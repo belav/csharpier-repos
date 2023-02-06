@@ -4,27 +4,23 @@ namespace Mono.Linker.Tests.Cases.Inheritance.VirtualMethods
 {
     public class UnusedVirtualMethodRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            var tmp = new B ();
+            var tmp = new B();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Base
         {
-            public virtual void Call ()
-            {
-            }
+            public virtual void Call() { }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (Base))]
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(Base))]
         class B : Base
         {
-            public override void Call ()
-            {
-            }
+            public override void Call() { }
         }
     }
 }

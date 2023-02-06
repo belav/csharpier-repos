@@ -11,49 +11,39 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
     // For mono though, we have to specify the assembly (Mono.Linker.Tests.Cases.Expectations) because at the time of processing
     // that assembly is not yet loaded into the closure in the linker, so it won't find the attribute type.
 #if NETCOREAPP
-    [SetupLinkAttributesFile ("DynamicDependencyFromAttributeXml.netcore.Attributes.xml")]
+    [SetupLinkAttributesFile("DynamicDependencyFromAttributeXml.netcore.Attributes.xml")]
 #else
-    [SetupLinkAttributesFile ("DynamicDependencyFromAttributeXml.mono.Attributes.xml")]
+    [SetupLinkAttributesFile("DynamicDependencyFromAttributeXml.mono.Attributes.xml")]
 #endif
-    [IgnoreLinkAttributes (false)]
-    [SetupLinkerArgument ("--enable-opt", "unreachablebodies", "missing.dll")]
+    [IgnoreLinkAttributes(false)]
+    [SetupLinkerArgument("--enable-opt", "unreachablebodies", "missing.dll")]
     class DynamicDependencyFromAttributeXml
     {
-        public static void Main ()
+        public static void Main()
         {
-            DependencyToUnusedMethod ();
-            DependencyToUnusedType ();
+            DependencyToUnusedMethod();
+            DependencyToUnusedType();
         }
 
         [Kept]
-        static void DependencyToUnusedMethod ()
-        {
-        }
+        static void DependencyToUnusedMethod() { }
 
         // https://github.com/dotnet/runtime/issues/79393
-        [Kept (By = ProducedBy.Trimmer)]
-        static void UnusedMethod ()
-        {
-        }
+        [Kept(By = ProducedBy.Trimmer)]
+        static void UnusedMethod() { }
 
         [Kept]
-        static void DependencyToUnusedType ()
-        {
-        }
+        static void DependencyToUnusedType() { }
 
         class NonUsedType
         {
             // https://github.com/dotnet/runtime/issues/79393
-            [Kept (By = ProducedBy.Trimmer)]
-            public NonUsedType ()
-            {
-            }
+            [Kept(By = ProducedBy.Trimmer)]
+            public NonUsedType() { }
 
             // https://github.com/dotnet/runtime/issues/79393
-            [Kept (By = ProducedBy.Trimmer)]
-            public static void PleasePreserveThisMethod ()
-            {
-            }
+            [Kept(By = ProducedBy.Trimmer)]
+            public static void PleasePreserveThisMethod() { }
         }
     }
 }

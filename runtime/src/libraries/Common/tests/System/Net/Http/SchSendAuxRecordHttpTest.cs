@@ -16,7 +16,8 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class SchSendAuxRecordHttpTest : HttpClientHandlerTestBase
     {
-        public SchSendAuxRecordHttpTest(ITestOutputHelper output) : base(output) { }
+        public SchSendAuxRecordHttpTest(ITestOutputHelper output)
+            : base(output) { }
 
         private class CircularBuffer
         {
@@ -75,38 +76,41 @@ namespace System.Net.Http.Functional.Tests
 
                 CircularBuffer buffer = new CircularBuffer(4);
 
-                tasks[0] = server.AcceptHttpsClientAsync((requestString) =>
-                {
-
-                    buffer.Add(requestString);
-
-                    serverTotalBytesReceived += requestString.Length;
-
-                    if (serverTotalBytesReceived == 1 && serverChunks == 0)
+                tasks[0] = server.AcceptHttpsClientAsync(
+                    (requestString) =>
                     {
-                        serverAuxRecordDetected = true;
-                    }
+                        buffer.Add(requestString);
 
-                    serverChunks++;
+                        serverTotalBytesReceived += requestString.Length;
 
-                    // Test is inconclusive if any non-CBC cipher is used:
-                    if (server.Stream.CipherAlgorithm == CipherAlgorithmType.None ||
-                        server.Stream.CipherAlgorithm == CipherAlgorithmType.Null ||
-                        server.Stream.CipherAlgorithm == CipherAlgorithmType.Rc4)
-                    {
-                        serverAuxRecordDetectedInconclusive = true;
-                    }
+                        if (serverTotalBytesReceived == 1 && serverChunks == 0)
+                        {
+                            serverAuxRecordDetected = true;
+                        }
 
-                    // Detect end of HTML request
-                    if (buffer.Equals("\r\n\r\n"))
-                    {
-                        return Task.FromResult(HttpsTestServer.Options.DefaultResponseString);
+                        serverChunks++;
+
+                        // Test is inconclusive if any non-CBC cipher is used:
+                        if (
+                            server.Stream.CipherAlgorithm == CipherAlgorithmType.None
+                            || server.Stream.CipherAlgorithm == CipherAlgorithmType.Null
+                            || server.Stream.CipherAlgorithm == CipherAlgorithmType.Rc4
+                        )
+                        {
+                            serverAuxRecordDetectedInconclusive = true;
+                        }
+
+                        // Detect end of HTML request
+                        if (buffer.Equals("\r\n\r\n"))
+                        {
+                            return Task.FromResult(HttpsTestServer.Options.DefaultResponseString);
+                        }
+                        else
+                        {
+                            return Task.FromResult<string>(null);
+                        }
                     }
-                    else
-                    {
-                        return Task.FromResult<string>(null);
-                    }
-                });
+                );
 
                 string requestUriString = "https://localhost:" + server.Port.ToString();
                 tasks[1] = client.GetStringAsync(requestUriString);
@@ -115,11 +119,16 @@ namespace System.Net.Http.Functional.Tests
 
                 if (serverAuxRecordDetectedInconclusive)
                 {
-                    _output.WriteLine("Test inconclusive: The Operating system preferred a non-CBC or Null cipher.");
+                    _output.WriteLine(
+                        "Test inconclusive: The Operating system preferred a non-CBC or Null cipher."
+                    );
                 }
                 else
                 {
-                    Assert.True(serverAuxRecordDetected, "Server reports: Client auxiliary record not detected.");
+                    Assert.True(
+                        serverAuxRecordDetected,
+                        "Server reports: Client auxiliary record not detected."
+                    );
                 }
             }
         }

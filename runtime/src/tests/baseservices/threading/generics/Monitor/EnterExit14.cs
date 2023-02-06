@@ -3,25 +3,27 @@
 using System;
 using System.Threading;
 
+public struct ValX1<T> { }
 
-public struct ValX1<T> {}
-public class RefX1<T> {}
+public class RefX1<T> { }
 
-struct Gen<T> 
+struct Gen<T>
 {
     public static object staticLock;
+
     public static void EnterExitTest<U>()
     {
-        
         Gen<T>.staticLock = new object();
         Gen<U>.staticLock = new object();
 
         object monitorT = Gen<T>.staticLock;
         object monitorU = Gen<U>.staticLock;
 
-        if(monitorU.Equals(monitorT))
-            throw new Exception("Invalid use of test case, T must not be equal to U - POSSIBLE TYPE SYSTEM BUG");
-                
+        if (monitorU.Equals(monitorT))
+            throw new Exception(
+                "Invalid use of test case, T must not be equal to U - POSSIBLE TYPE SYSTEM BUG"
+            );
+
         TestHelper myHelper = new TestHelper(Test_EnterExit14.nThreads);
         TestHelper myHelper2 = new TestHelper(Test_EnterExit14.nThreads);
         WaitHandle[] myWaiter = new WaitHandle[2];
@@ -33,7 +35,7 @@ struct Gen<T>
         //     new MonitorDelegate(myHelper2.Consumer).BeginInvoke(monitorU,null,null);
         // }
 
-        for(int i=0; i<Test_EnterExit14.nThreads; i++)
+        for (int i = 0; i < Test_EnterExit14.nThreads; i++)
         {
             ThreadPool.QueueUserWorkItem(state =>
             {
@@ -46,18 +48,15 @@ struct Gen<T>
             });
         }
 
-        for(int i=0;i<6;i++)
-        {    
-            if(WaitHandle.WaitAll(myWaiter,10000))//,true))
+        for (int i = 0; i < 6; i++)
+        {
+            if (WaitHandle.WaitAll(myWaiter, 10000)) //,true))
                 break;
-            if(myHelper.Error == true || myHelper2.Error == true)
+            if (myHelper.Error == true || myHelper2.Error == true)
                 break;
         }
         Test_EnterExit14.Eval(!(myHelper.Error || myHelper2.Error));
     }
-
-
-    
 }
 
 public class Test_EnterExit14
@@ -66,6 +65,7 @@ public class Test_EnterExit14
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -74,9 +74,8 @@ public class Test_EnterExit14
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         Gen<double>.EnterExitTest<int>();
@@ -87,8 +86,8 @@ public class Test_EnterExit14
         Gen<RefX1<string>>.EnterExitTest<int>();
         Gen<ValX1<int>>.EnterExitTest<int>();
         Gen<ValX1<string>>.EnterExitTest<int>();
-        
-        Gen<int>.EnterExitTest<double>();    
+
+        Gen<int>.EnterExitTest<double>();
         Gen<string>.EnterExitTest<double>();
         Gen<object>.EnterExitTest<double>();
         Gen<Guid>.EnterExitTest<double>();
@@ -97,7 +96,7 @@ public class Test_EnterExit14
         Gen<ValX1<int>>.EnterExitTest<double>();
         Gen<ValX1<string>>.EnterExitTest<double>();
 
-        Gen<int>.EnterExitTest<string>();    
+        Gen<int>.EnterExitTest<string>();
         Gen<double>.EnterExitTest<string>();
         Gen<object>.EnterExitTest<string>();
         Gen<Guid>.EnterExitTest<string>();
@@ -106,7 +105,7 @@ public class Test_EnterExit14
         Gen<ValX1<int>>.EnterExitTest<string>();
         Gen<ValX1<string>>.EnterExitTest<string>();
 
-        Gen<int>.EnterExitTest<object>();    
+        Gen<int>.EnterExitTest<object>();
         Gen<double>.EnterExitTest<object>();
         Gen<string>.EnterExitTest<object>();
         Gen<Guid>.EnterExitTest<object>();
@@ -115,7 +114,7 @@ public class Test_EnterExit14
         Gen<ValX1<int>>.EnterExitTest<object>();
         Gen<ValX1<string>>.EnterExitTest<object>();
 
-        Gen<int>.EnterExitTest<Guid>();    
+        Gen<int>.EnterExitTest<Guid>();
         Gen<double>.EnterExitTest<Guid>();
         Gen<string>.EnterExitTest<Guid>();
         Gen<object>.EnterExitTest<Guid>();
@@ -124,16 +123,16 @@ public class Test_EnterExit14
         Gen<ValX1<int>>.EnterExitTest<Guid>();
         Gen<ValX1<string>>.EnterExitTest<Guid>();
 
-        Gen<int>.EnterExitTest<RefX1<int>>();    
+        Gen<int>.EnterExitTest<RefX1<int>>();
         Gen<double>.EnterExitTest<RefX1<int>>();
         Gen<string>.EnterExitTest<RefX1<int>>();
         Gen<object>.EnterExitTest<RefX1<int>>();
         Gen<Guid>.EnterExitTest<RefX1<int>>();
         Gen<RefX1<string>>.EnterExitTest<RefX1<int>>();
         Gen<ValX1<int>>.EnterExitTest<RefX1<int>>();
-        Gen<ValX1<string>>.EnterExitTest<RefX1<int>>();    
+        Gen<ValX1<string>>.EnterExitTest<RefX1<int>>();
 
-        Gen<int>.EnterExitTest<RefX1<string>>();    
+        Gen<int>.EnterExitTest<RefX1<string>>();
         Gen<double>.EnterExitTest<RefX1<string>>();
         Gen<string>.EnterExitTest<RefX1<string>>();
         Gen<object>.EnterExitTest<RefX1<string>>();
@@ -142,7 +141,7 @@ public class Test_EnterExit14
         Gen<ValX1<int>>.EnterExitTest<RefX1<string>>();
         Gen<ValX1<string>>.EnterExitTest<RefX1<string>>();
 
-        Gen<int>.EnterExitTest<ValX1<int>>();    
+        Gen<int>.EnterExitTest<ValX1<int>>();
         Gen<double>.EnterExitTest<ValX1<int>>();
         Gen<string>.EnterExitTest<ValX1<int>>(); //offending line
         Gen<object>.EnterExitTest<ValX1<int>>(); //offending line
@@ -151,7 +150,7 @@ public class Test_EnterExit14
         Gen<RefX1<string>>.EnterExitTest<ValX1<int>>(); //offending line
         Gen<ValX1<string>>.EnterExitTest<ValX1<int>>(); //offending line
 
-        Gen<int>.EnterExitTest<ValX1<string>>();    //offending line
+        Gen<int>.EnterExitTest<ValX1<string>>(); //offending line
         Gen<double>.EnterExitTest<ValX1<string>>(); //offending line
         Gen<string>.EnterExitTest<ValX1<string>>(); //offending line
         Gen<object>.EnterExitTest<ValX1<string>>(); //offending line
@@ -159,7 +158,6 @@ public class Test_EnterExit14
         Gen<RefX1<int>>.EnterExitTest<ValX1<string>>(); //offending line
         Gen<RefX1<string>>.EnterExitTest<ValX1<string>>(); //offending line
         Gen<ValX1<int>>.EnterExitTest<ValX1<string>>(); //offending line
-        
 
         if (result)
         {
@@ -172,6 +170,4 @@ public class Test_EnterExit14
             return 1;
         }
     }
-}        
-
-
+}

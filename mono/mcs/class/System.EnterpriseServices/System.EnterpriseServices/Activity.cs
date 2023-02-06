@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,17 +29,17 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-
+namespace System.EnterpriseServices
+{
     [ComVisible(false)]
-    public sealed class Activity {
-
+    public sealed class Activity
+    {
         #region Constructors
 
         [MonoTODO]
-        public Activity (ServiceConfig cfg)
+        public Activity(ServiceConfig cfg)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -47,27 +47,27 @@ namespace System.EnterpriseServices {
         #region Methods
 
         [MonoTODO]
-        public void AsynchronousCall (IServiceCall serviceCall)
+        public void AsynchronousCall(IServiceCall serviceCall)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void BindToCurrentThread ()
+        public void BindToCurrentThread()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void SynchronousCall (IServiceCall serviceCall)
+        public void SynchronousCall(IServiceCall serviceCall)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void UnbindFromThread ()
+        public void UnbindFromThread()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion

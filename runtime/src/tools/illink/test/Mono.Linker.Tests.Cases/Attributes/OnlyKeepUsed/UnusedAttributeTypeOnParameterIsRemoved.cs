@@ -4,26 +4,22 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
 {
-    [SetupLinkerArgument ("--used-attrs-only", "true")]
+    [SetupLinkerArgument("--used-attrs-only", "true")]
     class UnusedAttributeTypeOnParameterIsRemoved
     {
-        static void Main ()
+        static void Main()
         {
-            new Bar ().Method ("Hello");
+            new Bar().Method("Hello");
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Bar
         {
             [Kept]
-            public void Method ([Foo] string arg)
-            {
-            }
+            public void Method([Foo] string arg) { }
         }
 
-        class FooAttribute : Attribute
-        {
-        }
+        class FooAttribute : Attribute { }
     }
 }

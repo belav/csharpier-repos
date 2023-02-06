@@ -36,78 +36,62 @@ namespace Microsoft.Build.Utilities
     [MonoTODO]
     public abstract class AppDomainIsolatedTask : MarshalByRefObject, ITask
     {
-        IBuildEngine        buildEngine;
-        string            helpKeywordPrefix;
-        ITaskHost        hostObject;
-        TaskLoggingHelper    log;
-        ResourceManager        taskResources;
-        
-        protected AppDomainIsolatedTask ()
-            : this (null, null)
-        {
-        }
+        IBuildEngine buildEngine;
+        string helpKeywordPrefix;
+        ITaskHost hostObject;
+        TaskLoggingHelper log;
+        ResourceManager taskResources;
 
-        protected AppDomainIsolatedTask (ResourceManager taskResources)
-            : this (taskResources, null)
-        {
-        }
+        protected AppDomainIsolatedTask()
+            : this(null, null) { }
 
-        protected AppDomainIsolatedTask (ResourceManager taskResources,
-                         string helpKeywordPrefix)
+        protected AppDomainIsolatedTask(ResourceManager taskResources)
+            : this(taskResources, null) { }
+
+        protected AppDomainIsolatedTask(ResourceManager taskResources, string helpKeywordPrefix)
         {
             this.taskResources = taskResources;
             this.helpKeywordPrefix = helpKeywordPrefix;
         }
 
-        public abstract bool Execute ();
+        public abstract bool Execute();
 
-        public override object InitializeLifetimeService ()
+        public override object InitializeLifetimeService()
         {
             return null;
         }
 
-        public IBuildEngine BuildEngine {
-            get {
-                return buildEngine;
-            }
-            set {
+        public IBuildEngine BuildEngine
+        {
+            get { return buildEngine; }
+            set
+            {
                 buildEngine = value;
-                log = new TaskLoggingHelper (this);
+                log = new TaskLoggingHelper(this);
             }
         }
 
-        protected string HelpKeywordPrefix {
-            get {
-                return helpKeywordPrefix;
-            }
-            set {
-                helpKeywordPrefix = value;
-            }
+        protected string HelpKeywordPrefix
+        {
+            get { return helpKeywordPrefix; }
+            set { helpKeywordPrefix = value; }
         }
 
-        public ITaskHost HostObject {
-            get {
-                return hostObject;
-            }
-            set {
-                hostObject = value;
-            }
+        public ITaskHost HostObject
+        {
+            get { return hostObject; }
+            set { hostObject = value; }
         }
 
-        public TaskLoggingHelper Log {
-            get {
-                return log;
-            }
+        public TaskLoggingHelper Log
+        {
+            get { return log; }
         }
 
-        protected ResourceManager TaskResources    {
-            get {
-                return taskResources;
-            }
-            set {
-                taskResources = value;
-            }
+        protected ResourceManager TaskResources
+        {
+            get { return taskResources; }
+            set { taskResources = value; }
         }
     }
 }
-

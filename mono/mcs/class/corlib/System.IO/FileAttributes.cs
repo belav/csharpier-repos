@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
-// 
-// System.IO.FileAttributes.cs 
+//
+// System.IO.FileAttributes.cs
 //
 // Copyright (C) 2001 Moonlight Enterprises, All Rights Reserved
-// 
+//
 // Author:         Jim Richardson, develop@wtfo-guru.com
-// Created:        Monday, August 13, 2001 
+// Created:        Monday, August 13, 2001
 //
 //------------------------------------------------------------------------------
 
@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,12 +38,12 @@ namespace System.IO
 {
     [Flags]
     [Serializable]
-    [ComVisible (true)]
+    [ComVisible(true)]
     public enum FileAttributes
     {
         Archive = 0x00020,
-        Compressed = 0x00800, 
-        Device = 0x00040, // Reserved for future use (NOT the w32 value). 
+        Compressed = 0x00800,
+        Device = 0x00040, // Reserved for future use (NOT the w32 value).
         Directory = 0x00010,
         Encrypted = 0x04000, // NOT the w32 value
         Hidden = 0x00002,
@@ -62,5 +62,4 @@ namespace System.IO
         //
         // Executable = 0x80000000
     }
-
 }

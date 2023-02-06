@@ -3,7 +3,7 @@
 
 public class MainClass
 {
-    public void Foo ()
+    public void Foo()
     {
         int i;
         i++;

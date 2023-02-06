@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,46 +30,59 @@ using System.Reflection;
 using System.ComponentModel;
 using System.Security.Permissions;
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public static class PropertyConverter
     {
-        public static object EnumFromString (Type enumType, string value)
+        public static object EnumFromString(Type enumType, string value)
         {
             object res = null;
 
-            try {
-                res = Enum.Parse (enumType, value, true);
-            } catch {
+            try
+            {
+                res = Enum.Parse(enumType, value, true);
+            }
+            catch
+            {
                 res = null;
             }
             return res;
         }
 
-        public static string EnumToString (Type enumType, object enumValue)
+        public static string EnumToString(Type enumType, object enumValue)
         {
-            return Enum.Format (enumType, enumValue, "G");
+            return Enum.Format(enumType, enumValue, "G");
         }
 
-        public static object ObjectFromString (Type objType,
-                MemberInfo propertyInfo, string value)
+        public static object ObjectFromString(Type objType, MemberInfo propertyInfo, string value)
         {
-            if (objType == typeof (string))
+            if (objType == typeof(string))
                 return value;
 
             // Is there a less kludgy way to get the converter?
-            PropertyDescriptorCollection col = TypeDescriptor.GetProperties (
-                propertyInfo.ReflectedType);
-            PropertyDescriptor pd = col.Find (propertyInfo.Name, false);
-            if (pd.Converter == null || !pd.Converter.CanConvertFrom (typeof (string))) {
-                throw new HttpException (Locale.GetText ("Cannot create an object " +
-                      "of type '{0}' from its string representation '{1}' for the " +
-                      "'{2}' property", objType, value, propertyInfo.Name));
+            PropertyDescriptorCollection col = TypeDescriptor.GetProperties(
+                propertyInfo.ReflectedType
+            );
+            PropertyDescriptor pd = col.Find(propertyInfo.Name, false);
+            if (pd.Converter == null || !pd.Converter.CanConvertFrom(typeof(string)))
+            {
+                throw new HttpException(
+                    Locale.GetText(
+                        "Cannot create an object "
+                            + "of type '{0}' from its string representation '{1}' for the "
+                            + "'{2}' property",
+                        objType,
+                        value,
+                        propertyInfo.Name
+                    )
+                );
             }
-            return pd.Converter.ConvertFromInvariantString (value);
+            return pd.Converter.ConvertFromInvariantString(value);
         }
     }
 }
-

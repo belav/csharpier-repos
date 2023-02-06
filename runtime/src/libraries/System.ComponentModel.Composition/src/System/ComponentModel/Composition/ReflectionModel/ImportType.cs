@@ -26,10 +26,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private static Dictionary<Type, Func<Export, object>?> CastSingleValueCache
         {
-            get
-            {
-                return _castSingleValueCache ??= new Dictionary<Type, Func<Export, object>?>();
-            }
+            get { return _castSingleValueCache ??= new Dictionary<Type, Func<Export, object>?>(); }
         }
 
         public ImportType(Type type, ImportCardinality cardinality)
@@ -64,7 +61,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public bool IsPartCreator { get; private set; }
 
-        public Type ContractType { get { return _contractType; } }
+        public Type ContractType
+        {
+            get { return _contractType; }
+        }
 
         public Func<Export, object>? CastExport
         {
@@ -134,7 +134,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
             // Look up the cast function
             if (!CastSingleValueCache.TryGetValue(type, out _castSingleValue))
             {
-                if (!TryGetCastFunction(genericType, _isOpenGeneric, arguments, out _castSingleValue))
+                if (
+                    !TryGetCastFunction(
+                        genericType,
+                        _isOpenGeneric,
+                        arguments,
+                        out _castSingleValue
+                    )
+                )
                 {
                     // in this case, even though the type is generic, it's nothing we have recognized,
                     // thereforeit's the same as the non-generic case
@@ -160,7 +167,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return (genericType == LazyOfTType) || (genericType == LazyOfTMType);
         }
 
-        private static bool TryGetCastFunction(Type genericType, bool isOpenGeneric, Type[] arguments, out Func<Export, object>? castFunction)
+        private static bool TryGetCastFunction(
+            Type genericType,
+            bool isOpenGeneric,
+            Type[] arguments,
+            out Func<Export, object>? castFunction
+        )
         {
             castFunction = null;
 
@@ -168,7 +180,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 if (!isOpenGeneric)
                 {
-                    castFunction = ExportServices.CreateStronglyTypedLazyFactory(arguments[0].UnderlyingSystemType, null);
+                    castFunction = ExportServices.CreateStronglyTypedLazyFactory(
+                        arguments[0].UnderlyingSystemType,
+                        null
+                    );
                 }
                 return true;
             }
@@ -177,7 +192,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 if (!isOpenGeneric)
                 {
-                    castFunction = ExportServices.CreateStronglyTypedLazyFactory(arguments[0].UnderlyingSystemType, arguments[1].UnderlyingSystemType);
+                    castFunction = ExportServices.CreateStronglyTypedLazyFactory(
+                        arguments[0].UnderlyingSystemType,
+                        arguments[1].UnderlyingSystemType
+                    );
                 }
                 return true;
             }
@@ -188,7 +206,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 {
                     if (!isOpenGeneric)
                     {
-                        castFunction = new ExportFactoryCreator(genericType).CreateStronglyTypedExportFactoryFactory(arguments[0].UnderlyingSystemType, null);
+                        castFunction = new ExportFactoryCreator(
+                            genericType
+                        ).CreateStronglyTypedExportFactoryFactory(
+                            arguments[0].UnderlyingSystemType,
+                            null
+                        );
                     }
                     return true;
                 }
@@ -196,13 +219,20 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 {
                     if (!isOpenGeneric)
                     {
-                        castFunction = new ExportFactoryCreator(genericType).CreateStronglyTypedExportFactoryFactory(arguments[0].UnderlyingSystemType, arguments[1].UnderlyingSystemType);
+                        castFunction = new ExportFactoryCreator(
+                            genericType
+                        ).CreateStronglyTypedExportFactoryFactory(
+                            arguments[0].UnderlyingSystemType,
+                            arguments[1].UnderlyingSystemType
+                        );
                     }
                     return true;
                 }
                 else
                 {
-                    throw ExceptionBuilder.ExportFactory_TooManyGenericParameters(genericType.FullName!);
+                    throw ExceptionBuilder.ExportFactory_TooManyGenericParameters(
+                        genericType.FullName!
+                    );
                 }
             }
 

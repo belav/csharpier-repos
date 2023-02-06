@@ -3,7 +3,7 @@
 // Jonathan Pobst (monkey@jpobst.com)
 // Francis Fisher (frankie@terrorise.me.uk)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,8 +31,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class ChartArea : ChartNamedElement
     {
-        public ChartArea() {}
-        public ChartArea( string name ){
+        public ChartArea() { }
+
+        public ChartArea(string name)
+        {
             Name = name;
         }
 
@@ -66,32 +68,34 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public int ShadowOffset { get; set; }
         public virtual bool Visible { get; set; }
 
-
         [MonoTODO]
-        protected override void Dispose (bool disposing)
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public float GetSeriesDepth (Series series )
+        protected override void Dispose(bool disposing)
         {
             throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public float GetSeriesZPosition (Series series)
-        {
-            throw new NotImplementedException ();
-        }
-        [MonoTODO]
-        public void RecalculateAxesScale ()
+        public float GetSeriesDepth(Series series)
         {
             throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public void TransformPoints (Point3D[] points)
+        public float GetSeriesZPosition(Series series)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void RecalculateAxesScale()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void TransformPoints(Point3D[] points)
+        {
+            throw new NotImplementedException();
         }
     }
 }

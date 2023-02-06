@@ -13,19 +13,20 @@ namespace MonoTests.System.ServiceModel.Dispatcher
     public class MessageFilterTableTest
     {
         [Test]
-        public void TestGetPriority ()
+        public void TestGetPriority()
         {
-            MessageFilterTable<int> table = new MessageFilterTable<int> ();
-            MessageFilter f = new XPathMessageFilter ();
+            MessageFilterTable<int> table = new MessageFilterTable<int>();
+            MessageFilter f = new XPathMessageFilter();
 
-            table.Add (f, 0);
+            table.Add(f, 0);
 
-            Console.WriteLine (table.GetPriority (f));
+            Console.WriteLine(table.GetPriority(f));
         }
+
         [Test]
-        public void TestAdd ()
+        public void TestAdd()
         {
-            Console.WriteLine ();
+            Console.WriteLine();
         }
     }
 }

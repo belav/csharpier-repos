@@ -4,17 +4,17 @@ public class HashedLinkedList<T>
 {
     public int? Offset;
 
-    public static HashedLinkedList<T> GetList ()
+    public static HashedLinkedList<T> GetList()
     {
-        return new HashedLinkedList<T> ();
+        return new HashedLinkedList<T>();
     }
 
-    public static void Test (int added)
+    public static void Test(int added)
     {
-        GetList ().Offset += added;
+        GetList().Offset += added;
     }
 
-    public void Test (HashedLinkedList<T> view)
+    public void Test(HashedLinkedList<T> view)
     {
         view.Offset--;
     }
@@ -22,10 +22,10 @@ public class HashedLinkedList<T>
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        HashedLinkedList<int>.Test (5);
-        HashedLinkedList<long> list = new HashedLinkedList<long> ();
-        list.Test (list);
+        HashedLinkedList<int>.Test(5);
+        HashedLinkedList<long> list = new HashedLinkedList<long>();
+        list.Test(list);
     }
 }

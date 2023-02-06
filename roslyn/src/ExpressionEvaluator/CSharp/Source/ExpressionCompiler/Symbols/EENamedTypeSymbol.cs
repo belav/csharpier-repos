@@ -32,10 +32,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string typeName,
             string methodName,
             CompilationContext context,
-            GenerateMethodBody generateMethodBody) :
-            this(container, baseType, currentFrame, typeName, (m, t) => ImmutableArray.Create<MethodSymbol>(context.CreateMethod(t, methodName, syntax, generateMethodBody)))
-        {
-        }
+            GenerateMethodBody generateMethodBody
+        )
+            : this(
+                container,
+                baseType,
+                currentFrame,
+                typeName,
+                (m, t) =>
+                    ImmutableArray.Create<MethodSymbol>(
+                        context.CreateMethod(t, methodName, syntax, generateMethodBody)
+                    )
+            ) { }
 
         internal EENamedTypeSymbol(
             NamespaceSymbol container,
@@ -44,7 +52,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string typeName,
             Func<MethodSymbol, EENamedTypeSymbol, ImmutableArray<MethodSymbol>> getMethods,
             ImmutableArray<TypeParameterSymbol> sourceTypeParameters,
-            Func<NamedTypeSymbol, EENamedTypeSymbol, ImmutableArray<TypeParameterSymbol>> getTypeParameters)
+            Func<
+                NamedTypeSymbol,
+                EENamedTypeSymbol,
+                ImmutableArray<TypeParameterSymbol>
+            > getTypeParameters
+        )
         {
             _container = container;
             _baseType = baseType;
@@ -60,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             NamedTypeSymbol baseType,
             MethodSymbol currentFrame,
             string typeName,
-            Func<MethodSymbol, EENamedTypeSymbol, ImmutableArray<MethodSymbol>> getMethods)
+            Func<MethodSymbol, EENamedTypeSymbol, ImmutableArray<MethodSymbol>> getMethods
+        )
         {
             _container = container;
             _baseType = baseType;
@@ -70,8 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // (since the old ones have the wrong owners).  Unfortunately, we have a circular dependency:
             //   1) Each new type parameter requires the entire map in order to be able to construct its constraint list.
             //   2) The map cannot be constructed until all new type parameters exist.
-            // Our solution is to pass each new type parameter a lazy reference to the type map.  We then 
-            // initialize the map as soon as the new type parameters are available - and before they are 
+            // Our solution is to pass each new type parameter a lazy reference to the type map.  We then
+            // initialize the map as soon as the new type parameters are available - and before they are
             // handed out - so that there is never a period where they can require the type map and find
             // it uninitialized.
 
@@ -81,8 +95,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             TypeMap typeMap = null;
             var getTypeMap = new Func<TypeMap>(() => typeMap);
             _typeParameters = this.SourceTypeParameters.SelectAsArray(
-                (tp, i, arg) => (TypeParameterSymbol)new EETypeParameterSymbol(this, tp, i, getTypeMap),
-                (object)null);
+                (tp, i, arg) =>
+                    (TypeParameterSymbol)new EETypeParameterSymbol(this, tp, i, getTypeMap),
+                (object)null
+            );
 
             typeMap = new TypeMap(this.SourceTypeParameters, _typeParameters);
 
@@ -94,8 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             _methods = getMethods(currentFrame, this);
         }
 
-        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
-            => throw ExceptionUtilities.Unreachable();
+        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
+            throw ExceptionUtilities.Unreachable();
 
         internal ImmutableArray<MethodSymbol> Methods
         {
@@ -177,7 +193,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         {
             // Should not be requesting generated members
             // by name other than constructors.
-            Debug.Assert((name == WellKnownMemberNames.InstanceConstructorName) || (name == WellKnownMemberNames.StaticConstructorName));
+            Debug.Assert(
+                (name == WellKnownMemberNames.InstanceConstructorName)
+                    || (name == WellKnownMemberNames.StaticConstructorName)
+            );
             return this.GetMembers().WhereAsArray((m, name) => m.Name == name, name);
         }
 
@@ -211,12 +230,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
+        internal override NamedTypeSymbol GetDeclaredBaseType(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return _baseType;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
@@ -281,7 +304,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             get { return _baseType; }
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
@@ -348,17 +373,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override bool HasCodeAnalysisEmbeddedAttribute => false;
 
-        internal sealed override NamedTypeSymbol AsNativeInteger() => throw ExceptionUtilities.Unreachable();
+        internal sealed override NamedTypeSymbol AsNativeInteger() =>
+            throw ExceptionUtilities.Unreachable();
 
         internal sealed override NamedTypeSymbol NativeIntegerUnderlyingType => null;
 
         internal override bool IsRecord => false;
         internal override bool IsRecordStruct => false;
+
         internal override bool HasPossibleWellKnownCloneMethod() => false;
+
         internal override bool IsInterpolatedStringHandlerType => false;
 
         [Conditional("DEBUG")]
-        internal static void VerifyTypeParameters(Symbol container, ImmutableArray<TypeParameterSymbol> typeParameters)
+        internal static void VerifyTypeParameters(
+            Symbol container,
+            ImmutableArray<TypeParameterSymbol> typeParameters
+        )
         {
             for (int i = 0; i < typeParameters.Length; i++)
             {
@@ -368,9 +399,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             }
         }
 
-        internal override IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls()
+        internal override IEnumerable<(
+            MethodSymbol Body,
+            MethodSymbol Implemented
+        )> SynthesizedInterfaceMethodImpls()
         {
-            return SpecializedCollections.EmptyEnumerable<(MethodSymbol Body, MethodSymbol Implemented)>();
+            return SpecializedCollections.EmptyEnumerable<(
+                MethodSymbol Body,
+                MethodSymbol Implemented
+            )>();
         }
     }
 }

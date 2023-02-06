@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             private DocumentAnalysisData _syntax = DocumentAnalysisData.Empty;
             private DocumentAnalysisData _semantic = DocumentAnalysisData.Empty;
 
-            public ActiveFileState(DocumentId documentId)
-                => DocumentId = documentId;
+            public ActiveFileState(DocumentId documentId) => DocumentId = documentId;
 
             public bool IsEmpty
             {

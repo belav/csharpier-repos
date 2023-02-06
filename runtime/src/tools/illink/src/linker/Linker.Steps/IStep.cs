@@ -31,9 +31,8 @@
 
 namespace Mono.Linker.Steps
 {
-
     public interface IStep
     {
-        void Process (LinkContext context);
+        void Process(LinkContext context);
     }
 }

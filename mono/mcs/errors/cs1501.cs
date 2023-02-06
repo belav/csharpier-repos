@@ -3,10 +3,15 @@
 
 class C
 {
-    public bool this [int i] { get { return false; } set {} }
-    
-    void Foo ()
-    {    C c = new C ();
-        c [0, 0] = null;
+    public bool this[int i]
+    {
+        get { return false; }
+        set { }
+    }
+
+    void Foo()
+    {
+        C c = new C();
+        c[0, 0] = null;
     }
 }

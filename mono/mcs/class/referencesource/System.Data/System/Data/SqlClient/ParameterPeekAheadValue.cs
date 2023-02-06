@@ -8,14 +8,13 @@
 
 
 
-namespace System.Data.SqlClient {
-
+namespace System.Data.SqlClient
+{
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
     using Microsoft.SqlServer.Server;
-
 
     // simple storage to contain objects that must be generated prior to sending data, but
     //  that we cannot re-generate at the time of sending the data.  The entire purpose is
@@ -28,10 +27,10 @@ namespace System.Data.SqlClient {
     //      but to properly stream the value, we can't ask the IEnumerable for these objects again
     //      when it's time to send the actual values.
 
-    internal class ParameterPeekAheadValue {
+    internal class ParameterPeekAheadValue
+    {
         // Peekahead for IEnumerable<SqlDataRecord>
         internal IEnumerator<SqlDataRecord> Enumerator;
-        internal SqlDataRecord              FirstRecord;
+        internal SqlDataRecord FirstRecord;
     }
-
 }

@@ -1,32 +1,31 @@
 using System;
 
-public interface IFoo<S>
-{ }
+public interface IFoo<S> { }
 
 public class ArrayList<T>
 {
-    public virtual int InsertAll (IFoo<T> foo)
+    public virtual int InsertAll(IFoo<T> foo)
     {
         return 0;
     }
 
-        public virtual int InsertAll<U> (IFoo<U> foo)
+    public virtual int InsertAll<U>(IFoo<U> foo)
         where U : T
-        {
-        return 1;
-        }
-
-    public virtual int AddAll (IFoo<T> foo)
     {
-        return InsertAll (foo);
+        return 1;
+    }
+
+    public virtual int AddAll(IFoo<T> foo)
+    {
+        return InsertAll(foo);
     }
 }
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        ArrayList<int> list = new ArrayList<int> ();
-        return list.AddAll (null);
+        ArrayList<int> list = new ArrayList<int>();
+        return list.AddAll(null);
     }
 }

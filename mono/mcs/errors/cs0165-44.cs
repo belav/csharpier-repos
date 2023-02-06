@@ -13,7 +13,7 @@ class X
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         X x;
         x.s.O = 2;

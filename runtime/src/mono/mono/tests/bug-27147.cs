@@ -3,9 +3,7 @@ using System.Threading;
 
 class Referee
 {
-    public Referee ()
-    {
-    }
+    public Referee() { }
 }
 
 class LotsaRefs
@@ -1017,23 +1015,23 @@ public class Test
 
     public static int Main()
     {
-        var t = new Thread (() =>
-                {
-                    refs = new LotsaRefs();
-                    refs.referee = new Referee();
-                });
-        t.Start ();
-        t.Join ();
+        var t = new Thread(() =>
+        {
+            refs = new LotsaRefs();
+            refs.referee = new Referee();
+        });
+        t.Start();
+        t.Join();
         for (var i = 0; i < 100000000; ++i)
         {
             var o = new object();
         }
         if (refs.referee.GetType() != typeof(Referee))
         {
-            Console.WriteLine ("wrong type: {0}", refs.referee.GetType());
+            Console.WriteLine("wrong type: {0}", refs.referee.GetType());
             return 1;
         }
-        Console.WriteLine ("all good");
+        Console.WriteLine("all good");
         return 0;
     }
 }

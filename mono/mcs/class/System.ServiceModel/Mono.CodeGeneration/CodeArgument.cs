@@ -7,31 +7,31 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-    public class CodeArgument: CodeExpression
+    public class CodeArgument : CodeExpression
     {
         int argument;
-        
-        public CodeArgument (int arg, Type type)
+
+        public CodeArgument(int arg, Type type)
         {
-            argument = arg;        
+            argument = arg;
         }
-        
+
         public int Argument
         {
             get { return argument; }
         }
-        
-        public override void Generate (ILGenerator gen)
+
+        public override void Generate(ILGenerator gen)
         {
-            gen.Emit (OpCodes.Ldloc, var.LocalBuilder);
+            gen.Emit(OpCodes.Ldloc, var.LocalBuilder);
         }
-        
-        public override void PrintCode (CodeWriter cp)
+
+        public override void PrintCode(CodeWriter cp)
         {
-            cp.Write ("arg" + argument);
+            cp.Write("arg" + argument);
         }
-        
-        public override Type GetResultType ()
+
+        public override Type GetResultType()
         {
             return var.Type;
         }

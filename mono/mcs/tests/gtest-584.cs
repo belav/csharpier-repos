@@ -7,22 +7,22 @@ enum E : sbyte
 
 struct S
 {
-    public static bool operator == (S s, S i)
+    public static bool operator ==(S s, S i)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 
-    public static bool operator != (S s, S i)
+    public static bool operator !=(S s, S i)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 
-    public static implicit operator int? (S s)
+    public static implicit operator int?(S s)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 
-    public static implicit operator E? (S s)
+    public static implicit operator E?(S s)
     {
         return null;
     }
@@ -30,7 +30,7 @@ struct S
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
         E? a = E.V;
         E? a_n = null;
@@ -45,8 +45,8 @@ class C
 
         if (a_n != b_n)
             return 3;
-        
-        E e = (E) 4;
+
+        E e = (E)4;
         S s;
         if (e == s)
             return 10;
@@ -66,11 +66,11 @@ class C
         if ((s & e) != null)
             return 15;
 
-        var res1 = (E?) 1 == null;
+        var res1 = (E?)1 == null;
         if (res1)
             return 16;
 
-        var res2 = null == (E?) 1;
+        var res2 = null == (E?)1;
         if (res2)
             return 17;
 
@@ -82,7 +82,7 @@ class C
         if (r2 != null)
             return 19;
 
-        Console.WriteLine ("ok");
+        Console.WriteLine("ok");
 
         return 0;
     }

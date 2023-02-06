@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,8 +28,9 @@
 using System.Web;
 using System.Reflection;
 
-namespace System.Web.UI.WebControls.WebParts {
-        public abstract class ConnectionPoint 
+namespace System.Web.UI.WebControls.WebParts
+{
+    public abstract class ConnectionPoint
     {
         bool allowMultiConn;
         string name = string.Empty;
@@ -37,12 +38,17 @@ namespace System.Web.UI.WebControls.WebParts {
         Type interfaceType;
         Type controlType;
         MethodInfo callBackMethod;
-        
+
         public const string DefaultID = "default";
 
-        internal ConnectionPoint (MethodInfo callBack, Type interFace, 
-                    Type control, string name, string id, 
-                            bool allowsMultiConnections)
+        internal ConnectionPoint(
+            MethodInfo callBack,
+            Type interFace,
+            Type control,
+            string name,
+            string id,
+            bool allowsMultiConnections
+        )
         {
             this.allowMultiConn = allowsMultiConnections;
             this.interfaceType = interFace;
@@ -51,35 +57,41 @@ namespace System.Web.UI.WebControls.WebParts {
             this.id = id;
             this.callBackMethod = callBack;
         }
-        
-        internal MethodInfo CallbackMethod {
-            get{ return callBackMethod;  }
-        }
-        
-        [MonoTODO ("Not implemented")]
-        public virtual bool GetEnabled (Control control)
+
+        internal MethodInfo CallbackMethod
         {
-            throw new NotImplementedException ();
+            get { return callBackMethod; }
         }
 
-        public bool AllowsMultipleConnections {
+        [MonoTODO("Not implemented")]
+        public virtual bool GetEnabled(Control control)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AllowsMultipleConnections
+        {
             get { return allowMultiConn; }
         }
 
-        public Type ControlType {
+        public Type ControlType
+        {
             get { return controlType; }
         }
 
-        public string ID {
+        public string ID
+        {
             get { return id; }
         }
 
-        public Type InterfaceType { 
+        public Type InterfaceType
+        {
             get { return interfaceType; }
         }
 
-        public string Name { 
-            get { return name;}
-        }    
+        public string Name
+        {
+            get { return name; }
         }
+    }
 }

@@ -21,7 +21,9 @@ public abstract class TagHelperDescriptorProviderContext
         return new DefaultContext(new List<TagHelperDescriptor>());
     }
 
-    public static TagHelperDescriptorProviderContext Create(ICollection<TagHelperDescriptor> results)
+    public static TagHelperDescriptorProviderContext Create(
+        ICollection<TagHelperDescriptor> results
+    )
     {
         if (results == null)
         {

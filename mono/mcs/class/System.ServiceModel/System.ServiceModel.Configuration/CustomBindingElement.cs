@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,114 +56,180 @@ using System.Diagnostics;
 namespace System.ServiceModel.Configuration
 {
     public class CustomBindingElement
-         : NamedServiceModelExtensionCollectionElement<BindingElementExtensionElement>, ICollection<BindingElementExtensionElement>, IEnumerable<BindingElementExtensionElement>, IEnumerable, IBindingConfigurationElement
+        : NamedServiceModelExtensionCollectionElement<BindingElementExtensionElement>,
+            ICollection<BindingElementExtensionElement>,
+            IEnumerable<BindingElementExtensionElement>,
+            IEnumerable,
+            IBindingConfigurationElement
     {
         ConfigurationPropertyCollection _properties;
 
-        public CustomBindingElement () {
-        }
+        public CustomBindingElement() { }
 
-        public CustomBindingElement (string name) {
+        public CustomBindingElement(string name)
+        {
             Name = name;
         }
 
         // Properties
 
-        [ConfigurationProperty ("closeTimeout",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:01:00")]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan CloseTimeout {
-            get { return (TimeSpan) base ["closeTimeout"]; }
-            set { base ["closeTimeout"] = value; }
+        [ConfigurationProperty(
+            "closeTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:01:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan CloseTimeout
+        {
+            get { return (TimeSpan)base["closeTimeout"]; }
+            set { base["closeTimeout"] = value; }
         }
 
-        [ConfigurationProperty ("openTimeout",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:01:00")]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan OpenTimeout {
-            get { return (TimeSpan) base ["openTimeout"]; }
-            set { base ["openTimeout"] = value; }
+        [ConfigurationProperty(
+            "openTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:01:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan OpenTimeout
+        {
+            get { return (TimeSpan)base["openTimeout"]; }
+            set { base["openTimeout"] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
                     _properties = base.Properties;
-                    _properties.Add (new ConfigurationProperty ("closeTimeout", typeof (TimeSpan), "00:01:00", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("openTimeout", typeof (TimeSpan), "00:01:00", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("receiveTimeout", typeof (TimeSpan), "00:10:00", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("sendTimeout", typeof (TimeSpan), "00:01:00", null, null, ConfigurationPropertyOptions.None));
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "closeTimeout",
+                            typeof(TimeSpan),
+                            "00:01:00",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "openTimeout",
+                            typeof(TimeSpan),
+                            "00:01:00",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "receiveTimeout",
+                            typeof(TimeSpan),
+                            "00:10:00",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "sendTimeout",
+                            typeof(TimeSpan),
+                            "00:01:00",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
                 }
                 return _properties;
             }
         }
 
-        [ConfigurationProperty ("receiveTimeout",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:10:00")]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan ReceiveTimeout {
-            get { return (TimeSpan) base ["receiveTimeout"]; }
-            set { base ["receiveTimeout"] = value; }
-        }
-
-        [ConfigurationProperty ("sendTimeout",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:01:00")]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan SendTimeout {
-            get { return (TimeSpan) base ["sendTimeout"]; }
-            set { base ["sendTimeout"] = value; }
-        }
-
-        [MonoTODO ("what to reject?")]
-        public override void Add (BindingElementExtensionElement element)
+        [ConfigurationProperty(
+            "receiveTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:10:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan ReceiveTimeout
         {
-            base.Add (element);
+            get { return (TimeSpan)base["receiveTimeout"]; }
+            set { base["receiveTimeout"] = value; }
         }
 
-        [MonoTODO ("what to reject?")]
-        public override bool CanAdd (BindingElementExtensionElement element)
+        [ConfigurationProperty(
+            "sendTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:01:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan SendTimeout
+        {
+            get { return (TimeSpan)base["sendTimeout"]; }
+            set { base["sendTimeout"] = value; }
+        }
+
+        [MonoTODO("what to reject?")]
+        public override void Add(BindingElementExtensionElement element)
+        {
+            base.Add(element);
+        }
+
+        [MonoTODO("what to reject?")]
+        public override bool CanAdd(BindingElementExtensionElement element)
         {
             return true;
         }
 
-        public void ApplyConfiguration (Binding binding)
+        public void ApplyConfiguration(Binding binding)
         {
-            OnApplyConfiguration (binding);
+            OnApplyConfiguration(binding);
         }
 
-        [MonoTODO ("implement using EvaluationContext")]
-        internal override BindingElementExtensionElement DeserializeExtensionElement (string elementName, XmlReader reader) {
+        [MonoTODO("implement using EvaluationContext")]
+        internal override BindingElementExtensionElement DeserializeExtensionElement(
+            string elementName,
+            XmlReader reader
+        )
+        {
             //ExtensionElementCollection extensions = ((ExtensionsSection) EvaluationContext.GetSection ("system.serviceModel/extensions")).BindingElementExtensions;
-            ExtensionElementCollection extensions = ConfigUtil.ExtensionsSection.BindingElementExtensions;
+            ExtensionElementCollection extensions = ConfigUtil
+                .ExtensionsSection
+                .BindingElementExtensions;
 
-            ExtensionElement extension = extensions [elementName];
+            ExtensionElement extension = extensions[elementName];
             if (extension == null)
-                throw new ConfigurationErrorsException ("Invalid element in configuration. The extension name '" + reader.LocalName + "' is not registered in the collection at system.serviceModel/extensions/bindingElementExtensions");
+                throw new ConfigurationErrorsException(
+                    "Invalid element in configuration. The extension name '"
+                        + reader.LocalName
+                        + "' is not registered in the collection at system.serviceModel/extensions/bindingElementExtensions"
+                );
 
-            BindingElementExtensionElement element = (BindingElementExtensionElement) Activator.CreateInstance (Type.GetType (extension.Type));
-            element.DeserializeElementInternal (reader, false);
+            BindingElementExtensionElement element = (BindingElementExtensionElement)
+                Activator.CreateInstance(Type.GetType(extension.Type));
+            element.DeserializeElementInternal(reader, false);
             return element;
         }
 
-        protected void OnApplyConfiguration (Binding binding)
+        protected void OnApplyConfiguration(Binding binding)
         {
             if (binding == null)
-                throw new ArgumentNullException ("binding");
-            var b = (CustomBinding) binding;
+                throw new ArgumentNullException("binding");
+            var b = (CustomBinding)binding;
             b.CloseTimeout = CloseTimeout;
             b.OpenTimeout = OpenTimeout;
             b.ReceiveTimeout = ReceiveTimeout;
             b.SendTimeout = SendTimeout;
 
             foreach (var be in this)
-                b.Elements.Add (be.CreateBindingElement ());
+                b.Elements.Add(be.CreateBindingElement());
         }
 
-        internal void InitializeFrom (Binding binding)
+        internal void InitializeFrom(Binding binding)
         {
             CloseTimeout = binding.CloseTimeout;
             OpenTimeout = binding.OpenTimeout;
@@ -171,5 +237,4 @@ namespace System.ServiceModel.Configuration
             SendTimeout = binding.SendTimeout;
         }
     }
-
 }

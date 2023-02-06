@@ -4,22 +4,28 @@ using Mono.Linker.Tests.Cases.LinkXml.Dependencies.EmbeddedLinkXmlFromCopyAssemb
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupCompileBefore ("Library.dll",
-        new[] { "Dependencies/EmbeddedLinkXmlFromCopyAssemblyIsProcessed/OtherLibrary.cs" })]
-    [SetupCompileBefore ("CopyLibrary.dll",
+    [SetupCompileBefore(
+        "Library.dll",
+        new[] { "Dependencies/EmbeddedLinkXmlFromCopyAssemblyIsProcessed/OtherLibrary.cs" }
+    )]
+    [SetupCompileBefore(
+        "CopyLibrary.dll",
         new[] { "Dependencies/EmbeddedLinkXmlFromCopyAssemblyIsProcessed/CopyLibrary.cs" },
-        resources: new object[] { "Dependencies/EmbeddedLinkXmlFromCopyAssemblyIsProcessed/CopyLibrary.xml" })]
-    [IgnoreDescriptors (false)]
-    [SetupLinkerAction ("copy", "CopyLibrary")]
-
-    [KeptTypeInAssembly ("CopyLibrary.dll", typeof (CopyLibrary))]
-    [KeptTypeInAssembly ("Library.dll", typeof (OtherLibrary))]
+        resources: new object[]
+        {
+            "Dependencies/EmbeddedLinkXmlFromCopyAssemblyIsProcessed/CopyLibrary.xml"
+        }
+    )]
+    [IgnoreDescriptors(false)]
+    [SetupLinkerAction("copy", "CopyLibrary")]
+    [KeptTypeInAssembly("CopyLibrary.dll", typeof(CopyLibrary))]
+    [KeptTypeInAssembly("Library.dll", typeof(OtherLibrary))]
     public class EmbeddedLinkXmlFromCopyAssemblyIsProcessed
     {
-        public static void Main ()
+        public static void Main()
         {
-            var tmp = new CopyLibrary ();
-            tmp.Method ();
+            var tmp = new CopyLibrary();
+            tmp.Method();
         }
     }
 }

@@ -4,9 +4,9 @@
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        var b = new B ();
-        b.Prop = null;    
+        var b = new B();
+        b.Prop = null;
     }
 }

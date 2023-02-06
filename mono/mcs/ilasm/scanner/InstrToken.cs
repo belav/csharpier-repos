@@ -6,31 +6,29 @@
 using System;
 using System.Reflection.Emit;
 
-namespace Mono.ILASM {
-
-    public class InstrToken : ILToken {
-
-
+namespace Mono.ILASM
+{
+    public class InstrToken : ILToken
+    {
         /// <summary>
         /// </summary>
-        public InstrToken (OpCode opcode)
+        public InstrToken(OpCode opcode)
         {
             this.val = opcode;
-            token = GetInstrType (opcode);
+            token = GetInstrType(opcode);
         }
-
 
         /// <summary>
         /// </summary>
         /// <param name="opcode"></param>
         /// <returns></returns>
-        public static int GetInstrType (OpCode opcode)
+        public static int GetInstrType(OpCode opcode)
         {
             OperandType t = opcode.OperandType;
             int token = Token.UNKNOWN;
 
-            switch (t) {
-
+            switch (t)
+            {
                 case OperandType.InlineBrTarget:
                 case OperandType.ShortInlineBrTarget:
                     token = Token.INSTR_BRTARGET;
@@ -101,10 +99,7 @@ namespace Mono.ILASM {
 
             return token;
         }
-
-
     }
-
 }
 
 #endif

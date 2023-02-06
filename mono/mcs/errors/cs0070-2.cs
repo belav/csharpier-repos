@@ -5,9 +5,7 @@ using System;
 
 public static class EventExtensions
 {
-    public static void Raise (this EventHandler h)
-    {
-    }
+    public static void Raise(this EventHandler h) { }
 }
 
 public class A
@@ -19,6 +17,6 @@ public class B : A
 {
     public void Run()
     {
-        Action a = () => evt.Raise ();
+        Action a = () => evt.Raise();
     }
 }

@@ -27,214 +27,212 @@ namespace System.DirectoryServices.ActiveDirectory
     [DirectoryServicesPermission(SecurityAction.LinkDemand, Unrestricted = true)]
     public class Forest : IDisposable
     {
-        public string Name {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public ReadOnlySiteCollection Sites {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public DomainCollection Domains {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public GlobalCatalogCollection GlobalCatalogs {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public ApplicationPartitionCollection ApplicationPartitions {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public ForestMode ForestMode {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public Domain RootDomain {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public ActiveDirectorySchema Schema {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public DomainController SchemaRoleOwner {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public DomainController NamingRoleOwner {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public void Dispose ()
+        public string Name
         {
-            this.Dispose (true);
+            get { throw new NotImplementedException(); }
         }
 
-        protected void Dispose (bool disposing)
+        public ReadOnlySiteCollection Sites
         {
-
+            get { throw new NotImplementedException(); }
         }
 
-        public static Forest GetForest (DirectoryContext context)
+        public DomainCollection Domains
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public void RaiseForestFunctionality (ForestMode forestMode)
+        public GlobalCatalogCollection GlobalCatalogs
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override string ToString ()
+        public ApplicationPartitionCollection ApplicationPartitions
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public GlobalCatalog FindGlobalCatalog ()
+        public ForestMode ForestMode
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public GlobalCatalog FindGlobalCatalog (string siteName)
+        public Domain RootDomain
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public GlobalCatalog FindGlobalCatalog (LocatorOptions flag)
+        public ActiveDirectorySchema Schema
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public GlobalCatalog FindGlobalCatalog (string siteName, LocatorOptions flag)
+        public DomainController SchemaRoleOwner
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public GlobalCatalogCollection FindAllGlobalCatalogs ()
+        public DomainController NamingRoleOwner
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public GlobalCatalogCollection FindAllGlobalCatalogs (string siteName)
+        public void Dispose()
         {
-            throw new NotImplementedException ();
+            this.Dispose(true);
         }
 
-        public GlobalCatalogCollection FindAllDiscoverableGlobalCatalogs ()
+        protected void Dispose(bool disposing) { }
+
+        public static Forest GetForest(DirectoryContext context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public GlobalCatalogCollection FindAllDiscoverableGlobalCatalogs (string siteName)
+        public void RaiseForestFunctionality(ForestMode forestMode)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public TrustRelationshipInformationCollection GetAllTrustRelationships ()
+        public override string ToString()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public ForestTrustRelationshipInformation GetTrustRelationship (string targetForestName)
+        public GlobalCatalog FindGlobalCatalog()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetSelectiveAuthenticationStatus (string targetForestName)
+        public GlobalCatalog FindGlobalCatalog(string siteName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void SetSelectiveAuthenticationStatus (string targetForestName, bool enable)
+        public GlobalCatalog FindGlobalCatalog(LocatorOptions flag)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetSidFilteringStatus (string targetForestName)
+        public GlobalCatalog FindGlobalCatalog(string siteName, LocatorOptions flag)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void SetSidFilteringStatus (string targetForestName, bool enable)
+        public GlobalCatalogCollection FindAllGlobalCatalogs()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void DeleteLocalSideOfTrustRelationship (string targetForestName)
+        public GlobalCatalogCollection FindAllGlobalCatalogs(string siteName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void DeleteTrustRelationship (Forest targetForest)
+        public GlobalCatalogCollection FindAllDiscoverableGlobalCatalogs()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void VerifyOutboundTrustRelationship (string targetForestName)
+        public GlobalCatalogCollection FindAllDiscoverableGlobalCatalogs(string siteName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void VerifyTrustRelationship (Forest targetForest, TrustDirection direction)
+        public TrustRelationshipInformationCollection GetAllTrustRelationships()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void CreateLocalSideOfTrustRelationship (string targetForestName, TrustDirection direction, string trustPassword)
+        public ForestTrustRelationshipInformation GetTrustRelationship(string targetForestName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void CreateTrustRelationship (Forest targetForest, TrustDirection direction)
+        public bool GetSelectiveAuthenticationStatus(string targetForestName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void UpdateLocalSideOfTrustRelationship (string targetForestName, string newTrustPassword)
+        public void SetSelectiveAuthenticationStatus(string targetForestName, bool enable)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void UpdateLocalSideOfTrustRelationship (string targetForestName, TrustDirection newTrustDirection, string newTrustPassword)
+        public bool GetSidFilteringStatus(string targetForestName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void UpdateTrustRelationship (Forest targetForest, TrustDirection newTrustDirection)
+        public void SetSidFilteringStatus(string targetForestName, bool enable)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void RepairTrustRelationship (Forest targetForest)
+        public void DeleteLocalSideOfTrustRelationship(string targetForestName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static Forest GetCurrentForest ()
+        public void DeleteTrustRelationship(Forest targetForest)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        public void VerifyOutboundTrustRelationship(string targetForestName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void VerifyTrustRelationship(Forest targetForest, TrustDirection direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateLocalSideOfTrustRelationship(
+            string targetForestName,
+            TrustDirection direction,
+            string trustPassword
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateTrustRelationship(Forest targetForest, TrustDirection direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateLocalSideOfTrustRelationship(
+            string targetForestName,
+            string newTrustPassword
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateLocalSideOfTrustRelationship(
+            string targetForestName,
+            TrustDirection newTrustDirection,
+            string newTrustPassword
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateTrustRelationship(Forest targetForest, TrustDirection newTrustDirection)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RepairTrustRelationship(Forest targetForest)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Forest GetCurrentForest()
+        {
+            throw new NotImplementedException();
         }
     }
 }

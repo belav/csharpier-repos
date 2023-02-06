@@ -22,10 +22,17 @@ namespace System.ServiceModel.Activities.Presentation.Factories
         static string requiredNamespace = typeof(CorrelationHandle).Namespace;
 
         public Activity Create(DependencyObject target)
-        {            
-            string correlationHandleName = ActivityDesignerHelper.GenerateUniqueVariableNameForContext(target, correlationHandleNamePrefix);
+        {
+            string correlationHandleName =
+                ActivityDesignerHelper.GenerateUniqueVariableNameForContext(
+                    target,
+                    correlationHandleNamePrefix
+                );
 
-            Variable<CorrelationHandle> requestReplyCorrelation = new Variable<CorrelationHandle> { Name = correlationHandleName };
+            Variable<CorrelationHandle> requestReplyCorrelation = new Variable<CorrelationHandle>
+            {
+                Name = correlationHandleName
+            };
 
             Receive receive = new Receive
             {
@@ -35,11 +42,13 @@ namespace System.ServiceModel.Activities.Presentation.Factories
                 {
                     new RequestReplyCorrelationInitializer
                     {
-                        CorrelationHandle = new VariableValue<CorrelationHandle> { Variable = requestReplyCorrelation }
+                        CorrelationHandle = new VariableValue<CorrelationHandle>
+                        {
+                            Variable = requestReplyCorrelation
+                        }
                     }
                 }
             };
-
 
             Sequence sequence = new Sequence()
             {
@@ -47,11 +56,7 @@ namespace System.ServiceModel.Activities.Presentation.Factories
                 Activities =
                 {
                     receive,
-                    new SendReply
-                    {    
-                        DisplayName = "SendReplyToReceive",
-                        Request = receive,
-                    },
+                    new SendReply { DisplayName = "SendReplyToReceive", Request = receive, },
                 }
             };
 

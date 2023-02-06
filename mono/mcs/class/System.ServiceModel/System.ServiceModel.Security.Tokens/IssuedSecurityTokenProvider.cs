@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,219 +39,241 @@ namespace System.ServiceModel.Security.Tokens
 {
     public class IssuedSecurityTokenProvider : SecurityTokenProvider, ICommunicationObject
     {
-        public IssuedSecurityTokenProvider ()
-        {
-        }
+        public IssuedSecurityTokenProvider() { }
 
-        IssuedTokenCommunicationObject comm =
-            new IssuedTokenCommunicationObject ();
+        IssuedTokenCommunicationObject comm = new IssuedTokenCommunicationObject();
 
-        SecurityKeyEntropyMode entropy_mode =
-            SecurityKeyEntropyMode.CombinedEntropy;
+        SecurityKeyEntropyMode entropy_mode = SecurityKeyEntropyMode.CombinedEntropy;
         TimeSpan max_cache_time = TimeSpan.MaxValue;
         MessageSecurityVersion version = MessageSecurityVersion.Default;
         int threshold = 60;
-        IdentityVerifier verifier = IdentityVerifier.CreateDefault ();
+        IdentityVerifier verifier = IdentityVerifier.CreateDefault();
         bool cache_issued_tokens = true;
-        Collection<XmlElement> request_params =
-            new Collection<XmlElement> ();
+        Collection<XmlElement> request_params = new Collection<XmlElement>();
 
         CommunicationState state = CommunicationState.Created;
 
-        internal IssuedTokenCommunicationObject Communication {
+        internal IssuedTokenCommunicationObject Communication
+        {
             get { return comm; }
         }
 
-        public bool CacheIssuedTokens {
+        public bool CacheIssuedTokens
+        {
             get { return cache_issued_tokens; }
             set { cache_issued_tokens = value; }
         }
 
-        public virtual TimeSpan DefaultCloseTimeout {
+        public virtual TimeSpan DefaultCloseTimeout
+        {
             get { return comm.DefaultCloseTimeout; }
         }
 
-        public virtual TimeSpan DefaultOpenTimeout {
+        public virtual TimeSpan DefaultOpenTimeout
+        {
             get { return comm.DefaultOpenTimeout; }
         }
 
-        public IdentityVerifier IdentityVerifier {
+        public IdentityVerifier IdentityVerifier
+        {
             get { return verifier; }
             set { verifier = value; }
         }
 
-        public int IssuedTokenRenewalThresholdPercentage {
+        public int IssuedTokenRenewalThresholdPercentage
+        {
             get { return threshold; }
             set { threshold = value; }
         }
 
-        public EndpointAddress IssuerAddress {
+        public EndpointAddress IssuerAddress
+        {
             get { return comm.IssuerAddress; }
             set { comm.IssuerAddress = value; }
         }
 
-        public Binding IssuerBinding {
+        public Binding IssuerBinding
+        {
             get { return comm.IssuerBinding; }
             set { comm.IssuerBinding = value; }
         }
 
-        public KeyedByTypeCollection<IEndpointBehavior> IssuerChannelBehaviors {
+        public KeyedByTypeCollection<IEndpointBehavior> IssuerChannelBehaviors
+        {
             get { return comm.IssuerChannelBehaviors; }
         }
 
-        public SecurityKeyEntropyMode KeyEntropyMode {
+        public SecurityKeyEntropyMode KeyEntropyMode
+        {
             get { return entropy_mode; }
             set { entropy_mode = value; }
         }
 
-        public TimeSpan MaxIssuedTokenCachingTime {
+        public TimeSpan MaxIssuedTokenCachingTime
+        {
             get { return max_cache_time; }
             set { max_cache_time = value; }
         }
 
-        public MessageSecurityVersion MessageSecurityVersion {
+        public MessageSecurityVersion MessageSecurityVersion
+        {
             get { return version; }
             set { version = value; }
         }
 
-        public SecurityAlgorithmSuite SecurityAlgorithmSuite {
+        public SecurityAlgorithmSuite SecurityAlgorithmSuite
+        {
             get { return comm.SecurityAlgorithmSuite; }
             set { comm.SecurityAlgorithmSuite = value; }
         }
 
-        public SecurityTokenSerializer SecurityTokenSerializer {
+        public SecurityTokenSerializer SecurityTokenSerializer
+        {
             get { return comm.SecurityTokenSerializer; }
             set { comm.SecurityTokenSerializer = value; }
         }
 
-        public EndpointAddress TargetAddress {
+        public EndpointAddress TargetAddress
+        {
             get { return comm.TargetAddress; }
             set { comm.TargetAddress = value; }
         }
 
-        public Collection<XmlElement> TokenRequestParameters {
+        public Collection<XmlElement> TokenRequestParameters
+        {
             get { return request_params; }
         }
 
         // SecurityTokenProvider
 
-        [MonoTODO ("support it then")]
-        public override bool SupportsTokenCancellation {
+        [MonoTODO("support it then")]
+        public override bool SupportsTokenCancellation
+        {
             get { return true; }
         }
 
         [MonoTODO]
-        protected override SecurityToken GetTokenCore (TimeSpan timeout)
+        protected override SecurityToken GetTokenCore(TimeSpan timeout)
         {
             if (State != CommunicationState.Opened)
-                throw new InvalidOperationException ("Open the provider before issuing actual request to get token.");
-            return comm.GetToken (timeout);
+                throw new InvalidOperationException(
+                    "Open the provider before issuing actual request to get token."
+                );
+            return comm.GetToken(timeout);
         }
 
         [MonoTODO]
-        protected override IAsyncResult BeginGetTokenCore (
+        protected override IAsyncResult BeginGetTokenCore(
             TimeSpan timeout,
-            AsyncCallback callback, object state)
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected override SecurityToken EndGetTokenCore (IAsyncResult result)
+        protected override SecurityToken EndGetTokenCore(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         // ICommunicationObject
 
-        public CommunicationState State {
+        public CommunicationState State
+        {
             get { return comm.State; }
         }
 
         [MonoTODO]
-        public void Abort ()
+        public void Abort()
         {
-            comm.Abort ();
+            comm.Abort();
         }
 
-        public void Open ()
+        public void Open()
         {
-            comm.Open ();
-        }
-
-        [MonoTODO]
-        public void Open (TimeSpan timeout)
-        {
-            comm.Open (timeout);
-        }
-
-        public IAsyncResult BeginOpen (AsyncCallback callback, object state)
-        {
-            return comm.BeginOpen (callback, state);
+            comm.Open();
         }
 
         [MonoTODO]
-        public IAsyncResult BeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+        public void Open(TimeSpan timeout)
         {
-            return comm.BeginOpen (timeout, callback, state);
+            comm.Open(timeout);
+        }
+
+        public IAsyncResult BeginOpen(AsyncCallback callback, object state)
+        {
+            return comm.BeginOpen(callback, state);
         }
 
         [MonoTODO]
-        public void EndOpen (IAsyncResult result)
+        public IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            comm.EndOpen (result);
-        }
-
-        public void Close ()
-        {
-            comm.Close ();
+            return comm.BeginOpen(timeout, callback, state);
         }
 
         [MonoTODO]
-        public void Close (TimeSpan timeout)
+        public void EndOpen(IAsyncResult result)
         {
-            comm.Close (timeout);
+            comm.EndOpen(result);
         }
 
-        public IAsyncResult BeginClose (AsyncCallback callback, object state)
+        public void Close()
         {
-            return comm.BeginClose (callback, state);
-        }
-
-        [MonoTODO]
-        public IAsyncResult BeginClose (TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            return comm.BeginClose (timeout, callback, state);
+            comm.Close();
         }
 
         [MonoTODO]
-        public void EndClose (IAsyncResult result)
+        public void Close(TimeSpan timeout)
         {
-            comm.EndClose (result);
+            comm.Close(timeout);
         }
 
-        public void Dispose ()
+        public IAsyncResult BeginClose(AsyncCallback callback, object state)
         {
-            Close ();
+            return comm.BeginClose(callback, state);
         }
 
-        public event EventHandler Opened {
+        [MonoTODO]
+        public IAsyncResult BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        {
+            return comm.BeginClose(timeout, callback, state);
+        }
+
+        [MonoTODO]
+        public void EndClose(IAsyncResult result)
+        {
+            comm.EndClose(result);
+        }
+
+        public void Dispose()
+        {
+            Close();
+        }
+
+        public event EventHandler Opened
+        {
             add { comm.Opened += value; }
             remove { comm.Opened -= value; }
         }
-        public event EventHandler Opening {
+        public event EventHandler Opening
+        {
             add { comm.Opening += value; }
             remove { comm.Opening -= value; }
         }
-        public event EventHandler Closed {
+        public event EventHandler Closed
+        {
             add { comm.Closed += value; }
             remove { comm.Closed -= value; }
         }
-        public event EventHandler Closing {
+        public event EventHandler Closing
+        {
             add { comm.Closing += value; }
             remove { comm.Closing -= value; }
         }
-        public event EventHandler Faulted {
+        public event EventHandler Faulted
+        {
             add { comm.Faulted += value; }
             remove { comm.Faulted -= value; }
         }

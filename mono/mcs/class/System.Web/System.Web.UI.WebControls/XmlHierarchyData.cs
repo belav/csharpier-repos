@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,83 +35,87 @@ using System.Xml;
 using System.ComponentModel;
 using AC = System.ComponentModel.AttributeCollection;
 
-namespace System.Web.UI.WebControls {
-    internal class XmlHierarchyData : IHierarchyData, ICustomTypeDescriptor {
-        internal XmlHierarchyData (XmlNode item)
+namespace System.Web.UI.WebControls
+{
+    internal class XmlHierarchyData : IHierarchyData, ICustomTypeDescriptor
+    {
+        internal XmlHierarchyData(XmlNode item)
         {
             this.item = item;
         }
-        
-        public override string ToString ()
+
+        public override string ToString()
         {
             return item.Name;
         }
-        
+
         #region ICustomTypeDescriptor
-        AC ICustomTypeDescriptor.GetAttributes ()
+        AC ICustomTypeDescriptor.GetAttributes()
         {
             return AC.Empty;
         }
-        
-        string ICustomTypeDescriptor.GetClassName ()
+
+        string ICustomTypeDescriptor.GetClassName()
         {
             return "XmlHierarchyData";
         }
-        
-        string ICustomTypeDescriptor.GetComponentName ()
+
+        string ICustomTypeDescriptor.GetComponentName()
         {
             return null;
         }
-        
-        TypeConverter ICustomTypeDescriptor.GetConverter ()
+
+        TypeConverter ICustomTypeDescriptor.GetConverter()
         {
             return null;
         }
-        
-        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent ()
+
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
         {
             return null;
         }
-        
-        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty ()
+
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
         {
-            return new XmlHierarchyDataPropertyDescriptor (item, "##Name##");
+            return new XmlHierarchyDataPropertyDescriptor(item, "##Name##");
         }
-        
-        object ICustomTypeDescriptor.GetEditor (Type editorBaseType)
+
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
         {
             return null;
         }
-        
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents ()
+
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
         {
             return null;
         }
-        
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents (Attribute [] attrs)
+
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attrs)
         {
             return null;
         }
-        
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties ()
+
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
         {
-            return ((ICustomTypeDescriptor)this).GetProperties (null);
+            return ((ICustomTypeDescriptor)this).GetProperties(null);
         }
-        
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties (Attribute [] attrFilter)
+
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attrFilter)
         {
-            ArrayList ret = new ArrayList ();
-            ret.Add (new XmlHierarchyDataPropertyDescriptor (item, "##Name##"));
-            ret.Add (new XmlHierarchyDataPropertyDescriptor (item, "##Value##"));
-            ret.Add (new XmlHierarchyDataPropertyDescriptor (item, "##InnerText##"));
-            
+            ArrayList ret = new ArrayList();
+            ret.Add(new XmlHierarchyDataPropertyDescriptor(item, "##Name##"));
+            ret.Add(new XmlHierarchyDataPropertyDescriptor(item, "##Value##"));
+            ret.Add(new XmlHierarchyDataPropertyDescriptor(item, "##InnerText##"));
+
             if (item.Attributes != null)
                 foreach (XmlAttribute a in item.Attributes)
-                    ret.Add (new XmlHierarchyDataPropertyDescriptor (item, a.Name));
-            
-            return new PropertyDescriptorCollection ((PropertyDescriptor[]) ret.ToArray (typeof (PropertyDescriptor)));
+                    ret.Add(new XmlHierarchyDataPropertyDescriptor(item, a.Name));
+
+            return new PropertyDescriptorCollection(
+                (PropertyDescriptor[])ret.ToArray(typeof(PropertyDescriptor))
+            );
         }
-        
+
         object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
         {
             if (pd is XmlHierarchyDataPropertyDescriptor)
@@ -119,80 +123,94 @@ namespace System.Web.UI.WebControls {
             return null;
         }
         #endregion
-        
+
         #region IHierarchyData
-        IHierarchicalEnumerable IHierarchyData.GetChildren ()
+        IHierarchicalEnumerable IHierarchyData.GetChildren()
         {
-            return new XmlHierarchicalEnumerable (item.ChildNodes);
+            return new XmlHierarchicalEnumerable(item.ChildNodes);
         }
-        
-        IHierarchyData IHierarchyData.GetParent ()
+
+        IHierarchyData IHierarchyData.GetParent()
         {
-            return new XmlHierarchyData (item.ParentNode);
+            return new XmlHierarchyData(item.ParentNode);
         }
-        
-        bool IHierarchyData.HasChildren {
+
+        bool IHierarchyData.HasChildren
+        {
             get { return item.HasChildNodes; }
         }
-        
-        object IHierarchyData.Item {
+
+        object IHierarchyData.Item
+        {
             get { return item; }
         }
-        
-        string IHierarchyData.Path {
-            get { 
+
+        string IHierarchyData.Path
+        {
+            get
+            {
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 XmlNode nod = item;
-                do {
-                    int n=1;
+                do
+                {
+                    int n = 1;
                     XmlNode prev = nod.PreviousSibling;
-                    while (prev != null) {
+                    while (prev != null)
+                    {
                         prev = prev.PreviousSibling;
                         n++;
                     }
 
-                    sb.Insert (0, "/*[position()=" + n + "]");
+                    sb.Insert(0, "/*[position()=" + n + "]");
                     nod = nod.ParentNode;
                 } while (nod != null && !(nod is XmlDocument));
-                
-                return sb.ToString ();
+
+                return sb.ToString();
             }
         }
-        
-        string IHierarchyData.Type {
+
+        string IHierarchyData.Type
+        {
             get { return item.Name; }
         }
         #endregion
-            
+
         XmlNode item;
-        
-        class XmlHierarchyDataPropertyDescriptor : PropertyDescriptor {
-            public XmlHierarchyDataPropertyDescriptor (XmlNode xmlNode, string name) : base (name, null)
+
+        class XmlHierarchyDataPropertyDescriptor : PropertyDescriptor
+        {
+            public XmlHierarchyDataPropertyDescriptor(XmlNode xmlNode, string name)
+                : base(name, null)
             {
                 this.xmlNode = xmlNode;
                 this.name = name;
             }
-            
-            public override bool CanResetValue (object o)
+
+            public override bool CanResetValue(object o)
             {
                 return false;
             }
-            
-            public override void ResetValue (object o)
+
+            public override void ResetValue(object o) { }
+
+            public override object GetValue(object o)
             {
-            }
-            
-            public override object GetValue (object o)
-            {
-                if (o is XmlHierarchyData) {
-                    switch (name) {
-                        case "##Name##": return xmlNode.Name;
-                        case "##Value##": return xmlNode.Value;
-                        case "##InnerText##": return xmlNode.InnerText;
-                        case null: return String.Empty;
+                if (o is XmlHierarchyData)
+                {
+                    switch (name)
+                    {
+                        case "##Name##":
+                            return xmlNode.Name;
+                        case "##Value##":
+                            return xmlNode.Value;
+                        case "##InnerText##":
+                            return xmlNode.InnerText;
+                        case null:
+                            return String.Empty;
                         default:
-                            if (xmlNode.Attributes != null) {
-                                XmlAttribute a = xmlNode.Attributes [name];
+                            if (xmlNode.Attributes != null)
+                            {
+                                XmlAttribute a = xmlNode.Attributes[name];
                                 if (a != null)
                                     return a.Value;
                             }
@@ -201,48 +219,57 @@ namespace System.Web.UI.WebControls {
                 }
                 return String.Empty;
             }
-            
-            public override void SetValue (object o, object value)
+
+            public override void SetValue(object o, object value)
             {
-                if (o is XmlHierarchyData) {
-                    switch (name) {
-                        case "##Name##": break;
-                        case "##Value##": xmlNode.Value = value.ToString (); break;
-                        case "##InnerText##": xmlNode.InnerText = value.ToString (); break;
-                        case null: break;
+                if (o is XmlHierarchyData)
+                {
+                    switch (name)
+                    {
+                        case "##Name##":
+                            break;
+                        case "##Value##":
+                            xmlNode.Value = value.ToString();
+                            break;
+                        case "##InnerText##":
+                            xmlNode.InnerText = value.ToString();
+                            break;
+                        case null:
+                            break;
                         default:
-                            if (xmlNode.Attributes != null) {
-                                XmlAttribute a = xmlNode.Attributes [name];
+                            if (xmlNode.Attributes != null)
+                            {
+                                XmlAttribute a = xmlNode.Attributes[name];
                                 if (a != null)
-                                    a.Value = value.ToString ();
+                                    a.Value = value.ToString();
                             }
                             break;
                     }
                 }
             }
-            
-            public override bool ShouldSerializeValue (object o)
+
+            public override bool ShouldSerializeValue(object o)
             {
                 return o is XmlNode;
             }
-            
-            public override Type ComponentType {
-                get { return typeof (XmlHierarchyData); }
+
+            public override Type ComponentType
+            {
+                get { return typeof(XmlHierarchyData); }
             }
-            
-            public override bool IsReadOnly {
+
+            public override bool IsReadOnly
+            {
                 get { return xmlNode.IsReadOnly; }
             }
-            
-            public override Type PropertyType {
-                get { return typeof (string); }
+
+            public override Type PropertyType
+            {
+                get { return typeof(string); }
             }
-            
+
             string name;
             XmlNode xmlNode;
         }
-    
     }
-    
 }
-

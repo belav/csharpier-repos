@@ -14,12 +14,15 @@ namespace MonoTests.System.Security.AccessControl
     public class MutexAccessRuleTest
     {
         [Test]
-        public void ConstructsWithoutCrashingAndRemembersRights ()
+        public void ConstructsWithoutCrashingAndRemembersRights()
         {
-            SecurityIdentifier id = new SecurityIdentifier (WellKnownSidType.WorldSid, null);
-            MutexAccessRule rule = new MutexAccessRule (id, MutexRights.FullControl, AccessControlType.Allow);
-            Assert.AreEqual (rule.MutexRights, MutexRights.FullControl);
+            SecurityIdentifier id = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+            MutexAccessRule rule = new MutexAccessRule(
+                id,
+                MutexRights.FullControl,
+                AccessControlType.Allow
+            );
+            Assert.AreEqual(rule.MutexRights, MutexRights.FullControl);
         }
     }
 }
-

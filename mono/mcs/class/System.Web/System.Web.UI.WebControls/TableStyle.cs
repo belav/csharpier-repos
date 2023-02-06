@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,12 +32,18 @@ using System.Security.Permissions;
 using System.Web.UI;
 using System.Web.Util;
 
-namespace System.Web.UI.WebControls {
-
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class TableStyle : Style {
-
+namespace System.Web.UI.WebControls
+{
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class TableStyle : Style
+    {
         [Flags]
         enum TableStyles
         {
@@ -48,243 +54,285 @@ namespace System.Web.UI.WebControls {
             HorizontalAlign = 0x00100000,
         }
 
-        public TableStyle ()
-        {
-        }
+        public TableStyle() { }
 
-        public TableStyle (StateBag bag)
-            : base (bag)
-        {
-        }
+        public TableStyle(StateBag bag)
+            : base(bag) { }
 
-
-        [NotifyParentProperty (true)]
+        [NotifyParentProperty(true)]
         [UrlProperty]
-        [DefaultValue ("")]
-        [WebSysDescription ("")]
-        [WebCategory ("Appearance")]
-        public virtual string BackImageUrl {
-            get {
-                if (!CheckBit ((int) TableStyles.BackImageUrl))
+        [DefaultValue("")]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public virtual string BackImageUrl
+        {
+            get
+            {
+                if (!CheckBit((int)TableStyles.BackImageUrl))
                     return String.Empty;
-                return (string) ViewState ["BackImageUrl"];
+                return (string)ViewState["BackImageUrl"];
             }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("BackImageUrl");
-                ViewState ["BackImageUrl"] = value;
-                SetBit ((int) TableStyles.BackImageUrl);
+                    throw new ArgumentNullException("BackImageUrl");
+                ViewState["BackImageUrl"] = value;
+                SetBit((int)TableStyles.BackImageUrl);
             }
         }
 
-        [NotifyParentProperty (true)]
-        [DefaultValue (-1)]
-        [WebSysDescription ("")]
-        [WebCategory ("Appearance")]
-        public virtual int CellPadding {
-            get {
-                if (!CheckBit ((int) TableStyles.CellPadding))
+        [NotifyParentProperty(true)]
+        [DefaultValue(-1)]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public virtual int CellPadding
+        {
+            get
+            {
+                if (!CheckBit((int)TableStyles.CellPadding))
                     return -1;
-                return (int) ViewState ["CellPadding"];
+                return (int)ViewState["CellPadding"];
             }
-            set {
+            set
+            {
                 if (value < -1)
-                    throw new ArgumentOutOfRangeException ("< -1");
-                ViewState ["CellPadding"] = value;
-                SetBit ((int) TableStyles.CellPadding);
+                    throw new ArgumentOutOfRangeException("< -1");
+                ViewState["CellPadding"] = value;
+                SetBit((int)TableStyles.CellPadding);
             }
         }
 
-        [NotifyParentProperty (true)]
-        [DefaultValue (-1)]
-        [WebSysDescription ("")]
-        [WebCategory ("Appearance")]
-        public virtual int CellSpacing {
-            get {
-                if (!CheckBit ((int) TableStyles.CellSpacing))
+        [NotifyParentProperty(true)]
+        [DefaultValue(-1)]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public virtual int CellSpacing
+        {
+            get
+            {
+                if (!CheckBit((int)TableStyles.CellSpacing))
                     return -1;
-                return (int) ViewState ["CellSpacing"];
+                return (int)ViewState["CellSpacing"];
             }
-            set {
+            set
+            {
                 if (value < -1)
-                    throw new ArgumentOutOfRangeException ("< -1");
-                ViewState ["CellSpacing"] = value;
-                SetBit ((int) TableStyles.CellSpacing);
+                    throw new ArgumentOutOfRangeException("< -1");
+                ViewState["CellSpacing"] = value;
+                SetBit((int)TableStyles.CellSpacing);
             }
         }
 
         // LAMESPEC: default is documented to be Both
-        [NotifyParentProperty (true)]
-        [DefaultValue (GridLines.None)]
-        [WebSysDescription ("")]
-        [WebCategory ("Appearance")]
-        public virtual GridLines GridLines {
-            get {
-                if (!CheckBit ((int) TableStyles.GridLines))
+        [NotifyParentProperty(true)]
+        [DefaultValue(GridLines.None)]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public virtual GridLines GridLines
+        {
+            get
+            {
+                if (!CheckBit((int)TableStyles.GridLines))
                     return GridLines.None;
-                return (GridLines) ViewState ["GridLines"];
+                return (GridLines)ViewState["GridLines"];
             }
-            set {
+            set
+            {
                 // avoid reflection
-                if ((value < GridLines.None) || (value > GridLines.Both)) {
+                if ((value < GridLines.None) || (value > GridLines.Both))
+                {
                     // LAMESPEC: documented as ArgumentException
-                    throw new ArgumentOutOfRangeException (Locale.GetText ("Invalid GridLines value."));
+                    throw new ArgumentOutOfRangeException(
+                        Locale.GetText("Invalid GridLines value.")
+                    );
                 }
-                ViewState ["GridLines"] = value;
-                SetBit ((int) TableStyles.GridLines);
+                ViewState["GridLines"] = value;
+                SetBit((int)TableStyles.GridLines);
             }
         }
 
-        [NotifyParentProperty (true)]
-        [DefaultValue (HorizontalAlign.NotSet)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual HorizontalAlign HorizontalAlign {
-            get {
-                if (!CheckBit ((int) TableStyles.HorizontalAlign))
+        [NotifyParentProperty(true)]
+        [DefaultValue(HorizontalAlign.NotSet)]
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual HorizontalAlign HorizontalAlign
+        {
+            get
+            {
+                if (!CheckBit((int)TableStyles.HorizontalAlign))
                     return HorizontalAlign.NotSet;
-                return (HorizontalAlign) ViewState ["HorizontalAlign"];
+                return (HorizontalAlign)ViewState["HorizontalAlign"];
             }
-            set {
+            set
+            {
                 // avoid reflection
-                if ((value < HorizontalAlign.NotSet) || (value > HorizontalAlign.Justify)) {
+                if ((value < HorizontalAlign.NotSet) || (value > HorizontalAlign.Justify))
+                {
                     // LAMESPEC: documented as ArgumentException
-                    throw new ArgumentOutOfRangeException (Locale.GetText ("Invalid HorizontalAlign value."));
+                    throw new ArgumentOutOfRangeException(
+                        Locale.GetText("Invalid HorizontalAlign value.")
+                    );
                 }
-                ViewState ["HorizontalAlign"] = value;
-                SetBit ((int) TableStyles.HorizontalAlign);
+                ViewState["HorizontalAlign"] = value;
+                SetBit((int)TableStyles.HorizontalAlign);
             }
         }
-        [MonoTODO ("collapse style should be rendered only for browsers which support that.")]
-        public override void AddAttributesToRender (HtmlTextWriter writer, WebControl owner)
+
+        [MonoTODO("collapse style should be rendered only for browsers which support that.")]
+        public override void AddAttributesToRender(HtmlTextWriter writer, WebControl owner)
         {
-            base.AddAttributesToRender (writer, owner);
+            base.AddAttributesToRender(writer, owner);
             if (writer == null)
                 return;
 
             // note: avoid calling properties multiple times
             int i = CellSpacing;
-            if (i != -1) {
-                writer.AddAttribute (HtmlTextWriterAttribute.Cellspacing, i.ToString (Helpers.InvariantCulture), false);
+            if (i != -1)
+            {
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Cellspacing,
+                    i.ToString(Helpers.InvariantCulture),
+                    false
+                );
                 if (i == 0)
                     writer.AddStyleAttribute(HtmlTextWriterStyle.BorderCollapse, "collapse");
             }
 
             i = CellPadding;
             if (i != -1)
-                writer.AddAttribute (HtmlTextWriterAttribute.Cellpadding, i.ToString (Helpers.InvariantCulture), false);
-            
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Cellpadding,
+                    i.ToString(Helpers.InvariantCulture),
+                    false
+                );
+
             GridLines g = GridLines;
-            switch (g) {
-            case GridLines.Horizontal:
-                writer.AddAttribute (HtmlTextWriterAttribute.Rules, "rows", false);
-                break;
-            case GridLines.Vertical:
-                writer.AddAttribute (HtmlTextWriterAttribute.Rules, "cols", false);
-                break;
-            case GridLines.Both:
-                writer.AddAttribute (HtmlTextWriterAttribute.Rules, "all", false);
-                break;
+            switch (g)
+            {
+                case GridLines.Horizontal:
+                    writer.AddAttribute(HtmlTextWriterAttribute.Rules, "rows", false);
+                    break;
+                case GridLines.Vertical:
+                    writer.AddAttribute(HtmlTextWriterAttribute.Rules, "cols", false);
+                    break;
+                case GridLines.Both:
+                    writer.AddAttribute(HtmlTextWriterAttribute.Rules, "all", false);
+                    break;
             }
 
             // note: avoid ToString on the enum
-            switch (HorizontalAlign) {
-            case HorizontalAlign.Left:
-                writer.AddAttribute (HtmlTextWriterAttribute.Align, "left", false);
-                break;
-            case HorizontalAlign.Center:
-                writer.AddAttribute (HtmlTextWriterAttribute.Align, "center", false);
-                break;
-            case HorizontalAlign.Right:
-                writer.AddAttribute (HtmlTextWriterAttribute.Align, "right", false);
-                break;
-            case HorizontalAlign.Justify:
-                writer.AddAttribute (HtmlTextWriterAttribute.Align, "justify", false);
-                break;
+            switch (HorizontalAlign)
+            {
+                case HorizontalAlign.Left:
+                    writer.AddAttribute(HtmlTextWriterAttribute.Align, "left", false);
+                    break;
+                case HorizontalAlign.Center:
+                    writer.AddAttribute(HtmlTextWriterAttribute.Align, "center", false);
+                    break;
+                case HorizontalAlign.Right:
+                    writer.AddAttribute(HtmlTextWriterAttribute.Align, "right", false);
+                    break;
+                case HorizontalAlign.Justify:
+                    writer.AddAttribute(HtmlTextWriterAttribute.Align, "justify", false);
+                    break;
             }
             if (g != GridLines.None && BorderWidth.IsEmpty)
-                writer.AddAttribute (HtmlTextWriterAttribute.Border, "1", false);
+                writer.AddAttribute(HtmlTextWriterAttribute.Border, "1", false);
         }
 
-        void Copy (string name, TableStyles s, Style source)
+        void Copy(string name, TableStyles s, Style source)
         {
-            if (source.CheckBit ((int) s)) {
-                object o = source.ViewState [name];
-                if (o != null) {
-                    ViewState [name] = o;
-                    SetBit ((int) s);
+            if (source.CheckBit((int)s))
+            {
+                object o = source.ViewState[name];
+                if (o != null)
+                {
+                    ViewState[name] = o;
+                    SetBit((int)s);
                 }
             }
         }
 
-        public override void CopyFrom (Style s)
+        public override void CopyFrom(Style s)
         {
             // note: styles is copied in base
-            base.CopyFrom (s);
-            if ((s != null) && !s.IsEmpty) {
-                Copy ("BackImageUrl", TableStyles.BackImageUrl, s);
-                Copy ("CellPadding", TableStyles.CellPadding, s);
-                Copy ("CellSpacing", TableStyles.CellSpacing, s);
-                Copy ("GridLines", TableStyles.GridLines, s);
-                Copy ("HorizontalAlign", TableStyles.HorizontalAlign, s);
+            base.CopyFrom(s);
+            if ((s != null) && !s.IsEmpty)
+            {
+                Copy("BackImageUrl", TableStyles.BackImageUrl, s);
+                Copy("CellPadding", TableStyles.CellPadding, s);
+                Copy("CellSpacing", TableStyles.CellSpacing, s);
+                Copy("GridLines", TableStyles.GridLines, s);
+                Copy("HorizontalAlign", TableStyles.HorizontalAlign, s);
             }
         }
 
-        void Merge (string name, TableStyles s, Style source)
+        void Merge(string name, TableStyles s, Style source)
         {
-            if ((!CheckBit ((int) s)) && (source.CheckBit ((int) s))) {
-                object o = source.ViewState [name];
-                if (o != null) {
-                    ViewState [name] = o;
-                    SetBit ((int) s);
+            if ((!CheckBit((int)s)) && (source.CheckBit((int)s)))
+            {
+                object o = source.ViewState[name];
+                if (o != null)
+                {
+                    ViewState[name] = o;
+                    SetBit((int)s);
                 }
             }
         }
 
-        public override void MergeWith (Style s)
+        public override void MergeWith(Style s)
         {
             // if we're empty then it's like a copy
-            if (IsEmpty) {
-                CopyFrom (s);
-            } else {
-                base.MergeWith (s);
-                if ((s != null) && !s.IsEmpty) {
-                    Merge ("BackImageUrl", TableStyles.BackImageUrl, s);
-                    Merge ("CellPadding", TableStyles.CellPadding, s);
-                    Merge ("CellSpacing", TableStyles.CellSpacing, s);
-                    Merge ("GridLines", TableStyles.GridLines, s);
-                    Merge ("HorizontalAlign", TableStyles.HorizontalAlign, s);
+            if (IsEmpty)
+            {
+                CopyFrom(s);
+            }
+            else
+            {
+                base.MergeWith(s);
+                if ((s != null) && !s.IsEmpty)
+                {
+                    Merge("BackImageUrl", TableStyles.BackImageUrl, s);
+                    Merge("CellPadding", TableStyles.CellPadding, s);
+                    Merge("CellSpacing", TableStyles.CellSpacing, s);
+                    Merge("GridLines", TableStyles.GridLines, s);
+                    Merge("HorizontalAlign", TableStyles.HorizontalAlign, s);
                 }
             }
         }
 
-        public override void Reset ()
+        public override void Reset()
         {
-            if (CheckBit ((int) TableStyles.BackImageUrl))
-                ViewState.Remove ("BackImageUrl");
-            if (CheckBit ((int) TableStyles.CellPadding))
-                ViewState.Remove ("CellPadding");
-            if (CheckBit ((int) TableStyles.CellSpacing))
-                ViewState.Remove ("CellSpacing");
-            if (CheckBit ((int) TableStyles.GridLines))
-                ViewState.Remove ("GridLines");
-            if (CheckBit ((int) TableStyles.HorizontalAlign))
-                ViewState.Remove ("HorizontalAlign");
+            if (CheckBit((int)TableStyles.BackImageUrl))
+                ViewState.Remove("BackImageUrl");
+            if (CheckBit((int)TableStyles.CellPadding))
+                ViewState.Remove("CellPadding");
+            if (CheckBit((int)TableStyles.CellSpacing))
+                ViewState.Remove("CellSpacing");
+            if (CheckBit((int)TableStyles.GridLines))
+                ViewState.Remove("GridLines");
+            if (CheckBit((int)TableStyles.HorizontalAlign))
+                ViewState.Remove("HorizontalAlign");
             // call base at the end because "styles" will reset there
-            base.Reset ();
-        }
-        protected override void FillStyleAttributes (CssStyleCollection attributes, IUrlResolutionService urlResolver)
-        {
-            if (attributes != null) {
-                string url = BackImageUrl;
-                if (url.Length > 0) {
-                    if (urlResolver != null)
-                        url = urlResolver.ResolveClientUrl (url);
-                    attributes.Add (HtmlTextWriterStyle.BackgroundImage, url);
-                }
-            }
-            base.FillStyleAttributes (attributes, urlResolver);
+            base.Reset();
         }
 
+        protected override void FillStyleAttributes(
+            CssStyleCollection attributes,
+            IUrlResolutionService urlResolver
+        )
+        {
+            if (attributes != null)
+            {
+                string url = BackImageUrl;
+                if (url.Length > 0)
+                {
+                    if (urlResolver != null)
+                        url = urlResolver.ResolveClientUrl(url);
+                    attributes.Add(HtmlTextWriterStyle.BackgroundImage, url);
+                }
+            }
+            base.FillStyleAttributes(attributes, urlResolver);
+        }
     }
 }

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,65 +33,78 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 
-
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     public sealed class ExpressionBuilder : ConfigurationElement
     {
         static ConfigurationProperty expressionPrefixProp;
         static ConfigurationProperty typeProp;
         static ConfigurationPropertyCollection properties;
 
-        static ExpressionBuilder ()
+        static ExpressionBuilder()
         {
-            expressionPrefixProp = new ConfigurationProperty ("expressionPrefix", typeof (string), "",
-                                      TypeDescriptor.GetConverter (typeof (string)),
-                                      PropertyHelper.NonEmptyStringValidator,
-                                      ConfigurationPropertyOptions.IsRequired |
-                                      ConfigurationPropertyOptions.IsKey);
-            typeProp = new ConfigurationProperty ("type", typeof (string), "",
-                                  TypeDescriptor.GetConverter (typeof (string)),
-                                  PropertyHelper.NonEmptyStringValidator,
-                                  ConfigurationPropertyOptions.IsRequired);
-            properties = new ConfigurationPropertyCollection ();
+            expressionPrefixProp = new ConfigurationProperty(
+                "expressionPrefix",
+                typeof(string),
+                "",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            typeProp = new ConfigurationProperty(
+                "type",
+                typeof(string),
+                "",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired
+            );
+            properties = new ConfigurationPropertyCollection();
 
-            properties.Add (expressionPrefixProp);
-            properties.Add (typeProp);
+            properties.Add(expressionPrefixProp);
+            properties.Add(typeProp);
         }
 
-        internal ExpressionBuilder ()
-        {
-        }
+        internal ExpressionBuilder() { }
 
-        public ExpressionBuilder (string expressionPrefix, string theType)
+        public ExpressionBuilder(string expressionPrefix, string theType)
         {
             this.ExpressionPrefix = expressionPrefix;
             this.Type = theType;
         }
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("expressionPrefix", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string ExpressionPrefix {
-            get { return (string) base[expressionPrefixProp]; }
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "expressionPrefix",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string ExpressionPrefix
+        {
+            get { return (string)base[expressionPrefixProp]; }
             set { base[expressionPrefixProp] = value; }
         }
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("type", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-        public string Type {
-            get { return (string) base[typeProp]; }
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "type",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string Type
+        {
+            get { return (string)base[typeProp]; }
             set { base[typeProp] = value; }
         }
 
-        internal Type TypeInternal {
-            get {
-                return System.Type.GetType (this.Type, true);
-            }
+        internal Type TypeInternal
+        {
+            get { return System.Type.GetType(this.Type, true); }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
     }
 }
-

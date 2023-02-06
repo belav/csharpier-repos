@@ -2,31 +2,31 @@ using System;
 
 public abstract class A<X>
 {
-    public abstract T Test<T> (T t, X x);
+    public abstract T Test<T>(T t, X x);
 }
 
 public class B : A<char>
 {
-    public override T Test<T> (T t, char x)
+    public override T Test<T>(T t, char x)
     {
-        Console.WriteLine ("B");
-        return default (T);
+        Console.WriteLine("B");
+        return default(T);
     }
 }
 
 public class C : B
 {
-    public override T Test<T> (T t, char c)
+    public override T Test<T>(T t, char c)
     {
-        base.Test ("a", 'a');
-        return default (T);
+        base.Test("a", 'a');
+        return default(T);
     }
 }
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        new C ().Test<int> (1, '1');
+        new C().Test<int>(1, '1');
     }
 }

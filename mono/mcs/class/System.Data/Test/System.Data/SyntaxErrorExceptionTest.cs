@@ -34,11 +34,13 @@ using System.Data;
 
 namespace MonoTests.System.Data
 {
-    [TestFixture] public class SyntaxErrorExceptionTest
+    [TestFixture]
+    public class SyntaxErrorExceptionTest
     {
-        [Test] public void Generate()
+        [Test]
+        public void Generate()
         {
-            Exception tmpEx = new Exception() ;
+            Exception tmpEx = new Exception();
 
             DataTable tbl = new DataTable();
             tbl.Columns.Add(new DataColumn("Column"));
@@ -46,25 +48,31 @@ namespace MonoTests.System.Data
             dc.Expression = "something"; //invalid expression
 
             // SyntaxErrorException - Column Expression
-            try 
+            try
             {
                 tbl.Columns[0].Expression = "Colummn +=+ 1"; //invalid expression
                 Assert.Fail("SEE1: Columns[0].Expression failed to raise SyntaxErrorException.");
             }
-            catch (SyntaxErrorException) {}
-            catch (AssertionException) { throw; }
+            catch (SyntaxErrorException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("SEE2: Columns[0].Expression wrong exception type. Got: " + exc);
             }
-            // SyntaxErrorException - Select 
-            try 
+            // SyntaxErrorException - Select
+            try
             {
                 tbl.Select("Name += bulshit");
                 Assert.Fail("SEE3: Select failed to raise SyntaxErrorException.");
             }
-            catch (SyntaxErrorException) {}
-            catch (AssertionException) { throw; }
+            catch (SyntaxErrorException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("SEE4: Select wrong exception type. Got: " + exc);

@@ -3,7 +3,7 @@
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         (int a, b) = (1, 2);
     }

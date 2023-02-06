@@ -11,4 +11,3 @@ namespace Microsoft.Build.Execution
         public abstract ElementLocation TaskParameterLocation { get; }
     }
 }
-

@@ -7,7 +7,7 @@
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
     /// <summary>
-    /// Because syntax nodes need to be constructed with context information - to allow us to 
+    /// Because syntax nodes need to be constructed with context information - to allow us to
     /// determine whether or not they can be reused during incremental parsing - the syntax
     /// factory needs a view of some internal parser state.
     /// </summary>

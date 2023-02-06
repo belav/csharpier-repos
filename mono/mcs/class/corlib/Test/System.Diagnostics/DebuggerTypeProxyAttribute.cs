@@ -36,21 +36,22 @@ namespace MonoTests.System.Diagnostics
     public class DebuggerTypeProxyAttributeTest
     {
         [Test]
-        public void Constructor_Type ()
+        public void Constructor_Type()
         {
-            var dtp = new DebuggerTypeProxyAttribute (typeof (string));
-            Assert.IsNull (dtp.Target, "#1");
-            Assert.AreEqual (typeof (string).AssemblyQualifiedName, dtp.ProxyTypeName, "#2");
+            var dtp = new DebuggerTypeProxyAttribute(typeof(string));
+            Assert.IsNull(dtp.Target, "#1");
+            Assert.AreEqual(typeof(string).AssemblyQualifiedName, dtp.ProxyTypeName, "#2");
         }
 
         [Test]
-        public void Constructor_Type_Invalid ()
+        public void Constructor_Type_Invalid()
         {
-            try {
-                new DebuggerTypeProxyAttribute (null as Type);
-                Assert.Fail ();
-            } catch (ArgumentNullException) {            
+            try
+            {
+                new DebuggerTypeProxyAttribute(null as Type);
+                Assert.Fail();
             }
+            catch (ArgumentNullException) { }
         }
     }
 }

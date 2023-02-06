@@ -3,7 +3,7 @@
 
 class C
 {
-    void Test ()
+    void Test()
     {
         const int? ac = null;
     }

@@ -11,22 +11,25 @@ using System.Threading;
 namespace MonoTests.Features.Serialization
 {
     [TestFixture]
-    public class DualContractFirstTest : TestFixtureBase<object, DualContractServer, MonoTests.Features.Contracts.IFirstContract>
+    public class DualContractFirstTest
+        : TestFixtureBase<object, DualContractServer, MonoTests.Features.Contracts.IFirstContract>
     {
         [Test]
-        public void TestFirst () {
-            Assert.AreEqual (Client.FirstMethod (), 1, "IFirstContract.FirstMethod");
+        public void TestFirst()
+        {
+            Assert.AreEqual(Client.FirstMethod(), 1, "IFirstContract.FirstMethod");
         }
     }
 
     [TestFixture]
-    public class DualContractSecondTest : TestFixtureBase<object, DualContractServer, MonoTests.Features.Contracts.ISecondContract>
+    public class DualContractSecondTest
+        : TestFixtureBase<object, DualContractServer, MonoTests.Features.Contracts.ISecondContract>
     {
         [Test]
-        public void TestSecond () {
-            Assert.AreEqual (Client.SecondMethod (), 2, "ISecondContract.SecondMethod");
+        public void TestSecond()
+        {
+            Assert.AreEqual(Client.SecondMethod(), 2, "ISecondContract.SecondMethod");
         }
     }
-
 }
 #endif

@@ -16,7 +16,11 @@ using HttpMethods = Microsoft.AspNetCore.Http.HttpMethods;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem, IDisposable, IPooledStream
+internal abstract partial class Http2Stream
+    : HttpProtocol,
+        IThreadPoolWorkItem,
+        IDisposable,
+        IPooledStream
 {
     private Http2StreamContext _context = default!;
     private Http2OutputProducer _http2Output = default!;
@@ -58,7 +62,8 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
                 context.FrameWriter,
                 context.ConnectionInputFlowControl,
                 context.ServerPeerSettings.InitialWindowSize,
-                context.ServerPeerSettings.InitialWindowSize / 2);
+                context.ServerPeerSettings.InitialWindowSize / 2
+            );
 
             _http2Output = new Http2OutputProducer(this, context);
 
@@ -86,9 +91,14 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
     public long? InputRemaining { get; internal set; }
 
     public bool RequestBodyStarted { get; private set; }
-    public bool EndStreamReceived => (_completionState & StreamCompletionFlags.EndStreamReceived) == StreamCompletionFlags.EndStreamReceived;
-    private bool IsAborted => (_completionState & StreamCompletionFlags.Aborted) == StreamCompletionFlags.Aborted;
-    internal bool RstStreamReceived => (_completionState & StreamCompletionFlags.RstStreamReceived) == StreamCompletionFlags.RstStreamReceived;
+    public bool EndStreamReceived =>
+        (_completionState & StreamCompletionFlags.EndStreamReceived)
+        == StreamCompletionFlags.EndStreamReceived;
+    private bool IsAborted =>
+        (_completionState & StreamCompletionFlags.Aborted) == StreamCompletionFlags.Aborted;
+    internal bool RstStreamReceived =>
+        (_completionState & StreamCompletionFlags.RstStreamReceived)
+        == StreamCompletionFlags.RstStreamReceived;
 
     public bool ReceivedEmptyRequestBody
     {
@@ -174,8 +184,8 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         }
     }
 
-    protected override string CreateRequestId()
-        => StringUtilities.ConcatAsHexSuffix(ConnectionId, ':', (uint)StreamId);
+    protected override string CreateRequestId() =>
+        StringUtilities.ConcatAsHexSuffix(ConnectionId, ':', (uint)StreamId);
 
     protected override MessageBody CreateMessageBody()
     {
@@ -250,18 +260,34 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
             if (!StringValues.IsNullOrEmpty(HttpRequestHeaders.HeaderProtocol))
             {
                 // On requests that contain the :protocol pseudo-header field, the :scheme and :path pseudo-header fields of the target URI MUST also be included.
-                if (StringValues.IsNullOrEmpty(HttpRequestHeaders.HeaderScheme) || StringValues.IsNullOrEmpty(HttpRequestHeaders.HeaderPath))
+                if (
+                    StringValues.IsNullOrEmpty(HttpRequestHeaders.HeaderScheme)
+                    || StringValues.IsNullOrEmpty(HttpRequestHeaders.HeaderPath)
+                )
                 {
-                    ResetAndAbort(new ConnectionAbortedException(CoreStrings.ConnectRequestsWithProtocolRequireSchemeAndPath), Http2ErrorCode.PROTOCOL_ERROR);
+                    ResetAndAbort(
+                        new ConnectionAbortedException(
+                            CoreStrings.ConnectRequestsWithProtocolRequireSchemeAndPath
+                        ),
+                        Http2ErrorCode.PROTOCOL_ERROR
+                    );
                     return false;
                 }
                 ConnectProtocol = HttpRequestHeaders.HeaderProtocol;
                 IsExtendedConnectRequest = true;
             }
             // CONNECT - :scheme and :path must be excluded
-            else if (!StringValues.IsNullOrEmpty(HttpRequestHeaders.HeaderScheme) || !StringValues.IsNullOrEmpty(HttpRequestHeaders.HeaderPath))
+            else if (
+                !StringValues.IsNullOrEmpty(HttpRequestHeaders.HeaderScheme)
+                || !StringValues.IsNullOrEmpty(HttpRequestHeaders.HeaderPath)
+            )
             {
-                ResetAndAbort(new ConnectionAbortedException(CoreStrings.Http2ErrorConnectMustNotSendSchemeOrPath), Http2ErrorCode.PROTOCOL_ERROR);
+                ResetAndAbort(
+                    new ConnectionAbortedException(
+                        CoreStrings.Http2ErrorConnectMustNotSendSchemeOrPath
+                    ),
+                    Http2ErrorCode.PROTOCOL_ERROR
+                );
                 return false;
             }
             else
@@ -272,7 +298,10 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         }
         else if (!StringValues.IsNullOrEmpty(HttpRequestHeaders.HeaderProtocol))
         {
-            ResetAndAbort(new ConnectionAbortedException(CoreStrings.ProtocolRequiresConnect), Http2ErrorCode.PROTOCOL_ERROR);
+            ResetAndAbort(
+                new ConnectionAbortedException(CoreStrings.ProtocolRequiresConnect),
+                Http2ErrorCode.PROTOCOL_ERROR
+            );
             return false;
         }
 
@@ -282,13 +311,19 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         // enabling the use of HTTP to interact with non - HTTP services.
         // A common example is TLS termination.
         var headerScheme = HttpRequestHeaders.HeaderScheme.ToString();
-        if (!ReferenceEquals(headerScheme, Scheme) &&
-            !string.Equals(headerScheme, Scheme, StringComparison.OrdinalIgnoreCase))
+        if (
+            !ReferenceEquals(headerScheme, Scheme)
+            && !string.Equals(headerScheme, Scheme, StringComparison.OrdinalIgnoreCase)
+        )
         {
             if (!ServerOptions.AllowAlternateSchemes || !Uri.CheckSchemeName(headerScheme))
             {
-                ResetAndAbort(new ConnectionAbortedException(
-                    CoreStrings.FormatHttp2StreamErrorSchemeMismatch(headerScheme, Scheme)), Http2ErrorCode.PROTOCOL_ERROR);
+                ResetAndAbort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatHttp2StreamErrorSchemeMismatch(headerScheme, Scheme)
+                    ),
+                    Http2ErrorCode.PROTOCOL_ERROR
+                );
                 return false;
             }
 
@@ -316,10 +351,14 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         }
 
         // Approximate MaxRequestLineSize by totaling the required pseudo header field lengths.
-        var requestLineLength = _methodText!.Length + Scheme!.Length + hostText.Length + path.Length;
+        var requestLineLength =
+            _methodText!.Length + Scheme!.Length + hostText.Length + path.Length;
         if (requestLineLength > ServerOptions.Limits.MaxRequestLineSize)
         {
-            ResetAndAbort(new ConnectionAbortedException(CoreStrings.BadRequest_RequestLineTooLong), Http2ErrorCode.PROTOCOL_ERROR);
+            ResetAndAbort(
+                new ConnectionAbortedException(CoreStrings.BadRequest_RequestLineTooLong),
+                Http2ErrorCode.PROTOCOL_ERROR
+            );
             return false;
         }
 
@@ -339,7 +378,12 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
 
         if (Method == HttpMethod.None)
         {
-            ResetAndAbort(new ConnectionAbortedException(CoreStrings.FormatHttp2ErrorMethodInvalid(_methodText)), Http2ErrorCode.PROTOCOL_ERROR);
+            ResetAndAbort(
+                new ConnectionAbortedException(
+                    CoreStrings.FormatHttp2ErrorMethodInvalid(_methodText)
+                ),
+                Http2ErrorCode.PROTOCOL_ERROR
+            );
             return false;
         }
 
@@ -347,7 +391,12 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         {
             if (HttpCharacters.IndexOfInvalidTokenChar(_methodText) >= 0)
             {
-                ResetAndAbort(new ConnectionAbortedException(CoreStrings.FormatHttp2ErrorMethodInvalid(_methodText)), Http2ErrorCode.PROTOCOL_ERROR);
+                ResetAndAbort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatHttp2ErrorMethodInvalid(_methodText)
+                    ),
+                    Http2ErrorCode.PROTOCOL_ERROR
+                );
                 return false;
             }
         }
@@ -387,7 +436,12 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         if (host.Count > 1 || !HttpUtilities.IsHostHeaderValid(hostText))
         {
             // RST replaces 400
-            ResetAndAbort(new ConnectionAbortedException(CoreStrings.FormatBadRequest_InvalidHostHeader_Detail(hostText)), Http2ErrorCode.PROTOCOL_ERROR);
+            ResetAndAbort(
+                new ConnectionAbortedException(
+                    CoreStrings.FormatBadRequest_InvalidHostHeader_Detail(hostText)
+                ),
+                Http2ErrorCode.PROTOCOL_ERROR
+            );
             return false;
         }
 
@@ -400,7 +454,12 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         // Must start with a leading slash
         if (pathSegment.IsEmpty || pathSegment[0] != '/')
         {
-            ResetAndAbort(new ConnectionAbortedException(CoreStrings.FormatHttp2StreamErrorPathInvalid(RawTarget)), Http2ErrorCode.PROTOCOL_ERROR);
+            ResetAndAbort(
+                new ConnectionAbortedException(
+                    CoreStrings.FormatHttp2StreamErrorPathInvalid(RawTarget)
+                ),
+                Http2ErrorCode.PROTOCOL_ERROR
+            );
             return false;
         }
 
@@ -417,13 +476,14 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
             const int MaxPathBufferStackAllocSize = 256;
 
             // The decoder operates only on raw bytes
-            Span<byte> pathBuffer = pathSegment.Length <= MaxPathBufferStackAllocSize
-                // A constant size plus slice generates better code
-                // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383159929
-                ? stackalloc byte[MaxPathBufferStackAllocSize].Slice(0, pathSegment.Length)
-                // TODO - Consider pool here for less than 4096
-                // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383604184
-                : new byte[pathSegment.Length];
+            Span<byte> pathBuffer =
+                pathSegment.Length <= MaxPathBufferStackAllocSize
+                    // A constant size plus slice generates better code
+                    // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383159929
+                    ? stackalloc byte[MaxPathBufferStackAllocSize].Slice(0, pathSegment.Length)
+                    // TODO - Consider pool here for less than 4096
+                    // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383604184
+                    : new byte[pathSegment.Length];
 
             for (var i = 0; i < pathSegment.Length; i++)
             {
@@ -433,13 +493,23 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
                 pathBuffer[i] = (byte)ch;
             }
 
-            Path = PathNormalizer.DecodePath(pathBuffer, pathEncoded, RawTarget!, QueryString!.Length);
+            Path = PathNormalizer.DecodePath(
+                pathBuffer,
+                pathEncoded,
+                RawTarget!,
+                QueryString!.Length
+            );
 
             return true;
         }
         catch (InvalidOperationException)
         {
-            ResetAndAbort(new ConnectionAbortedException(CoreStrings.FormatHttp2StreamErrorPathInvalid(RawTarget)), Http2ErrorCode.PROTOCOL_ERROR);
+            ResetAndAbort(
+                new ConnectionAbortedException(
+                    CoreStrings.FormatHttp2StreamErrorPathInvalid(RawTarget)
+                ),
+                Http2ErrorCode.PROTOCOL_ERROR
+            );
             return false;
         }
     }
@@ -478,7 +548,11 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
                     // https://tools.ietf.org/html/rfc7540#section-8.1.2.6
                     if (dataPayload.Length > InputRemaining.Value)
                     {
-                        throw new Http2StreamErrorException(StreamId, CoreStrings.Http2StreamErrorMoreDataThanLength, Http2ErrorCode.PROTOCOL_ERROR);
+                        throw new Http2StreamErrorException(
+                            StreamId,
+                            CoreStrings.Http2StreamErrorMoreDataThanLength,
+                            Http2ErrorCode.PROTOCOL_ERROR
+                        );
                     }
 
                     InputRemaining -= dataPayload.Length;
@@ -523,7 +597,11 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
             // https://tools.ietf.org/html/rfc7540#section-8.1.2.6
             if (InputRemaining.Value != 0)
             {
-                throw new Http2StreamErrorException(StreamId, CoreStrings.Http2StreamErrorLessDataThanLength, Http2ErrorCode.PROTOCOL_ERROR);
+                throw new Http2StreamErrorException(
+                    StreamId,
+                    CoreStrings.Http2StreamErrorLessDataThanLength,
+                    Http2ErrorCode.PROTOCOL_ERROR
+                );
             }
         }
 
@@ -571,7 +649,11 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         ResetAndAbort(abortReason, Http2ErrorCode.INTERNAL_ERROR);
     }
 
-    protected override void ApplicationAbort() => ApplicationAbort(new ConnectionAbortedException(CoreStrings.ConnectionAbortedByApplication), Http2ErrorCode.INTERNAL_ERROR);
+    protected override void ApplicationAbort() =>
+        ApplicationAbort(
+            new ConnectionAbortedException(CoreStrings.ConnectionAbortedByApplication),
+            Http2ErrorCode.INTERNAL_ERROR
+        );
 
     private void ApplicationAbort(ConnectionAbortedException abortReason, Http2ErrorCode error)
     {
@@ -629,21 +711,24 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         _context.StreamLifetimeHandler.DecrementActiveClientStreamCount();
     }
 
-    private Pipe CreateRequestBodyPipe()
-        => new Pipe(new PipeOptions
-        (
-            pool: _context.MemoryPool,
-            readerScheduler: ServiceContext.Scheduler,
-            writerScheduler: PipeScheduler.Inline,
-            // Never pause within the window range. Flow control will prevent more data from being added.
-            // See the assert in OnDataAsync.
-            pauseWriterThreshold: _context.ServerPeerSettings.InitialWindowSize + 1,
-            resumeWriterThreshold: _context.ServerPeerSettings.InitialWindowSize + 1,
-            useSynchronizationContext: false,
-            minimumSegmentSize: _context.MemoryPool.GetMinimumSegmentSize()
-        ));
+    private Pipe CreateRequestBodyPipe() =>
+        new Pipe(
+            new PipeOptions(
+                pool: _context.MemoryPool,
+                readerScheduler: ServiceContext.Scheduler,
+                writerScheduler: PipeScheduler.Inline,
+                // Never pause within the window range. Flow control will prevent more data from being added.
+                // See the assert in OnDataAsync.
+                pauseWriterThreshold: _context.ServerPeerSettings.InitialWindowSize + 1,
+                resumeWriterThreshold: _context.ServerPeerSettings.InitialWindowSize + 1,
+                useSynchronizationContext: false,
+                minimumSegmentSize: _context.MemoryPool.GetMinimumSegmentSize()
+            )
+        );
 
-    private (StreamCompletionFlags OldState, StreamCompletionFlags NewState) ApplyCompletionFlag(StreamCompletionFlags completionState)
+    private (StreamCompletionFlags OldState, StreamCompletionFlags NewState) ApplyCompletionFlag(
+        StreamCompletionFlags completionState
+    )
     {
         lock (_completionLock)
         {
@@ -673,7 +758,12 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         Aborted = 4,
     }
 
-    public override void OnHeader(int index, bool indexOnly, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    public override void OnHeader(
+        int index,
+        bool indexOnly,
+        ReadOnlySpan<byte> name,
+        ReadOnlySpan<byte> value
+    )
     {
         base.OnHeader(index, indexOnly, name, value);
 

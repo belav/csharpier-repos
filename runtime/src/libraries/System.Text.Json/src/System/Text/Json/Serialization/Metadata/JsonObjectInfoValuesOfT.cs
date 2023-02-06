@@ -29,7 +29,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// Provides a mechanism to initialize metadata for properties and fields of the class or struct.
         /// </summary>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public Func<JsonSerializerContext, JsonPropertyInfo[]>? PropertyMetadataInitializer { get; init; }
+        public Func<
+            JsonSerializerContext,
+            JsonPropertyInfo[]
+        >? PropertyMetadataInitializer { get; init; }
 
         /// <summary>
         /// Provides a mechanism to initialize metadata for a parameterized constructor of the class or struct to be used when deserializing.

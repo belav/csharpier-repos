@@ -5,12 +5,10 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class InheritanceQueryCosmosFixture : InheritanceQueryFixtureBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => CosmosTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
+    public TestSqlLoggerFactory TestSqlLoggerFactory =>
+        (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
 
-    protected override bool UseGeneratedKeys
-        => false;
+    protected override bool UseGeneratedKeys => false;
 }

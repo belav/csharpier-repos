@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,10 +43,10 @@ namespace System.Web
 {
     public abstract class SiteMapProvider : ProviderBase
     {
-        static readonly object siteMapResolveEvent = new object ();
-        
-        internal object this_lock = new object ();
-        
+        static readonly object siteMapResolveEvent = new object();
+
+        internal object this_lock = new object();
+
         bool enableLocalization;
         SiteMapProvider parentProvider;
         SiteMapProvider rootProviderCache;
@@ -54,24 +54,25 @@ namespace System.Web
         object resolveLock = new Object();
         bool resolving;
 
-        EventHandlerList events = new EventHandlerList ();
-        
-        public event SiteMapResolveEventHandler SiteMapResolve {
-            add { events.AddHandler (siteMapResolveEvent, value); }
-            remove { events.RemoveHandler (siteMapResolveEvent, value); }
-        }
-        
-        protected virtual void AddNode (SiteMapNode node)
+        EventHandlerList events = new EventHandlerList();
+
+        public event SiteMapResolveEventHandler SiteMapResolve
         {
-            AddNode (node, null);
-        }
-        
-        internal protected virtual void AddNode (SiteMapNode node, SiteMapNode parentNode)
-        {
-            throw new NotImplementedException ();
+            add { events.AddHandler(siteMapResolveEvent, value); }
+            remove { events.RemoveHandler(siteMapResolveEvent, value); }
         }
 
-        public virtual SiteMapNode FindSiteMapNode (HttpContext context)
+        protected virtual void AddNode(SiteMapNode node)
+        {
+            AddNode(node, null);
+        }
+
+        internal protected virtual void AddNode(SiteMapNode node, SiteMapNode parentNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual SiteMapNode FindSiteMapNode(HttpContext context)
         {
             if (context == null)
                 return null;
@@ -79,110 +80,138 @@ namespace System.Web
             HttpRequest req = context.Request;
             if (req == null)
                 return null;
-            
-            SiteMapNode ret = this.FindSiteMapNode (req.RawUrl);
+
+            SiteMapNode ret = this.FindSiteMapNode(req.RawUrl);
             if (ret == null)
-                ret = this.FindSiteMapNode (req.Path);
+                ret = this.FindSiteMapNode(req.Path);
             return ret;
         }
 
-        public abstract SiteMapNode FindSiteMapNode (string rawUrl);
-        
-        public virtual SiteMapNode FindSiteMapNodeFromKey (string key)
+        public abstract SiteMapNode FindSiteMapNode(string rawUrl);
+
+        public virtual SiteMapNode FindSiteMapNodeFromKey(string key)
         {
             /* msdn2 says this function always returns
              * null, but it seems to just call
              * FindSiteMapNode(string rawUrl) */
-            return FindSiteMapNode (key);
+            return FindSiteMapNode(key);
         }
 
-        public abstract SiteMapNodeCollection GetChildNodes (SiteMapNode node);
-        
-        public virtual SiteMapNode GetCurrentNodeAndHintAncestorNodes (int upLevel)
+        public abstract SiteMapNodeCollection GetChildNodes(SiteMapNode node);
+
+        public virtual SiteMapNode GetCurrentNodeAndHintAncestorNodes(int upLevel)
         {
-            if (upLevel < -1) throw new ArgumentOutOfRangeException ("upLevel");
+            if (upLevel < -1)
+                throw new ArgumentOutOfRangeException("upLevel");
 
             return CurrentNode;
         }
-        
-        public virtual SiteMapNode GetCurrentNodeAndHintNeighborhoodNodes (int upLevel, int downLevel)
+
+        public virtual SiteMapNode GetCurrentNodeAndHintNeighborhoodNodes(
+            int upLevel,
+            int downLevel
+        )
         {
-            if (upLevel < -1) throw new ArgumentOutOfRangeException ("upLevel");
-            if (downLevel < -1) throw new ArgumentOutOfRangeException ("downLevel");
-            
+            if (upLevel < -1)
+                throw new ArgumentOutOfRangeException("upLevel");
+            if (downLevel < -1)
+                throw new ArgumentOutOfRangeException("downLevel");
+
             return CurrentNode;
         }
 
-        public abstract SiteMapNode GetParentNode (SiteMapNode node);
-        
-        public virtual SiteMapNode GetParentNodeRelativeToCurrentNodeAndHintDownFromParent (int walkupLevels, int relativeDepthFromWalkup)
-        {
-            if (walkupLevels < 0) throw new ArgumentOutOfRangeException ("walkupLevels");
-            if (relativeDepthFromWalkup < 0) throw new ArgumentOutOfRangeException ("relativeDepthFromWalkup");
-            
-            SiteMapNode node = GetCurrentNodeAndHintAncestorNodes (walkupLevels);
-            for (int n=0; n<walkupLevels && node != null; n++)
-                node = GetParentNode (node);
-                
-            if (node == null) return null;
+        public abstract SiteMapNode GetParentNode(SiteMapNode node);
 
-            HintNeighborhoodNodes (node, 0, relativeDepthFromWalkup);
+        public virtual SiteMapNode GetParentNodeRelativeToCurrentNodeAndHintDownFromParent(
+            int walkupLevels,
+            int relativeDepthFromWalkup
+        )
+        {
+            if (walkupLevels < 0)
+                throw new ArgumentOutOfRangeException("walkupLevels");
+            if (relativeDepthFromWalkup < 0)
+                throw new ArgumentOutOfRangeException("relativeDepthFromWalkup");
+
+            SiteMapNode node = GetCurrentNodeAndHintAncestorNodes(walkupLevels);
+            for (int n = 0; n < walkupLevels && node != null; n++)
+                node = GetParentNode(node);
+
+            if (node == null)
+                return null;
+
+            HintNeighborhoodNodes(node, 0, relativeDepthFromWalkup);
             return node;
         }
-        
-        public virtual SiteMapNode GetParentNodeRelativeToNodeAndHintDownFromParent (SiteMapNode node, int walkupLevels, int relativeDepthFromWalkup)
+
+        public virtual SiteMapNode GetParentNodeRelativeToNodeAndHintDownFromParent(
+            SiteMapNode node,
+            int walkupLevels,
+            int relativeDepthFromWalkup
+        )
         {
-            if (walkupLevels < 0) throw new ArgumentOutOfRangeException ("walkupLevels");
-            if (relativeDepthFromWalkup < 0) throw new ArgumentOutOfRangeException ("relativeDepthFromWalkup");
-            if (node == null) throw new ArgumentNullException ("node");
-            
-            HintAncestorNodes (node, walkupLevels);
-            for (int n=0; n<walkupLevels && node != null; n++)
-                node = GetParentNode (node);
-                
-            if (node == null) return null;
-            
-            HintNeighborhoodNodes (node, 0, relativeDepthFromWalkup);
+            if (walkupLevels < 0)
+                throw new ArgumentOutOfRangeException("walkupLevels");
+            if (relativeDepthFromWalkup < 0)
+                throw new ArgumentOutOfRangeException("relativeDepthFromWalkup");
+            if (node == null)
+                throw new ArgumentNullException("node");
+
+            HintAncestorNodes(node, walkupLevels);
+            for (int n = 0; n < walkupLevels && node != null; n++)
+                node = GetParentNode(node);
+
+            if (node == null)
+                return null;
+
+            HintNeighborhoodNodes(node, 0, relativeDepthFromWalkup);
             return node;
         }
-        
-        protected internal abstract SiteMapNode GetRootNodeCore ();
-        
-        protected static SiteMapNode GetRootNodeCoreFromProvider (SiteMapProvider provider)
+
+        protected internal abstract SiteMapNode GetRootNodeCore();
+
+        protected static SiteMapNode GetRootNodeCoreFromProvider(SiteMapProvider provider)
         {
-            return provider.GetRootNodeCore ();
-        }
-        
-        public virtual void HintAncestorNodes (SiteMapNode node, int upLevel)
-        {
-            if (upLevel < -1) throw new ArgumentOutOfRangeException ("upLevel");
-            if (node == null) throw new ArgumentNullException ("node");
-        }
-        
-        public virtual void HintNeighborhoodNodes (SiteMapNode node, int upLevel, int downLevel)
-        {
-            if (upLevel < -1) throw new ArgumentOutOfRangeException ("upLevel");
-            if (downLevel < -1) throw new ArgumentOutOfRangeException ("downLevel");
-            if (node == null) throw new ArgumentNullException ("node");
-        }
-        
-        protected virtual void RemoveNode (SiteMapNode node)
-        {
-            throw new NotImplementedException ();
+            return provider.GetRootNodeCore();
         }
 
-        public override void Initialize (string name, NameValueCollection attributes)
+        public virtual void HintAncestorNodes(SiteMapNode node, int upLevel)
         {
-            base.Initialize (name, attributes);
-            if (attributes ["securityTrimmingEnabled"] != null)
-                securityTrimming = (bool) Convert.ChangeType (attributes ["securityTrimmingEnabled"], typeof (bool));
+            if (upLevel < -1)
+                throw new ArgumentOutOfRangeException("upLevel");
+            if (node == null)
+                throw new ArgumentNullException("node");
         }
-        
-        [MonoTODO ("need to implement cases 2 and 3")]
-        public virtual bool IsAccessibleToUser (HttpContext context, SiteMapNode node)
+
+        public virtual void HintNeighborhoodNodes(SiteMapNode node, int upLevel, int downLevel)
         {
-            if (context == null) throw new ArgumentNullException ("context");
-            if (node == null) throw new ArgumentNullException ("node");
+            if (upLevel < -1)
+                throw new ArgumentOutOfRangeException("upLevel");
+            if (downLevel < -1)
+                throw new ArgumentOutOfRangeException("downLevel");
+            if (node == null)
+                throw new ArgumentNullException("node");
+        }
+
+        protected virtual void RemoveNode(SiteMapNode node)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Initialize(string name, NameValueCollection attributes)
+        {
+            base.Initialize(name, attributes);
+            if (attributes["securityTrimmingEnabled"] != null)
+                securityTrimming = (bool)
+                    Convert.ChangeType(attributes["securityTrimmingEnabled"], typeof(bool));
+        }
+
+        [MonoTODO("need to implement cases 2 and 3")]
+        public virtual bool IsAccessibleToUser(HttpContext context, SiteMapNode node)
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
+            if (node == null)
+                throw new ArgumentNullException("node");
 
             if (!SecurityTrimmingEnabled)
                 return true;
@@ -195,120 +224,141 @@ namespace System.Web
              * the URL is located within the directory structure for the application.
              *
              * 3. The current user is authorized specifically for the requested URL in the authorization element for
-             * the current application and the URL is located within the directory structure for the application. 
+             * the current application and the URL is located within the directory structure for the application.
             */
 
             /* 1. */
             IList roles = node.Roles;
-            if (roles != null && roles.Count > 0) {
+            if (roles != null && roles.Count > 0)
+            {
                 foreach (string rolename in roles)
-                    if (rolename == "*" || context.User.IsInRole (rolename))
+                    if (rolename == "*" || context.User.IsInRole(rolename))
                         return true;
             }
-            
+
             /* 2. */
             /* XXX */
 
             /* 3. */
             string url = node.Url;
-            if(!String.IsNullOrEmpty(url)) {
+            if (!String.IsNullOrEmpty(url))
+            {
                 // TODO check url is located within the current application
 
-                if (VirtualPathUtility.IsAppRelative (url) || !VirtualPathUtility.IsAbsolute (url))
-                    url = VirtualPathUtility.Combine (VirtualPathUtility.AppendTrailingSlash (HttpRuntime.AppDomainAppVirtualPath), url);
+                if (VirtualPathUtility.IsAppRelative(url) || !VirtualPathUtility.IsAbsolute(url))
+                    url = VirtualPathUtility.Combine(
+                        VirtualPathUtility.AppendTrailingSlash(HttpRuntime.AppDomainAppVirtualPath),
+                        url
+                    );
 
-                AuthorizationSection config = (AuthorizationSection) WebConfigurationManager.GetSection (
-                    "system.web/authorization",
-                    url);
+                AuthorizationSection config = (AuthorizationSection)
+                    WebConfigurationManager.GetSection("system.web/authorization", url);
                 if (config != null)
-                    return config.IsValidUser (context.User, context.Request.HttpMethod);
+                    return config.IsValidUser(context.User, context.Request.HttpMethod);
             }
 
             return false;
         }
-        
-        public virtual SiteMapNode CurrentNode {
-            get {
-                if (HttpContext.Current != null) {
-                    SiteMapNode ret = ResolveSiteMapNode (HttpContext.Current);
-                    if (ret != null) return ret;
-                    return FindSiteMapNode (HttpContext.Current);
-                } else
+
+        public virtual SiteMapNode CurrentNode
+        {
+            get
+            {
+                if (HttpContext.Current != null)
+                {
+                    SiteMapNode ret = ResolveSiteMapNode(HttpContext.Current);
+                    if (ret != null)
+                        return ret;
+                    return FindSiteMapNode(HttpContext.Current);
+                }
+                else
                     return null;
             }
         }
-        
-        public virtual SiteMapProvider ParentProvider {
+
+        public virtual SiteMapProvider ParentProvider
+        {
             get { return parentProvider; }
             set { parentProvider = value; }
         }
-        
-        public virtual SiteMapProvider RootProvider {
-            get {
-                lock (this_lock) {
-                    if (rootProviderCache == null) {
+
+        public virtual SiteMapProvider RootProvider
+        {
+            get
+            {
+                lock (this_lock)
+                {
+                    if (rootProviderCache == null)
+                    {
                         SiteMapProvider current = this;
                         while (current.ParentProvider != null)
                             current = current.ParentProvider;
-                        
+
                         rootProviderCache = current;
                     }
                 }
                 return rootProviderCache;
             }
         }
-        
-        protected SiteMapNode ResolveSiteMapNode (HttpContext context)
-        {
-            SiteMapResolveEventHandler eh = events [siteMapResolveEvent] as SiteMapResolveEventHandler;
 
-            if (eh != null) {
-                lock (resolveLock) {
+        protected SiteMapNode ResolveSiteMapNode(HttpContext context)
+        {
+            SiteMapResolveEventHandler eh =
+                events[siteMapResolveEvent] as SiteMapResolveEventHandler;
+
+            if (eh != null)
+            {
+                lock (resolveLock)
+                {
                     if (resolving)
                         return null;
                     resolving = true;
-                    SiteMapResolveEventArgs args = new SiteMapResolveEventArgs (context, this);
-                    SiteMapNode r = eh (this, args);
+                    SiteMapResolveEventArgs args = new SiteMapResolveEventArgs(context, this);
+                    SiteMapNode r = eh(this, args);
                     resolving = false;
                     return r;
                 }
-            } else
+            }
+            else
                 return null;
         }
-        
-        public bool EnableLocalization {
+
+        public bool EnableLocalization
+        {
             get { return enableLocalization; }
             set { enableLocalization = value; }
         }
-        
-        public bool SecurityTrimmingEnabled {
+
+        public bool SecurityTrimmingEnabled
+        {
             get { return securityTrimming; }
         }
 
         string resourceKey;
-        public string ResourceKey {
+        public string ResourceKey
+        {
             get { return resourceKey; }
             set { resourceKey = value; }
         }
 
-        public virtual SiteMapNode RootNode {
-            get {
-                SiteMapNode node = GetRootNodeCore ();
-                return ReturnNodeIfAccessible (node);
+        public virtual SiteMapNode RootNode
+        {
+            get
+            {
+                SiteMapNode node = GetRootNodeCore();
+                return ReturnNodeIfAccessible(node);
             }
         }
 
-        internal static SiteMapNode ReturnNodeIfAccessible (SiteMapNode node)
+        internal static SiteMapNode ReturnNodeIfAccessible(SiteMapNode node)
         {
-            if (node.IsAccessibleToUser (HttpContext.Current))
+            if (node.IsAccessibleToUser(HttpContext.Current))
                 return node;
             else
-                throw new InvalidOperationException (); /* need
+                throw new InvalidOperationException(); /* need
                                      * a
                                      * message
                                      * here */
         }
     }
 }
-
-

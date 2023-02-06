@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,39 +37,51 @@ namespace System.ServiceModel.Security
 {
     public sealed class X509CertificateRecipientServiceCredential
     {
-        internal X509CertificateRecipientServiceCredential ()
-        {
-        }
+        internal X509CertificateRecipientServiceCredential() { }
 
         X509Certificate2 certificate;
 
-        internal X509CertificateRecipientServiceCredential Clone ()
+        internal X509CertificateRecipientServiceCredential Clone()
         {
-            return new X509CertificateRecipientServiceCredential () { certificate = this.certificate };
+            return new X509CertificateRecipientServiceCredential()
+            {
+                certificate = this.certificate
+            };
         }
-        
-        public X509Certificate2 Certificate {
+
+        public X509Certificate2 Certificate
+        {
             get { return certificate; }
             set { certificate = value; }
         }
 
-        public void SetCertificate (StoreLocation storeLocation,
-            StoreName storeName, X509FindType findType,
-            object findValue)
+        public void SetCertificate(
+            StoreLocation storeLocation,
+            StoreName storeName,
+            X509FindType findType,
+            object findValue
+        )
         {
-            Certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
+            Certificate = ConfigUtil.CreateCertificateFrom(
+                storeLocation,
+                storeName,
+                findType,
+                findValue
+            );
         }
 
-        public void SetCertificate (string subjectName)
+        public void SetCertificate(string subjectName)
         {
-            SetCertificate (subjectName, StoreLocation.CurrentUser, StoreName.My);
+            SetCertificate(subjectName, StoreLocation.CurrentUser, StoreName.My);
         }
 
-        public void SetCertificate (
-            string subjectName, StoreLocation storeLocation,
-            StoreName storeName)
+        public void SetCertificate(
+            string subjectName,
+            StoreLocation storeLocation,
+            StoreName storeName
+        )
         {
-            SetCertificate (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName);
+            SetCertificate(storeLocation, storeName, X509FindType.FindBySubjectName, subjectName);
         }
     }
 }

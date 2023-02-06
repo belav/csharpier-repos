@@ -3,7 +3,7 @@
 
 public class C<V>
 {
-    public bool TryGet (V v)
+    public bool TryGet(V v)
     {
         object tmp = null;
         return tmp == v;

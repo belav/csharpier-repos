@@ -17,14 +17,13 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         private abstract class IndentationData
         {
-            public IndentationData(TextSpan textSpan)
-                => this.TextSpan = textSpan;
+            public IndentationData(TextSpan textSpan) => this.TextSpan = textSpan;
 
             public TextSpan TextSpan { get; }
             public abstract int Indentation { get; }
 
-            public IndentationData WithTextSpan(TextSpan span)
-                => span == TextSpan ? this : WithTextSpanCore(span);
+            public IndentationData WithTextSpan(TextSpan span) =>
+                span == TextSpan ? this : WithTextSpanCore(span);
 
             protected abstract IndentationData WithTextSpanCore(TextSpan span);
         }
@@ -52,8 +51,17 @@ namespace Microsoft.CodeAnalysis.Formatting
             private const int UninitializedIndentationDelta = int.MinValue;
 
             private readonly FormattingContext _formattingContext;
-            private readonly Func<FormattingContext, IndentBlockOperation, SyntaxToken> _effectiveBaseTokenGetter;
-            private readonly Func<FormattingContext, IndentBlockOperation, SyntaxToken, int> _indentationDeltaGetter;
+            private readonly Func<
+                FormattingContext,
+                IndentBlockOperation,
+                SyntaxToken
+            > _effectiveBaseTokenGetter;
+            private readonly Func<
+                FormattingContext,
+                IndentBlockOperation,
+                SyntaxToken,
+                int
+            > _indentationDeltaGetter;
             private readonly Func<FormattingContext, SyntaxToken, int> _baseIndentationGetter;
 
             /// <summary>
@@ -65,7 +73,20 @@ namespace Microsoft.CodeAnalysis.Formatting
             /// </value>
             private int _lazyIndentationDelta;
 
-            public RelativeIndentationData(FormattingContext formattingContext, int inseparableRegionSpanStart, TextSpan textSpan, IndentBlockOperation operation, Func<FormattingContext, IndentBlockOperation, SyntaxToken> effectiveBaseTokenGetter, Func<FormattingContext, IndentBlockOperation, SyntaxToken, int> indentationDeltaGetter, Func<FormattingContext, SyntaxToken, int> baseIndentationGetter)
+            public RelativeIndentationData(
+                FormattingContext formattingContext,
+                int inseparableRegionSpanStart,
+                TextSpan textSpan,
+                IndentBlockOperation operation,
+                Func<FormattingContext, IndentBlockOperation, SyntaxToken> effectiveBaseTokenGetter,
+                Func<
+                    FormattingContext,
+                    IndentBlockOperation,
+                    SyntaxToken,
+                    int
+                > indentationDeltaGetter,
+                Func<FormattingContext, SyntaxToken, int> baseIndentationGetter
+            )
                 : base(textSpan)
             {
                 _formattingContext = formattingContext;
@@ -76,10 +97,27 @@ namespace Microsoft.CodeAnalysis.Formatting
                 _lazyIndentationDelta = UninitializedIndentationDelta;
 
                 this.Operation = operation;
-                this.InseparableRegionSpan = TextSpan.FromBounds(inseparableRegionSpanStart, textSpan.End);
+                this.InseparableRegionSpan = TextSpan.FromBounds(
+                    inseparableRegionSpanStart,
+                    textSpan.End
+                );
             }
 
-            private RelativeIndentationData(FormattingContext formattingContext, int inseparableRegionSpanStart, TextSpan textSpan, IndentBlockOperation operation, Func<FormattingContext, IndentBlockOperation, SyntaxToken> effectiveBaseTokenGetter, Func<FormattingContext, IndentBlockOperation, SyntaxToken, int> indentationDeltaGetter, Func<FormattingContext, SyntaxToken, int> baseIndentationGetter, int lazyIndentationDelta)
+            private RelativeIndentationData(
+                FormattingContext formattingContext,
+                int inseparableRegionSpanStart,
+                TextSpan textSpan,
+                IndentBlockOperation operation,
+                Func<FormattingContext, IndentBlockOperation, SyntaxToken> effectiveBaseTokenGetter,
+                Func<
+                    FormattingContext,
+                    IndentBlockOperation,
+                    SyntaxToken,
+                    int
+                > indentationDeltaGetter,
+                Func<FormattingContext, SyntaxToken, int> baseIndentationGetter,
+                int lazyIndentationDelta
+            )
                 : base(textSpan)
             {
                 _formattingContext = formattingContext;
@@ -90,7 +128,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 _lazyIndentationDelta = lazyIndentationDelta;
 
                 this.Operation = operation;
-                this.InseparableRegionSpan = TextSpan.FromBounds(inseparableRegionSpanStart, textSpan.End);
+                this.InseparableRegionSpan = TextSpan.FromBounds(
+                    inseparableRegionSpanStart,
+                    textSpan.End
+                );
             }
 
             public TextSpan InseparableRegionSpan { get; }
@@ -106,18 +147,35 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return LazyInitialization.EnsureInitialized(
                     ref _lazyIndentationDelta,
                     UninitializedIndentationDelta,
-                    static self => self._indentationDeltaGetter(
-                        self._formattingContext,
-                        self.Operation,
-                        self._effectiveBaseTokenGetter(self._formattingContext, self.Operation)),
-                    this);
+                    static self =>
+                        self._indentationDeltaGetter(
+                            self._formattingContext,
+                            self.Operation,
+                            self._effectiveBaseTokenGetter(self._formattingContext, self.Operation)
+                        ),
+                    this
+                );
             }
 
-            public override int Indentation => GetOrComputeIndentationDelta() + _baseIndentationGetter(_formattingContext, _effectiveBaseTokenGetter(_formattingContext, Operation));
+            public override int Indentation =>
+                GetOrComputeIndentationDelta()
+                + _baseIndentationGetter(
+                    _formattingContext,
+                    _effectiveBaseTokenGetter(_formattingContext, Operation)
+                );
 
             protected override IndentationData WithTextSpanCore(TextSpan span)
             {
-                return new RelativeIndentationData(_formattingContext, InseparableRegionSpan.Start, span, Operation, _effectiveBaseTokenGetter, _indentationDeltaGetter, _baseIndentationGetter, _lazyIndentationDelta);
+                return new RelativeIndentationData(
+                    _formattingContext,
+                    InseparableRegionSpan.Start,
+                    span,
+                    Operation,
+                    _effectiveBaseTokenGetter,
+                    _indentationDeltaGetter,
+                    _baseIndentationGetter,
+                    _lazyIndentationDelta
+                );
             }
         }
 
@@ -127,11 +185,21 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         private sealed class AdjustedIndentationData : IndentationData
         {
-            public AdjustedIndentationData(TextSpan textSpan, IndentationData baseIndentationData, int adjustment)
+            public AdjustedIndentationData(
+                TextSpan textSpan,
+                IndentationData baseIndentationData,
+                int adjustment
+            )
                 : base(textSpan)
             {
-                Debug.Assert(adjustment != 0, $"Indentation with no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
-                Debug.Assert(baseIndentationData is not AdjustedIndentationData, $"Indentation data should only involve one layer of adjustment (multiples can be combined by adding the {nameof(Adjustment)} fields.");
+                Debug.Assert(
+                    adjustment != 0,
+                    $"Indentation with no adjustment should be represented by {nameof(BaseIndentationData)} directly."
+                );
+                Debug.Assert(
+                    baseIndentationData is not AdjustedIndentationData,
+                    $"Indentation data should only involve one layer of adjustment (multiples can be combined by adding the {nameof(Adjustment)} fields."
+                );
 
                 BaseIndentationData = baseIndentationData;
                 Adjustment = adjustment;

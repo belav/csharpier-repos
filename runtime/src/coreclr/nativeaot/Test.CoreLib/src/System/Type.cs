@@ -29,7 +29,8 @@ namespace System
         [Intrinsic]
         public static bool operator ==(Type left, Type right)
         {
-            return RuntimeTypeHandle.GetValueInternal(left._typeHandle) == RuntimeTypeHandle.GetValueInternal(right._typeHandle);
+            return RuntimeTypeHandle.GetValueInternal(left._typeHandle)
+                == RuntimeTypeHandle.GetValueInternal(right._typeHandle);
         }
 
         [Intrinsic]

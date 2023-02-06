@@ -3,10 +3,8 @@
 
 using System;
 
-[A(new dynamic [] { 8 })]
+[A(new dynamic[] { 8 })]
 public class A : Attribute
 {
-    public A (object arg)
-    {
-    }
+    public A(object arg) { }
 }

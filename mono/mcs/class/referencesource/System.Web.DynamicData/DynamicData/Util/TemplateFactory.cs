@@ -5,8 +5,10 @@ using System.Web.Compilation;
 using System.Web.Hosting;
 using System.Web.Resources;
 
-namespace System.Web.DynamicData {
-    internal class TemplateFactory {
+namespace System.Web.DynamicData
+{
+    internal class TemplateFactory
+    {
         // Use Hashtable instead of Dictionary<,> because it is more thread safe
         private Hashtable _fieldTemplateVirtualPathCache = new Hashtable();
 
@@ -23,30 +25,40 @@ namespace System.Web.DynamicData {
         private bool _usingCustomVpp;
 
         internal TemplateFactory(string defaultLocation)
-            : this(defaultLocation, true) {
-        }
+            : this(defaultLocation, true) { }
 
-        internal TemplateFactory(string defaultLocation, bool trackFolderChanges) {
+        internal TemplateFactory(string defaultLocation, bool trackFolderChanges)
+        {
             Debug.Assert(!String.IsNullOrEmpty(defaultLocation));
             _defaultLocation = defaultLocation;
             _trackFolderChanges = trackFolderChanges;
         }
 
-        internal string TemplateFolderVirtualPath {
-            get {
-                if (_templateFolderVirtualPath == null) {
+        internal string TemplateFolderVirtualPath
+        {
+            get
+            {
+                if (_templateFolderVirtualPath == null)
+                {
                     // If not set, set its default location
                     TemplateFolderVirtualPath = _defaultLocation;
                 }
 
-                if (_needToResolveVirtualPath) {
+                if (_needToResolveVirtualPath)
+                {
                     // Make sure it ends with a slash
-                    _templateFolderVirtualPath = VirtualPathUtility.AppendTrailingSlash(_templateFolderVirtualPath);
+                    _templateFolderVirtualPath = VirtualPathUtility.AppendTrailingSlash(
+                        _templateFolderVirtualPath
+                    );
 
                     // If it's relative, make it relative to the Model's path
                     // Note can be null under Unit Testing
-                    if (Model != null) {
-                        _templateFolderVirtualPath = VirtualPathUtility.Combine(Model.DynamicDataFolderVirtualPath, _templateFolderVirtualPath);
+                    if (Model != null)
+                    {
+                        _templateFolderVirtualPath = VirtualPathUtility.Combine(
+                            Model.DynamicDataFolderVirtualPath,
+                            _templateFolderVirtualPath
+                        );
                     }
 
                     _needToResolveVirtualPath = false;
@@ -54,7 +66,8 @@ namespace System.Web.DynamicData {
 
                 return _templateFolderVirtualPath;
             }
-            set {
+            set
+            {
                 _templateFolderVirtualPath = value;
 
                 // Make sure we register for change notifications, since we just got a new path
@@ -65,25 +78,31 @@ namespace System.Web.DynamicData {
             }
         }
 
-        internal VirtualPathProvider VirtualPathProvider {
-            get {
-                if (_vpp == null) {
+        internal VirtualPathProvider VirtualPathProvider
+        {
+            get
+            {
+                if (_vpp == null)
+                {
                     _vpp = HostingEnvironment.VirtualPathProvider;
                 }
                 return _vpp;
             }
-            set {
+            set
+            {
                 _vpp = value;
                 _usingCustomVpp = value != null;
             }
         }
 
-        internal string GetTemplatePath(long cacheKey, Func<string> templatePathFactoryFunction) {
+        internal string GetTemplatePath(long cacheKey, Func<string> templatePathFactoryFunction)
+        {
             // Check if we already have it cached
             string virtualPath = this[cacheKey];
 
             // null is a valid value, so we also need to check whether the key exists
-            if (virtualPath == null && !ContainsKey(cacheKey)) {
+            if (virtualPath == null && !ContainsKey(cacheKey))
+            {
                 // It's not cached, so compute it and cache it.  Make sure multiple writers are serialized
                 virtualPath = templatePathFactoryFunction();
                 this[cacheKey] = virtualPath;
@@ -92,47 +111,66 @@ namespace System.Web.DynamicData {
             return virtualPath;
         }
 
-        private string this[long cacheKey] {
-            get {
+        private string this[long cacheKey]
+        {
+            get
+            {
                 EnsureRegisteredForChangeNotifications();
                 return (string)_fieldTemplateVirtualPathCache[cacheKey];
             }
-            set {
+            set
+            {
                 EnsureRegisteredForChangeNotifications();
-                lock (_fieldTemplateVirtualPathCache) {
+                lock (_fieldTemplateVirtualPathCache)
+                {
                     _fieldTemplateVirtualPathCache[cacheKey] = value;
                 }
             }
         }
 
-        private bool ContainsKey(long cacheKey) {
+        private bool ContainsKey(long cacheKey)
+        {
             EnsureRegisteredForChangeNotifications();
             return _fieldTemplateVirtualPathCache.ContainsKey(cacheKey);
         }
 
-        private void EnsureRegisteredForChangeNotifications() {
-            if (!_trackFolderChanges) {
+        private void EnsureRegisteredForChangeNotifications()
+        {
+            if (!_trackFolderChanges)
+            {
                 return;
             }
 
-            if (!_registeredForChangeNotifications) {
-                lock (this) {
-                    if (!_registeredForChangeNotifications) {
+            if (!_registeredForChangeNotifications)
+            {
+                lock (this)
+                {
+                    if (!_registeredForChangeNotifications)
+                    {
                         // Make sure the folder exists
-                        if (!VirtualPathProvider.DirectoryExists(TemplateFolderVirtualPath)) {
-                            throw new InvalidOperationException(String.Format(
-                                CultureInfo.CurrentCulture,
-                                DynamicDataResources.FieldTemplateFactory_FolderNotFound,
-                                TemplateFolderVirtualPath));
+                        if (!VirtualPathProvider.DirectoryExists(TemplateFolderVirtualPath))
+                        {
+                            throw new InvalidOperationException(
+                                String.Format(
+                                    CultureInfo.CurrentCulture,
+                                    DynamicDataResources.FieldTemplateFactory_FolderNotFound,
+                                    TemplateFolderVirtualPath
+                                )
+                            );
                         }
 
                         // Register for notifications if anything in that folder changes
-                        FileChangeNotifier.Register(TemplateFolderVirtualPath, delegate(string path) {
-                            // Something has changed, so clear our cache
-                            lock (_fieldTemplateVirtualPathCache) {
-                                _fieldTemplateVirtualPathCache.Clear();
+                        FileChangeNotifier.Register(
+                            TemplateFolderVirtualPath,
+                            delegate(string path)
+                            {
+                                // Something has changed, so clear our cache
+                                lock (_fieldTemplateVirtualPathCache)
+                                {
+                                    _fieldTemplateVirtualPathCache.Clear();
+                                }
                             }
-                        });
+                        );
 
                         _registeredForChangeNotifications = true;
                     }
@@ -140,13 +178,20 @@ namespace System.Web.DynamicData {
             }
         }
 
-        internal bool FileExists(string virtualPath) {
-            if (_usingCustomVpp) {
+        internal bool FileExists(string virtualPath)
+        {
+            if (_usingCustomVpp)
+            {
                 // for unit testing
                 return VirtualPathProvider.FileExists(virtualPath);
-            } else {
+            }
+            else
+            {
                 // Use GetObjectFactory instead of GetCompiledType because it will not throw, which improves the debugging experience
-                return BuildManager.GetObjectFactory(virtualPath, /* throwIfNotFound */ false) != null;
+                return BuildManager.GetObjectFactory(
+                        virtualPath, /* throwIfNotFound */
+                        false
+                    ) != null;
             }
         }
     }

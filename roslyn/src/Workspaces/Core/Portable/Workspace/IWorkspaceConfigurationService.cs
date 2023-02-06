@@ -20,9 +20,7 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultWorkspaceConfigurationService()
-        {
-        }
+        public DefaultWorkspaceConfigurationService() { }
 
         public WorkspaceConfigurationOptions Options => WorkspaceConfigurationOptions.Default;
     }
@@ -42,12 +40,11 @@ namespace Microsoft.CodeAnalysis.Host
         [property: DataMember(Order = 1)] bool EnableOpeningSourceGeneratedFiles = false,
         [property: DataMember(Order = 2)] bool DisableReferenceManagerRecoverableMetadata = false,
         [property: DataMember(Order = 3)] bool DisableBackgroundCompilation = false,
-        [property: DataMember(Order = 4)] bool DisableSharedSyntaxTrees = false)
+        [property: DataMember(Order = 4)] bool DisableSharedSyntaxTrees = false
+    )
     {
         public WorkspaceConfigurationOptions()
-            : this(CacheStorage: StorageDatabase.SQLite)
-        {
-        }
+            : this(CacheStorage: StorageDatabase.SQLite) { }
 
         public static readonly WorkspaceConfigurationOptions Default = new();
 
@@ -55,11 +52,13 @@ namespace Microsoft.CodeAnalysis.Host
         /// These values are such that the correctness of remote services is not affected if these options are changed from defaults
         /// to non-defauls while the services have already been executing.
         /// </summary>
-        public static readonly WorkspaceConfigurationOptions RemoteDefault = new(
-            CacheStorage: StorageDatabase.None,
-            EnableOpeningSourceGeneratedFiles: false,
-            DisableReferenceManagerRecoverableMetadata: false,
-            DisableBackgroundCompilation: false,
-            DisableSharedSyntaxTrees: false);
+        public static readonly WorkspaceConfigurationOptions RemoteDefault =
+            new(
+                CacheStorage: StorageDatabase.None,
+                EnableOpeningSourceGeneratedFiles: false,
+                DisableReferenceManagerRecoverableMetadata: false,
+                DisableBackgroundCompilation: false,
+                DisableSharedSyntaxTrees: false
+            );
     }
 }

@@ -36,23 +36,24 @@ using System.Collections;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_TableItemStyle_Wrap
-        : GHTWebControlBase
+    public class WebControl_TableItemStyle_Wrap : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) {
+        override protected void OnInit(EventArgs e)
+        {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
             //
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -66,10 +67,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             base.m_derivedTypes.Add(typeof(TableCell));
             base.m_derivedTypes.Add(typeof(DataListItem));
         }
- 
-        private void Page_Load(object sender, System.EventArgs e) 
+
+        private void Page_Load(object sender, System.EventArgs e)
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             foreach (Type currentType in TypesToTest)
             {
@@ -85,7 +86,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Set True.");
-                style1 = (TableItemStyle) this.TestedControl.ControlStyle;
+                style1 = (TableItemStyle)this.TestedControl.ControlStyle;
                 style1.Wrap = true;
             }
             catch (Exception exception4)
@@ -99,7 +100,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Set False.");
-                style1 = (TableItemStyle) this.TestedControl.ControlStyle;
+                style1 = (TableItemStyle)this.TestedControl.ControlStyle;
                 style1.Wrap = false;
             }
             catch (Exception exception5)
@@ -113,7 +114,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Get default value.");
-                style1 = (TableItemStyle) this.TestedControl.ControlStyle;
+                style1 = (TableItemStyle)this.TestedControl.ControlStyle;
                 this.GHTSubTestAddResult(style1.Wrap.ToString());
             }
             catch (Exception exception6)
@@ -125,6 +126,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
     }
 }

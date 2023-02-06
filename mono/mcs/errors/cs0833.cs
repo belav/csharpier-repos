@@ -4,7 +4,7 @@
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         var v1 = new { Value = 1, Value = 0 };
     }

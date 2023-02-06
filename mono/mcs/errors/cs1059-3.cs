@@ -5,9 +5,9 @@ using System;
 
 class X
 {
-    static void Main ()
+    static void Main()
     {
         Decimal v;
-        (v = new Decimal ())++;
+        (v = new Decimal())++;
     }
 }

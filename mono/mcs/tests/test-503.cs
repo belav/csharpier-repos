@@ -1,12 +1,17 @@
 // Compiler options: -warnaserror
 
-class Foo {
-    public static int Main ()
+class Foo
+{
+    public static int Main()
     {
-        for (;;) {
-            try {
+        for (; ; )
+        {
+            try
+            {
                 break;
-            } catch {
+            }
+            catch
+            {
                 continue;
             }
         }

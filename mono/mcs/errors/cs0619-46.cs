@@ -11,8 +11,8 @@ class C
 
 class MainClass
 {
-    public static void Main ()
+    public static void Main()
     {
-        Console.WriteLine (C.SS);
+        Console.WriteLine(C.SS);
     }
 }

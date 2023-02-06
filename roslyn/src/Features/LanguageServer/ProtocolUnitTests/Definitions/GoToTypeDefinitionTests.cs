@@ -16,15 +16,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
 {
     public class GoToTypeDefinitionTests : AbstractLanguageServerProtocolTests
     {
-        public GoToTypeDefinitionTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public GoToTypeDefinitionTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
         [Fact]
         public async Task TestGotoTypeDefinitionAsync()
         {
             var markup =
-@"class {|definition:A|}
+                @"class {|definition:A|}
 {
 }
 class B
@@ -33,7 +32,10 @@ class B
 }";
             await using var testLspServer = await CreateTestLspServerAsync(markup);
 
-            var results = await RunGotoTypeDefinitionAsync(testLspServer, testLspServer.GetLocations("caret").Single());
+            var results = await RunGotoTypeDefinitionAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").Single()
+            );
             AssertLocationsEqual(testLspServer.GetLocations("definition"), results);
         }
 
@@ -42,13 +44,13 @@ class B
         {
             var markups = new string[]
             {
-@"namespace One
+                @"namespace One
 {
     class {|definition:A|}
     {
     }
 }",
-@"namespace One
+                @"namespace One
 {
     class B
     {
@@ -59,7 +61,10 @@ class B
 
             await using var testLspServer = await CreateTestLspServerAsync(markups);
 
-            var results = await RunGotoTypeDefinitionAsync(testLspServer, testLspServer.GetLocations("caret").Single());
+            var results = await RunGotoTypeDefinitionAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").Single()
+            );
             AssertLocationsEqual(testLspServer.GetLocations("definition"), results);
         }
 
@@ -67,7 +72,7 @@ class B
         public async Task TestGotoTypeDefinitionAsync_InvalidLocation()
         {
             var markup =
-@"class {|definition:A|}
+                @"class {|definition:A|}
 {
 }
 class B
@@ -77,14 +82,26 @@ class B
 }";
             await using var testLspServer = await CreateTestLspServerAsync(markup);
 
-            var results = await RunGotoTypeDefinitionAsync(testLspServer, testLspServer.GetLocations("caret").Single());
+            var results = await RunGotoTypeDefinitionAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").Single()
+            );
             Assert.Empty(results);
         }
 
-        private static async Task<LSP.Location[]> RunGotoTypeDefinitionAsync(TestLspServer testLspServer, LSP.Location caret)
+        private static async Task<LSP.Location[]> RunGotoTypeDefinitionAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.TextDocumentPositionParams, LSP.Location[]>(LSP.Methods.TextDocumentTypeDefinitionName,
-                           CreateTextDocumentPositionParams(caret), CancellationToken.None);
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.TextDocumentPositionParams,
+                LSP.Location[]
+            >(
+                LSP.Methods.TextDocumentTypeDefinitionName,
+                CreateTextDocumentPositionParams(caret),
+                CancellationToken.None
+            );
         }
     }
 }

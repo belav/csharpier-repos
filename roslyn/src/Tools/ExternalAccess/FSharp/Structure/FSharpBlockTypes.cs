@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Structure
         // Basic types.
         public static string Nonstructural => BlockTypes.Nonstructural;
 
-        // Trivstatic 
+        // Trivstatic
         public static string Comment => BlockTypes.Comment;
         public static string PreprocessorRegion => BlockTypes.PreprocessorRegion;
 

@@ -4,4 +4,4 @@
 
 using System.Reflection;
 
-[assembly:AssemblyDelaySign (true)]
+[assembly: AssemblyDelaySign(true)]

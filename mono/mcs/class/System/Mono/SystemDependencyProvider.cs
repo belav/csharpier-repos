@@ -34,41 +34,43 @@ namespace Mono
     class SystemDependencyProvider : ISystemDependencyProvider
     {
         static SystemDependencyProvider instance;
-        static object syncRoot = new object ();
+        static object syncRoot = new object();
 
-        public static SystemDependencyProvider Instance {
-            get {
-                Initialize ();
+        public static SystemDependencyProvider Instance
+        {
+            get
+            {
+                Initialize();
                 return instance;
             }
         }
 
-        internal static void Initialize ()
+        internal static void Initialize()
         {
-            lock (syncRoot) {
+            lock (syncRoot)
+            {
                 if (instance != null)
                     return;
 
-                instance = new SystemDependencyProvider ();
+                instance = new SystemDependencyProvider();
             }
         }
 
-        ISystemCertificateProvider ISystemDependencyProvider.CertificateProvider => CertificateProvider;
+        ISystemCertificateProvider ISystemDependencyProvider.CertificateProvider =>
+            CertificateProvider;
 
-        public SystemCertificateProvider CertificateProvider {
-            get;
-        }
+        public SystemCertificateProvider CertificateProvider { get; }
 
         public X509PalImpl X509Pal => CertificateProvider.X509Pal;
 
-        SystemDependencyProvider ()
+        SystemDependencyProvider()
         {
-            CertificateProvider = new SystemCertificateProvider ();
+            CertificateProvider = new SystemCertificateProvider();
 
             /*
              * Register ourselves with corlib's `DependencyInjector`.
              */
-            DependencyInjector.Register (this);
+            DependencyInjector.Register(this);
         }
     }
 }

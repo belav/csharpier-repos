@@ -6,33 +6,33 @@ public class C
     public string Value { get; private set; }
     public Foo Foo { get; set; }
 
-    public int Test ()
+    public int Test()
     {
-        dynamic d = new C ();
-        return D.Foo (d.Value);
+        dynamic d = new C();
+        return D.Foo(d.Value);
     }
 
-    public static int Test2 (dynamic d)
+    public static int Test2(dynamic d)
     {
         return Foo.Method(d);
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        var c = new C ();
-        if (c.Test () != 1)
+        var c = new C();
+        if (c.Test() != 1)
             return 1;
 
-        if (C.Test2 ("s") != 1)
+        if (C.Test2("s") != 1)
             return 2;
-        
+
         return 0;
     }
 }
 
 public struct D
 {
-    public int Foo (string value)
+    public int Foo(string value)
     {
         return 1;
     }
@@ -40,7 +40,7 @@ public struct D
 
 public class Foo
 {
-    public static int Method (string s)
+    public static int Method(string s)
     {
         return 1;
     }

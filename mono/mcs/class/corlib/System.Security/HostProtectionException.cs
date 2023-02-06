@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,61 +31,61 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-namespace System.Security {
-
+namespace System.Security
+{
     [Serializable]
-    [ComVisible (true)]
-    [MonoTODO ("Not supported in the runtime")]
-    public class HostProtectionException : SystemException {
-
+    [ComVisible(true)]
+    [MonoTODO("Not supported in the runtime")]
+    public class HostProtectionException : SystemException
+    {
         private HostProtectionResource _protected;
         private HostProtectionResource _demanded;
 
-        public HostProtectionException ()
-        {
-        }
+        public HostProtectionException() { }
 
-        public HostProtectionException (string message)
-            : base (message)
-        {
-        }
+        public HostProtectionException(string message)
+            : base(message) { }
 
-        public HostProtectionException (string message, Exception e)
-            : base (message, e)
-        {
-        }
+        public HostProtectionException(string message, Exception e)
+            : base(message, e) { }
 
-        public HostProtectionException (string message, HostProtectionResource protectedResources, HostProtectionResource demandedResources)
-            : base (message)
+        public HostProtectionException(
+            string message,
+            HostProtectionResource protectedResources,
+            HostProtectionResource demandedResources
+        )
+            : base(message)
         {
             this._protected = protectedResources;
             this._demanded = demandedResources;
         }
 
-        protected HostProtectionException (SerializationInfo info, StreamingContext context)
+        protected HostProtectionException(SerializationInfo info, StreamingContext context)
         {
-            GetObjectData (info, context);
+            GetObjectData(info, context);
         }
 
-        public HostProtectionResource DemandedResources {
+        public HostProtectionResource DemandedResources
+        {
             get { return _demanded; }
         }
 
-        public HostProtectionResource ProtectedResources {
+        public HostProtectionResource ProtectedResources
+        {
             get { return _protected; }
         }
 
         [MonoTODO]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
-                throw new ArgumentNullException ("info");
+                throw new ArgumentNullException("info");
         }
 
         [MonoTODO]
-        public override string ToString ()
+        public override string ToString()
         {
-            return base.ToString ();
+            return base.ToString();
         }
     }
 }

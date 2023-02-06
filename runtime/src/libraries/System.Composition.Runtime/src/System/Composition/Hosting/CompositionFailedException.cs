@@ -14,16 +14,14 @@ namespace System.Composition.Hosting
         /// Construct a <see cref="CompositionFailedException"/> with the default message.
         /// </summary>
         public CompositionFailedException()
-            : base(SR.CompositionFailedDefaultExceptionMessage)
-        { }
+            : base(SR.CompositionFailedDefaultExceptionMessage) { }
 
         /// <summary>
         /// Construct a <see cref="CompositionFailedException"/>.
         /// </summary>
         /// <param name="message">The exception message.</param>
         public CompositionFailedException(string message)
-            : base(message)
-        { }
+            : base(message) { }
 
         /// <summary>
         /// Construct a <see cref="CompositionFailedException"/>.
@@ -31,7 +29,6 @@ namespace System.Composition.Hosting
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">The inner exception.</param>
         public CompositionFailedException(string message, Exception innerException)
-            : base(message, innerException)
-        { }
+            : base(message, innerException) { }
     }
 }

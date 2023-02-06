@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,45 +33,46 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.HtmlControls
 {
-    [ControlBuilder (typeof (HtmlEmptyTagControlBuilder))]
-    public class HtmlLink: HtmlControl
+    [ControlBuilder(typeof(HtmlEmptyTagControlBuilder))]
+    public class HtmlLink : HtmlControl
     {
-        public HtmlLink () : base ("link")
-        {
-        }
+        public HtmlLink()
+            : base("link") { }
 
-        [DefaultValue ("")]
+        [DefaultValue("")]
         [UrlProperty]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual string Href {
-            get {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual string Href
+        {
+            get
+            {
                 string s = Attributes["href"];
                 if (s == null)
                     return "";
                 return s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("href");
+                    Attributes.Remove("href");
                 else
                     Attributes["href"] = value;
             }
         }
 
-        protected internal override void Render (HtmlTextWriter writer)
+        protected internal override void Render(HtmlTextWriter writer)
         {
-            writer.WriteBeginTag (TagName);
-            RenderAttributes (writer);
-            writer.Write (" />");
+            writer.WriteBeginTag(TagName);
+            RenderAttributes(writer);
+            writer.Write(" />");
         }
 
-        [MonoTODO ("why override?")]
-        protected override void RenderAttributes (HtmlTextWriter writer)
+        [MonoTODO("why override?")]
+        protected override void RenderAttributes(HtmlTextWriter writer)
         {
             if (Href.Length > 0)
-                Href = ResolveClientUrl (Href);
-            base.RenderAttributes (writer);
+                Href = ResolveClientUrl(Href);
+            base.RenderAttributes(writer);
         }
     }
 }
-

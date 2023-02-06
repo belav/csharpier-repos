@@ -27,17 +27,22 @@ namespace MonoTests.System.Web.Services.Description
     public class WebReferenceTest
     {
         [Test]
-        public void ProtocolName ()
+        public void ProtocolName()
         {
-            WebReference r = new WebReference (
-                new DiscoveryClientDocumentCollection (),
-                new CodeNamespace (),
-                null, null, null); // null ProtocolName
-            r = new WebReference (
-                new DiscoveryClientDocumentCollection (),
-                new CodeNamespace (),
-                null, null);
-            Assert.AreEqual (String.Empty, r.ProtocolName, "#1");
+            WebReference r = new WebReference(
+                new DiscoveryClientDocumentCollection(),
+                new CodeNamespace(),
+                null,
+                null,
+                null
+            ); // null ProtocolName
+            r = new WebReference(
+                new DiscoveryClientDocumentCollection(),
+                new CodeNamespace(),
+                null,
+                null
+            );
+            Assert.AreEqual(String.Empty, r.ProtocolName, "#1");
             // it is not rejected here, while only "SOAP" and
             // "SOAP12" are said as valid...
             r.ProtocolName = "invalid";

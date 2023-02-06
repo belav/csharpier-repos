@@ -33,61 +33,58 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-    public class ReadLinesFromFile : TaskExtension {
-    
-        ITaskItem    file;
-        ITaskItem[]    lines;
-    
-        public ReadLinesFromFile ()
-        {
-        }
+namespace Microsoft.Build.Tasks
+{
+    public class ReadLinesFromFile : TaskExtension
+    {
+        ITaskItem file;
+        ITaskItem[] lines;
 
-        public override bool Execute ()
+        public ReadLinesFromFile() { }
+
+        public override bool Execute()
         {
-            string full_filename = file.GetMetadata ("FullPath");
-            if (!System.IO.File.Exists (full_filename))
+            string full_filename = file.GetMetadata("FullPath");
+            if (!System.IO.File.Exists(full_filename))
                 return true;
 
             StreamReader streamReader = null;
-            try {
-                streamReader = new StreamReader (full_filename);
-                List <ITaskItem> temporaryLines = new List <ITaskItem> ();
+            try
+            {
+                streamReader = new StreamReader(full_filename);
+                List<ITaskItem> temporaryLines = new List<ITaskItem>();
 
                 string line;
-                while ((line = streamReader.ReadLine ()) != null)
-                    temporaryLines.Add (new TaskItem (line));
-                
-                lines = temporaryLines.ToArray ();
-            } catch (IOException ex) {
-                Log.LogWarningFromException (ex);
-            } finally {
+                while ((line = streamReader.ReadLine()) != null)
+                    temporaryLines.Add(new TaskItem(line));
+
+                lines = temporaryLines.ToArray();
+            }
+            catch (IOException ex)
+            {
+                Log.LogWarningFromException(ex);
+            }
+            finally
+            {
                 if (streamReader != null)
-                    streamReader.Dispose ();
+                    streamReader.Dispose();
             }
 
             return true;
         }
 
         [Required]
-        public ITaskItem File {
-            get {
-                return file;
-            }
-            set {
-                file = value;
-            }
+        public ITaskItem File
+        {
+            get { return file; }
+            set { file = value; }
         }
 
         [Output]
-        public ITaskItem[] Lines {
-            get {
-                return lines;
-            }
-            set {
-                lines = value;
-            }
+        public ITaskItem[] Lines
+        {
+            get { return lines; }
+            set { lines = value; }
         }
     }
 }
-

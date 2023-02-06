@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,68 +36,94 @@ namespace System.ServiceModel.Discovery
 {
     public class MyServiceDiscoveryBehavior : ServiceDiscoveryBehavior, IServiceBehavior
     {
-        IServiceBehavior GetBase ()
+        IServiceBehavior GetBase()
         {
-            var sdb = (ServiceDiscoveryBehavior) this;
-            return (IServiceBehavior) sdb;
+            var sdb = (ServiceDiscoveryBehavior)this;
+            return (IServiceBehavior)sdb;
         }
 
-        void IServiceBehavior.AddBindingParameters (ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters
+        )
         {
-            GetBase ().AddBindingParameters (serviceDescription, serviceHostBase, endpoints, bindingParameters);
+            GetBase()
+                .AddBindingParameters(
+                    serviceDescription,
+                    serviceHostBase,
+                    endpoints,
+                    bindingParameters
+                );
         }
 
-        void IServiceBehavior.ApplyDispatchBehavior (ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
         {
-            GetBase ().ApplyDispatchBehavior (serviceDescription, serviceHostBase);
+            GetBase().ApplyDispatchBehavior(serviceDescription, serviceHostBase);
         }
 
-        void IServiceBehavior.Validate (ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.Validate(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (serviceHostBase == null)
-                throw new ArgumentNullException ("serviceHostBase");
-            var dse = serviceHostBase.Extensions.Find<DiscoveryServiceExtension> ();
-            if (dse == null) {
-                dse = new MyDiscoveryServiceExtension ();
-                serviceHostBase.Extensions.Add (dse);
+                throw new ArgumentNullException("serviceHostBase");
+            var dse = serviceHostBase.Extensions.Find<DiscoveryServiceExtension>();
+            if (dse == null)
+            {
+                dse = new MyDiscoveryServiceExtension();
+                serviceHostBase.Extensions.Add(dse);
             }
 
-            GetBase ().Validate (serviceDescription, serviceHostBase);
+            GetBase().Validate(serviceDescription, serviceHostBase);
         }
     }
 
     public class MyDiscoveryServiceExtension : DiscoveryServiceExtension
     {
-        protected override DiscoveryService GetDiscoveryService ()
+        protected override DiscoveryService GetDiscoveryService()
         {
-            return new MyDiscoveryService ();
+            return new MyDiscoveryService();
         }
     }
 
     public class MyDiscoveryService : DiscoveryService
     {
-        protected override IAsyncResult OnBeginFind (FindRequestContext findRequestContext, AsyncCallback callback, Object state)
+        protected override IAsyncResult OnBeginFind(
+            FindRequestContext findRequestContext,
+            AsyncCallback callback,
+            Object state
+        )
         {
-            Console.Error.WriteLine ("OnBeginFind");
-            throw new Exception ("1");
+            Console.Error.WriteLine("OnBeginFind");
+            throw new Exception("1");
         }
 
-        protected override IAsyncResult OnBeginResolve (ResolveCriteria resolveCriteria, AsyncCallback callback, Object state)
+        protected override IAsyncResult OnBeginResolve(
+            ResolveCriteria resolveCriteria,
+            AsyncCallback callback,
+            Object state
+        )
         {
-            Console.Error.WriteLine ("OnBeginResolve");
-            throw new Exception ("2");
+            Console.Error.WriteLine("OnBeginResolve");
+            throw new Exception("2");
         }
 
-        protected override void OnEndFind (IAsyncResult result)
+        protected override void OnEndFind(IAsyncResult result)
         {
-            Console.Error.WriteLine ("OnEndFind");
-            throw new Exception ("3");
+            Console.Error.WriteLine("OnEndFind");
+            throw new Exception("3");
         }
 
-        protected override EndpointDiscoveryMetadata OnEndResolve (IAsyncResult result)
+        protected override EndpointDiscoveryMetadata OnEndResolve(IAsyncResult result)
         {
-            Console.Error.WriteLine ("OnEndResolve");
-            throw new Exception ("4");
+            Console.Error.WriteLine("OnEndResolve");
+            throw new Exception("4");
         }
     }
 }

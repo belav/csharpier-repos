@@ -57,8 +57,8 @@ namespace Microsoft.CodeAnalysis
         object? ConstantValue { get; }
 
         /// <summary>
-        /// Returns true if this local variable is function return variable whose name is the function's name, 
-        /// whose type is the return type of the function and whose initial value is the default of its type. 
+        /// Returns true if this local variable is function return variable whose name is the function's name,
+        /// whose type is the return type of the function and whose initial value is the default of its type.
         /// </summary>
         /// <remarks>
         /// Is always false for the C# local variable
@@ -81,7 +81,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <example>
         /// <code>
-        ///     using (var localVariable = new StreamReader(path)) { ... } 
+        ///     using (var localVariable = new StreamReader(path)) { ... }
         /// </code>
         /// </example>
         bool IsUsing { get; }

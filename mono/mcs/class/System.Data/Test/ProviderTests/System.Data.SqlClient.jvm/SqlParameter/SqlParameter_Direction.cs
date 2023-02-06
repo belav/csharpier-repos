@@ -13,6 +13,7 @@ namespace MonoTests.System.Data.SqlClient
     public class SqlParameter_Direction : GHTBase
     {
         private Exception exp;
+
         public static void Main()
         {
             SqlParameter_Direction tc = new SqlParameter_Direction();
@@ -24,7 +25,7 @@ namespace MonoTests.System.Data.SqlClient
                 tc.BeginTest("SqlParameter_Direction");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 tc.exp = ex;
             }
@@ -34,7 +35,7 @@ namespace MonoTests.System.Data.SqlClient
                 tc.TestTearDown();
             }
         }
- 
+
         public void run()
         {
             TestBug4703();
@@ -43,9 +44,15 @@ namespace MonoTests.System.Data.SqlClient
         [TestFixtureSetUp]
         public void TestSetup()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
@@ -85,9 +92,15 @@ namespace MonoTests.System.Data.SqlClient
         [TestFixtureTearDown()]
         public void TestTearDown()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
@@ -117,19 +130,27 @@ namespace MonoTests.System.Data.SqlClient
                 }
             }
         }
-        
+
         [Test]
         public void TestBug4703()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
             try
             {
-                BeginCase("Test Bug 4703 - DateTime output parameter of stored procedure contains incorrect time ( always 12:00 AM )");
+                BeginCase(
+                    "Test Bug 4703 - DateTime output parameter of stored procedure contains incorrect time ( always 12:00 AM )"
+                );
                 string strConnection = ConnectedDataProvider.ConnectionStringSQLClient;
                 SqlConnection conn = new SqlConnection(strConnection);
                 conn.Open();
@@ -140,16 +161,16 @@ namespace MonoTests.System.Data.SqlClient
                 command.CommandText = "GHSP_DateTimeOutputTest";
 
                 param = command.CreateParameter();
-                param.ParameterName="@LastRefresh";
+                param.ParameterName = "@LastRefresh";
                 param.DbType = DbType.DateTime;
                 param.Direction = ParameterDirection.InputOutput;
                 DateTime testValue = DateTime.Now;
                 param.Value = testValue;
 
-                command.Parameters.Add( param );
+                command.Parameters.Add(param);
                 Compare(param.Value, testValue);
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }

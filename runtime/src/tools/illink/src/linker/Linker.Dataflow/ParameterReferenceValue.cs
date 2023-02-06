@@ -5,10 +5,10 @@ using ILLink.Shared.TypeSystemProxy;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-    internal sealed record ParameterReferenceValue (ParameterProxy Parameter)
-        : ReferenceValue (Parameter.ParameterType)
+    internal sealed record ParameterReferenceValue(ParameterProxy Parameter)
+        : ReferenceValue(Parameter.ParameterType)
     {
-        public override SingleValue DeepCopy ()
+        public override SingleValue DeepCopy()
         {
             return this;
         }

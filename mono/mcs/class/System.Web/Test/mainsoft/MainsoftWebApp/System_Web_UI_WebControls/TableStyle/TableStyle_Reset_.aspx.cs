@@ -35,13 +35,13 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class TableStyle_Reset_
-        : GHTBaseWeb 
+    public class TableStyle_Reset_ : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.Table Table1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -49,19 +49,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
             base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));

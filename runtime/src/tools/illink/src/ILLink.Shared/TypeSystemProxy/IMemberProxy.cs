@@ -10,6 +10,6 @@ namespace ILLink.Shared.TypeSystemProxy
     {
         public string Name { get; }
 
-        public string GetDisplayName ();
+        public string GetDisplayName();
     }
 }

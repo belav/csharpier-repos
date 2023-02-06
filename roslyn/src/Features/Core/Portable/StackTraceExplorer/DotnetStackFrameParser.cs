@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         /// <summary>
         /// Uses <see cref="StackFrameParser"/> to parse a line if possible
         /// </summary>
-        public bool TryParseLine(VirtualCharSequence line, [NotNullWhen(true)] out ParsedFrame? parsedFrame)
+        public bool TryParseLine(
+            VirtualCharSequence line,
+            [NotNullWhen(true)] out ParsedFrame? parsedFrame
+        )
         {
             parsedFrame = null;
             var tree = StackFrameParser.TryParse(line);

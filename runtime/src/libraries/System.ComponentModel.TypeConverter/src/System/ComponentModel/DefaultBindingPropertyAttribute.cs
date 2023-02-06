@@ -14,9 +14,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DefaultBindingPropertyAttribute'/> class.
         /// </summary>
-        public DefaultBindingPropertyAttribute()
-        {
-        }
+        public DefaultBindingPropertyAttribute() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DefaultBindingPropertyAttribute'/> class.
@@ -36,7 +34,8 @@ namespace System.ComponentModel
         /// Specifies the default value for the <see cref='System.ComponentModel.DefaultBindingPropertyAttribute'/>, which is <see langword='null'/>. This
         /// <see langword='static '/>field is read-only.
         /// </summary>
-        public static readonly DefaultBindingPropertyAttribute Default = new DefaultBindingPropertyAttribute();
+        public static readonly DefaultBindingPropertyAttribute Default =
+            new DefaultBindingPropertyAttribute();
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {

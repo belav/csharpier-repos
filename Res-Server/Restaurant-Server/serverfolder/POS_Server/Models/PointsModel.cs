@@ -24,8 +24,6 @@ namespace POS_Server.Models
         public byte isActive { get; set; }
         public Nullable<long> agentId { get; set; }
 
-     
-       
         public bool canDelete { get; set; }
     }
 }

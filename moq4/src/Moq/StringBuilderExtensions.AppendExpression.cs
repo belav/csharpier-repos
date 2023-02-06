@@ -17,7 +17,10 @@ namespace Moq
     // These methods are intended to create more readable string representations for use in failure messages.
     partial class StringBuilderExtensions
     {
-        public static StringBuilder AppendExpression(this StringBuilder builder, Expression expression)
+        public static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            Expression expression
+        )
         {
             if (expression == null)
             {
@@ -119,69 +122,82 @@ namespace Moq
                     goto default;
 
                 default:
-                    throw new Exception(string.Format(Resources.UnhandledExpressionType, expression.NodeType));
+                    throw new Exception(
+                        string.Format(Resources.UnhandledExpressionType, expression.NodeType)
+                    );
             }
         }
 
-        private static StringBuilder AppendElementInit(this StringBuilder builder, ElementInit initializer)
+        private static StringBuilder AppendElementInit(
+            this StringBuilder builder,
+            ElementInit initializer
+        )
         {
-            return builder.AppendCommaSeparated("{ ", initializer.Arguments, AppendExpression, " }");
+            return builder.AppendCommaSeparated(
+                "{ ",
+                initializer.Arguments,
+                AppendExpression,
+                " }"
+            );
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, UnaryExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            UnaryExpression expression
+        )
         {
             switch (expression.NodeType)
             {
                 case ExpressionType.Convert:
                 case ExpressionType.ConvertChecked:
-                    return builder.Append('(')
-                                  .AppendNameOf(expression.Type)
-                                  .Append(')')
-                                  .AppendExpression(expression.Operand);
+                    return builder
+                        .Append('(')
+                        .AppendNameOf(expression.Type)
+                        .Append(')')
+                        .AppendExpression(expression.Operand);
 
                 case ExpressionType.ArrayLength:
-                    return builder.AppendExpression(expression.Operand)
-                                  .Append(".Length");
+                    return builder.AppendExpression(expression.Operand).Append(".Length");
 
                 case ExpressionType.Negate:
                 case ExpressionType.NegateChecked:
-                    return builder.Append('-')
-                                  .AppendExpression(expression.Operand);
+                    return builder.Append('-').AppendExpression(expression.Operand);
 
                 case ExpressionType.Not:
-                    return builder.Append("!(")
-                                  .AppendExpression(expression.Operand)
-                                  .Append(')');
+                    return builder.Append("!(").AppendExpression(expression.Operand).Append(')');
 
                 case ExpressionType.Quote:
                     return builder.AppendExpression(expression.Operand);
 
                 case ExpressionType.TypeAs:
-                    return builder.Append('(')
-                                  .AppendExpression(expression.Operand)
-                                  .Append(" as ")
-                                  .AppendNameOf(expression.Type)
-                                  .Append(')');
+                    return builder
+                        .Append('(')
+                        .AppendExpression(expression.Operand)
+                        .Append(" as ")
+                        .AppendNameOf(expression.Type)
+                        .Append(')');
             }
 
-            return builder;  // TODO: check whether this should be unreachable
+            return builder; // TODO: check whether this should be unreachable
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, BinaryExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            BinaryExpression expression
+        )
         {
             if (expression.NodeType == ExpressionType.ArrayIndex)
             {
-                builder.AppendExpression(expression.Left)
-                       .Append('[')
-                       .AppendExpression(expression.Right)
-                       .Append(']');
+                builder
+                    .AppendExpression(expression.Left)
+                    .Append('[')
+                    .AppendExpression(expression.Right)
+                    .Append(']');
             }
             else
             {
                 AppendMaybeParenthesized(expression.Left, builder);
-                builder.Append(' ')
-                       .Append(GetOperator(expression.NodeType))
-                       .Append(' ');
+                builder.Append(' ').Append(GetOperator(expression.NodeType)).Append(' ');
                 AppendMaybeParenthesized(expression.Right, builder);
             }
 
@@ -189,7 +205,9 @@ namespace Moq
 
             void AppendMaybeParenthesized(Expression operand, StringBuilder b)
             {
-                bool parenthesize = operand.NodeType == ExpressionType.AndAlso || operand.NodeType == ExpressionType.OrElse;
+                bool parenthesize =
+                    operand.NodeType == ExpressionType.AndAlso
+                    || operand.NodeType == ExpressionType.OrElse;
                 if (parenthesize)
                 {
                     b.Append("(");
@@ -205,64 +223,80 @@ namespace Moq
             {
                 return nodeType switch
                 {
-                    ExpressionType.Add                => "+",
-                    ExpressionType.AddChecked         => "+",
-                    ExpressionType.AddAssign          => "+=",
-                    ExpressionType.Assign             => "=",
-                    ExpressionType.And                => "&",
-                    ExpressionType.AndAlso            => "&&",
-                    ExpressionType.Coalesce           => "??",
-                    ExpressionType.Divide             => "/",
-                    ExpressionType.Equal              => "==",
-                    ExpressionType.ExclusiveOr        => "^",
-                    ExpressionType.GreaterThan        => ">",
+                    ExpressionType.Add => "+",
+                    ExpressionType.AddChecked => "+",
+                    ExpressionType.AddAssign => "+=",
+                    ExpressionType.Assign => "=",
+                    ExpressionType.And => "&",
+                    ExpressionType.AndAlso => "&&",
+                    ExpressionType.Coalesce => "??",
+                    ExpressionType.Divide => "/",
+                    ExpressionType.Equal => "==",
+                    ExpressionType.ExclusiveOr => "^",
+                    ExpressionType.GreaterThan => ">",
                     ExpressionType.GreaterThanOrEqual => ">=",
-                    ExpressionType.LeftShift          => "<<",
-                    ExpressionType.LessThan           => "<",
-                    ExpressionType.LessThanOrEqual    => "<=",
-                    ExpressionType.Modulo             => "%",
-                    ExpressionType.Multiply           => "*",
-                    ExpressionType.MultiplyChecked    => "*",
-                    ExpressionType.NotEqual           => "!=",
-                    ExpressionType.Or                 => "|",
-                    ExpressionType.OrElse             => "||",
-                    ExpressionType.Power              => "**",
-                    ExpressionType.RightShift         => ">>",
-                    ExpressionType.Subtract           => "-",
-                    ExpressionType.SubtractChecked    => "-",
-                    ExpressionType.SubtractAssign     => "-=",
-                    _                                 => nodeType.ToString(),
+                    ExpressionType.LeftShift => "<<",
+                    ExpressionType.LessThan => "<",
+                    ExpressionType.LessThanOrEqual => "<=",
+                    ExpressionType.Modulo => "%",
+                    ExpressionType.Multiply => "*",
+                    ExpressionType.MultiplyChecked => "*",
+                    ExpressionType.NotEqual => "!=",
+                    ExpressionType.Or => "|",
+                    ExpressionType.OrElse => "||",
+                    ExpressionType.Power => "**",
+                    ExpressionType.RightShift => ">>",
+                    ExpressionType.Subtract => "-",
+                    ExpressionType.SubtractChecked => "-",
+                    ExpressionType.SubtractAssign => "-=",
+                    _ => nodeType.ToString(),
                 };
             }
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, TypeBinaryExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            TypeBinaryExpression expression
+        )
         {
-            return builder.AppendExpression(expression.Expression)
-                          .Append(" is ")
-                          .AppendNameOf(expression.TypeOperand);
+            return builder
+                .AppendExpression(expression.Expression)
+                .Append(" is ")
+                .AppendNameOf(expression.TypeOperand);
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, ConditionalExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            ConditionalExpression expression
+        )
         {
-            return builder.AppendExpression(expression.Test)
-                          .Append(" ? ")
-                          .AppendExpression(expression.IfTrue)
-                          .Append(" : ")
-                          .AppendExpression(expression.IfFalse);
+            return builder
+                .AppendExpression(expression.Test)
+                .Append(" ? ")
+                .AppendExpression(expression.IfTrue)
+                .Append(" : ")
+                .AppendExpression(expression.IfFalse);
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, ParameterExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            ParameterExpression expression
+        )
         {
             return builder.Append(expression.Name ?? "<param>");
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, MemberExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            MemberExpression expression
+        )
         {
             if (expression.Expression != null)
             {
-                if (expression.Expression is ConstantExpression ce
-                    && ce.Type.IsDefined(typeof(CompilerGeneratedAttribute)))
+                if (
+                    expression.Expression is ConstantExpression ce
+                    && ce.Type.IsDefined(typeof(CompilerGeneratedAttribute))
+                )
                 {
                     return builder.Append(expression.Member.Name);
                 }
@@ -276,11 +310,13 @@ namespace Moq
                 builder.AppendNameOf(expression.Member.DeclaringType);
             }
 
-            return builder.Append('.')
-                          .Append(expression.Member.Name);
+            return builder.Append('.').Append(expression.Member.Name);
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, MethodCallExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            MethodCallExpression expression
+        )
         {
             var instance = expression.Object;
             var method = expression.Method;
@@ -307,8 +343,7 @@ namespace Moq
             {
                 if (method.IsPropertyAccessor())
                 {
-                    builder.Append('.')
-                           .Append(method.Name, 4);
+                    builder.Append('.').Append(method.Name, 4);
                 }
                 else
                 {
@@ -321,50 +356,67 @@ namespace Moq
             {
                 if (method.IsPropertyAccessor())
                 {
-                    builder.Append('.')
-                           .Append(method.Name, 4)
-                           .Append(" = ")
-                           .AppendExpression(arguments.Last());
+                    builder
+                        .Append('.')
+                        .Append(method.Name, 4)
+                        .Append(" = ")
+                        .AppendExpression(arguments.Last());
                 }
                 else
                 {
                     Debug.Assert(method.IsIndexerAccessor());
 
-                    builder.AppendCommaSeparated("[", arguments.Take(arguments.Count() - 1), AppendExpression, "] = ")
-                           .AppendExpression(arguments.Last());
+                    builder
+                        .AppendCommaSeparated(
+                            "[",
+                            arguments.Take(arguments.Count() - 1),
+                            AppendExpression,
+                            "] = "
+                        )
+                        .AppendExpression(arguments.Last());
                 }
             }
             else if (method.IsEventAddAccessor())
             {
-                builder.Append('.')
-                       .Append(method.Name, 4)
-                       .Append(" += ")
-                       .AppendCommaSeparated(arguments, AppendExpression);
+                builder
+                    .Append('.')
+                    .Append(method.Name, 4)
+                    .Append(" += ")
+                    .AppendCommaSeparated(arguments, AppendExpression);
             }
             else if (method.IsEventRemoveAccessor())
             {
-                builder.Append('.')
-                       .Append(method.Name, 7)
-                       .Append(" -= ")
-                       .AppendCommaSeparated(arguments, AppendExpression);
+                builder
+                    .Append('.')
+                    .Append(method.Name, 7)
+                    .Append(" -= ")
+                    .AppendCommaSeparated(arguments, AppendExpression);
             }
             else
             {
-                builder.Append('.')
-                       .AppendNameOf(method, includeGenericArgumentList: true)
-                       .AppendCommaSeparated("(", arguments, AppendExpression, ")");
+                builder
+                    .Append('.')
+                    .AppendNameOf(method, includeGenericArgumentList: true)
+                    .AppendCommaSeparated("(", arguments, AppendExpression, ")");
             }
 
             return builder;
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, IndexExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            IndexExpression expression
+        )
         {
-            return builder.AppendExpression(expression.Object)
-                          .AppendCommaSeparated("[", expression.Arguments, AppendExpression, "]");
+            return builder
+                .AppendExpression(expression.Object)
+                .AppendCommaSeparated("[", expression.Arguments, AppendExpression, "]");
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, LambdaExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            LambdaExpression expression
+        )
         {
             if (expression.Parameters.Count == 1)
             {
@@ -374,44 +426,67 @@ namespace Moq
             {
                 builder.AppendCommaSeparated("(", expression.Parameters, AppendExpression, ")");
             }
-            return builder.Append(" => ")
-                          .AppendExpression(expression.Body);
+            return builder.Append(" => ").AppendExpression(expression.Body);
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, NewExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            NewExpression expression
+        )
         {
-            Type type = (expression.Constructor == null) ? expression.Type : expression.Constructor.DeclaringType;
-            return builder.Append("new ")
-                          .AppendNameOf(type)
-                          .AppendCommaSeparated("(", expression.Arguments, AppendExpression, ")");
+            Type type =
+                (expression.Constructor == null)
+                    ? expression.Type
+                    : expression.Constructor.DeclaringType;
+            return builder
+                .Append("new ")
+                .AppendNameOf(type)
+                .AppendCommaSeparated("(", expression.Arguments, AppendExpression, ")");
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, NewArrayExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            NewArrayExpression expression
+        )
         {
             switch (expression.NodeType)
             {
                 case ExpressionType.NewArrayInit:
-                    return builder.AppendCommaSeparated("new[] { ", expression.Expressions, AppendExpression, " }");
+                    return builder.AppendCommaSeparated(
+                        "new[] { ",
+                        expression.Expressions,
+                        AppendExpression,
+                        " }"
+                    );
 
                 case ExpressionType.NewArrayBounds:
-                    return builder.Append("new ")
-                                  .AppendNameOf(expression.Type.GetElementType())
-                                  .AppendCommaSeparated("[", expression.Expressions, AppendExpression, "]");
+                    return builder
+                        .Append("new ")
+                        .AppendNameOf(expression.Type.GetElementType())
+                        .AppendCommaSeparated("[", expression.Expressions, AppendExpression, "]");
             }
 
-            return builder;  // TODO: check whether this should be unreachable
+            return builder; // TODO: check whether this should be unreachable
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, InvocationExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            InvocationExpression expression
+        )
         {
-            return builder.AppendExpression(expression.Expression)
-                          .AppendCommaSeparated("(", expression.Arguments, AppendExpression, ")");
+            return builder
+                .AppendExpression(expression.Expression)
+                .AppendCommaSeparated("(", expression.Arguments, AppendExpression, ")");
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, MemberInitExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            MemberInitExpression expression
+        )
         {
-            return builder.AppendExpression(expression.NewExpression)
-                          .AppendCommaSeparated(" { ", expression.Bindings, AppendMemberBinding, " }");
+            return builder
+                .AppendExpression(expression.NewExpression)
+                .AppendCommaSeparated(" { ", expression.Bindings, AppendMemberBinding, " }");
 
             StringBuilder AppendMemberBinding(StringBuilder b, MemberBinding binding)
             {
@@ -419,12 +494,16 @@ namespace Moq
                 {
                     case MemberBindingType.Assignment:
                         var assignment = (MemberAssignment)binding;
-                        return builder.Append(assignment.Member.Name)
-                                      .Append("= ")
-                                      .AppendExpression(assignment.Expression);
+                        return builder
+                            .Append(assignment.Member.Name)
+                            .Append("= ")
+                            .AppendExpression(assignment.Expression);
 
                     case MemberBindingType.MemberBinding:
-                        return b.AppendCommaSeparated(((MemberMemberBinding)binding).Bindings, AppendMemberBinding);
+                        return b.AppendCommaSeparated(
+                            ((MemberMemberBinding)binding).Bindings,
+                            AppendMemberBinding
+                        );
 
                     case MemberBindingType.ListBinding:
                         var original = ((MemberListBinding)binding).Initializers;
@@ -435,18 +514,27 @@ namespace Moq
                         return builder;
 
                     default:
-                        throw new Exception(string.Format(Resources.UnhandledBindingType, binding.BindingType));
+                        throw new Exception(
+                            string.Format(Resources.UnhandledBindingType, binding.BindingType)
+                        );
                 }
             }
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, ListInitExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            ListInitExpression expression
+        )
         {
-            return builder.AppendExpression(expression.NewExpression)
-                          .AppendCommaSeparated(" { ", expression.Initializers, AppendElementInit, " }");
+            return builder
+                .AppendExpression(expression.NewExpression)
+                .AppendCommaSeparated(" { ", expression.Initializers, AppendElementInit, " }");
         }
 
-        private static StringBuilder AppendExpression(this StringBuilder builder, MatchExpression expression)
+        private static StringBuilder AppendExpression(
+            this StringBuilder builder,
+            MatchExpression expression
+        )
         {
             return builder.AppendExpression(expression.Match.RenderExpression);
         }

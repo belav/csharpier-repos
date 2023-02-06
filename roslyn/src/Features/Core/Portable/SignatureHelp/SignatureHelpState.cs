@@ -13,7 +13,12 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         public string? ArgumentName;
         public IList<string>? ArgumentNames;
 
-        public SignatureHelpState(int argumentIndex, int argumentCount, string? argumentName, IList<string>? argumentNames)
+        public SignatureHelpState(
+            int argumentIndex,
+            int argumentCount,
+            string? argumentName,
+            IList<string>? argumentNames
+        )
         {
             ArgumentIndex = argumentIndex;
             ArgumentCount = argumentCount;

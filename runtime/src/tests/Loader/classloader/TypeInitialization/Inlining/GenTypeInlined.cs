@@ -36,65 +36,49 @@ public class Foo<T>
 
 public class NotInlined<T>
 {
-
     static NotInlined()
     {
         Console.WriteLine("Inside NotInlined::.cctor");
         File.WriteAllText("notinlined.txt", "inside .cctor");
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)] 
-    public static void NotInlinedMeth()
-    {
-    }
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void NotInlinedMeth() { }
 }
-
 
 public class Inlined<T>
 {
-
     static Inlined()
     {
         Console.WriteLine("Inside Inlined::.cctor");
         File.WriteAllText("inlined.txt", "inside .cctor");
     }
 
-    public static void InlinedMeth()
-    {
-    }
+    public static void InlinedMeth() { }
 }
-
 
 public struct NotInlinedVal<T>
 {
-
     static NotInlinedVal()
     {
         Console.WriteLine("Inside NotInlinedVal::.cctor");
         File.WriteAllText("notinlinedval.txt", "inside .cctor");
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)] 
-    public static void NotInlinedValMeth()
-    {
-    }
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void NotInlinedValMeth() { }
 }
-
 
 public struct InlinedVal<T>
 {
-
     static InlinedVal()
     {
         Console.WriteLine("Inside InlinedVal::.cctor");
         File.WriteAllText("inlinedval.txt", "inside .cctor");
     }
 
-    public static void InlinedValMeth()
-    {
-    }
+    public static void InlinedValMeth() { }
 }
-
 
 public class Test_GenTypeInlined
 {
@@ -106,7 +90,12 @@ public class Test_GenTypeInlined
         Foo<InlinedVal<int>>.ValMeth_In();
         Foo<NotInlined<bool>>.ValMeth_NotIn();
 
-        if (!File.Exists("inlined.txt") || !File.Exists("notinlined.txt") || !File.Exists("inlinedval.txt") || !File.Exists("notinlinedval.txt") )
+        if (
+            !File.Exists("inlined.txt")
+            || !File.Exists("notinlined.txt")
+            || !File.Exists("inlinedval.txt")
+            || !File.Exists("notinlinedval.txt")
+        )
         {
             Console.WriteLine("FAIL: Cctor wasn't called");
             return 101;
@@ -120,6 +109,5 @@ public class Test_GenTypeInlined
             File.Delete("notinlinedval.txt");
             return 100;
         }
-        
     }
 }

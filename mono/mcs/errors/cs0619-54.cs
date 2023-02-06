@@ -3,21 +3,19 @@
 
 using System;
 
-[Obsolete ("msg", true)]
+[Obsolete("msg", true)]
 class A
 {
     public class M
     {
-        public static void Foo ()
-        {
-        }
+        public static void Foo() { }
     }
 }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        A.M.Foo ();
+        A.M.Foo();
     }
 }

@@ -3,16 +3,17 @@
 using System;
 using System.Threading;
 
+public struct ValX1<T> { }
 
-public struct ValX1<T> {}
-public class RefX1<T> {}
-struct Gen<T> 
+public class RefX1<T> { }
+
+struct Gen<T>
 {
     public static void TryEnterTest()
     {
-// #pragma warning disable 219
-//         Gen<T> inst = new Gen<T>();
-// #pragma warning restore
+        // #pragma warning disable 219
+        //         Gen<T> inst = new Gen<T>();
+        // #pragma warning restore
         Type monitor = typeof(Gen<T>);
         TestHelper myHelper = new TestHelper(Test_TryEnter04.nThreads);
         // MonitorDelegateTS[] consumer = new MonitorDelegateTS[Test.nThreads];
@@ -29,14 +30,15 @@ struct Gen<T>
             });
         }
 
-        for(int i=0;i<6;i++){
-            if(myHelper.m_Event.WaitOne(10000))//,true))
+        for (int i = 0; i < 6; i++)
+        {
+            if (myHelper.m_Event.WaitOne(10000)) //,true))
                 break;
-            if(myHelper.Error == true)
+            if (myHelper.Error == true)
                 break;
         }
         Test_TryEnter04.Eval(!myHelper.Error);
-    }    
+    }
 }
 
 public class Test_TryEnter04
@@ -45,6 +47,7 @@ public class Test_TryEnter04
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -53,12 +56,11 @@ public class Test_TryEnter04
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
-        Gen<int>.TryEnterTest();    
+        Gen<int>.TryEnterTest();
         /*Gen<double>.TryEnterTest();
         Gen<string>.TryEnterTest();
         Gen<object>.TryEnterTest();
@@ -93,6 +95,4 @@ public class Test_TryEnter04
             return 1;
         }
     }
-}        
-
-
+}

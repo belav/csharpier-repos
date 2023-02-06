@@ -42,22 +42,29 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            JObject o1 = JObject.Parse(@"{
+            JObject o1 = JObject.Parse(
+                @"{
               'FirstName': 'John',
               'LastName': 'Smith',
               'Enabled': false,
               'Roles': [ 'User' ]
-            }");
-            JObject o2 = JObject.Parse(@"{
+            }"
+            );
+            JObject o2 = JObject.Parse(
+                @"{
               'Enabled': true,
               'Roles': [ 'User', 'Admin' ]
-            }");
+            }"
+            );
 
-            o1.Merge(o2, new JsonMergeSettings
-            {
-                // union array values together to avoid duplicates
-                MergeArrayHandling = MergeArrayHandling.Union
-            });
+            o1.Merge(
+                o2,
+                new JsonMergeSettings
+                {
+                    // union array values together to avoid duplicates
+                    MergeArrayHandling = MergeArrayHandling.Union
+                }
+            );
 
             string json = o1.ToString();
             // {
@@ -71,7 +78,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""FirstName"": ""John"",
   ""LastName"": ""Smith"",
   ""Enabled"": true,
@@ -79,7 +87,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
     ""User"",
     ""Admin""
   ]
-}", json);
+}",
+                json
+            );
         }
     }
 }

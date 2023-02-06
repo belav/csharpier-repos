@@ -37,101 +37,102 @@ using Microsoft.Build.Utilities;
 
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Utilities {
-
+namespace MonoTests.Microsoft.Build.Utilities
+{
     [TestFixture]
-    public class ToolTaskTest {
-
-        [Test, TestCaseSource (nameof (GetErrorParsingTestData))]
-        public void LogEventsFromTextOutput (string lineText, LogEvent expected)
+    public class ToolTaskTest
+    {
+        [Test, TestCaseSource(nameof(GetErrorParsingTestData))]
+        public void LogEventsFromTextOutput(string lineText, LogEvent expected)
         {
-            var task = new LogEventsFromTextOutputToolTask ();
-            task.LogEventsFromTextOutput (lineText);
-            Assert.AreEqual (task.LogEvents.Count, 1);
+            var task = new LogEventsFromTextOutputToolTask();
+            task.LogEventsFromTextOutput(lineText);
+            Assert.AreEqual(task.LogEvents.Count, 1);
             var result = task.LogEvents[0];
-            task.LogEvents.Clear ();
+            task.LogEvents.Clear();
 
-            if (result != null && result.Origin == task.GetType ().Name.ToUpper ())
+            if (result != null && result.Origin == task.GetType().Name.ToUpper())
                 result.Origin = "#TASKNAME";
 
-            if (expected == null) {
-                Assert.IsNull (result, "#nomatch");
+            if (expected == null)
+            {
+                Assert.IsNull(result, "#nomatch");
                 return;
             }
 
-            Assert.IsNotNull (result, "#match");
-            Assert.AreEqual (expected.Origin, result.Origin, "#origin");
-            Assert.AreEqual (expected.Line, result.Line, "#line");
-            Assert.AreEqual (expected.Column, result.Column, "#column");
-            Assert.AreEqual (expected.EndLine, result.EndLine, "#endline");
-            Assert.AreEqual (expected.EndColumn, result.EndColumn, "#endcolumn");
-            Assert.AreEqual (expected.IsError, result.IsError, "#iserror");
-            Assert.AreEqual (expected.Subcategory ?? "", result.Subcategory, "#subcategory");
-            Assert.AreEqual (expected.Code, result.Code, "number");
-            Assert.AreEqual (expected.Message ?? "", result.Message, "#message");
+            Assert.IsNotNull(result, "#match");
+            Assert.AreEqual(expected.Origin, result.Origin, "#origin");
+            Assert.AreEqual(expected.Line, result.Line, "#line");
+            Assert.AreEqual(expected.Column, result.Column, "#column");
+            Assert.AreEqual(expected.EndLine, result.EndLine, "#endline");
+            Assert.AreEqual(expected.EndColumn, result.EndColumn, "#endcolumn");
+            Assert.AreEqual(expected.IsError, result.IsError, "#iserror");
+            Assert.AreEqual(expected.Subcategory ?? "", result.Subcategory, "#subcategory");
+            Assert.AreEqual(expected.Code, result.Code, "number");
+            Assert.AreEqual(expected.Message ?? "", result.Message, "#message");
         }
 
-        static IEnumerable<TestCaseData> GetErrorParsingTestData ()
+        static IEnumerable<TestCaseData> GetErrorParsingTestData()
         {
-            yield return new TestCaseData (
-                "error   CS66",
-                null
-            ).SetName ("NoColon");
+            yield return new TestCaseData("error   CS66", null).SetName("NoColon");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "error   CS66 : ",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "#TASKNAME",
                     IsError = true,
                     Code = "CS66"
                 }
-            ).SetName ("Minimal");
+            ).SetName("Minimal");
 
-            yield return new TestCaseData (
-                "pineapple   CS66 : ",
-                null
-            ).SetName ("InvalidCategory");
+            yield return new TestCaseData("pineapple   CS66 : ", null).SetName("InvalidCategory");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "ERROR  CS66 : ",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "#TASKNAME",
                     IsError = true,
                     Code = "CS66"
                 }
-            ).SetName ("CaseInsensitivity");
+            ).SetName("CaseInsensitivity");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 ": error  CS66 : ",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "#TASKNAME",
                     IsError = true,
                     Code = "CS66"
                 }
-            ).SetName ("EmptyOrigin");
+            ).SetName("EmptyOrigin");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "     : error  CS66 : ",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "#TASKNAME",
                     IsError = true,
                     Code = "CS66"
                 }
-            ).SetName ("BlankOrigin");
+            ).SetName("BlankOrigin");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "error   CS66 : error in 'hello:thing'",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "#TASKNAME",
                     IsError = true,
                     Code = "CS66",
                     Message = "error in 'hello:thing'",
                 }
-            ).SetName ("NoOriginButErrorLikeMessage");
+            ).SetName("NoOriginButErrorLikeMessage");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "   C:\\class.cs   (23,344)  :    error   CS66   : blah    ",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "C:\\class.cs",
                     Line = 23,
                     Column = 344,
@@ -139,11 +140,12 @@ namespace MonoTests.Microsoft.Build.Utilities {
                     Code = "CS66",
                     Message = "blah",
                 }
-            ).SetName ("Whitespace");
+            ).SetName("Whitespace");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(16,4): error CS0152: The label `case 1:' already occurs in this switch statement",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs",
                     Line = 16,
                     Column = 4,
@@ -151,11 +153,12 @@ namespace MonoTests.Microsoft.Build.Utilities {
                     Code = "CS0152",
                     Message = "The label `case 1:' already occurs in this switch statement",
                 }
-            ).SetName ("RangeLineCol");
+            ).SetName("RangeLineCol");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(16,4-56): error X: blah",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs",
                     Line = 16,
                     Column = 4,
@@ -164,11 +167,12 @@ namespace MonoTests.Microsoft.Build.Utilities {
                     Code = "X",
                     Message = "blah",
                 }
-            ).SetName ("RangeLineColCol");
+            ).SetName("RangeLineColCol");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(16,4,56,7): error X: blah",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs",
                     Line = 16,
                     Column = 4,
@@ -178,11 +182,12 @@ namespace MonoTests.Microsoft.Build.Utilities {
                     Code = "X",
                     Message = "blah",
                 }
-            ).SetName ("RangeLineColLineCol");
+            ).SetName("RangeLineColLineCol");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(1-77): error X: blah",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs",
                     Line = 1,
                     EndLine = 77,
@@ -190,90 +195,99 @@ namespace MonoTests.Microsoft.Build.Utilities {
                     Code = "X",
                     Message = "blah",
                 }
-            ).SetName ("RangeLineLine");
+            ).SetName("RangeLineLine");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(1-77-89): error X: blah",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs",
                     IsError = true,
                     Code = "X",
                     Message = "blah",
                 }
-            ).SetName ("BadRangeTooManyDashes");
+            ).SetName("BadRangeTooManyDashes");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(1&77-89): error X: blah",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs(1&77-89)",
                     IsError = true,
                     Code = "X",
                     Message = "blah",
                 }
-            ).SetName ("BadRangePunctuation");
+            ).SetName("BadRangePunctuation");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(ASDF): error X: blah",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs(ASDF)",
                     IsError = true,
                     Code = "X",
                     Message = "blah",
                 }
-            ).SetName ("BadRangeAlpha");
+            ).SetName("BadRangeAlpha");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(12AA45): error X: blah",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs(12AA45)",
                     IsError = true,
                     Code = "X",
                     Message = "blah",
                 }
-            ).SetName ("BadRangeAlphaNumeric");
+            ).SetName("BadRangeAlphaNumeric");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(1-77,89-56): error X: blah",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs",
                     IsError = true,
                     Code = "X",
                     Message = "blah",
                 }
-            ).SetName ("BadRangeLineLineColCol");
+            ).SetName("BadRangeLineLineColCol");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(1,77,89): error X: blah",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs",
                     IsError = true,
                     Code = "X",
                     Message = "blah",
                 }
-            ).SetName ("BadRangeThreeCommas");
+            ).SetName("BadRangeThreeCommas");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(0): error X:",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs",
                     IsError = true,
                     Code = "X",
                 }
-            ).SetName ("RangeZero");
+            ).SetName("RangeZero");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(2,1234567890192929293833838380): error X:",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "class1.cs",
                     Line = 2,
                     IsError = true,
                     Code = "X",
                 }
-            ).SetName ("BadRangeOverflowCol");
+            ).SetName("BadRangeOverflowCol");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "class1.cs(2,1234567890192929293833838380,5,7): error X:",
-                new LogEvent {
+                new LogEvent
+                {
                     Line = 2,
                     EndLine = 5,
                     EndColumn = 7,
@@ -281,86 +295,94 @@ namespace MonoTests.Microsoft.Build.Utilities {
                     IsError = true,
                     Code = "X",
                 }
-            ).SetName ("BadRangeOverflowBeforeValues");
+            ).SetName("BadRangeOverflowBeforeValues");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "c:\\foo error XXX: fatal error YYY : error blah : thing",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "c:\\foo error XXX",
                     IsError = true,
                     Subcategory = "fatal",
                     Code = "YYY",
                     Message = "error blah : thing",
                 }
-            ).SetName ("LotsOfColons");
+            ).SetName("LotsOfColons");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "Main.cs(17,20): warning CS0168: The variable 'foo' is declared but never used",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "Main.cs",
                     Line = 17,
                     Column = 20,
                     Code = "CS0168",
                     Message = "The variable 'foo' is declared but never used",
                 }
-            ).SetName ("MSExample1");
+            ).SetName("MSExample1");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "C:\\dir1\\foo.resx(2) : error BC30188: Declaration expected.",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "C:\\dir1\\foo.resx",
                     Line = 2,
                     IsError = true,
                     Code = "BC30188",
                     Message = "Declaration expected.",
                 }
-            ).SetName ("MSExample2");
+            ).SetName("MSExample2");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "cl : Command line warning D4024 : unrecognized source file type 'foo.cs', object file assumed",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "cl",
                     Subcategory = "Command line",
                     Code = "D4024",
                     Message = "unrecognized source file type 'foo.cs', object file assumed",
                 }
-            ).SetName ("MSExample3");
+            ).SetName("MSExample3");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "error CS0006: Metadata file 'System.dll' could not be found.",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "#TASKNAME",
                     IsError = true,
                     Code = "CS0006",
                     Message = "Metadata file 'System.dll' could not be found.",
                 }
-            ).SetName ("MSExample4");
+            ).SetName("MSExample4");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "C:\\sourcefile.cpp(134) : error C2143: syntax error : missing ';' before '}'",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "C:\\sourcefile.cpp",
                     Line = 134,
                     IsError = true,
                     Code = "C2143",
                     Message = "syntax error : missing ';' before '}'",
                 }
-            ).SetName ("MSExample5");
+            ).SetName("MSExample5");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "LINK : fatal error LNK1104: cannot open file 'somelib.lib'",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "LINK",
                     Subcategory = "fatal",
                     IsError = true,
                     Code = "LNK1104",
                     Message = "cannot open file 'somelib.lib'",
                 }
-            ).SetName ("MSExample6");
+            ).SetName("MSExample6");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "/foo (bar)/baz/Component1.fs(3,5): error FS0201: Namespaces cannot contain values.",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "/foo (bar)/baz/Component1.fs",
                     Line = 3,
                     Column = 5,
@@ -368,83 +390,87 @@ namespace MonoTests.Microsoft.Build.Utilities {
                     Code = "FS0201",
                     Message = "Namespaces cannot contain values.",
                 }
-            ).SetName ("ParensInFilename");
+            ).SetName("ParensInFilename");
 
-            yield return new TestCaseData (
+            yield return new TestCaseData(
                 "fatal error XXX: stuff.",
-                new LogEvent {
+                new LogEvent
+                {
                     Origin = "#TASKNAME",
                     IsError = true,
                     Subcategory = "fatal",
                     Code = "XXX",
                     Message = "stuff.",
                 }
-            ).SetName ("SubcategoryNoOrigin");
+            ).SetName("SubcategoryNoOrigin");
         }
 
         [Test]
-        public void ToolExeAndPath ()
+        public void ToolExeAndPath()
         {
-            TestToolTask a = new TestToolTask ();
-            Assert.AreEqual (a.ToolExe, "TestTool.exe", "#1");
+            TestToolTask a = new TestToolTask();
+            Assert.AreEqual(a.ToolExe, "TestTool.exe", "#1");
             a.ToolExe = "Foo";
-            Assert.AreEqual (a.ToolExe, "Foo", "#2");
+            Assert.AreEqual(a.ToolExe, "Foo", "#2");
             a.ToolExe = "";
-            Assert.AreEqual (a.ToolExe, "TestTool.exe", "#3");
+            Assert.AreEqual(a.ToolExe, "TestTool.exe", "#3");
 
-            Assert.AreEqual (a.ToolPath, null, "#4");
+            Assert.AreEqual(a.ToolPath, null, "#4");
             a.ToolPath = "Bar";
-            Assert.AreEqual (a.ToolPath, "Bar", "#5");
+            Assert.AreEqual(a.ToolPath, "Bar", "#5");
             a.ToolPath = "";
-            Assert.AreEqual (a.ToolPath, "", "#6");
+            Assert.AreEqual(a.ToolPath, "", "#6");
 
-            a.Execute ();
+            a.Execute();
         }
 
         [Test]
-        public void Execute_1 ()
+        public void Execute_1()
         {
-            var t = new TestExecuteToolTask ();
-            t.OnExecuteTool = delegate { Assert.Fail ("#1"); };
-            t.BuildEngine = new MockBuildEngine ();
-            Assert.IsFalse (t.Execute (), "result");
+            var t = new TestExecuteToolTask();
+            t.OnExecuteTool = delegate
+            {
+                Assert.Fail("#1");
+            };
+            t.BuildEngine = new MockBuildEngine();
+            Assert.IsFalse(t.Execute(), "result");
         }
 
         [Test]
-        public void Execute_2 ()
+        public void Execute_2()
         {
-            var t = new TestExecuteToolTask ();
-            t.BuildEngine = new MockBuildEngine ();
-            var monoProcess = Process.GetCurrentProcess ().MainModule.FileName;
-            t.ToolPath = Path.GetDirectoryName (monoProcess);
-            t.ToolExe = Path.GetFileName (monoProcess);
+            var t = new TestExecuteToolTask();
+            t.BuildEngine = new MockBuildEngine();
+            var monoProcess = Process.GetCurrentProcess().MainModule.FileName;
+            t.ToolPath = Path.GetDirectoryName(monoProcess);
+            t.ToolExe = Path.GetFileName(monoProcess);
 
-            t.OnExecuteTool = (pathToTool, responseFileCommands, commandLineCommands) => {
-                Assert.AreEqual (monoProcess, pathToTool, "#1");
-                Assert.AreEqual ("", responseFileCommands, "#2");
-                Assert.AreEqual ("", commandLineCommands, "#3");
-
+            t.OnExecuteTool = (pathToTool, responseFileCommands, commandLineCommands) =>
+            {
+                Assert.AreEqual(monoProcess, pathToTool, "#1");
+                Assert.AreEqual("", responseFileCommands, "#2");
+                Assert.AreEqual("", commandLineCommands, "#3");
             };
 
-            Assert.IsTrue (t.Execute (), "result");
+            Assert.IsTrue(t.Execute(), "result");
         }
 
         [Test]
-        public void Execute_3 ()
+        public void Execute_3()
         {
-            var t = new TestExecuteToolTask ();
+            var t = new TestExecuteToolTask();
             t.FullPathToTool = "fpt";
-            t.BuildEngine = new MockBuildEngine ();
+            t.BuildEngine = new MockBuildEngine();
             t.ToolExe = "Makefile.mk";
 
-            t.OnExecuteTool = (pathToTool, responseFileCommands, commandLineCommands) => {
-                Assert.AreEqual ("Makefile.mk", pathToTool, "#1");
-                Assert.AreEqual ("", responseFileCommands, "#2");
-                Assert.AreEqual ("", commandLineCommands, "#3");
-
+            t.OnExecuteTool = (pathToTool, responseFileCommands, commandLineCommands) =>
+            {
+                Assert.AreEqual("Makefile.mk", pathToTool, "#1");
+                Assert.AreEqual("", responseFileCommands, "#2");
+                Assert.AreEqual("", commandLineCommands, "#3");
             };
 
-            Assert.IsFalse (t.Execute (), "result");
+            Assert.IsFalse(t.Execute(), "result");
         }
     }
 
@@ -461,114 +487,124 @@ namespace MonoTests.Microsoft.Build.Utilities {
         public string Message { get; set; }
     }
 
-    class LogEventsFromTextOutputToolTask : ToolTask {
-
-        public List<LogEvent> LogEvents {
+    class LogEventsFromTextOutputToolTask : ToolTask
+    {
+        public List<LogEvent> LogEvents
+        {
             get { return engine.LogEvents; }
         }
 
-        CodeLoggingBuildEngine engine = new CodeLoggingBuildEngine ();
+        CodeLoggingBuildEngine engine = new CodeLoggingBuildEngine();
 
-        public LogEventsFromTextOutputToolTask ()
+        public LogEventsFromTextOutputToolTask()
         {
             BuildEngine = engine;
         }
 
-        protected override string GenerateFullPathToTool ()
+        protected override string GenerateFullPathToTool()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override string ToolName {
-            get {throw new NotImplementedException ();}
+        protected override string ToolName
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public void LogEventsFromTextOutput (string line)
+        public void LogEventsFromTextOutput(string line)
         {
-            base.LogEventsFromTextOutput (line, MessageImportance.Normal);
+            base.LogEventsFromTextOutput(line, MessageImportance.Normal);
         }
     }
 
-    class CodeLoggingBuildEngine : IBuildEngine {
+    class CodeLoggingBuildEngine : IBuildEngine
+    {
+        public List<LogEvent> LogEvents = new List<LogEvent>();
 
-        public List<LogEvent> LogEvents = new List<LogEvent> ();
-
-        public int ColumnNumberOfTaskNode {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public bool ContinueOnError {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public int LineNumberOfTaskNode {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public string ProjectFileOfTaskNode {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public bool BuildProjectFile (string projectFileName, string[] targetNames, System.Collections.IDictionary globalProperties, System.Collections.IDictionary targetOutputs)
+        public int ColumnNumberOfTaskNode
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public void LogCustomEvent (CustomBuildEventArgs e)
+        public bool ContinueOnError
         {
-            LogEvents.Add (null);
+            get { throw new NotImplementedException(); }
         }
 
-        public void LogErrorEvent (BuildErrorEventArgs e)
+        public int LineNumberOfTaskNode
         {
-            LogEvents.Add (new LogEvent {
-                IsError = true,
-                Subcategory = e.Subcategory,
-                Origin = e.File,
-                Line = e.LineNumber,
-                EndLine = e.EndLineNumber,
-                Column = e.ColumnNumber,
-                EndColumn = e.EndColumnNumber,
-                Code = e.Code,
-                Message = e.Message,
-            });
+            get { throw new NotImplementedException(); }
         }
 
-        public void LogMessageEvent (BuildMessageEventArgs e)
+        public string ProjectFileOfTaskNode
         {
-            LogEvents.Add (null);
+            get { throw new NotImplementedException(); }
         }
 
-        public void LogWarningEvent (BuildWarningEventArgs e)
+        public bool BuildProjectFile(
+            string projectFileName,
+            string[] targetNames,
+            System.Collections.IDictionary globalProperties,
+            System.Collections.IDictionary targetOutputs
+        )
         {
-            LogEvents.Add (new LogEvent {
-                Subcategory = e.Subcategory,
-                Origin = e.File,
-                Line = e.LineNumber,
-                EndLine = e.EndLineNumber,
-                Column = e.ColumnNumber,
-                EndColumn = e.EndColumnNumber,
-                Code = e.Code,
-                Message = e.Message,
-            });
+            throw new NotImplementedException();
+        }
+
+        public void LogCustomEvent(CustomBuildEventArgs e)
+        {
+            LogEvents.Add(null);
+        }
+
+        public void LogErrorEvent(BuildErrorEventArgs e)
+        {
+            LogEvents.Add(
+                new LogEvent
+                {
+                    IsError = true,
+                    Subcategory = e.Subcategory,
+                    Origin = e.File,
+                    Line = e.LineNumber,
+                    EndLine = e.EndLineNumber,
+                    Column = e.ColumnNumber,
+                    EndColumn = e.EndColumnNumber,
+                    Code = e.Code,
+                    Message = e.Message,
+                }
+            );
+        }
+
+        public void LogMessageEvent(BuildMessageEventArgs e)
+        {
+            LogEvents.Add(null);
+        }
+
+        public void LogWarningEvent(BuildWarningEventArgs e)
+        {
+            LogEvents.Add(
+                new LogEvent
+                {
+                    Subcategory = e.Subcategory,
+                    Origin = e.File,
+                    Line = e.LineNumber,
+                    EndLine = e.EndLineNumber,
+                    Column = e.ColumnNumber,
+                    EndColumn = e.EndColumnNumber,
+                    Code = e.Code,
+                    Message = e.Message,
+                }
+            );
         }
     }
 
-    class TestToolTask : ToolTask {
-
-        protected override string ToolName {
+    class TestToolTask : ToolTask
+    {
+        protected override string ToolName
+        {
             get { return "TestTool.exe"; }
         }
 
-        protected override string GenerateFullPathToTool ()
+        protected override string GenerateFullPathToTool()
         {
             return "";
         }
@@ -576,51 +612,46 @@ namespace MonoTests.Microsoft.Build.Utilities {
 
     class MockBuildEngine : IBuildEngine
     {
-        public int ColumnNumberOfTaskNode {
-            get {
-                return 0;
-            }
-        }
-
-        public bool ContinueOnError {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public int LineNumberOfTaskNode {
-            get {
-                return 0;
-            }
-        }
-
-        public string ProjectFileOfTaskNode {
-            get {
-                return "ProjectFileOfTaskNode";
-            }
-        }
-
-        public bool BuildProjectFile (string projectFileName, string[] targetNames, IDictionary globalProperties, IDictionary targetOutputs)
+        public int ColumnNumberOfTaskNode
         {
-            throw new NotImplementedException ();
+            get { return 0; }
         }
 
-        public void LogCustomEvent (CustomBuildEventArgs e)
+        public bool ContinueOnError
         {
+            get { throw new NotImplementedException(); }
         }
 
-        public void LogErrorEvent (BuildErrorEventArgs e)
+        public int LineNumberOfTaskNode
         {
-            Console.WriteLine (e.Message);
+            get { return 0; }
         }
 
-        public void LogMessageEvent (BuildMessageEventArgs e)
+        public string ProjectFileOfTaskNode
         {
+            get { return "ProjectFileOfTaskNode"; }
         }
 
-        public void LogWarningEvent (BuildWarningEventArgs e)
+        public bool BuildProjectFile(
+            string projectFileName,
+            string[] targetNames,
+            IDictionary globalProperties,
+            IDictionary targetOutputs
+        )
         {
+            throw new NotImplementedException();
         }
+
+        public void LogCustomEvent(CustomBuildEventArgs e) { }
+
+        public void LogErrorEvent(BuildErrorEventArgs e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        public void LogMessageEvent(BuildMessageEventArgs e) { }
+
+        public void LogWarningEvent(BuildWarningEventArgs e) { }
     }
 
     class TestExecuteToolTask : ToolTask
@@ -628,27 +659,31 @@ namespace MonoTests.Microsoft.Build.Utilities {
         public Action<string, string, string> OnExecuteTool;
         public string FullPathToTool;
 
-        protected override string ToolName {
+        protected override string ToolName
+        {
             get { return "TestTool.exe"; }
         }
 
-        protected override bool CallHostObjectToExecute ()
+        protected override bool CallHostObjectToExecute()
         {
-            return base.CallHostObjectToExecute ();
+            return base.CallHostObjectToExecute();
         }
 
-        protected override string GenerateFullPathToTool ()
+        protected override string GenerateFullPathToTool()
         {
             return FullPathToTool;
         }
 
-        protected override int ExecuteTool (string pathToTool, string responseFileCommands, string commandLineCommands)
+        protected override int ExecuteTool(
+            string pathToTool,
+            string responseFileCommands,
+            string commandLineCommands
+        )
         {
             if (OnExecuteTool != null)
-                OnExecuteTool (pathToTool, responseFileCommands, commandLineCommands);
+                OnExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
 
             return 0;
         }
     }
 }
-

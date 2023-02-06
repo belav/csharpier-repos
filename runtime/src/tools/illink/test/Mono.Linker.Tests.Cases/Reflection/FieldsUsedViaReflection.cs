@@ -6,100 +6,111 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Reflection
 {
-    [SetupCSharpCompilerToUse ("csc")]
+    [SetupCSharpCompilerToUse("csc")]
     [ExpectedNoWarnings]
     public class FieldsUsedViaReflection
     {
-        public static void Main ()
+        public static void Main()
         {
-            TestGetFields ();
-            TestBindingFlags ();
-            TestUnknownBindingFlags (BindingFlags.Public);
-            TestNullType ();
-            TestNoValue ();
-            TestDataFlowType ();
-            TestDataFlowWithAnnotation (typeof (MyType));
-            TestIfElse (1);
-            TestIgnoreCaseBindingFlags ();
-            TestUnsupportedBindingFlags ();
+            TestGetFields();
+            TestBindingFlags();
+            TestUnknownBindingFlags(BindingFlags.Public);
+            TestNullType();
+            TestNoValue();
+            TestDataFlowType();
+            TestDataFlowWithAnnotation(typeof(MyType));
+            TestIfElse(1);
+            TestIgnoreCaseBindingFlags();
+            TestUnsupportedBindingFlags();
         }
 
         [Kept]
-        static void TestGetFields ()
+        static void TestGetFields()
         {
-            var fields = typeof (FieldsUsedViaReflection).GetFields ();
+            var fields = typeof(FieldsUsedViaReflection).GetFields();
         }
 
         [Kept]
-        static void TestBindingFlags ()
+        static void TestBindingFlags()
         {
-            var fields = typeof (Foo).GetFields (BindingFlags.Public);
+            var fields = typeof(Foo).GetFields(BindingFlags.Public);
         }
 
         [Kept]
-        static void TestUnknownBindingFlags (BindingFlags bindingFlags)
+        static void TestUnknownBindingFlags(BindingFlags bindingFlags)
         {
             // Since the binding flags are not known linker should mark all fields on the type
-            var fields = typeof (UnknownBindingFlags).GetFields (bindingFlags);
+            var fields = typeof(UnknownBindingFlags).GetFields(bindingFlags);
         }
 
         [Kept]
-        static void TestNullType ()
+        static void TestNullType()
         {
             Type type = null;
-            var fields = type.GetFields ();
+            var fields = type.GetFields();
         }
 
         [Kept]
-        static void TestNoValue ()
+        static void TestNoValue()
         {
             Type t = null;
-            Type noValue = Type.GetTypeFromHandle (t.TypeHandle);
-            var methods = noValue.GetFields ();
+            Type noValue = Type.GetTypeFromHandle(t.TypeHandle);
+            var methods = noValue.GetFields();
         }
 
         [Kept]
-        static Type FindType ()
+        static Type FindType()
         {
-            return typeof (FieldsUsedViaReflection);
+            return typeof(FieldsUsedViaReflection);
         }
 
         [Kept]
-        [ExpectedWarning ("IL2075", "FindType", "GetFields")]
-        static void TestDataFlowType ()
+        [ExpectedWarning("IL2075", "FindType", "GetFields")]
+        static void TestDataFlowType()
         {
-            Type type = FindType ();
-            var fields = type.GetFields (BindingFlags.Public);
+            Type type = FindType();
+            var fields = type.GetFields(BindingFlags.Public);
         }
 
         [Kept]
-        static void TestDataFlowWithAnnotation ([KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))][DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicFields)] Type type)
+        static void TestDataFlowWithAnnotation(
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                Type type
+        )
         {
-            var fields = type.GetFields (BindingFlags.Public | BindingFlags.Static);
+            var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static);
         }
 
         [Kept]
-        static void TestIfElse (int i)
+        static void TestIfElse(int i)
         {
             Type myType;
-            if (i == 1) {
-                myType = typeof (IfClass);
-            } else {
-                myType = typeof (ElseClass);
+            if (i == 1)
+            {
+                myType = typeof(IfClass);
             }
-            var fields = myType.GetFields (BindingFlags.Public);
+            else
+            {
+                myType = typeof(ElseClass);
+            }
+            var fields = myType.GetFields(BindingFlags.Public);
         }
 
         [Kept]
-        static void TestIgnoreCaseBindingFlags ()
+        static void TestIgnoreCaseBindingFlags()
         {
-            var fields = typeof (IgnoreCaseBindingFlagsClass).GetFields (BindingFlags.IgnoreCase | BindingFlags.Public);
+            var fields = typeof(IgnoreCaseBindingFlagsClass).GetFields(
+                BindingFlags.IgnoreCase | BindingFlags.Public
+            );
         }
 
         [Kept]
-        static void TestUnsupportedBindingFlags ()
+        static void TestUnsupportedBindingFlags()
         {
-            var fields = typeof (PutDispPropertyBindingFlagsClass).GetFields (BindingFlags.PutDispProperty);
+            var fields = typeof(PutDispPropertyBindingFlagsClass).GetFields(
+                BindingFlags.PutDispProperty
+            );
         }
 
         static int field;
@@ -112,6 +123,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             [Kept]
             public static int field;
+
             [Kept]
             public int nonStatic;
             private static int nonKept;
@@ -122,8 +134,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             [Kept]
             public static int field;
+
             [Kept]
             public int nonStatic;
+
             [Kept]
             private static int privatefield;
         }
@@ -133,6 +147,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             [Kept]
             public static int ifField;
+
             [Kept]
             public int elseField;
             protected int nonKept;
@@ -143,6 +158,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             [Kept]
             public static int ifField;
+
             [Kept]
             public int elseField;
             protected int nonKept;
@@ -153,6 +169,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             [Kept]
             public int elseField;
+
             [Kept]
             public static string ifField;
             volatile char nonKept;

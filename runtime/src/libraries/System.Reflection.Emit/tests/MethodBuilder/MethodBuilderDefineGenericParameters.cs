@@ -40,7 +40,12 @@ namespace System.Reflection.Emit.Tests
         public void DefineGenericParameter_MultipleParameters()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public, typeof(int), new Type[0]);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public,
+                typeof(int),
+                new Type[0]
+            );
             method.DefineGenericParameters(new string[] { "T", "U", "V" });
 
             ILGenerator ilGenerator = method.GetILGenerator();
@@ -49,7 +54,9 @@ namespace System.Reflection.Emit.Tests
 
             Type resultType = type.CreateType();
             Type[] typeArguments = { typeof(int), typeof(string), typeof(object) };
-            MethodInfo constructedMethod = resultType.GetMethod("TestMethod").MakeGenericMethod(typeArguments);
+            MethodInfo constructedMethod = resultType
+                .GetMethod("TestMethod")
+                .MakeGenericMethod(typeArguments);
             Assert.Equal(typeArguments, constructedMethod.GetGenericArguments());
         }
 
@@ -68,11 +75,21 @@ namespace System.Reflection.Emit.Tests
         public void DefineGenericParameters_TwoTypeParameters_SetImplementationFlagsCalled_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
 
-            method.SetImplementationFlags(MethodImplAttributes.IL | MethodImplAttributes.Managed | MethodImplAttributes.Synchronized | MethodImplAttributes.NoInlining);
+            method.SetImplementationFlags(
+                MethodImplAttributes.IL
+                    | MethodImplAttributes.Managed
+                    | MethodImplAttributes.Synchronized
+                    | MethodImplAttributes.NoInlining
+            );
 
-            Assert.Throws<InvalidOperationException>(() => method.DefineGenericParameters("T", "U"));
+            Assert.Throws<InvalidOperationException>(
+                () => method.DefineGenericParameters("T", "U")
+            );
         }
 
         [Fact]
@@ -91,52 +108,80 @@ namespace System.Reflection.Emit.Tests
         public void DefineGenericParameters_TwoTypeParameters_AlreadyDefined_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
 
             method.DefineGenericParameters("T", "U");
-            Assert.Throws<InvalidOperationException>(() => method.DefineGenericParameters("M", "K"));
+            Assert.Throws<InvalidOperationException>(
+                () => method.DefineGenericParameters("M", "K")
+            );
         }
 
         [Theory]
         [InlineData(TypeAttributes.NotPublic, MethodAttributes.Public)]
         [InlineData(TypeAttributes.Public, MethodAttributes.Public | MethodAttributes.Static)]
-        public void DefineGenericParameters_NullNames_ThrowsArgumentNullException(TypeAttributes typeAttributes, MethodAttributes methodAttributes)
+        public void DefineGenericParameters_NullNames_ThrowsArgumentNullException(
+            TypeAttributes typeAttributes,
+            MethodAttributes methodAttributes
+        )
         {
             TypeBuilder type = Helpers.DynamicType(typeAttributes);
             MethodBuilder method = type.DefineMethod("TestMethod", methodAttributes);
-            AssertExtensions.Throws<ArgumentNullException>("names", () => method.DefineGenericParameters(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "names",
+                () => method.DefineGenericParameters(null)
+            );
         }
 
         [Theory]
         [InlineData(TypeAttributes.NotPublic, MethodAttributes.Public)]
         [InlineData(TypeAttributes.Public, MethodAttributes.Public | MethodAttributes.Static)]
-        public void DefineGenericParameters_NamesContainsNull_ThrowsArgumentNullException(TypeAttributes typeAttributes, MethodAttributes methodAttributes)
+        public void DefineGenericParameters_NamesContainsNull_ThrowsArgumentNullException(
+            TypeAttributes typeAttributes,
+            MethodAttributes methodAttributes
+        )
         {
             TypeBuilder type = Helpers.DynamicType(typeAttributes);
             MethodBuilder method = type.DefineMethod("Test", methodAttributes);
             string[] typeParamNames = new string[] { "T", null, "U" };
-            AssertExtensions.Throws<ArgumentNullException>("names", () => method.DefineGenericParameters(typeParamNames));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "names",
+                () => method.DefineGenericParameters(typeParamNames)
+            );
         }
 
         [Theory]
         [InlineData(TypeAttributes.NotPublic, MethodAttributes.Public)]
         [InlineData(TypeAttributes.Public, MethodAttributes.Public | MethodAttributes.Static)]
-        public void DefineGenericParameters_EmptyNames_ThrowsArgumentException(TypeAttributes typeAttributes, MethodAttributes methodAttributes)
+        public void DefineGenericParameters_EmptyNames_ThrowsArgumentException(
+            TypeAttributes typeAttributes,
+            MethodAttributes methodAttributes
+        )
         {
             TypeBuilder type = Helpers.DynamicType(typeAttributes);
             MethodBuilder builder = type.DefineMethod("TestMethod", methodAttributes);
-            AssertExtensions.Throws<ArgumentException>("names", () => builder.DefineGenericParameters());
+            AssertExtensions.Throws<ArgumentException>(
+                "names",
+                () => builder.DefineGenericParameters()
+            );
         }
 
         [Fact]
         public void DefineGenericParameters_TypeCreated_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("method1", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "method1",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             method.GetILGenerator().Emit(OpCodes.Ret);
 
             Type resultType = type.CreateType();
-            Assert.Throws<InvalidOperationException>(() => method.DefineGenericParameters("T", "U"));
+            Assert.Throws<InvalidOperationException>(
+                () => method.DefineGenericParameters("T", "U")
+            );
         }
     }
 }

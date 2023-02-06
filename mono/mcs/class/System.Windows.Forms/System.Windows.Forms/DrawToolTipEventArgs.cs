@@ -41,7 +41,16 @@ namespace System.Windows.Forms
         private Graphics graphics;
         private string tooltip_text;
 
-        public DrawToolTipEventArgs (Graphics graphics, IWin32Window associatedWindow, Control associatedControl, Rectangle bounds, string toolTipText, Color backColor, Color foreColor, Font font)
+        public DrawToolTipEventArgs(
+            Graphics graphics,
+            IWin32Window associatedWindow,
+            Control associatedControl,
+            Rectangle bounds,
+            string toolTipText,
+            Color backColor,
+            Color foreColor,
+            Font font
+        )
         {
             this.graphics = graphics;
             this.associated_window = associatedWindow;
@@ -53,60 +62,72 @@ namespace System.Windows.Forms
             this.font = font;
         }
 
-        public void DrawBackground ()
+        public void DrawBackground()
         {
-            graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (back_color), bounds);
+            graphics.FillRectangle(ThemeEngine.Current.ResPool.GetSolidBrush(back_color), bounds);
         }
 
-        public void DrawBorder ()
+        public void DrawBorder()
         {
-            ControlPaint.DrawBorder (graphics, bounds, SystemColors.WindowFrame, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(
+                graphics,
+                bounds,
+                SystemColors.WindowFrame,
+                ButtonBorderStyle.Solid
+            );
         }
 
-        public void DrawText ()
+        public void DrawText()
         {
-            DrawText (TextFormatFlags.HidePrefix | TextFormatFlags.SingleLine | TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+            DrawText(
+                TextFormatFlags.HidePrefix
+                    | TextFormatFlags.SingleLine
+                    | TextFormatFlags.VerticalCenter
+                    | TextFormatFlags.HorizontalCenter
+            );
         }
 
-        public void DrawText (TextFormatFlags flags)
+        public void DrawText(TextFormatFlags flags)
         {
-            TextRenderer.DrawTextInternal (graphics, tooltip_text, font, bounds, fore_color, flags, false);
+            TextRenderer.DrawTextInternal(
+                graphics,
+                tooltip_text,
+                font,
+                bounds,
+                fore_color,
+                flags,
+                false
+            );
         }
 
-        public Control AssociatedControl {
-            get {
-                return associated_control;
-            }
+        public Control AssociatedControl
+        {
+            get { return associated_control; }
         }
 
-        public IWin32Window AssociatedWindow {
-            get {
-                return associated_window;
-            }
+        public IWin32Window AssociatedWindow
+        {
+            get { return associated_window; }
         }
 
-        public Rectangle Bounds {
-            get {
-                return bounds;
-            }
+        public Rectangle Bounds
+        {
+            get { return bounds; }
         }
 
-        public Font Font {
-            get {
-                return font;
-            }
+        public Font Font
+        {
+            get { return font; }
         }
 
-        public Graphics Graphics {
-            get {
-                return graphics;
-            }
+        public Graphics Graphics
+        {
+            get { return graphics; }
         }
 
-        public string ToolTipText {
-            get {
-                return tooltip_text;
-            }
+        public string ToolTipText
+        {
+            get { return tooltip_text; }
         }
     }
 }

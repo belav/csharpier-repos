@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,82 +31,91 @@
 using System;
 using System.Configuration;
 
-
-namespace System.Web.Configuration {
-
-    [ConfigurationCollection (typeof (UrlMapping), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+namespace System.Web.Configuration
+{
+    [ConfigurationCollection(
+        typeof(UrlMapping),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     public sealed class UrlMappingCollection : ConfigurationElementCollection
     {
         static ConfigurationPropertyCollection properties;
 
-        static UrlMappingCollection ()
+        static UrlMappingCollection()
         {
-            properties = new ConfigurationPropertyCollection ();
+            properties = new ConfigurationPropertyCollection();
         }
 
-        public void Add (UrlMapping urlMapping)
+        public void Add(UrlMapping urlMapping)
         {
-            BaseAdd (urlMapping);
+            BaseAdd(urlMapping);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new UrlMapping ();
+            return new UrlMapping();
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
             return ((UrlMapping)element).Url;
         }
 
-        public string GetKey (int index)
+        public string GetKey(int index)
         {
-            return (string)BaseGetKey (index);
+            return (string)BaseGetKey(index);
         }
 
-        public void Remove (string name)
+        public void Remove(string name)
         {
-            BaseRemove (name);
+            BaseRemove(name);
         }
 
-        public void Remove (UrlMapping urlMapping)
+        public void Remove(UrlMapping urlMapping)
         {
-            BaseRemove (urlMapping.Url);
+            BaseRemove(urlMapping.Url);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            BaseRemoveAt (index);
+            BaseRemoveAt(index);
         }
 
-        public string[] AllKeys {
-            get {
+        public string[] AllKeys
+        {
+            get
+            {
                 string[] keys = new string[Count];
-                for (int i = 0; i < Count; i ++)
+                for (int i = 0; i < Count; i++)
                     keys[i] = this[i].Url;
                 return keys;
             }
         }
 
-        public UrlMapping this [int index] {
-            get { return (UrlMapping) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+        public UrlMapping this[int index]
+        {
+            get { return (UrlMapping)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
         }
 
-        public new UrlMapping this [string name] {
-            get { return (UrlMapping) BaseGet (name); }
+        public new UrlMapping this[string name]
+        {
+            get { return (UrlMapping)BaseGet(name); }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
     }
-
 }
-

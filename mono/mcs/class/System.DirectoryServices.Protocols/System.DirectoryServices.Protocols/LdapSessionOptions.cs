@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,13 +34,12 @@ namespace System.DirectoryServices.Protocols
 {
     public class LdapSessionOptions
     {
-        internal LdapSessionOptions ()
-        {
-        }
+        internal LdapSessionOptions() { }
 
         public bool AutoReconnect { get; set; }
         public string DomainName { get; set; }
         public string HostName { get; set; }
+
         [MonoTODO]
         public bool HostReachable { get; private set; }
         public LocatorFlags LocatorFlag { get; set; }
@@ -56,10 +55,12 @@ namespace System.DirectoryServices.Protocols
         public string SaslMethod { get; set; }
         public bool Sealing { get; set; }
         public bool SecureSocketLayer { get; set; }
+
         [MonoTODO]
-        public object SecurityContext { get; private set;}
+        public object SecurityContext { get; private set; }
         public TimeSpan SendTimeout { get; set; }
         public bool Signing { get; set; }
+
         [MonoTODO]
         public SecurityPackageContextConnectionInformation SslInformation { get; private set; }
         public int SspiFlag { get; set; }
@@ -67,21 +68,21 @@ namespace System.DirectoryServices.Protocols
         public VerifyServerCertificateCallback VerifyServerCertificate { get; set; }
 
         [MonoTODO]
-        public void FastConcurrentBind ()
+        public void FastConcurrentBind()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void StartTransportLayerSecurity (DirectoryControlCollection controls)
+        public void StartTransportLayerSecurity(DirectoryControlCollection controls)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void StopTransportLayerSecurity ()
+        public void StopTransportLayerSecurity()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

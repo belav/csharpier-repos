@@ -51,7 +51,7 @@ namespace System.Text.Json.Tests
         {
             get
             {
-                yield return new object[] { "\"MyString"};
+                yield return new object[] { "\"MyString" };
                 yield return new object[] { "{" };
                 yield return new object[] { "[" };
                 yield return new object[] { " \n" };
@@ -108,7 +108,11 @@ namespace System.Text.Json.Tests
         [MemberData(nameof(ElementParsePartialDataCases))]
         public static void ParseValueOutOfData(string json)
         {
-            var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(json), isFinalBlock: false, new JsonReaderState());
+            var reader = new Utf8JsonReader(
+                Encoding.UTF8.GetBytes(json),
+                isFinalBlock: false,
+                new JsonReaderState()
+            );
 
             Exception ex;
             try
@@ -131,7 +135,11 @@ namespace System.Text.Json.Tests
         [MemberData(nameof(ElementParsePartialDataCases))]
         public static void TryParseValueOutOfData(string json)
         {
-            var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(json), isFinalBlock: false, new JsonReaderState());
+            var reader = new Utf8JsonReader(
+                Encoding.UTF8.GetBytes(json),
+                isFinalBlock: false,
+                new JsonReaderState()
+            );
             Assert.False(JsonElement.TryParseValue(ref reader, out JsonElement? element));
             Assert.Null(element);
             Assert.Equal(0, reader.BytesConsumed);

@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 
 class MainClass
 {
-    public static void Main ()
+    public static void Main()
     {
         Task<C> v = null;
 
-        Task.Run (async () => {
-            await Task.Yield ();
-            if (v == null) {
+        Task.Run(async () =>
+        {
+            await Task.Yield();
+            if (v == null)
+            {
                 return;
             }
 

@@ -7,7 +7,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
 {
     public class ManagedCompilationResult
     {
-        public ManagedCompilationResult (NPath inputAssemblyPath, NPath expectationsAssemblyPath)
+        public ManagedCompilationResult(NPath inputAssemblyPath, NPath expectationsAssemblyPath)
         {
             InputAssemblyPath = inputAssemblyPath;
             ExpectationsAssemblyPath = expectationsAssemblyPath;

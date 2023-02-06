@@ -37,8 +37,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGridItem_ItemIndex
-        : GHTBaseWeb 
+    public class DataGridItem_ItemIndex : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -46,8 +45,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest2;
         protected System.Web.UI.WebControls.DataGrid DataGrid3;
         protected GHTWebControls.GHTSubTest GHTSubTest3;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -55,21 +55,20 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
             this.DataGrid2.ItemCreated += new DataGridItemEventHandler(DataGrid2_ItemCreated);
             this.DataGrid3.ItemCreated += new DataGridItemEventHandler(DataGrid3_ItemCreated);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -77,10 +76,11 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
                 DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
-                DataGrid1.DataBind();;
+                DataGrid1.DataBind();
+                ;
 
                 IEnumerator items = DataGrid1.Items.GetEnumerator();
                 System.Web.UI.WebControls.DataGridItem item;
@@ -91,32 +91,34 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                     GHTSubTestAddResult(item.ItemIndex.ToString());
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest2;
-            try 
+            try
             {
                 DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
-                DataGrid2.DataBind();;
+                DataGrid2.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest3;
-            try 
+            try
             {
                 DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid3.AllowPaging = true;
                 DataGrid3.PageSize = 5;
                 DataGrid3.CurrentPageIndex = 1;
-                DataGrid3.DataBind();;
+                DataGrid3.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
@@ -124,14 +126,20 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestEnd();
         }
 
-        private void DataGrid2_ItemCreated(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
+        private void DataGrid2_ItemCreated(
+            object sender,
+            System.Web.UI.WebControls.DataGridItemEventArgs e
+        )
         {
             TableCell tc = new TableCell();
             tc.Controls.Add(new LiteralControl(e.Item.ItemIndex.ToString()));
             e.Item.Controls.Add(tc);
         }
 
-        private void DataGrid3_ItemCreated(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
+        private void DataGrid3_ItemCreated(
+            object sender,
+            System.Web.UI.WebControls.DataGridItemEventArgs e
+        )
         {
             TableCell tc = new TableCell();
             tc.Controls.Add(new LiteralControl(e.Item.ItemIndex.ToString()));

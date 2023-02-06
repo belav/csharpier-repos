@@ -4,24 +4,32 @@ using Mono.Linker.Tests.Cases.Inheritance.Interfaces.Dependencies;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
 {
-    [SetupCompileBefore ("library.dll", new[] { "../Dependencies/InterfaceWithInterfaceFromOtherAssemblyWhenExplicitMethodUsed_Lib.cs" })]
+    [SetupCompileBefore(
+        "library.dll",
+        new[]
+        {
+            "../Dependencies/InterfaceWithInterfaceFromOtherAssemblyWhenExplicitMethodUsed_Lib.cs"
+        }
+    )]
     public class InterfaceWithInterfaceFromOtherAssemblyWhenExplicitMethodUsed
     {
-        public static void Main ()
+        public static void Main()
         {
-            Helper (null);
+            Helper(null);
         }
 
         [Kept]
-        static void Helper (IBar obj)
+        static void Helper(IBar obj)
         {
-            var result = ((InterfaceWithInterfaceFromOtherAssemblyWhenExplicitMethodUsed_Lib.IFoo) obj).ExplicitMethod ();
+            var result = (
+                (InterfaceWithInterfaceFromOtherAssemblyWhenExplicitMethodUsed_Lib.IFoo)obj
+            ).ExplicitMethod();
         }
 
         [Kept]
-        [KeptInterface (typeof (InterfaceWithInterfaceFromOtherAssemblyWhenExplicitMethodUsed_Lib.IFoo))]
-        interface IBar : InterfaceWithInterfaceFromOtherAssemblyWhenExplicitMethodUsed_Lib.IFoo
-        {
-        }
+        [KeptInterface(
+            typeof(InterfaceWithInterfaceFromOtherAssemblyWhenExplicitMethodUsed_Lib.IFoo)
+        )]
+        interface IBar : InterfaceWithInterfaceFromOtherAssemblyWhenExplicitMethodUsed_Lib.IFoo { }
     }
 }

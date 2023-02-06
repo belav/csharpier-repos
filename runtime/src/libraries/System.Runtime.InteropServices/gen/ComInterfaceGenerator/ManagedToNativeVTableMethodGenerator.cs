@@ -33,7 +33,8 @@ namespace Microsoft.Interop
         private const string LastErrorIdentifier = "__lastError";
         private const string InvokeSucceededIdentifier = "__invokeSucceeded";
         private const string NativeThisParameterIdentifier = "__this";
-        private const string VirtualMethodTableIdentifier = $"__vtable{StubCodeContext.GeneratedNativeIdentifierSuffix}";
+        private const string VirtualMethodTableIdentifier =
+            $"__vtable{StubCodeContext.GeneratedNativeIdentifierSuffix}";
 
         // Error code representing success. This maps to S_OK for Windows HRESULT semantics and 0 for POSIX errno semantics.
         private const int SuccessErrorCode = 0;
@@ -48,44 +49,76 @@ namespace Microsoft.Interop
             ImmutableArray<TypePositionInfo> argTypes,
             bool setLastError,
             bool implicitThis,
-            Action<TypePositionInfo, MarshallingNotSupportedException> marshallingNotSupportedCallback,
-            IMarshallingGeneratorFactory generatorFactory)
+            Action<
+                TypePositionInfo,
+                MarshallingNotSupportedException
+            > marshallingNotSupportedCallback,
+            IMarshallingGeneratorFactory generatorFactory
+        )
         {
             _setLastError = setLastError;
             if (implicitThis)
             {
-                ImmutableArray<TypePositionInfo>.Builder newArgTypes = ImmutableArray.CreateBuilder<TypePositionInfo>(argTypes.Length + 1);
-                newArgTypes.Add(new TypePositionInfo(SpecialTypeInfo.IntPtr, NoMarshallingInfo.Instance)
-                {
-                    InstanceIdentifier = NativeThisParameterIdentifier,
-                    NativeIndex = 0
-                });
+                ImmutableArray<TypePositionInfo>.Builder newArgTypes =
+                    ImmutableArray.CreateBuilder<TypePositionInfo>(argTypes.Length + 1);
+                newArgTypes.Add(
+                    new TypePositionInfo(SpecialTypeInfo.IntPtr, NoMarshallingInfo.Instance)
+                    {
+                        InstanceIdentifier = NativeThisParameterIdentifier,
+                        NativeIndex = 0
+                    }
+                );
                 foreach (var arg in argTypes)
                 {
-                    newArgTypes.Add(arg with
-                    {
-                        NativeIndex = arg.NativeIndex switch
+                    newArgTypes.Add(
+                        arg with
                         {
-                            TypePositionInfo.UnsetIndex or TypePositionInfo.ReturnIndex => arg.NativeIndex,
-                            int index => index + 1
+                            NativeIndex = arg.NativeIndex switch
+                            {
+                                TypePositionInfo.UnsetIndex
+                                or TypePositionInfo.ReturnIndex
+                                    => arg.NativeIndex,
+                                int index => index + 1
+                            }
                         }
-                    });
+                    );
                 }
                 argTypes = newArgTypes.ToImmutableArray();
             }
 
-            _context = new ManagedToNativeStubCodeContext(targetFramework, targetFrameworkVersion, ReturnIdentifier, ReturnIdentifier);
-            _marshallers = BoundGenerators.Create(argTypes, generatorFactory, _context, new Forwarder(), out var bindingFailures);
+            _context = new ManagedToNativeStubCodeContext(
+                targetFramework,
+                targetFrameworkVersion,
+                ReturnIdentifier,
+                ReturnIdentifier
+            );
+            _marshallers = BoundGenerators.Create(
+                argTypes,
+                generatorFactory,
+                _context,
+                new Forwarder(),
+                out var bindingFailures
+            );
 
             foreach (var failure in bindingFailures)
             {
                 marshallingNotSupportedCallback(failure.Info, failure.Exception);
             }
 
-            if (_marshallers.ManagedReturnMarshaller.Generator.UsesNativeIdentifier(_marshallers.ManagedReturnMarshaller.TypeInfo, _context))
+            if (
+                _marshallers.ManagedReturnMarshaller.Generator.UsesNativeIdentifier(
+                    _marshallers.ManagedReturnMarshaller.TypeInfo,
+                    _context
+                )
+            )
             {
                 // If we need a different native return identifier, then recreate the context with the correct identifier before we generate any code.
-                _context = new ManagedToNativeStubCodeContext(targetFramework, targetFrameworkVersion, ReturnIdentifier, $"{ReturnIdentifier}{StubCodeContext.GeneratedNativeIdentifierSuffix}");
+                _context = new ManagedToNativeStubCodeContext(
+                    targetFramework,
+                    targetFrameworkVersion,
+                    ReturnIdentifier,
+                    $"{ReturnIdentifier}{StubCodeContext.GeneratedNativeIdentifierSuffix}"
+                );
             }
         }
 
@@ -97,7 +130,12 @@ namespace Microsoft.Interop
         /// <remarks>
         /// The generated code assumes it will be in an unsafe context.
         /// </remarks>
-        public BlockSyntax GenerateStubBody(int index, ImmutableArray<FunctionPointerUnmanagedCallingConventionSyntax> callConv, TypeSyntax containingTypeName, ManagedTypeInfo typeKeyType)
+        public BlockSyntax GenerateStubBody(
+            int index,
+            ImmutableArray<FunctionPointerUnmanagedCallingConventionSyntax> callConv,
+            TypeSyntax containingTypeName,
+            ManagedTypeInfo typeKeyType
+        )
         {
             var setupStatements = new List<StatementSyntax>
             {
@@ -109,28 +147,45 @@ namespace Microsoft.Interop
                             IdentifierName("var"),
                             ParenthesizedVariableDesignation(
                                 SeparatedList<VariableDesignationSyntax>(
-                                    new[]{
+                                    new[]
+                                    {
                                         SingleVariableDesignation(
-                                            Identifier(NativeThisParameterIdentifier)),
+                                            Identifier(NativeThisParameterIdentifier)
+                                        ),
                                         SingleVariableDesignation(
-                                            Identifier(VirtualMethodTableIdentifier))}))),
+                                            Identifier(VirtualMethodTableIdentifier)
+                                        )
+                                    }
+                                )
+                            )
+                        ),
                         InvocationExpression(
-                            MemberAccessExpression(
-                                SyntaxKind.SimpleMemberAccessExpression,
-                                ParenthesizedExpression(
-                                    CastExpression(
-                                        GenericName(
-                                            Identifier(TypeNames.IUnmanagedVirtualMethodTableProvider))
-                                        .WithTypeArgumentList(
-                                            TypeArgumentList(
-                                                SingletonSeparatedList(typeKeyType.Syntax))),
-                                        ThisExpression())),
-                                GenericName(
-                                    Identifier("GetVirtualMethodTableInfoForKey"),
-                                    TypeArgumentList(
-                                        SingletonSeparatedList(containingTypeName)))))
-                        .WithArgumentList(
-                            ArgumentList())))
+                                MemberAccessExpression(
+                                    SyntaxKind.SimpleMemberAccessExpression,
+                                    ParenthesizedExpression(
+                                        CastExpression(
+                                            GenericName(
+                                                    Identifier(
+                                                        TypeNames.IUnmanagedVirtualMethodTableProvider
+                                                    )
+                                                )
+                                                .WithTypeArgumentList(
+                                                    TypeArgumentList(
+                                                        SingletonSeparatedList(typeKeyType.Syntax)
+                                                    )
+                                                ),
+                                            ThisExpression()
+                                        )
+                                    ),
+                                    GenericName(
+                                        Identifier("GetVirtualMethodTableInfoForKey"),
+                                        TypeArgumentList(SingletonSeparatedList(containingTypeName))
+                                    )
+                                )
+                            )
+                            .WithArgumentList(ArgumentList())
+                    )
+                )
             };
 
             GeneratedStatements statements = GeneratedStatements.Create(
@@ -138,26 +193,52 @@ namespace Microsoft.Interop
                 _context,
                 CreateFunctionPointerExpression(
                     // <vtableDeclaration>[<index>]
-                    ElementAccessExpression(IdentifierName(VirtualMethodTableIdentifier),
-                        BracketedArgumentList(SingletonSeparatedList(
-                            Argument(LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(index)))))),
-                    callConv));
-            bool shouldInitializeVariables = !statements.GuaranteedUnmarshal.IsEmpty || !statements.Cleanup.IsEmpty;
-            VariableDeclarations declarations = VariableDeclarations.GenerateDeclarationsForManagedToUnmanaged(_marshallers, _context, shouldInitializeVariables);
-
+                    ElementAccessExpression(
+                        IdentifierName(VirtualMethodTableIdentifier),
+                        BracketedArgumentList(
+                            SingletonSeparatedList(
+                                Argument(
+                                    LiteralExpression(
+                                        SyntaxKind.NumericLiteralExpression,
+                                        Literal(index)
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    callConv
+                )
+            );
+            bool shouldInitializeVariables =
+                !statements.GuaranteedUnmarshal.IsEmpty || !statements.Cleanup.IsEmpty;
+            VariableDeclarations declarations =
+                VariableDeclarations.GenerateDeclarationsForManagedToUnmanaged(
+                    _marshallers,
+                    _context,
+                    shouldInitializeVariables
+                );
 
             if (_setLastError)
             {
                 // Declare variable for last error
-                setupStatements.Add(MarshallerHelpers.Declare(
-                    PredefinedType(Token(SyntaxKind.IntKeyword)),
-                    LastErrorIdentifier,
-                    initializeToDefault: false));
+                setupStatements.Add(
+                    MarshallerHelpers.Declare(
+                        PredefinedType(Token(SyntaxKind.IntKeyword)),
+                        LastErrorIdentifier,
+                        initializeToDefault: false
+                    )
+                );
             }
 
             if (!statements.GuaranteedUnmarshal.IsEmpty)
             {
-                setupStatements.Add(MarshallerHelpers.Declare(PredefinedType(Token(SyntaxKind.BoolKeyword)), InvokeSucceededIdentifier, initializeToDefault: true));
+                setupStatements.Add(
+                    MarshallerHelpers.Declare(
+                        PredefinedType(Token(SyntaxKind.BoolKeyword)),
+                        InvokeSucceededIdentifier,
+                        initializeToDefault: true
+                    )
+                );
             }
 
             setupStatements.AddRange(declarations.Initializations);
@@ -167,28 +248,42 @@ namespace Microsoft.Interop
             var tryStatements = new List<StatementSyntax>();
             tryStatements.AddRange(statements.Marshal);
 
-
             BlockSyntax fixedBlock = Block(statements.PinnedMarshal);
             if (_setLastError)
             {
-                StatementSyntax clearLastError = MarshallerHelpers.CreateClearLastSystemErrorStatement(SuccessErrorCode);
+                StatementSyntax clearLastError =
+                    MarshallerHelpers.CreateClearLastSystemErrorStatement(SuccessErrorCode);
 
-                StatementSyntax getLastError = MarshallerHelpers.CreateGetLastSystemErrorStatement(LastErrorIdentifier);
+                StatementSyntax getLastError = MarshallerHelpers.CreateGetLastSystemErrorStatement(
+                    LastErrorIdentifier
+                );
 
-                fixedBlock = fixedBlock.AddStatements(clearLastError, statements.InvokeStatement, getLastError);
+                fixedBlock = fixedBlock.AddStatements(
+                    clearLastError,
+                    statements.InvokeStatement,
+                    getLastError
+                );
             }
             else
             {
                 fixedBlock = fixedBlock.AddStatements(statements.InvokeStatement);
             }
-            tryStatements.Add(statements.Pin.CastArray<FixedStatementSyntax>().NestFixedStatements(fixedBlock));
+            tryStatements.Add(
+                statements.Pin.CastArray<FixedStatementSyntax>().NestFixedStatements(fixedBlock)
+            );
 
             // <invokeSucceeded> = true;
             if (!statements.GuaranteedUnmarshal.IsEmpty)
             {
-                tryStatements.Add(ExpressionStatement(AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
-                    IdentifierName(InvokeSucceededIdentifier),
-                    LiteralExpression(SyntaxKind.TrueLiteralExpression))));
+                tryStatements.Add(
+                    ExpressionStatement(
+                        AssignmentExpression(
+                            SyntaxKind.SimpleAssignmentExpression,
+                            IdentifierName(InvokeSucceededIdentifier),
+                            LiteralExpression(SyntaxKind.TrueLiteralExpression)
+                        )
+                    )
+                );
             }
 
             tryStatements.AddRange(statements.NotifyForSuccessfulInvoke);
@@ -198,7 +293,12 @@ namespace Microsoft.Interop
             List<StatementSyntax> finallyStatements = new List<StatementSyntax>();
             if (!statements.GuaranteedUnmarshal.IsEmpty)
             {
-                finallyStatements.Add(IfStatement(IdentifierName(InvokeSucceededIdentifier), Block(statements.GuaranteedUnmarshal)));
+                finallyStatements.Add(
+                    IfStatement(
+                        IdentifierName(InvokeSucceededIdentifier),
+                        Block(statements.GuaranteedUnmarshal)
+                    )
+                );
             }
 
             finallyStatements.AddRange(statements.Cleanup);
@@ -206,7 +306,12 @@ namespace Microsoft.Interop
             {
                 // Add try-finally block if there are any statements in the finally block
                 allStatements.Add(
-                    TryStatement(Block(tryStatements), default, FinallyClause(Block(finallyStatements))));
+                    TryStatement(
+                        Block(tryStatements),
+                        default,
+                        FinallyClause(Block(finallyStatements))
+                    )
+                );
             }
             else
             {
@@ -216,31 +321,55 @@ namespace Microsoft.Interop
             if (_setLastError)
             {
                 // Marshal.SetLastPInvokeError(<lastError>);
-                allStatements.Add(MarshallerHelpers.CreateSetLastPInvokeErrorStatement(LastErrorIdentifier));
+                allStatements.Add(
+                    MarshallerHelpers.CreateSetLastPInvokeErrorStatement(LastErrorIdentifier)
+                );
             }
 
             // Return
             if (!_marshallers.IsManagedVoidReturn)
-                allStatements.Add(ReturnStatement(IdentifierName(_context.GetIdentifiers(_marshallers.ManagedReturnMarshaller.TypeInfo).managed)));
+                allStatements.Add(
+                    ReturnStatement(
+                        IdentifierName(
+                            _context
+                                .GetIdentifiers(_marshallers.ManagedReturnMarshaller.TypeInfo)
+                                .managed
+                        )
+                    )
+                );
 
             return Block(allStatements);
         }
 
         private ExpressionSyntax CreateFunctionPointerExpression(
             ExpressionSyntax untypedFunctionPointerExpression,
-            ImmutableArray<FunctionPointerUnmanagedCallingConventionSyntax> callConv)
+            ImmutableArray<FunctionPointerUnmanagedCallingConventionSyntax> callConv
+        )
         {
             List<FunctionPointerParameterSyntax> functionPointerParameters = new();
             var (paramList, retType, _) = _marshallers.GenerateTargetMethodSignatureData(_context);
-            functionPointerParameters.AddRange(paramList.Parameters.Select(p => FunctionPointerParameter(p.Type)));
+            functionPointerParameters.AddRange(
+                paramList.Parameters.Select(p => FunctionPointerParameter(p.Type))
+            );
             functionPointerParameters.Add(FunctionPointerParameter(retType));
 
             // ((delegate* unmanaged<...>)<untypedFunctionPointerExpression>)
-            return ParenthesizedExpression(CastExpression(
-                FunctionPointerType(
-                    FunctionPointerCallingConvention(Token(SyntaxKind.UnmanagedKeyword), callConv.IsEmpty ? null : FunctionPointerUnmanagedCallingConventionList(SeparatedList(callConv))),
-                    FunctionPointerParameterList(SeparatedList(functionPointerParameters))),
-                untypedFunctionPointerExpression));
+            return ParenthesizedExpression(
+                CastExpression(
+                    FunctionPointerType(
+                        FunctionPointerCallingConvention(
+                            Token(SyntaxKind.UnmanagedKeyword),
+                            callConv.IsEmpty
+                                ? null
+                                : FunctionPointerUnmanagedCallingConventionList(
+                                    SeparatedList(callConv)
+                                )
+                        ),
+                        FunctionPointerParameterList(SeparatedList(functionPointerParameters))
+                    ),
+                    untypedFunctionPointerExpression
+                )
+            );
         }
     }
 }

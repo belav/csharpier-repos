@@ -8,11 +8,10 @@ using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 {
-    internal class StackFrameTree : EmbeddedSyntaxTree<StackFrameKind, StackFrameNode, StackFrameCompilationUnit>
+    internal class StackFrameTree
+        : EmbeddedSyntaxTree<StackFrameKind, StackFrameNode, StackFrameCompilationUnit>
     {
         public StackFrameTree(VirtualCharSequence text, StackFrameCompilationUnit root)
-            : base(text, root, ImmutableArray<EmbeddedDiagnostic>.Empty)
-        {
-        }
+            : base(text, root, ImmutableArray<EmbeddedDiagnostic>.Empty) { }
     }
 }

@@ -37,17 +37,18 @@ namespace LinkerAnalyzer.Core
     public class SpaceAnalyzer
     {
         readonly string assembliesDirectory;
-        readonly List<AssemblyDefinition> assemblies = new List<AssemblyDefinition> ();
-        readonly Dictionary<string, int> sizes = new Dictionary<string, int> ();
+        readonly List<AssemblyDefinition> assemblies = new List<AssemblyDefinition>();
+        readonly Dictionary<string, int> sizes = new Dictionary<string, int>();
 
-        public SpaceAnalyzer (string assembliesDirectory)
+        public SpaceAnalyzer(string assembliesDirectory)
         {
             this.assembliesDirectory = assembliesDirectory;
         }
 
-        static bool IsAssemblyBound (TypeDefinition td)
+        static bool IsAssemblyBound(TypeDefinition td)
         {
-            do {
+            do
+            {
                 if (td.IsNestedPrivate || td.IsNestedAssembly || td.IsNestedFamilyAndAssembly)
                     return true;
 
@@ -57,99 +58,112 @@ namespace LinkerAnalyzer.Core
             return false;
         }
 
-        static string GetTypeKey (TypeDefinition td)
+        static string GetTypeKey(TypeDefinition td)
         {
             if (td == null)
                 return "";
 
-            var addAssembly = td.IsNotPublic || IsAssemblyBound (td);
+            var addAssembly = td.IsNotPublic || IsAssemblyBound(td);
 
             var addition = addAssembly ? $":{td.Module}" : "";
             return $"{td.MetadataToken.TokenType}:{td}{addition}";
         }
 
-        static string GetKey (IMetadataTokenProvider provider)
+        static string GetKey(IMetadataTokenProvider provider)
         {
             return $"{provider.MetadataToken.TokenType}:{provider}";
         }
 
-        int GetMethodSize (MethodDefinition method)
+        int GetMethodSize(MethodDefinition method)
         {
-            var key = GetKey (method);
+            var key = GetKey(method);
             int msize;
 
-            if (sizes.TryGetValue (key, out msize))
+            if (sizes.TryGetValue(key, out msize))
                 return msize;
 
             msize = method.Body.CodeSize;
             msize += method.Name.Length;
 
-            sizes.Add (key, msize);
+            sizes.Add(key, msize);
 
             return msize;
         }
 
-        int ProcessType (TypeDefinition type)
+        int ProcessType(TypeDefinition type)
         {
             int size = type.Name.Length;
 
             foreach (var field in type.Fields)
                 size += field.Name.Length;
 
-            foreach (var method in type.Methods) {
-                method.Resolve ();
+            foreach (var method in type.Methods)
+            {
+                method.Resolve();
                 if (method.Body != null)
-                    size += GetMethodSize (method);
+                    size += GetMethodSize(method);
             }
 
-            type.Resolve ();
-            try {
-                sizes.Add (GetTypeKey (type), size);
-            } catch (ArgumentException e) {
-                Console.WriteLine ($"\nWarning: duplicated type '{type}' scope '{type.Scope}'\n{e}");
+            type.Resolve();
+            try
+            {
+                sizes.Add(GetTypeKey(type), size);
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine($"\nWarning: duplicated type '{type}' scope '{type.Scope}'\n{e}");
             }
             return size;
         }
 
-        public void LoadAssemblies (bool verbose = true)
+        public void LoadAssemblies(bool verbose = true)
         {
-            if (verbose) {
-                ConsoleDependencyGraph.Header ("Space analyzer");
-                Console.WriteLine ("Load assemblies from {0}", assembliesDirectory);
-            } else
-                Console.Write ("Analyzing assemblies .");
+            if (verbose)
+            {
+                ConsoleDependencyGraph.Header("Space analyzer");
+                Console.WriteLine("Load assemblies from {0}", assembliesDirectory);
+            }
+            else
+                Console.Write("Analyzing assemblies .");
 
-            var resolver = new DefaultAssemblyResolver ();
-            resolver.AddSearchDirectory (assembliesDirectory);
+            var resolver = new DefaultAssemblyResolver();
+            resolver.AddSearchDirectory(assembliesDirectory);
 
             int totalSize = 0;
-            foreach (var file in System.IO.Directory.GetFiles (assembliesDirectory, "*.dll")) {
+            foreach (var file in System.IO.Directory.GetFiles(assembliesDirectory, "*.dll"))
+            {
                 if (verbose)
-                    Console.WriteLine ($"Analyzing {file}");
+                    Console.WriteLine($"Analyzing {file}");
                 else
-                    Console.Write (".");
+                    Console.Write(".");
 
-                ReaderParameters parameters = new ReaderParameters () { ReadingMode = ReadingMode.Immediate, AssemblyResolver = resolver };
-                var assembly = AssemblyDefinition.ReadAssembly (file, parameters);
-                assemblies.Add (assembly);
-                foreach (var module in assembly.Modules) {
-                    foreach (var type in module.Types) {
-                        totalSize += ProcessType (type);
+                ReaderParameters parameters = new ReaderParameters()
+                {
+                    ReadingMode = ReadingMode.Immediate,
+                    AssemblyResolver = resolver
+                };
+                var assembly = AssemblyDefinition.ReadAssembly(file, parameters);
+                assemblies.Add(assembly);
+                foreach (var module in assembly.Modules)
+                {
+                    foreach (var type in module.Types)
+                    {
+                        totalSize += ProcessType(type);
                         foreach (var child in type.NestedTypes)
-                            totalSize += ProcessType (child);
+                            totalSize += ProcessType(child);
                     }
                 }
             }
 
             if (verbose)
-                Console.WriteLine ("Total known size: {0}", totalSize);
+                Console.WriteLine("Total known size: {0}", totalSize);
             else
-                System.Console.WriteLine ();
+                System.Console.WriteLine();
         }
 
-        public int GetSize (VertexData vertex)
+        public int GetSize(VertexData vertex)
         {
-            return sizes.TryGetValue (vertex.value, out var size) ? size : 0;
+            return sizes.TryGetValue(vertex.value, out var size) ? size : 0;
         }
     }
 }

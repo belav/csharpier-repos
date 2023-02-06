@@ -4,26 +4,24 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupLinkerDescriptorFile ("PreserveSecondLevelMethodsOfNonRequiredType.xml")]
+    [SetupLinkerDescriptorFile("PreserveSecondLevelMethodsOfNonRequiredType.xml")]
     class PreserveSecondLevelMethodsOfNonRequiredType
     {
-        public static void Main ()
+        public static void Main()
         {
-            new Unused ();
+            new Unused();
         }
 
         [Kept]
         class Unused
         {
             [Kept]
-            public Unused ()
-            {
-            }
+            public Unused() { }
 
             [Kept]
-            private void PreservedMethod ()
+            private void PreservedMethod()
             {
-                new SecondLevel (2);
+                new SecondLevel(2);
             }
         }
 
@@ -31,9 +29,7 @@ namespace Mono.Linker.Tests.Cases.LinkXml
         class SecondLevel
         {
             [Kept]
-            public SecondLevel (int arg)
-            {
-            }
+            public SecondLevel(int arg) { }
         }
     }
 }

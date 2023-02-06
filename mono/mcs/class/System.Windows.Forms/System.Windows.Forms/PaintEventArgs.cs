@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,47 +28,48 @@
 
 using System.Drawing;
 
-namespace System.Windows.Forms {
-    public class PaintEventArgs : EventArgs, IDisposable {
-        private Graphics    graphics;
-        private Rectangle    clip_rectangle;
-        internal bool        Handled;
-        private bool        disposed;
-        
+namespace System.Windows.Forms
+{
+    public class PaintEventArgs : EventArgs, IDisposable
+    {
+        private Graphics graphics;
+        private Rectangle clip_rectangle;
+        internal bool Handled;
+        private bool disposed;
+
         #region Public Constructors
-        public PaintEventArgs (Graphics graphics, Rectangle clipRect)
+        public PaintEventArgs(Graphics graphics, Rectangle clipRect)
         {
             if (graphics == null)
-                throw new ArgumentNullException ("graphics");
+                throw new ArgumentNullException("graphics");
 
-            this.graphics=graphics;
-            this.clip_rectangle=clipRect;
+            this.graphics = graphics;
+            this.clip_rectangle = clipRect;
         }
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public Rectangle ClipRectangle {
-            get {
-                return this.clip_rectangle;
-            }
+        public Rectangle ClipRectangle
+        {
+            get { return this.clip_rectangle; }
         }
 
-        public Graphics Graphics {
-            get {
-                return this.graphics;
-            }
+        public Graphics Graphics
+        {
+            get { return this.graphics; }
         }
         #endregion    // Public Instance Properties
 
         #region Public Instance Methods
-        public void Dispose() {
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
         #endregion    // Public Instance Methods
 
-                // Returns the previous graphics
-        internal Graphics SetGraphics (Graphics g)
+        // Returns the previous graphics
+        internal Graphics SetGraphics(Graphics g)
         {
             Graphics res = graphics;
             graphics = g;
@@ -76,19 +77,21 @@ namespace System.Windows.Forms {
             return res;
         }
 
-        internal void SetClip (Rectangle clip)
+        internal void SetClip(Rectangle clip)
         {
             clip_rectangle = clip;
         }
-        
+
         #region Protected Instance Methods
-        ~PaintEventArgs() {
+        ~PaintEventArgs()
+        {
             Dispose(false);
         }
 
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            if (!disposed) {
+            if (!disposed)
+            {
                 disposed = true;
             }
         }

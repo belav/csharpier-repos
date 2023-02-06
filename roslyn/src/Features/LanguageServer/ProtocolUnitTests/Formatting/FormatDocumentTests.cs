@@ -17,15 +17,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
 {
     public class FormatDocumentTests : AbstractLanguageServerProtocolTests
     {
-        public FormatDocumentTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public FormatDocumentTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
         [Fact]
         public async Task TestFormatDocumentAsync()
         {
             var markup =
-@"class A
+                @"class A
 {
 void M()
 {
@@ -33,7 +32,7 @@ void M()
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -42,7 +41,11 @@ void M()
 }";
             await using var testLspServer = await CreateTestLspServerAsync(markup);
             var documentURI = testLspServer.GetLocations("caret").Single().Uri;
-            var documentText = await testLspServer.GetCurrentSolution().GetDocuments(documentURI).Single().GetTextAsync();
+            var documentText = await testLspServer
+                .GetCurrentSolution()
+                .GetDocuments(documentURI)
+                .Single()
+                .GetTextAsync();
 
             var results = await RunFormatDocumentAsync(testLspServer, documentURI);
             var actualText = ApplyTextEdits(results, documentText);
@@ -53,7 +56,7 @@ void M()
         public async Task TestFormatDocument_UseTabsAsync()
         {
             var markup =
-@"class A
+                @"class A
 {
 void M()
 {
@@ -61,7 +64,7 @@ void M()
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -70,9 +73,18 @@ void M()
 }";
             await using var testLspServer = await CreateTestLspServerAsync(markup);
             var documentURI = testLspServer.GetLocations("caret").Single().Uri;
-            var documentText = await testLspServer.GetCurrentSolution().GetDocuments(documentURI).Single().GetTextAsync();
+            var documentText = await testLspServer
+                .GetCurrentSolution()
+                .GetDocuments(documentURI)
+                .Single()
+                .GetTextAsync();
 
-            var results = await RunFormatDocumentAsync(testLspServer, documentURI, insertSpaces: false, tabSize: 4);
+            var results = await RunFormatDocumentAsync(
+                testLspServer,
+                documentURI,
+                insertSpaces: false,
+                tabSize: 4
+            );
             var actualText = ApplyTextEdits(results, documentText);
             Assert.Equal(expected, actualText);
         }
@@ -81,7 +93,7 @@ void M()
         public async Task TestFormatDocument_ModifyTabIndentSizeAsync()
         {
             var markup =
-@"class A
+                @"class A
 {
 void M()
 {
@@ -89,7 +101,7 @@ void M()
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
   void M()
   {
@@ -98,9 +110,18 @@ void M()
 }";
             await using var testLspServer = await CreateTestLspServerAsync(markup);
             var documentURI = testLspServer.GetLocations("caret").Single().Uri;
-            var documentText = await testLspServer.GetCurrentSolution().GetDocuments(documentURI).Single().GetTextAsync();
+            var documentText = await testLspServer
+                .GetCurrentSolution()
+                .GetDocuments(documentURI)
+                .Single()
+                .GetTextAsync();
 
-            var results = await RunFormatDocumentAsync(testLspServer, documentURI, insertSpaces: true, tabSize: 2);
+            var results = await RunFormatDocumentAsync(
+                testLspServer,
+                documentURI,
+                insertSpaces: true,
+                tabSize: 2
+            );
             var actualText = ApplyTextEdits(results, documentText);
             Assert.Equal(expected, actualText);
         }
@@ -109,14 +130,25 @@ void M()
             TestLspServer testLspServer,
             Uri uri,
             bool insertSpaces = true,
-            int tabSize = 4)
+            int tabSize = 4
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.DocumentFormattingParams, LSP.TextEdit[]>(LSP.Methods.TextDocumentFormattingName,
-                CreateDocumentFormattingParams(uri, insertSpaces, tabSize), CancellationToken.None);
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.DocumentFormattingParams,
+                LSP.TextEdit[]
+            >(
+                LSP.Methods.TextDocumentFormattingName,
+                CreateDocumentFormattingParams(uri, insertSpaces, tabSize),
+                CancellationToken.None
+            );
         }
 
-        private static LSP.DocumentFormattingParams CreateDocumentFormattingParams(Uri uri, bool insertSpaces, int tabSize)
-            => new LSP.DocumentFormattingParams()
+        private static LSP.DocumentFormattingParams CreateDocumentFormattingParams(
+            Uri uri,
+            bool insertSpaces,
+            int tabSize
+        ) =>
+            new LSP.DocumentFormattingParams()
             {
                 TextDocument = CreateTextDocumentIdentifier(uri),
                 Options = new LSP.FormattingOptions()

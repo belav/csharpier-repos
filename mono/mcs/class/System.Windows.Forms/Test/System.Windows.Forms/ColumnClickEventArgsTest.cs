@@ -39,15 +39,15 @@ namespace MonoTests.System.Windows.Forms
     public class ColumnClickEventArgsTest : TestHelper
     {
         [Test]
-        public void CtorTest ()
+        public void CtorTest()
         {
             ColumnClickEventArgs ce;
 
-            ce = new ColumnClickEventArgs (0);
-            Assert.AreEqual (0, ce.Column, "1");
+            ce = new ColumnClickEventArgs(0);
+            Assert.AreEqual(0, ce.Column, "1");
 
-            ce = new ColumnClickEventArgs (-1);
-            Assert.AreEqual (-1, ce.Column, "2");
+            ce = new ColumnClickEventArgs(-1);
+            Assert.AreEqual(-1, ce.Column, "2");
         }
     }
 }

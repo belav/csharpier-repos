@@ -17,32 +17,32 @@ namespace MonoTests.System.CodeDom
     public class CodeTypeDelegateTest
     {
         [Test]
-        public void EmptyTypeName ()
+        public void EmptyTypeName()
         {
-            CodeTypeDelegate delegateType = new CodeTypeDelegate (string.Empty);
-            Assert.AreEqual (string.Empty, delegateType.Name);
+            CodeTypeDelegate delegateType = new CodeTypeDelegate(string.Empty);
+            Assert.AreEqual(string.Empty, delegateType.Name);
         }
 
         [Test]
-        public void NullTypeName ()
+        public void NullTypeName()
         {
-            CodeTypeDelegate delegateType = new CodeTypeDelegate ((string) null);
-            Assert.AreEqual (string.Empty, delegateType.Name);
+            CodeTypeDelegate delegateType = new CodeTypeDelegate((string)null);
+            Assert.AreEqual(string.Empty, delegateType.Name);
         }
 
         [Test]
-        public void BaseTypes ()
+        public void BaseTypes()
         {
-            CodeTypeDelegate delegateType = new CodeTypeDelegate ((string) null);
-            Assert.AreEqual (1, delegateType.BaseTypes.Count);
-            Assert.AreEqual ("System.Delegate", delegateType.BaseTypes[0].BaseType);
+            CodeTypeDelegate delegateType = new CodeTypeDelegate((string)null);
+            Assert.AreEqual(1, delegateType.BaseTypes.Count);
+            Assert.AreEqual("System.Delegate", delegateType.BaseTypes[0].BaseType);
         }
 
         [Test]
-        public void DefaultReturnType ()
+        public void DefaultReturnType()
         {
-            CodeTypeDelegate delegateType = new CodeTypeDelegate ((string) null);
-            Assert.AreEqual (typeof(void).FullName, delegateType.ReturnType.BaseType);
+            CodeTypeDelegate delegateType = new CodeTypeDelegate((string)null);
+            Assert.AreEqual(typeof(void).FullName, delegateType.ReturnType.BaseType);
         }
     }
 }

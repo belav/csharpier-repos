@@ -1,6 +1,7 @@
-class X {
-    public static void Main ()
+class X
+{
+    public static void Main()
     {
-        global::System.Console.WriteLine ("hello");
+        global::System.Console.WriteLine("hello");
     }
 }

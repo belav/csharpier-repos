@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,15 +43,11 @@ namespace System.Net
 {
     class WebConnectionTunnel
     {
-        public HttpWebRequest Request {
-            get;
-        }
+        public HttpWebRequest Request { get; }
 
-        public Uri ConnectUri {
-            get;
-        }
+        public Uri ConnectUri { get; }
 
-        public WebConnectionTunnel (HttpWebRequest request, Uri connectUri)
+        public WebConnectionTunnel(HttpWebRequest request, Uri connectUri)
         {
             Request = request;
             ConnectUri = connectUri;
@@ -67,202 +63,254 @@ namespace System.Net
         HttpWebRequest connectRequest;
         NtlmAuthState ntlmAuthState;
 
-        public bool Success {
-            get;
-            private set;
-        }
+        public bool Success { get; private set; }
 
-        public bool CloseConnection {
-            get;
-            private set;
-        }
+        public bool CloseConnection { get; private set; }
 
-        public int StatusCode {
-            get;
-            private set;
-        }
+        public int StatusCode { get; private set; }
 
-        public string StatusDescription {
-            get;
-            private set;
-        }
+        public string StatusDescription { get; private set; }
 
-        public string[] Challenge {
-            get;
-            private set;
-        }
+        public string[] Challenge { get; private set; }
 
-        public WebHeaderCollection Headers {
-            get;
-            private set;
-        }
+        public WebHeaderCollection Headers { get; private set; }
 
-        public Version ProxyVersion {
-            get;
-            private set;
-        }
+        public Version ProxyVersion { get; private set; }
 
-        public byte[] Data {
-            get;
-            private set;
-        }
+        public byte[] Data { get; private set; }
 
-        internal async Task Initialize (Stream stream, CancellationToken cancellationToken)
+        internal async Task Initialize(Stream stream, CancellationToken cancellationToken)
         {
-            StringBuilder sb = new StringBuilder ();
-            sb.Append ("CONNECT ");
-            sb.Append (Request.Address.Host);
-            sb.Append (':');
-            sb.Append (Request.Address.Port);
-            sb.Append (" HTTP/");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("CONNECT ");
+            sb.Append(Request.Address.Host);
+            sb.Append(':');
+            sb.Append(Request.Address.Port);
+            sb.Append(" HTTP/");
             if (Request.ProtocolVersion == HttpVersion.Version11)
-                sb.Append ("1.1");
+                sb.Append("1.1");
             else
-                sb.Append ("1.0");
+                sb.Append("1.0");
 
-            sb.Append ("\r\nHost: ");
-            sb.Append (Request.Address.Authority);
+            sb.Append("\r\nHost: ");
+            sb.Append(Request.Address.Authority);
 
             bool ntlm = false;
             var challenge = Challenge;
             Challenge = null;
             var auth_header = Request.Headers["Proxy-Authorization"];
             bool have_auth = auth_header != null;
-            if (have_auth) {
-                sb.Append ("\r\nProxy-Authorization: ");
-                sb.Append (auth_header);
-                ntlm = auth_header.ToUpper ().Contains ("NTLM");
-            } else if (challenge != null && StatusCode == 407) {
+            if (have_auth)
+            {
+                sb.Append("\r\nProxy-Authorization: ");
+                sb.Append(auth_header);
+                ntlm = auth_header.ToUpper().Contains("NTLM");
+            }
+            else if (challenge != null && StatusCode == 407)
+            {
                 ICredentials creds = Request.Proxy.Credentials;
                 have_auth = true;
 
-                if (connectRequest == null) {
+                if (connectRequest == null)
+                {
                     // create a CONNECT request to use with Authenticate
-                    connectRequest = (HttpWebRequest)WebRequest.Create (
-                        ConnectUri.Scheme + "://" + ConnectUri.Host + ":" + ConnectUri.Port + "/");
+                    connectRequest = (HttpWebRequest)
+                        WebRequest.Create(
+                            ConnectUri.Scheme
+                                + "://"
+                                + ConnectUri.Host
+                                + ":"
+                                + ConnectUri.Port
+                                + "/"
+                        );
                     connectRequest.Method = "CONNECT";
                     connectRequest.Credentials = creds;
                 }
 
-                if (creds != null) {
-                    for (int i = 0; i < challenge.Length; i++) {
-                        var auth = AuthenticationManager.Authenticate (challenge[i], connectRequest, creds);
+                if (creds != null)
+                {
+                    for (int i = 0; i < challenge.Length; i++)
+                    {
+                        var auth = AuthenticationManager.Authenticate(
+                            challenge[i],
+                            connectRequest,
+                            creds
+                        );
                         if (auth == null)
                             continue;
                         ntlm = (auth.ModuleAuthenticationType == "NTLM");
-                        sb.Append ("\r\nProxy-Authorization: ");
-                        sb.Append (auth.Message);
+                        sb.Append("\r\nProxy-Authorization: ");
+                        sb.Append(auth.Message);
                         break;
                     }
                 }
             }
 
-            if (ntlm) {
-                sb.Append ("\r\nProxy-Connection: keep-alive");
+            if (ntlm)
+            {
+                sb.Append("\r\nProxy-Connection: keep-alive");
                 ntlmAuthState++;
             }
 
-            sb.Append ("\r\n\r\n");
+            sb.Append("\r\n\r\n");
 
             StatusCode = 0;
-            byte[] connectBytes = Encoding.Default.GetBytes (sb.ToString ());
-            await stream.WriteAsync (connectBytes, 0, connectBytes.Length, cancellationToken).ConfigureAwait (false);
+            byte[] connectBytes = Encoding.Default.GetBytes(sb.ToString());
+            await stream
+                .WriteAsync(connectBytes, 0, connectBytes.Length, cancellationToken)
+                .ConfigureAwait(false);
 
-            (Headers, Data, StatusCode) = await ReadHeaders (stream, cancellationToken).ConfigureAwait (false);
+            (Headers, Data, StatusCode) = await ReadHeaders(stream, cancellationToken)
+                .ConfigureAwait(false);
 
-            if ((!have_auth || ntlmAuthState == NtlmAuthState.Challenge) && Headers != null && StatusCode == 407) { // Needs proxy auth
+            if (
+                (!have_auth || ntlmAuthState == NtlmAuthState.Challenge)
+                && Headers != null
+                && StatusCode == 407
+            )
+            { // Needs proxy auth
                 var connectionHeader = Headers["Connection"];
-                if (!string.IsNullOrEmpty (connectionHeader) && connectionHeader.ToLower () == "close") {
+                if (
+                    !string.IsNullOrEmpty(connectionHeader) && connectionHeader.ToLower() == "close"
+                )
+                {
                     // The server is requesting that this connection be closed
                     CloseConnection = true;
                 }
 
-                Challenge = Headers.GetValues ("Proxy-Authenticate");
+                Challenge = Headers.GetValues("Proxy-Authenticate");
                 Success = false;
-            } else {
+            }
+            else
+            {
                 Success = StatusCode == 200 && Headers != null;
             }
 
-            if (Challenge == null && (StatusCode == 401 || StatusCode == 407)) {
-                var response = new HttpWebResponse (ConnectUri, "CONNECT", (HttpStatusCode)StatusCode, Headers);
-                throw new WebException (
-                    StatusCode == 407 ? "(407) Proxy Authentication Required" : "(401) Unauthorized",
-                    null, WebExceptionStatus.ProtocolError, response);
+            if (Challenge == null && (StatusCode == 401 || StatusCode == 407))
+            {
+                var response = new HttpWebResponse(
+                    ConnectUri,
+                    "CONNECT",
+                    (HttpStatusCode)StatusCode,
+                    Headers
+                );
+                throw new WebException(
+                    StatusCode == 407
+                        ? "(407) Proxy Authentication Required"
+                        : "(401) Unauthorized",
+                    null,
+                    WebExceptionStatus.ProtocolError,
+                    response
+                );
             }
         }
 
-        async Task<(WebHeaderCollection, byte[], int)> ReadHeaders (Stream stream, CancellationToken cancellationToken)
+        async Task<(WebHeaderCollection, byte[], int)> ReadHeaders(
+            Stream stream,
+            CancellationToken cancellationToken
+        )
         {
             byte[] retBuffer = null;
             int status = 200;
 
             byte[] buffer = new byte[1024];
-            MemoryStream ms = new MemoryStream ();
+            MemoryStream ms = new MemoryStream();
 
-            while (true) {
-                cancellationToken.ThrowIfCancellationRequested ();
-                int n = await stream.ReadAsync (buffer, 0, 1024, cancellationToken).ConfigureAwait (false);
+            while (true)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                int n = await stream
+                    .ReadAsync(buffer, 0, 1024, cancellationToken)
+                    .ConfigureAwait(false);
                 if (n == 0)
-                    throw WebConnection.GetException (WebExceptionStatus.ServerProtocolViolation, null);
+                    throw WebConnection.GetException(
+                        WebExceptionStatus.ServerProtocolViolation,
+                        null
+                    );
 
-                ms.Write (buffer, 0, n);
+                ms.Write(buffer, 0, n);
                 int start = 0;
                 string str = null;
                 bool gotStatus = false;
-                WebHeaderCollection headers = new WebHeaderCollection ();
-                while (WebConnection.ReadLine (ms.GetBuffer (), ref start, (int)ms.Length, ref str)) {
-                    if (str == null) {
+                WebHeaderCollection headers = new WebHeaderCollection();
+                while (WebConnection.ReadLine(ms.GetBuffer(), ref start, (int)ms.Length, ref str))
+                {
+                    if (str == null)
+                    {
                         int contentLen;
                         var clengthHeader = headers["Content-Length"];
-                        if (string.IsNullOrEmpty (clengthHeader) || !int.TryParse (clengthHeader, out contentLen))
+                        if (
+                            string.IsNullOrEmpty(clengthHeader)
+                            || !int.TryParse(clengthHeader, out contentLen)
+                        )
                             contentLen = 0;
 
-                        if (ms.Length - start - contentLen > 0) {
+                        if (ms.Length - start - contentLen > 0)
+                        {
                             // we've read more data than the response header and conents,
                             // give back extra data to the caller
                             retBuffer = new byte[ms.Length - start - contentLen];
-                            Buffer.BlockCopy (ms.GetBuffer (), start + contentLen, retBuffer, 0, retBuffer.Length);
-                        } else {
+                            Buffer.BlockCopy(
+                                ms.GetBuffer(),
+                                start + contentLen,
+                                retBuffer,
+                                0,
+                                retBuffer.Length
+                            );
+                        }
+                        else
+                        {
                             // haven't read in some or all of the contents for the response, do so now
-                            FlushContents (stream, contentLen - (int)(ms.Length - start));
+                            FlushContents(stream, contentLen - (int)(ms.Length - start));
                         }
 
                         return (headers, retBuffer, status);
                     }
 
-                    if (gotStatus) {
-                        headers.Add (str);
+                    if (gotStatus)
+                    {
+                        headers.Add(str);
                         continue;
                     }
 
-                    string[] parts = str.Split (' ');
+                    string[] parts = str.Split(' ');
                     if (parts.Length < 2)
-                        throw WebConnection.GetException (WebExceptionStatus.ServerProtocolViolation, null);
+                        throw WebConnection.GetException(
+                            WebExceptionStatus.ServerProtocolViolation,
+                            null
+                        );
 
-                    if (String.Compare (parts[0], "HTTP/1.1", true) == 0)
+                    if (String.Compare(parts[0], "HTTP/1.1", true) == 0)
                         ProxyVersion = HttpVersion.Version11;
-                    else if (String.Compare (parts[0], "HTTP/1.0", true) == 0)
+                    else if (String.Compare(parts[0], "HTTP/1.0", true) == 0)
                         ProxyVersion = HttpVersion.Version10;
                     else
-                        throw WebConnection.GetException (WebExceptionStatus.ServerProtocolViolation, null);
+                        throw WebConnection.GetException(
+                            WebExceptionStatus.ServerProtocolViolation,
+                            null
+                        );
 
-                    status = (int)UInt32.Parse (parts[1]);
+                    status = (int)UInt32.Parse(parts[1]);
                     if (parts.Length >= 3)
-                        StatusDescription = String.Join (" ", parts, 2, parts.Length - 2);
+                        StatusDescription = String.Join(" ", parts, 2, parts.Length - 2);
 
                     gotStatus = true;
                 }
             }
         }
 
-        void FlushContents (Stream stream, int contentLength)
+        void FlushContents(Stream stream, int contentLength)
         {
-            while (contentLength > 0) {
+            while (contentLength > 0)
+            {
                 byte[] contentBuffer = new byte[contentLength];
-                int bytesRead = stream.Read (contentBuffer, 0, contentLength);
-                if (bytesRead > 0) {
+                int bytesRead = stream.Read(contentBuffer, 0, contentLength);
+                if (bytesRead > 0)
+                {
                     contentLength -= bytesRead;
-                } else {
+                }
+                else
+                {
                     break;
                 }
             }

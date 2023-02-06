@@ -2,29 +2,30 @@
 
 public class A
 {
-    public static bool operator==(A a1, A a2)
+    public static bool operator ==(A a1, A a2)
     {
         return true;
     }
 
-    public static bool operator!=(A a1, A a2)
+    public static bool operator !=(A a1, A a2)
     {
         return false;
     }
 
-    public override bool Equals (object o)
+    public override bool Equals(object o)
     {
         return true;
     }
 
-    public override int GetHashCode ()
+    public override int GetHashCode()
     {
-        return base.GetHashCode ();
+        return base.GetHashCode();
     }
 
-    public int KK () { return 1; }
+    public int KK()
+    {
+        return 1;
+    }
 }
 
-public class B : A {
-}
-
+public class B : A { }

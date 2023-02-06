@@ -26,7 +26,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"child::*[last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -35,9 +36,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Child5",
                     HasNameTable = true,
                     Value = "Last"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -53,7 +61,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"child::*[last() - 1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -62,9 +71,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Child4",
                     HasNameTable = true,
                     Value = "Fourth"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -80,7 +96,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"attribute::*[last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Attribute,
@@ -88,9 +105,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Attr5",
                     HasNameTable = true,
                     Value = "Last"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -106,7 +130,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"attribute::*[last() - 1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Attribute,
@@ -114,9 +139,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Attr4",
                     HasNameTable = true,
                     Value = "Fourth"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -132,7 +164,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"child::*[position() = last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -141,9 +174,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Child5",
                     HasNameTable = true,
                     Value = "Last"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -161,7 +201,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"*[position() = last()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -179,7 +225,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"*[position() = last()]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -197,7 +249,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"@*[position() = last()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -215,7 +273,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"@*[position() = last()]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -233,7 +297,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"*[last() = 1]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -251,7 +321,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"*[last() = 1]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -267,7 +343,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"child::*[position() = 2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -276,9 +353,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Child2",
                     HasNameTable = true,
                     Value = "Second"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -294,7 +378,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"attribute::*[position() = 2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Attribute,
@@ -302,9 +387,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Attr2",
                     HasNameTable = true,
                     Value = "Second"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -320,7 +412,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"child::*[2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -329,9 +422,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Child2",
                     HasNameTable = true,
                     Value = "Second"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -347,7 +447,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"attribute::*[2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Attribute,
@@ -355,9 +456,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Attr2",
                     HasNameTable = true,
                     Value = "Second"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -373,7 +481,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"child::*[position() > 2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -400,9 +509,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Child5",
                     HasNameTable = true,
                     Value = "Last"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -418,7 +534,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"child::*[position()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -463,9 +580,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
                     Name = "Child5",
                     HasNameTable = true,
                     Value = "Last"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -483,7 +607,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"*[position() = 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -501,7 +631,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"*[position() = 2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -519,7 +655,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"@*[position() = 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -537,7 +679,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"@*[position() = 2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -555,7 +703,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"*[2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -573,7 +727,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"*[2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -591,7 +751,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"@*[2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -609,7 +775,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"@*[2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -627,7 +799,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"*[position() > 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -645,7 +823,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"*[position() > 2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -663,7 +847,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"@*[position() > 2]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -681,7 +871,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"@*[position() > 2]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -699,7 +895,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"count(attribute::*)";
             var expected = 5d;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -717,7 +919,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"count(descendant::Child3)";
             var expected = 1d;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -738,8 +946,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"uri:this is a test";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -760,8 +974,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"uri:this is a test";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -782,8 +1002,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"uri:this is a test";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -804,8 +1030,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"uri:this is a test";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -826,8 +1058,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"ns:elem";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -848,8 +1086,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"ns:attr";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -870,8 +1114,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"ns:elem";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -892,8 +1142,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"ns:attr";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -914,8 +1170,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"elem";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -936,8 +1198,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"attr";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -958,8 +1226,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"elem";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -980,8 +1254,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "uri:this is a test");
             var expected = @"attr";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1017,8 +1297,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1039,8 +1325,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1061,8 +1353,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1082,7 +1380,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager
+            );
         }
 
         /// <summary>
@@ -1103,8 +1407,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"NSbook";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1125,8 +1435,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1147,8 +1463,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1168,7 +1490,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"NSbook";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager
+            );
         }
     }
 }

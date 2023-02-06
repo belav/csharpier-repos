@@ -4,26 +4,21 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class LocalPassedAsParameterToGenericWithConstraint
     {
-        public static void Main ()
+        public static void Main()
         {
             Foo f = null;
-            Helper (f);
+            Helper(f);
         }
 
         [Kept]
-        static void Helper<T> (T f) where T : IFoo
-        {
-        }
+        static void Helper<T>(T f)
+            where T : IFoo { }
 
         [Kept]
-        [KeptInterface (typeof (IFoo))]
-        class Foo : IFoo
-        {
-        }
+        [KeptInterface(typeof(IFoo))]
+        class Foo : IFoo { }
 
         [Kept]
-        interface IFoo
-        {
-        }
+        interface IFoo { }
     }
 }

@@ -47,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             ExportProvider exportProvider,
             IThreadingContext threadingContext,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter,
-            [Import(typeof(SVsServiceProvider))] IAsyncServiceProvider asyncServiceProvider)
+            [Import(typeof(SVsServiceProvider))] IAsyncServiceProvider asyncServiceProvider
+        )
             : base(exportProvider, asyncServiceProvider)
         {
             _threadingContext = threadingContext;
@@ -63,11 +64,14 @@ namespace Microsoft.VisualStudio.LanguageServices
 
             if (textDocument == null)
             {
-                throw new InvalidOperationException(string.Format(WorkspacesResources._0_is_not_part_of_the_workspace, documentId));
+                throw new InvalidOperationException(
+                    string.Format(WorkspacesResources._0_is_not_part_of_the_workspace, documentId)
+                );
             }
 
             // Do not save the file if is open and there is not a global undo transaction.
-            var needsSave = globalUndoService.IsGlobalTransactionOpen(this) || !this.IsDocumentOpen(documentId);
+            var needsSave =
+                globalUndoService.IsGlobalTransactionOpen(this) || !this.IsDocumentOpen(documentId);
             if (needsSave)
             {
                 if (textDocument is Document document)
@@ -86,39 +90,72 @@ namespace Microsoft.VisualStudio.LanguageServices
             // to us from the project system.
             Contract.ThrowIfNull(textDocument.FilePath);
 
-            return new InvisibleEditor(ServiceProvider.GlobalProvider, textDocument.FilePath, GetHierarchy(documentId.ProjectId), needsSave, needsUndoDisabled);
+            return new InvisibleEditor(
+                ServiceProvider.GlobalProvider,
+                textDocument.FilePath,
+                GetHierarchy(documentId.ProjectId),
+                needsSave,
+                needsUndoDisabled
+            );
         }
 
         [Obsolete("Use TryGoToDefinitionAsync instead", error: true)]
-        public override bool TryGoToDefinition(ISymbol symbol, Project project, CancellationToken cancellationToken)
-            => _threadingContext.JoinableTaskFactory.Run(() => TryGoToDefinitionAsync(symbol, project, cancellationToken));
+        public override bool TryGoToDefinition(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        ) =>
+            _threadingContext.JoinableTaskFactory.Run(
+                () => TryGoToDefinitionAsync(symbol, project, cancellationToken)
+            );
 
         public override async Task<bool> TryGoToDefinitionAsync(
-            ISymbol symbol, Project project, CancellationToken cancellationToken)
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             var currentProject = project.Solution.Workspace.CurrentSolution.GetProject(project.Id);
             if (currentProject == null)
                 return false;
 
             var symbolId = SymbolKey.Create(symbol, cancellationToken);
-            var currentCompilation = await currentProject.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-            var symbolInfo = symbolId.Resolve(currentCompilation, cancellationToken: cancellationToken);
+            var currentCompilation = await currentProject
+                .GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var symbolInfo = symbolId.Resolve(
+                currentCompilation,
+                cancellationToken: cancellationToken
+            );
             if (symbolInfo.Symbol == null)
                 return false;
 
-            return await GoToDefinitionHelpers.TryNavigateToLocationAsync(
-                symbolInfo.Symbol, currentProject.Solution,
-                _threadingContext, _streamingPresenter.Value, cancellationToken).ConfigureAwait(false);
+            return await GoToDefinitionHelpers
+                .TryNavigateToLocationAsync(
+                    symbolInfo.Symbol,
+                    currentProject.Solution,
+                    _threadingContext,
+                    _streamingPresenter.Value,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        public override bool TryFindAllReferences(ISymbol symbol, Project project, CancellationToken cancellationToken)
+        public override bool TryFindAllReferences(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             // Legacy API.  Previously used by ObjectBrowser to support 'FindRefs' off of an
             // object browser item.  Now ObjectBrowser goes through the streaming-FindRefs system.
             return false;
         }
 
-        public override void DisplayReferencedSymbols(Solution solution, IEnumerable<ReferencedSymbol> referencedSymbols)
+        public override void DisplayReferencedSymbols(
+            Solution solution,
+            IEnumerable<ReferencedSymbol> referencedSymbols
+        )
         {
             // Legacy API.  Previously used by ObjectBrowser to support 'FindRefs' off of an
             // object browser item.  Now ObjectBrowser goes through the streaming-FindRefs system.
@@ -159,10 +196,16 @@ namespace Microsoft.VisualStudio.LanguageServices
             }
 
             var tree = sourceLocation.SourceTree;
-            Contract.ThrowIfNull(tree, "We have a location that was in source, but doesn't have a SourceTree.");
+            Contract.ThrowIfNull(
+                tree,
+                "We have a location that was in source, but doesn't have a SourceTree."
+            );
 
             var document = project.GetDocument(tree);
-            Contract.ThrowIfNull(document, "We have a symbol coming from a tree, and that tree isn't in the Project it supposedly came from.");
+            Contract.ThrowIfNull(
+                document,
+                "We have a symbol coming from a tree, and that tree isn't in the Project it supposedly came from."
+            );
 
             var vsFileCodeModel = this.GetFileCodeModel(document.Id);
 
@@ -182,7 +225,9 @@ namespace Microsoft.VisualStudio.LanguageServices
 
                 if (syntaxNode != null)
                 {
-                    var codeElement = fileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(syntaxNode);
+                    var codeElement = fileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(
+                        syntaxNode
+                    );
                     if (codeElement != null)
                     {
                         return codeElement;

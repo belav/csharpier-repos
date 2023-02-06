@@ -26,7 +26,10 @@ namespace System.Tests
         [Fact]
         public void AppContext_ThrowTest()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => AppContext.SetData(null, 123));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => AppContext.SetData(null, 123)
+            );
         }
     }
 }

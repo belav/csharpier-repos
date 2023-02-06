@@ -11,16 +11,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// <summary>
 /// A <see cref="IActionResultExecutor{PhysicalFileResult}"/> for <see cref="PhysicalFileResult"/>.
 /// </summary>
-public partial class PhysicalFileResultExecutor : FileResultExecutorBase, IActionResultExecutor<PhysicalFileResult>
+public partial class PhysicalFileResultExecutor
+    : FileResultExecutorBase,
+        IActionResultExecutor<PhysicalFileResult>
 {
     /// <summary>
     /// Initializes a new instance of <see cref="PhysicalFileResultExecutor"/>.
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     public PhysicalFileResultExecutor(ILoggerFactory loggerFactory)
-        : base(CreateLogger<PhysicalFileResultExecutor>(loggerFactory))
-    {
-    }
+        : base(CreateLogger<PhysicalFileResultExecutor>(loggerFactory)) { }
 
     /// <inheritdoc />
     public virtual Task ExecuteAsync(ActionContext context, PhysicalFileResult result)
@@ -39,7 +39,9 @@ public partial class PhysicalFileResultExecutor : FileResultExecutorBase, IActio
         if (!fileInfo.Exists)
         {
             throw new FileNotFoundException(
-                Resources.FormatFileResult_InvalidPath(result.FileName), result.FileName);
+                Resources.FormatFileResult_InvalidPath(result.FileName),
+                result.FileName
+            );
         }
 
         Log.ExecutingFileResult(Logger, result, result.FileName);
@@ -51,7 +53,8 @@ public partial class PhysicalFileResultExecutor : FileResultExecutorBase, IActio
             fileInfo.Length,
             result.EnableRangeProcessing,
             lastModified,
-            result.EntityTag);
+            result.EntityTag
+        );
 
         if (serveBody)
         {
@@ -62,7 +65,12 @@ public partial class PhysicalFileResultExecutor : FileResultExecutorBase, IActio
     }
 
     /// <inheritdoc/>
-    protected virtual Task WriteFileAsync(ActionContext context, PhysicalFileResult result, RangeItemHeaderValue? range, long rangeLength)
+    protected virtual Task WriteFileAsync(
+        ActionContext context,
+        PhysicalFileResult result,
+        RangeItemHeaderValue? range,
+        long rangeLength
+    )
     {
         return WriteFileAsyncInternal(context.HttpContext, result, range, rangeLength, Logger);
     }
@@ -72,7 +80,8 @@ public partial class PhysicalFileResultExecutor : FileResultExecutorBase, IActio
         PhysicalFileResult result,
         RangeItemHeaderValue? range,
         long rangeLength,
-        ILogger logger)
+        ILogger logger
+    )
     {
         if (httpContext == null)
         {
@@ -92,7 +101,9 @@ public partial class PhysicalFileResultExecutor : FileResultExecutorBase, IActio
         var response = httpContext.Response;
         if (!Path.IsPathRooted(result.FileName))
         {
-            throw new NotSupportedException(Resources.FormatFileResult_PathNotRooted(result.FileName));
+            throw new NotSupportedException(
+                Resources.FormatFileResult_PathNotRooted(result.FileName)
+            );
         }
 
         if (range != null)
@@ -102,14 +113,14 @@ public partial class PhysicalFileResultExecutor : FileResultExecutorBase, IActio
 
         if (range != null)
         {
-            return response.SendFileAsync(result.FileName,
+            return response.SendFileAsync(
+                result.FileName,
                 offset: range.From ?? 0L,
-                count: rangeLength);
+                count: rangeLength
+            );
         }
 
-        return response.SendFileAsync(result.FileName,
-            offset: 0,
-            count: null);
+        return response.SendFileAsync(result.FileName, offset: 0, count: null);
     }
 
     /// <summary>
@@ -124,12 +135,13 @@ public partial class PhysicalFileResultExecutor : FileResultExecutorBase, IActio
         }
 
         return new FileStream(
-                path,
-                FileMode.Open,
-                FileAccess.Read,
-                FileShare.ReadWrite,
-                BufferSize,
-                FileOptions.Asynchronous | FileOptions.SequentialScan);
+            path,
+            FileMode.Open,
+            FileAccess.Read,
+            FileShare.ReadWrite,
+            BufferSize,
+            FileOptions.Asynchronous | FileOptions.SequentialScan
+        );
     }
 
     /// <summary>
@@ -179,7 +191,11 @@ public partial class PhysicalFileResultExecutor : FileResultExecutorBase, IActio
 
     private static partial class Log
     {
-        public static void ExecutingFileResult(ILogger logger, FileResult fileResult, string fileName)
+        public static void ExecutingFileResult(
+            ILogger logger,
+            FileResult fileResult,
+            string fileName
+        )
         {
             if (logger.IsEnabled(LogLevel.Information))
             {
@@ -188,10 +204,26 @@ public partial class PhysicalFileResultExecutor : FileResultExecutorBase, IActio
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information, "Executing {FileResultType}, sending file '{FileDownloadPath}' with download name '{FileDownloadName}' ...", EventName = "ExecutingFileResult", SkipEnabledCheck = true)]
-        private static partial void ExecutingFileResult(ILogger logger, string fileResultType, string fileDownloadPath, string fileDownloadName);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing {FileResultType}, sending file '{FileDownloadPath}' with download name '{FileDownloadName}' ...",
+            EventName = "ExecutingFileResult",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ExecutingFileResult(
+            ILogger logger,
+            string fileResultType,
+            string fileDownloadPath,
+            string fileDownloadName
+        );
 
-        [LoggerMessage(17, LogLevel.Debug, "Writing the requested range of bytes to the body...", EventName = "WritingRangeToBody")]
+        [LoggerMessage(
+            17,
+            LogLevel.Debug,
+            "Writing the requested range of bytes to the body...",
+            EventName = "WritingRangeToBody"
+        )]
         public static partial void WritingRangeToBody(ILogger logger);
     }
 }

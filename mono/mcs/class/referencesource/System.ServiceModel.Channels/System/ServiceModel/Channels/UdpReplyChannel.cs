@@ -12,18 +12,25 @@ namespace System.ServiceModel.Channels
 
     internal sealed class UdpReplyChannel : UdpChannelBase<RequestContext>, IReplyChannel
     {
-        public UdpReplyChannel(UdpReplyChannelListener listener, UdpSocket[] sockets, EndpointAddress localAddress, Uri via, bool isMulticast)
+        public UdpReplyChannel(
+            UdpReplyChannelListener listener,
+            UdpSocket[] sockets,
+            EndpointAddress localAddress,
+            Uri via,
+            bool isMulticast
+        )
             : base(
-            listener, 
-            listener.MessageEncoderFactory.Encoder, 
-            listener.BufferManager,
-            sockets, 
-            listener.UdpTransportBindingElement.RetransmissionSettings,
-            listener.UdpTransportBindingElement.MaxPendingMessagesTotalSize,
-            localAddress,
-            via,
-            isMulticast,
-            (int)listener.UdpTransportBindingElement.MaxReceivedMessageSize)
+                listener,
+                listener.MessageEncoderFactory.Encoder,
+                listener.BufferManager,
+                sockets,
+                listener.UdpTransportBindingElement.RetransmissionSettings,
+                listener.UdpTransportBindingElement.MaxPendingMessagesTotalSize,
+                localAddress,
+                via,
+                isMulticast,
+                (int)listener.UdpTransportBindingElement.MaxReceivedMessageSize
+            )
         {
             UdpOutputChannel udpOutputChannel = new ServerUdpOutputChannel(
                 listener,
@@ -32,20 +39,22 @@ namespace System.ServiceModel.Channels
                 sockets,
                 listener.UdpTransportBindingElement.RetransmissionSettings,
                 via,
-                isMulticast);
+                isMulticast
+            );
 
             this.SetOutputChannel(udpOutputChannel);
         }
 
         protected override bool IgnoreSerializationException
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        [SuppressMessage("Microsoft.StyleCop.CSharp.ReadabilityRules", "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists", Justification = "StyleCop 4.5 does not validate this rule properly.")]
+        [SuppressMessage(
+            "Microsoft.StyleCop.CSharp.ReadabilityRules",
+            "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists",
+            Justification = "StyleCop 4.5 does not validate this rule properly."
+        )]
         public override T GetProperty<T>()
         {
             if (typeof(T) == typeof(IReplyChannel))
@@ -65,7 +74,9 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
@@ -77,11 +88,17 @@ namespace System.ServiceModel.Channels
             return this.BeginReceiveRequest(this.DefaultReceiveTimeout, callback, state);
         }
 
-        public IAsyncResult BeginReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
@@ -97,18 +114,26 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
             return this.Dequeue(timeout, out context);
         }
 
-        public IAsyncResult BeginTryReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginTryReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
@@ -124,18 +149,26 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
             return this.WaitForItem(timeout);
         }
 
-        public IAsyncResult BeginWaitForRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
@@ -147,9 +180,16 @@ namespace System.ServiceModel.Channels
             return this.EndWaitForItem(result);
         }
 
-        internal override void FinishEnqueueMessage(Message message, Action dequeuedCallback, bool canDispatchOnThisThread)
+        internal override void FinishEnqueueMessage(
+            Message message,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            UdpRequestContext udpRequestContext = new UdpRequestContext(this.UdpOutputChannel, message);
+            UdpRequestContext udpRequestContext = new UdpRequestContext(
+                this.UdpOutputChannel,
+                message
+            );
             this.EnqueueAndDispatch(udpRequestContext, dequeuedCallback, canDispatchOnThisThread);
         }
 
@@ -162,11 +202,18 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw FxTrace.Exception.AsError(UdpReplyChannel.CreateReceiveRequestTimedOutException(channel, timeout));
+                throw FxTrace.Exception.AsError(
+                    UdpReplyChannel.CreateReceiveRequestTimedOutException(channel, timeout)
+                );
             }
         }
 
-        private static IAsyncResult HelpBeginReceiveRequest(IReplyChannel channel, TimeSpan timeout, AsyncCallback callback, object state)
+        private static IAsyncResult HelpBeginReceiveRequest(
+            IReplyChannel channel,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new HelpReceiveRequestAsyncResult(channel, timeout, callback, state);
         }
@@ -176,11 +223,16 @@ namespace System.ServiceModel.Channels
             return HelpReceiveRequestAsyncResult.End(result);
         }
 
-        private static Exception CreateReceiveRequestTimedOutException(IReplyChannel channel, TimeSpan timeout)
+        private static Exception CreateReceiveRequestTimedOutException(
+            IReplyChannel channel,
+            TimeSpan timeout
+        )
         {
             if (channel.LocalAddress != null)
             {
-                return new TimeoutException(SR.ReceiveRequestTimedOut(channel.LocalAddress.Uri.AbsoluteUri, timeout));
+                return new TimeoutException(
+                    SR.ReceiveRequestTimedOut(channel.LocalAddress.Uri.AbsoluteUri, timeout)
+                );
             }
             else
             {
@@ -190,17 +242,28 @@ namespace System.ServiceModel.Channels
 
         private class HelpReceiveRequestAsyncResult : AsyncResult
         {
-            private static AsyncCallback onReceiveRequest = Fx.ThunkCallback(new AsyncCallback(OnReceiveRequest));
+            private static AsyncCallback onReceiveRequest = Fx.ThunkCallback(
+                new AsyncCallback(OnReceiveRequest)
+            );
             private IReplyChannel channel;
             private TimeSpan timeout;
             private RequestContext requestContext;
 
-            public HelpReceiveRequestAsyncResult(IReplyChannel channel, TimeSpan timeout, AsyncCallback callback, object state)
+            public HelpReceiveRequestAsyncResult(
+                IReplyChannel channel,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.channel = channel;
                 this.timeout = timeout;
-                IAsyncResult result = channel.BeginTryReceiveRequest(timeout, onReceiveRequest, this);
+                IAsyncResult result = channel.BeginTryReceiveRequest(
+                    timeout,
+                    onReceiveRequest,
+                    this
+                );
 
                 if (!result.CompletedSynchronously)
                 {
@@ -213,7 +276,8 @@ namespace System.ServiceModel.Channels
 
             public static RequestContext End(IAsyncResult result)
             {
-                HelpReceiveRequestAsyncResult thisPtr = AsyncResult.End<HelpReceiveRequestAsyncResult>(result);
+                HelpReceiveRequestAsyncResult thisPtr =
+                    AsyncResult.End<HelpReceiveRequestAsyncResult>(result);
                 return thisPtr.requestContext;
             }
 
@@ -224,7 +288,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                HelpReceiveRequestAsyncResult thisPtr = (HelpReceiveRequestAsyncResult)result.AsyncState;
+                HelpReceiveRequestAsyncResult thisPtr = (HelpReceiveRequestAsyncResult)
+                    result.AsyncState;
                 Exception completionException = null;
                 try
                 {
@@ -247,7 +312,12 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.channel.EndTryReceiveRequest(result, out this.requestContext))
                 {
-                    throw FxTrace.Exception.AsError(UdpReplyChannel.CreateReceiveRequestTimedOutException(this.channel, this.timeout));
+                    throw FxTrace.Exception.AsError(
+                        UdpReplyChannel.CreateReceiveRequestTimedOutException(
+                            this.channel,
+                            this.timeout
+                        )
+                    );
                 }
             }
         }

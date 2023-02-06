@@ -40,50 +40,57 @@ namespace System.Drawing.Printing
     internal class PrintingServicesUnix : PrintingServices
     {
         #region Private Fields
-        
-        private static Hashtable doc_info = new Hashtable ();
+
+        private static Hashtable doc_info = new Hashtable();
         private static bool cups_installed;
-        
+
         //private string printer_name;
-        
+
         private static Hashtable installed_printers;
         private static string default_printer = String.Empty;
-                
+
         #endregion
 
         #region Constructor
 
-        internal PrintingServicesUnix () {
+        internal PrintingServicesUnix() { }
+
+        static PrintingServicesUnix()
+        {
+            installed_printers = new Hashtable();
+            CheckCupsInstalled();
         }
-        
-        static PrintingServicesUnix () {
-            installed_printers = new Hashtable ();
-            CheckCupsInstalled ();
-        }
-        
+
         #endregion
 
         #region Properties
 
-        internal static PrinterSettings.StringCollection InstalledPrinters {
-            get {
+        internal static PrinterSettings.StringCollection InstalledPrinters
+        {
+            get
+            {
                 LoadPrinters();
-                PrinterSettings.StringCollection list = new PrinterSettings.StringCollection (new string[] {});
-                foreach (object key in installed_printers.Keys) {
-                    list.Add (key.ToString());
+                PrinterSettings.StringCollection list = new PrinterSettings.StringCollection(
+                    new string[] { }
+                );
+                foreach (object key in installed_printers.Keys)
+                {
+                    list.Add(key.ToString());
                 }
                 return list;
             }
         }
 
-        internal override string DefaultPrinter {
-            get {
+        internal override string DefaultPrinter
+        {
+            get
+            {
                 if (installed_printers.Count == 0)
                     LoadPrinters();
                 return default_printer;
             }
         }
-        
+
         #endregion
 
 
@@ -92,13 +99,17 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Do a cups call to check if it is installed
         /// </summary>
-        private static void CheckCupsInstalled ()
+        private static void CheckCupsInstalled()
         {
-            try {
-                cupsGetDefault ();
+            try
+            {
+                cupsGetDefault();
             }
-            catch (DllNotFoundException) {
-                Console.WriteLine("libcups not found. To have printing support, you need cups installed");
+            catch (DllNotFoundException)
+            {
+                Console.WriteLine(
+                    "libcups not found. To have printing support, you need cups installed"
+                );
                 cups_installed = false;
                 return;
             }
@@ -110,16 +121,20 @@ namespace System.Drawing.Printing
         /// Open the printer's PPD file
         /// </summary>
         /// <param name="printer">Printer name, returned from cupsGetDests</param>
-        private IntPtr OpenPrinter (string printer)
+        private IntPtr OpenPrinter(string printer)
         {
-            try {
-                IntPtr ptr = cupsGetPPD (printer);
-                string ppd_filename = Marshal.PtrToStringAnsi (ptr);
-                IntPtr ppd_handle = ppdOpenFile (ppd_filename);
+            try
+            {
+                IntPtr ptr = cupsGetPPD(printer);
+                string ppd_filename = Marshal.PtrToStringAnsi(ptr);
+                IntPtr ppd_handle = ppdOpenFile(ppd_filename);
                 return ppd_handle;
             }
-            catch (Exception) {
-                Console.WriteLine ("There was an error opening the printer {0}. Please check your cups installation.");
+            catch (Exception)
+            {
+                Console.WriteLine(
+                    "There was an error opening the printer {0}. Please check your cups installation."
+                );
             }
             return IntPtr.Zero;
         }
@@ -128,33 +143,41 @@ namespace System.Drawing.Printing
         /// Close the printer file
         /// </summary>
         /// <param name="handle">PPD handle</param>
-        private void ClosePrinter (ref IntPtr handle)
+        private void ClosePrinter(ref IntPtr handle)
         {
-            try {
+            try
+            {
                 if (handle != IntPtr.Zero)
-                    ppdClose (handle);
+                    ppdClose(handle);
             }
-            finally {
+            finally
+            {
                 handle = IntPtr.Zero;
             }
         }
 
-        private static int OpenDests (ref IntPtr ptr) {
-            try {
-                return cupsGetDests (ref ptr);
+        private static int OpenDests(ref IntPtr ptr)
+        {
+            try
+            {
+                return cupsGetDests(ref ptr);
             }
-            catch {
+            catch
+            {
                 ptr = IntPtr.Zero;
             }
             return 0;
         }
 
-        private static void CloseDests (ref IntPtr ptr, int count) {
-            try {
+        private static void CloseDests(ref IntPtr ptr, int count)
+        {
+            try
+            {
                 if (ptr != IntPtr.Zero)
-                    cupsFreeDests (count, ptr);
+                    cupsFreeDests(count, ptr);
             }
-            finally {
+            finally
+            {
                 ptr = IntPtr.Zero;
             }
         }
@@ -167,35 +190,36 @@ namespace System.Drawing.Printing
         {
             if (!cups_installed || printer == null | printer == String.Empty)
                 return false;
-                
-            return installed_printers.Contains (printer);
-/*
-            if (!force && this.printer_name != null && String.Intern(this.printer_name).Equals(printer))
-                return is_printer_valid;
 
-            IntPtr ptr = cupsGetPPD (printer);
-            string ppd_filename = Marshal.PtrToStringAnsi (ptr);
-            is_printer_valid = ppd_filename != null;
-            this.printer_name = printer; 
-            return is_printer_valid;
-*/            
+            return installed_printers.Contains(printer);
+            /*
+                        if (!force && this.printer_name != null && String.Intern(this.printer_name).Equals(printer))
+                            return is_printer_valid;
+            
+                        IntPtr ptr = cupsGetPPD (printer);
+                        string ppd_filename = Marshal.PtrToStringAnsi (ptr);
+                        is_printer_valid = ppd_filename != null;
+                        this.printer_name = printer;
+                        return is_printer_valid;
+            */
         }
-    
+
         /// <summary>
         /// Loads the printer settings and initializes the PrinterSettings and PageSettings fields
         /// </summary>
         /// <param name="printer">Printer name</param>
         /// <param name="settings">PrinterSettings object to initialize</param>
-        internal override void LoadPrinterSettings (string printer, PrinterSettings settings)
+        internal override void LoadPrinterSettings(string printer, PrinterSettings settings)
         {
             if (cups_installed == false || (printer == null) || (printer == String.Empty))
                 return;
 
             if (installed_printers.Count == 0)
-                LoadPrinters ();
+                LoadPrinters();
 
-            if (((SysPrn.Printer)installed_printers[printer]).Settings != null) {
-                SysPrn.Printer p = (SysPrn.Printer) installed_printers[printer];
+            if (((SysPrn.Printer)installed_printers[printer]).Settings != null)
+            {
+                SysPrn.Printer p = (SysPrn.Printer)installed_printers[printer];
                 settings.can_duplex = p.Settings.can_duplex;
                 settings.is_plotter = p.Settings.is_plotter;
                 settings.landscape_angle = p.Settings.landscape_angle;
@@ -208,77 +232,108 @@ namespace System.Drawing.Printing
                 return;
             }
 
-            settings.PrinterCapabilities.Clear ();
+            settings.PrinterCapabilities.Clear();
 
-            IntPtr dests = IntPtr.Zero, ptr = IntPtr.Zero, ptr_printer, ppd_handle = IntPtr.Zero;
+            IntPtr dests = IntPtr.Zero,
+                ptr = IntPtr.Zero,
+                ptr_printer,
+                ppd_handle = IntPtr.Zero;
             string name = String.Empty;
             CUPS_DESTS printer_dest;
             PPD_FILE ppd;
-            int ret = 0, cups_dests_size;
-            NameValueCollection options, paper_names, paper_sources;
+            int ret = 0,
+                cups_dests_size;
+            NameValueCollection options,
+                paper_names,
+                paper_sources;
 
-            try {
-                ret = OpenDests (ref dests);
+            try
+            {
+                ret = OpenDests(ref dests);
                 if (ret == 0)
                     return;
 
-                cups_dests_size = Marshal.SizeOf (typeof(CUPS_DESTS));
+                cups_dests_size = Marshal.SizeOf(typeof(CUPS_DESTS));
                 ptr = dests;
-                for (int i = 0; i < ret; i++) {
-                    ptr_printer = (IntPtr) Marshal.ReadIntPtr (ptr);
-                    if (Marshal.PtrToStringAnsi (ptr_printer).Equals(printer)) {
+                for (int i = 0; i < ret; i++)
+                {
+                    ptr_printer = (IntPtr)Marshal.ReadIntPtr(ptr);
+                    if (Marshal.PtrToStringAnsi(ptr_printer).Equals(printer))
+                    {
                         name = printer;
                         break;
                     }
-                    ptr = (IntPtr) ((long)ptr + cups_dests_size);
+                    ptr = (IntPtr)((long)ptr + cups_dests_size);
                 }
-            
-                if (!name.Equals(printer)) {
+
+                if (!name.Equals(printer))
+                {
                     return;
                 }
 
-                ppd_handle = OpenPrinter (printer);
+                ppd_handle = OpenPrinter(printer);
                 if (ppd_handle == IntPtr.Zero)
                     return;
 
-                printer_dest = (CUPS_DESTS) Marshal.PtrToStructure (ptr, typeof (CUPS_DESTS));
+                printer_dest = (CUPS_DESTS)Marshal.PtrToStructure(ptr, typeof(CUPS_DESTS));
                 options = new NameValueCollection();
                 paper_names = new NameValueCollection();
                 paper_sources = new NameValueCollection();
                 string defsize;
                 string defsource;
-                LoadPrinterOptions (printer_dest.options, printer_dest.num_options, ppd_handle, options,
-                    paper_names, out defsize,
-                    paper_sources, out defsource);
+                LoadPrinterOptions(
+                    printer_dest.options,
+                    printer_dest.num_options,
+                    ppd_handle,
+                    options,
+                    paper_names,
+                    out defsize,
+                    paper_sources,
+                    out defsource
+                );
 
                 if (settings.paper_sizes == null)
-                    settings.paper_sizes = new PrinterSettings.PaperSizeCollection (new PaperSize [] {});
+                    settings.paper_sizes = new PrinterSettings.PaperSizeCollection(
+                        new PaperSize[] { }
+                    );
                 else
                     settings.paper_sizes.Clear();
-            
-                if (settings.paper_sources == null)                
-                    settings.paper_sources = new PrinterSettings.PaperSourceCollection (new PaperSource [] {});
+
+                if (settings.paper_sources == null)
+                    settings.paper_sources = new PrinterSettings.PaperSourceCollection(
+                        new PaperSource[] { }
+                    );
                 else
                     settings.paper_sources.Clear();
 
-                settings.DefaultPageSettings.PaperSource = LoadPrinterPaperSources (settings, defsource, paper_sources);
-                settings.DefaultPageSettings.PaperSize = LoadPrinterPaperSizes (ppd_handle, settings, defsize, paper_names);
-                LoadPrinterResolutionsAndDefault (printer, settings, ppd_handle);
+                settings.DefaultPageSettings.PaperSource = LoadPrinterPaperSources(
+                    settings,
+                    defsource,
+                    paper_sources
+                );
+                settings.DefaultPageSettings.PaperSize = LoadPrinterPaperSizes(
+                    ppd_handle,
+                    settings,
+                    defsize,
+                    paper_names
+                );
+                LoadPrinterResolutionsAndDefault(printer, settings, ppd_handle);
 
-                ppd = (PPD_FILE) Marshal.PtrToStructure (ppd_handle, typeof (PPD_FILE));
+                ppd = (PPD_FILE)Marshal.PtrToStructure(ppd_handle, typeof(PPD_FILE));
                 settings.landscape_angle = ppd.landscape;
                 settings.supports_color = (ppd.color_device == 0) ? false : true;
                 settings.can_duplex = options["Duplex"] != null;
 
-                ClosePrinter (ref ppd_handle);
-            
+                ClosePrinter(ref ppd_handle);
+
                 ((SysPrn.Printer)installed_printers[printer]).Settings = settings;
             }
-            finally {
-                CloseDests (ref dests, ret);
+            finally
+            {
+                CloseDests(ref dests, ret);
             }
         }
-        
+
         /// <summary>
         /// Loads the global options of a printer plus the paper types and trays supported,
         /// and sets the default paper size and source tray.
@@ -291,60 +346,68 @@ namespace System.Drawing.Printing
         /// <param name="defsize">The default paper size, set by LoadOptionList</param>
         /// <param name="paper_sources">A list of trays(InputSlot) </param>
         /// <param name="defsource">The default source tray, set by LoadOptionList</param>
-        private static void LoadPrinterOptions(IntPtr options, int numOptions, IntPtr ppd, 
-                                         NameValueCollection list, 
-                                         NameValueCollection paper_names, out string defsize,
-                                         NameValueCollection paper_sources, out string defsource)
+        private static void LoadPrinterOptions(
+            IntPtr options,
+            int numOptions,
+            IntPtr ppd,
+            NameValueCollection list,
+            NameValueCollection paper_names,
+            out string defsize,
+            NameValueCollection paper_sources,
+            out string defsource
+        )
         {
             CUPS_OPTIONS cups_options;
-            string option_name, option_value;
+            string option_name,
+                option_value;
             int cups_size = Marshal.SizeOf(typeof(CUPS_OPTIONS));
 
-            LoadOptionList (ppd, "PageSize", paper_names, out defsize);
-            LoadOptionList (ppd, "InputSlot", paper_sources, out defsource);
-            
+            LoadOptionList(ppd, "PageSize", paper_names, out defsize);
+            LoadOptionList(ppd, "InputSlot", paper_sources, out defsource);
+
             for (int j = 0; j < numOptions; j++)
             {
-                cups_options = (CUPS_OPTIONS) Marshal.PtrToStructure(options, typeof(CUPS_OPTIONS));
+                cups_options = (CUPS_OPTIONS)Marshal.PtrToStructure(options, typeof(CUPS_OPTIONS));
                 option_name = Marshal.PtrToStringAnsi(cups_options.name);
                 option_value = Marshal.PtrToStringAnsi(cups_options.val);
 
-                if (option_name == "PageSize") defsize = option_value;
-                else if (option_name == "InputSlot") defsource = option_value;
-                #if PrintDebug
+                if (option_name == "PageSize")
+                    defsize = option_value;
+                else if (option_name == "InputSlot")
+                    defsource = option_value;
+#if PrintDebug
                 Console.WriteLine("{0} = {1}", option_name, option_value);
-                #endif
-                
+#endif
                 list.Add(option_name, option_value);
 
-                options = (IntPtr) ((long)options + cups_size);
+                options = (IntPtr)((long)options + cups_size);
             }
         }
-        
+
         /// <summary>
-        /// Loads the global options of a printer. 
+        /// Loads the global options of a printer.
         /// </summary>
         /// <param name="options">The options field of a printer's CUPS_DESTS structure</param>
         /// <param name="numOptions">The number of options of the printer</param>
         private static NameValueCollection LoadPrinterOptions(IntPtr options, int numOptions)
         {
             CUPS_OPTIONS cups_options;
-            string option_name, option_value;
-            int cups_size = Marshal.SizeOf (typeof(CUPS_OPTIONS));
-            NameValueCollection list = new NameValueCollection ();
+            string option_name,
+                option_value;
+            int cups_size = Marshal.SizeOf(typeof(CUPS_OPTIONS));
+            NameValueCollection list = new NameValueCollection();
             for (int j = 0; j < numOptions; j++)
             {
-                cups_options = (CUPS_OPTIONS) Marshal.PtrToStructure(options, typeof(CUPS_OPTIONS));
-                option_name = Marshal.PtrToStringAnsi (cups_options.name);
-                option_value = Marshal.PtrToStringAnsi (cups_options.val);
-                
-                #if PrintDebug
-                Console.WriteLine("{0} = {1}", option_name, option_value);
-                #endif
-                
-                list.Add (option_name, option_value);
+                cups_options = (CUPS_OPTIONS)Marshal.PtrToStructure(options, typeof(CUPS_OPTIONS));
+                option_name = Marshal.PtrToStringAnsi(cups_options.name);
+                option_value = Marshal.PtrToStringAnsi(cups_options.val);
 
-                options = (IntPtr) ((long)options + cups_size);
+#if PrintDebug
+                Console.WriteLine("{0} = {1}", option_name, option_value);
+#endif
+                list.Add(option_name, option_value);
+
+                options = (IntPtr)((long)options + cups_size);
             }
             return list;
         }
@@ -357,33 +420,44 @@ namespace System.Drawing.Printing
         /// <param name="option_name">Name of the option group to load</param>
         /// <param name="list">List of loaded options</param>
         /// <param name="defoption">The default option from the loaded options list</param>
-        private static void LoadOptionList (IntPtr ppd, string option_name, NameValueCollection list, out string defoption) {
-
+        private static void LoadOptionList(
+            IntPtr ppd,
+            string option_name,
+            NameValueCollection list,
+            out string defoption
+        )
+        {
             IntPtr ptr = IntPtr.Zero;
             PPD_OPTION ppd_option;
             PPD_CHOICE choice;
-            int choice_size = Marshal.SizeOf(typeof(PPD_CHOICE)); 
+            int choice_size = Marshal.SizeOf(typeof(PPD_CHOICE));
             defoption = null;
-            
-            ptr = ppdFindOption (ppd, option_name);
+
+            ptr = ppdFindOption(ppd, option_name);
             if (ptr != IntPtr.Zero)
             {
-                ppd_option = (PPD_OPTION) Marshal.PtrToStructure (ptr, typeof (PPD_OPTION));
-                #if PrintDebug
-                Console.WriteLine (" OPTION  key:{0} def:{1} text: {2}", ppd_option.keyword, ppd_option.defchoice, ppd_option.text);
-                #endif
+                ppd_option = (PPD_OPTION)Marshal.PtrToStructure(ptr, typeof(PPD_OPTION));
+#if PrintDebug
+                Console.WriteLine(
+                    " OPTION  key:{0} def:{1} text: {2}",
+                    ppd_option.keyword,
+                    ppd_option.defchoice,
+                    ppd_option.text
+                );
+#endif
                 defoption = ppd_option.defchoice;
                 ptr = ppd_option.choices;
-                for (int c = 0; c < ppd_option.num_choices; c++) {
-                    choice = (PPD_CHOICE) Marshal.PtrToStructure (ptr, typeof (PPD_CHOICE));
+                for (int c = 0; c < ppd_option.num_choices; c++)
+                {
+                    choice = (PPD_CHOICE)Marshal.PtrToStructure(ptr, typeof(PPD_CHOICE));
                     list.Add(choice.choice, choice.text);
-                    #if PrintDebug
-                    Console.WriteLine ("       choice:{0} - text: {1}", choice.choice, choice.text);
-                    #endif
+#if PrintDebug
+                    Console.WriteLine("       choice:{0} - text: {1}", choice.choice, choice.text);
+#endif
 
-                    ptr = (IntPtr) ((long)ptr + choice_size);
+                    ptr = (IntPtr)((long)ptr + choice_size);
                 }
-            }        
+            }
         }
 
         /// <summary>
@@ -391,49 +465,56 @@ namespace System.Drawing.Printing
         /// </summary>
         /// <param name="printer">Printer name</param>
         /// <param name="settings">PrinterSettings object to fill</param>
-        internal override void LoadPrinterResolutions (string printer, PrinterSettings settings)
+        internal override void LoadPrinterResolutions(string printer, PrinterSettings settings)
         {
-            IntPtr ppd_handle = OpenPrinter (printer);
+            IntPtr ppd_handle = OpenPrinter(printer);
             if (ppd_handle == IntPtr.Zero)
                 return;
 
-            LoadPrinterResolutionsAndDefault (printer, settings, ppd_handle);
+            LoadPrinterResolutionsAndDefault(printer, settings, ppd_handle);
 
-            ClosePrinter (ref ppd_handle);
+            ClosePrinter(ref ppd_handle);
         }
 
         /// <summary>
         /// Create a PrinterResolution from a string Resolution that is set in the PPD option.
         /// An example of Resolution is "600x600dpi" or "600dpi". Returns null if malformed or "Unknown".
         /// </summary>
-        private PrinterResolution ParseResolution (string resolution)
+        private PrinterResolution ParseResolution(string resolution)
         {
-            if (String.IsNullOrEmpty (resolution))
+            if (String.IsNullOrEmpty(resolution))
                 return null;
 
-            int dpiIndex = resolution.IndexOf ("dpi");
+            int dpiIndex = resolution.IndexOf("dpi");
             if (dpiIndex == -1)
             {
                 // Resolution is "Unknown" or unparsable
                 return null;
             }
-            resolution = resolution.Substring (0, dpiIndex);
+            resolution = resolution.Substring(0, dpiIndex);
 
-            int x_resolution, y_resolution;
-            try {
-                if (resolution.Contains ("x")) {
-                    string[] resolutions = resolution.Split (new[] {'x'});
-                    x_resolution = Convert.ToInt32 (resolutions [0]);
-                    y_resolution = Convert.ToInt32 (resolutions [1]);
-                } else {
-                    x_resolution = Convert.ToInt32 (resolution);
+            int x_resolution,
+                y_resolution;
+            try
+            {
+                if (resolution.Contains("x"))
+                {
+                    string[] resolutions = resolution.Split(new[] { 'x' });
+                    x_resolution = Convert.ToInt32(resolutions[0]);
+                    y_resolution = Convert.ToInt32(resolutions[1]);
+                }
+                else
+                {
+                    x_resolution = Convert.ToInt32(resolution);
                     y_resolution = x_resolution;
                 }
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 return null;
             }
 
-            return new PrinterResolution (PrinterResolutionKind.Custom, x_resolution, y_resolution);
+            return new PrinterResolution(PrinterResolutionKind.Custom, x_resolution, y_resolution);
         }
 
         /// <summary>
@@ -443,8 +524,12 @@ namespace System.Drawing.Printing
         /// <param name="settings">PrinterSettings object to fill</param>
         /// <param name="def_size">Default paper size, from the global options of the printer</param>
         /// <param name="paper_names">List of available paper sizes that gets filled</param>
-        private PaperSize LoadPrinterPaperSizes(IntPtr ppd_handle, PrinterSettings settings, 
-                                                string def_size, NameValueCollection paper_names)
+        private PaperSize LoadPrinterPaperSizes(
+            IntPtr ppd_handle,
+            PrinterSettings settings,
+            string def_size,
+            NameValueCollection paper_names
+        )
         {
             IntPtr ptr;
             string real_name;
@@ -452,40 +537,45 @@ namespace System.Drawing.Printing
             PPD_SIZE size;
             PaperSize ps;
 
-            PaperSize defsize = new PaperSize (GetPaperKind (827, 1169), "A4", 827, 1169);
-            ppd = (PPD_FILE) Marshal.PtrToStructure (ppd_handle, typeof (PPD_FILE));
+            PaperSize defsize = new PaperSize(GetPaperKind(827, 1169), "A4", 827, 1169);
+            ppd = (PPD_FILE)Marshal.PtrToStructure(ppd_handle, typeof(PPD_FILE));
             ptr = ppd.sizes;
-            float w, h;
-            for (int i = 0; i < ppd.num_sizes; i++) {
-                size = (PPD_SIZE) Marshal.PtrToStructure (ptr, typeof (PPD_SIZE));
+            float w,
+                h;
+            for (int i = 0; i < ppd.num_sizes; i++)
+            {
+                size = (PPD_SIZE)Marshal.PtrToStructure(ptr, typeof(PPD_SIZE));
                 real_name = paper_names[size.name];
                 w = size.width * 100 / 72;
                 h = size.length * 100 / 72;
-                PaperKind kind = GetPaperKind ((int) w, (int) h);
-                ps = new PaperSize (kind, real_name, (int) w, (int) h);
+                PaperKind kind = GetPaperKind((int)w, (int)h);
+                ps = new PaperSize(kind, real_name, (int)w, (int)h);
                 ps.RawKind = (int)kind;
-                if (def_size == ps.Kind.ToString ())
+                if (def_size == ps.Kind.ToString())
                     defsize = ps;
-                settings.paper_sizes.Add (ps);
-                ptr = (IntPtr) ((long)ptr + Marshal.SizeOf (size));
+                settings.paper_sizes.Add(ps);
+                ptr = (IntPtr)((long)ptr + Marshal.SizeOf(size));
             }
-            
-            return defsize;
 
+            return defsize;
         }
-        
+
         /// <summary>
         /// Loads a printer's paper sources (trays). Returns the default PaperSource, and fills a list of paper_sources for use in dialogues
         /// </summary>
         /// <param name="settings">PrinterSettings object to fill</param>
         /// <param name="def_source">Default paper source, from the global options of the printer</param>
         /// <param name="paper_sources">List of available paper sizes that gets filled</param>
-        private PaperSource LoadPrinterPaperSources (PrinterSettings settings, string def_source, 
-                                                    NameValueCollection paper_sources)
+        private PaperSource LoadPrinterPaperSources(
+            PrinterSettings settings,
+            string def_source,
+            NameValueCollection paper_sources
+        )
         {
             PaperSourceKind kind;
             PaperSource defsource = null;
-            foreach(string source in paper_sources) {
+            foreach (string source in paper_sources)
+            {
                 switch (source)
                 {
                     case "Auto":
@@ -507,11 +597,11 @@ namespace System.Drawing.Printing
                         kind = PaperSourceKind.Custom;
                         break;
                 }
-                settings.paper_sources.Add (new PaperSource (kind, paper_sources[source]));
+                settings.paper_sources.Add(new PaperSource(kind, paper_sources[source]));
                 if (def_source == source)
-                    defsource = settings.paper_sources[settings.paper_sources.Count-1];
+                    defsource = settings.paper_sources[settings.paper_sources.Count - 1];
             }
-            
+
             if (defsource == null && settings.paper_sources.Count > 0)
                 return settings.paper_sources[0];
             return defsource;
@@ -521,28 +611,34 @@ namespace System.Drawing.Printing
         /// Sets the available resolutions and default resolution from a
         /// printer's PPD file into settings.
         /// </summary>
-        private void LoadPrinterResolutionsAndDefault (string printer,
-            PrinterSettings settings, IntPtr ppd_handle)
+        private void LoadPrinterResolutionsAndDefault(
+            string printer,
+            PrinterSettings settings,
+            IntPtr ppd_handle
+        )
         {
             if (settings.printer_resolutions == null)
-                settings.printer_resolutions = new PrinterSettings.PrinterResolutionCollection (new PrinterResolution [] {});
+                settings.printer_resolutions = new PrinterSettings.PrinterResolutionCollection(
+                    new PrinterResolution[] { }
+                );
             else
-                settings.printer_resolutions.Clear ();
+                settings.printer_resolutions.Clear();
 
-            var printer_resolutions = new NameValueCollection ();
+            var printer_resolutions = new NameValueCollection();
             string defresolution;
-            LoadOptionList (ppd_handle, "Resolution", printer_resolutions, out defresolution);
-            foreach (var resolution in printer_resolutions.Keys) {
-                var new_resolution = ParseResolution (resolution.ToString ());
-                settings.PrinterResolutions.Add (new_resolution);
+            LoadOptionList(ppd_handle, "Resolution", printer_resolutions, out defresolution);
+            foreach (var resolution in printer_resolutions.Keys)
+            {
+                var new_resolution = ParseResolution(resolution.ToString());
+                settings.PrinterResolutions.Add(new_resolution);
             }
 
-            var default_resolution = ParseResolution (defresolution);
+            var default_resolution = ParseResolution(defresolution);
 
             if (default_resolution == null)
-                default_resolution = ParseResolution ("300dpi");
+                default_resolution = ParseResolution("300dpi");
             if (printer_resolutions.Count == 0)
-                settings.PrinterResolutions.Add (default_resolution);
+                settings.PrinterResolutions.Add(default_resolution);
 
             settings.DefaultPageSettings.PrinterResolution = default_resolution;
         }
@@ -553,41 +649,52 @@ namespace System.Drawing.Printing
         /// <param name="def_printer"></param>
         private static void LoadPrinters()
         {
-            installed_printers.Clear ();        
+            installed_printers.Clear();
             if (cups_installed == false)
                 return;
-            
-            IntPtr dests = IntPtr.Zero, ptr_printers;
+
+            IntPtr dests = IntPtr.Zero,
+                ptr_printers;
             CUPS_DESTS printer;
-              int n_printers = 0;
+            int n_printers = 0;
             int cups_dests_size = Marshal.SizeOf(typeof(CUPS_DESTS));
-            string name, first, type, status, comment;
+            string name,
+                first,
+                type,
+                status,
+                comment;
             first = type = status = comment = String.Empty;
             int state = 0;
-            
-            try {
-                n_printers = OpenDests (ref dests);
+
+            try
+            {
+                n_printers = OpenDests(ref dests);
 
                 ptr_printers = dests;
-                for (int i = 0; i < n_printers; i++) {
-                    printer = (CUPS_DESTS) Marshal.PtrToStructure (ptr_printers, typeof (CUPS_DESTS));
-                    name = Marshal.PtrToStringAnsi (printer.name);
+                for (int i = 0; i < n_printers; i++)
+                {
+                    printer = (CUPS_DESTS)Marshal.PtrToStructure(ptr_printers, typeof(CUPS_DESTS));
+                    name = Marshal.PtrToStringAnsi(printer.name);
 
                     if (printer.is_default == 1)
                         default_printer = name;
-                
-                    if (first.Equals (String.Empty))
+
+                    if (first.Equals(String.Empty))
                         first = name;
-            
-                    NameValueCollection options = LoadPrinterOptions(printer.options, printer.num_options);
-                
+
+                    NameValueCollection options = LoadPrinterOptions(
+                        printer.options,
+                        printer.num_options
+                    );
+
                     if (options["printer-state"] != null)
                         state = Int32.Parse(options["printer-state"]);
-                
+
                     if (options["printer-comment"] != null)
                         comment = options["printer-state"];
 
-                    switch(state) {
+                    switch (state)
+                    {
                         case 4:
                             status = "Printing";
                             break;
@@ -595,21 +702,24 @@ namespace System.Drawing.Printing
                             status = "Stopped";
                             break;
                         default:
-                            status =  "Ready";
+                            status = "Ready";
                             break;
                     }
-                
-                    installed_printers.Add (name, new SysPrn.Printer (String.Empty, type, status, comment));
 
-                    ptr_printers = (IntPtr) ((long)ptr_printers + cups_dests_size);
+                    installed_printers.Add(
+                        name,
+                        new SysPrn.Printer(String.Empty, type, status, comment)
+                    );
+
+                    ptr_printers = (IntPtr)((long)ptr_printers + cups_dests_size);
                 }
-            
             }
-            finally {
-                CloseDests (ref dests, n_printers);
+            finally
+            {
+                CloseDests(ref dests, n_printers);
             }
-            
-            if (default_printer.Equals (String.Empty))
+
+            if (default_printer.Equals(String.Empty))
                 default_printer = first;
         }
 
@@ -621,47 +731,64 @@ namespace System.Drawing.Printing
         /// <param name="type"></param>
         /// <param name="status"></param>
         /// <param name="comment"></param>
-        internal override void GetPrintDialogInfo (string printer, ref string port, ref string type, ref string status, ref string comment) {
-            int count = 0, state = -1;
+        internal override void GetPrintDialogInfo(
+            string printer,
+            ref string port,
+            ref string type,
+            ref string status,
+            ref string comment
+        )
+        {
+            int count = 0,
+                state = -1;
             bool found = false;
             CUPS_DESTS cups_dests;
-            IntPtr dests = IntPtr.Zero, ptr_printers, ptr_printer;
+            IntPtr dests = IntPtr.Zero,
+                ptr_printers,
+                ptr_printer;
             int cups_dests_size = Marshal.SizeOf(typeof(CUPS_DESTS));
-            
+
             if (cups_installed == false)
                 return;
 
-            try {
-                count = OpenDests (ref dests);
+            try
+            {
+                count = OpenDests(ref dests);
 
                 if (count == 0)
                     return;
 
                 ptr_printers = dests;
 
-                for (int i = 0; i < count; i++) {
-                    ptr_printer = (IntPtr) Marshal.ReadIntPtr (ptr_printers);
-                    if (Marshal.PtrToStringAnsi (ptr_printer).Equals(printer)) {
+                for (int i = 0; i < count; i++)
+                {
+                    ptr_printer = (IntPtr)Marshal.ReadIntPtr(ptr_printers);
+                    if (Marshal.PtrToStringAnsi(ptr_printer).Equals(printer))
+                    {
                         found = true;
                         break;
                     }
-                    ptr_printers = (IntPtr) ((long)ptr_printers + cups_dests_size);                
+                    ptr_printers = (IntPtr)((long)ptr_printers + cups_dests_size);
                 }
-            
+
                 if (!found)
                     return;
-            
-                cups_dests = (CUPS_DESTS) Marshal.PtrToStructure (ptr_printers, typeof (CUPS_DESTS));
-            
-                NameValueCollection options = LoadPrinterOptions(cups_dests.options, cups_dests.num_options);
+
+                cups_dests = (CUPS_DESTS)Marshal.PtrToStructure(ptr_printers, typeof(CUPS_DESTS));
+
+                NameValueCollection options = LoadPrinterOptions(
+                    cups_dests.options,
+                    cups_dests.num_options
+                );
 
                 if (options["printer-state"] != null)
                     state = Int32.Parse(options["printer-state"]);
-            
+
                 if (options["printer-comment"] != null)
                     comment = options["printer-state"];
 
-                switch(state) {
+                switch (state)
+                {
                     case 4:
                         status = "Printing";
                         break;
@@ -669,12 +796,13 @@ namespace System.Drawing.Printing
                         status = "Stopped";
                         break;
                     default:
-                        status =  "Ready";
+                        status = "Ready";
                         break;
                 }
             }
-            finally {
-                CloseDests (ref dests, count);
+            finally
+            {
+                CloseDests(ref dests, count);
             }
         }
 
@@ -683,7 +811,7 @@ namespace System.Drawing.Printing
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        private PaperKind GetPaperKind (int width, int height)
+        private PaperKind GetPaperKind(int width, int height)
         {
             if (width == 827 && height == 1169)
                 return PaperKind.A4;
@@ -771,7 +899,11 @@ namespace System.Drawing.Printing
         /// <param name="printer_settings"></param>
         /// <param name="page_settings"></param>
         /// <param name="options"></param>
-        internal static int GetCupsOptions (PrinterSettings printer_settings, PageSettings page_settings, out IntPtr options)
+        internal static int GetCupsOptions(
+            PrinterSettings printer_settings,
+            PageSettings page_settings,
+            out IntPtr options
+        )
         {
             options = IntPtr.Zero;
 
@@ -781,98 +913,132 @@ namespace System.Drawing.Printing
 
             StringBuilder sb = new StringBuilder();
             sb.Append(
-                "copies=" + printer_settings.Copies + " " + 
-                "Collate=" + printer_settings.Collate + " " +
-                "ColorModel=" + (page_settings.Color ? "Color" : "Black") + " " +
-                "PageSize=" + String.Format ("Custom.{0}x{1}", width, height) + " " +
-                "landscape=" + page_settings.Landscape
+                "copies="
+                    + printer_settings.Copies
+                    + " "
+                    + "Collate="
+                    + printer_settings.Collate
+                    + " "
+                    + "ColorModel="
+                    + (page_settings.Color ? "Color" : "Black")
+                    + " "
+                    + "PageSize="
+                    + String.Format("Custom.{0}x{1}", width, height)
+                    + " "
+                    + "landscape="
+                    + page_settings.Landscape
             );
-            
+
             if (printer_settings.CanDuplex)
             {
                 if (printer_settings.Duplex == Duplex.Simplex)
                     sb.Append(" Duplex=None");
                 else
-                    sb.Append(" Duplex=DuplexNoTumble");                
+                    sb.Append(" Duplex=DuplexNoTumble");
             }
 
-            return cupsParseOptions (sb.ToString(), 0, ref options);
+            return cupsParseOptions(sb.ToString(), 0, ref options);
         }
 
-        internal static bool StartDoc (GraphicsPrinter gr, string doc_name, string output_file)
+        internal static bool StartDoc(GraphicsPrinter gr, string doc_name, string output_file)
         {
-            DOCINFO doc = (DOCINFO) doc_info[gr.Hdc];
+            DOCINFO doc = (DOCINFO)doc_info[gr.Hdc];
             doc.title = doc_name;
             return true;
         }
 
-        internal static bool EndDoc (GraphicsPrinter gr)
+        internal static bool EndDoc(GraphicsPrinter gr)
         {
-            DOCINFO doc = (DOCINFO) doc_info[gr.Hdc];
+            DOCINFO doc = (DOCINFO)doc_info[gr.Hdc];
 
-            gr.Graphics.Dispose (); // Dispose object to force surface finish
-            
+            gr.Graphics.Dispose(); // Dispose object to force surface finish
+
             IntPtr options;
-            int options_count = GetCupsOptions (doc.settings, doc.default_page_settings, out options);
+            int options_count = GetCupsOptions(
+                doc.settings,
+                doc.default_page_settings,
+                out options
+            );
 
-            cupsPrintFile (doc.settings.PrinterName, doc.filename, doc.title, options_count, options);
-            cupsFreeOptions (options_count, options);
-            doc_info.Remove (gr.Hdc);
-            if (tmpfile != null) {
-                try { File.Delete (tmpfile); }
+            cupsPrintFile(
+                doc.settings.PrinterName,
+                doc.filename,
+                doc.title,
+                options_count,
+                options
+            );
+            cupsFreeOptions(options_count, options);
+            doc_info.Remove(gr.Hdc);
+            if (tmpfile != null)
+            {
+                try
+                {
+                    File.Delete(tmpfile);
+                }
                 catch { }
             }
             return true;
         }
 
-        internal static bool StartPage (GraphicsPrinter gr)
+        internal static bool StartPage(GraphicsPrinter gr)
         {
             return true;
         }
 
-        internal static bool EndPage (GraphicsPrinter gr)
+        internal static bool EndPage(GraphicsPrinter gr)
         {
-            GdipGetPostScriptSavePage (gr.Hdc);
+            GdipGetPostScriptSavePage(gr.Hdc);
             return true;
         }
 
         // Unfortunately, PrinterSettings and PageSettings couldn't be referencing each other,
         // thus we need to pass them separately
-        internal static IntPtr CreateGraphicsContext (PrinterSettings settings, PageSettings default_page_settings)
+        internal static IntPtr CreateGraphicsContext(
+            PrinterSettings settings,
+            PageSettings default_page_settings
+        )
         {
             IntPtr graphics = IntPtr.Zero;
             string name;
-            if (!settings.PrintToFile) {
-                StringBuilder sb = new StringBuilder (1024);
+            if (!settings.PrintToFile)
+            {
+                StringBuilder sb = new StringBuilder(1024);
                 int length = sb.Capacity;
-                cupsTempFd (sb, length);
-                name = sb.ToString ();
+                cupsTempFd(sb, length);
+                name = sb.ToString();
                 tmpfile = name;
             }
             else
                 name = settings.PrintFileName;
 
             PaperSize psize = default_page_settings.PaperSize;
-            int width, height;
-            if (default_page_settings.Landscape) { // Swap in case of landscape
+            int width,
+                height;
+            if (default_page_settings.Landscape)
+            { // Swap in case of landscape
                 width = psize.Height;
                 height = psize.Width;
-            } else {
+            }
+            else
+            {
                 width = psize.Width;
                 height = psize.Height;
             }
 
-            GdipGetPostScriptGraphicsContext (name,
+            GdipGetPostScriptGraphicsContext(
+                name,
                 width * 72 / 100,
-                height * 72 / 100, 
+                height * 72 / 100,
                 default_page_settings.PrinterResolution.X,
-                default_page_settings.PrinterResolution.Y, ref graphics);
+                default_page_settings.PrinterResolution.Y,
+                ref graphics
+            );
 
-            DOCINFO doc = new DOCINFO ();
+            DOCINFO doc = new DOCINFO();
             doc.filename = name;
             doc.settings = settings;
             doc.default_page_settings = default_page_settings;
-            doc_info.Add (graphics, doc);
+            doc_info.Add(graphics, doc);
 
             return graphics;
         }
@@ -881,47 +1047,60 @@ namespace System.Drawing.Printing
 
         #region DllImports
 
-        [DllImport("libcups", CharSet=CharSet.Ansi)]
-        static extern int cupsGetDests (ref IntPtr dests);
+        [DllImport("libcups", CharSet = CharSet.Ansi)]
+        static extern int cupsGetDests(ref IntPtr dests);
 
-//        [DllImport("libcups", CharSet=CharSet.Ansi)]
-//        static extern void cupsGetDest (string name, string instance, int num_dests, ref IntPtr dests);
-
-        [DllImport("libcups")]
-        static extern void cupsFreeDests (int num_dests, IntPtr dests);
-
-        [DllImport("libcups", CharSet=CharSet.Ansi)]
-        static extern IntPtr cupsTempFd (StringBuilder sb, int len);
-
-        [DllImport("libcups", CharSet=CharSet.Ansi)]
-        static extern IntPtr cupsGetDefault ();
-
-        [DllImport("libcups", CharSet=CharSet.Ansi)]
-        static extern int cupsPrintFile (string printer, string filename, string title, int num_options, IntPtr options);
-
-        [DllImport("libcups", CharSet=CharSet.Ansi)]
-        static extern IntPtr cupsGetPPD (string printer);
-
-        [DllImport("libcups", CharSet=CharSet.Ansi)]
-        static extern IntPtr ppdOpenFile (string filename);
-
-        [DllImport("libcups", CharSet=CharSet.Ansi)]
-        static extern IntPtr ppdFindOption (IntPtr ppd_file, string keyword);
+        //        [DllImport("libcups", CharSet=CharSet.Ansi)]
+        //        static extern void cupsGetDest (string name, string instance, int num_dests, ref IntPtr dests);
 
         [DllImport("libcups")]
-        static extern void ppdClose (IntPtr ppd);
+        static extern void cupsFreeDests(int num_dests, IntPtr dests);
 
-        [DllImport ("libcups", CharSet=CharSet.Ansi)]
-        static extern int cupsParseOptions (string arg, int number_of_options, ref IntPtr options);
+        [DllImport("libcups", CharSet = CharSet.Ansi)]
+        static extern IntPtr cupsTempFd(StringBuilder sb, int len);
+
+        [DllImport("libcups", CharSet = CharSet.Ansi)]
+        static extern IntPtr cupsGetDefault();
+
+        [DllImport("libcups", CharSet = CharSet.Ansi)]
+        static extern int cupsPrintFile(
+            string printer,
+            string filename,
+            string title,
+            int num_options,
+            IntPtr options
+        );
+
+        [DllImport("libcups", CharSet = CharSet.Ansi)]
+        static extern IntPtr cupsGetPPD(string printer);
+
+        [DllImport("libcups", CharSet = CharSet.Ansi)]
+        static extern IntPtr ppdOpenFile(string filename);
+
+        [DllImport("libcups", CharSet = CharSet.Ansi)]
+        static extern IntPtr ppdFindOption(IntPtr ppd_file, string keyword);
 
         [DllImport("libcups")]
-        static extern void cupsFreeOptions (int number_options, IntPtr options);
+        static extern void ppdClose(IntPtr ppd);
 
-        [DllImport("gdiplus.dll", CharSet=CharSet.Ansi)]
-        static extern int GdipGetPostScriptGraphicsContext (string filename, int with, int height, double dpix, double dpiy, ref IntPtr graphics);
+        [DllImport("libcups", CharSet = CharSet.Ansi)]
+        static extern int cupsParseOptions(string arg, int number_of_options, ref IntPtr options);
+
+        [DllImport("libcups")]
+        static extern void cupsFreeOptions(int number_options, IntPtr options);
+
+        [DllImport("gdiplus.dll", CharSet = CharSet.Ansi)]
+        static extern int GdipGetPostScriptGraphicsContext(
+            string filename,
+            int with,
+            int height,
+            double dpix,
+            double dpiy,
+            ref IntPtr graphics
+        );
 
         [DllImport("gdiplus.dll")]
-        static extern int GdipGetPostScriptSavePage (IntPtr graphics);
+        static extern int GdipGetPostScriptSavePage(IntPtr graphics);
 
         #endregion
 
@@ -929,150 +1108,157 @@ namespace System.Drawing.Printing
         #region Struct
         public struct DOCINFO
         {
-             public PrinterSettings settings;
+            public PrinterSettings settings;
             public PageSettings default_page_settings;
             public string title;
             public string filename;
-          }
+        }
 
         public struct PPD_SIZE
         {
-            public    int marked;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=42)]
-            public    string name;
-            public  float width;
-            public  float length;
-            public    float left;
-            public  float bottom;
-            public    float right;
-            public     float top;
+            public int marked;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 42)]
+            public string name;
+            public float width;
+            public float length;
+            public float left;
+            public float bottom;
+            public float right;
+            public float top;
         }
 
         public struct PPD_GROUP
         {
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=40)]
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 40)]
             public string text;
-              [MarshalAs(UnmanagedType.ByValTStr, SizeConst=42)]
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 42)]
             public string name;
-              public int num_options;
+            public int num_options;
             public IntPtr options;
-             public int num_subgroups;
+            public int num_subgroups;
             public IntPtr subgrups;
         }
 
         public struct PPD_OPTION
         {
-            public byte     conflicted;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=41)]
-            public string    keyword;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=41)]
-            public string     defchoice;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=81)]
-            public string     text;
-            public int    ui;
-              public int     section;
-              public float    order;
-              public int    num_choices;
-              public IntPtr    choices;
+            public byte conflicted;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
+            public string keyword;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
+            public string defchoice;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 81)]
+            public string text;
+            public int ui;
+            public int section;
+            public float order;
+            public int num_choices;
+            public IntPtr choices;
         }
 
         public struct PPD_CHOICE
         {
-            public byte     marked;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=41)]
-            public string    choice;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=81)]
-            public string     text;
-            public IntPtr    code;
-            public IntPtr    option;
+            public byte marked;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
+            public string choice;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 81)]
+            public string text;
+            public IntPtr code;
+            public IntPtr option;
         }
 
         public struct PPD_FILE
         {
-              public int    language_level;
-            public int    color_device;
-            public int    variable_sizes;
-            public int    accurate_screens;
-            public int    contone_only;
-            public int    landscape;
-            public int    model_number;
-            public int    manual_copies;
-            public int    throughput;
-              public int    colorspace;
-              public IntPtr     patches;
-            public int    num_emulations;
-              public IntPtr    emulations;
-            public IntPtr     jcl_begin;
-            public IntPtr     jcl_ps;
-            public IntPtr     jcl_end;
-            public IntPtr     lang_encoding;
-            public IntPtr     lang_version;
-            public IntPtr     modelname;
-            public IntPtr     ttrasterizer;
-            public IntPtr     manufacturer;
-            public IntPtr     product;
-            public IntPtr     nickname;
-            public IntPtr     shortnickname;
-              public int    num_groups;
-            public IntPtr    groups;
-              public int    num_sizes;
-              public IntPtr    sizes;
+            public int language_level;
+            public int color_device;
+            public int variable_sizes;
+            public int accurate_screens;
+            public int contone_only;
+            public int landscape;
+            public int model_number;
+            public int manual_copies;
+            public int throughput;
+            public int colorspace;
+            public IntPtr patches;
+            public int num_emulations;
+            public IntPtr emulations;
+            public IntPtr jcl_begin;
+            public IntPtr jcl_ps;
+            public IntPtr jcl_end;
+            public IntPtr lang_encoding;
+            public IntPtr lang_version;
+            public IntPtr modelname;
+            public IntPtr ttrasterizer;
+            public IntPtr manufacturer;
+            public IntPtr product;
+            public IntPtr nickname;
+            public IntPtr shortnickname;
+            public int num_groups;
+            public IntPtr groups;
+            public int num_sizes;
+            public IntPtr sizes;
 
             /* There is more data after this that we are not using*/
         }
 
-
         public struct CUPS_OPTIONS
         {
-              public IntPtr name;
-              public IntPtr val;
+            public IntPtr name;
+            public IntPtr val;
         }
-        
+
         public struct CUPS_DESTS
         {
-            public IntPtr    name;
-            public IntPtr    instance;
-            public int     is_default;
-            public int    num_options;
-            public IntPtr    options;
+            public IntPtr name;
+            public IntPtr instance;
+            public int is_default;
+            public int num_options;
+            public IntPtr options;
         }
-        
+
         #endregion
 #pragma warning restore 649
     }
 
     class GlobalPrintingServicesUnix : GlobalPrintingServices
     {
-        internal override PrinterSettings.StringCollection InstalledPrinters {
-            get {
-                return PrintingServicesUnix.InstalledPrinters;
-            }
+        internal override PrinterSettings.StringCollection InstalledPrinters
+        {
+            get { return PrintingServicesUnix.InstalledPrinters; }
         }
 
-        internal override IntPtr CreateGraphicsContext (PrinterSettings settings, PageSettings default_page_settings)
+        internal override IntPtr CreateGraphicsContext(
+            PrinterSettings settings,
+            PageSettings default_page_settings
+        )
         {
-            return PrintingServicesUnix.CreateGraphicsContext (settings, default_page_settings);
+            return PrintingServicesUnix.CreateGraphicsContext(settings, default_page_settings);
         }
 
-        internal override bool StartDoc (GraphicsPrinter gr, string doc_name, string output_file)
+        internal override bool StartDoc(GraphicsPrinter gr, string doc_name, string output_file)
         {
-            return PrintingServicesUnix.StartDoc (gr, doc_name, output_file);
+            return PrintingServicesUnix.StartDoc(gr, doc_name, output_file);
         }
 
-        internal override bool EndDoc (GraphicsPrinter gr)
+        internal override bool EndDoc(GraphicsPrinter gr)
         {
-            return PrintingServicesUnix.EndDoc (gr);
+            return PrintingServicesUnix.EndDoc(gr);
         }
 
-        internal override bool StartPage (GraphicsPrinter gr)
+        internal override bool StartPage(GraphicsPrinter gr)
         {
-            return PrintingServicesUnix.StartPage (gr);
+            return PrintingServicesUnix.StartPage(gr);
         }
 
-        internal override bool EndPage (GraphicsPrinter gr)
+        internal override bool EndPage(GraphicsPrinter gr)
         {
-            return PrintingServicesUnix.EndPage (gr);
+            return PrintingServicesUnix.EndPage(gr);
         }
     }
 }
-

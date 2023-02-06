@@ -18,16 +18,16 @@ namespace Internal.JitInterface
 
             public bool Equals(IntrinsicKey other)
             {
-                return (MethodName == other.MethodName) &&
-                    (TypeNamespace == other.TypeNamespace) &&
-                    (TypeName == other.TypeName);
+                return (MethodName == other.MethodName)
+                    && (TypeNamespace == other.TypeNamespace)
+                    && (TypeName == other.TypeName);
             }
 
             public override int GetHashCode()
             {
-                return MethodName.GetHashCode() +
-                    ((TypeNamespace != null) ? TypeNamespace.GetHashCode() : 0) +
-                    ((TypeName != null) ? TypeName.GetHashCode() : 0);
+                return MethodName.GetHashCode()
+                    + ((TypeNamespace != null) ? TypeNamespace.GetHashCode() : 0)
+                    + ((TypeName != null) ? TypeName.GetHashCode() : 0);
             }
         }
 
@@ -43,25 +43,37 @@ namespace Internal.JitInterface
             {
                 return key.Equals(value.Key);
             }
-            protected override bool CompareValueToValue(IntrinsicEntry value1, IntrinsicEntry value2)
+
+            protected override bool CompareValueToValue(
+                IntrinsicEntry value1,
+                IntrinsicEntry value2
+            )
             {
                 return value1.Key.Equals(value2.Key);
             }
+
             protected override IntrinsicEntry CreateValueFromKey(IntrinsicKey key)
             {
                 Debug.Fail("CreateValueFromKey not supported");
                 return null;
             }
+
             protected override int GetKeyHashCode(IntrinsicKey key)
             {
                 return key.GetHashCode();
             }
+
             protected override int GetValueHashCode(IntrinsicEntry value)
             {
                 return value.Key.GetHashCode();
             }
 
-            public void Add(CorInfoIntrinsics id, string methodName, string typeNamespace, string typeName)
+            public void Add(
+                CorInfoIntrinsics id,
+                string methodName,
+                string typeNamespace,
+                string typeName
+            )
             {
                 var entry = new IntrinsicEntry();
                 entry.Id = id;
@@ -79,18 +91,73 @@ namespace Internal.JitInterface
             table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_Array_Get, "Get", null, null);
             table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_Array_Address, "Address", null, null);
             table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_Array_Set, "Set", null, null);
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_InitializeArray, "InitializeArray", "System.Runtime.CompilerServices", "RuntimeHelpers");
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_RTH_GetValueInternal, "GetValueInternal", "System", "RuntimeTypeHandle");
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_Object_GetType, "GetType", "System", "Object");
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_StubHelpers_GetStubContext, "GetStubContext", "System.StubHelpers", "StubHelpers"); // interop-specific
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_InitializeArray,
+                "InitializeArray",
+                "System.Runtime.CompilerServices",
+                "RuntimeHelpers"
+            );
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_RTH_GetValueInternal,
+                "GetValueInternal",
+                "System",
+                "RuntimeTypeHandle"
+            );
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_Object_GetType,
+                "GetType",
+                "System",
+                "Object"
+            );
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_StubHelpers_GetStubContext,
+                "GetStubContext",
+                "System.StubHelpers",
+                "StubHelpers"
+            ); // interop-specific
             // table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_StubHelpers_GetStubContextAddr, "GetStubContextAddr", "System.StubHelpers", "StubHelpers"); // interop-specific
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_StubHelpers_NextCallReturnAddress, "NextCallReturnAddress", "System.StubHelpers", "StubHelpers");
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_ByReference_Ctor, ".ctor", "System", "ByReference`1");
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_ByReference_Value, "get_Value", "System", "ByReference`1");
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_GetRawHandle, "EETypePtrOf", "System", "EETypePtr");
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_GetRawHandle, "MethodTableOf", "System", "Object");
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_GetRawHandle, "DefaultConstructorOf", "System", "Activator");
-            table.Add(CorInfoIntrinsics.CORINFO_INTRINSIC_GetRawHandle, "AllocatorOf", "System", "Activator");
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_StubHelpers_NextCallReturnAddress,
+                "NextCallReturnAddress",
+                "System.StubHelpers",
+                "StubHelpers"
+            );
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_ByReference_Ctor,
+                ".ctor",
+                "System",
+                "ByReference`1"
+            );
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_ByReference_Value,
+                "get_Value",
+                "System",
+                "ByReference`1"
+            );
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_GetRawHandle,
+                "EETypePtrOf",
+                "System",
+                "EETypePtr"
+            );
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_GetRawHandle,
+                "MethodTableOf",
+                "System",
+                "Object"
+            );
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_GetRawHandle,
+                "DefaultConstructorOf",
+                "System",
+                "Activator"
+            );
+            table.Add(
+                CorInfoIntrinsics.CORINFO_INTRINSIC_GetRawHandle,
+                "AllocatorOf",
+                "System",
+                "Activator"
+            );
 
             return table;
         }

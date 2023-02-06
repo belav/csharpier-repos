@@ -16,6 +16,12 @@ namespace Microsoft.CodeAnalysis.Editor
     /// </summary>
     internal interface ICustomCommitCompletionProvider
     {
-        void Commit(CompletionItem completionItem, ITextView textView, ITextBuffer subjectBuffer, ITextSnapshot triggerSnapshot, char? commitChar);
+        void Commit(
+            CompletionItem completionItem,
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            ITextSnapshot triggerSnapshot,
+            char? commitChar
+        );
     }
 }

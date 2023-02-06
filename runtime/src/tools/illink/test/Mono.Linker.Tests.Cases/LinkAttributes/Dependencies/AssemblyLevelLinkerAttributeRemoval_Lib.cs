@@ -9,15 +9,11 @@ using Mono.Linker.Tests.Cases.TestAttributeLib;
 
 namespace Mono.Linker.Tests.Cases.TestAttributeLib
 {
-    [System.AttributeUsage (System.AttributeTargets.All, Inherited = false, AllowMultiple = true)]
+    [System.AttributeUsage(System.AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     public sealed class MyAttribute : System.Attribute
     {
-        public MyAttribute ()
-        {
-        }
+        public MyAttribute() { }
     }
 
-    public class Foo
-    {
-    }
+    public class Foo { }
 }

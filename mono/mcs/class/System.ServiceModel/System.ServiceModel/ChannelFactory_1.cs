@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,63 +39,57 @@ namespace System.ServiceModel
     // LAMESPEC: TChannel should have been defined as "where TChannel : IClientChannel".
     // The returned channel is actually used as IClientChannel.
     // (That's also likely why the type parameter name is TChannel, not TContract.)
-    public class ChannelFactory<TChannel>
-        : ChannelFactory, IChannelFactory<TChannel>
+    public class ChannelFactory<TChannel> : ChannelFactory, IChannelFactory<TChannel>
     {
-        public ChannelFactory ()
-        {
-        }
+        public ChannelFactory() { }
 
-        protected ChannelFactory (Type channelType)
+        protected ChannelFactory(Type channelType)
         {
             if (channelType == null)
-                throw new ArgumentNullException ("channelType");
+                throw new ArgumentNullException("channelType");
             if (!channelType.IsInterface)
-                throw new InvalidOperationException ("The channelType argument to the generic ChannelFactory constructor must be an interface type.");
+                throw new InvalidOperationException(
+                    "The channelType argument to the generic ChannelFactory constructor must be an interface type."
+                );
 
-            InitializeEndpoint (CreateDescription ());
+            InitializeEndpoint(CreateDescription());
         }
 
-        public ChannelFactory (string endpointConfigurationName)
+        public ChannelFactory(string endpointConfigurationName)
         {
             if (endpointConfigurationName == null)
-                throw new ArgumentNullException ("endpointConfigurationName");
+                throw new ArgumentNullException("endpointConfigurationName");
 
-            InitializeEndpoint (endpointConfigurationName, null);
+            InitializeEndpoint(endpointConfigurationName, null);
         }
 
-        public ChannelFactory (string endpointConfigurationName,
-            EndpointAddress remoteAddress)
+        public ChannelFactory(string endpointConfigurationName, EndpointAddress remoteAddress)
         {
             if (endpointConfigurationName == null)
-                throw new ArgumentNullException ("endpointConfigurationName");
+                throw new ArgumentNullException("endpointConfigurationName");
 
-            InitializeEndpoint (endpointConfigurationName, remoteAddress);
+            InitializeEndpoint(endpointConfigurationName, remoteAddress);
         }
 
-        public ChannelFactory (ServiceEndpoint endpoint)
+        public ChannelFactory(ServiceEndpoint endpoint)
         {
             if (endpoint == null)
-                throw new ArgumentNullException ("serviceEndpoint");
+                throw new ArgumentNullException("serviceEndpoint");
 
-            InitializeEndpoint (endpoint);
+            InitializeEndpoint(endpoint);
         }
 
-        public ChannelFactory (Binding binding, string remoteAddress)
-            : this (binding, new EndpointAddress (remoteAddress))
-        {
-        }
+        public ChannelFactory(Binding binding, string remoteAddress)
+            : this(binding, new EndpointAddress(remoteAddress)) { }
 
-        public ChannelFactory (Binding binding)
-            : this (binding, (EndpointAddress) null)
-        {
-        }
+        public ChannelFactory(Binding binding)
+            : this(binding, (EndpointAddress)null) { }
 
-        public ChannelFactory (Binding binding, EndpointAddress remoteAddress)
-            : this (typeof (TChannel))
+        public ChannelFactory(Binding binding, EndpointAddress remoteAddress)
+            : this(typeof(TChannel))
         {
             if (binding == null)
-                throw new ArgumentNullException ();
+                throw new ArgumentNullException();
 
             Endpoint.Binding = binding;
             Endpoint.Address = remoteAddress;
@@ -103,97 +97,134 @@ namespace System.ServiceModel
 
         internal object OwnerClientBase { get; set; }
 
-        public TChannel CreateChannel ()
+        public TChannel CreateChannel()
         {
-            EnsureOpened ();
+            EnsureOpened();
 
-            return CreateChannel (Endpoint.Address);
+            return CreateChannel(Endpoint.Address);
         }
 
-        public TChannel CreateChannel (EndpointAddress address)
+        public TChannel CreateChannel(EndpointAddress address)
         {
-            return CreateChannel (address, null);
+            return CreateChannel(address, null);
         }
 
-        static TChannel CreateChannelCore (ChannelFactory<TChannel> cf, Func<ChannelFactory<TChannel>, TChannel> f)
+        static TChannel CreateChannelCore(
+            ChannelFactory<TChannel> cf,
+            Func<ChannelFactory<TChannel>, TChannel> f
+        )
         {
-            var ch = f (cf);
-            ((ICommunicationObject) (object) ch).Closed += delegate {
+            var ch = f(cf);
+            ((ICommunicationObject)(object)ch).Closed += delegate
+            {
                 if (cf.State == CommunicationState.Opened)
-                    cf.Close ();
+                    cf.Close();
             };
             return ch;
         }
 
-        public static TChannel CreateChannel (Binding binding, EndpointAddress endpointAddress)
+        public static TChannel CreateChannel(Binding binding, EndpointAddress endpointAddress)
         {
-            return CreateChannelCore (new ChannelFactory<TChannel> (binding, endpointAddress), f => f.CreateChannel ());
+            return CreateChannelCore(
+                new ChannelFactory<TChannel>(binding, endpointAddress),
+                f => f.CreateChannel()
+            );
         }
 
-        public static TChannel CreateChannel (Binding binding, EndpointAddress endpointAddress, Uri via)
+        public static TChannel CreateChannel(
+            Binding binding,
+            EndpointAddress endpointAddress,
+            Uri via
+        )
         {
-            return CreateChannelCore (new ChannelFactory<TChannel> (binding), f => f.CreateChannel (endpointAddress, via));
+            return CreateChannelCore(
+                new ChannelFactory<TChannel>(binding),
+                f => f.CreateChannel(endpointAddress, via)
+            );
         }
 
-        public virtual TChannel CreateChannel (EndpointAddress address, Uri via)
+        public virtual TChannel CreateChannel(EndpointAddress address, Uri via)
         {
 #if FULL_AOT_RUNTIME || DISABLE_REMOTING
-            throw new InvalidOperationException ("MonoTouch does not support dynamic proxy code generation. Override this method or its caller to return specific client proxy instance");
+            throw new InvalidOperationException(
+                "MonoTouch does not support dynamic proxy code generation. Override this method or its caller to return specific client proxy instance"
+            );
 #else
             var existing = Endpoint.Address;
-            try {
-
-            Endpoint.Address = address;
-            EnsureOpened ();
-            Endpoint.Validate ();
+            try
+            {
+                Endpoint.Address = address;
+                EnsureOpened();
+                Endpoint.Validate();
 #if DISABLE_REAL_PROXY
-            Type type = ClientProxyGenerator.CreateProxyType (typeof (TChannel), Endpoint.Contract, false);
-            // in .NET and SL2, it seems that the proxy is RealProxy.
-            // But since there is no remoting in SL2 (and we have
-            // no special magic), we have to use different approach
-            // that should work either.
-            var proxy = (IClientChannel) Activator.CreateInstance (type, new object [] {Endpoint, this, address ?? Endpoint.Address, via});
+                Type type = ClientProxyGenerator.CreateProxyType(
+                    typeof(TChannel),
+                    Endpoint.Contract,
+                    false
+                );
+                // in .NET and SL2, it seems that the proxy is RealProxy.
+                // But since there is no remoting in SL2 (and we have
+                // no special magic), we have to use different approach
+                // that should work either.
+                var proxy = (IClientChannel)
+                    Activator.CreateInstance(
+                        type,
+                        new object[] { Endpoint, this, address ?? Endpoint.Address, via }
+                    );
 #else
-            var proxy = (IClientChannel) new ClientRealProxy (typeof (TChannel), new ClientRuntimeChannel (Endpoint, this, address ?? Endpoint.Address, via), false).GetTransparentProxy ();
+                var proxy = (IClientChannel)
+                    new ClientRealProxy(
+                        typeof(TChannel),
+                        new ClientRuntimeChannel(Endpoint, this, address ?? Endpoint.Address, via),
+                        false
+                    ).GetTransparentProxy();
 #endif
-            proxy.Opened += delegate {
-                OpenedChannels.Add (proxy);
-            };
-            proxy.Closing += delegate {
-                OpenedChannels.Remove (proxy);
-            };
+                proxy.Opened += delegate
+                {
+                    OpenedChannels.Add(proxy);
+                };
+                proxy.Closing += delegate
+                {
+                    OpenedChannels.Remove(proxy);
+                };
 
-            return (TChannel) proxy;
-            } catch (TargetInvocationException ex) {
+                return (TChannel)proxy;
+            }
+            catch (TargetInvocationException ex)
+            {
                 if (ex.InnerException != null)
                     throw ex.InnerException;
                 else
                     throw;
-            } finally {
+            }
+            finally
+            {
                 Endpoint.Address = existing;
             }
 #endif
         }
 
-        protected static TChannel CreateChannel (string endpointConfigurationName)
+        protected static TChannel CreateChannel(string endpointConfigurationName)
         {
-            return CreateChannelCore (new ChannelFactory<TChannel> (endpointConfigurationName), f => f.CreateChannel ());
+            return CreateChannelCore(
+                new ChannelFactory<TChannel>(endpointConfigurationName),
+                f => f.CreateChannel()
+            );
         }
 
-        protected override ServiceEndpoint CreateDescription ()
+        protected override ServiceEndpoint CreateDescription()
         {
-            ContractDescription cd = ContractDescription.GetContract (typeof (TChannel));
-            ServiceEndpoint ep = new ServiceEndpoint (cd);
-            ep.Behaviors.Add (new ClientCredentials ());
+            ContractDescription cd = ContractDescription.GetContract(typeof(TChannel));
+            ServiceEndpoint ep = new ServiceEndpoint(cd);
+            ep.Behaviors.Add(new ClientCredentials());
             return ep;
         }
     }
 
-    class DummyClientBase<T> : ClientBase<T> where T : class
+    class DummyClientBase<T> : ClientBase<T>
+        where T : class
     {
-        public DummyClientBase (ChannelFactory<T> factory)
-            : base (factory)
-        {
-        }
+        public DummyClientBase(ChannelFactory<T> factory)
+            : base(factory) { }
     }
 }

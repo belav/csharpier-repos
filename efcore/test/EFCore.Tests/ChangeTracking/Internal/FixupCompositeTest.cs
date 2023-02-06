@@ -17,7 +17,9 @@ public class FixupCompositeTest
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_FK_set_both_navs_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_FK_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -44,14 +46,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_FK_not_set_both_navs_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_FK_not_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -76,7 +81,8 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -108,14 +114,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -141,14 +150,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -174,14 +186,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -201,14 +216,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -232,14 +250,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_FK_set_both_navs_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_FK_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -266,14 +287,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_FK_not_set_both_navs_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_FK_not_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -298,7 +322,8 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -330,14 +355,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -363,14 +391,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -396,14 +427,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -423,14 +457,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -454,14 +491,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_prin_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_prin_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -485,14 +525,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_prin_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_prin_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -516,14 +559,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_prin_uni_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_prin_uni_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -548,14 +594,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_prin_uni_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_prin_uni_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -574,14 +623,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_prin_uni_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_prin_uni_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -606,14 +658,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_prin_uni_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_prin_uni_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -632,14 +687,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_dep_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_dep_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -663,14 +721,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Category);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_dep_uni_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_dep_uni_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -695,14 +756,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Category);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_dep_uni_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -725,14 +789,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Category);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_dep_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_dep_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -756,14 +823,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Category);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_dep_uni_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_dep_uni_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -788,14 +858,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Category);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_dep_uni_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -818,14 +891,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Category);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_many_no_navs_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_many_no_navs_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
@@ -848,14 +924,17 @@ public class FixupCompositeTest
                 Assert.Equal(principal.Id2, dependent.CategoryId2);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_many_no_navs_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_many_no_navs_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
@@ -878,14 +957,17 @@ public class FixupCompositeTest
                 Assert.Equal(principal.Id2, dependent.CategoryId2);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_FK_set_both_navs_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_FK_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -912,14 +994,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_FK_not_set_both_navs_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_FK_not_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -944,7 +1029,8 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -976,14 +1062,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -1009,14 +1098,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -1042,14 +1134,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -1069,14 +1164,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -1100,14 +1198,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_FK_set_both_navs_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_FK_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -1134,14 +1235,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_FK_not_set_both_navs_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_FK_not_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -1166,7 +1270,8 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1198,14 +1303,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -1231,14 +1339,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -1264,14 +1375,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -1291,14 +1405,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -1322,14 +1439,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_prin_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_prin_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -1353,14 +1473,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_prin_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_prin_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -1384,14 +1507,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_prin_uni_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_prin_uni_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -1416,14 +1542,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_prin_uni_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_prin_uni_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -1442,14 +1571,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_prin_uni_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_prin_uni_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -1474,14 +1606,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_prin_uni_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_prin_uni_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -1500,14 +1635,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_dep_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_dep_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -1531,14 +1669,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_dep_uni_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_dep_uni_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -1563,14 +1704,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_dep_uni_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -1593,14 +1737,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_dep_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_dep_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -1624,14 +1771,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_dep_uni_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_dep_uni_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -1656,14 +1806,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_dep_uni_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -1686,14 +1839,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_then_principal_one_to_one_no_navs_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_then_principal_one_to_one_no_navs_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
@@ -1716,14 +1872,17 @@ public class FixupCompositeTest
                 Assert.Equal(principal.Id2, dependent.ParentId2);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_then_dependent_one_to_one_no_navs_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_then_dependent_one_to_one_no_navs_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
@@ -1746,14 +1905,17 @@ public class FixupCompositeTest
                 Assert.Equal(principal.Id2, dependent.ParentId2);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_FK_set_both_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_FK_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -1778,15 +1940,20 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_FK_not_set_both_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_FK_not_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -1809,15 +1976,20 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -1840,15 +2012,20 @@ public class FixupCompositeTest
                 Assert.Empty(principal.Products);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -1872,15 +2049,20 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -1904,15 +2086,20 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -1933,14 +2120,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -1962,15 +2152,20 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_FK_set_both_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_FK_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -1995,14 +2190,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_FK_not_set_both_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_FK_not_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -2025,14 +2223,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -2055,14 +2256,17 @@ public class FixupCompositeTest
                 Assert.Empty(principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -2086,14 +2290,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -2117,14 +2324,17 @@ public class FixupCompositeTest
                 Assert.Empty(principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -2148,14 +2358,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Category { Id1 = 77, Id2 = Guid77 };
@@ -2176,14 +2389,17 @@ public class FixupCompositeTest
                 Assert.Empty(principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -2205,15 +2421,20 @@ public class FixupCompositeTest
                 Assert.Empty(principal.Products);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -2235,14 +2456,17 @@ public class FixupCompositeTest
                 Assert.Empty(principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -2265,15 +2489,20 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_prin_uni_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -2293,14 +2522,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -2323,14 +2555,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_prin_uni_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryPN { Id1 = 77, Id2 = Guid77 };
@@ -2351,14 +2586,17 @@ public class FixupCompositeTest
                 Assert.Equal(new[] { dependent }.ToList(), principal.Products);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -2380,15 +2618,20 @@ public class FixupCompositeTest
                 Assert.Null(dependent.Category);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -2411,15 +2654,20 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Category);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -2440,15 +2688,20 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Category);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -2470,14 +2723,17 @@ public class FixupCompositeTest
                 Assert.Null(dependent.Category);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -2500,14 +2756,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Category);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_dep_uni_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryDN { Id1 = 77, Id2 = Guid77 };
@@ -2527,14 +2786,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Category);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_many_no_navs_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_many_no_navs_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
@@ -2555,15 +2817,20 @@ public class FixupCompositeTest
                 Assert.Equal(principal.Id2, dependent.CategoryId2);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_many_no_navs_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_many_no_navs_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new CategoryNN { Id1 = 77, Id2 = Guid77 };
@@ -2584,14 +2851,17 @@ public class FixupCompositeTest
                 Assert.Equal(principal.Id2, dependent.CategoryId2);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_FK_set_both_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_FK_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2616,15 +2886,20 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_FK_not_set_both_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_FK_not_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2647,15 +2922,20 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2678,15 +2958,20 @@ public class FixupCompositeTest
                 Assert.Null(principal.Child);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2710,15 +2995,20 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2742,15 +3032,20 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2771,14 +3066,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2800,15 +3098,20 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_FK_set_both_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_FK_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2833,14 +3136,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_FK_not_set_both_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_FK_not_set_both_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2863,14 +3169,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2893,14 +3202,17 @@ public class FixupCompositeTest
                 Assert.Null(principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2924,14 +3236,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2955,14 +3270,17 @@ public class FixupCompositeTest
                 Assert.Null(principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -2984,14 +3302,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new Parent { Id1 = 77, Id2 = Guid77 };
@@ -3012,14 +3333,17 @@ public class FixupCompositeTest
                 Assert.Null(principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -3041,15 +3365,20 @@ public class FixupCompositeTest
                 Assert.Null(principal.Child);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -3071,14 +3400,17 @@ public class FixupCompositeTest
                 Assert.Null(principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -3101,15 +3433,20 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_prin_uni_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -3129,14 +3466,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -3159,14 +3499,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_not_set_principal_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_prin_uni_FK_not_set_principal_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentPN { Id1 = 77, Id2 = Guid77 };
@@ -3187,14 +3530,17 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.Child);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -3216,15 +3562,20 @@ public class FixupCompositeTest
                 Assert.Null(dependent.Parent);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -3247,15 +3598,20 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -3276,15 +3632,20 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(EntityState.Added, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -3306,14 +3667,17 @@ public class FixupCompositeTest
                 Assert.Null(dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -3336,14 +3700,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_not_set_dependent_nav_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_dep_uni_FK_not_set_dependent_nav_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentDN { Id1 = 77, Id2 = Guid77 };
@@ -3363,14 +3730,17 @@ public class FixupCompositeTest
                 Assert.Same(principal, dependent.Parent);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_dependent_but_not_principal_one_to_one_no_navs_FK_set_no_navs_set(EntityState entityState)
+    public void Add_dependent_but_not_principal_one_to_one_no_navs_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
@@ -3391,15 +3761,20 @@ public class FixupCompositeTest
                 Assert.Equal(principal.Id2, dependent.ParentId2);
                 Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                 Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified, context.Entry(dependent).State);
-            });
+                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                    context.Entry(dependent).State
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Modified)]
     [InlineData(EntityState.Unchanged)]
-    public void Add_principal_but_not_dependent_one_to_one_no_navs_FK_set_no_navs_set(EntityState entityState)
+    public void Add_principal_but_not_dependent_one_to_one_no_navs_FK_set_no_navs_set(
+        EntityState entityState
+    )
     {
         using var context = new FixupContext();
         var principal = new ParentNN { Id1 = 77, Id2 = Guid77 };
@@ -3420,7 +3795,8 @@ public class FixupCompositeTest
                 Assert.Equal(principal.Id2, dependent.ParentId2);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -3447,7 +3823,8 @@ public class FixupCompositeTest
                 Assert.Same(dependent, principal.FavoriteChildShared);
                 Assert.Equal(entityState, context.Entry(principal).State);
                 Assert.Equal(entityState, context.Entry(dependent).State);
-            });
+            }
+        );
     }
 
     private class Parent
@@ -3620,175 +3997,135 @@ public class FixupCompositeTest
 
         protected internal override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Parent>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                    b.HasOne(e => e.Child)
-                        .WithOne(e => e.Parent)
-                        .HasForeignKey<Child>(
-                            e => new { e.ParentId1, e.ParentId2 });
-                });
+            modelBuilder.Entity<Parent>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.HasOne(e => e.Child)
+                    .WithOne(e => e.Parent)
+                    .HasForeignKey<Child>(e => new { e.ParentId1, e.ParentId2 });
+            });
 
-            modelBuilder.Entity<Child>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                });
+            modelBuilder.Entity<Child>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+            });
 
-            modelBuilder.Entity<ParentPN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                    b.HasOne(e => e.Child)
-                        .WithOne()
-                        .HasForeignKey<ChildPN>(
-                            e => new { e.ParentId1, e.ParentId2 });
-                });
+            modelBuilder.Entity<ParentPN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.HasOne(e => e.Child)
+                    .WithOne()
+                    .HasForeignKey<ChildPN>(e => new { e.ParentId1, e.ParentId2 });
+            });
 
-            modelBuilder.Entity<ChildPN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                });
+            modelBuilder.Entity<ChildPN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+            });
 
-            modelBuilder.Entity<ParentDN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                    b.HasOne<ChildDN>()
-                        .WithOne(e => e.Parent)
-                        .HasForeignKey<ChildDN>(
-                            e => new { e.ParentId1, e.ParentId2 });
-                });
+            modelBuilder.Entity<ParentDN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.HasOne<ChildDN>()
+                    .WithOne(e => e.Parent)
+                    .HasForeignKey<ChildDN>(e => new { e.ParentId1, e.ParentId2 });
+            });
 
-            modelBuilder.Entity<ChildDN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                });
+            modelBuilder.Entity<ChildDN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+            });
 
-            modelBuilder.Entity<ParentNN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                    b.HasOne<ChildNN>()
-                        .WithOne()
-                        .HasForeignKey<ChildNN>(
-                            e => new { e.ParentId1, e.ParentId2 });
-                });
+            modelBuilder.Entity<ParentNN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.HasOne<ChildNN>()
+                    .WithOne()
+                    .HasForeignKey<ChildNN>(e => new { e.ParentId1, e.ParentId2 });
+            });
 
-            modelBuilder.Entity<ChildNN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                });
+            modelBuilder.Entity<ChildNN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+            });
 
-            modelBuilder.Entity<CategoryDN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                    b.HasMany<ProductDN>()
-                        .WithOne(e => e.Category)
-                        .HasForeignKey(
-                            e => new { e.CategoryId1, e.CategoryId2 })
-                        .IsRequired(false);
-                });
+            modelBuilder.Entity<CategoryDN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.HasMany<ProductDN>()
+                    .WithOne(e => e.Category)
+                    .HasForeignKey(e => new { e.CategoryId1, e.CategoryId2 })
+                    .IsRequired(false);
+            });
 
-            modelBuilder.Entity<ProductDN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                });
+            modelBuilder.Entity<ProductDN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+            });
 
-            modelBuilder.Entity<CategoryPN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                    b.HasMany(e => e.Products)
-                        .WithOne()
-                        .HasForeignKey(
-                            e => new { e.CategoryId1, e.CategoryId2 })
-                        .IsRequired(false);
-                });
+            modelBuilder.Entity<CategoryPN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.HasMany(e => e.Products)
+                    .WithOne()
+                    .HasForeignKey(e => new { e.CategoryId1, e.CategoryId2 })
+                    .IsRequired(false);
+            });
 
-            modelBuilder.Entity<ProductPN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                });
+            modelBuilder.Entity<ProductPN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+            });
 
-            modelBuilder.Entity<CategoryNN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                    b.HasMany<ProductNN>()
-                        .WithOne()
-                        .HasForeignKey(
-                            e => new { e.CategoryId1, e.CategoryId2 })
-                        .IsRequired(false);
-                });
+            modelBuilder.Entity<CategoryNN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.HasMany<ProductNN>()
+                    .WithOne()
+                    .HasForeignKey(e => new { e.CategoryId1, e.CategoryId2 })
+                    .IsRequired(false);
+            });
 
-            modelBuilder.Entity<ProductNN>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                });
+            modelBuilder.Entity<ProductNN>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+            });
 
-            modelBuilder.Entity<Category>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                    b.HasMany(e => e.Products)
-                        .WithOne(e => e.Category)
-                        .HasForeignKey(
-                            e => new { e.CategoryId1, e.CategoryId2 })
-                        .IsRequired(false);
-                });
+            modelBuilder.Entity<Category>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.HasMany(e => e.Products)
+                    .WithOne(e => e.Category)
+                    .HasForeignKey(e => new { e.CategoryId1, e.CategoryId2 })
+                    .IsRequired(false);
+            });
 
-            modelBuilder.Entity<Product>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                });
+            modelBuilder.Entity<Product>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+            });
 
-            modelBuilder.Entity<ParentShared>(
-                entity =>
-                {
-                    entity.HasOne(d => d.FavoriteChildShared)
-                        .WithOne()
-                        .HasForeignKey<ParentShared>(d => new { d.ID, d.FavoriteChildID });
-                });
+            modelBuilder.Entity<ParentShared>(entity =>
+            {
+                entity
+                    .HasOne(d => d.FavoriteChildShared)
+                    .WithOne()
+                    .HasForeignKey<ParentShared>(d => new { d.ID, d.FavoriteChildID });
+            });
 
-            modelBuilder.Entity<ChildShared>(
-                entity =>
-                {
-                    entity.HasKey(d => new { d.ParentID, d.ID });
+            modelBuilder.Entity<ChildShared>(entity =>
+            {
+                entity.HasKey(d => new { d.ParentID, d.ID });
 
-                    entity.HasOne(d => d.ParentShared)
-                        .WithMany(p => p.Children)
-                        .HasForeignKey(d => d.ParentID);
-                });
+                entity
+                    .HasOne(d => d.ParentShared)
+                    .WithMany(p => p.Children)
+                    .HasForeignKey(d => d.ParentID);
+            });
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(FixupContext));
     }

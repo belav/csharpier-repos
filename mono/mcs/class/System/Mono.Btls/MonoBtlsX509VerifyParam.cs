@@ -35,242 +35,275 @@ namespace Mono.Btls
     {
         internal class BoringX509VerifyParamHandle : MonoBtlsHandle
         {
-            public BoringX509VerifyParamHandle (IntPtr handle)
-                : base (handle, true)
-            {
-            }
+            public BoringX509VerifyParamHandle(IntPtr handle)
+                : base(handle, true) { }
 
-            protected override bool ReleaseHandle ()
+            protected override bool ReleaseHandle()
             {
-                mono_btls_x509_verify_param_free (handle);
+                mono_btls_x509_verify_param_free(handle);
                 return true;
             }
         }
 
-        new internal BoringX509VerifyParamHandle Handle {
+        new internal BoringX509VerifyParamHandle Handle
+        {
             get { return (BoringX509VerifyParamHandle)base.Handle; }
         }
 
-        [DllImport (BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_verify_param_new ();
+        [DllImport(BTLS_DYLIB)]
+        extern static IntPtr mono_btls_x509_verify_param_new();
 
-        [DllImport (BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_verify_param_copy (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static IntPtr mono_btls_x509_verify_param_copy(IntPtr handle);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_verify_param_lookup (IntPtr name);
+        [DllImport(BTLS_DYLIB)]
+        extern static IntPtr mono_btls_x509_verify_param_lookup(IntPtr name);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_can_modify (IntPtr param);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_verify_param_can_modify(IntPtr param);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_name (IntPtr handle, IntPtr name);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_verify_param_set_name(IntPtr handle, IntPtr name);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_host (IntPtr handle, IntPtr name, int namelen);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_verify_param_set_host(
+            IntPtr handle,
+            IntPtr name,
+            int namelen
+        );
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_add_host (IntPtr handle, IntPtr name, int namelen);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_verify_param_add_host(
+            IntPtr handle,
+            IntPtr name,
+            int namelen
+        );
 
-        [DllImport (BTLS_DYLIB)]
-        extern static ulong mono_btls_x509_verify_param_get_flags (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static ulong mono_btls_x509_verify_param_get_flags(IntPtr handle);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_flags (IntPtr handle, ulong flags);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_verify_param_set_flags(IntPtr handle, ulong flags);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static MonoBtlsX509VerifyFlags mono_btls_x509_verify_param_get_mono_flags (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static MonoBtlsX509VerifyFlags mono_btls_x509_verify_param_get_mono_flags(
+            IntPtr handle
+        );
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_mono_flags (IntPtr handle, MonoBtlsX509VerifyFlags flags);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_verify_param_set_mono_flags(
+            IntPtr handle,
+            MonoBtlsX509VerifyFlags flags
+        );
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_purpose (IntPtr handle, MonoBtlsX509Purpose purpose);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_verify_param_set_purpose(
+            IntPtr handle,
+            MonoBtlsX509Purpose purpose
+        );
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_get_depth (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_verify_param_get_depth(IntPtr handle);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_depth (IntPtr handle, int depth);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_verify_param_set_depth(IntPtr handle, int depth);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_verify_param_set_time (IntPtr handle, long time);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_verify_param_set_time(IntPtr handle, long time);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_verify_param_get_peername (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static IntPtr mono_btls_x509_verify_param_get_peername(IntPtr handle);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static void mono_btls_x509_verify_param_free (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static void mono_btls_x509_verify_param_free(IntPtr handle);
 
-        internal MonoBtlsX509VerifyParam ()
-            : base (new BoringX509VerifyParamHandle (mono_btls_x509_verify_param_new ()))
+        internal MonoBtlsX509VerifyParam()
+            : base(new BoringX509VerifyParamHandle(mono_btls_x509_verify_param_new())) { }
+
+        internal MonoBtlsX509VerifyParam(BoringX509VerifyParamHandle handle)
+            : base(handle) { }
+
+        public MonoBtlsX509VerifyParam Copy()
         {
+            var copy = mono_btls_x509_verify_param_copy(Handle.DangerousGetHandle());
+            CheckError(copy != IntPtr.Zero);
+            return new MonoBtlsX509VerifyParam(new BoringX509VerifyParamHandle(copy));
         }
 
-        internal MonoBtlsX509VerifyParam (BoringX509VerifyParamHandle handle)
-            : base (handle)
+        public static MonoBtlsX509VerifyParam GetSslClient()
         {
+            return Lookup("ssl_client", true);
         }
 
-        public MonoBtlsX509VerifyParam Copy ()
+        public static MonoBtlsX509VerifyParam GetSslServer()
         {
-            var copy = mono_btls_x509_verify_param_copy (Handle.DangerousGetHandle ());
-            CheckError (copy != IntPtr.Zero);
-            return new MonoBtlsX509VerifyParam (new BoringX509VerifyParamHandle (copy));
+            return Lookup("ssl_server", true);
         }
 
-        public static MonoBtlsX509VerifyParam GetSslClient ()
-        {
-            return Lookup ("ssl_client", true);
-        }
-
-        public static MonoBtlsX509VerifyParam GetSslServer ()
-        {
-            return Lookup ("ssl_server", true);
-        }
-
-        public static MonoBtlsX509VerifyParam Lookup (string name, bool fail = false)
+        public static MonoBtlsX509VerifyParam Lookup(string name, bool fail = false)
         {
             IntPtr namePtr = IntPtr.Zero;
             IntPtr handle = IntPtr.Zero;
 
-            try {
-                namePtr = Marshal.StringToHGlobalAnsi (name);
-                handle = mono_btls_x509_verify_param_lookup (namePtr);
-                if (handle == IntPtr.Zero) {
+            try
+            {
+                namePtr = Marshal.StringToHGlobalAnsi(name);
+                handle = mono_btls_x509_verify_param_lookup(namePtr);
+                if (handle == IntPtr.Zero)
+                {
                     if (!fail)
                         return null;
-                    throw new MonoBtlsException ("X509_VERIFY_PARAM_lookup() could not find '{0}'.", name);
+                    throw new MonoBtlsException(
+                        "X509_VERIFY_PARAM_lookup() could not find '{0}'.",
+                        name
+                    );
                 }
 
-                return new MonoBtlsX509VerifyParam (new BoringX509VerifyParamHandle (handle));
-            } finally {
+                return new MonoBtlsX509VerifyParam(new BoringX509VerifyParamHandle(handle));
+            }
+            finally
+            {
                 if (namePtr != IntPtr.Zero)
-                    Marshal.FreeHGlobal (namePtr);
+                    Marshal.FreeHGlobal(namePtr);
             }
         }
 
-        public bool CanModify {
-            get {
-                return mono_btls_x509_verify_param_can_modify (Handle.DangerousGetHandle ()) != 0;
-            }
+        public bool CanModify
+        {
+            get { return mono_btls_x509_verify_param_can_modify(Handle.DangerousGetHandle()) != 0; }
         }
 
-        void WantToModify ()
+        void WantToModify()
         {
             if (!CanModify)
-                throw new MonoBtlsException ("Attempting to modify read-only MonoBtlsX509VerifyParam instance.");
+                throw new MonoBtlsException(
+                    "Attempting to modify read-only MonoBtlsX509VerifyParam instance."
+                );
         }
 
-        public void SetName (string name)
+        public void SetName(string name)
         {
-            WantToModify ();
+            WantToModify();
             IntPtr namePtr = IntPtr.Zero;
-            try {
-                namePtr = Marshal.StringToHGlobalAnsi (name);
-                var ret = mono_btls_x509_verify_param_set_name (
-                    Handle.DangerousGetHandle (), namePtr);
-                CheckError (ret);
-            } finally {
+            try
+            {
+                namePtr = Marshal.StringToHGlobalAnsi(name);
+                var ret = mono_btls_x509_verify_param_set_name(
+                    Handle.DangerousGetHandle(),
+                    namePtr
+                );
+                CheckError(ret);
+            }
+            finally
+            {
                 if (namePtr != IntPtr.Zero)
-                    Marshal.FreeHGlobal (namePtr);
+                    Marshal.FreeHGlobal(namePtr);
             }
         }
 
-        public void SetHost (string name)
+        public void SetHost(string name)
         {
-            WantToModify ();
+            WantToModify();
             IntPtr namePtr = IntPtr.Zero;
-            try {
-                namePtr = Marshal.StringToHGlobalAnsi (name);
-                var ret = mono_btls_x509_verify_param_set_host (
-                    Handle.DangerousGetHandle (), namePtr, name.Length);
-                CheckError (ret);
-            } finally {
+            try
+            {
+                namePtr = Marshal.StringToHGlobalAnsi(name);
+                var ret = mono_btls_x509_verify_param_set_host(
+                    Handle.DangerousGetHandle(),
+                    namePtr,
+                    name.Length
+                );
+                CheckError(ret);
+            }
+            finally
+            {
                 if (namePtr != IntPtr.Zero)
-                    Marshal.FreeHGlobal (namePtr);
+                    Marshal.FreeHGlobal(namePtr);
             }
         }
 
-        public void AddHost (string name)
+        public void AddHost(string name)
         {
-            WantToModify ();
+            WantToModify();
             IntPtr namePtr = IntPtr.Zero;
-            try {
-                namePtr = Marshal.StringToHGlobalAnsi (name);
-                var ret = mono_btls_x509_verify_param_add_host (
-                    Handle.DangerousGetHandle (), namePtr, name.Length);
-                CheckError (ret);
-            } finally {
+            try
+            {
+                namePtr = Marshal.StringToHGlobalAnsi(name);
+                var ret = mono_btls_x509_verify_param_add_host(
+                    Handle.DangerousGetHandle(),
+                    namePtr,
+                    name.Length
+                );
+                CheckError(ret);
+            }
+            finally
+            {
                 if (namePtr != IntPtr.Zero)
-                    Marshal.FreeHGlobal (namePtr);
+                    Marshal.FreeHGlobal(namePtr);
             }
         }
 
-        public ulong GetFlags ()
+        public ulong GetFlags()
         {
-            return mono_btls_x509_verify_param_get_flags (Handle.DangerousGetHandle ());
+            return mono_btls_x509_verify_param_get_flags(Handle.DangerousGetHandle());
         }
 
-        public void SetFlags (ulong flags)
+        public void SetFlags(ulong flags)
         {
-            WantToModify ();
-            var ret = mono_btls_x509_verify_param_set_flags (
-                Handle.DangerousGetHandle (), flags);
-            CheckError (ret);
+            WantToModify();
+            var ret = mono_btls_x509_verify_param_set_flags(Handle.DangerousGetHandle(), flags);
+            CheckError(ret);
         }
 
-        public MonoBtlsX509VerifyFlags GetMonoFlags ()
+        public MonoBtlsX509VerifyFlags GetMonoFlags()
         {
-            return mono_btls_x509_verify_param_get_mono_flags (
-                Handle.DangerousGetHandle ());
+            return mono_btls_x509_verify_param_get_mono_flags(Handle.DangerousGetHandle());
         }
 
-        public void SetMonoFlags (MonoBtlsX509VerifyFlags flags)
+        public void SetMonoFlags(MonoBtlsX509VerifyFlags flags)
         {
-            WantToModify ();
-            var ret = mono_btls_x509_verify_param_set_mono_flags (
-                Handle.DangerousGetHandle (), flags);
-            CheckError (ret);
+            WantToModify();
+            var ret = mono_btls_x509_verify_param_set_mono_flags(
+                Handle.DangerousGetHandle(),
+                flags
+            );
+            CheckError(ret);
         }
 
-        public void SetPurpose (MonoBtlsX509Purpose purpose)
+        public void SetPurpose(MonoBtlsX509Purpose purpose)
         {
-            WantToModify ();
-            var ret = mono_btls_x509_verify_param_set_purpose (
-                Handle.DangerousGetHandle (), purpose);
-            CheckError (ret);
+            WantToModify();
+            var ret = mono_btls_x509_verify_param_set_purpose(Handle.DangerousGetHandle(), purpose);
+            CheckError(ret);
         }
 
-        public int GetDepth ()
+        public int GetDepth()
         {
-            return mono_btls_x509_verify_param_get_depth (Handle.DangerousGetHandle ());
+            return mono_btls_x509_verify_param_get_depth(Handle.DangerousGetHandle());
         }
 
-        public void SetDepth (int depth)
+        public void SetDepth(int depth)
         {
-            WantToModify ();
-            var ret = mono_btls_x509_verify_param_set_depth (
-                Handle.DangerousGetHandle (), depth);
-            CheckError (ret);
+            WantToModify();
+            var ret = mono_btls_x509_verify_param_set_depth(Handle.DangerousGetHandle(), depth);
+            CheckError(ret);
         }
 
-        public void SetTime (DateTime time)
+        public void SetTime(DateTime time)
         {
-            WantToModify ();
-            var epoch = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var ticks = (long)time.Subtract (epoch).TotalSeconds;
-            var ret = mono_btls_x509_verify_param_set_time (
-                Handle.DangerousGetHandle (), ticks);
-            CheckError (ret);
+            WantToModify();
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            var ticks = (long)time.Subtract(epoch).TotalSeconds;
+            var ret = mono_btls_x509_verify_param_set_time(Handle.DangerousGetHandle(), ticks);
+            CheckError(ret);
         }
 
-        public string GetPeerName ()
+        public string GetPeerName()
         {
-            var peer = mono_btls_x509_verify_param_get_peername (Handle.DangerousGetHandle ());
+            var peer = mono_btls_x509_verify_param_get_peername(Handle.DangerousGetHandle());
             if (peer == IntPtr.Zero)
                 return null;
-            return Marshal.PtrToStringAnsi (peer);
+            return Marshal.PtrToStringAnsi(peer);
         }
     }
 }

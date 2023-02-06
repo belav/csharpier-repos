@@ -8,7 +8,10 @@ namespace Microsoft.AspNetCore.Analyzers;
 
 internal sealed class ServicesAnalysis
 {
-    public ServicesAnalysis(IMethodSymbol configureServicesMethod, ImmutableArray<ServicesItem> services)
+    public ServicesAnalysis(
+        IMethodSymbol configureServicesMethod,
+        ImmutableArray<ServicesItem> services
+    )
     {
         ConfigureServicesMethod = configureServicesMethod;
         Services = services;

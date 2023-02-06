@@ -2,40 +2,35 @@ using System;
 
 namespace Bug
 {
-    public delegate void D ();
-    
+    public delegate void D();
+
     class AA : BB
     {
-        public AA (BB bb)
-            : base (bb.Value)
+        public AA(BB bb)
+            : base(bb.Value)
         {
-            D d = delegate () {
-                bb.Foo ();
-                TestMe ();
+            D d = delegate()
+            {
+                bb.Foo();
+                TestMe();
             };
         }
-        
-        void TestMe ()
+
+        void TestMe() { }
+
+        public static int Main()
         {
-        }
-        
-        public static int Main ()
-        {
-            new AA (new BB ("a"));
+            new AA(new BB("a"));
             return 0;
         }
     }
-    
+
     class BB
     {
         public string Value = "test";
-        
-        public BB (string s)
-        {
-        }
-        
-        public void Foo ()
-        {
-        }
+
+        public BB(string s) { }
+
+        public void Foo() { }
     }
 }

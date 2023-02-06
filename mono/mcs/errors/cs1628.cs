@@ -2,16 +2,16 @@
 // Line: 15
 using System;
 
-delegate void D ();
+delegate void D();
 
-class X {
-    static void Main ()
-    {
-    }
+class X
+{
+    static void Main() { }
 
-    static void Host (ref int a)
+    static void Host(ref int a)
     {
-        D b = delegate {
+        D b = delegate
+        {
             a = 1;
         };
     }

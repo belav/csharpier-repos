@@ -1,5 +1,5 @@
 //
-// OracleBinary.cs 
+// OracleBinary.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -18,21 +18,22 @@ using System;
 using System.IO;
 using System.Data.SqlTypes;
 
-namespace System.Data.OracleClient {
+namespace System.Data.OracleClient
+{
     public struct OracleBinary : IComparable, INullable
     {
         #region Fields
 
-        public static readonly OracleBinary Null = new OracleBinary ();
+        public static readonly OracleBinary Null = new OracleBinary();
 
-        bool notNull; 
-        byte[] value; 
+        bool notNull;
+        byte[] value;
 
         #endregion // Fields
 
         #region Constructors
 
-        public OracleBinary (byte[] b)
+        public OracleBinary(byte[] b)
         {
             value = b;
             notNull = true;
@@ -42,30 +43,37 @@ namespace System.Data.OracleClient {
 
         #region Properties
 
-        public bool IsNull {
+        public bool IsNull
+        {
             get { return !notNull; }
         }
 
-        public byte this [int index] {
-            get { 
+        public byte this[int index]
+        {
+            get
+            {
                 if (IsNull)
-                    throw new Exception ("Data is null.");
-                return value [index];
+                    throw new Exception("Data is null.");
+                return value[index];
             }
         }
 
-        public int Length {
-            get {
+        public int Length
+        {
+            get
+            {
                 if (IsNull)
-                    throw new Exception ("Data is null.");
+                    throw new Exception("Data is null.");
                 return value.Length;
             }
         }
 
-        public byte[] Value {
-            get {
+        public byte[] Value
+        {
+            get
+            {
                 if (IsNull)
-                    throw new Exception ("Data is null.");
+                    throw new Exception("Data is null.");
                 return value;
             }
         }
@@ -75,128 +83,128 @@ namespace System.Data.OracleClient {
         #region Methods
 
         [MonoTODO]
-        public int CompareTo (object obj)
+        public int CompareTo(object obj)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static OracleBinary Concat (OracleBinary x, OracleBinary y)
+        public static OracleBinary Concat(OracleBinary x, OracleBinary y)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override bool Equals (object value)
+        public override bool Equals(object value)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static OracleBoolean Equals (OracleBinary x, OracleBinary y)
+        public static OracleBoolean Equals(OracleBinary x, OracleBinary y)
         {
             if (x.IsNull || y.IsNull)
                 return OracleBoolean.Null;
-            return new OracleBoolean (x.Value == y.Value);
+            return new OracleBoolean(x.Value == y.Value);
         }
 
         [MonoTODO]
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static OracleBoolean GreaterThan (OracleBinary x, OracleBinary y)
+        public static OracleBoolean GreaterThan(OracleBinary x, OracleBinary y)
         {
             if (x.IsNull || y.IsNull)
                 return OracleBoolean.Null;
             //return (x.Value > y.Value);
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static OracleBoolean GreaterThanOrEqual (OracleBinary x, OracleBinary y)
+        public static OracleBoolean GreaterThanOrEqual(OracleBinary x, OracleBinary y)
         {
             if (x.IsNull || y.IsNull)
                 return OracleBoolean.Null;
             //return (x.Value >= y.Value);
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static OracleBoolean LessThan (OracleBinary x, OracleBinary y)
+        public static OracleBoolean LessThan(OracleBinary x, OracleBinary y)
         {
             if (x.IsNull || y.IsNull)
                 return OracleBoolean.Null;
             //return (x.Value < y.Value);
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static OracleBoolean LessThanOrEqual (OracleBinary x, OracleBinary y)
+        public static OracleBoolean LessThanOrEqual(OracleBinary x, OracleBinary y)
         {
             if (x.IsNull || y.IsNull)
                 return OracleBoolean.Null;
             //return (x.Value <= y.Value);
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static OracleBoolean NotEquals (OracleBinary x, OracleBinary y)
+        public static OracleBoolean NotEquals(OracleBinary x, OracleBinary y)
         {
             if (x.IsNull || y.IsNull)
                 return OracleBoolean.Null;
             //return (x.Value != y.Value);
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion // Methods
 
         #region Operators and Type Conversions
 
-        public static OracleBinary operator + (OracleBinary x, OracleBinary y)
+        public static OracleBinary operator +(OracleBinary x, OracleBinary y)
         {
-            return Concat (x, y);
+            return Concat(x, y);
         }
 
-        public static OracleBoolean operator == (OracleBinary x, OracleBinary y)
+        public static OracleBoolean operator ==(OracleBinary x, OracleBinary y)
         {
-            return Equals (x, y);
+            return Equals(x, y);
         }
 
-        public static OracleBoolean operator > (OracleBinary x, OracleBinary y)
+        public static OracleBoolean operator >(OracleBinary x, OracleBinary y)
         {
-            return GreaterThan (x, y);
+            return GreaterThan(x, y);
         }
 
-        public static OracleBoolean operator >= (OracleBinary x, OracleBinary y)
+        public static OracleBoolean operator >=(OracleBinary x, OracleBinary y)
         {
-            return GreaterThanOrEqual (x, y);
+            return GreaterThanOrEqual(x, y);
         }
 
-        public static OracleBoolean operator != (OracleBinary x, OracleBinary y)
+        public static OracleBoolean operator !=(OracleBinary x, OracleBinary y)
         {
-            return NotEquals (x, y);
+            return NotEquals(x, y);
         }
 
-        public static OracleBoolean operator < (OracleBinary x, OracleBinary y)
+        public static OracleBoolean operator <(OracleBinary x, OracleBinary y)
         {
-            return LessThan (x, y);
+            return LessThan(x, y);
         }
 
-        public static OracleBoolean operator <= (OracleBinary x, OracleBinary y)
+        public static OracleBoolean operator <=(OracleBinary x, OracleBinary y)
         {
-            return LessThan (x, y);
+            return LessThan(x, y);
         }
 
-        public static explicit operator byte[] (OracleBinary x)
+        public static explicit operator byte[](OracleBinary x)
         {
             return x.Value;
         }
 
-        public static implicit operator OracleBinary (byte[] b)
+        public static implicit operator OracleBinary(byte[] b)
         {
-            return new OracleBinary (b);
+            return new OracleBinary(b);
         }
 
         #endregion // Operators and Type Conversions

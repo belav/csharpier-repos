@@ -3,7 +3,7 @@
 
 class C
 {
-    public virtual (int a, int b) M ()
+    public virtual (int a, int b) M()
     {
         throw null;
     }
@@ -11,7 +11,7 @@ class C
 
 class D : C
 {
-    public override (int, int) M ()
+    public override (int, int) M()
     {
         throw null;
     }

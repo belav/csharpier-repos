@@ -5,11 +5,9 @@ namespace Mono.Linker.Tests.Cases.Attributes.StructLayout
 {
     class UnusedTypeWithSequentialLayoutIsRemoved
     {
-        static void Main ()
-        {
-        }
+        static void Main() { }
 
-        [StructLayout (LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         class B
         {
             int a;

@@ -15,8 +15,7 @@ namespace Moq.Tests
         public void ShouldExtendMatching()
         {
             var mock = new Mock<IOrderRepository>();
-            mock.Setup(repo => repo.Save(Order.IsBig()))
-                .Throws(new InvalidOperationException());
+            mock.Setup(repo => repo.Save(Order.IsBig())).Throws(new InvalidOperationException());
 
             try
             {
@@ -24,9 +23,7 @@ namespace Moq.Tests
 
                 Assert.True(false, "Should have failed for big order");
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
         }
 
         [Fact]
@@ -37,8 +34,7 @@ namespace Moq.Tests
 
             Order repo = Match.Create<Order>(r => true);
 
-            mock.Setup(x => x.Save(Orders.Contains(order)))
-                 .Throws<ArgumentException>();
+            mock.Setup(x => x.Save(Orders.Contains(order))).Throws<ArgumentException>();
 
             Assert.Throws<ArgumentException>(() => mock.Object.Save(new[] { order }));
         }
@@ -47,8 +43,7 @@ namespace Moq.Tests
         public void ShouldExtendWithPropertyMatchers()
         {
             var mock = new Mock<IOrderRepository>();
-            mock.Setup(repo => repo.Save(Order.IsSmall))
-                .Throws(new InvalidOperationException());
+            mock.Setup(repo => repo.Save(Order.IsSmall)).Throws(new InvalidOperationException());
 
             try
             {
@@ -56,9 +51,7 @@ namespace Moq.Tests
 
                 Assert.True(false, "Should have failed for small order");
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
         }
 
         [Fact]
@@ -75,7 +68,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IOrderRepository>();
 
-            var ex = Record.Exception(() => mock.VerifySet(repo => repo.OrderSavedLast = Order.IsBig()));
+            var ex = Record.Exception(
+                () => mock.VerifySet(repo => repo.OrderSavedLast = Order.IsBig())
+            );
             Assert.Contains("repo => repo.OrderSavedLast = Order.IsBig()", ex.Message);
         }
 
@@ -84,7 +79,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IOrderRepository>();
 
-            var ex = Record.Exception(() => mock.VerifySet(repo => repo.OrderSavedLast = Order.IsSmall));
+            var ex = Record.Exception(
+                () => mock.VerifySet(repo => repo.OrderSavedLast = Order.IsSmall)
+            );
             Assert.Contains("repo => repo.OrderSavedLast = Match.Matcher<Order>()", ex.Message);
         }
     }

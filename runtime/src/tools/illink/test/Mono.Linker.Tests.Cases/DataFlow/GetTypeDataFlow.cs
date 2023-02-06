@@ -16,25 +16,25 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     [ExpectedNoWarnings]
     public class GetTypeDataFlow
     {
-        public static void Main ()
+        public static void Main()
         {
-            TestPublicParameterlessConstructor ();
-            TestPublicConstructors ();
-            TestConstructors ();
-            TestNull ();
-            TestNoValue ();
-            TestUnknownType ();
+            TestPublicParameterlessConstructor();
+            TestPublicConstructors();
+            TestConstructors();
+            TestNull();
+            TestNoValue();
+            TestUnknownType();
 
-            TestTypeNameFromParameter (null);
-            TestTypeNameFromField ();
+            TestTypeNameFromParameter(null);
+            TestTypeNameFromField();
 
-            TestMultipleConstantValues ();
-            TestMultipleMixedValues ();
+            TestMultipleConstantValues();
+            TestMultipleMixedValues();
 
-            TestStringEmpty ();
+            TestStringEmpty();
 
-            TypeWithWarnings.Test ();
-            OverConstTypeName.Test ();
+            TypeWithWarnings.Test();
+            OverConstTypeName.Test();
 
             // TODO:
             // Test multi-value returns
@@ -42,177 +42,213 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             //    Type.GetType over two params
         }
 
-        [ExpectedWarning ("IL2072", nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-        [ExpectedWarning ("IL2072", nameof (DataFlowTypeExtensions.RequiresNonPublicConstructors))]
-        static void TestPublicParameterlessConstructor ()
+        [ExpectedWarning("IL2072", nameof(DataFlowTypeExtensions.RequiresPublicConstructors))]
+        [ExpectedWarning("IL2072", nameof(DataFlowTypeExtensions.RequiresNonPublicConstructors))]
+        static void TestPublicParameterlessConstructor()
         {
-            Type type = Type.GetType (GetStringTypeWithPublicParameterlessConstructor ());
-            type.RequiresPublicParameterlessConstructor ();
-            type.RequiresPublicConstructors ();
-            type.RequiresNonPublicConstructors ();
-            type.RequiresNone ();
+            Type type = Type.GetType(GetStringTypeWithPublicParameterlessConstructor());
+            type.RequiresPublicParameterlessConstructor();
+            type.RequiresPublicConstructors();
+            type.RequiresNonPublicConstructors();
+            type.RequiresNone();
         }
 
-        [ExpectedWarning ("IL2072", nameof (DataFlowTypeExtensions.RequiresNonPublicConstructors))]
-        static void TestPublicConstructors ()
+        [ExpectedWarning("IL2072", nameof(DataFlowTypeExtensions.RequiresNonPublicConstructors))]
+        static void TestPublicConstructors()
         {
-            Type type = Type.GetType (GetStringTypeWithPublicConstructors ());
-            type.RequiresPublicParameterlessConstructor ();
-            type.RequiresPublicConstructors ();
-            type.RequiresNonPublicConstructors ();
-            type.RequiresNone ();
+            Type type = Type.GetType(GetStringTypeWithPublicConstructors());
+            type.RequiresPublicParameterlessConstructor();
+            type.RequiresPublicConstructors();
+            type.RequiresNonPublicConstructors();
+            type.RequiresNone();
         }
 
-        [ExpectedWarning ("IL2072", nameof (DataFlowTypeExtensions.RequiresPublicParameterlessConstructor))]
-        [ExpectedWarning ("IL2072", nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-        static void TestConstructors ()
+        [ExpectedWarning(
+            "IL2072",
+            nameof(DataFlowTypeExtensions.RequiresPublicParameterlessConstructor)
+        )]
+        [ExpectedWarning("IL2072", nameof(DataFlowTypeExtensions.RequiresPublicConstructors))]
+        static void TestConstructors()
         {
-            Type type = Type.GetType (GetStringTypeWithNonPublicConstructors ());
-            type.RequiresPublicParameterlessConstructor ();
-            type.RequiresPublicConstructors ();
-            type.RequiresNonPublicConstructors ();
-            type.RequiresNone ();
+            Type type = Type.GetType(GetStringTypeWithNonPublicConstructors());
+            type.RequiresPublicParameterlessConstructor();
+            type.RequiresPublicConstructors();
+            type.RequiresNonPublicConstructors();
+            type.RequiresNone();
         }
 
-        static void TestNull ()
+        static void TestNull()
         {
             // GetType(null) throws at runtime, so we "give up" on analysis
-            Type.GetType (null).RequiresAll ();
+            Type.GetType(null).RequiresAll();
         }
 
-        static void TestNoValue ()
+        static void TestNoValue()
         {
             Type t = null;
             // null.AssemblyQualifiedName throws at runtime, so we "give up" on analysis
             string noValue = t.AssemblyQualifiedName;
-            Type.GetType (noValue).RequiresAll ();
+            Type.GetType(noValue).RequiresAll();
         }
 
-        [ExpectedWarning ("IL2057", nameof (GetType))]
-        static void TestUnknownType ()
+        [ExpectedWarning("IL2057", nameof(GetType))]
+        static void TestUnknownType()
         {
-            Type type = Type.GetType (GetStringUnknownType ());
+            Type type = Type.GetType(GetStringUnknownType());
         }
 
-        [ExpectedWarning ("IL2072", nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-        static void TestTypeNameFromParameter (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            string typeName)
+        [ExpectedWarning("IL2072", nameof(DataFlowTypeExtensions.RequiresPublicConstructors))]
+        static void TestTypeNameFromParameter(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                string typeName
+        )
         {
-            Type.GetType (typeName).RequiresPublicConstructors ();
+            Type.GetType(typeName).RequiresPublicConstructors();
         }
 
-        [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         static string _typeNameWithPublicParameterlessConstructor;
 
-        [ExpectedWarning ("IL2072", nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-        static void TestTypeNameFromField ()
+        [ExpectedWarning("IL2072", nameof(DataFlowTypeExtensions.RequiresPublicConstructors))]
+        static void TestTypeNameFromField()
         {
-            Type.GetType (_typeNameWithPublicParameterlessConstructor).RequiresPublicConstructors ();
+            Type.GetType(_typeNameWithPublicParameterlessConstructor).RequiresPublicConstructors();
         }
 
         static int _switchOnField;
 
-        static void TestMultipleConstantValues ()
+        static void TestMultipleConstantValues()
         {
             string typeName = null;
-            switch (_switchOnField) {
-            case 0: // valid
-                typeName = "Mono.Linker.Tests.Cases.DataFlow.GetTypeDataFlow";
-                break;
-            case 1: // null
-                typeName = null;
-                break;
-            case 2: // invalid
-                typeName = "UnknownType";
-                break;
-            case 3: // invalid second
-                typeName = "AnotherUnknownType";
-                break;
+            switch (_switchOnField)
+            {
+                case 0: // valid
+                    typeName = "Mono.Linker.Tests.Cases.DataFlow.GetTypeDataFlow";
+                    break;
+                case 1: // null
+                    typeName = null;
+                    break;
+                case 2: // invalid
+                    typeName = "UnknownType";
+                    break;
+                case 3: // invalid second
+                    typeName = "AnotherUnknownType";
+                    break;
             }
 
-            Type.GetType (typeName);
+            Type.GetType(typeName);
         }
 
-        static void TestStringEmpty ()
+        static void TestStringEmpty()
         {
-            Type.GetType (string.Empty);
+            Type.GetType(string.Empty);
         }
 
-        [ExpectedWarning ("IL2072", nameof (DataFlowTypeExtensions.RequiresNonPublicConstructors), nameof (Type.GetType))]
-        [ExpectedWarning ("IL2057", "System.Type.GetType(String)")]
-        static void TestMultipleMixedValues ()
+        [ExpectedWarning(
+            "IL2072",
+            nameof(DataFlowTypeExtensions.RequiresNonPublicConstructors),
+            nameof(Type.GetType)
+        )]
+        [ExpectedWarning("IL2057", "System.Type.GetType(String)")]
+        static void TestMultipleMixedValues()
         {
             string typeName = null;
-            switch (_switchOnField) {
-            case 0:
-                typeName = GetStringTypeWithPublicParameterlessConstructor ();
-                break;
-            case 1:
-                typeName = GetStringTypeWithNonPublicConstructors ();
-                break;
-            case 2:
-                typeName = "Mono.Linker.Tests.Cases.DataFlow.GetTypeDataFlow";
-                break;
-            case 3:
-                typeName = GetStringUnknownType ();
-                break;
+            switch (_switchOnField)
+            {
+                case 0:
+                    typeName = GetStringTypeWithPublicParameterlessConstructor();
+                    break;
+                case 1:
+                    typeName = GetStringTypeWithNonPublicConstructors();
+                    break;
+                case 2:
+                    typeName = "Mono.Linker.Tests.Cases.DataFlow.GetTypeDataFlow";
+                    break;
+                case 3:
+                    typeName = GetStringUnknownType();
+                    break;
             }
 
-            Type.GetType (typeName).RequiresNonPublicConstructors ();
+            Type.GetType(typeName).RequiresNonPublicConstructors();
         }
 
         class TypeWithWarnings
         {
-            [RequiresUnreferencedCode ("--Method1--")]
-            public void Method1 () { }
+            [RequiresUnreferencedCode("--Method1--")]
+            public void Method1() { }
 
-            [RequiresUnreferencedCode ("--Method2--")]
-            public void Method2 () { }
+            [RequiresUnreferencedCode("--Method2--")]
+            public void Method2() { }
 
             // https://github.com/dotnet/linker/issues/2273
-            [ExpectedWarning ("IL2026", "--Method1--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-            [ExpectedWarning ("IL2026", "--Method2--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-            public static void Test ()
+            [ExpectedWarning(
+                "IL2026",
+                "--Method1--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--Method2--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
+            public static void Test()
             {
-                Type.GetType ("Mono.Linker.Tests.Cases.DataFlow." + nameof (GetTypeDataFlow) + "+" + nameof (TypeWithWarnings)).RequiresPublicMethods ();
+                Type.GetType(
+                        "Mono.Linker.Tests.Cases.DataFlow."
+                            + nameof(GetTypeDataFlow)
+                            + "+"
+                            + nameof(TypeWithWarnings)
+                    )
+                    .RequiresPublicMethods();
             }
         }
 
         class OverConstTypeName
         {
-            private const string s_ConstTypeName = "Mono.Linker.Tests.Cases.DataFlow." + nameof (GetTypeDataFlow) + "+" + nameof (OverConstTypeName);
+            private const string s_ConstTypeName =
+                "Mono.Linker.Tests.Cases.DataFlow."
+                + nameof(GetTypeDataFlow)
+                + "+"
+                + nameof(OverConstTypeName);
 
-            [RequiresUnreferencedCode ("--Method1--")]
-            public void Method1 () { }
+            [RequiresUnreferencedCode("--Method1--")]
+            public void Method1() { }
 
             // https://github.com/dotnet/linker/issues/2273
-            [ExpectedWarning ("IL2026", "--Method1--", ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot)]
-            public static void Test ()
+            [ExpectedWarning(
+                "IL2026",
+                "--Method1--",
+                ProducedBy = ProducedBy.Trimmer | ProducedBy.NativeAot
+            )]
+            public static void Test()
             {
-                Type.GetType (s_ConstTypeName).RequiresPublicMethods ();
+                Type.GetType(s_ConstTypeName).RequiresPublicMethods();
             }
         }
 
-        [return: DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        private static string GetStringTypeWithPublicParameterlessConstructor ()
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        )]
+        private static string GetStringTypeWithPublicParameterlessConstructor()
         {
             return null;
         }
 
-        [return: DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicConstructors)]
-        private static string GetStringTypeWithPublicConstructors ()
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+        private static string GetStringTypeWithPublicConstructors()
         {
             return null;
         }
 
-        [return: DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-        private static string GetStringTypeWithNonPublicConstructors ()
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        private static string GetStringTypeWithNonPublicConstructors()
         {
             return null;
         }
 
-        private static string GetStringUnknownType ()
+        private static string GetStringUnknownType()
         {
             return null;
         }

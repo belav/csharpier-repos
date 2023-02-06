@@ -3,9 +3,10 @@
 // Compiler options: -warn:1 -warnaserror
 
 using System;
-[assembly: CLSCompliant (true)]
 
-public class Class {
-    public void Test ([CLSCompliant(false)] uint u) {
-    }
+[assembly: CLSCompliant(true)]
+
+public class Class
+{
+    public void Test([CLSCompliant(false)] uint u) { }
 }

@@ -1,4 +1,5 @@
-struct Bla {
+struct Bla
+{
     public object o;
     int i;
     object oa;
@@ -65,17 +66,20 @@ struct Bla {
     int iaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;
 };
 
-public class Test {
-    static Bla [] blas;
+public class Test
+{
+    static Bla[] blas;
 
-    public static int Main (string [] args) {
-        for (int i = 0; i < 200; ++i) {
-            Bla [] x = new Bla [256];
+    public static int Main(string[] args)
+    {
+        for (int i = 0; i < 200; ++i)
+        {
+            Bla[] x = new Bla[256];
             if (i % 10 == 0)
                 blas = x;
             for (int j = 0; j < 256; ++j)
-                blas [j].o = new int [32];
-            blas [1] = x [1];
+                blas[j].o = new int[32];
+            blas[1] = x[1];
         }
         return 0;
     }

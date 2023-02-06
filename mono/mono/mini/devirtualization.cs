@@ -25,174 +25,205 @@ using System.Reflection;
 
 delegate int IntNoArgs();
 
-public class Base {
-
-    public virtual int method1 () {
+public class Base
+{
+    public virtual int method1()
+    {
         return 1;
     }
 
-    public virtual int method2 () {
-        return 1;
-    }
-    
-    public virtual int method3 () {
+    public virtual int method2()
+    {
         return 1;
     }
 
-    public virtual int method4 () {
+    public virtual int method3()
+    {
         return 1;
     }
 
-    public virtual int method5 () {
+    public virtual int method4()
+    {
         return 1;
     }
-    
-}
 
-public class Middle : Base {
-    public override int method2 () {
-        return 2;
-    }
-    
-    public override int method4 () {
-        return 2;
-    }
-    
-    public override sealed int method5 () {
-        return 2;
+    public virtual int method5()
+    {
+        return 1;
     }
 }
 
+public class Middle : Base
+{
+    public override int method2()
+    {
+        return 2;
+    }
 
-public class OpenFinal : Middle {
-    public override sealed int method4 () {
+    public override int method4()
+    {
+        return 2;
+    }
+
+    public override sealed int method5()
+    {
+        return 2;
+    }
+}
+
+public class OpenFinal : Middle
+{
+    public override sealed int method4()
+    {
         return 3;
     }
-    
-    static public int staticMethod() {
+
+    static public int staticMethod()
+    {
         return 3;
     }
-
 }
 
-sealed public class SealedFinal : Middle {
-    public override int method1 () {
+sealed public class SealedFinal : Middle
+{
+    public override int method1()
+    {
         return 4;
     }
-    
-    static public int staticMethod() {
+
+    static public int staticMethod()
+    {
         return 4;
     }
 }
 
-
-class DevirtualizationTests {
-
+class DevirtualizationTests
+{
 #if !__MOBILE__
-    static int Main  (string[] args) {
-        return TestDriver.RunTests (typeof (DevirtualizationTests), args);
+    static int Main(string[] args)
+    {
+        return TestDriver.RunTests(typeof(DevirtualizationTests), args);
     }
 #endif
-    
-    static public int test_0_sealed_class_devirt_right_method () {
-        SealedFinal x = new SealedFinal ();
-        if (x.method1 () != 4)
+    static public int test_0_sealed_class_devirt_right_method()
+    {
+        SealedFinal x = new SealedFinal();
+        if (x.method1() != 4)
             return 1;
-        if (x.method2 () != 2)
+        if (x.method2() != 2)
             return 2;
-        if (x.method3 () != 1)
+        if (x.method3() != 1)
             return 1;
-        return 0;    
-    }
-    
-    static public int test_0_sealed_method_devirt_right_method () {
-        OpenFinal x = new OpenFinal ();
-        if (x.method4 () != 3)
-            return 1;
-        if (x.method5 () != 2)
-            return 2;
-        return 0;    
-    }
-    
-    static public int test_0_sealed_class_devirt_right_method_using_delegates () {
-        SealedFinal x = new SealedFinal ();
-        IntNoArgs d1 = new IntNoArgs(x.method1);
-        IntNoArgs d2 = new IntNoArgs(x.method2);
-        IntNoArgs d3 = new IntNoArgs(x.method3);
-        
-        if (d1 () != 4)
-            return 1;
-        if (d2 () != 2)
-            return 2;
-        if (d3 () != 1)
-            return 1;
-        return 0;    
-    }
-    
-    static public int test_0_sealed_method_devirt_right_method_using_delegates () {
-        OpenFinal x = new OpenFinal ();
-        IntNoArgs d1 = new IntNoArgs(x.method4);
-        IntNoArgs d2 = new IntNoArgs(x.method5);
-        
-        if (d1 () != 3)
-            return 1;
-        if (d2 () != 2)
-            return 2;
-        return 0;    
-    }
-    
-    
-    static public int test_0_delegate_over_static_method_devirtualize_ok () {
-        IntNoArgs d1 = new IntNoArgs(OpenFinal.staticMethod);
-        IntNoArgs d2 = new IntNoArgs(SealedFinal.staticMethod);
-        
-        if (d1 () != 3)
-            return 1;
-        if (d2 () != 4)
-            return 2;
-            
         return 0;
     }
 
-    static public int test_0_npe_still_happens() {
+    static public int test_0_sealed_method_devirt_right_method()
+    {
+        OpenFinal x = new OpenFinal();
+        if (x.method4() != 3)
+            return 1;
+        if (x.method5() != 2)
+            return 2;
+        return 0;
+    }
+
+    static public int test_0_sealed_class_devirt_right_method_using_delegates()
+    {
+        SealedFinal x = new SealedFinal();
+        IntNoArgs d1 = new IntNoArgs(x.method1);
+        IntNoArgs d2 = new IntNoArgs(x.method2);
+        IntNoArgs d3 = new IntNoArgs(x.method3);
+
+        if (d1() != 4)
+            return 1;
+        if (d2() != 2)
+            return 2;
+        if (d3() != 1)
+            return 1;
+        return 0;
+    }
+
+    static public int test_0_sealed_method_devirt_right_method_using_delegates()
+    {
+        OpenFinal x = new OpenFinal();
+        IntNoArgs d1 = new IntNoArgs(x.method4);
+        IntNoArgs d2 = new IntNoArgs(x.method5);
+
+        if (d1() != 3)
+            return 1;
+        if (d2() != 2)
+            return 2;
+        return 0;
+    }
+
+    static public int test_0_delegate_over_static_method_devirtualize_ok()
+    {
+        IntNoArgs d1 = new IntNoArgs(OpenFinal.staticMethod);
+        IntNoArgs d2 = new IntNoArgs(SealedFinal.staticMethod);
+
+        if (d1() != 3)
+            return 1;
+        if (d2() != 4)
+            return 2;
+
+        return 0;
+    }
+
+    static public int test_0_npe_still_happens()
+    {
         OpenFinal x = null;
         SealedFinal y = null;
-        
-        try {
+
+        try
+        {
             y.method1();
             return 1;
-        } catch(NullReferenceException e) {
-            ;//ok
+        }
+        catch (NullReferenceException e)
+        {
+            ; //ok
         }
 
-        try {
+        try
+        {
             y.method2();
             return 2;
-        } catch(NullReferenceException e) {
-            ;//ok
+        }
+        catch (NullReferenceException e)
+        {
+            ; //ok
         }
 
-        try {
+        try
+        {
             y.method3();
             return 3;
-        } catch(NullReferenceException e) {
-            ;//ok
         }
-        
-        try {
-            x.method4();
-            return 4;
-        } catch(NullReferenceException e) {
-            ;//ok
+        catch (NullReferenceException e)
+        {
+            ; //ok
         }
 
-        try {
+        try
+        {
+            x.method4();
+            return 4;
+        }
+        catch (NullReferenceException e)
+        {
+            ; //ok
+        }
+
+        try
+        {
             x.method5();
             return 5;
-        } catch(NullReferenceException e) {
-            ;//ok
         }
-        
+        catch (NullReferenceException e)
+        {
+            ; //ok
+        }
+
         return 0;
     }
 }

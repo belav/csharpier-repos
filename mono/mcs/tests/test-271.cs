@@ -1,22 +1,24 @@
 using System;
 using System.Collections;
 
-class T {
-    struct C : IEnumerable {
-        public IEnumerator GetEnumerator ()
+class T
+{
+    struct C : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
         {
-            return new ArrayList ().GetEnumerator (); 
+            return new ArrayList().GetEnumerator();
         }
     }
-    
-    static C X ()
+
+    static C X()
     {
-        return new C ();
+        return new C();
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        foreach (object o in X ())
+        foreach (object o in X())
             ;
     }
 }

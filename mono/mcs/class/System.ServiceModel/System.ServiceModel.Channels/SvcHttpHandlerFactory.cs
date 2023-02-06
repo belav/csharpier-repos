@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,133 +39,154 @@ using System.Web;
 using System.Web.Caching;
 using System.Web.Compilation;
 
-namespace System.ServiceModel.Channels {
-
+namespace System.ServiceModel.Channels
+{
     internal class SvcHttpHandlerFactory : IHttpHandlerFactory
     {
-        static Dictionary<string, SvcHttpHandler> handlers = new Dictionary<string, SvcHttpHandler> ();
+        static Dictionary<string, SvcHttpHandler> handlers =
+            new Dictionary<string, SvcHttpHandler>();
         string privateBinPath;
-        Type service_type, factory_type;
+        Type service_type,
+            factory_type;
 
-        public SvcHttpHandlerFactory ()
+        public SvcHttpHandlerFactory()
         {
             ServiceHostingEnvironmentInternal.InAspNet = true;
         }
 
-        public IHttpHandler GetHandler (HttpContext context, string requestType, string url, string pathTranslated)
+        public IHttpHandler GetHandler(
+            HttpContext context,
+            string requestType,
+            string url,
+            string pathTranslated
+        )
         {
-            lock (handlers) {
+            lock (handlers)
+            {
+                if (handlers.ContainsKey(url))
+                    return handlers[url];
 
-            if (handlers.ContainsKey (url))
-                return handlers [url];
-            
-            LoadTypeFromSvc (pathTranslated, url, context);
-            if (service_type == null)
-                throw new Exception (String.Format (
-                    "Could not find service for url : '{0}'", url));
-            
-            SvcHttpHandler handler = new SvcHttpHandler (service_type, factory_type, url);
-            handlers [url] = handler;
+                LoadTypeFromSvc(pathTranslated, url, context);
+                if (service_type == null)
+                    throw new Exception(
+                        String.Format("Could not find service for url : '{0}'", url)
+                    );
 
-            return handler;
+                SvcHttpHandler handler = new SvcHttpHandler(service_type, factory_type, url);
+                handlers[url] = handler;
 
+                return handler;
             }
         }
 
-        public void ReleaseHandler (IHttpHandler handler)
+        public void ReleaseHandler(IHttpHandler handler)
         {
             // do nothing
         }
 
-        void LoadTypeFromSvc (string path, string url, HttpContext context)
+        void LoadTypeFromSvc(string path, string url, HttpContext context)
         {
-            if (CachingCompiler.GetTypeFromCache (path) != null)
+            if (CachingCompiler.GetTypeFromCache(path) != null)
                 return;
-            
-            ServiceHostParser parser = new ServiceHostParser (path, url, context);
-            
-            parser.Parse ();
-            if (parser.Program == null) {
+
+            ServiceHostParser parser = new ServiceHostParser(path, url, context);
+
+            parser.Parse();
+            if (parser.Program == null)
+            {
                 //FIXME: Not caching, as parser.TypeName could be
                 //just typename or fully qualified name
-                service_type = GetTypeFromBinAndConfig (parser.TypeName);
+                service_type = GetTypeFromBinAndConfig(parser.TypeName);
                 /*CachingCompiler.InsertType (
-                    service_type, service_type.Assembly.Location, url, 
+                    service_type, service_type.Assembly.Location, url,
                     new CacheItemRemovedCallback (RemovedCallback));*/
-            } else {
-                service_type = CachingCompiler.CompileAndGetType (
-                    parser, url,
-                    new CacheItemRemovedCallback (RemovedCallback));
+            }
+            else
+            {
+                service_type = CachingCompiler.CompileAndGetType(
+                    parser,
+                    url,
+                    new CacheItemRemovedCallback(RemovedCallback)
+                );
             }
 
-            if (parser.Factory != null) {
-                factory_type = GetTypeFromBinAndConfig (parser.Factory);
+            if (parser.Factory != null)
+            {
+                factory_type = GetTypeFromBinAndConfig(parser.Factory);
                 /*CachingCompiler.InsertType (
-                    factory_type, factory_type.Assembly.Location, url, 
+                    factory_type, factory_type.Assembly.Location, url,
                     new CacheItemRemovedCallback (RemovedCallback));*/
             }
         }
-        
-        string PrivateBinPath {
-            get {
+
+        string PrivateBinPath
+        {
+            get
+            {
                 if (privateBinPath != null)
                     return privateBinPath;
 
                 AppDomainSetup setup = AppDomain.CurrentDomain.SetupInformation;
                 privateBinPath = setup.PrivateBinPath;
-                    
-                if (!Path.IsPathRooted (privateBinPath)) {
+
+                if (!Path.IsPathRooted(privateBinPath))
+                {
                     string appbase = setup.ApplicationBase;
-                    if (appbase.StartsWith ("file://")) {
-                        appbase = appbase.Substring (7);
+                    if (appbase.StartsWith("file://"))
+                    {
+                        appbase = appbase.Substring(7);
                         if (Path.DirectorySeparatorChar != '/')
-                            appbase = appbase.Replace ('/', Path.DirectorySeparatorChar);
+                            appbase = appbase.Replace('/', Path.DirectorySeparatorChar);
                     }
-                    privateBinPath = Path.Combine (appbase, privateBinPath);
+                    privateBinPath = Path.Combine(appbase, privateBinPath);
                 }
 
                 return privateBinPath;
             }
         }
 
-        Type GetTypeFromBinAndConfig (string typeName)
+        Type GetTypeFromBinAndConfig(string typeName)
         {
             string assname = null;
-            int idx = typeName.IndexOf (',');
-            if (idx > 0) {
-                assname = typeName.Substring (idx + 1).Trim ();
-                typeName = typeName.Substring (0, idx);
+            int idx = typeName.IndexOf(',');
+            if (idx > 0)
+            {
+                assname = typeName.Substring(idx + 1).Trim();
+                typeName = typeName.Substring(0, idx);
             }
 
             Type result = null;
-            foreach (Assembly ass in BuildManager.GetReferencedAssemblies ()) {
-                if (assname != null && ass.GetName ().Name != assname)
+            foreach (Assembly ass in BuildManager.GetReferencedAssemblies())
+            {
+                if (assname != null && ass.GetName().Name != assname)
                     continue;
-                Type type = ass.GetType (typeName, false);
-                if (type != null) {
+                Type type = ass.GetType(typeName, false);
+                if (type != null)
+                {
                     if (result != null)
-                        throw new HttpException (String.Format ("Type {0} is not unique.", typeName));
+                        throw new HttpException(String.Format("Type {0} is not unique.", typeName));
                     result = type;
                 }
             }
 
             if (result == null)
-                throw new HttpException (String.Format ("Type {0} not found.", typeName));
+                throw new HttpException(String.Format("Type {0} not found.", typeName));
 
             return result;
         }
 
-        public static void RemovedCallback (string key, object value, CacheItemRemovedReason reason)
+        public static void RemovedCallback(string key, object value, CacheItemRemovedReason reason)
         {
-            if (key.StartsWith (CachingCompiler.cacheTypePrefix)) {
-                string path = key.Remove (0, CachingCompiler.cacheTypePrefix.Length);
+            if (key.StartsWith(CachingCompiler.cacheTypePrefix))
+            {
+                string path = key.Remove(0, CachingCompiler.cacheTypePrefix.Length);
 
                 SvcHttpHandler handler;
-                if (!handlers.TryGetValue (path, out handler))
+                if (!handlers.TryGetValue(path, out handler))
                     return;
-                handler.Close ();
+                handler.Close();
 
-                handlers.Remove (path);
+                handlers.Remove(path);
             }
         }
     }

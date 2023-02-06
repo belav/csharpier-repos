@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,66 +32,76 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 
-
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     public sealed class UrlMapping : ConfigurationElement
     {
         static ConfigurationProperty mappedUrlProp;
         static ConfigurationProperty urlProp;
         static ConfigurationPropertyCollection properties;
 
-        static void ValidateUrl (object value)
+        static void ValidateUrl(object value)
         {
             string url = value as string;
-            if (String.IsNullOrEmpty (url))
+            if (String.IsNullOrEmpty(url))
                 return;
-            if (!VirtualPathUtility.IsAppRelative (url))
-                throw new ConfigurationException ("Only app-relative (~/) URLs are allowed");
+            if (!VirtualPathUtility.IsAppRelative(url))
+                throw new ConfigurationException("Only app-relative (~/) URLs are allowed");
         }
 
-        static UrlMapping ()
+        static UrlMapping()
         {
-            mappedUrlProp = new ConfigurationProperty ("mappedUrl", typeof (string), null,
-                                   PropertyHelper.WhiteSpaceTrimStringConverter,
-                                   PropertyHelper.NonEmptyStringValidator,
-                                   ConfigurationPropertyOptions.IsRequired);
-            urlProp = new ConfigurationProperty ("url", typeof (string), null,
-                                 PropertyHelper.WhiteSpaceTrimStringConverter,
-                                 new CallbackValidator (typeof (string), ValidateUrl),
-                                 ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-            properties = new ConfigurationPropertyCollection ();
+            mappedUrlProp = new ConfigurationProperty(
+                "mappedUrl",
+                typeof(string),
+                null,
+                PropertyHelper.WhiteSpaceTrimStringConverter,
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired
+            );
+            urlProp = new ConfigurationProperty(
+                "url",
+                typeof(string),
+                null,
+                PropertyHelper.WhiteSpaceTrimStringConverter,
+                new CallbackValidator(typeof(string), ValidateUrl),
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            properties = new ConfigurationPropertyCollection();
 
-            properties.Add (mappedUrlProp);
-            properties.Add (urlProp);
+            properties.Add(mappedUrlProp);
+            properties.Add(urlProp);
         }
 
-        internal UrlMapping ()
-        {
-        }
+        internal UrlMapping() { }
 
-        public UrlMapping (string url, string mappedUrl)
+        public UrlMapping(string url, string mappedUrl)
         {
             this.Url = url;
             this.MappedUrl = mappedUrl;
         }
 
-        [ConfigurationProperty ("mappedUrl", Options = ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty("mappedUrl", Options = ConfigurationPropertyOptions.IsRequired)]
         // LAMESPEC: MS lists no validator here but provides one in Properties.
-        public string MappedUrl {
-            get { return (string) base [mappedUrlProp];}
-            internal set { base [mappedUrlProp] = value;}
+        public string MappedUrl
+        {
+            get { return (string)base[mappedUrlProp]; }
+            internal set { base[mappedUrlProp] = value; }
         }
 
-        [ConfigurationProperty ("url", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Url {
-            get { return (string) base [urlProp];}
-            internal set { base [urlProp] = value;}
+        [ConfigurationProperty(
+            "url",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Url
+        {
+            get { return (string)base[urlProp]; }
+            internal set { base[urlProp] = value; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
     }
 }
-

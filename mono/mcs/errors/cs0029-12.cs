@@ -3,9 +3,9 @@
 
 class A
 {
-    delegate void D ();
+    delegate void D();
 
-    public static void Main ()
+    public static void Main()
     {
         const D d = null;
         A a = d;

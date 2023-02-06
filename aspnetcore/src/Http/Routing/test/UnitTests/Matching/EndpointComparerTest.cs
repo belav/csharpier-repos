@@ -193,11 +193,30 @@ public class RouteEndpointComparerTest
         var endpoint3 = CreateEndpoint("/bar", order: 0, new TestMetadata1());
         var endpoint4 = CreateEndpoint("/foo", order: 0, new TestMetadata2());
         var endpoint5 = CreateEndpoint("/foo", order: 0);
-        var endpoint6 = CreateEndpoint("/a{baz}", order: 0, new TestMetadata1(), new TestMetadata2());
-        var endpoint7 = CreateEndpoint("/bar{baz}", order: 0, new TestMetadata1(), new TestMetadata2());
+        var endpoint6 = CreateEndpoint(
+            "/a{baz}",
+            order: 0,
+            new TestMetadata1(),
+            new TestMetadata2()
+        );
+        var endpoint7 = CreateEndpoint(
+            "/bar{baz}",
+            order: 0,
+            new TestMetadata1(),
+            new TestMetadata2()
+        );
 
         // Endpoints listed in reverse of the desired order.
-        var list = new List<RouteEndpoint>() { endpoint7, endpoint6, endpoint5, endpoint4, endpoint3, endpoint2, endpoint1, };
+        var list = new List<RouteEndpoint>()
+        {
+            endpoint7,
+            endpoint6,
+            endpoint5,
+            endpoint4,
+            endpoint3,
+            endpoint2,
+            endpoint1,
+        };
 
         var comparer = CreateComparer(new TestMetadata1Policy(), new TestMetadata2Policy());
 
@@ -213,7 +232,8 @@ public class RouteEndpointComparerTest
             e => Assert.Same(endpoint4, e),
             e => Assert.Same(endpoint5, e),
             e => Assert.Same(endpoint6, e),
-            e => Assert.Same(endpoint7, e));
+            e => Assert.Same(endpoint7, e)
+        );
     }
 
     [Fact]
@@ -236,17 +256,23 @@ public class RouteEndpointComparerTest
             list,
             e => Assert.Same(endpoint1, e),
             e => Assert.Same(endpoint2, e),
-            e => Assert.Same(endpoint3, e));
+            e => Assert.Same(endpoint3, e)
+        );
     }
 
-    private static RouteEndpoint CreateEndpoint(string template, int order, params object[] metadata)
+    private static RouteEndpoint CreateEndpoint(
+        string template,
+        int order,
+        params object[] metadata
+    )
     {
         return new RouteEndpoint(
             TestConstants.EmptyRequestDelegate,
             RoutePatternFactory.Parse(template),
             order,
             new EndpointMetadataCollection(metadata),
-            "test: " + template);
+            "test: " + template
+        );
     }
 
     private static EndpointComparer CreateComparer(params IEndpointComparerPolicy[] policies)
@@ -254,18 +280,14 @@ public class RouteEndpointComparerTest
         return new EndpointComparer(policies);
     }
 
-    private class TestMetadata1
-    {
-    }
+    private class TestMetadata1 { }
 
     private class TestMetadata1Policy : IEndpointComparerPolicy
     {
         public IComparer<Endpoint> Comparer => EndpointMetadataComparer<TestMetadata1>.Default;
     }
 
-    private class TestMetadata2
-    {
-    }
+    private class TestMetadata2 { }
 
     private class TestMetadata2Policy : IEndpointComparerPolicy
     {

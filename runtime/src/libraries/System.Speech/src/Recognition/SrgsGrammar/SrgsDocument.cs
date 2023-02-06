@@ -37,12 +37,14 @@ namespace System.Speech.Recognition.SrgsGrammar
                 Load(reader);
             }
         }
+
         public SrgsDocument(XmlReader srgsGrammar)
         {
             Helpers.ThrowIfNull(srgsGrammar, nameof(srgsGrammar));
 
             Load(srgsGrammar);
         }
+
         public SrgsDocument(GrammarBuilder builder)
         {
             Helpers.ThrowIfNull(builder, nameof(builder));
@@ -62,7 +64,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             builder.CreateGrammar(elementFactory);
         }
 
-        public SrgsDocument(SrgsRule grammarRootRule) : this()
+        public SrgsDocument(SrgsRule grammarRootRule)
+            : this()
         {
             Helpers.ThrowIfNull(grammarRootRule, nameof(grammarRootRule));
 
@@ -93,10 +96,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public Uri XmlBase
         {
-            get
-            {
-                return _grammar.XmlBase;
-            }
+            get { return _grammar.XmlBase; }
             set
             {
                 // base value can be null
@@ -111,10 +111,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public CultureInfo Culture
         {
-            get
-            {
-                return _grammar.Culture;
-            }
+            get { return _grammar.Culture; }
             set
             {
                 Helpers.ThrowIfNull(value, nameof(value));
@@ -131,10 +128,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public SrgsRule Root
         {
-            get
-            {
-                return _grammar.Root;
-            }
+            get { return _grammar.Root; }
             set
             {
                 // base value can be null
@@ -151,11 +145,16 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get
             {
-                return _grammar.Mode == GrammarType.VoiceGrammar ? SrgsGrammarMode.Voice : SrgsGrammarMode.Dtmf;
+                return _grammar.Mode == GrammarType.VoiceGrammar
+                    ? SrgsGrammarMode.Voice
+                    : SrgsGrammarMode.Dtmf;
             }
             set
             {
-                _grammar.Mode = value == SrgsGrammarMode.Voice ? GrammarType.VoiceGrammar : GrammarType.DtmfGrammar;
+                _grammar.Mode =
+                    value == SrgsGrammarMode.Voice
+                        ? GrammarType.VoiceGrammar
+                        : GrammarType.DtmfGrammar;
             }
         }
 
@@ -164,10 +163,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public SrgsPhoneticAlphabet PhoneticAlphabet
         {
-            get
-            {
-                return (SrgsPhoneticAlphabet)_grammar.PhoneticAlphabet;
-            }
+            get { return (SrgsPhoneticAlphabet)_grammar.PhoneticAlphabet; }
             set
             {
                 _grammar.PhoneticAlphabet = (AlphabetType)value;
@@ -181,10 +177,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         // APITODO: Implementations of Rules and all other SRGS objects not here for now
         public SrgsRulesCollection Rules
         {
-            get
-            {
-                return _grammar.Rules;
-            }
+            get { return _grammar.Rules; }
         }
 
         /// <summary>
@@ -192,10 +185,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string Language
         {
-            get
-            {
-                return _grammar.Language;
-            }
+            get { return _grammar.Language; }
             set
             {
                 // Language can be set to null
@@ -210,10 +200,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string Namespace
         {
-            get
-            {
-                return _grammar.Namespace;
-            }
+            get { return _grammar.Namespace; }
             set
             {
                 // namespace can be set to null
@@ -228,10 +215,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public Collection<string> CodeBehind
         {
-            get
-            {
-                return _grammar.CodeBehind;
-            }
+            get { return _grammar.CodeBehind; }
         }
 
         /// <summary>
@@ -239,14 +223,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public bool Debug
         {
-            get
-            {
-                return _grammar.Debug;
-            }
-            set
-            {
-                _grammar.Debug = value;
-            }
+            get { return _grammar.Debug; }
+            set { _grammar.Debug = value; }
         }
 
         /// <summary>
@@ -254,10 +232,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string Script
         {
-            get
-            {
-                return _grammar.Script;
-            }
+            get { return _grammar.Script; }
             set
             {
                 Helpers.ThrowIfEmptyOrNull(value, nameof(value));
@@ -270,10 +245,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public Collection<string> ImportNamespaces
         {
-            get
-            {
-                return _grammar.ImportNamespaces;
-            }
+            get { return _grammar.ImportNamespaces; }
         }
 
         /// <summary>
@@ -281,10 +253,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public Collection<string> AssemblyReferences
         {
-            get
-            {
-                return _grammar.AssemblyReferences;
-            }
+            get { return _grammar.AssemblyReferences; }
         }
 
         #endregion
@@ -371,26 +340,17 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>summary>
         internal SrgsTagFormat TagFormat
         {
-            set
-            {
-                _grammar.TagFormat = value;
-            }
+            set { _grammar.TagFormat = value; }
         }
 
         internal Uri BaseUri
         {
-            get
-            {
-                return _baseUri;
-            }
+            get { return _baseUri; }
         }
 
         internal SrgsGrammar Grammar
         {
-            get
-            {
-                return _grammar;
-            }
+            get { return _grammar; }
         }
 
         #endregion
@@ -413,6 +373,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         Voice,
         Dtmf
     }
+
     // Grammar mode.  Voice, Dtmf
     public enum SrgsPhoneticAlphabet
     {

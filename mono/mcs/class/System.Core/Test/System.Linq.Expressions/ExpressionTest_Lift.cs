@@ -36,35 +36,37 @@ namespace MonoTests.System.Linq.Expressions
     public class ExpressionTest_Lifting
     {
         [Test]
-        public void TestLiftOnEqual ()
+        public void TestLiftOnEqual()
         {
-            ConstantExpression a = Expression.Constant (1, typeof (int?));
-            ConstantExpression b = Expression.Constant (1, typeof (int?));
+            ConstantExpression a = Expression.Constant(1, typeof(int?));
+            ConstantExpression b = Expression.Constant(1, typeof(int?));
 
-            BinaryExpression cmp = Expression.Equal (a, b);
+            BinaryExpression cmp = Expression.Equal(a, b);
 
-            Assert.AreEqual (true, cmp.IsLifted, "IsLifted");
-            Assert.AreEqual (false, cmp.IsLiftedToNull, "IsLiftedToNull");
-            Assert.AreEqual (typeof(bool), cmp.Type, "type");
+            Assert.AreEqual(true, cmp.IsLifted, "IsLifted");
+            Assert.AreEqual(false, cmp.IsLiftedToNull, "IsLiftedToNull");
+            Assert.AreEqual(typeof(bool), cmp.Type, "type");
         }
 
         [Test]
-        public void TestLiftOnEqual_ForcedLifted ()
+        public void TestLiftOnEqual_ForcedLifted()
         {
-            ConstantExpression a = Expression.Constant (1, typeof (int?));
-            ConstantExpression b = Expression.Constant (1, typeof (int?));
+            ConstantExpression a = Expression.Constant(1, typeof(int?));
+            ConstantExpression b = Expression.Constant(1, typeof(int?));
 
             // Force the lift on equal
-            BinaryExpression cmp = Expression.Equal (a, b, true, null);
+            BinaryExpression cmp = Expression.Equal(a, b, true, null);
 
-            Assert.AreEqual (true, cmp.IsLifted, "IsLifted");
-            Assert.AreEqual (true, cmp.IsLiftedToNull, "IsLiftedToNull");
-            Assert.AreEqual (typeof(bool?), cmp.Type);
+            Assert.AreEqual(true, cmp.IsLifted, "IsLifted");
+            Assert.AreEqual(true, cmp.IsLiftedToNull, "IsLiftedToNull");
+            Assert.AreEqual(typeof(bool?), cmp.Type);
         }
 
         static MethodInfo GM(string n)
         {
-            MethodInfo [] m = typeof(ExpressionTest_Lifting).GetMethods(BindingFlags.Static | BindingFlags.Public);
+            MethodInfo[] m = typeof(ExpressionTest_Lifting).GetMethods(
+                BindingFlags.Static | BindingFlags.Public
+            );
 
             foreach (MethodInfo mm in m)
                 if (mm.Name == n)
@@ -73,33 +75,32 @@ namespace MonoTests.System.Linq.Expressions
             throw new Exception("No method found: " + n);
         }
 
-        static public int MyCompare (OpStruct a, OpStruct b)
+        static public int MyCompare(OpStruct a, OpStruct b)
         {
             return 1;
         }
 
         [Test]
-        public void TestLiftOnEqual_WithMethodInfo ()
+        public void TestLiftOnEqual_WithMethodInfo()
         {
-            ConstantExpression a = Expression.Constant (new OpStruct (), typeof (OpStruct?));
-            ConstantExpression b = Expression.Constant (null, typeof (OpStruct?));
+            ConstantExpression a = Expression.Constant(new OpStruct(), typeof(OpStruct?));
+            ConstantExpression b = Expression.Constant(null, typeof(OpStruct?));
 
             // Force the lift on equal
-            BinaryExpression cmp = Expression.Equal (a, b, true, GM("MyCompare"));
+            BinaryExpression cmp = Expression.Equal(a, b, true, GM("MyCompare"));
 
-            Assert.AreEqual (true, cmp.IsLifted, "IsLifted");
-            Assert.AreEqual (true, cmp.IsLiftedToNull, "IsLiftedToNull");
+            Assert.AreEqual(true, cmp.IsLifted, "IsLifted");
+            Assert.AreEqual(true, cmp.IsLiftedToNull, "IsLiftedToNull");
 
-            BinaryExpression cmp2 = Expression.Equal (a, b, false, GM("MyCompare"));
+            BinaryExpression cmp2 = Expression.Equal(a, b, false, GM("MyCompare"));
 
             //
             // When we use a MethodInfo, that has a non-bool return type,
             // the result is always Nullable<returntype> regardless of the
             // setting of "liftToNull"
             //
-            Assert.AreEqual (typeof(int?), cmp.Type);
-            Assert.AreEqual (typeof(int?), cmp2.Type);
-
+            Assert.AreEqual(typeof(int?), cmp.Type);
+            Assert.AreEqual(typeof(int?), cmp2.Type);
         }
     }
 }

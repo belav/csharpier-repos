@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace System.Drawing {
+namespace System.Drawing
+{
     using System.Runtime.Serialization.Formatters;
     using System.Runtime.InteropServices;
 
@@ -21,15 +22,17 @@ namespace System.Drawing {
     ///      Point from one data type to another.  Access this
     ///      class through the TypeDescriptor.
     /// </devdoc>
-    public class PointConverter : TypeConverter {
-
+    public class PointConverter : TypeConverter
+    {
         /// <include file='doc\PointConverter.uex' path='docs/doc[@for="PointConverter.CanConvertFrom"]/*' />
         /// <devdoc>
         ///      Determines if this converter can convert an object in the given source
         ///      type to the native type of the converter.
         /// </devdoc>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
-            if (sourceType == typeof(string)) {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            if (sourceType == typeof(string))
+            {
                 return true;
             }
             return base.CanConvertFrom(context, sourceType);
@@ -40,8 +43,13 @@ namespace System.Drawing {
         ///    <para>Gets a value indicating whether this converter can
         ///       convert an object to the given destination type using the context.</para>
         /// </devdoc>
-        public override bool CanConvertTo(ITypeDescriptorContext context, [NotNullWhen(true)] Type? destinationType) {
-            if (destinationType == typeof(InstanceDescriptor)) {
+        public override bool CanConvertTo(
+            ITypeDescriptorContext context,
+            [NotNullWhen(true)] Type? destinationType
+        )
+        {
+            if (destinationType == typeof(InstanceDescriptor))
+            {
                 return true;
             }
             return base.CanConvertTo(context, destinationType);
@@ -51,19 +59,24 @@ namespace System.Drawing {
         /// <devdoc>
         ///      Converts the given object to the converter's native type.
         /// </devdoc>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) {
-
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
+        {
             string strValue = value as string;
 
-            if (strValue != null) {
-
+            if (strValue != null)
+            {
                 string text = strValue.Trim();
 
-                if (text.Length == 0) {
+                if (text.Length == 0)
+                {
                     return null;
                 }
-                else {
-
+                else
+                {
                     // Parse 2 integer values.
                     //
                     culture ??= CultureInfo.CurrentCulture;
@@ -71,18 +84,22 @@ namespace System.Drawing {
                     string[] tokens = text.Split(sep);
                     int[] values = new int[tokens.Length];
                     TypeConverter intConverter = TypeDescriptor.GetConverter(typeof(int));
-                    for (int i = 0; i < values.Length; i++) {
+                    for (int i = 0; i < values.Length; i++)
+                    {
                         // Note: ConvertFromString will raise exception if value cannot be converted.
-                        values[i] = (int)intConverter.ConvertFromString(context, culture, tokens[i]);
+                        values[i] = (int)
+                            intConverter.ConvertFromString(context, culture, tokens[i]);
                     }
 
-                    if (values.Length == 2) {
+                    if (values.Length == 2)
+                    {
                         return new Point(values[0], values[1]);
                     }
-                    else {
-                        throw new ArgumentException(SR.Format(SR.TextParseFailedFormat,
-                                                                  text,
-                                                                  "x, y"));
+                    else
+                    {
+                        throw new ArgumentException(
+                            SR.Format(SR.TextParseFailedFormat, text, "x, y")
+                        );
                     }
                 }
             }
@@ -98,13 +115,22 @@ namespace System.Drawing {
         ///      type is string.  If this cannot convert to the destination type, this will
         ///      throw a NotSupportedException.
         /// </devdoc>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
-            if (destinationType == null) {
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            if (destinationType == null)
+            {
                 throw new ArgumentNullException(nameof(destinationType));
             }
 
-            if (value is Point){
-                if (destinationType == typeof(string)) {
+            if (value is Point)
+            {
+                if (destinationType == typeof(string))
+                {
                     Point pt = (Point)value;
 
                     culture ??= CultureInfo.CurrentCulture;
@@ -119,12 +145,16 @@ namespace System.Drawing {
 
                     return string.Join(sep, args);
                 }
-                if (destinationType == typeof(InstanceDescriptor)) {
+                if (destinationType == typeof(InstanceDescriptor))
+                {
                     Point pt = (Point)value;
 
-                    ConstructorInfo ctor = typeof(Point).GetConstructor(new Type[] {typeof(int), typeof(int)});
-                    if (ctor != null) {
-                        return new InstanceDescriptor(ctor, new object[] {pt.X, pt.Y});
+                    ConstructorInfo ctor = typeof(Point).GetConstructor(
+                        new Type[] { typeof(int), typeof(int) }
+                    );
+                    if (ctor != null)
+                    {
+                        return new InstanceDescriptor(ctor, new object[] { pt.X, pt.Y });
                     }
                 }
             }
@@ -138,23 +168,25 @@ namespace System.Drawing {
         ///      for the object.  This is useful for objects that are immutable, but still
         ///      want to provide changable properties.
         /// </devdoc>
-        public override object CreateInstance(ITypeDescriptorContext context, IDictionary propertyValues) {
-            if ( propertyValues == null ) {
-                throw new ArgumentNullException( nameof(propertyValues) );
+        public override object CreateInstance(
+            ITypeDescriptorContext context,
+            IDictionary propertyValues
+        )
+        {
+            if (propertyValues == null)
+            {
+                throw new ArgumentNullException(nameof(propertyValues));
             }
 
             object x = propertyValues["X"];
             object y = propertyValues["Y"];
 
-            if (x == null || y == null ||
-                !(x is int) || !(y is int)) {
+            if (x == null || y == null || !(x is int) || !(y is int))
+            {
                 throw new ArgumentException(SR.PropertyValueInvalidEntry);
             }
 
-
-            return new Point((int)x,
-                              (int)y);
-
+            return new Point((int)x, (int)y);
         }
 
         /// <include file='doc\PointConverter.uex' path='docs/doc[@for="PointConverter.GetCreateInstanceSupported"]/*' />
@@ -162,7 +194,8 @@ namespace System.Drawing {
         ///      Determines if changing a value on this object should require a call to
         ///      CreateInstance to create a new value.
         /// </devdoc>
-        public override bool GetCreateInstanceSupported(ITypeDescriptorContext context) {
+        public override bool GetCreateInstanceSupported(ITypeDescriptorContext context)
+        {
             return true;
         }
 
@@ -172,20 +205,27 @@ namespace System.Drawing {
         ///      does not return any properties.  An easy implementation of this method
         ///      can just call TypeDescriptor.GetProperties for the correct data type.
         /// </devdoc>
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes) {
-            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(Point), attributes);
-            return props.Sort(new string[] {"X", "Y"});
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
+        {
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(
+                typeof(Point),
+                attributes
+            );
+            return props.Sort(new string[] { "X", "Y" });
         }
-
 
         /// <include file='doc\PointConverter.uex' path='docs/doc[@for="PointConverter.GetPropertiesSupported"]/*' />
         /// <devdoc>
         ///      Determines if this object supports properties.  By default, this
         ///      is false.
         /// </devdoc>
-        public override bool GetPropertiesSupported(ITypeDescriptorContext context) {
+        public override bool GetPropertiesSupported(ITypeDescriptorContext context)
+        {
             return true;
         }
-
     }
 }

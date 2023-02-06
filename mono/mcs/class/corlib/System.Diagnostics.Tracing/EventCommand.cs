@@ -37,4 +37,3 @@ namespace System.Diagnostics.Tracing
         Disable = -3
     }
 }
-

@@ -33,18 +33,24 @@ namespace MonoTests.System.Windows.Forms
     public class DragEventArgsTest : TestHelper
     {
         [Test]
-        public void EffectTest ()
+        public void EffectTest()
         {
             DragDropEffects allowed_effects = DragDropEffects.Copy | DragDropEffects.Link;
-            DragEventArgs args = new DragEventArgs (null, 0, 0, 0, allowed_effects, DragDropEffects.Copy);
+            DragEventArgs args = new DragEventArgs(
+                null,
+                0,
+                0,
+                0,
+                allowed_effects,
+                DragDropEffects.Copy
+            );
 
-            Assert.AreEqual (allowed_effects, args.AllowedEffect, "#A1");
-            Assert.AreEqual (DragDropEffects.Copy, args.Effect, "#A2");
+            Assert.AreEqual(allowed_effects, args.AllowedEffect, "#A1");
+            Assert.AreEqual(DragDropEffects.Copy, args.Effect, "#A2");
 
             // An effect not part of AllowedEffect
             args.Effect = DragDropEffects.Move;
-            Assert.AreEqual (DragDropEffects.Move, args.Effect, "#B1");
+            Assert.AreEqual(DragDropEffects.Move, args.Effect, "#B1");
         }
     }
 }
-

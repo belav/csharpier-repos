@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 class C
 {
-    public async Task Test (__arglist)
+    public async Task Test(__arglist)
     {
-        await Call ();
+        await Call();
     }
-    
-    static Task Call ()
+
+    static Task Call()
     {
         return null;
     }

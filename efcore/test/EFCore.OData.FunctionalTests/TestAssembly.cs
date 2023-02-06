@@ -12,6 +12,5 @@ internal sealed class TestAssembly : Assembly
         _types = types;
     }
 
-    public override Type[] GetTypes()
-        => _types;
+    public override Type[] GetTypes() => _types;
 }

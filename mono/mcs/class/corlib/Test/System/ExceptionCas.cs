@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,129 +32,135 @@ using System;
 using System.Security;
 using System.Security.Permissions;
 
-namespace MonoCasTests.System {
-
+namespace MonoCasTests.System
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class ExceptionCas {
-
+    [Category("CAS")]
+    public class ExceptionCas
+    {
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         // Partial Trust Tests - i.e. call "normal" unit with reduced privileges
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void PartialTrust_DenyUnrestricted_Success ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void PartialTrust_DenyUnrestricted_Success()
         {
-            MonoTests.System.ExceptionTest et = new MonoTests.System.ExceptionTest ();
+            MonoTests.System.ExceptionTest et = new MonoTests.System.ExceptionTest();
             // call most (all but arguments checking) unit tests from ExceptionTest
-            et.TestThrowOnBlockBoundaries ();
-            et.Source_InnerException ();
+            et.TestThrowOnBlockBoundaries();
+            et.Source_InnerException();
         }
 
         // CAS tests
 
         [Test]
-        public void NoRestriction ()
+        public void NoRestriction()
         {
-            Exception e = new Exception ("message", new Exception ("inner message"));
+            Exception e = new Exception("message", new Exception("inner message"));
 
-            Assert.AreEqual ("message", e.Message, "Message");
-            Assert.IsNotNull (e.InnerException, "InnerException");
-            Assert.IsNotNull (e.ToString (), "ToString");
-            Assert.IsNotNull (e.Data, "Data");
-            Assert.IsNull (e.HelpLink, "HelpLink");
-            Assert.IsNull (e.Source, "Source");
-            Assert.IsNull (e.StackTrace, "StackTrace");
-            Assert.IsNull (e.TargetSite, "TargetSite");
+            Assert.AreEqual("message", e.Message, "Message");
+            Assert.IsNotNull(e.InnerException, "InnerException");
+            Assert.IsNotNull(e.ToString(), "ToString");
+            Assert.IsNotNull(e.Data, "Data");
+            Assert.IsNull(e.HelpLink, "HelpLink");
+            Assert.IsNull(e.Source, "Source");
+            Assert.IsNull(e.StackTrace, "StackTrace");
+            Assert.IsNull(e.TargetSite, "TargetSite");
         }
 
         [Test]
-        public void Throw_NoRestriction ()
+        public void Throw_NoRestriction()
         {
-            try {
-                throw new Exception ("message", new Exception ("inner message"));
+            try
+            {
+                throw new Exception("message", new Exception("inner message"));
             }
-            catch (Exception e) {
-                Assert.AreEqual ("message", e.Message, "Message");
-                Assert.IsNotNull (e.InnerException, "InnerException");
-                Assert.IsNotNull (e.ToString (), "ToString");
-                Assert.IsNotNull (e.Data, "Data");
-                Assert.IsNull (e.HelpLink, "HelpLink");
-                Assert.IsNotNull (e.Source, "Source");
-                Assert.IsNotNull (e.StackTrace, "StackTrace");
-                Assert.IsNotNull (e.TargetSite, "TargetSite");
+            catch (Exception e)
+            {
+                Assert.AreEqual("message", e.Message, "Message");
+                Assert.IsNotNull(e.InnerException, "InnerException");
+                Assert.IsNotNull(e.ToString(), "ToString");
+                Assert.IsNotNull(e.Data, "Data");
+                Assert.IsNull(e.HelpLink, "HelpLink");
+                Assert.IsNotNull(e.Source, "Source");
+                Assert.IsNotNull(e.StackTrace, "StackTrace");
+                Assert.IsNotNull(e.TargetSite, "TargetSite");
             }
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void FullRestriction ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void FullRestriction()
         {
-            Exception e = new Exception ("message", new Exception ("inner message"));
+            Exception e = new Exception("message", new Exception("inner message"));
 
-            Assert.AreEqual ("message", e.Message, "Message");
-            Assert.IsNotNull (e.InnerException, "InnerException");
-            Assert.IsNotNull (e.ToString (), "ToString");
-            Assert.IsNull (e.HelpLink, "HelpLink");
-            Assert.IsNull (e.Source, "Source");
-            Assert.IsNull (e.StackTrace, "StackTrace");
-            Assert.IsNotNull (e.Data, "Data");
+            Assert.AreEqual("message", e.Message, "Message");
+            Assert.IsNotNull(e.InnerException, "InnerException");
+            Assert.IsNotNull(e.ToString(), "ToString");
+            Assert.IsNull(e.HelpLink, "HelpLink");
+            Assert.IsNull(e.Source, "Source");
+            Assert.IsNull(e.StackTrace, "StackTrace");
+            Assert.IsNotNull(e.Data, "Data");
             // throws under 1.x
-            Assert.IsNull (e.TargetSite, "TargetSite");
+            Assert.IsNull(e.TargetSite, "TargetSite");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Throw_FullRestriction_Pass ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Throw_FullRestriction_Pass()
         {
-            try {
-                throw new Exception ("message", new Exception ("inner message"));
+            try
+            {
+                throw new Exception("message", new Exception("inner message"));
             }
-            catch (Exception e) {
-                Assert.AreEqual ("message", e.Message, "Message");
-                Assert.IsNotNull (e.InnerException, "InnerException");
-                Assert.IsNull (e.HelpLink, "HelpLink");
-                Assert.IsNotNull (e.Source, "Source");
-                Assert.IsNotNull (e.Data, "Data");
+            catch (Exception e)
+            {
+                Assert.AreEqual("message", e.Message, "Message");
+                Assert.IsNotNull(e.InnerException, "InnerException");
+                Assert.IsNull(e.HelpLink, "HelpLink");
+                Assert.IsNotNull(e.Source, "Source");
+                Assert.IsNotNull(e.Data, "Data");
                 // throws under 1.x
-                Assert.IsNotNull (e.TargetSite, "TargetSite");
+                Assert.IsNotNull(e.TargetSite, "TargetSite");
             }
         }
 
-
         [Test]
-        [FileIOPermission (SecurityAction.Deny, PathDiscovery = "/")]
-        [ExpectedException (typeof (Exception))]
-        public void Throw_FullRestriction_Fail_StackTrace ()
+        [FileIOPermission(SecurityAction.Deny, PathDiscovery = "/")]
+        [ExpectedException(typeof(Exception))]
+        public void Throw_FullRestriction_Fail_StackTrace()
         {
-            try {
-                throw new Exception ("message");
+            try
+            {
+                throw new Exception("message");
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 // throws only under 2.x
                 string s = e.StackTrace;
             }
         }
 
         [Test]
-        [FileIOPermission (SecurityAction.Deny, PathDiscovery = "/")]
-        [ExpectedException (typeof (Exception))]
-        public void Throw_FullRestriction_Fail_ToString ()
+        [FileIOPermission(SecurityAction.Deny, PathDiscovery = "/")]
+        [ExpectedException(typeof(Exception))]
+        public void Throw_FullRestriction_Fail_ToString()
         {
-            try {
-                throw new Exception ("message");
+            try
+            {
+                throw new Exception("message");
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 // throws only under 2.x
-                string s = e.ToString ();
+                string s = e.ToString();
             }
         }
-        
     }
 }

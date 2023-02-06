@@ -7,17 +7,15 @@ namespace Test
     {
         private class B
         {
-            public static void Method ()
-            {
-            }
+            public static void Method() { }
         }
     }
-    
+
     class MainClass
     {
         public static void Main(string[] args)
         {
-            A.B.Method ();
+            A.B.Method();
         }
     }
 }

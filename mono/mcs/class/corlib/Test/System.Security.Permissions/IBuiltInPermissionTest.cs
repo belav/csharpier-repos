@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,144 +32,149 @@ using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Security.Permissions {
-
+namespace MonoTests.System.Security.Permissions
+{
     [TestFixture]
-    public class IBuiltInPermissionTest {
-
+    public class IBuiltInPermissionTest
+    {
         // IBuiltInPermission is internal but we can test it's values
         // using reflection.
-        private int GetTokenIndex (IPermission p)
+        private int GetTokenIndex(IPermission p)
         {
-            Type t = p.GetType ();
-            int result = (int) t.InvokeMember ("System.Security.Permissions.IBuiltInPermission.GetTokenIndex", 
-                BindingFlags.InvokeMethod | BindingFlags.NonPublic |  BindingFlags.Instance,
-                null, p, null);
+            Type t = p.GetType();
+            int result = (int)
+                t.InvokeMember(
+                    "System.Security.Permissions.IBuiltInPermission.GetTokenIndex",
+                    BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Instance,
+                    null,
+                    p,
+                    null
+                );
             return result;
         }
 
         [Test]
-        public void Environment ()
+        public void Environment()
         {
-            IPermission p = (IPermission) new EnvironmentPermission (PermissionState.None);
-            Assert.AreEqual (0, GetTokenIndex (p));
+            IPermission p = (IPermission)new EnvironmentPermission(PermissionState.None);
+            Assert.AreEqual(0, GetTokenIndex(p));
         }
 
         [Test]
-        public void FileDialog ()
+        public void FileDialog()
         {
-            IPermission p = (IPermission) new FileDialogPermission (PermissionState.None);
-            Assert.AreEqual (1, GetTokenIndex (p));
+            IPermission p = (IPermission)new FileDialogPermission(PermissionState.None);
+            Assert.AreEqual(1, GetTokenIndex(p));
         }
 
         [Test]
-        public void FileIO ()
+        public void FileIO()
         {
-            IPermission p = (IPermission) new FileIOPermission (PermissionState.None);
-            Assert.AreEqual (2, GetTokenIndex (p));
+            IPermission p = (IPermission)new FileIOPermission(PermissionState.None);
+            Assert.AreEqual(2, GetTokenIndex(p));
         }
 
         [Test]
-        public void IsolatedStorageFile ()
+        public void IsolatedStorageFile()
         {
-            IPermission p = (IPermission) new IsolatedStorageFilePermission (PermissionState.None);
-            Assert.AreEqual (3, GetTokenIndex (p));
+            IPermission p = (IPermission)new IsolatedStorageFilePermission(PermissionState.None);
+            Assert.AreEqual(3, GetTokenIndex(p));
         }
 
         [Test]
-        public void Reflection ()
+        public void Reflection()
         {
-            IPermission p = (IPermission) new ReflectionPermission (PermissionState.None);
-            Assert.AreEqual (4, GetTokenIndex (p));
+            IPermission p = (IPermission)new ReflectionPermission(PermissionState.None);
+            Assert.AreEqual(4, GetTokenIndex(p));
         }
 
         [Test]
-        public void Registry ()
+        public void Registry()
         {
-            IPermission p = (IPermission) new RegistryPermission (PermissionState.None);
-            Assert.AreEqual (5, GetTokenIndex (p));
+            IPermission p = (IPermission)new RegistryPermission(PermissionState.None);
+            Assert.AreEqual(5, GetTokenIndex(p));
         }
 
         [Test]
-        public void Security ()
+        public void Security()
         {
-            IPermission p = (IPermission) new SecurityPermission (PermissionState.None);
-            Assert.AreEqual (6, GetTokenIndex (p));
+            IPermission p = (IPermission)new SecurityPermission(PermissionState.None);
+            Assert.AreEqual(6, GetTokenIndex(p));
         }
 
         [Test]
-        public void UI ()
+        public void UI()
         {
-            IPermission p = (IPermission) new UIPermission (PermissionState.None);
-            Assert.AreEqual (7, GetTokenIndex (p));
+            IPermission p = (IPermission)new UIPermission(PermissionState.None);
+            Assert.AreEqual(7, GetTokenIndex(p));
         }
 
         [Test]
-        public void Principal ()
+        public void Principal()
         {
-            IPermission p = (IPermission) new PrincipalPermission (PermissionState.None);
-            Assert.AreEqual (8, GetTokenIndex (p));
+            IPermission p = (IPermission)new PrincipalPermission(PermissionState.None);
+            Assert.AreEqual(8, GetTokenIndex(p));
         }
 
         [Test]
 #if MOBILE
         [Ignore]
 #endif
-        public void HostProtection ()
+        public void HostProtection()
         {
-            HostProtectionAttribute hpa = new HostProtectionAttribute ();
+            HostProtectionAttribute hpa = new HostProtectionAttribute();
             // internal permission
-            IPermission p = hpa.CreatePermission ();
-            Assert.AreEqual (9, GetTokenIndex (p));
+            IPermission p = hpa.CreatePermission();
+            Assert.AreEqual(9, GetTokenIndex(p));
         }
 
         [Test]
-        public void PublisherIdentity ()
+        public void PublisherIdentity()
         {
-            IPermission p = (IPermission) new PublisherIdentityPermission (PermissionState.None);
-            Assert.AreEqual (10, GetTokenIndex (p));
+            IPermission p = (IPermission)new PublisherIdentityPermission(PermissionState.None);
+            Assert.AreEqual(10, GetTokenIndex(p));
         }
 
         [Test]
-        public void SiteIdentity ()
+        public void SiteIdentity()
         {
-            IPermission p = (IPermission) new SiteIdentityPermission (PermissionState.None);
-            Assert.AreEqual (11, GetTokenIndex (p));
+            IPermission p = (IPermission)new SiteIdentityPermission(PermissionState.None);
+            Assert.AreEqual(11, GetTokenIndex(p));
         }
 
         [Test]
-        public void StrongNameIdentity ()
+        public void StrongNameIdentity()
         {
-            IPermission p = (IPermission) new StrongNameIdentityPermission (PermissionState.None);
-            Assert.AreEqual (12, GetTokenIndex (p));
+            IPermission p = (IPermission)new StrongNameIdentityPermission(PermissionState.None);
+            Assert.AreEqual(12, GetTokenIndex(p));
         }
 
         [Test]
-        public void UrlIdentity ()
+        public void UrlIdentity()
         {
-            IPermission p = (IPermission) new UrlIdentityPermission (PermissionState.None);
-            Assert.AreEqual (13, GetTokenIndex (p));
+            IPermission p = (IPermission)new UrlIdentityPermission(PermissionState.None);
+            Assert.AreEqual(13, GetTokenIndex(p));
         }
 
         [Test]
-        public void ZoneIdentity ()
+        public void ZoneIdentity()
         {
-            IPermission p = (IPermission) new ZoneIdentityPermission (PermissionState.None);
-            Assert.AreEqual (14, GetTokenIndex (p));
+            IPermission p = (IPermission)new ZoneIdentityPermission(PermissionState.None);
+            Assert.AreEqual(14, GetTokenIndex(p));
         }
 
         [Test]
-        public void GacIdentity ()
+        public void GacIdentity()
         {
-            IPermission p = (IPermission) new GacIdentityPermission (PermissionState.None);
-            Assert.AreEqual (15, GetTokenIndex (p));
+            IPermission p = (IPermission)new GacIdentityPermission(PermissionState.None);
+            Assert.AreEqual(15, GetTokenIndex(p));
         }
 
         [Test]
-        public void KeyContainer ()
+        public void KeyContainer()
         {
-            IPermission p = (IPermission)new KeyContainerPermission (PermissionState.None);
-            Assert.AreEqual (16, GetTokenIndex (p));
+            IPermission p = (IPermission)new KeyContainerPermission(PermissionState.None);
+            Assert.AreEqual(16, GetTokenIndex(p));
         }
     }
 }

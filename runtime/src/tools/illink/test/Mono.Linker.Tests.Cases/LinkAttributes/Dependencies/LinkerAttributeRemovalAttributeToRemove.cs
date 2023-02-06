@@ -14,19 +14,14 @@ namespace Mono.Linker.Tests.Cases.LinkAttributes.Dependencies
 
     public class TestAttributeUsedFromCopyAssemblyAttribute : Attribute
     {
-        public TestAttributeUsedFromCopyAssemblyAttribute (TestAttributeUsedFromCopyAssemblyEnum n)
-        {
-        }
+        public TestAttributeUsedFromCopyAssemblyAttribute(TestAttributeUsedFromCopyAssemblyEnum n)
+        { }
     }
 
     public class TestAnotherAttributeUsedFromCopyAssemblyAttribute : Attribute
     {
-        public TestAnotherAttributeUsedFromCopyAssemblyAttribute ()
-        {
-        }
+        public TestAnotherAttributeUsedFromCopyAssemblyAttribute() { }
     }
 
-    public class TestAttributeReferencedAsTypeFromCopyAssemblyAttribute : Attribute
-    {
-    }
+    public class TestAttributeReferencedAsTypeFromCopyAssemblyAttribute : Attribute { }
 }

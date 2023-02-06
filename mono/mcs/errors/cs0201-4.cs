@@ -3,10 +3,8 @@
 
 class MainClass
 {
-    public static void Main ()
+    public static void Main()
     {
-        for (int i = 0; i++; i < 8) {
-        }
+        for (int i = 0; i++; i < 8) { }
     }
 }
-

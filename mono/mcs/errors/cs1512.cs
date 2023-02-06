@@ -3,10 +3,13 @@
 
 class Base
 {
-    private string B () { return "a"; }
+    private string B()
+    {
+        return "a";
+    }
 }
 
 class E
 {
-   private string B = base.B ();
+    private string B = base.B();
 }

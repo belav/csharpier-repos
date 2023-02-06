@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,115 +28,120 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-    [ListBindable (false)]
+    [ListBindable(false)]
     public class DataGridViewSelectedRowCollection : BaseCollection, IList, ICollection, IEnumerable
     {
         private DataGridView dataGridView;
-        
-        internal DataGridViewSelectedRowCollection (DataGridView dataGridView)
+
+        internal DataGridViewSelectedRowCollection(DataGridView dataGridView)
         {
             this.dataGridView = dataGridView;
         }
 
-        bool IList.IsFixedSize {
+        bool IList.IsFixedSize
+        {
             get { return base.List.IsFixedSize; }
         }
 
-        object IList.this [int index] {
-            get { return this [index]; }
+        object IList.this[int index]
+        {
+            get { return this[index]; }
             set { throw new NotSupportedException("Can't insert or modify this collection."); }
         }
 
-        public DataGridViewRow this [int index] {
-            get { return (DataGridViewRow) base.List [index]; }
+        public DataGridViewRow this[int index]
+        {
+            get { return (DataGridViewRow)base.List[index]; }
         }
 
-        int IList.Add (object value)
+        int IList.Add(object value)
         {
             throw new NotSupportedException("Can't add elements to this collection.");
         }
 
-        void IList.Clear ()
+        void IList.Clear()
         {
-            Clear ();
+            Clear();
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public void Clear ()
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void Clear()
         {
-            throw new NotSupportedException ("This collection cannot be cleared.");
+            throw new NotSupportedException("This collection cannot be cleared.");
         }
 
-        bool IList.Contains (object value)
+        bool IList.Contains(object value)
         {
-            return Contains (value as DataGridViewRow);
+            return Contains(value as DataGridViewRow);
         }
 
-        public bool Contains (DataGridViewRow dataGridViewRow)
+        public bool Contains(DataGridViewRow dataGridViewRow)
         {
             return base.List.Contains(dataGridViewRow);
         }
 
-        public void CopyTo (DataGridViewRow[] array, int index)
+        public void CopyTo(DataGridViewRow[] array, int index)
         {
             base.List.CopyTo(array, index);
         }
 
-        int IList.IndexOf (object value)
+        int IList.IndexOf(object value)
         {
-            return base.List.IndexOf (value);
+            return base.List.IndexOf(value);
         }
 
-        void IList.Insert (int index, object value)
+        void IList.Insert(int index, object value)
         {
-            Insert (index, value as DataGridViewRow);
+            Insert(index, value as DataGridViewRow);
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public void Insert (int index, DataGridViewRow dataGridViewRow)
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void Insert(int index, DataGridViewRow dataGridViewRow)
         {
-            throw new NotSupportedException ("Insert is not allowed.");
+            throw new NotSupportedException("Insert is not allowed.");
         }
 
-        void IList.Remove (object value)
+        void IList.Remove(object value)
         {
-            throw new NotSupportedException ("Can't remove elements of this collection.");
+            throw new NotSupportedException("Can't remove elements of this collection.");
         }
 
-        void IList.RemoveAt (int index)
+        void IList.RemoveAt(int index)
         {
-            throw new NotSupportedException ("Can't remove elements of this collection.");
+            throw new NotSupportedException("Can't remove elements of this collection.");
         }
 
-        protected override ArrayList List {
+        protected override ArrayList List
+        {
             get { return base.List; }
         }
 
-        internal void InternalAdd (DataGridViewRow dataGridViewRow)
+        internal void InternalAdd(DataGridViewRow dataGridViewRow)
         {
-            base.List.Add (dataGridViewRow);
+            base.List.Add(dataGridViewRow);
         }
-        
-        internal void InternalAddRange (DataGridViewSelectedRowCollection rows)
+
+        internal void InternalAddRange(DataGridViewSelectedRowCollection rows)
         {
             if (rows == null)
                 return;
 
             // Believe it or not, MS adds the rows in reverse order...
             DataGridViewRow editing_row = dataGridView != null ? dataGridView.EditingRow : null;
-            for (int i = rows.Count - 1; i >= 0; i--) {
-                if (rows [i] == editing_row)
+            for (int i = rows.Count - 1; i >= 0; i--)
+            {
+                if (rows[i] == editing_row)
                     continue;
-                base.List.Add (rows [i]);
+                base.List.Add(rows[i]);
             }
         }
 
-        internal void InternalClear ()
+        internal void InternalClear()
         {
-            List.Clear ();
+            List.Clear();
         }
-        
-        internal void InternalRemove (DataGridViewRow dataGridViewRow)
+
+        internal void InternalRemove(DataGridViewRow dataGridViewRow)
         {
             base.List.Remove(dataGridViewRow);
         }

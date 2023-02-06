@@ -32,76 +32,82 @@ namespace System.Net.Http.Headers
 {
     public sealed class MediaTypeWithQualityHeaderValue : MediaTypeHeaderValue
     {
-        public MediaTypeWithQualityHeaderValue (string mediaType)
-            : base (mediaType)
-        {
-        }
+        public MediaTypeWithQualityHeaderValue(string mediaType)
+            : base(mediaType) { }
 
-        public MediaTypeWithQualityHeaderValue (string mediaType, double quality)
-            : this (mediaType)
+        public MediaTypeWithQualityHeaderValue(string mediaType, double quality)
+            : this(mediaType)
         {
             Quality = quality;
         }
 
-        private MediaTypeWithQualityHeaderValue ()
+        private MediaTypeWithQualityHeaderValue() { }
+
+        public double? Quality
         {
+            get { return QualityValue.GetValue(parameters); }
+            set { QualityValue.SetValue(ref parameters, value); }
         }
 
-        public double? Quality {
-            get {
-                return QualityValue.GetValue (parameters);
-            }
-            set {
-                QualityValue.SetValue (ref parameters, value);
-            }
-        }
-
-        public new static MediaTypeWithQualityHeaderValue Parse (string input)
+        public new static MediaTypeWithQualityHeaderValue Parse(string input)
         {
             MediaTypeWithQualityHeaderValue value;
-            if (TryParse (input, out value))
+            if (TryParse(input, out value))
                 return value;
 
-            throw new FormatException ();
+            throw new FormatException();
         }
 
-        public static bool TryParse (string input, out MediaTypeWithQualityHeaderValue parsedValue)
+        public static bool TryParse(string input, out MediaTypeWithQualityHeaderValue parsedValue)
         {
-            var lexer = new Lexer (input);
+            var lexer = new Lexer(input);
             Token token;
-            if (TryParseElement (lexer, out parsedValue, out token) && token == Token.Type.End)
+            if (TryParseElement(lexer, out parsedValue, out token) && token == Token.Type.End)
                 return true;
 
             parsedValue = null;
             return false;
         }
 
-        static bool TryParseElement (Lexer lexer, out MediaTypeWithQualityHeaderValue parsedValue, out Token t)
+        static bool TryParseElement(
+            Lexer lexer,
+            out MediaTypeWithQualityHeaderValue parsedValue,
+            out Token t
+        )
         {
             parsedValue = null;
 
             string media;
             List<NameValueHeaderValue> parameters = null;
-            var token = TryParseMediaType (lexer, out media);
-            if (token == null) {
+            var token = TryParseMediaType(lexer, out media);
+            if (token == null)
+            {
                 t = Token.Empty;
                 return false;
             }
 
             t = token.Value;
-            if (t == Token.Type.SeparatorSemicolon && !NameValueHeaderValue.TryParseParameters (lexer, out parameters, out t)) {
+            if (
+                t == Token.Type.SeparatorSemicolon
+                && !NameValueHeaderValue.TryParseParameters(lexer, out parameters, out t)
+            )
+            {
                 return false;
             }
 
-            parsedValue = new MediaTypeWithQualityHeaderValue ();
+            parsedValue = new MediaTypeWithQualityHeaderValue();
             parsedValue.media_type = media;
             parsedValue.parameters = parameters;
             return true;
         }
 
-        internal static bool TryParse (string input, int minimalCount, out List<MediaTypeWithQualityHeaderValue> result)
+        internal static bool TryParse(
+            string input,
+            int minimalCount,
+            out List<MediaTypeWithQualityHeaderValue> result
+        )
         {
-            return CollectionParser.TryParse (input, minimalCount, TryParseElement, out result);
+            return CollectionParser.TryParse(input, minimalCount, TryParseElement, out result);
         }
     }
 }

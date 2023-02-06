@@ -18,11 +18,11 @@ namespace N2
 
     class X
     {
-        public static void Main ()
+        public static void Main()
         {
-            Y y = new Y ();
-            Y.B b = new Y.B ();
-            Y.C<long> c = new Y.C<long> ();
+            Y y = new Y();
+            Y.B b = new Y.B();
+            Y.C<long> c = new Y.C<long>();
         }
     }
 }

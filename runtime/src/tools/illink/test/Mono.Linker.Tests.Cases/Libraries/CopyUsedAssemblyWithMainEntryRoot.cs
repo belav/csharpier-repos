@@ -5,29 +5,30 @@ using Mono.Linker.Tests.Cases.Libraries.Dependencies;
 namespace Mono.Linker.Tests.Cases.Libraries
 {
     [Kept]
-    [KeptMember (".ctor()")]
-    [SetupLinkerAction ("copyused", "test")]
-    [SetupCompileBefore ("lib.dll", new[] { "Dependencies/CopyUsedAssemblyWithMainEntryRoot_Lib.cs" })]
-    [KeptMemberInAssembly ("lib.dll", typeof (CopyUsedAssemblyWithMainEntryRoot_Lib), "Used()")]
+    [KeptMember(".ctor()")]
+    [SetupLinkerAction("copyused", "test")]
+    [SetupCompileBefore(
+        "lib.dll",
+        new[] { "Dependencies/CopyUsedAssemblyWithMainEntryRoot_Lib.cs" }
+    )]
+    [KeptMemberInAssembly("lib.dll", typeof(CopyUsedAssemblyWithMainEntryRoot_Lib), "Used()")]
     // Marked CopyUsed assemblies are not fully marked like Copy assemblies, so the Unused dependency is not kept.
-    [RemovedMemberInAssembly ("lib.dll", typeof (CopyUsedAssemblyWithMainEntryRoot_Lib), "Unused()")]
+    [RemovedMemberInAssembly("lib.dll", typeof(CopyUsedAssemblyWithMainEntryRoot_Lib), "Unused()")]
     public class CopyUsedAssemblyWithMainEntryRoot
     {
         [Kept]
-        public static void Main ()
+        public static void Main()
         {
-            CopyUsedAssemblyWithMainEntryRoot_Lib.Used ();
+            CopyUsedAssemblyWithMainEntryRoot_Lib.Used();
         }
 
         [Kept]
-        public void UnusedPublicMethod ()
-        {
-        }
+        public void UnusedPublicMethod() { }
 
         [Kept]
-        private void UnusedPrivateMethod ()
+        private void UnusedPrivateMethod()
         {
-            CopyUsedAssemblyWithMainEntryRoot_Lib.Unused ();
+            CopyUsedAssemblyWithMainEntryRoot_Lib.Unused();
         }
     }
 }

@@ -107,7 +107,7 @@ namespace Moq
                 {
                     return new Invocation[0];
                 }
-                
+
                 var result = new List<Invocation>(this.count);
 
                 for (var i = 0; i < this.count; i++)

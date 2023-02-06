@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         private readonly PEModuleSymbol _module;
         private CSharpAttributeData? _nullableContext;
 
-        private NullableAttributesVisitor(PEModuleSymbol module, StringBuilder builder) : base(builder)
+        private NullableAttributesVisitor(PEModuleSymbol module, StringBuilder builder)
+            : base(builder)
         {
             _module = module;
         }
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         public override void VisitNamedType(NamedTypeSymbol type)
         {
             var previousContext = _nullableContext;
-            _nullableContext = GetNullableContextAttribute(type.GetAttributes()) ?? _nullableContext;
+            _nullableContext =
+                GetNullableContextAttribute(type.GetAttributes()) ?? _nullableContext;
 
             base.VisitNamedType(type);
 
@@ -44,24 +46,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         public override void VisitMethod(MethodSymbol method)
         {
             var previousContext = _nullableContext;
-            _nullableContext = GetNullableContextAttribute(method.GetAttributes()) ?? _nullableContext;
+            _nullableContext =
+                GetNullableContextAttribute(method.GetAttributes()) ?? _nullableContext;
 
             base.VisitMethod(method);
 
             _nullableContext = previousContext;
         }
 
-        protected override SymbolDisplayFormat DisplayFormat => SymbolDisplayFormat.TestFormatWithConstraints.
-            WithMemberOptions(
-                SymbolDisplayMemberOptions.IncludeParameters |
-                SymbolDisplayMemberOptions.IncludeType |
-                SymbolDisplayMemberOptions.IncludeRef |
-                SymbolDisplayMemberOptions.IncludeExplicitInterface);
+        protected override SymbolDisplayFormat DisplayFormat =>
+            SymbolDisplayFormat.TestFormatWithConstraints.WithMemberOptions(
+                SymbolDisplayMemberOptions.IncludeParameters
+                    | SymbolDisplayMemberOptions.IncludeType
+                    | SymbolDisplayMemberOptions.IncludeRef
+                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
+            );
 
         protected override void ReportSymbol(Symbol symbol)
         {
             var nullableContextAttribute = GetNullableContextAttribute(symbol.GetAttributes());
-            var nullableAttribute = GetNullableAttribute((symbol is MethodSymbol method) ? method.GetReturnTypeAttributes() : symbol.GetAttributes());
+            var nullableAttribute = GetNullableAttribute(
+                (symbol is MethodSymbol method)
+                    ? method.GetReturnTypeAttributes()
+                    : symbol.GetAttributes()
+            );
 
             if (nullableContextAttribute == null && nullableAttribute == null)
             {
@@ -110,18 +118,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             }
         }
 
-        private static CSharpAttributeData? GetNullableContextAttribute(ImmutableArray<CSharpAttributeData> attributes) =>
+        private static CSharpAttributeData? GetNullableContextAttribute(
+            ImmutableArray<CSharpAttributeData> attributes
+        ) =>
             GetAttribute(attributes, "System.Runtime.CompilerServices", "NullableContextAttribute");
 
-        private static CSharpAttributeData? GetNullableAttribute(ImmutableArray<CSharpAttributeData> attributes) =>
-            GetAttribute(attributes, "System.Runtime.CompilerServices", "NullableAttribute");
+        private static CSharpAttributeData? GetNullableAttribute(
+            ImmutableArray<CSharpAttributeData> attributes
+        ) => GetAttribute(attributes, "System.Runtime.CompilerServices", "NullableAttribute");
 
         protected override bool TypeRequiresAttribute(TypeSymbol? type)
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        protected override CSharpAttributeData GetTargetAttribute(ImmutableArray<CSharpAttributeData> attributes)
+        protected override CSharpAttributeData GetTargetAttribute(
+            ImmutableArray<CSharpAttributeData> attributes
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }

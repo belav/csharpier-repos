@@ -30,13 +30,14 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace Samples.Common {
-
-    public class Matrices {
-
-        static public object[] GetList ()
+namespace Samples.Common
+{
+    public class Matrices
+    {
+        static public object[] GetList()
         {
-            return new object[] {
+            return new object[]
+            {
                 "Null",
                 "Empty",
                 "Rotate 15\'",
@@ -47,32 +48,33 @@ namespace Samples.Common {
             };
         }
 
-        static public Matrix GetMatrix (int index)
+        static public Matrix GetMatrix(int index)
         {
             // not defined (-1) or first (0)
             if (index <= 0)
                 return null;
 
-            Matrix m = new Matrix ();
-            switch (index) {
-            case 1:
-                // empty
-                break;
-            case 2:
-                m.Rotate (15);
-                break;
-            case 3:
-                m.RotateAt (45, new PointF (100, 100));
-                break;
-            case 4:
-                m.Scale (1.5f, 0.5f);
-                break;
-            case 5:
-                m.Shear (2.0f, 2.0f);
-                break;
-            case 6:
-                m.Translate (50, 50);
-                break;
+            Matrix m = new Matrix();
+            switch (index)
+            {
+                case 1:
+                    // empty
+                    break;
+                case 2:
+                    m.Rotate(15);
+                    break;
+                case 3:
+                    m.RotateAt(45, new PointF(100, 100));
+                    break;
+                case 4:
+                    m.Scale(1.5f, 0.5f);
+                    break;
+                case 5:
+                    m.Shear(2.0f, 2.0f);
+                    break;
+                case 6:
+                    m.Translate(50, 50);
+                    break;
             }
             return m;
         }

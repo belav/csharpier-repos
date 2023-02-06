@@ -1,5 +1,5 @@
 //
-// BinaryFormatterTest.cs - Unit tests for 
+// BinaryFormatterTest.cs - Unit tests for
 //    System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,21 +42,24 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
     public class SerializationTest
     {
         private int integer;
+
         [NonSerialized]
         private bool boolean;
 
-        public SerializationTest (bool b, int i)
+        public SerializationTest(bool b, int i)
         {
             boolean = b;
             integer = i;
         }
 
-        public bool Boolean {
+        public bool Boolean
+        {
             get { return boolean; }
             set { boolean = value; }
         }
 
-        public int Integer {
+        public int Integer
+        {
             get { return integer; }
             set { integer = value; }
         }
@@ -69,7 +72,8 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
         {
             int value = 0;
 
-            public int ValueA {
+            public int ValueA
+            {
                 get { return value; }
                 set { this.value = value; }
             }
@@ -83,7 +87,8 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
         {
             int value = 0;
 
-            public int ValueB {
+            public int ValueB
+            {
                 get { return value; }
                 set { this.value = value; }
             }
@@ -95,24 +100,27 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
     {
         int value = 0;
 
-        public int Value {
+        public int Value
+        {
             get { return value; }
             set { this.value = value; }
         }
     }
 
-    class SurrogateSelector: ISurrogateSelector
+    class SurrogateSelector : ISurrogateSelector
     {
-        public void ChainSelector (ISurrogateSelector selector)
-        {
-        }
+        public void ChainSelector(ISurrogateSelector selector) { }
 
-        public ISurrogateSelector GetNextSelector ()
+        public ISurrogateSelector GetNextSelector()
         {
             return null;
         }
 
-        public ISerializationSurrogate GetSurrogate (Type type, StreamingContext context, out ISurrogateSelector selector)
+        public ISerializationSurrogate GetSurrogate(
+            Type type,
+            StreamingContext context,
+            out ISurrogateSelector selector
+        )
         {
             selector = null;
             return null;
@@ -124,9 +132,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
     {
         internal static int Count;
 
-        internal ThisObjectReference()
-        {
-        }
+        internal ThisObjectReference() { }
 
         public object GetRealObject(StreamingContext context)
         {
@@ -140,9 +146,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
     {
         internal static int Count;
 
-        internal NewObjectReference()
-        {
-        }
+        internal NewObjectReference() { }
 
         public object GetRealObject(StreamingContext context)
         {
@@ -160,27 +164,32 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
         public int publicFoo;
         internal int assemblyFoo;
 
-        public int PrivateFoo {
+        public int PrivateFoo
+        {
             get { return privateFoo; }
         }
 
-        public int FamilyFoo {
+        public int FamilyFoo
+        {
             get { return familyFoo; }
         }
 
-        public int FamilyANDAssemFoo {
+        public int FamilyANDAssemFoo
+        {
             get { return familyANDAssemFoo; }
         }
 
-        public int PublicFoo {
+        public int PublicFoo
+        {
             get { return publicFoo; }
         }
 
-        public int AssemblyFoo {
+        public int AssemblyFoo
+        {
             get { return assemblyFoo; }
         }
 
-        public virtual void Init ()
+        public virtual void Init()
         {
             privateFoo = 1;
             familyFoo = 2;
@@ -199,27 +208,32 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
         public int publicBar;
         internal int assemblyBar;
 
-        public int PrivateBar {
+        public int PrivateBar
+        {
             get { return privateBar; }
         }
 
-        public int FamilyBar {
+        public int FamilyBar
+        {
             get { return familyBar; }
         }
 
-        public int FamilyANDAssemBar {
+        public int FamilyANDAssemBar
+        {
             get { return familyANDAssemBar; }
         }
 
-        public int PublicBar {
+        public int PublicBar
+        {
             get { return publicBar; }
         }
 
-        public int AssemblyBar {
+        public int AssemblyBar
+        {
             get { return assemblyBar; }
         }
 
-        public override void Init ()
+        public override void Init()
         {
             privateBar = 1;
             familyBar = 2;
@@ -227,19 +241,16 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
             publicBar = 8;
             assemblyBar = 16;
 
-            base.Init ();
+            base.Init();
         }
     }
 
     [Serializable]
     public class Comparable
     {
-        public int Foo {
-            get;
-            set;
-        }
+        public int Foo { get; set; }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var other = obj as Comparable;
             if (other == null)
@@ -247,7 +258,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
             return other.Foo == Foo;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return Foo;
         }
@@ -268,13 +279,12 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
         public Class Class;
     }
 
-
     [Serializable]
     class ClassSerializationProxy : IObjectReference
     {
         string className;
 
-        public ClassSerializationProxy (Class klass)
+        public ClassSerializationProxy(Class klass)
         {
             this.className = klass.Name;
         }
@@ -290,7 +300,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
     {
         Class klass;
 
-        public ObjectStreamClass (Class klass)
+        public ObjectStreamClass(Class klass)
         {
             this.klass = klass;
         }
@@ -300,14 +310,14 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
             klass = (Class)info.GetValue("0", typeof(object));
         }
 
-        public object GetRealObject (StreamingContext context)
+        public object GetRealObject(StreamingContext context)
         {
             return this;
         }
 
-        public void GetObjectData (SerializationInfo info, StreamingContext context)
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue ("0", new ClassSerializationProxy (klass));
+            info.AddValue("0", new ClassSerializationProxy(klass));
         }
 
         public override Instance NewInstance()
@@ -317,29 +327,29 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
     }
 
     [Serializable]
-    class DynamicProxy: IObjectReference, ISerializable
+    class DynamicProxy : IObjectReference, ISerializable
     {
         Instance obj;
 
-        public DynamicProxy (Instance obj)
+        public DynamicProxy(Instance obj)
         {
             this.obj = obj;
         }
 
-        public DynamicProxy (SerializationInfo info, StreamingContext context)
+        public DynamicProxy(SerializationInfo info, StreamingContext context)
         {
-            ObjectStreamClass osc = (ObjectStreamClass) info.GetValue("0", typeof(object));
+            ObjectStreamClass osc = (ObjectStreamClass)info.GetValue("0", typeof(object));
             obj = osc.NewInstance();
         }
 
-        public object GetRealObject (StreamingContext context)
+        public object GetRealObject(StreamingContext context)
         {
             return obj;
         }
 
-        public void GetObjectData (SerializationInfo info, StreamingContext context)
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue ("0", new ObjectStreamClass (obj.Class));
+            info.AddValue("0", new ObjectStreamClass(obj.Class));
         }
     }
 
@@ -347,78 +357,81 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
     public class BinaryFormatterTest
     {
         [Test]
-        public void Constructor_Default ()
+        public void Constructor_Default()
         {
-            BinaryFormatter bf = new BinaryFormatter ();
-            Assert.AreEqual (FormatterAssemblyStyle.Simple, bf.AssemblyFormat, "AssemblyFormat");
-            Assert.IsNull (bf.Binder, "Binder");
-            Assert.AreEqual (StreamingContextStates.All, bf.Context.State, "Context");
-            Assert.AreEqual (TypeFilterLevel.Full, bf.FilterLevel, "FilterLevel");
-            Assert.IsNull (bf.SurrogateSelector, "SurrogateSelector");
-            Assert.AreEqual (FormatterTypeStyle.TypesAlways, bf.TypeFormat, "TypeFormat");
+            BinaryFormatter bf = new BinaryFormatter();
+            Assert.AreEqual(FormatterAssemblyStyle.Simple, bf.AssemblyFormat, "AssemblyFormat");
+            Assert.IsNull(bf.Binder, "Binder");
+            Assert.AreEqual(StreamingContextStates.All, bf.Context.State, "Context");
+            Assert.AreEqual(TypeFilterLevel.Full, bf.FilterLevel, "FilterLevel");
+            Assert.IsNull(bf.SurrogateSelector, "SurrogateSelector");
+            Assert.AreEqual(FormatterTypeStyle.TypesAlways, bf.TypeFormat, "TypeFormat");
         }
 
         [Test]
-        public void Constructor ()
+        public void Constructor()
         {
-            SurrogateSelector ss = new SurrogateSelector ();
-            BinaryFormatter bf = new BinaryFormatter (ss, new StreamingContext (StreamingContextStates.CrossMachine));
-            Assert.AreEqual (FormatterAssemblyStyle.Simple, bf.AssemblyFormat, "AssemblyFormat");
-            Assert.IsNull (bf.Binder, "Binder");
-            Assert.AreEqual (StreamingContextStates.CrossMachine, bf.Context.State, "Context");
-            Assert.AreEqual (TypeFilterLevel.Full, bf.FilterLevel, "FilterLevel");
-            Assert.AreSame (ss, bf.SurrogateSelector, "SurrogateSelector");
-            Assert.AreEqual (FormatterTypeStyle.TypesAlways, bf.TypeFormat, "TypeFormat");
+            SurrogateSelector ss = new SurrogateSelector();
+            BinaryFormatter bf = new BinaryFormatter(
+                ss,
+                new StreamingContext(StreamingContextStates.CrossMachine)
+            );
+            Assert.AreEqual(FormatterAssemblyStyle.Simple, bf.AssemblyFormat, "AssemblyFormat");
+            Assert.IsNull(bf.Binder, "Binder");
+            Assert.AreEqual(StreamingContextStates.CrossMachine, bf.Context.State, "Context");
+            Assert.AreEqual(TypeFilterLevel.Full, bf.FilterLevel, "FilterLevel");
+            Assert.AreSame(ss, bf.SurrogateSelector, "SurrogateSelector");
+            Assert.AreEqual(FormatterTypeStyle.TypesAlways, bf.TypeFormat, "TypeFormat");
         }
 
         [Test]
-        public void Inheritance ()
+        public void Inheritance()
         {
-            MemoryStream ms = new MemoryStream ();
-            BinaryFormatter bf = new BinaryFormatter ();
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf = new BinaryFormatter();
 
-            Bar bar = new Bar ();
-            bar.Init ();
+            Bar bar = new Bar();
+            bar.Init();
 
-            bf.Serialize (ms, bar);
+            bf.Serialize(ms, bar);
             ms.Position = 0;
 
-            Bar clone = (Bar) bf.Deserialize (ms);
-            Assert.AreEqual (bar.PrivateBar, clone.PrivateBar, "#1");
-            Assert.AreEqual (bar.FamilyBar, clone.FamilyBar, "#2");
-            Assert.AreEqual (bar.FamilyANDAssemBar, clone.FamilyANDAssemBar, "#3");
-            Assert.AreEqual (bar.PublicBar, clone.PublicBar, "#4");
-            Assert.AreEqual (bar.AssemblyBar, clone.AssemblyBar, "#5");
-            Assert.AreEqual (bar.PrivateFoo, clone.PrivateFoo, "#6");
-            Assert.AreEqual (bar.FamilyFoo, clone.FamilyFoo, "#7");
-            Assert.AreEqual (bar.FamilyANDAssemFoo, clone.FamilyANDAssemFoo, "#8");
-            Assert.AreEqual (bar.PublicFoo, clone.PublicFoo, "#9");
-            Assert.AreEqual (bar.AssemblyFoo, clone.AssemblyFoo, "#10");
+            Bar clone = (Bar)bf.Deserialize(ms);
+            Assert.AreEqual(bar.PrivateBar, clone.PrivateBar, "#1");
+            Assert.AreEqual(bar.FamilyBar, clone.FamilyBar, "#2");
+            Assert.AreEqual(bar.FamilyANDAssemBar, clone.FamilyANDAssemBar, "#3");
+            Assert.AreEqual(bar.PublicBar, clone.PublicBar, "#4");
+            Assert.AreEqual(bar.AssemblyBar, clone.AssemblyBar, "#5");
+            Assert.AreEqual(bar.PrivateFoo, clone.PrivateFoo, "#6");
+            Assert.AreEqual(bar.FamilyFoo, clone.FamilyFoo, "#7");
+            Assert.AreEqual(bar.FamilyANDAssemFoo, clone.FamilyANDAssemFoo, "#8");
+            Assert.AreEqual(bar.PublicFoo, clone.PublicFoo, "#9");
+            Assert.AreEqual(bar.AssemblyFoo, clone.AssemblyFoo, "#10");
         }
 
         [Test]
-        public void SerializationRoundtrip ()
+        public void SerializationRoundtrip()
         {
-            Stream s = GetSerializedStream ();
-            BinaryFormatter bf = new BinaryFormatter ();
-            SerializationTest clone = (SerializationTest) bf.Deserialize (s);
-            Assert.AreEqual (Int32.MinValue, clone.Integer, "Integer");
-            Assert.IsFalse (clone.Boolean, "Boolean");
+            Stream s = GetSerializedStream();
+            BinaryFormatter bf = new BinaryFormatter();
+            SerializationTest clone = (SerializationTest)bf.Deserialize(s);
+            Assert.AreEqual(Int32.MinValue, clone.Integer, "Integer");
+            Assert.IsFalse(clone.Boolean, "Boolean");
         }
 
         [Test]
-        public void SerializationUnsafeRoundtrip ()
+        public void SerializationUnsafeRoundtrip()
         {
-            Stream s = GetSerializedStream ();
-            BinaryFormatter bf = new BinaryFormatter ();
-            SerializationTest clone = (SerializationTest) bf.UnsafeDeserialize (s, null);
-            Assert.AreEqual (Int32.MinValue, clone.Integer, "Integer");
-            Assert.IsFalse (clone.Boolean, "Boolean");
+            Stream s = GetSerializedStream();
+            BinaryFormatter bf = new BinaryFormatter();
+            SerializationTest clone = (SerializationTest)bf.UnsafeDeserialize(s, null);
+            Assert.AreEqual(Int32.MinValue, clone.Integer, "Integer");
+            Assert.IsFalse(clone.Boolean, "Boolean");
         }
-        
+
         [Test]
-        [Category ("Remoting")]
-        public void NestedObjectReference ()
+        [Category("Remoting")]
+        public void NestedObjectReference()
         {
             MemoryStream ms = new MemoryStream();
             BinaryFormatter bf = new BinaryFormatter();
@@ -426,68 +439,75 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
             bf.Serialize(ms, new ThisObjectReference());
             bf.Serialize(ms, new NewObjectReference());
             ms.Position = 0;
-            Assert.AreEqual (0, ThisObjectReference.Count, "#1");
+            Assert.AreEqual(0, ThisObjectReference.Count, "#1");
 
             bf.Deserialize(ms);
-            Assert.AreEqual (2, ThisObjectReference.Count, "#2");
-            Assert.AreEqual (0, NewObjectReference.Count, "#3");
-            try {
+            Assert.AreEqual(2, ThisObjectReference.Count, "#2");
+            Assert.AreEqual(0, NewObjectReference.Count, "#3");
+            try
+            {
                 bf.Deserialize(ms);
-            } catch (SerializationException) {
             }
-            Assert.AreEqual (101, NewObjectReference.Count, "#4");
+            catch (SerializationException) { }
+            Assert.AreEqual(101, NewObjectReference.Count, "#4");
         }
 
         [Test]
-        public void DateTimeArray ()
+        public void DateTimeArray()
         {
-            DateTime [] e = new DateTime [6];
-            string [] names = new string [6];
+            DateTime[] e = new DateTime[6];
+            string[] names = new string[6];
 
-            names [0] = "Today";  e [0] = DateTime.Today;
-            names [1] = "Min";    e [1] = DateTime.MinValue;
-            names [2] = "Max";    e [2] = DateTime.MaxValue;
-            names [3] = "BiCent"; e [3] = new DateTime (1976, 07, 04);
-            names [4] = "Now";    e [4] = DateTime.Now;
-            names [5] = "UtcNow"; e [5] = DateTime.UtcNow;
+            names[0] = "Today";
+            e[0] = DateTime.Today;
+            names[1] = "Min";
+            e[1] = DateTime.MinValue;
+            names[2] = "Max";
+            e[2] = DateTime.MaxValue;
+            names[3] = "BiCent";
+            e[3] = new DateTime(1976, 07, 04);
+            names[4] = "Now";
+            e[4] = DateTime.Now;
+            names[5] = "UtcNow";
+            e[5] = DateTime.UtcNow;
 
-            BinaryFormatter bf = new BinaryFormatter ();
-            MemoryStream ms = new MemoryStream ();
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
 
-            bf.Serialize (ms, e);
+            bf.Serialize(ms, e);
 
             ms.Position = 0;
-            DateTime [] a = (DateTime []) bf.Deserialize (ms);
+            DateTime[] a = (DateTime[])bf.Deserialize(ms);
 
-            Assert.AreEqual (e.Length, a.Length);
+            Assert.AreEqual(e.Length, a.Length);
             for (int i = 0; i < e.Length; ++i)
-                Assert.AreEqual (e [i], a [i], names [i]);
+                Assert.AreEqual(e[i], a[i], names[i]);
         }
 
         [Test]
-        public void GenericArray ()
+        public void GenericArray()
         {
-            Comparable [] a = new Comparable [1];
-            a [0] = new Comparable ();
+            Comparable[] a = new Comparable[1];
+            a[0] = new Comparable();
 
-            BinaryFormatter bf = new BinaryFormatter ();
-            MemoryStream ms = new MemoryStream ();
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
 
-            bf.Serialize (ms, a);
+            bf.Serialize(ms, a);
 
             ms.Position = 0;
-            Comparable [] b = (Comparable []) bf.Deserialize (ms);
+            Comparable[] b = (Comparable[])bf.Deserialize(ms);
 
-            Assert.AreEqual (a.Length, b.Length, "#1");
-            Assert.AreEqual (a [0], b [0], "#2");
+            Assert.AreEqual(a.Length, b.Length, "#1");
+            Assert.AreEqual(a[0], b[0], "#2");
         }
 
-        public Stream GetSerializedStream ()
+        public Stream GetSerializedStream()
         {
-            SerializationTest test = new SerializationTest (true, Int32.MinValue);
-            BinaryFormatter bf = new BinaryFormatter ();
-            MemoryStream ms = new MemoryStream ();
-            bf.Serialize (ms, test);
+            SerializationTest test = new SerializationTest(true, Int32.MinValue);
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+            bf.Serialize(ms, test);
             ms.Position = 0;
             return ms;
         }
@@ -495,69 +515,76 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
         [Test]
         public void QualifiedField()
         {
-            QualifiedFieldTest a = new QualifiedFieldTest ();
+            QualifiedFieldTest a = new QualifiedFieldTest();
             a.ValueA = 1;
             a.ValueB = 2;
             a.Value = 3;
-            Stream ms = new MemoryStream ();
-            BinaryFormatter bf = new BinaryFormatter ();
+            Stream ms = new MemoryStream();
+            BinaryFormatter bf = new BinaryFormatter();
             bf.Serialize(ms, a);
             ms.Position = 0;
-            QualifiedFieldTest b = (QualifiedFieldTest)bf.Deserialize (ms);
-            Assert.AreEqual (a.ValueA, b.ValueA, "#1");
-            Assert.AreEqual (a.ValueB, b.ValueB, "#2");
-            Assert.AreEqual (a.Value, b.Value, "#3");
+            QualifiedFieldTest b = (QualifiedFieldTest)bf.Deserialize(ms);
+            Assert.AreEqual(a.ValueA, b.ValueA, "#1");
+            Assert.AreEqual(a.ValueB, b.ValueB, "#2");
+            Assert.AreEqual(a.Value, b.Value, "#3");
         }
 
         [Test]
-        public void SerializationBindToName ()
+        public void SerializationBindToName()
         {
-            BinaryFormatter bf = new BinaryFormatter ();
+            BinaryFormatter bf = new BinaryFormatter();
             bf.AssemblyFormat = FormatterAssemblyStyle.Full;
-            bf.Binder = new SimpleSerializationBinder ();
-            MemoryStream ms = new MemoryStream ();
+            bf.Binder = new SimpleSerializationBinder();
+            MemoryStream ms = new MemoryStream();
 
-            SimpleSerializableObject o = new SimpleSerializableObject ();
+            SimpleSerializableObject o = new SimpleSerializableObject();
             o.Name = "MonoObject";
             o.Id = 666;
 
-            bf.Serialize (ms, o);
+            bf.Serialize(ms, o);
             ms.Position = 0;
 
-            o = (SimpleSerializableObject)bf.Deserialize (ms);
-            Assert.AreEqual ("MonoObject", o.Name);
-            Assert.AreEqual (666, o.Id);
+            o = (SimpleSerializableObject)bf.Deserialize(ms);
+            Assert.AreEqual("MonoObject", o.Name);
+            Assert.AreEqual(666, o.Id);
         }
 
         class SimpleSerializationBinder : SerializationBinder
         {
-            public override Type BindToType (string assemblyName, string typeName)
+            public override Type BindToType(string assemblyName, string typeName)
             {
                 // We *should* be getting a SimpleSerializableObject2 instance
                 // Otherwise it means we are not getting called our BindToName method.
-                if (!typeName.EndsWith ("SimpleSerializableObject2"))
-                    Assert.Fail ("#BindToType-TypeName");
+                if (!typeName.EndsWith("SimpleSerializableObject2"))
+                    Assert.Fail("#BindToType-TypeName");
 
                 // We are also supposed to be getting a 9.9.9.9 version here,
                 // and if we get a different version, it likely means BindToName was called.
-                AssemblyName aname = Assembly.GetExecutingAssembly ().GetName ();
-                aname.Version = new Version (9, 9, 9, 9);
-                if (aname.ToString () != assemblyName)
-                    Assert.Fail ("#BindToType-AssemblyName");
+                AssemblyName aname = Assembly.GetExecutingAssembly().GetName();
+                aname.Version = new Version(9, 9, 9, 9);
+                if (aname.ToString() != assemblyName)
+                    Assert.Fail("#BindToType-AssemblyName");
 
                 // No need to call Type.GetType
-                return typeof (SimpleSerializableObject);
+                return typeof(SimpleSerializableObject);
             }
 
-            public override void BindToName (Type serializedType, out string assemblyName, out string typeName)
+            public override void BindToName(
+                Type serializedType,
+                out string assemblyName,
+                out string typeName
+            )
             {
-                AssemblyName aname = Assembly.GetExecutingAssembly ().GetName ();
-                aname.Version = new Version (9, 9, 9, 9);
+                AssemblyName aname = Assembly.GetExecutingAssembly().GetName();
+                aname.Version = new Version(9, 9, 9, 9);
 
                 // Serialize mapping to this same assembly with 9.9.9.9 version
                 // and a different type name.
-                assemblyName = aname.ToString ();
-                typeName = serializedType.FullName.Replace ("SimpleSerializableObject", "SimpleSerializableObject2");
+                assemblyName = aname.ToString();
+                typeName = serializedType.FullName.Replace(
+                    "SimpleSerializableObject",
+                    "SimpleSerializableObject2"
+                );
             }
         }
 
@@ -569,72 +596,79 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
         }
 
         [Test]
-        public void SerializationBindToName2 ()
+        public void SerializationBindToName2()
         {
-            BinaryFormatter bf = new BinaryFormatter ();
+            BinaryFormatter bf = new BinaryFormatter();
             bf.AssemblyFormat = FormatterAssemblyStyle.Full;
-            bf.Binder = new SimpleSerializationBinder2 ();
-            MemoryStream ms = new MemoryStream ();
+            bf.Binder = new SimpleSerializationBinder2();
+            MemoryStream ms = new MemoryStream();
 
-            SimpleISerializableObject o = new SimpleISerializableObject ();
+            SimpleISerializableObject o = new SimpleISerializableObject();
             o.Name = "MonoObject";
             o.Id = 666;
 
-            bf.Serialize (ms, o);
+            bf.Serialize(ms, o);
             ms.Position = 0;
 
-            o = (SimpleISerializableObject)bf.Deserialize (ms);
-            Assert.AreEqual ("MonoObject", o.Name);
-            Assert.AreEqual (666, o.Id);
+            o = (SimpleISerializableObject)bf.Deserialize(ms);
+            Assert.AreEqual("MonoObject", o.Name);
+            Assert.AreEqual(666, o.Id);
 
-            ms.Close ();
+            ms.Close();
         }
 
         [Test]
-        [Category ("Remoting")]
-        public void NestedObjectReferences ()
+        [Category("Remoting")]
+        public void NestedObjectReferences()
         {
-            MemoryStream ms = new MemoryStream ();
+            MemoryStream ms = new MemoryStream();
 
             var cls = new Class { Name = "MyClass" };
-            var ob = cls.NewInstance ();
+            var ob = cls.NewInstance();
 
             BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize (ms, new DynamicProxy (ob));
+            bf.Serialize(ms, new DynamicProxy(ob));
 
             ms.Position = 0;
 
-            Instance ins = (Instance) bf.Deserialize (ms);
-            Assert.AreEqual ("MyClass", ins.Class.Name);
+            Instance ins = (Instance)bf.Deserialize(ms);
+            Assert.AreEqual("MyClass", ins.Class.Name);
         }
 
         class SimpleSerializationBinder2 : SerializationBinder
         {
-            public override void BindToName (Type serializedType, out string assemblyName, out string typeName)
+            public override void BindToName(
+                Type serializedType,
+                out string assemblyName,
+                out string typeName
+            )
             {
-                AssemblyName aname = Assembly.GetExecutingAssembly ().GetName ();
-                aname.Version = new Version (9, 9, 9, 9);
+                AssemblyName aname = Assembly.GetExecutingAssembly().GetName();
+                aname.Version = new Version(9, 9, 9, 9);
 
                 // Serialize mapping to this same assembly with 9.9.9.9 version
                 // and a different type name.
-                assemblyName = aname.ToString ();
-                typeName = serializedType.FullName.Replace ("SimpleISerializableObject", "SimpleISerializableObject2");
+                assemblyName = aname.ToString();
+                typeName = serializedType.FullName.Replace(
+                    "SimpleISerializableObject",
+                    "SimpleISerializableObject2"
+                );
             }
 
-            public override Type BindToType (string assemblyName, string typeName)
+            public override Type BindToType(string assemblyName, string typeName)
             {
                 // We *should* be getting a SimpleISerializableObject2 instance
-                if (!typeName.EndsWith ("SimpleISerializableObject2"))
-                    Assert.Fail ("#BindToType-TypeName");
+                if (!typeName.EndsWith("SimpleISerializableObject2"))
+                    Assert.Fail("#BindToType-TypeName");
 
                 // We are also supposed to be getting a 9.9.9.9 version here,
                 // and if we get a different version, it likely means BindToName was called.
-                AssemblyName aname = Assembly.GetExecutingAssembly ().GetName ();
-                aname.Version = new Version (9, 9, 9, 9);
-                if (aname.ToString () != assemblyName)
-                    Assert.Fail ("#BindToType-AssemblyName");
+                AssemblyName aname = Assembly.GetExecutingAssembly().GetName();
+                aname.Version = new Version(9, 9, 9, 9);
+                if (aname.ToString() != assemblyName)
+                    Assert.Fail("#BindToType-AssemblyName");
 
-                return typeof (SimpleISerializableObject);
+                return typeof(SimpleISerializableObject);
             }
         }
 
@@ -644,27 +678,23 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
             public string Name { get; set; }
             public int Id { get; set; }
 
-            public SimpleISerializableObject ()
+            public SimpleISerializableObject() { }
+
+            protected SimpleISerializableObject(SerializationInfo info, StreamingContext context)
             {
+                Name = info.GetString("Name");
+                Id = info.GetInt32("Id");
             }
 
-            protected SimpleISerializableObject (SerializationInfo info, StreamingContext context)
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
             {
-                Name = info.GetString ("Name");
-                Id = info.GetInt32 ("Id");
-            }
-
-            public void GetObjectData (SerializationInfo info, StreamingContext context)
-            {
-                info.AddValue ("Name", Name);
-                info.AddValue ("Id", Id);
+                info.AddValue("Name", Name);
+                info.AddValue("Id", Id);
             }
         }
 
         [Serializable]
-        public class OtherClass
-        {
-        }
+        public class OtherClass { }
 
         [Serializable]
         public class BaseClass
@@ -672,54 +702,61 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
             public OtherClass Other { get; set; }
         }
 
-        public class CustomSerBinder: SerializationBinder
+        public class CustomSerBinder : SerializationBinder
         {
-            public override void BindToName (Type serializedType, out string assemblyName, out string typeName)
+            public override void BindToName(
+                Type serializedType,
+                out string assemblyName,
+                out string typeName
+            )
             {
                 assemblyName = null;
-                if (serializedType == typeof (BaseClass))
+                if (serializedType == typeof(BaseClass))
                     typeName = "base";
-                else if (serializedType == typeof (OtherClass))
+                else if (serializedType == typeof(OtherClass))
                     typeName = "other";
                 else
-                    throw new ArgumentException ("Unknown type", "serializedType");
+                    throw new ArgumentException("Unknown type", "serializedType");
             }
 
-            public override Type BindToType (string assemblyName, string typeName)
+            public override Type BindToType(string assemblyName, string typeName)
             {
-                switch (typeName) {
-                case "base":
-                    return typeof (BaseClass);
-                case "other":
-                    return typeof (OtherClass);
-                default:
-                    throw new ArgumentException ("Unknown type name", "typeName");
+                switch (typeName)
+                {
+                    case "base":
+                        return typeof(BaseClass);
+                    case "other":
+                        return typeof(OtherClass);
+                    default:
+                        throw new ArgumentException("Unknown type name", "typeName");
                 }
             }
         }
 
         [Test]
-        public void BinderShouldBeUsedForProperties ()
+        public void BinderShouldBeUsedForProperties()
         {
-            using (var serStream = new MemoryStream ()) {
-                var binder = new CustomSerBinder ();
+            using (var serStream = new MemoryStream())
+            {
+                var binder = new CustomSerBinder();
 
                 // serialize
-                var original = new BaseClass () {
-                    Other = new OtherClass ()
-                };
-                var formatter = new BinaryFormatter ();
+                var original = new BaseClass() { Other = new OtherClass() };
+                var formatter = new BinaryFormatter();
                 formatter.Binder = binder;
-                formatter.Serialize (serStream, original);
+                formatter.Serialize(serStream, original);
 
                 // deserialize, making sure we're using a new formatter, just to be thorough
-                formatter = new BinaryFormatter ();
+                formatter = new BinaryFormatter();
                 formatter.Binder = binder;
-                serStream.Seek (0, SeekOrigin.Begin);
-                var deserialized = formatter.Deserialize (serStream);
+                serStream.Seek(0, SeekOrigin.Begin);
+                var deserialized = formatter.Deserialize(serStream);
 
-                Assert.AreEqual (original.GetType (), deserialized.GetType ());
-                Assert.AreEqual (original.Other.GetType (), ((BaseClass)deserialized).Other.GetType ());
+                Assert.AreEqual(original.GetType(), deserialized.GetType());
+                Assert.AreEqual(
+                    original.Other.GetType(),
+                    ((BaseClass)deserialized).Other.GetType()
+                );
             }
         }
     }

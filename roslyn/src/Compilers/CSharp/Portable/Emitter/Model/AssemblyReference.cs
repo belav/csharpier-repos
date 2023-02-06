@@ -40,12 +40,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         string Cci.INamedEntity.Name => Identity.Name;
 
-        Cci.IAssemblyReference Cci.IModuleReference.GetContainingAssembly(CodeAnalysis.Emit.EmitContext context)
+        Cci.IAssemblyReference Cci.IModuleReference.GetContainingAssembly(
+            CodeAnalysis.Emit.EmitContext context
+        )
         {
             return this;
         }
 
-        IEnumerable<Cci.ICustomAttribute> Cci.IReference.GetAttributes(CodeAnalysis.Emit.EmitContext context)
+        IEnumerable<Cci.ICustomAttribute> Cci.IReference.GetAttributes(
+            CodeAnalysis.Emit.EmitContext context
+        )
         {
             return SpecializedCollections.EmptyEnumerable<Cci.ICustomAttribute>();
         }

@@ -15,7 +15,9 @@ public class ComponentTagHelperDescriptorProviderTest : TagHelperDescriptorProvi
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
@@ -35,7 +37,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -49,7 +53,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         // These are features Components don't use. Verifying them once here and
@@ -90,8 +97,17 @@ namespace Test
         // which is trivial. Verifying it once in detail and then ignoring it.
         Assert.Collection(
             component.Metadata.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal(TagHelperMetadata.Common.TypeName, kvp.Key); Assert.Equal("Test.MyComponent", kvp.Value); },
-            kvp => { Assert.Equal(TagHelperMetadata.Runtime.Name, kvp.Key); Assert.Equal("Components.IComponent", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal(TagHelperMetadata.Common.TypeName, kvp.Key);
+                Assert.Equal("Test.MyComponent", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal(TagHelperMetadata.Runtime.Name, kvp.Key);
+                Assert.Equal("Components.IComponent", kvp.Value);
+            }
+        );
 
         // Our use of bound attributes is what tests will focus on. As you might expect right now, this test
         // is going to cover a lot of trivial stuff that will be true for all components/component-properties.
@@ -129,7 +145,12 @@ namespace Test
         // which is trivial. Verifying it once in detail and then ignoring it.
         Assert.Collection(
             attribute.Metadata.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal(TagHelperMetadata.Common.PropertyName, kvp.Key); Assert.Equal("MyProperty", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal(TagHelperMetadata.Common.PropertyName, kvp.Key);
+                Assert.Equal("MyProperty", kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -137,7 +158,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
@@ -157,7 +180,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -171,7 +196,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -192,7 +220,6 @@ namespace Test
                 Assert.Equal("MyProperty", a.GetPropertyName());
                 Assert.Equal("string Test.MyComponent<T>.MyProperty", a.DisplayName);
                 Assert.Equal("System.String", a.TypeName);
-
             },
             a =>
             {
@@ -201,7 +228,8 @@ namespace Test
                 Assert.Equal("T", a.DisplayName);
                 Assert.Equal("System.Type", a.TypeName);
                 Assert.True(a.IsTypeParameterProperty());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -209,7 +237,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -221,7 +251,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -235,7 +267,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -251,7 +286,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -263,7 +300,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -277,7 +316,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -291,7 +333,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -303,7 +347,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -317,7 +363,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -331,7 +380,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -343,7 +394,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -357,7 +410,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -378,7 +434,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -396,7 +454,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -410,7 +470,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -431,7 +494,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -444,7 +509,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -458,7 +525,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -480,7 +550,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -492,7 +564,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -506,7 +580,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -521,7 +598,6 @@ namespace Test
                 Assert.Equal("T Test.MyComponent<T>.MyProperty", a.DisplayName);
                 Assert.Equal("T", a.TypeName);
                 Assert.True(a.IsGenericTypedProperty());
-
             },
             a =>
             {
@@ -530,7 +606,8 @@ namespace Test
                 Assert.Equal("T", a.DisplayName);
                 Assert.Equal("System.Type", a.TypeName);
                 Assert.True(a.IsTypeParameterProperty());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -538,7 +615,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -556,7 +635,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -570,7 +651,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -610,7 +694,8 @@ namespace Test
             {
                 Assert.Equal("V", a.Name);
                 Assert.True(a.IsTypeParameterProperty());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -618,7 +703,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using System;
 using Microsoft.AspNetCore.Components;
 
@@ -631,7 +718,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -645,7 +734,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -668,7 +760,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using System;
 using Microsoft.AspNetCore.Components;
 
@@ -681,7 +775,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -695,7 +791,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -714,7 +813,6 @@ namespace Test
                 Assert.True(a.IsDelegateProperty());
                 Assert.False(a.IsChildContentProperty());
                 Assert.True(a.IsGenericTypedProperty());
-
             },
             a =>
             {
@@ -723,7 +821,8 @@ namespace Test
                 Assert.Equal("T", a.DisplayName);
                 Assert.Equal("System.Type", a.TypeName);
                 Assert.True(a.IsTypeParameterProperty());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -731,7 +830,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -743,7 +844,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -757,7 +860,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -781,7 +887,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using System;
 using Microsoft.AspNetCore.Components;
 
@@ -794,7 +902,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -808,7 +918,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -819,7 +932,10 @@ namespace Test
             a =>
             {
                 Assert.Equal("OnClick", a.Name);
-                Assert.Equal("Microsoft.AspNetCore.Components.EventCallback<System.EventArgs>", a.TypeName);
+                Assert.Equal(
+                    "Microsoft.AspNetCore.Components.EventCallback<System.EventArgs>",
+                    a.TypeName
+                );
                 Assert.False(a.HasIndexer);
                 Assert.False(a.IsBooleanProperty);
                 Assert.False(a.IsEnum);
@@ -828,8 +944,8 @@ namespace Test
                 Assert.False(a.IsDelegateProperty());
                 Assert.False(a.IsChildContentProperty());
                 Assert.False(a.IsGenericTypedProperty());
-
-            });
+            }
+        );
     }
 
     [Fact]
@@ -837,7 +953,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -849,7 +967,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -863,7 +983,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -883,7 +1006,6 @@ namespace Test
                 Assert.False(a.IsDelegateProperty());
                 Assert.False(a.IsChildContentProperty());
                 Assert.True(a.IsGenericTypedProperty());
-
             },
             a =>
             {
@@ -892,7 +1014,8 @@ namespace Test
                 Assert.Equal("T", a.DisplayName);
                 Assert.Equal("System.Type", a.TypeName);
                 Assert.True(a.IsTypeParameterProperty());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -900,7 +1023,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -912,7 +1037,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -926,7 +1053,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 2);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 2
+        );
         var component = Assert.Single(components, c => c.IsComponentTagHelper());
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -957,7 +1087,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -969,7 +1101,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -983,7 +1117,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 2);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 2
+        );
         var component = Assert.Single(components, c => c.IsComponentTagHelper());
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -994,14 +1131,17 @@ namespace Test
             a =>
             {
                 Assert.Equal("ChildContent2", a.Name);
-                Assert.Equal("Microsoft.AspNetCore.Components.RenderFragment<System.String>", a.TypeName);
+                Assert.Equal(
+                    "Microsoft.AspNetCore.Components.RenderFragment<System.String>",
+                    a.TypeName
+                );
 
                 Assert.False(a.HasIndexer);
                 Assert.False(a.IsBooleanProperty);
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                Assert.True(a.IsChildContentProperty());
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.False(a.IsGenericTypedProperty());
             },
@@ -1009,7 +1149,8 @@ namespace Test
             {
                 Assert.Equal(ComponentMetadata.ChildContent.ParameterAttributeName, a.Name);
                 Assert.True(a.IsChildContentParameterNameProperty());
-            });
+            }
+        );
 
         var childContent = Assert.Single(components, c => c.IsChildContentTagHelper());
 
@@ -1020,7 +1161,10 @@ namespace Test
         var contextAttribute = Assert.Single(childContent.BoundAttributes);
         Assert.Equal(ComponentMetadata.ChildContent.ParameterAttributeName, contextAttribute.Name);
         Assert.Equal("System.String", contextAttribute.TypeName);
-        Assert.Equal("Specifies the parameter name for the 'ChildContent2' child content expression.", contextAttribute.Documentation);
+        Assert.Equal(
+            "Specifies the parameter name for the 'ChildContent2' child content expression.",
+            contextAttribute.Documentation
+        );
         Assert.True(contextAttribute.IsChildContentParameterNameProperty());
     }
 
@@ -1029,7 +1173,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -1044,7 +1190,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -1058,7 +1206,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 2);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 2
+        );
         var component = Assert.Single(components, c => c.IsComponentTagHelper());
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -1069,14 +1220,17 @@ namespace Test
             a =>
             {
                 Assert.Equal("ChildContent2", a.Name);
-                Assert.Equal("Microsoft.AspNetCore.Components.RenderFragment<System.String>", a.TypeName);
+                Assert.Equal(
+                    "Microsoft.AspNetCore.Components.RenderFragment<System.String>",
+                    a.TypeName
+                );
 
                 Assert.False(a.HasIndexer);
                 Assert.False(a.IsBooleanProperty);
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                Assert.True(a.IsChildContentProperty());
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.False(a.IsGenericTypedProperty());
             },
@@ -1084,7 +1238,8 @@ namespace Test
             {
                 Assert.Equal(ComponentMetadata.ChildContent.ParameterAttributeName, a.Name);
                 Assert.False(a.IsChildContentParameterNameProperty());
-            });
+            }
+        );
 
         var childContent = Assert.Single(components, c => c.IsChildContentTagHelper());
 
@@ -1095,7 +1250,10 @@ namespace Test
         var contextAttribute = Assert.Single(childContent.BoundAttributes);
         Assert.Equal(ComponentMetadata.ChildContent.ParameterAttributeName, contextAttribute.Name);
         Assert.Equal("System.String", contextAttribute.TypeName);
-        Assert.Equal("Specifies the parameter name for the 'ChildContent2' child content expression.", contextAttribute.Documentation);
+        Assert.Equal(
+            "Specifies the parameter name for the 'ChildContent2' child content expression.",
+            contextAttribute.Documentation
+        );
         Assert.True(contextAttribute.IsChildContentParameterNameProperty());
     }
 
@@ -1104,7 +1262,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -1116,7 +1276,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -1130,7 +1292,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 2);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 2
+        );
         var component = Assert.Single(components, c => c.IsComponentTagHelper());
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -1148,10 +1313,9 @@ namespace Test
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                Assert.True(a.IsChildContentProperty());
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.True(a.IsGenericTypedProperty());
-
             },
             a =>
             {
@@ -1165,7 +1329,8 @@ namespace Test
                 Assert.Equal("T", a.DisplayName);
                 Assert.Equal("System.Type", a.TypeName);
                 Assert.True(a.IsTypeParameterProperty());
-            });
+            }
+        );
 
         var childContent = Assert.Single(components, c => c.IsChildContentTagHelper());
 
@@ -1176,7 +1341,10 @@ namespace Test
         var contextAttribute = Assert.Single(childContent.BoundAttributes);
         Assert.Equal(ComponentMetadata.ChildContent.ParameterAttributeName, contextAttribute.Name);
         Assert.Equal("System.String", contextAttribute.TypeName);
-        Assert.Equal("Specifies the parameter name for the 'ChildContent2' child content expression.", contextAttribute.Documentation);
+        Assert.Equal(
+            "Specifies the parameter name for the 'ChildContent2' child content expression.",
+            contextAttribute.Documentation
+        );
         Assert.True(contextAttribute.IsChildContentParameterNameProperty());
     }
 
@@ -1185,7 +1353,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 
@@ -1198,7 +1368,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -1212,7 +1384,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 2);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 2
+        );
         var component = Assert.Single(components, c => c.IsComponentTagHelper());
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -1223,17 +1398,19 @@ namespace Test
             a =>
             {
                 Assert.Equal("ChildContent2", a.Name);
-                Assert.Equal("Microsoft.AspNetCore.Components.RenderFragment<System.Collections.Generic.List<System.String>>", a.TypeName);
+                Assert.Equal(
+                    "Microsoft.AspNetCore.Components.RenderFragment<System.Collections.Generic.List<System.String>>",
+                    a.TypeName
+                );
 
                 Assert.False(a.HasIndexer);
                 Assert.False(a.IsBooleanProperty);
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                Assert.True(a.IsChildContentProperty());
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.False(a.IsGenericTypedProperty());
-
             },
             a =>
             {
@@ -1247,7 +1424,8 @@ namespace Test
                 Assert.Equal("T", a.DisplayName);
                 Assert.Equal("System.Type", a.TypeName);
                 Assert.True(a.IsTypeParameterProperty());
-            });
+            }
+        );
 
         var childContent = Assert.Single(components, c => c.IsChildContentTagHelper());
 
@@ -1258,7 +1436,10 @@ namespace Test
         var contextAttribute = Assert.Single(childContent.BoundAttributes);
         Assert.Equal(ComponentMetadata.ChildContent.ParameterAttributeName, contextAttribute.Name);
         Assert.Equal("System.String", contextAttribute.TypeName);
-        Assert.Equal("Specifies the parameter name for the 'ChildContent2' child content expression.", contextAttribute.Documentation);
+        Assert.Equal(
+            "Specifies the parameter name for the 'ChildContent2' child content expression.",
+            contextAttribute.Documentation
+        );
         Assert.True(contextAttribute.IsChildContentParameterNameProperty());
     }
 
@@ -1267,7 +1448,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 
@@ -1280,7 +1463,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -1294,7 +1479,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 2);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 2
+        );
         var component = Assert.Single(components, c => c.IsComponentTagHelper());
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -1305,17 +1493,19 @@ namespace Test
             a =>
             {
                 Assert.Equal("ChildContent2", a.Name);
-                Assert.Equal("Microsoft.AspNetCore.Components.RenderFragment<System.Collections.Generic.List<T>>", a.TypeName);
+                Assert.Equal(
+                    "Microsoft.AspNetCore.Components.RenderFragment<System.Collections.Generic.List<T>>",
+                    a.TypeName
+                );
 
                 Assert.False(a.HasIndexer);
                 Assert.False(a.IsBooleanProperty);
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                Assert.True(a.IsChildContentProperty());
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.True(a.IsGenericTypedProperty());
-
             },
             a =>
             {
@@ -1329,7 +1519,8 @@ namespace Test
                 Assert.Equal("T", a.DisplayName);
                 Assert.Equal("System.Type", a.TypeName);
                 Assert.True(a.IsTypeParameterProperty());
-            });
+            }
+        );
 
         var childContent = Assert.Single(components, c => c.IsChildContentTagHelper());
 
@@ -1340,7 +1531,10 @@ namespace Test
         var contextAttribute = Assert.Single(childContent.BoundAttributes);
         Assert.Equal(ComponentMetadata.ChildContent.ParameterAttributeName, contextAttribute.Name);
         Assert.Equal("System.String", contextAttribute.TypeName);
-        Assert.Equal("Specifies the parameter name for the 'ChildContent2' child content expression.", contextAttribute.Documentation);
+        Assert.Equal(
+            "Specifies the parameter name for the 'ChildContent2' child content expression.",
+            contextAttribute.Documentation
+        );
         Assert.True(contextAttribute.IsChildContentParameterNameProperty());
     }
 
@@ -1349,7 +1543,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -1366,7 +1562,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -1380,7 +1578,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 2);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 2
+        );
         var component = Assert.Single(components, c => c.IsComponentTagHelper());
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -1391,17 +1592,19 @@ namespace Test
             a =>
             {
                 Assert.Equal("ChildContent2", a.Name);
-                Assert.Equal("Microsoft.AspNetCore.Components.RenderFragment<Test.MyComponent<T>.Context>", a.TypeName);
+                Assert.Equal(
+                    "Microsoft.AspNetCore.Components.RenderFragment<Test.MyComponent<T>.Context>",
+                    a.TypeName
+                );
 
                 Assert.False(a.HasIndexer);
                 Assert.False(a.IsBooleanProperty);
                 Assert.False(a.IsEnum);
                 Assert.False(a.IsStringProperty);
                 Assert.False(a.IsDelegateProperty()); // We treat RenderFragment as separate from generalized delegates
-                    Assert.True(a.IsChildContentProperty());
+                Assert.True(a.IsChildContentProperty());
                 Assert.True(a.IsParameterizedChildContentProperty());
                 Assert.True(a.IsGenericTypedProperty());
-
             },
             a =>
             {
@@ -1415,7 +1618,8 @@ namespace Test
                 Assert.Equal("T", a.DisplayName);
                 Assert.Equal("System.Type", a.TypeName);
                 Assert.True(a.IsTypeParameterProperty());
-            });
+            }
+        );
 
         var childContent = Assert.Single(components, c => c.IsChildContentTagHelper());
 
@@ -1426,7 +1630,10 @@ namespace Test
         var contextAttribute = Assert.Single(childContent.BoundAttributes);
         Assert.Equal(ComponentMetadata.ChildContent.ParameterAttributeName, contextAttribute.Name);
         Assert.Equal("System.String", contextAttribute.TypeName);
-        Assert.Equal("Specifies the parameter name for the 'ChildContent2' child content expression.", contextAttribute.Documentation);
+        Assert.Equal(
+            "Specifies the parameter name for the 'ChildContent2' child content expression.",
+            contextAttribute.Documentation
+        );
     }
 
     [Fact]
@@ -1434,7 +1641,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -1452,7 +1661,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -1466,7 +1677,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 4);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 4
+        );
         var component = Assert.Single(components, c => c.IsComponentTagHelper());
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -1488,23 +1702,30 @@ namespace Test
             a =>
             {
                 Assert.Equal("Footer", a.Name);
-                Assert.Equal("Microsoft.AspNetCore.Components.RenderFragment<System.String>", a.TypeName);
+                Assert.Equal(
+                    "Microsoft.AspNetCore.Components.RenderFragment<System.String>",
+                    a.TypeName
+                );
                 Assert.True(a.IsChildContentProperty());
             },
             a =>
             {
                 Assert.Equal("Header", a.Name);
-                Assert.Equal("Microsoft.AspNetCore.Components.RenderFragment<System.String>", a.TypeName);
+                Assert.Equal(
+                    "Microsoft.AspNetCore.Components.RenderFragment<System.String>",
+                    a.TypeName
+                );
                 Assert.True(a.IsChildContentProperty());
-            });
-
+            }
+        );
 
         var childContents = components.Where(c => c.IsChildContentTagHelper()).OrderBy(c => c.Name);
         Assert.Collection(
             childContents,
             c => Assert.Equal("Test.MyComponent.ChildContent", c.Name),
             c => Assert.Equal("Test.MyComponent.Footer", c.Name),
-            c => Assert.Equal("Test.MyComponent.Header", c.Name));
+            c => Assert.Equal("Test.MyComponent.Header", c.Name)
+        );
     }
 
     [Fact] // This component has lots of properties that don't become components.
@@ -1512,7 +1733,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -1544,7 +1767,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -1558,7 +1783,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components);
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -1572,7 +1800,9 @@ namespace Test
     {
         // Arrange
 
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -1600,7 +1830,9 @@ namespace Test
         public override string Footer { get; set; }
     }
 }
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
@@ -1614,7 +1846,10 @@ namespace Test
 
         // Assert
         var components = ExcludeBuiltInComponents(context);
-        components = AssertAndExcludeFullyQualifiedNameMatchComponents(components, expectedCount: 1);
+        components = AssertAndExcludeFullyQualifiedNameMatchComponents(
+            components,
+            expectedCount: 1
+        );
         var component = Assert.Single(components, c => c.IsComponentTagHelper());
 
         Assert.Equal("TestAssembly", component.AssemblyName);
@@ -1631,7 +1866,8 @@ namespace Test
             {
                 Assert.Equal("Header", a.Name);
                 Assert.Equal("System.String", a.TypeName);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -1640,7 +1876,9 @@ namespace Test
         // Arrange
         var testComponent = "Test.MyComponent";
         var routerComponent = "Microsoft.AspNetCore.Components.Routing.Router";
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
@@ -1660,13 +1898,22 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 
         var context = TagHelperDescriptorProviderContext.Create();
         context.SetCompilation(compilation);
-        context.Items.SetTargetAssembly((IAssemblySymbol)compilation.GetAssemblyOrModuleSymbol(compilation.References.First(r => r.Display.Contains("Microsoft.CodeAnalysis.Razor.Test.dll"))));
+        context.Items.SetTargetAssembly(
+            (IAssemblySymbol)
+                compilation.GetAssemblyOrModuleSymbol(
+                    compilation.References.First(
+                        r => r.Display.Contains("Microsoft.CodeAnalysis.Razor.Test.dll")
+                    )
+                )
+        );
         var provider = new ComponentTagHelperDescriptorProvider();
 
         // Act
@@ -1684,9 +1931,10 @@ namespace Test
     {
         // Arrange
         var testComponent = "Test.MyComponent";
-        var routerComponent
-            = "Microsoft.AspNetCore.Components.Routing.Router";
-        var compilation = BaseCompilation.AddSyntaxTrees(Parse(@"
+        var routerComponent = "Microsoft.AspNetCore.Components.Routing.Router";
+        var compilation = BaseCompilation.AddSyntaxTrees(
+            Parse(
+                @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
@@ -1706,7 +1954,9 @@ namespace Test
     }
 }
 
-"));
+"
+            )
+        );
 
         Assert.Empty(compilation.GetDiagnostics());
 

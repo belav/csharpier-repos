@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,18 +35,18 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 
-namespace System {
-
+namespace System
+{
     [Serializable]
-    [ClassInterface (ClassInterfaceType.AutoDual)]
-    [ComVisible (true)]
-    public class Object {
-
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ComVisible(true)]
+    public class Object
+    {
         // <summary>
         //   Compares this object to the specified object.
         //   Returns true if they are equal, false otherwise.
         // </summary>
-        public virtual bool Equals (object obj)
+        public virtual bool Equals(object obj)
         {
             return this == obj;
         }
@@ -54,86 +54,83 @@ namespace System {
         // <summary>
         //   Compares two objects for equality
         // </summary>
-        public static bool Equals (object objA, object objB)
+        public static bool Equals(object objA, object objB)
         {
             if (objA == objB)
                 return true;
-            
+
             if (objA == null || objB == null)
                 return false;
 
-            return objA.Equals (objB);
+            return objA.Equals(objB);
         }
 
         // <summary>
         //   Initializes a new instance of the object class.
         // </summary>
-        [ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.MayFail)]
-        public Object ()
-        {
-        }
+        [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.MayFail)]
+        public Object() { }
 
         // <summary>
-        //   Object destructor. 
+        //   Object destructor.
         // </summary>
-        [ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.Success)]
-        ~Object ()
-        {
-        }
+        [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
+        ~Object() { }
 
         // <summary>
         //   Returns a hashcode for this object.  Each derived
         //   class should return a hash code that makes sense
         //   for that particular implementation of the object.
         // </summary>
-        public virtual int GetHashCode () {
-            return InternalGetHashCode (this);
+        public virtual int GetHashCode()
+        {
+            return InternalGetHashCode(this);
         }
 
         // <summary>
         //   Returns the Type associated with the object.
         // </summary>
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Type GetType ();
+        public extern Type GetType();
 
         // <summary>
         //   Shallow copy of the object.
         // </summary>
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        protected extern object MemberwiseClone ();
+        protected extern object MemberwiseClone();
 
         // <summary>
         //   Returns a stringified representation of the object.
         //   This is not supposed to be used for user presentation,
         //   use Format() for that and IFormattable.
         //
-        //   ToString is mostly used for debugging purposes. 
+        //   ToString is mostly used for debugging purposes.
         // </summary>
-        public virtual string ToString ()
+        public virtual string ToString()
         {
-            return GetType ().ToString ();
+            return GetType().ToString();
         }
 
         // <summary>
         //   Tests whether a is equal to b.
         //   Can not figure out why this even exists
         // </summary>
-        [ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.Success)]
-        public static bool ReferenceEquals (object objA, object objB)
+        [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
+        public static bool ReferenceEquals(object objA, object objB)
         {
             return (objA == objB);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern int InternalGetHashCode (object o);
- 
+        internal static extern int InternalGetHashCode(object o);
+
 #pragma warning disable 169
-        void FieldGetter (string typeName, string fieldName, ref object val)
+        void FieldGetter(string typeName, string fieldName, ref object val)
         {
             /* never called */
         }
 
-        void FieldSetter (string typeName, string fieldName, object val)
+        void FieldSetter(string typeName, string fieldName, object val)
         {
             /* never called */
         }

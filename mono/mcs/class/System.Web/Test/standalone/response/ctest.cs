@@ -9,17 +9,17 @@ using System.IO;
 using System.Net;
 using System.Web;
 
-class X {
-
-    static void Main (string [] args)
+class X
+{
+    static void Main(string[] args)
     {
-        string url = String.Format ("http://{0}:{1}/{2}", args [0], args [1], args [2]);
-        
-        HttpWebRequest web = (HttpWebRequest) WebRequest.Create (url);
+        string url = String.Format("http://{0}:{1}/{2}", args[0], args[1], args[2]);
 
-        Stream s = web.GetResponse ().GetResponseStream ();
+        HttpWebRequest web = (HttpWebRequest)WebRequest.Create(url);
 
-        StreamReader sr = new StreamReader (s);
-        Console.WriteLine (sr.ReadToEnd ());
+        Stream s = web.GetResponse().GetResponseStream();
+
+        StreamReader sr = new StreamReader(s);
+        Console.WriteLine(sr.ReadToEnd());
     }
 }

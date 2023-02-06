@@ -122,13 +122,17 @@ namespace System.Web.WebPages.Administration.Test
         [Fact]
         public void GetRedirectUrlAppendsAppRelativePathAsReturnUrl()
         {
-            // Arrange            
+            // Arrange
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(m => m.RawUrl).Returns("~/_Admin/foo/bar/baz");
             mockRequest.Setup(m => m.QueryString).Returns(new NameValueCollection());
 
             // Act
-            string redirectUrl = SiteAdmin.GetRedirectUrl(mockRequest.Object, "register", MakeAppRelative);
+            string redirectUrl = SiteAdmin.GetRedirectUrl(
+                mockRequest.Object,
+                "register",
+                MakeAppRelative
+            );
 
             // Assert
             Assert.Equal("~/_Admin/register?ReturnUrl=%7e%2f_Admin%2ffoo%2fbar%2fbaz", redirectUrl);
@@ -137,7 +141,7 @@ namespace System.Web.WebPages.Administration.Test
         [Fact]
         public void GetRedirectUrlDoesNotAppendsAppRelativePathAsReturnUrlIfAlreadyExists()
         {
-            // Arrange            
+            // Arrange
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(m => m.RawUrl).Returns("~/_Admin/foo/bar/baz?ReturnUrl=~/foo");
             var queryString = new NameValueCollection();
@@ -145,7 +149,11 @@ namespace System.Web.WebPages.Administration.Test
             mockRequest.Setup(m => m.QueryString).Returns(queryString);
 
             // Act
-            string redirectUrl = SiteAdmin.GetRedirectUrl(mockRequest.Object, "register", MakeAppRelative);
+            string redirectUrl = SiteAdmin.GetRedirectUrl(
+                mockRequest.Object,
+                "register",
+                MakeAppRelative
+            );
 
             // Assert
             Assert.Equal("~/_Admin/register?ReturnUrl=%7e%2ffoo", redirectUrl);
@@ -154,7 +162,7 @@ namespace System.Web.WebPages.Administration.Test
         [Fact]
         public void GetReturnUrlReturnsNullIfNotSet()
         {
-            // Arrange            
+            // Arrange
             var mockRequest = new Mock<HttpRequestBase>();
             mockRequest.Setup(m => m.QueryString).Returns(new NameValueCollection());
 
@@ -168,20 +176,23 @@ namespace System.Web.WebPages.Administration.Test
         [Fact]
         public void GetReturnUrlThrowsIfReturnUrlIsNotAppRelative()
         {
-            // Arrange            
+            // Arrange
             var mockRequest = new Mock<HttpRequestBase>();
             var queryString = new NameValueCollection();
             queryString["ReturnUrl"] = "http://www.bing.com";
             mockRequest.Setup(m => m.QueryString).Returns(queryString);
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => SiteAdmin.GetReturnUrl(mockRequest.Object), "The return URL specified for request redirection is invalid.");
+            Assert.Throws<InvalidOperationException>(
+                () => SiteAdmin.GetReturnUrl(mockRequest.Object),
+                "The return URL specified for request redirection is invalid."
+            );
         }
 
         [Fact]
         public void GetReturnUrlReturnsReturlUrlQueryStringParameterIfItIsAppRelative()
         {
-            // Arrange            
+            // Arrange
             var mockRequest = new Mock<HttpRequestBase>();
             var queryString = new NameValueCollection();
             queryString["ReturnUrl"] = "~/_Admin/bar?foo=1";
@@ -217,7 +228,13 @@ namespace System.Web.WebPages.Administration.Test
         public void SaveAdminPasswordReturnsFalseIfGettingStreamThrowsUnauthorizedAccessException()
         {
             // Act
-            bool passwordSaved = AdminSecurity.SaveTemporaryPassword("password", () => { throw new UnauthorizedAccessException(); });
+            bool passwordSaved = AdminSecurity.SaveTemporaryPassword(
+                "password",
+                () =>
+                {
+                    throw new UnauthorizedAccessException();
+                }
+            );
 
             // Assert
             Assert.False(passwordSaved);
@@ -301,59 +318,78 @@ namespace System.Web.WebPages.Administration.Test
         [Fact]
         public void NoPasswordOrTemporaryPasswordRedirectsToRegisterPage()
         {
-            AssertSecure(requestUrl: "~/",
-                         passwordExists: false,
-                         temporaryPasswordExists: false,
-                         expectedUrl: "~/_Admin/Register.cshtml?ReturnUrl=%7e%2f");
+            AssertSecure(
+                requestUrl: "~/",
+                passwordExists: false,
+                temporaryPasswordExists: false,
+                expectedUrl: "~/_Admin/Register.cshtml?ReturnUrl=%7e%2f"
+            );
         }
 
         [Fact]
         public void IfPasswordExistsRedirectsToLoginPage()
         {
-            AssertSecure(requestUrl: "~/",
-                         passwordExists: true,
-                         temporaryPasswordExists: false,
-                         expectedUrl: "~/_Admin/Login.cshtml?ReturnUrl=%7e%2f");
+            AssertSecure(
+                requestUrl: "~/",
+                passwordExists: true,
+                temporaryPasswordExists: false,
+                expectedUrl: "~/_Admin/Login.cshtml?ReturnUrl=%7e%2f"
+            );
         }
 
         [Fact]
         public void IfPasswordExistsRedirectsToLoginPageEvenIfTemporaryPasswordFileExists()
         {
-            AssertSecure(requestUrl: "~/",
-                         passwordExists: true,
-                         temporaryPasswordExists: true,
-                         expectedUrl: "~/_Admin/Login.cshtml?ReturnUrl=%7e%2f");
+            AssertSecure(
+                requestUrl: "~/",
+                passwordExists: true,
+                temporaryPasswordExists: true,
+                expectedUrl: "~/_Admin/Login.cshtml?ReturnUrl=%7e%2f"
+            );
         }
 
         [Fact]
         public void IfTemporaryPasswordExistsRedirectsToInstructionsPage()
         {
-            AssertSecure(requestUrl: "~/",
-                         passwordExists: false,
-                         temporaryPasswordExists: true,
-                         expectedUrl: "~/_Admin/EnableInstructions.cshtml?ReturnUrl=%7e%2f");
+            AssertSecure(
+                requestUrl: "~/",
+                passwordExists: false,
+                temporaryPasswordExists: true,
+                expectedUrl: "~/_Admin/EnableInstructions.cshtml?ReturnUrl=%7e%2f"
+            );
         }
 
         [Fact]
         public void NoRedirectIfAlreadyGoingToRedirectPage()
         {
-            AssertSecure(requestUrl: "~/_Admin/Register.cshtml",
-                         passwordExists: false,
-                         temporaryPasswordExists: false,
-                         expectedUrl: null);
+            AssertSecure(
+                requestUrl: "~/_Admin/Register.cshtml",
+                passwordExists: false,
+                temporaryPasswordExists: false,
+                expectedUrl: null
+            );
 
-            AssertSecure(requestUrl: "~/_Admin/Login.cshtml",
-                         passwordExists: true,
-                         temporaryPasswordExists: false,
-                         expectedUrl: null);
+            AssertSecure(
+                requestUrl: "~/_Admin/Login.cshtml",
+                passwordExists: true,
+                temporaryPasswordExists: false,
+                expectedUrl: null
+            );
 
-            AssertSecure(requestUrl: "~/_Admin/EnableInstructions.cshtml",
-                         passwordExists: false,
-                         temporaryPasswordExists: true,
-                         expectedUrl: null);
+            AssertSecure(
+                requestUrl: "~/_Admin/EnableInstructions.cshtml",
+                passwordExists: false,
+                temporaryPasswordExists: true,
+                expectedUrl: null
+            );
         }
 
-        private static void AssertSecure(string requestUrl, bool passwordExists, bool temporaryPasswordExists, string expectedUrl)
+        private static void AssertSecure(
+            string requestUrl,
+            bool passwordExists,
+            bool temporaryPasswordExists,
+            string expectedUrl
+        )
         {
             // Arrange
             var vpp = new Mock<VirtualPathProvider>();
@@ -369,7 +405,9 @@ namespace System.Web.WebPages.Administration.Test
 
             string redirectUrl = null;
             var response = new Mock<HttpResponseBase>();
-            response.Setup(m => m.Redirect(It.IsAny<string>())).Callback<string>(url => redirectUrl = url);
+            response
+                .Setup(m => m.Redirect(It.IsAny<string>()))
+                .Callback<string>(url => redirectUrl = url);
             var request = new Mock<HttpRequestBase>();
             request.Setup(m => m.QueryString).Returns(new NameValueCollection());
             request.Setup(m => m.RawUrl).Returns(requestUrl);

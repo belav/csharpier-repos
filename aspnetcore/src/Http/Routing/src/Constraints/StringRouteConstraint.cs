@@ -29,7 +29,13 @@ public class StringRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatc
     }
 
     /// <inheritdoc />
-    public bool Match(HttpContext? httpContext, IRouter? route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
+    public bool Match(
+        HttpContext? httpContext,
+        IRouter? route,
+        string routeKey,
+        RouteValueDictionary values,
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -41,8 +47,7 @@ public class StringRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatc
             throw new ArgumentNullException(nameof(values));
         }
 
-        if (values.TryGetValue(routeKey, out var routeValue)
-            && routeValue != null)
+        if (values.TryGetValue(routeKey, out var routeValue) && routeValue != null)
         {
             var parameterValueString = Convert.ToString(routeValue, CultureInfo.InvariantCulture)!;
             return CheckConstraintCore(parameterValueString);

@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,7 +27,6 @@ using System.Data.OracleClient;
 
 using MonoTests.System.Data.Utils;
 
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
@@ -35,14 +34,14 @@ namespace MonoTests.System.Data.OracleClient
     [TestFixture]
     public class OracleCommandBuilder_DeriveParameters_O : GHTBase
     {
-        OracleConnection    con;
+        OracleConnection con;
         OracleCommand cmd;
         Exception exp = null;
 
         [SetUp]
         public void SetUp()
         {
-            exp=null;
+            exp = null;
             BeginCase("Setup");
             try
             {
@@ -51,8 +50,15 @@ namespace MonoTests.System.Data.OracleClient
                 cmd = new OracleCommand("", con);
                 Compare("Setup", "Setup");
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         [TearDown]
@@ -60,13 +66,15 @@ namespace MonoTests.System.Data.OracleClient
         {
             if (con != null)
             {
-                if (con.State == ConnectionState.Open) con.Close();
+                if (con.State == ConnectionState.Open)
+                    con.Close();
             }
         }
 
         public static void Main()
         {
-            OracleCommandBuilder_DeriveParameters_O tc = new OracleCommandBuilder_DeriveParameters_O();
+            OracleCommandBuilder_DeriveParameters_O tc =
+                new OracleCommandBuilder_DeriveParameters_O();
             try
             {
                 tc.BeginTest("OracleCommandBuilder_DeriveParameters_O");
@@ -74,7 +82,7 @@ namespace MonoTests.System.Data.OracleClient
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 tc.exp = ex;
             }
@@ -83,7 +91,6 @@ namespace MonoTests.System.Data.OracleClient
                 tc.EndTest(tc.exp);
             }
         }
-
 
         public void run()
         {
@@ -98,7 +105,7 @@ namespace MonoTests.System.Data.OracleClient
             try
             {
                 BeginCase("retrieve parameters");
-                
+
                 if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.DB2)
                 {
                     this.Skip("Not Implemented on DB2.");
@@ -107,14 +114,14 @@ namespace MonoTests.System.Data.OracleClient
 
                 switch (ConnectedDataProvider.GetDbType(con))
                 {
-//                    case MonoTests.Utils.DataBaseServer.PostgreSQL:
-//                        cmd = new OracleCommand("GH_MULTIRECORDSETS('a','b','c')", con);
-//                        break;
+                    //                    case MonoTests.Utils.DataBaseServer.PostgreSQL:
+                    //                        cmd = new OracleCommand("GH_MULTIRECORDSETS('a','b','c')", con);
+                    //                        break;
                     default:
                         cmd = new OracleCommand("GH_MultiRecordSets", con);
                         break;
                 }
-                
+
                 cmd.CommandType = CommandType.StoredProcedure;
                 OracleCommandBuilder.DeriveParameters(cmd);
 
@@ -126,7 +133,7 @@ namespace MonoTests.System.Data.OracleClient
                         Compare(cmd.Parameters[0].Direction, ParameterDirection.ReturnValue);
                         Compare(cmd.Parameters[0].ParameterName, "RETURN_VALUE");
                         break;
-                
+
                     case DataBaseServer.Oracle:
                         Compare(cmd.Parameters.Count, 3);
                         Compare(cmd.Parameters[0].Direction, ParameterDirection.Output);
@@ -142,10 +149,15 @@ namespace MonoTests.System.Data.OracleClient
                         break;
 
                     default:
-                        throw new ApplicationException(string.Format("GHT: Test not implemented for DB type {0}", ConnectedDataProvider.GetDbType(con)));
+                        throw new ApplicationException(
+                            string.Format(
+                                "GHT: Test not implemented for DB type {0}",
+                                ConnectedDataProvider.GetDbType(con)
+                            )
+                        );
                 }
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }

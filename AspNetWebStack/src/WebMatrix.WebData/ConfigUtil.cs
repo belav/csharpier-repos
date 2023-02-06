@@ -17,7 +17,9 @@ namespace WebMatrix.WebData
 
         private static bool IsSimpleMembershipEnabled()
         {
-            string settingValue = ConfigurationManager.AppSettings[WebSecurity.EnableSimpleMembershipKey];
+            string settingValue = ConfigurationManager.AppSettings[
+                WebSecurity.EnableSimpleMembershipKey
+            ];
             bool enabled;
             if (!String.IsNullOrEmpty(settingValue) && Boolean.TryParse(settingValue, out enabled))
             {
@@ -29,14 +31,19 @@ namespace WebMatrix.WebData
 
         internal static bool ShouldPreserveLoginUrl()
         {
-            string settingValue = ConfigurationManager.AppSettings[FormsAuthenticationSettings.PreserveLoginUrlKey];
+            string settingValue = ConfigurationManager.AppSettings[
+                FormsAuthenticationSettings.PreserveLoginUrlKey
+            ];
             bool preserveLoginUrl;
-            if (!String.IsNullOrEmpty(settingValue) && Boolean.TryParse(settingValue, out preserveLoginUrl))
+            if (
+                !String.IsNullOrEmpty(settingValue)
+                && Boolean.TryParse(settingValue, out preserveLoginUrl)
+            )
             {
                 return preserveLoginUrl;
             }
 
-            // For backwards compatible with WebPages 1.0, we override the loginUrl value if 
+            // For backwards compatible with WebPages 1.0, we override the loginUrl value if
             // the PreserveLoginUrl key is not present.
             return false;
         }

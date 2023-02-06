@@ -8,9 +8,7 @@ namespace TopNS
 {
     class Foo
     {
-        Foo /** incorrect */ ()
-        {
-        }
+        Foo
+        /** incorrect */() { }
     }
-
 }

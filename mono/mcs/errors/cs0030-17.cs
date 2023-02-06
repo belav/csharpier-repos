@@ -2,14 +2,12 @@
 // Line: 13
 // Compiler options: -langversion:latest
 
-ref struct S
-{
-}
+ref struct S { }
 
 class X
 {
-    public static void Foo (object o)
+    public static void Foo(object o)
     {
-        var res = (S) o;
+        var res = (S)o;
     }
 }

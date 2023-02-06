@@ -37,7 +37,13 @@ public class DistributedSessionStore : ISessionStore
     }
 
     /// <inheritdoc />
-    public ISession Create(string sessionKey, TimeSpan idleTimeout, TimeSpan ioTimeout, Func<bool> tryEstablishSession, bool isNewSessionKey)
+    public ISession Create(
+        string sessionKey,
+        TimeSpan idleTimeout,
+        TimeSpan ioTimeout,
+        Func<bool> tryEstablishSession,
+        bool isNewSessionKey
+    )
     {
         if (string.IsNullOrEmpty(sessionKey))
         {
@@ -49,6 +55,14 @@ public class DistributedSessionStore : ISessionStore
             throw new ArgumentNullException(nameof(tryEstablishSession));
         }
 
-        return new DistributedSession(_cache, sessionKey, idleTimeout, ioTimeout, tryEstablishSession, _loggerFactory, isNewSessionKey);
+        return new DistributedSession(
+            _cache,
+            sessionKey,
+            idleTimeout,
+            ioTimeout,
+            tryEstablishSession,
+            _loggerFactory,
+            isNewSessionKey
+        );
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,7 +36,7 @@ namespace System.Net
 {
     class DnsAsyncResult : IAsyncResult
     {
-        static WaitCallback internal_cb = new WaitCallback (CB);
+        static WaitCallback internal_cb = new WaitCallback(CB);
         ManualResetEvent handle;
         bool synch;
         bool is_completed;
@@ -45,77 +45,87 @@ namespace System.Net
         IPHostEntry entry;
         Exception exc;
 
-        public DnsAsyncResult (AsyncCallback cb, object state)
+        public DnsAsyncResult(AsyncCallback cb, object state)
         {
             this.callback = cb;
             this.state = state;
         }
 
-        public void SetCompleted (bool synch, IPHostEntry entry, Exception e)
+        public void SetCompleted(bool synch, IPHostEntry entry, Exception e)
         {
             this.synch = synch;
             this.entry = entry;
             exc = e;
-            lock (this) {
+            lock (this)
+            {
                 if (is_completed)
                     return;
                 is_completed = true;
                 if (handle != null)
-                    handle.Set ();
+                    handle.Set();
             }
             if (callback != null)
-                ThreadPool.QueueUserWorkItem (internal_cb, this);
+                ThreadPool.QueueUserWorkItem(internal_cb, this);
         }
 
-        public void SetCompleted (bool synch, Exception e)
+        public void SetCompleted(bool synch, Exception e)
         {
-            SetCompleted (synch, null, e);
+            SetCompleted(synch, null, e);
         }
 
-        public void SetCompleted (bool synch, IPHostEntry entry)
+        public void SetCompleted(bool synch, IPHostEntry entry)
         {
-            SetCompleted (synch, entry, null);
+            SetCompleted(synch, entry, null);
         }
 
-        static void CB (object _this)
+        static void CB(object _this)
         {
-            DnsAsyncResult ares = (DnsAsyncResult) _this;
-            ares.callback (ares);
+            DnsAsyncResult ares = (DnsAsyncResult)_this;
+            ares.callback(ares);
         }
 
-        public object AsyncState {
+        public object AsyncState
+        {
             get { return state; }
         }
 
-        public WaitHandle AsyncWaitHandle {
-            get {
-                lock (this) {
+        public WaitHandle AsyncWaitHandle
+        {
+            get
+            {
+                lock (this)
+                {
                     if (handle == null)
-                        handle = new ManualResetEvent (is_completed);
+                        handle = new ManualResetEvent(is_completed);
                 }
                 return handle;
             }
         }
 
-        public Exception Exception {
+        public Exception Exception
+        {
             get { return exc; }
         }
 
-        public IPHostEntry HostEntry {
+        public IPHostEntry HostEntry
+        {
             get { return entry; }
         }
 
-        public bool CompletedSynchronously {
+        public bool CompletedSynchronously
+        {
             get { return synch; }
         }
 
-        public bool IsCompleted {
-            get {
-                lock (this) {
+        public bool IsCompleted
+        {
+            get
+            {
+                lock (this)
+                {
                     return is_completed;
                 }
             }
         }
     }
 }
-

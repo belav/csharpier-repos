@@ -17,13 +17,13 @@ namespace MonoTests.System.XmlSerialization
     public class XmlChoiceIdentifierAttributeTests
     {
         [Test]
-        public void MemerNameDefault ()
+        public void MemerNameDefault()
         {
-            XmlChoiceIdentifierAttribute attr = new XmlChoiceIdentifierAttribute ();
-            Assert.AreEqual (string.Empty, attr.MemberName, "#1");
+            XmlChoiceIdentifierAttribute attr = new XmlChoiceIdentifierAttribute();
+            Assert.AreEqual(string.Empty, attr.MemberName, "#1");
 
             attr.MemberName = null;
-            Assert.AreEqual (string.Empty, attr.MemberName, "#2");
+            Assert.AreEqual(string.Empty, attr.MemberName, "#2");
         }
     }
 }

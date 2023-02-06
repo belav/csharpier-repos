@@ -4,21 +4,19 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Resources
 {
-    [IgnoreDescriptors (false)]
-
+    [IgnoreDescriptors(false)]
     // Rename the resource so that it matches the name of an assembly being processed.
-    [SetupCompileResource ("Dependencies/EmbeddedLinkXmlFileIsProcessedIfNameMatchesAnAssembly.xml", "test.xml")]
+    [SetupCompileResource(
+        "Dependencies/EmbeddedLinkXmlFileIsProcessedIfNameMatchesAnAssembly.xml",
+        "test.xml"
+    )]
     [SkipPeVerify]
     public class EmbeddedLinkXmlFileIsProcessedIfNameMatchesAnAssembly
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        public class Unused
-        {
-        }
+        [KeptMember(".ctor()")]
+        public class Unused { }
     }
 }

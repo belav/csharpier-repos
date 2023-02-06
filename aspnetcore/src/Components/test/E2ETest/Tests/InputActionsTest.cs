@@ -16,10 +16,9 @@ public class InputFocusTest : ServerTestBase<ToggleExecutionModeServerFixture<Pr
     public InputFocusTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -27,8 +26,8 @@ public class InputFocusTest : ServerTestBase<ToggleExecutionModeServerFixture<Pr
         Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
     }
 
-    protected virtual IWebElement MountInputActionsComponent()
-        => Browser.MountTestComponent<InputFocusComponent>();
+    protected virtual IWebElement MountInputActionsComponent() =>
+        Browser.MountTestComponent<InputFocusComponent>();
 
     [Fact]
     public void InputElementsGetFocusedSuccessfully()

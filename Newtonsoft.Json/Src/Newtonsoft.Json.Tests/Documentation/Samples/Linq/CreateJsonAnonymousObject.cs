@@ -66,24 +66,20 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                 {
                     Title = "Episode VII",
                     Description = "Episode VII production",
-                    Categories = new List<string>
-                    {
-                        "episode-vii",
-                        "movie"
-                    },
+                    Categories = new List<string> { "episode-vii", "movie" },
                     Link = "episode-vii-production.aspx"
                 }
             };
 
-            JObject o = JObject.FromObject(new
-            {
-                channel = new
+            JObject o = JObject.FromObject(
+                new
                 {
-                    title = "Star Wars",
-                    link = "http://www.starwars.com",
-                    description = "Star Wars blog.",
-                    item =
-                        from p in posts
+                    channel = new
+                    {
+                        title = "Star Wars",
+                        link = "http://www.starwars.com",
+                        description = "Star Wars blog.",
+                        item = from p in posts
                         orderby p.Title
                         select new
                         {
@@ -92,8 +88,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                             link = p.Link,
                             category = p.Categories
                         }
+                    }
                 }
-            });
+            );
 
             Console.WriteLine(o.ToString());
             // {
@@ -116,7 +113,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""channel"": {
     ""title"": ""Star Wars"",
     ""link"": ""http://www.starwars.com"",
@@ -133,7 +131,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
       }
     ]
   }
-}", o.ToString());
+}",
+                o.ToString()
+            );
         }
     }
 }

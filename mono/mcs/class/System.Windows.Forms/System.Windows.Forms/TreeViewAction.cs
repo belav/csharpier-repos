@@ -22,9 +22,10 @@
 // Authors:
 //    Jackson Harper (jackson@ximian.com)
 
-namespace System.Windows.Forms {
-
-    public enum TreeViewAction {
+namespace System.Windows.Forms
+{
+    public enum TreeViewAction
+    {
         Unknown,
         ByKeyboard,
         ByMouse,
@@ -32,4 +33,3 @@ namespace System.Windows.Forms {
         Expand
     }
 }
-

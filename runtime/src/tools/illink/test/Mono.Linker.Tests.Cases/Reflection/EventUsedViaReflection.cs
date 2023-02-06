@@ -5,39 +5,39 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Reflection
 {
-    [SetupCSharpCompilerToUse ("csc")]
+    [SetupCSharpCompilerToUse("csc")]
     [ExpectedNoWarnings]
     public class EventUsedViaReflection
     {
-        public static void Main ()
+        public static void Main()
         {
-            new Foo (); // Needed to avoid lazy body marking stubbing
+            new Foo(); // Needed to avoid lazy body marking stubbing
 
-            TestByName ();
-            TestInternalByName ();
-            TestNameBindingFlags ();
-            TestNameWrongBindingFlags ();
-            TestNameUnknownBindingFlags (BindingFlags.Public);
-            TestNameUnknownBindingFlagsAndName (BindingFlags.Public, "DoesntMatter");
-            TestNullName ();
-            TestEmptyName ();
-            TestNoValueName ();
-            TestNonExistingName ();
-            TestNullType ();
-            TestNoValue ();
-            TestDataFlowType ();
-            TestIfElse (1);
-            TestEventInBaseType ();
-            TestIgnoreCaseBindingFlags ();
-            TestFailIgnoreCaseBindingFlags ();
-            TestUnsupportedBindingFlags ();
+            TestByName();
+            TestInternalByName();
+            TestNameBindingFlags();
+            TestNameWrongBindingFlags();
+            TestNameUnknownBindingFlags(BindingFlags.Public);
+            TestNameUnknownBindingFlagsAndName(BindingFlags.Public, "DoesntMatter");
+            TestNullName();
+            TestEmptyName();
+            TestNoValueName();
+            TestNonExistingName();
+            TestNullType();
+            TestNoValue();
+            TestDataFlowType();
+            TestIfElse(1);
+            TestEventInBaseType();
+            TestIgnoreCaseBindingFlags();
+            TestFailIgnoreCaseBindingFlags();
+            TestUnsupportedBindingFlags();
         }
 
         [Kept]
-        static void TestByName ()
+        static void TestByName()
         {
-            var eventInfo = typeof (Foo).GetEvent ("Event");
-            eventInfo.GetAddMethod (false);
+            var eventInfo = typeof(Foo).GetEvent("Event");
+            eventInfo.GetAddMethod(false);
         }
 
         [Kept]
@@ -47,137 +47,149 @@ namespace Mono.Linker.Tests.Cases.Reflection
         //   - Without linking the GetEvent will return null
         //   - After linking the GetEvent will still return null
         // We also don't mark it as recognized pattern since we didn't mark anything
-        static void TestInternalByName ()
+        static void TestInternalByName()
         {
-            var eventInfo = typeof (InternalEventType).GetEvent ("Event");
-            eventInfo.GetAddMethod (false);
+            var eventInfo = typeof(InternalEventType).GetEvent("Event");
+            eventInfo.GetAddMethod(false);
         }
 
         [Kept]
-        static void TestNameBindingFlags ()
+        static void TestNameBindingFlags()
         {
-            var eventInfo = typeof (Bar).GetEvent ("PrivateEvent", BindingFlags.NonPublic);
+            var eventInfo = typeof(Bar).GetEvent("PrivateEvent", BindingFlags.NonPublic);
         }
 
         [Kept]
-        static void TestNameWrongBindingFlags ()
+        static void TestNameWrongBindingFlags()
         {
-            var eventInfo = typeof (Bar).GetEvent ("PublicEvent", BindingFlags.NonPublic);
+            var eventInfo = typeof(Bar).GetEvent("PublicEvent", BindingFlags.NonPublic);
         }
 
         [Kept]
-        static void TestNameUnknownBindingFlags (BindingFlags bindingFlags)
-        {
-            // Since the binding flags are not known linker should mark all events on the type
-            var eventInfo = typeof (UnknownBindingFlags).GetEvent ("PrivateEvent", bindingFlags);
-        }
-
-        [Kept]
-        static void TestNameUnknownBindingFlagsAndName (BindingFlags bindingFlags, string name)
+        static void TestNameUnknownBindingFlags(BindingFlags bindingFlags)
         {
             // Since the binding flags are not known linker should mark all events on the type
-            var eventInfo = typeof (UnknownBindingFlagsAndName).GetEvent (name, bindingFlags);
+            var eventInfo = typeof(UnknownBindingFlags).GetEvent("PrivateEvent", bindingFlags);
         }
 
         [Kept]
-        static void TestNullName ()
+        static void TestNameUnknownBindingFlagsAndName(BindingFlags bindingFlags, string name)
         {
-            var eventInfo = typeof (EventUsedViaReflection).GetEvent (null);
+            // Since the binding flags are not known linker should mark all events on the type
+            var eventInfo = typeof(UnknownBindingFlagsAndName).GetEvent(name, bindingFlags);
         }
 
         [Kept]
-        static void TestEmptyName ()
+        static void TestNullName()
         {
-            var eventInfo = typeof (EventUsedViaReflection).GetEvent (string.Empty);
+            var eventInfo = typeof(EventUsedViaReflection).GetEvent(null);
         }
 
         [Kept]
-        static void TestNoValueName ()
+        static void TestEmptyName()
+        {
+            var eventInfo = typeof(EventUsedViaReflection).GetEvent(string.Empty);
+        }
+
+        [Kept]
+        static void TestNoValueName()
         {
             Type t = null;
             string noValue = t.AssemblyQualifiedName;
-            var method = typeof (EventUsedViaReflection).GetEvent (noValue);
+            var method = typeof(EventUsedViaReflection).GetEvent(noValue);
         }
 
         [Kept]
-        static void TestNonExistingName ()
+        static void TestNonExistingName()
         {
-            var eventInfo = typeof (EventUsedViaReflection).GetEvent ("NonExisting");
+            var eventInfo = typeof(EventUsedViaReflection).GetEvent("NonExisting");
         }
 
         [Kept]
-        static void TestNullType ()
+        static void TestNullType()
         {
             Type type = null;
-            var eventInfo = type.GetEvent ("Event");
+            var eventInfo = type.GetEvent("Event");
         }
 
         [Kept]
-        static void TestNoValue ()
+        static void TestNoValue()
         {
             Type t = null;
-            Type noValue = Type.GetTypeFromHandle (t.TypeHandle);
-            var method = noValue.GetEvent ("Event");
+            Type noValue = Type.GetTypeFromHandle(t.TypeHandle);
+            var method = noValue.GetEvent("Event");
         }
 
         [Kept]
-        static Type FindType ()
+        static Type FindType()
         {
-            return typeof (Foo);
+            return typeof(Foo);
         }
 
         [Kept]
-        [ExpectedWarning ("IL2075", "FindType", "GetEvent")]
-        static void TestDataFlowType ()
+        [ExpectedWarning("IL2075", "FindType", "GetEvent")]
+        static void TestDataFlowType()
         {
-            Type type = FindType ();
-            var eventInfo = type.GetEvent ("Event");
+            Type type = FindType();
+            var eventInfo = type.GetEvent("Event");
         }
 
         [Kept]
-        static void TestIfElse (int i)
+        static void TestIfElse(int i)
         {
             Type myType;
-            if (i == 1) {
-                myType = typeof (IfClass);
-            } else {
-                myType = typeof (ElseClass);
+            if (i == 1)
+            {
+                myType = typeof(IfClass);
+            }
+            else
+            {
+                myType = typeof(ElseClass);
             }
             String myString;
-            if (i == 1) {
+            if (i == 1)
+            {
                 myString = "IfEvent";
-            } else {
+            }
+            else
+            {
                 myString = "ElseEvent";
             }
-            var eventInfo = myType.GetEvent (myString);
+            var eventInfo = myType.GetEvent(myString);
         }
 
         [Kept]
-        static void TestEventInBaseType ()
+        static void TestEventInBaseType()
         {
-            typeof (DerivedClass).GetEvent ("ProtectedEventOnBase"); // Will not mark anything as it only works on public events
-            typeof (DerivedClass).GetEvent ("PublicEventOnBase");
+            typeof(DerivedClass).GetEvent("ProtectedEventOnBase"); // Will not mark anything as it only works on public events
+            typeof(DerivedClass).GetEvent("PublicEventOnBase");
         }
 
         [Kept]
-        static void TestIgnoreCaseBindingFlags ()
+        static void TestIgnoreCaseBindingFlags()
         {
-            typeof (IgnoreCaseBindingFlagsClass).GetEvent ("publicevent", BindingFlags.IgnoreCase | BindingFlags.Public);
+            typeof(IgnoreCaseBindingFlagsClass).GetEvent(
+                "publicevent",
+                BindingFlags.IgnoreCase | BindingFlags.Public
+            );
         }
 
         [Kept]
-        static void TestFailIgnoreCaseBindingFlags ()
+        static void TestFailIgnoreCaseBindingFlags()
         {
-            typeof (FailIgnoreCaseBindingFlagsClass).GetEvent ("publicevent", BindingFlags.Public);
+            typeof(FailIgnoreCaseBindingFlagsClass).GetEvent("publicevent", BindingFlags.Public);
         }
 
         [Kept]
-        static void TestUnsupportedBindingFlags ()
+        static void TestUnsupportedBindingFlags()
         {
-            typeof (PutRefDispPropertyBindingFlagsClass).GetEvent ("PublicEvent", BindingFlags.PutRefDispProperty);
+            typeof(PutRefDispPropertyBindingFlagsClass).GetEvent(
+                "PublicEvent",
+                BindingFlags.PutRefDispProperty
+            );
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Foo
         {
             [Kept]
@@ -197,6 +209,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             internal event EventHandler<EventArgs> InternalEvent;
             static event EventHandler<EventArgs> Static;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -212,16 +225,19 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             internal event EventHandler<EventArgs> InternalEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             static event EventHandler<EventArgs> Static;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             private event EventHandler<EventArgs> PrivateEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -236,16 +252,19 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             internal event EventHandler<EventArgs> InternalEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             static event EventHandler<EventArgs> Static;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             private event EventHandler<EventArgs> PrivateEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -260,6 +279,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             public event EventHandler<EventArgs> IfEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -274,6 +294,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             public static event EventHandler<EventArgs> ElseEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -285,16 +306,16 @@ namespace Mono.Linker.Tests.Cases.Reflection
         class BaseClass
         {
             protected static event EventHandler<EventArgs> ProtectedEventOnBase;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             public event EventHandler<EventArgs> PublicEventOnBase;
         }
-        [KeptBaseType (typeof (BaseClass))]
-        class DerivedClass : BaseClass
-        {
-        }
+
+        [KeptBaseType(typeof(BaseClass))]
+        class DerivedClass : BaseClass { }
 
         class IgnoreCaseBindingFlagsClass
         {

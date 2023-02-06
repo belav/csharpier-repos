@@ -3,7 +3,7 @@ using static S;
 
 struct S
 {
-    internal static int Foo ()
+    internal static int Foo()
     {
         return 5;
     }
@@ -11,13 +11,13 @@ struct S
 
 class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        string res = Concat ("a", "b", "c");
+        string res = Concat("a", "b", "c");
         if (res != "abc")
             return 1;
 
-        if (Foo () != 5)
+        if (Foo() != 5)
             return 2;
 
         return 0;

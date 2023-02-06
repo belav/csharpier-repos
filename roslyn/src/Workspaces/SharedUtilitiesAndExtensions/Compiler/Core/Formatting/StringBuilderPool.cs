@@ -8,11 +8,11 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     internal static class StringBuilderPool
     {
-        public static StringBuilder Allocate()
-            => SharedPools.Default<StringBuilder>().AllocateAndClear();
+        public static StringBuilder Allocate() =>
+            SharedPools.Default<StringBuilder>().AllocateAndClear();
 
-        public static void Free(StringBuilder builder)
-            => SharedPools.Default<StringBuilder>().ClearAndFree(builder);
+        public static void Free(StringBuilder builder) =>
+            SharedPools.Default<StringBuilder>().ClearAndFree(builder);
 
         public static string ReturnAndFree(StringBuilder builder)
         {

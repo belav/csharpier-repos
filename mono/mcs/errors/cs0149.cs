@@ -5,8 +5,8 @@ delegate void TestDelegate();
 
 public class MainClass
 {
-    public static void Main ()
+    public static void Main()
     {
-        TestDelegate delegateInstance = new TestDelegate ();
+        TestDelegate delegateInstance = new TestDelegate();
     }
 }

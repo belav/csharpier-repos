@@ -12,23 +12,29 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding
     ///
     /// In order words, until https://github.com/dotnet/linker/issues/1703 is addressed this test will pass with or without the fix to update the scope on security attributes
     /// </summary>
-    [SetupLinkerArgument ("--skip-unresolved", "true")]
-    [SetupLinkerArgument ("--strip-security", "false")]
-    [Define ("IL_ASSEMBLY_AVAILABLE")]
-    [SetupLinkerAction ("copy", "Library")]
-    [SetupCompileBefore ("Forwarder.dll", new[] { "Dependencies/SecurityAttributeForwarderLibrary.cs" })]
-    [SetupCompileBefore ("Library.dll", new[] { "Dependencies/LibraryWithSecurityAttributes.il" }, new[] { "Forwarder.dll" })]
-
+    [SetupLinkerArgument("--skip-unresolved", "true")]
+    [SetupLinkerArgument("--strip-security", "false")]
+    [Define("IL_ASSEMBLY_AVAILABLE")]
+    [SetupLinkerAction("copy", "Library")]
+    [SetupCompileBefore(
+        "Forwarder.dll",
+        new[] { "Dependencies/SecurityAttributeForwarderLibrary.cs" }
+    )]
+    [SetupCompileBefore(
+        "Library.dll",
+        new[] { "Dependencies/LibraryWithSecurityAttributes.il" },
+        new[] { "Forwarder.dll" }
+    )]
     // Sanity checks to verify the test was setup correctly
-    [KeptTypeInAssembly ("Library.dll", "LibraryWithSecurityAttributes")]
+    [KeptTypeInAssembly("Library.dll", "LibraryWithSecurityAttributes")]
     // There's a reference to `Forwarder` in the copy assembly `Library`.
-    [KeptAssembly ("Forwarder.dll")]
+    [KeptAssembly("Forwarder.dll")]
     public class SecurityAttributeScope
     {
-        public static void Main ()
+        public static void Main()
         {
 #if IL_ASSEMBLY_AVAILABLE
-            new LibraryWithSecurityAttributes().OnAMethod ();
+            new LibraryWithSecurityAttributes().OnAMethod();
 #endif
         }
     }

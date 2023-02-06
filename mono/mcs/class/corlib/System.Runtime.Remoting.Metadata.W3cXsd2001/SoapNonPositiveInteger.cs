@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,31 +33,31 @@
 
 using System;
 
-namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
+namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
     [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class SoapNonPositiveInteger : ISoapXsd
     {
         decimal _value;
-        
-        public SoapNonPositiveInteger()
-        {
-        }
-        
+
+        public SoapNonPositiveInteger() { }
+
         public SoapNonPositiveInteger(decimal value)
         {
-            if (value > 0) 
-                throw SoapHelper.GetException (this, "invalid " + value);
+            if (value > 0)
+                throw SoapHelper.GetException(this, "invalid " + value);
             _value = value;
         }
-        
-        public decimal Value {
-            get { return _value; } 
+
+        public decimal Value
+        {
+            get { return _value; }
             set { _value = value; }
         }
 
-        public static string XsdType {
+        public static string XsdType
+        {
             get { return "nonPositiveInteger"; }
         }
 
@@ -65,15 +65,15 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
         {
             return XsdType;
         }
-        
-        public static SoapNonPositiveInteger Parse (string value)
+
+        public static SoapNonPositiveInteger Parse(string value)
         {
-            return new SoapNonPositiveInteger (decimal.Parse (value));
+            return new SoapNonPositiveInteger(decimal.Parse(value));
         }
 
         public override string ToString()
         {
-            return _value.ToString ();
+            return _value.ToString();
         }
     }
 }

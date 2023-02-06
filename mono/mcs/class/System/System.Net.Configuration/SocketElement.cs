@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,7 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
     public sealed class SocketElement : ConfigurationElement
     {
@@ -47,33 +47,44 @@ namespace System.Net.Configuration
 
         #region Constructors
 
-        public SocketElement ()
+        public SocketElement()
         {
-            alwaysUseCompletionPortsForAcceptProp = new ConfigurationProperty ("alwaysUseCompletionPortsForAccept", typeof (bool), false);
-            alwaysUseCompletionPortsForConnectProp = new ConfigurationProperty ("alwaysUseCompletionPortsForConnect", typeof (bool), false);
-            properties = new ConfigurationPropertyCollection ();
+            alwaysUseCompletionPortsForAcceptProp = new ConfigurationProperty(
+                "alwaysUseCompletionPortsForAccept",
+                typeof(bool),
+                false
+            );
+            alwaysUseCompletionPortsForConnectProp = new ConfigurationProperty(
+                "alwaysUseCompletionPortsForConnect",
+                typeof(bool),
+                false
+            );
+            properties = new ConfigurationPropertyCollection();
 
-            properties.Add (alwaysUseCompletionPortsForAcceptProp);
-            properties.Add (alwaysUseCompletionPortsForConnectProp);
+            properties.Add(alwaysUseCompletionPortsForAcceptProp);
+            properties.Add(alwaysUseCompletionPortsForConnectProp);
         }
 
         #endregion // Constructors
 
         #region Properties
 
-        [ConfigurationProperty ("alwaysUseCompletionPortsForAccept", DefaultValue = "False")]
-        public bool AlwaysUseCompletionPortsForAccept {
-            get { return (bool) base [alwaysUseCompletionPortsForAcceptProp]; }
-            set { base [alwaysUseCompletionPortsForAcceptProp] = value; }
+        [ConfigurationProperty("alwaysUseCompletionPortsForAccept", DefaultValue = "False")]
+        public bool AlwaysUseCompletionPortsForAccept
+        {
+            get { return (bool)base[alwaysUseCompletionPortsForAcceptProp]; }
+            set { base[alwaysUseCompletionPortsForAcceptProp] = value; }
         }
 
-        [ConfigurationProperty ("alwaysUseCompletionPortsForConnect", DefaultValue = "False")]
-        public bool AlwaysUseCompletionPortsForConnect {
-            get { return (bool) base [alwaysUseCompletionPortsForConnectProp]; }
-            set { base [alwaysUseCompletionPortsForConnectProp] = value; }
+        [ConfigurationProperty("alwaysUseCompletionPortsForConnect", DefaultValue = "False")]
+        public bool AlwaysUseCompletionPortsForConnect
+        {
+            get { return (bool)base[alwaysUseCompletionPortsForConnectProp]; }
+            set { base[alwaysUseCompletionPortsForConnectProp] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
@@ -82,9 +93,7 @@ namespace System.Net.Configuration
         #region Methods
 
         [MonoTODO]
-        protected override void PostDeserialize ()
-        {
-        }
+        protected override void PostDeserialize() { }
 
         #endregion // Methods
     }

@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Classification
     internal static class ClassificationTags
     {
         [Obsolete("Use ToClassificationTypeName")]
-        public static string GetClassificationTypeName(string textTag)
-            => textTag.ToClassificationTypeName();
+        public static string GetClassificationTypeName(string textTag) =>
+            textTag.ToClassificationTypeName();
     }
 }

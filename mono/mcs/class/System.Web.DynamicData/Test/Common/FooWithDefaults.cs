@@ -19,7 +19,7 @@ namespace MonoTests.Common
         public int ForeignKeyColumn2 { get; set; }
         public bool ForeignKeyColumn3 { get; set; }
 
-        public FooWithDefaults ()
+        public FooWithDefaults()
         {
             Column1 = "hello";
             Column2 = 123;

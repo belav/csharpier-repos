@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
     {
         public StackTraceAnalysisResult(
             string originalString,
-            ImmutableArray<ParsedFrame> parsedLines)
+            ImmutableArray<ParsedFrame> parsedLines
+        )
         {
             OriginalString = originalString;
             ParsedFrames = parsedLines;

@@ -6,7 +6,5 @@
 
 namespace CSharpSyntaxGenerator
 {
-    public class PredefinedNode : TreeType
-    {
-    }
+    public class PredefinedNode : TreeType { }
 }

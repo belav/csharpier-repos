@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.WebControls.ListItemCollection.cs 
+// Tests for System.Web.UI.WebControls.ListItemCollection.cs
 //
 // Author:
 //    Peter Dennis Bartok (pbartok@novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,32 +40,32 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    [TestFixture]    
-    public class ListItemCollectionTest 
+    [TestFixture]
+    public class ListItemCollectionTest
     {
         [Test]
-        public void Methods ()
+        public void Methods()
         {
-            ListItemCollection    c;
-            ListItem        i;
-            ListItem        i2;
+            ListItemCollection c;
+            ListItem i;
+            ListItem i2;
 
             c = new ListItemCollection();
-            Assert.AreEqual (0, c.Count, "T1");
+            Assert.AreEqual(0, c.Count, "T1");
 
             i = new ListItem("Item 1", "10");
             c.Add(i);
-            Assert.AreEqual (1, c.Count, "T2");
+            Assert.AreEqual(1, c.Count, "T2");
 
             i = new ListItem("This is item 2", "20");
             c.Add(i);
-            Assert.AreEqual (2, c.Count, "T3");
+            Assert.AreEqual(2, c.Count, "T3");
 
-            Assert.AreEqual (null, c.FindByText(" is "), "T4");
-            Assert.AreEqual (i.Text, c.FindByText("This is item 2").Text, "T5");
-            Assert.AreSame (i, c.FindByText("This is item 2"), "T6");
-            Assert.AreEqual (1, c.IndexOf(c.FindByText("This is item 2")), "T7");
-            Assert.AreEqual (1, c.IndexOf(c.FindByValue("20")), "T8");
+            Assert.AreEqual(null, c.FindByText(" is "), "T4");
+            Assert.AreEqual(i.Text, c.FindByText("This is item 2").Text, "T5");
+            Assert.AreSame(i, c.FindByText("This is item 2"), "T6");
+            Assert.AreEqual(1, c.IndexOf(c.FindByText("This is item 2")), "T7");
+            Assert.AreEqual(1, c.IndexOf(c.FindByValue("20")), "T8");
 
             i = new ListItem("Item 3", "30");
             Assert.IsFalse(c.Contains(i), "T9");
@@ -74,23 +74,23 @@ namespace MonoTests.System.Web.UI.WebControls
 
             i = new ListItem("Forth", "40");
             i2 = new ListItem("Fifth", "50");
-            c.AddRange(new ListItem[] {i, i2});
-            Assert.AreEqual (5, c.Count, "T11");
+            c.AddRange(new ListItem[] { i, i2 });
+            Assert.AreEqual(5, c.Count, "T11");
 
             c.RemoveAt(1);
-            Assert.AreEqual (4, c.Count, "T12");
-            Assert.AreEqual (null, c.FindByText("This is item 2"), "T13");
+            Assert.AreEqual(4, c.Count, "T12");
+            Assert.AreEqual(null, c.FindByText("This is item 2"), "T13");
 
             c.Clear();
-            Assert.AreEqual (0, c.Count, "T13");
+            Assert.AreEqual(0, c.Count, "T13");
         }
 
         [Test]
-        public void IListTest () 
+        public void IListTest()
         {
-            ListItemCollection    c;
-            ListItem        i;
-            ListItem        i2;
+            ListItemCollection c;
+            ListItem i;
+            ListItem i2;
 
             c = new ListItemCollection();
             i = new ListItem("Item 1", "1");
@@ -114,11 +114,11 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void RemoveInvalidTest () 
+        public void RemoveInvalidTest()
         {
-            ListItemCollection    c;
-            ListItem        i;
-            ListItem        i2;
+            ListItemCollection c;
+            ListItem i;
+            ListItem i2;
 
             c = new ListItemCollection();
             i = new ListItem("Item 1", "1");
@@ -132,9 +132,9 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(InvalidCastException))]
-        public void AddInvalidTest () 
+        public void AddInvalidTest()
         {
-            ListItemCollection    c;
+            ListItemCollection c;
 
             c = new ListItemCollection();
 
@@ -143,10 +143,11 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void AccessInvalidTest () {
-            ListItemCollection    c;
-            ListItem        i;
-            ListItem        i2;
+        public void AccessInvalidTest()
+        {
+            ListItemCollection c;
+            ListItem i;
+            ListItem i2;
 
             c = new ListItemCollection();
             i = new ListItem("Item 1", "1");
@@ -156,10 +157,10 @@ namespace MonoTests.System.Web.UI.WebControls
         }
 
         [Test]
-        public void AddTest () 
+        public void AddTest()
         {
-            ListItemCollection    c;
-            ListItem        i;
+            ListItemCollection c;
+            ListItem i;
 
             c = new ListItemCollection();
 
@@ -173,9 +174,10 @@ namespace MonoTests.System.Web.UI.WebControls
         }
 
         [Test]
-        public void AssignmentTest () {
-            ListItemCollection    c;
-            ListItem        i;
+        public void AssignmentTest()
+        {
+            ListItemCollection c;
+            ListItem i;
 
             c = new ListItemCollection();
             i = new ListItem("Text", "Value");
@@ -191,9 +193,10 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         [ExpectedException(typeof(InvalidCastException))]
-        public void AssignmentExceptionTest () {
-            ListItemCollection    c;
-            ListItem        i;
+        public void AssignmentExceptionTest()
+        {
+            ListItemCollection c;
+            ListItem i;
 
             c = new ListItemCollection();
             i = new ListItem("Text", "Value");
@@ -204,11 +207,11 @@ namespace MonoTests.System.Web.UI.WebControls
         }
 
         [Test]
-        public void ContainsTest ()
+        public void ContainsTest()
         {
-            ListItemCollection    c;
-            ListItem        i;
-            ListItem        i2;
+            ListItemCollection c;
+            ListItem i;
+            ListItem i2;
 
             c = new ListItemCollection();
             i = new ListItem("Item 1", "1");
@@ -220,15 +223,16 @@ namespace MonoTests.System.Web.UI.WebControls
             i2 = new ListItem("Item 1", "1");
 
             // test same vs equal
-            Assert.AreEqual (true, c.Contains(i), "C1");
-            Assert.AreEqual (true, c.Contains(i2), "C2");
+            Assert.AreEqual(true, c.Contains(i), "C1");
+            Assert.AreEqual(true, c.Contains(i2), "C2");
         }
 
         [Test]
-        public void IndexOfTest () {
-            ListItemCollection    c;
-            ListItem        i;
-            ListItem        i2;
+        public void IndexOfTest()
+        {
+            ListItemCollection c;
+            ListItem i;
+            ListItem i2;
 
             c = new ListItemCollection();
             i = new ListItem("Item 1", "1");
@@ -240,16 +244,17 @@ namespace MonoTests.System.Web.UI.WebControls
             i = new ListItem("Item 2", "2");
 
             // test same vs equal
-            Assert.AreEqual (1, c.IndexOf(i), "IO1");
-            Assert.AreEqual (1, c.IndexOf(i2), "IO2");
+            Assert.AreEqual(1, c.IndexOf(i), "IO1");
+            Assert.AreEqual(1, c.IndexOf(i2), "IO2");
         }
 
         [Test]
         [ExpectedException(typeof(InvalidCastException))]
-        public void ContainsTypeTest () {
-            ListItemCollection    c;
-            ListItem        i;
-            ListItem        i2;
+        public void ContainsTypeTest()
+        {
+            ListItemCollection c;
+            ListItem i;
+            ListItem i2;
 
             c = new ListItemCollection();
             i = new ListItem("Item 1", "1");
@@ -258,14 +263,15 @@ namespace MonoTests.System.Web.UI.WebControls
             c.Add(i);
             c.Add(i2);
 
-            Assert.AreEqual (false, ((IList)c).Contains(5), "CT1");
+            Assert.AreEqual(false, ((IList)c).Contains(5), "CT1");
         }
 
         [Test]
-        public void RemoveTest () {
-            ListItemCollection    c;
-            ListItem        i;
-            ListItem        i2;
+        public void RemoveTest()
+        {
+            ListItemCollection c;
+            ListItem i;
+            ListItem i2;
 
             c = new ListItemCollection();
             i = new ListItem("Item 1", "1");
@@ -278,46 +284,46 @@ namespace MonoTests.System.Web.UI.WebControls
 
             // test same vs equal
             c.Remove(i);
-            Assert.AreEqual (1, c.Count, "R1");
+            Assert.AreEqual(1, c.Count, "R1");
         }
 
         [Test]
-        public void ViewState () 
+        public void ViewState()
         {
-            ListItemCollection    c;
-            ListItemCollection    c2;
-            ListItem        i;
-            ListItem        i2;
-            object            state;
+            ListItemCollection c;
+            ListItemCollection c2;
+            ListItem i;
+            ListItem i2;
+            object state;
 
             c = new ListItemCollection();
-            state = ((IStateManager) c).SaveViewState ();
-            Assert.IsNull (state, "#A1");
+            state = ((IStateManager)c).SaveViewState();
+            Assert.IsNull(state, "#A1");
 
             i = new ListItem("Item 1", "1");
             i2 = new ListItem("Item 2", "2");
 
-            c.Add (i);
-            c.Add (i2);
-            state = ((IStateManager) c).SaveViewState ();
-            Assert.IsNull (state, "#A2");
+            c.Add(i);
+            c.Add(i2);
+            state = ((IStateManager)c).SaveViewState();
+            Assert.IsNull(state, "#A2");
 
-            c = new ListItemCollection ();
+            c = new ListItemCollection();
             ((IStateManager)c).TrackViewState();
 
             c.Add(i);
             c.Add(i2);
-            Assert.AreEqual (2, c.Count, "V1");
+            Assert.AreEqual(2, c.Count, "V1");
 
             state = ((IStateManager)c).SaveViewState();
-            Assert.IsNotNull (state, "#A3");
+            Assert.IsNotNull(state, "#A3");
 
             c2 = new ListItemCollection();
             ((IStateManager)c2).LoadViewState(state);
-            Assert.AreEqual (2, c2.Count, "V2");
-            Assert.AreEqual ("Item 1", c2.FindByText("Item 1").ToString(), "V3");
-            Assert.AreEqual ("Item 2", c2.FindByText("Item 2").ToString(), "V4");
-            Assert.AreEqual (false, c2.IndexOf(i) == c2.IndexOf(i2), "V5");
+            Assert.AreEqual(2, c2.Count, "V2");
+            Assert.AreEqual("Item 1", c2.FindByText("Item 1").ToString(), "V3");
+            Assert.AreEqual("Item 2", c2.FindByText("Item 2").ToString(), "V4");
+            Assert.AreEqual(false, c2.IndexOf(i) == c2.IndexOf(i2), "V5");
         }
     }
 }

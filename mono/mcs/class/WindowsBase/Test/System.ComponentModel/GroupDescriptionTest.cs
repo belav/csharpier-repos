@@ -34,34 +34,34 @@ namespace MonoTests.System.ComponentModel
     public class GroupDescriptionTest
     {
         [Test]
-        public void NamesMatch ()
+        public void NamesMatch()
         {
-            var gd = new ConcreteGroupDescription ();
-            var obj = new object ();
-            Assert.IsTrue (gd.NamesMatch (obj, obj), "A1");
-            Assert.IsFalse (gd.NamesMatch (new object (), new object ()), "A2");
+            var gd = new ConcreteGroupDescription();
+            var obj = new object();
+            Assert.IsTrue(gd.NamesMatch(obj, obj), "A1");
+            Assert.IsFalse(gd.NamesMatch(new object(), new object()), "A2");
         }
 
         [Test]
-        public void ShouldSerializeGroupNames ()
+        public void ShouldSerializeGroupNames()
         {
-            var g = new ConcreteGroupDescription ();
-            g.GroupNames.Add ("name");
-            Assert.IsTrue (g.ShouldSerializeGroupNames (), "#A1");
+            var g = new ConcreteGroupDescription();
+            g.GroupNames.Add("name");
+            Assert.IsTrue(g.ShouldSerializeGroupNames(), "#A1");
         }
 
         [Test]
-        public void ShouldSerializeGroupNamesEmpty ()
+        public void ShouldSerializeGroupNamesEmpty()
         {
-            var g = new ConcreteGroupDescription ();
-            Assert.IsFalse (g.ShouldSerializeGroupNames (), "#A1");
+            var g = new ConcreteGroupDescription();
+            Assert.IsFalse(g.ShouldSerializeGroupNames(), "#A1");
         }
 
         class ConcreteGroupDescription : GroupDescription
         {
-            public override object GroupNameFromItem (object item, int level, CultureInfo culture)
+            public override object GroupNameFromItem(object item, int level, CultureInfo culture)
             {
-                throw new NotSupportedException ();
+                throw new NotSupportedException();
             }
         }
     }

@@ -5,9 +5,7 @@ namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
 public class FiltersInheritanceBulkUpdatesSqlServerFixture : InheritanceBulkUpdatesSqlServerFixture
 {
-    protected override string StoreName
-        => "FiltersInheritanceBulkUpdatesTest";
+    protected override string StoreName => "FiltersInheritanceBulkUpdatesTest";
 
-    protected override bool EnableFilters
-        => true;
+    protected override bool EnableFilters => true;
 }

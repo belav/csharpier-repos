@@ -1,6 +1,4 @@
-partial class A
-{
-}
+partial class A { }
 
 partial class A
 {
@@ -13,7 +11,5 @@ partial class A
 
 class X
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

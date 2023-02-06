@@ -36,442 +36,564 @@ namespace Microsoft.Build.Utilities
 {
     public class TaskLoggingHelper : MarshalByRefObject
     {
-        IBuildEngine    buildEngine;
-        bool        hasLoggedErrors;
-        string        helpKeywordPrefix;
-        string        taskName;
-        ResourceManager    taskResources;
-        ITask        taskInstance;
-    
-        public TaskLoggingHelper (ITask taskInstance)
+        IBuildEngine buildEngine;
+        bool hasLoggedErrors;
+        string helpKeywordPrefix;
+        string taskName;
+        ResourceManager taskResources;
+        ITask taskInstance;
+
+        public TaskLoggingHelper(ITask taskInstance)
         {
             if (taskInstance == null)
-                throw new ArgumentNullException ("taskInstance");
+                throw new ArgumentNullException("taskInstance");
 
             this.taskInstance = taskInstance;
             taskName = null;
         }
 
         [MonoTODO]
-        public string ExtractMessageCode (string message,
-                          out string messageWithoutCodePrefix)
+        public string ExtractMessageCode(string message, out string messageWithoutCodePrefix)
         {
             if (message == null)
-                throw new ArgumentNullException ("message");
-                
+                throw new ArgumentNullException("message");
+
             messageWithoutCodePrefix = String.Empty;
             return String.Empty;
         }
 
         [MonoTODO]
-        public virtual string FormatResourceString (string resourceName,
-                                params object[] args)
+        public virtual string FormatResourceString(string resourceName, params object[] args)
         {
             if (resourceName == null)
-                throw new ArgumentNullException ("resourceName");
+                throw new ArgumentNullException("resourceName");
 
             if (taskResources == null)
-                throw new InvalidOperationException ("Task did not register any task resources");
+                throw new InvalidOperationException("Task did not register any task resources");
 
-            string resourceString = taskResources.GetString (resourceName);
+            string resourceString = taskResources.GetString(resourceName);
             if (resourceString == null)
-                throw new ArgumentException ($"No resource string found for resource named {resourceName}");
+                throw new ArgumentException(
+                    $"No resource string found for resource named {resourceName}"
+                );
 
-            return FormatString (resourceString, args);
+            return FormatString(resourceString, args);
         }
 
         [MonoTODO]
-        public virtual string FormatString (string unformatted,
-                           params object[] args)
+        public virtual string FormatString(string unformatted, params object[] args)
         {
             if (unformatted == null)
-                throw new ArgumentNullException ("unformatted");
-        
+                throw new ArgumentNullException("unformatted");
+
             if (args == null || args.Length == 0)
                 return unformatted;
             else
-                return String.Format (unformatted, args);
-        }
-        
-        [MonoTODO]
-        public void LogCommandLine (string commandLine)
-        {
-        }
-        
-        [MonoTODO]
-        public void LogCommandLine (MessageImportance importance,
-                        string commandLine)
-        {
+                return String.Format(unformatted, args);
         }
 
-        public void LogError (string message,
-                     params object[] messageArgs)
+        [MonoTODO]
+        public void LogCommandLine(string commandLine) { }
+
+        [MonoTODO]
+        public void LogCommandLine(MessageImportance importance, string commandLine) { }
+
+        public void LogError(string message, params object[] messageArgs)
         {
             if (message == null)
-                throw new ArgumentNullException ("message");
+                throw new ArgumentNullException("message");
 
-            ThrowInvalidOperationIf (BuildEngine == null, "Task is attempting to log before it was initialized");
-                
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                null, null, BuildEngine.ProjectFileOfTaskNode, 0, 0, 0, 0, FormatString (message, messageArgs),
-                helpKeywordPrefix, null);
-            BuildEngine.LogErrorEvent (beea);
+            ThrowInvalidOperationIf(
+                BuildEngine == null,
+                "Task is attempting to log before it was initialized"
+            );
+
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                null,
+                null,
+                BuildEngine.ProjectFileOfTaskNode,
+                0,
+                0,
+                0,
+                0,
+                FormatString(message, messageArgs),
+                helpKeywordPrefix,
+                null
+            );
+            BuildEngine.LogErrorEvent(beea);
             hasLoggedErrors = true;
         }
 
-        public void LogError (string subcategory, string errorCode,
-                      string helpKeyword, string file,
-                      int lineNumber, int columnNumber,
-                      int endLineNumber, int endColumnNumber,
-                      string message,
-                      params object[] messageArgs)
+        public void LogError(
+            string subcategory,
+            string errorCode,
+            string helpKeyword,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string message,
+            params object[] messageArgs
+        )
         {
             if (message == null)
-                throw new ArgumentNullException ("message");
-            
-            ThrowInvalidOperationIf (BuildEngine == null, "Task is attempting to log before it was initialized");
+                throw new ArgumentNullException("message");
 
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                subcategory, errorCode, file, lineNumber,
-                columnNumber, endLineNumber, endColumnNumber,
-                FormatString (message, messageArgs), helpKeyword /*it's helpKeyword*/,
-                null /*it's senderName*/);
-            BuildEngine.LogErrorEvent (beea);
+            ThrowInvalidOperationIf(
+                BuildEngine == null,
+                "Task is attempting to log before it was initialized"
+            );
+
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                subcategory,
+                errorCode,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                FormatString(message, messageArgs),
+                helpKeyword /*it's helpKeyword*/
+                ,
+                null /*it's senderName*/
+            );
+            BuildEngine.LogErrorEvent(beea);
             hasLoggedErrors = true;
         }
 
-        public void LogErrorFromException (Exception exception)
+        public void LogErrorFromException(Exception exception)
         {
-            LogErrorFromException (exception, true);
+            LogErrorFromException(exception, true);
         }
 
-        public void LogErrorFromException (Exception exception,
-                           bool showStackTrace)
+        public void LogErrorFromException(Exception exception, bool showStackTrace)
         {
-            LogErrorFromException (exception, showStackTrace, true, String.Empty);
+            LogErrorFromException(exception, showStackTrace, true, String.Empty);
         }
 
-        [MonoTODO ("Arguments @showDetail and @file are not honored")]
-        public void LogErrorFromException (Exception exception,
-                           bool showStackTrace, bool showDetail, string file)
+        [MonoTODO("Arguments @showDetail and @file are not honored")]
+        public void LogErrorFromException(
+            Exception exception,
+            bool showStackTrace,
+            bool showDetail,
+            string file
+        )
         {
             if (exception == null)
-                throw new ArgumentNullException ("exception");
-        
-            ThrowInvalidOperationIf (BuildEngine == null, "Task is attempting to log before it was initialized");
+                throw new ArgumentNullException("exception");
 
-            StringBuilder sb = new StringBuilder ();
-            sb.Append (exception.Message);
+            ThrowInvalidOperationIf(
+                BuildEngine == null,
+                "Task is attempting to log before it was initialized"
+            );
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(exception.Message);
             if (showStackTrace == true)
-                sb.Append (exception.StackTrace);
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                null, null, BuildEngine.ProjectFileOfTaskNode, 0, 0, 0, 0, sb.ToString (),
-                exception.HelpLink, exception.Source);
-            BuildEngine.LogErrorEvent (beea);
+                sb.Append(exception.StackTrace);
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                null,
+                null,
+                BuildEngine.ProjectFileOfTaskNode,
+                0,
+                0,
+                0,
+                0,
+                sb.ToString(),
+                exception.HelpLink,
+                exception.Source
+            );
+            BuildEngine.LogErrorEvent(beea);
             hasLoggedErrors = true;
         }
 
-        public void LogErrorFromResources (string messageResourceName,
-                           params object[] messageArgs)
+        public void LogErrorFromResources(string messageResourceName, params object[] messageArgs)
         {
-            LogErrorFromResources (null, null, null, null, 0, 0, 0,
-                0, messageResourceName, messageArgs);
+            LogErrorFromResources(
+                null,
+                null,
+                null,
+                null,
+                0,
+                0,
+                0,
+                0,
+                messageResourceName,
+                messageArgs
+            );
         }
 
-        public void LogErrorFromResources (string subcategoryResourceName,
-                           string errorCode,
-                           string helpKeyword,
-                           string file, int lineNumber,
-                           int columnNumber,
-                           int endLineNumber,
-                           int endColumnNumber,
-                           string messageResourceName,
-                           params object[] messageArgs)
+        public void LogErrorFromResources(
+            string subcategoryResourceName,
+            string errorCode,
+            string helpKeyword,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string messageResourceName,
+            params object[] messageArgs
+        )
         {
             if (messageResourceName == null)
-                throw new ArgumentNullException ("messageResourceName");
+                throw new ArgumentNullException("messageResourceName");
 
-            ThrowInvalidOperationIf (BuildEngine == null, "Task is attempting to log before it was initialized");
+            ThrowInvalidOperationIf(
+                BuildEngine == null,
+                "Task is attempting to log before it was initialized"
+            );
 
             string subcategory = null;
-            if (!String.IsNullOrEmpty (subcategoryResourceName))
-                subcategory = taskResources.GetString (subcategoryResourceName);
+            if (!String.IsNullOrEmpty(subcategoryResourceName))
+                subcategory = taskResources.GetString(subcategoryResourceName);
 
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
                 subcategory,
-                errorCode, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber,
-                FormatResourceString (messageResourceName, messageArgs),
-                helpKeyword, null );
-            BuildEngine.LogErrorEvent (beea);
+                errorCode,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                FormatResourceString(messageResourceName, messageArgs),
+                helpKeyword,
+                null
+            );
+            BuildEngine.LogErrorEvent(beea);
             hasLoggedErrors = true;
         }
 
-        public void LogErrorWithCodeFromResources (string messageResourceName,
-                              params object[] messageArgs)
+        public void LogErrorWithCodeFromResources(
+            string messageResourceName,
+            params object[] messageArgs
+        )
         {
             // FIXME: there should be something different than normal
             // LogErrorFromResources
-            LogErrorFromResources (messageResourceName, messageArgs);
+            LogErrorFromResources(messageResourceName, messageArgs);
         }
 
-        public void LogErrorWithCodeFromResources (string subcategoryResourceName,
-                              string file,
-                              int lineNumber,
-                              int columnNumber,
-                              int endLineNumber,
-                              int endColumnNumber,
-                              string messageResourceName,
-                              params object[] messageArgs)
+        public void LogErrorWithCodeFromResources(
+            string subcategoryResourceName,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string messageResourceName,
+            params object[] messageArgs
+        )
         {
             // FIXME: there should be something different than normal
             // LogErrorFromResources
-            LogErrorFromResources (subcategoryResourceName, file,
-                lineNumber, columnNumber, endLineNumber,
-                endColumnNumber, messageResourceName,
-                messageArgs);
+            LogErrorFromResources(
+                subcategoryResourceName,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                messageResourceName,
+                messageArgs
+            );
         }
 
-        public void LogMessage (string message,
-                       params object[] messageArgs)
+        public void LogMessage(string message, params object[] messageArgs)
         {
-            LogMessage (MessageImportance.Normal, message, messageArgs); 
+            LogMessage(MessageImportance.Normal, message, messageArgs);
         }
 
-        public void LogMessage (MessageImportance importance,
-                    string message,
-                    params object[] messageArgs)
+        public void LogMessage(
+            MessageImportance importance,
+            string message,
+            params object[] messageArgs
+        )
         {
             if (message == null)
-                throw new ArgumentNullException ("message");
-        
-            LogMessageFromText (FormatString (message, messageArgs), importance);
+                throw new ArgumentNullException("message");
+
+            LogMessageFromText(FormatString(message, messageArgs), importance);
         }
 
-        public void LogMessageFromResources (string messageResourceName,
-                             params object[] messageArgs)
+        public void LogMessageFromResources(string messageResourceName, params object[] messageArgs)
         {
-            LogMessageFromResources (MessageImportance.Normal, messageResourceName, messageArgs);
+            LogMessageFromResources(MessageImportance.Normal, messageResourceName, messageArgs);
         }
 
-        public void LogMessageFromResources (MessageImportance importance,
-                             string messageResourceName,
-                             params object[] messageArgs)
+        public void LogMessageFromResources(
+            MessageImportance importance,
+            string messageResourceName,
+            params object[] messageArgs
+        )
         {
             if (messageResourceName == null)
-                throw new ArgumentNullException ("messageResourceName");
+                throw new ArgumentNullException("messageResourceName");
 
-            LogMessage (importance, FormatResourceString (messageResourceName, messageArgs));
+            LogMessage(importance, FormatResourceString(messageResourceName, messageArgs));
         }
 
-        public bool LogMessagesFromFile (string fileName)
+        public bool LogMessagesFromFile(string fileName)
         {
-            return LogMessagesFromFile (fileName, MessageImportance.Normal);
+            return LogMessagesFromFile(fileName, MessageImportance.Normal);
         }
 
-        public bool LogMessagesFromFile (string fileName,
-                         MessageImportance messageImportance)
+        public bool LogMessagesFromFile(string fileName, MessageImportance messageImportance)
         {
-            try {
-                StreamReader sr = new StreamReader (fileName);
-                LogMessage (messageImportance, sr.ReadToEnd (),
-                    null);
-                sr.Close ();
+            try
+            {
+                StreamReader sr = new StreamReader(fileName);
+                LogMessage(messageImportance, sr.ReadToEnd(), null);
+                sr.Close();
                 return true;
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 return false;
             }
         }
 
-        public bool LogMessagesFromStream (TextReader stream,
-                           MessageImportance messageImportance)
+        public bool LogMessagesFromStream(TextReader stream, MessageImportance messageImportance)
         {
-            try {
-                LogMessage (messageImportance, stream.ReadToEnd (), null);
+            try
+            {
+                LogMessage(messageImportance, stream.ReadToEnd(), null);
                 return true;
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 return false;
             }
-            finally {
+            finally
+            {
                 // FIXME: should it be done here?
-                stream.Close ();
+                stream.Close();
             }
         }
 
-        public bool LogMessageFromText (string lineOfText,
-                        MessageImportance messageImportance)
+        public bool LogMessageFromText(string lineOfText, MessageImportance messageImportance)
         {
             if (lineOfText == null)
-                throw new ArgumentNullException ("lineOfText");
+                throw new ArgumentNullException("lineOfText");
 
-            ThrowInvalidOperationIf (BuildEngine == null, "Task is attempting to log before it was initialized");
+            ThrowInvalidOperationIf(
+                BuildEngine == null,
+                "Task is attempting to log before it was initialized"
+            );
 
-            BuildMessageEventArgs bmea = new BuildMessageEventArgs (
-                lineOfText, helpKeywordPrefix,
-                null, messageImportance);
-            BuildEngine.LogMessageEvent (bmea);
+            BuildMessageEventArgs bmea = new BuildMessageEventArgs(
+                lineOfText,
+                helpKeywordPrefix,
+                null,
+                messageImportance
+            );
+            BuildEngine.LogMessageEvent(bmea);
 
             return true;
         }
 
-        public void LogWarning (string message,
-                       params object[] messageArgs)
+        public void LogWarning(string message, params object[] messageArgs)
         {
-            ThrowInvalidOperationIf (BuildEngine == null, "Task is attempting to log before it was initialized");
+            ThrowInvalidOperationIf(
+                BuildEngine == null,
+                "Task is attempting to log before it was initialized"
+            );
 
             // FIXME: what about all the parameters?
-            BuildWarningEventArgs bwea = new BuildWarningEventArgs (
-                null, null, BuildEngine.ProjectFileOfTaskNode, 0, 0, 0, 0, FormatString (message, messageArgs),
-                helpKeywordPrefix, null);
-            BuildEngine.LogWarningEvent (bwea);
+            BuildWarningEventArgs bwea = new BuildWarningEventArgs(
+                null,
+                null,
+                BuildEngine.ProjectFileOfTaskNode,
+                0,
+                0,
+                0,
+                0,
+                FormatString(message, messageArgs),
+                helpKeywordPrefix,
+                null
+            );
+            BuildEngine.LogWarningEvent(bwea);
         }
 
-        public void LogWarning (string subcategory, string warningCode,
-                    string helpKeyword, string file,
-                    int lineNumber, int columnNumber,
-                    int endLineNumber, int endColumnNumber,
-                    string message,
-                    params object[] messageArgs)
+        public void LogWarning(
+            string subcategory,
+            string warningCode,
+            string helpKeyword,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string message,
+            params object[] messageArgs
+        )
         {
-            ThrowInvalidOperationIf (BuildEngine == null, "Task is attempting to log before it was initialized");
+            ThrowInvalidOperationIf(
+                BuildEngine == null,
+                "Task is attempting to log before it was initialized"
+            );
 
-            BuildWarningEventArgs bwea = new BuildWarningEventArgs (
-                subcategory, warningCode, file, lineNumber,
-                columnNumber, endLineNumber, endColumnNumber,
-                FormatString (message, messageArgs), helpKeyword, null);
-            BuildEngine.LogWarningEvent (bwea);
+            BuildWarningEventArgs bwea = new BuildWarningEventArgs(
+                subcategory,
+                warningCode,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                FormatString(message, messageArgs),
+                helpKeyword,
+                null
+            );
+            BuildEngine.LogWarningEvent(bwea);
         }
 
-        public void LogWarningFromException (Exception exception)
+        public void LogWarningFromException(Exception exception)
         {
-            LogWarningFromException (exception, false);
+            LogWarningFromException(exception, false);
         }
 
-        public void LogWarningFromException (Exception exception,
-                             bool showStackTrace)
+        public void LogWarningFromException(Exception exception, bool showStackTrace)
         {
-            StringBuilder sb = new StringBuilder ();
-            sb.Append (exception.Message);
+            StringBuilder sb = new StringBuilder();
+            sb.Append(exception.Message);
             if (showStackTrace)
-                sb.Append (exception.StackTrace);
-            LogWarning (null, null, null, null, 0, 0, 0, 0,
-                sb.ToString (), null);
+                sb.Append(exception.StackTrace);
+            LogWarning(null, null, null, null, 0, 0, 0, 0, sb.ToString(), null);
         }
 
-        public void LogWarningFromResources (string messageResourceName,
-                             params object[] messageArgs)
+        public void LogWarningFromResources(string messageResourceName, params object[] messageArgs)
         {
             if (messageResourceName == null)
-                throw new ArgumentNullException ("messageResourceName");
+                throw new ArgumentNullException("messageResourceName");
 
-            LogWarningFromResources (null, null, null, null, 0, 0, 0, 0, messageResourceName, messageArgs);
+            LogWarningFromResources(
+                null,
+                null,
+                null,
+                null,
+                0,
+                0,
+                0,
+                0,
+                messageResourceName,
+                messageArgs
+            );
         }
 
-        public void LogWarningFromResources (string subcategoryResourceName,
-                             string warningCode,
-                             string helpKeyword,
-                             string file,
-                             int lineNumber,
-                             int columnNumber,
-                             int endLineNumber,
-                             int endColumnNumber,
-                             string messageResourceName,
-                             params object[] messageArgs)
+        public void LogWarningFromResources(
+            string subcategoryResourceName,
+            string warningCode,
+            string helpKeyword,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string messageResourceName,
+            params object[] messageArgs
+        )
         {
             if (messageResourceName == null)
-                throw new ArgumentNullException ("messageResourceName");
+                throw new ArgumentNullException("messageResourceName");
 
             string subcategory = null;
-            if (!String.IsNullOrEmpty (subcategoryResourceName))
-                subcategory = taskResources.GetString (subcategoryResourceName);
+            if (!String.IsNullOrEmpty(subcategoryResourceName))
+                subcategory = taskResources.GetString(subcategoryResourceName);
 
-            LogWarning (subcategory,
-                warningCode, helpKeyword, file, lineNumber,
-                columnNumber, endLineNumber, endColumnNumber,
-                FormatResourceString (messageResourceName, messageArgs));
+            LogWarning(
+                subcategory,
+                warningCode,
+                helpKeyword,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                FormatResourceString(messageResourceName, messageArgs)
+            );
         }
 
-        public void LogWarningWithCodeFromResources (string messageResourceName,
-                                 params object[] messageArgs)
+        public void LogWarningWithCodeFromResources(
+            string messageResourceName,
+            params object[] messageArgs
+        )
         {
             // FIXME: what's different from normal logwarning?
-            LogWarningFromResources (messageResourceName, messageArgs);
+            LogWarningFromResources(messageResourceName, messageArgs);
         }
 
-        public void LogWarningWithCodeFromResources (string subcategoryResourceName,
-                                 string file,
-                                 int lineNumber,
-                                 int columnNumber,
-                                 int endLineNumber,
-                                 int endColumnNumber,
-                                 string messageResourceName,
-                                 params object[] messageArgs)
+        public void LogWarningWithCodeFromResources(
+            string subcategoryResourceName,
+            string file,
+            int lineNumber,
+            int columnNumber,
+            int endLineNumber,
+            int endColumnNumber,
+            string messageResourceName,
+            params object[] messageArgs
+        )
         {
-            LogWarningFromResources (subcategoryResourceName, file,
-                lineNumber, columnNumber, endLineNumber,
-                endColumnNumber, messageResourceName,
-                messageArgs);
-        }
-        
-        [MonoTODO]
-        public void LogExternalProjectFinished (string message,
-                            string helpKeyword,
-                            string projectFile,
-                            bool succeeded)
-        {
-        }
-        
-        [MonoTODO]
-        public void LogExternalProjectStarted (string message,
-                               string helpKeyword,
-                               string projectFile,
-                               string targetNames)
-        {
+            LogWarningFromResources(
+                subcategoryResourceName,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                messageResourceName,
+                messageArgs
+            );
         }
 
-        void ThrowInvalidOperationIf (bool condition, string message)
+        [MonoTODO]
+        public void LogExternalProjectFinished(
+            string message,
+            string helpKeyword,
+            string projectFile,
+            bool succeeded
+        ) { }
+
+        [MonoTODO]
+        public void LogExternalProjectStarted(
+            string message,
+            string helpKeyword,
+            string projectFile,
+            string targetNames
+        ) { }
+
+        void ThrowInvalidOperationIf(bool condition, string message)
         {
             if (condition)
-                throw new InvalidOperationException (message);
+                throw new InvalidOperationException(message);
         }
 
-        protected IBuildEngine BuildEngine {
-            get {
-                return taskInstance?.BuildEngine;
-            }
+        protected IBuildEngine BuildEngine
+        {
+            get { return taskInstance?.BuildEngine; }
         }
 
-        public bool HasLoggedErrors {
-            get {
-                return hasLoggedErrors;
-            }
+        public bool HasLoggedErrors
+        {
+            get { return hasLoggedErrors; }
         }
 
-        public string HelpKeywordPrefix {
-            get {
-                return helpKeywordPrefix;
-            }
-            set {
-                helpKeywordPrefix = value;
-            }
+        public string HelpKeywordPrefix
+        {
+            get { return helpKeywordPrefix; }
+            set { helpKeywordPrefix = value; }
         }
 
-        protected string TaskName {
-            get {
-                return taskName;
-            }
+        protected string TaskName
+        {
+            get { return taskName; }
         }
 
-        public ResourceManager TaskResources {
-            get {
-                return taskResources;
-            }
-            set {
-                taskResources = value;
-            }
+        public ResourceManager TaskResources
+        {
+            get { return taskResources; }
+            set { taskResources = value; }
         }
     }
 }
-

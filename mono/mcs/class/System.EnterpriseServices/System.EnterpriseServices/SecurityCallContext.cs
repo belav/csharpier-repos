@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.SecurityCallContext.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,60 +30,64 @@
 
 using System;
 
-namespace System.EnterpriseServices {
-    public sealed class SecurityCallContext {
-
+namespace System.EnterpriseServices
+{
+    public sealed class SecurityCallContext
+    {
         #region Fields
 
         #endregion // Fields
 
         #region Constructors
 
-        internal SecurityCallContext ()
-        {
-        }
+        internal SecurityCallContext() { }
 
-        internal SecurityCallContext (ISecurityCallContext context)
-        {
-        }
+        internal SecurityCallContext(ISecurityCallContext context) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public SecurityCallers Callers {
+        public SecurityCallers Callers
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public static SecurityCallContext CurrentCall {
+        public static SecurityCallContext CurrentCall
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public SecurityIdentity DirectCaller {
+        public SecurityIdentity DirectCaller
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public bool IsSecurityEnabled {
+        public bool IsSecurityEnabled
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public int MinAuthenticationLevel {
+        public int MinAuthenticationLevel
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public int NumCallers {
+        public int NumCallers
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public SecurityIdentity OriginalCaller {
+        public SecurityIdentity OriginalCaller
+        {
             [MonoTODO]
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
         #endregion // Properties
@@ -91,15 +95,15 @@ namespace System.EnterpriseServices {
         #region Methods
 
         [MonoTODO]
-        public bool IsCallerInRole (string role)
+        public bool IsCallerInRole(string role)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public bool IsUserInRole (string user, string role)
+        public bool IsUserInRole(string user, string role)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion

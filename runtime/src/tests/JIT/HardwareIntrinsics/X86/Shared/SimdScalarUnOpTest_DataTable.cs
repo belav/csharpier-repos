@@ -32,10 +32,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             this.alignment = (ulong)alignment;
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArrayPtr), ref Unsafe.As<TOp1, byte>(ref inArray[0]), (uint)sizeOfinArray);
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.AsRef<byte>(inArrayPtr),
+                ref Unsafe.As<TOp1, byte>(ref inArray[0]),
+                (uint)sizeOfinArray
+            );
         }
 
-        public void* inArrayPtr => Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), alignment);
+        public void* inArrayPtr =>
+            Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
         public void Dispose()
         {

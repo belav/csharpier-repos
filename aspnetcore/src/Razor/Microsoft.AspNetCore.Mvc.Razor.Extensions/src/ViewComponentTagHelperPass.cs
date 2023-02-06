@@ -13,10 +13,15 @@ public class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimi
     // Run after the default taghelper pass
     public override int Order => IntermediateNodePassBase.DefaultFeatureOrder + 2000;
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
-        if (documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind &&
-            documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind)
+        if (
+            documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind
+            && documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind
+        )
         {
             // Not a MVC file. Skip.
             return;
@@ -53,7 +58,11 @@ public class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimi
         }
     }
 
-    private void RewriteUsage(Context context, TagHelperIntermediateNode node, TagHelperDescriptor tagHelper)
+    private void RewriteUsage(
+        Context context,
+        TagHelperIntermediateNode node,
+        TagHelperDescriptor tagHelper
+    )
     {
         if (!tagHelper.IsViewComponentKind())
         {
@@ -77,24 +86,31 @@ public class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimi
         }
 
         // Now find the last create node.
-        while (i < node.Children.Count && node.Children[i] is DefaultTagHelperCreateIntermediateNode)
+        while (
+            i < node.Children.Count && node.Children[i] is DefaultTagHelperCreateIntermediateNode
+        )
         {
             i++;
         }
 
         // Now i has the right insertion point.
-        node.Children.Insert(i, new DefaultTagHelperCreateIntermediateNode()
-        {
-            FieldName = context.GetFieldName(tagHelper),
-            TagHelper = tagHelper,
-            TypeName = context.GetFullyQualifiedName(tagHelper),
-        });
+        node.Children.Insert(
+            i,
+            new DefaultTagHelperCreateIntermediateNode()
+            {
+                FieldName = context.GetFieldName(tagHelper),
+                TagHelper = tagHelper,
+                TypeName = context.GetFullyQualifiedName(tagHelper),
+            }
+        );
 
         // Now we need to rewrite any set property nodes to use the default runtime.
         for (i = 0; i < node.Children.Count; i++)
         {
-            if (node.Children[i] is TagHelperPropertyIntermediateNode propertyNode &&
-                propertyNode.TagHelper == tagHelper)
+            if (
+                node.Children[i] is TagHelperPropertyIntermediateNode propertyNode
+                && propertyNode.TagHelper == tagHelper
+            )
             {
                 // This is a set property for this VCTH - we need to replace it with a node
                 // that will use our field and property name.
@@ -115,29 +131,35 @@ public class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimi
         // We also want to preserve the ordering of the nodes for testability. So insert at the end of any existing
         // field nodes.
         var i = 0;
-        while (i < context.Class.Children.Count && context.Class.Children[i] is DefaultTagHelperRuntimeIntermediateNode)
+        while (
+            i < context.Class.Children.Count
+            && context.Class.Children[i] is DefaultTagHelperRuntimeIntermediateNode
+        )
         {
             i++;
         }
 
-        while (i < context.Class.Children.Count && context.Class.Children[i] is FieldDeclarationIntermediateNode)
+        while (
+            i < context.Class.Children.Count
+            && context.Class.Children[i] is FieldDeclarationIntermediateNode
+        )
         {
             i++;
         }
 
-        context.Class.Children.Insert(i, new FieldDeclarationIntermediateNode()
-        {
-            Annotations =
+        context.Class.Children.Insert(
+            i,
+            new FieldDeclarationIntermediateNode()
+            {
+                Annotations =
                 {
                     { CommonAnnotations.DefaultTagHelperExtension.TagHelperField, bool.TrueString },
                 },
-            Modifiers =
-                {
-                    "private",
-                },
-            FieldName = context.GetFieldName(tagHelper),
-            FieldType = "global::" + context.GetFullyQualifiedName(tagHelper),
-        });
+                Modifiers = { "private", },
+                FieldName = context.GetFieldName(tagHelper),
+                FieldType = "global::" + context.GetFullyQualifiedName(tagHelper),
+            }
+        );
     }
 
     private void AddTagHelperClass(Context context, TagHelperDescriptor tagHelper)
@@ -153,9 +175,15 @@ public class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimi
 
     private struct Context
     {
-        private readonly Dictionary<TagHelperDescriptor, (string className, string fullyQualifiedName, string fieldName)> _tagHelpers;
+        private readonly Dictionary<
+            TagHelperDescriptor,
+            (string className, string fullyQualifiedName, string fieldName)
+        > _tagHelpers;
 
-        public Context(NamespaceDeclarationIntermediateNode @namespace, ClassDeclarationIntermediateNode @class)
+        public Context(
+            NamespaceDeclarationIntermediateNode @namespace,
+            ClassDeclarationIntermediateNode @class
+        )
         {
             Namespace = @namespace;
             Class = @class;
@@ -167,7 +195,6 @@ public class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimi
 
         public NamespaceDeclarationIntermediateNode Namespace { get; }
 
-
         public IEnumerable<TagHelperDescriptor> TagHelpers => _tagHelpers.Keys;
 
         public bool Add(TagHelperDescriptor tagHelper)
@@ -177,7 +204,8 @@ public class ViewComponentTagHelperPass : IntermediateNodePassBase, IRazorOptimi
                 return false;
             }
 
-            var className = $"__Generated__{tagHelper.GetViewComponentName()}ViewComponentTagHelper";
+            var className =
+                $"__Generated__{tagHelper.GetViewComponentName()}ViewComponentTagHelper";
             var fullyQualifiedName = $"{Namespace.Content}.{Class.ClassName}.{className}";
             var fieldName = GenerateFieldName(tagHelper);
 

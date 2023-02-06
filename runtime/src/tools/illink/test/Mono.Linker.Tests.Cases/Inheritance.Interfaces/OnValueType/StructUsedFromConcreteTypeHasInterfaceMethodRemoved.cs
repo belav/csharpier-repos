@@ -4,24 +4,22 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnValueType
 {
     class StructUsedFromConcreteTypeHasInterfaceMethodRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            A a = new A ();
-            a.Foo ();
+            A a = new A();
+            a.Foo();
         }
 
         [Kept]
         struct A : IFoo
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
         }
 
         public interface IFoo
         {
-            void Foo ();
+            void Foo();
         }
     }
 }

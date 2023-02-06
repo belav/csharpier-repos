@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -13,7 +13,7 @@
 //
 //  Purpose:    Annotation Converters.
 //
-//    Reviewed:    
+//    Reviewed:
 //
 //===================================================================
 
@@ -31,11 +31,11 @@ using System.Drawing.Design;
 using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 #else
 using System.Web;
 using System.Web.UI;
@@ -47,9 +47,9 @@ using System.Web.UI.DataVisualization.Charting.Utilities;
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
-    namespace System.Web.UI.DataVisualization.Charting
+namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
     /// <summary>
@@ -59,37 +59,45 @@ using System.Web.UI.DataVisualization.Charting.Utilities;
     {
         #region Converter methods
 
-    /// <summary>
-    /// Converts anchor data point to string name.
-    /// </summary>
-    /// <param name="context">Descriptor context.</param>
-    /// <param name="culture">Culture information.</param>
-    /// <param name="value">Value to convert.</param>
-    /// <param name="destinationType">Convertion destination type.</param>
-    /// <returns>Converted object.</returns>
-    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-    {
-        if (destinationType == typeof(string))
+        /// <summary>
+        /// Converts anchor data point to string name.
+        /// </summary>
+        /// <param name="context">Descriptor context.</param>
+        /// <param name="culture">Culture information.</param>
+        /// <param name="value">Value to convert.</param>
+        /// <param name="destinationType">Convertion destination type.</param>
+        /// <returns>Converted object.</returns>
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
-            if (value == null)
+            if (destinationType == typeof(string))
             {
-                return Constants.NotSetValue;
-            }
-            DataPoint dataPoint = value as DataPoint;
-
-            if (dataPoint != null)
-            {
-                if (dataPoint.series != null)
+                if (value == null)
                 {
-                    int pointIndex = dataPoint.series.Points.IndexOf(dataPoint) + 1;
-                    return dataPoint.series.Name + " - " + SR.DescriptionTypePoint + pointIndex.ToString(CultureInfo.InvariantCulture);
+                    return Constants.NotSetValue;
+                }
+                DataPoint dataPoint = value as DataPoint;
+
+                if (dataPoint != null)
+                {
+                    if (dataPoint.series != null)
+                    {
+                        int pointIndex = dataPoint.series.Points.IndexOf(dataPoint) + 1;
+                        return dataPoint.series.Name
+                            + " - "
+                            + SR.DescriptionTypePoint
+                            + pointIndex.ToString(CultureInfo.InvariantCulture);
+                    }
                 }
             }
-        }
 
-        // Call base class
-        return base.ConvertTo(context, culture, value, destinationType);
-    }
+            // Call base class
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
         #endregion
     }
 
@@ -108,7 +116,12 @@ using System.Web.UI.DataVisualization.Charting.Utilities;
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string))
             {
@@ -133,4 +146,3 @@ using System.Web.UI.DataVisualization.Charting.Utilities;
         #endregion
     }
 }
-

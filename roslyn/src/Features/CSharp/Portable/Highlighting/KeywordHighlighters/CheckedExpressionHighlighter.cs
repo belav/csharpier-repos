@@ -16,15 +16,17 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
 {
     [ExportHighlighter(LanguageNames.CSharp), Shared]
-    internal class CheckedExpressionHighlighter : AbstractKeywordHighlighter<CheckedExpressionSyntax>
+    internal class CheckedExpressionHighlighter
+        : AbstractKeywordHighlighter<CheckedExpressionSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CheckedExpressionHighlighter()
-        {
-        }
+        public CheckedExpressionHighlighter() { }
 
-        protected override void AddHighlights(CheckedExpressionSyntax checkedExpressionSyntax, List<TextSpan> highlights, CancellationToken cancellationToken)
-            => highlights.Add(checkedExpressionSyntax.Keyword.Span);
+        protected override void AddHighlights(
+            CheckedExpressionSyntax checkedExpressionSyntax,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        ) => highlights.Add(checkedExpressionSyntax.Keyword.Span);
     }
 }

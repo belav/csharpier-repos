@@ -36,23 +36,24 @@ using System.Collections;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_TableStyle_GridLines
-        : GHTWebControlBase
+    public class WebControl_TableStyle_GridLines : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) {
+        override protected void OnInit(EventArgs e)
+        {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
             //
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -68,11 +69,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             base.m_derivedTypes.Add(typeof(DataList));
             base.m_derivedTypes.Add(typeof(Table));
         }
- 
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             foreach (Type currentType in TypesToTest)
             {
@@ -88,8 +88,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Default value");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
-                this.GHTSubTestAddResult(((int) style1.GridLines).ToString());
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
+                this.GHTSubTestAddResult(((int)style1.GridLines).ToString());
             }
             catch (Exception exception8)
             {
@@ -102,7 +102,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Set 'Both'");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.GridLines = GridLines.Both;
             }
             catch (Exception exception9)
@@ -116,7 +116,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Set 'Horizontal'");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.GridLines = GridLines.Horizontal;
             }
             catch (Exception exception10)
@@ -130,7 +130,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Set 'None'");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.GridLines = GridLines.None;
             }
             catch (Exception exception11)
@@ -144,7 +144,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Set 'Vertical'");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.GridLines = GridLines.Vertical;
             }
             catch (Exception exception12)
@@ -157,9 +157,12 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.GHTSubTestEnd();
             try
             {
-                this.GHTSubTestBegin(ctrlType, "Causes ArgumentException if set to a non-valid GridLine value.");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
-                style1.GridLines = (GridLines) 12;
+                this.GHTSubTestBegin(
+                    ctrlType,
+                    "Causes ArgumentException if set to a non-valid GridLine value."
+                );
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
+                style1.GridLines = (GridLines)12;
                 this.GHTSubTestExpectedExceptionNotCaught("argumentException");
             }
             catch (ArgumentException exception13)
@@ -178,6 +181,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
     }
 }

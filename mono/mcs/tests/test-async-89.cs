@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        new X ().Test ();
+        new X().Test();
     }
 
-    void Test ()
+    void Test()
     {
         object v1 = null;
 
@@ -20,32 +20,31 @@ class X
 
                 Action a2 = () =>
                 {
-                    Console.WriteLine (v2);
+                    Console.WriteLine(v2);
                 };
-                
+
                 Action a3 = async () =>
                 {
                     // This scope needs to access to Scope which can do ldftn on instance method
                     {
-                    Func<Task> a4 = async () =>
-                    {
-                        await Foo ();
-                    };
+                        Func<Task> a4 = async () =>
+                        {
+                            await Foo();
+                        };
                     }
 
-                    await Task.Yield ();
+                    await Task.Yield();
                 };
 
-                a3 ();
+                a3();
             }
         };
 
-        a ();
+        a();
     }
 
-    async Task Foo ()
+    async Task Foo()
     {
-        await Task.FromResult (1);
+        await Task.FromResult(1);
     }
-
 }

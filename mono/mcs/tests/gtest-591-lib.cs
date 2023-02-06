@@ -8,7 +8,7 @@ namespace A
     {
         public abstract class C : System.IEquatable<C>
         {
-            public abstract bool Equals (C other);
+            public abstract bool Equals(C other);
         }
     }
 }

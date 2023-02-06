@@ -4,12 +4,7 @@ public class 쯠쯡쯢
 {
     public string 颀顰飳;
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 
-    static void P̀ः०‿ ()
-    {
-    }
+    static void P̀ः०‿() { }
 }
-

@@ -8,15 +8,13 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding.Dependencies
 {
     public interface ImplementationLibraryInterface
     {
-        public int GetDefaultImplementation ()
+        public int GetDefaultImplementation()
         {
             return 42;
         }
     }
 
-    public class ImplementationLibraryImp : ImplementationLibraryInterface
-    {
-    }
+    public class ImplementationLibraryImp : ImplementationLibraryInterface { }
 
     public class ImplementationLibrary
     {
@@ -25,13 +23,11 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding.Dependencies
             public static int PropertyOnNestedType { get; set; }
         }
 
-        public class ForwardedNestedType
-        {
-        }
+        public class ForwardedNestedType { }
 
         public static int someField = 42;
 
-        public string GetSomeValue ()
+        public string GetSomeValue()
         {
             return "Hello";
         }
@@ -39,15 +35,11 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding.Dependencies
 
     public class AnotherImplementationClass
     {
-        public class ForwardedNestedType
-        {
-        }
+        public class ForwardedNestedType { }
     }
 
-    [AttributeUsage (AttributeTargets.All)]
-    public class ImplementationLibraryAttribute : Attribute
-    {
-    }
+    [AttributeUsage(AttributeTargets.All)]
+    public class ImplementationLibraryAttribute : Attribute { }
 
     public struct ImplementationStruct
     {

@@ -1,18 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="NextPrevFormat.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-    
-
+namespace System.Web.UI.WebControls
+{
     /// <devdoc>
     ///    <para> Specifies the display format of the month on the Previous Month
     ///       and Next Month buttons within the <see cref='System.Web.UI.WebControls.Calendar'/> control.</para>
     /// </devdoc>
-    public enum NextPrevFormat {
-
+    public enum NextPrevFormat
+    {
         /// <devdoc>
         ///    <para> Custom text is used.</para>
         /// </devdoc>
@@ -30,5 +29,4 @@ namespace System.Web.UI.WebControls {
         /// </devdoc>
         FullMonth = 2
     }
-
 }

@@ -47,7 +47,8 @@ internal class DefaultAllowedChildTagDescriptorBuilder : AllowedChildTagDescript
         var descriptor = new DefaultAllowedChildTagDescriptor(
             Name,
             displayName,
-            diagnostics?.ToArray() ?? Array.Empty<RazorDiagnostic>());
+            diagnostics?.ToArray() ?? Array.Empty<RazorDiagnostic>()
+        );
 
         return descriptor;
     }
@@ -57,7 +58,10 @@ internal class DefaultAllowedChildTagDescriptorBuilder : AllowedChildTagDescript
         HashSet<RazorDiagnostic> diagnostics = null;
         if (string.IsNullOrWhiteSpace(Name))
         {
-            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidRestrictedChildNullOrWhitespace(_parent.GetDisplayName());
+            var diagnostic =
+                RazorDiagnosticFactory.CreateTagHelper_InvalidRestrictedChildNullOrWhitespace(
+                    _parent.GetDisplayName()
+                );
 
             diagnostics ??= new();
             diagnostics.Add(diagnostic);
@@ -66,9 +70,16 @@ internal class DefaultAllowedChildTagDescriptorBuilder : AllowedChildTagDescript
         {
             foreach (var character in Name)
             {
-                if (char.IsWhiteSpace(character) || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character))
+                if (
+                    char.IsWhiteSpace(character)
+                    || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character)
+                )
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidRestrictedChild(_parent.GetDisplayName(), Name, character);
+                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidRestrictedChild(
+                        _parent.GetDisplayName(),
+                        Name,
+                        character
+                    );
                     diagnostics ??= new();
                     diagnostics.Add(diagnostic);
                 }

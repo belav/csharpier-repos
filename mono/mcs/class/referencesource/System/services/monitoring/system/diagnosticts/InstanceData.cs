@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="InstanceData.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Diagnostics {
-
+namespace System.Diagnostics
+{
     using System.Diagnostics;
 
     using System;
@@ -13,15 +13,17 @@ namespace System.Diagnostics {
 
     /// <devdoc>
     ///     A holder of instance data.
-    /// </devdoc>    
-    public class InstanceData {
+    /// </devdoc>
+    public class InstanceData
+    {
         private string instanceName;
         private CounterSample sample;
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public InstanceData(string instanceName, CounterSample sample) {
+        public InstanceData(string instanceName, CounterSample sample)
+        {
             this.instanceName = instanceName;
             this.sample = sample;
         }
@@ -29,28 +31,25 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string InstanceName {
-            get {
-                return instanceName;
-            }
+        public string InstanceName
+        {
+            get { return instanceName; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CounterSample Sample {
-            get {
-                return sample;
-            }
+        public CounterSample Sample
+        {
+            get { return sample; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public long RawValue {
-            get {
-                return sample.RawValue;
-            }
+        public long RawValue
+        {
+            get { return sample.RawValue; }
         }
     }
 }

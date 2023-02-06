@@ -3,7 +3,6 @@
 using System;
 using System.Threading;
 
-
 interface IGen<T>
 {
     void Target<U>();
@@ -12,32 +11,36 @@ interface IGen<T>
 
 class Gen<T> : IGen<T>
 {
-    public T Dummy(T t) {return t;}
+    public T Dummy(T t)
+    {
+        return t;
+    }
 
     public virtual void Target<U>()
-    {        
+    {
         //dummy line to avoid warnings
-        Test_thread21.Eval(typeof(U)!=null);
+        Test_thread21.Eval(typeof(U) != null);
         Interlocked.Increment(ref Test_thread21.Xcounter);
     }
+
     public static void DelegateTest<U>()
     {
         IGen<T> obj = new Gen<T>();
         ThreadStart d = new ThreadStart(obj.Target<U>);
-        
-        
+
         d();
-        Test_thread21.Eval(Test_thread21.Xcounter==1);
+        Test_thread21.Eval(Test_thread21.Xcounter == 1);
         Test_thread21.Xcounter = 0;
     }
 }
 
 public class Test_thread21
 {
-    public static int nThreads =50;
+    public static int nThreads = 50;
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -46,16 +49,15 @@ public class Test_thread21
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         Gen<int>.DelegateTest<object>();
         Gen<double>.DelegateTest<string>();
         Gen<string>.DelegateTest<Guid>();
-        Gen<object>.DelegateTest<int>(); 
-        Gen<Guid>.DelegateTest<double>(); 
+        Gen<object>.DelegateTest<int>();
+        Gen<Guid>.DelegateTest<double>();
 
         if (result)
         {
@@ -68,6 +70,4 @@ public class Test_thread21
             return 1;
         }
     }
-}        
-
-
+}

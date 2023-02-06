@@ -17,7 +17,12 @@ namespace Microsoft.CodeAnalysis
         {
             try
             {
-                using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
+                using var stream = new FileStream(
+                    filePath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.ReadWrite | FileShare.Delete
+                );
                 using var peReader = new PEReader(stream);
 
                 var metadataReader = peReader.GetMetadataReader();
@@ -28,7 +33,8 @@ namespace Microsoft.CodeAnalysis
                 Version version = assemblyDefinition.Version;
 
                 StringHandle cultureHandle = assemblyDefinition.Culture;
-                string? cultureName = (!cultureHandle.IsNil) ? metadataReader.GetString(cultureHandle) : null;
+                string? cultureName =
+                    (!cultureHandle.IsNil) ? metadataReader.GetString(cultureHandle) : null;
                 AssemblyFlags flags = assemblyDefinition.Flags;
 
                 bool hasPublicKey = (flags & AssemblyFlags.PublicKey) != 0;
@@ -36,7 +42,13 @@ namespace Microsoft.CodeAnalysis
                 ImmutableArray<byte> publicKeyOrToken = !publicKeyHandle.IsNil
                     ? metadataReader.GetBlobBytes(publicKeyHandle).AsImmutableOrNull()
                     : default;
-                return new AssemblyIdentity(name, version, cultureName, publicKeyOrToken, hasPublicKey);
+                return new AssemblyIdentity(
+                    name,
+                    version,
+                    cultureName,
+                    publicKeyOrToken,
+                    hasPublicKey
+                );
             }
             catch { }
 

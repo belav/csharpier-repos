@@ -5,38 +5,34 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Statics
 {
-    [SetupCompileArgument ("/optimize+")]
+    [SetupCompileArgument("/optimize+")]
     public class ExplicitStaticCtor
     {
-        public static void Main ()
+        public static void Main()
         {
-            C.Foo ();
-            CEmpty.Foo ();
+            C.Foo();
+            CEmpty.Foo();
         }
 
         static class C
         {
             [Kept]
-            static C ()
+            static C()
             {
-                new object ();
+                new object();
             }
 
             [Kept]
-            public static void Foo ()
-            {
-            }
+            public static void Foo() { }
         }
 
-        [AddedPseudoAttributeAttribute ((uint) TypeAttributes.BeforeFieldInit)]
+        [AddedPseudoAttributeAttribute((uint)TypeAttributes.BeforeFieldInit)]
         static class CEmpty
         {
-            static CEmpty ()
-            {
-            }
+            static CEmpty() { }
 
             [Kept]
-            public static void Foo ()
+            public static void Foo()
             {
                 ++count;
             }

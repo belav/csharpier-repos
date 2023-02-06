@@ -37,11 +37,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGridColumn_HeaderImageUrl
-        : GHTBaseWeb 
+    public class DataGridColumn_HeaderImageUrl : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -49,13 +48,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -70,13 +69,15 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 literal1.DataBinding += new EventHandler(this.BindData);
                 container.Controls.Add(literal1);
             }
+
             public void BindData(object sender, EventArgs e)
             {
-                Literal literal1 = (Literal) sender;
-                DataGridItem item1 = (DataGridItem) literal1.NamingContainer;
+                Literal literal1 = (Literal)sender;
+                DataGridItem item1 = (DataGridItem)literal1.NamingContainer;
                 literal1.Text = DataBinder.Eval(item1.DataItem, "Name") + "</div>";
             }
         }
+
         public class t_EmptyLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -86,6 +87,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(literal1);
             }
         }
+
         public class t_PlainTextLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -95,6 +97,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(literal1);
             }
         }
+
         public class t_HtmlLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -104,6 +107,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(literal1);
             }
         }
+
         public class t_ControlLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -132,7 +136,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 }
             }
         }
- 
+
         private void setStyle(DataGridColumn c, ListItemType tp)
         {
             switch (tp)
@@ -160,7 +164,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 }
             }
         }
- 
+
         private DataGridColumn c_bounded(string se)
         {
             BoundColumn column1 = new BoundColumn();
@@ -168,7 +172,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             column1.HeaderImageUrl = se;
             return column1;
         }
- 
+
         private DataGridColumn c_button(string se)
         {
             ButtonColumn column1 = new ButtonColumn();
@@ -176,7 +180,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             column1.HeaderImageUrl = se;
             return column1;
         }
- 
+
         private DataGridColumn c_hyper_link(string se)
         {
             HyperLinkColumn column1 = new HyperLinkColumn();
@@ -185,7 +189,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             column1.HeaderImageUrl = se;
             return column1;
         }
- 
+
         private DataGridColumn c_edit(string se)
         {
             EditCommandColumn column1 = new EditCommandColumn();
@@ -193,7 +197,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             column1.HeaderImageUrl = se;
             return column1;
         }
- 
+
         private DataGridColumn c_template(string se)
         {
             TemplateColumn column1 = new TemplateColumn();
@@ -201,6 +205,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             column1.HeaderImageUrl = se;
             return column1;
         }
+
         private void DataGridTest(string TestName, DataGridColumn c)
         {
             DataGrid grid1 = new DataGrid();
@@ -224,10 +229,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
+
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -249,12 +254,20 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             DataGridTest("GhtSubTest13", c_edit("http://127.0.0.1/asd/asd/../../asd.asd"));
             DataGridTest("GhtSubTest14", c_hyper_link("http://127.0.0.1/asd/asd/../../asd.asd"));
             DataGridTest("GhtSubTest15", c_template("http://127.0.0.1/asd/asd/../../asd.asd"));
-            DataGridTest("GhtSubTest16", c_bounded(@"asdd://asd?//.\.\.\././..\/\/\/\/././zxc.zxc"));
+            DataGridTest(
+                "GhtSubTest16",
+                c_bounded(@"asdd://asd?//.\.\.\././..\/\/\/\/././zxc.zxc")
+            );
             DataGridTest("GhtSubTest17", c_button(@"asdd://asd?//.\.\.\././..\/\/\/\/././zxc.zxc"));
             DataGridTest("GhtSubTest18", c_edit(@"asdd://asd?//.\.\.\././..\/\/\/\/././zxc.zxc"));
-            DataGridTest("GhtSubTest19", c_hyper_link(@"asdd://asd?//.\.\.\././..\/\/\/\/././zxc.zxc"));
-            DataGridTest("GhtSubTest20", c_template(@"asdd://asd?//.\.\.\././..\/\/\/\/././zxc.zxc"));
-
+            DataGridTest(
+                "GhtSubTest19",
+                c_hyper_link(@"asdd://asd?//.\.\.\././..\/\/\/\/././zxc.zxc")
+            );
+            DataGridTest(
+                "GhtSubTest20",
+                c_template(@"asdd://asd?//.\.\.\././..\/\/\/\/././zxc.zxc")
+            );
 
             GHTTestEnd();
         }

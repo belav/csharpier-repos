@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -48,11 +48,13 @@ namespace System.IdentityModel.Tokens
 
         public const string ExclusiveC14n = "http://www.w3.org/2001/10/xml-exc-c14n#";
 
-        public const string ExclusiveC14nWithComments = "http://www.w3.org/2001/10/xml-exc-c14n#WithComments";
+        public const string ExclusiveC14nWithComments =
+            "http://www.w3.org/2001/10/xml-exc-c14n#WithComments";
 
         public const string HmacSha1Signature = "http://www.w3.org/2000/09/xmldsig#hmac-sha1";
 
-        public const string Psha1KeyDerivation = "http://schemas.xmlsoap.org/ws/2005/02/sc/dk/p_sha1";
+        public const string Psha1KeyDerivation =
+            "http://schemas.xmlsoap.org/ws/2005/02/sc/dk/p_sha1";
 
         public const string Ripemd160Digest = "http://www.w3.org/2001/04/xmlenc#ripemd160";
 
@@ -72,9 +74,13 @@ namespace System.IdentityModel.Tokens
 
         public const string TripleDesKeyWrap = "http://www.w3.org/2001/04/xmlenc#kw-tripledes";
 
-        public const string HmacSha256Signature = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256";
-        public const string RsaSha256Signature = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
-        public const string TlsSspiKeyWrap = "http://schemas.xmlsoap.org/2005/02/trust/tlsnego#TLS_Wrap";
-        public const string WindowsSspiKeyWrap = "http://schemas.xmlsoap.org/2005/02/trust/spnego#GSS_Wrap";
+        public const string HmacSha256Signature =
+            "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256";
+        public const string RsaSha256Signature =
+            "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
+        public const string TlsSspiKeyWrap =
+            "http://schemas.xmlsoap.org/2005/02/trust/tlsnego#TLS_Wrap";
+        public const string WindowsSspiKeyWrap =
+            "http://schemas.xmlsoap.org/2005/02/trust/spnego#GSS_Wrap";
     }
 }

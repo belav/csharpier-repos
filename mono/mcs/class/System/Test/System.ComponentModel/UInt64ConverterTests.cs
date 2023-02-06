@@ -20,251 +20,383 @@ namespace MonoTests.System.ComponentModel
     public class UInt64ConverterTests
     {
         private UInt64Converter converter;
-        
+
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            converter = new UInt64Converter ();
+            converter = new UInt64Converter();
         }
 
         [Test]
-        public void CanConvertFrom ()
+        public void CanConvertFrom()
         {
-            Assert.IsTrue (converter.CanConvertFrom (typeof (string)), "#1");
-            Assert.IsFalse (converter.CanConvertFrom (typeof (ulong)), "#2");
-            Assert.IsFalse (converter.CanConvertFrom (typeof (object)), "#3");
-            Assert.IsTrue (converter.CanConvertFrom (typeof (InstanceDescriptor)), "#4");
+            Assert.IsTrue(converter.CanConvertFrom(typeof(string)), "#1");
+            Assert.IsFalse(converter.CanConvertFrom(typeof(ulong)), "#2");
+            Assert.IsFalse(converter.CanConvertFrom(typeof(object)), "#3");
+            Assert.IsTrue(converter.CanConvertFrom(typeof(InstanceDescriptor)), "#4");
         }
 
         [Test]
-        public void CanConvertTo ()
+        public void CanConvertTo()
         {
-            Assert.IsTrue (converter.CanConvertTo (typeof (string)), "#1");
-            Assert.IsFalse (converter.CanConvertTo (typeof (object)), "#2");
-            Assert.IsTrue (converter.CanConvertTo (typeof (int)), "#3");
+            Assert.IsTrue(converter.CanConvertTo(typeof(string)), "#1");
+            Assert.IsFalse(converter.CanConvertTo(typeof(object)), "#2");
+            Assert.IsTrue(converter.CanConvertTo(typeof(int)), "#3");
         }
 
         [Test]
-        public void ConvertFrom_MinValue ()
+        public void ConvertFrom_MinValue()
         {
-            Assert.AreEqual (ulong.MinValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "#0"), "#1");
-            Assert.AreEqual (ulong.MinValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "#0x0"), "#2");
-            Assert.AreEqual (ulong.MinValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "#0X0"), "#3");
-            Assert.AreEqual (ulong.MinValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "0x0"), "#4");
-            Assert.AreEqual (ulong.MinValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "0X0"), "#5");
+            Assert.AreEqual(
+                ulong.MinValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "#0"),
+                "#1"
+            );
+            Assert.AreEqual(
+                ulong.MinValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "#0x0"),
+                "#2"
+            );
+            Assert.AreEqual(
+                ulong.MinValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "#0X0"),
+                "#3"
+            );
+            Assert.AreEqual(
+                ulong.MinValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "0x0"),
+                "#4"
+            );
+            Assert.AreEqual(
+                ulong.MinValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "0X0"),
+                "#5"
+            );
         }
 
         [Test]
-        public void ConvertFrom_MaxValue ()
+        public void ConvertFrom_MaxValue()
         {
-            Assert.AreEqual (ulong.MaxValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "#ffffffffffffffff"), "#1");
-            Assert.AreEqual (ulong.MaxValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "#FFFFFFFFFFFFFFFF"), "#2");
-            Assert.AreEqual (ulong.MaxValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "#0xffffffffffffffff"), "#3");
-            Assert.AreEqual (ulong.MaxValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "#0XFFFFFFFFFFFFFFFF"), "#4");
-            Assert.AreEqual (ulong.MaxValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "0xffffffffffffffff"), "#5");
-            Assert.AreEqual (ulong.MaxValue, converter.ConvertFrom (null, CultureInfo.InvariantCulture, "0XFFFFFFFFFFFFFFFF"), "#6");
+            Assert.AreEqual(
+                ulong.MaxValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "#ffffffffffffffff"),
+                "#1"
+            );
+            Assert.AreEqual(
+                ulong.MaxValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "#FFFFFFFFFFFFFFFF"),
+                "#2"
+            );
+            Assert.AreEqual(
+                ulong.MaxValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "#0xffffffffffffffff"),
+                "#3"
+            );
+            Assert.AreEqual(
+                ulong.MaxValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "#0XFFFFFFFFFFFFFFFF"),
+                "#4"
+            );
+            Assert.AreEqual(
+                ulong.MaxValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "0xffffffffffffffff"),
+                "#5"
+            );
+            Assert.AreEqual(
+                ulong.MaxValue,
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "0XFFFFFFFFFFFFFFFF"),
+                "#6"
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ConvertFrom_Object ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertFrom_Object()
         {
-            converter.ConvertFrom (new object ());
+            converter.ConvertFrom(new object());
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ConvertFrom_Int32 ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertFrom_Int32()
         {
-            converter.ConvertFrom (10);
+            converter.ConvertFrom(10);
         }
 
         [Test]
-        public void ConvertTo_MinValue ()
+        public void ConvertTo_MinValue()
         {
-            Assert.AreEqual (ulong.MinValue.ToString (CultureInfo.InvariantCulture),
-                converter.ConvertTo (null, CultureInfo.InvariantCulture, ulong.MinValue,
-                typeof (string)), "#1");
-            Assert.AreEqual (ulong.MinValue.ToString (CultureInfo.CurrentCulture),
-                converter.ConvertTo (null, CultureInfo.CurrentCulture, ulong.MinValue,
-                typeof (string)), "#2");
-            Assert.AreEqual (ulong.MinValue.ToString (CultureInfo.CurrentCulture),
-                converter.ConvertTo (ulong.MinValue, typeof (string)), "#3");
+            Assert.AreEqual(
+                ulong.MinValue.ToString(CultureInfo.InvariantCulture),
+                converter.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    ulong.MinValue,
+                    typeof(string)
+                ),
+                "#1"
+            );
+            Assert.AreEqual(
+                ulong.MinValue.ToString(CultureInfo.CurrentCulture),
+                converter.ConvertTo(
+                    null,
+                    CultureInfo.CurrentCulture,
+                    ulong.MinValue,
+                    typeof(string)
+                ),
+                "#2"
+            );
+            Assert.AreEqual(
+                ulong.MinValue.ToString(CultureInfo.CurrentCulture),
+                converter.ConvertTo(ulong.MinValue, typeof(string)),
+                "#3"
+            );
         }
 
         [Test]
-        public void ConvertTo_MaxValue ()
+        public void ConvertTo_MaxValue()
         {
-            Assert.AreEqual (ulong.MaxValue.ToString (CultureInfo.InvariantCulture),
-                converter.ConvertTo (null, CultureInfo.InvariantCulture, ulong.MaxValue,
-                typeof (string)), "#1");
-            Assert.AreEqual (ulong.MaxValue.ToString (CultureInfo.CurrentCulture),
-                converter.ConvertTo (null, CultureInfo.CurrentCulture, ulong.MaxValue,
-                typeof (string)), "#2");
-            Assert.AreEqual (ulong.MaxValue.ToString (CultureInfo.CurrentCulture),
-                converter.ConvertTo (ulong.MaxValue, typeof (string)), "#3");
+            Assert.AreEqual(
+                ulong.MaxValue.ToString(CultureInfo.InvariantCulture),
+                converter.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    ulong.MaxValue,
+                    typeof(string)
+                ),
+                "#1"
+            );
+            Assert.AreEqual(
+                ulong.MaxValue.ToString(CultureInfo.CurrentCulture),
+                converter.ConvertTo(
+                    null,
+                    CultureInfo.CurrentCulture,
+                    ulong.MaxValue,
+                    typeof(string)
+                ),
+                "#2"
+            );
+            Assert.AreEqual(
+                ulong.MaxValue.ToString(CultureInfo.CurrentCulture),
+                converter.ConvertTo(ulong.MaxValue, typeof(string)),
+                "#3"
+            );
         }
 
         [Test]
-        public void ConvertToString ()
+        public void ConvertToString()
         {
-            CultureInfo culture = new MyCultureInfo ();
-            NumberFormatInfo numberFormatInfo = (NumberFormatInfo) culture.GetFormat (typeof (NumberFormatInfo));
+            CultureInfo culture = new MyCultureInfo();
+            NumberFormatInfo numberFormatInfo = (NumberFormatInfo)
+                culture.GetFormat(typeof(NumberFormatInfo));
 
-            Assert.AreEqual (culture.NumberFormat.NegativeSign + "5", converter.ConvertToString (null, culture, -5));
+            Assert.AreEqual(
+                culture.NumberFormat.NegativeSign + "5",
+                converter.ConvertToString(null, culture, -5)
+            );
         }
 
         [Test]
-        public void ConvertFromString_Invalid1 ()
+        public void ConvertFromString_Invalid1()
         {
-            try {
-                converter.ConvertFromString (null, CultureInfo.InvariantCulture, "*1");
-                Assert.Fail ("#1");
-            } catch (AssertionException) {
+            try
+            {
+                converter.ConvertFromString(null, CultureInfo.InvariantCulture, "*1");
+                Assert.Fail("#1");
+            }
+            catch (AssertionException)
+            {
                 throw;
-            } catch (Exception ex) {
-                Assert.AreEqual (typeof (ArgumentException), ex.GetType (), "#2");
-                Assert.IsNotNull (ex.InnerException, "#3");
-                Assert.AreEqual (typeof (FormatException), ex.InnerException.GetType (), "#3");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(typeof(ArgumentException), ex.GetType(), "#2");
+                Assert.IsNotNull(ex.InnerException, "#3");
+                Assert.AreEqual(typeof(FormatException), ex.InnerException.GetType(), "#3");
             }
         }
 
         [Test]
-        public void ConvertFromString_Invalid2 ()
+        public void ConvertFromString_Invalid2()
         {
-            try {
-                converter.ConvertFromString (null, CultureInfo.InvariantCulture,
-                    double.MaxValue.ToString(CultureInfo.InvariantCulture));
-                Assert.Fail ("#1");
-            } catch (AssertionException) {
+            try
+            {
+                converter.ConvertFromString(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    double.MaxValue.ToString(CultureInfo.InvariantCulture)
+                );
+                Assert.Fail("#1");
+            }
+            catch (AssertionException)
+            {
                 throw;
-            } catch (Exception ex) {
-                Assert.AreEqual (typeof (ArgumentException), ex.GetType (), "#2");
-                Assert.IsNotNull (ex.InnerException, "#3");
-                Assert.AreEqual (typeof (FormatException), ex.InnerException.GetType (), "#3");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(typeof(ArgumentException), ex.GetType(), "#2");
+                Assert.IsNotNull(ex.InnerException, "#3");
+                Assert.AreEqual(typeof(FormatException), ex.InnerException.GetType(), "#3");
             }
         }
 
         [Test]
-        public void ConvertFromString_Invalid3 ()
+        public void ConvertFromString_Invalid3()
         {
-            try {
-                converter.ConvertFromString ("*1");
-                Assert.Fail ("#1");
-            } catch (AssertionException) {
+            try
+            {
+                converter.ConvertFromString("*1");
+                Assert.Fail("#1");
+            }
+            catch (AssertionException)
+            {
                 throw;
-            } catch (Exception ex) {
-                Assert.AreEqual (typeof (ArgumentException), ex.GetType (), "#2");
-                Assert.IsNotNull (ex.InnerException, "#3");
-                Assert.AreEqual (typeof (FormatException), ex.InnerException.GetType (), "#3");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(typeof(ArgumentException), ex.GetType(), "#2");
+                Assert.IsNotNull(ex.InnerException, "#3");
+                Assert.AreEqual(typeof(FormatException), ex.InnerException.GetType(), "#3");
             }
         }
 
         [Test]
-        public void ConvertFromString_Invalid4 ()
+        public void ConvertFromString_Invalid4()
         {
-            try {
-                converter.ConvertFromString (double.MaxValue.ToString (CultureInfo.CurrentCulture));
-                Assert.Fail ("#1");
-            } catch (AssertionException) {
+            try
+            {
+                converter.ConvertFromString(double.MaxValue.ToString(CultureInfo.CurrentCulture));
+                Assert.Fail("#1");
+            }
+            catch (AssertionException)
+            {
                 throw;
-            } catch (Exception ex) {
-                Assert.AreEqual (typeof (ArgumentException), ex.GetType (), "#2");
-                Assert.IsNotNull (ex.InnerException, "#3");
-                Assert.AreEqual (typeof (FormatException), ex.InnerException.GetType (), "#3");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(typeof(ArgumentException), ex.GetType(), "#2");
+                Assert.IsNotNull(ex.InnerException, "#3");
+                Assert.AreEqual(typeof(FormatException), ex.InnerException.GetType(), "#3");
             }
         }
 
         [Test]
-        public void ConvertFrom_InvalidString1 ()
+        public void ConvertFrom_InvalidString1()
         {
-            try {
-                converter.ConvertFrom (null, CultureInfo.InvariantCulture, "*1");
-                Assert.Fail ("#1");
-            } catch (AssertionException) {
+            try
+            {
+                converter.ConvertFrom(null, CultureInfo.InvariantCulture, "*1");
+                Assert.Fail("#1");
+            }
+            catch (AssertionException)
+            {
                 throw;
-            } catch (Exception ex) {
-                Assert.AreEqual (typeof (ArgumentException), ex.GetType (), "#2");
-                Assert.IsNotNull (ex.InnerException, "#3");
-                Assert.AreEqual (typeof (FormatException), ex.InnerException.GetType (), "#3");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(typeof(ArgumentException), ex.GetType(), "#2");
+                Assert.IsNotNull(ex.InnerException, "#3");
+                Assert.AreEqual(typeof(FormatException), ex.InnerException.GetType(), "#3");
             }
         }
 
         [Test]
-        public void ConvertFrom_InvalidString2 ()
+        public void ConvertFrom_InvalidString2()
         {
-            try {
-                converter.ConvertFrom (null, CultureInfo.InvariantCulture,
-                    double.MaxValue.ToString (CultureInfo.InvariantCulture));
-                Assert.Fail ("#1");
-            } catch (AssertionException) {
+            try
+            {
+                converter.ConvertFrom(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    double.MaxValue.ToString(CultureInfo.InvariantCulture)
+                );
+                Assert.Fail("#1");
+            }
+            catch (AssertionException)
+            {
                 throw;
-            } catch (Exception ex) {
-                Assert.AreEqual (typeof (ArgumentException), ex.GetType (), "#2");
-                Assert.IsNotNull (ex.InnerException, "#3");
-                Assert.AreEqual (typeof (FormatException), ex.InnerException.GetType (), "#3");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(typeof(ArgumentException), ex.GetType(), "#2");
+                Assert.IsNotNull(ex.InnerException, "#3");
+                Assert.AreEqual(typeof(FormatException), ex.InnerException.GetType(), "#3");
             }
         }
 
         [Test]
-        public void ConvertFrom_InvalidString3 ()
+        public void ConvertFrom_InvalidString3()
         {
-            try {
-                converter.ConvertFrom ("*1");
-                Assert.Fail ("#1");
-            } catch (AssertionException) {
+            try
+            {
+                converter.ConvertFrom("*1");
+                Assert.Fail("#1");
+            }
+            catch (AssertionException)
+            {
                 throw;
-            } catch (Exception ex) {
-                Assert.AreEqual (typeof (ArgumentException), ex.GetType (), "#2");
-                Assert.IsNotNull (ex.InnerException, "#3");
-                Assert.AreEqual (typeof (FormatException), ex.InnerException.GetType (), "#3");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(typeof(ArgumentException), ex.GetType(), "#2");
+                Assert.IsNotNull(ex.InnerException, "#3");
+                Assert.AreEqual(typeof(FormatException), ex.InnerException.GetType(), "#3");
             }
         }
 
         [Test]
-        public void ConvertFrom_InvalidString4 ()
+        public void ConvertFrom_InvalidString4()
         {
-            try {
-                converter.ConvertFrom (double.MaxValue.ToString (CultureInfo.CurrentCulture));
-                Assert.Fail ("#1");
-            } catch (AssertionException) {
+            try
+            {
+                converter.ConvertFrom(double.MaxValue.ToString(CultureInfo.CurrentCulture));
+                Assert.Fail("#1");
+            }
+            catch (AssertionException)
+            {
                 throw;
-            } catch (Exception ex) {
-                Assert.AreEqual (typeof (ArgumentException), ex.GetType (), "#2");
-                Assert.IsNotNull (ex.InnerException, "#3");
-                Assert.AreEqual (typeof (FormatException), ex.InnerException.GetType (), "#3");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(typeof(ArgumentException), ex.GetType(), "#2");
+                Assert.IsNotNull(ex.InnerException, "#3");
+                Assert.AreEqual(typeof(FormatException), ex.InnerException.GetType(), "#3");
             }
         }
 
         [Serializable]
         private sealed class MyCultureInfo : CultureInfo
         {
-            internal MyCultureInfo ()
-                : base ("en-US")
-            {
-            }
+            internal MyCultureInfo()
+                : base("en-US") { }
 
-            public override object GetFormat (Type formatType)
+            public override object GetFormat(Type formatType)
             {
-                if (formatType == typeof (NumberFormatInfo)) {
-                    NumberFormatInfo nfi = (NumberFormatInfo) ((NumberFormatInfo) base.GetFormat (formatType)).Clone ();
+                if (formatType == typeof(NumberFormatInfo))
+                {
+                    NumberFormatInfo nfi = (NumberFormatInfo)
+                        ((NumberFormatInfo)base.GetFormat(formatType)).Clone();
 
                     nfi.NegativeSign = "myNegativeSign";
-                    return NumberFormatInfo.ReadOnly (nfi);
-                } else {
-                    return base.GetFormat (formatType);
+                    return NumberFormatInfo.ReadOnly(nfi);
+                }
+                else
+                {
+                    return base.GetFormat(formatType);
                 }
             }
 
-// adding this override in 1.x shows different result in .NET (it is ignored).
-// Some compatibility kids might want to fix this issue.
-            public override NumberFormatInfo NumberFormat {
-                get {
-                    NumberFormatInfo nfi = (NumberFormatInfo) base.NumberFormat.Clone ();
+            // adding this override in 1.x shows different result in .NET (it is ignored).
+            // Some compatibility kids might want to fix this issue.
+            public override NumberFormatInfo NumberFormat
+            {
+                get
+                {
+                    NumberFormatInfo nfi = (NumberFormatInfo)base.NumberFormat.Clone();
                     nfi.NegativeSign = "myNegativeSign";
                     return nfi;
                 }
-                set { throw new NotSupportedException (); }
+                set { throw new NotSupportedException(); }
             }
         }
     }

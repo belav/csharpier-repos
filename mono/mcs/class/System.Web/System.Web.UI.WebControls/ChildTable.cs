@@ -37,16 +37,16 @@ namespace System.Web.UI.WebControls
     {
         Control parent;
 
-        public ChildTable (Control parent)
+        public ChildTable(Control parent)
         {
             this.parent = parent;
         }
 
-        protected override void AddAttributesToRender (HtmlTextWriter writer)
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
         {
-            base.AddAttributesToRender (writer);
+            base.AddAttributesToRender(writer);
             if (ID == null)
-                writer.AddAttribute ("id", parent.ClientID);
+                writer.AddAttribute("id", parent.ClientID);
         }
     }
 }

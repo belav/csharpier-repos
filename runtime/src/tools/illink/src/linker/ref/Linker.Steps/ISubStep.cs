@@ -9,14 +9,14 @@ namespace Mono.Linker.Steps
     {
         SubStepTargets Targets { get; }
 
-        void Initialize (LinkContext context);
-        bool IsActiveFor (AssemblyDefinition assembly);
+        void Initialize(LinkContext context);
+        bool IsActiveFor(AssemblyDefinition assembly);
 
-        void ProcessAssembly (AssemblyDefinition assembly);
-        void ProcessType (TypeDefinition type);
-        void ProcessField (FieldDefinition field);
-        void ProcessMethod (MethodDefinition method);
-        void ProcessProperty (PropertyDefinition property);
-        void ProcessEvent (EventDefinition @event);
+        void ProcessAssembly(AssemblyDefinition assembly);
+        void ProcessType(TypeDefinition type);
+        void ProcessField(FieldDefinition field);
+        void ProcessMethod(MethodDefinition method);
+        void ProcessProperty(PropertyDefinition property);
+        void ProcessEvent(EventDefinition @event);
     }
 }

@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,70 +33,68 @@ using System.Runtime.Serialization;
 namespace System.Configuration
 {
     [Serializable]
-    public sealed class PropertyInformationCollection: NameObjectCollectionBase
+    public sealed class PropertyInformationCollection : NameObjectCollectionBase
     {
-        internal PropertyInformationCollection ()
-            : base (StringComparer.Ordinal)
+        internal PropertyInformationCollection()
+            : base(StringComparer.Ordinal) { }
+
+        public void CopyTo(PropertyInformation[] array, int index)
         {
+            ((ICollection)this).CopyTo(array, index);
         }
-        
-        public void CopyTo (PropertyInformation[] array, int index)
+
+        public PropertyInformation this[string propertyName]
         {
-            ((ICollection)this).CopyTo (array, index);
+            get { return (PropertyInformation)BaseGet(propertyName); }
         }
-        
-        public PropertyInformation this [string propertyName] {
-            get { return (PropertyInformation) BaseGet (propertyName); }
-        }
-        
-        public override IEnumerator GetEnumerator ()
+
+        public override IEnumerator GetEnumerator()
         {
-            return new PropertyInformationEnumerator (this);
+            return new PropertyInformationEnumerator(this);
         }
-        
-        internal void Add (PropertyInformation pi)
+
+        internal void Add(PropertyInformation pi)
         {
-            BaseAdd (pi.Name, pi);
+            BaseAdd(pi.Name, pi);
         }
 
         [MonoTODO]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         class PropertyInformationEnumerator : IEnumerator
         {
             private PropertyInformationCollection collection;
             private int position;
-            
-            public PropertyInformationEnumerator (PropertyInformationCollection collection)
+
+            public PropertyInformationEnumerator(PropertyInformationCollection collection)
             {
                 this.collection = collection;
                 position = -1;
             }
-            
-            public object Current 
+
+            public object Current
             {
-                get {
+                get
+                {
                     if ((position < collection.Count) && (position >= 0))
-                        return collection.BaseGet (position);
-                    else 
+                        return collection.BaseGet(position);
+                    else
                         throw new InvalidOperationException();
                 }
-                
             }
-            
-            public bool MoveNext ()
+
+            public bool MoveNext()
             {
                 return (++position < collection.Count) ? true : false;
             }
-            
-            public void Reset ()
+
+            public void Reset()
             {
                 position = -1;
             }
         }
     }
 }
-

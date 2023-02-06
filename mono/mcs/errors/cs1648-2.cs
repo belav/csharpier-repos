@@ -9,15 +9,13 @@ public class Test
     {
         public int foo { get; set; }
     }
-    
+
     readonly Container p;
-    
-    void Foo ()
+
+    void Foo()
     {
         p.foo = 0;
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

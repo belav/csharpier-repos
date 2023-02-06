@@ -5,7 +5,7 @@ public class Test<T>
 {
     protected T item;
 
-    public Test (T item)
+    public Test(T item)
     {
         this.item = item;
     }
@@ -18,9 +18,9 @@ public class Test<T>
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        Test<int> test = new Test<int> (3);
+        Test<int> test = new Test<int>(3);
         foreach (int a in test)
             ;
     }

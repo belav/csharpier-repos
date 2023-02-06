@@ -14,32 +14,58 @@ using Microsoft.CodeAnalysis.SimplifyInterpolation;
 
 namespace Microsoft.CodeAnalysis.CSharp.SimplifyInterpolation
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.SimplifyInterpolation), Shared]
-    internal class CSharpSimplifyInterpolationCodeFixProvider : AbstractSimplifyInterpolationCodeFixProvider<
-        InterpolationSyntax, ExpressionSyntax, InterpolationAlignmentClauseSyntax,
-        InterpolationFormatClauseSyntax, InterpolatedStringExpressionSyntax>
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.SimplifyInterpolation
+        ),
+        Shared
+    ]
+    internal class CSharpSimplifyInterpolationCodeFixProvider
+        : AbstractSimplifyInterpolationCodeFixProvider<
+            InterpolationSyntax,
+            ExpressionSyntax,
+            InterpolationAlignmentClauseSyntax,
+            InterpolationFormatClauseSyntax,
+            InterpolatedStringExpressionSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpSimplifyInterpolationCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpSimplifyInterpolationCodeFixProvider() { }
 
-        protected override AbstractSimplifyInterpolationHelpers GetHelpers() => CSharpSimplifyInterpolationHelpers.Instance;
+        protected override AbstractSimplifyInterpolationHelpers GetHelpers() =>
+            CSharpSimplifyInterpolationHelpers.Instance;
 
-        protected override InterpolationSyntax WithExpression(InterpolationSyntax interpolation, ExpressionSyntax expression)
-            => interpolation.WithExpression(expression);
+        protected override InterpolationSyntax WithExpression(
+            InterpolationSyntax interpolation,
+            ExpressionSyntax expression
+        ) => interpolation.WithExpression(expression);
 
-        protected override InterpolationSyntax WithAlignmentClause(InterpolationSyntax interpolation, InterpolationAlignmentClauseSyntax alignmentClause)
-            => interpolation.WithAlignmentClause(alignmentClause);
+        protected override InterpolationSyntax WithAlignmentClause(
+            InterpolationSyntax interpolation,
+            InterpolationAlignmentClauseSyntax alignmentClause
+        ) => interpolation.WithAlignmentClause(alignmentClause);
 
-        protected override InterpolationSyntax WithFormatClause(InterpolationSyntax interpolation, InterpolationFormatClauseSyntax formatClause)
-            => interpolation.WithFormatClause(formatClause);
+        protected override InterpolationSyntax WithFormatClause(
+            InterpolationSyntax interpolation,
+            InterpolationFormatClauseSyntax formatClause
+        ) => interpolation.WithFormatClause(formatClause);
 
-        protected override string Escape(InterpolatedStringExpressionSyntax interpolatedString, string formatString)
+        protected override string Escape(
+            InterpolatedStringExpressionSyntax interpolatedString,
+            string formatString
+        )
         {
             var result = new StringBuilder();
-            if (interpolatedString.StringStartToken.Kind() == SyntaxKind.InterpolatedVerbatimStringStartToken)
+            if (
+                interpolatedString.StringStartToken.Kind()
+                == SyntaxKind.InterpolatedVerbatimStringStartToken
+            )
             {
                 foreach (var c in formatString)
                 {
@@ -54,7 +80,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyInterpolation
             }
             else
             {
-                // In a normal string we have to escape quotes and we have to escape an 
+                // In a normal string we have to escape quotes and we have to escape an
                 // escape character itself.
                 foreach (var c in formatString)
                 {

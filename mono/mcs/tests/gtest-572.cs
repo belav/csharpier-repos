@@ -1,32 +1,26 @@
 using System.Collections.Generic;
 
-interface IC<T> : IB<T>, IEnumerable<T>
-{
-}
+interface IC<T> : IB<T>, IEnumerable<T> { }
 
-interface IB<V> : IA<V>
-{
-}
+interface IB<V> : IA<V> { }
 
-interface IA<W> : IEnumerable<W>
-{
-}
+interface IA<W> : IEnumerable<W> { }
 
 class C : IC<short>
 {
-    public IEnumerator<short> GetEnumerator ()
+    public IEnumerator<short> GetEnumerator()
     {
         return null;
     }
 
-    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
-        throw new System.NotImplementedException ();
+        throw new System.NotImplementedException();
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        IC<short> ic = new C ();
-        var m2 = ic.GetEnumerator ();
+        IC<short> ic = new C();
+        var m2 = ic.GetEnumerator();
     }
 }

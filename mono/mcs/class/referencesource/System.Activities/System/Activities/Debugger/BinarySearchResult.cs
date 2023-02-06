@@ -29,7 +29,10 @@ namespace System.Activities.Debugger
         {
             get
             {
-                UnitTestUtility.Assert(this.IsFound, "We should not call FoundIndex if we cannot find the element.");
+                UnitTestUtility.Assert(
+                    this.IsFound,
+                    "We should not call FoundIndex if we cannot find the element."
+                );
                 return this.result;
             }
         }
@@ -39,8 +42,14 @@ namespace System.Activities.Debugger
         {
             get
             {
-                UnitTestUtility.Assert(!this.IsFound, "We should not call NextIndex if we found the element.");
-                UnitTestUtility.Assert(this.IsNextIndexAvailable, "We should not call NextIndex if next index is not available.");
+                UnitTestUtility.Assert(
+                    !this.IsFound,
+                    "We should not call NextIndex if we found the element."
+                );
+                UnitTestUtility.Assert(
+                    this.IsNextIndexAvailable,
+                    "We should not call NextIndex if next index is not available."
+                );
                 return this.NextIndexValue;
             }
         }
@@ -50,7 +59,10 @@ namespace System.Activities.Debugger
         {
             get
             {
-                UnitTestUtility.Assert(!this.IsFound, "We should not call IsNextIndexAvailable if we found the element.");
+                UnitTestUtility.Assert(
+                    !this.IsFound,
+                    "We should not call IsNextIndexAvailable if we found the element."
+                );
                 return this.NextIndexValue != this.count;
             }
         }
@@ -60,7 +72,12 @@ namespace System.Activities.Debugger
             get { return ~this.result; }
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Justification = "Message used in debugger only.")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1305:SpecifyIFormatProvider",
+            MessageId = "System.String.Format(System.String,System.Object)",
+            Justification = "Message used in debugger only."
+        )]
         public override string ToString()
         {
             if (this.IsFound)

@@ -13,7 +13,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     {
         private static int s_globalId;
 
-        public static int GetNextId()
-            => Interlocked.Increment(ref s_globalId);
+        public static int GetNextId() => Interlocked.Increment(ref s_globalId);
     }
 }

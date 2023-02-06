@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,78 +43,90 @@ using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    [TestFixture]    
-    public class CustomValidatorTest : ValidatorTest {
-        private bool    bool_result;
+    [TestFixture]
+    public class CustomValidatorTest : ValidatorTest
+    {
+        private bool bool_result;
 
-        public class CustomValidatorTestClass : CustomValidator {
-            public CustomValidatorTestClass () {
+        public class CustomValidatorTestClass : CustomValidator
+        {
+            public CustomValidatorTestClass()
+            {
                 TrackViewState();
             }
 
-            public bool AreControlPropertiesValid ()
+            public bool AreControlPropertiesValid()
             {
-                return ControlPropertiesValid ();
+                return ControlPropertiesValid();
             }
 
-            public object SaveState () {
-                return SaveViewState ();
+            public object SaveState()
+            {
+                return SaveViewState();
             }
 
-            public void LoadState (object o) {
-                LoadViewState (o);
+            public void LoadState(object o)
+            {
+                LoadViewState(o);
             }
 
-            public void SetTrackingVS () {
-                TrackViewState ();
+            public void SetTrackingVS()
+            {
+                TrackViewState();
             }
 
-            public void CheckProperties () {
-                ControlPropertiesValid ();
+            public void CheckProperties()
+            {
+                ControlPropertiesValid();
             }
 
-            public bool DoEvaluateIsValid () {
-                return EvaluateIsValid ();
+            public bool DoEvaluateIsValid()
+            {
+                return EvaluateIsValid();
             }
 
-            protected new bool RenderUplevel {
-                get {
-                    return true;
-                }
+            protected new bool RenderUplevel
+            {
+                get { return true; }
             }
 
-            public void CallInit() {
+            public void CallInit()
+            {
                 base.OnInit(EventArgs.Empty);
             }
 
-            public bool Evaluate() {
+            public bool Evaluate()
+            {
                 return base.EvaluateIsValid();
             }
 
-            public string Render () {
-                HtmlTextWriter    writer;
+            public string Render()
+            {
+                HtmlTextWriter writer;
 
                 writer = CustomValidatorTest.GetWriter();
-                base.Render (writer);
-                return writer.InnerWriter.ToString ();
+                base.Render(writer);
+                return writer.InnerWriter.ToString();
             }
         }
 
-        private static HtmlTextWriter GetWriter () {
-            StringWriter sw = new StringWriter ();
+        private static HtmlTextWriter GetWriter()
+        {
+            StringWriter sw = new StringWriter();
             sw.NewLine = "\n";
-            return new HtmlTextWriter (sw);
+            return new HtmlTextWriter(sw);
         }
 
-        private void ServerValidateMethod(object sender, ServerValidateEventArgs e) {
+        private void ServerValidateMethod(object sender, ServerValidateEventArgs e)
+        {
             bool_result = e.IsValid;
         }
 
         [Test]
-        public void EventDefaults ()
+        public void EventDefaults()
         {
-            CustomValidatorTestClass    c;
-            TextBox                t;
+            CustomValidatorTestClass c;
+            TextBox t;
 
             c = new CustomValidatorTestClass();
 
@@ -136,58 +148,58 @@ namespace MonoTests.System.Web.UI.WebControls
         }
 
         [Test]
-        public void Defaults () {
-            CustomValidatorTestClass    c;
+        public void Defaults()
+        {
+            CustomValidatorTestClass c;
 
-            c= new CustomValidatorTestClass();
-            Assert.AreEqual(string.Empty, c.ClientValidationFunction , "D1");
+            c = new CustomValidatorTestClass();
+            Assert.AreEqual(string.Empty, c.ClientValidationFunction, "D1");
 
             c.ClientValidationFunction = "Hurra, hurra, die Schule brennt";
-            Assert.AreEqual("Hurra, hurra, die Schule brennt", c.ClientValidationFunction , "D1");
+            Assert.AreEqual("Hurra, hurra, die Schule brennt", c.ClientValidationFunction, "D1");
         }
 
         [Test]
-        public void DefaultsNotWorking ()
+        public void DefaultsNotWorking()
         {
-            CustomValidatorTestClass c = new CustomValidatorTestClass ();
-            Assert.AreEqual (false, c.ValidateEmptyText, "ValidateEmptyText");
+            CustomValidatorTestClass c = new CustomValidatorTestClass();
+            Assert.AreEqual(false, c.ValidateEmptyText, "ValidateEmptyText");
         }
 
-
-        // Variable for checking events 
+        // Variable for checking events
         private bool checker;
 
         [Test]
-        public void ValidateEmptyText ()
+        public void ValidateEmptyText()
         {
-            CustomValidatorTestClass c = new CustomValidatorTestClass ();
-            Page p = new Page ();
-            TextBox tb = new TextBox ();
+            CustomValidatorTestClass c = new CustomValidatorTestClass();
+            Page p = new Page();
+            TextBox tb = new TextBox();
             tb.ID = "tb";
-            
-            CustomValidator v = new CustomValidator ();
-            v.ServerValidate += new ServerValidateEventHandler (ServerValidate);
-            v.ControlToValidate = "tb";
-            p.Controls.Add (tb);
-            p.Controls.Add (v);
 
-            v.Validate ();
-            Assert.AreEqual (false, checker, "Validate with ValidateEmptyText = false");
+            CustomValidator v = new CustomValidator();
+            v.ServerValidate += new ServerValidateEventHandler(ServerValidate);
+            v.ControlToValidate = "tb";
+            p.Controls.Add(tb);
+            p.Controls.Add(v);
+
+            v.Validate();
+            Assert.AreEqual(false, checker, "Validate with ValidateEmptyText = false");
             v.ValidateEmptyText = true;
-            v.Validate ();
-            Assert.AreEqual (true, checker, "Validate with ValidateEmptyText = true");
+            v.Validate();
+            Assert.AreEqual(true, checker, "Validate with ValidateEmptyText = true");
         }
 
-        void ServerValidate (object source, ServerValidateEventArgs value)
+        void ServerValidate(object source, ServerValidateEventArgs value)
         {
             checker = true;
         }
 
-
         [Test]
-        public void Render () {
-            CustomValidatorTestClass    c;
-            TextBox                t;
+        public void Render()
+        {
+            CustomValidatorTestClass c;
+            TextBox t;
 
             c = new CustomValidatorTestClass();
             StartValidationTest(c);
@@ -198,44 +210,45 @@ namespace MonoTests.System.Web.UI.WebControls
             c.Enabled = true;
             c.EnableViewState = true;
 
-
             c.ClientValidationFunction = "Father to a sister of thought";
         }
 
         class Poker : CustomValidator
         {
-            public string Render ()
+            public string Render()
             {
                 HtmlTextWriter writer;
-                writer = CustomValidatorTest.GetWriter ();
-                base.Render (writer);
-                return writer.InnerWriter.ToString ();
+                writer = CustomValidatorTest.GetWriter();
+                base.Render(writer);
+                return writer.InnerWriter.ToString();
             }
         }
 
         [Test]
-        public void Render_2_0 ()
+        public void Render_2_0()
         {
             Poker c = new Poker();
             c.ErrorMessage = "aw shucks";
             c.Display = ValidatorDisplay.Static;
             c.Enabled = true;
             c.EnableViewState = true;
-            string html = c.Render ();
-            HtmlDiff.AssertAreEqual ("<span style=\"color:Red;\">aw shucks</span>", html, "Render#1");
+            string html = c.Render();
+            HtmlDiff.AssertAreEqual(
+                "<span style=\"color:Red;\">aw shucks</span>",
+                html,
+                "Render#1"
+            );
         }
 
-        
-
         [Test]
-        public void EmptyControlName ()
+        public void EmptyControlName()
         {
-            Page page = new Page ();
-            HtmlForm form = new HtmlForm ();
-            CustomValidatorTestClass tc = new CustomValidatorTestClass ();
-            page.Controls.Add (form);
-            form.Controls.Add (tc);
-            Assert.IsTrue (tc.AreControlPropertiesValid (), "#01");
+            Page page = new Page();
+            HtmlForm form = new HtmlForm();
+            CustomValidatorTestClass tc = new CustomValidatorTestClass();
+            page.Controls.Add(form);
+            form.Controls.Add(tc);
+            Assert.IsTrue(tc.AreControlPropertiesValid(), "#01");
         }
     }
 }

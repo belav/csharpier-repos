@@ -21,82 +21,115 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _inProc = CreateInProcComponent<SolutionExplorer_InProc>(visualStudioInstance);
         }
 
-        public string DirectoryName
-            => _inProc.DirectoryName;
+        public string DirectoryName => _inProc.DirectoryName;
 
-        public void CloseSolution(bool saveFirst = false)
-            => _inProc.CloseSolution(saveFirst);
+        public void CloseSolution(bool saveFirst = false) => _inProc.CloseSolution(saveFirst);
 
         /// <summary>
         /// Creates and loads a new solution in the host process, optionally saving the existing solution if one exists.
         /// </summary>
-        public void CreateSolution(string solutionName, bool saveExistingSolutionIfExists = false)
-            => _inProc.CreateSolution(solutionName, saveExistingSolutionIfExists);
+        public void CreateSolution(
+            string solutionName,
+            bool saveExistingSolutionIfExists = false
+        ) => _inProc.CreateSolution(solutionName, saveExistingSolutionIfExists);
 
-        public void CreateSolution(string solutionName, XElement solutionElement)
-            => _inProc.CreateSolution(solutionName, solutionElement.ToString());
+        public void CreateSolution(string solutionName, XElement solutionElement) =>
+            _inProc.CreateSolution(solutionName, solutionElement.ToString());
 
-        public void AddProject(ProjectUtils.Project projectName, string projectTemplate, string languageName)
+        public void AddProject(
+            ProjectUtils.Project projectName,
+            string projectTemplate,
+            string languageName
+        )
         {
             _inProc.AddProject(projectName.Name, projectTemplate, languageName);
-            _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
         }
 
-        public void AddProjectReference(ProjectUtils.Project fromProjectName, ProjectUtils.ProjectReference toProjectName)
+        public void AddProjectReference(
+            ProjectUtils.Project fromProjectName,
+            ProjectUtils.ProjectReference toProjectName
+        )
         {
             _inProc.AddProjectReference(fromProjectName.Name, toProjectName.Name);
-            _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
         }
 
-        public void AddMetadataReference(ProjectUtils.AssemblyReference fullyQualifiedAssemblyName, ProjectUtils.Project projectName)
+        public void AddMetadataReference(
+            ProjectUtils.AssemblyReference fullyQualifiedAssemblyName,
+            ProjectUtils.Project projectName
+        )
         {
             _inProc.AddMetadataReference(fullyQualifiedAssemblyName.Name, projectName.Name);
-            _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
         }
 
-        public void CleanUpOpenSolution()
-            => _inProc.CleanUpOpenSolution();
+        public void CleanUpOpenSolution() => _inProc.CleanUpOpenSolution();
 
-        public void AddFile(ProjectUtils.Project project, string fileName, string? contents = null, bool open = false)
-            => _inProc.AddFile(project.Name, fileName, contents, open);
+        public void AddFile(
+            ProjectUtils.Project project,
+            string fileName,
+            string? contents = null,
+            bool open = false
+        ) => _inProc.AddFile(project.Name, fileName, contents, open);
 
-        public void SetFileContents(ProjectUtils.Project project, string fileName, string contents)
-            => _inProc.SetFileContents(project.Name, fileName, contents);
+        public void SetFileContents(
+            ProjectUtils.Project project,
+            string fileName,
+            string contents
+        ) => _inProc.SetFileContents(project.Name, fileName, contents);
 
-        public string GetFileContents(ProjectUtils.Project project, string fileName)
-            => _inProc.GetFileContents(project.Name, fileName);
+        public string GetFileContents(ProjectUtils.Project project, string fileName) =>
+            _inProc.GetFileContents(project.Name, fileName);
 
-        public void BuildSolution()
-            => _inProc.BuildSolution();
+        public void BuildSolution() => _inProc.BuildSolution();
 
-        public void OpenFileWithDesigner(ProjectUtils.Project project, string fileName)
-            => _inProc.OpenFileWithDesigner(project.Name, fileName);
+        public void OpenFileWithDesigner(ProjectUtils.Project project, string fileName) =>
+            _inProc.OpenFileWithDesigner(project.Name, fileName);
 
         public void OpenFile(ProjectUtils.Project project, string fileName)
         {
             // Wireup to open files can happen asynchronously in the case we're being notified of changes on background threads.
             _inProc.OpenFile(project.Name, fileName);
-            _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
         }
 
-        public void CloseDesignerFile(ProjectUtils.Project project, string fileName, bool saveFile)
-            => _inProc.CloseDesignerFile(project.Name, fileName, saveFile);
+        public void CloseDesignerFile(
+            ProjectUtils.Project project,
+            string fileName,
+            bool saveFile
+        ) => _inProc.CloseDesignerFile(project.Name, fileName, saveFile);
 
-        public void CloseCodeFile(ProjectUtils.Project project, string fileName, bool saveFile)
-            => _inProc.CloseCodeFile(project.Name, fileName, saveFile);
+        public void CloseCodeFile(ProjectUtils.Project project, string fileName, bool saveFile) =>
+            _inProc.CloseCodeFile(project.Name, fileName, saveFile);
 
-        public void SaveFile(ProjectUtils.Project project, string fileName)
-            => _inProc.SaveFile(project.Name, fileName);
+        public void SaveFile(ProjectUtils.Project project, string fileName) =>
+            _inProc.SaveFile(project.Name, fileName);
 
-        public void RestoreNuGetPackages(ProjectUtils.Project project)
-            => _inProc.RestoreNuGetPackages(project.Name);
+        public void RestoreNuGetPackages(ProjectUtils.Project project) =>
+            _inProc.RestoreNuGetPackages(project.Name);
 
         public void SaveAll()
         {
             _inProc.SaveAll();
 
             // Wait for async save operations to complete before proceeding
-            _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.Workspace
+            );
         }
 
         /// <summary>
@@ -105,16 +138,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         /// there may be more than one item of a given name, use <see cref="SelectItemAtPath(string[])"/>
         /// instead.
         /// </summary>
-        public void SelectItem(string itemName)
-            => _inProc.SelectItem(itemName);
+        public void SelectItem(string itemName) => _inProc.SelectItem(itemName);
 
         /// <summary>
         /// Selects the specific item at the given "path".
         /// </summary>
-        public void SelectItemAtPath(params string[] path)
-            => _inProc.SelectItemAtPath(path);
+        public void SelectItemAtPath(params string[] path) => _inProc.SelectItemAtPath(path);
 
-        public void AddStandaloneFile(string fileName)
-            => _inProc.AddStandaloneFile(fileName);
+        public void AddStandaloneFile(string fileName) => _inProc.AddStandaloneFile(fileName);
     }
 }

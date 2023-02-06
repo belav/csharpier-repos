@@ -13,29 +13,35 @@ namespace System.Linq.Tests
         [MemberData(nameof(EnumerableData), MemberType = typeof(SkipTakeData))]
         public void TakeLast(IEnumerable<int> source, int count)
         {
-            Assert.All(IdentityTransforms<int>(), transform =>
-            {
-                IEnumerable<int> equivalent = transform(source);
-
-                IEnumerable<int> expected = equivalent.Reverse().Take(count).Reverse();
-                IEnumerable<int> actual = equivalent.TakeLast(count);
-
-                Assert.Equal(expected, actual);
-                Assert.Equal(expected.Count(), actual.Count());
-                Assert.Equal(expected, actual.ToArray());
-                Assert.Equal(expected, actual.ToList());
-
-                Assert.Equal(expected.FirstOrDefault(), actual.FirstOrDefault());
-                Assert.Equal(expected.LastOrDefault(), actual.LastOrDefault());
-
-                Assert.All(Enumerable.Range(0, expected.Count()), index =>
+            Assert.All(
+                IdentityTransforms<int>(),
+                transform =>
                 {
-                    Assert.Equal(expected.ElementAt(index), actual.ElementAt(index));
-                });
+                    IEnumerable<int> equivalent = transform(source);
 
-                Assert.Equal(0, actual.ElementAtOrDefault(-1));
-                Assert.Equal(0, actual.ElementAtOrDefault(actual.Count()));
-            });
+                    IEnumerable<int> expected = equivalent.Reverse().Take(count).Reverse();
+                    IEnumerable<int> actual = equivalent.TakeLast(count);
+
+                    Assert.Equal(expected, actual);
+                    Assert.Equal(expected.Count(), actual.Count());
+                    Assert.Equal(expected, actual.ToArray());
+                    Assert.Equal(expected, actual.ToList());
+
+                    Assert.Equal(expected.FirstOrDefault(), actual.FirstOrDefault());
+                    Assert.Equal(expected.LastOrDefault(), actual.LastOrDefault());
+
+                    Assert.All(
+                        Enumerable.Range(0, expected.Count()),
+                        index =>
+                        {
+                            Assert.Equal(expected.ElementAt(index), actual.ElementAt(index));
+                        }
+                    );
+
+                    Assert.Equal(0, actual.ElementAtOrDefault(-1));
+                    Assert.Equal(0, actual.ElementAtOrDefault(actual.Count()));
+                }
+            );
         }
 
         [Theory]
@@ -48,7 +54,8 @@ namespace System.Linq.Tests
             var source = new DelegateIterator<int>(
                 moveNext: () => index++ != limit, // Stop once we go past the limit.
                 current: () => index, // Yield from 1 up to the limit, inclusive.
-                dispose: () => index ^= int.MinValue);
+                dispose: () => index ^= int.MinValue
+            );
 
             IEnumerator<int> iterator = source.TakeLast(count).GetEnumerator();
             Assert.Equal(0, index); // Nothing should be done before MoveNext is called.

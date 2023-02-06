@@ -25,7 +25,7 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public enum HourOfDay
     {
-        Zero,    // midnight
+        Zero, // midnight
         One,
         Two,
         Three,

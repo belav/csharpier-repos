@@ -24,17 +24,14 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Command_Invoke_can_be_called_more_than_once_for_the_same_command()
         {
-            var command = new RootCommand("Root command description")
-            {
-                new Command("inner")
-            };
+            var command = new RootCommand("Root command description") { new Command("inner") };
 
             var console1 = new TestConsole();
 
             command.Invoke("-h", console1);
 
             console1.Out.ToString().Should().Contain(command.Description);
-            
+
             var console2 = new TestConsole();
 
             command.Invoke("-h", console2);
@@ -58,10 +55,7 @@ namespace System.CommandLine.Tests
 
             command.Invoke("", console);
 
-            console.Out
-                   .ToString()
-                   .Should()
-                   .NotContain("hello!");
+            console.Out.ToString().Should().NotContain("hello!");
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/1589
@@ -72,11 +66,11 @@ namespace System.CommandLine.Tests
             root.Parse("");
 
             var console = new TestConsole();
-            
+
             await root.InvokeAsync("-h", console);
 
             _output.WriteLine(console.Out.ToString());
-            
+
             console.Should().ShowHelp();
         }
 

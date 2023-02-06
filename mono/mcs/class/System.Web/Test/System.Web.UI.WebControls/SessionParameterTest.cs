@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.WebControls.FormView.cs 
+// Tests for System.Web.UI.WebControls.FormView.cs
 //
 // Author:
 //    Merav Sudri (meravs@mainsoft.com)
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -49,18 +49,13 @@ namespace MonoTests.System.Web.UI.WebControls
         }
 
         public SessionParameterPoker(SessionParameter param)
-            : base(param)
-        {
-        }
+            : base(param) { }
 
         public SessionParameterPoker(string name, string sessionField)
-            : base(name, sessionField)
-        {
-        }
+            : base(name, sessionField) { }
+
         public SessionParameterPoker(string name, TypeCode type, string sessionField)
-            : base(name, type, sessionField)
-        {
-        }
+            : base(name, type, sessionField) { }
 
         public object DoEvaluate(HttpContext context, Control control)
         {
@@ -76,6 +71,7 @@ namespace MonoTests.System.Web.UI.WebControls
         {
             return SaveViewState();
         }
+
         public void LoadState(object o)
         {
             LoadViewState(o);
@@ -85,7 +81,6 @@ namespace MonoTests.System.Web.UI.WebControls
         {
             get { return base.ViewState; }
         }
-
     }
 
     [TestFixture]
@@ -99,7 +94,11 @@ namespace MonoTests.System.Web.UI.WebControls
             SessionParameterPoker sessionParam2 = new SessionParameterPoker("Name", "id");
             Assert.AreEqual("Name", sessionParam2.Name, "OverloadConstructorName1");
             Assert.AreEqual("id", sessionParam2.SessionField, "OverloadConstructorSessionField1");
-            SessionParameterPoker sessionParam3 = new SessionParameterPoker("Name", TypeCode.Int64, "id");
+            SessionParameterPoker sessionParam3 = new SessionParameterPoker(
+                "Name",
+                TypeCode.Int64,
+                "id"
+            );
             Assert.AreEqual("Name", sessionParam3.Name, "OverloadConstructorName2");
             Assert.AreEqual("id", sessionParam3.SessionField, "OverloadConstructorsessionField2");
             Assert.AreEqual(TypeCode.Int64, sessionParam3.Type, "OverloadConstructorType2");
@@ -107,8 +106,6 @@ namespace MonoTests.System.Web.UI.WebControls
             Assert.AreEqual("Name", sessionParam4.Name, "OverloadConstructorName3");
             Assert.AreEqual("id", sessionParam4.SessionField, "OverloadConstructorSessionField3");
             Assert.AreEqual(TypeCode.Int64, sessionParam4.Type, "OverloadConstructorType3");
-
-
         }
 
         [Test]
@@ -117,7 +114,6 @@ namespace MonoTests.System.Web.UI.WebControls
             SessionParameterPoker sessionParam = new SessionParameterPoker();
             sessionParam.SessionField = "Test";
             Assert.AreEqual("Test", sessionParam.SessionField, "AssignToSessionField");
-
         }
 
         //Protected Methods
@@ -125,11 +121,14 @@ namespace MonoTests.System.Web.UI.WebControls
         [Test]
         public void SessionParameter_Clone()
         {
-                     SessionParameterPoker sessionParam = new SessionParameterPoker("EmployeeName", TypeCode.String, "Name");
-             SessionParameter clonedParam = (SessionParameter)sessionParam.DoClone();
-             Assert.AreEqual("EmployeeName", clonedParam.Name, "SessionParameterCloneName");
-             Assert.AreEqual(TypeCode.String, clonedParam.Type, "SessionParameterCloneType");
-            
+            SessionParameterPoker sessionParam = new SessionParameterPoker(
+                "EmployeeName",
+                TypeCode.String,
+                "Name"
+            );
+            SessionParameter clonedParam = (SessionParameter)sessionParam.DoClone();
+            Assert.AreEqual("EmployeeName", clonedParam.Name, "SessionParameterCloneName");
+            Assert.AreEqual(TypeCode.String, clonedParam.Type, "SessionParameterCloneType");
         }
 
         [Test]
@@ -137,7 +136,11 @@ namespace MonoTests.System.Web.UI.WebControls
         [Category("NotWorking")]
         public void SessionParameter_Evaluate()
         {
-            SessionParameterPoker sessionParam = new SessionParameterPoker("employee",TypeCode.String ,"id") ;
+            SessionParameterPoker sessionParam = new SessionParameterPoker(
+                "employee",
+                TypeCode.String,
+                "id"
+            );
             Button b = new Button();
             string value = (string)sessionParam.DoEvaluate(null, b);
             Assert.AreEqual(null, value, "EvaluateSessionWhenNullContext");
@@ -147,14 +150,12 @@ namespace MonoTests.System.Web.UI.WebControls
             pd.Load = EvaluateSession;
             t.Invoker = new PageInvoker(pd);
             string html = t.Run();
-            WebTest.Unload(); 
-            
-
+            WebTest.Unload();
         }
 
         public static void InitSesssion(Page p)
         {
-            p.Session["key"] = "Key1"; 
+            p.Session["key"] = "Key1";
         }
 
         public static void EvaluateSession(Page p)
@@ -163,10 +164,9 @@ namespace MonoTests.System.Web.UI.WebControls
             sessionParam.SessionField = "key";
             sessionParam.Type = TypeCode.String;
             TextBox tb = new TextBox();
-            p.Controls.Add(tb); 
+            p.Controls.Add(tb);
             string value = (string)sessionParam.DoEvaluate(HttpContext.Current, tb);
             Assert.AreEqual("Key1", value, "EvaluateSessionParameter");
         }
-
     }
 }

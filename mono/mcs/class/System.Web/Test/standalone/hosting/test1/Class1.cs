@@ -4,12 +4,13 @@ using System.Web.Hosting;
 
 namespace ClassLibrary1
 {
-    public class Class1:MarshalByRefObject
+    public class Class1 : MarshalByRefObject
     {
-        public void Run ()
+        public void Run()
         {
-            HttpRuntime.ProcessRequest (new SimpleWorkerRequest ("PageWithMaster.aspx", "", Console.Out));
+            HttpRuntime.ProcessRequest(
+                new SimpleWorkerRequest("PageWithMaster.aspx", "", Console.Out)
+            );
         }
     }
 }
-

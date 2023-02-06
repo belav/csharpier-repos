@@ -1,5 +1,5 @@
 //
-// XmlAttributes.cs: 
+// XmlAttributes.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,55 +55,53 @@ namespace System.Xml.Serialization
         private XmlTextAttribute xmlText;
         private XmlTypeAttribute xmlType;
 
-        public XmlAttributes ()
-        {
-        }
+        public XmlAttributes() { }
 
-        public XmlAttributes (ICustomAttributeProvider provider)
+        public XmlAttributes(ICustomAttributeProvider provider)
         {
             object[] attributes = provider.GetCustomAttributes(false);
-            foreach(object obj in attributes)
+            foreach (object obj in attributes)
             {
-                if(obj is XmlAnyAttributeAttribute)
-                    xmlAnyAttribute = (XmlAnyAttributeAttribute) obj;
-                else
-                if(obj is XmlAnyElementAttribute)
-                    xmlAnyElements.Add((XmlAnyElementAttribute) obj);
-                else if(obj is XmlArrayAttribute)
-                    xmlArray = (XmlArrayAttribute) obj;
-                else if(obj is XmlArrayItemAttribute)
-                    xmlArrayItems.Add((XmlArrayItemAttribute) obj);
-                else if(obj is XmlAttributeAttribute)
-                    xmlAttribute = (XmlAttributeAttribute) obj;
-                else if(obj is XmlChoiceIdentifierAttribute)
-                    xmlChoiceIdentifier = (XmlChoiceIdentifierAttribute) obj;
-                else if(obj is DefaultValueAttribute)
+                if (obj is XmlAnyAttributeAttribute)
+                    xmlAnyAttribute = (XmlAnyAttributeAttribute)obj;
+                else if (obj is XmlAnyElementAttribute)
+                    xmlAnyElements.Add((XmlAnyElementAttribute)obj);
+                else if (obj is XmlArrayAttribute)
+                    xmlArray = (XmlArrayAttribute)obj;
+                else if (obj is XmlArrayItemAttribute)
+                    xmlArrayItems.Add((XmlArrayItemAttribute)obj);
+                else if (obj is XmlAttributeAttribute)
+                    xmlAttribute = (XmlAttributeAttribute)obj;
+                else if (obj is XmlChoiceIdentifierAttribute)
+                    xmlChoiceIdentifier = (XmlChoiceIdentifierAttribute)obj;
+                else if (obj is DefaultValueAttribute)
                     xmlDefaultValue = ((DefaultValueAttribute)obj).Value;
-                else if(obj is XmlElementAttribute )
-                    xmlElements.Add((XmlElementAttribute ) obj);
-                else if(obj is XmlEnumAttribute)
-                    xmlEnum = (XmlEnumAttribute) obj;
-                else if(obj is XmlIgnoreAttribute)
+                else if (obj is XmlElementAttribute)
+                    xmlElements.Add((XmlElementAttribute)obj);
+                else if (obj is XmlEnumAttribute)
+                    xmlEnum = (XmlEnumAttribute)obj;
+                else if (obj is XmlIgnoreAttribute)
                     xmlIgnore = true;
-                else if(obj is XmlNamespaceDeclarationsAttribute)
+                else if (obj is XmlNamespaceDeclarationsAttribute)
                     xmlns = true;
-                else if(obj is XmlRootAttribute)
-                    xmlRoot = (XmlRootAttribute) obj;
-                else if(obj is XmlTextAttribute)
-                    xmlText = (XmlTextAttribute) obj;
-                else if(obj is XmlTypeAttribute)
-                    xmlType = (XmlTypeAttribute) obj;
+                else if (obj is XmlRootAttribute)
+                    xmlRoot = (XmlRootAttribute)obj;
+                else if (obj is XmlTextAttribute)
+                    xmlText = (XmlTextAttribute)obj;
+                else if (obj is XmlTypeAttribute)
+                    xmlType = (XmlTypeAttribute)obj;
             }
-            
-            if (xmlIgnore) {
+
+            if (xmlIgnore)
+            {
                 xmlAnyAttribute = null;
-                xmlAnyElements.Clear ();
+                xmlAnyElements.Clear();
                 xmlArray = null;
-                xmlArrayItems.Clear ();
+                xmlArrayItems.Clear();
                 xmlAttribute = null;
                 xmlChoiceIdentifier = null;
                 xmlDefaultValue = null;
-                xmlElements.Clear ();
+                xmlElements.Clear();
                 xmlEnum = null;
                 xmlns = false;
                 xmlRoot = null;
@@ -113,192 +111,128 @@ namespace System.Xml.Serialization
         }
 
         #region public properties
-        public XmlAnyAttributeAttribute XmlAnyAttribute 
+        public XmlAnyAttributeAttribute XmlAnyAttribute
         {
-            get 
-            {
-                return xmlAnyAttribute;
-            }
-            set 
-            {
-                xmlAnyAttribute = value;
-            }
+            get { return xmlAnyAttribute; }
+            set { xmlAnyAttribute = value; }
         }
 
-        public XmlAnyElementAttributes XmlAnyElements 
+        public XmlAnyElementAttributes XmlAnyElements
         {
-            get 
-            {
-                return xmlAnyElements;
-            }
+            get { return xmlAnyElements; }
         }
         public XmlArrayAttribute XmlArray
         {
-            get 
-            {
-                return xmlArray;
-            }
-            set 
-            {
-                xmlArray = value;
-            }
+            get { return xmlArray; }
+            set { xmlArray = value; }
         }
-        public XmlArrayItemAttributes XmlArrayItems 
+        public XmlArrayItemAttributes XmlArrayItems
         {
-            get 
-            {
-                return xmlArrayItems;
-            }
+            get { return xmlArrayItems; }
         }
-        public XmlAttributeAttribute XmlAttribute 
+        public XmlAttributeAttribute XmlAttribute
         {
-            get 
-            {
-                return xmlAttribute;
-            }
-            set 
-            {
-                xmlAttribute = value;
-            }
+            get { return xmlAttribute; }
+            set { xmlAttribute = value; }
         }
-        public XmlChoiceIdentifierAttribute XmlChoiceIdentifier 
+        public XmlChoiceIdentifierAttribute XmlChoiceIdentifier
         {
-            get 
-            {
-                return xmlChoiceIdentifier;
-            }
+            get { return xmlChoiceIdentifier; }
         }
-        public object XmlDefaultValue 
+        public object XmlDefaultValue
         {
-            get 
-            {
-                return xmlDefaultValue;
-            }
-            set 
-            {
-                xmlDefaultValue = value;
-            }
+            get { return xmlDefaultValue; }
+            set { xmlDefaultValue = value; }
         }
-        public XmlElementAttributes XmlElements 
+        public XmlElementAttributes XmlElements
         {
-            get 
-            {
-                return xmlElements;
-            }
+            get { return xmlElements; }
         }
-        public XmlEnumAttribute XmlEnum 
+        public XmlEnumAttribute XmlEnum
         {
-            get 
-            {
-                return xmlEnum;
-            }
-            set 
-            {
-                xmlEnum = value;
-            }
+            get { return xmlEnum; }
+            set { xmlEnum = value; }
         }
-        public bool XmlIgnore 
+        public bool XmlIgnore
         {
-            get 
-            {
-                return xmlIgnore;
-            }
-            set 
-            {
-                xmlIgnore = value;
-            }
+            get { return xmlIgnore; }
+            set { xmlIgnore = value; }
         }
-        public bool Xmlns 
+        public bool Xmlns
         {
-            get 
-            {
-                return xmlns;
-            }
-            set 
-            {
-                xmlns = value;
-            }
+            get { return xmlns; }
+            set { xmlns = value; }
         }
-        public XmlRootAttribute XmlRoot 
+        public XmlRootAttribute XmlRoot
         {
-            get 
-            {
-                return xmlRoot;}
-            set 
-            {
-                xmlRoot = value;
-            }
+            get { return xmlRoot; }
+            set { xmlRoot = value; }
         }
-        public XmlTextAttribute XmlText 
+        public XmlTextAttribute XmlText
         {
-            get 
-            {
-                return xmlText;
-            }
-            set 
-            {
-                xmlText = value;
-            }
+            get { return xmlText; }
+            set { xmlText = value; }
         }
-        public XmlTypeAttribute XmlType 
+        public XmlTypeAttribute XmlType
         {
-            get 
-            {
-                return xmlType;
-            }
-            set 
-            {
-                xmlType = value;
-            }
+            get { return xmlType; }
+            set { xmlType = value; }
         }
         #endregion
-        
-        internal void AddKeyHash (System.Text.StringBuilder sb)
-        {
-            sb.Append ("XA ");
-            
-            KeyHelper.AddField (sb, 1, xmlIgnore);
-            KeyHelper.AddField (sb, 2, xmlns);
-            KeyHelper.AddField (sb, 3, xmlAnyAttribute!=null);
 
-            xmlAnyElements.AddKeyHash (sb);
-            xmlArrayItems.AddKeyHash (sb);
-            xmlElements.AddKeyHash (sb);
-            
+        internal void AddKeyHash(System.Text.StringBuilder sb)
+        {
+            sb.Append("XA ");
+
+            KeyHelper.AddField(sb, 1, xmlIgnore);
+            KeyHelper.AddField(sb, 2, xmlns);
+            KeyHelper.AddField(sb, 3, xmlAnyAttribute != null);
+
+            xmlAnyElements.AddKeyHash(sb);
+            xmlArrayItems.AddKeyHash(sb);
+            xmlElements.AddKeyHash(sb);
+
             if (xmlArray != null)
-                xmlArray.AddKeyHash (sb);
-                
+                xmlArray.AddKeyHash(sb);
+
             if (xmlAttribute != null)
-                xmlAttribute.AddKeyHash (sb);
-                
-            if (xmlDefaultValue == null) {
-                sb.Append ("n");
+                xmlAttribute.AddKeyHash(sb);
+
+            if (xmlDefaultValue == null)
+            {
+                sb.Append("n");
             }
-            else if (!(xmlDefaultValue is System.DBNull)) {
-                string v = XmlCustomFormatter.ToXmlString (TypeTranslator.GetTypeData (xmlDefaultValue.GetType()), xmlDefaultValue);
-                sb.Append ("v" + v);
+            else if (!(xmlDefaultValue is System.DBNull))
+            {
+                string v = XmlCustomFormatter.ToXmlString(
+                    TypeTranslator.GetTypeData(xmlDefaultValue.GetType()),
+                    xmlDefaultValue
+                );
+                sb.Append("v" + v);
             }
-            
+
             if (xmlEnum != null)
-                xmlEnum.AddKeyHash (sb);
-                
+                xmlEnum.AddKeyHash(sb);
+
             if (xmlRoot != null)
-                xmlRoot.AddKeyHash (sb);
-                
+                xmlRoot.AddKeyHash(sb);
+
             if (xmlText != null)
-                xmlText.AddKeyHash (sb);
-                
+                xmlText.AddKeyHash(sb);
+
             if (xmlType != null)
-                xmlType.AddKeyHash (sb);
-                
+                xmlType.AddKeyHash(sb);
+
             if (xmlChoiceIdentifier != null)
-                xmlChoiceIdentifier.AddKeyHash (sb);
-                
-            sb.Append ("|");
+                xmlChoiceIdentifier.AddKeyHash(sb);
+
+            sb.Append("|");
         }
 
-        internal int? Order {
-            get {
+        internal int? Order
+        {
+            get
+            {
                 int? order = null;
                 if (XmlElements.Count > 0)
                     order = XmlElements.Order;
@@ -309,9 +243,10 @@ namespace System.Xml.Serialization
                 return order;
             }
         }
-        
-        internal int SortableOrder {
-            get { return Order != null ? (int) Order : int.MinValue; }
+
+        internal int SortableOrder
+        {
+            get { return Order != null ? (int)Order : int.MinValue; }
         }
     }
 }

@@ -6,16 +6,15 @@ using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit)]
 // non-generic base class
-public class Base
-{
-}
+public class Base { }
 
 // ... AND subclass is explicit
 [StructLayout(LayoutKind.Explicit)]
 public class Sub : Base
-{    
-  // and field is at offset 8
-  [FieldOffset(8)]public object Fld1;
+{
+    // and field is at offset 8
+    [FieldOffset(8)]
+    public object Fld1;
 }
 
 public class Test_derivedexplicitclass
@@ -24,9 +23,9 @@ public class Test_derivedexplicitclass
     {
         try
         {
-                  new Sub();
-               Console.WriteLine("PASS");
-               
+            new Sub();
+            Console.WriteLine("PASS");
+
             return 100;
         }
         catch (TypeLoadException e)

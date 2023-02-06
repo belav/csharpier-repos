@@ -8,8 +8,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class UnsafeStatementSyntax
     {
-        public UnsafeStatementSyntax Update(SyntaxToken unsafeKeyword, BlockSyntax block)
-            => Update(AttributeLists, unsafeKeyword, block);
+        public UnsafeStatementSyntax Update(SyntaxToken unsafeKeyword, BlockSyntax block) =>
+            Update(AttributeLists, unsafeKeyword, block);
     }
 }
 
@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static UnsafeStatementSyntax UnsafeStatement(SyntaxToken unsafeKeyword, BlockSyntax block)
-            => UnsafeStatement(attributeLists: default, unsafeKeyword, block);
+        public static UnsafeStatementSyntax UnsafeStatement(
+            SyntaxToken unsafeKeyword,
+            BlockSyntax block
+        ) => UnsafeStatement(attributeLists: default, unsafeKeyword, block);
     }
 }

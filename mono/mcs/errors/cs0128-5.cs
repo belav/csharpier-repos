@@ -3,7 +3,7 @@
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         short xx;
         var (xx, yy) = (1, 'g');

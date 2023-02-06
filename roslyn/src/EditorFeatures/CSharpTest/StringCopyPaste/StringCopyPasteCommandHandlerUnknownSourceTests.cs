@@ -7,9 +7,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
     public abstract class StringCopyPasteCommandHandlerUnknownSourceTests
         : StringCopyPasteCommandHandlerTests
     {
-        protected static void TestPasteUnknownSource(string pasteText, string markup, string expectedMarkup, string afterUndo)
+        protected static void TestPasteUnknownSource(
+            string pasteText,
+            string markup,
+            string expectedMarkup,
+            string afterUndo
+        )
         {
-            using var state = StringCopyPasteTestState.CreateTestState(copyFileMarkup: null, pasteFileMarkup: markup, mockCopyPasteService: true);
+            using var state = StringCopyPasteTestState.CreateTestState(
+                copyFileMarkup: null,
+                pasteFileMarkup: markup,
+                mockCopyPasteService: true
+            );
 
             state.TestCopyPaste(expectedMarkup, pasteText, pasteTextIsKnown: false, afterUndo);
         }

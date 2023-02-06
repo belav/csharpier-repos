@@ -36,25 +36,25 @@ namespace Mono
      */
     static class MonoNativePlatform
     {
-        [DllImport ("System.Native")]
-        extern static int mono_native_get_platform_type ();
+        [DllImport("System.Native")]
+        extern static int mono_native_get_platform_type();
 
-        public static MonoNativePlatformType GetPlatformType ()
+        public static MonoNativePlatformType GetPlatformType()
         {
-            return (MonoNativePlatformType)mono_native_get_platform_type ();
+            return (MonoNativePlatformType)mono_native_get_platform_type();
         }
 
         /*
          * Test Suite Use Only.
          */
-        [MethodImpl (MethodImplOptions.InternalCall)]
-        extern static int IncrementInternalCounter ();
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        extern static int IncrementInternalCounter();
 
-        [DllImport ("System.Native")]
-        extern static int mono_native_is_initialized ();
+        [DllImport("System.Native")]
+        extern static int mono_native_is_initialized();
 
-        [DllImport ("System.Native")]
-        extern static int mono_native_initialize ();
+        [DllImport("System.Native")]
+        extern static int mono_native_initialize();
 
         /*
          * This method is called by the xamarin-macios test suite
@@ -64,23 +64,23 @@ namespace Mono
          * `mono_add_internal_call_with_flags` and the mtouch and mmp
          * tools can correctly deal with it.
          */
-        public static void Initialize ()
+        public static void Initialize()
         {
-            mono_native_initialize ();
+            mono_native_initialize();
         }
 
-        public static bool IsInitialized ()
+        public static bool IsInitialized()
         {
-            return mono_native_is_initialized () != 0;
+            return mono_native_is_initialized() != 0;
         }
 
         /*
          * Test Suite Use Only.
          */
-        internal static int TestInternalCounter ()
+        internal static int TestInternalCounter()
         {
             // Atomically increments internal counter, for testing purposes only.
-            return IncrementInternalCounter ();
+            return IncrementInternalCounter();
         }
     }
 }

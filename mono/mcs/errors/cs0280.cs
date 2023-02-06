@@ -6,17 +6,16 @@ using System;
 
 unsafe class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        fixed (int* p = new Fixable ()) {
-        }
+        fixed (int* p = new Fixable()) { }
     }
 
     struct Fixable
     {
-        public ref int GetPinnableReference (int i = 1)
+        public ref int GetPinnableReference(int i = 1)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

@@ -19,12 +19,12 @@ public class DictionaryModelBinderTest
     {
         // Arrange
         var values = new Dictionary<string, string>()
-            {
-                { "someName[0].Key", "42" },
-                { "someName[0].Value", "forty-two" },
-                { "someName[1].Key", "84" },
-                { "someName[1].Value", "eighty-four" },
-            };
+        {
+            { "someName[0].Key", "42" },
+            { "someName[0].Value", "forty-two" },
+            { "someName[1].Key", "84" },
+            { "someName[1].Value", "eighty-four" },
+        };
 
         // Value Provider
 
@@ -34,7 +34,8 @@ public class DictionaryModelBinderTest
         var binder = new DictionaryModelBinder<int, string>(
             new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -42,7 +43,9 @@ public class DictionaryModelBinderTest
         // Assert
         Assert.True(bindingContext.Result.IsModelSet);
 
-        var dictionary = Assert.IsAssignableFrom<IDictionary<int, string>>(bindingContext.Result.Model);
+        var dictionary = Assert.IsAssignableFrom<IDictionary<int, string>>(
+            bindingContext.Result.Model
+        );
         Assert.NotNull(dictionary);
         Assert.Equal(2, dictionary.Count);
         Assert.Equal("forty-two", dictionary[42]);
@@ -59,12 +62,12 @@ public class DictionaryModelBinderTest
     {
         // Arrange
         var values = new Dictionary<string, string>()
-            {
-                { "someName[0].Key", "42" },
-                { "someName[0].Value", "forty-two" },
-                { "someName[1].Key", "84" },
-                { "someName[1].Value", "eighty-four" },
-            };
+        {
+            { "someName[0].Key", "42" },
+            { "someName[0].Value", "forty-two" },
+            { "someName[1].Key", "84" },
+            { "someName[1].Value", "eighty-four" },
+        };
 
         var bindingContext = GetModelBindingContext(isReadOnly, values);
         bindingContext.ValueProvider = CreateEnumerableValueProvider("{0}", values);
@@ -75,7 +78,8 @@ public class DictionaryModelBinderTest
         var binder = new DictionaryModelBinder<int, string>(
             new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -99,25 +103,25 @@ public class DictionaryModelBinderTest
         get
         {
             var dictionaryWithOne = new Dictionary<string, string>(StringComparer.Ordinal)
-                {
-                    { "one", "one" },
-                };
+            {
+                { "one", "one" },
+            };
             var dictionaryWithThree = new Dictionary<string, string>(StringComparer.Ordinal)
-                {
-                    { "one", "one" },
-                    { "two", "two" },
-                    { "three", "three" },
-                };
+            {
+                { "one", "one" },
+                { "two", "two" },
+                { "three", "three" },
+            };
 
             return new TheoryData<string, string, IDictionary<string, string>>
-                {
-                    { string.Empty, "[{0}]", dictionaryWithOne },
-                    { string.Empty, "[{0}]", dictionaryWithThree },
-                    { "prefix", "prefix[{0}]", dictionaryWithOne },
-                    { "prefix", "prefix[{0}]", dictionaryWithThree },
-                    { "prefix.property", "prefix.property[{0}]", dictionaryWithOne },
-                    { "prefix.property", "prefix.property[{0}]", dictionaryWithThree },
-                };
+            {
+                { string.Empty, "[{0}]", dictionaryWithOne },
+                { string.Empty, "[{0}]", dictionaryWithThree },
+                { "prefix", "prefix[{0}]", dictionaryWithOne },
+                { "prefix", "prefix[{0}]", dictionaryWithThree },
+                { "prefix.property", "prefix.property[{0}]", dictionaryWithOne },
+                { "prefix.property", "prefix.property[{0}]", dictionaryWithThree },
+            };
         }
     }
 
@@ -126,13 +130,15 @@ public class DictionaryModelBinderTest
     public async Task BindModel_FallsBackToBindingValues(
         string modelName,
         string keyFormat,
-        IDictionary<string, string> dictionary)
+        IDictionary<string, string> dictionary
+    )
     {
         // Arrange
         var binder = new DictionaryModelBinder<string, string>(
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var bindingContext = CreateContext();
         bindingContext.ModelName = modelName;
@@ -142,7 +148,8 @@ public class DictionaryModelBinderTest
         var metadataProvider = new TestModelMetadataProvider();
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithDictionaryProperties),
-            nameof(ModelWithDictionaryProperties.DictionaryProperty));
+            nameof(ModelWithDictionaryProperties.DictionaryProperty)
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -150,7 +157,9 @@ public class DictionaryModelBinderTest
         // Assert
         Assert.True(bindingContext.Result.IsModelSet);
 
-        var resultDictionary = Assert.IsAssignableFrom<IDictionary<string, string>>(bindingContext.Result.Model);
+        var resultDictionary = Assert.IsAssignableFrom<IDictionary<string, string>>(
+            bindingContext.Result.Model
+        );
         Assert.Equal(dictionary, resultDictionary);
     }
 
@@ -160,16 +169,17 @@ public class DictionaryModelBinderTest
     {
         // Arrange
         var dictionary = new Dictionary<string, string>(StringComparer.Ordinal)
-            {
-                { "one", "one" },
-                { "two", "two" },
-                { "three", "three" },
-            };
+        {
+            { "one", "one" },
+            { "two", "two" },
+            { "three", "three" },
+        };
 
         var binder = new DictionaryModelBinder<string, string>(
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var bindingContext = CreateContext();
         bindingContext.ModelName = "prefix";
@@ -179,7 +189,8 @@ public class DictionaryModelBinderTest
         var metadataProvider = new TestModelMetadataProvider();
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithDictionaryProperties),
-            nameof(ModelWithDictionaryProperties.DictionaryProperty));
+            nameof(ModelWithDictionaryProperties.DictionaryProperty)
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -187,7 +198,9 @@ public class DictionaryModelBinderTest
         // Assert
         Assert.True(bindingContext.Result.IsModelSet);
 
-        var resultDictionary = Assert.IsAssignableFrom<IDictionary<string, string>>(bindingContext.Result.Model);
+        var resultDictionary = Assert.IsAssignableFrom<IDictionary<string, string>>(
+            bindingContext.Result.Model
+        );
         Assert.Empty(resultDictionary);
     }
 
@@ -195,42 +208,53 @@ public class DictionaryModelBinderTest
     {
         get
         {
-            var dictionaryWithOne = new Dictionary<long, int>
-                {
-                    { 0L, 0 },
-                };
+            var dictionaryWithOne = new Dictionary<long, int> { { 0L, 0 }, };
             var dictionaryWithThree = new Dictionary<long, int>
-                {
-                    { -1L, -1 },
-                    { long.MaxValue, int.MaxValue },
-                    { long.MinValue, int.MinValue },
-                };
+            {
+                { -1L, -1 },
+                { long.MaxValue, int.MaxValue },
+                { long.MinValue, int.MinValue },
+            };
 
-            return new TheoryData<IDictionary<long, int>> { dictionaryWithOne, dictionaryWithThree };
+            return new TheoryData<IDictionary<long, int>>
+            {
+                dictionaryWithOne,
+                dictionaryWithThree
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(LongToIntData))]
-    public async Task BindModel_FallsBackToBindingValues_WithValueTypes(IDictionary<long, int> dictionary)
+    public async Task BindModel_FallsBackToBindingValues_WithValueTypes(
+        IDictionary<long, int> dictionary
+    )
     {
         // Arrange
-        var stringDictionary = dictionary.ToDictionary(kvp => kvp.Key.ToString(CultureInfo.InvariantCulture), kvp => kvp.Value.ToString(CultureInfo.InvariantCulture));
+        var stringDictionary = dictionary.ToDictionary(
+            kvp => kvp.Key.ToString(CultureInfo.InvariantCulture),
+            kvp => kvp.Value.ToString(CultureInfo.InvariantCulture)
+        );
 
         var binder = new DictionaryModelBinder<long, int>(
             new SimpleTypeModelBinder(typeof(long), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var bindingContext = CreateContext();
         bindingContext.ModelName = "prefix";
-        bindingContext.ValueProvider = CreateEnumerableValueProvider("prefix[{0}]", stringDictionary);
+        bindingContext.ValueProvider = CreateEnumerableValueProvider(
+            "prefix[{0}]",
+            stringDictionary
+        );
         bindingContext.FieldName = bindingContext.ModelName;
 
         var metadataProvider = new TestModelMetadataProvider();
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithDictionaryProperties),
-            nameof(ModelWithDictionaryProperties.DictionaryWithValueTypesProperty));
+            nameof(ModelWithDictionaryProperties.DictionaryWithValueTypesProperty)
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -238,7 +262,9 @@ public class DictionaryModelBinderTest
         // Assert
         Assert.True(bindingContext.Result.IsModelSet);
 
-        var resultDictionary = Assert.IsAssignableFrom<IDictionary<long, int>>(bindingContext.Result.Model);
+        var resultDictionary = Assert.IsAssignableFrom<IDictionary<long, int>>(
+            bindingContext.Result.Model
+        );
         Assert.Equal(dictionary, resultDictionary);
     }
 
@@ -247,17 +273,23 @@ public class DictionaryModelBinderTest
     {
         // Arrange
         var dictionary = new Dictionary<int, ModelWithProperties>
+        {
             {
-                { 23, new ModelWithProperties { Id = 43, Name = "Wilma" } },
-                { 27, new ModelWithProperties { Id = 98, Name = "Fred" } },
-            };
+                23,
+                new ModelWithProperties { Id = 43, Name = "Wilma" }
+            },
+            {
+                27,
+                new ModelWithProperties { Id = 98, Name = "Fred" }
+            },
+        };
         var stringDictionary = new Dictionary<string, string>
-            {
-                { "prefix[23].Id", "43" },
-                { "prefix[23].Name", "Wilma" },
-                { "prefix[27].Id", "98" },
-                { "prefix[27].Name", "Fred" },
-            };
+        {
+            { "prefix[23].Id", "43" },
+            { "prefix[23].Name", "Wilma" },
+            { "prefix[27].Id", "98" },
+            { "prefix[27].Name", "Fred" },
+        };
 
         var bindingContext = CreateContext();
         bindingContext.ModelName = "prefix";
@@ -267,20 +299,30 @@ public class DictionaryModelBinderTest
         var metadataProvider = new TestModelMetadataProvider();
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithDictionaryProperties),
-            nameof(ModelWithDictionaryProperties.DictionaryWithComplexValuesProperty));
+            nameof(ModelWithDictionaryProperties.DictionaryWithComplexValuesProperty)
+        );
 
         var valueMetadata = metadataProvider.GetMetadataForType(typeof(ModelWithProperties));
 
         var binder = new DictionaryModelBinder<int, ModelWithProperties>(
             new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
-            new ComplexObjectModelBinder(new Dictionary<ModelMetadata, IModelBinder>()
-            {
-                    { valueMetadata.Properties["Id"], new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance) },
-                    { valueMetadata.Properties["Name"], new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance) },
-            },
-            Array.Empty<IModelBinder>(),
-            NullLogger<ComplexObjectModelBinder>.Instance),
-            NullLoggerFactory.Instance);
+            new ComplexObjectModelBinder(
+                new Dictionary<ModelMetadata, IModelBinder>()
+                {
+                    {
+                        valueMetadata.Properties["Id"],
+                        new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance)
+                    },
+                    {
+                        valueMetadata.Properties["Name"],
+                        new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance)
+                    },
+                },
+                Array.Empty<IModelBinder>(),
+                NullLogger<ComplexObjectModelBinder>.Instance
+            ),
+            NullLoggerFactory.Instance
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -288,20 +330,25 @@ public class DictionaryModelBinderTest
         // Assert
         Assert.True(bindingContext.Result.IsModelSet);
 
-        var resultDictionary = Assert.IsAssignableFrom<IDictionary<int, ModelWithProperties>>(bindingContext.Result.Model);
+        var resultDictionary = Assert.IsAssignableFrom<IDictionary<int, ModelWithProperties>>(
+            bindingContext.Result.Model
+        );
         Assert.Equal(dictionary, resultDictionary);
 
         // This requires a non-default IValidationStrategy
         Assert.Contains(bindingContext.Result.Model, bindingContext.ValidationState.Keys);
         var entry = bindingContext.ValidationState[bindingContext.Result.Model];
-        var strategy = Assert.IsType<ShortFormDictionaryValidationStrategy<int, ModelWithProperties>>(entry.Strategy);
+        var strategy = Assert.IsType<
+            ShortFormDictionaryValidationStrategy<int, ModelWithProperties>
+        >(entry.Strategy);
         Assert.Equal(
             new KeyValuePair<string, int>[]
             {
-                    new KeyValuePair<string, int>("prefix[23]", 23),
-                    new KeyValuePair<string, int>("prefix[27]", 27),
+                new KeyValuePair<string, int>("prefix[23]", 23),
+                new KeyValuePair<string, int>("prefix[27]", 27),
             }.OrderBy(kvp => kvp.Key),
-            strategy.KeyMappings.OrderBy(kvp => kvp.Key));
+            strategy.KeyMappings.OrderBy(kvp => kvp.Key)
+        );
     }
 
     [Theory]
@@ -309,14 +356,16 @@ public class DictionaryModelBinderTest
     public async Task BindModel_FallsBackToBindingValues_WithCustomDictionary(
         string modelName,
         string keyFormat,
-        IDictionary<string, string> dictionary)
+        IDictionary<string, string> dictionary
+    )
     {
         // Arrange
         var expectedDictionary = new SortedDictionary<string, string>(dictionary);
         var binder = new DictionaryModelBinder<string, string>(
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var bindingContext = CreateContext();
         bindingContext.ModelName = modelName;
@@ -327,7 +376,8 @@ public class DictionaryModelBinderTest
         var metadataProvider = new TestModelMetadataProvider();
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithDictionaryProperties),
-            nameof(ModelWithDictionaryProperties.CustomDictionaryProperty));
+            nameof(ModelWithDictionaryProperties.CustomDictionaryProperty)
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -335,11 +385,14 @@ public class DictionaryModelBinderTest
         // Assert
         Assert.True(bindingContext.Result.IsModelSet);
 
-        var resultDictionary = Assert.IsAssignableFrom<SortedDictionary<string, string>>(bindingContext.Result.Model);
+        var resultDictionary = Assert.IsAssignableFrom<SortedDictionary<string, string>>(
+            bindingContext.Result.Model
+        );
         Assert.Equal(expectedDictionary, resultDictionary);
     }
 
-    private IActionResult ActionWithDictionaryParameter(Dictionary<string, string> parameter) => null;
+    private IActionResult ActionWithDictionaryParameter(Dictionary<string, string> parameter) =>
+        null;
 
     [Theory]
     [InlineData(false, false)]
@@ -348,7 +401,8 @@ public class DictionaryModelBinderTest
     [InlineData(true, true)]
     public async Task DictionaryModelBinder_CreatesEmptyCollection_IfIsTopLevelObject(
         bool allowValidatingTopLevelNodes,
-        bool isBindingRequired)
+        bool isBindingRequired
+    )
     {
         // Arrange
         var expectedErrorCount = isBindingRequired ? 1 : 0;
@@ -356,7 +410,8 @@ public class DictionaryModelBinderTest
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
             NullLoggerFactory.Instance,
-            allowValidatingTopLevelNodes);
+            allowValidatingTopLevelNodes
+        );
 
         var bindingContext = CreateContext();
         bindingContext.IsTopLevelObject = true;
@@ -366,7 +421,10 @@ public class DictionaryModelBinderTest
 
         var metadataProvider = new TestModelMetadataProvider();
         var parameter = typeof(DictionaryModelBinderTest)
-            .GetMethod(nameof(ActionWithDictionaryParameter), BindingFlags.Instance | BindingFlags.NonPublic)
+            .GetMethod(
+                nameof(ActionWithDictionaryParameter),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )
             .GetParameters()[0];
         metadataProvider
             .ForParameter(parameter)
@@ -392,7 +450,8 @@ public class DictionaryModelBinderTest
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance),
             NullLoggerFactory.Instance,
-            allowValidatingTopLevelNodes: true);
+            allowValidatingTopLevelNodes: true
+        );
 
         var bindingContext = CreateContext();
         bindingContext.IsTopLevelObject = true;
@@ -401,11 +460,12 @@ public class DictionaryModelBinderTest
 
         var metadataProvider = new TestModelMetadataProvider();
         var parameter = typeof(DictionaryModelBinderTest)
-            .GetMethod(nameof(ActionWithDictionaryParameter), BindingFlags.Instance | BindingFlags.NonPublic)
+            .GetMethod(
+                nameof(ActionWithDictionaryParameter),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )
             .GetParameters()[0];
-        metadataProvider
-            .ForParameter(parameter)
-            .BindingDetails(b => b.IsBindingRequired = true);
+        metadataProvider.ForParameter(parameter).BindingDetails(b => b.IsBindingRequired = true);
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForParameter(parameter);
 
         bindingContext.ValueProvider = new TestValueProvider(new Dictionary<string, object>());
@@ -420,7 +480,10 @@ public class DictionaryModelBinderTest
         var keyValuePair = Assert.Single(bindingContext.ModelState);
         Assert.Equal("modelName", keyValuePair.Key);
         var error = Assert.Single(keyValuePair.Value.Errors);
-        Assert.Equal("A value for the 'fieldName' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'fieldName' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Theory]
@@ -435,14 +498,16 @@ public class DictionaryModelBinderTest
     public async Task DictionaryModelBinder_DoesNotCreateCollection_IfNotIsTopLevelObject(
         string prefix,
         bool allowValidatingTopLevelNodes,
-        bool isBindingRequired)
+        bool isBindingRequired
+    )
     {
         // Arrange
         var binder = new DictionaryModelBinder<int, int>(
             new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
             NullLoggerFactory.Instance,
-            allowValidatingTopLevelNodes);
+            allowValidatingTopLevelNodes
+        );
 
         var bindingContext = CreateContext();
         bindingContext.ModelName = ModelNames.CreatePropertyModelName(prefix, "ListProperty");
@@ -451,11 +516,13 @@ public class DictionaryModelBinderTest
         metadataProvider
             .ForProperty(
                 typeof(ModelWithDictionaryProperties),
-                nameof(ModelWithDictionaryProperties.DictionaryProperty))
+                nameof(ModelWithDictionaryProperties.DictionaryProperty)
+            )
             .BindingDetails(b => b.IsBindingRequired = isBindingRequired);
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithDictionaryProperties),
-            nameof(ModelWithDictionaryProperties.DictionaryProperty));
+            nameof(ModelWithDictionaryProperties.DictionaryProperty)
+        );
 
         bindingContext.ValueProvider = new TestValueProvider(new Dictionary<string, object>());
 
@@ -473,15 +540,15 @@ public class DictionaryModelBinderTest
         get
         {
             return new TheoryData<Type, bool>
-                {
-                    { typeof(IEnumerable<KeyValuePair<int, int>>), true },
-                    { typeof(ICollection<KeyValuePair<int, int>>), true },
-                    { typeof(IDictionary<int, int>), true },
-                    { typeof(Dictionary<int, int>), true },
-                    { typeof(SortedDictionary<int, int>), true },
-                    { typeof(IList<KeyValuePair<int, int>>), true },
-                    { typeof(ISet<KeyValuePair<int, int>>), false },
-                };
+            {
+                { typeof(IEnumerable<KeyValuePair<int, int>>), true },
+                { typeof(ICollection<KeyValuePair<int, int>>), true },
+                { typeof(IDictionary<int, int>), true },
+                { typeof(Dictionary<int, int>), true },
+                { typeof(SortedDictionary<int, int>), true },
+                { typeof(IList<KeyValuePair<int, int>>), true },
+                { typeof(ISet<KeyValuePair<int, int>>), false },
+            };
         }
     }
 
@@ -493,7 +560,8 @@ public class DictionaryModelBinderTest
         var binder = new DictionaryModelBinder<int, int>(
             new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
             new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
         var result = binder.CanCreateInstance(modelType);
@@ -504,10 +572,7 @@ public class DictionaryModelBinderTest
 
     private static DefaultModelBindingContext CreateContext()
     {
-        var actionContext = new ActionContext()
-        {
-            HttpContext = new DefaultHttpContext(),
-        };
+        var actionContext = new ActionContext() { HttpContext = new DefaultHttpContext(), };
         var modelBindingContext = new DefaultModelBindingContext()
         {
             ActionContext = actionContext,
@@ -520,43 +585,54 @@ public class DictionaryModelBinderTest
 
     private static IValueProvider CreateEnumerableValueProvider(
         string keyFormat,
-        IDictionary<string, string> dictionary)
+        IDictionary<string, string> dictionary
+    )
     {
         // Convert to an IDictionary<string, StringValues> then wrap it up.
         var backingStore = dictionary.ToDictionary(
             kvp => string.Format(CultureInfo.InvariantCulture, keyFormat, kvp.Key),
-            kvp => (StringValues)kvp.Value);
+            kvp => (StringValues)kvp.Value
+        );
 
         var formCollection = new FormCollection(backingStore);
 
         return new FormValueProvider(
             BindingSource.Form,
             formCollection,
-            CultureInfo.InvariantCulture);
+            CultureInfo.InvariantCulture
+        );
     }
 
     // Like CreateEnumerableValueProvider except returned instance does not implement IEnumerableValueProvider.
-    private static IValueProvider CreateTestValueProvider(string keyFormat, IDictionary<string, string> dictionary)
+    private static IValueProvider CreateTestValueProvider(
+        string keyFormat,
+        IDictionary<string, string> dictionary
+    )
     {
         // Convert to an IDictionary<string, object> then wrap it up.
         var backingStore = dictionary.ToDictionary(
             kvp => string.Format(CultureInfo.InvariantCulture, keyFormat, kvp.Key),
-            kvp => (object)kvp.Value);
+            kvp => (object)kvp.Value
+        );
 
         return new TestValueProvider(BindingSource.Form, backingStore);
     }
 
     private static DefaultModelBindingContext GetModelBindingContext(
         bool isReadOnly,
-        IDictionary<string, string> values = null)
+        IDictionary<string, string> values = null
+    )
     {
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider
-            .ForProperty<ModelWithIDictionaryProperty>(nameof(ModelWithIDictionaryProperty.DictionaryProperty))
+            .ForProperty<ModelWithIDictionaryProperty>(
+                nameof(ModelWithIDictionaryProperty.DictionaryProperty)
+            )
             .BindingDetails(bd => bd.IsReadOnly = isReadOnly);
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithIDictionaryProperty),
-            nameof(ModelWithIDictionaryProperty.DictionaryProperty));
+            nameof(ModelWithIDictionaryProperty.DictionaryProperty)
+        );
 
         var valueProvider = new SimpleValueProvider();
         foreach (var kvp in values)
@@ -584,7 +660,10 @@ public class DictionaryModelBinderTest
 
         public Dictionary<string, string> DictionaryProperty { get; set; }
 
-        public Dictionary<int, ModelWithProperties> DictionaryWithComplexValuesProperty { get; set; }
+        public Dictionary<
+            int,
+            ModelWithProperties
+        > DictionaryWithComplexValuesProperty { get; set; }
 
         public Dictionary<long, int> DictionaryWithValueTypesProperty { get; set; }
     }
@@ -597,9 +676,9 @@ public class DictionaryModelBinderTest
 
         public override bool Equals(object obj)
         {
-            return obj is ModelWithProperties other &&
-                Id == other.Id &&
-                string.Equals(Name, other.Name, StringComparison.Ordinal);
+            return obj is ModelWithProperties other
+                && Id == other.Id
+                && string.Equals(Name, other.Name, StringComparison.Ordinal);
         }
 
         public override int GetHashCode()
@@ -610,7 +689,7 @@ public class DictionaryModelBinderTest
 
         public override string ToString()
         {
-            return $"{{{ Id }, '{ Name }'}}";
+            return $"{{{Id}, '{Name}'}}";
         }
     }
 }

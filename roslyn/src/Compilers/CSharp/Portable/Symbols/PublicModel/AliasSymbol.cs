@@ -20,10 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         INamespaceOrTypeSymbol IAliasSymbol.Target
         {
-            get
-            {
-                return _underlying.Target.GetPublicSymbol();
-            }
+            get { return _underlying.Target.GetPublicSymbol(); }
         }
 
         #region ISymbol Members
@@ -39,7 +36,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitAlias(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitAlias(this, argument);
         }

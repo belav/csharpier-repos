@@ -38,184 +38,206 @@ namespace MonoTests.System.IO
     {
         class MockStream : Stream
         {
-            bool canRead, canSeek, canWrite;
+            bool canRead,
+                canSeek,
+                canWrite;
             public event Action OnFlush;
             public event Func<byte[], int, int, int> OnRead;
             public event Action<byte[], int, int> OnWrite;
 
-            public MockStream (bool canRead, bool canSeek, bool canWrite)
+            public MockStream(bool canRead, bool canSeek, bool canWrite)
             {
                 this.canRead = canRead;
                 this.canSeek = canSeek;
                 this.canWrite = canWrite;
             }
 
-            public override bool CanRead {
-                get {
-                    return canRead;
-                }
+            public override bool CanRead
+            {
+                get { return canRead; }
             }
 
-            public override bool CanSeek {
-                get {
-                    return canSeek;
-                }
+            public override bool CanSeek
+            {
+                get { return canSeek; }
             }
 
-            public override bool CanWrite {
-                get {
-                    return canWrite;
-                }
+            public override bool CanWrite
+            {
+                get { return canWrite; }
             }
 
-            public override void Flush ()
+            public override void Flush()
             {
                 if (OnFlush != null)
-                    OnFlush ();
+                    OnFlush();
             }
 
-            public override long Length {
-                get { throw new NotImplementedException (); }
+            public override long Length
+            {
+                get { throw new NotImplementedException(); }
             }
 
-            public override long Position {
-                get {
-                    throw new NotImplementedException ();
-                }
-                set {
-                    throw new NotImplementedException ();
-                }
+            public override long Position
+            {
+                get { throw new NotImplementedException(); }
+                set { throw new NotImplementedException(); }
             }
 
-            public override int Read (byte[] buffer, int offset, int count)
+            public override int Read(byte[] buffer, int offset, int count)
             {
                 if (OnRead != null)
-                    return OnRead (buffer, offset, count);
+                    return OnRead(buffer, offset, count);
 
                 return -1;
             }
 
-            public override long Seek (long offset, SeekOrigin origin)
+            public override long Seek(long offset, SeekOrigin origin)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            public override void SetLength (long value)
+            public override void SetLength(long value)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            public override void Write (byte[] buffer, int offset, int count)
+            public override void Write(byte[] buffer, int offset, int count)
             {
                 if (OnWrite != null)
-                    OnWrite (buffer, offset, count);
+                    OnWrite(buffer, offset, count);
             }
         }
 
         [Test]
-        public void SynchronizedTest ()
+        public void SynchronizedTest()
         {
-            var s = Stream.Synchronized (new MemoryStream ());
-            s.Close ();
-            Assert.IsFalse (s.CanRead, "#1");
+            var s = Stream.Synchronized(new MemoryStream());
+            s.Close();
+            Assert.IsFalse(s.CanRead, "#1");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void CopyAsync ()
+        [Category("MultiThreaded")]
+        public void CopyAsync()
         {
-            var ms = new MockStream (true, false, true);
+            var ms = new MockStream(true, false, true);
             int counter = 4;
-            ms.OnRead += delegate { return --counter; };
-            var memory = new MemoryStream ();
-            Assert.IsTrue (ms.CopyToAsync (ms).Wait (1000));
+            ms.OnRead += delegate
+            {
+                return --counter;
+            };
+            var memory = new MemoryStream();
+            Assert.IsTrue(ms.CopyToAsync(ms).Wait(1000));
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FlushAsync ()
+        [Category("MultiThreaded")]
+        public void FlushAsync()
         {
             bool called = false;
-            var ms = new MockStream (false, false, false);
-            ms.OnFlush += () => { called = true; };
-            var t = ms.FlushAsync ();
-            Assert.IsTrue (t.Wait (1000), "#1");
-            Assert.IsTrue (called, "#2");
+            var ms = new MockStream(false, false, false);
+            ms.OnFlush += () =>
+            {
+                called = true;
+            };
+            var t = ms.FlushAsync();
+            Assert.IsTrue(t.Wait(1000), "#1");
+            Assert.IsTrue(called, "#2");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void FlushAsync_Exception ()
+        [Category("MultiThreaded")]
+        public void FlushAsync_Exception()
         {
-            var ms = new MockStream (false, false, false);
-            ms.OnFlush += () => { throw new ApplicationException (); };
-            var t = ms.FlushAsync ();
-            try {
-                t.Wait (1000);
-                Assert.Fail ();
-            } catch (AggregateException) {
+            var ms = new MockStream(false, false, false);
+            ms.OnFlush += () =>
+            {
+                throw new ApplicationException();
+            };
+            var t = ms.FlushAsync();
+            try
+            {
+                t.Wait(1000);
+                Assert.Fail();
             }
+            catch (AggregateException) { }
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void ReadAsync ()
-        {
-            bool called = false;
-            var buffer = new byte[4];
-            var ms = new MockStream (true, false, false);
-            ms.OnRead += (b, p, c) => { called = true; return 2; };
-            var t = ms.ReadAsync (buffer, 0, 4);
-
-            Assert.IsTrue (t.Wait (1000), "#1");
-            Assert.IsTrue (called, "#2");
-            Assert.AreEqual (2, t.Result, "#3");
-        }
-
-        [Test]
-        [Category ("MultiThreaded")]
-        public void ReadAsync_Exception ()
-        {
-            var buffer = new byte[4];
-            var ms = new MockStream (true, false, false);
-            ms.OnRead += (b, p, c) => { throw new ApplicationException (); };
-            var t = ms.ReadAsync (buffer, 0, 4);
-
-            try {
-                t.Wait (1000);
-                Assert.Fail ();
-            } catch (AggregateException) {
-            }
-        }
-
-        [Test]
-        [Category ("MultiThreaded")]
-        public void WriteAsync ()
+        [Category("MultiThreaded")]
+        public void ReadAsync()
         {
             bool called = false;
             var buffer = new byte[4];
-            var ms = new MockStream (false, false, true);
-            ms.OnWrite += (b, p, c) => { called = true; };
-            var t = ms.WriteAsync (buffer, 0, 4);
+            var ms = new MockStream(true, false, false);
+            ms.OnRead += (b, p, c) =>
+            {
+                called = true;
+                return 2;
+            };
+            var t = ms.ReadAsync(buffer, 0, 4);
 
-            Assert.IsTrue (t.Wait (1000), "#1");
-            Assert.IsTrue (called, "#2");
+            Assert.IsTrue(t.Wait(1000), "#1");
+            Assert.IsTrue(called, "#2");
+            Assert.AreEqual(2, t.Result, "#3");
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void WriteAsync_Exception ()
+        [Category("MultiThreaded")]
+        public void ReadAsync_Exception()
         {
             var buffer = new byte[4];
-            var ms = new MockStream (false, false, true);
-            ms.OnWrite += (b, p, c) => { throw new ApplicationException (); };
-            var t = ms.WriteAsync (buffer, 0, 4);
+            var ms = new MockStream(true, false, false);
+            ms.OnRead += (b, p, c) =>
+            {
+                throw new ApplicationException();
+            };
+            var t = ms.ReadAsync(buffer, 0, 4);
 
-            try {
-                t.Wait (1000);
-                Assert.Fail ();
-            } catch (AggregateException) {
+            try
+            {
+                t.Wait(1000);
+                Assert.Fail();
             }
+            catch (AggregateException) { }
+        }
+
+        [Test]
+        [Category("MultiThreaded")]
+        public void WriteAsync()
+        {
+            bool called = false;
+            var buffer = new byte[4];
+            var ms = new MockStream(false, false, true);
+            ms.OnWrite += (b, p, c) =>
+            {
+                called = true;
+            };
+            var t = ms.WriteAsync(buffer, 0, 4);
+
+            Assert.IsTrue(t.Wait(1000), "#1");
+            Assert.IsTrue(called, "#2");
+        }
+
+        [Test]
+        [Category("MultiThreaded")]
+        public void WriteAsync_Exception()
+        {
+            var buffer = new byte[4];
+            var ms = new MockStream(false, false, true);
+            ms.OnWrite += (b, p, c) =>
+            {
+                throw new ApplicationException();
+            };
+            var t = ms.WriteAsync(buffer, 0, 4);
+
+            try
+            {
+                t.Wait(1000);
+                Assert.Fail();
+            }
+            catch (AggregateException) { }
         }
     }
 }

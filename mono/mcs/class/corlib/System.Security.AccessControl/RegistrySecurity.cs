@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,98 +35,118 @@ namespace System.Security.AccessControl
 {
     public sealed class RegistrySecurity : NativeObjectSecurity
     {
-        public RegistrySecurity ()
-            : base (true, ResourceType.RegistryKey)
+        public RegistrySecurity()
+            : base(true, ResourceType.RegistryKey) { }
+
+        internal RegistrySecurity(string name, AccessControlSections includeSections)
+            : base(true, ResourceType.RegistryKey, name, includeSections) { }
+
+        public override Type AccessRightType
         {
-        }
-        
-        internal RegistrySecurity (string name, AccessControlSections includeSections)
-            : base (true, ResourceType.RegistryKey, name, includeSections)
-        {
-        }
-        
-        public override Type AccessRightType {
-            get { return typeof (RegistryRights); }
-        }
-        
-        public override Type AccessRuleType {
-            get { return typeof (RegistryAccessRule); }
+            get { return typeof(RegistryRights); }
         }
 
-        public override Type AuditRuleType {
-            get { return typeof (RegistryAuditRule); }
-        }
-        
-        public override AccessRule AccessRuleFactory (IdentityReference identityReference, int accessMask,
-                                  bool isInherited, InheritanceFlags inheritanceFlags,
-                                  PropagationFlags propagationFlags, AccessControlType type)
+        public override Type AccessRuleType
         {
-            return new RegistryAccessRule (identityReference, (RegistryRights) accessMask, isInherited,
-                               inheritanceFlags, propagationFlags, type);
+            get { return typeof(RegistryAccessRule); }
         }
-        
-        public void AddAccessRule (RegistryAccessRule rule)
+
+        public override Type AuditRuleType
         {
-            AddAccessRule ((AccessRule)rule);
+            get { return typeof(RegistryAuditRule); }
         }
-        
-        public bool RemoveAccessRule (RegistryAccessRule rule)
+
+        public override AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
         {
-            return RemoveAccessRule ((AccessRule)rule);
+            return new RegistryAccessRule(
+                identityReference,
+                (RegistryRights)accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            );
         }
-        
-        public void RemoveAccessRuleAll (RegistryAccessRule rule)
+
+        public void AddAccessRule(RegistryAccessRule rule)
         {
-            RemoveAccessRuleAll ((AccessRule)rule);
+            AddAccessRule((AccessRule)rule);
         }
-        
-        public void RemoveAccessRuleSpecific (RegistryAccessRule rule)
+
+        public bool RemoveAccessRule(RegistryAccessRule rule)
         {
-            RemoveAccessRuleSpecific ((AccessRule)rule);
+            return RemoveAccessRule((AccessRule)rule);
         }
-        
-        public void ResetAccessRule (RegistryAccessRule rule)
+
+        public void RemoveAccessRuleAll(RegistryAccessRule rule)
         {
-            ResetAccessRule ((AccessRule)rule);
+            RemoveAccessRuleAll((AccessRule)rule);
         }
-        
-        public void SetAccessRule (RegistryAccessRule rule)
+
+        public void RemoveAccessRuleSpecific(RegistryAccessRule rule)
         {
-            SetAccessRule ((AccessRule)rule);
+            RemoveAccessRuleSpecific((AccessRule)rule);
         }
-        
-        public override AuditRule AuditRuleFactory (IdentityReference identityReference, int accessMask,
-                                bool isInherited, InheritanceFlags inheritanceFlags,
-                                PropagationFlags propagationFlags, AuditFlags flags)
+
+        public void ResetAccessRule(RegistryAccessRule rule)
         {
-            return new RegistryAuditRule (identityReference, (RegistryRights) accessMask, isInherited,
-                              inheritanceFlags, propagationFlags, flags);
+            ResetAccessRule((AccessRule)rule);
         }
-        
-        public void AddAuditRule (RegistryAuditRule rule)
+
+        public void SetAccessRule(RegistryAccessRule rule)
         {
-            AddAuditRule ((AuditRule)rule);
+            SetAccessRule((AccessRule)rule);
         }
-        
-        public bool RemoveAuditRule (RegistryAuditRule rule)
+
+        public override AuditRule AuditRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+        {
+            return new RegistryAuditRule(
+                identityReference,
+                (RegistryRights)accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            );
+        }
+
+        public void AddAuditRule(RegistryAuditRule rule)
+        {
+            AddAuditRule((AuditRule)rule);
+        }
+
+        public bool RemoveAuditRule(RegistryAuditRule rule)
         {
             return RemoveAuditRule((AuditRule)rule);
         }
-        
-        public void RemoveAuditRuleAll (RegistryAuditRule rule)
+
+        public void RemoveAuditRuleAll(RegistryAuditRule rule)
         {
             RemoveAuditRuleAll((AuditRule)rule);
         }
-        
-        public void RemoveAuditRuleSpecific (RegistryAuditRule rule)
+
+        public void RemoveAuditRuleSpecific(RegistryAuditRule rule)
         {
             RemoveAuditRuleSpecific((AuditRule)rule);
         }
-        
-        public void SetAuditRule (RegistryAuditRule rule)
+
+        public void SetAuditRule(RegistryAuditRule rule)
         {
             SetAuditRule((AuditRule)rule);
         }
     }
 }
-

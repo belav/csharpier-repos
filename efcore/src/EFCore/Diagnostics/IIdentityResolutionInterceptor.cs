@@ -38,5 +38,9 @@ public interface IIdentityResolutionInterceptor : IInterceptor
     /// <param name="interceptionData">Contextual information about the identity resolution.</param>
     /// <param name="existingEntry">The entry for the existing tracked entity instance.</param>
     /// <param name="newEntity">The new entity instance, which will be discarded after this call.</param>
-    void UpdateTrackedInstance(IdentityResolutionInterceptionData interceptionData, EntityEntry existingEntry, object newEntity);
+    void UpdateTrackedInstance(
+        IdentityResolutionInterceptionData interceptionData,
+        EntityEntry existingEntry,
+        object newEntity
+    );
 }

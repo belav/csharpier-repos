@@ -1,9 +1,9 @@
-// 
+//
 // System.Collections.SortedListTest.cs
-// 
+//
 // Author:
 //   Zoltan Varga (vargaz@gmail.com)
-// 
+//
 
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -48,285 +48,304 @@ namespace MonoTests.System.Collections.Generic
         SortedList<string, int> list2;
 
         [SetUp]
-        public void SetUp () {
-            list = new SortedList <int, string> ();
+        public void SetUp()
+        {
+            list = new SortedList<int, string>();
 
-            list [0] = "A";
-            list [5] = "C";
-            list [2] = "B";
+            list[0] = "A";
+            list[5] = "C";
+            list[2] = "B";
 
-            list2 = new SortedList<string, int> ();
+            list2 = new SortedList<string, int>();
         }
 
         [Test]
-        public void Item () {
-            Assert.AreEqual ("A", list [0]);
-            Assert.AreEqual ("B", list [2]);
-            Assert.AreEqual ("C", list [5]);
+        public void Item()
+        {
+            Assert.AreEqual("A", list[0]);
+            Assert.AreEqual("B", list[2]);
+            Assert.AreEqual("C", list[5]);
 
-            list [2] = "D";
+            list[2] = "D";
 
-            Assert.AreEqual ("D", list [2]);
+            Assert.AreEqual("D", list[2]);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ItemNullKey () {
-            int i = list2 [null];
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ItemNullKey()
+        {
+            int i = list2[null];
         }
 
         [Test]
-        [ExpectedException (typeof (KeyNotFoundException))]
-        public void ItemMissingKey () {
-            string s = list [99];
+        [ExpectedException(typeof(KeyNotFoundException))]
+        public void ItemMissingKey()
+        {
+            string s = list[99];
         }
 
         [Test]
-        public void Keys () {
+        public void Keys()
+        {
             IList<int> keys = list.Keys;
 
-            Assert.AreEqual (3, keys.Count);
-            Assert.AreEqual (0, keys [0]);
-            Assert.AreEqual (2, keys [1]);
-            Assert.AreEqual (5, keys [2]);
+            Assert.AreEqual(3, keys.Count);
+            Assert.AreEqual(0, keys[0]);
+            Assert.AreEqual(2, keys[1]);
+            Assert.AreEqual(5, keys[2]);
 
-            int[] arr = new int [4];
-            keys.CopyTo (arr, 1);
-            Assert.AreEqual (0, arr [1]);
-            Assert.AreEqual (2, arr [2]);
-            Assert.AreEqual (5, arr [3]);
+            int[] arr = new int[4];
+            keys.CopyTo(arr, 1);
+            Assert.AreEqual(0, arr[1]);
+            Assert.AreEqual(2, arr[2]);
+            Assert.AreEqual(5, arr[3]);
 
-            Assert.AreEqual (true, keys.Contains (2));
-            Assert.AreEqual (false, keys.Contains (100));
+            Assert.AreEqual(true, keys.Contains(2));
+            Assert.AreEqual(false, keys.Contains(100));
 
-            Assert.AreEqual (2, keys.IndexOf (5));
-            Assert.AreEqual (-1, keys.IndexOf (100));
+            Assert.AreEqual(2, keys.IndexOf(5));
+            Assert.AreEqual(-1, keys.IndexOf(100));
 
             int index = 0;
-            arr [0] = 0;
-            arr [1] = 0;
-            arr [2] = 0;
+            arr[0] = 0;
+            arr[1] = 0;
+            arr[2] = 0;
             foreach (int i in keys)
-                arr [index ++] = i;
-            Assert.AreEqual (0, arr [0]);
-            Assert.AreEqual (2, arr [1]);
-            Assert.AreEqual (5, arr [2]);
+                arr[index++] = i;
+            Assert.AreEqual(0, arr[0]);
+            Assert.AreEqual(2, arr[1]);
+            Assert.AreEqual(5, arr[2]);
         }
 
         [Test]
-        public void KeysNonGeneric () {
+        public void KeysNonGeneric()
+        {
             ICollection keys = ((IDictionary)list).Keys;
 
-            Assert.AreEqual (3, keys.Count);
+            Assert.AreEqual(3, keys.Count);
 
-            int[] arr = new int [4];
-            keys.CopyTo (arr, 1);
-            Assert.AreEqual (0, arr [1]);
-            Assert.AreEqual (2, arr [2]);
-            Assert.AreEqual (5, arr [3]);
+            int[] arr = new int[4];
+            keys.CopyTo(arr, 1);
+            Assert.AreEqual(0, arr[1]);
+            Assert.AreEqual(2, arr[2]);
+            Assert.AreEqual(5, arr[3]);
 
             int index = 0;
-            arr [0] = 0;
-            arr [1] = 0;
-            arr [2] = 0;
+            arr[0] = 0;
+            arr[1] = 0;
+            arr[2] = 0;
             foreach (int i in keys)
-                arr [index ++] = i;
-            Assert.AreEqual (0, arr [0]);
-            Assert.AreEqual (2, arr [1]);
-            Assert.AreEqual (5, arr [2]);
+                arr[index++] = i;
+            Assert.AreEqual(0, arr[0]);
+            Assert.AreEqual(2, arr[1]);
+            Assert.AreEqual(5, arr[2]);
         }
 
         [Test]
-        public void Values () {
+        public void Values()
+        {
             IList<string> values = list.Values;
 
-            Assert.AreEqual (3, values.Count);
-            Assert.AreEqual ("A", values [0]);
-            Assert.AreEqual ("B", values [1]);
-            Assert.AreEqual ("C", values [2]);
+            Assert.AreEqual(3, values.Count);
+            Assert.AreEqual("A", values[0]);
+            Assert.AreEqual("B", values[1]);
+            Assert.AreEqual("C", values[2]);
 
-            string[] arr = new string [4];
-            values.CopyTo (arr, 1);
-            Assert.AreEqual ("A", arr [1]);
-            Assert.AreEqual ("B", arr [2]);
-            Assert.AreEqual ("C", arr [3]);
+            string[] arr = new string[4];
+            values.CopyTo(arr, 1);
+            Assert.AreEqual("A", arr[1]);
+            Assert.AreEqual("B", arr[2]);
+            Assert.AreEqual("C", arr[3]);
 
-            Assert.AreEqual (true, values.Contains ("B"));
-            Assert.AreEqual (false, values.Contains ("X"));
+            Assert.AreEqual(true, values.Contains("B"));
+            Assert.AreEqual(false, values.Contains("X"));
 
-            Assert.AreEqual (2, values.IndexOf ("C"));
-            Assert.AreEqual (-1, values.IndexOf ("X"));
+            Assert.AreEqual(2, values.IndexOf("C"));
+            Assert.AreEqual(-1, values.IndexOf("X"));
 
             int index = 0;
-            arr [0] = null;
-            arr [1] = null;
-            arr [2] = null;
+            arr[0] = null;
+            arr[1] = null;
+            arr[2] = null;
             foreach (string s in values)
-                arr [index ++] = s;
-            Assert.AreEqual ("A", arr [0]);
-            Assert.AreEqual ("B", arr [1]);
-            Assert.AreEqual ("C", arr [2]);
+                arr[index++] = s;
+            Assert.AreEqual("A", arr[0]);
+            Assert.AreEqual("B", arr[1]);
+            Assert.AreEqual("C", arr[2]);
         }
 
         [Test]
-        public void ValuesNonGeneric () {
+        public void ValuesNonGeneric()
+        {
             ICollection values = ((IDictionary)list).Values;
 
-            Assert.AreEqual (3, values.Count);
+            Assert.AreEqual(3, values.Count);
 
-            string[] arr = new string [4];
-            values.CopyTo (arr, 1);
-            Assert.AreEqual ("A", arr [1]);
-            Assert.AreEqual ("B", arr [2]);
-            Assert.AreEqual ("C", arr [3]);
+            string[] arr = new string[4];
+            values.CopyTo(arr, 1);
+            Assert.AreEqual("A", arr[1]);
+            Assert.AreEqual("B", arr[2]);
+            Assert.AreEqual("C", arr[3]);
 
             int index = 0;
-            arr [0] = null;
-            arr [1] = null;
-            arr [2] = null;
+            arr[0] = null;
+            arr[1] = null;
+            arr[2] = null;
             foreach (string s in values)
-                arr [index ++] = s;
-            Assert.AreEqual ("A", arr [0]);
-            Assert.AreEqual ("B", arr [1]);
-            Assert.AreEqual ("C", arr [2]);
+                arr[index++] = s;
+            Assert.AreEqual("A", arr[0]);
+            Assert.AreEqual("B", arr[1]);
+            Assert.AreEqual("C", arr[2]);
         }
 
         [Test]
-        public void KeysIDictionaryGeneric () {
-            ICollection<int> keys = ((IDictionary<int,string>)list).Keys;
-
-            Assert.AreEqual (3, keys.Count);
-        }
-
-        [Test]
-        public void EmptyKeysCopyToZeroSizedArray ()
+        public void KeysIDictionaryGeneric()
         {
-            string [] ary = new string [0];
-            list2.Keys.CopyTo (ary, 0);
+            ICollection<int> keys = ((IDictionary<int, string>)list).Keys;
+
+            Assert.AreEqual(3, keys.Count);
         }
 
         [Test]
-        public void EmptyValuesCopyToZeroSizedArray ()
+        public void EmptyKeysCopyToZeroSizedArray()
         {
-            int [] ary = new int [0];
-            list2.Values.CopyTo (ary, 0);
+            string[] ary = new string[0];
+            list2.Keys.CopyTo(ary, 0);
         }
 
         [Test]
-        public void ValuesIDictionaryGeneric () {
-            ICollection<string> values = ((IDictionary<int,string>)list).Values;
-
-            Assert.AreEqual (3, values.Count);
-        }
-
-        public void Add () {
-            list.Add (10, "D");
-
-            Assert.AreEqual ("D", list [10]);
+        public void EmptyValuesCopyToZeroSizedArray()
+        {
+            int[] ary = new int[0];
+            list2.Values.CopyTo(ary, 0);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void AddNullKey () {
-            list2.Add (null, 10);
+        public void ValuesIDictionaryGeneric()
+        {
+            ICollection<string> values = ((IDictionary<int, string>)list).Values;
+
+            Assert.AreEqual(3, values.Count);
+        }
+
+        public void Add()
+        {
+            list.Add(10, "D");
+
+            Assert.AreEqual("D", list[10]);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void AddKeyAlreadyExists () {
-            list.Add (10, "B");
-            list.Add (10, "C");
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddNullKey()
+        {
+            list2.Add(null, 10);
         }
 
         [Test]
-        public void ContainsKey () {
-            Assert.AreEqual (true, list.ContainsKey (5));
-            Assert.AreEqual (false, list.ContainsKey (10));
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddKeyAlreadyExists()
+        {
+            list.Add(10, "B");
+            list.Add(10, "C");
         }
 
         [Test]
-        public void Remove () {
-            Assert.AreEqual (true, list.Remove (5));
-            Assert.AreEqual (false, list.Remove (5));
-            Assert.AreEqual (false, list.Remove (10));
+        public void ContainsKey()
+        {
+            Assert.AreEqual(true, list.ContainsKey(5));
+            Assert.AreEqual(false, list.ContainsKey(10));
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void RemoveNullKey () {
-            list2.Remove (null);
+        public void Remove()
+        {
+            Assert.AreEqual(true, list.Remove(5));
+            Assert.AreEqual(false, list.Remove(5));
+            Assert.AreEqual(false, list.Remove(10));
         }
 
         [Test]
-        public void GetEnumerator () {
-            int[] keys = new int [3];
-            string[] values = new string [3];
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void RemoveNullKey()
+        {
+            list2.Remove(null);
+        }
+
+        [Test]
+        public void GetEnumerator()
+        {
+            int[] keys = new int[3];
+            string[] values = new string[3];
             int i = 0;
-            foreach (KeyValuePair <int, string> kvp in list) {
-                keys [i] = kvp.Key;
-                values [i] = kvp.Value;
-                i ++;
+            foreach (KeyValuePair<int, string> kvp in list)
+            {
+                keys[i] = kvp.Key;
+                values[i] = kvp.Value;
+                i++;
             }
 
-            Assert.AreEqual (0, keys [0]);
-            Assert.AreEqual (2, keys [1]);
-            Assert.AreEqual (5, keys [2]);
-            Assert.AreEqual ("A", values [0]);
-            Assert.AreEqual ("B", values [1]);
-            Assert.AreEqual ("C", values [2]);
+            Assert.AreEqual(0, keys[0]);
+            Assert.AreEqual(2, keys[1]);
+            Assert.AreEqual(5, keys[2]);
+            Assert.AreEqual("A", values[0]);
+            Assert.AreEqual("B", values[1]);
+            Assert.AreEqual("C", values[2]);
         }
 
         [Test]
-        public void CopyTo ()
-        {    
+        public void CopyTo()
+        {
             ICollection<KeyValuePair<int, string>> col1 =
                 list as ICollection<KeyValuePair<int, string>>;
-            KeyValuePair <int, string> [] array1 =
-                new KeyValuePair <int, string> [col1.Count];
-            col1.CopyTo (array1, 0);
-            Assert.AreEqual (3, array1.Length);
-            
+            KeyValuePair<int, string>[] array1 = new KeyValuePair<int, string>[col1.Count];
+            col1.CopyTo(array1, 0);
+            Assert.AreEqual(3, array1.Length);
+
             ICollection col = list as ICollection;
-            array1 = new KeyValuePair <int, string> [col.Count];
-            col.CopyTo (array1, 0);            
-            Assert.AreEqual (3, array1.Length);
-            
+            array1 = new KeyValuePair<int, string>[col.Count];
+            col.CopyTo(array1, 0);
+            Assert.AreEqual(3, array1.Length);
+
             ICollection<KeyValuePair<string, int>> col2 =
                 list2 as ICollection<KeyValuePair<string, int>>;
-            KeyValuePair <string, int> [] array2 =
-                new KeyValuePair <string, int> [col2.Count];
-            col2.CopyTo (array2, 0);
-            Assert.AreEqual (0, array2.Length);
-            
+            KeyValuePair<string, int>[] array2 = new KeyValuePair<string, int>[col2.Count];
+            col2.CopyTo(array2, 0);
+            Assert.AreEqual(0, array2.Length);
+
             col = list2 as ICollection;
-            array2 = new KeyValuePair <string, int> [col.Count];
-            col.CopyTo (array2, 0);
-            Assert.AreEqual (0, array2.Length);            
+            array2 = new KeyValuePair<string, int>[col.Count];
+            col.CopyTo(array2, 0);
+            Assert.AreEqual(0, array2.Length);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void KeyEnumeratorVersionChecking () {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void KeyEnumeratorVersionChecking()
+        {
             var en = list.Keys.GetEnumerator();
 
             int i = 0;
-            en.MoveNext ();
-            list.Remove (en.Current);
-            en.MoveNext ();
+            en.MoveNext();
+            list.Remove(en.Current);
+            en.MoveNext();
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ValueEnumeratorVersionChecking () {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ValueEnumeratorVersionChecking()
+        {
             var en = list.Values.GetEnumerator();
 
             int i = 0;
-            en.MoveNext ();
-            list.RemoveAt (0);
-            en.MoveNext ();
+            en.MoveNext();
+            list.RemoveAt(0);
+            en.MoveNext();
         }
 
-        sealed class StartsWithComparator : IComparer<string> {
+        sealed class StartsWithComparator : IComparer<string>
+        {
             private readonly static Comparer<string> _stringComparer = Comparer<string>.Default;
             public static readonly StartsWithComparator Instance = new StartsWithComparator();
 
@@ -339,7 +358,8 @@ namespace MonoTests.System.Collections.Generic
                 // loop through all characters that part and whole have in common
                 int pos = 0;
                 bool match;
-                do {
+                do
+                {
                     match = (part[pos] == whole[pos]);
                 } while (match && ++pos < part.Length);
 
@@ -366,7 +386,8 @@ namespace MonoTests.System.Collections.Generic
                 // loop through all characters that part and whole have in common
                 int pos = 0;
                 bool match;
-                do {
+                do
+                {
                     match = (part[pos] == whole[pos]);
                 } while (match && ++pos < part.Length);
 
@@ -378,7 +399,9 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ComparatorUsageTest()
         {
-            SortedList<string, string> sl = new SortedList<string, string>(StartsWithComparator.Instance);
+            SortedList<string, string> sl = new SortedList<string, string>(
+                StartsWithComparator.Instance
+            );
 
             sl.Add("Apples", "Value-Apples");
             sl.Add("Bananas", "Value-Bananas");
@@ -404,13 +427,14 @@ namespace MonoTests.System.Collections.Generic
             Assert.IsFalse(sl.ContainsKey("I forgot to bring my bananas."), "#D0");
             Assert.IsFalse(sl.ContainsKey("My apples are on vacation."), "#D0");
             Assert.IsFalse(sl.ContainsKey("The oranges are not ripe yet."), "#D0");
-
         }
 
         [Test]
         public void ComparatorPartWholeCheck()
         {
-            SortedList<string, string> sl = new SortedList<string, string>(StartsWithComparatorPartWholeCheck.Instance);
+            SortedList<string, string> sl = new SortedList<string, string>(
+                StartsWithComparatorPartWholeCheck.Instance
+            );
             sl.Add("Part", "Value-Part");
             Assert.IsFalse(sl.ContainsKey("Whole"), "#PWC2");
         }
@@ -465,61 +489,67 @@ namespace MonoTests.System.Collections.Generic
         }
 
         [Test]
-        public void ClearDoesNotTouchCapacity ()
+        public void ClearDoesNotTouchCapacity()
         {
-            SortedList<int, int> sl = new SortedList<int, int> ();
-            for (int i = 0; i < 18; i++) {
-                sl.Add (i, i);
+            SortedList<int, int> sl = new SortedList<int, int>();
+            for (int i = 0; i < 18; i++)
+            {
+                sl.Add(i, i);
             }
             int capacityBeforeClear = sl.Capacity;
-            sl.Clear ();
+            sl.Clear();
             int capacityAfterClear = sl.Capacity;
-            Assert.AreEqual (capacityBeforeClear, capacityAfterClear);
+            Assert.AreEqual(capacityBeforeClear, capacityAfterClear);
         }
 
         class Uncomparable : IComparer<double>
         {
-            public int Compare (double x, double y)
+            public int Compare(double x, double y)
             {
-                throw new DivideByZeroException ();
+                throw new DivideByZeroException();
             }
         }
 
         [Test]
         // Bug #4327
-        public void UncomparableList ()
+        public void UncomparableList()
         {
-            var list = new SortedList<double, int> (new Uncomparable ());
+            var list = new SortedList<double, int>(new Uncomparable());
 
-            list.Add (Math.PI, 1);
+            list.Add(Math.PI, 1);
 
-            try {
-                list.Add (Math.E, 2);
-                Assert.Fail ("UC #1");
-            } catch (Exception ex) {
-                Assert.That (ex, Is.TypeOf (typeof (InvalidOperationException)), "UC #2");
-                Assert.IsNotNull (ex.InnerException, "UC #3");
-                Assert.That (ex.InnerException, Is.TypeOf (typeof (DivideByZeroException)), "UC #4");
+            try
+            {
+                list.Add(Math.E, 2);
+                Assert.Fail("UC #1");
+            }
+            catch (Exception ex)
+            {
+                Assert.That(ex, Is.TypeOf(typeof(InvalidOperationException)), "UC #2");
+                Assert.IsNotNull(ex.InnerException, "UC #3");
+                Assert.That(ex.InnerException, Is.TypeOf(typeof(DivideByZeroException)), "UC #4");
             }
 
-            try {
+            try
+            {
                 int a;
-                list.TryGetValue (Math.E, out a);
-                Assert.Fail ("UC #5");
-            } catch (Exception ex) {
-                Assert.That (ex, Is.TypeOf (typeof (InvalidOperationException)), "UC #6");
-                Assert.IsNotNull (ex.InnerException, "UC #7");
-                Assert.That (ex.InnerException, Is.TypeOf (typeof (DivideByZeroException)), "UC #8");
+                list.TryGetValue(Math.E, out a);
+                Assert.Fail("UC #5");
+            }
+            catch (Exception ex)
+            {
+                Assert.That(ex, Is.TypeOf(typeof(InvalidOperationException)), "UC #6");
+                Assert.IsNotNull(ex.InnerException, "UC #7");
+                Assert.That(ex.InnerException, Is.TypeOf(typeof(DivideByZeroException)), "UC #8");
             }
         }
 
         [Test]
-        public void IDictionaryNullOnNonExistingKey ()
+        public void IDictionaryNullOnNonExistingKey()
         {
-            IDictionary list = new SortedList<long, string> ();
-            object val = list [1234L];
-            Assert.IsNull (val);
+            IDictionary list = new SortedList<long, string>();
+            object val = list[1234L];
+            Assert.IsNull(val);
         }
     }
 }
-

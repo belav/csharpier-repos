@@ -5,16 +5,9 @@ using System.Text;
 
 namespace AndrusDB
 {
-    public class HourlyEmployee : Employee
-    {
-    }
+    public class HourlyEmployee : Employee { }
 
-    public class SalariedEmployee : Employee
-    {
-    }
+    public class SalariedEmployee : Employee { }
 
-    public class CommissionedEmployee : Employee
-    {
-    }
-
+    public class CommissionedEmployee : Employee { }
 }

@@ -21,45 +21,66 @@ namespace ILLink.Shared.TrimAnalysis
         readonly IOperation _operation;
         readonly ReflectionAccessAnalyzer _reflectionAccessAnalyzer;
 
-        public HandleCallAction (in DiagnosticContext diagnosticContext, ISymbol owningSymbol, IOperation operation)
+        public HandleCallAction(
+            in DiagnosticContext diagnosticContext,
+            ISymbol owningSymbol,
+            IOperation operation
+        )
         {
             _owningSymbol = owningSymbol;
             _operation = operation;
             _diagnosticContext = diagnosticContext;
             _annotations = FlowAnnotations.Instance;
-            _reflectionAccessAnalyzer = new ReflectionAccessAnalyzer ();
-            _requireDynamicallyAccessedMembersAction = new (diagnosticContext, _reflectionAccessAnalyzer);
+            _reflectionAccessAnalyzer = new ReflectionAccessAnalyzer();
+            _requireDynamicallyAccessedMembersAction = new(
+                diagnosticContext,
+                _reflectionAccessAnalyzer
+            );
         }
 
-        private partial IEnumerable<SystemReflectionMethodBaseValue> GetMethodsOnTypeHierarchy (TypeProxy type, string name, BindingFlags? bindingFlags)
+        private partial IEnumerable<SystemReflectionMethodBaseValue> GetMethodsOnTypeHierarchy(
+            TypeProxy type,
+            string name,
+            BindingFlags? bindingFlags
+        )
         {
-            foreach (var method in type.Type.GetMethodsOnTypeHierarchy (m => m.Name == name, bindingFlags))
-                yield return new SystemReflectionMethodBaseValue (new MethodProxy (method));
+            foreach (
+                var method in type.Type.GetMethodsOnTypeHierarchy(m => m.Name == name, bindingFlags)
+            )
+                yield return new SystemReflectionMethodBaseValue(new MethodProxy(method));
         }
 
-        private partial IEnumerable<SystemTypeValue> GetNestedTypesOnType (TypeProxy type, string name, BindingFlags? bindingFlags)
+        private partial IEnumerable<SystemTypeValue> GetNestedTypesOnType(
+            TypeProxy type,
+            string name,
+            BindingFlags? bindingFlags
+        )
         {
-            foreach (var nestedType in type.Type.GetNestedTypesOnType (t => t.Name == name, bindingFlags))
-                yield return new SystemTypeValue (new TypeProxy (nestedType));
+            foreach (
+                var nestedType in type.Type.GetNestedTypesOnType(t => t.Name == name, bindingFlags)
+            )
+                yield return new SystemTypeValue(new TypeProxy(nestedType));
         }
 
-        private partial bool MethodIsTypeConstructor (MethodProxy method)
+        private partial bool MethodIsTypeConstructor(MethodProxy method)
         {
-            if (!method.Method.IsConstructor ())
+            if (!method.Method.IsConstructor())
                 return false;
             var type = method.Method.ContainingType;
-            while (type is not null) {
-                if (type.IsTypeOf (WellKnownType.System_Type))
+            while (type is not null)
+            {
+                if (type.IsTypeOf(WellKnownType.System_Type))
                     return true;
                 type = type.BaseType;
             }
             return false;
         }
 
-        private partial bool TryGetBaseType (TypeProxy type, out TypeProxy? baseType)
+        private partial bool TryGetBaseType(TypeProxy type, out TypeProxy? baseType)
         {
-            if (type.Type.BaseType is not null) {
-                baseType = new TypeProxy (type.Type.BaseType);
+            if (type.Type.BaseType is not null)
+            {
+                baseType = new TypeProxy(type.Type.BaseType);
                 return true;
             }
 
@@ -67,7 +88,12 @@ namespace ILLink.Shared.TrimAnalysis
             return false;
         }
 
-        private partial bool TryResolveTypeNameForCreateInstanceAndMark (in MethodProxy calledMethod, string assemblyName, string typeName, out TypeProxy resolvedType)
+        private partial bool TryResolveTypeNameForCreateInstanceAndMark(
+            in MethodProxy calledMethod,
+            string assemblyName,
+            string typeName,
+            out TypeProxy resolvedType
+        )
         {
             // Intentionally never resolve anything. Analyzer can really only see types from the current compilation unit. For other assemblies
             // it typically only sees reference assemblies and thus just public API. It's not worth (at least for now) to try to resolve
@@ -77,42 +103,97 @@ namespace ILLink.Shared.TrimAnalysis
             return false;
         }
 
-        private partial void MarkStaticConstructor (TypeProxy type)
-            => _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForConstructorsOnType (_diagnosticContext, type.Type, BindingFlags.Static, parameterCount: 0);
+        private partial void MarkStaticConstructor(TypeProxy type) =>
+            _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForConstructorsOnType(
+                _diagnosticContext,
+                type.Type,
+                BindingFlags.Static,
+                parameterCount: 0
+            );
 
-        private partial void MarkEventsOnTypeHierarchy (TypeProxy type, string name, BindingFlags? bindingFlags)
-            => _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForEventsOnTypeHierarchy (_diagnosticContext, type.Type, name, bindingFlags);
+        private partial void MarkEventsOnTypeHierarchy(
+            TypeProxy type,
+            string name,
+            BindingFlags? bindingFlags
+        ) =>
+            _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForEventsOnTypeHierarchy(
+                _diagnosticContext,
+                type.Type,
+                name,
+                bindingFlags
+            );
 
-        private partial void MarkFieldsOnTypeHierarchy (TypeProxy type, string name, BindingFlags? bindingFlags)
-            => _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForFieldsOnTypeHierarchy (_diagnosticContext, type.Type, name, bindingFlags);
+        private partial void MarkFieldsOnTypeHierarchy(
+            TypeProxy type,
+            string name,
+            BindingFlags? bindingFlags
+        ) =>
+            _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForFieldsOnTypeHierarchy(
+                _diagnosticContext,
+                type.Type,
+                name,
+                bindingFlags
+            );
 
-        private partial void MarkPropertiesOnTypeHierarchy (TypeProxy type, string name, BindingFlags? bindingFlags)
-            => _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForPropertiesOnTypeHierarchy (_diagnosticContext, type.Type, name, bindingFlags);
+        private partial void MarkPropertiesOnTypeHierarchy(
+            TypeProxy type,
+            string name,
+            BindingFlags? bindingFlags
+        ) =>
+            _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForPropertiesOnTypeHierarchy(
+                _diagnosticContext,
+                type.Type,
+                name,
+                bindingFlags
+            );
 
-        private partial void MarkPublicParameterlessConstructorOnType (TypeProxy type)
-            => _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForPublicParameterlessConstructor (_diagnosticContext, type.Type);
+        private partial void MarkPublicParameterlessConstructorOnType(TypeProxy type) =>
+            _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForPublicParameterlessConstructor(
+                _diagnosticContext,
+                type.Type
+            );
 
-        private partial void MarkConstructorsOnType (TypeProxy type, BindingFlags? bindingFlags, int? parameterCount)
-            => _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForConstructorsOnType (_diagnosticContext, type.Type, bindingFlags, parameterCount);
+        private partial void MarkConstructorsOnType(
+            TypeProxy type,
+            BindingFlags? bindingFlags,
+            int? parameterCount
+        ) =>
+            _reflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForConstructorsOnType(
+                _diagnosticContext,
+                type.Type,
+                bindingFlags,
+                parameterCount
+            );
 
-        private partial void MarkMethod (MethodProxy method)
-            => ReflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForMethod (_diagnosticContext, method.Method);
+        private partial void MarkMethod(MethodProxy method) =>
+            ReflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForMethod(
+                _diagnosticContext,
+                method.Method
+            );
 
         // TODO: Does the analyzer need to do something here?
-        private partial void MarkType (TypeProxy type) { }
+        private partial void MarkType(TypeProxy type) { }
 
-        private partial bool MarkAssociatedProperty (MethodProxy method)
+        private partial bool MarkAssociatedProperty(MethodProxy method)
         {
-            if (method.Method.MethodKind == MethodKind.PropertyGet || method.Method.MethodKind == MethodKind.PropertySet) {
-                var property = (IPropertySymbol) method.Method.AssociatedSymbol!;
-                Debug.Assert (property != null);
-                ReflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForProperty (_diagnosticContext, property!);
+            if (
+                method.Method.MethodKind == MethodKind.PropertyGet
+                || method.Method.MethodKind == MethodKind.PropertySet
+            )
+            {
+                var property = (IPropertySymbol)method.Method.AssociatedSymbol!;
+                Debug.Assert(property != null);
+                ReflectionAccessAnalyzer.GetReflectionAccessDiagnosticsForProperty(
+                    _diagnosticContext,
+                    property!
+                );
                 return true;
             }
 
             return false;
         }
 
-        private partial string GetContainingSymbolDisplayName () => _operation.FindContainingSymbol (_owningSymbol).GetDisplayName ();
+        private partial string GetContainingSymbolDisplayName() =>
+            _operation.FindContainingSymbol(_owningSymbol).GetDisplayName();
     }
 }

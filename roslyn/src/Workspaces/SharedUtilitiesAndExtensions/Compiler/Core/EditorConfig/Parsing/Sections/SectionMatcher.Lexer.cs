@@ -87,18 +87,17 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
                 switch (headerText[position])
                 {
                     case '*':
+                    {
+                        position++;
+                        if (position < headerText.Length && headerText[position] == '*')
                         {
-                            position++;
-                            if (position < headerText.Length &&
-                                headerText[position] == '*')
-                            {
-                                return TokenKind.StarStar;
-                            }
-                            else
-                            {
-                                return TokenKind.Star;
-                            }
+                            return TokenKind.StarStar;
                         }
+                        else
+                        {
+                            return TokenKind.Star;
+                        }
+                    }
 
                     case '?':
                         return TokenKind.Question;
@@ -175,9 +174,7 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
                 }
 
                 var str = sb.ToString();
-                return str.Length == 0 || str == "-"
-                    ? null
-                    : str;
+                return str.Length == 0 || str == "-" ? null : str;
             }
         }
 

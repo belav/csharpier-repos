@@ -18,6 +18,6 @@ class C
     static void Main()
     {
         S s;
-        Console.WriteLine (s.s2.p);
+        Console.WriteLine(s.s2.p);
     }
 }

@@ -36,16 +36,16 @@ using System.Collections;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_CopyBaseAttributes_W
-        : GHTWebControlBase
+    public class WebControl_CopyBaseAttributes_W : GHTWebControlBase
     {
         protected System.Web.UI.WebControls.Button btnAccessKey;
         protected System.Web.UI.WebControls.Button btnEnabled;
         protected System.Web.UI.WebControls.Button btnToolTip;
         protected System.Web.UI.WebControls.Button btnTabIndex;
         protected System.Web.UI.WebControls.Button btnAttributes;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -53,21 +53,20 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             foreach (Type currentType in TypesToTest)
             {
@@ -95,11 +94,16 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.GHTSubTestEnd();
             try
             {
-                if ((TestedControl is System.Web.UI.WebControls.Image) || 
-                    (TestedControl is System.Web.UI.WebControls.ImageButton)) {
+                if (
+                    (TestedControl is System.Web.UI.WebControls.Image)
+                    || (TestedControl is System.Web.UI.WebControls.ImageButton)
+                )
+                {
                     this.GHTSubTestBegin(ctrlType, "Enabled:");
                     this.GHTSubTestAddResult("Not supported for this control");
-                } else {
+                }
+                else
+                {
                     this.GHTSubTestBegin(ctrlType, "Enabled:");
                     this.TestedControl.CopyBaseAttributes(this.btnEnabled);
                     this.Compare(this.TestedControl.Enabled, this.btnEnabled.Enabled);
@@ -115,11 +119,16 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.GHTSubTestEnd();
             try
             {
-                if ((TestedControl is System.Web.UI.WebControls.ListBox) ||
-                    (TestedControl is System.Web.UI.WebControls.DropDownList)) {
+                if (
+                    (TestedControl is System.Web.UI.WebControls.ListBox)
+                    || (TestedControl is System.Web.UI.WebControls.DropDownList)
+                )
+                {
                     this.GHTSubTestBegin(ctrlType, "ToolTip:");
                     this.GHTSubTestAddResult("Not supported for this control");
-                } else {
+                }
+                else
+                {
                     this.GHTSubTestBegin(ctrlType, "ToolTip:");
                     this.TestedControl.CopyBaseAttributes(this.btnToolTip);
                     this.Compare(this.TestedControl.ToolTip, this.btnToolTip.ToolTip);
@@ -158,14 +167,16 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                     while (enumerator1.MoveNext())
                     {
                         string text1 = (string)(enumerator1.Current);
-                        this.GHTSubTestAddResult("key = " + text1 + " Value = " + this.TestedControl.Attributes[text1]);
+                        this.GHTSubTestAddResult(
+                            "key = " + text1 + " Value = " + this.TestedControl.Attributes[text1]
+                        );
                     }
                 }
                 finally
                 {
                     if (enumerator1 is IDisposable)
                     {
-                        ((IDisposable) enumerator1).Dispose();
+                        ((IDisposable)enumerator1).Dispose();
                     }
                 }
             }

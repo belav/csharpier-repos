@@ -2,7 +2,4 @@
 // Line: 5
 // Compiler options: -langversion:ISO-1
 
-class Stack < type >
-{
-}
-
+class Stack<type> { }

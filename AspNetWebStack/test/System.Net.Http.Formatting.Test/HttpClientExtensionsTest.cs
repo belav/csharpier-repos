@@ -14,16 +14,33 @@ namespace System.Net.Http
 {
     public class HttpClientExtensionsTest
     {
-        private readonly MediaTypeFormatter _formatter = new MockMediaTypeFormatter { CallBase = true };
+        private readonly MediaTypeFormatter _formatter = new MockMediaTypeFormatter
+        {
+            CallBase = true
+        };
         private readonly HttpClient _client;
-        private readonly MediaTypeHeaderValue _mediaTypeHeader = MediaTypeHeaderValue.Parse("foo/bar; charset=utf-16");
+        private readonly MediaTypeHeaderValue _mediaTypeHeader = MediaTypeHeaderValue.Parse(
+            "foo/bar; charset=utf-16"
+        );
 
         public HttpClientExtensionsTest()
         {
-            Mock<TestableHttpMessageHandler> handlerMock = new Mock<TestableHttpMessageHandler> { CallBase = true };
+            Mock<TestableHttpMessageHandler> handlerMock = new Mock<TestableHttpMessageHandler>
+            {
+                CallBase = true
+            };
             handlerMock
-                .Setup(h => h.SendAsyncPublic(It.IsAny<HttpRequestMessage>(), It.IsAny<CancellationToken>()))
-                .Returns((HttpRequestMessage request, CancellationToken _) => Task.FromResult(new HttpResponseMessage() { RequestMessage = request }));
+                .Setup(
+                    h =>
+                        h.SendAsyncPublic(
+                            It.IsAny<HttpRequestMessage>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Returns(
+                    (HttpRequestMessage request, CancellationToken _) =>
+                        Task.FromResult(new HttpResponseMessage() { RequestMessage = request })
+                );
 
             _client = new HttpClient(handlerMock.Object);
         }
@@ -33,14 +50,19 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PostAsJsonAsync("http://www.example.com", new object()), "client");
+            Assert.ThrowsArgumentNull(
+                () => client.PostAsJsonAsync("http://www.example.com", new object()),
+                "client"
+            );
         }
 
         [Fact]
         public void PostAsJsonAsync_String_WhenUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PostAsJsonAsync((string)null, new object()),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () => _client.PostAsJsonAsync((string)null, new object()),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
@@ -57,14 +79,19 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PostAsXmlAsync("http://www.example.com", new object()), "client");
+            Assert.ThrowsArgumentNull(
+                () => client.PostAsXmlAsync("http://www.example.com", new object()),
+                "client"
+            );
         }
 
         [Fact]
         public void PostAsXmlAsync_String_WhenUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PostAsXmlAsync((string)null, new object()),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () => _client.PostAsXmlAsync((string)null, new object()),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
@@ -81,14 +108,31 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PostAsync("http://www.example.com", new object(), new JsonMediaTypeFormatter(), "text/json"), "client");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    client.PostAsync(
+                        "http://www.example.com",
+                        new object(),
+                        new JsonMediaTypeFormatter(),
+                        "text/json"
+                    ),
+                "client"
+            );
         }
 
         [Fact]
         public void PostAsync_String_WhenRequestUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PostAsync((string)null, new object(), new JsonMediaTypeFormatter(), "text/json"),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    _client.PostAsync(
+                        (string)null,
+                        new object(),
+                        new JsonMediaTypeFormatter(),
+                        "text/json"
+                    ),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
@@ -105,7 +149,13 @@ namespace System.Net.Http
         [Fact]
         public async Task PostAsync_String_WhenAuthoritativeMediaTypeIsSet_CreatesRequestWithAppropriateContentType()
         {
-            var response = await _client.PostAsync("http://example.com/myapi/", new object(), _formatter, _mediaTypeHeader, CancellationToken.None);
+            var response = await _client.PostAsync(
+                "http://example.com/myapi/",
+                new object(),
+                _formatter,
+                _mediaTypeHeader,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -116,7 +166,13 @@ namespace System.Net.Http
         public async Task PostAsync_String_WhenAuthoritativeMediaTypeStringIsSet_CreatesRequestWithAppropriateContentType()
         {
             string mediaType = _mediaTypeHeader.MediaType;
-            var response = await _client.PostAsync("http://example.com/myapi/", new object(), _formatter, mediaType, CancellationToken.None);
+            var response = await _client.PostAsync(
+                "http://example.com/myapi/",
+                new object(),
+                _formatter,
+                mediaType,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -126,7 +182,12 @@ namespace System.Net.Http
         public async Task PostAsync_String_WhenAuthoritativeMediaTypeStringIsSetWithoutCT_CreatesRequestWithAppropriateContentType()
         {
             string mediaType = _mediaTypeHeader.MediaType;
-            var response = await _client.PostAsync("http://example.com/myapi/", new object(), _formatter, mediaType);
+            var response = await _client.PostAsync(
+                "http://example.com/myapi/",
+                new object(),
+                _formatter,
+                mediaType
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -135,7 +196,13 @@ namespace System.Net.Http
         [Fact]
         public async Task PostAsync_String_WhenFormatterIsSet_CreatesRequestWithObjectContentAndCorrectFormatter()
         {
-            var response = await _client.PostAsync("http://example.com/myapi/", new object(), _formatter, _mediaTypeHeader, CancellationToken.None);
+            var response = await _client.PostAsync(
+                "http://example.com/myapi/",
+                new object(),
+                _formatter,
+                _mediaTypeHeader,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             var content = Assert.IsType<ObjectContent<object>>(request.Content);
@@ -145,7 +212,11 @@ namespace System.Net.Http
         [Fact]
         public async Task PostAsync_String_IssuesPostRequest()
         {
-            var response = await _client.PostAsync("http://example.com/myapi/", new object(), _formatter);
+            var response = await _client.PostAsync(
+                "http://example.com/myapi/",
+                new object(),
+                _formatter
+            );
 
             var request = response.RequestMessage;
             Assert.Same(HttpMethod.Post, request.Method);
@@ -154,7 +225,10 @@ namespace System.Net.Http
         [Fact]
         public void PostAsync_String_WhenMediaTypeFormatterIsNull_ThrowsException()
         {
-            Assert.ThrowsArgumentNull(() => _client.PostAsync("http://example.com", new object(), formatter: null), "formatter");
+            Assert.ThrowsArgumentNull(
+                () => _client.PostAsync("http://example.com", new object(), formatter: null),
+                "formatter"
+            );
         }
 
         [Fact]
@@ -162,14 +236,19 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PutAsJsonAsync("http://www.example.com", new object()), "client");
+            Assert.ThrowsArgumentNull(
+                () => client.PutAsJsonAsync("http://www.example.com", new object()),
+                "client"
+            );
         }
 
         [Fact]
         public void PutAsJsonAsync_String_WhenUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PutAsJsonAsync((string)null, new object()),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () => _client.PutAsJsonAsync((string)null, new object()),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
@@ -186,14 +265,19 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PutAsXmlAsync("http://www.example.com", new object()), "client");
+            Assert.ThrowsArgumentNull(
+                () => client.PutAsXmlAsync("http://www.example.com", new object()),
+                "client"
+            );
         }
 
         [Fact]
         public void PutAsXmlAsync_String_WhenUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PutAsXmlAsync((string)null, new object()),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () => _client.PutAsXmlAsync((string)null, new object()),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
@@ -210,14 +294,31 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PutAsync("http://www.example.com", new object(), new JsonMediaTypeFormatter(), "text/json"), "client");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    client.PutAsync(
+                        "http://www.example.com",
+                        new object(),
+                        new JsonMediaTypeFormatter(),
+                        "text/json"
+                    ),
+                "client"
+            );
         }
 
         [Fact]
         public void PutAsync_String_WhenRequestUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PutAsync((string)null, new object(), new JsonMediaTypeFormatter(), "text/json"),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    _client.PutAsync(
+                        (string)null,
+                        new object(),
+                        new JsonMediaTypeFormatter(),
+                        "text/json"
+                    ),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
@@ -234,7 +335,13 @@ namespace System.Net.Http
         [Fact]
         public async Task PutAsync_String_WhenAuthoritativeMediaTypeIsSet_CreatesRequestWithAppropriateContentType()
         {
-            var response = await _client.PutAsync("http://example.com/myapi/", new object(), _formatter, _mediaTypeHeader, CancellationToken.None);
+            var response = await _client.PutAsync(
+                "http://example.com/myapi/",
+                new object(),
+                _formatter,
+                _mediaTypeHeader,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -244,7 +351,13 @@ namespace System.Net.Http
         [Fact]
         public async Task PutAsync_String_WhenFormatterIsSet_CreatesRequestWithObjectContentAndCorrectFormatter()
         {
-            var response = await _client.PutAsync("http://example.com/myapi/", new object(), _formatter, _mediaTypeHeader, CancellationToken.None);
+            var response = await _client.PutAsync(
+                "http://example.com/myapi/",
+                new object(),
+                _formatter,
+                _mediaTypeHeader,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             var content = Assert.IsType<ObjectContent<object>>(request.Content);
@@ -255,7 +368,13 @@ namespace System.Net.Http
         public async Task PutAsync_String_WhenAuthoritativeMediaTypeStringIsSet_CreatesRequestWithAppropriateContentType()
         {
             string mediaType = _mediaTypeHeader.MediaType;
-            var response = await _client.PutAsync("http://example.com/myapi/", new object(), _formatter, mediaType, CancellationToken.None);
+            var response = await _client.PutAsync(
+                "http://example.com/myapi/",
+                new object(),
+                _formatter,
+                mediaType,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -265,7 +384,12 @@ namespace System.Net.Http
         public async Task PutAsync_String_WhenAuthoritativeMediaTypeStringIsSetWithoutCT_CreatesRequestWithAppropriateContentType()
         {
             string mediaType = _mediaTypeHeader.MediaType;
-            var response = await _client.PutAsync("http://example.com/myapi/", new object(), _formatter, mediaType);
+            var response = await _client.PutAsync(
+                "http://example.com/myapi/",
+                new object(),
+                _formatter,
+                mediaType
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -274,7 +398,11 @@ namespace System.Net.Http
         [Fact]
         public async Task PutAsync_String_IssuesPutRequest()
         {
-            var response = await _client.PutAsync("http://example.com/myapi/", new object(), _formatter);
+            var response = await _client.PutAsync(
+                "http://example.com/myapi/",
+                new object(),
+                _formatter
+            );
 
             var request = response.RequestMessage;
             Assert.Same(HttpMethod.Put, request.Method);
@@ -283,7 +411,10 @@ namespace System.Net.Http
         [Fact]
         public void PutAsync_String_WhenMediaTypeFormatterIsNull_ThrowsException()
         {
-            Assert.ThrowsArgumentNull(() => _client.PutAsync("http://example.com", new object(), formatter: null), "formatter");
+            Assert.ThrowsArgumentNull(
+                () => _client.PutAsync("http://example.com", new object(), formatter: null),
+                "formatter"
+            );
         }
 
         [Fact]
@@ -291,20 +422,28 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PostAsJsonAsync(new Uri("http://www.example.com"), new object()), "client");
+            Assert.ThrowsArgumentNull(
+                () => client.PostAsJsonAsync(new Uri("http://www.example.com"), new object()),
+                "client"
+            );
         }
 
         [Fact]
         public void PostAsJsonAsync_Uri_WhenUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PostAsJsonAsync((Uri)null, new object()),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () => _client.PostAsJsonAsync((Uri)null, new object()),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
         public async Task PostAsJsonAsync_Uri_UsesJsonMediaTypeFormatter()
         {
-            var response = await _client.PostAsJsonAsync(new Uri("http://example.com"), new object());
+            var response = await _client.PostAsJsonAsync(
+                new Uri("http://example.com"),
+                new object()
+            );
 
             var content = Assert.IsType<ObjectContent<object>>(response.RequestMessage.Content);
             Assert.IsType<JsonMediaTypeFormatter>(content.Formatter);
@@ -315,20 +454,28 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PostAsXmlAsync(new Uri("http://www.example.com"), new object()), "client");
+            Assert.ThrowsArgumentNull(
+                () => client.PostAsXmlAsync(new Uri("http://www.example.com"), new object()),
+                "client"
+            );
         }
 
         [Fact]
         public void PostAsXmlAsync_Uri_WhenUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PostAsXmlAsync((Uri)null, new object()),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () => _client.PostAsXmlAsync((Uri)null, new object()),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
         public async Task PostAsXmlAsync_Uri_UsesXmlMediaTypeFormatter()
         {
-            var response = await _client.PostAsXmlAsync(new Uri("http://example.com"), new object());
+            var response = await _client.PostAsXmlAsync(
+                new Uri("http://example.com"),
+                new object()
+            );
 
             var content = Assert.IsType<ObjectContent<object>>(response.RequestMessage.Content);
             Assert.IsType<XmlMediaTypeFormatter>(content.Formatter);
@@ -339,14 +486,31 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PostAsync(new Uri("http://www.example.com"), new object(), new JsonMediaTypeFormatter(), "text/json"), "client");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    client.PostAsync(
+                        new Uri("http://www.example.com"),
+                        new object(),
+                        new JsonMediaTypeFormatter(),
+                        "text/json"
+                    ),
+                "client"
+            );
         }
 
         [Fact]
         public void PostAsync_Uri_WhenRequestUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PostAsync((Uri)null, new object(), new JsonMediaTypeFormatter(), "text/json"),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    _client.PostAsync(
+                        (Uri)null,
+                        new object(),
+                        new JsonMediaTypeFormatter(),
+                        "text/json"
+                    ),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
@@ -354,7 +518,11 @@ namespace System.Net.Http
         {
             _client.BaseAddress = new Uri("http://example.com/");
 
-            var response = await _client.PostAsync(new Uri("myapi/", UriKind.Relative), new object(), _formatter);
+            var response = await _client.PostAsync(
+                new Uri("myapi/", UriKind.Relative),
+                new object(),
+                _formatter
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("http://example.com/myapi/", request.RequestUri.ToString());
@@ -363,7 +531,13 @@ namespace System.Net.Http
         [Fact]
         public async Task PostAsync_Uri_WhenAuthoritativeMediaTypeIsSet_CreatesRequestWithAppropriateContentType()
         {
-            var response = await _client.PostAsync(new Uri("http://example.com/myapi/"), new object(), _formatter, _mediaTypeHeader, CancellationToken.None);
+            var response = await _client.PostAsync(
+                new Uri("http://example.com/myapi/"),
+                new object(),
+                _formatter,
+                _mediaTypeHeader,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -373,7 +547,13 @@ namespace System.Net.Http
         [Fact]
         public async Task PostAsync_Uri_WhenFormatterIsSet_CreatesRequestWithObjectContentAndCorrectFormatter()
         {
-            var response = await _client.PostAsync(new Uri("http://example.com/myapi/"), new object(), _formatter, _mediaTypeHeader, CancellationToken.None);
+            var response = await _client.PostAsync(
+                new Uri("http://example.com/myapi/"),
+                new object(),
+                _formatter,
+                _mediaTypeHeader,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             var content = Assert.IsType<ObjectContent<object>>(request.Content);
@@ -384,7 +564,13 @@ namespace System.Net.Http
         public async Task PostAsync_Uri_WhenAuthoritativeMediaTypeStringIsSet_CreatesRequestWithAppropriateContentType()
         {
             string mediaType = _mediaTypeHeader.MediaType;
-            var response = await _client.PostAsync(new Uri("http://example.com/myapi/"), new object(), _formatter, mediaType, CancellationToken.None);
+            var response = await _client.PostAsync(
+                new Uri("http://example.com/myapi/"),
+                new object(),
+                _formatter,
+                mediaType,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -394,7 +580,12 @@ namespace System.Net.Http
         public async Task PostAsync_Uri_WhenAuthoritativeMediaTypeStringIsSetWithoutCT_CreatesRequestWithAppropriateContentType()
         {
             string mediaType = _mediaTypeHeader.MediaType;
-            var response = await _client.PostAsync(new Uri("http://example.com/myapi/"), new object(), _formatter, mediaType);
+            var response = await _client.PostAsync(
+                new Uri("http://example.com/myapi/"),
+                new object(),
+                _formatter,
+                mediaType
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -403,7 +594,11 @@ namespace System.Net.Http
         [Fact]
         public async Task PostAsync_Uri_IssuesPostRequest()
         {
-            var response = await _client.PostAsync(new Uri("http://example.com/myapi/"), new object(), _formatter);
+            var response = await _client.PostAsync(
+                new Uri("http://example.com/myapi/"),
+                new object(),
+                _formatter
+            );
 
             var request = response.RequestMessage;
             Assert.Same(HttpMethod.Post, request.Method);
@@ -412,7 +607,11 @@ namespace System.Net.Http
         [Fact]
         public void PostAsync_Uri_WhenMediaTypeFormatterIsNull_ThrowsException()
         {
-            Assert.ThrowsArgumentNull(() => _client.PostAsync(new Uri("http://example.com"), new object(), formatter: null), "formatter");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    _client.PostAsync(new Uri("http://example.com"), new object(), formatter: null),
+                "formatter"
+            );
         }
 
         [Fact]
@@ -420,20 +619,28 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PutAsJsonAsync(new Uri("http://www.example.com"), new object()), "client");
+            Assert.ThrowsArgumentNull(
+                () => client.PutAsJsonAsync(new Uri("http://www.example.com"), new object()),
+                "client"
+            );
         }
 
         [Fact]
         public void PutAsJsonAsync_Uri_WhenUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PutAsJsonAsync((Uri)null, new object()),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () => _client.PutAsJsonAsync((Uri)null, new object()),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
         public async Task PutAsJsonAsync_Uri_UsesJsonMediaTypeFormatter()
         {
-            var response = await _client.PutAsJsonAsync(new Uri("http://example.com"), new object());
+            var response = await _client.PutAsJsonAsync(
+                new Uri("http://example.com"),
+                new object()
+            );
 
             var content = Assert.IsType<ObjectContent<object>>(response.RequestMessage.Content);
             Assert.IsType<JsonMediaTypeFormatter>(content.Formatter);
@@ -444,14 +651,19 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PutAsXmlAsync(new Uri("http://www.example.com"), new object()), "client");
+            Assert.ThrowsArgumentNull(
+                () => client.PutAsXmlAsync(new Uri("http://www.example.com"), new object()),
+                "client"
+            );
         }
 
         [Fact]
         public void PutAsXmlAsync_Uri_WhenUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PutAsXmlAsync((Uri)null, new object()),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () => _client.PutAsXmlAsync((Uri)null, new object()),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
@@ -468,14 +680,31 @@ namespace System.Net.Http
         {
             HttpClient client = null;
 
-            Assert.ThrowsArgumentNull(() => client.PutAsync(new Uri("http://www.example.com"), new object(), new JsonMediaTypeFormatter(), "text/json"), "client");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    client.PutAsync(
+                        new Uri("http://www.example.com"),
+                        new object(),
+                        new JsonMediaTypeFormatter(),
+                        "text/json"
+                    ),
+                "client"
+            );
         }
 
         [Fact]
         public void PutAsync_Uri_WhenRequestUriIsNull_ThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => _client.PutAsync((Uri)null, new object(), new JsonMediaTypeFormatter(), "text/json"),
-                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    _client.PutAsync(
+                        (Uri)null,
+                        new object(),
+                        new JsonMediaTypeFormatter(),
+                        "text/json"
+                    ),
+                "An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set."
+            );
         }
 
         [Fact]
@@ -483,7 +712,11 @@ namespace System.Net.Http
         {
             _client.BaseAddress = new Uri("http://example.com/");
 
-            var response = await _client.PutAsync(new Uri("myapi/", UriKind.Relative), new object(), _formatter);
+            var response = await _client.PutAsync(
+                new Uri("myapi/", UriKind.Relative),
+                new object(),
+                _formatter
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("http://example.com/myapi/", request.RequestUri.ToString());
@@ -492,7 +725,13 @@ namespace System.Net.Http
         [Fact]
         public async Task PutAsync_Uri_WhenAuthoritativeMediaTypeIsSet_CreatesRequestWithAppropriateContentType()
         {
-            var response = await _client.PutAsync(new Uri("http://example.com/myapi/"), new object(), _formatter, _mediaTypeHeader, CancellationToken.None);
+            var response = await _client.PutAsync(
+                new Uri("http://example.com/myapi/"),
+                new object(),
+                _formatter,
+                _mediaTypeHeader,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -502,7 +741,13 @@ namespace System.Net.Http
         [Fact]
         public async Task PutAsync_Uri_WhenFormatterIsSet_CreatesRequestWithObjectContentAndCorrectFormatter()
         {
-            var response = await _client.PutAsync(new Uri("http://example.com/myapi/"), new object(), _formatter, _mediaTypeHeader, CancellationToken.None);
+            var response = await _client.PutAsync(
+                new Uri("http://example.com/myapi/"),
+                new object(),
+                _formatter,
+                _mediaTypeHeader,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             var content = Assert.IsType<ObjectContent<object>>(request.Content);
@@ -513,7 +758,13 @@ namespace System.Net.Http
         public async Task PutAsync_Uri_WhenAuthoritativeMediaTypeStringIsSet_CreatesRequestWithAppropriateContentType()
         {
             string mediaType = _mediaTypeHeader.MediaType;
-            var response = await _client.PutAsync(new Uri("http://example.com/myapi/"), new object(), _formatter, mediaType, CancellationToken.None);
+            var response = await _client.PutAsync(
+                new Uri("http://example.com/myapi/"),
+                new object(),
+                _formatter,
+                mediaType,
+                CancellationToken.None
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -523,7 +774,12 @@ namespace System.Net.Http
         public async Task PutAsync_Uri_WhenAuthoritativeMediaTypeStringIsSetWithoutCT_CreatesRequestWithAppropriateContentType()
         {
             string mediaType = _mediaTypeHeader.MediaType;
-            var response = await _client.PutAsync(new Uri("http://example.com/myapi/"), new object(), _formatter, mediaType);
+            var response = await _client.PutAsync(
+                new Uri("http://example.com/myapi/"),
+                new object(),
+                _formatter,
+                mediaType
+            );
 
             var request = response.RequestMessage;
             Assert.Equal("foo/bar", request.Content.Headers.ContentType.MediaType);
@@ -532,7 +788,11 @@ namespace System.Net.Http
         [Fact]
         public async Task PutAsync_Uri_IssuesPutRequest()
         {
-            var response = await _client.PutAsync(new Uri("http://example.com/myapi/"), new object(), _formatter);
+            var response = await _client.PutAsync(
+                new Uri("http://example.com/myapi/"),
+                new object(),
+                _formatter
+            );
 
             var request = response.RequestMessage;
             Assert.Same(HttpMethod.Put, request.Method);
@@ -541,7 +801,11 @@ namespace System.Net.Http
         [Fact]
         public void PutAsync_Uri_WhenMediaTypeFormatterIsNull_ThrowsException()
         {
-            Assert.ThrowsArgumentNull(() => _client.PutAsync(new Uri("http://example.com"), new object(), formatter: null), "formatter");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    _client.PutAsync(new Uri("http://example.com"), new object(), formatter: null),
+                "formatter"
+            );
         }
     }
 }

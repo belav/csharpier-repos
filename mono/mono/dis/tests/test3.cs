@@ -6,20 +6,23 @@
 
 using System;
 
-class X<T1> {
-    public static void Xfoo () {
-        Console.WriteLine (typeof (T1).ToString ());
-    }
-}
-
-class Y<T2> {
-    public static void Yfoo () {
-        Console.WriteLine (typeof (T2).ToString ());
-    }
-}
-
-class Test {
-    static void Main ()
+class X<T1>
+{
+    public static void Xfoo()
     {
+        Console.WriteLine(typeof(T1).ToString());
     }
+}
+
+class Y<T2>
+{
+    public static void Yfoo()
+    {
+        Console.WriteLine(typeof(T2).ToString());
+    }
+}
+
+class Test
+{
+    static void Main() { }
 }

@@ -8,8 +8,10 @@ using System.Reflection;
 using System.Linq;
 using System.Linq.Expressions;
 
-public class Repro {
-    public class Foo {
+public class Repro
+{
+    public class Foo
+    {
         public string Bar;
         public string Baz;
 
@@ -19,36 +21,46 @@ public class Repro {
 
         public string Gruik { get; set; }
 
-        public Foo ()
+        public Foo()
         {
-            Gazoo = new Gazonk ();
-            Gaz = new Gazonk ();
+            Gazoo = new Gazonk();
+            Gaz = new Gazonk();
         }
     }
 
-    public class Gazonk {
+    public class Gazonk
+    {
         public string Tzap;
 
         public int Klang;
 
         public string Couic { get; set; }
 
-        public string Bang () { return ""; }
+        public string Bang()
+        {
+            return "";
+        }
     }
 
-    public static int CompiledMemberBinding ()
+    public static int CompiledMemberBinding()
     {
-        var getfoo = Expression.Lambda<Func<Foo>> (
-                Expression.MemberInit (
-                    Expression.New (typeof (Foo)),
-                    Expression.MemberBind (
-                        typeof (Foo).GetProperty ("Gazoo"),
-                        Expression.Bind (typeof (Gazonk).GetField ("Tzap"),
-                            Expression.Constant ("tzap")),
-                        Expression.Bind (typeof (Gazonk).GetField ("Klang"),
-                            Expression.Constant (42))))).Compile ();
+        var getfoo = Expression
+            .Lambda<Func<Foo>>(
+                Expression.MemberInit(
+                    Expression.New(typeof(Foo)),
+                    Expression.MemberBind(
+                        typeof(Foo).GetProperty("Gazoo"),
+                        Expression.Bind(
+                            typeof(Gazonk).GetField("Tzap"),
+                            Expression.Constant("tzap")
+                        ),
+                        Expression.Bind(typeof(Gazonk).GetField("Klang"), Expression.Constant(42))
+                    )
+                )
+            )
+            .Compile();
 
-        var foo = getfoo ();
+        var foo = getfoo();
 
         if (foo == null)
             return 2;
@@ -60,8 +72,8 @@ public class Repro {
         return 0;
     }
 
-    public static int Main (string []args)
+    public static int Main(string[] args)
     {
-        return CompiledMemberBinding ();
+        return CompiledMemberBinding();
     }
 }

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,6 @@ using System.ComponentModel;
 
 namespace MonoTests.System.Windows.Forms
 {
-
     [TestFixture]
     public class BindingNavigatorTest : TestHelper
     {
@@ -46,14 +45,14 @@ namespace MonoTests.System.Windows.Forms
         }
 
         [SetUp]
-        protected override void SetUp ()
+        protected override void SetUp()
         {
             IntThing test = new IntThing(50);
             BindingSource s = new BindingSource();
             s.DataSource = test;
             navigator = new BindingNavigator(s);
             flag = false;
-            base.SetUp ();
+            base.SetUp();
         }
 
         [Test]
@@ -127,7 +126,6 @@ namespace MonoTests.System.Windows.Forms
             navigator.AddNewItem = new ToolStripButton();
             Assert.IsFalse(existing.IsDisposed, "#1");
         }
-
 
         private void CheckStandardItems(BindingNavigator navigator)
         {
@@ -207,9 +205,7 @@ namespace MonoTests.System.Windows.Forms
             navigator.RefreshItems += new EventHandler(SetFlag);
             navigator.AddNewItem = new ToolStripButton();
             Assert.IsTrue(flag, "#1");
-
         }
-
 
         private void RefreshNav()
         {
@@ -237,10 +233,10 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(11, navigator.Items.Count, "#2");
         }
 
-
         private class IntThing : BindingList<int>
         {
             int Number;
+
             public IntThing(int number)
                 : base()
             {
@@ -254,7 +250,7 @@ namespace MonoTests.System.Windows.Forms
             {
                 get { return true; }
             }
-            
+
             protected override int FindCore(PropertyDescriptor prop, object key)
             {
                 return this.Items.IndexOf((int)key);

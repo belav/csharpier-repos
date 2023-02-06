@@ -15,80 +15,151 @@ namespace Mono.Linker.Tests.TestCasesRunner
     {
         private readonly ObjectFactory _factory;
 
-        public TestRunner (ObjectFactory factory)
+        public TestRunner(ObjectFactory factory)
         {
             _factory = factory;
         }
 
-        public virtual ILCompilerTestCaseResult? Run (TestCase testCase)
+        public virtual ILCompilerTestCaseResult? Run(TestCase testCase)
         {
-            try {
-                using (var fullTestCaseAssemblyDefinition = AssemblyDefinition.ReadAssembly (testCase.OriginalTestCaseAssemblyPath.ToString ())) {
-                    var compilationMetadataProvider = _factory.CreateCompilationMetadataProvider (testCase, fullTestCaseAssemblyDefinition);
+            try
+            {
+                using (
+                    var fullTestCaseAssemblyDefinition = AssemblyDefinition.ReadAssembly(
+                        testCase.OriginalTestCaseAssemblyPath.ToString()
+                    )
+                )
+                {
+                    var compilationMetadataProvider = _factory.CreateCompilationMetadataProvider(
+                        testCase,
+                        fullTestCaseAssemblyDefinition
+                    );
 
-                    if (compilationMetadataProvider.IsIgnored (out string? ignoreReason))
-                        throw new IgnoreTestException (ignoreReason);
+                    if (compilationMetadataProvider.IsIgnored(out string? ignoreReason))
+                        throw new IgnoreTestException(ignoreReason);
 
-                    var sandbox = Sandbox (testCase, compilationMetadataProvider);
-                    var compilationResult = Compile (sandbox, compilationMetadataProvider);
-                    using (var expectationsAssemblyDefinition = AssemblyDefinition.ReadAssembly (compilationResult.ExpectationsAssemblyPath.ToString ())) {
-                        var metadataProvider = _factory.CreateMetadataProvider (testCase, expectationsAssemblyDefinition);
+                    var sandbox = Sandbox(testCase, compilationMetadataProvider);
+                    var compilationResult = Compile(sandbox, compilationMetadataProvider);
+                    using (
+                        var expectationsAssemblyDefinition = AssemblyDefinition.ReadAssembly(
+                            compilationResult.ExpectationsAssemblyPath.ToString()
+                        )
+                    )
+                    {
+                        var metadataProvider = _factory.CreateMetadataProvider(
+                            testCase,
+                            expectationsAssemblyDefinition
+                        );
 
-                        sandbox.PopulateFromExpectations (metadataProvider);
+                        sandbox.PopulateFromExpectations(metadataProvider);
 
-                        PrepForLink (sandbox, compilationResult);
-                        return Link (testCase, sandbox, compilationResult, metadataProvider);
+                        PrepForLink(sandbox, compilationResult);
+                        return Link(testCase, sandbox, compilationResult, metadataProvider);
                     }
                 }
-            } catch (IgnoreTestException) {
+            }
+            catch (IgnoreTestException)
+            {
                 return null;
             }
         }
 
-        public virtual ILCompilerTestCaseResult Relink (ILCompilerTestCaseResult result)
+        public virtual ILCompilerTestCaseResult Relink(ILCompilerTestCaseResult result)
         {
-            PrepForLink (result.Sandbox, result.CompilationResult);
-            return Link (result.TestCase, result.Sandbox, result.CompilationResult, result.MetadataProvider);
+            PrepForLink(result.Sandbox, result.CompilationResult);
+            return Link(
+                result.TestCase,
+                result.Sandbox,
+                result.CompilationResult,
+                result.MetadataProvider
+            );
         }
 
-        private TestCaseSandbox Sandbox (TestCase testCase, TestCaseCompilationMetadataProvider metadataProvider)
+        private TestCaseSandbox Sandbox(
+            TestCase testCase,
+            TestCaseCompilationMetadataProvider metadataProvider
+        )
         {
-            var sandbox = _factory.CreateSandbox (testCase);
-            sandbox.Populate (metadataProvider);
+            var sandbox = _factory.CreateSandbox(testCase);
+            sandbox.Populate(metadataProvider);
             return sandbox;
         }
 
-        private ManagedCompilationResult Compile (TestCaseSandbox sandbox, TestCaseCompilationMetadataProvider metadataProvider)
+        private ManagedCompilationResult Compile(
+            TestCaseSandbox sandbox,
+            TestCaseCompilationMetadataProvider metadataProvider
+        )
         {
-            var inputCompiler = _factory.CreateCompiler (sandbox, metadataProvider);
-            var expectationsCompiler = _factory.CreateCompiler (sandbox, metadataProvider);
-            var sourceFiles = sandbox.SourceFiles.Select (s => s.ToString ()).ToArray ();
+            var inputCompiler = _factory.CreateCompiler(sandbox, metadataProvider);
+            var expectationsCompiler = _factory.CreateCompiler(sandbox, metadataProvider);
+            var sourceFiles = sandbox.SourceFiles.Select(s => s.ToString()).ToArray();
 
-            var assemblyName = metadataProvider.GetAssemblyName ();
+            var assemblyName = metadataProvider.GetAssemblyName();
 
-            var commonReferences = metadataProvider.GetCommonReferencedAssemblies (sandbox.InputDirectory).ToArray ();
-            var mainAssemblyReferences = metadataProvider.GetReferencedAssemblies (sandbox.InputDirectory).ToArray ();
-            var resources = sandbox.ResourceFiles.ToArray ();
-            var additionalArguments = metadataProvider.GetSetupCompilerArguments ().ToArray ();
+            var commonReferences = metadataProvider
+                .GetCommonReferencedAssemblies(sandbox.InputDirectory)
+                .ToArray();
+            var mainAssemblyReferences = metadataProvider
+                .GetReferencedAssemblies(sandbox.InputDirectory)
+                .ToArray();
+            var resources = sandbox.ResourceFiles.ToArray();
+            var additionalArguments = metadataProvider.GetSetupCompilerArguments().ToArray();
 
-            var expectationsCommonReferences = metadataProvider.GetCommonReferencedAssemblies (sandbox.ExpectationsDirectory).ToArray ();
-            var expectationsMainAssemblyReferences = metadataProvider.GetReferencedAssemblies (sandbox.ExpectationsDirectory).ToArray ();
+            var expectationsCommonReferences = metadataProvider
+                .GetCommonReferencedAssemblies(sandbox.ExpectationsDirectory)
+                .ToArray();
+            var expectationsMainAssemblyReferences = metadataProvider
+                .GetReferencedAssemblies(sandbox.ExpectationsDirectory)
+                .ToArray();
 
-            var inputTask = Task.Run (() => inputCompiler.CompileTestIn (sandbox.InputDirectory, assemblyName!, sourceFiles, commonReferences, mainAssemblyReferences, new string[] { "NATIVEAOT" }, resources, additionalArguments));
-            var expectationsTask = Task.Run (() => expectationsCompiler.CompileTestIn (sandbox.ExpectationsDirectory, assemblyName!, sourceFiles, expectationsCommonReferences, expectationsMainAssemblyReferences, new[] { "INCLUDE_EXPECTATIONS", "NATIVEAOT" }, resources, additionalArguments));
+            var inputTask = Task.Run(
+                () =>
+                    inputCompiler.CompileTestIn(
+                        sandbox.InputDirectory,
+                        assemblyName!,
+                        sourceFiles,
+                        commonReferences,
+                        mainAssemblyReferences,
+                        new string[] { "NATIVEAOT" },
+                        resources,
+                        additionalArguments
+                    )
+            );
+            var expectationsTask = Task.Run(
+                () =>
+                    expectationsCompiler.CompileTestIn(
+                        sandbox.ExpectationsDirectory,
+                        assemblyName!,
+                        sourceFiles,
+                        expectationsCommonReferences,
+                        expectationsMainAssemblyReferences,
+                        new[] { "INCLUDE_EXPECTATIONS", "NATIVEAOT" },
+                        resources,
+                        additionalArguments
+                    )
+            );
 
             NPath? inputAssemblyPath = null;
             NPath? expectationsAssemblyPath = null;
-            try {
-                inputAssemblyPath = GetResultOfTaskThatMakesXUnitAssertions (inputTask);
-                expectationsAssemblyPath = GetResultOfTaskThatMakesXUnitAssertions (expectationsTask);
-            } catch (Exception) {
+            try
+            {
+                inputAssemblyPath = GetResultOfTaskThatMakesXUnitAssertions(inputTask);
+                expectationsAssemblyPath = GetResultOfTaskThatMakesXUnitAssertions(
+                    expectationsTask
+                );
+            }
+            catch (Exception)
+            {
                 // If completing the input assembly task threw, we need to wait for the expectations task to complete before continuing
                 // otherwise we could set the next test up for a race condition with the expectations compilation over access to the sandbox directory
-                if (inputAssemblyPath == null && expectationsAssemblyPath == null) {
-                    try {
-                        expectationsTask.Wait ();
-                    } catch (Exception) {
+                if (inputAssemblyPath == null && expectationsAssemblyPath == null)
+                {
+                    try
+                    {
+                        expectationsTask.Wait();
+                    }
+                    catch (Exception)
+                    {
                         // Don't care, we want to throw the first exception
                     }
                 }
@@ -96,63 +167,101 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 throw;
             }
 
-            return new ManagedCompilationResult (inputAssemblyPath, expectationsAssemblyPath);
+            return new ManagedCompilationResult(inputAssemblyPath, expectationsAssemblyPath);
         }
 
-        protected virtual void PrepForLink (TestCaseSandbox sandbox, ManagedCompilationResult compilationResult)
+        protected virtual void PrepForLink(
+            TestCaseSandbox sandbox,
+            ManagedCompilationResult compilationResult
+        ) { }
+
+        private ILCompilerTestCaseResult Link(
+            TestCase testCase,
+            TestCaseSandbox sandbox,
+            ManagedCompilationResult compilationResult,
+            TestCaseMetadataProvider metadataProvider
+        )
         {
+            var trimmer = _factory.CreateTrimmer();
+
+            var builder = _factory.CreateTrimmerOptionsBuilder(metadataProvider);
+
+            AddLinkOptions(sandbox, compilationResult, builder, metadataProvider);
+
+            var logWriter = new TestLogWriter();
+            var trimmingResults = trimmer.Trim(builder.Options, logWriter);
+
+            return new ILCompilerTestCaseResult(
+                testCase,
+                compilationResult.InputAssemblyPath,
+                compilationResult.ExpectationsAssemblyPath,
+                sandbox,
+                metadataProvider,
+                compilationResult,
+                trimmingResults,
+                logWriter
+            );
         }
 
-        private ILCompilerTestCaseResult Link (TestCase testCase, TestCaseSandbox sandbox, ManagedCompilationResult compilationResult, TestCaseMetadataProvider metadataProvider)
+        protected virtual void AddLinkOptions(
+            TestCaseSandbox sandbox,
+            ManagedCompilationResult compilationResult,
+            ILCompilerOptionsBuilder builder,
+            TestCaseMetadataProvider metadataProvider
+        )
         {
-            var trimmer = _factory.CreateTrimmer ();
+            var caseDefinedOptions = metadataProvider.GetLinkerOptions(sandbox.InputDirectory);
 
-            var builder = _factory.CreateTrimmerOptionsBuilder (metadataProvider);
-
-            AddLinkOptions (sandbox, compilationResult, builder, metadataProvider);
-
-            var logWriter = new TestLogWriter ();
-            var trimmingResults = trimmer.Trim (builder.Options, logWriter);
-
-            return new ILCompilerTestCaseResult (testCase, compilationResult.InputAssemblyPath, compilationResult.ExpectationsAssemblyPath, sandbox, metadataProvider, compilationResult, trimmingResults, logWriter);
-        }
-
-        protected virtual void AddLinkOptions (TestCaseSandbox sandbox, ManagedCompilationResult compilationResult, ILCompilerOptionsBuilder builder, TestCaseMetadataProvider metadataProvider)
-        {
-            var caseDefinedOptions = metadataProvider.GetLinkerOptions (sandbox.InputDirectory);
-
-            builder.AddOutputDirectory (sandbox.OutputDirectory.Combine (compilationResult.InputAssemblyPath.FileNameWithoutExtension + ".obj"));
+            builder.AddOutputDirectory(
+                sandbox.OutputDirectory.Combine(
+                    compilationResult.InputAssemblyPath.FileNameWithoutExtension + ".obj"
+                )
+            );
 
             foreach (var rspFile in sandbox.ResponseFiles)
-                builder.AddResponseFile (rspFile);
+                builder.AddResponseFile(rspFile);
 
-            foreach (var inputReference in sandbox.InputDirectory.Files ()) {
+            foreach (var inputReference in sandbox.InputDirectory.Files())
+            {
                 var ext = inputReference.ExtensionWithDot;
-                if (ext == ".dll" || ext == ".exe") {
-                    if (caseDefinedOptions.AssembliesAction.Contains (("link", inputReference.FileNameWithoutExtension))) {
-                        builder.AddLinkAssembly (inputReference);
-                    } else {
-                        builder.AddReference (inputReference);
+                if (ext == ".dll" || ext == ".exe")
+                {
+                    if (
+                        caseDefinedOptions.AssembliesAction.Contains(
+                            ("link", inputReference.FileNameWithoutExtension)
+                        )
+                    )
+                    {
+                        builder.AddLinkAssembly(inputReference);
+                    }
+                    else
+                    {
+                        builder.AddReference(inputReference);
                     }
                 }
             }
             var coreAction = caseDefinedOptions.TrimMode ?? "skip";
-            foreach (var extraReference in metadataProvider.GetExtraLinkerReferences ()) {
-                builder.AddReference (extraReference);
-                builder.AddAssemblyAction (coreAction, extraReference.FileNameWithoutExtension);
+            foreach (var extraReference in metadataProvider.GetExtraLinkerReferences())
+            {
+                builder.AddReference(extraReference);
+                builder.AddAssemblyAction(coreAction, extraReference.FileNameWithoutExtension);
             }
 
-            builder.ProcessOptions (caseDefinedOptions);
+            builder.ProcessOptions(caseDefinedOptions);
 
-            builder.ProcessTestInputAssembly (compilationResult.InputAssemblyPath);
+            builder.ProcessTestInputAssembly(compilationResult.InputAssemblyPath);
         }
 
-        private static T GetResultOfTaskThatMakesXUnitAssertions<T> (Task<T> task)
+        private static T GetResultOfTaskThatMakesXUnitAssertions<T>(Task<T> task)
         {
-            try {
+            try
+            {
                 return task.Result;
-            } catch (AggregateException e) {
-                if (e.InnerException != null) {
+            }
+            catch (AggregateException e)
+            {
+                if (e.InnerException != null)
+                {
                     if (e.InnerException is XunitException)
                         throw e.InnerException;
                 }

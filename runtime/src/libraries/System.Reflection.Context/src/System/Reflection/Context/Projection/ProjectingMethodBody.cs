@@ -22,7 +22,13 @@ namespace System.Reflection.Context.Projection
 
         public override IList<ExceptionHandlingClause> ExceptionHandlingClauses
         {
-            get { return _projector.Project(base.ExceptionHandlingClauses, _projector.ProjectExceptionHandlingClause); }
+            get
+            {
+                return _projector.Project(
+                    base.ExceptionHandlingClauses,
+                    _projector.ProjectExceptionHandlingClause
+                );
+            }
         }
 
         public override IList<LocalVariableInfo> LocalVariables

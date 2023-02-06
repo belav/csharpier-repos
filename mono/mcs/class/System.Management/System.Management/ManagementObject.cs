@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,351 +38,344 @@ namespace System.Management
     public class ManagementObject : ManagementBaseObject
     {
         [MonoTODO]
-        public ManagementObject ()
+        public ManagementObject() { }
+
+        [MonoTODO]
+        public ManagementObject(ManagementPath path) { }
+
+        [MonoTODO]
+        public ManagementObject(string path) { }
+
+        [MonoTODO]
+        public ManagementObject(ManagementPath path, ObjectGetOptions options) { }
+
+        [MonoTODO]
+        public ManagementObject(string path, ObjectGetOptions options) { }
+
+        [MonoTODO]
+        public ManagementObject(
+            ManagementScope scope,
+            ManagementPath path,
+            ObjectGetOptions options
+        ) { }
+
+        [MonoTODO]
+        public ManagementObject(string scopeString, string pathString, ObjectGetOptions options) { }
+
+        [MonoTODO]
+        protected ManagementObject(SerializationInfo info, StreamingContext context) { }
+
+        [MonoTODO]
+        protected override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObject (ManagementPath path)
+        public override object Clone()
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObject (string path)
+        public ManagementPath CopyTo(ManagementPath path)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObject (ManagementPath path, ObjectGetOptions options)
+        public ManagementPath CopyTo(string path)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObject (string path, ObjectGetOptions options)
+        public void CopyTo(ManagementOperationObserver watcher, ManagementPath path)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObject (ManagementScope scope, ManagementPath path, ObjectGetOptions options)
+        public void CopyTo(ManagementOperationObserver watcher, string path)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObject (string scopeString, string pathString, ObjectGetOptions options)
+        public ManagementPath CopyTo(ManagementPath path, PutOptions options)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected
-        ManagementObject (SerializationInfo info, StreamingContext context)
+        public ManagementPath CopyTo(string path, PutOptions options)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected override void GetObjectData (SerializationInfo info, StreamingContext context)
+        public void CopyTo(
+            ManagementOperationObserver watcher,
+            ManagementPath path,
+            PutOptions options
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override object Clone ()
+        public void CopyTo(ManagementOperationObserver watcher, string path, PutOptions options)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementPath CopyTo (ManagementPath path)
+        public void Delete()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementPath CopyTo (string path)
+        public void Delete(ManagementOperationObserver watcher)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void CopyTo (ManagementOperationObserver watcher, ManagementPath path)
+        public void Delete(DeleteOptions options)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void CopyTo (ManagementOperationObserver watcher, string path)
+        public void Delete(ManagementOperationObserver watcher, DeleteOptions options)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementPath CopyTo (ManagementPath path, PutOptions options)
+        public void Get()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementPath CopyTo (string path, PutOptions options)
+        public void Get(ManagementOperationObserver watcher)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void CopyTo (ManagementOperationObserver watcher, ManagementPath path, PutOptions options)
+        public ManagementBaseObject GetMethodParameters(string methodName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void CopyTo (ManagementOperationObserver watcher, string path, PutOptions options)
+        public ManagementObjectCollection GetRelated()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Delete ()
+        public ManagementObjectCollection GetRelated(string relatedClass)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Delete (ManagementOperationObserver watcher)
+        public void GetRelated(ManagementOperationObserver watcher)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Delete (DeleteOptions options)
+        public void GetRelated(ManagementOperationObserver watcher, string relatedClass)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Delete (ManagementOperationObserver watcher, DeleteOptions options)
+        public ManagementObjectCollection GetRelated(
+            string relatedClass,
+            string relationshipClass,
+            string relationshipQualifier,
+            string relatedQualifier,
+            string relatedRole,
+            string thisRole,
+            bool classDefinitionsOnly,
+            EnumerationOptions options
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Get ()
+        public void GetRelated(
+            ManagementOperationObserver watcher,
+            string relatedClass,
+            string relationshipClass,
+            string relationshipQualifier,
+            string relatedQualifier,
+            string relatedRole,
+            string thisRole,
+            bool classDefinitionsOnly,
+            EnumerationOptions options
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Get (ManagementOperationObserver watcher)
+        public ManagementObjectCollection GetRelationships()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementBaseObject GetMethodParameters (string methodName)
+        public ManagementObjectCollection GetRelationships(string relationshipClass)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObjectCollection GetRelated ()
+        public void GetRelationships(ManagementOperationObserver watcher)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObjectCollection GetRelated (string relatedClass)
+        public void GetRelationships(ManagementOperationObserver watcher, string relationshipClass)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GetRelated (ManagementOperationObserver watcher)
+        public ManagementObjectCollection GetRelationships(
+            string relationshipClass,
+            string relationshipQualifier,
+            string thisRole,
+            bool classDefinitionsOnly,
+            EnumerationOptions options
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GetRelated (ManagementOperationObserver watcher, string relatedClass)
+        public void GetRelationships(
+            ManagementOperationObserver watcher,
+            string relationshipClass,
+            string relationshipQualifier,
+            string thisRole,
+            bool classDefinitionsOnly,
+            EnumerationOptions options
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObjectCollection GetRelated (string relatedClass,
-                                  string relationshipClass,
-                                  string relationshipQualifier,
-                                  string relatedQualifier,
-                                  string relatedRole,
-                                  string thisRole,
-                                  bool classDefinitionsOnly,
-                                  EnumerationOptions options)
+        public object InvokeMethod(string methodName, object[] args)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GetRelated (ManagementOperationObserver watcher,
-                    string relatedClass,
-                    string relationshipClass,
-                    string relationshipQualifier,
-                    string relatedQualifier,
-                    string relatedRole,
-                    string thisRole,
-                    bool classDefinitionsOnly,
-                    EnumerationOptions options)
+        public ManagementBaseObject InvokeMethod(
+            string methodName,
+            ManagementBaseObject inParameters,
+            InvokeMethodOptions options
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObjectCollection GetRelationships ()
+        public void InvokeMethod(
+            ManagementOperationObserver watcher,
+            string methodName,
+            object[] args
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObjectCollection GetRelationships (string relationshipClass)
+        public void InvokeMethod(
+            ManagementOperationObserver watcher,
+            string methodName,
+            ManagementBaseObject inParameters,
+            InvokeMethodOptions options
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GetRelationships (ManagementOperationObserver watcher)
+        public ManagementPath Put()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GetRelationships (ManagementOperationObserver watcher, string relationshipClass)
+        public void Put(ManagementOperationObserver watcher)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public ManagementObjectCollection GetRelationships (string relationshipClass,
-                                    string relationshipQualifier,
-                                    string thisRole,
-                                    bool classDefinitionsOnly,
-                                    EnumerationOptions options)
+        public ManagementPath Put(PutOptions options)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void GetRelationships (ManagementOperationObserver watcher,
-                          string relationshipClass,
-                          string relationshipQualifier,
-                          string thisRole,
-                          bool classDefinitionsOnly,
-                          EnumerationOptions options)
+        public void Put(ManagementOperationObserver watcher, PutOptions options)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public object InvokeMethod (string methodName, object [] args)
+        public override string ToString()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO]
-        public ManagementBaseObject InvokeMethod (string methodName,
-                              ManagementBaseObject inParameters,
-                              InvokeMethodOptions options)
+        public override ManagementPath ClassPath
         {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public void InvokeMethod (ManagementOperationObserver watcher, string methodName, object [] args)
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public void InvokeMethod (ManagementOperationObserver watcher,
-                      string methodName,
-                      ManagementBaseObject inParameters,
-                      InvokeMethodOptions options)
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public ManagementPath Put ()
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public void Put (ManagementOperationObserver watcher)
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public ManagementPath Put (PutOptions options)
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public void Put (ManagementOperationObserver watcher, PutOptions options)
-        {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public override string ToString ()
-        {
-            throw new NotImplementedException ();
-        }
-
-        public override ManagementPath ClassPath {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
-        public ObjectGetOptions Options {
+        public ObjectGetOptions Options
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
-
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
 
-        public virtual ManagementPath Path {
+        public virtual ManagementPath Path
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
-
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
 
-        public ManagementScope Scope {
+        public ManagementScope Scope
+        {
             [MonoTODO]
-            get {
-                throw new NotImplementedException ();
-            }
-
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public void Dispose ()
+        public void Dispose()
         {
-            base.Dispose ();
+            base.Dispose();
         }
     }
 }
-

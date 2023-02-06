@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,12 +31,12 @@ namespace System.Runtime.InteropServices
 {
     [Obsolete]
     [ComImport]
-    [Guid ("b196b284-bab4-101a-b69c-00aa00341d07")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("b196b284-bab4-101a-b69c-00aa00341d07")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface UCOMIConnectionPointContainer
     {
-        void EnumConnectionPoints (out UCOMIEnumConnectionPoints ppEnum);
-        void FindConnectionPoint (ref Guid riid, out UCOMIConnectionPoint ppCP);
+        void EnumConnectionPoints(out UCOMIEnumConnectionPoints ppEnum);
+        void FindConnectionPoint(ref Guid riid, out UCOMIConnectionPoint ppCP);
     }
 }
 #endif

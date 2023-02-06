@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         public void EmptyTryFinally()
         {
             var source =
-@"class C
+                @"class C
 {
     static void EmptyTryFinally()
     {
@@ -43,24 +43,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
     }
 }";
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.EmptyTryFinally",
-@"{
+            compilation.VerifyIL(
+                "C.EmptyTryFinally",
+                @"{
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
-            compilation.VerifyIL("C.EmptyTryFinallyInTry",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "C.EmptyTryFinallyInTry",
+                @"{
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
-            compilation.VerifyIL("C.EmptyTryFinallyInFinally",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "C.EmptyTryFinallyInFinally",
+                @"{
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
+}"
+            );
         }
 
         [Theory, WorkItem(4729, "https://github.com/dotnet/roslyn/issues/4729")]
@@ -69,7 +75,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         public void NopInTryCatchFinally(string doNothingStatements)
         {
             var source =
-$@"class C
+                $@"class C
 {{
     static void M1()
     {{
@@ -115,20 +121,25 @@ $@"class C
     }}
 }}";
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.M1",
-@"{
+            compilation.VerifyIL(
+                "C.M1",
+                @"{
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
-            compilation.VerifyIL("C.M2",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "C.M2",
+                @"{
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
-            compilation.VerifyIL("C.M3",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "C.M3",
+                @"{
   // Code size       12 (0xc)
   .maxstack  1
   .try
@@ -143,15 +154,19 @@ $@"class C
     IL_0009:  leave.s    IL_000b
   }
   IL_000b:  ret
-}");
-            compilation.VerifyIL("C.M4",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "C.M4",
+                @"{
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
-}");
-            compilation.VerifyIL("C.M5",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "C.M5",
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .try
@@ -165,14 +180,15 @@ $@"class C
     IL_0008:  endfinally
   }
   IL_0009:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void TryFinally()
         {
             var source =
-@"class C
+                @"class C
 {
     static void Main()
     {
@@ -198,8 +214,9 @@ $@"class C
     }
 }";
             var compilation = CompileAndVerify(source, expectedOutput: "1, 3, 4, 1, 2, 3, ");
-            compilation.VerifyIL("C.M",
-@"{
+            compilation.VerifyIL(
+                "C.M",
+                @"{
   // Code size       50 (0x32)
   .maxstack  2
   .try
@@ -223,14 +240,15 @@ $@"class C
   IL_0027:  ldstr      ""4, ""
   IL_002c:  call       ""void System.Console.Write(string)""
   IL_0031:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void TryCatch()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static void Main()
@@ -257,9 +275,13 @@ class C
             throw new Exception();
     }
 }";
-            var compilation = CompileAndVerify(source, expectedOutput: "before, catch, before, after,");
-            compilation.VerifyIL("C.M",
-@"{
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: "before, catch, before, after,"
+            );
+            compilation.VerifyIL(
+                "C.M",
+                @"{
   // Code size       42 (0x2a)
   .maxstack  1
   .try
@@ -280,14 +302,15 @@ class C
     IL_0027:  leave.s    IL_0029
   }
   IL_0029:  ret       
-}");
+}"
+            );
         }
 
         [Fact]
         public void TryCatch001()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static void Main()
@@ -316,8 +339,9 @@ class C
     }
 }";
             var compilation = CompileAndVerify(source, expectedOutput: "");
-            compilation.VerifyIL("C.M",
-@"{
+            compilation.VerifyIL(
+                "C.M",
+                @"{
   // Code size       24 (0x18)
   .maxstack  1
   .try
@@ -343,14 +367,15 @@ class C
     }
   }
   IL_0017:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void TryCatch002()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static void Main()
@@ -384,7 +409,9 @@ class C
     }
 }";
             var compilation = CompileAndVerify(source, expectedOutput: "");
-            compilation.VerifyIL("C.M", @"
+            compilation.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  1
@@ -411,7 +438,8 @@ class C
     }
   }
   IL_0017:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(813428, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/813428")]
@@ -419,7 +447,7 @@ class C
         public void TryCatchOptimized001()
         {
             var source =
-@"
+                @"
 
 using System;
 using System.Diagnostics;
@@ -459,8 +487,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(source, expectedOutput: "hellobyebye");
-            compilation.VerifyIL("Program.Main",
-@"
+            compilation.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       74 (0x4a)
   .maxstack  2
@@ -506,14 +535,15 @@ class Program
 }
   IL_0049:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void TryFilterOptimized001()
         {
             var source =
-@"
+                @"
 using System;
 
 class Program
@@ -544,7 +574,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("Program.Main", @"
+            compilation.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       78 (0x4e)
   .maxstack  2
@@ -600,14 +632,15 @@ class Program
 }
   IL_004d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void TryFilterOptimized002()
         {
             var source =
-@"
+                @"
 using System;
 
 class Program
@@ -631,7 +664,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("Program.Main", @"
+            compilation.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       46 (0x2e)
   .maxstack  2
@@ -666,14 +701,15 @@ class Program
   }
   IL_002d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void TryFilterOptimized003()
         {
             var source =
-@"
+                @"
 using System;
 
 class Program
@@ -698,7 +734,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("Program.Main", @"
+            compilation.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       46 (0x2e)
   .maxstack  2
@@ -731,14 +769,15 @@ class Program
   IL_002b:  leave.s    IL_002d
 }
   IL_002d:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void TryFilterOptimized004()
         {
             var source =
-@"
+                @"
 using System;
 
 class Program
@@ -762,7 +801,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("Program.F<T>", @"
+            compilation.VerifyIL(
+                "Program.F<T>",
+                @"
 {
   // Code size       56 (0x38)
   .maxstack  2
@@ -799,13 +840,15 @@ class Program
   }
   IL_0037:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(854935, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/854935")]
         public void LiftedExceptionVariableInGenericIterator()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -836,7 +879,8 @@ class C
         [Fact, WorkItem(854935, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/854935")]
         public void GenericLiftedExceptionVariableInGenericIterator()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -869,7 +913,7 @@ class C
         public void Regression579778()
         {
             var source =
-@"
+                @"
 using System;
 using System.Security;
 
@@ -898,8 +942,9 @@ class C
     
 }";
             var compilation = CompileAndVerify(source, expectedOutput: "");
-            compilation.VerifyIL("C.Main",
-@"
+            compilation.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  1
@@ -933,14 +978,15 @@ class C
   }
   IL_0011:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void NestedExceptionHandlers()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static void F(int i)
@@ -976,12 +1022,15 @@ class C
         M(1);
     }
 }";
-            var compilation = CompileAndVerify(source, expectedOutput:
-@"Exception: i == 0
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"Exception: i == 0
 InvalidOperationException: i != 0
-Exception: i != 0");
-            compilation.VerifyIL("C.M",
-@"
+Exception: i != 0"
+            );
+            compilation.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  2
@@ -1021,14 +1070,15 @@ Exception: i != 0");
   }
   IL_0038:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(WindowsDesktopOnly))]
         public void NestedExceptionHandlersThreadAbort01()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading;
 
@@ -1068,12 +1118,16 @@ class Program
     }
 }
 ";
-            var compilation = CompileAndVerify(source, expectedOutput: @"
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"
 catch1
 catch2
-");
-            compilation.VerifyIL("Program.Test",
-@"
+"
+            );
+            compilation.VerifyIL(
+                "Program.Test",
+                @"
 {
   // Code size       41 (0x29)
   .maxstack  1
@@ -1103,14 +1157,15 @@ catch2
   }
   IL_0028:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(WindowsDesktopOnly))]
         public void NestedExceptionHandlersThreadAbort02()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading;
 
@@ -1157,13 +1212,17 @@ class Program
     }
 }
 ";
-            var compilation = CompileAndVerify(source, expectedOutput: @"
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"
 catch1
 finally
 catch2
-");
-            compilation.VerifyIL("Program.Test",
-@"
+"
+            );
+            compilation.VerifyIL(
+                "Program.Test",
+                @"
 {
   // Code size       54 (0x36)
   .maxstack  1
@@ -1203,14 +1262,15 @@ catch2
   }
   IL_0035:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(WindowsDesktopOnly))]
         public void NestedExceptionHandlersThreadAbort03()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading;
 
@@ -1264,14 +1324,18 @@ class Program
     }
 }
 ";
-            var compilation = CompileAndVerify(source, expectedOutput: @"
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"
 catch1
 finally1
 catch2
 finally2
-");
-            compilation.VerifyIL("Program.Test",
-@"
+"
+            );
+            compilation.VerifyIL(
+                "Program.Test",
+                @"
 {
   // Code size       72 (0x48)
   .maxstack  1
@@ -1322,14 +1386,15 @@ finally2
   }
   IL_0047:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(WindowsDesktopOnly))]
         public void NestedExceptionHandlersThreadAbort04()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading;
 
@@ -1383,14 +1448,18 @@ class Program
     }
 }
 ";
-            var compilation = CompileAndVerify(source, expectedOutput: @"
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"
 catch1
 finally1
 catch2
 finally2
-");
-            compilation.VerifyIL("Program.Test",
-@"
+"
+            );
+            compilation.VerifyIL(
+                "Program.Test",
+                @"
 {
   // Code size       92 (0x5c)
   .maxstack  2
@@ -1454,14 +1523,18 @@ finally2
   }
   IL_005b:  ret
 }
-");
+"
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes
+        )]
         public void NestedExceptionHandlersThreadAbort05()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading;
 
@@ -1520,12 +1593,16 @@ class Program
     }
 }
 ";
-            var compilation = CompileAndVerify(source, expectedOutput: @"
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"
 try2
 catch3
-");
-            compilation.VerifyIL("Program.Test",
-@"{
+"
+            );
+            compilation.VerifyIL(
+                "Program.Test",
+                @"{
   // Code size       87 (0x57)
   .maxstack  1
   .try
@@ -1587,14 +1664,15 @@ catch3
     IL_0054:  leave.s    IL_0056
   }
   IL_0056:  ret
-}");
+}"
+            );
         }
 
         [ConditionalFact(typeof(WindowsDesktopOnly))]
         public void NestedExceptionHandlersThreadAbort06()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading;
 
@@ -1653,13 +1731,17 @@ class Program
     }
 }
 ";
-            var compilation = CompileAndVerify(source, expectedOutput: @"
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"
 catch1
 try2
 catch3
-");
-            compilation.VerifyIL("Program.Test",
-@"
+"
+            );
+            compilation.VerifyIL(
+                "Program.Test",
+                @"
 {
   // Code size       86 (0x56)
   .maxstack  2
@@ -1726,14 +1808,15 @@ catch3
   }
   IL_0055:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(WindowsDesktopOnly))]
         public void NestedExceptionHandlersThreadAbort07()
         {
             var source =
-@"
+                @"
 using System;
 using System.Threading;
 
@@ -1787,14 +1870,18 @@ class Program
     }
 }
 ";
-            var compilation = CompileAndVerify(source, expectedOutput: @"
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"
 catch1
 finally1
 finally2
 catch2
-");
-            compilation.VerifyIL("Program.Test",
-@"
+"
+            );
+            compilation.VerifyIL(
+                "Program.Test",
+                @"
 {
   // Code size       74 (0x4a)
   .maxstack  1
@@ -1846,14 +1933,15 @@ catch2
   }
   IL_0049:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void ThrowInTry()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static void nop() { }
@@ -1914,22 +2002,27 @@ class D
     }
 }";
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.ThrowInTry",
-@"{
+            compilation.VerifyIL(
+                "C.ThrowInTry",
+                @"{
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  newobj     ""System.Exception..ctor()""
   IL_0005:  throw
-}");
-            compilation.VerifyIL("C.ThrowInTryInTry",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "C.ThrowInTryInTry",
+                @"{
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  newobj     ""System.Exception..ctor()""
   IL_0005:  throw
-}");
-            compilation.VerifyIL("C.ThrowInTryInFinally",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "C.ThrowInTryInFinally",
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .try
@@ -1942,9 +2035,11 @@ class D
     IL_0007:  throw
   }
   IL_0008:  br.s       IL_0008
-}");
-            compilation.VerifyIL("D.ThrowInTry",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "D.ThrowInTry",
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .try
@@ -1958,9 +2053,11 @@ class D
     IL_0007:  leave.s    IL_0009
   }
   IL_0009:  ret
-}");
-            compilation.VerifyIL("D.ThrowInTryInTry",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "D.ThrowInTryInTry",
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .try
@@ -1974,9 +2071,11 @@ class D
     IL_0007:  leave.s    IL_0009
   }
   IL_0009:  ret
-}");
-            compilation.VerifyIL("D.ThrowInTryInFinally",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "D.ThrowInTryInFinally",
+                @"{
   // Code size       22 (0x16)
   .maxstack  1
   .try
@@ -2008,7 +2107,8 @@ class D
     IL_0014:  endfinally
   }
   IL_0015:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(540716, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540716")]
@@ -2016,7 +2116,7 @@ class D
         public void ThrowInFinally()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static void nop() { }
@@ -2080,8 +2180,9 @@ class D
     }
 }";
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.ThrowInFinally",
-@"{
+            compilation.VerifyIL(
+                "C.ThrowInFinally",
+                @"{
   // Code size       10 (0xa)
   .maxstack  1
   .try
@@ -2094,9 +2195,11 @@ class D
     IL_0007:  throw
   }
   IL_0008:  br.s       IL_0008
-}");
-            compilation.VerifyIL("C.ThrowInFinallyInTry",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "C.ThrowInFinallyInTry",
+                @"{
   // Code size       16 (0x10)
   .maxstack  1
   .try
@@ -2117,11 +2220,13 @@ class D
     IL_000a:  call       ""void C.nop()""
     IL_000f:  endfinally
   }
-}");
+}"
+            );
             // The nop below is to work around a verifier bug.
             // See DevDiv 563799.
-            compilation.VerifyIL("C.ThrowInFinallyInFinally",
-@"{
+            compilation.VerifyIL(
+                "C.ThrowInFinallyInFinally",
+                @"{
   // Code size       15 (0xf)
   .maxstack  1
   .try
@@ -2143,9 +2248,11 @@ class D
     IL_000b:  br.s       IL_000b
   }
   IL_000d:  br.s       IL_000d
-}");
-            compilation.VerifyIL("D.ThrowInFinally",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "D.ThrowInFinally",
+                @"{
   // Code size       18 (0x12)
   .maxstack  1
   .try
@@ -2167,9 +2274,11 @@ class D
     IL_000f:  throw
   }
   IL_0010:  br.s       IL_0010
-}");
-            compilation.VerifyIL("D.ThrowInFinallyInTry",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "D.ThrowInFinallyInTry",
+                @"{
   // Code size       30 (0x1e)
   .maxstack  1
   .try
@@ -2209,9 +2318,11 @@ class D
     IL_001c:  endfinally
   }
   IL_001d:  ret
-}");
-            compilation.VerifyIL("D.ThrowInFinallyInFinally",
-@"{
+}"
+            );
+            compilation.VerifyIL(
+                "D.ThrowInFinallyInFinally",
+                @"{
   // Code size       31 (0x1f)
   .maxstack  1
   .try
@@ -2251,13 +2362,15 @@ class D
     IL_001b:  br.s       IL_001b
   }
   IL_001d:  br.s       IL_001d
-}");
+}"
+            );
         }
 
         [Fact]
         public void TryFilterSimple()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -2286,9 +2399,10 @@ class C
         }
     }
 }";
-            var comp = CompileAndVerify(src,
-                expectedOutput: "TryFilterCatchFinally");
-            comp.VerifyIL("C.Main", @"
+            var comp = CompileAndVerify(src, expectedOutput: "TryFilterCatchFinally");
+            comp.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       54 (0x36)
   .maxstack  2
@@ -2330,13 +2444,15 @@ class C
   }
   IL_0035:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void TryFilterUseException()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -2380,8 +2496,10 @@ class C
         }
     }
 }";
-            CompileAndVerify(src, expectedOutput: "TryCatch228Finally").
-                VerifyIL("C.Test", @"
+            CompileAndVerify(src, expectedOutput: "TryCatch228Finally")
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size      132 (0x84)
   .maxstack  2
@@ -2461,13 +2579,15 @@ class C
     IL_0082:  endfinally
   }
   IL_0083:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TryFilterScoping()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -2493,7 +2613,9 @@ class C
     }
 }";
             var comp = CompileAndVerify(src, expectedOutput: "TryCatchS1Finally");
-            comp.VerifyIL("C.Main", @"
+            comp.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       95 (0x5f)
   .maxstack  2
@@ -2546,14 +2668,16 @@ class C
   }
   IL_005e:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(18678, "https://github.com/dotnet/roslyn/issues/18678")]
         [Fact]
         public void TryCatchConstantFalseFilter1()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -2570,20 +2694,24 @@ class C
     }
 }";
             var comp = CompileAndVerify(src);
-            comp.VerifyIL("C.Main", @"
+            comp.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  newobj     ""System.Exception..ctor()""
   IL_0005:  throw
-}");
+}"
+            );
         }
 
         [WorkItem(18678, "https://github.com/dotnet/roslyn/issues/18678")]
         [Fact]
         public void TryCatchConstantFalseFilter2()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -2608,20 +2736,24 @@ class C
     }
 }";
             var comp = CompileAndVerify(src);
-            comp.VerifyIL("C.Main", @"
+            comp.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  newobj     ""System.Exception..ctor()""
   IL_0005:  throw
-}");
+}"
+            );
         }
 
         [WorkItem(18678, "https://github.com/dotnet/roslyn/issues/18678")]
         [Fact]
         public void TryCatchConstantFalseFilter3()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -2646,7 +2778,9 @@ class C
     }
 }";
             var comp = CompileAndVerify(src);
-            comp.VerifyIL("C.Main", @"
+            comp.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  2
@@ -2676,14 +2810,16 @@ class C
     IL_0024:  leave.s    IL_0026
   }
   IL_0026:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(18678, "https://github.com/dotnet/roslyn/issues/18678")]
         [Fact]
         public void TryCatchConstantFalseFilterCombined()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -2713,7 +2849,9 @@ class C
     }
 }";
             var comp = CompileAndVerify(src, expectedOutput: "ExceptionFilter");
-            comp.VerifyIL("C.Main", @"
+            comp.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       68 (0x44)
   .maxstack  2
@@ -2755,14 +2893,16 @@ class C
     IL_0041:  leave.s    IL_0043
   }
   IL_0043:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(18678, "https://github.com/dotnet/roslyn/issues/18678")]
         [Fact]
         public void TryCatchFinallyConstantFalseFilter()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -2795,7 +2935,9 @@ class C
     }
 }";
             var comp = CompileAndVerify(src, expectedOutput: "FinallyOuterCatch");
-            comp.VerifyIL("C.Main", @"
+            comp.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  1
@@ -2821,14 +2963,15 @@ class C
     IL_001c:  leave.s    IL_001e
   }
   IL_001e:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void TryCatchWithReturnValue()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     static int F(int i)
@@ -2868,8 +3011,9 @@ class C
     }
 }";
             var compilation = CompileAndVerify(source, expectedOutput: "M(0)=-4, M(1)=11, M(2)=6");
-            compilation.VerifyIL("C.M",
-@"{
+            compilation.VerifyIL(
+                "C.M",
+                @"{
   // Code size       34 (0x22)
   .maxstack  2
   .locals init (int V_0)
@@ -2913,14 +3057,15 @@ class C
   IL_001f:  ret       
   IL_0020:  ldloc.0   
   IL_0021:  ret       
-}");
+}"
+            );
         }
 
         [Fact]
         public void Rethrow()
         {
             var source =
-@"using System.IO;
+                @"using System.IO;
 class C
 {
     static void nop() { }
@@ -2953,8 +3098,9 @@ class C
     }
 }";
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.M",
-@"{
+            compilation.VerifyIL(
+                "C.M",
+                @"{
   // Code size       27 (0x1b)
   .maxstack  2
   .locals init (System.IO.FileNotFoundException V_0) //e
@@ -2984,7 +3130,8 @@ class C
     IL_0018:  rethrow
   }
   IL_001a:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(541494, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541494")]
@@ -2992,7 +3139,7 @@ class C
         public void CatchT()
         {
             var source =
-@"using System;
+                @"using System;
 class C
 {
     internal static void TryCatch<T>() where T : Exception
@@ -3024,11 +3171,14 @@ class C
         }
     }
 }";
-            var compilation = CompileAndVerify(source, expectedOutput:
-@"Handled
-Unhandled");
-            compilation.VerifyIL("C.TryCatch<T>()",
-@"
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"Handled
+Unhandled"
+            );
+            compilation.VerifyIL(
+                "C.TryCatch<T>()",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  1
@@ -3046,7 +3196,8 @@ Unhandled");
 }
   IL_0018:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(540664, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540664")]
@@ -3054,7 +3205,7 @@ Unhandled");
         public void ExceptionAlreadyCaught1()
         {
             var source =
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -3063,14 +3214,17 @@ Unhandled");
         catch { }
     }
 }";
-            CompileAndVerify(source).VerifyDiagnostics(
-                Diagnostic(ErrorCode.WRN_UnreachableGeneralCatch, "catch").WithLocation(7, 9));
+            CompileAndVerify(source)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.WRN_UnreachableGeneralCatch, "catch").WithLocation(7, 9)
+                );
         }
 
         [Fact]
         public void ExceptionAlreadyCaught2()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     static void M()
@@ -3082,16 +3236,19 @@ class Program
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (9,9): warning CS1058: A previous catch clause already catches all exceptions. All non-exceptions thrown will be wrapped in a System.Runtime.CompilerServices.RuntimeWrappedException.
-                //         catch when (a == 1) { }
-                Diagnostic(ErrorCode.WRN_UnreachableGeneralCatch, "catch").WithLocation(9, 9));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (9,9): warning CS1058: A previous catch clause already catches all exceptions. All non-exceptions thrown will be wrapped in a System.Runtime.CompilerServices.RuntimeWrappedException.
+                    //         catch when (a == 1) { }
+                    Diagnostic(ErrorCode.WRN_UnreachableGeneralCatch, "catch").WithLocation(9, 9)
+                );
         }
 
         [Fact]
         public void ExceptionAlreadyCaught3()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     static void M()
@@ -3112,7 +3269,7 @@ class Program
         public void EmptyTryFinally_Simple()
         {
             var source =
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -3128,7 +3285,7 @@ class Program
         public void ConditionInTry()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -3148,8 +3305,9 @@ class Program
 }";
 
             var compilation = CompileAndVerify(source, expectedOutput: "");
-            compilation.VerifyIL("Program.Main",
-@"
+            compilation.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -3171,13 +3329,15 @@ class Program
 }
   IL_000c:  ret
 }
-");
+"
+            );
         }
 
         [Fact(), WorkItem(544911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544911")]
         public void UnreachableAfterTryFinally()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3209,8 +3369,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(source, expectedOutput: "0");
-            compilation.VerifyIL("Program.T1",
-@"
+            compilation.VerifyIL(
+                "Program.T1",
+                @"
 {
   // Code size        6 (0x6)
   .maxstack  0
@@ -3224,14 +3385,15 @@ class Program
 }
   IL_0004:  br.s       IL_0004
 }
-");
+"
+            );
         }
 
         [Fact(), WorkItem(544911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544911")]
         public void ReachableAfterBlockingCatch()
         {
             var source =
-@"using System;
+                @"using System;
 
     class Program
     {
@@ -3263,8 +3425,9 @@ class Program
 ";
 
             var compilation = CompileAndVerify(source, expectedOutput: "hello");
-            compilation.VerifyIL("Program.T1",
-@"{
+            compilation.VerifyIL(
+                "Program.T1",
+                @"{
   // Code size       16 (0x10)
   .maxstack  1
   .try
@@ -3279,13 +3442,15 @@ class Program
   }
   IL_000a:  call       ""void Program.F()""
   IL_000f:  ret
-}");
+}"
+            );
         }
 
         [Fact(), WorkItem(544911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544911")]
         public void UnreachableAfterTryFinallyConditional()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3318,8 +3483,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(source, expectedOutput: "0");
-            compilation.VerifyIL("Program.T1",
-@"
+            compilation.VerifyIL(
+                "Program.T1",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -3335,13 +3501,15 @@ class Program
 }
   IL_000a:  br.s       IL_000a
 }
-");
+"
+            );
         }
 
         [Fact()]
         public void ReachableAfterFinallyButNotFromTryConditional01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3390,8 +3558,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(source, expectedOutput: "0");
-            compilation.VerifyIL("Program.T1",
-@"
+            compilation.VerifyIL(
+                "Program.T1",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -3420,13 +3589,15 @@ class Program
   IL_0017:  call       ""void Program.F()""
   IL_001c:  ret
 }
-");
+"
+            );
         }
 
         [Fact(), WorkItem(544911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544911")]
         public void ReachableAfterFinallyButNotFromTryConditional()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3473,8 +3644,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(source, expectedOutput: "0");
-            compilation.VerifyIL("Program.T1",
-@"
+            compilation.VerifyIL(
+                "Program.T1",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -3503,13 +3675,15 @@ class Program
   IL_0017:  call       ""void Program.F()""
   IL_001c:  ret
 }
-");
+"
+            );
         }
 
         [Fact(), WorkItem(713418, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/713418")]
         public void ConditionalUnconditionalBranches()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
     class Program
@@ -3548,11 +3722,15 @@ lOut:
         }
     }
 ";
-            var compilation = CompileAndVerify(source, expectedOutput: @"2
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"2
 Finally
-Out");
-            compilation.VerifyIL("Program.Main",
-@"
+Out"
+            );
+            compilation.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       62 (0x3e)
   .maxstack  2
@@ -3580,13 +3758,15 @@ Out");
   IL_0038:  call       ""void System.Console.WriteLine(string)""
   IL_003d:  ret
 }
-");
+"
+            );
         }
 
         [Fact(), WorkItem(713418, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/713418")]
         public void ConditionalUnconditionalBranches001()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
     class Program
@@ -3625,11 +3805,15 @@ lOut:
         }
     }
 ";
-            var compilation = CompileAndVerify(source, expectedOutput: @"2
+            var compilation = CompileAndVerify(
+                source,
+                expectedOutput: @"2
 Finally
-Out");
-            compilation.VerifyIL("Program.Main",
-@"
+Out"
+            );
+            compilation.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       52 (0x34)
   .maxstack  2
@@ -3655,13 +3839,15 @@ Out");
   IL_002e:  call       ""void System.Console.WriteLine(string)""
   IL_0033:  ret
 }
-");
+"
+            );
         }
 
         [Fact(), WorkItem(2443, "https://github.com/dotnet/roslyn/issues/2443")]
         public void OptimizeEmptyTryBlock()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3679,21 +3865,24 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(source, expectedOutput: @"");
-            compilation.VerifyIL("Program.Main",
-@"
+            compilation.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(29481, "https://github.com/dotnet/roslyn/issues/29481")]
         public void Issue29481()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Program
@@ -3727,8 +3916,10 @@ public class Program
 }";
 
             CompileAndVerify(source, expectedOutput: "", options: TestOptions.DebugExe);
-            CompileAndVerify(source, expectedOutput: "", options: TestOptions.ReleaseExe).VerifyIL("Program.Main",
-@"
+            CompileAndVerify(source, expectedOutput: "", options: TestOptions.ReleaseExe)
+                .VerifyIL(
+                    "Program.Main",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  1
@@ -3756,7 +3947,8 @@ public class Program
   }
   IL_0019:  ret
 }
-");
+"
+                );
         }
     }
 }

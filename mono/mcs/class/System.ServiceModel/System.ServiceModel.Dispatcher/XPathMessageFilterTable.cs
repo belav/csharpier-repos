@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,217 +38,229 @@ namespace System.ServiceModel.Dispatcher
 {
     [DataContract]
     public class XPathMessageFilterTable<TFilterData>
-        : IDictionary<MessageFilter,TFilterData>,
-          IMessageFilterTable<TFilterData>,
-          IEnumerable,
-          ICollection<KeyValuePair<MessageFilter,TFilterData>>,
-          IEnumerable<KeyValuePair<MessageFilter,TFilterData>>
+        : IDictionary<MessageFilter, TFilterData>,
+            IMessageFilterTable<TFilterData>,
+            IEnumerable,
+            ICollection<KeyValuePair<MessageFilter, TFilterData>>,
+            IEnumerable<KeyValuePair<MessageFilter, TFilterData>>
     {
-        Dictionary<MessageFilter,TFilterData> dict
-            = new Dictionary<MessageFilter,TFilterData> ();
+        Dictionary<MessageFilter, TFilterData> dict = new Dictionary<MessageFilter, TFilterData>();
 
         int quota;
 
         [MonoTODO]
-        public XPathMessageFilterTable ()
-            : this (int.MaxValue)
-        {
-        }
+        public XPathMessageFilterTable()
+            : this(int.MaxValue) { }
 
-        public XPathMessageFilterTable (int capacity)
+        public XPathMessageFilterTable(int capacity)
         {
             this.quota = capacity;
         }
 
         [DataMember]
-        public int NodeQuota {
+        public int NodeQuota
+        {
             get { return quota; }
             set { quota = value; }
         }
 
-        public TFilterData this [MessageFilter filter] {
-            get { return dict [filter]; }
-            set { dict [filter] = value; }
+        public TFilterData this[MessageFilter filter]
+        {
+            get { return dict[filter]; }
+            set { dict[filter] = value; }
         }
 
-        public int Count {
+        public int Count
+        {
             get { return dict.Count; }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return false; }
         }
 
-        public ICollection<MessageFilter> Keys {
+        public ICollection<MessageFilter> Keys
+        {
             get { return dict.Keys; }
         }
 
-        public ICollection<TFilterData> Values {
+        public ICollection<TFilterData> Values
+        {
             get { return dict.Values; }
         }
 
-        public void Add (KeyValuePair<MessageFilter,TFilterData> item)
+        public void Add(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            dict.Add (item.Key, item.Value);
+            dict.Add(item.Key, item.Value);
         }
 
         [MonoTODO]
-        public void Add (XPathMessageFilter filter, TFilterData data)
+        public void Add(XPathMessageFilter filter, TFilterData data)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void Add (MessageFilter filter, TFilterData data)
+        public void Add(MessageFilter filter, TFilterData data)
         {
-            dict.Add (filter, data);
+            dict.Add(filter, data);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            dict.Clear ();
+            dict.Clear();
         }
 
-        public bool Contains (KeyValuePair<MessageFilter,TFilterData> item)
+        public bool Contains(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            return dict.ContainsKey (item.Key) &&
-                dict [item.Key].Equals (item.Value);
+            return dict.ContainsKey(item.Key) && dict[item.Key].Equals(item.Value);
         }
 
-        public bool ContainsKey (MessageFilter filter)
+        public bool ContainsKey(MessageFilter filter)
         {
-            return dict.ContainsKey (filter);
+            return dict.ContainsKey(filter);
         }
 
-        public void CopyTo (KeyValuePair<MessageFilter,TFilterData> [] array, int arrayIndex)
+        public void CopyTo(KeyValuePair<MessageFilter, TFilterData>[] array, int arrayIndex)
         {
             if (arrayIndex < 0 || dict.Count >= array.Length - arrayIndex)
-                throw new ArgumentOutOfRangeException ("arrayIndex");
-            foreach (KeyValuePair<MessageFilter,TFilterData> item in dict)
-                array [arrayIndex++] = item;
+                throw new ArgumentOutOfRangeException("arrayIndex");
+            foreach (KeyValuePair<MessageFilter, TFilterData> item in dict)
+                array[arrayIndex++] = item;
         }
 
-        public IEnumerator<KeyValuePair<MessageFilter,TFilterData>> GetEnumerator ()
+        public IEnumerator<KeyValuePair<MessageFilter, TFilterData>> GetEnumerator()
         {
-            return dict.GetEnumerator ();
+            return dict.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator ();
+            return GetEnumerator();
         }
 
-        public bool GetMatchingFilter (Message message, out MessageFilter filter)
+        public bool GetMatchingFilter(Message message, out MessageFilter filter)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingFilter (MessageBuffer messageBuffer, out MessageFilter filter)
+        public bool GetMatchingFilter(MessageBuffer messageBuffer, out MessageFilter filter)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingFilter (SeekableXPathNavigator navigator, out MessageFilter filter)
+        public bool GetMatchingFilter(SeekableXPathNavigator navigator, out MessageFilter filter)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingFilter (XPathNavigator navigator, out MessageFilter filter)
+        public bool GetMatchingFilter(XPathNavigator navigator, out MessageFilter filter)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingFilters (Message message, ICollection<MessageFilter> results)
+        public bool GetMatchingFilters(Message message, ICollection<MessageFilter> results)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingFilters (MessageBuffer messageBuffer, ICollection<MessageFilter> results)
+        public bool GetMatchingFilters(
+            MessageBuffer messageBuffer,
+            ICollection<MessageFilter> results
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingFilters (SeekableXPathNavigator navigator, ICollection<MessageFilter> results)
+        public bool GetMatchingFilters(
+            SeekableXPathNavigator navigator,
+            ICollection<MessageFilter> results
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingFilters (XPathNavigator navigator, ICollection<MessageFilter> results)
+        public bool GetMatchingFilters(XPathNavigator navigator, ICollection<MessageFilter> results)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValue (Message message, out TFilterData data)
+        public bool GetMatchingValue(Message message, out TFilterData data)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValue (MessageBuffer messageBuffer, out TFilterData data)
+        public bool GetMatchingValue(MessageBuffer messageBuffer, out TFilterData data)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValue (SeekableXPathNavigator navigator, out TFilterData data)
+        public bool GetMatchingValue(SeekableXPathNavigator navigator, out TFilterData data)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValue (XPathNavigator navigator, out TFilterData data)
+        public bool GetMatchingValue(XPathNavigator navigator, out TFilterData data)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValues (Message message, ICollection<TFilterData> results)
+        public bool GetMatchingValues(Message message, ICollection<TFilterData> results)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValues (MessageBuffer messageBuffer, ICollection<TFilterData> results)
+        public bool GetMatchingValues(MessageBuffer messageBuffer, ICollection<TFilterData> results)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValues (SeekableXPathNavigator navigator, ICollection<TFilterData> results)
+        public bool GetMatchingValues(
+            SeekableXPathNavigator navigator,
+            ICollection<TFilterData> results
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool GetMatchingValues (XPathNavigator navigator, ICollection<TFilterData> results)
+        public bool GetMatchingValues(XPathNavigator navigator, ICollection<TFilterData> results)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool Remove (KeyValuePair<MessageFilter,TFilterData> item)
+        public bool Remove(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            if (dict.ContainsKey (item.Key) && dict [item.Key].Equals (item.Value)) {
-                dict.Remove (item.Key);
+            if (dict.ContainsKey(item.Key) && dict[item.Key].Equals(item.Value))
+            {
+                dict.Remove(item.Key);
                 return true;
             }
             return false;
         }
 
-        public bool Remove (XPathMessageFilter filter)
+        public bool Remove(XPathMessageFilter filter)
         {
-            return dict.Remove (filter);
+            return dict.Remove(filter);
         }
 
-        public bool Remove (MessageFilter filter)
+        public bool Remove(MessageFilter filter)
         {
-            return Remove ((XPathMessageFilter) filter);
+            return Remove((XPathMessageFilter)filter);
         }
 
         static Exception trim_to_size_error;
 
-        public void TrimToSize ()
+        public void TrimToSize()
         {
             // This is the documented behavior: throws NIE.
             if (trim_to_size_error == null)
-                trim_to_size_error = new NotImplementedException ();
+                trim_to_size_error = new NotImplementedException();
             throw trim_to_size_error;
         }
 
-        public bool TryGetValue (MessageFilter filter, out TFilterData data)
+        public bool TryGetValue(MessageFilter filter, out TFilterData data)
         {
-            return dict.TryGetValue (filter, out data);
+            return dict.TryGetValue(filter, out data);
         }
     }
 }

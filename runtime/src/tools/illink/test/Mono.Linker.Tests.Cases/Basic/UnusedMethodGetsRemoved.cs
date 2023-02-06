@@ -4,22 +4,18 @@ namespace Mono.Linker.Tests.Cases.Basic
 {
     class UnusedMethodGetsRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            new UnusedMethodGetsRemoved.B ().Method ();
+            new UnusedMethodGetsRemoved.B().Method();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class B
         {
-            public void Unused ()
-            {
-            }
+            public void Unused() { }
 
             [Kept]
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
     }
 }

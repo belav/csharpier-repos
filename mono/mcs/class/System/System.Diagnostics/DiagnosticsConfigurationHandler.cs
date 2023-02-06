@@ -1,10 +1,10 @@
 //
 // System.Diagnostics.DiagnosticsConfigurationHandler.cs
 //
-// Comments from John R. Hicks <angryjohn69@nc.rr.com> original implementation 
+// Comments from John R. Hicks <angryjohn69@nc.rr.com> original implementation
 // can be found at: /mcs/docs/apidocs/xml/en/System.Diagnostics
 //
-// Authors: 
+// Authors:
 //    John R. Hicks <angryjohn69@nc.rr.com>
 //    Jonathan Pryor <jonpryor@vt.edu>
 //
@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,111 +42,118 @@ using System.Xml;
 #endif
 namespace System.Diagnostics
 {
-/*
-    // It handles following elements in <system.diagnostics> :
-    //    - <sharedListeners> [2.0]
-    //    - <sources>
-    //        - <source>
-    //            - <listeners> (collection)
-    //    - <switches>
-    //        - <add name=string value=string />
-    //    - <trace autoflush=bool indentsize=int useGlobalLock=bool>
-    //        - <listeners>
-    internal sealed class DiagnosticsConfiguration
-    {
-#if NO_LOCK_FREE
-        private static object lock_ = new object();
-#endif
-        private static object settings;
-
-        public static IDictionary Settings {
-            get {
-#if !NO_LOCK_FREE
-                if (settings == null) {
-                    object s = ConfigurationSettings.GetConfig ("system.diagnostics");
-                    if (s == null)
-                        throw new Exception ("INTERNAL configuration error: failed to get configuration 'system.diagnostics'");
-                    Thread.MemoryBarrier ();
-                    while (Interlocked.CompareExchange (ref settings, s, null) == null) {
-                        // do nothing; we're just setting settings.
+    /*
+        // It handles following elements in <system.diagnostics> :
+        //    - <sharedListeners> [2.0]
+        //    - <sources>
+        //        - <source>
+        //            - <listeners> (collection)
+        //    - <switches>
+        //        - <add name=string value=string />
+        //    - <trace autoflush=bool indentsize=int useGlobalLock=bool>
+        //        - <listeners>
+        internal sealed class DiagnosticsConfiguration
+        {
+    #if NO_LOCK_FREE
+            private static object lock_ = new object();
+    #endif
+            private static object settings;
+    
+            public static IDictionary Settings {
+                get {
+    #if !NO_LOCK_FREE
+                    if (settings == null) {
+                        object s = ConfigurationSettings.GetConfig ("system.diagnostics");
+                        if (s == null)
+                            throw new Exception ("INTERNAL configuration error: failed to get configuration 'system.diagnostics'");
+                        Thread.MemoryBarrier ();
+                        while (Interlocked.CompareExchange (ref settings, s, null) == null) {
+                            // do nothing; we're just setting settings.
+                        }
+                        Thread.MemoryBarrier ();
                     }
-                    Thread.MemoryBarrier ();
+    #else
+                    lock (lock_) {
+                        if (settings == null)
+                            settings = ConfigurationSettings.GetConfig ("system.diagnostics");
+                    }
+    #endif
+                    return (IDictionary) settings;
                 }
-#else
-                lock (lock_) {
-                    if (settings == null)
-                        settings = ConfigurationSettings.GetConfig ("system.diagnostics");
-                }
-#endif
-                return (IDictionary) settings;
             }
         }
-    }
-*/
+    */
 
 #if (XML_DEP)
-    [Obsolete ("This class is obsoleted")]
+    [Obsolete("This class is obsoleted")]
     public class DiagnosticsConfigurationHandler : IConfigurationSectionHandler
     {
         TraceImplSettings configValues;
 
-        delegate void ElementHandler (IDictionary d, XmlNode node);
+        delegate void ElementHandler(IDictionary d, XmlNode node);
 
-        IDictionary elementHandlers = new Hashtable ();
+        IDictionary elementHandlers = new Hashtable();
 
-        public DiagnosticsConfigurationHandler ()
+        public DiagnosticsConfigurationHandler()
         {
-            elementHandlers ["assert"] = new ElementHandler (AddAssertNode);
-            elementHandlers ["performanceCounters"] = new ElementHandler (AddPerformanceCountersNode);
-            elementHandlers ["switches"] = new ElementHandler (AddSwitchesNode);
-            elementHandlers ["trace"] = new ElementHandler (AddTraceNode);
-            elementHandlers ["sources"] = new ElementHandler (AddSourcesNode);
+            elementHandlers["assert"] = new ElementHandler(AddAssertNode);
+            elementHandlers["performanceCounters"] = new ElementHandler(AddPerformanceCountersNode);
+            elementHandlers["switches"] = new ElementHandler(AddSwitchesNode);
+            elementHandlers["trace"] = new ElementHandler(AddTraceNode);
+            elementHandlers["sources"] = new ElementHandler(AddSourcesNode);
         }
 
-        public virtual object Create (object parent, object configContext, XmlNode section)
+        public virtual object Create(object parent, object configContext, XmlNode section)
         {
             IDictionary d;
             if (parent == null)
-                d = new Hashtable (CaseInsensitiveHashCodeProvider.Default, CaseInsensitiveComparer.Default);
+                d = new Hashtable(
+                    CaseInsensitiveHashCodeProvider.Default,
+                    CaseInsensitiveComparer.Default
+                );
             else
-                d = (IDictionary) ((ICloneable)parent).Clone();
+                d = (IDictionary)((ICloneable)parent).Clone();
 
-            if (d.Contains (TraceImplSettings.Key))
-                configValues = (TraceImplSettings) d [TraceImplSettings.Key];
+            if (d.Contains(TraceImplSettings.Key))
+                configValues = (TraceImplSettings)d[TraceImplSettings.Key];
             else
-                d.Add (TraceImplSettings.Key, configValues = new TraceImplSettings ());
+                d.Add(TraceImplSettings.Key, configValues = new TraceImplSettings());
 
             // process <sharedListeners> first
-            foreach (XmlNode child in section.ChildNodes) {
-                switch (child.NodeType) {
-                case XmlNodeType.Element:
-                    if (child.LocalName != "sharedListeners")
-                        continue;
-                    AddTraceListeners (d, child, GetSharedListeners (d));
-                    break;
+            foreach (XmlNode child in section.ChildNodes)
+            {
+                switch (child.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        if (child.LocalName != "sharedListeners")
+                            continue;
+                        AddTraceListeners(d, child, GetSharedListeners(d));
+                        break;
                 }
             }
 
-            foreach (XmlNode child in section.ChildNodes) {
+            foreach (XmlNode child in section.ChildNodes)
+            {
                 XmlNodeType type = child.NodeType;
 
-                switch (type) {
-                /* ignore */
-                case XmlNodeType.Whitespace:
-                case XmlNodeType.Comment:
-                    continue;
-                case XmlNodeType.Element:
-                    if (child.LocalName == "sharedListeners")
+                switch (type)
+                {
+                    /* ignore */
+                    case XmlNodeType.Whitespace:
+                    case XmlNodeType.Comment:
                         continue;
-                    ElementHandler eh = (ElementHandler) elementHandlers [child.Name];
-                    if (eh != null)
-                        eh (d, child);
-                    else
-                        ThrowUnrecognizedElement (child);
-                    break;
-                default:
-                    ThrowUnrecognizedElement (child);
-                    break;
+                    case XmlNodeType.Element:
+                        if (child.LocalName == "sharedListeners")
+                            continue;
+                        ElementHandler eh = (ElementHandler)elementHandlers[child.Name];
+                        if (eh != null)
+                            eh(d, child);
+                        else
+                            ThrowUnrecognizedElement(child);
+                        break;
+                    default:
+                        ThrowUnrecognizedElement(child);
+                        break;
                 }
             }
 
@@ -154,275 +161,330 @@ namespace System.Diagnostics
         }
 
         // Remarks: Both attribute are optional
-        private void AddAssertNode (IDictionary d, XmlNode node)
+        private void AddAssertNode(IDictionary d, XmlNode node)
         {
             XmlAttributeCollection c = node.Attributes;
-            string assertuienabled = GetAttribute (c, "assertuienabled", false, node);
-            string logfilename = GetAttribute (c, "logfilename", false, node);
-            ValidateInvalidAttributes (c, node);
-            if (assertuienabled != null) {
-                try {
-                    d ["assertuienabled"] = bool.Parse (assertuienabled);
+            string assertuienabled = GetAttribute(c, "assertuienabled", false, node);
+            string logfilename = GetAttribute(c, "logfilename", false, node);
+            ValidateInvalidAttributes(c, node);
+            if (assertuienabled != null)
+            {
+                try
+                {
+                    d["assertuienabled"] = bool.Parse(assertuienabled);
                 }
-                catch (Exception e) {
-                    throw new ConfigurationException ("The `assertuienabled' attribute must be `true' or `false'",
-                            e, node);
+                catch (Exception e)
+                {
+                    throw new ConfigurationException(
+                        "The `assertuienabled' attribute must be `true' or `false'",
+                        e,
+                        node
+                    );
                 }
             }
 
             if (logfilename != null)
-                d ["logfilename"] = logfilename;
+                d["logfilename"] = logfilename;
 
-            DefaultTraceListener dtl = (DefaultTraceListener) configValues.Listeners["Default"];
-            if (dtl != null) {
+            DefaultTraceListener dtl = (DefaultTraceListener)configValues.Listeners["Default"];
+            if (dtl != null)
+            {
                 if (assertuienabled != null)
-                    dtl.AssertUiEnabled = (bool) d ["assertuienabled"];
+                    dtl.AssertUiEnabled = (bool)d["assertuienabled"];
                 if (logfilename != null)
                     dtl.LogFileName = logfilename;
             }
 
             if (node.ChildNodes.Count > 0)
-                ThrowUnrecognizedElement (node.ChildNodes[0]);
+                ThrowUnrecognizedElement(node.ChildNodes[0]);
         }
 
-        private void AddPerformanceCountersNode (IDictionary d, XmlNode node)
+        private void AddPerformanceCountersNode(IDictionary d, XmlNode node)
         {
             XmlAttributeCollection c = node.Attributes;
-            string filemappingsize = GetAttribute (c, "filemappingsize", false, node);
-            ValidateInvalidAttributes (c, node);
-            if (filemappingsize != null) {
-                try {
-                    d ["filemappingsize"] = int.Parse (filemappingsize);
+            string filemappingsize = GetAttribute(c, "filemappingsize", false, node);
+            ValidateInvalidAttributes(c, node);
+            if (filemappingsize != null)
+            {
+                try
+                {
+                    d["filemappingsize"] = int.Parse(filemappingsize);
                 }
-                catch (Exception e) {
-                    throw new ConfigurationException ("The `filemappingsize' attribute must be an integral value.",
-                            e, node);
+                catch (Exception e)
+                {
+                    throw new ConfigurationException(
+                        "The `filemappingsize' attribute must be an integral value.",
+                        e,
+                        node
+                    );
                 }
             }
 
             if (node.ChildNodes.Count > 0)
-                ThrowUnrecognizedElement (node.ChildNodes[0]);
+                ThrowUnrecognizedElement(node.ChildNodes[0]);
         }
 
         // name and value attributes are required
         // Docs do not define "remove" or "clear" elements, but .NET recognizes
         // them
-        private void AddSwitchesNode (IDictionary d, XmlNode node)
+        private void AddSwitchesNode(IDictionary d, XmlNode node)
         {
             // There are no attributes on <switch/>
-            ValidateInvalidAttributes (node.Attributes, node);
+            ValidateInvalidAttributes(node.Attributes, node);
 
-            IDictionary newNodes = new Hashtable ();
+            IDictionary newNodes = new Hashtable();
 
-            foreach (XmlNode child in node.ChildNodes) {
+            foreach (XmlNode child in node.ChildNodes)
+            {
                 XmlNodeType t = child.NodeType;
                 if (t == XmlNodeType.Whitespace || t == XmlNodeType.Comment)
                     continue;
-                if (t == XmlNodeType.Element) {
+                if (t == XmlNodeType.Element)
+                {
                     XmlAttributeCollection attributes = child.Attributes;
                     string name = null;
                     string value = null;
-                    switch (child.Name) {
+                    switch (child.Name)
+                    {
                         case "add":
-                            name = GetAttribute (attributes, "name", true, child);
-                            value = GetAttribute (attributes, "value", true, child);
-                            newNodes [name] = GetSwitchValue (name, value);
+                            name = GetAttribute(attributes, "name", true, child);
+                            value = GetAttribute(attributes, "value", true, child);
+                            newNodes[name] = GetSwitchValue(name, value);
                             break;
                         case "remove":
-                            name = GetAttribute (attributes, "name", true, child);
-                            newNodes.Remove (name);
+                            name = GetAttribute(attributes, "name", true, child);
+                            newNodes.Remove(name);
                             break;
                         case "clear":
-                            newNodes.Clear ();
+                            newNodes.Clear();
                             break;
                         default:
-                            ThrowUnrecognizedElement (child);
+                            ThrowUnrecognizedElement(child);
                             break;
                     }
-                    ValidateInvalidAttributes (attributes, child);
+                    ValidateInvalidAttributes(attributes, child);
                 }
                 else
-                    ThrowUnrecognizedNode (child);
+                    ThrowUnrecognizedNode(child);
             }
 
-            d [node.Name] = newNodes;
+            d[node.Name] = newNodes;
         }
 
-        private static object GetSwitchValue (string name, string value)
+        private static object GetSwitchValue(string name, string value)
         {
             return value;
         }
 
-        private void AddTraceNode (IDictionary d, XmlNode node)
+        private void AddTraceNode(IDictionary d, XmlNode node)
         {
-            AddTraceAttributes (d, node);
+            AddTraceAttributes(d, node);
 
-            foreach (XmlNode child in node.ChildNodes) {
+            foreach (XmlNode child in node.ChildNodes)
+            {
                 XmlNodeType t = child.NodeType;
                 if (t == XmlNodeType.Whitespace || t == XmlNodeType.Comment)
                     continue;
-                if (t == XmlNodeType.Element) {
+                if (t == XmlNodeType.Element)
+                {
                     if (child.Name == "listeners")
-                        AddTraceListeners (d, child, configValues.Listeners);
+                        AddTraceListeners(d, child, configValues.Listeners);
                     else
-                        ThrowUnrecognizedElement (child);
-                    ValidateInvalidAttributes (child.Attributes, child);
+                        ThrowUnrecognizedElement(child);
+                    ValidateInvalidAttributes(child.Attributes, child);
                 }
                 else
-                    ThrowUnrecognizedNode (child);
+                    ThrowUnrecognizedNode(child);
             }
         }
 
         // all attributes are optional
-        private void AddTraceAttributes (IDictionary d, XmlNode node)
+        private void AddTraceAttributes(IDictionary d, XmlNode node)
         {
             XmlAttributeCollection c = node.Attributes;
-            string autoflushConf = GetAttribute (c, "autoflush", false, node);
-            string indentsizeConf = GetAttribute (c, "indentsize", false, node);
-            ValidateInvalidAttributes (c, node);
-            if (autoflushConf != null) {
+            string autoflushConf = GetAttribute(c, "autoflush", false, node);
+            string indentsizeConf = GetAttribute(c, "indentsize", false, node);
+            ValidateInvalidAttributes(c, node);
+            if (autoflushConf != null)
+            {
                 bool autoflush = false;
-                try {
-                    autoflush = bool.Parse (autoflushConf);
-                    d ["autoflush"] = autoflush;
-                } catch (Exception e) {
-                    throw new ConfigurationException ("The `autoflush' attribute must be `true' or `false'",
-                            e, node);
+                try
+                {
+                    autoflush = bool.Parse(autoflushConf);
+                    d["autoflush"] = autoflush;
+                }
+                catch (Exception e)
+                {
+                    throw new ConfigurationException(
+                        "The `autoflush' attribute must be `true' or `false'",
+                        e,
+                        node
+                    );
                 }
                 configValues.AutoFlush = autoflush;
             }
-            if (indentsizeConf != null) {
+            if (indentsizeConf != null)
+            {
                 int indentsize = 0;
-                try {
-                    indentsize = int.Parse (indentsizeConf);
-                    d ["indentsize"] = indentsize;
-                } catch (Exception e) {
-                    throw new ConfigurationException ("The `indentsize' attribute must be an integral value.",
-                            e, node);
+                try
+                {
+                    indentsize = int.Parse(indentsizeConf);
+                    d["indentsize"] = indentsize;
+                }
+                catch (Exception e)
+                {
+                    throw new ConfigurationException(
+                        "The `indentsize' attribute must be an integral value.",
+                        e,
+                        node
+                    );
                 }
                 configValues.IndentSize = indentsize;
             }
         }
 
-        private TraceListenerCollection GetSharedListeners (IDictionary d)
+        private TraceListenerCollection GetSharedListeners(IDictionary d)
         {
-            TraceListenerCollection shared_listeners = d ["sharedListeners"] as TraceListenerCollection;
-            if (shared_listeners == null) {
-                shared_listeners = new TraceListenerCollection ();
-                d ["sharedListeners"] = shared_listeners;
+            TraceListenerCollection shared_listeners =
+                d["sharedListeners"] as TraceListenerCollection;
+            if (shared_listeners == null)
+            {
+                shared_listeners = new TraceListenerCollection();
+                d["sharedListeners"] = shared_listeners;
             }
             return shared_listeners;
         }
 
-        private void AddSourcesNode (IDictionary d, XmlNode node)
+        private void AddSourcesNode(IDictionary d, XmlNode node)
         {
             // FIXME: are there valid attributes?
-            ValidateInvalidAttributes (node.Attributes, node);
-            Hashtable sources = d ["sources"] as Hashtable;
-            if (sources == null) {
-                sources = new Hashtable ();
-                d ["sources"] = sources;
+            ValidateInvalidAttributes(node.Attributes, node);
+            Hashtable sources = d["sources"] as Hashtable;
+            if (sources == null)
+            {
+                sources = new Hashtable();
+                d["sources"] = sources;
             }
 
-            foreach (XmlNode child in node.ChildNodes) {
+            foreach (XmlNode child in node.ChildNodes)
+            {
                 XmlNodeType t = child.NodeType;
                 if (t == XmlNodeType.Whitespace || t == XmlNodeType.Comment)
                     continue;
-                if (t == XmlNodeType.Element) {
+                if (t == XmlNodeType.Element)
+                {
                     if (child.Name == "source")
-                        AddTraceSource (d, sources, child);
+                        AddTraceSource(d, sources, child);
                     else
-                        ThrowUnrecognizedElement (child);
-//                    ValidateInvalidAttributes (child.Attributes, child);
+                        ThrowUnrecognizedElement(child);
+                    //                    ValidateInvalidAttributes (child.Attributes, child);
                 }
                 else
-                    ThrowUnrecognizedNode (child);
+                    ThrowUnrecognizedNode(child);
             }
         }
 
-        private void AddTraceSource (IDictionary d, Hashtable sources, XmlNode node)
+        private void AddTraceSource(IDictionary d, Hashtable sources, XmlNode node)
         {
             string name = null;
             SourceLevels levels = SourceLevels.Error;
-            StringDictionary atts = new StringDictionary ();
-            foreach (XmlAttribute a in node.Attributes) {
-                switch (a.Name) {
-                case "name":
-                    name = a.Value;
-                    break;
-                case "switchValue":
-                    levels = (SourceLevels) Enum.Parse (typeof (SourceLevels), a.Value);
-                    break;
-                default:
-                    atts [a.Name] = a.Value;
-                    break;
+            StringDictionary atts = new StringDictionary();
+            foreach (XmlAttribute a in node.Attributes)
+            {
+                switch (a.Name)
+                {
+                    case "name":
+                        name = a.Value;
+                        break;
+                    case "switchValue":
+                        levels = (SourceLevels)Enum.Parse(typeof(SourceLevels), a.Value);
+                        break;
+                    default:
+                        atts[a.Name] = a.Value;
+                        break;
                 }
             }
             if (name == null)
-                throw new ConfigurationException ("Mandatory attribute 'name' is missing in 'source' element.");
+                throw new ConfigurationException(
+                    "Mandatory attribute 'name' is missing in 'source' element."
+                );
 
             // ignore duplicate ones (no error occurs)
-            if (sources.ContainsKey (name))
+            if (sources.ContainsKey(name))
                 return;
 
-            TraceSourceInfo sinfo = new TraceSourceInfo (name, levels, configValues);
-            sources.Add (sinfo.Name, sinfo);
-            
-            foreach (XmlNode child in node.ChildNodes) {
+            TraceSourceInfo sinfo = new TraceSourceInfo(name, levels, configValues);
+            sources.Add(sinfo.Name, sinfo);
+
+            foreach (XmlNode child in node.ChildNodes)
+            {
                 XmlNodeType t = child.NodeType;
                 if (t == XmlNodeType.Whitespace || t == XmlNodeType.Comment)
                     continue;
-                if (t == XmlNodeType.Element) {
+                if (t == XmlNodeType.Element)
+                {
                     if (child.Name == "listeners")
-                        AddTraceListeners (d, child, sinfo.Listeners);
+                        AddTraceListeners(d, child, sinfo.Listeners);
                     else
-                        ThrowUnrecognizedElement (child);
-                    ValidateInvalidAttributes (child.Attributes, child);
+                        ThrowUnrecognizedElement(child);
+                    ValidateInvalidAttributes(child.Attributes, child);
                 }
                 else
-                    ThrowUnrecognizedNode (child);
+                    ThrowUnrecognizedNode(child);
             }
         }
 
         // only defines "add" and "remove", but "clear" also works
         // for add, "name" is required; initializeData is optional; "type" is required in 1.x, optional in 2.0.
-        private void AddTraceListeners (IDictionary d, XmlNode listenersNode, TraceListenerCollection listeners)
+        private void AddTraceListeners(
+            IDictionary d,
+            XmlNode listenersNode,
+            TraceListenerCollection listeners
+        )
         {
             // There are no attributes on <listeners/>
-            ValidateInvalidAttributes (listenersNode.Attributes, listenersNode);
+            ValidateInvalidAttributes(listenersNode.Attributes, listenersNode);
 
-            foreach (XmlNode child in listenersNode.ChildNodes) {
+            foreach (XmlNode child in listenersNode.ChildNodes)
+            {
                 XmlNodeType t = child.NodeType;
                 if (t == XmlNodeType.Whitespace || t == XmlNodeType.Comment)
                     continue;
-                if (t == XmlNodeType.Element) {
+                if (t == XmlNodeType.Element)
+                {
                     XmlAttributeCollection attributes = child.Attributes;
                     string name = null;
-                    switch (child.Name) {
+                    switch (child.Name)
+                    {
                         case "add":
-                            AddTraceListener (d, child, attributes, listeners);
+                            AddTraceListener(d, child, attributes, listeners);
                             break;
                         case "remove":
-                            name = GetAttribute (attributes, "name", true, child);
-                            RemoveTraceListener (name);
+                            name = GetAttribute(attributes, "name", true, child);
+                            RemoveTraceListener(name);
                             break;
                         case "clear":
-                            configValues.Listeners.Clear ();
+                            configValues.Listeners.Clear();
                             break;
                         default:
-                            ThrowUnrecognizedElement (child);
+                            ThrowUnrecognizedElement(child);
                             break;
                     }
-                    ValidateInvalidAttributes (attributes, child);
+                    ValidateInvalidAttributes(attributes, child);
                 }
                 else
-                    ThrowUnrecognizedNode (child);
+                    ThrowUnrecognizedNode(child);
             }
         }
 
-        private void AddTraceListener (IDictionary d, XmlNode child, XmlAttributeCollection attributes, TraceListenerCollection listeners)
+        private void AddTraceListener(
+            IDictionary d,
+            XmlNode child,
+            XmlAttributeCollection attributes,
+            TraceListenerCollection listeners
+        )
         {
-            string name = GetAttribute (attributes, "name", true, child);
+            string name = GetAttribute(attributes, "name", true, child);
             string type = null;
 
 #if CONFIGURATION_DEP
@@ -442,34 +504,39 @@ namespace System.Diagnostics
                 return;
             }
 #else
-            type = GetAttribute (attributes, "type", true, child);
+            type = GetAttribute(attributes, "type", true, child);
 #endif
 
-            Type t = Type.GetType (type);
+            Type t = Type.GetType(type);
             if (t == null)
-                throw new ConfigurationException (string.Format ("Invalid Type Specified: {0}", type));
+                throw new ConfigurationException(
+                    string.Format("Invalid Type Specified: {0}", type)
+                );
 
             object[] args;
             Type[] types;
 
-            string initializeData = GetAttribute (attributes, "initializeData", false, child);
-            if (initializeData != null) {
+            string initializeData = GetAttribute(attributes, "initializeData", false, child);
+            if (initializeData != null)
+            {
                 args = new object[] { initializeData };
                 types = new Type[] { typeof(string) };
-            } else {
+            }
+            else
+            {
                 args = null;
                 types = Type.EmptyTypes;
             }
 
             BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
-            if (t.Assembly == GetType ().Assembly)
+            if (t.Assembly == GetType().Assembly)
                 flags |= BindingFlags.NonPublic;
 
-            ConstructorInfo ctor = t.GetConstructor (flags, null, types, null);
-            if (ctor == null) 
-                throw new ConfigurationException ("Couldn't find constructor for class " + type);
-            
-            TraceListener l = (TraceListener) ctor.Invoke (args);
+            ConstructorInfo ctor = t.GetConstructor(flags, null, types, null);
+            if (ctor == null)
+                throw new ConfigurationException("Couldn't find constructor for class " + type);
+
+            TraceListener l = (TraceListener)ctor.Invoke(args);
             l.Name = name;
 
 #if CONFIGURATION_DEP
@@ -506,81 +573,103 @@ namespace System.Diagnostics
 #endif
 
             l.IndentSize = configValues.IndentSize;
-            listeners.Add (l);
+            listeners.Add(l);
         }
 
-        private void RemoveTraceListener (string name)
+        private void RemoveTraceListener(string name)
         {
-            try {
-                configValues.Listeners.Remove (name);
+            try
+            {
+                configValues.Listeners.Remove(name);
             }
-            catch (ArgumentException) {
+            catch (ArgumentException)
+            {
                 // The specified listener wasn't in the collection
                 // Ignore this; .NET does.
             }
-            catch (Exception e) {
-                throw new ConfigurationException (
-                        string.Format ("Unknown error removing listener: {0}", name),
-                        e);
+            catch (Exception e)
+            {
+                throw new ConfigurationException(
+                    string.Format("Unknown error removing listener: {0}", name),
+                    e
+                );
             }
         }
 
-        private string GetAttribute (XmlAttributeCollection attrs, string attr, bool required, XmlNode node)
+        private string GetAttribute(
+            XmlAttributeCollection attrs,
+            string attr,
+            bool required,
+            XmlNode node
+        )
         {
             XmlAttribute a = attrs[attr];
 
             string r = null;
 
-            if (a != null) {
+            if (a != null)
+            {
                 r = a.Value;
                 if (required)
-                    ValidateAttribute (attr, r, node);
-                attrs.Remove (a);
+                    ValidateAttribute(attr, r, node);
+                attrs.Remove(a);
             }
             else if (required)
-                ThrowMissingAttribute (attr, node);
+                ThrowMissingAttribute(attr, node);
 
             return r;
         }
 
-        private void ValidateAttribute (string attribute, string value, XmlNode node)
+        private void ValidateAttribute(string attribute, string value, XmlNode node)
         {
             if (value == null || value.Length == 0)
-                throw new ConfigurationException (string.Format ("Required attribute '{0}' cannot be empty.", attribute), node);
+                throw new ConfigurationException(
+                    string.Format("Required attribute '{0}' cannot be empty.", attribute),
+                    node
+                );
         }
 
-        private void ValidateInvalidAttributes (XmlAttributeCollection c, XmlNode node)
+        private void ValidateInvalidAttributes(XmlAttributeCollection c, XmlNode node)
         {
             if (c.Count != 0)
-                ThrowUnrecognizedAttribute (c[0].Name, node);
+                ThrowUnrecognizedAttribute(c[0].Name, node);
         }
 
-        private void ThrowMissingAttribute (string attribute, XmlNode node)
+        private void ThrowMissingAttribute(string attribute, XmlNode node)
         {
-            throw new ConfigurationException (string.Format ("Required attribute '{0}' not found.", attribute), node);
+            throw new ConfigurationException(
+                string.Format("Required attribute '{0}' not found.", attribute),
+                node
+            );
         }
 
-        private void ThrowUnrecognizedNode (XmlNode node)
+        private void ThrowUnrecognizedNode(XmlNode node)
         {
-            throw new ConfigurationException (
-                    string.Format ("Unrecognized node `{0}'; nodeType={1}", node.Name, node.NodeType),
-                    node);
+            throw new ConfigurationException(
+                string.Format("Unrecognized node `{0}'; nodeType={1}", node.Name, node.NodeType),
+                node
+            );
         }
 
-        private void ThrowUnrecognizedElement (XmlNode node)
+        private void ThrowUnrecognizedElement(XmlNode node)
         {
-            throw new ConfigurationException (
-                    string.Format ("Unrecognized element '{0}'.", node.Name),
-                    node);
+            throw new ConfigurationException(
+                string.Format("Unrecognized element '{0}'.", node.Name),
+                node
+            );
         }
 
-        private void ThrowUnrecognizedAttribute (string attribute, XmlNode node)
+        private void ThrowUnrecognizedAttribute(string attribute, XmlNode node)
         {
-            throw new ConfigurationException (
-                    string.Format ("Unrecognized attribute '{0}' on element <{1}/>.", attribute, node.Name),
-                    node);
+            throw new ConfigurationException(
+                string.Format(
+                    "Unrecognized attribute '{0}' on element <{1}/>.",
+                    attribute,
+                    node.Name
+                ),
+                node
+            );
         }
     }
 #endif
 }
-

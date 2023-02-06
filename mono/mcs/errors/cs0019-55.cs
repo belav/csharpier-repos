@@ -3,12 +3,12 @@
 
 class A
 {
-    public static bool operator == (A a, int b)
+    public static bool operator ==(A a, int b)
     {
         return false;
     }
-    
-    public static bool operator != (A a, int b)
+
+    public static bool operator !=(A a, int b)
     {
         return false;
     }
@@ -16,13 +16,14 @@ class A
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        A a = new A ();
+        A a = new A();
         object b = a == Id;
     }
-    
-    static int? Id {
+
+    static int? Id
+    {
         get { return 1; }
     }
 }

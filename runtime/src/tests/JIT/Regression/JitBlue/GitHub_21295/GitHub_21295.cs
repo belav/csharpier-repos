@@ -31,7 +31,7 @@ public class X
     {
         p = false;
         // After inlining G(), the jit must not update
-        // the type of the return spill temp for G(), or it 
+        // the type of the return spill temp for G(), or it
         // may incorrectly devirtualize the call to F()
         return G().F() + 67;
     }

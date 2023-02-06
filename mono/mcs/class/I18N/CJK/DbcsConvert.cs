@@ -19,20 +19,19 @@ namespace I18N.CJK
         // Public access to the conversion tables.
         public byte[] n2u;
         public byte[] u2n;
-        
+
         // Constructor.
-        internal DbcsConvert(string fileName) {
-            using (CodeTable table = new CodeTable(fileName)) {
+        internal DbcsConvert(string fileName)
+        {
+            using (CodeTable table = new CodeTable(fileName))
+            {
                 n2u = table.GetSection(1);
                 u2n = table.GetSection(2);
             }
         }
 
-        internal static readonly DbcsConvert Gb2312 =
-            new DbcsConvert ("gb2312.table");
-        internal static readonly DbcsConvert Big5 =
-            new DbcsConvert ("big5.table");
-        internal static readonly DbcsConvert KS =
-            new DbcsConvert ("ks.table");
+        internal static readonly DbcsConvert Gb2312 = new DbcsConvert("gb2312.table");
+        internal static readonly DbcsConvert Big5 = new DbcsConvert("big5.table");
+        internal static readonly DbcsConvert KS = new DbcsConvert("ks.table");
     }
 }

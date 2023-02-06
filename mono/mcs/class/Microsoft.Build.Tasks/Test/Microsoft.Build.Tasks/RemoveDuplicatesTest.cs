@@ -41,10 +41,13 @@ namespace MonoTests.Microsoft.Build.Tasks
     public class RemoveDuplicatesTest
     {
         [Test]
-        public void Test1 ()
+        public void Test1()
         {
-            string documentString = @"
-                                <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" " + Consts.ToolsVersionString + @">
+            string documentString =
+                @"
+                                <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"" "
+                + Consts.ToolsVersionString
+                + @">
                 
                 <ItemGroup>
                     <Items Include='A'>
@@ -83,22 +86,23 @@ namespace MonoTests.Microsoft.Build.Tasks
                 </Project>
             ";
 
-            Engine engine = new Engine (Consts.BinPath);
+            Engine engine = new Engine(Consts.BinPath);
 
-            TestMessageLogger testLogger = new TestMessageLogger ();
-            engine.RegisterLogger (testLogger);
+            TestMessageLogger testLogger = new TestMessageLogger();
+            engine.RegisterLogger(testLogger);
 
-            Project project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            if (!project.Build ("Main")) {
-                testLogger.DumpMessages ();
-                Assert.Fail ("Build failed");
+            Project project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            if (!project.Build("Main"))
+            {
+                testLogger.DumpMessages();
+                Assert.Fail("Build failed");
             }
 
-            testLogger.CheckLoggedMessageHead ("Filtered items: A MD: Value1 MD2:  MD3: ", "A1");
-            testLogger.CheckLoggedMessageHead ("Filtered items: B MD: Value1 MD2:  MD3: ", "A2");
-            testLogger.CheckLoggedMessageHead ("Filtered items: C MD: Value1 MD2:  MD3: ", "A3");
-            Assert.AreEqual (0, testLogger.NormalMessageCount, "Unexpected extra messages found");
+            testLogger.CheckLoggedMessageHead("Filtered items: A MD: Value1 MD2:  MD3: ", "A1");
+            testLogger.CheckLoggedMessageHead("Filtered items: B MD: Value1 MD2:  MD3: ", "A2");
+            testLogger.CheckLoggedMessageHead("Filtered items: C MD: Value1 MD2:  MD3: ", "A3");
+            Assert.AreEqual(0, testLogger.NormalMessageCount, "Unexpected extra messages found");
         }
     }
 }

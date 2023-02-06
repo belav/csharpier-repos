@@ -8,9 +8,7 @@ interface I
     int Foo { get; set; }
 }
 
-public class MySubClass : MyTest, I
-{
-}
+public class MySubClass : MyTest, I { }
 
 public class MyTest
 {

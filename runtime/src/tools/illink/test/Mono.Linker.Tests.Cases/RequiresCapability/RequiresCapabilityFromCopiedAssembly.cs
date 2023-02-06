@@ -7,23 +7,23 @@ using Mono.Linker.Tests.Cases.RequiresCapability.Dependencies;
 
 namespace Mono.Linker.Tests.Cases.RequiresCapability
 {
-    [SetupLinkerAction ("copy", "lib")]
-    [SetupCompileBefore ("lib.dll", new[] { "Dependencies/RequiresInCopyAssembly.cs" })]
-    [KeptAllTypesAndMembersInAssembly ("lib.dll")]
-    [LogDoesNotContain ("IL2026")]
-    [LogDoesNotContain ("IL3002")]
-    [LogDoesNotContain ("IL2027")]
+    [SetupLinkerAction("copy", "lib")]
+    [SetupCompileBefore("lib.dll", new[] { "Dependencies/RequiresInCopyAssembly.cs" })]
+    [KeptAllTypesAndMembersInAssembly("lib.dll")]
+    [LogDoesNotContain("IL2026")]
+    [LogDoesNotContain("IL3002")]
+    [LogDoesNotContain("IL2027")]
     public class RequiresCapabilityFromCopiedAssembly
     {
-        public static void Main ()
+        public static void Main()
         {
-            Test ();
+            Test();
         }
 
         [Kept]
-        static void Test ()
+        static void Test()
         {
-            var x = new RequiresInCopyAssembly ();
+            var x = new RequiresInCopyAssembly();
         }
     }
 }

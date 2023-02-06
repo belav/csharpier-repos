@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -30,94 +30,130 @@ using System.IO;
 using System.Xml;
 using Mono.XBuild.Framework;
 
-namespace Microsoft.Build.BuildEngine {
-    public class UsingTask {
-    
-        ImportedProject    importedProject;
-        Project        project;
-        XmlElement    usingTaskElement;
+namespace Microsoft.Build.BuildEngine
+{
+    public class UsingTask
+    {
+        ImportedProject importedProject;
+        Project project;
+        XmlElement usingTaskElement;
 
-        internal UsingTask (XmlElement usingTaskElement, Project project, ImportedProject importedProject)
+        internal UsingTask(
+            XmlElement usingTaskElement,
+            Project project,
+            ImportedProject importedProject
+        )
         {
             this.project = project;
             this.importedProject = importedProject;
             this.usingTaskElement = usingTaskElement;
-            
+
             if (project == null)
-                throw new ArgumentNullException ("project");
+                throw new ArgumentNullException("project");
             if (usingTaskElement == null)
-                throw new ArgumentNullException ("usingTaskElement");
+                throw new ArgumentNullException("usingTaskElement");
             if (AssemblyName != null && AssemblyFile != null)
-                throw new InvalidProjectFileException ("A <UsingTask> element must contain either the \"AssemblyName\" attribute or the \"AssemblyFile\" attribute (but not both).  ");
+                throw new InvalidProjectFileException(
+                    "A <UsingTask> element must contain either the \"AssemblyName\" attribute or the \"AssemblyFile\" attribute (but not both).  "
+                );
             if (TaskName == String.Empty)
-                throw new InvalidProjectFileException ("The required attribute \"TaskName\" is missing from element <UsingTask>.  ");
+                throw new InvalidProjectFileException(
+                    "The required attribute \"TaskName\" is missing from element <UsingTask>.  "
+                );
         }
 
-        internal void Evaluate ()
+        internal void Evaluate()
         {
             if (AssemblyName == null && AssemblyFile == null)
-                throw new InvalidProjectFileException ("A <UsingTask> element must contain either the \"AssemblyName\" attribute or the \"AssemblyFile\" attribute (but not both).  ");
+                throw new InvalidProjectFileException(
+                    "A <UsingTask> element must contain either the \"AssemblyName\" attribute or the \"AssemblyFile\" attribute (but not both).  "
+                );
 
-            if (ConditionParser.ParseAndEvaluate (Condition, project))
-                project.TaskDatabase.RegisterUsingTask (this);
+            if (ConditionParser.ParseAndEvaluate(Condition, project))
+                project.TaskDatabase.RegisterUsingTask(this);
         }
 
-        internal void Load (TaskDatabase db)
+        internal void Load(TaskDatabase db)
         {
             AssemblyLoadInfo loadInfo = null;
 
-            if (AssemblyName != null) {
-                loadInfo = new AssemblyLoadInfo (AssemblyName, TaskName);
-            } else if (AssemblyFile != null) {
-                Expression exp = new Expression ();
+            if (AssemblyName != null)
+            {
+                loadInfo = new AssemblyLoadInfo(AssemblyName, TaskName);
+            }
+            else if (AssemblyFile != null)
+            {
+                Expression exp = new Expression();
                 // FIXME: test it
-                exp.Parse (AssemblyFile, ParseOptions.Split);
-                string filename = (string) exp.ConvertTo (project, typeof (string));
+                exp.Parse(AssemblyFile, ParseOptions.Split);
+                string filename = (string)exp.ConvertTo(project, typeof(string));
 
-                if (Path.IsPathRooted (filename) == false) {
+                if (Path.IsPathRooted(filename) == false)
+                {
                     string ffn;
-                    if (importedProject != null) {
-                        ffn = Path.GetDirectoryName (importedProject.FullFileName);
-                    } else if (project.FullFileName != String.Empty) {
-                        ffn = Path.GetDirectoryName (project.FullFileName);
-                    } else {
+                    if (importedProject != null)
+                    {
+                        ffn = Path.GetDirectoryName(importedProject.FullFileName);
+                    }
+                    else if (project.FullFileName != String.Empty)
+                    {
+                        ffn = Path.GetDirectoryName(project.FullFileName);
+                    }
+                    else
+                    {
                         ffn = Environment.CurrentDirectory;
                     }
-                    filename = Path.Combine (ffn, filename);
+                    filename = Path.Combine(ffn, filename);
                 }
-                loadInfo = new AssemblyLoadInfo (LoadInfoType.AssemblyFilename, filename, null, null, null, null, TaskName);
+                loadInfo = new AssemblyLoadInfo(
+                    LoadInfoType.AssemblyFilename,
+                    filename,
+                    null,
+                    null,
+                    null,
+                    null,
+                    TaskName
+                );
             }
 
-            db.RegisterTask (TaskName, loadInfo);
+            db.RegisterTask(TaskName, loadInfo);
         }
 
-        public bool IsImported {
+        public bool IsImported
+        {
             get { return importedProject != null; }
         }
-        
-        public string AssemblyFile {
-            get {
-                string assemblyFile = usingTaskElement.GetAttribute ("AssemblyFile");
+
+        public string AssemblyFile
+        {
+            get
+            {
+                string assemblyFile = usingTaskElement.GetAttribute("AssemblyFile");
                 return (assemblyFile == String.Empty) ? null : assemblyFile;
             }
         }
-        
-        public string AssemblyName {
-            get {
-                string assemblyName = usingTaskElement.GetAttribute ("AssemblyName");
+
+        public string AssemblyName
+        {
+            get
+            {
+                string assemblyName = usingTaskElement.GetAttribute("AssemblyName");
                 return (assemblyName == String.Empty) ? null : assemblyName;
             }
         }
-        
-        public string Condition {
-            get {
-                string condition = usingTaskElement.GetAttribute ("Condition");
+
+        public string Condition
+        {
+            get
+            {
+                string condition = usingTaskElement.GetAttribute("Condition");
                 return (condition == String.Empty) ? null : condition;
             }
         }
-        
-        public string TaskName {
-            get { return usingTaskElement.GetAttribute ("TaskName"); }
+
+        public string TaskName
+        {
+            get { return usingTaskElement.GetAttribute("TaskName"); }
         }
     }
 }

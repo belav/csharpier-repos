@@ -29,9 +29,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
-    internal enum Code {
+namespace Mono.Cecil.Cil
+{
+    internal enum Code
+    {
         Nop,
         Break,
         Ldarg_0,

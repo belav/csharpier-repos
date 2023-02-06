@@ -27,7 +27,7 @@ namespace MonoTests.System.Diagnostics
             listener = new TextWriterTraceListener();
             listener.Writer = Console.Out;
         }
-        
+
         [TearDown]
         public void TearDown()
         {
@@ -40,9 +40,8 @@ namespace MonoTests.System.Diagnostics
             Assert.IsTrue(!(listener == null), "Null Listener");
             Assert.IsTrue(!(listener.Writer == null), "Null Writer");
             listener.Write("Test Message\n");
-            
         }
-        
+
         [Test]
         public void TestWriteLine()
         {
@@ -50,7 +49,7 @@ namespace MonoTests.System.Diagnostics
             Assert.IsTrue(!(listener.Writer == null), "Null Writer");
             listener.WriteLine("Test WriteLine Message");
         }
-        
+
         [Test]
         public void TestFlush()
         {

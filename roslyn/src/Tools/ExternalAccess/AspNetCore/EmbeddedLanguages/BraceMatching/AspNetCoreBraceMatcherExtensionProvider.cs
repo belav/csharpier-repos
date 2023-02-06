@@ -12,12 +12,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
         : AbstractProjectExtensionProvider<
             AspNetCoreBraceMatcherExtensionProvider,
             IAspNetCoreEmbeddedLanguageBraceMatcher,
-            ExportAspNetCoreEmbeddedLanguageBraceMatcherAttribute>
+            ExportAspNetCoreEmbeddedLanguageBraceMatcherAttribute
+        >
     {
-        protected override ImmutableArray<string> GetLanguages(ExportAspNetCoreEmbeddedLanguageBraceMatcherAttribute exportAttribute)
-            => ImmutableArray.Create(exportAttribute.Language);
+        protected override ImmutableArray<string> GetLanguages(
+            ExportAspNetCoreEmbeddedLanguageBraceMatcherAttribute exportAttribute
+        ) => ImmutableArray.Create(exportAttribute.Language);
 
-        protected override bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<IAspNetCoreEmbeddedLanguageBraceMatcher> extensions)
+        protected override bool TryGetExtensionsFromReference(
+            AnalyzerReference reference,
+            out ImmutableArray<IAspNetCoreEmbeddedLanguageBraceMatcher> extensions
+        )
         {
             extensions = default;
             return false;

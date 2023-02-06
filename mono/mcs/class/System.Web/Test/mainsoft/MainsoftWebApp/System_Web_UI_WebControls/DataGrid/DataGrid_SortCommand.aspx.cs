@@ -37,15 +37,15 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGrid_SortCommand
-        : GHTBaseWeb 
+    public class DataGrid_SortCommand : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest Ghtsubtest1;
         protected System.Web.UI.WebControls.DataGrid DataGrid2;
         protected GHTWebControls.GHTSubTest Ghtsubtest2;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -53,52 +53,56 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-            this.DataGrid1.SortCommand += new DataGridSortCommandEventHandler(DataGrid1_SortCommand);
-            this.DataGrid2.SortCommand += new DataGridSortCommandEventHandler(DataGrid2_SortCommand);
-
+            this.DataGrid1.SortCommand += new DataGridSortCommandEventHandler(
+                DataGrid1_SortCommand
+            );
+            this.DataGrid2.SortCommand += new DataGridSortCommandEventHandler(
+                DataGrid2_SortCommand
+            );
         }
         #endregion
 
         private void BindGrid(System.Web.UI.WebControls.DataGrid dg)
         {
             dg.DataSource = GHTTests.GHDataSources.DSDataTable();
-            dg.DataBind();;
+            dg.DataBind();
+            ;
         }
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
             GHTTestBegin(frm);
 
             GHTActiveSubTest = Ghtsubtest1;
-            try 
+            try
             {
                 DataGrid1.AllowSorting = true;
-                if (! IsPostBack )
+                if (!IsPostBack)
                     BindGrid(DataGrid1);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = Ghtsubtest2;
-            try 
+            try
             {
                 DataGrid2.AllowSorting = true;
                 DataGrid2.PagerStyle.Mode = PagerMode.NumericPages;
-                if (! IsPostBack )
+                if (!IsPostBack)
                     BindGrid(DataGrid2);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
@@ -106,22 +110,30 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestEnd();
         }
 
-        private void DataGrid1_SortCommand(object source, System.Web.UI.WebControls.DataGridSortCommandEventArgs e)
+        private void DataGrid1_SortCommand(
+            object source,
+            System.Web.UI.WebControls.DataGridSortCommandEventArgs e
+        )
         {
             DataView dv = new DataView();
             dv.Table = GHTTests.GHDataSources.DSDataTable();
             dv.Sort = e.SortExpression;
             DataGrid1.DataSource = dv;
-            DataGrid1.DataBind();;
+            DataGrid1.DataBind();
+            ;
         }
 
-        private void DataGrid2_SortCommand(object source, System.Web.UI.WebControls.DataGridSortCommandEventArgs e)
+        private void DataGrid2_SortCommand(
+            object source,
+            System.Web.UI.WebControls.DataGridSortCommandEventArgs e
+        )
         {
             DataView dv = new DataView();
             dv.Table = GHTTests.GHDataSources.DSDataTable();
             dv.Sort = e.SortExpression;
             DataGrid2.DataSource = dv;
-            DataGrid2.DataBind();;
+            DataGrid2.DataBind();
+            ;
         }
     }
 }

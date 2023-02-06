@@ -27,14 +27,22 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public ActiveStatementExceptionRegions ExceptionRegions { get; }
 
-        public UnmappedActiveStatement(TextSpan unmappedSpan, ActiveStatement statement, ActiveStatementExceptionRegions exceptionRegions)
+        public UnmappedActiveStatement(
+            TextSpan unmappedSpan,
+            ActiveStatement statement,
+            ActiveStatementExceptionRegions exceptionRegions
+        )
         {
             UnmappedSpan = unmappedSpan;
             Statement = statement;
             ExceptionRegions = exceptionRegions;
         }
 
-        public void Deconstruct(out TextSpan unmappedSpan, out ActiveStatement statement, out ActiveStatementExceptionRegions exceptionRegions)
+        public void Deconstruct(
+            out TextSpan unmappedSpan,
+            out ActiveStatement statement,
+            out ActiveStatementExceptionRegions exceptionRegions
+        )
         {
             unmappedSpan = UnmappedSpan;
             statement = Statement;

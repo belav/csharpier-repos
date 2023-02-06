@@ -18,15 +18,16 @@ namespace System.ServiceModel.Activation.Interop
     sealed class SafeHGlobalHandleCritical : SafeHandleZeroOrMinusOneIsInvalid
     {
         SafeHGlobalHandleCritical()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         // 0 is an Invalid Handle
         SafeHGlobalHandleCritical(IntPtr handle)
             : base(true)
         {
-            Fx.Assert(handle == IntPtr.Zero, "SafeHGlobalHandleCritical constructor can only be called with IntPtr.Zero.");
+            Fx.Assert(
+                handle == IntPtr.Zero,
+                "SafeHGlobalHandleCritical constructor can only be called with IntPtr.Zero."
+            );
             SetHandle(handle);
         }
 
@@ -71,7 +72,7 @@ namespace System.ServiceModel.Activation.Interop
 
             SafeHGlobalHandleCritical result = new SafeHGlobalHandleCritical();
 
-            // CER 
+            // CER
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
             finally

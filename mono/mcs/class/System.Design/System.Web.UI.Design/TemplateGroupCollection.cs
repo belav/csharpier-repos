@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,193 +34,178 @@ namespace System.Web.UI.Design
 {
     public sealed class TemplateGroupCollection : IList, ICollection, IEnumerable
     {
-        [MonoNotSupported ("")]
-        public TemplateGroupCollection ()
+        [MonoNotSupported("")]
+        public TemplateGroupCollection()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        public int Count {
-            [MonoNotSupported ("")]
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        [MonoNotSupported ("")]
-        public TemplateGroup this [int index] {
-            [MonoNotSupported ("")]
-            get {
-                throw new NotImplementedException ();
-            }
-
-            [MonoNotSupported ("")]
-            set {
-                throw new NotImplementedException ();
-            }
-        }
-
-        [MonoNotSupported ("")]
-        public int Add (TemplateGroup group)
+        [MonoNotSupported("")]
+        public int Count
         {
-            throw new NotImplementedException ();
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
         }
 
-        [MonoNotSupported ("")]
-        public void AddRange (TemplateGroupCollection groups)
+        [MonoNotSupported("")]
+        public TemplateGroup this[int index]
         {
-            throw new NotImplementedException ();
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+            [MonoNotSupported("")]
+            set { throw new NotImplementedException(); }
         }
 
-        [MonoNotSupported ("")]
-        public void Clear ()
+        [MonoNotSupported("")]
+        public int Add(TemplateGroup group)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        public bool Contains (TemplateGroup group)
+        [MonoNotSupported("")]
+        public void AddRange(TemplateGroupCollection groups)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        public void CopyTo (TemplateGroup[] array, int index)
+        [MonoNotSupported("")]
+        public void Clear()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        public int IndexOf (TemplateGroup group)
+        [MonoNotSupported("")]
+        public bool Contains(TemplateGroup group)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        public void Insert (int index, TemplateGroup group)
+        [MonoNotSupported("")]
+        public void CopyTo(TemplateGroup[] array, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        public void Remove (TemplateGroup group)
+        [MonoNotSupported("")]
+        public int IndexOf(TemplateGroup group)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        public void RemoveAt (int index)
+        [MonoNotSupported("")]
+        public void Insert(int index, TemplateGroup group)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        void ICollection.CopyTo (Array array, int index)
+        [MonoNotSupported("")]
+        public void Remove(TemplateGroup group)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        IEnumerator IEnumerable.GetEnumerator ()
+        [MonoNotSupported("")]
+        public void RemoveAt(int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        int IList.Add (Object o)
+        [MonoNotSupported("")]
+        void ICollection.CopyTo(Array array, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        void IList.Clear ()
+        [MonoNotSupported("")]
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        bool IList.Contains (Object o)
+        [MonoNotSupported("")]
+        int IList.Add(Object o)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        int IList.IndexOf (Object o)
+        [MonoNotSupported("")]
+        void IList.Clear()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        void IList.Insert (int index, Object o)
+        [MonoNotSupported("")]
+        bool IList.Contains(Object o)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        void IList.Remove (Object o)
+        [MonoNotSupported("")]
+        int IList.IndexOf(Object o)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        void IList.RemoveAt (int index)
+        [MonoNotSupported("")]
+        void IList.Insert(int index, Object o)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        int ICollection.Count {
-            [MonoNotSupported ("")]
-            get {
-                throw new NotImplementedException ();
-            }
+        [MonoNotSupported("")]
+        void IList.Remove(Object o)
+        {
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        bool ICollection.IsSynchronized {
-            [MonoNotSupported ("")]
-            get {
-                throw new NotImplementedException ();
-            }
+        [MonoNotSupported("")]
+        void IList.RemoveAt(int index)
+        {
+            throw new NotImplementedException();
         }
 
-        [MonoNotSupported ("")]
-        Object ICollection.SyncRoot {
-            [MonoNotSupported ("")]
-            get {
-                throw new NotImplementedException ();
-            }
+        [MonoNotSupported("")]
+        int ICollection.Count
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
         }
 
-        [MonoNotSupported ("")]
-        bool IList.IsFixedSize {
-            [MonoNotSupported ("")]
-            get {
-                throw new NotImplementedException ();
-            }
+        [MonoNotSupported("")]
+        bool ICollection.IsSynchronized
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
         }
 
-        [MonoNotSupported ("")]
-        bool IList.IsReadOnly {
-            [MonoNotSupported ("")]
-            get {
-                throw new NotImplementedException ();
-            }
+        [MonoNotSupported("")]
+        Object ICollection.SyncRoot
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
         }
 
-        [MonoNotSupported ("")]
-        Object IList.this [int index] {
-            [MonoNotSupported ("")]
-            get {
-                throw new NotImplementedException ();
-            }
+        [MonoNotSupported("")]
+        bool IList.IsFixedSize
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
 
-            [MonoNotSupported ("")]
-            set {
-                throw new NotImplementedException ();
-            }
+        [MonoNotSupported("")]
+        bool IList.IsReadOnly
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoNotSupported("")]
+        Object IList.this[int index]
+        {
+            [MonoNotSupported("")]
+            get { throw new NotImplementedException(); }
+            [MonoNotSupported("")]
+            set { throw new NotImplementedException(); }
         }
     }
 }
-

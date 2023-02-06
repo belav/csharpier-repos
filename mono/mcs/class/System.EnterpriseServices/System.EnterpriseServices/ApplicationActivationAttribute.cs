@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.ApplicationActivationAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,22 +32,23 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Assembly)]
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Assembly)]
     [ComVisible(false)]
-    public sealed class ApplicationActivationAttribute : Attribute, IConfigurationAttribute {
-
+    public sealed class ApplicationActivationAttribute : Attribute, IConfigurationAttribute
+    {
         #region Fields
 
         ActivationOption opt;
         string soapMailbox;
-        string soapVRoot;    
+        string soapVRoot;
 
         #endregion // Fields
 
         #region Constructors
 
-        public ApplicationActivationAttribute (ActivationOption opt)
+        public ApplicationActivationAttribute(ActivationOption opt)
         {
             this.opt = opt;
         }
@@ -57,18 +58,18 @@ namespace System.EnterpriseServices {
         #region Implementation of IConfigurationAttribute
 
         [MonoTODO]
-        bool IConfigurationAttribute.AfterSaveChanges (Hashtable info)
+        bool IConfigurationAttribute.AfterSaveChanges(Hashtable info)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        bool IConfigurationAttribute.Apply (Hashtable cache)
+        bool IConfigurationAttribute.Apply(Hashtable cache)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        bool IConfigurationAttribute.IsValidTarget (string s)
+        bool IConfigurationAttribute.IsValidTarget(string s)
         {
             return (s == "Application");
         }
@@ -77,17 +78,20 @@ namespace System.EnterpriseServices {
 
         #region Properties
 
-        public string SoapMailbox {    
+        public string SoapMailbox
+        {
             get { return soapMailbox; }
             set { soapMailbox = value; }
         }
 
-        public string SoapVRoot {
+        public string SoapVRoot
+        {
             get { return soapVRoot; }
             set { soapVRoot = value; }
         }
 
-        public ActivationOption Value {
+        public ActivationOption Value
+        {
             get { return opt; }
         }
 

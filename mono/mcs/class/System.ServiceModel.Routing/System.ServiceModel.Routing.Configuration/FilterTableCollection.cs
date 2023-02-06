@@ -10,36 +10,37 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Routing.Configuration
 {
-    [ConfigurationCollection (typeof (FilterTableEntryCollection), AddItemName = "filterTable")]
+    [ConfigurationCollection(typeof(FilterTableEntryCollection), AddItemName = "filterTable")]
     public class FilterTableCollection : ConfigurationElementCollection
     {
-        public void Add (FilterTableEntryCollection element)
+        public void Add(FilterTableEntryCollection element)
         {
-            BaseAdd (element);
+            BaseAdd(element);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new FilterTableEntryCollection ();
+            return new FilterTableEntryCollection();
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((FilterTableEntryCollection) element).Name;
+            return ((FilterTableEntryCollection)element).Name;
         }
 
-        public void Remove (FilterTableEntryCollection element)
+        public void Remove(FilterTableEntryCollection element)
         {
-            BaseRemove (element);
+            BaseRemove(element);
         }
 
-        public new FilterTableEntryCollection this [string name] {
-            get { return (FilterTableEntryCollection) BaseGet (name); }
+        public new FilterTableEntryCollection this[string name]
+        {
+            get { return (FilterTableEntryCollection)BaseGet(name); }
         }
     }
 }

@@ -31,50 +31,50 @@ using System.Drawing;
 #endif
 using NUnit.Framework;
 
-namespace MonoTests.System.ComponentModel {
-
+namespace MonoTests.System.ComponentModel
+{
     [TestFixture]
-    public class DefaultValueAttributeTest {
-
+    public class DefaultValueAttributeTest
+    {
         [Test]
-        public void Null ()
+        public void Null()
         {
-            DefaultValueAttribute dva = new DefaultValueAttribute (null);
-            Assert.IsNull (dva.Value, "Value");
+            DefaultValueAttribute dva = new DefaultValueAttribute(null);
+            Assert.IsNull(dva.Value, "Value");
 
-            Assert.IsFalse (dva.Equals (null), "Equals(null)");
+            Assert.IsFalse(dva.Equals(null), "Equals(null)");
 
-            DefaultValueAttribute dva2 = new DefaultValueAttribute (null);
-            Assert.IsTrue (dva.Equals (dva2), "Equals(new)");
+            DefaultValueAttribute dva2 = new DefaultValueAttribute(null);
+            Assert.IsTrue(dva.Equals(dva2), "Equals(new)");
 
-            Assert.AreEqual (dva.GetHashCode (), dva2.GetHashCode (), "GetHashCode");
+            Assert.AreEqual(dva.GetHashCode(), dva2.GetHashCode(), "GetHashCode");
         }
 
         [Test]
-        public void Bool ()
+        public void Bool()
         {
-            DefaultValueAttribute dvat = new DefaultValueAttribute (true);
-            Assert.IsTrue ((bool) dvat.Value, "Value");
+            DefaultValueAttribute dvat = new DefaultValueAttribute(true);
+            Assert.IsTrue((bool)dvat.Value, "Value");
 
-            Assert.IsFalse (dvat.Equals (true), "Equals(true)");
-            Assert.IsTrue (dvat.Equals (new DefaultValueAttribute (true)), "Equals(new)");
+            Assert.IsFalse(dvat.Equals(true), "Equals(true)");
+            Assert.IsTrue(dvat.Equals(new DefaultValueAttribute(true)), "Equals(new)");
 
-            Assert.AreEqual (1, dvat.GetHashCode (), "GetHashCode");
+            Assert.AreEqual(1, dvat.GetHashCode(), "GetHashCode");
         }
 
 #if !MOBILE && !XAMMAC_4_5
-        [DefaultValue (typeof (Color), "Black")]
+        [DefaultValue(typeof(Color), "Black")]
         public Color Bar { get; set; }
 
         // https://github.com/mono/mono/issues/12362
         [Test]
-        public void Bug_12362 ()
+        public void Bug_12362()
         {
-            var prop = typeof (DefaultValueAttributeTest).GetProperty ("Bar");
-            var attr = (DefaultValueAttribute)prop.GetCustomAttributes (true) [0];
+            var prop = typeof(DefaultValueAttributeTest).GetProperty("Bar");
+            var attr = (DefaultValueAttribute)prop.GetCustomAttributes(true)[0];
             var value = attr.Value;
-            Assert.IsNotNull (value);
-            Assert.AreEqual (typeof (Color), value.GetType ());
+            Assert.IsNotNull(value);
+            Assert.AreEqual(typeof(Color), value.GetType());
         }
 #endif
     }

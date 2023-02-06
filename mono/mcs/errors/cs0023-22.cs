@@ -3,7 +3,7 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
         var res = null?[0];
     }

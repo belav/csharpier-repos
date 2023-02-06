@@ -4,7 +4,7 @@
 
 class A
 {
-    void Foo ()
+    void Foo()
     {
         var v = new { X = "Bar" };
     }

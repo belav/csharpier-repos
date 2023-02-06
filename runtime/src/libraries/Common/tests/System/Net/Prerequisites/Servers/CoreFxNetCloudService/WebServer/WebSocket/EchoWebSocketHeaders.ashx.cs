@@ -38,10 +38,7 @@ namespace WebServer
 
         public bool IsReusable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         private async Task ProcessWebSocketRequest(WebSocketContext wsContext)
@@ -61,24 +58,37 @@ namespace WebServer
             }
 
             byte[] sendBuffer = Encoding.UTF8.GetBytes(sb.ToString());
-            await socket.SendAsync(new ArraySegment<byte>(sendBuffer), WebSocketMessageType.Text, true, new CancellationToken());
+            await socket.SendAsync(
+                new ArraySegment<byte>(sendBuffer),
+                WebSocketMessageType.Text,
+                true,
+                new CancellationToken()
+            );
 
             // Stay in loop while websocket is open
             while (socket.State == WebSocketState.Open || socket.State == WebSocketState.CloseSent)
             {
-                var receiveResult = await socket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), CancellationToken.None);
+                var receiveResult = await socket.ReceiveAsync(
+                    new ArraySegment<byte>(receiveBuffer),
+                    CancellationToken.None
+                );
                 if (receiveResult.MessageType == WebSocketMessageType.Close)
                 {
                     if (receiveResult.CloseStatus == WebSocketCloseStatus.Empty)
                     {
-                        await socket.CloseAsync(WebSocketCloseStatus.Empty, null, CancellationToken.None);
+                        await socket.CloseAsync(
+                            WebSocketCloseStatus.Empty,
+                            null,
+                            CancellationToken.None
+                        );
                     }
                     else
                     {
                         await socket.CloseAsync(
                             receiveResult.CloseStatus.GetValueOrDefault(),
                             receiveResult.CloseStatusDescription,
-                            CancellationToken.None);
+                            CancellationToken.None
+                        );
                     }
 
                     continue;

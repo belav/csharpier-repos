@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace System.Reflection.Runtime.TypeParsing
 {
     //
-    // Parser for type names passed to GetType() apis. 
+    // Parser for type names passed to GetType() apis.
     //
     public sealed class TypeParser
     {
@@ -73,7 +73,6 @@ namespace System.Reflection.Runtime.TypeParsing
             _lexer = new TypeLexer(s);
         }
 
-
         //
         // Parses a type name without any assembly name qualification.
         //
@@ -83,7 +82,7 @@ namespace System.Reflection.Runtime.TypeParsing
             NonQualifiedTypeName typeName = ParseNamedOrConstructedGenericTypeName();
 
             // Iterate through any "has-element" qualifiers ([], &, *).
-            for (;;)
+            for (; ; )
             {
                 TokenType token = _lexer.Peek;
                 if (token == TokenType.End)
@@ -138,13 +137,21 @@ namespace System.Reflection.Runtime.TypeParsing
         {
             NamedTypeName namedType = ParseNamedTypeName();
             // Because "[" is used both for generic arguments and array indexes, we must peek two characters deep.
-            if (!(_lexer.Peek == TokenType.OpenSqBracket && (_lexer.PeekSecond == TokenType.Other || _lexer.PeekSecond == TokenType.OpenSqBracket)))
+            if (
+                !(
+                    _lexer.Peek == TokenType.OpenSqBracket
+                    && (
+                        _lexer.PeekSecond == TokenType.Other
+                        || _lexer.PeekSecond == TokenType.OpenSqBracket
+                    )
+                )
+            )
                 return namedType;
             else
             {
                 _lexer.Skip();
                 List<TypeName> genericTypeArguments = new List<TypeName>();
-                for (;;)
+                for (; ; )
                 {
                     TypeName genericTypeArgument = ParseGenericTypeArgument();
                     genericTypeArguments.Add(genericTypeArgument);
@@ -161,7 +168,7 @@ namespace System.Reflection.Runtime.TypeParsing
 
         //
         // Foo or Foo+Inner
-        // 
+        //
         private NamedTypeName ParseNamedTypeName()
         {
             NamedTypeName namedType = ParseNamespaceTypeName();
@@ -176,7 +183,7 @@ namespace System.Reflection.Runtime.TypeParsing
 
         //
         // Non-nested named type.
-        // 
+        //
         private NamespaceTypeName ParseNamespaceTypeName()
         {
             string fullName = _lexer.GetNextIdentifier();

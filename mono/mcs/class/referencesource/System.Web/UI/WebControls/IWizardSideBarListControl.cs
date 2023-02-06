@@ -4,10 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
     using System.Collections;
 
-    internal interface IWizardSideBarListControl {
+    internal interface IWizardSideBarListControl
+    {
         object DataSource { get; set; }
 
         IEnumerable Items { get; }

@@ -5,14 +5,14 @@ using System;
 
 class T
 {
-    public void M1 (int i, params object[] args) {}
+    public void M1(int i, params object[] args) { }
 }
 
 class MainClass
 {
-    static void Main ()
+    static void Main()
     {
-        T t = new T ();
-        t.M1 (new object ());
+        T t = new T();
+        t.M1(new object());
     }
 }

@@ -30,68 +30,74 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-    
-    [ComVisible (false)]
-    public sealed class AssemblyReference : BaseReference {
-    
-        AssemblyIdentity    assemblyIdentity;
-        bool            isPrerequisite;
-        AssemblyReferenceType    referenceType;
-        AssemblyIdentity    xmlAssemblyIdentity;
-        string            xmlIsNative;
-        string            xmlIsPrerequisite;
-    
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class AssemblyReference : BaseReference
+    {
+        AssemblyIdentity assemblyIdentity;
+        bool isPrerequisite;
+        AssemblyReferenceType referenceType;
+        AssemblyIdentity xmlAssemblyIdentity;
+        string xmlIsNative;
+        string xmlIsPrerequisite;
+
         [MonoTODO]
-        public AssemblyReference ()
+        public AssemblyReference()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public override string ToString ()
+
+        public override string ToString()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public AssemblyReference (string path)
+        public AssemblyReference(string path)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public AssemblyIdentity AssemblyIdentity {
+
+        public AssemblyIdentity AssemblyIdentity
+        {
             get { return assemblyIdentity; }
             set { assemblyIdentity = value; }
         }
-        
-        public bool IsPrerequisite {
+
+        public bool IsPrerequisite
+        {
             get { return isPrerequisite; }
             set { isPrerequisite = value; }
         }
-        
-        public AssemblyReferenceType ReferenceType {
+
+        public AssemblyReferenceType ReferenceType
+        {
             get { return referenceType; }
             set { referenceType = value; }
         }
-        
-        public AssemblyIdentity XmlAssemblyIdentity {
+
+        public AssemblyIdentity XmlAssemblyIdentity
+        {
             get { return xmlAssemblyIdentity; }
             set { xmlAssemblyIdentity = value; }
         }
-        
-        public string XmlIsNative {
+
+        public string XmlIsNative
+        {
             get { return xmlIsNative; }
             set { xmlIsNative = value; }
         }
-        
-        public string XmlIsPrerequisite {
+
+        public string XmlIsPrerequisite
+        {
             get { return xmlIsPrerequisite; }
             set { xmlIsPrerequisite = value; }
         }
-        
-        protected internal override string SortName {
+
+        protected internal override string SortName
+        {
             get { return null; }
         }
     }
 }
-

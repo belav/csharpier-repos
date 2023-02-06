@@ -20,12 +20,16 @@ namespace Microsoft.IO
         {
             if (span.Length != value.Length)
                 return false;
-            if (value.Length == 0)  // span.Length == value.Length == 0
+            if (value.Length == 0) // span.Length == value.Length == 0
                 return true;
             return span.SequenceEqual(value);
         }
 
-        public static unsafe string Create<TState>(int length, TState state, SpanAction<char, TState> action)
+        public static unsafe string Create<TState>(
+            int length,
+            TState state,
+            SpanAction<char, TState> action
+        )
         {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
@@ -58,7 +62,11 @@ namespace Microsoft.IO
             return result;
         }
 
-        internal static unsafe string Concat(ReadOnlySpan<char> str0, ReadOnlySpan<char> str1, ReadOnlySpan<char> str2)
+        internal static unsafe string Concat(
+            ReadOnlySpan<char> str0,
+            ReadOnlySpan<char> str1,
+            ReadOnlySpan<char> str2
+        )
         {
             var result = new string('\0', checked(str0.Length + str1.Length + str2.Length));
             fixed (char* resultPtr = result)

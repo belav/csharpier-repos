@@ -9,10 +9,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,126 +31,165 @@ namespace System.Xaml.Schema
 {
     public class XamlTypeInvoker
     {
-        static readonly XamlTypeInvoker unknown = new XamlTypeInvoker ();
-        public static XamlTypeInvoker UnknownInvoker {
+        static readonly XamlTypeInvoker unknown = new XamlTypeInvoker();
+        public static XamlTypeInvoker UnknownInvoker
+        {
             get { return unknown; }
         }
 
-        protected XamlTypeInvoker ()
-        {
-        }
-        
-        public XamlTypeInvoker (XamlType type)
+        protected XamlTypeInvoker() { }
+
+        public XamlTypeInvoker(XamlType type)
         {
             if (type == null)
-                throw new ArgumentNullException ("type");
+                throw new ArgumentNullException("type");
             this.type = type;
         }
-        
+
         XamlType type;
 
-        void ThrowIfUnknown ()
+        void ThrowIfUnknown()
         {
             if (type == null || type.UnderlyingType == null)
-                throw new NotSupportedException (String.Format ("Current operation is valid only when the underlying type on a XamlType is known, but it is unknown for '{0}'", type));
+                throw new NotSupportedException(
+                    String.Format(
+                        "Current operation is valid only when the underlying type on a XamlType is known, but it is unknown for '{0}'",
+                        type
+                    )
+                );
         }
 
-        public EventHandler<XamlSetMarkupExtensionEventArgs> SetMarkupExtensionHandler {
+        public EventHandler<XamlSetMarkupExtensionEventArgs> SetMarkupExtensionHandler
+        {
             get { return type == null ? null : type.SetMarkupExtensionHandler; }
         }
 
-        public EventHandler<XamlSetTypeConverterEventArgs> SetTypeConverterHandler {
+        public EventHandler<XamlSetTypeConverterEventArgs> SetTypeConverterHandler
+        {
             get { return type == null ? null : type.SetTypeConverterHandler; }
         }
 
-        public virtual void AddToCollection (object instance, object item)
+        public virtual void AddToCollection(object instance, object item)
         {
             if (instance == null)
-                throw new ArgumentNullException ("instance");
+                throw new ArgumentNullException("instance");
             if (item == null)
-                throw new ArgumentNullException ("item");
+                throw new ArgumentNullException("item");
 
-            var ct = instance.GetType ();
-            var xct = type == null ? null : type.SchemaContext.GetXamlType (ct);
+            var ct = instance.GetType();
+            var xct = type == null ? null : type.SchemaContext.GetXamlType(ct);
             MethodInfo mi = null;
 
             // FIXME: this method lookup should be mostly based on GetAddMethod(). At least iface method lookup must be done there.
-            if (type != null && type.UnderlyingType != null) {
+            if (type != null && type.UnderlyingType != null)
+            {
                 if (!xct.IsCollection) // not sure why this check is done only when UnderlyingType exists...
-                    throw new NotSupportedException (String.Format ("Non-collection type '{0}' does not support this operation", xct));
-                if (ct.IsAssignableFrom (type.UnderlyingType))
-                    mi = GetAddMethod (type.SchemaContext.GetXamlType (item.GetType ()));
+                    throw new NotSupportedException(
+                        String.Format(
+                            "Non-collection type '{0}' does not support this operation",
+                            xct
+                        )
+                    );
+                if (ct.IsAssignableFrom(type.UnderlyingType))
+                    mi = GetAddMethod(type.SchemaContext.GetXamlType(item.GetType()));
             }
 
-            if (mi == null) {
-                if (ct.IsGenericType) {
-                    mi = ct.GetMethod ("Add", ct.GetGenericArguments ());
+            if (mi == null)
+            {
+                if (ct.IsGenericType)
+                {
+                    mi = ct.GetMethod("Add", ct.GetGenericArguments());
                     if (mi == null)
-                        mi = LookupAddMethod (ct, typeof (ICollection<>).MakeGenericType (ct.GetGenericArguments ()));
-                } else {
-                    mi = ct.GetMethod ("Add", new Type [] {typeof (object)});
+                        mi = LookupAddMethod(
+                            ct,
+                            typeof(ICollection<>).MakeGenericType(ct.GetGenericArguments())
+                        );
+                }
+                else
+                {
+                    mi = ct.GetMethod("Add", new Type[] { typeof(object) });
                     if (mi == null)
-                        mi = LookupAddMethod (ct, typeof (IList));
+                        mi = LookupAddMethod(ct, typeof(IList));
                 }
             }
 
             if (mi == null)
-                throw new InvalidOperationException (String.Format ("The collection type '{0}' does not have 'Add' method", ct));
-            
-            mi.Invoke (instance, new object [] {item});
+                throw new InvalidOperationException(
+                    String.Format("The collection type '{0}' does not have 'Add' method", ct)
+                );
+
+            mi.Invoke(instance, new object[] { item });
         }
 
-        public virtual void AddToDictionary (object instance, object key, object item)
+        public virtual void AddToDictionary(object instance, object key, object item)
         {
             if (instance == null)
-                throw new ArgumentNullException ("instance");
+                throw new ArgumentNullException("instance");
 
-            var t = instance.GetType ();
+            var t = instance.GetType();
             // FIXME: this likely needs similar method lookup to AddToCollection().
 
             MethodInfo mi = null;
-            if (t.IsGenericType) {
-                mi = instance.GetType ().GetMethod ("Add", t.GetGenericArguments ());
+            if (t.IsGenericType)
+            {
+                mi = instance.GetType().GetMethod("Add", t.GetGenericArguments());
                 if (mi == null)
-                    mi = LookupAddMethod (t, typeof (IDictionary<,>).MakeGenericType (t.GetGenericArguments ()));
-            } else {
-                mi = instance.GetType ().GetMethod ("Add", new Type [] {typeof (object), typeof (object)});
-                if (mi == null)
-                    mi = LookupAddMethod (t, typeof (IDictionary));
+                    mi = LookupAddMethod(
+                        t,
+                        typeof(IDictionary<,>).MakeGenericType(t.GetGenericArguments())
+                    );
             }
-            mi.Invoke (instance, new object [] {key, item});
+            else
+            {
+                mi = instance
+                    .GetType()
+                    .GetMethod("Add", new Type[] { typeof(object), typeof(object) });
+                if (mi == null)
+                    mi = LookupAddMethod(t, typeof(IDictionary));
+            }
+            mi.Invoke(instance, new object[] { key, item });
         }
-        
-        MethodInfo LookupAddMethod (Type ct, Type iface)
+
+        MethodInfo LookupAddMethod(Type ct, Type iface)
         {
-            var map = ct.GetInterfaceMap (iface);
+            var map = ct.GetInterfaceMap(iface);
             for (int i = 0; i < map.TargetMethods.Length; i++)
-                if (map.InterfaceMethods [i].Name == "Add")
-                    return map.TargetMethods [i];
+                if (map.InterfaceMethods[i].Name == "Add")
+                    return map.TargetMethods[i];
             return null;
         }
 
-        public virtual object CreateInstance (object [] arguments)
+        public virtual object CreateInstance(object[] arguments)
         {
-            ThrowIfUnknown ();
-            return Activator.CreateInstance (type.UnderlyingType, arguments);
+            ThrowIfUnknown();
+            return Activator.CreateInstance(type.UnderlyingType, arguments);
         }
 
-        public virtual MethodInfo GetAddMethod (XamlType contentType)
+        public virtual MethodInfo GetAddMethod(XamlType contentType)
         {
-            return type == null || type.UnderlyingType == null || type.ItemType == null || type.LookupCollectionKind () == XamlCollectionKind.None ? null : type.UnderlyingType.GetMethod ("Add", new Type [] {contentType.UnderlyingType});
+            return
+                type == null
+                || type.UnderlyingType == null
+                || type.ItemType == null
+                || type.LookupCollectionKind() == XamlCollectionKind.None
+                ? null
+                : type.UnderlyingType.GetMethod("Add", new Type[] { contentType.UnderlyingType });
         }
 
-        public virtual MethodInfo GetEnumeratorMethod ()
+        public virtual MethodInfo GetEnumeratorMethod()
         {
-            return type.UnderlyingType == null || type.LookupCollectionKind () == XamlCollectionKind.None ? null : type.UnderlyingType.GetMethod ("GetEnumerator");
+            return
+                type.UnderlyingType == null
+                || type.LookupCollectionKind() == XamlCollectionKind.None
+                ? null
+                : type.UnderlyingType.GetMethod("GetEnumerator");
         }
-        
-        public virtual IEnumerator GetItems (object instance)
+
+        public virtual IEnumerator GetItems(object instance)
         {
             if (instance == null)
-                throw new ArgumentNullException ("instance");
-            return ((IEnumerable) instance).GetEnumerator ();
+                throw new ArgumentNullException("instance");
+            return ((IEnumerable)instance).GetEnumerator();
         }
     }
 }

@@ -3,28 +3,30 @@ using System;
 
 class X
 {
-    static void Main ()
+    static void Main()
     {
-        var x = new X ();
-        x.Run ().Wait ();
+        var x = new X();
+        x.Run().Wait();
     }
 
-    Task<int> AnimateAsync (Action callback)
+    Task<int> AnimateAsync(Action callback)
     {
-        callback ();
-        return Task.FromResult (2);
+        callback();
+        return Task.FromResult(2);
     }
 
-    void SecondLevel (Action callback)
+    void SecondLevel(Action callback)
     {
-        callback ();
+        callback();
     }
 
-    async Task Run ()
+    async Task Run()
     {
-        var ret = await AnimateAsync (() => {
-            SecondLevel (() => {
-                Console.WriteLine (this);
+        var ret = await AnimateAsync(() =>
+        {
+            SecondLevel(() =>
+            {
+                Console.WriteLine(this);
             });
         });
     }

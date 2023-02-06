@@ -10,9 +10,7 @@ internal static partial class Interop
         [SuppressGCTransition]
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetThreadErrorMode(
-            uint dwNewMode,
-            out uint lpOldMode);
+        internal static partial bool SetThreadErrorMode(uint dwNewMode, out uint lpOldMode);
 
         internal const uint SEM_FAILCRITICALERRORS = 1;
     }

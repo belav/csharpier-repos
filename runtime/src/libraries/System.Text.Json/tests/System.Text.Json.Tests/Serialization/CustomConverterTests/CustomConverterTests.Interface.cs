@@ -19,14 +19,17 @@ namespace System.Text.Json.Serialization.Tests
         // A custom converter that writes and reads the string property as a top-level value
         private class MyInterfaceConverter : JsonConverter<IMyInterface>
         {
-            public override IMyInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-                => new MyClass
-                {
-                    IntValue = 42,
-                    StringValue = reader.GetString()
-                };
+            public override IMyInterface Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => new MyClass { IntValue = 42, StringValue = reader.GetString() };
 
-            public override void Write(Utf8JsonWriter writer, IMyInterface value, JsonSerializerOptions options) => writer.WriteStringValue(value.StringValue);
+            public override void Write(
+                Utf8JsonWriter writer,
+                IMyInterface value,
+                JsonSerializerOptions options
+            ) => writer.WriteStringValue(value.StringValue);
         }
 
         private class MyClass : IMyInterface

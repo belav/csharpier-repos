@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,48 +40,51 @@ namespace System.ServiceModel
     public class NetNamedPipeBinding : Binding, IBindingRuntimePreferences
     {
         // We don't support PNRP
-        public static bool IsPnrpAvailable {
+        public static bool IsPnrpAvailable
+        {
             get { return false; }
         }
 
-        XmlDictionaryReaderQuotas reader_quotas = new XmlDictionaryReaderQuotas ();
+        XmlDictionaryReaderQuotas reader_quotas = new XmlDictionaryReaderQuotas();
         NetNamedPipeSecurity security;
-        NamedPipeTransportBindingElement transport = new NamedPipeTransportBindingElement ();
+        NamedPipeTransportBindingElement transport = new NamedPipeTransportBindingElement();
 
-        public NetNamedPipeBinding ()
-            : this (NetNamedPipeSecurityMode.None)
-        {
-        }
+        public NetNamedPipeBinding()
+            : this(NetNamedPipeSecurityMode.None) { }
 
-        public NetNamedPipeBinding (NetNamedPipeSecurityMode securityMode)
+        public NetNamedPipeBinding(NetNamedPipeSecurityMode securityMode)
         {
-            security = new NetNamedPipeSecurity () { Mode = securityMode };
+            security = new NetNamedPipeSecurity() { Mode = securityMode };
         }
 
         [MonoTODO]
-        public NetNamedPipeBinding (string configurationName)
+        public NetNamedPipeBinding(string configurationName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public EnvelopeVersion EnvelopeVersion {
+        public EnvelopeVersion EnvelopeVersion
+        {
             get { return EnvelopeVersion.Soap12; }
         }
 
         [MonoTODO]
-        public HostNameComparisonMode HostNameComparisonMode {
+        public HostNameComparisonMode HostNameComparisonMode
+        {
             get { return transport.HostNameComparisonMode; }
             set { transport.HostNameComparisonMode = value; }
         }
 
         [MonoTODO]
-        public long MaxBufferPoolSize {
+        public long MaxBufferPoolSize
+        {
             get { return transport.MaxBufferPoolSize; }
             set { transport.MaxBufferPoolSize = value; }
         }
 
         [MonoTODO]
-        public int MaxBufferSize {
+        public int MaxBufferSize
+        {
             get { return transport.MaxBufferSize; }
             set { transport.MaxBufferSize = value; }
         }
@@ -90,25 +93,30 @@ namespace System.ServiceModel
         public int MaxConnections { get; set; }
 
         [MonoTODO]
-        public long MaxReceivedMessageSize {
+        public long MaxReceivedMessageSize
+        {
             get { return transport.MaxReceivedMessageSize; }
             set { transport.MaxReceivedMessageSize = value; }
         }
 
-        public XmlDictionaryReaderQuotas ReaderQuotas {
+        public XmlDictionaryReaderQuotas ReaderQuotas
+        {
             get { return reader_quotas; }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
+                    throw new ArgumentNullException("value");
                 reader_quotas = value;
             }
         }
 
-        public override string Scheme {
+        public override string Scheme
+        {
             get { return "net.pipe"; }
         }
-        
-        public NetNamedPipeSecurity Security {
+
+        public NetNamedPipeSecurity Security
+        {
             get { return security; }
         }
 
@@ -118,23 +126,25 @@ namespace System.ServiceModel
         [MonoTODO]
         public TransactionProtocol TransactionProtocol { get; set; }
 
-        public TransferMode TransferMode {
+        public TransferMode TransferMode
+        {
             get { return transport.TransferMode; }
             set { transport.TransferMode = value; }
         }
 
-        public override BindingElementCollection CreateBindingElements ()
+        public override BindingElementCollection CreateBindingElements()
         {
-            var mbe = new BinaryMessageEncodingBindingElement ();
+            var mbe = new BinaryMessageEncodingBindingElement();
             if (ReaderQuotas != null)
-                ReaderQuotas.CopyTo (mbe.ReaderQuotas);
+                ReaderQuotas.CopyTo(mbe.ReaderQuotas);
 
-            return new BindingElementCollection (new BindingElement [] { mbe, transport.Clone () });
+            return new BindingElementCollection(new BindingElement[] { mbe, transport.Clone() });
         }
 
         // explicit interface implementations
 
-        bool IBindingRuntimePreferences.ReceiveSynchronously {
+        bool IBindingRuntimePreferences.ReceiveSynchronously
+        {
             get { return false; }
         }
     }

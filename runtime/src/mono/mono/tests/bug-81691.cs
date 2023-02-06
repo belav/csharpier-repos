@@ -4,24 +4,37 @@ using System.Reflection;
 
 class Program
 {
-    static int Main ()
+    static int Main()
     {
-        string assemblyFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "bug-81691-b.dll");
-        Assembly assembly = Assembly.LoadFile (assemblyFile);
+        string assemblyFile = Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory,
+            "bug-81691-b.dll"
+        );
+        Assembly assembly = Assembly.LoadFile(assemblyFile);
         int i;
         int numExceptions = 0;
 
-        for (i = 0; i < 100000; ++i) {
-            try {
-                try {
-                    Type type = assembly.GetType ("NS.B.TestB");
-                    FieldInfo field =type.GetField ("testb", BindingFlags.NonPublic | BindingFlags.Static);
+        for (i = 0; i < 100000; ++i)
+        {
+            try
+            {
+                try
+                {
+                    Type type = assembly.GetType("NS.B.TestB");
+                    FieldInfo field = type.GetField(
+                        "testb",
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    );
                     if (field.FieldType == null)
                         return 1;
-                } catch (TypeLoadException ex) {
+                }
+                catch (TypeLoadException ex)
+                {
                     ++numExceptions;
                 }
-            } catch (FileNotFoundException ex) {
+            }
+            catch (FileNotFoundException ex)
+            {
                 ++numExceptions;
             }
         }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,22 +32,26 @@ namespace Mono.MonoConfig
 {
     public class FeatureNode
     {
-        List <FeatureBlock> blocks;
-        List <FeatureAction> actionsBefore;
-        List <FeatureAction> actionsAfter;
+        List<FeatureBlock> blocks;
+        List<FeatureAction> actionsBefore;
+        List<FeatureAction> actionsAfter;
         string description;
-        
-        public List <FeatureBlock> Blocks {
-            get {
+
+        public List<FeatureBlock> Blocks
+        {
+            get
+            {
                 if (blocks != null)
                     return blocks;
 
-                return new List <FeatureBlock> ();
+                return new List<FeatureBlock>();
             }
         }
 
-        public string Description {
-            get {
+        public string Description
+        {
+            get
+            {
                 if (description != null)
                     return description;
 
@@ -55,16 +59,22 @@ namespace Mono.MonoConfig
             }
         }
 
-        public List <FeatureAction> ActionsBefore {
+        public List<FeatureAction> ActionsBefore
+        {
             get { return actionsBefore; }
         }
 
-        public List <FeatureAction> ActionsAfter {
+        public List<FeatureAction> ActionsAfter
+        {
             get { return actionsAfter; }
         }
-        
-        public FeatureNode (List <FeatureBlock> blocks, string description,
-                    List <FeatureAction> actionsBefore, List <FeatureAction> actionsAfter)
+
+        public FeatureNode(
+            List<FeatureBlock> blocks,
+            string description,
+            List<FeatureAction> actionsBefore,
+            List<FeatureAction> actionsAfter
+        )
         {
             this.blocks = blocks;
             this.description = description;

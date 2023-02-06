@@ -26,12 +26,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
+namespace Mono.Cecil.Binary
+{
     using System;
 
     [Flags]
-    internal enum ImageCharacteristics : ushort {
+    internal enum ImageCharacteristics : ushort
+    {
         RelocsStripped = 0x0001,
         ExecutableImage = 0x0002,
         LineNumsStripped = 0x0004,
@@ -51,7 +52,7 @@ namespace Mono.Cecil.Binary {
 
         __flags = 0x0002 | 0x0004 | 0x0008 | 0x0100,
 
-        CILOnlyDll = 0x2000 | (ushort) __flags,
+        CILOnlyDll = 0x2000 | (ushort)__flags,
         CILOnlyExe = __flags
     }
 }

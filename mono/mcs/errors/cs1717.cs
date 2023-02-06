@@ -3,9 +3,9 @@
 // Compiler options: -warnaserror -warn:3
 
 class A
-{    
-    public A (int a)
+{
+    public A(int a)
     {
-    a = a;
+        a = a;
     }
 }

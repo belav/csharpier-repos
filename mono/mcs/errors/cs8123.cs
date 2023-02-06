@@ -4,7 +4,7 @@
 
 static class X
 {
-    static (long a, string x) Test ()
+    static (long a, string x) Test()
     {
         return (b: 1, "");
     }

@@ -13,7 +13,11 @@ namespace System.Web.Http.Internal
 {
     internal static class CollectionModelBinderUtil
     {
-        internal static void CreateOrReplaceCollection<TElement>(ModelBindingContext bindingContext, IEnumerable<TElement> incomingElements, Func<ICollection<TElement>> creator)
+        internal static void CreateOrReplaceCollection<TElement>(
+            ModelBindingContext bindingContext,
+            IEnumerable<TElement> incomingElements,
+            Func<ICollection<TElement>> creator
+        )
         {
             ICollection<TElement> collection = bindingContext.Model as ICollection<TElement>;
             if (collection == null || collection.IsReadOnly)
@@ -29,9 +33,14 @@ namespace System.Web.Http.Internal
             }
         }
 
-        internal static void CreateOrReplaceDictionary<TKey, TValue>(ModelBindingContext bindingContext, IEnumerable<KeyValuePair<TKey, TValue>> incomingElements, Func<IDictionary<TKey, TValue>> creator)
+        internal static void CreateOrReplaceDictionary<TKey, TValue>(
+            ModelBindingContext bindingContext,
+            IEnumerable<KeyValuePair<TKey, TValue>> incomingElements,
+            Func<IDictionary<TKey, TValue>> creator
+        )
         {
-            IDictionary<TKey, TValue> dictionary = bindingContext.Model as IDictionary<TKey, TValue>;
+            IDictionary<TKey, TValue> dictionary =
+                bindingContext.Model as IDictionary<TKey, TValue>;
             if (dictionary == null || dictionary.IsReadOnly)
             {
                 dictionary = creator();
@@ -60,7 +69,12 @@ namespace System.Web.Http.Internal
         // type can update models that implement IList<T>, and if for some reason the existing model instance is not
         // updatable the binder will create a List<T> object and bind to that instead. This method will return a ListBinder<T>
         // or null, depending on whether the type and updatability checks succeed.
-        internal static IModelBinder GetGenericBinder(Type supportedInterfaceType, Type newInstanceType, Type openBinderType, Type modelType)
+        internal static IModelBinder GetGenericBinder(
+            Type supportedInterfaceType,
+            Type newInstanceType,
+            Type openBinderType,
+            Type modelType
+        )
         {
             Contract.Assert(supportedInterfaceType != null);
             Contract.Assert(openBinderType != null);
@@ -103,8 +117,15 @@ namespace System.Web.Http.Internal
             return modelTypeArguments;
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "System.Web.Http.ValueProviders.ValueProviderResult.ConvertTo(System.Type)", Justification = "The ValueProviderResult already has the necessary context to perform a culture-aware conversion.")]
-        internal static IEnumerable<string> GetIndexNamesFromValueProviderResult(ValueProviderResult valueProviderResultIndex)
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1304:SpecifyCultureInfo",
+            MessageId = "System.Web.Http.ValueProviders.ValueProviderResult.ConvertTo(System.Type)",
+            Justification = "The ValueProviderResult already has the necessary context to perform a culture-aware conversion."
+        )]
+        internal static IEnumerable<string> GetIndexNamesFromValueProviderResult(
+            ValueProviderResult valueProviderResultIndex
+        )
         {
             IEnumerable<string> indexNames = null;
             if (valueProviderResultIndex != null)

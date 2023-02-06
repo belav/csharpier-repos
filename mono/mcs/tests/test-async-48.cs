@@ -3,19 +3,19 @@ using System;
 
 public class App
 {
-    X _x = new X ();
+    X _x = new X();
 
-    public async Task Test ()
+    public async Task Test()
     {
-        await Task.Run (new Func<Task> (async () => _x.ToString ()));
+        await Task.Run(new Func<Task>(async () => _x.ToString()));
     }
 }
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        var app = new App ();
-        app.Test ().Wait ();
+        var app = new App();
+        app.Test().Wait();
     }
 }

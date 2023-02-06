@@ -11,13 +11,18 @@ namespace ILLink.Shared.TrimAnalysis
 {
     partial record MethodReturnValue
     {
-        public MethodReturnValue (IMethodSymbol methodSymbol)
+        public MethodReturnValue(IMethodSymbol methodSymbol)
         {
             MethodSymbol = methodSymbol;
-            DynamicallyAccessedMemberTypes = FlowAnnotations.GetMethodReturnValueAnnotation (methodSymbol);
+            DynamicallyAccessedMemberTypes = FlowAnnotations.GetMethodReturnValueAnnotation(
+                methodSymbol
+            );
         }
 
-        public MethodReturnValue (IMethodSymbol methodSymbol, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
+        public MethodReturnValue(
+            IMethodSymbol methodSymbol,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
         {
             MethodSymbol = methodSymbol;
             DynamicallyAccessedMemberTypes = dynamicallyAccessedMemberTypes;
@@ -27,11 +32,12 @@ namespace ILLink.Shared.TrimAnalysis
 
         public override DynamicallyAccessedMemberTypes DynamicallyAccessedMemberTypes { get; }
 
-        public override IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch ()
-            => new string[] { MethodSymbol.GetDisplayName () };
+        public override IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch() =>
+            new string[] { MethodSymbol.GetDisplayName() };
 
-        public override SingleValue DeepCopy () => this; // This value is immutable
+        public override SingleValue DeepCopy() => this; // This value is immutable
 
-        public override string ToString () => this.ValueToString (MethodSymbol, DynamicallyAccessedMemberTypes);
+        public override string ToString() =>
+            this.ValueToString(MethodSymbol, DynamicallyAccessedMemberTypes);
     }
 }

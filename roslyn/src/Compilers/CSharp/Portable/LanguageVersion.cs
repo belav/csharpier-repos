@@ -33,16 +33,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// C# language version 4
         /// <para>
         /// Features: dynamic.
-        /// </para>        
-        /// </summary>        
+        /// </para>
+        /// </summary>
         CSharp4 = 4,
 
         /// <summary>
         /// C# language version 5
         /// <para>
         /// Features: async, caller info attributes.
-        /// </para>        
-        /// </summary> 
+        /// </para>
+        /// </summary>
         CSharp5 = 5,
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <item><description>Relaxed shift operator</description></item>
         /// <item><description>Ref fields</description></item>
         /// <item><description>File-local types</description></item>
-        /// </list> 
+        /// </list>
         /// </summary>
         CSharp11 = 1100,
 

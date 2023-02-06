@@ -16,7 +16,11 @@ namespace System.DirectoryServices.AccountManagement
 
         public IEnumerator<T> GetEnumerator()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearchResult", "Entering GetEnumerator");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalSearchResult",
+                "Entering GetEnumerator"
+            );
 
             CheckDisposed();
 
@@ -32,11 +36,19 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (!_disposed)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearchResult", "Dispose: disposing");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalSearchResult",
+                    "Dispose: disposing"
+                );
 
                 if (_resultSet != null)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalSearchResult", "Dispose: disposing resultSet");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalSearchResult",
+                        "Dispose: disposing resultSet"
+                    );
 
                     lock (_resultSet)
                     {
@@ -81,7 +93,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (_disposed)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "PrincipalSearchResult", "CheckDisposed: accessing disposed object");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "PrincipalSearchResult",
+                    "CheckDisposed: accessing disposed object"
+                );
                 throw new ObjectDisposedException("PrincipalSearchResult");
             }
         }

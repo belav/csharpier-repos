@@ -36,8 +36,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
 
         public Func<CancellationToken, IEnumerable<TaggedText>> DocumentationFactory { get; }
 
-        private static readonly Func<CancellationToken, IEnumerable<TaggedText>> s_emptyDocumentationFactory =
-            _ => SpecializedCollections.EmptyEnumerable<TaggedText>();
+        private static readonly Func<
+            CancellationToken,
+            IEnumerable<TaggedText>
+        > s_emptyDocumentationFactory = _ => SpecializedCollections.EmptyEnumerable<TaggedText>();
 
         public FSharpSignatureHelpItem(
             bool isVariadic,
@@ -46,11 +48,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
             IEnumerable<TaggedText> separatorParts,
             IEnumerable<TaggedText> suffixParts,
             IEnumerable<FSharpSignatureHelpParameter> parameters,
-            IEnumerable<TaggedText> descriptionParts)
+            IEnumerable<TaggedText> descriptionParts
+        )
         {
             if (isVariadic && !parameters.Any())
             {
-                throw new ArgumentException(FeaturesResources.Variadic_SignatureHelpItem_must_have_at_least_one_parameter);
+                throw new ArgumentException(
+                    FeaturesResources.Variadic_SignatureHelpItem_must_have_at_least_one_parameter
+                );
             }
 
             this.IsVariadic = isVariadic;
@@ -64,12 +69,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
 
         internal IEnumerable<TaggedText> GetAllParts()
         {
-            return
-                PrefixDisplayParts.Concat(
+            return PrefixDisplayParts.Concat(
                 SeparatorDisplayParts.Concat(
-                SuffixDisplayParts.Concat(
-                Parameters.SelectMany(p => p.GetAllParts())).Concat(
-                DescriptionParts)));
+                    SuffixDisplayParts
+                        .Concat(Parameters.SelectMany(p => p.GetAllParts()))
+                        .Concat(DescriptionParts)
+                )
+            );
         }
 
         public override string ToString()

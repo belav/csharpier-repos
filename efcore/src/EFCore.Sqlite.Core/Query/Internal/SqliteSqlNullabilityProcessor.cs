@@ -22,10 +22,9 @@ public class SqliteSqlNullabilityProcessor : SqlNullabilityProcessor
     /// </summary>
     public SqliteSqlNullabilityProcessor(
         RelationalParameterBasedSqlProcessorDependencies dependencies,
-        bool useRelationalNulls)
-        : base(dependencies, useRelationalNulls)
-    {
-    }
+        bool useRelationalNulls
+    )
+        : base(dependencies, useRelationalNulls) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,11 +35,14 @@ public class SqliteSqlNullabilityProcessor : SqlNullabilityProcessor
     protected override SqlExpression VisitCustomSqlExpression(
         SqlExpression sqlExpression,
         bool allowOptimizedExpansion,
-        out bool nullable)
-        => sqlExpression switch
+        out bool nullable
+    ) =>
+        sqlExpression switch
         {
-            GlobExpression globExpression => VisitGlob(globExpression, allowOptimizedExpansion, out nullable),
-            RegexpExpression regexpExpression => VisitRegexp(regexpExpression, allowOptimizedExpansion, out nullable),
+            GlobExpression globExpression
+                => VisitGlob(globExpression, allowOptimizedExpansion, out nullable),
+            RegexpExpression regexpExpression
+                => VisitRegexp(regexpExpression, allowOptimizedExpansion, out nullable),
             _ => base.VisitCustomSqlExpression(sqlExpression, allowOptimizedExpansion, out nullable)
         };
 
@@ -53,7 +55,8 @@ public class SqliteSqlNullabilityProcessor : SqlNullabilityProcessor
     protected virtual SqlExpression VisitGlob(
         GlobExpression globExpression,
         bool allowOptimizedExpansion,
-        out bool nullable)
+        out bool nullable
+    )
     {
         var match = Visit(globExpression.Match, out var matchNullable);
         var pattern = Visit(globExpression.Pattern, out var patternNullable);
@@ -72,7 +75,8 @@ public class SqliteSqlNullabilityProcessor : SqlNullabilityProcessor
     protected virtual SqlExpression VisitRegexp(
         RegexpExpression regexpExpression,
         bool allowOptimizedExpansion,
-        out bool nullable)
+        out bool nullable
+    )
     {
         Check.NotNull(regexpExpression, nameof(regexpExpression));
 
@@ -90,7 +94,9 @@ public class SqliteSqlNullabilityProcessor : SqlNullabilityProcessor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override SqlExpression OptimizeNonNullableNotExpression(SqlUnaryExpression sqlUnaryExpression)
+    protected override SqlExpression OptimizeNonNullableNotExpression(
+        SqlUnaryExpression sqlUnaryExpression
+    )
     {
         if (sqlUnaryExpression.OperatorType == ExpressionType.Not)
         {

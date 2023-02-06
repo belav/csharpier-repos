@@ -29,10 +29,7 @@ public class DefaultRazorDocumentClassifierPhaseTest
         });
 
         // Assert
-        Assert.Collection(
-            phase.Passes,
-            p => Assert.Same(first, p),
-            p => Assert.Same(second, p));
+        Assert.Collection(phase.Passes, p => Assert.Same(first, p), p => Assert.Same(second, p));
     }
 
     [Fact]
@@ -48,8 +45,9 @@ public class DefaultRazorDocumentClassifierPhaseTest
         // Act & Assert
         ExceptionAssert.Throws<InvalidOperationException>(
             () => phase.Execute(codeDocument),
-            $"The '{nameof(DefaultRazorDocumentClassifierPhase)}' phase requires a '{nameof(DocumentIntermediateNode)}' " +
-            $"provided by the '{nameof(RazorCodeDocument)}'.");
+            $"The '{nameof(DefaultRazorDocumentClassifierPhase)}' phase requires a '{nameof(DocumentIntermediateNode)}' "
+                + $"provided by the '{nameof(RazorCodeDocument)}'."
+        );
     }
 
     [Fact]
@@ -68,19 +66,23 @@ public class DefaultRazorDocumentClassifierPhaseTest
         var firstPass = new Mock<IRazorDocumentClassifierPass>(MockBehavior.Strict);
         firstPass.SetupGet(m => m.Order).Returns(0);
         firstPass.SetupProperty(m => m.Engine);
-        firstPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
-        {
-            originalNode.Children.Add(firstPassNode);
-        });
+        firstPass
+            .Setup(m => m.Execute(codeDocument, originalNode))
+            .Callback(() =>
+            {
+                originalNode.Children.Add(firstPassNode);
+            });
 
         var secondPass = new Mock<IRazorDocumentClassifierPass>(MockBehavior.Strict);
         secondPass.SetupGet(m => m.Order).Returns(1);
         secondPass.SetupProperty(m => m.Engine);
-        secondPass.Setup(m => m.Execute(codeDocument, originalNode)).Callback(() =>
-        {
+        secondPass
+            .Setup(m => m.Execute(codeDocument, originalNode))
+            .Callback(() =>
+            {
                 // Works only when the first pass has run before this.
                 originalNode.Children[0].Children.Add(secondPassNode);
-        });
+            });
 
         var phase = new DefaultRazorDocumentClassifierPhase();
 
@@ -96,6 +98,9 @@ public class DefaultRazorDocumentClassifierPhaseTest
         phase.Execute(codeDocument);
 
         // Assert
-        Assert.Same(secondPassNode, codeDocument.GetDocumentIntermediateNode().Children[0].Children[0]);
+        Assert.Same(
+            secondPassNode,
+            codeDocument.GetDocumentIntermediateNode().Children[0].Children[0]
+        );
     }
 }

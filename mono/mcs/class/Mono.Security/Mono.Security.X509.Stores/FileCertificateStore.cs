@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,10 +35,10 @@ using Mono.Security.Authenticode;
 using Mono.Security.X509;
 using Mono.Security.X509.Stores;
 
-namespace Mono.Security.X509.Stores {
-
-    public class FileCertificateStore : ICertificateStore {
-
+namespace Mono.Security.X509.Stores
+{
+    public class FileCertificateStore : ICertificateStore
+    {
         private string _name;
         private string _location;
         private bool _readOnly;
@@ -47,7 +47,7 @@ namespace Mono.Security.X509.Stores {
         private bool _saveOnClose;
         private SoftwarePublisherCertificate _spc;
 
-        public FileCertificateStore ()
+        public FileCertificateStore()
         {
             _readOnly = true;
             _includeArchives = false;
@@ -56,21 +56,30 @@ namespace Mono.Security.X509.Stores {
 
         // properties
 
-        public X509CertificateCollection Certificates {
-            get { 
+        public X509CertificateCollection Certificates
+        {
+            get
+            {
                 if (_spc != null)
-                    return _spc.Certificates; 
+                    return _spc.Certificates;
                 return null;
             }
         }
-                
-        public IntPtr Handle {
-            get { return (IntPtr) 0; }
+
+        public IntPtr Handle
+        {
+            get { return (IntPtr)0; }
         }
 
         // methods
 
-        public void Open (string name, string location, bool readOnly, bool createIfNonExisting, bool includeArchives) 
+        public void Open(
+            string name,
+            string location,
+            bool readOnly,
+            bool createIfNonExisting,
+            bool includeArchives
+        )
         {
             _name = name;
             _location = _location;
@@ -79,37 +88,43 @@ namespace Mono.Security.X509.Stores {
             _includeArchives = includeArchives;
             _saveOnClose = false;
 
-            if (File.Exists (_name)) {
-                _spc = SoftwarePublisherCertificate.CreateFromFile (_name);
+            if (File.Exists(_name))
+            {
+                _spc = SoftwarePublisherCertificate.CreateFromFile(_name);
             }
-            else if (_createIfRequired) {
-                _spc = new SoftwarePublisherCertificate ();
+            else if (_createIfRequired)
+            {
+                _spc = new SoftwarePublisherCertificate();
                 _saveOnClose = true;
             }
         }
 
-        public void Close () 
+        public void Close()
         {
-            if (_saveOnClose) {
-                byte[] store = _spc.GetBytes ();
-                using (FileStream fs = File.Create (_name)) {
-                    fs.Write (store, 0, store.Length);
+            if (_saveOnClose)
+            {
+                byte[] store = _spc.GetBytes();
+                using (FileStream fs = File.Create(_name))
+                {
+                    fs.Write(store, 0, store.Length);
                 }
             }
         }
-        
-        public void Add (X509Certificate certificate) 
+
+        public void Add(X509Certificate certificate)
         {
-            if ((!_readOnly) && (_spc != null)) {
-                _spc.Certificates.Add (certificate);
+            if ((!_readOnly) && (_spc != null))
+            {
+                _spc.Certificates.Add(certificate);
                 _saveOnClose = true;
             }
         }
-        
-        public void Remove (X509Certificate certificate) 
+
+        public void Remove(X509Certificate certificate)
         {
-            if ((!_readOnly) && (_spc != null)) {
-                _spc.Certificates.Remove (certificate);
+            if ((!_readOnly) && (_spc != null))
+            {
+                _spc.Certificates.Remove(certificate);
                 _saveOnClose = true;
             }
         }

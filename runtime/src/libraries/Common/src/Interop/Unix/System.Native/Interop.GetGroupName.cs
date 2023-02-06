@@ -17,9 +17,15 @@ internal static partial class Interop
         /// </summary>
         /// <param name="gid">The group ID.</param>
         /// <returns>On success, return a string with the group name. On failure, throws an IOException.</returns>
-        internal static string GetGroupName(uint gid) => GetGroupNameInternal(gid) ?? throw GetIOException(GetLastErrorInfo());
+        internal static string GetGroupName(uint gid) =>
+            GetGroupNameInternal(gid) ?? throw GetIOException(GetLastErrorInfo());
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetGroupName", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetGroupName",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
         private static unsafe partial string? GetGroupNameInternal(uint uid);
     }
 }

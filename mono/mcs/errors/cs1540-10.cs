@@ -5,20 +5,21 @@ namespace Test
 {
     public class A
     {
-        protected int Property {
+        protected int Property
+        {
             get { return 0; }
         }
     }
- 
+
     public class B : A
     {
         private sealed class C
         {
-            public C (A a)
+            public C(A a)
             {
                 int test = a.Property;
                 test++;
             }
         }
-    } 
+    }
 }

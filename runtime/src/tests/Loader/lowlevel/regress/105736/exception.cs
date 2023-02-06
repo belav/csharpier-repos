@@ -6,29 +6,30 @@ using System;
 public struct GS1<T>
 {
     public T t;
-    public GS1(T t) 
-    { 
+
+    public GS1(T t)
+    {
         this.t = t;
     }
 }
 
 public abstract class Base
 {
-    public abstract T vMeth1<T>(T t) ;
+    public abstract T vMeth1<T>(T t);
     public abstract T vMeth2<T>(out T t);
 }
 
 public class Sub : Base
-{    
-    public override  T vMeth1<T>(T t) 
-    {     
-        return t; 
+{
+    public override T vMeth1<T>(T t)
+    {
+        return t;
     }
 
-    public override T vMeth2<T>(out T t) 
-    { 
+    public override T vMeth2<T>(out T t)
+    {
         t = default(T);
-        return t; 
+        return t;
     }
 }
 
@@ -51,7 +52,10 @@ public class Test_exception
         }
         catch (System.NotSupportedException ex)
         {
-            Console.WriteLine("{0} \n Caught unexpected System.NotSupportedException exception.", ex);
+            Console.WriteLine(
+                "{0} \n Caught unexpected System.NotSupportedException exception.",
+                ex
+            );
             Console.WriteLine("FAIL");
             return 101;
         }

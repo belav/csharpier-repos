@@ -6,17 +6,18 @@ class TestCase
     string b;
     string c;
 
-    public void Testing ()
+    public void Testing()
     {
         string z = a + b + "blah1" + c + "blah2";
-        Action test = () => {
+        Action test = () =>
+        {
             string x = a;
         };
-        test ();
+        test();
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        new TestCase ().Testing ();
+        new TestCase().Testing();
     }
 }

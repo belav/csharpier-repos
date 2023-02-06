@@ -4,8 +4,8 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
-        var n = nameof (Main);
+        var n = nameof(Main);
     }
 }

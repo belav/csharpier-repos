@@ -52,9 +52,18 @@ namespace Newtonsoft.Json.Tests.Serialization
             var contract = (JsonObjectContract)resolver.ResolveContract(value.GetType());
 
             Assert.AreEqual(3, contract.Properties.Count);
-            Assert.IsTrue(contract.Properties.Contains("OverriddenProperty"), "Contract is missing property 'OverriddenProperty'");
-            Assert.IsTrue(contract.Properties.Contains("PropertyA"), "Contract is missing property 'PropertyA'");
-            Assert.IsTrue(contract.Properties.Contains("PropertyB"), "Contract is missing property 'PropertyB'");
+            Assert.IsTrue(
+                contract.Properties.Contains("OverriddenProperty"),
+                "Contract is missing property 'OverriddenProperty'"
+            );
+            Assert.IsTrue(
+                contract.Properties.Contains("PropertyA"),
+                "Contract is missing property 'PropertyA'"
+            );
+            Assert.IsTrue(
+                contract.Properties.Contains("PropertyB"),
+                "Contract is missing property 'PropertyB'"
+            );
         }
     }
 }

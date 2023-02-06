@@ -1,23 +1,23 @@
-// 
+//
 // BroadcastBlockTest.cs
-//  
+//
 // Author:
 //       Jérémie "garuma" Laval <jeremie.laval@gmail.com>
 //       Petr Onderka <gsvick@gmail.com>
-// 
+//
 // Copyright (c) 2011 Jérémie "garuma" Laval
 // Copyright (c) 2012 Petr Onderka
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,258 +32,277 @@ using System.Threading;
 using System.Threading.Tasks.Dataflow;
 using NUnit.Framework;
 
-namespace MonoTests.System.Threading.Tasks.Dataflow {
+namespace MonoTests.System.Threading.Tasks.Dataflow
+{
     [TestFixture]
-    public class BroadcastBlockTest {
+    public class BroadcastBlockTest
+    {
         [Test]
-        public void BasicUsageTest ()
+        public void BasicUsageTest()
         {
-            bool act1 = false, act2 = false;
-            var evt = new CountdownEvent (2);
+            bool act1 = false,
+                act2 = false;
+            var evt = new CountdownEvent(2);
 
-            var broadcast = new BroadcastBlock<int> (null);
-            var action1 = new ActionBlock<int> (i =>
+            var broadcast = new BroadcastBlock<int>(null);
+            var action1 = new ActionBlock<int>(i =>
             {
                 act1 = i == 42;
-                evt.Signal ();
+                evt.Signal();
             });
-            var action2 = new ActionBlock<int> (i =>
+            var action2 = new ActionBlock<int>(i =>
             {
                 act2 = i == 42;
-                evt.Signal ();
+                evt.Signal();
             });
 
-            broadcast.LinkTo (action1);
-            broadcast.LinkTo (action2);
+            broadcast.LinkTo(action1);
+            broadcast.LinkTo(action2);
 
-            Assert.IsTrue (broadcast.Post (42));
+            Assert.IsTrue(broadcast.Post(42));
 
-            Assert.IsTrue (evt.Wait (1000));
+            Assert.IsTrue(evt.Wait(1000));
 
-            Assert.IsTrue (act1);
-            Assert.IsTrue (act2);
+            Assert.IsTrue(act1);
+            Assert.IsTrue(act2);
         }
 
         [Test]
-        public void LinkAfterPostTest ()
+        public void LinkAfterPostTest()
         {
             bool act = false;
-            var evt = new ManualResetEventSlim ();
+            var evt = new ManualResetEventSlim();
 
-            var broadcast = new BroadcastBlock<int> (null);
-            var action = new ActionBlock<int> (i =>
+            var broadcast = new BroadcastBlock<int>(null);
+            var action = new ActionBlock<int>(i =>
             {
                 act = i == 42;
-                evt.Set ();
+                evt.Set();
             });
 
-            Assert.IsTrue (broadcast.Post (42));
+            Assert.IsTrue(broadcast.Post(42));
 
-            broadcast.LinkTo (action);
+            broadcast.LinkTo(action);
 
-            Assert.IsTrue (evt.Wait (1000));
+            Assert.IsTrue(evt.Wait(1000));
 
-            Assert.IsTrue (act);
+            Assert.IsTrue(act);
         }
 
         [Test]
-        public void PostponedTest ()
+        public void PostponedTest()
         {
-            var broadcast = new BroadcastBlock<int> (null);
-            var target = new BufferBlock<int> (
-                new DataflowBlockOptions { BoundedCapacity = 1 });
-            broadcast.LinkTo (target);
+            var broadcast = new BroadcastBlock<int>(null);
+            var target = new BufferBlock<int>(new DataflowBlockOptions { BoundedCapacity = 1 });
+            broadcast.LinkTo(target);
 
-            Assert.IsTrue (target.Post (1));
-
-            Assert.IsTrue (broadcast.Post (2));
-
-            Assert.AreEqual (1, target.Receive (TimeSpan.FromMilliseconds (0)));
-            Assert.AreEqual (2, target.Receive (TimeSpan.FromMilliseconds (1000)));
-        }
-
-        [Test]
-        public void ConsumeChangedTest ()
-        {
-            var scheduler = new TestScheduler ();
-            var broadcast = new BroadcastBlock<int> (null,
-                new DataflowBlockOptions { TaskScheduler = scheduler });
-            var target = new TestTargetBlock<int> { Postpone = true };
-
-            broadcast.LinkTo (target);
-
-            Assert.IsFalse (target.HasPostponed);
-
-            Assert.IsTrue (broadcast.Post (1));
-
-            scheduler.ExecuteAll ();
-
-            Assert.IsTrue (target.HasPostponed);
-
-            Assert.IsTrue (broadcast.Post (2));
-
-            scheduler.ExecuteAll ();
-
-            int value;
-            Assert.IsTrue (target.RetryPostponed (out value));
-            Assert.AreEqual (2, value);
-        }
-
-        [Test]
-        public void ReserveConsumeChangedTest ()
-        {
-            var scheduler = new TestScheduler ();
-            var broadcast = new BroadcastBlock<int> (null,
-                new DataflowBlockOptions { TaskScheduler = scheduler });
-            var target = new TestTargetBlock<int> { Postpone = true };
-
-            broadcast.LinkTo (target);
-
-            Assert.IsFalse (target.HasPostponed);
-
-            Assert.IsTrue (broadcast.Post (1));
-
-            scheduler.ExecuteAll ();
-
-            Assert.IsTrue (target.HasPostponed);
-
-            Assert.IsTrue (target.ReservePostponed ());
-
-            Assert.IsTrue (broadcast.Post (2));
-
-            scheduler.ExecuteAll ();
-
-            int value;
-            Assert.IsTrue (target.RetryPostponed (out value));
-            Assert.AreEqual (1, value);
-        }
-
-        [Test]
-        public void ReserveChangedTest ()
-        {
-            var scheduler = new TestScheduler ();
-            var broadcast = new BroadcastBlock<int> (null,
-                new DataflowBlockOptions { TaskScheduler = scheduler });
-            var target = new TestTargetBlock<int> { Postpone = true };
-
-            broadcast.LinkTo (target);
-
-            Assert.IsFalse (target.HasPostponed);
-
-            Assert.IsTrue (broadcast.Post (1));
-
-            scheduler.ExecuteAll ();
-
-            Assert.IsTrue (target.HasPostponed);
+            Assert.IsTrue(target.Post(1));
 
             Assert.IsTrue(broadcast.Post(2));
 
-            scheduler.ExecuteAll ();
+            Assert.AreEqual(1, target.Receive(TimeSpan.FromMilliseconds(0)));
+            Assert.AreEqual(2, target.Receive(TimeSpan.FromMilliseconds(1000)));
+        }
 
-            Assert.IsTrue (target.ReservePostponed ());
+        [Test]
+        public void ConsumeChangedTest()
+        {
+            var scheduler = new TestScheduler();
+            var broadcast = new BroadcastBlock<int>(
+                null,
+                new DataflowBlockOptions { TaskScheduler = scheduler }
+            );
+            var target = new TestTargetBlock<int> { Postpone = true };
+
+            broadcast.LinkTo(target);
+
+            Assert.IsFalse(target.HasPostponed);
+
+            Assert.IsTrue(broadcast.Post(1));
+
+            scheduler.ExecuteAll();
+
+            Assert.IsTrue(target.HasPostponed);
+
+            Assert.IsTrue(broadcast.Post(2));
+
+            scheduler.ExecuteAll();
 
             int value;
-            Assert.IsTrue (target.RetryPostponed (out value));
-            Assert.AreEqual (2, value);
+            Assert.IsTrue(target.RetryPostponed(out value));
+            Assert.AreEqual(2, value);
         }
 
         [Test]
-        public void QueuedMessagesTest ()
+        public void ReserveConsumeChangedTest()
         {
-            var scheduler = new TestScheduler ();
-            var broadcast = new BroadcastBlock<int> (null,
-                new DataflowBlockOptions { TaskScheduler = scheduler });
-            var target = new BufferBlock<int> ();
-            broadcast.LinkTo (target);
+            var scheduler = new TestScheduler();
+            var broadcast = new BroadcastBlock<int>(
+                null,
+                new DataflowBlockOptions { TaskScheduler = scheduler }
+            );
+            var target = new TestTargetBlock<int> { Postpone = true };
 
-            Assert.IsTrue (broadcast.Post (1));
-            Assert.IsTrue (broadcast.Post (2));
+            broadcast.LinkTo(target);
 
-            AssertEx.Throws<TimeoutException> (
-                () => target.Receive (TimeSpan.FromMilliseconds (1000)));
+            Assert.IsFalse(target.HasPostponed);
 
-            scheduler.ExecuteAll ();
+            Assert.IsTrue(broadcast.Post(1));
+
+            scheduler.ExecuteAll();
+
+            Assert.IsTrue(target.HasPostponed);
+
+            Assert.IsTrue(target.ReservePostponed());
+
+            Assert.IsTrue(broadcast.Post(2));
+
+            scheduler.ExecuteAll();
+
+            int value;
+            Assert.IsTrue(target.RetryPostponed(out value));
+            Assert.AreEqual(1, value);
+        }
+
+        [Test]
+        public void ReserveChangedTest()
+        {
+            var scheduler = new TestScheduler();
+            var broadcast = new BroadcastBlock<int>(
+                null,
+                new DataflowBlockOptions { TaskScheduler = scheduler }
+            );
+            var target = new TestTargetBlock<int> { Postpone = true };
+
+            broadcast.LinkTo(target);
+
+            Assert.IsFalse(target.HasPostponed);
+
+            Assert.IsTrue(broadcast.Post(1));
+
+            scheduler.ExecuteAll();
+
+            Assert.IsTrue(target.HasPostponed);
+
+            Assert.IsTrue(broadcast.Post(2));
+
+            scheduler.ExecuteAll();
+
+            Assert.IsTrue(target.ReservePostponed());
+
+            int value;
+            Assert.IsTrue(target.RetryPostponed(out value));
+            Assert.AreEqual(2, value);
+        }
+
+        [Test]
+        public void QueuedMessagesTest()
+        {
+            var scheduler = new TestScheduler();
+            var broadcast = new BroadcastBlock<int>(
+                null,
+                new DataflowBlockOptions { TaskScheduler = scheduler }
+            );
+            var target = new BufferBlock<int>();
+            broadcast.LinkTo(target);
+
+            Assert.IsTrue(broadcast.Post(1));
+            Assert.IsTrue(broadcast.Post(2));
+
+            AssertEx.Throws<TimeoutException>(
+                () => target.Receive(TimeSpan.FromMilliseconds(1000))
+            );
+
+            scheduler.ExecuteAll();
 
             int item;
-            Assert.IsTrue (target.TryReceive (out item));
-            Assert.AreEqual (1, item);
-            Assert.IsTrue (target.TryReceive (out item));
-            Assert.AreEqual (2, item);
+            Assert.IsTrue(target.TryReceive(out item));
+            Assert.AreEqual(1, item);
+            Assert.IsTrue(target.TryReceive(out item));
+            Assert.AreEqual(2, item);
         }
 
         [Test]
-        public void BoundedQueuedTest ()
+        public void BoundedQueuedTest()
         {
-            var scheduler = new TestScheduler ();
-            var broadcast = new BroadcastBlock<int> (
+            var scheduler = new TestScheduler();
+            var broadcast = new BroadcastBlock<int>(
                 null,
-                new DataflowBlockOptions { TaskScheduler = scheduler, BoundedCapacity = 1 });
+                new DataflowBlockOptions { TaskScheduler = scheduler, BoundedCapacity = 1 }
+            );
 
-            Assert.IsTrue (broadcast.Post (1));
-            Assert.IsFalse (broadcast.Post (2));
+            Assert.IsTrue(broadcast.Post(1));
+            Assert.IsFalse(broadcast.Post(2));
         }
 
         [Test]
-        public void BoundedPostponedTest ()
+        public void BoundedPostponedTest()
         {
-            var scheduler = new TestScheduler ();
-            var broadcast = new BroadcastBlock<int> (
+            var scheduler = new TestScheduler();
+            var broadcast = new BroadcastBlock<int>(
                 null,
-                new DataflowBlockOptions { TaskScheduler = scheduler, BoundedCapacity = 1 });
+                new DataflowBlockOptions { TaskScheduler = scheduler, BoundedCapacity = 1 }
+            );
             ITargetBlock<int> target = broadcast;
-            var source = new TestSourceBlock<int> ();
+            var source = new TestSourceBlock<int>();
 
-            Assert.IsTrue (broadcast.Post (1));
-            var header = new DataflowMessageHeader (1);
-            source.AddMessage (header, 2);
-            Assert.AreEqual (DataflowMessageStatus.Postponed,
-                target.OfferMessage (header, 2, source, false));
-            Assert.IsFalse (source.WasConsumed (header));
+            Assert.IsTrue(broadcast.Post(1));
+            var header = new DataflowMessageHeader(1);
+            source.AddMessage(header, 2);
+            Assert.AreEqual(
+                DataflowMessageStatus.Postponed,
+                target.OfferMessage(header, 2, source, false)
+            );
+            Assert.IsFalse(source.WasConsumed(header));
 
-            scheduler.ExecuteAll ();
+            scheduler.ExecuteAll();
 
-            Assert.IsTrue (source.WasConsumed (header));
+            Assert.IsTrue(source.WasConsumed(header));
         }
 
         [Test]
-        public void CloningTest ()
+        public void CloningTest()
         {
-            object act1 = null, act2 = null;
-            var evt = new CountdownEvent (2);
+            object act1 = null,
+                act2 = null;
+            var evt = new CountdownEvent(2);
 
-            object source = new object ();
-            var broadcast = new BroadcastBlock<object> (o => new object ());
-            var action1 = new ActionBlock<object> (i =>
+            object source = new object();
+            var broadcast = new BroadcastBlock<object>(o => new object());
+            var action1 = new ActionBlock<object>(i =>
             {
                 act1 = i;
-                evt.Signal ();
+                evt.Signal();
             });
-            var action2 = new ActionBlock<object> (i =>
+            var action2 = new ActionBlock<object>(i =>
             {
                 act2 = i;
-                evt.Signal ();
+                evt.Signal();
             });
 
-            broadcast.LinkTo (action1);
-            broadcast.LinkTo (action2);
+            broadcast.LinkTo(action1);
+            broadcast.LinkTo(action2);
 
-            Assert.IsTrue (broadcast.Post (source));
+            Assert.IsTrue(broadcast.Post(source));
 
-            Assert.IsTrue (evt.Wait (1000));
+            Assert.IsTrue(evt.Wait(1000));
 
-            Assert.IsNotNull (act1);
-            Assert.IsNotNull (act2);
+            Assert.IsNotNull(act1);
+            Assert.IsNotNull(act2);
 
-            Assert.IsFalse (source.Equals (act1));
-            Assert.IsFalse (source.Equals (act2));
-            Assert.IsFalse (act2.Equals (act1));
+            Assert.IsFalse(source.Equals(act1));
+            Assert.IsFalse(source.Equals(act2));
+            Assert.IsFalse(act2.Equals(act1));
         }
 
         [Test]
         public void TryReceiveTest()
         {
             var scheduler = new TestScheduler();
-            var block = new BroadcastBlock<int>(i => i * 10, new DataflowBlockOptions { TaskScheduler = scheduler });
+            var block = new BroadcastBlock<int>(
+                i => i * 10,
+                new DataflowBlockOptions { TaskScheduler = scheduler }
+            );
 
             int item;
             Assert.IsFalse(block.TryReceive(null, out item));
@@ -304,7 +323,10 @@ namespace MonoTests.System.Threading.Tasks.Dataflow {
         public void TryReceiveAllTest()
         {
             var scheduler = new TestScheduler();
-            var block = new BroadcastBlock<int>(null, new DataflowBlockOptions { TaskScheduler = scheduler });
+            var block = new BroadcastBlock<int>(
+                null,
+                new DataflowBlockOptions { TaskScheduler = scheduler }
+            );
             IReceivableSourceBlock<int> source = block;
 
             Assert.IsTrue(block.Post(1));
@@ -321,20 +343,21 @@ namespace MonoTests.System.Threading.Tasks.Dataflow {
         [Test]
         public void DontOfferTwiceTest()
         {
-            var scheduler = new TestScheduler ();
-            var block = new BroadcastBlock<int> (null,
-                new DataflowBlockOptions { TaskScheduler = scheduler });
-            var target =
-                new TestTargetBlock<int> { Postpone = true };
-            block.LinkTo (target);
+            var scheduler = new TestScheduler();
+            var block = new BroadcastBlock<int>(
+                null,
+                new DataflowBlockOptions { TaskScheduler = scheduler }
+            );
+            var target = new TestTargetBlock<int> { Postpone = true };
+            block.LinkTo(target);
 
-            Assert.IsFalse (target.HasPostponed);
+            Assert.IsFalse(target.HasPostponed);
 
-            Assert.IsTrue (block.Post (1));
+            Assert.IsTrue(block.Post(1));
 
             scheduler.ExecuteAll();
 
-            Assert.IsTrue (target.HasPostponed);
+            Assert.IsTrue(target.HasPostponed);
 
             target.Postpone = false;
 

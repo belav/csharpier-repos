@@ -19,7 +19,10 @@ namespace Roslyn.Utilities
             }
         }
 
-        internal static void AppendData(this IncrementalHash hash, IEnumerable<ArraySegment<byte>> blobs)
+        internal static void AppendData(
+            this IncrementalHash hash,
+            IEnumerable<ArraySegment<byte>> blobs
+        )
         {
             foreach (var blob in blobs)
             {

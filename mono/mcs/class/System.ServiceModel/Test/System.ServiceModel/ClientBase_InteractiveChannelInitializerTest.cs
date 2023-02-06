@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -48,89 +48,104 @@ namespace MonoTests.System.ServiceModel
     public class ClientBase_InteractiveChannelInitializerTest
     {
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void NotAllowedInitializationUI ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void NotAllowedInitializationUI()
         {
-            var f = new FooProxy (new BasicHttpBinding (), new EndpointAddress ("http://localhost:" + NetworkHelpers.FindFreePort ()));
-            f.Endpoint.Contract.Behaviors.Add (new MyContractBehavior ());
+            var f = new FooProxy(
+                new BasicHttpBinding(),
+                new EndpointAddress("http://localhost:" + NetworkHelpers.FindFreePort())
+            );
+            f.Endpoint.Contract.Behaviors.Add(new MyContractBehavior());
             f.InnerChannel.AllowInitializationUI = false;
-            f.DisplayInitializationUI ();
+            f.DisplayInitializationUI();
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void OpenBeforeDisplayInitializationUI ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void OpenBeforeDisplayInitializationUI()
         {
-            var f = new FooProxy (new BasicHttpBinding (), new EndpointAddress ("http://localhost:" + NetworkHelpers.FindFreePort ()));
-            f.Endpoint.Contract.Behaviors.Add (new MyContractBehavior ());
-            f.Open ();
+            var f = new FooProxy(
+                new BasicHttpBinding(),
+                new EndpointAddress("http://localhost:" + NetworkHelpers.FindFreePort())
+            );
+            f.Endpoint.Contract.Behaviors.Add(new MyContractBehavior());
+            f.Open();
         }
 
-        public class MyContractBehavior2 : MyContractBehavior
-        {
-        }
+        public class MyContractBehavior2 : MyContractBehavior { }
 
         public class MyContractBehavior : IContractBehavior
         {
-            public void AddBindingParameters (ContractDescription contractDescription, ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+            public void AddBindingParameters(
+                ContractDescription contractDescription,
+                ServiceEndpoint endpoint,
+                BindingParameterCollection bindingParameters
+            ) { }
+
+            public void ApplyClientBehavior(
+                ContractDescription contractDescription,
+                ServiceEndpoint endpoint,
+                ClientRuntime clientRuntime
+            )
             {
+                clientRuntime.InteractiveChannelInitializers.Add(new MyChannelInitializer());
             }
 
-            public void ApplyClientBehavior (ContractDescription contractDescription, ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-            {
-                clientRuntime.InteractiveChannelInitializers.Add (new MyChannelInitializer ());
-            }
+            public void ApplyDispatchBehavior(
+                ContractDescription contractDescription,
+                ServiceEndpoint endpoint,
+                DispatchRuntime dispatchRuntime
+            ) { }
 
-            public void ApplyDispatchBehavior (ContractDescription contractDescription, ServiceEndpoint endpoint, DispatchRuntime dispatchRuntime)
-            {
-            }
-
-            public void Validate (ContractDescription contractDescription, ServiceEndpoint endpoint)
-            {
-            }
+            public void Validate(
+                ContractDescription contractDescription,
+                ServiceEndpoint endpoint
+            ) { }
         }
 
         public class MyChannelInitializer : IInteractiveChannelInitializer
         {
-            delegate void DoWork ();
+            delegate void DoWork();
             DoWork d;
             static int instance;
             int number;
 
-            public MyChannelInitializer ()
+            public MyChannelInitializer()
             {
                 number = instance++;
             }
 
-            public IAsyncResult BeginDisplayInitializationUI (IClientChannel channel, AsyncCallback callback, object state)
+            public IAsyncResult BeginDisplayInitializationUI(
+                IClientChannel channel,
+                AsyncCallback callback,
+                object state
+            )
             {
-                Console.WriteLine ("Begin");
-                d = new DoWork (DisplayInitializationUI);
-                return d.BeginInvoke (null, null);
+                Console.WriteLine("Begin");
+                d = new DoWork(DisplayInitializationUI);
+                return d.BeginInvoke(null, null);
             }
 
-            public void EndDisplayInitializationUI (IAsyncResult result)
+            public void EndDisplayInitializationUI(IAsyncResult result)
             {
-                Console.WriteLine ("End");
-                d.EndInvoke (result);
+                Console.WriteLine("End");
+                d.EndInvoke(result);
             }
 
-            public void DisplayInitializationUI ()
+            public void DisplayInitializationUI()
             {
-                Console.WriteLine ("Core: " + number);
+                Console.WriteLine("Core: " + number);
             }
         }
 
         public class FooProxy : ClientBase<IFoo>, IFoo
         {
-            public FooProxy (Binding binding, EndpointAddress address)
-                : base (binding, address)
-            {
-            }
+            public FooProxy(Binding binding, EndpointAddress address)
+                : base(binding, address) { }
 
-            public string Echo (string msg)
+            public string Echo(string msg)
             {
-                return Channel.Echo (msg);
+                return Channel.Echo(msg);
             }
         }
 
@@ -138,12 +153,12 @@ namespace MonoTests.System.ServiceModel
         public interface IFoo
         {
             [OperationContract]
-            string Echo (string input);
+            string Echo(string input);
         }
 
         public class FooService : IFoo
         {
-            public string Echo (string input)
+            public string Echo(string input)
             {
                 return input;
             }

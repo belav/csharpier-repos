@@ -12,6 +12,7 @@ namespace MonoTests.System.Data.SqlClient
     public class SqlCommand_ExecuteReader_ : ADONetTesterClass
     {
         private Exception exp;
+
         public static void Main()
         {
             SqlCommand_ExecuteReader_ tc = new SqlCommand_ExecuteReader_();
@@ -21,7 +22,7 @@ namespace MonoTests.System.Data.SqlClient
                 tc.BeginTest("SqlCommand_ExecuteReader");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 tc.exp = ex;
             }
@@ -32,8 +33,7 @@ namespace MonoTests.System.Data.SqlClient
             }
         }
 
-
-        [Test] 
+        [Test]
         public void run()
         {
             // testing only SQLServerr
@@ -49,7 +49,7 @@ namespace MonoTests.System.Data.SqlClient
         public void DoTestCheckSqlStatementThatDeclaresLocalVariableAndUsesIt()
         {
             SqlConnection conn = new SqlConnection(ConnectedDataProvider.ConnectionStringSQLClient);
-            SqlDataReader rdr=null;
+            SqlDataReader rdr = null;
             try
             {
                 BeginCase("Check sql statement that declares a local variable and uses it.");
@@ -59,7 +59,7 @@ namespace MonoTests.System.Data.SqlClient
 
                 cmd.CommandText = "declare @var int; select @var=1;";
                 cmd.CommandType = CommandType.Text;
-                
+
                 rdr = cmd.ExecuteReader();
                 Compare(rdr.Read(), false);
             }
@@ -81,6 +81,5 @@ namespace MonoTests.System.Data.SqlClient
                 }
             }
         }
-
     }
 }

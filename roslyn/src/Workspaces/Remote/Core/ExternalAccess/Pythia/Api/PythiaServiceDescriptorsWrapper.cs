@@ -22,16 +22,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             Func<string, string> featureDisplayNameProvider,
             ImmutableArray<IMessagePackFormatter> additionalFormatters,
             ImmutableArray<IFormatterResolver> additionalResolvers,
-            IEnumerable<(Type serviceInterface, Type? callbackInterface)> interfaces)
-            => UnderlyingObject = new ServiceDescriptors(componentName, featureDisplayNameProvider, new RemoteSerializationOptions(additionalFormatters, additionalResolvers), interfaces);
+            IEnumerable<(Type serviceInterface, Type? callbackInterface)> interfaces
+        ) =>
+            UnderlyingObject = new ServiceDescriptors(
+                componentName,
+                featureDisplayNameProvider,
+                new RemoteSerializationOptions(additionalFormatters, additionalResolvers),
+                interfaces
+            );
 
         /// <summary>
         /// To be called from a service factory in OOP.
         /// </summary>
-        public ServiceJsonRpcDescriptor GetDescriptorForServiceFactory(Type serviceInterface)
-            => UnderlyingObject.GetServiceDescriptorForServiceFactory(serviceInterface);
+        public ServiceJsonRpcDescriptor GetDescriptorForServiceFactory(Type serviceInterface) =>
+            UnderlyingObject.GetServiceDescriptorForServiceFactory(serviceInterface);
 
-        public MessagePackSerializerOptions MessagePackOptions
-            => UnderlyingObject.Options.MessagePackOptions;
+        public MessagePackSerializerOptions MessagePackOptions =>
+            UnderlyingObject.Options.MessagePackOptions;
     }
 }

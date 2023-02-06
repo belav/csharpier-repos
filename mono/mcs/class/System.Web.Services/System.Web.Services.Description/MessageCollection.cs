@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.MessageCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,35 +28,38 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Description {
-    public sealed class MessageCollection : ServiceDescriptionBaseCollection {
-
+namespace System.Web.Services.Description
+{
+    public sealed class MessageCollection : ServiceDescriptionBaseCollection
+    {
         #region Constructors
-        
-        internal MessageCollection (ServiceDescription serviceDescription)
-            : base (serviceDescription)
-        {
-        }
+
+        internal MessageCollection(ServiceDescription serviceDescription)
+            : base(serviceDescription) { }
 
         #endregion
 
         #region Properties
 
-        public Message this [int index] {
-            get { 
+        public Message this[int index]
+        {
+            get
+            {
                 if (index < 0 || index > Count)
-                    throw new ArgumentOutOfRangeException ();
+                    throw new ArgumentOutOfRangeException();
 
-                return (Message) List [index]; 
+                return (Message)List[index];
             }
-                        set { List [index] = value; }
+            set { List[index] = value; }
         }
 
-        public Message this [string name] {
-            get {
-                int index = IndexOf ((Message) Table [name]);
+        public Message this[string name]
+        {
+            get
+            {
+                int index = IndexOf((Message)Table[name]);
                 if (index >= 0)
-                    return this [index];
+                    return this[index];
                 return null;
             }
         }
@@ -65,50 +68,50 @@ namespace System.Web.Services.Description {
 
         #region Methods
 
-        public int Add (Message message) 
+        public int Add(Message message)
         {
-            Insert (Count, message);
+            Insert(Count, message);
             return (Count - 1);
         }
 
-        public bool Contains (Message message)
+        public bool Contains(Message message)
         {
-            return List.Contains (message);
+            return List.Contains(message);
         }
 
-        public void CopyTo (Message[] array, int index) 
+        public void CopyTo(Message[] array, int index)
         {
-            List.CopyTo (array, index);
+            List.CopyTo(array, index);
         }
 
-        protected override string GetKey (object value) 
+        protected override string GetKey(object value)
         {
             if (!(value is Message))
-                throw new InvalidCastException ();
+                throw new InvalidCastException();
 
-            return ((Message) value).Name;
-        }
-
-        public int IndexOf (Message message)
-        {
-            return List.IndexOf (message);
+            return ((Message)value).Name;
         }
 
-        public void Insert (int index, Message message)
+        public int IndexOf(Message message)
         {
-            List.Insert (index, message);
+            return List.IndexOf(message);
         }
-    
-        public void Remove (Message message)
+
+        public void Insert(int index, Message message)
         {
-            List.Remove (message);
+            List.Insert(index, message);
         }
-            
-        protected override void SetParent (object value, object parent)
+
+        public void Remove(Message message)
         {
-            ((Message) value).SetParent ((ServiceDescription) parent);
+            List.Remove(message);
         }
-            
+
+        protected override void SetParent(object value, object parent)
+        {
+            ((Message)value).SetParent((ServiceDescription)parent);
+        }
+
         #endregion // Methods
     }
 }

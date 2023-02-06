@@ -9,8 +9,5 @@ namespace TestResources.Analyzers;
 [Generator(LanguageNames.CSharp, LanguageNames.VisualBasic)]
 public sealed class DoNothingGenerator : IIncrementalGenerator
 {
-    public void Initialize(IncrementalGeneratorInitializationContext context)
-    {
-
-    }
+    public void Initialize(IncrementalGeneratorInitializationContext context) { }
 }

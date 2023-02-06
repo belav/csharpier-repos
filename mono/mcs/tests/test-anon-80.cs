@@ -10,11 +10,7 @@ namespace MonoBug
 
             public static EventHandler DoNothingEventHandler
             {
-                get
-                {
-                    return delegate {
-                    };
-                }
+                get { return delegate { }; }
             }
 
             private int i;
@@ -22,7 +18,8 @@ namespace MonoBug
             {
                 get
                 {
-                    return delegate {
+                    return delegate
+                    {
                         ++i;
                     };
                 }
@@ -30,47 +27,43 @@ namespace MonoBug
 
             public EventHandler Handler
             {
-                get
-                {
-                    return _handler;
-                }
-                set
-                {
-                    _handler = value;
-                }
+                get { return _handler; }
+                set { _handler = value; }
             }
         }
 
-        public static int Main ()
+        public static int Main()
         {
-            EventHandlers handlers = new EventHandlers ();
+            EventHandlers handlers = new EventHandlers();
             handlers.Handler = handlers.DoSomethingEventHandler;
 
-            Console.WriteLine ("Is handlers.Handler == handlers.DoSomethingEventHandler (instance)?");
-            Console.WriteLine ("Expected: True");
-            Console.Write ("Actual:   ");
+            Console.WriteLine(
+                "Is handlers.Handler == handlers.DoSomethingEventHandler (instance)?"
+            );
+            Console.WriteLine("Expected: True");
+            Console.Write("Actual:   ");
             bool instanceEqual = handlers.Handler == handlers.DoSomethingEventHandler;
-            Console.WriteLine (instanceEqual);
-            Console.WriteLine ();
+            Console.WriteLine(instanceEqual);
+            Console.WriteLine();
 
             handlers.Handler = EventHandlers.DoNothingEventHandler;
-            Console.WriteLine ("Is handlers.Handler == EventHandlers.DoNothingEventHandler (static)?");
-            Console.WriteLine ("Expected: True");
-            Console.Write ("Actual:   ");
+            Console.WriteLine(
+                "Is handlers.Handler == EventHandlers.DoNothingEventHandler (static)?"
+            );
+            Console.WriteLine("Expected: True");
+            Console.Write("Actual:   ");
             bool staticEqual = handlers.Handler == EventHandlers.DoNothingEventHandler;
-            Console.WriteLine (staticEqual);
+            Console.WriteLine(staticEqual);
 
             if (instanceEqual)
                 if (staticEqual)
                     return 0; // instance passed, static passed
                 else
                     return 1; // instance passed, static failed
+            else if (staticEqual)
+                return 2; // instance failed, static passed
             else
-                if (staticEqual)
-                    return 2; // instance failed, static passed
-                else
-                    return 3; // instance failed, static failed
+                return 3; // instance failed, static failed
         }
     }
 }
-

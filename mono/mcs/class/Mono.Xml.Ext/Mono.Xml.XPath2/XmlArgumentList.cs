@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,7 @@
 using System.Collections;
 using System.Xml;
 
-namespace System.Xml.Query 
+namespace System.Xml.Query
 {
     public sealed class XmlArgumentList
     {
@@ -48,74 +48,73 @@ namespace System.Xml.Query
         #region    Constructors
 
         [MonoTODO]
-        public XmlArgumentList ()
+        public XmlArgumentList()
         {
-            extensionObjects = new Hashtable ();
-            parameters = new Hashtable ();
+            extensionObjects = new Hashtable();
+            parameters = new Hashtable();
         }
 
         #endregion // Constructors
 
         #region    Methods
 
-        [MonoTODO ("Confirm name conflicts")]
-        public void AddExtensionObject (string namespaceUri, object value)
+        [MonoTODO("Confirm name conflicts")]
+        public void AddExtensionObject(string namespaceUri, object value)
         {
-            extensionObjects.Add (namespaceUri, value);
+            extensionObjects.Add(namespaceUri, value);
         }
 
-        [MonoTODO ("Confirm name conflicts")]
-        public void AddParameter (string localName,    string namespaceUri, object value)
+        [MonoTODO("Confirm name conflicts")]
+        public void AddParameter(string localName, string namespaceUri, object value)
         {
-            parameters.Add (new XmlQualifiedName (localName, namespaceUri), value);
+            parameters.Add(new XmlQualifiedName(localName, namespaceUri), value);
         }
 
-        public void ClearExtensionObjects ()
+        public void ClearExtensionObjects()
         {
-            extensionObjects.Clear ();
+            extensionObjects.Clear();
         }
 
-        public void ClearParameters ()
+        public void ClearParameters()
         {
-            parameters.Clear ();
+            parameters.Clear();
         }
 
-        public object GetExtensionObject (string namespaceUri)
+        public object GetExtensionObject(string namespaceUri)
         {
-            return extensionObjects [namespaceUri];
+            return extensionObjects[namespaceUri];
         }
 
-        [MonoTODO ("Performance")]
-        public object GetParameter (string localName, string namespaceUri)
+        [MonoTODO("Performance")]
+        public object GetParameter(string localName, string namespaceUri)
         {
-            return parameters [new XmlQualifiedName (localName, namespaceUri)];
-        }
-
-        [MonoTODO]
-        public void RemoveExtensionObject (string namespaceUri)
-        {
-            extensionObjects.Remove (namespaceUri);
+            return parameters[new XmlQualifiedName(localName, namespaceUri)];
         }
 
         [MonoTODO]
-        public void RemoveParameter (string localName, string namespaceUri)
+        public void RemoveExtensionObject(string namespaceUri)
         {
-            parameters.Remove (new XmlQualifiedName (localName, namespaceUri));
+            extensionObjects.Remove(namespaceUri);
         }
 
         [MonoTODO]
-        public void SetExtensionObject (string namespaceUri, object value)
+        public void RemoveParameter(string localName, string namespaceUri)
         {
-            extensionObjects [namespaceUri] = value;
+            parameters.Remove(new XmlQualifiedName(localName, namespaceUri));
         }
 
         [MonoTODO]
-        public void SetParameter (string localName, string namespaceUri, object value)
+        public void SetExtensionObject(string namespaceUri, object value)
         {
-            parameters [new XmlQualifiedName (localName, namespaceUri)] = value;
+            extensionObjects[namespaceUri] = value;
+        }
+
+        [MonoTODO]
+        public void SetParameter(string localName, string namespaceUri, object value)
+        {
+            parameters[new XmlQualifiedName(localName, namespaceUri)] = value;
         }
 
         #endregion // Methods
     }
 }
-

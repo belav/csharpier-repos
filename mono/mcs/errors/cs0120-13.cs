@@ -3,12 +3,10 @@
 
 class C
 {
-    static void Test (int i)
+    static void Test(int i)
     {
-        Test ("a");
+        Test("a");
     }
-    
-    void Test (string s)
-    {
-    }
+
+    void Test(string s) { }
 }

@@ -4,17 +4,13 @@
 
 interface I<T, U>
 {
-    void Foo (U t);
-    void Foo (T u);
+    void Foo(U t);
+    void Foo(T u);
 }
 
 class A : I<int, int>
 {
-    void I<int, int>.Foo (int arg)
-    {
-    }
+    void I<int, int>.Foo(int arg) { }
 
-    public void Foo (int arg)
-    {
-    }
+    public void Foo(int arg) { }
 }

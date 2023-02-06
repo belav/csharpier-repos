@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,46 +40,49 @@ namespace MonoTests.Helpers
         static string tempFolder;
         static Assembly currentAssembly;
 
-        static TestResourceHelper ()
+        static TestResourceHelper()
         {
             // create temp directory for extracting all the test resources to disk
-            tempFolder = Path.Combine (Path.GetTempPath(), Path.GetRandomFileName ());
-            Directory.CreateDirectory (tempFolder);
+            tempFolder = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            Directory.CreateDirectory(tempFolder);
 
-            currentAssembly = Assembly.GetExecutingAssembly ();
-            foreach (string resourceName in currentAssembly.GetManifestResourceNames ())
+            currentAssembly = Assembly.GetExecutingAssembly();
+            foreach (string resourceName in currentAssembly.GetManifestResourceNames())
             {
                 // skip non-test assets
-                if (!resourceName.StartsWith ("Test/"))
+                if (!resourceName.StartsWith("Test/"))
                     continue;
 
                 // persist the resource to disk
-                var stream = currentAssembly.GetManifestResourceStream (resourceName);
-                var resourcePath = Path.Combine (tempFolder, resourceName);
-                Directory.CreateDirectory (Path.GetDirectoryName (resourcePath));
+                var stream = currentAssembly.GetManifestResourceStream(resourceName);
+                var resourcePath = Path.Combine(tempFolder, resourceName);
+                Directory.CreateDirectory(Path.GetDirectoryName(resourcePath));
 
-                using (var file = File.Create (resourcePath))
+                using (var file = File.Create(resourcePath))
                 {
-                    stream.CopyTo (file);
+                    stream.CopyTo(file);
                 }
             }
 
             // delete the temp directory at the end of the test process
-            AppDomain.CurrentDomain.ProcessExit += (s,e) =>
+            AppDomain.CurrentDomain.ProcessExit += (s, e) =>
             {
-                try { Directory.Delete (tempFolder, true); }
+                try
+                {
+                    Directory.Delete(tempFolder, true);
+                }
                 catch { }
             };
         }
 
-        public static string GetFullPathOfResource (string resourceName)
+        public static string GetFullPathOfResource(string resourceName)
         {
-            return Path.Combine (tempFolder, resourceName);
+            return Path.Combine(tempFolder, resourceName);
         }
 
-        public static Stream GetStreamOfResource (string resourceName)
+        public static Stream GetStreamOfResource(string resourceName)
         {
-            return currentAssembly.GetManifestResourceStream (resourceName);
+            return currentAssembly.GetManifestResourceStream(resourceName);
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,23 +33,24 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoTests.System.Web.UI {
-    [TestFixture]    
-    public class ControlCollectionTest {
+namespace MonoTests.System.Web.UI
+{
+    [TestFixture]
+    public class ControlCollectionTest
+    {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void AddNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddNull()
         {
-            Page p = new Page ();
-            p.Controls.Add (null);
+            Page p = new Page();
+            p.Controls.Add(null);
         }
 
         [Test]
-        public void RemoveNull ()
+        public void RemoveNull()
         {
-            Page p = new Page ();
-            p.Controls.Remove (null);
+            Page p = new Page();
+            p.Controls.Remove(null);
         }
     }
 }
-

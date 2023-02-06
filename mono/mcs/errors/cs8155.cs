@@ -7,9 +7,9 @@ class TestClass
 {
     static int x;
 
-    delegate ref int D ();
+    delegate ref int D();
 
-    static void Main ()
+    static void Main()
     {
         Expression<D> e = () => ref x;
     }

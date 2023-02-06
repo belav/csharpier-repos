@@ -21,7 +21,6 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {
-
     [TestFixture]
     public class XmlCharTests
     {

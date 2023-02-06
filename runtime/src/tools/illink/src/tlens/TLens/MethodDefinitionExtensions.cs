@@ -8,19 +8,20 @@ namespace TLens
 {
     static class MethodDefinitionExtensions
     {
-        public static string ToDisplay (this MethodDefinition method, bool showSize = false)
+        public static string ToDisplay(this MethodDefinition method, bool showSize = false)
         {
-            var str = new StringBuilder ();
-            str.Append (method.FullName);
-            int idx = method.FullName.IndexOf (' ');
-            str.Remove (0, idx + 1);
-            if (showSize) {
-                str.Append (" [size: ");
-                str.Append (method.GetEstimatedSize ());
-                str.Append ("]");
+            var str = new StringBuilder();
+            str.Append(method.FullName);
+            int idx = method.FullName.IndexOf(' ');
+            str.Remove(0, idx + 1);
+            if (showSize)
+            {
+                str.Append(" [size: ");
+                str.Append(method.GetEstimatedSize());
+                str.Append("]");
             }
 
-            return str.ToString ();
+            return str.ToString();
         }
     }
 }

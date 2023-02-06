@@ -1,14 +1,14 @@
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         int a = 2;
 #line 100 "mising-file"
         int b = 2;
 #line default
     }
-    
-    void Hidden ()
+
+    void Hidden()
     {
 #line hidden
         int x = 9;
@@ -22,8 +22,8 @@ class C
 #line 55
         int h = 7;
     }
-    
-    void HiddenRecurse ()
+
+    void HiddenRecurse()
     {
         string s1 = "a";
 #line hidden

@@ -4,7 +4,7 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         int? k = 1;
         var x = k > null;

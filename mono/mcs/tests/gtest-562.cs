@@ -7,7 +7,7 @@ abstract class A<T>
 
 class B<U> : A<B<U>>, IFoo
 {
-    public void Test ()
+    public void Test()
     {
         IFoo foo = this;
         Value = this;
@@ -16,28 +16,27 @@ class B<U> : A<B<U>>, IFoo
 
 class C<U> : A<C<U>.N>, IFoo
 {
-    public void Test ()
+    public void Test()
     {
         IFoo foo = this;
-        Value = new N ();
+        Value = new N();
     }
-    
-    public class N
-    {
-    }
+
+    public class N { }
 }
 
 class D<U> : A<D<int>>
 {
-    public void Test ()
+    public void Test()
     {
-        Value = new D<int> ();
+        Value = new D<int>();
     }
 }
 
-class E<U> : IFoo where U : A<E<U>>
+class E<U> : IFoo
+    where U : A<E<U>>
 {
-    public void Test (U u)
+    public void Test(U u)
     {
         IFoo foo = u.Value;
     }
@@ -45,12 +44,12 @@ class E<U> : IFoo where U : A<E<U>>
 
 static class Application
 {
-    public static int Main ()
+    public static int Main()
     {
-        new B<byte>().Test ();
-        new C<char>().Test ();
-        new D<string>().Test ();
-        
+        new B<byte>().Test();
+        new C<char>().Test();
+        new D<string>().Test();
+
         return 0;
     }
 }

@@ -41,7 +41,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Populate()
         {
-            string json = @"{
+            string json =
+                @"{
                 ""array"": [
                     /* comment0 */
                     {
@@ -64,7 +65,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_Multidimensional()
         {
-            string json = @"[
+            string json =
+                @"[
                 /* comment0 */
                 [1,2,3],
                 /* comment1 */
@@ -120,7 +122,9 @@ namespace Newtonsoft.Json.Tests.Issues
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException("Converter is not writable. Method should not be invoked");
+            throw new NotImplementedException(
+                "Converter is not writable. Method should not be invoked"
+            );
         }
 
         public override bool CanConvert(Type objectType)
@@ -132,7 +136,12 @@ namespace Newtonsoft.Json.Tests.Issues
 #endif
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             if (reader.TokenType == JsonToken.Null)
             {

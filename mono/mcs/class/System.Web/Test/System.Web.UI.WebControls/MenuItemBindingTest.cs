@@ -31,6 +31,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using NUnit.Framework;
+
 namespace MonoTests.System.Web.UI.WebControls
 {
     [TestFixture]
@@ -38,90 +39,114 @@ namespace MonoTests.System.Web.UI.WebControls
     {
         const string TO_STRING_EMPTY_VALUE = "(Empty)";
 
-        static readonly SortedDictionary <string, string> toStringValues = new SortedDictionary<string, string> (StringComparer.OrdinalIgnoreCase) {
-            {"DataMember", "value"},
-            {"Depth", TO_STRING_EMPTY_VALUE},
-            {"Enabled", TO_STRING_EMPTY_VALUE},
-            {"EnabledField", TO_STRING_EMPTY_VALUE},
-            {"FormatString", TO_STRING_EMPTY_VALUE},
-            {"ImageUrl", TO_STRING_EMPTY_VALUE},
-            {"ImageUrlField", TO_STRING_EMPTY_VALUE},
-            {"NavigateUrl", TO_STRING_EMPTY_VALUE},
-            {"Selectable", TO_STRING_EMPTY_VALUE},
-            {"SelectableField", TO_STRING_EMPTY_VALUE},
-            {"Target", TO_STRING_EMPTY_VALUE},
-            {"TargetField", TO_STRING_EMPTY_VALUE},
-            {"Text", TO_STRING_EMPTY_VALUE},
-            {"TextField", TO_STRING_EMPTY_VALUE},
-            {"ToolTip", TO_STRING_EMPTY_VALUE},
-            {"ToolTipField", TO_STRING_EMPTY_VALUE},
-            {"Value", TO_STRING_EMPTY_VALUE},
-            {"ValueField", TO_STRING_EMPTY_VALUE},
-            {"PopOutImageUrl", TO_STRING_EMPTY_VALUE},
-            {"PopOutImageUrlField", TO_STRING_EMPTY_VALUE},
-            {"SeparatorImageUrl", TO_STRING_EMPTY_VALUE},
-            {"SeparatorImageUrlField", TO_STRING_EMPTY_VALUE}
+        static readonly SortedDictionary<string, string> toStringValues = new SortedDictionary<
+            string,
+            string
+        >(StringComparer.OrdinalIgnoreCase)
+        {
+            { "DataMember", "value" },
+            { "Depth", TO_STRING_EMPTY_VALUE },
+            { "Enabled", TO_STRING_EMPTY_VALUE },
+            { "EnabledField", TO_STRING_EMPTY_VALUE },
+            { "FormatString", TO_STRING_EMPTY_VALUE },
+            { "ImageUrl", TO_STRING_EMPTY_VALUE },
+            { "ImageUrlField", TO_STRING_EMPTY_VALUE },
+            { "NavigateUrl", TO_STRING_EMPTY_VALUE },
+            { "Selectable", TO_STRING_EMPTY_VALUE },
+            { "SelectableField", TO_STRING_EMPTY_VALUE },
+            { "Target", TO_STRING_EMPTY_VALUE },
+            { "TargetField", TO_STRING_EMPTY_VALUE },
+            { "Text", TO_STRING_EMPTY_VALUE },
+            { "TextField", TO_STRING_EMPTY_VALUE },
+            { "ToolTip", TO_STRING_EMPTY_VALUE },
+            { "ToolTipField", TO_STRING_EMPTY_VALUE },
+            { "Value", TO_STRING_EMPTY_VALUE },
+            { "ValueField", TO_STRING_EMPTY_VALUE },
+            { "PopOutImageUrl", TO_STRING_EMPTY_VALUE },
+            { "PopOutImageUrlField", TO_STRING_EMPTY_VALUE },
+            { "SeparatorImageUrl", TO_STRING_EMPTY_VALUE },
+            { "SeparatorImageUrlField", TO_STRING_EMPTY_VALUE }
         };
 
         [Test]
-        public void Test_ToString ()
+        public void Test_ToString()
         {
-            var mib = new MenuItemBinding ();
+            var mib = new MenuItemBinding();
 
-            Assert.AreEqual ("(Empty)", mib.ToString (), "#A1");
+            Assert.AreEqual("(Empty)", mib.ToString(), "#A1");
             foreach (var entry in toStringValues)
-                ToStringTestProperty (entry.Key, entry.Value);
+                ToStringTestProperty(entry.Key, entry.Value);
         }
 
-        void ToStringTestProperty (string propertyName, string expectedValue)
+        void ToStringTestProperty(string propertyName, string expectedValue)
         {
-            PropertyInfo pi = typeof (MenuItemBinding).GetProperty (propertyName, BindingFlags.Instance | BindingFlags.Public);
+            PropertyInfo pi = typeof(MenuItemBinding).GetProperty(
+                propertyName,
+                BindingFlags.Instance | BindingFlags.Public
+            );
             if (pi == null)
-                Assert.Fail ("Property '{0}' not found.", propertyName);
+                Assert.Fail("Property '{0}' not found.", propertyName);
 
             object defaultValue = null;
-            object[] attrs = pi.GetCustomAttributes (typeof (DefaultValueAttribute), false);
+            object[] attrs = pi.GetCustomAttributes(typeof(DefaultValueAttribute), false);
             Type t = pi.PropertyType;
-            if (attrs != null && attrs.Length > 0) {
-                var dva = attrs [0] as DefaultValueAttribute;
+            if (attrs != null && attrs.Length > 0)
+            {
+                var dva = attrs[0] as DefaultValueAttribute;
                 defaultValue = dva.Value;
-            } else {
-                if (t == typeof (string))
+            }
+            else
+            {
+                if (t == typeof(string))
                     defaultValue = String.Empty;
-                else if (t == typeof (bool))
+                else if (t == typeof(bool))
                     defaultValue = false;
-                else if (t == typeof (int))
+                else if (t == typeof(int))
                     defaultValue = Int32.MaxValue;
                 else
-                    Assert.Fail ("Unsupported return type '{0}' for property '{1}'", t.FullName, propertyName);
+                    Assert.Fail(
+                        "Unsupported return type '{0}' for property '{1}'",
+                        t.FullName,
+                        propertyName
+                    );
             }
 
             object setToValue = null;
-            if (t == typeof (string)) {
+            if (t == typeof(string))
+            {
                 string v = defaultValue as String;
                 if (v == String.Empty || v != "value")
                     setToValue = "value";
                 else
                     setToValue = "value123";
-            } else if (t == typeof (bool)) {
-                bool v = (bool) defaultValue;
+            }
+            else if (t == typeof(bool))
+            {
+                bool v = (bool)defaultValue;
                 if (v)
                     setToValue = false;
                 else
                     setToValue = true;
-            } else if (t == typeof (int)) {
-                int v = (int) defaultValue;
+            }
+            else if (t == typeof(int))
+            {
+                int v = (int)defaultValue;
                 if (v == Int32.MaxValue)
                     v = Int32.MinValue;
                 else
                     v = Int32.MaxValue;
-            } else
-                Assert.Fail ("Unsupported return type '{0}' for property '{1}'", t.FullName, propertyName);
+            }
+            else
+                Assert.Fail(
+                    "Unsupported return type '{0}' for property '{1}'",
+                    t.FullName,
+                    propertyName
+                );
 
-            var mib = new MenuItemBinding ();
-            pi.SetValue (mib, setToValue, null);
+            var mib = new MenuItemBinding();
+            pi.SetValue(mib, setToValue, null);
 
-            Assert.AreEqual (expectedValue, mib.ToString (), propertyName);
+            Assert.AreEqual(expectedValue, mib.ToString(), propertyName);
         }
     }
 }

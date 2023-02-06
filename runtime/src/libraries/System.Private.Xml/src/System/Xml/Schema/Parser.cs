@@ -35,7 +35,12 @@ namespace System.Xml.Schema
         private XmlNamespaceManager? _annotationNSManager;
         private string? _xmlns;
 
-        public Parser(SchemaType schemaType, XmlNameTable nameTable, SchemaNames schemaNames, ValidationEventHandler? eventHandler)
+        public Parser(
+            SchemaType schemaType,
+            XmlNameTable nameTable,
+            SchemaNames schemaNames,
+            ValidationEventHandler? eventHandler
+        )
         {
             _schemaType = schemaType;
             _nameTable = nameTable;
@@ -71,25 +76,48 @@ namespace System.Xml.Schema
 
             _markupDepth = int.MaxValue;
             _schemaXmlDepth = reader.Depth;
-            SchemaType rootType = _schemaNames.SchemaTypeFromRoot(reader.LocalName, reader.NamespaceURI);
+            SchemaType rootType = _schemaNames.SchemaTypeFromRoot(
+                reader.LocalName,
+                reader.NamespaceURI
+            );
 
             if (!CheckSchemaRoot(rootType, out string? code))
             {
-                throw new XmlSchemaException(code, reader.BaseURI, _positionInfo.LineNumber, _positionInfo.LinePosition);
+                throw new XmlSchemaException(
+                    code,
+                    reader.BaseURI,
+                    _positionInfo.LineNumber,
+                    _positionInfo.LinePosition
+                );
             }
 
             if (_schemaType == SchemaType.XSD)
             {
                 _schema = new XmlSchema();
                 _schema.BaseUri = new Uri(reader.BaseURI!, UriKind.RelativeOrAbsolute);
-                _builder = new XsdBuilder(reader, _namespaceManager, _schema, _nameTable, _schemaNames, _eventHandler);
+                _builder = new XsdBuilder(
+                    reader,
+                    _namespaceManager,
+                    _schema,
+                    _nameTable,
+                    _schemaNames,
+                    _eventHandler
+                );
             }
             else
             {
                 Debug.Assert(_schemaType == SchemaType.XDR);
                 _xdrSchema = new SchemaInfo();
                 _xdrSchema.SchemaType = SchemaType.XDR;
-                _builder = new XdrBuilder(reader, _namespaceManager, _xdrSchema, targetNamespace, _nameTable, _schemaNames, _eventHandler);
+                _builder = new XdrBuilder(
+                    reader,
+                    _namespaceManager,
+                    _xdrSchema,
+                    targetNamespace,
+                    _nameTable,
+                    _schemaNames,
+                    _eventHandler
+                );
                 ((XdrBuilder)_builder).XmlResolver = _xmlResolver;
             }
         }
@@ -152,10 +180,7 @@ namespace System.Xml.Schema
 
         internal XmlResolver? XmlResolver
         {
-            set
-            {
-                _xmlResolver = value;
-            }
+            set { _xmlResolver = value; }
         }
 
         public SchemaInfo? XdrSchema
@@ -175,20 +200,36 @@ namespace System.Xml.Schema
             }
             else if (_reader.NodeType == XmlNodeType.Element)
             {
-                if (_builder!.ProcessElement(_reader.Prefix, _reader.LocalName, _reader.NamespaceURI))
+                if (
+                    _builder!.ProcessElement(
+                        _reader.Prefix,
+                        _reader.LocalName,
+                        _reader.NamespaceURI
+                    )
+                )
                 {
                     _namespaceManager!.PushScope();
                     if (_reader.MoveToFirstAttribute())
                     {
                         do
                         {
-                            _builder.ProcessAttribute(_reader.Prefix, _reader.LocalName, _reader.NamespaceURI, _reader.Value);
-                            if (Ref.Equal(_reader.NamespaceURI, _schemaNames.NsXmlNs) && _isProcessNamespaces)
+                            _builder.ProcessAttribute(
+                                _reader.Prefix,
+                                _reader.LocalName,
+                                _reader.NamespaceURI,
+                                _reader.Value
+                            );
+                            if (
+                                Ref.Equal(_reader.NamespaceURI, _schemaNames.NsXmlNs)
+                                && _isProcessNamespaces
+                            )
                             {
-                                _namespaceManager.AddNamespace(_reader.Prefix.Length == 0 ? string.Empty : _reader.LocalName, _reader.Value);
+                                _namespaceManager.AddNamespace(
+                                    _reader.Prefix.Length == 0 ? string.Empty : _reader.LocalName,
+                                    _reader.Value
+                                );
                             }
-                        }
-                        while (_reader.MoveToNextAttribute());
+                        } while (_reader.MoveToNextAttribute());
                         _reader.MoveToElement(); // get back to the element
                     }
                     _builder.StartChildren();
@@ -226,9 +267,11 @@ namespace System.Xml.Schema
                     _builder!.ProcessCData(_reader.Value);
                 }
             }
-            else if (_reader.NodeType == XmlNodeType.EntityReference ||
-                _reader.NodeType == XmlNodeType.SignificantWhitespace ||
-                _reader.NodeType == XmlNodeType.CDATA)
+            else if (
+                _reader.NodeType == XmlNodeType.EntityReference
+                || _reader.NodeType == XmlNodeType.SignificantWhitespace
+                || _reader.NodeType == XmlNodeType.CDATA
+            )
             {
                 _builder!.ProcessCData(_reader.Value);
             }
@@ -306,7 +349,10 @@ namespace System.Xml.Schema
                     goto default;
 
                 case XmlNodeType.ProcessingInstruction:
-                    currentNode = _dummyDocument.CreateProcessingInstruction(_reader.Name, _reader.Value);
+                    currentNode = _dummyDocument.CreateProcessingInstruction(
+                        _reader.Name,
+                        _reader.Value
+                    );
                     goto default;
 
                 case XmlNodeType.EndEntity:
@@ -335,7 +381,11 @@ namespace System.Xml.Schema
             XmlReader r = _reader;
             bool fEmptyElement = r.IsEmptyElement;
 
-            XmlElement element = _dummyDocument.CreateElement(r.Prefix, r.LocalName, r.NamespaceURI);
+            XmlElement element = _dummyDocument.CreateElement(
+                r.Prefix,
+                r.LocalName,
+                r.NamespaceURI
+            );
             element.IsEmpty = fEmptyElement;
 
             if (root)
@@ -351,7 +401,10 @@ namespace System.Xml.Schema
                     {
                         if (Ref.Equal(r.NamespaceURI, _schemaNames.NsXmlNs))
                         { //Namespace Attribute
-                            _annotationNSManager!.AddNamespace(r.Prefix.Length == 0 ? string.Empty : _reader.LocalName, _reader.Value);
+                            _annotationNSManager!.AddNamespace(
+                                r.Prefix.Length == 0 ? string.Empty : _reader.LocalName,
+                                _reader.Value
+                            );
                         }
                         XmlAttribute attr = LoadAttributeNode();
                         attributes.Append(attr);
@@ -361,7 +414,10 @@ namespace System.Xml.Schema
                 string? ns = _annotationNSManager!.LookupNamespace(r.Prefix);
                 if (ns == null)
                 {
-                    XmlAttribute attr = CreateXmlNsAttribute(r.Prefix, _namespaceManager!.LookupNamespace(r.Prefix)!);
+                    XmlAttribute attr = CreateXmlNsAttribute(
+                        r.Prefix,
+                        _namespaceManager!.LookupNamespace(r.Prefix)!
+                    );
                     attributes.Append(attr);
                 }
                 else if (ns.Length == 0)
@@ -381,7 +437,10 @@ namespace System.Xml.Schema
                         string? attNS = _annotationNSManager.LookupNamespace(r.Prefix);
                         if (attNS == null)
                         {
-                            XmlAttribute attr = CreateXmlNsAttribute(r.Prefix, _namespaceManager!.LookupNamespace(r.Prefix)!);
+                            XmlAttribute attr = CreateXmlNsAttribute(
+                                r.Prefix,
+                                _namespaceManager!.LookupNamespace(r.Prefix)!
+                            );
                             attributes.Append(attr);
                         }
                     }
@@ -419,7 +478,11 @@ namespace System.Xml.Schema
 
             XmlReader r = _reader;
 
-            XmlAttribute attr = _dummyDocument.CreateAttribute(r.Prefix, r.LocalName, r.NamespaceURI);
+            XmlAttribute attr = _dummyDocument.CreateAttribute(
+                r.Prefix,
+                r.LocalName,
+                r.NamespaceURI
+            );
 
             while (r.ReadAttributeValue())
             {

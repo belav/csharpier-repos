@@ -8,9 +8,9 @@ namespace Application
 {
     public interface IMyInterface
     {
-        void Run ();
+        void Run();
 #if WITH_STOP
-        void Stop ();
+        void Stop();
 #endif
     }
 }

@@ -8,7 +8,10 @@ namespace System.Web.Mvc
 {
     internal static class DictionaryHelpers
     {
-        public static IEnumerable<KeyValuePair<string, TValue>> FindKeysWithPrefix<TValue>(IDictionary<string, TValue> dictionary, string prefix)
+        public static IEnumerable<KeyValuePair<string, TValue>> FindKeysWithPrefix<TValue>(
+            IDictionary<string, TValue> dictionary,
+            string prefix
+        )
         {
             TValue exactMatchValue;
             if (dictionary.TryGetValue(prefix, out exactMatchValue))
@@ -41,12 +44,19 @@ namespace System.Web.Mvc
             }
         }
 
-        public static bool DoesAnyKeyHavePrefix<TValue>(IDictionary<string, TValue> dictionary, string prefix)
+        public static bool DoesAnyKeyHavePrefix<TValue>(
+            IDictionary<string, TValue> dictionary,
+            string prefix
+        )
         {
             return FindKeysWithPrefix(dictionary, prefix).Any();
         }
 
-        public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key, TValue @default)
+        public static TValue GetOrDefault<TKey, TValue>(
+            this IDictionary<TKey, TValue> dict,
+            TKey key,
+            TValue @default
+        )
         {
             TValue value;
             if (dict.TryGetValue(key, out value))

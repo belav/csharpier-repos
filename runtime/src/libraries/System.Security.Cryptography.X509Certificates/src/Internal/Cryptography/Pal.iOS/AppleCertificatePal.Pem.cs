@@ -14,7 +14,8 @@ namespace Internal.Cryptography.Pal
     internal sealed partial class AppleCertificatePal : ICertificatePal
     {
         // Byte representation of "-----BEGIN "
-        private static ReadOnlySpan<byte> PemBegin => new byte[] { 0x2D, 0x2D, 0x2D, 0x2D, 0x2D, 0x42, 0x45, 0x47, 0x49, 0x4E, 0x20 };
+        private static ReadOnlySpan<byte> PemBegin =>
+            new byte[] { 0x2D, 0x2D, 0x2D, 0x2D, 0x2D, 0x42, 0x45, 0x47, 0x49, 0x4E, 0x20 };
 
         internal delegate bool DerCallback(ReadOnlySpan<byte> derData, X509ContentType contentType);
 
@@ -42,25 +43,39 @@ namespace Internal.Cryptography.Pal
             {
                 Encoding.ASCII.GetChars(rawData, certPem);
 
-                foreach ((ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(certPem.AsSpan(0, rawData.Length)))
+                foreach (
+                    (ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(
+                        certPem.AsSpan(0, rawData.Length)
+                    )
+                )
                 {
                     ReadOnlySpan<char> label = contents[fields.Label];
 
-                    if (label.SequenceEqual(PemLabels.X509Certificate) || label.SequenceEqual(PemLabels.Pkcs7Certificate))
+                    if (
+                        label.SequenceEqual(PemLabels.X509Certificate)
+                        || label.SequenceEqual(PemLabels.Pkcs7Certificate)
+                    )
                     {
                         certBytes = CryptoPool.Rent(fields.DecodedDataLength);
 
-                        if (!Convert.TryFromBase64Chars(contents[fields.Base64Data], certBytes, out int bytesWritten)
-                            || bytesWritten != fields.DecodedDataLength)
+                        if (
+                            !Convert.TryFromBase64Chars(
+                                contents[fields.Base64Data],
+                                certBytes,
+                                out int bytesWritten
+                            )
+                            || bytesWritten != fields.DecodedDataLength
+                        )
                         {
-                            Debug.Fail("The contents should have already been validated by the PEM reader.");
+                            Debug.Fail(
+                                "The contents should have already been validated by the PEM reader."
+                            );
                             throw new CryptographicException(SR.Cryptography_X509_NoPemCertificate);
                         }
 
-                        X509ContentType contentType =
-                            label.SequenceEqual(PemLabels.X509Certificate) ?
-                            X509ContentType.Cert :
-                            X509ContentType.Pkcs7;
+                        X509ContentType contentType = label.SequenceEqual(PemLabels.X509Certificate)
+                            ? X509ContentType.Cert
+                            : X509ContentType.Pkcs7;
                         bool cont = derCallback(certBytes.AsSpan(0, bytesWritten), contentType);
 
                         byte[] toReturn = certBytes;

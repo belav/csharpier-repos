@@ -22,7 +22,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -42,9 +42,8 @@ using ICSharpCode.SharpZipLib.Checksums;
 using ICSharpCode.SharpZipLib.Zip.Compression;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
-namespace ICSharpCode.SharpZipLib.GZip 
+namespace ICSharpCode.SharpZipLib.GZip
 {
-    
     /// <summary>
     /// This filter stream is used to compress a stream into a "GZIP" stream.
     /// The "GZIP" format is described in RFC 1952.
@@ -55,9 +54,9 @@ namespace ICSharpCode.SharpZipLib.GZip
     /// <code>
     /// using System;
     /// using System.IO;
-    /// 
+    ///
     /// using ICSharpCode.SharpZipLib.GZip;    // -jr- corrected
-    /// 
+    ///
     /// class MainClass
     /// {
     ///     public static void Main(string[] args)
@@ -69,31 +68,32 @@ namespace ICSharpCode.SharpZipLib.GZip
     ///         s.Write(writeData, 0, writeData.Length);
     ///         s.Close();
     ///     }
-    /// }    
+    /// }
     /// </code>
     /// </example>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public class GZipOutputStream : DeflaterOutputStream
     {
         //Variables
-        
+
         /// <summary>
         /// CRC-32 value for uncompressed data
         /// </summary>
         protected Crc32 crc = new Crc32();
-        
+
         // Constructors
-        
+
         /// <summary>
         /// Creates a GzipOutputStream with the default buffer size
         /// </summary>
         /// <param name="baseOutputStream">
         /// The stream to read data (to be compressed) from
         /// </param>
-        public GZipOutputStream(Stream baseOutputStream) : this(baseOutputStream, 4096)
-        {
-        }
-        
+        public GZipOutputStream(Stream baseOutputStream)
+            : this(baseOutputStream, 4096) { }
+
         /// <summary>
         /// Creates a GZIPOutputStream with the specified buffer size
         /// </summary>
@@ -103,44 +103,44 @@ namespace ICSharpCode.SharpZipLib.GZip
         /// <param name="size">
         /// Size of the buffer to use
         /// </param>
-        public GZipOutputStream(Stream baseOutputStream, int size) : base(baseOutputStream, new Deflater(Deflater.DEFAULT_COMPRESSION, true), size)
+        public GZipOutputStream(Stream baseOutputStream, int size)
+            : base(baseOutputStream, new Deflater(Deflater.DEFAULT_COMPRESSION, true), size)
         {
             WriteHeader();
             //    System.err.println("wrote GZIP header (" + gzipHeader.length + " bytes )");
         }
-        
+
         void WriteHeader()
         {
-            int mod_time = (int)(DateTime.Now.Ticks / 10000L);  // Ticks give back 100ns intervals
-            byte[] gzipHeader = {
+            int mod_time = (int)(DateTime.Now.Ticks / 10000L); // Ticks give back 100ns intervals
+            byte[] gzipHeader =
+            {
                 /* The two magic bytes */
-                (byte) (GZipConstants.GZIP_MAGIC >> 8), (byte) GZipConstants.GZIP_MAGIC,
-                
+                (byte)(GZipConstants.GZIP_MAGIC >> 8),
+                (byte)GZipConstants.GZIP_MAGIC,
                 /* The compression type */
-                (byte) Deflater.DEFLATED,
-                
+                (byte)Deflater.DEFLATED,
                 /* The flags (not set) */
                 0,
-                
                 /* The modification time */
-                (byte) mod_time, (byte) (mod_time >> 8),
-                (byte) (mod_time >> 16), (byte) (mod_time >> 24),
-                
+                (byte)mod_time,
+                (byte)(mod_time >> 8),
+                (byte)(mod_time >> 16),
+                (byte)(mod_time >> 24),
                 /* The extra flags */
                 0,
-                
                 /* The OS type (unknown) */
-                (byte) 255
+                (byte)255
             };
             baseOutputStream.Write(gzipHeader, 0, gzipHeader.Length);
         }
-        
+
         public override void Write(byte[] buf, int off, int len)
         {
             crc.Update(buf, off, len);
             base.Write(buf, off, len);
         }
-        
+
         /// <summary>
         /// Writes remaining compressed output data to the output stream
         /// and closes it.
@@ -150,22 +150,26 @@ namespace ICSharpCode.SharpZipLib.GZip
             Finish();
             baseOutputStream.Close();
         }
-        
+
         public override void Finish()
         {
             base.Finish();
-            
+
             int totalin = def.TotalIn;
-            int crcval = (int) (crc.Value & 0xffffffff);
-            
+            int crcval = (int)(crc.Value & 0xffffffff);
+
             //    System.err.println("CRC val is " + Integer.toHexString( crcval )                + " and length " + Integer.toHexString(totalin));
-            
-            byte[] gzipFooter = {
-                (byte) crcval, (byte) (crcval >> 8),
-                (byte) (crcval >> 16), (byte) (crcval >> 24),
-                
-                (byte) totalin, (byte) (totalin >> 8),
-                (byte) (totalin >> 16), (byte) (totalin >> 24)
+
+            byte[] gzipFooter =
+            {
+                (byte)crcval,
+                (byte)(crcval >> 8),
+                (byte)(crcval >> 16),
+                (byte)(crcval >> 24),
+                (byte)totalin,
+                (byte)(totalin >> 8),
+                (byte)(totalin >> 16),
+                (byte)(totalin >> 24)
             };
 
             baseOutputStream.Write(gzipFooter, 0, gzipFooter.Length);

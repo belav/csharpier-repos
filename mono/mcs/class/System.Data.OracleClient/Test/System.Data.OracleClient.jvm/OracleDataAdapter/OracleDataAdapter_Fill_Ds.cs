@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,7 +28,6 @@ using System.Data.OracleClient;
 
 using MonoTests.System.Data.Utils;
 
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
@@ -41,17 +40,20 @@ namespace MonoTests.System.Data.OracleClient
         {
             Exception exp = null;
             BeginCase("Setup");
-            try
+            try { }
+            catch (Exception ex)
             {
+                exp = ex;
             }
-            catch(Exception ex)    {exp = ex;}
-            finally    {EndCase(exp); exp = null;}
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
 
         [TearDown]
-        public void TearDown()
-        {
-        }
+        public void TearDown() { }
 
         public static void Main()
         {
@@ -64,7 +66,7 @@ namespace MonoTests.System.Data.OracleClient
                 tc.run();
                 tc.TearDown();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -81,10 +83,9 @@ namespace MonoTests.System.Data.OracleClient
         public void run()
         {
             OracleDataAdapter oleDBda = new OracleDataAdapter();
-            oleDBda.SelectCommand = new OracleCommand("",new OracleConnection());
-    
-            base.DbDataAdapter_Fill_Ds((DbDataAdapter)oleDBda);
+            oleDBda.SelectCommand = new OracleCommand("", new OracleConnection());
 
+            base.DbDataAdapter_Fill_Ds((DbDataAdapter)oleDBda);
         }
     }
 }

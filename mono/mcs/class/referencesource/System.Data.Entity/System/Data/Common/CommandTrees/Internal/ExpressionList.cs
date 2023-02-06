@@ -16,11 +16,10 @@ using System.Data.Common.CommandTrees;
 
 namespace System.Data.Common.CommandTrees.Internal
 {
-    internal sealed class DbExpressionList : System.Collections.ObjectModel.ReadOnlyCollection<DbExpression>
+    internal sealed class DbExpressionList
+        : System.Collections.ObjectModel.ReadOnlyCollection<DbExpression>
     {
-        internal DbExpressionList(IList<DbExpression> elements) 
-            : base(elements) 
-        {
-        }
+        internal DbExpressionList(IList<DbExpression> elements)
+            : base(elements) { }
     }
 }

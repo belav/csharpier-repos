@@ -6,19 +6,22 @@ using System;
 
 public struct Point
 {
-        public bool this [int i] { set { } }
+    public bool this[int i]
+    {
+        set { }
+    }
 }
 
 public class A : MarshalByRefObject
 {
-   public Point point = new Point ();
+    public Point point = new Point();
 }
 
 public class Test
 {
-   public static void Main ()
-   {
-        A a = new A ();
-        a.point [3] = false;
-   }
+    public static void Main()
+    {
+        A a = new A();
+        a.point[3] = false;
+    }
 }

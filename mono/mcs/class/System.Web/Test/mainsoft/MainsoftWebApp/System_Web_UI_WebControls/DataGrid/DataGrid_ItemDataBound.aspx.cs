@@ -37,13 +37,13 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGrid_ItemDataBound
-        : GHTBaseWeb 
+    public class DataGrid_ItemDataBound : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest Ghtsubtest1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -51,20 +51,19 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
             this.DataGrid1.ItemDataBound += new DataGridItemEventHandler(DataGrid1_ItemDataBound);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -72,13 +71,14 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = Ghtsubtest1;
-            try 
+            try
             {
                 DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable();
                 DataGrid1.ShowFooter = true;
-                DataGrid1.DataBind();;
+                DataGrid1.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
@@ -90,6 +90,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         {
             e.Item.Cells[0].Controls.Add(new LiteralControl("Added on ItemDataBound event"));
         }
- 
     }
 }

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
         public string Message { get; }
         public int Position { get; }
 
-        public TodoComment(TodoCommentDescriptor descriptor, string message, int position) : this()
+        public TodoComment(TodoCommentDescriptor descriptor, string message, int position)
+            : this()
         {
             Descriptor = descriptor;
             Message = message;
@@ -30,14 +31,22 @@ namespace Microsoft.CodeAnalysis.TodoComments
         }
 
         private TodoCommentData CreateSerializableData(
-            Document document, SourceText text, SyntaxTree? tree)
+            Document document,
+            SourceText text,
+            SyntaxTree? tree
+        )
         {
             // make sure given position is within valid text range.
             var textSpan = new TextSpan(Math.Min(text.Length, Math.Max(0, Position)), 0);
 
-            var location = tree == null
-                ? Location.Create(document.FilePath!, textSpan, text.Lines.GetLinePositionSpan(textSpan))
-                : tree.GetLocation(textSpan);
+            var location =
+                tree == null
+                    ? Location.Create(
+                        document.FilePath!,
+                        textSpan,
+                        text.Lines.GetLinePositionSpan(textSpan)
+                    )
+                    : tree.GetLocation(textSpan);
             var originalLineInfo = location.GetLineSpan();
             var mappedLineInfo = location.GetMappedLineSpan();
 
@@ -50,17 +59,21 @@ namespace Microsoft.CodeAnalysis.TodoComments
                 originalFilePath: document.FilePath,
                 mappedLine: mappedLineInfo.StartLinePosition.Line,
                 mappedColumn: mappedLineInfo.StartLinePosition.Character,
-                mappedFilePath: mappedLineInfo.GetMappedFilePathIfExist());
+                mappedFilePath: mappedLineInfo.GetMappedFilePathIfExist()
+            );
         }
 
         public static async Task ConvertAsync(
             Document document,
             ImmutableArray<TodoComment> todoComments,
             ArrayBuilder<TodoCommentData> converted,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var comment in todoComments)
                 converted.Add(comment.CreateSerializableData(document, sourceText, syntaxTree));
@@ -69,6 +82,10 @@ namespace Microsoft.CodeAnalysis.TodoComments
 
     internal interface ITodoCommentService : ILanguageService
     {
-        Task<ImmutableArray<TodoComment>> GetTodoCommentsAsync(Document document, ImmutableArray<TodoCommentDescriptor> commentDescriptors, CancellationToken cancellationToken);
+        Task<ImmutableArray<TodoComment>> GetTodoCommentsAsync(
+            Document document,
+            ImmutableArray<TodoCommentDescriptor> commentDescriptors,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -44,36 +44,44 @@ namespace MonoTests.System.Runtime.CompilerServices
         class Scheduler : TaskScheduler
         {
             string name;
-            int ic, qc;
+            int ic,
+                qc;
 
-            public Scheduler (string name)
+            public Scheduler(string name)
             {
                 this.name = name;
             }
 
-            public int InlineCalls { get { return ic; } }
-            public int QueueCalls { get { return qc; } }
-
-            protected override IEnumerable<Task> GetScheduledTasks ()
+            public int InlineCalls
             {
-                throw new NotImplementedException ();
+                get { return ic; }
+            }
+            public int QueueCalls
+            {
+                get { return qc; }
             }
 
-            protected override void QueueTask (Task task)
+            protected override IEnumerable<Task> GetScheduledTasks()
             {
-                Interlocked.Increment (ref qc);
-                ThreadPool.QueueUserWorkItem (o => {
-                    TryExecuteTask (task);
+                throw new NotImplementedException();
+            }
+
+            protected override void QueueTask(Task task)
+            {
+                Interlocked.Increment(ref qc);
+                ThreadPool.QueueUserWorkItem(o =>
+                {
+                    TryExecuteTask(task);
                 });
             }
 
-            protected override bool TryExecuteTaskInline (Task task, bool taskWasPreviouslyQueued)
+            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
             {
-                Interlocked.Increment (ref ic);
+                Interlocked.Increment(ref ic);
                 return false;
             }
 
-            public override string ToString ()
+            public override string ToString()
             {
                 return "Scheduler-" + name;
             }
@@ -81,64 +89,75 @@ namespace MonoTests.System.Runtime.CompilerServices
 
         class SingleThreadSynchronizationContext : SynchronizationContext
         {
-            readonly Queue _queue = new Queue ();
+            readonly Queue _queue = new Queue();
 
-            public void RunOnCurrentThread ()
+            public void RunOnCurrentThread()
             {
-                while (_queue.Count != 0) {
-                    var workItem = (KeyValuePair<SendOrPostCallback, object>) _queue.Dequeue ();
-                    workItem.Key (workItem.Value);
+                while (_queue.Count != 0)
+                {
+                    var workItem = (KeyValuePair<SendOrPostCallback, object>)_queue.Dequeue();
+                    workItem.Key(workItem.Value);
                 }
             }
-                
-            public override void Post (SendOrPostCallback d, object state)
+
+            public override void Post(SendOrPostCallback d, object state)
             {
-                if (d == null) {
-                    throw new ArgumentNullException ("d");
+                if (d == null)
+                {
+                    throw new ArgumentNullException("d");
                 }
 
-                _queue.Enqueue (new KeyValuePair<SendOrPostCallback, object> (d, state));
+                _queue.Enqueue(new KeyValuePair<SendOrPostCallback, object>(d, state));
             }
 
-            public override void Send (SendOrPostCallback d, object state)
+            public override void Send(SendOrPostCallback d, object state)
             {
-                throw new NotSupportedException ("Synchronously sending is not supported.");
+                throw new NotSupportedException("Synchronously sending is not supported.");
             }
         }
 
         class NestedSynchronizationContext : SynchronizationContext
         {
             Thread thread;
-            readonly ConcurrentQueue<Tuple<SendOrPostCallback, object, ExecutionContext>> workQueue = new ConcurrentQueue<Tuple<SendOrPostCallback, object, ExecutionContext>> ();
-            readonly AutoResetEvent workReady = new AutoResetEvent (false);
+            readonly ConcurrentQueue<
+                Tuple<SendOrPostCallback, object, ExecutionContext>
+            > workQueue =
+                new ConcurrentQueue<Tuple<SendOrPostCallback, object, ExecutionContext>>();
+            readonly AutoResetEvent workReady = new AutoResetEvent(false);
 
-            public NestedSynchronizationContext ()
+            public NestedSynchronizationContext()
             {
-                thread = new Thread (WorkerThreadProc) { IsBackground = true };
-                thread.Start ();
+                thread = new Thread(WorkerThreadProc) { IsBackground = true };
+                thread.Start();
             }
 
-            public override void Post (SendOrPostCallback d, object state)
+            public override void Post(SendOrPostCallback d, object state)
             {
-                var context = ExecutionContext.Capture ();
-                workQueue.Enqueue (Tuple.Create (d, state, context));
-                workReady.Set ();
+                var context = ExecutionContext.Capture();
+                workQueue.Enqueue(Tuple.Create(d, state, context));
+                workReady.Set();
             }
 
-            void WorkerThreadProc ()
+            void WorkerThreadProc()
             {
-                if (!workReady.WaitOne (10000))
+                if (!workReady.WaitOne(10000))
                     return;
 
                 Tuple<SendOrPostCallback, object, ExecutionContext> work;
 
-                while (workQueue.TryDequeue (out work)) {
-                    ExecutionContext.Run (work.Item3, _ => {
-                        var oldSyncContext = SynchronizationContext.Current;
-                        SynchronizationContext.SetSynchronizationContext (this);
-                        work.Item1 (_);
-                        SynchronizationContext.SetSynchronizationContext (oldSyncContext);
-                    }, work.Item2);    
+                while (workQueue.TryDequeue(out work))
+                {
+                    ExecutionContext.Run(
+                        work.Item3,
+                        _ =>
+                        {
+                            var oldSyncContext = SynchronizationContext.Current;
+                            SynchronizationContext.SetSynchronizationContext(this);
+                            work.Item1(_);
+                            SynchronizationContext.SetSynchronizationContext(oldSyncContext);
+                        },
+                        work.Item2
+                    );
                 }
             }
         }
@@ -148,170 +167,192 @@ namespace MonoTests.System.Runtime.CompilerServices
         ManualResetEvent mre;
 
         [SetUp]
-        public void Setup ()
+        public void Setup()
         {
             sc = SynchronizationContext.Current;
         }
 
         [TearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            SynchronizationContext.SetSynchronizationContext (sc);
+            SynchronizationContext.SetSynchronizationContext(sc);
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void GetResultFaulted ()
+        [Category("MultiThreaded")]
+        public void GetResultFaulted()
         {
             TaskAwaiter awaiter;
 
-            var task = new Task (() => { throw new ApplicationException (); });
-            awaiter = task.GetAwaiter ();
-            task.RunSynchronously (TaskScheduler.Current);
+            var task = new Task(() =>
+            {
+                throw new ApplicationException();
+            });
+            awaiter = task.GetAwaiter();
+            task.RunSynchronously(TaskScheduler.Current);
 
+            Assert.IsTrue(awaiter.IsCompleted);
 
-            Assert.IsTrue (awaiter.IsCompleted);
-
-            try {
-                awaiter.GetResult ();
-                Assert.Fail ();
-            } catch (ApplicationException) {
+            try
+            {
+                awaiter.GetResult();
+                Assert.Fail();
             }
+            catch (ApplicationException) { }
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void GetResultCanceled ()
+        [Category("MultiThreaded")]
+        public void GetResultCanceled()
         {
             TaskAwaiter awaiter;
 
-            var token = new CancellationToken (true);
-            var task = new Task (() => { }, token);
-            awaiter = task.GetAwaiter ();
+            var token = new CancellationToken(true);
+            var task = new Task(() => { }, token);
+            awaiter = task.GetAwaiter();
 
-            try {
-                awaiter.GetResult ();
-                Assert.Fail ();
-            } catch (TaskCanceledException) {
+            try
+            {
+                awaiter.GetResult();
+                Assert.Fail();
             }
+            catch (TaskCanceledException) { }
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void GetResultWaitOnCompletion ()
+        [Category("MultiThreaded")]
+        public void GetResultWaitOnCompletion()
         {
             TaskAwaiter awaiter;
-                
-            var task = Task.Delay (30);
-            awaiter = task.GetAwaiter ();
-                
-            awaiter.GetResult ();
-            Assert.AreEqual (TaskStatus.RanToCompletion, task.Status);
+
+            var task = Task.Delay(30);
+            awaiter = task.GetAwaiter();
+
+            awaiter.GetResult();
+            Assert.AreEqual(TaskStatus.RanToCompletion, task.Status);
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void CustomScheduler ()
+        [Category("MultiThreaded")]
+        public void CustomScheduler()
         {
             // some test runners (e.g. Touch.Unit) will execute this on the main thread and that would lock them
             if (!Thread.CurrentThread.IsBackground)
-                Assert.Ignore ("Current thread is not running in the background.");
+                Assert.Ignore("Current thread is not running in the background.");
 
-            var a = new Scheduler ("a");
-            var b = new Scheduler ("b");
+            var a = new Scheduler("a");
+            var b = new Scheduler("b");
 
-            var t = TestCS (a, b);
-            Assert.IsTrue (t.Wait (3000), "#0");
-            Assert.AreEqual (0, t.Result, "#1");
-            Assert.AreEqual (0, b.InlineCalls, "#2b");
-            Assert.IsTrue (a.QueueCalls == 1 || a.QueueCalls == 2, "#3a");
-            Assert.AreEqual (1, b.QueueCalls, "#3b");
+            var t = TestCS(a, b);
+            Assert.IsTrue(t.Wait(3000), "#0");
+            Assert.AreEqual(0, t.Result, "#1");
+            Assert.AreEqual(0, b.InlineCalls, "#2b");
+            Assert.IsTrue(a.QueueCalls == 1 || a.QueueCalls == 2, "#3a");
+            Assert.AreEqual(1, b.QueueCalls, "#3b");
         }
 
-        static async Task<int> TestCS (TaskScheduler schedulerA, TaskScheduler schedulerB)
+        static async Task<int> TestCS(TaskScheduler schedulerA, TaskScheduler schedulerB)
         {
-            var res = await Task.Factory.StartNew (async () => {
-                if (TaskScheduler.Current != schedulerA)
-                    return 1;
+            var res = await Task.Factory.StartNew(
+                async () =>
+                {
+                    if (TaskScheduler.Current != schedulerA)
+                        return 1;
 
-                await Task.Factory.StartNew (
-                    () => {
-                        if (TaskScheduler.Current != schedulerB)
-                            return 2;
+                    await Task.Factory.StartNew(
+                        () =>
+                        {
+                            if (TaskScheduler.Current != schedulerB)
+                                return 2;
 
-                        return 0;
-                    }, CancellationToken.None, TaskCreationOptions.None, schedulerB);
+                            return 0;
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        schedulerB
+                    );
 
-                if (TaskScheduler.Current != schedulerA)
-                    return 3;
+                    if (TaskScheduler.Current != schedulerA)
+                        return 3;
 
-                return 0;
-            }, CancellationToken.None, TaskCreationOptions.None, schedulerA);
+                    return 0;
+                },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                schedulerA
+            );
 
             return res.Result;
         }
 
         [Test]
-        [Ignore ("Incompatible with nunitlite")]
-        [Category ("MultiThreaded")]
-        public void FinishedTaskOnCompleted ()
+        [Ignore("Incompatible with nunitlite")]
+        [Category("MultiThreaded")]
+        public void FinishedTaskOnCompleted()
         {
-            var mres = new ManualResetEvent (false);
-            var mres2 = new ManualResetEvent (false);
+            var mres = new ManualResetEvent(false);
+            var mres2 = new ManualResetEvent(false);
 
-            var tcs = new TaskCompletionSource<object> ();
-            tcs.SetResult (null);
+            var tcs = new TaskCompletionSource<object>();
+            tcs.SetResult(null);
             var task = tcs.Task;
 
-            var awaiter = task.GetAwaiter ();
-            Assert.IsTrue (awaiter.IsCompleted, "#1");
+            var awaiter = task.GetAwaiter();
+            Assert.IsTrue(awaiter.IsCompleted, "#1");
 
-            awaiter.OnCompleted(() => { 
-                if (mres.WaitOne (1000))
-                    mres2.Set ();
+            awaiter.OnCompleted(() =>
+            {
+                if (mres.WaitOne(1000))
+                    mres2.Set();
             });
 
-            mres.Set ();
+            mres.Set();
             // this will only terminate correctly if the test was not executed from the main thread
             // e.g. nunitlite/Touch.Unit defaults to run tests on the main thread and this will return false
-            Assert.AreEqual (Thread.CurrentThread.IsBackground, mres2.WaitOne (2000), "#2");;
+            Assert.AreEqual(Thread.CurrentThread.IsBackground, mres2.WaitOne(2000), "#2");
+            ;
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void CompletionOnSameCustomSynchronizationContext ()
+        [Category("MultiThreaded")]
+        public void CompletionOnSameCustomSynchronizationContext()
         {
             progress = "";
-            var syncContext = new SingleThreadSynchronizationContext ();
-            SynchronizationContext.SetSynchronizationContext (syncContext);
+            var syncContext = new SingleThreadSynchronizationContext();
+            SynchronizationContext.SetSynchronizationContext(syncContext);
 
-            syncContext.Post (delegate {
-                Go (syncContext);
-            }, null);
+            syncContext.Post(
+                delegate
+                {
+                    Go(syncContext);
+                },
+                null
+            );
 
             // Custom message loop
-            var cts = new CancellationTokenSource ();
-            cts.CancelAfter (5000);
-            while (progress.Length != 3 && !cts.IsCancellationRequested) {
-                syncContext.RunOnCurrentThread ();
-                Thread.Sleep (0);
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(5000);
+            while (progress.Length != 3 && !cts.IsCancellationRequested)
+            {
+                syncContext.RunOnCurrentThread();
+                Thread.Sleep(0);
             }
 
-            Assert.AreEqual ("123", progress);
+            Assert.AreEqual("123", progress);
         }
 
-        async void Go (SynchronizationContext ctx)
+        async void Go(SynchronizationContext ctx)
         {
-            await Wait (ctx);
+            await Wait(ctx);
 
             progress += "2";
         }
 
-        async Task Wait (SynchronizationContext ctx)
+        async Task Wait(SynchronizationContext ctx)
         {
-            await Task.Delay (10); // Force block suspend/return
+            await Task.Delay(10); // Force block suspend/return
 
-            ctx.Post (l => progress += "3", null);
+            ctx.Post(l => progress += "3", null);
 
             progress += "1";
 
@@ -319,85 +360,93 @@ namespace MonoTests.System.Runtime.CompilerServices
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void CompletionOnDifferentCustomSynchronizationContext ()
+        [Category("MultiThreaded")]
+        public void CompletionOnDifferentCustomSynchronizationContext()
         {
-            mre = new ManualResetEvent (false);
+            mre = new ManualResetEvent(false);
             progress = "";
-            var syncContext = new SingleThreadSynchronizationContext ();
-            SynchronizationContext.SetSynchronizationContext (syncContext);
+            var syncContext = new SingleThreadSynchronizationContext();
+            SynchronizationContext.SetSynchronizationContext(syncContext);
 
-            syncContext.Post (delegate {
-                Task t = new Task (delegate() { });
-                Go2 (syncContext, t);
-                t.Start ();
-            }, null);
+            syncContext.Post(
+                delegate
+                {
+                    Task t = new Task(delegate() { });
+                    Go2(syncContext, t);
+                    t.Start();
+                },
+                null
+            );
 
             // Custom message loop
-            var cts = new CancellationTokenSource ();
-            cts.CancelAfter (5000);
-            while (progress.Length != 3 && !cts.IsCancellationRequested) {
-                syncContext.RunOnCurrentThread ();
-                Thread.Sleep (0);
+            var cts = new CancellationTokenSource();
+            cts.CancelAfter(5000);
+            while (progress.Length != 3 && !cts.IsCancellationRequested)
+            {
+                syncContext.RunOnCurrentThread();
+                Thread.Sleep(0);
             }
 
-            Assert.AreEqual ("13xa2", progress);
+            Assert.AreEqual("13xa2", progress);
         }
 
-        async void Go2 (SynchronizationContext ctx, Task t)
+        async void Go2(SynchronizationContext ctx, Task t)
         {
-            await Wait2 (ctx, t);
+            await Wait2(ctx, t);
 
             progress += "a";
 
-            if (mre.WaitOne (5000))
+            if (mre.WaitOne(5000))
                 progress += "2";
             else
                 progress += "b";
         }
 
-        async Task Wait2 (SynchronizationContext ctx, Task t)
+        async Task Wait2(SynchronizationContext ctx, Task t)
         {
             await t; // Force block suspend/return
 
-            ctx.Post (l => {
-                progress += "3";
-                mre.Set ();
-                progress += "x";
-            }, null);
+            ctx.Post(
+                l =>
+                {
+                    progress += "3";
+                    mre.Set();
+                    progress += "x";
+                },
+                null
+            );
 
             progress += "1";
 
-            SynchronizationContext.SetSynchronizationContext (null);
+            SynchronizationContext.SetSynchronizationContext(null);
         }
 
         [Test]
-        [Category ("MultiThreaded")]
-        public void NestedLeakingSynchronizationContext ()
+        [Category("MultiThreaded")]
+        public void NestedLeakingSynchronizationContext()
         {
             var sc = SynchronizationContext.Current;
             if (sc == null)
-                Assert.IsTrue (NestedLeakingSynchronizationContext_MainAsync (sc).Wait (5000), "#1");
+                Assert.IsTrue(NestedLeakingSynchronizationContext_MainAsync(sc).Wait(5000), "#1");
             else
-                Assert.Ignore ("NestedSynchronizationContext may never complete on custom context");
+                Assert.Ignore("NestedSynchronizationContext may never complete on custom context");
         }
 
-        static async Task NestedLeakingSynchronizationContext_MainAsync (SynchronizationContext sc)
+        static async Task NestedLeakingSynchronizationContext_MainAsync(SynchronizationContext sc)
         {
-            Assert.AreSame (sc, SynchronizationContext.Current, "#1");
-            await NestedLeakingSynchronizationContext_DoWorkAsync ();
-            Assert.AreSame (sc, SynchronizationContext.Current, "#2");
+            Assert.AreSame(sc, SynchronizationContext.Current, "#1");
+            await NestedLeakingSynchronizationContext_DoWorkAsync();
+            Assert.AreSame(sc, SynchronizationContext.Current, "#2");
         }
 
-        static async Task NestedLeakingSynchronizationContext_DoWorkAsync ()
+        static async Task NestedLeakingSynchronizationContext_DoWorkAsync()
         {
-            var sc = new NestedSynchronizationContext ();
-            SynchronizationContext.SetSynchronizationContext (sc);
+            var sc = new NestedSynchronizationContext();
+            SynchronizationContext.SetSynchronizationContext(sc);
 
-            Assert.AreSame (sc, SynchronizationContext.Current);
-            await Task.Yield ();
-            Assert.AreSame (sc, SynchronizationContext.Current);
+            Assert.AreSame(sc, SynchronizationContext.Current);
+            await Task.Yield();
+            Assert.AreSame(sc, SynchronizationContext.Current);
         }
     }
 }
-

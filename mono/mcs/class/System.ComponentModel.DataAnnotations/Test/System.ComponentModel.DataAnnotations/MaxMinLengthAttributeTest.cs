@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,39 +35,43 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
     public class MaxMinLengthAttributeTest
     {
         [Test]
-        public void CheckMinLength () {
-            var attr = new MinLengthAttribute (2);
+        public void CheckMinLength()
+        {
+            var attr = new MinLengthAttribute(2);
 
-            Assert.IsTrue (attr.IsValid (null), "#A1");
-            Assert.IsFalse (attr.IsValid ("1"), "#A2");
+            Assert.IsTrue(attr.IsValid(null), "#A1");
+            Assert.IsFalse(attr.IsValid("1"), "#A2");
 
-            Assert.IsTrue (attr.IsValid ("12"), "#A3");
-            Assert.IsTrue (attr.IsValid ("123"), "#A4");
+            Assert.IsTrue(attr.IsValid("12"), "#A3");
+            Assert.IsTrue(attr.IsValid("123"), "#A4");
 
-            Assert.IsFalse (attr.IsValid (BuildQuickList (1)), "#A5");
-            Assert.IsTrue (attr.IsValid (BuildQuickList (2)), "#A6");
-            Assert.IsTrue (attr.IsValid (BuildQuickList (3)), "#A7");
+            Assert.IsFalse(attr.IsValid(BuildQuickList(1)), "#A5");
+            Assert.IsTrue(attr.IsValid(BuildQuickList(2)), "#A6");
+            Assert.IsTrue(attr.IsValid(BuildQuickList(3)), "#A7");
         }
 
         [Test]
-        public void CheckMaxLength () {
-            var attr = new MaxLengthAttribute (2);
+        public void CheckMaxLength()
+        {
+            var attr = new MaxLengthAttribute(2);
 
-            Assert.IsTrue (attr.IsValid (null), "#A1");
-            Assert.IsTrue (attr.IsValid ("1"), "#A2");
-            Assert.IsTrue (attr.IsValid ("12"), "#A3");
+            Assert.IsTrue(attr.IsValid(null), "#A1");
+            Assert.IsTrue(attr.IsValid("1"), "#A2");
+            Assert.IsTrue(attr.IsValid("12"), "#A3");
 
-            Assert.IsFalse (attr.IsValid ("123"), "#A4");
+            Assert.IsFalse(attr.IsValid("123"), "#A4");
 
-            Assert.IsTrue (attr.IsValid (BuildQuickList (1)), "#A5");
-            Assert.IsTrue (attr.IsValid (BuildQuickList (2)), "#A6");
-            Assert.IsFalse (attr.IsValid (BuildQuickList (3)), "#A7");
+            Assert.IsTrue(attr.IsValid(BuildQuickList(1)), "#A5");
+            Assert.IsTrue(attr.IsValid(BuildQuickList(2)), "#A6");
+            Assert.IsFalse(attr.IsValid(BuildQuickList(3)), "#A7");
         }
 
-        List<string> BuildQuickList (int count) {
-            var items = new List<string> ();
-            
-            for (int i = 0; i < count; i++) {
+        List<string> BuildQuickList(int count)
+        {
+            var items = new List<string>();
+
+            for (int i = 0; i < count; i++)
+            {
                 items.Add(i.ToString());
             }
 

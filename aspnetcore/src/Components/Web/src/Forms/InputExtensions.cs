@@ -8,10 +8,14 @@ namespace Microsoft.AspNetCore.Components.Forms;
 
 internal static class InputExtensions
 {
-    public static bool TryParseSelectableValueFromString<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>(
-        this InputBase<TValue> input, string? value,
+    public static bool TryParseSelectableValueFromString<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue
+    >(
+        this InputBase<TValue> input,
+        string? value,
         [MaybeNullWhen(false)] out TValue result,
-        [NotNullWhen(false)] out string? validationErrorMessage)
+        [NotNullWhen(false)] out string? validationErrorMessage
+    )
     {
         try
         {
@@ -32,7 +36,13 @@ internal static class InputExtensions
                     return true;
                 }
             }
-            else if (BindConverter.TryConvertTo<TValue>(value, CultureInfo.CurrentCulture, out var parsedValue))
+            else if (
+                BindConverter.TryConvertTo<TValue>(
+                    value,
+                    CultureInfo.CurrentCulture,
+                    out var parsedValue
+                )
+            )
             {
                 result = parsedValue;
                 validationErrorMessage = null;
@@ -40,12 +50,16 @@ internal static class InputExtensions
             }
 
             result = default;
-            validationErrorMessage = $"The {input.DisplayName ?? input.FieldIdentifier.FieldName} field is not valid.";
+            validationErrorMessage =
+                $"The {input.DisplayName ?? input.FieldIdentifier.FieldName} field is not valid.";
             return false;
         }
         catch (InvalidOperationException ex)
         {
-            throw new InvalidOperationException($"{input.GetType()} does not support the type '{typeof(TValue)}'.", ex);
+            throw new InvalidOperationException(
+                $"{input.GetType()} does not support the type '{typeof(TValue)}'.",
+                ex
+            );
         }
     }
 

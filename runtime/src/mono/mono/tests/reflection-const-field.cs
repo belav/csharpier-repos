@@ -1,8 +1,8 @@
 using System;
 using System.Reflection;
 
-class T {
-
+class T
+{
     public const bool a = true;
     public const byte b = 1;
     public const sbyte c = 2;
@@ -29,40 +29,40 @@ class T {
     public const float lll = 0;
     public const string m = "la la la";
     public const string n = null;
-    
-    static void Main ()
+
+    static void Main()
     {
-        X ("a", a);
-        X ("b", b);
-        X ("c", c);
-        X ("cc", cc);
-        X ("ccc", ccc);
-        X ("d", d);
-        X ("e", e);
-        X ("ee", ee);
-        X ("eee", eee);
-        X ("f", f);
-        X ("g", g);
-        X ("gg", gg);
-        X ("ggg", ggg);
-        X ("h", h);
-        X ("i", i);
-        X ("ii", ii);
-        X ("iii", iii);
-        X ("j", j);
-        X ("k", k);
-        X ("kk", kk);
-        X ("kkk", kkk);
-        X ("l", l);
-        X ("ll", ll);
-        X ("lll", lll);
-        X ("m", m);
-        X ("n", n);
+        X("a", a);
+        X("b", b);
+        X("c", c);
+        X("cc", cc);
+        X("ccc", ccc);
+        X("d", d);
+        X("e", e);
+        X("ee", ee);
+        X("eee", eee);
+        X("f", f);
+        X("g", g);
+        X("gg", gg);
+        X("ggg", ggg);
+        X("h", h);
+        X("i", i);
+        X("ii", ii);
+        X("iii", iii);
+        X("j", j);
+        X("k", k);
+        X("kk", kk);
+        X("kkk", kkk);
+        X("l", l);
+        X("ll", ll);
+        X("lll", lll);
+        X("m", m);
+        X("n", n);
     }
-    
-    static void X (string n, object o)
+
+    static void X(string n, object o)
     {
-        if (! Object.Equals (typeof (T).GetField (n).GetValue (null), o))
-            throw new Exception (n);
+        if (!Object.Equals(typeof(T).GetField(n).GetValue(null), o))
+            throw new Exception(n);
     }
 }

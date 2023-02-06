@@ -3,13 +3,13 @@
 
 class C<T>
 {
-    static T Test ()
+    static T Test()
     {
-        return default (T);
+        return default(T);
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        Test ().Foo;
+        Test().Foo;
     }
 }

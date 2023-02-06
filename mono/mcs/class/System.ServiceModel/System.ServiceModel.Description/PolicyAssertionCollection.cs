@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,20 +34,15 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-    public class PolicyAssertionCollection
-        : Collection<XmlElement>
+    public class PolicyAssertionCollection : Collection<XmlElement>
     {
-        public PolicyAssertionCollection ()
-        {
-        }
+        public PolicyAssertionCollection() { }
 
-        public PolicyAssertionCollection (IEnumerable<XmlElement> elements)
-            : base (new List<XmlElement> (elements))
-        {
-        }
+        public PolicyAssertionCollection(IEnumerable<XmlElement> elements)
+            : base(new List<XmlElement>(elements)) { }
 
         [MonoTODO]
-        public bool Contains (string localName, string namespaceUri)
+        public bool Contains(string localName, string namespaceUri)
         {
             foreach (XmlElement el in this)
                 if (el.LocalName == localName && el.NamespaceURI == namespaceUri)
@@ -56,7 +51,7 @@ namespace System.ServiceModel.Description
         }
 
         [MonoTODO]
-        public XmlElement Find (string localName, string namespaceUri)
+        public XmlElement Find(string localName, string namespaceUri)
         {
             foreach (XmlElement el in this)
                 if (el.LocalName == localName && el.NamespaceURI == namespaceUri)
@@ -65,46 +60,46 @@ namespace System.ServiceModel.Description
         }
 
         [MonoTODO]
-        public Collection<XmlElement> FindAll (string localName, string namespaceUri)
+        public Collection<XmlElement> FindAll(string localName, string namespaceUri)
         {
-            Collection<XmlElement> ret =
-                new Collection<XmlElement> ();
+            Collection<XmlElement> ret = new Collection<XmlElement>();
             foreach (XmlElement el in this)
                 if (el.LocalName == localName && el.NamespaceURI == namespaceUri)
-                    ret.Add (el);
+                    ret.Add(el);
             return ret;
         }
 
         [MonoTODO]
-        public XmlElement Remove (string localName, string namespaceUri)
+        public XmlElement Remove(string localName, string namespaceUri)
         {
             foreach (XmlElement el in this)
-                if (el.LocalName == localName && el.NamespaceURI == namespaceUri) {
-                    Remove (el);
+                if (el.LocalName == localName && el.NamespaceURI == namespaceUri)
+                {
+                    Remove(el);
                     return el;
                 }
             return null;
         }
 
         [MonoTODO]
-        public Collection<XmlElement> RemoveAll (string localName, string namespaceUri)
+        public Collection<XmlElement> RemoveAll(string localName, string namespaceUri)
         {
-            Collection<XmlElement> list = FindAll (localName, namespaceUri);
+            Collection<XmlElement> list = FindAll(localName, namespaceUri);
             foreach (XmlElement el in list)
-                Remove (el);
+                Remove(el);
             return list;
         }
 
         [MonoTODO]
-        protected override void InsertItem (int index, XmlElement item)
+        protected override void InsertItem(int index, XmlElement item)
         {
-            base.InsertItem (index, item);
+            base.InsertItem(index, item);
         }
 
         [MonoTODO]
-        protected override void SetItem (int index, XmlElement item)
+        protected override void SetItem(int index, XmlElement item)
         {
-            base.SetItem (index, item);
+            base.SetItem(index, item);
         }
     }
 }

@@ -9,7 +9,7 @@ using System;
 namespace Microsoft.CodeAnalysis.Emit
 {
     /// <summary>
-    /// Describes a symbol edit between two compilations. 
+    /// Describes a symbol edit between two compilations.
     /// For example, an addition of a method, an update of a method, removal of a type, etc.
     /// </summary>
     public readonly struct SemanticEdit : IEquatable<SemanticEdit>
@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.Emit
         public ISymbol? NewSymbol { get; }
 
         /// <summary>
-        /// A map from syntax node in the later compilation to syntax node in the previous compilation, 
-        /// or null if <see cref="PreserveLocalVariables"/> is false and the map is not needed or 
+        /// A map from syntax node in the later compilation to syntax node in the previous compilation,
+        /// or null if <see cref="PreserveLocalVariables"/> is false and the map is not needed or
         /// the source of the current method is the same as the source of the previous method.
         /// </summary>
         /// <remarks>
@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.Emit
         /// The symbol from the later compilation, or null if the edit represents a deletion.
         /// </param>
         /// <param name="syntaxMap">
-        /// A map from syntax node in the later compilation to syntax node in the previous compilation, 
-        /// or null if <paramref name="preserveLocalVariables"/> is false and the map is not needed or 
+        /// A map from syntax node in the later compilation to syntax node in the previous compilation,
+        /// or null if <paramref name="preserveLocalVariables"/> is false and the map is not needed or
         /// the source of the current method is the same as the source of the previous method.
         /// </param>
         /// <param name="preserveLocalVariables">
@@ -72,9 +72,18 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="kind"/> is not a valid kind.
         /// </exception>
-        public SemanticEdit(SemanticEditKind kind, ISymbol? oldSymbol, ISymbol? newSymbol, Func<SyntaxNode, SyntaxNode?>? syntaxMap = null, bool preserveLocalVariables = false)
+        public SemanticEdit(
+            SemanticEditKind kind,
+            ISymbol? oldSymbol,
+            ISymbol? newSymbol,
+            Func<SyntaxNode, SyntaxNode?>? syntaxMap = null,
+            bool preserveLocalVariables = false
+        )
         {
-            if (oldSymbol == null && kind is not (SemanticEditKind.Insert or SemanticEditKind.Replace))
+            if (
+                oldSymbol == null
+                && kind is not (SemanticEditKind.Insert or SemanticEditKind.Replace)
+            )
             {
                 throw new ArgumentNullException(nameof(oldSymbol));
             }
@@ -96,24 +105,33 @@ namespace Microsoft.CodeAnalysis.Emit
             SyntaxMap = syntaxMap;
         }
 
-        internal static SemanticEdit Create(SemanticEditKind kind, ISymbolInternal oldSymbol, ISymbolInternal newSymbol, Func<SyntaxNode, SyntaxNode>? syntaxMap = null, bool preserveLocalVariables = false)
-            => new SemanticEdit(kind, oldSymbol?.GetISymbol(), newSymbol?.GetISymbol(), syntaxMap, preserveLocalVariables);
+        internal static SemanticEdit Create(
+            SemanticEditKind kind,
+            ISymbolInternal oldSymbol,
+            ISymbolInternal newSymbol,
+            Func<SyntaxNode, SyntaxNode>? syntaxMap = null,
+            bool preserveLocalVariables = false
+        ) =>
+            new SemanticEdit(
+                kind,
+                oldSymbol?.GetISymbol(),
+                newSymbol?.GetISymbol(),
+                syntaxMap,
+                preserveLocalVariables
+            );
 
-        public override int GetHashCode()
-            => Hash.Combine(OldSymbol, Hash.Combine(NewSymbol, (int)Kind));
+        public override int GetHashCode() =>
+            Hash.Combine(OldSymbol, Hash.Combine(NewSymbol, (int)Kind));
 
-        public override bool Equals(object? obj)
-            => obj is SemanticEdit other && Equals(other);
+        public override bool Equals(object? obj) => obj is SemanticEdit other && Equals(other);
 
-        public bool Equals(SemanticEdit other)
-            => Kind == other.Kind
-                && (OldSymbol == null ? other.OldSymbol == null : OldSymbol.Equals(other.OldSymbol))
-                && (NewSymbol == null ? other.NewSymbol == null : NewSymbol.Equals(other.NewSymbol));
+        public bool Equals(SemanticEdit other) =>
+            Kind == other.Kind
+            && (OldSymbol == null ? other.OldSymbol == null : OldSymbol.Equals(other.OldSymbol))
+            && (NewSymbol == null ? other.NewSymbol == null : NewSymbol.Equals(other.NewSymbol));
 
-        public static bool operator ==(SemanticEdit left, SemanticEdit right)
-            => left.Equals(right);
+        public static bool operator ==(SemanticEdit left, SemanticEdit right) => left.Equals(right);
 
-        public static bool operator !=(SemanticEdit left, SemanticEdit right)
-            => !(left == right);
+        public static bool operator !=(SemanticEdit left, SemanticEdit right) => !(left == right);
     }
 }

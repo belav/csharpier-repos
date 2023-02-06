@@ -18,11 +18,10 @@ public class SingleThreadSynchronizationContext : SynchronizationContext, IDispo
         Thread.Start();
     }
 
-    public override void Post(SendOrPostCallback callback, object state)
-        => _tasks.Add((callback, state));
+    public override void Post(SendOrPostCallback callback, object state) =>
+        _tasks.Add((callback, state));
 
-    public void Dispose()
-        => _tasks.CompleteAdding();
+    public void Dispose() => _tasks.CompleteAdding();
 
     private void WorkLoop()
     {

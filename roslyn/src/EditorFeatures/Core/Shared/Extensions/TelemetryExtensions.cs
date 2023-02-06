@@ -31,11 +31,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             return new Guid(0, scope, 0, suffixBytes);
         }
 
-        public static Type GetTypeForTelemetry(this Type type)
-            => type.IsConstructedGenericType ? type.GetGenericTypeDefinition() : type;
+        public static Type GetTypeForTelemetry(this Type type) =>
+            type.IsConstructedGenericType ? type.GetGenericTypeDefinition() : type;
 
-        public static short GetScopeIdForTelemetry(this FixAllScope scope)
-            => scope switch
+        public static short GetScopeIdForTelemetry(this FixAllScope scope) =>
+            scope switch
             {
                 FixAllScope.Document => 1,
                 FixAllScope.Project => 2,
@@ -46,7 +46,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static string GetTelemetryDiagnosticID(this Diagnostic diagnostic)
         {
             // we log diagnostic id as it is if it is from us
-            if (diagnostic.Descriptor.ImmutableCustomTags().Any(t => t == WellKnownDiagnosticTags.Telemetry))
+            if (
+                diagnostic.Descriptor
+                    .ImmutableCustomTags()
+                    .Any(t => t == WellKnownDiagnosticTags.Telemetry)
+            )
             {
                 return diagnostic.Id;
             }

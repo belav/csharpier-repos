@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.SoapRpcServiceAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,10 +30,11 @@
 
 using System.Web.Services.Description;
 
-namespace System.Web.Services.Protocols {
-    [AttributeUsage (AttributeTargets.Class, Inherited = true)]
-    public sealed class SoapRpcServiceAttribute : Attribute {
-
+namespace System.Web.Services.Protocols
+{
+    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
+    public sealed class SoapRpcServiceAttribute : Attribute
+    {
         #region Fields
 
         SoapServiceRoutingStyle routingStyle;
@@ -43,7 +44,7 @@ namespace System.Web.Services.Protocols {
 
         #region Constructors
 
-        public SoapRpcServiceAttribute ()
+        public SoapRpcServiceAttribute()
         {
             routingStyle = SoapServiceRoutingStyle.SoapAction;
         }
@@ -52,13 +53,15 @@ namespace System.Web.Services.Protocols {
 
         #region Properties
 
-        public SoapServiceRoutingStyle RoutingStyle {
+        public SoapServiceRoutingStyle RoutingStyle
+        {
             get { return routingStyle; }
             set { routingStyle = value; }
         }
 
         [System.Runtime.InteropServices.ComVisible(false)]
-        public SoapBindingUse Use {
+        public SoapBindingUse Use
+        {
             get { return use; }
             set { use = value; }
         }

@@ -20,9 +20,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         /// </summary>
         private abstract partial class Chunk
         {
-            protected Chunk()
-            {
-            }
+            protected Chunk() { }
 
             public abstract int Length { get; }
             public abstract VirtualChar this[int index] { get; }
@@ -38,8 +36,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         {
             private readonly ImmutableSegmentedList<VirtualChar> _array;
 
-            public ImmutableSegmentedListChunk(ImmutableSegmentedList<VirtualChar> array)
-                => _array = array;
+            public ImmutableSegmentedListChunk(ImmutableSegmentedList<VirtualChar> array) =>
+                _array = array;
 
             public override int Length => _array.Count;
             public override VirtualChar this[int index] => _array[index];
@@ -52,16 +50,19 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
                 if (position < _array[0].Span.Start || position >= _array[^1].Span.End)
                     return null;
 
-                var index = _array.BinarySearch(position, static (ch, position) =>
-                {
-                    if (position < ch.Span.Start)
-                        return 1;
+                var index = _array.BinarySearch(
+                    position,
+                    static (ch, position) =>
+                    {
+                        if (position < ch.Span.Start)
+                            return 1;
 
-                    if (position >= ch.Span.End)
-                        return -1;
+                        if (position >= ch.Span.End)
+                            return -1;
 
-                    return 0;
-                });
+                        return 0;
+                    }
+                );
 
                 // Characters can be discontiguous (for example, in multi-line-raw-string literals).  So if the
                 // position is in one of the gaps, it won't be able to find a corresponding virtual char.
@@ -115,8 +116,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
                     // when the string has the same number of chars as there are VirtualChars.
                     if (char.IsHighSurrogate(_underlyingData[index]))
                     {
-                        Debug.Assert(index + 1 >= _underlyingData.Length ||
-                                     !char.IsLowSurrogate(_underlyingData[index + 1]));
+                        Debug.Assert(
+                            index + 1 >= _underlyingData.Length
+                                || !char.IsLowSurrogate(_underlyingData[index + 1])
+                        );
                     }
 #endif
 

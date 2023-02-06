@@ -102,14 +102,8 @@ namespace System.Text.Json.Node
         /// </summary>
         public JsonNode? Parent
         {
-            get
-            {
-                return _parent;
-            }
-            internal set
-            {
-                _parent = value;
-            }
+            get { return _parent; }
+            internal set { _parent = value; }
         }
 
         /// <summary>
@@ -170,8 +164,9 @@ namespace System.Text.Json.Node
         ///   The current <see cref="JsonNode"/> is not a <see cref="JsonValue"/> or
         ///   is not compatible with {TValue}.
         /// </exception>
-        public virtual TValue GetValue<[DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] TValue>() =>
-            throw new InvalidOperationException(SR.Format(SR.NodeWrongType, nameof(JsonValue)));
+        public virtual TValue GetValue<
+            [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] TValue
+        >() => throw new InvalidOperationException(SR.Format(SR.NodeWrongType, nameof(JsonValue)));
 
         /// <summary>
         ///   Gets or sets the element at the specified index.
@@ -185,14 +180,8 @@ namespace System.Text.Json.Node
         /// </exception>
         public JsonNode? this[int index]
         {
-            get
-            {
-                return AsArray().GetItem(index);
-            }
-            set
-            {
-                AsArray().SetItem(index, value);
-            }
+            get { return AsArray().GetItem(index); }
+            set { AsArray().SetItem(index, value); }
         }
 
         /// <summary>
@@ -208,15 +197,8 @@ namespace System.Text.Json.Node
         /// </exception>
         public JsonNode? this[string propertyName]
         {
-            get
-            {
-                return AsObject().GetItem(propertyName);
-            }
-
-            set
-            {
-                AsObject().SetItem(propertyName, value);
-            }
+            get { return AsObject().GetItem(propertyName); }
+            set { AsObject().SetItem(propertyName, value); }
         }
 
         internal void AssignParent(JsonNode parent)

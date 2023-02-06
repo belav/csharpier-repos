@@ -6,11 +6,14 @@ using System;
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        try {
-            throw new ApplicationException ();
-        } catch when (true) {
+        try
+        {
+            throw new ApplicationException();
+        }
+        catch when (true)
+        {
             return 0;
         }
     }

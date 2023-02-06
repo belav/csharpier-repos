@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,13 +31,17 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
+namespace System.Security.Permissions
+{
     [Serializable]
-    [SecurityPermission (SecurityAction.InheritanceDemand, ControlEvidence = true, ControlPolicy = true)]
-    [ComVisible (true)]
-    public abstract class IsolatedStoragePermission : CodeAccessPermission, IUnrestrictedPermission    {
-
+    [SecurityPermission(
+        SecurityAction.InheritanceDemand,
+        ControlEvidence = true,
+        ControlPolicy = true
+    )]
+    [ComVisible(true)]
+    public abstract class IsolatedStoragePermission : CodeAccessPermission, IUnrestrictedPermission
+    {
         private const int version = 1;
 
         internal long m_userQuota;
@@ -46,61 +50,67 @@ namespace System.Security.Permissions {
         internal bool m_permanentData;
         internal IsolatedStorageContainment m_allowed;
 
-        protected IsolatedStoragePermission (PermissionState state)
+        protected IsolatedStoragePermission(PermissionState state)
         {
-            if (CheckPermissionState (state, true) == PermissionState.Unrestricted) {
+            if (CheckPermissionState(state, true) == PermissionState.Unrestricted)
+            {
                 UsageAllowed = IsolatedStorageContainment.UnrestrictedIsolatedStorage;
             }
         }
 
-        public long UserQuota {
+        public long UserQuota
+        {
             get { return m_userQuota; }
             set { m_userQuota = value; }
         }
 
-        public IsolatedStorageContainment UsageAllowed {
+        public IsolatedStorageContainment UsageAllowed
+        {
             get { return m_allowed; }
-            set {
-                if (!Enum.IsDefined (typeof (IsolatedStorageContainment), value)) {
-                    string msg = String.Format (Locale.GetText ("Invalid enum {0}"), value);
-                    throw new ArgumentException (msg, "IsolatedStorageContainment");
+            set
+            {
+                if (!Enum.IsDefined(typeof(IsolatedStorageContainment), value))
+                {
+                    string msg = String.Format(Locale.GetText("Invalid enum {0}"), value);
+                    throw new ArgumentException(msg, "IsolatedStorageContainment");
                 }
                 m_allowed = value;
-                if (m_allowed == IsolatedStorageContainment.UnrestrictedIsolatedStorage) {
+                if (m_allowed == IsolatedStorageContainment.UnrestrictedIsolatedStorage)
+                {
                     m_userQuota = Int64.MaxValue;
                     m_machineQuota = Int64.MaxValue;
-                    m_expirationDays = Int64.MaxValue ;
+                    m_expirationDays = Int64.MaxValue;
                     m_permanentData = true;
                 }
             }
         }
 
-
-        public bool IsUnrestricted ()
+        public bool IsUnrestricted()
         {
             return IsolatedStorageContainment.UnrestrictedIsolatedStorage == m_allowed;
         }
 
-        public override SecurityElement ToXml ()
+        public override SecurityElement ToXml()
         {
-            SecurityElement se = Element (version);
+            SecurityElement se = Element(version);
 
             if (m_allowed == IsolatedStorageContainment.UnrestrictedIsolatedStorage)
-                se.AddAttribute ("Unrestricted", "true");
-            else {
-                se.AddAttribute ("Allowed", m_allowed.ToString ());
+                se.AddAttribute("Unrestricted", "true");
+            else
+            {
+                se.AddAttribute("Allowed", m_allowed.ToString());
                 if (m_userQuota > 0)
-                    se.AddAttribute ("UserQuota", m_userQuota.ToString ());
+                    se.AddAttribute("UserQuota", m_userQuota.ToString());
             }
-            
+
             return se;
         }
 
-        public override void FromXml (SecurityElement esd)
+        public override void FromXml(SecurityElement esd)
         {
             // General validation in CodeAccessPermission
-            CheckSecurityElement (esd, "esd", version, version);
-            // Note: we do not (yet) care about the return value 
+            CheckSecurityElement(esd, "esd", version, version);
+            // Note: we do not (yet) care about the return value
             // as we only accept version 1 (min/max values)
 
             m_userQuota = 0;
@@ -109,24 +119,29 @@ namespace System.Security.Permissions {
             m_permanentData = false;
             m_allowed = IsolatedStorageContainment.None;
 
-            if (IsUnrestricted (esd)) {
+            if (IsUnrestricted(esd))
+            {
                 UsageAllowed = IsolatedStorageContainment.UnrestrictedIsolatedStorage;
-            } else {
-                string a = esd.Attribute ("Allowed");
-                if (a != null) {
-                    UsageAllowed = (IsolatedStorageContainment) Enum.Parse (
-                        typeof (IsolatedStorageContainment), a);
+            }
+            else
+            {
+                string a = esd.Attribute("Allowed");
+                if (a != null)
+                {
+                    UsageAllowed = (IsolatedStorageContainment)
+                        Enum.Parse(typeof(IsolatedStorageContainment), a);
                 }
-                a = esd.Attribute ("UserQuota");
-                if (a != null) {
-                    m_userQuota = Int64.Parse (a, CultureInfo.InvariantCulture);
+                a = esd.Attribute("UserQuota");
+                if (a != null)
+                {
+                    m_userQuota = Int64.Parse(a, CultureInfo.InvariantCulture);
                 }
             }
         }
 
         // helpers
 
-        internal bool IsEmpty ()
+        internal bool IsEmpty()
         {
             // should we include internals ? or just publics ?
             return ((m_userQuota == 0) && (m_allowed == IsolatedStorageContainment.None));

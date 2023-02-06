@@ -3,12 +3,12 @@
 
 class A
 {
-    public static implicit operator ushort (A mask)
+    public static implicit operator ushort(A mask)
     {
         return 1;
     }
 
-    public static implicit operator short (A mask)
+    public static implicit operator short(A mask)
     {
         return 2;
     }

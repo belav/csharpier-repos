@@ -22,13 +22,13 @@ using System;
 using System.Net;
 using System.Threading;
 
-namespace Mono.Net.Dns {
-    class SimpleResolverEventArgs : EventArgs {
+namespace Mono.Net.Dns
+{
+    class SimpleResolverEventArgs : EventArgs
+    {
         public event EventHandler<SimpleResolverEventArgs> Completed;
 
-        public SimpleResolverEventArgs ()
-        {
-        }
+        public SimpleResolverEventArgs() { }
 
         public ResolverError ResolverError { get; set; }
         public string ErrorMessage { get; set; }
@@ -41,7 +41,7 @@ namespace Mono.Net.Dns {
         internal Timer Timer;
         internal IPAddress PTRAddress;
 
-        internal void Reset (ResolverAsyncOperation op)
+        internal void Reset(ResolverAsyncOperation op)
         {
             ResolverError = 0;
             ErrorMessage = null;
@@ -52,12 +52,11 @@ namespace Mono.Net.Dns {
             PTRAddress = null;
         }
 
-        protected internal void OnCompleted (object sender)
+        protected internal void OnCompleted(object sender)
         {
             var handler = Completed;
             if (handler != null)
-                handler (sender, this);
+                handler(sender, this);
         }
     }
 }
-

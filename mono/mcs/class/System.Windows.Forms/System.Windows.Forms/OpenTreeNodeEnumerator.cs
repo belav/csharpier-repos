@@ -26,43 +26,48 @@
 using System;
 using System.Collections;
 
-namespace System.Windows.Forms {
-
-    internal class OpenTreeNodeEnumerator : IEnumerator {
-
+namespace System.Windows.Forms
+{
+    internal class OpenTreeNodeEnumerator : IEnumerator
+    {
         private TreeNode start;
         private TreeNode current;
         private bool started;
 
-        public OpenTreeNodeEnumerator (TreeNode start)
+        public OpenTreeNodeEnumerator(TreeNode start)
         {
             this.start = start;
         }
 
-        public object Current {
-            get { return current; }
-        }
-
-        public TreeNode CurrentNode {
-            get { return current; }
-        }
-
-        public bool MoveNext ()
+        public object Current
         {
-            if (!started) {
+            get { return current; }
+        }
+
+        public TreeNode CurrentNode
+        {
+            get { return current; }
+        }
+
+        public bool MoveNext()
+        {
+            if (!started)
+            {
                 started = true;
                 current = start;
                 return (current != null);
             }
 
-            if (current.is_expanded && current.Nodes.Count > 0) {
-                current = current.Nodes [0];
+            if (current.is_expanded && current.Nodes.Count > 0)
+            {
+                current = current.Nodes[0];
                 return true;
             }
 
             TreeNode prev = current;
             TreeNode next = current.NextNode;
-            while (next == null) {
+            while (next == null)
+            {
                 // The next node is null so we need to move back up the tree until we hit the top
                 if (prev.parent == null)
                     return false;
@@ -73,20 +78,23 @@ namespace System.Windows.Forms {
             current = next;
             return true;
         }
-        
-        public bool MovePrevious ()
+
+        public bool MovePrevious()
         {
-            if (!started) {
+            if (!started)
+            {
                 started = true;
                 current = start;
                 return (current != null);
             }
 
-            if (current.PrevNode != null) {
+            if (current.PrevNode != null)
+            {
                 // Drill down as far as possible
                 TreeNode prev = current.PrevNode;
                 TreeNode walk = prev;
-                while (walk != null) {
+                while (walk != null)
+                {
                     prev = walk;
                     if (!walk.is_expanded)
                         break;
@@ -103,10 +111,9 @@ namespace System.Windows.Forms {
             return true;
         }
 
-        public void Reset ()
+        public void Reset()
         {
             started = false;
         }
     }
 }
-

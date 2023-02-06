@@ -13,12 +13,14 @@ namespace System.ServiceModel.Web.Configuration
 
     internal static class AppSettings
     {
-        private const string EnableAutomaticEndpointsCompatabilityString = "wcf:webservicehost:enableautomaticendpointscompatability";
-        private const string DisableHtmlErrorPageExceptionHtmlEncodingString = "wcf:web:HtmlErrorPage:DisableExceptionMessageHtmlEncoding";
+        private const string EnableAutomaticEndpointsCompatabilityString =
+            "wcf:webservicehost:enableautomaticendpointscompatability";
+        private const string DisableHtmlErrorPageExceptionHtmlEncodingString =
+            "wcf:web:HtmlErrorPage:DisableExceptionMessageHtmlEncoding";
         private static readonly object appSettingsLock = new object();
         private static bool enableAutomaticEndpointCompat = false;
         private static bool disableHtmlErrorPageExceptionHtmlEncoding = false;
-        private static volatile bool settingsInitialized = false;        
+        private static volatile bool settingsInitialized = false;
 
         public static bool EnableAutomaticEndpointsCompatibility
         {
@@ -37,9 +39,12 @@ namespace System.ServiceModel.Web.Configuration
                 return disableHtmlErrorPageExceptionHtmlEncoding;
             }
         }
-        
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, "Reliability104:CaughtAndHandledExceptionsRule", 
-            Justification = "Handle the configuration exceptions here to avoid regressions on customer's existing scenarios")]
+
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            "Reliability104:CaughtAndHandledExceptionsRule",
+            Justification = "Handle the configuration exceptions here to avoid regressions on customer's existing scenarios"
+        )]
         private static void EnsureSettingsLoaded()
         {
             if (!settingsInitialized)
@@ -53,17 +58,29 @@ namespace System.ServiceModel.Web.Configuration
                         {
                             appSettingsSection = ConfigurationManager.AppSettings;
                         }
-                        catch (ConfigurationErrorsException)
-                        {
-                        }
+                        catch (ConfigurationErrorsException) { }
                         finally
                         {
-                            if ((appSettingsSection == null) || !bool.TryParse(appSettingsSection[EnableAutomaticEndpointsCompatabilityString], out enableAutomaticEndpointCompat))
+                            if (
+                                (appSettingsSection == null)
+                                || !bool.TryParse(
+                                    appSettingsSection[EnableAutomaticEndpointsCompatabilityString],
+                                    out enableAutomaticEndpointCompat
+                                )
+                            )
                             {
                                 enableAutomaticEndpointCompat = false;
                             }
 
-                            if ((appSettingsSection == null) || !bool.TryParse(appSettingsSection[DisableHtmlErrorPageExceptionHtmlEncodingString], out disableHtmlErrorPageExceptionHtmlEncoding))
+                            if (
+                                (appSettingsSection == null)
+                                || !bool.TryParse(
+                                    appSettingsSection[
+                                        DisableHtmlErrorPageExceptionHtmlEncodingString
+                                    ],
+                                    out disableHtmlErrorPageExceptionHtmlEncoding
+                                )
+                            )
                             {
                                 disableHtmlErrorPageExceptionHtmlEncoding = false;
                             }

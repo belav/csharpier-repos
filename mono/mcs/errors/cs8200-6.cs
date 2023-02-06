@@ -3,9 +3,9 @@
 
 class X
 {
-    public static bool Test { get; } = Foo () is bool x;
+    public static bool Test { get; } = Foo() is bool x;
 
-    static object Foo ()
+    static object Foo()
     {
         return false;
     }

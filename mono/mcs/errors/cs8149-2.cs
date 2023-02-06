@@ -6,8 +6,8 @@ using System;
 class A
 {
     int p;
-    
-    void Test ()
+
+    void Test()
     {
         Action a = () => ref p;
     }

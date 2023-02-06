@@ -32,8 +32,8 @@ namespace POS_Server.Models
         public string processType { get; set; }
         public Nullable<long> cardId { get; set; }
         public Nullable<long> bondId { get; set; }
-        public Nullable<long> shippingCompanyId { get; set; }      
-        public string opSideNum { get; set; }      
+        public Nullable<long> shippingCompanyId { get; set; }
+        public string opSideNum { get; set; }
         public string bankName { get; set; }
         public string agentName { get; set; }
         public string usersName { get; set; }
@@ -43,7 +43,7 @@ namespace POS_Server.Models
         public Nullable<byte> isConfirm2 { get; set; }
         public long cashTrans2Id { get; set; }
         public Nullable<long> pos2Id { get; set; }
-        public string pos2Name { get; set; }     
+        public string pos2Name { get; set; }
         public string createUserName { get; set; }
         public string updateUserName { get; set; }
         public string updateUserJob { get; set; }
@@ -53,8 +53,9 @@ namespace POS_Server.Models
         public string updateUserLName { get; set; }
         public string cardName { get; set; }
         public Nullable<System.DateTime> bondDeserveDate { get; set; }
-    //    public Nullable<byte>  bondIsRecieved { get; set; }
-        public string agentCompany { get; set; } 
+
+        //    public Nullable<byte>  bondIsRecieved { get; set; }
+        public string agentCompany { get; set; }
         public string shippingCompanyName { get; set; }
         public string userAcc { get; set; }
         public Nullable<long> branchCreatorId { get; set; }
@@ -63,6 +64,7 @@ namespace POS_Server.Models
         public string branchName { get; set; }
         public Nullable<long> branch2Id { get; set; }
         public string branch2Name { get; set; }
+
         //
         public Nullable<decimal> commissionValue { get; set; }
         public Nullable<decimal> commissionRatio { get; set; }
@@ -83,18 +85,19 @@ namespace POS_Server.Models
         public Nullable<long> invAgentId { get; set; }
         public string invAgentName { get; set; }
         public decimal cashTotal { get; set; }
-        //     
-    //    public Nullable<byte> bondIsRecieved { get; set; }      
+
+        //
+        //    public Nullable<byte> bondIsRecieved { get; set; }
         public string agentMobile { get; set; }
         public string userMobile { get; set; }
         public string shippingCompanyMobile { get; set; }
-       
+
         public Nullable<decimal> commissionValueFinal { get; set; }
+
         //
         public Nullable<decimal> totalNet { get; set; }
         public string reciveName { get; set; }
 
-      
         public Nullable<decimal> cashSource { get; set; }
         public string invNumber { get; set; }
         public string transNumSource { get; set; }

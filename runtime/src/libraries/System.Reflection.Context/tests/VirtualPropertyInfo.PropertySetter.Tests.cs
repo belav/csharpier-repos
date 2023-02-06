@@ -27,13 +27,19 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void ProjectionTest()
         {
-            Assert.Equal(ProjectionConstants.VirtualPropertyInfoSetter, _virtualPropertySetter.GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.VirtualPropertyInfoSetter,
+                _virtualPropertySetter.GetType().FullName
+            );
         }
 
         [Fact]
         public void GetCustomAttributes_WithType_Test()
         {
-            object[] attributes = _virtualPropertySetter.GetCustomAttributes(typeof(TestGetterSetterAttribute), true);
+            object[] attributes = _virtualPropertySetter.GetCustomAttributes(
+                typeof(TestGetterSetterAttribute),
+                true
+            );
             Assert.Single(attributes);
             Assert.IsType<TestGetterSetterAttribute>(attributes[0]);
         }
@@ -52,7 +58,8 @@ namespace System.Reflection.Context.Tests
             // This will never return any results as virtual properties never have custom attributes
             // defined in code as they are instantiated during runtime. But as the method is overridden
             // we call it for code coverage.
-            IList<CustomAttributeData> customAttributesData = _virtualPropertySetter.GetCustomAttributesData();
+            IList<CustomAttributeData> customAttributesData =
+                _virtualPropertySetter.GetCustomAttributesData();
             Assert.Empty(customAttributesData);
         }
 
@@ -70,51 +77,102 @@ namespace System.Reflection.Context.Tests
         {
             ParameterInfo[] virtualParameters = _virtualPropertySetter.GetParameters();
             Assert.Single(virtualParameters);
-            Assert.Equal(ProjectionConstants.VirtualParameter, virtualParameters[0].GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.VirtualParameter,
+                virtualParameters[0].GetType().FullName
+            );
         }
 
         [Fact]
         public void Invoke_NullParameter_Throws()
         {
-            Assert.Throws<TargetParameterCountException>(() =>
-                _virtualPropertySetter.Invoke(null, BindingFlags.GetProperty, null, null, CultureInfo.InvariantCulture));
+            Assert.Throws<TargetParameterCountException>(
+                () =>
+                    _virtualPropertySetter.Invoke(
+                        null,
+                        BindingFlags.GetProperty,
+                        null,
+                        null,
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
         public void Invoke_NotSingleParameter_Throws()
         {
-            Assert.Throws<TargetParameterCountException>(() =>
-                _virtualPropertySetter.Invoke(_testObject, BindingFlags.GetProperty, null, new object[] { }, CultureInfo.InvariantCulture));
-            Assert.Throws<TargetParameterCountException>(() =>
-                _virtualPropertySetter.Invoke(_testObject, BindingFlags.GetProperty, null, new object[] { "a", 1 }, CultureInfo.InvariantCulture));
+            Assert.Throws<TargetParameterCountException>(
+                () =>
+                    _virtualPropertySetter.Invoke(
+                        _testObject,
+                        BindingFlags.GetProperty,
+                        null,
+                        new object[] { },
+                        CultureInfo.InvariantCulture
+                    )
+            );
+            Assert.Throws<TargetParameterCountException>(
+                () =>
+                    _virtualPropertySetter.Invoke(
+                        _testObject,
+                        BindingFlags.GetProperty,
+                        null,
+                        new object[] { "a", 1 },
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
         public void Invoke_NullObject_Throws()
         {
-            Assert.Throws<TargetException>(() =>
-                _virtualPropertySetter.Invoke(null, BindingFlags.GetProperty, null, new object[] { 2 }, CultureInfo.InvariantCulture));
+            Assert.Throws<TargetException>(
+                () =>
+                    _virtualPropertySetter.Invoke(
+                        null,
+                        BindingFlags.GetProperty,
+                        null,
+                        new object[] { 2 },
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
         public void Invoke_WrongObject_Throws()
         {
-            Assert.Throws<TargetException>(() =>
-                _virtualPropertySetter.Invoke("text", BindingFlags.GetProperty, null, new object[] { 2 }, CultureInfo.InvariantCulture));
+            Assert.Throws<TargetException>(
+                () =>
+                    _virtualPropertySetter.Invoke(
+                        "text",
+                        BindingFlags.GetProperty,
+                        null,
+                        new object[] { 2 },
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
         public void Invoke_ValidArguments_Success()
         {
-            object returnVal = _virtualPropertySetter.Invoke(_testObject, BindingFlags.GetProperty, null, new object[] { 2 }, CultureInfo.InvariantCulture);
+            object returnVal = _virtualPropertySetter.Invoke(
+                _testObject,
+                BindingFlags.GetProperty,
+                null,
+                new object[] { 2 },
+                CultureInfo.InvariantCulture
+            );
             Assert.Null(returnVal);
-
         }
 
         [Fact]
         public void CallingConventionTest()
         {
-            Assert.Equal(CallingConventions.HasThis | CallingConventions.Standard, _virtualPropertySetter.CallingConvention);
+            Assert.Equal(
+                CallingConventions.HasThis | CallingConventions.Standard,
+                _virtualPropertySetter.CallingConvention
+            );
         }
 
         [Fact]
@@ -152,7 +210,10 @@ namespace System.Reflection.Context.Tests
         public void ReturnParameterTest()
         {
             ParameterInfo virtualReturnParameter = _virtualPropertySetter.ReturnParameter;
-            Assert.Equal(ProjectionConstants.VirtualReturnParameter, virtualReturnParameter.GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.VirtualReturnParameter,
+                virtualReturnParameter.GetType().FullName
+            );
             ParameterInfo clone = _virtualPropertySetter.ReturnParameter;
 
             Assert.Equal(virtualReturnParameter.GetHashCode(), clone.GetHashCode());
@@ -162,8 +223,12 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void ReturnTypeCustomAttributes()
         {
-            ICustomAttributeProvider virtualReturnParameter = _virtualPropertySetter.ReturnTypeCustomAttributes;
-            Assert.Equal(ProjectionConstants.VirtualReturnParameter, virtualReturnParameter.GetType().FullName);
+            ICustomAttributeProvider virtualReturnParameter =
+                _virtualPropertySetter.ReturnTypeCustomAttributes;
+            Assert.Equal(
+                ProjectionConstants.VirtualReturnParameter,
+                virtualReturnParameter.GetType().FullName
+            );
         }
 
         [Fact]
@@ -183,19 +248,26 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void GetGenericMethodDefinitionTest()
         {
-            Assert.Throws<InvalidOperationException>(() => _virtualPropertySetter.GetGenericMethodDefinition());
+            Assert.Throws<InvalidOperationException>(
+                () => _virtualPropertySetter.GetGenericMethodDefinition()
+            );
         }
 
         [Fact]
         public void GetMethodImplementationFlagsTest()
         {
-            Assert.Equal(MethodImplAttributes.IL, _virtualPropertySetter.GetMethodImplementationFlags());
+            Assert.Equal(
+                MethodImplAttributes.IL,
+                _virtualPropertySetter.GetMethodImplementationFlags()
+            );
         }
 
         [Fact]
         public void MakeGenericMethodTest()
         {
-            Assert.Throws<InvalidOperationException>(() => _virtualPropertySetter.MakeGenericMethod());
+            Assert.Throws<InvalidOperationException>(
+                () => _virtualPropertySetter.MakeGenericMethod()
+            );
         }
 
         [Fact]

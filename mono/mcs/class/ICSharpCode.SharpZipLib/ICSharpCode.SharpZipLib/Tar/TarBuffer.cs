@@ -36,9 +36,8 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace ICSharpCode.SharpZipLib.Tar 
+namespace ICSharpCode.SharpZipLib.Tar
 {
-    
     /// <summary>
     /// The TarBuffer class implements the tar archive concept
     /// of a buffered input stream. This concept goes back to the
@@ -51,39 +50,40 @@ namespace ICSharpCode.SharpZipLib.Tar
     /// TarBuffers are created by Tar IO Streams.
     /// </p>
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public class TarBuffer
     {
-
-/* A quote from GNU tar man file on blocking and records
-   A `tar' archive file contains a series of blocks.  Each block
-contains `BLOCKSIZE' bytes.  Although this format may be thought of as
-being on magnetic tape, other media are often used.
-
-   Each file archived is represented by a header block which describes
-the file, followed by zero or more blocks which give the contents of
-the file.  At the end of the archive file there may be a block filled
-with binary zeros as an end-of-file marker.  A reasonable system should
-write a block of zeros at the end, but must not assume that such a
-block exists when reading an archive.
-
-   The blocks may be "blocked" for physical I/O operations.  Each
-record of N blocks (where N is set by the `--blocking-factor=512-SIZE'
-(`-b 512-SIZE') option to `tar') is written with a single `write ()'
-operation.  On magnetic tapes, the result of such a write is a single
-record.  When writing an archive, the last record of blocks should be
-written at the full size, with blocks after the zero block containing
-all zeros.  When reading an archive, a reasonable system should
-properly handle an archive whose last record is shorter than the rest,
-or which contains garbage records after a zero block.
-*/
+        /* A quote from GNU tar man file on blocking and records
+           A `tar' archive file contains a series of blocks.  Each block
+        contains `BLOCKSIZE' bytes.  Although this format may be thought of as
+        being on magnetic tape, other media are often used.
+        
+           Each file archived is represented by a header block which describes
+        the file, followed by zero or more blocks which give the contents of
+        the file.  At the end of the archive file there may be a block filled
+        with binary zeros as an end-of-file marker.  A reasonable system should
+        write a block of zeros at the end, but must not assume that such a
+        block exists when reading an archive.
+        
+           The blocks may be "blocked" for physical I/O operations.  Each
+        record of N blocks (where N is set by the `--blocking-factor=512-SIZE'
+        (`-b 512-SIZE') option to `tar') is written with a single `write ()'
+        operation.  On magnetic tapes, the result of such a write is a single
+        record.  When writing an archive, the last record of blocks should be
+        written at the full size, with blocks after the zero block containing
+        all zeros.  When reading an archive, a reasonable system should
+        properly handle an archive whose last record is shorter than the rest,
+        or which contains garbage records after a zero block.
+        */
 
         /// <summary>
         /// The size of a block in a tar archive in bytes.
         /// </summary>
         /// <remarks>This is 512 bytes.</remarks>
         public const int BlockSize = 512;
-        
+
         /// <summary>
         /// The number of blocks in a default record.
         /// </summary>
@@ -91,7 +91,7 @@ or which contains garbage records after a zero block.
         /// The default value is 20 block per record.
         /// </remarks>
         public const int DefaultBlockFactor = 20;
-        
+
         /// <summary>
         /// The size in bytes of a default record.
         /// </summary>
@@ -99,44 +99,39 @@ or which contains garbage records after a zero block.
         /// The default size is 10KB.
         /// </remarks>
         public const int DefaultRecordSize = BlockSize * DefaultBlockFactor;
-        
+
         Stream inputStream;
         Stream outputStream;
-        
-        byte[] recordBuffer;
-        int    currentBlockIndex;
-        int    currentRecordIndex;
 
-        int    recordSize = DefaultRecordSize;
-        
+        byte[] recordBuffer;
+        int currentBlockIndex;
+        int currentRecordIndex;
+
+        int recordSize = DefaultRecordSize;
+
         /// <summary>
         /// Get the record size for this buffer
         /// </summary>
-        public int RecordSize {
-            get { 
-                return recordSize; 
-            }
+        public int RecordSize
+        {
+            get { return recordSize; }
         }
 
-        int    blockFactor = DefaultBlockFactor;
+        int blockFactor = DefaultBlockFactor;
 
         /// <summary>
         /// Get the Blocking factor for the buffer
         /// </summary>
-        public int BlockFactor {
-            get { 
-                return blockFactor; 
-            }
+        public int BlockFactor
+        {
+            get { return blockFactor; }
         }
-
 
         /// <summary>
         /// Construct a default TarBuffer
         /// </summary>
-        protected TarBuffer()
-        {
-        }
-        
+        protected TarBuffer() { }
+
         /// <summary>
         /// Create TarBuffer for reading with default BlockFactor
         /// </summary>
@@ -156,10 +151,10 @@ or which contains garbage records after a zero block.
         public static TarBuffer CreateInputTarBuffer(Stream inputStream, int blockFactor)
         {
             TarBuffer tarBuffer = new TarBuffer();
-            tarBuffer.inputStream  = inputStream;
+            tarBuffer.inputStream = inputStream;
             tarBuffer.outputStream = null;
             tarBuffer.Initialize(blockFactor);
-            
+
             return tarBuffer;
         }
 
@@ -182,32 +177,35 @@ or which contains garbage records after a zero block.
         public static TarBuffer CreateOutputTarBuffer(Stream outputStream, int blockFactor)
         {
             TarBuffer tarBuffer = new TarBuffer();
-            tarBuffer.inputStream  = null;
+            tarBuffer.inputStream = null;
             tarBuffer.outputStream = outputStream;
             tarBuffer.Initialize(blockFactor);
-            
+
             return tarBuffer;
         }
-        
+
         /// <summary>
         /// Initialization common to all constructors.
         /// </summary>
         void Initialize(int blockFactor)
         {
-            this.blockFactor  = blockFactor;
-            this.recordSize   = blockFactor * BlockSize;
+            this.blockFactor = blockFactor;
+            this.recordSize = blockFactor * BlockSize;
 
-            this.recordBuffer  = new byte[RecordSize];
-            
-            if (inputStream != null) {
+            this.recordBuffer = new byte[RecordSize];
+
+            if (inputStream != null)
+            {
                 this.currentRecordIndex = -1;
                 this.currentBlockIndex = BlockFactor;
-            } else {
+            }
+            else
+            {
                 this.currentRecordIndex = 0;
                 this.currentBlockIndex = 0;
             }
         }
-        
+
         /// <summary>
         /// Get the TAR Buffer's block factor
         /// </summary>
@@ -215,7 +213,7 @@ or which contains garbage records after a zero block.
         {
             return this.blockFactor;
         }
-        
+
         /// <summary>
         /// Get the TAR Buffer's record size.
         /// </summary>
@@ -223,7 +221,7 @@ or which contains garbage records after a zero block.
         {
             return this.recordSize;
         }
-        
+
         /// <summary>
         /// Determine if an archive block indicates End of Archive. End of
         /// archive is indicated by a block that consists entirely of null bytes.
@@ -234,33 +232,38 @@ or which contains garbage records after a zero block.
         /// <param name = "block">The data block to check.</param>
         public bool IsEOFBlock(byte[] block)
         {
-            for (int i = 0, sz = BlockSize; i < sz; ++i) {
-                if (block[i] != 0) {
+            for (int i = 0, sz = BlockSize; i < sz; ++i)
+            {
+                if (block[i] != 0)
+                {
                     return false;
                 }
             }
-            
+
             return true;
         }
-        
+
         /// <summary>
         /// Skip over a block on the input stream.
         /// </summary>
         public void SkipBlock()
         {
-            if (this.inputStream == null) {
+            if (this.inputStream == null)
+            {
                 throw new TarException("no input stream defined");
             }
-            
-            if (this.currentBlockIndex >= this.BlockFactor) {
-                if (!this.ReadRecord()) {
+
+            if (this.currentBlockIndex >= this.BlockFactor)
+            {
+                if (!this.ReadRecord())
+                {
                     return;
                 }
             }
-            
+
             this.currentBlockIndex++;
         }
-        
+
         /// <summary>
         /// Read a block from the input stream.
         /// </summary>
@@ -269,23 +272,32 @@ or which contains garbage records after a zero block.
         /// </returns>
         public byte[] ReadBlock()
         {
-            if (this.inputStream == null) {
+            if (this.inputStream == null)
+            {
                 throw new TarException("TarBuffer.ReadBlock - no input stream defined");
             }
-            
-            if (this.currentBlockIndex >= this.BlockFactor) {
-                if (!this.ReadRecord()) {
+
+            if (this.currentBlockIndex >= this.BlockFactor)
+            {
+                if (!this.ReadRecord())
+                {
                     return null;
                 }
             }
-            
+
             byte[] result = new byte[BlockSize];
-            
-            Array.Copy(this.recordBuffer, (this.currentBlockIndex * BlockSize), result, 0, BlockSize );
+
+            Array.Copy(
+                this.recordBuffer,
+                (this.currentBlockIndex * BlockSize),
+                result,
+                0,
+                BlockSize
+            );
             this.currentBlockIndex++;
             return result;
         }
-        
+
         /// <summary>
         /// Read a record from data stream.
         /// </summary>
@@ -294,18 +306,20 @@ or which contains garbage records after a zero block.
         /// </returns>
         bool ReadRecord()
         {
-            if (this.inputStream == null) {
+            if (this.inputStream == null)
+            {
                 throw new TarException("no input stream stream defined");
             }
-                        
+
             this.currentBlockIndex = 0;
-            
+
             int offset = 0;
             int bytesNeeded = RecordSize;
 
-            while (bytesNeeded > 0) {
+            while (bytesNeeded > 0)
+            {
                 long numBytes = this.inputStream.Read(this.recordBuffer, offset, bytesNeeded);
-                
+
                 //
                 // NOTE
                 // We have found EOF, and the record is not full!
@@ -319,18 +333,19 @@ or which contains garbage records after a zero block.
                 //
                 // Thanks to 'Yohann.Roussel@alcatel.fr' for this fix.
                 //
-                if (numBytes <= 0) {
+                if (numBytes <= 0)
+                {
                     break;
                 }
-                
-                offset      += (int)numBytes;
+
+                offset += (int)numBytes;
                 bytesNeeded -= (int)numBytes;
             }
-            
+
             this.currentRecordIndex++;
             return true;
         }
-        
+
         /// <summary>
         /// Get the current block number, within the current record, zero based.
         /// </summary>
@@ -344,7 +359,7 @@ or which contains garbage records after a zero block.
         {
             return this.currentBlockIndex;
         }
-        
+
         /// <summary>
         /// Get the current record number.
         /// </summary>
@@ -355,7 +370,7 @@ or which contains garbage records after a zero block.
         {
             return this.currentRecordIndex;
         }
-        
+
         /// <summary>
         /// Write a block of data to the archive.
         /// </summary>
@@ -364,22 +379,37 @@ or which contains garbage records after a zero block.
         /// </param>
         public void WriteBlock(byte[] block)
         {
-            if (this.outputStream == null) {
+            if (this.outputStream == null)
+            {
                 throw new TarException("TarBuffer.WriteBlock - no output stream defined");
             }
-                        
-            if (block.Length != BlockSize) {
-                throw new TarException("TarBuffer.WriteBlock - block to write has length '" + block.Length + "' which is not the block size of '" + BlockSize + "'" );
+
+            if (block.Length != BlockSize)
+            {
+                throw new TarException(
+                    "TarBuffer.WriteBlock - block to write has length '"
+                        + block.Length
+                        + "' which is not the block size of '"
+                        + BlockSize
+                        + "'"
+                );
             }
-            
-            if (this.currentBlockIndex >= BlockFactor) {
+
+            if (this.currentBlockIndex >= BlockFactor)
+            {
                 this.WriteRecord();
             }
 
-            Array.Copy(block, 0, this.recordBuffer, (this.currentBlockIndex * BlockSize), BlockSize);
+            Array.Copy(
+                block,
+                0,
+                this.recordBuffer,
+                (this.currentBlockIndex * BlockSize),
+                BlockSize
+            );
             this.currentBlockIndex++;
         }
-        
+
         /// <summary>
         /// Write an archive record to the archive, where the record may be
         /// inside of a larger array buffer. The buffer must be "offset plus
@@ -393,23 +423,40 @@ or which contains garbage records after a zero block.
         /// </param>
         public void WriteBlock(byte[] buf, int offset)
         {
-            if (this.outputStream == null) {
+            if (this.outputStream == null)
+            {
                 throw new TarException("TarBuffer.WriteBlock - no output stream stream defined");
             }
-                        
-            if ((offset + BlockSize) > buf.Length) {
-                throw new TarException("TarBuffer.WriteBlock - record has length '" + buf.Length + "' with offset '" + offset + "' which is less than the record size of '" + this.recordSize + "'" );
+
+            if ((offset + BlockSize) > buf.Length)
+            {
+                throw new TarException(
+                    "TarBuffer.WriteBlock - record has length '"
+                        + buf.Length
+                        + "' with offset '"
+                        + offset
+                        + "' which is less than the record size of '"
+                        + this.recordSize
+                        + "'"
+                );
             }
-            
-            if (this.currentBlockIndex >= this.BlockFactor) {
+
+            if (this.currentBlockIndex >= this.BlockFactor)
+            {
                 this.WriteRecord();
             }
-            
-            Array.Copy(buf, offset, this.recordBuffer, (this.currentBlockIndex * BlockSize), BlockSize);
-            
+
+            Array.Copy(
+                buf,
+                offset,
+                this.recordBuffer,
+                (this.currentBlockIndex * BlockSize),
+                BlockSize
+            );
+
             this.currentBlockIndex++;
         }
-        
+
         /// <summary>
         /// Write a TarBuffer record to the archive.
         /// </summary>
@@ -419,31 +466,31 @@ or which contains garbage records after a zero block.
             {
                 throw new TarException("TarBuffer.WriteRecord no output stream defined");
             }
-            
+
             this.outputStream.Write(this.recordBuffer, 0, RecordSize);
             this.outputStream.Flush();
-            
+
             this.currentBlockIndex = 0;
             this.currentRecordIndex++;
         }
-        
+
         /// <summary>
         /// Flush the current data block if it has any data in it.
         /// </summary>
         void Flush()
         {
-            if (this.outputStream == null) 
+            if (this.outputStream == null)
             {
                 throw new TarException("TarBuffer.Flush no output stream defined");
             }
-            
-            if (this.currentBlockIndex > 0) 
+
+            if (this.currentBlockIndex > 0)
             {
                 this.WriteRecord();
             }
             outputStream.Flush();
         }
-        
+
         /// <summary>
         /// Close the TarBuffer. If this is an output buffer, also flush the
         /// current block before closing.
@@ -453,7 +500,7 @@ or which contains garbage records after a zero block.
             if (outputStream != null)
             {
                 Flush();
-    
+
                 outputStream.Close();
                 outputStream = null;
             }

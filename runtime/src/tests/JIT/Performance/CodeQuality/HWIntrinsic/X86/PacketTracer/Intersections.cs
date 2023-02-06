@@ -38,5 +38,4 @@ internal struct Intersections
         var mask = Avx2.CompareEqual(zero, zero);
         return TestC(cmp, mask.AsSingle());
     }
-
 }

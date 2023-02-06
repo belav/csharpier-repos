@@ -1,29 +1,32 @@
 //
 using System;
 
-delegate void D ();
+delegate void D();
 
-class X {
+class X
+{
     static D r;
-    
-    public static void Main ()
-    {
-        D d = T ();
 
-        d ();
-        r ();
-        r ();
+    public static void Main()
+    {
+        D d = T();
+
+        d();
+        r();
+        r();
     }
 
-    static D T ()
+    static D T()
     {
         int var1 = 0;
-        
-        D d = delegate () {
+
+        D d = delegate()
+        {
             int var2 = 1;
-            
-            r = delegate {
-                Console.WriteLine ("var1: {0} var2: {1}", var1, var2);
+
+            r = delegate
+            {
+                Console.WriteLine("var1: {0} var2: {1}", var1, var2);
                 var2 = var2 + 1;
             };
 

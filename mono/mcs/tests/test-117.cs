@@ -1,28 +1,23 @@
 using System;
 using System.Collections;
 
-public interface IFoo {
+public interface IFoo { }
 
-}
-
-public class Blah : IFoo {
-
+public class Blah : IFoo
+{
     Hashtable table;
 
-    public Blah ()
+    public Blah()
     {
-        table = new Hashtable ();
+        table = new Hashtable();
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        Blah b = new Blah ();
+        Blah b = new Blah();
 
-        b.table.Add ("Ravi", (IFoo) b);
+        b.table.Add("Ravi", (IFoo)b);
 
         return 0;
     }
-        
-    
-
 }

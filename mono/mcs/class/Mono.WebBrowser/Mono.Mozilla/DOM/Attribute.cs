@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,48 +35,56 @@ namespace Mono.Mozilla.DOM
     {
         private nsIDOMAttr attribute;
 
-        public Attribute (WebBrowser control, nsIDOMAttr domAttribute)
-            : base (control, domAttribute as nsIDOMNode)
+        public Attribute(WebBrowser control, nsIDOMAttr domAttribute)
+            : base(control, domAttribute as nsIDOMNode)
         {
             if (control.platform != control.enginePlatform)
-                this.attribute = nsDOMAttr.GetProxy (control, domAttribute);
+                this.attribute = nsDOMAttr.GetProxy(control, domAttribute);
             else
                 this.attribute = domAttribute;
         }
 
         #region IDisposable Members
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (!disposed) {
-                if (disposing) {
+            if (!disposed)
+            {
+                if (disposing)
+                {
                     this.attribute = null;
                 }
             }
-            base.Dispose (disposing);
+            base.Dispose(disposing);
         }
         #endregion
 
         #region IAttribute Members
-        public string Name {
-            get {
-                this.attribute.getName (storage);
-                return Base.StringGet (storage);
+        public string Name
+        {
+            get
+            {
+                this.attribute.getName(storage);
+                return Base.StringGet(storage);
             }
         }
 
-        public new string Value {
-            get {
-                this.attribute.getValue (storage);
-                return Base.StringGet (storage);
+        public new string Value
+        {
+            get
+            {
+                this.attribute.getValue(storage);
+                return Base.StringGet(storage);
             }
-            set {
-                Base.StringSet (storage, value);
-                this.attribute.setValue (storage);
+            set
+            {
+                Base.StringSet(storage, value);
+                this.attribute.setValue(storage);
             }
         }
         #endregion
-        
-        public override int GetHashCode () {
+
+        public override int GetHashCode()
+        {
             return this.hashcode;
         }
     }

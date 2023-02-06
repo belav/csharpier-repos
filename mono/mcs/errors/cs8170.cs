@@ -3,7 +3,7 @@
 
 public struct S
 {
-    public ref S Foo ()
+    public ref S Foo()
     {
         return ref this;
     }

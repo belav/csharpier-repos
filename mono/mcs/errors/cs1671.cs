@@ -17,18 +17,13 @@ namespace Mono.Tests
 
         public int X
         {
-            get
-            {
-                return x;
-            }
+            get { return x; }
         }
     }
 
     [error_1518(10)]
     public class error_1518Class
     {
-        public error_1518Class()
-        {
-        }
+        public error_1518Class() { }
     }
 }

@@ -2,7 +2,7 @@ using System;
 
 class Program
 {
-    public static int Main ()
+    public static int Main()
     {
         int x = 1;
         int y = 2;

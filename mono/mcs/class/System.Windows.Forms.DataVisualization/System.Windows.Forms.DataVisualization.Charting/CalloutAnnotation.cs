@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,7 +31,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public override ContentAlignment AnchorAlignment { get; set; }
         public override double AnchorOffsetX { get; set; }
         public override double AnchorOffsetY { get; set; }
-        public override string AnnotationType { get { throw new NotImplementedException (); } } //FIXME - find out what MS implementation returns here
+        public override string AnnotationType
+        {
+            get { throw new NotImplementedException(); }
+        } //FIXME - find out what MS implementation returns here
         public override Color BackColor { get; set; }
         public override GradientStyle BackGradientStyle { get; set; }
         public override ChartHatchStyle BackHatchStyle { get; set; }

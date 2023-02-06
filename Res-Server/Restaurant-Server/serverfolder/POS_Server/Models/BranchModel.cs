@@ -23,7 +23,6 @@ namespace POS_Server.Models
         public byte isActive { get; set; }
         public string type { get; set; }
 
-      
         public Boolean canDelete { get; set; }
     }
 }

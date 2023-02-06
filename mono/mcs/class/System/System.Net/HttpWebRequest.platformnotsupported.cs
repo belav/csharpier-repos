@@ -36,392 +36,464 @@ namespace System.Net
     [Serializable]
     public class HttpWebRequest : WebRequest, ISerializable
     {
-        internal const string EXCEPTION_MESSAGE = "System.Net.HttpWebRequest is not supported on the current platform.";
+        internal const string EXCEPTION_MESSAGE =
+            "System.Net.HttpWebRequest is not supported on the current platform.";
 
 #if MOBILE
         public
 #else
         internal
 #endif
-        HttpWebRequest (Uri uri)
+        HttpWebRequest(Uri uri)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        internal HttpWebRequest (Uri uri, object /* MonoTlsProvider */ tlsProvider, object /* MonoTlsSettings */ settings = null)
+        internal HttpWebRequest(
+            Uri uri,
+            object /* MonoTlsProvider */
+            tlsProvider,
+            object /* MonoTlsSettings */
+            settings = null
+        )
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        protected HttpWebRequest (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected HttpWebRequest(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public string Accept {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public string Accept
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public Uri Address {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public Uri Address
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public virtual bool AllowAutoRedirect {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public virtual bool AllowAutoRedirect
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public virtual bool AllowWriteStreamBuffering {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public virtual bool AllowWriteStreamBuffering
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public virtual bool AllowReadStreamBuffering {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public virtual bool AllowReadStreamBuffering
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public DecompressionMethods AutomaticDecompression {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public DecompressionMethods AutomaticDecompression
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        internal bool InternalAllowBuffering {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        internal bool InternalAllowBuffering
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public X509CertificateCollection ClientCertificates {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public X509CertificateCollection ClientCertificates
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public string Connection {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public string Connection
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public override string ConnectionGroupName {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public override string ConnectionGroupName
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public override long ContentLength {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public override long ContentLength
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        internal long InternalContentLength {
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        internal long InternalContentLength
+        {
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public override string ContentType {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public override string ContentType
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public HttpContinueDelegate ContinueDelegate {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public HttpContinueDelegate ContinueDelegate
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public virtual CookieContainer CookieContainer {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public virtual CookieContainer CookieContainer
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public override ICredentials Credentials {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public override ICredentials Credentials
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public DateTime Date {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public DateTime Date
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
 #if !MOBILE
-        public static new RequestCachePolicy DefaultCachePolicy {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
+        public static new RequestCachePolicy DefaultCachePolicy
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 #endif
 
-        public static int DefaultMaximumErrorResponseLength {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public string Expect {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public virtual bool HaveResponse {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public override WebHeaderCollection Headers {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public string Host {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public DateTime IfModifiedSince {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool KeepAlive {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public int MaximumAutomaticRedirections {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public int MaximumResponseHeadersLength {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public static int DefaultMaximumResponseHeadersLength {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public int ReadWriteTimeout {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public int ContinueTimeout {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public string MediaType {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public override string Method {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool Pipelined {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public override bool PreAuthenticate {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public Version ProtocolVersion {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public override IWebProxy Proxy {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public string Referer {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public override Uri RequestUri {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool SendChunked {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public ServicePoint ServicePoint {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        internal ServicePoint ServicePointNoLock {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public virtual bool SupportsCookieContainer {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public override int Timeout {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public string TransferEncoding {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public override bool UseDefaultCredentials {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public string UserAgent {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool UnsafeAuthenticatedConnectionSharing {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        internal bool ExpectContinue {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        internal ServerCertValidationCallback ServerCertValidationCallback {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        internal Uri AuthUri {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public RemoteCertificateValidationCallback ServerCertificateValidationCallback {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public void AddRange (int range)
+        public static int DefaultMaximumErrorResponseLength
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void AddRange (int from, int to)
+        public string Expect
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void AddRange (string rangeSpecifier, int range)
+        public virtual bool HaveResponse
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void AddRange (string rangeSpecifier, int from, int to)
+        public override WebHeaderCollection Headers
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void AddRange (long range)
+        public string Host
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void AddRange (long from, long to)
+        public DateTime IfModifiedSince
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void AddRange (string rangeSpecifier, long range)
+        public bool KeepAlive
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void AddRange (string rangeSpecifier, long from, long to)
+        public int MaximumAutomaticRedirections
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public override IAsyncResult BeginGetRequestStream (AsyncCallback callback, object state)
+        public int MaximumResponseHeadersLength
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public override Stream EndGetRequestStream (IAsyncResult asyncResult)
+        public static int DefaultMaximumResponseHeadersLength
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public int ReadWriteTimeout
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public int ContinueTimeout
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public string MediaType
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public override string Method
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public bool Pipelined
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public override bool PreAuthenticate
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public Version ProtocolVersion
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public override IWebProxy Proxy
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public string Referer
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public override Uri RequestUri
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public bool SendChunked
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public ServicePoint ServicePoint
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        internal ServicePoint ServicePointNoLock
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public virtual bool SupportsCookieContainer
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public override int Timeout
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public string TransferEncoding
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public override bool UseDefaultCredentials
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public string UserAgent
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public bool UnsafeAuthenticatedConnectionSharing
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        internal bool ExpectContinue
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        internal ServerCertValidationCallback ServerCertValidationCallback
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        internal Uri AuthUri
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public RemoteCertificateValidationCallback ServerCertificateValidationCallback
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public void AddRange(int range)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void AddRange(int from, int to)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void AddRange(string rangeSpecifier, int range)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void AddRange(string rangeSpecifier, int from, int to)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void AddRange(long range)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void AddRange(long from, long to)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void AddRange(string rangeSpecifier, long range)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void AddRange(string rangeSpecifier, long from, long to)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public override IAsyncResult BeginGetRequestStream(AsyncCallback callback, object state)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public override Stream EndGetRequestStream(IAsyncResult asyncResult)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
         public override Stream GetRequestStream()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public System.IO.Stream GetRequestStream (out TransportContext context)
+        public System.IO.Stream GetRequestStream(out TransportContext context)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public override IAsyncResult BeginGetResponse (AsyncCallback callback, object state)
+        public override IAsyncResult BeginGetResponse(AsyncCallback callback, object state)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public override WebResponse EndGetResponse (IAsyncResult asyncResult)
+        public override WebResponse EndGetResponse(IAsyncResult asyncResult)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public Stream EndGetRequestStream (IAsyncResult asyncResult, out TransportContext transportContext)
+        public Stream EndGetRequestStream(
+            IAsyncResult asyncResult,
+            out TransportContext transportContext
+        )
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
         public override WebResponse GetResponse()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        internal bool FinishedReading {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        internal bool Aborted {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public override void Abort ()
+        internal bool FinishedReading
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        void ISerializable.GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        internal bool Aborted
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        protected override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        public override void Abort()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        internal void DoContinueDelegate (int statusCode, WebHeaderCollection headers)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        internal void SetWriteStreamError (WebExceptionStatus status, Exception exc)
+        protected override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        internal byte[] GetRequestHeaders ()
+        internal void DoContinueDelegate(int statusCode, WebHeaderCollection headers)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        internal void SetWriteStreamError(WebExceptionStatus status, Exception exc)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        internal byte[] GetRequestHeaders()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
     }
 }

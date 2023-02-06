@@ -46,6 +46,9 @@ namespace Microsoft.VisualStudio.Debugger
         //
         // Summary:
         //     Provides the DkmExcepionCode for this exception
-        public DkmExceptionCode Code { get { return _code; } }
+        public DkmExceptionCode Code
+        {
+            get { return _code; }
+        }
     }
 }

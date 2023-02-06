@@ -13,21 +13,34 @@ namespace Microsoft.Interop.Analyzers
 {
     internal static class SyntaxExtensions
     {
-        public static AttributeArgumentSyntax FindArgumentWithNameOrArity(this AttributeSyntax attribute, string name, int arity)
+        public static AttributeArgumentSyntax FindArgumentWithNameOrArity(
+            this AttributeSyntax attribute,
+            string name,
+            int arity
+        )
         {
-            return attribute.ArgumentList.Arguments.FirstOrDefault(arg => arg.NameColon?.Name.ToString() == name) ?? attribute.ArgumentList.Arguments[arity];
+            return attribute.ArgumentList.Arguments.FirstOrDefault(
+                    arg => arg.NameColon?.Name.ToString() == name
+                ) ?? attribute.ArgumentList.Arguments[arity];
         }
 
-        public static Location FindTypeExpressionOrNullLocation(this AttributeArgumentSyntax attributeArgumentSyntax)
+        public static Location FindTypeExpressionOrNullLocation(
+            this AttributeArgumentSyntax attributeArgumentSyntax
+        )
         {
             var walker = new FindTypeLocationWalker();
             walker.Visit(attributeArgumentSyntax);
             return walker.TypeExpressionLocation;
         }
 
-        public static AttributeData? FindAttributeData(this AttributeSyntax syntax, ISymbol targetSymbol)
+        public static AttributeData? FindAttributeData(
+            this AttributeSyntax syntax,
+            ISymbol targetSymbol
+        )
         {
-            AttributeTargetSpecifierSyntax attributeTarget = syntax.FirstAncestorOrSelf<AttributeListSyntax>().Target;
+            AttributeTargetSpecifierSyntax attributeTarget = syntax
+                .FirstAncestorOrSelf<AttributeListSyntax>()
+                .Target;
             if (attributeTarget is not null)
             {
                 switch (attributeTarget.Identifier.Kind())
@@ -39,15 +52,21 @@ namespace Microsoft.Interop.Analyzers
                             // For example, the ContainingSymbol for an AttributeSyntax on a local function has a ContainingSymbol of the method.
                             // Since this method is internal and the callers don't care about attributes on local functions,
                             // we just allow this method to return null in those cases.
-                            return method.GetReturnTypeAttributes().FirstOrDefault(attributeSyntaxLocationMatches);
+                            return method
+                                .GetReturnTypeAttributes()
+                                .FirstOrDefault(attributeSyntaxLocationMatches);
                         }
                         // An attribute on the return value of a delegate type's Invoke method has a ContainingSymbol of the delegate type.
                         // We don't care about the attributes in this case for the callers, so we'll just return null.
                         return null;
                     case SyntaxKind.AssemblyKeyword:
-                        return targetSymbol.ContainingAssembly.GetAttributes().First(attributeSyntaxLocationMatches);
+                        return targetSymbol.ContainingAssembly
+                            .GetAttributes()
+                            .First(attributeSyntaxLocationMatches);
                     case SyntaxKind.ModuleKeyword:
-                        return targetSymbol.ContainingModule.GetAttributes().First(attributeSyntaxLocationMatches);
+                        return targetSymbol.ContainingModule
+                            .GetAttributes()
+                            .First(attributeSyntaxLocationMatches);
                     default:
                         return null;
                 }
@@ -61,7 +80,8 @@ namespace Microsoft.Interop.Analyzers
 
             bool attributeSyntaxLocationMatches(AttributeData attrData)
             {
-                return attrData.ApplicationSyntaxReference!.SyntaxTree == syntax.SyntaxTree && attrData.ApplicationSyntaxReference.Span == syntax.Span;
+                return attrData.ApplicationSyntaxReference!.SyntaxTree == syntax.SyntaxTree
+                    && attrData.ApplicationSyntaxReference.Span == syntax.Span;
             }
         }
 
@@ -86,6 +106,5 @@ namespace Microsoft.Interop.Analyzers
                 }
             }
         }
-
     }
 }

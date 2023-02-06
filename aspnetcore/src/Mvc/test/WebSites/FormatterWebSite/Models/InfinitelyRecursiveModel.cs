@@ -12,9 +12,15 @@ public class InfinitelyRecursiveModel
 
     private class StringIdentifierConverter : JsonConverter
     {
-        public override bool CanConvert(Type objectType) => objectType == typeof(RecursiveIdentifier);
+        public override bool CanConvert(Type objectType) =>
+            objectType == typeof(RecursiveIdentifier);
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             return new RecursiveIdentifier(reader.Value.ToString());
         }

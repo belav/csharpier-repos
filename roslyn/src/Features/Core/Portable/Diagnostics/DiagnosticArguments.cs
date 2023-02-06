@@ -80,12 +80,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalysisKind? documentAnalysisKind,
             ProjectId projectId,
             string[] analyzerIds,
-            IdeAnalyzerOptions ideOptions)
+            IdeAnalyzerOptions ideOptions
+        )
         {
             Debug.Assert(documentId != null || documentSpan == null);
             Debug.Assert(documentId != null || documentAnalysisKind == null);
-            Debug.Assert(documentAnalysisKind is null or
-                (AnalysisKind?)AnalysisKind.Syntax or (AnalysisKind?)AnalysisKind.Semantic);
+            Debug.Assert(
+                documentAnalysisKind
+                    is null
+                        or (AnalysisKind?)AnalysisKind.Syntax
+                        or (AnalysisKind?)AnalysisKind.Semantic
+            );
             Debug.Assert(analyzerIds.Length > 0);
 
             ReportSuppressedDiagnostics = reportSuppressedDiagnostics;

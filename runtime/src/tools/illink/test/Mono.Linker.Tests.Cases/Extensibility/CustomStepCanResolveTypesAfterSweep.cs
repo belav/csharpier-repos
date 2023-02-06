@@ -5,22 +5,29 @@ namespace Mono.Linker.Tests.Cases.Extensibility
 {
     // Repro for https://github.com/dotnet/linker/issues/2267.
 #if !NETCOREAPP
-    [IgnoreTestCase ("Specific to the illink build")]
+    [IgnoreTestCase("Specific to the illink build")]
 #endif
-    [SetupCompileBefore ("ResolveTypesSubStep.dll", new[] { "Dependencies/ResolveTypesSubStep.cs" }, new[] { "illink.dll", "Mono.Cecil.dll", "netstandard.dll" })]
-    [SetupLinkerArgument ("--custom-step", "+OutputStep:ResolveTypesSubStep,ResolveTypesSubStep.dll")]
-    [SetupLinkerAction ("copy", "test")]
-    [SetupLinkerTrimMode ("link")]
-    [KeptMember (".ctor()")]
+    [SetupCompileBefore(
+        "ResolveTypesSubStep.dll",
+        new[] { "Dependencies/ResolveTypesSubStep.cs" },
+        new[] { "illink.dll", "Mono.Cecil.dll", "netstandard.dll" }
+    )]
+    [SetupLinkerArgument(
+        "--custom-step",
+        "+OutputStep:ResolveTypesSubStep,ResolveTypesSubStep.dll"
+    )]
+    [SetupLinkerAction("copy", "test")]
+    [SetupLinkerTrimMode("link")]
+    [KeptMember(".ctor()")]
     public class CustomStepCanResolveTypesAfterSweep
     {
-        public static void Main ()
+        public static void Main()
         {
             var f = TypeWithFields.primitiveField;
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class TypeWithFields
         {
             [Kept]

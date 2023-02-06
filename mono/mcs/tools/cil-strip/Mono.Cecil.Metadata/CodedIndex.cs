@@ -29,9 +29,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
-    internal enum CodedIndex {
+namespace Mono.Cecil.Metadata
+{
+    internal enum CodedIndex
+    {
         TypeDefOrRef,
         HasConstant,
         HasCustomAttribute,

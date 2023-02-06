@@ -2,10 +2,11 @@
 // Line: 7
 
 using System;
-[assembly:CLSCompliant (true)]
+
+[assembly: CLSCompliant(true)]
 
 [AAAA(false)]
 public sealed class Region
 {
-    public Region() {}
+    public Region() { }
 }

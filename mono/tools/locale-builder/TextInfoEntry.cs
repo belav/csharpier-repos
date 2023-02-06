@@ -39,25 +39,25 @@ namespace Mono.Tools.LocaleBuilder
         public string ListSeparator;
         public bool IsRightToLeft;
 
-        public override string ToString ()
+        public override string ToString()
         {
-            StringBuilder b = new StringBuilder ();
-            b.Append ("{ ");
-            b.Append (ANSICodePage).Append (", ");
-            b.Append (EBCDICCodePage).Append (", ");
-            b.Append (MacCodePage).Append (", ");
-            b.Append (OEMCodePage).Append (", ");
-            b.Append (IsRightToLeft ? "1" : "0").Append (", '");
+            StringBuilder b = new StringBuilder();
+            b.Append("{ ");
+            b.Append(ANSICodePage).Append(", ");
+            b.Append(EBCDICCodePage).Append(", ");
+            b.Append(MacCodePage).Append(", ");
+            b.Append(OEMCodePage).Append(", ");
+            b.Append(IsRightToLeft ? "1" : "0").Append(", '");
 
             // TODO: It's more than 1 char for some cultures
             if (ListSeparator.Length <= 1)
-                b.Append (ListSeparator);
+                b.Append(ListSeparator);
             else
-                b.Append (";");
+                b.Append(";");
 
-            b.Append ("' }");
+            b.Append("' }");
 
-            return b.ToString ();
+            return b.ToString();
         }
     }
 }

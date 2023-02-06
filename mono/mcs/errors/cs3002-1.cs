@@ -3,16 +3,18 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant(true)]
+
+[assembly: CLSCompliant(true)]
 
 [CLSCompliant(false)]
-public interface I1 {
-}
+public interface I1 { }
 
-public class CLSClass {
-        protected internal I1 Foo() {
-                return null;
-        }
-       
-        static void Main() {}
+public class CLSClass
+{
+    protected internal I1 Foo()
+    {
+        return null;
+    }
+
+    static void Main() { }
 }

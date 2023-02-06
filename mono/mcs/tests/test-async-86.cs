@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 public class Program
 {
-    string Data { 
-        get {
-            return data;
-        }
-        set {
+    string Data
+    {
+        get { return data; }
+        set
+        {
             ++setter_called;
             data = value;
         }
@@ -16,11 +16,11 @@ public class Program
     int setter_called;
     string data = "init-";
 
-    string this [string arg] {
-        get {
-            return i_data;
-        }
-        set {
+    string this[string arg]
+    {
+        get { return i_data; }
+        set
+        {
             ++i_setter_called;
             i_data = value;
         }
@@ -31,18 +31,20 @@ public class Program
 
     public static int Main()
     {
-        var p = new Program ();
-        p.TestProperty ().Wait ();
-        if (p.data != "init-nxa123z") {
+        var p = new Program();
+        p.TestProperty().Wait();
+        if (p.data != "init-nxa123z")
+        {
             return 1;
         }
 
         if (p.setter_called != 1)
             return 2;
 
-        p.TestIndexer ().Wait ();
+        p.TestIndexer().Wait();
 
-        if (p.i_data != "init2-nxa123z") {
+        if (p.i_data != "init2-nxa123z")
+        {
             return 3;
         }
 
@@ -52,20 +54,20 @@ public class Program
         return 0;
     }
 
-    async Task TestProperty ()
+    async Task TestProperty()
     {
-        Data += "n" + await StringValue () + "a" + 123.ToString () + "z";
+        Data += "n" + await StringValue() + "a" + 123.ToString() + "z";
     }
 
-    async Task TestIndexer ()
+    async Task TestIndexer()
     {
         string arg = "foo";
-        this[arg] += "n" + await StringValue () + "a" + 123.ToString () + "z";
+        this[arg] += "n" + await StringValue() + "a" + 123.ToString() + "z";
     }
 
-    async Task<string> StringValue ()
+    async Task<string> StringValue()
     {
-        await Task.Yield ();
+        await Task.Yield();
         return "x";
     }
 }

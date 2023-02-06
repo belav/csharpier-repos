@@ -15,10 +15,10 @@ namespace test
 
     class Program
     {
-        public static void Main (string[] args)
+        public static void Main(string[] args)
         {
             Test<string> test = new Test<string>();
-            foreach(string s in test.Lookup("hi") )
+            foreach (string s in test.Lookup("hi"))
             {
                 Console.WriteLine(s);
             }

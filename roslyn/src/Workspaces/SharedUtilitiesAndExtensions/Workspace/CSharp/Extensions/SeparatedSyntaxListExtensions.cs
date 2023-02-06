@@ -9,7 +9,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     internal static class SeparatedSyntaxListExtensions
     {
         public static SeparatedSyntaxList<T> InsertRangeWithTrailingSeparator<T>(
-            this SeparatedSyntaxList<T> separatedList, int index, IEnumerable<T> nodes, SyntaxKind separator)
+            this SeparatedSyntaxList<T> separatedList,
+            int index,
+            IEnumerable<T> nodes,
+            SyntaxKind separator
+        )
             where T : SyntaxNode
         {
             var newList = separatedList.InsertRange(index, nodes);
@@ -20,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (!nodesAndTokens.Last().IsNode)
                 return newList;
 
-            return SyntaxFactory.SeparatedList<T>(nodesAndTokens.Add(SyntaxFactory.Token(separator)));
+            return SyntaxFactory.SeparatedList<T>(
+                nodesAndTokens.Add(SyntaxFactory.Token(separator))
+            );
         }
     }
 }

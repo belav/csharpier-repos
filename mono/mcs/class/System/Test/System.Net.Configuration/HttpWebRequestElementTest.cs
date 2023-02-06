@@ -19,14 +19,14 @@ namespace MonoTests.System.Net
     public class HttpWebRequestElementTest
     {
         [Test]
-        public void DefaultValues ()
+        public void DefaultValues()
         {
-            HttpWebRequestElement element = new HttpWebRequestElement ();
+            HttpWebRequestElement element = new HttpWebRequestElement();
 
-            Assert.AreEqual (64, element.MaximumErrorResponseLength, "#1");
-            Assert.AreEqual (64, element.MaximumResponseHeadersLength, "#2");
-            Assert.AreEqual (-1, element.MaximumUnauthorizedUploadLength, "#3");
-            Assert.AreEqual (false, element.UseUnsafeHeaderParsing, "#4");
+            Assert.AreEqual(64, element.MaximumErrorResponseLength, "#1");
+            Assert.AreEqual(64, element.MaximumResponseHeadersLength, "#2");
+            Assert.AreEqual(-1, element.MaximumUnauthorizedUploadLength, "#3");
+            Assert.AreEqual(false, element.UseUnsafeHeaderParsing, "#4");
         }
     }
 }

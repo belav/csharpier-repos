@@ -16,25 +16,23 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MonoTests.System.Globalization
 {
-
     [TestFixture]
     public class SortKeyTest
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void CompareNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CompareNull()
         {
             // bug #376171
-            SortKey.Compare (null, null);
+            SortKey.Compare(null, null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void CompareNull2 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CompareNull2()
         {
             // bug #376171
-            SortKey.Compare (CultureInfo.InvariantCulture.CompareInfo.GetSortKey ("A"), null);
+            SortKey.Compare(CultureInfo.InvariantCulture.CompareInfo.GetSortKey("A"), null);
         }
     }
-
 }

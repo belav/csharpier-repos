@@ -12,8 +12,21 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
     internal interface IVsTypeScriptVisualStudioProjectFactory
     {
         [Obsolete("Use CreateAndAddToWorkspaceAsync instead")]
-        VSTypeScriptVisualStudioProjectWrapper CreateAndAddToWorkspace(string projectSystemName, string language, string projectFilePath, IVsHierarchy hierarchy, Guid projectGuid);
+        VSTypeScriptVisualStudioProjectWrapper CreateAndAddToWorkspace(
+            string projectSystemName,
+            string language,
+            string projectFilePath,
+            IVsHierarchy hierarchy,
+            Guid projectGuid
+        );
 
-        ValueTask<VSTypeScriptVisualStudioProjectWrapper> CreateAndAddToWorkspaceAsync(string projectSystemName, string language, string projectFilePath, IVsHierarchy hierarchy, Guid projectGuid, CancellationToken cancellationToken);
+        ValueTask<VSTypeScriptVisualStudioProjectWrapper> CreateAndAddToWorkspaceAsync(
+            string projectSystemName,
+            string language,
+            string projectFilePath,
+            IVsHierarchy hierarchy,
+            Guid projectGuid,
+            CancellationToken cancellationToken
+        );
     }
 }

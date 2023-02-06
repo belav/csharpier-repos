@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,13 +35,24 @@ using System.Web.Util;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Util
-{    
+{
     class TestRequestValidator : RequestValidator
     {
-        public bool DoIsValidRequestString (HttpContext context, string value, RequestValidationSource requestValidationSource,
-                        string collectionKey, out int validationFailureIndex)
+        public bool DoIsValidRequestString(
+            HttpContext context,
+            string value,
+            RequestValidationSource requestValidationSource,
+            string collectionKey,
+            out int validationFailureIndex
+        )
         {
-            return IsValidRequestString (context, value, requestValidationSource, collectionKey, out validationFailureIndex);
+            return IsValidRequestString(
+                context,
+                value,
+                requestValidationSource,
+                collectionKey,
+                out validationFailureIndex
+            );
         }
     }
 
@@ -52,46 +63,76 @@ namespace MonoTests.System.Web.Util
         {
             Uri uri;
 
-            public FakeHttpWorkerRequest (string url)
+            public FakeHttpWorkerRequest(string url)
             {
-                uri = new Uri (url, UriKind.Absolute);
+                uri = new Uri(url, UriKind.Absolute);
             }
 
-            public override string GetQueryString ()
+            public override string GetQueryString()
             {
                 return uri.Query;
             }
 
-            public override string GetUriPath ()
+            public override string GetUriPath()
             {
                 return uri.AbsolutePath;
             }
         }
 
         [Test]
-        public void Current ()
+        public void Current()
         {
-            Assert.IsNotNull (RequestValidator.Current, "#A1");
-            Assert.AreEqual (typeof (RequestValidator).AssemblyQualifiedName, RequestValidator.Current.GetType ().AssemblyQualifiedName, "#A2");
-            Assert.Throws<ArgumentNullException> (() => {
-                RequestValidator.Current = null;
-            }, "#A3");
+            Assert.IsNotNull(RequestValidator.Current, "#A1");
+            Assert.AreEqual(
+                typeof(RequestValidator).AssemblyQualifiedName,
+                RequestValidator.Current.GetType().AssemblyQualifiedName,
+                "#A2"
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    RequestValidator.Current = null;
+                },
+                "#A3"
+            );
 
-            RequestValidator.Current = new TestRequestValidator ();
-            Assert.IsNotNull (RequestValidator.Current, "#B1");
-            Assert.AreEqual (typeof (TestRequestValidator).AssemblyQualifiedName, RequestValidator.Current.GetType ().AssemblyQualifiedName, "#B2");
+            RequestValidator.Current = new TestRequestValidator();
+            Assert.IsNotNull(RequestValidator.Current, "#B1");
+            Assert.AreEqual(
+                typeof(TestRequestValidator).AssemblyQualifiedName,
+                RequestValidator.Current.GetType().AssemblyQualifiedName,
+                "#B2"
+            );
         }
 
         [Test]
-        public void IsValidRequestString ()
+        public void IsValidRequestString()
         {
-            var rv = new TestRequestValidator ();
+            var rv = new TestRequestValidator();
             int validationFailureIndex;
-            var fr = new FakeHttpWorkerRequest ("http://localhost/default.aspx?key=invalid%value");
-            var ctx = new HttpContext (fr);
+            var fr = new FakeHttpWorkerRequest("http://localhost/default.aspx?key=invalid%value");
+            var ctx = new HttpContext(fr);
 
-            Assert.IsFalse (rv.DoIsValidRequestString (null, "<script>invalid%value", RequestValidationSource.QueryString, "key", out validationFailureIndex), "#A1");
-            Assert.IsFalse (rv.DoIsValidRequestString (ctx, "<script>invalid%value", RequestValidationSource.QueryString, "key", out validationFailureIndex), "#A2");
+            Assert.IsFalse(
+                rv.DoIsValidRequestString(
+                    null,
+                    "<script>invalid%value",
+                    RequestValidationSource.QueryString,
+                    "key",
+                    out validationFailureIndex
+                ),
+                "#A1"
+            );
+            Assert.IsFalse(
+                rv.DoIsValidRequestString(
+                    ctx,
+                    "<script>invalid%value",
+                    RequestValidationSource.QueryString,
+                    "key",
+                    out validationFailureIndex
+                ),
+                "#A2"
+            );
         }
     }
 }

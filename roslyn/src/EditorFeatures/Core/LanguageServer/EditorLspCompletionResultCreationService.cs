@@ -16,14 +16,16 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer
 {
-    [ExportWorkspaceService(typeof(ILspCompletionResultCreationService), ServiceLayer.Editor), Shared]
-    internal sealed class EditorLspCompletionResultCreationService : ILspCompletionResultCreationService
+    [
+        ExportWorkspaceService(typeof(ILspCompletionResultCreationService), ServiceLayer.Editor),
+        Shared
+    ]
+    internal sealed class EditorLspCompletionResultCreationService
+        : ILspCompletionResultCreationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorLspCompletionResultCreationService()
-        {
-        }
+        public EditorLspCompletionResultCreationService() { }
 
         public async Task<LSP.CompletionItem> CreateAsync(
             Document document,
@@ -32,7 +34,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             bool itemDefaultsSupported,
             TextSpan defaultSpan,
             CompletionItem item,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var lspItem = new LSP.VSInternalCompletionItem
             {
@@ -52,8 +55,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             }
             else
             {
-                await DefaultLspCompletionResultCreationService.PopulateTextEditAsync(
-                    document, documentText, itemDefaultsSupported, defaultSpan, item, lspItem, cancellationToken).ConfigureAwait(false);
+                await DefaultLspCompletionResultCreationService
+                    .PopulateTextEditAsync(
+                        document,
+                        documentText,
+                        itemDefaultsSupported,
+                        defaultSpan,
+                        item,
+                        lspItem,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             return lspItem;

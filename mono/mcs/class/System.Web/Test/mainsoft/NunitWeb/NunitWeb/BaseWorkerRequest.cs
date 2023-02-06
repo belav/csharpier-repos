@@ -18,6 +18,7 @@ namespace MonoTests.SystemWeb.Framework
     public class BaseWorkerRequest : SimpleWorkerRequest, IForeignData
     {
         string _userAgent;
+
         /// <summary>
         /// Create worker request with given page, query, writer and user agent.
         /// </summary>
@@ -25,8 +26,8 @@ namespace MonoTests.SystemWeb.Framework
         /// <param name="query">The request query string.</param>
         /// <param name="writer">The <see cref="System.IO.TextWriter"/> used to write HTTP response.</param>
         /// <param name="userAgent">The value of the user-agent HTTP header.</param>
-        public BaseWorkerRequest (string page, string query, TextWriter writer, string userAgent)
-            : base (page, query, writer)
+        public BaseWorkerRequest(string page, string query, TextWriter writer, string userAgent)
+            : base(page, query, writer)
         {
             _userAgent = userAgent;
         }
@@ -37,20 +38,24 @@ namespace MonoTests.SystemWeb.Framework
         /// <param name="index">Header index, as defined by <see cref="System.Web.HttpWorkerRequest"/></param>
         /// <returns></returns>
         /// <seealso cref="System.Web.HttpWorkerRequest"/>
-        public override string GetKnownRequestHeader(int index) {
-            switch (index) {
-            case HttpWorkerRequest.HeaderUserAgent:
-                return _userAgent;
+        public override string GetKnownRequestHeader(int index)
+        {
+            switch (index)
+            {
+                case HttpWorkerRequest.HeaderUserAgent:
+                    return _userAgent;
             }
-            return base.GetKnownRequestHeader (index);
+            return base.GetKnownRequestHeader(index);
         }
 
-        Hashtable foreignData = new Hashtable ();
-        object IForeignData.this [Type type] {
-            get {return foreignData[type];}
-            set {
+        Hashtable foreignData = new Hashtable();
+        object IForeignData.this[Type type]
+        {
+            get { return foreignData[type]; }
+            set
+            {
                 if (value == null)
-                    foreignData.Remove (type);
+                    foreignData.Remove(type);
                 else
                     foreignData[type] = value;
             }
@@ -58,16 +63,17 @@ namespace MonoTests.SystemWeb.Framework
 
         HttpStatusCode _statusCode;
         string _statusDescription;
+
         /// <summary>
         /// Overriden to store the status code.
         /// </summary>
         /// <param name="statusCode"></param>
         /// <param name="statusDescription"></param>
-        public override void SendStatus (int statusCode, string statusDescription)
+        public override void SendStatus(int statusCode, string statusDescription)
         {
-            _statusCode = (HttpStatusCode) statusCode;
+            _statusCode = (HttpStatusCode)statusCode;
             _statusDescription = statusDescription;
-            base.SendStatus (statusCode, statusDescription);
+            base.SendStatus(statusCode, statusDescription);
         }
 
         internal HttpStatusCode StatusCode

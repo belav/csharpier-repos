@@ -5,12 +5,12 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.DynamicDependencies
 {
-    [SetupLinkerArgument ("--keep-dep-attributes", "true")]
+    [SetupLinkerArgument("--keep-dep-attributes", "true")]
     class DynamicDependencyKeptOption
     {
-        public static void Main ()
+        public static void Main()
         {
-            B.Test ();
+            B.Test();
         }
 
         class B
@@ -19,12 +19,9 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
             int field;
 
             [Kept]
-            [KeptAttributeAttribute (typeof (DynamicDependencyAttribute))]
-
-            [DynamicDependency ("field")]
-            public static void Test ()
-            {
-            }
+            [KeptAttributeAttribute(typeof(DynamicDependencyAttribute))]
+            [DynamicDependency("field")]
+            public static void Test() { }
         }
     }
 }

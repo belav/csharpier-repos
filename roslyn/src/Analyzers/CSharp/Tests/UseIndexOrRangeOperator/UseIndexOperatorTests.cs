@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseIndexOperatorDiagnosticAnalyzer,
-        CSharpUseIndexOperatorCodeFixProvider>;
+        CSharpUseIndexOperatorCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseIndexOperator)]
     public class UseIndexOperatorTests
@@ -24,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
         public async Task TestNotInCSharp7()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -46,7 +47,7 @@ class C
         public async Task TestWithMissingReference()
         {
             var source =
-@"class {|#0:C|}
+                @"class {|#0:C|}
 {
     {|#1:void|} Goo({|#2:string|} s)
     {
@@ -61,15 +62,30 @@ class C
                 ExpectedDiagnostics =
                 {
                     // /0/Test0.cs(1,7): error CS0518: Predefined type 'System.Object' is not defined or imported
-                    DiagnosticResult.CompilerError("CS0518").WithLocation(0).WithArguments("System.Object"),
+                    DiagnosticResult
+                        .CompilerError("CS0518")
+                        .WithLocation(0)
+                        .WithArguments("System.Object"),
                     // /0/Test0.cs(1,7): error CS1729: 'object' does not contain a constructor that takes 0 arguments
-                    DiagnosticResult.CompilerError("CS1729").WithLocation(0).WithArguments("object", "0"),
+                    DiagnosticResult
+                        .CompilerError("CS1729")
+                        .WithLocation(0)
+                        .WithArguments("object", "0"),
                     // /0/Test0.cs(3,5): error CS0518: Predefined type 'System.Void' is not defined or imported
-                    DiagnosticResult.CompilerError("CS0518").WithLocation(1).WithArguments("System.Void"),
+                    DiagnosticResult
+                        .CompilerError("CS0518")
+                        .WithLocation(1)
+                        .WithArguments("System.Void"),
                     // /0/Test0.cs(3,14): error CS0518: Predefined type 'System.String' is not defined or imported
-                    DiagnosticResult.CompilerError("CS0518").WithLocation(2).WithArguments("System.String"),
+                    DiagnosticResult
+                        .CompilerError("CS0518")
+                        .WithLocation(2)
+                        .WithArguments("System.String"),
                     // /0/Test0.cs(5,30): error CS0518: Predefined type 'System.Int32' is not defined or imported
-                    DiagnosticResult.CompilerError("CS0518").WithLocation(3).WithArguments("System.Int32"),
+                    DiagnosticResult
+                        .CompilerError("CS0518")
+                        .WithLocation(3)
+                        .WithArguments("System.Int32"),
                 },
                 FixedCode = source,
             }.RunAsync();
@@ -79,7 +95,7 @@ class C
         public async Task TestSimple()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -88,7 +104,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -109,7 +125,7 @@ class C
         public async Task TestMultipleDefinitions()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -118,7 +134,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -128,7 +144,8 @@ class C
 }";
 
             // Adding a dependency with internal definitions of Index and Range should not break the feature
-            var source1 = "namespace System { internal struct Index { } internal struct Range { } }";
+            var source1 =
+                "namespace System { internal struct Index { } internal struct Range { } }";
 
             await new VerifyCS.Test
             {
@@ -154,7 +171,7 @@ class C
         public async Task TestComplexSubtaction()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -163,7 +180,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -184,7 +201,7 @@ class C
         public async Task TestComplexInstance()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 class C
@@ -195,7 +212,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 using System.Linq;
 
 class C
@@ -218,7 +235,7 @@ class C
         public async Task TestNotWithoutSubtraction1()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -239,7 +256,7 @@ class C
         public async Task TestNotWithoutSubtraction2()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -260,7 +277,7 @@ class C
         public async Task TestNotWithMultipleArgs()
         {
             var source =
-@"
+                @"
 struct S { public int Length { get; } public int this[int i] { get => 0; } public int this[int i, int j] { get => 0; } public int this[System.Index i] { get => 0; } }
 class C
 {
@@ -282,7 +299,7 @@ class C
         public async Task TestUserDefinedTypeWithLength()
         {
             var source =
-@"
+                @"
 struct S { public int Length { get; } public int this[int i] { get => 0; } public int this[System.Index i] { get => 0; } }
 class C
 {
@@ -292,7 +309,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 struct S { public int Length { get; } public int this[int i] { get => 0; } public int this[System.Index i] { get => 0; } }
 class C
 {
@@ -314,7 +331,7 @@ class C
         public async Task TestUserDefinedTypeWithCount()
         {
             var source =
-@"
+                @"
 struct S { public int Count { get; } public int this[int i] { get => 0; } public int this[System.Index i] { get => 0; } }
 class C
 {
@@ -324,7 +341,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 struct S { public int Count { get; } public int this[int i] { get => 0; } public int this[System.Index i] { get => 0; } }
 class C
 {
@@ -346,7 +363,7 @@ class C
         public async Task TestUserDefinedTypeWithNoLengthOrCount()
         {
             var source =
-@"
+                @"
 struct S { public int this[int i] { get => 0; } public int this[System.Index i] { get => 0; } }
 class C
 {
@@ -368,7 +385,7 @@ class C
         public async Task TestUserDefinedTypeWithNoInt32Indexer()
         {
             var source =
-@"
+                @"
 struct S { public int Length { get; } public int this[System.Index i] { get => 0; } }
 class C
 {
@@ -390,7 +407,7 @@ class C
         public async Task TestUserDefinedTypeWithNoIndexIndexer()
         {
             var source =
-@"
+                @"
 struct S { public int Count { get; } public int this[int i] { get => 0; } }
 class C
 {
@@ -400,7 +417,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 struct S { public int Count { get; } public int this[int i] { get => 0; } }
 class C
 {
@@ -422,7 +439,7 @@ class C
         public async Task TestMethodToMethod()
         {
             var source =
-@"
+                @"
 struct S { public int Length { get; } public int Get(int i) => 0; public int Get(System.Index i) => 0; }
 class C
 {
@@ -432,7 +449,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 struct S { public int Length { get; } public int Get(int i) => 0; public int Get(System.Index i) => 0; }
 class C
 {
@@ -454,7 +471,7 @@ class C
         public async Task TestMethodToMethodMissingIndexIndexer()
         {
             var source =
-@"
+                @"
 struct S { public int Length { get; } public int Get(int i) => 0; }
 class C
 {
@@ -476,7 +493,7 @@ class C
         public async Task TestMethodToMethodWithIntIndexer()
         {
             var source =
-@"
+                @"
 struct S { public int Length { get; } public int Get(int i) => 0; public int this[int i] { get => 0; } }
 class C
 {
@@ -498,7 +515,7 @@ class C
         public async Task TestMissingWithNoSystemIndex()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string[] s)
@@ -520,7 +537,7 @@ class C
         public async Task TestMissingWithInaccessibleSystemIndex()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string[] s)
@@ -539,10 +556,7 @@ class C
                     {
                         ["AdditionalProject"] =
                         {
-                            Sources =
-                            {
-                                "namespace System { internal struct Index { } }"
-                            }
+                            Sources = { "namespace System { internal struct Index { } }" }
                         }
                     },
                     AdditionalProjectReferences = { "AdditionalProject" },
@@ -556,7 +570,7 @@ class C
         public async Task TestArray()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string[] s)
@@ -565,7 +579,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void Goo(string[] s)
@@ -586,7 +600,7 @@ class C
         public async Task TestFixAll1()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -596,7 +610,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void Goo(string s)
@@ -618,7 +632,7 @@ class C
         public async Task TestNestedFixAll1()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string[] s)
@@ -627,7 +641,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void Goo(string[] s)
@@ -648,7 +662,7 @@ class C
         public async Task TestNestedFixAll2()
         {
             var source =
-@"
+                @"
 class C
 {
     void Goo(string[] s)
@@ -657,7 +671,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 class C
 {
     void Goo(string[] s)
@@ -678,7 +692,7 @@ class C
         public async Task TestSimple_NoIndexIndexer_SupportsIntIndexer()
         {
             var source =
-@"
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -688,7 +702,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -710,7 +724,7 @@ class C
         public async Task TestSimple_NoIndexIndexer_SupportsIntIndexer_Set()
         {
             var source =
-@"
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -720,7 +734,7 @@ class C
     }
 }";
             var fixedSource =
-@"
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -742,7 +756,7 @@ class C
         public async Task NotOnConstructedIndexer()
         {
             var source =
-@"
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -764,7 +778,7 @@ class C
         public async Task TestNotInExpressionTree()
         {
             var source =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

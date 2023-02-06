@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,20 +36,38 @@ namespace Castle.DynamicProxy.Tests
             switch (kind)
             {
                 case ProxyKind.Class:
-                    return (TType) generator.CreateClassProxy(typeof (object), Type.EmptyTypes, options);
+                    return (TType)
+                        generator.CreateClassProxy(typeof(object), Type.EmptyTypes, options);
                 case ProxyKind.WithoutTarget:
-                    return (TType) generator.CreateInterfaceProxyWithoutTarget(typeof (IEmpty), Type.EmptyTypes, options);
+                    return (TType)
+                        generator.CreateInterfaceProxyWithoutTarget(
+                            typeof(IEmpty),
+                            Type.EmptyTypes,
+                            options
+                        );
                 case ProxyKind.WithTarget:
-                    return (TType) generator.CreateInterfaceProxyWithTarget(typeof (IEmpty), Type.EmptyTypes, new Empty(), options);
+                    return (TType)
+                        generator.CreateInterfaceProxyWithTarget(
+                            typeof(IEmpty),
+                            Type.EmptyTypes,
+                            new Empty(),
+                            options
+                        );
                 case ProxyKind.WithTargetInterface:
-                    return (TType) generator.CreateInterfaceProxyWithTargetInterface(typeof (IEmpty), new Empty(), options);
+                    return (TType)
+                        generator.CreateInterfaceProxyWithTargetInterface(
+                            typeof(IEmpty),
+                            new Empty(),
+                            options
+                        );
             }
 
             Assert.Fail("Invalid proxy kind {0}", kind);
             return default(TType);
         }
 
-        public static readonly object[] AllKinds = {
+        public static readonly object[] AllKinds =
+        {
             new object[] { ProxyKind.Class },
             new object[] { ProxyKind.WithoutTarget },
             new object[] { ProxyKind.WithTarget },
@@ -91,7 +109,7 @@ namespace Castle.DynamicProxy.Tests
         public void Mixin_method_out_ref_parameters(ProxyKind kind)
         {
             var proxy = CreateProxyWithMixin<IWithRefOut>(kind, new WithRefOut());
-            int[] result = {-1};
+            int[] result = { -1 };
             Assert.DoesNotThrow(() => proxy.Did(ref result[0]));
             Assert.AreEqual(5, result[0]);
 

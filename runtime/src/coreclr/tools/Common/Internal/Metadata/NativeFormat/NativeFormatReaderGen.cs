@@ -29,54 +29,39 @@ namespace Internal.Metadata.NativeFormat
 
         public ArraySignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public Handle ElementType
         {
-            get
-            {
-                return _elementType;
-            }
+            get { return _elementType; }
         } // ElementType
 
         internal Handle _elementType;
 
         public int Rank
         {
-            get
-            {
-                return _rank;
-            }
+            get { return _rank; }
         } // Rank
 
         internal int _rank;
 
         public Int32Collection Sizes
         {
-            get
-            {
-                return _sizes;
-            }
+            get { return _sizes; }
         } // Sizes
 
         internal Int32Collection _sizes;
 
         public Int32Collection LowerBounds
         {
-            get
-            {
-                return _lowerBounds;
-            }
+            get { return _lowerBounds; }
         } // LowerBounds
 
         internal Int32Collection _lowerBounds;
     } // ArraySignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -110,9 +95,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ArraySignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ArraySignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ArraySignatureHandle(int value)
         {
@@ -123,17 +107,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ArraySignatureHandle handle)
+        public static implicit operator Handle(ArraySignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ArraySignature GetArraySignature(MetadataReader reader)
@@ -163,7 +144,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ArraySignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -175,24 +155,18 @@ namespace Internal.Metadata.NativeFormat
 
         public ByReferenceSignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public Handle Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         } // Type
 
         internal Handle _type;
     } // ByReferenceSignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -226,30 +200,32 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ByReferenceSignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ByReferenceSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ByReferenceSignatureHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ByReferenceSignature || hType == HandleType.Null))
+            if (
+                !(
+                    hType == 0
+                    || hType == HandleType.ByReferenceSignature
+                    || hType == HandleType.Null
+                )
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ByReferenceSignature) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ByReferenceSignatureHandle handle)
+        public static implicit operator Handle(ByReferenceSignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ByReferenceSignature GetByReferenceSignature(MetadataReader reader)
@@ -279,7 +255,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ByReferenceSignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -291,23 +266,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantBooleanArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public BooleanCollection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal BooleanCollection _value;
     } // ConstantBooleanArray
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -341,30 +309,32 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantBooleanArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantBooleanArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantBooleanArrayHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantBooleanArray || hType == HandleType.Null))
+            if (
+                !(
+                    hType == 0
+                    || hType == HandleType.ConstantBooleanArray
+                    || hType == HandleType.Null
+                )
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantBooleanArray) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantBooleanArrayHandle handle)
+        public static implicit operator Handle(ConstantBooleanArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantBooleanArray GetConstantBooleanArray(MetadataReader reader)
@@ -394,7 +364,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantBooleanArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -406,23 +375,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantBooleanValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public bool Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal bool _value;
     } // ConstantBooleanValue
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -456,30 +418,32 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantBooleanValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantBooleanValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantBooleanValueHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantBooleanValue || hType == HandleType.Null))
+            if (
+                !(
+                    hType == 0
+                    || hType == HandleType.ConstantBooleanValue
+                    || hType == HandleType.Null
+                )
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantBooleanValue) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantBooleanValueHandle handle)
+        public static implicit operator Handle(ConstantBooleanValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantBooleanValue GetConstantBooleanValue(MetadataReader reader)
@@ -509,7 +473,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantBooleanValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -521,35 +484,27 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantBoxedEnumValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: ConstantByteValue, ConstantSByteValue, ConstantInt16Value, ConstantUInt16Value, ConstantInt32Value, ConstantUInt32Value, ConstantInt64Value, ConstantUInt64Value
 
         public Handle Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal Handle _value;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public Handle Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         } // Type
 
         internal Handle _type;
     } // ConstantBoxedEnumValue
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -583,30 +538,32 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantBoxedEnumValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantBoxedEnumValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantBoxedEnumValueHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantBoxedEnumValue || hType == HandleType.Null))
+            if (
+                !(
+                    hType == 0
+                    || hType == HandleType.ConstantBoxedEnumValue
+                    || hType == HandleType.Null
+                )
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantBoxedEnumValue) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantBoxedEnumValueHandle handle)
+        public static implicit operator Handle(ConstantBoxedEnumValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantBoxedEnumValue GetConstantBoxedEnumValue(MetadataReader reader)
@@ -636,7 +593,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantBoxedEnumValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -648,23 +604,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantByteArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public ByteCollection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal ByteCollection _value;
     } // ConstantByteArray
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -698,9 +647,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantByteArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantByteArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantByteArrayHandle(int value)
         {
@@ -711,17 +659,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantByteArrayHandle handle)
+        public static implicit operator Handle(ConstantByteArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantByteArray GetConstantByteArray(MetadataReader reader)
@@ -751,7 +696,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantByteArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -763,23 +707,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantByteValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public byte Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal byte _value;
     } // ConstantByteValue
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -813,9 +750,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantByteValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantByteValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantByteValueHandle(int value)
         {
@@ -826,17 +762,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantByteValueHandle handle)
+        public static implicit operator Handle(ConstantByteValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantByteValue GetConstantByteValue(MetadataReader reader)
@@ -866,7 +799,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantByteValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -878,23 +810,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantCharArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public CharCollection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal CharCollection _value;
     } // ConstantCharArray
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -928,9 +853,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantCharArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantCharArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantCharArrayHandle(int value)
         {
@@ -941,17 +865,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantCharArrayHandle handle)
+        public static implicit operator Handle(ConstantCharArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantCharArray GetConstantCharArray(MetadataReader reader)
@@ -981,7 +902,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantCharArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -993,23 +913,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantCharValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public char Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal char _value;
     } // ConstantCharValue
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1043,9 +956,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantCharValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantCharValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantCharValueHandle(int value)
         {
@@ -1056,17 +968,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantCharValueHandle handle)
+        public static implicit operator Handle(ConstantCharValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantCharValue GetConstantCharValue(MetadataReader reader)
@@ -1096,7 +1005,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantCharValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1108,23 +1016,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantDoubleArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public DoubleCollection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal DoubleCollection _value;
     } // ConstantDoubleArray
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1158,30 +1059,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantDoubleArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantDoubleArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantDoubleArrayHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantDoubleArray || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantDoubleArray || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantDoubleArray) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantDoubleArrayHandle handle)
+        public static implicit operator Handle(ConstantDoubleArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantDoubleArray GetConstantDoubleArray(MetadataReader reader)
@@ -1211,7 +1110,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantDoubleArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1223,23 +1121,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantDoubleValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public double Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal double _value;
     } // ConstantDoubleValue
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1273,30 +1164,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantDoubleValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantDoubleValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantDoubleValueHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantDoubleValue || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantDoubleValue || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantDoubleValue) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantDoubleValueHandle handle)
+        public static implicit operator Handle(ConstantDoubleValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantDoubleValue GetConstantDoubleValue(MetadataReader reader)
@@ -1326,7 +1215,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantDoubleValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1338,33 +1226,23 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantEnumArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public Handle ElementType
         {
-            get
-            {
-                return _elementType;
-            }
+            get { return _elementType; }
         } // ElementType
 
         internal Handle _elementType;
 
         public Handle Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal Handle _value;
     } // ConstantEnumArray
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1398,9 +1276,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantEnumArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantEnumArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantEnumArrayHandle(int value)
         {
@@ -1411,17 +1288,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantEnumArrayHandle handle)
+        public static implicit operator Handle(ConstantEnumArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantEnumArray GetConstantEnumArray(MetadataReader reader)
@@ -1451,7 +1325,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantEnumArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1463,23 +1336,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantHandleArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public HandleCollection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal HandleCollection _value;
     } // ConstantHandleArray
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1513,30 +1379,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantHandleArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantHandleArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantHandleArrayHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantHandleArray || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantHandleArray || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantHandleArray) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantHandleArrayHandle handle)
+        public static implicit operator Handle(ConstantHandleArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantHandleArray GetConstantHandleArray(MetadataReader reader)
@@ -1566,7 +1430,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantHandleArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1578,23 +1441,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantInt16ArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public Int16Collection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal Int16Collection _value;
     } // ConstantInt16Array
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1628,9 +1484,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt16ArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantInt16ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt16ArrayHandle(int value)
         {
@@ -1641,17 +1496,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantInt16ArrayHandle handle)
+        public static implicit operator Handle(ConstantInt16ArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantInt16Array GetConstantInt16Array(MetadataReader reader)
@@ -1681,7 +1533,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantInt16ArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1693,23 +1544,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantInt16ValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public short Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal short _value;
     } // ConstantInt16Value
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1743,9 +1587,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt16ValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantInt16ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt16ValueHandle(int value)
         {
@@ -1756,17 +1599,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantInt16ValueHandle handle)
+        public static implicit operator Handle(ConstantInt16ValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantInt16Value GetConstantInt16Value(MetadataReader reader)
@@ -1796,7 +1636,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantInt16ValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1808,23 +1647,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantInt32ArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public Int32Collection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal Int32Collection _value;
     } // ConstantInt32Array
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1858,9 +1690,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt32ArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantInt32ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt32ArrayHandle(int value)
         {
@@ -1871,17 +1702,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantInt32ArrayHandle handle)
+        public static implicit operator Handle(ConstantInt32ArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantInt32Array GetConstantInt32Array(MetadataReader reader)
@@ -1911,7 +1739,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantInt32ArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1923,23 +1750,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantInt32ValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public int Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal int _value;
     } // ConstantInt32Value
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -1973,9 +1793,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt32ValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantInt32ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt32ValueHandle(int value)
         {
@@ -1986,17 +1805,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantInt32ValueHandle handle)
+        public static implicit operator Handle(ConstantInt32ValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantInt32Value GetConstantInt32Value(MetadataReader reader)
@@ -2026,7 +1842,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantInt32ValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2038,23 +1853,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantInt64ArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public Int64Collection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal Int64Collection _value;
     } // ConstantInt64Array
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2088,9 +1896,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt64ArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantInt64ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt64ArrayHandle(int value)
         {
@@ -2101,17 +1908,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantInt64ArrayHandle handle)
+        public static implicit operator Handle(ConstantInt64ArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantInt64Array GetConstantInt64Array(MetadataReader reader)
@@ -2141,7 +1945,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantInt64ArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2153,23 +1956,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantInt64ValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public long Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal long _value;
     } // ConstantInt64Value
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2203,9 +1999,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt64ValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantInt64ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt64ValueHandle(int value)
         {
@@ -2216,17 +2011,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantInt64ValueHandle handle)
+        public static implicit operator Handle(ConstantInt64ValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantInt64Value GetConstantInt64Value(MetadataReader reader)
@@ -2256,7 +2048,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantInt64ValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2268,13 +2059,9 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantReferenceValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
     } // ConstantReferenceValue
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2308,30 +2095,32 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantReferenceValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantReferenceValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantReferenceValueHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantReferenceValue || hType == HandleType.Null))
+            if (
+                !(
+                    hType == 0
+                    || hType == HandleType.ConstantReferenceValue
+                    || hType == HandleType.Null
+                )
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantReferenceValue) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantReferenceValueHandle handle)
+        public static implicit operator Handle(ConstantReferenceValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantReferenceValue GetConstantReferenceValue(MetadataReader reader)
@@ -2361,7 +2150,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantReferenceValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2373,23 +2161,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantSByteArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public SByteCollection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal SByteCollection _value;
     } // ConstantSByteArray
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2423,9 +2204,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantSByteArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantSByteArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantSByteArrayHandle(int value)
         {
@@ -2436,17 +2216,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantSByteArrayHandle handle)
+        public static implicit operator Handle(ConstantSByteArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantSByteArray GetConstantSByteArray(MetadataReader reader)
@@ -2476,7 +2253,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantSByteArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2488,23 +2264,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantSByteValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public sbyte Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal sbyte _value;
     } // ConstantSByteValue
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2538,9 +2307,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantSByteValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantSByteValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantSByteValueHandle(int value)
         {
@@ -2551,17 +2319,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantSByteValueHandle handle)
+        public static implicit operator Handle(ConstantSByteValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantSByteValue GetConstantSByteValue(MetadataReader reader)
@@ -2591,7 +2356,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantSByteValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2603,23 +2367,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantSingleArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public SingleCollection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal SingleCollection _value;
     } // ConstantSingleArray
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2653,30 +2410,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantSingleArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantSingleArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantSingleArrayHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantSingleArray || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantSingleArray || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantSingleArray) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantSingleArrayHandle handle)
+        public static implicit operator Handle(ConstantSingleArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantSingleArray GetConstantSingleArray(MetadataReader reader)
@@ -2706,7 +2461,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantSingleArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2718,23 +2472,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantSingleValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public float Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal float _value;
     } // ConstantSingleValue
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2768,30 +2515,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantSingleValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantSingleValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantSingleValueHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantSingleValue || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantSingleValue || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantSingleValue) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantSingleValueHandle handle)
+        public static implicit operator Handle(ConstantSingleValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantSingleValue GetConstantSingleValue(MetadataReader reader)
@@ -2821,7 +2566,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantSingleValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2833,24 +2577,18 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantStringArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: ConstantStringValue, ConstantReferenceValue
 
         public HandleCollection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal HandleCollection _value;
     } // ConstantStringArray
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2884,30 +2622,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantStringArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantStringArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantStringArrayHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantStringArray || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantStringArray || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantStringArray) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantStringArrayHandle handle)
+        public static implicit operator Handle(ConstantStringArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantStringArray GetConstantStringArray(MetadataReader reader)
@@ -2937,7 +2673,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantStringArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2949,23 +2684,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantStringValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public string Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal string _value;
     } // ConstantStringValue
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -2999,30 +2727,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantStringValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantStringValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantStringValueHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantStringValue || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantStringValue || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantStringValue) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantStringValueHandle handle)
+        public static implicit operator Handle(ConstantStringValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantStringValue GetConstantStringValue(MetadataReader reader)
@@ -3052,7 +2778,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantStringValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3064,23 +2789,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantUInt16ArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public UInt16Collection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal UInt16Collection _value;
     } // ConstantUInt16Array
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3114,30 +2832,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt16ArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantUInt16ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt16ArrayHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantUInt16Array || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantUInt16Array || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantUInt16Array) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantUInt16ArrayHandle handle)
+        public static implicit operator Handle(ConstantUInt16ArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantUInt16Array GetConstantUInt16Array(MetadataReader reader)
@@ -3167,7 +2883,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantUInt16ArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3179,23 +2894,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantUInt16ValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public ushort Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal ushort _value;
     } // ConstantUInt16Value
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3229,30 +2937,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt16ValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantUInt16ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt16ValueHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantUInt16Value || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantUInt16Value || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantUInt16Value) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantUInt16ValueHandle handle)
+        public static implicit operator Handle(ConstantUInt16ValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantUInt16Value GetConstantUInt16Value(MetadataReader reader)
@@ -3282,7 +2988,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantUInt16ValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3294,23 +2999,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantUInt32ArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public UInt32Collection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal UInt32Collection _value;
     } // ConstantUInt32Array
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3344,30 +3042,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt32ArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantUInt32ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt32ArrayHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantUInt32Array || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantUInt32Array || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantUInt32Array) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantUInt32ArrayHandle handle)
+        public static implicit operator Handle(ConstantUInt32ArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantUInt32Array GetConstantUInt32Array(MetadataReader reader)
@@ -3397,7 +3093,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantUInt32ArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3409,23 +3104,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantUInt32ValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public uint Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal uint _value;
     } // ConstantUInt32Value
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3459,30 +3147,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt32ValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantUInt32ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt32ValueHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantUInt32Value || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantUInt32Value || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantUInt32Value) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantUInt32ValueHandle handle)
+        public static implicit operator Handle(ConstantUInt32ValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantUInt32Value GetConstantUInt32Value(MetadataReader reader)
@@ -3512,7 +3198,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantUInt32ValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3524,23 +3209,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantUInt64ArrayHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public UInt64Collection Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal UInt64Collection _value;
     } // ConstantUInt64Array
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3574,30 +3252,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt64ArrayHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantUInt64ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt64ArrayHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantUInt64Array || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantUInt64Array || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantUInt64Array) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantUInt64ArrayHandle handle)
+        public static implicit operator Handle(ConstantUInt64ArrayHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantUInt64Array GetConstantUInt64Array(MetadataReader reader)
@@ -3627,7 +3303,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantUInt64ArrayHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3639,23 +3314,16 @@ namespace Internal.Metadata.NativeFormat
 
         public ConstantUInt64ValueHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public ulong Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal ulong _value;
     } // ConstantUInt64Value
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3689,30 +3357,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt64ValueHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ConstantUInt64ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt64ValueHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.ConstantUInt64Value || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.ConstantUInt64Value || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.ConstantUInt64Value) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(ConstantUInt64ValueHandle handle)
+        public static implicit operator Handle(ConstantUInt64ValueHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ConstantUInt64Value GetConstantUInt64Value(MetadataReader reader)
@@ -3742,7 +3408,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ConstantUInt64ValueHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3754,45 +3419,34 @@ namespace Internal.Metadata.NativeFormat
 
         public CustomAttributeHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: QualifiedMethod, MemberReference
 
         public Handle Constructor
         {
-            get
-            {
-                return _constructor;
-            }
+            get { return _constructor; }
         } // Constructor
 
         internal Handle _constructor;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ConstantBooleanArray, ConstantBooleanValue, ConstantByteArray, ConstantByteValue, ConstantCharArray, ConstantCharValue, ConstantDoubleArray, ConstantDoubleValue, ConstantEnumArray, ConstantHandleArray, ConstantInt16Array, ConstantInt16Value, ConstantInt32Array, ConstantInt32Value, ConstantInt64Array, ConstantInt64Value, ConstantReferenceValue, ConstantSByteArray, ConstantSByteValue, ConstantSingleArray, ConstantSingleValue, ConstantStringArray, ConstantStringValue, ConstantUInt16Array, ConstantUInt16Value, ConstantUInt32Array, ConstantUInt32Value, ConstantUInt64Array, ConstantUInt64Value
 
         public HandleCollection FixedArguments
         {
-            get
-            {
-                return _fixedArguments;
-            }
+            get { return _fixedArguments; }
         } // FixedArguments
 
         internal HandleCollection _fixedArguments;
 
         public NamedArgumentHandleCollection NamedArguments
         {
-            get
-            {
-                return _namedArguments;
-            }
+            get { return _namedArguments; }
         } // NamedArguments
 
         internal NamedArgumentHandleCollection _namedArguments;
     } // CustomAttribute
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3826,9 +3480,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal CustomAttributeHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal CustomAttributeHandle(Handle handle)
+            : this(handle._value) { }
 
         internal CustomAttributeHandle(int value)
         {
@@ -3839,17 +3492,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(CustomAttributeHandle handle)
+        public static implicit operator Handle(CustomAttributeHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public CustomAttribute GetCustomAttribute(MetadataReader reader)
@@ -3879,7 +3529,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // CustomAttributeHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3891,64 +3540,46 @@ namespace Internal.Metadata.NativeFormat
 
         public EventHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public EventAttributes Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         } // Flags
 
         internal EventAttributes _flags;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public Handle Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         } // Type
 
         internal Handle _type;
 
         public MethodSemanticsHandleCollection MethodSemantics
         {
-            get
-            {
-                return _methodSemantics;
-            }
+            get { return _methodSemantics; }
         } // MethodSemantics
 
         internal MethodSemanticsHandleCollection _methodSemantics;
 
         public CustomAttributeHandleCollection CustomAttributes
         {
-            get
-            {
-                return _customAttributes;
-            }
+            get { return _customAttributes; }
         } // CustomAttributes
 
         internal CustomAttributeHandleCollection _customAttributes;
     } // Event
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -3982,9 +3613,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal EventHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal EventHandle(Handle handle)
+            : this(handle._value) { }
 
         internal EventHandle(int value)
         {
@@ -3995,17 +3625,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(EventHandle handle)
+        public static implicit operator Handle(EventHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public Event GetEvent(MetadataReader reader)
@@ -4035,7 +3662,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // EventHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4047,74 +3673,53 @@ namespace Internal.Metadata.NativeFormat
 
         public FieldHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public FieldAttributes Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         } // Flags
 
         internal FieldAttributes _flags;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
 
         public FieldSignatureHandle Signature
         {
-            get
-            {
-                return _signature;
-            }
+            get { return _signature; }
         } // Signature
 
         internal FieldSignatureHandle _signature;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ConstantBooleanArray, ConstantBooleanValue, ConstantByteArray, ConstantByteValue, ConstantCharArray, ConstantCharValue, ConstantDoubleArray, ConstantDoubleValue, ConstantEnumArray, ConstantHandleArray, ConstantInt16Array, ConstantInt16Value, ConstantInt32Array, ConstantInt32Value, ConstantInt64Array, ConstantInt64Value, ConstantReferenceValue, ConstantSByteArray, ConstantSByteValue, ConstantSingleArray, ConstantSingleValue, ConstantStringArray, ConstantStringValue, ConstantUInt16Array, ConstantUInt16Value, ConstantUInt32Array, ConstantUInt32Value, ConstantUInt64Array, ConstantUInt64Value
 
         public Handle DefaultValue
         {
-            get
-            {
-                return _defaultValue;
-            }
+            get { return _defaultValue; }
         } // DefaultValue
 
         internal Handle _defaultValue;
 
         public uint Offset
         {
-            get
-            {
-                return _offset;
-            }
+            get { return _offset; }
         } // Offset
 
         internal uint _offset;
 
         public CustomAttributeHandleCollection CustomAttributes
         {
-            get
-            {
-                return _customAttributes;
-            }
+            get { return _customAttributes; }
         } // CustomAttributes
 
         internal CustomAttributeHandleCollection _customAttributes;
     } // Field
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4148,9 +3753,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal FieldHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal FieldHandle(Handle handle)
+            : this(handle._value) { }
 
         internal FieldHandle(int value)
         {
@@ -4161,17 +3765,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(FieldHandle handle)
+        public static implicit operator Handle(FieldHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public Field GetField(MetadataReader reader)
@@ -4201,7 +3802,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // FieldHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4213,24 +3813,18 @@ namespace Internal.Metadata.NativeFormat
 
         public FieldSignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
 
         public Handle Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         } // Type
 
         internal Handle _type;
     } // FieldSignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4264,9 +3858,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal FieldSignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal FieldSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal FieldSignatureHandle(int value)
         {
@@ -4277,17 +3870,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(FieldSignatureHandle handle)
+        public static implicit operator Handle(FieldSignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public FieldSignature GetFieldSignature(MetadataReader reader)
@@ -4317,7 +3907,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // FieldSignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4329,23 +3918,16 @@ namespace Internal.Metadata.NativeFormat
 
         public FunctionPointerSignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public MethodSignatureHandle Signature
         {
-            get
-            {
-                return _signature;
-            }
+            get { return _signature; }
         } // Signature
 
         internal MethodSignatureHandle _signature;
     } // FunctionPointerSignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4379,30 +3961,32 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal FunctionPointerSignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal FunctionPointerSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal FunctionPointerSignatureHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.FunctionPointerSignature || hType == HandleType.Null))
+            if (
+                !(
+                    hType == 0
+                    || hType == HandleType.FunctionPointerSignature
+                    || hType == HandleType.Null
+                )
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.FunctionPointerSignature) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(FunctionPointerSignatureHandle handle)
+        public static implicit operator Handle(FunctionPointerSignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public FunctionPointerSignature GetFunctionPointerSignature(MetadataReader reader)
@@ -4432,7 +4016,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // FunctionPointerSignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4444,74 +4027,53 @@ namespace Internal.Metadata.NativeFormat
 
         public GenericParameterHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public ushort Number
         {
-            get
-            {
-                return _number;
-            }
+            get { return _number; }
         } // Number
 
         internal ushort _number;
 
         public GenericParameterAttributes Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         } // Flags
 
         internal GenericParameterAttributes _flags;
 
         public GenericParameterKind Kind
         {
-            get
-            {
-                return _kind;
-            }
+            get { return _kind; }
         } // Kind
 
         internal GenericParameterKind _kind;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
 
         public HandleCollection Constraints
         {
-            get
-            {
-                return _constraints;
-            }
+            get { return _constraints; }
         } // Constraints
 
         internal HandleCollection _constraints;
 
         public CustomAttributeHandleCollection CustomAttributes
         {
-            get
-            {
-                return _customAttributes;
-            }
+            get { return _customAttributes; }
         } // CustomAttributes
 
         internal CustomAttributeHandleCollection _customAttributes;
     } // GenericParameter
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4545,9 +4107,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal GenericParameterHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal GenericParameterHandle(Handle handle)
+            : this(handle._value) { }
 
         internal GenericParameterHandle(int value)
         {
@@ -4558,17 +4119,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(GenericParameterHandle handle)
+        public static implicit operator Handle(GenericParameterHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public GenericParameter GetGenericParameter(MetadataReader reader)
@@ -4598,7 +4156,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // GenericParameterHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4610,45 +4167,34 @@ namespace Internal.Metadata.NativeFormat
 
         public MemberReferenceHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public Handle Parent
         {
-            get
-            {
-                return _parent;
-            }
+            get { return _parent; }
         } // Parent
 
         internal Handle _parent;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
+
         /// One of: MethodSignature, FieldSignature
 
         public Handle Signature
         {
-            get
-            {
-                return _signature;
-            }
+            get { return _signature; }
         } // Signature
 
         internal Handle _signature;
     } // MemberReference
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4682,9 +4228,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MemberReferenceHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal MemberReferenceHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MemberReferenceHandle(int value)
         {
@@ -4695,17 +4240,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(MemberReferenceHandle handle)
+        public static implicit operator Handle(MemberReferenceHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public MemberReference GetMemberReference(MetadataReader reader)
@@ -4735,7 +4277,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // MemberReferenceHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4747,83 +4288,58 @@ namespace Internal.Metadata.NativeFormat
 
         public MethodHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public MethodAttributes Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         } // Flags
 
         internal MethodAttributes _flags;
 
         public MethodImplAttributes ImplFlags
         {
-            get
-            {
-                return _implFlags;
-            }
+            get { return _implFlags; }
         } // ImplFlags
 
         internal MethodImplAttributes _implFlags;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
 
         public MethodSignatureHandle Signature
         {
-            get
-            {
-                return _signature;
-            }
+            get { return _signature; }
         } // Signature
 
         internal MethodSignatureHandle _signature;
 
         public ParameterHandleCollection Parameters
         {
-            get
-            {
-                return _parameters;
-            }
+            get { return _parameters; }
         } // Parameters
 
         internal ParameterHandleCollection _parameters;
 
         public GenericParameterHandleCollection GenericParameters
         {
-            get
-            {
-                return _genericParameters;
-            }
+            get { return _genericParameters; }
         } // GenericParameters
 
         internal GenericParameterHandleCollection _genericParameters;
 
         public CustomAttributeHandleCollection CustomAttributes
         {
-            get
-            {
-                return _customAttributes;
-            }
+            get { return _customAttributes; }
         } // CustomAttributes
 
         internal CustomAttributeHandleCollection _customAttributes;
     } // Method
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4857,9 +4373,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MethodHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal MethodHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MethodHandle(int value)
         {
@@ -4870,17 +4385,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(MethodHandle handle)
+        public static implicit operator Handle(MethodHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public Method GetMethod(MetadataReader reader)
@@ -4910,7 +4422,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // MethodHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4922,35 +4433,27 @@ namespace Internal.Metadata.NativeFormat
 
         public MethodInstantiationHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: QualifiedMethod, MemberReference
 
         public Handle Method
         {
-            get
-            {
-                return _method;
-            }
+            get { return _method; }
         } // Method
 
         internal Handle _method;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public HandleCollection GenericTypeArguments
         {
-            get
-            {
-                return _genericTypeArguments;
-            }
+            get { return _genericTypeArguments; }
         } // GenericTypeArguments
 
         internal HandleCollection _genericTypeArguments;
     } // MethodInstantiation
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -4984,30 +4487,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MethodInstantiationHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal MethodInstantiationHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MethodInstantiationHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.MethodInstantiation || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.MethodInstantiation || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.MethodInstantiation) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(MethodInstantiationHandle handle)
+        public static implicit operator Handle(MethodInstantiationHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public MethodInstantiation GetMethodInstantiation(MetadataReader reader)
@@ -5037,7 +4538,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // MethodInstantiationHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5049,33 +4549,23 @@ namespace Internal.Metadata.NativeFormat
 
         public MethodSemanticsHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public MethodSemanticsAttributes Attributes
         {
-            get
-            {
-                return _attributes;
-            }
+            get { return _attributes; }
         } // Attributes
 
         internal MethodSemanticsAttributes _attributes;
 
         public MethodHandle Method
         {
-            get
-            {
-                return _method;
-            }
+            get { return _method; }
         } // Method
 
         internal MethodHandle _method;
     } // MethodSemantics
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5109,9 +4599,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MethodSemanticsHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal MethodSemanticsHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MethodSemanticsHandle(int value)
         {
@@ -5122,17 +4611,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(MethodSemanticsHandle handle)
+        public static implicit operator Handle(MethodSemanticsHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public MethodSemantics GetMethodSemantics(MetadataReader reader)
@@ -5162,7 +4648,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // MethodSemanticsHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5174,66 +4659,50 @@ namespace Internal.Metadata.NativeFormat
 
         public MethodSignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public CallingConventions CallingConvention
         {
-            get
-            {
-                return _callingConvention;
-            }
+            get { return _callingConvention; }
         } // CallingConvention
 
         internal CallingConventions _callingConvention;
 
         public int GenericParameterCount
         {
-            get
-            {
-                return _genericParameterCount;
-            }
+            get { return _genericParameterCount; }
         } // GenericParameterCount
 
         internal int _genericParameterCount;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
 
         public Handle ReturnType
         {
-            get
-            {
-                return _returnType;
-            }
+            get { return _returnType; }
         } // ReturnType
 
         internal Handle _returnType;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
 
         public HandleCollection Parameters
         {
-            get
-            {
-                return _parameters;
-            }
+            get { return _parameters; }
         } // Parameters
 
         internal HandleCollection _parameters;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
 
         public HandleCollection VarArgParameters
         {
-            get
-            {
-                return _varArgParameters;
-            }
+            get { return _varArgParameters; }
         } // VarArgParameters
 
         internal HandleCollection _varArgParameters;
     } // MethodSignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5267,9 +4736,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MethodSignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal MethodSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MethodSignatureHandle(int value)
         {
@@ -5280,17 +4748,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(MethodSignatureHandle handle)
+        public static implicit operator Handle(MethodSignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public MethodSignature GetMethodSignature(MetadataReader reader)
@@ -5320,7 +4785,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // MethodSignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5332,23 +4796,16 @@ namespace Internal.Metadata.NativeFormat
 
         public MethodTypeVariableSignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public int Number
         {
-            get
-            {
-                return _number;
-            }
+            get { return _number; }
         } // Number
 
         internal int _number;
     } // MethodTypeVariableSignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5382,30 +4839,32 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MethodTypeVariableSignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal MethodTypeVariableSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MethodTypeVariableSignatureHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.MethodTypeVariableSignature || hType == HandleType.Null))
+            if (
+                !(
+                    hType == 0
+                    || hType == HandleType.MethodTypeVariableSignature
+                    || hType == HandleType.Null
+                )
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.MethodTypeVariableSignature) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(MethodTypeVariableSignatureHandle handle)
+        public static implicit operator Handle(MethodTypeVariableSignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public MethodTypeVariableSignature GetMethodTypeVariableSignature(MetadataReader reader)
@@ -5435,7 +4894,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // MethodTypeVariableSignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5447,45 +4905,34 @@ namespace Internal.Metadata.NativeFormat
 
         public ModifiedTypeHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public bool IsOptional
         {
-            get
-            {
-                return _isOptional;
-            }
+            get { return _isOptional; }
         } // IsOptional
 
         internal bool _isOptional;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public Handle ModifierType
         {
-            get
-            {
-                return _modifierType;
-            }
+            get { return _modifierType; }
         } // ModifierType
 
         internal Handle _modifierType;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
 
         public Handle Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         } // Type
 
         internal Handle _type;
     } // ModifiedType
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5519,9 +4966,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ModifiedTypeHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ModifiedTypeHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ModifiedTypeHandle(int value)
         {
@@ -5532,17 +4978,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ModifiedTypeHandle handle)
+        public static implicit operator Handle(ModifiedTypeHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ModifiedType GetModifiedType(MetadataReader reader)
@@ -5572,7 +5015,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ModifiedTypeHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5584,55 +5026,41 @@ namespace Internal.Metadata.NativeFormat
 
         public NamedArgumentHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public NamedArgumentMemberKind Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         } // Flags
 
         internal NamedArgumentMemberKind _flags;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public Handle Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         } // Type
 
         internal Handle _type;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ConstantBooleanArray, ConstantBooleanValue, ConstantByteArray, ConstantByteValue, ConstantCharArray, ConstantCharValue, ConstantDoubleArray, ConstantDoubleValue, ConstantEnumArray, ConstantHandleArray, ConstantInt16Array, ConstantInt16Value, ConstantInt32Array, ConstantInt32Value, ConstantInt64Array, ConstantInt64Value, ConstantReferenceValue, ConstantSByteArray, ConstantSByteValue, ConstantSingleArray, ConstantSingleValue, ConstantStringArray, ConstantStringValue, ConstantUInt16Array, ConstantUInt16Value, ConstantUInt32Array, ConstantUInt32Value, ConstantUInt64Array, ConstantUInt64Value
 
         public Handle Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         } // Value
 
         internal Handle _value;
     } // NamedArgument
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5666,9 +5094,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal NamedArgumentHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal NamedArgumentHandle(Handle handle)
+            : this(handle._value) { }
 
         internal NamedArgumentHandle(int value)
         {
@@ -5679,17 +5106,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(NamedArgumentHandle handle)
+        public static implicit operator Handle(NamedArgumentHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public NamedArgument GetNamedArgument(MetadataReader reader)
@@ -5719,7 +5143,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // NamedArgumentHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5731,64 +5154,46 @@ namespace Internal.Metadata.NativeFormat
 
         public NamespaceDefinitionHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: NamespaceDefinition, ScopeDefinition
 
         public Handle ParentScopeOrNamespace
         {
-            get
-            {
-                return _parentScopeOrNamespace;
-            }
+            get { return _parentScopeOrNamespace; }
         } // ParentScopeOrNamespace
 
         internal Handle _parentScopeOrNamespace;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
 
         public TypeDefinitionHandleCollection TypeDefinitions
         {
-            get
-            {
-                return _typeDefinitions;
-            }
+            get { return _typeDefinitions; }
         } // TypeDefinitions
 
         internal TypeDefinitionHandleCollection _typeDefinitions;
 
         public TypeForwarderHandleCollection TypeForwarders
         {
-            get
-            {
-                return _typeForwarders;
-            }
+            get { return _typeForwarders; }
         } // TypeForwarders
 
         internal TypeForwarderHandleCollection _typeForwarders;
 
         public NamespaceDefinitionHandleCollection NamespaceDefinitions
         {
-            get
-            {
-                return _namespaceDefinitions;
-            }
+            get { return _namespaceDefinitions; }
         } // NamespaceDefinitions
 
         internal NamespaceDefinitionHandleCollection _namespaceDefinitions;
     } // NamespaceDefinition
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5822,30 +5227,28 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal NamespaceDefinitionHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal NamespaceDefinitionHandle(Handle handle)
+            : this(handle._value) { }
 
         internal NamespaceDefinitionHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.NamespaceDefinition || hType == HandleType.Null))
+            if (
+                !(hType == 0 || hType == HandleType.NamespaceDefinition || hType == HandleType.Null)
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.NamespaceDefinition) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(NamespaceDefinitionHandle handle)
+        public static implicit operator Handle(NamespaceDefinitionHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public NamespaceDefinition GetNamespaceDefinition(MetadataReader reader)
@@ -5875,7 +5278,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // NamespaceDefinitionHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5887,34 +5289,25 @@ namespace Internal.Metadata.NativeFormat
 
         public NamespaceReferenceHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: NamespaceReference, ScopeReference
 
         public Handle ParentScopeOrNamespace
         {
-            get
-            {
-                return _parentScopeOrNamespace;
-            }
+            get { return _parentScopeOrNamespace; }
         } // ParentScopeOrNamespace
 
         internal Handle _parentScopeOrNamespace;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
     } // NamespaceReference
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -5948,9 +5341,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal NamespaceReferenceHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal NamespaceReferenceHandle(Handle handle)
+            : this(handle._value) { }
 
         internal NamespaceReferenceHandle(int value)
         {
@@ -5961,17 +5353,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(NamespaceReferenceHandle handle)
+        public static implicit operator Handle(NamespaceReferenceHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public NamespaceReference GetNamespaceReference(MetadataReader reader)
@@ -6001,7 +5390,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // NamespaceReferenceHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6013,64 +5401,46 @@ namespace Internal.Metadata.NativeFormat
 
         public ParameterHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public ParameterAttributes Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         } // Flags
 
         internal ParameterAttributes _flags;
 
         public ushort Sequence
         {
-            get
-            {
-                return _sequence;
-            }
+            get { return _sequence; }
         } // Sequence
 
         internal ushort _sequence;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ConstantBooleanArray, ConstantBooleanValue, ConstantByteArray, ConstantByteValue, ConstantCharArray, ConstantCharValue, ConstantDoubleArray, ConstantDoubleValue, ConstantEnumArray, ConstantHandleArray, ConstantInt16Array, ConstantInt16Value, ConstantInt32Array, ConstantInt32Value, ConstantInt64Array, ConstantInt64Value, ConstantReferenceValue, ConstantSByteArray, ConstantSByteValue, ConstantSingleArray, ConstantSingleValue, ConstantStringArray, ConstantStringValue, ConstantUInt16Array, ConstantUInt16Value, ConstantUInt32Array, ConstantUInt32Value, ConstantUInt64Array, ConstantUInt64Value
 
         public Handle DefaultValue
         {
-            get
-            {
-                return _defaultValue;
-            }
+            get { return _defaultValue; }
         } // DefaultValue
 
         internal Handle _defaultValue;
 
         public CustomAttributeHandleCollection CustomAttributes
         {
-            get
-            {
-                return _customAttributes;
-            }
+            get { return _customAttributes; }
         } // CustomAttributes
 
         internal CustomAttributeHandleCollection _customAttributes;
     } // Parameter
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6104,9 +5474,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ParameterHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ParameterHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ParameterHandle(int value)
         {
@@ -6117,17 +5486,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ParameterHandle handle)
+        public static implicit operator Handle(ParameterHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public Parameter GetParameter(MetadataReader reader)
@@ -6157,7 +5523,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ParameterHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6169,24 +5534,18 @@ namespace Internal.Metadata.NativeFormat
 
         public PointerSignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
 
         public Handle Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         } // Type
 
         internal Handle _type;
     } // PointerSignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6220,9 +5579,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal PointerSignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal PointerSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal PointerSignatureHandle(int value)
         {
@@ -6233,17 +5591,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(PointerSignatureHandle handle)
+        public static implicit operator Handle(PointerSignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public PointerSignature GetPointerSignature(MetadataReader reader)
@@ -6273,7 +5628,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // PointerSignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6285,74 +5639,53 @@ namespace Internal.Metadata.NativeFormat
 
         public PropertyHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public PropertyAttributes Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         } // Flags
 
         internal PropertyAttributes _flags;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
 
         public PropertySignatureHandle Signature
         {
-            get
-            {
-                return _signature;
-            }
+            get { return _signature; }
         } // Signature
 
         internal PropertySignatureHandle _signature;
 
         public MethodSemanticsHandleCollection MethodSemantics
         {
-            get
-            {
-                return _methodSemantics;
-            }
+            get { return _methodSemantics; }
         } // MethodSemantics
 
         internal MethodSemanticsHandleCollection _methodSemantics;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ConstantBooleanArray, ConstantBooleanValue, ConstantByteArray, ConstantByteValue, ConstantCharArray, ConstantCharValue, ConstantDoubleArray, ConstantDoubleValue, ConstantEnumArray, ConstantHandleArray, ConstantInt16Array, ConstantInt16Value, ConstantInt32Array, ConstantInt32Value, ConstantInt64Array, ConstantInt64Value, ConstantReferenceValue, ConstantSByteArray, ConstantSByteValue, ConstantSingleArray, ConstantSingleValue, ConstantStringArray, ConstantStringValue, ConstantUInt16Array, ConstantUInt16Value, ConstantUInt32Array, ConstantUInt32Value, ConstantUInt64Array, ConstantUInt64Value
 
         public Handle DefaultValue
         {
-            get
-            {
-                return _defaultValue;
-            }
+            get { return _defaultValue; }
         } // DefaultValue
 
         internal Handle _defaultValue;
 
         public CustomAttributeHandleCollection CustomAttributes
         {
-            get
-            {
-                return _customAttributes;
-            }
+            get { return _customAttributes; }
         } // CustomAttributes
 
         internal CustomAttributeHandleCollection _customAttributes;
     } // Property
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6386,9 +5719,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal PropertyHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal PropertyHandle(Handle handle)
+            : this(handle._value) { }
 
         internal PropertyHandle(int value)
         {
@@ -6399,17 +5731,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(PropertyHandle handle)
+        public static implicit operator Handle(PropertyHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public Property GetProperty(MetadataReader reader)
@@ -6439,7 +5768,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // PropertyHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6451,45 +5779,34 @@ namespace Internal.Metadata.NativeFormat
 
         public PropertySignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public CallingConventions CallingConvention
         {
-            get
-            {
-                return _callingConvention;
-            }
+            get { return _callingConvention; }
         } // CallingConvention
 
         internal CallingConventions _callingConvention;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
 
         public Handle Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         } // Type
 
         internal Handle _type;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
 
         public HandleCollection Parameters
         {
-            get
-            {
-                return _parameters;
-            }
+            get { return _parameters; }
         } // Parameters
 
         internal HandleCollection _parameters;
     } // PropertySignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6523,9 +5840,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal PropertySignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal PropertySignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal PropertySignatureHandle(int value)
         {
@@ -6536,17 +5852,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(PropertySignatureHandle handle)
+        public static implicit operator Handle(PropertySignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public PropertySignature GetPropertySignature(MetadataReader reader)
@@ -6576,7 +5889,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // PropertySignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6588,33 +5900,23 @@ namespace Internal.Metadata.NativeFormat
 
         public QualifiedFieldHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public FieldHandle Field
         {
-            get
-            {
-                return _field;
-            }
+            get { return _field; }
         } // Field
 
         internal FieldHandle _field;
 
         public TypeDefinitionHandle EnclosingType
         {
-            get
-            {
-                return _enclosingType;
-            }
+            get { return _enclosingType; }
         } // EnclosingType
 
         internal TypeDefinitionHandle _enclosingType;
     } // QualifiedField
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6648,9 +5950,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal QualifiedFieldHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal QualifiedFieldHandle(Handle handle)
+            : this(handle._value) { }
 
         internal QualifiedFieldHandle(int value)
         {
@@ -6661,17 +5962,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(QualifiedFieldHandle handle)
+        public static implicit operator Handle(QualifiedFieldHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public QualifiedField GetQualifiedField(MetadataReader reader)
@@ -6701,7 +5999,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // QualifiedFieldHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6713,33 +6010,23 @@ namespace Internal.Metadata.NativeFormat
 
         public QualifiedMethodHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public MethodHandle Method
         {
-            get
-            {
-                return _method;
-            }
+            get { return _method; }
         } // Method
 
         internal MethodHandle _method;
 
         public TypeDefinitionHandle EnclosingType
         {
-            get
-            {
-                return _enclosingType;
-            }
+            get { return _enclosingType; }
         } // EnclosingType
 
         internal TypeDefinitionHandle _enclosingType;
     } // QualifiedMethod
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6773,9 +6060,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal QualifiedMethodHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal QualifiedMethodHandle(Handle handle)
+            : this(handle._value) { }
 
         internal QualifiedMethodHandle(int value)
         {
@@ -6786,17 +6072,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(QualifiedMethodHandle handle)
+        public static implicit operator Handle(QualifiedMethodHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public QualifiedMethod GetQualifiedMethod(MetadataReader reader)
@@ -6826,7 +6109,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // QualifiedMethodHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6838,24 +6120,18 @@ namespace Internal.Metadata.NativeFormat
 
         public SZArraySignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification, ModifiedType
 
         public Handle ElementType
         {
-            get
-            {
-                return _elementType;
-            }
+            get { return _elementType; }
         } // ElementType
 
         internal Handle _elementType;
     } // SZArraySignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6889,9 +6165,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal SZArraySignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal SZArraySignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal SZArraySignatureHandle(int value)
         {
@@ -6902,17 +6177,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(SZArraySignatureHandle handle)
+        public static implicit operator Handle(SZArraySignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public SZArraySignature GetSZArraySignature(MetadataReader reader)
@@ -6942,7 +6214,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // SZArraySignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -6954,173 +6225,121 @@ namespace Internal.Metadata.NativeFormat
 
         public ScopeDefinitionHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public AssemblyFlags Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         } // Flags
 
         internal AssemblyFlags _flags;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
 
         public AssemblyHashAlgorithm HashAlgorithm
         {
-            get
-            {
-                return _hashAlgorithm;
-            }
+            get { return _hashAlgorithm; }
         } // HashAlgorithm
 
         internal AssemblyHashAlgorithm _hashAlgorithm;
 
         public ushort MajorVersion
         {
-            get
-            {
-                return _majorVersion;
-            }
+            get { return _majorVersion; }
         } // MajorVersion
 
         internal ushort _majorVersion;
 
         public ushort MinorVersion
         {
-            get
-            {
-                return _minorVersion;
-            }
+            get { return _minorVersion; }
         } // MinorVersion
 
         internal ushort _minorVersion;
 
         public ushort BuildNumber
         {
-            get
-            {
-                return _buildNumber;
-            }
+            get { return _buildNumber; }
         } // BuildNumber
 
         internal ushort _buildNumber;
 
         public ushort RevisionNumber
         {
-            get
-            {
-                return _revisionNumber;
-            }
+            get { return _revisionNumber; }
         } // RevisionNumber
 
         internal ushort _revisionNumber;
 
         public ByteCollection PublicKey
         {
-            get
-            {
-                return _publicKey;
-            }
+            get { return _publicKey; }
         } // PublicKey
 
         internal ByteCollection _publicKey;
 
         public ConstantStringValueHandle Culture
         {
-            get
-            {
-                return _culture;
-            }
+            get { return _culture; }
         } // Culture
 
         internal ConstantStringValueHandle _culture;
 
         public NamespaceDefinitionHandle RootNamespaceDefinition
         {
-            get
-            {
-                return _rootNamespaceDefinition;
-            }
+            get { return _rootNamespaceDefinition; }
         } // RootNamespaceDefinition
 
         internal NamespaceDefinitionHandle _rootNamespaceDefinition;
 
         public QualifiedMethodHandle EntryPoint
         {
-            get
-            {
-                return _entryPoint;
-            }
+            get { return _entryPoint; }
         } // EntryPoint
 
         internal QualifiedMethodHandle _entryPoint;
 
         public TypeDefinitionHandle GlobalModuleType
         {
-            get
-            {
-                return _globalModuleType;
-            }
+            get { return _globalModuleType; }
         } // GlobalModuleType
 
         internal TypeDefinitionHandle _globalModuleType;
 
         public CustomAttributeHandleCollection CustomAttributes
         {
-            get
-            {
-                return _customAttributes;
-            }
+            get { return _customAttributes; }
         } // CustomAttributes
 
         internal CustomAttributeHandleCollection _customAttributes;
 
         public ConstantStringValueHandle ModuleName
         {
-            get
-            {
-                return _moduleName;
-            }
+            get { return _moduleName; }
         } // ModuleName
 
         internal ConstantStringValueHandle _moduleName;
 
         public ByteCollection Mvid
         {
-            get
-            {
-                return _mvid;
-            }
+            get { return _mvid; }
         } // Mvid
 
         internal ByteCollection _mvid;
 
         public CustomAttributeHandleCollection ModuleCustomAttributes
         {
-            get
-            {
-                return _moduleCustomAttributes;
-            }
+            get { return _moduleCustomAttributes; }
         } // ModuleCustomAttributes
 
         internal CustomAttributeHandleCollection _moduleCustomAttributes;
     } // ScopeDefinition
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7154,9 +6373,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ScopeDefinitionHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ScopeDefinitionHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ScopeDefinitionHandle(int value)
         {
@@ -7167,17 +6385,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ScopeDefinitionHandle handle)
+        public static implicit operator Handle(ScopeDefinitionHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ScopeDefinition GetScopeDefinition(MetadataReader reader)
@@ -7207,7 +6422,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ScopeDefinitionHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7219,93 +6433,65 @@ namespace Internal.Metadata.NativeFormat
 
         public ScopeReferenceHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public AssemblyFlags Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         } // Flags
 
         internal AssemblyFlags _flags;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
 
         public ushort MajorVersion
         {
-            get
-            {
-                return _majorVersion;
-            }
+            get { return _majorVersion; }
         } // MajorVersion
 
         internal ushort _majorVersion;
 
         public ushort MinorVersion
         {
-            get
-            {
-                return _minorVersion;
-            }
+            get { return _minorVersion; }
         } // MinorVersion
 
         internal ushort _minorVersion;
 
         public ushort BuildNumber
         {
-            get
-            {
-                return _buildNumber;
-            }
+            get { return _buildNumber; }
         } // BuildNumber
 
         internal ushort _buildNumber;
 
         public ushort RevisionNumber
         {
-            get
-            {
-                return _revisionNumber;
-            }
+            get { return _revisionNumber; }
         } // RevisionNumber
 
         internal ushort _revisionNumber;
 
         public ByteCollection PublicKeyOrToken
         {
-            get
-            {
-                return _publicKeyOrToken;
-            }
+            get { return _publicKeyOrToken; }
         } // PublicKeyOrToken
 
         internal ByteCollection _publicKeyOrToken;
 
         public ConstantStringValueHandle Culture
         {
-            get
-            {
-                return _culture;
-            }
+            get { return _culture; }
         } // Culture
 
         internal ConstantStringValueHandle _culture;
     } // ScopeReference
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7339,9 +6525,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ScopeReferenceHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal ScopeReferenceHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ScopeReferenceHandle(int value)
         {
@@ -7352,17 +6537,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(ScopeReferenceHandle handle)
+        public static implicit operator Handle(ScopeReferenceHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public ScopeReference GetScopeReference(MetadataReader reader)
@@ -7392,7 +6574,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // ScopeReferenceHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7404,165 +6585,118 @@ namespace Internal.Metadata.NativeFormat
 
         public TypeDefinitionHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public TypeAttributes Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         } // Flags
 
         internal TypeAttributes _flags;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public Handle BaseType
         {
-            get
-            {
-                return _baseType;
-            }
+            get { return _baseType; }
         } // BaseType
 
         internal Handle _baseType;
 
         public NamespaceDefinitionHandle NamespaceDefinition
         {
-            get
-            {
-                return _namespaceDefinition;
-            }
+            get { return _namespaceDefinition; }
         } // NamespaceDefinition
 
         internal NamespaceDefinitionHandle _namespaceDefinition;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
 
         public uint Size
         {
-            get
-            {
-                return _size;
-            }
+            get { return _size; }
         } // Size
 
         internal uint _size;
 
         public ushort PackingSize
         {
-            get
-            {
-                return _packingSize;
-            }
+            get { return _packingSize; }
         } // PackingSize
 
         internal ushort _packingSize;
 
         public TypeDefinitionHandle EnclosingType
         {
-            get
-            {
-                return _enclosingType;
-            }
+            get { return _enclosingType; }
         } // EnclosingType
 
         internal TypeDefinitionHandle _enclosingType;
 
         public TypeDefinitionHandleCollection NestedTypes
         {
-            get
-            {
-                return _nestedTypes;
-            }
+            get { return _nestedTypes; }
         } // NestedTypes
 
         internal TypeDefinitionHandleCollection _nestedTypes;
 
         public MethodHandleCollection Methods
         {
-            get
-            {
-                return _methods;
-            }
+            get { return _methods; }
         } // Methods
 
         internal MethodHandleCollection _methods;
 
         public FieldHandleCollection Fields
         {
-            get
-            {
-                return _fields;
-            }
+            get { return _fields; }
         } // Fields
 
         internal FieldHandleCollection _fields;
 
         public PropertyHandleCollection Properties
         {
-            get
-            {
-                return _properties;
-            }
+            get { return _properties; }
         } // Properties
 
         internal PropertyHandleCollection _properties;
 
         public EventHandleCollection Events
         {
-            get
-            {
-                return _events;
-            }
+            get { return _events; }
         } // Events
 
         internal EventHandleCollection _events;
 
         public GenericParameterHandleCollection GenericParameters
         {
-            get
-            {
-                return _genericParameters;
-            }
+            get { return _genericParameters; }
         } // GenericParameters
 
         internal GenericParameterHandleCollection _genericParameters;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public HandleCollection Interfaces
         {
-            get
-            {
-                return _interfaces;
-            }
+            get { return _interfaces; }
         } // Interfaces
 
         internal HandleCollection _interfaces;
 
         public CustomAttributeHandleCollection CustomAttributes
         {
-            get
-            {
-                return _customAttributes;
-            }
+            get { return _customAttributes; }
         } // CustomAttributes
 
         internal CustomAttributeHandleCollection _customAttributes;
     } // TypeDefinition
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7596,9 +6730,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeDefinitionHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal TypeDefinitionHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeDefinitionHandle(int value)
         {
@@ -7609,17 +6742,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(TypeDefinitionHandle handle)
+        public static implicit operator Handle(TypeDefinitionHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public TypeDefinition GetTypeDefinition(MetadataReader reader)
@@ -7649,7 +6779,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // TypeDefinitionHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7661,43 +6790,30 @@ namespace Internal.Metadata.NativeFormat
 
         public TypeForwarderHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public ScopeReferenceHandle Scope
         {
-            get
-            {
-                return _scope;
-            }
+            get { return _scope; }
         } // Scope
 
         internal ScopeReferenceHandle _scope;
 
         public ConstantStringValueHandle Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         } // Name
 
         internal ConstantStringValueHandle _name;
 
         public TypeForwarderHandleCollection NestedTypes
         {
-            get
-            {
-                return _nestedTypes;
-            }
+            get { return _nestedTypes; }
         } // NestedTypes
 
         internal TypeForwarderHandleCollection _nestedTypes;
     } // TypeForwarder
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7731,9 +6847,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeForwarderHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal TypeForwarderHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeForwarderHandle(int value)
         {
@@ -7744,17 +6859,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(TypeForwarderHandle handle)
+        public static implicit operator Handle(TypeForwarderHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public TypeForwarder GetTypeForwarder(MetadataReader reader)
@@ -7784,7 +6896,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // TypeForwarderHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7796,35 +6907,27 @@ namespace Internal.Metadata.NativeFormat
 
         public TypeInstantiationSignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public Handle GenericType
         {
-            get
-            {
-                return _genericType;
-            }
+            get { return _genericType; }
         } // GenericType
 
         internal Handle _genericType;
+
         /// One of: TypeDefinition, TypeReference, TypeSpecification
 
         public HandleCollection GenericTypeArguments
         {
-            get
-            {
-                return _genericTypeArguments;
-            }
+            get { return _genericTypeArguments; }
         } // GenericTypeArguments
 
         internal HandleCollection _genericTypeArguments;
     } // TypeInstantiationSignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7858,30 +6961,32 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeInstantiationSignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal TypeInstantiationSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeInstantiationSignatureHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.TypeInstantiationSignature || hType == HandleType.Null))
+            if (
+                !(
+                    hType == 0
+                    || hType == HandleType.TypeInstantiationSignature
+                    || hType == HandleType.Null
+                )
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.TypeInstantiationSignature) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(TypeInstantiationSignatureHandle handle)
+        public static implicit operator Handle(TypeInstantiationSignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public TypeInstantiationSignature GetTypeInstantiationSignature(MetadataReader reader)
@@ -7911,7 +7016,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // TypeInstantiationSignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7923,34 +7027,25 @@ namespace Internal.Metadata.NativeFormat
 
         public TypeReferenceHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: NamespaceReference, TypeReference
 
         public Handle ParentNamespaceOrType
         {
-            get
-            {
-                return _parentNamespaceOrType;
-            }
+            get { return _parentNamespaceOrType; }
         } // ParentNamespaceOrType
 
         internal Handle _parentNamespaceOrType;
 
         public ConstantStringValueHandle TypeName
         {
-            get
-            {
-                return _typeName;
-            }
+            get { return _typeName; }
         } // TypeName
 
         internal ConstantStringValueHandle _typeName;
     } // TypeReference
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -7984,9 +7079,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeReferenceHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal TypeReferenceHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeReferenceHandle(int value)
         {
@@ -7997,17 +7091,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(TypeReferenceHandle handle)
+        public static implicit operator Handle(TypeReferenceHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public TypeReference GetTypeReference(MetadataReader reader)
@@ -8037,7 +7128,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // TypeReferenceHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8049,24 +7139,18 @@ namespace Internal.Metadata.NativeFormat
 
         public TypeSpecificationHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
+
         /// One of: TypeDefinition, TypeReference, TypeInstantiationSignature, SZArraySignature, ArraySignature, PointerSignature, FunctionPointerSignature, ByReferenceSignature, TypeVariableSignature, MethodTypeVariableSignature
 
         public Handle Signature
         {
-            get
-            {
-                return _signature;
-            }
+            get { return _signature; }
         } // Signature
 
         internal Handle _signature;
     } // TypeSpecification
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8100,9 +7184,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeSpecificationHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal TypeSpecificationHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeSpecificationHandle(int value)
         {
@@ -8113,17 +7196,14 @@ namespace Internal.Metadata.NativeFormat
             _Validate();
         }
 
-        public static implicit operator  Handle(TypeSpecificationHandle handle)
+        public static implicit operator Handle(TypeSpecificationHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public TypeSpecification GetTypeSpecification(MetadataReader reader)
@@ -8153,7 +7233,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // TypeSpecificationHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8165,23 +7244,16 @@ namespace Internal.Metadata.NativeFormat
 
         public TypeVariableSignatureHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         } // Handle
 
         public int Number
         {
-            get
-            {
-                return _number;
-            }
+            get { return _number; }
         } // Number
 
         internal int _number;
     } // TypeVariableSignature
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8215,30 +7287,32 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeVariableSignatureHandle(Handle handle) : this(handle._value)
-        {
-        }
+        internal TypeVariableSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeVariableSignatureHandle(int value)
         {
             HandleType hType = (HandleType)(value >> 24);
-            if (!(hType == 0 || hType == HandleType.TypeVariableSignature || hType == HandleType.Null))
+            if (
+                !(
+                    hType == 0
+                    || hType == HandleType.TypeVariableSignature
+                    || hType == HandleType.Null
+                )
+            )
                 throw new ArgumentException();
             _value = (value & 0x00FFFFFF) | (((int)HandleType.TypeVariableSignature) << 24);
             _Validate();
         }
 
-        public static implicit operator  Handle(TypeVariableSignatureHandle handle)
+        public static implicit operator Handle(TypeVariableSignatureHandle handle)
         {
             return new Handle(handle._value);
         } // Handle
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         } // Offset
 
         public TypeVariableSignature GetTypeVariableSignature(MetadataReader reader)
@@ -8268,7 +7342,6 @@ namespace Internal.Metadata.NativeFormat
             return string.Format("{0:X8}", _value);
         } // ToString
     } // TypeVariableSignatureHandle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8298,7 +7371,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -8319,10 +7391,7 @@ namespace Internal.Metadata.NativeFormat
 
             public NamedArgumentHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -8334,12 +7403,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // NamedArgumentHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8369,7 +7435,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -8390,10 +7455,7 @@ namespace Internal.Metadata.NativeFormat
 
             public MethodSemanticsHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -8405,12 +7467,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // MethodSemanticsHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8440,7 +7499,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -8461,10 +7519,7 @@ namespace Internal.Metadata.NativeFormat
 
             public CustomAttributeHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -8476,12 +7531,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // CustomAttributeHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8511,7 +7563,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -8532,10 +7583,7 @@ namespace Internal.Metadata.NativeFormat
 
             public ParameterHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -8547,12 +7595,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // ParameterHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8582,7 +7627,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -8603,10 +7647,7 @@ namespace Internal.Metadata.NativeFormat
 
             public GenericParameterHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -8618,12 +7659,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // GenericParameterHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8653,7 +7691,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -8674,10 +7711,7 @@ namespace Internal.Metadata.NativeFormat
 
             public TypeDefinitionHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -8689,12 +7723,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // TypeDefinitionHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8724,7 +7755,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -8745,10 +7775,7 @@ namespace Internal.Metadata.NativeFormat
 
             public TypeForwarderHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -8760,12 +7787,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // TypeForwarderHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8795,7 +7819,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -8816,10 +7839,7 @@ namespace Internal.Metadata.NativeFormat
 
             public NamespaceDefinitionHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -8831,12 +7851,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // NamespaceDefinitionHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8866,7 +7883,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -8887,10 +7903,7 @@ namespace Internal.Metadata.NativeFormat
 
             public MethodHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -8902,12 +7915,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // MethodHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -8937,7 +7947,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -8958,10 +7967,7 @@ namespace Internal.Metadata.NativeFormat
 
             public FieldHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -8973,12 +7979,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // FieldHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9008,7 +8011,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9029,10 +8031,7 @@ namespace Internal.Metadata.NativeFormat
 
             public PropertyHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9044,12 +8043,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // PropertyHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9079,7 +8075,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9100,10 +8095,7 @@ namespace Internal.Metadata.NativeFormat
 
             public EventHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9115,12 +8107,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // EventHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9150,7 +8139,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9171,10 +8159,7 @@ namespace Internal.Metadata.NativeFormat
 
             public ScopeDefinitionHandle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9186,12 +8171,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // ScopeDefinitionHandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9221,7 +8203,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9242,10 +8223,7 @@ namespace Internal.Metadata.NativeFormat
 
             public bool Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9257,12 +8235,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // BooleanCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9292,7 +8267,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9313,10 +8287,7 @@ namespace Internal.Metadata.NativeFormat
 
             public char Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9328,12 +8299,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // CharCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9363,7 +8331,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9384,10 +8351,7 @@ namespace Internal.Metadata.NativeFormat
 
             public byte Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9399,12 +8363,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // ByteCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9434,7 +8395,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9455,10 +8415,7 @@ namespace Internal.Metadata.NativeFormat
 
             public sbyte Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9470,12 +8427,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // SByteCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9505,7 +8459,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9526,10 +8479,7 @@ namespace Internal.Metadata.NativeFormat
 
             public short Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9541,12 +8491,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // Int16Collection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9576,7 +8523,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9597,10 +8543,7 @@ namespace Internal.Metadata.NativeFormat
 
             public ushort Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9612,12 +8555,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // UInt16Collection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9647,7 +8587,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9668,10 +8607,7 @@ namespace Internal.Metadata.NativeFormat
 
             public int Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9683,12 +8619,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // Int32Collection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9718,7 +8651,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9739,10 +8671,7 @@ namespace Internal.Metadata.NativeFormat
 
             public uint Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9754,12 +8683,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // UInt32Collection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9789,7 +8715,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9810,10 +8735,7 @@ namespace Internal.Metadata.NativeFormat
 
             public long Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9825,12 +8747,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // Int64Collection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9860,7 +8779,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9881,10 +8799,7 @@ namespace Internal.Metadata.NativeFormat
 
             public ulong Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9896,12 +8811,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // UInt64Collection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -9931,7 +8843,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -9952,10 +8863,7 @@ namespace Internal.Metadata.NativeFormat
 
             public float Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -9967,12 +8875,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // SingleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -10002,7 +8907,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -10023,10 +8927,7 @@ namespace Internal.Metadata.NativeFormat
 
             public double Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -10038,12 +8939,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // DoubleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -10230,7 +9128,9 @@ namespace Internal.Metadata.NativeFormat
             return new FieldSignatureHandle(this);
         } // ToFieldSignatureHandle
 
-        public FunctionPointerSignatureHandle ToFunctionPointerSignatureHandle(MetadataReader reader)
+        public FunctionPointerSignatureHandle ToFunctionPointerSignatureHandle(
+            MetadataReader reader
+        )
         {
             return new FunctionPointerSignatureHandle(this);
         } // ToFunctionPointerSignatureHandle
@@ -10265,7 +9165,9 @@ namespace Internal.Metadata.NativeFormat
             return new MethodSignatureHandle(this);
         } // ToMethodSignatureHandle
 
-        public MethodTypeVariableSignatureHandle ToMethodTypeVariableSignatureHandle(MetadataReader reader)
+        public MethodTypeVariableSignatureHandle ToMethodTypeVariableSignatureHandle(
+            MetadataReader reader
+        )
         {
             return new MethodTypeVariableSignatureHandle(this);
         } // ToMethodTypeVariableSignatureHandle
@@ -10345,7 +9247,9 @@ namespace Internal.Metadata.NativeFormat
             return new TypeForwarderHandle(this);
         } // ToTypeForwarderHandle
 
-        public TypeInstantiationSignatureHandle ToTypeInstantiationSignatureHandle(MetadataReader reader)
+        public TypeInstantiationSignatureHandle ToTypeInstantiationSignatureHandle(
+            MetadataReader reader
+        )
         {
             return new TypeInstantiationSignatureHandle(this);
         } // ToTypeInstantiationSignatureHandle
@@ -10365,7 +9269,6 @@ namespace Internal.Metadata.NativeFormat
             return new TypeVariableSignatureHandle(this);
         } // ToTypeVariableSignatureHandle
     } // Handle
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -10395,7 +9298,6 @@ namespace Internal.Metadata.NativeFormat
         {
             return new Enumerator(_reader, _offset);
         } // GetEnumerator
-
 #if SYSTEM_PRIVATE_CORELIB
         [CLSCompliant(false)]
         [ReflectionBlocked]
@@ -10416,10 +9318,7 @@ namespace Internal.Metadata.NativeFormat
 
             public Handle Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             } // Current
 
             public bool MoveNext()
@@ -10431,12 +9330,9 @@ namespace Internal.Metadata.NativeFormat
                 return true;
             } // MoveNext
 
-            public void Dispose()
-            {
-            } // Dispose
+            public void Dispose() { } // Dispose
         } // Enumerator
     } // HandleCollection
-
 #if SYSTEM_PRIVATE_CORELIB
     [CLSCompliant(false)]
     [ReflectionBlocked]
@@ -10820,7 +9716,9 @@ namespace Internal.Metadata.NativeFormat
             return record;
         } // GetFieldSignature
 
-        public FunctionPointerSignature GetFunctionPointerSignature(FunctionPointerSignatureHandle handle)
+        public FunctionPointerSignature GetFunctionPointerSignature(
+            FunctionPointerSignatureHandle handle
+        )
         {
             FunctionPointerSignature record;
             record._reader = this;
@@ -10909,7 +9807,9 @@ namespace Internal.Metadata.NativeFormat
             return record;
         } // GetMethodSignature
 
-        public MethodTypeVariableSignature GetMethodTypeVariableSignature(MethodTypeVariableSignatureHandle handle)
+        public MethodTypeVariableSignature GetMethodTypeVariableSignature(
+            MethodTypeVariableSignatureHandle handle
+        )
         {
             MethodTypeVariableSignature record;
             record._reader = this;
@@ -11130,7 +10030,9 @@ namespace Internal.Metadata.NativeFormat
             return record;
         } // GetTypeForwarder
 
-        public TypeInstantiationSignature GetTypeInstantiationSignature(TypeInstantiationSignatureHandle handle)
+        public TypeInstantiationSignature GetTypeInstantiationSignature(
+            TypeInstantiationSignatureHandle handle
+        )
         {
             TypeInstantiationSignature record;
             record._reader = this;
@@ -11702,7 +10604,9 @@ namespace Internal.Metadata.NativeFormat
             return new MethodSignatureHandle(handle._value);
         } // ToMethodSignatureHandle
 
-        internal MethodTypeVariableSignatureHandle ToMethodTypeVariableSignatureHandle(Handle handle)
+        internal MethodTypeVariableSignatureHandle ToMethodTypeVariableSignatureHandle(
+            Handle handle
+        )
         {
             return new MethodTypeVariableSignatureHandle(handle._value);
         } // ToMethodTypeVariableSignatureHandle

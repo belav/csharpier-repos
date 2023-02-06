@@ -18,12 +18,14 @@ internal static partial class Interop
             out SafeBCryptKeyHandle phKey,
             byte* pbInput,
             int cbInput,
-            uint dwFlags);
+            uint dwFlags
+        );
 
         internal static unsafe SafeBCryptKeyHandle BCryptImportKeyPair(
             SafeBCryptAlgorithmHandle algorithm,
             string blobType,
-            ReadOnlySpan<byte> keyBlob)
+            ReadOnlySpan<byte> keyBlob
+        )
         {
             NTSTATUS status;
             SafeBCryptKeyHandle key;
@@ -37,7 +39,8 @@ internal static partial class Interop
                     out key,
                     pBlob,
                     keyBlob.Length,
-                    0);
+                    0
+                );
             }
 
             if (status != NTSTATUS.STATUS_SUCCESS)

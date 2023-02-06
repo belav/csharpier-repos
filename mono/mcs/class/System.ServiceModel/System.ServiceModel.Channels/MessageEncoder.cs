@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,9 +33,7 @@ namespace System.ServiceModel.Channels
 {
     public abstract class MessageEncoder
     {
-        protected MessageEncoder ()
-        {
-        }
+        protected MessageEncoder() { }
 
         public abstract string ContentType { get; }
 
@@ -44,71 +42,96 @@ namespace System.ServiceModel.Channels
         public abstract MessageVersion MessageVersion { get; }
 
         [MonoTODO]
-        public virtual T GetProperty<T> () where T : class
+        public virtual T GetProperty<T>()
+            where T : class
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public virtual bool IsContentTypeSupported (string contentType)
+        public virtual bool IsContentTypeSupported(string contentType)
         {
             if (contentType == null)
-                throw new ArgumentNullException ("contentType");
+                throw new ArgumentNullException("contentType");
 
-            var expected = new ContentType (ContentType.ToLowerInvariant ());
-            expected.MediaType = MediaType.ToLowerInvariant ();
-            var check = new ContentType (contentType.ToLowerInvariant ());
+            var expected = new ContentType(ContentType.ToLowerInvariant());
+            expected.MediaType = MediaType.ToLowerInvariant();
+            var check = new ContentType(contentType.ToLowerInvariant());
 
-            if (!string.Equals (expected.MediaType, check.MediaType, StringComparison.InvariantCultureIgnoreCase))
+            if (
+                !string.Equals(
+                    expected.MediaType,
+                    check.MediaType,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
                 return false;
 
-            foreach (string param in expected.Parameters.Keys) {
-                if (!check.Parameters.ContainsKey (param))
+            foreach (string param in expected.Parameters.Keys)
+            {
+                if (!check.Parameters.ContainsKey(param))
                     continue;
-                if (!object.Equals (expected.Parameters [param], check.Parameters [param]))
+                if (!object.Equals(expected.Parameters[param], check.Parameters[param]))
                     return false;
             }
 
             return true;
         }
 
-        public Message ReadMessage (ArraySegment<byte> buffer,
-            BufferManager bufferManager)
+        public Message ReadMessage(ArraySegment<byte> buffer, BufferManager bufferManager)
         {
-            return ReadMessage (buffer, bufferManager, ContentType);
+            return ReadMessage(buffer, bufferManager, ContentType);
         }
 
-        public abstract Message ReadMessage (ArraySegment<byte> buffer,
-            BufferManager bufferManager, string contentType);
+        public abstract Message ReadMessage(
+            ArraySegment<byte> buffer,
+            BufferManager bufferManager,
+            string contentType
+        );
 
-        public Message ReadMessage (Stream stream, int maxSizeOfHeaders)
+        public Message ReadMessage(Stream stream, int maxSizeOfHeaders)
         {
-            return ReadMessage (stream, maxSizeOfHeaders, ContentType);
+            return ReadMessage(stream, maxSizeOfHeaders, ContentType);
         }
 
-        public abstract Message ReadMessage (Stream stream,
-            int maxSizeOfHeaders, string contentType);
+        public abstract Message ReadMessage(
+            Stream stream,
+            int maxSizeOfHeaders,
+            string contentType
+        );
 
-        public abstract void WriteMessage (Message message, Stream stream);
+        public abstract void WriteMessage(Message message, Stream stream);
 
-        public ArraySegment<byte> WriteMessage (Message message,
-            int maxMessageSize, BufferManager bufferManager)
+        public ArraySegment<byte> WriteMessage(
+            Message message,
+            int maxMessageSize,
+            BufferManager bufferManager
+        )
         {
-            return WriteMessage (message, maxMessageSize, bufferManager, 0);
+            return WriteMessage(message, maxMessageSize, bufferManager, 0);
         }
 
-        public abstract ArraySegment<byte> WriteMessage (
-            Message message, int maxMessageSize,
-            BufferManager bufferManager, int messageOffset);
+        public abstract ArraySegment<byte> WriteMessage(
+            Message message,
+            int maxMessageSize,
+            BufferManager bufferManager,
+            int messageOffset
+        );
 
-        public override string ToString ()
+        public override string ToString()
         {
             return ContentType;
         }
 
-        internal void VerifyMessageVersion (Message message)
+        internal void VerifyMessageVersion(Message message)
         {
-            if (!message.Version.Equals (MessageVersion))
-                throw new ProtocolException (String.Format ("Message version mismatch. Expected {0} but was {1}.", MessageVersion, message.Version));
+            if (!message.Version.Equals(MessageVersion))
+                throw new ProtocolException(
+                    String.Format(
+                        "Message version mismatch. Expected {0} but was {1}.",
+                        MessageVersion,
+                        message.Version
+                    )
+                );
         }
     }
 }

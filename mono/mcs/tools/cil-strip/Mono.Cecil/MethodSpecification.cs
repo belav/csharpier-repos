@@ -26,65 +26,75 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System;
 
-    internal abstract class MethodSpecification : MethodReference {
-
+    internal abstract class MethodSpecification : MethodReference
+    {
         MethodReference m_elementMethod;
 
-        public MethodReference ElementMethod {
+        public MethodReference ElementMethod
+        {
             get { return m_elementMethod; }
             set { m_elementMethod = value; }
         }
 
-        public override string Name {
+        public override string Name
+        {
             get { return m_elementMethod.Name; }
-            set { throw new InvalidOperationException (); }
+            set { throw new InvalidOperationException(); }
         }
 
-        public override MethodCallingConvention CallingConvention {
+        public override MethodCallingConvention CallingConvention
+        {
             get { return m_elementMethod.CallingConvention; }
-            set { throw new InvalidOperationException (); }
+            set { throw new InvalidOperationException(); }
         }
 
-        public override bool HasThis {
+        public override bool HasThis
+        {
             get { return m_elementMethod.HasThis; }
-            set { throw new InvalidOperationException (); }
+            set { throw new InvalidOperationException(); }
         }
 
-        public override bool ExplicitThis {
+        public override bool ExplicitThis
+        {
             get { return m_elementMethod.ExplicitThis; }
-            set { throw new InvalidOperationException (); }
+            set { throw new InvalidOperationException(); }
         }
 
-        public override MethodReturnType ReturnType {
+        public override MethodReturnType ReturnType
+        {
             get { return m_elementMethod.ReturnType; }
-            set { throw new InvalidOperationException (); }
+            set { throw new InvalidOperationException(); }
         }
 
-        public override TypeReference DeclaringType {
+        public override TypeReference DeclaringType
+        {
             get { return m_elementMethod.DeclaringType; }
-            set { throw new InvalidOperationException (); }
+            set { throw new InvalidOperationException(); }
         }
 
-        public override bool HasParameters {
+        public override bool HasParameters
+        {
             get { return m_elementMethod.HasParameters; }
         }
 
-        public override ParameterDefinitionCollection Parameters {
+        public override ParameterDefinitionCollection Parameters
+        {
             get { return m_elementMethod.Parameters; }
         }
 
-        internal MethodSpecification (MethodReference elemMethod) : base (string.Empty)
+        internal MethodSpecification(MethodReference elemMethod)
+            : base(string.Empty)
         {
             m_elementMethod = elemMethod;
         }
 
         public override MethodReference GetOriginalMethod()
         {
-            return m_elementMethod.GetOriginalMethod ();
+            return m_elementMethod.GetOriginalMethod();
         }
     }
 }

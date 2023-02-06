@@ -6,8 +6,8 @@ using System;
 
 class Program
 {
-    static void Main ()
+    static void Main()
     {
-        Console.WriteLine (typeof (Lang));
+        Console.WriteLine(typeof(Lang));
     }
 }

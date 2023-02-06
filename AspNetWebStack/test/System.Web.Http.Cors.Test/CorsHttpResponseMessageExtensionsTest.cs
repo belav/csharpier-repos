@@ -14,9 +14,14 @@ namespace System.Web.Cors.Test.WebAPI
         [Fact]
         public void WriteCorsHeaders_NullResponse_Throws()
         {
-            Assert.ThrowsArgumentNull(() =>
-                System.Web.Http.Cors.CorsHttpResponseMessageExtensions.WriteCorsHeaders(null, new CorsResult()),
-                "response");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    System.Web.Http.Cors.CorsHttpResponseMessageExtensions.WriteCorsHeaders(
+                        null,
+                        new CorsResult()
+                    ),
+                "response"
+            );
         }
 
         [Fact]
@@ -24,9 +29,7 @@ namespace System.Web.Cors.Test.WebAPI
         {
             HttpResponseMessage response = new HttpResponseMessage();
 
-            Assert.ThrowsArgumentNull(() =>
-                response.WriteCorsHeaders(null),
-                "corsResult");
+            Assert.ThrowsArgumentNull(() => response.WriteCorsHeaders(null), "corsResult");
         }
 
         [Fact]
@@ -49,7 +52,10 @@ namespace System.Web.Cors.Test.WebAPI
             HttpResponseHeaders headers = response.Headers;
 
             Assert.Single(headers);
-            string[] allowMethods = headers.GetValues("Access-Control-Allow-Methods").FirstOrDefault().Split(',');
+            string[] allowMethods = headers
+                .GetValues("Access-Control-Allow-Methods")
+                .FirstOrDefault()
+                .Split(',');
             Assert.Contains("DELETE", allowMethods);
             Assert.Contains("PUT", allowMethods);
         }
@@ -65,7 +71,10 @@ namespace System.Web.Cors.Test.WebAPI
             HttpResponseHeaders headers = response.Headers;
 
             Assert.Single(headers);
-            string[] exposedHeaders = headers.GetValues("Access-Control-Expose-Headers").FirstOrDefault().Split(',');
+            string[] exposedHeaders = headers
+                .GetValues("Access-Control-Expose-Headers")
+                .FirstOrDefault()
+                .Split(',');
             Assert.Contains("baz", exposedHeaders);
         }
 
@@ -81,7 +90,10 @@ namespace System.Web.Cors.Test.WebAPI
             HttpResponseHeaders headers = response.Headers;
 
             Assert.Single(headers);
-            string[] allowHeaders = headers.GetValues("Access-Control-Allow-Headers").FirstOrDefault().Split(',');
+            string[] allowHeaders = headers
+                .GetValues("Access-Control-Allow-Headers")
+                .FirstOrDefault()
+                .Split(',');
             Assert.Contains("foo", allowHeaders);
             Assert.Contains("bar", allowHeaders);
         }
@@ -90,26 +102,23 @@ namespace System.Web.Cors.Test.WebAPI
         public void WriteCorsHeaders_WritesAllowCredentials()
         {
             HttpResponseMessage response = new HttpResponseMessage();
-            CorsResult corsResult = new CorsResult
-            {
-                SupportsCredentials = true
-            };
+            CorsResult corsResult = new CorsResult { SupportsCredentials = true };
 
             response.WriteCorsHeaders(corsResult);
             HttpResponseHeaders headers = response.Headers;
 
             Assert.Single(headers);
-            Assert.Equal("true", headers.GetValues("Access-Control-Allow-Credentials").FirstOrDefault());
+            Assert.Equal(
+                "true",
+                headers.GetValues("Access-Control-Allow-Credentials").FirstOrDefault()
+            );
         }
 
         [Fact]
         public void WriteCorsHeaders_WritesAllowOrigin()
         {
             HttpResponseMessage response = new HttpResponseMessage();
-            CorsResult corsResult = new CorsResult
-            {
-                AllowedOrigin = "*"
-            };
+            CorsResult corsResult = new CorsResult { AllowedOrigin = "*" };
 
             response.WriteCorsHeaders(corsResult);
             HttpResponseHeaders headers = response.Headers;
@@ -122,10 +131,7 @@ namespace System.Web.Cors.Test.WebAPI
         public void WriteCorsHeaders_WritesPreflightMaxAge()
         {
             HttpResponseMessage response = new HttpResponseMessage();
-            CorsResult corsResult = new CorsResult
-            {
-                PreflightMaxAge = 10
-            };
+            CorsResult corsResult = new CorsResult { PreflightMaxAge = 10 };
 
             response.WriteCorsHeaders(corsResult);
             HttpResponseHeaders headers = response.Headers;

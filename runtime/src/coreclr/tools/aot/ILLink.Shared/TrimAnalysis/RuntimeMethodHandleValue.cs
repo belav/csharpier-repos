@@ -14,15 +14,15 @@ namespace ILLink.Shared.TrimAnalysis
     /// </summary>
     internal sealed partial record RuntimeMethodHandleValue : SingleValue
     {
-        public RuntimeMethodHandleValue (in MethodProxy representedMethod)
+        public RuntimeMethodHandleValue(in MethodProxy representedMethod)
         {
             RepresentedMethod = representedMethod;
         }
 
         public readonly MethodProxy RepresentedMethod;
 
-        public override SingleValue DeepCopy () => this; // immutable value
+        public override SingleValue DeepCopy() => this; // immutable value
 
-        public override string ToString () => this.ValueToString ();
+        public override string ToString() => this.ValueToString();
     }
 }

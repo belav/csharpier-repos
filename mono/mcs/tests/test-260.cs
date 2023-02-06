@@ -4,14 +4,12 @@ using Test = x.Test;
 
 namespace x
 {
-    public class Test
-    { }
+    public class Test { }
 }
 
 namespace y
 {
-    public class Test
-    { }
+    public class Test { }
 }
 
 namespace b

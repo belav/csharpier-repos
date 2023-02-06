@@ -5,102 +5,99 @@ using System.Linq;
 
 interface I
 {
-    void Explicit ();
+    void Explicit();
 }
 
 class CallerMemberTest : I
 {
-    object field = TraceStatic ("field");
-    
-    CallerMemberTest ()
-        : this (TraceStatic (".ctor"))
+    object field = TraceStatic("field");
+
+    CallerMemberTest()
+        : this(TraceStatic(".ctor")) { }
+
+    CallerMemberTest(object arg) { }
+
+    static IEnumerable<int> Enumerator()
     {
-    }
-    
-    CallerMemberTest (object arg)
-    {
-    }
-    
-    static IEnumerable<int> Enumerator ()
-    {
-        TraceStatic ("Enumerator");
+        TraceStatic("Enumerator");
         yield return 1;
     }
-    
-    void I.Explicit ()
+
+    void I.Explicit()
     {
-        Trace ("Explicit");
+        Trace("Explicit");
     }
-    
-    public void GenericMethod<T> ()
+
+    public void GenericMethod<T>()
     {
-        Trace ("GenericMethod");
+        Trace("GenericMethod");
     }
-    
-    public int this [string arg] {
-        set {
-            Trace ("Item");
-        }
+
+    public int this[string arg]
+    {
+        set { Trace("Item"); }
     }
-    
-    public bool Property {
-        get {
-            Trace ("Property");
+
+    public bool Property
+    {
+        get
+        {
+            Trace("Property");
             return false;
         }
     }
-    
-    public static implicit operator CallerMemberTest (int i)
+
+    public static implicit operator CallerMemberTest(int i)
     {
-        TraceStatic ("op_Implicit");
-        return new CallerMemberTest ();
+        TraceStatic("op_Implicit");
+        return new CallerMemberTest();
     }
 
     public void Trace(string expected, [CallerMemberName] string member = ";;")
     {
-        Console.WriteLine (member);
+        Console.WriteLine(member);
         if (expected != member)
-            throw new ApplicationException (member);
+            throw new ApplicationException(member);
     }
-    
+
     public static object TraceStatic(string expected, [CallerMemberName] object member = null)
     {
-        Console.WriteLine (member);
-        
+        Console.WriteLine(member);
+
         if (expected != member as string)
-            throw new ApplicationException (string.Format ("`{0}' !=  `{1}'", expected, member as string));
-        
+            throw new ApplicationException(
+                string.Format("`{0}' !=  `{1}'", expected, member as string)
+            );
+
         return member;
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        var c = new CallerMemberTest ();
-        c.Trace ("Main");
-        Action a = () => {
-            c.Trace ("Main");
+        var c = new CallerMemberTest();
+        c.Trace("Main");
+        Action a = () =>
+        {
+            c.Trace("Main");
         };
-        a ();
-        
-        a = () => TraceStatic ("Main");
-        a ();
-        
-        foreach (var e in Enumerator ()) {
-        }
-        
-        var atype = new {
-            OO = TraceStatic ("Main")
-        };
-        
-        var l = (from x in "ab" select TraceStatic ("Main")).ToList ();
-        
-        c.GenericMethod<long> ();
-        c ["aa"] = 4;
+        a();
+
+        a = () => TraceStatic("Main");
+        a();
+
+        foreach (var e in Enumerator()) { }
+
+        var atype = new { OO = TraceStatic("Main") };
+
+        var l = (from x in "ab" select TraceStatic("Main")).ToList();
+
+        c.GenericMethod<long>();
+        c["aa"] = 4;
         var p = c.Property;
-        
+
         I i = c;
-        i.Explicit ();
-        
+        i.Explicit();
+
         CallerMemberTest op = 1;
     }
 }

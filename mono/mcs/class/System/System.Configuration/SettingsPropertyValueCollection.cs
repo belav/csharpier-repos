@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,96 +31,90 @@ using System.Collections;
 
 namespace System.Configuration
 {
-
     public class SettingsPropertyValueCollection : ICloneable, ICollection, IEnumerable
     {
         Hashtable items;
         bool isReadOnly;
 
-        public SettingsPropertyValueCollection ()
+        public SettingsPropertyValueCollection()
         {
             items = new Hashtable();
         }
 
-        public void Add (SettingsPropertyValue property)
+        public void Add(SettingsPropertyValue property)
         {
             if (isReadOnly)
-                throw new NotSupportedException ();
+                throw new NotSupportedException();
 
             /* actually do the add */
-            items.Add (property.Name, property);
+            items.Add(property.Name, property);
         }
 
-        internal void Add (SettingsPropertyValueCollection vals)
+        internal void Add(SettingsPropertyValueCollection vals)
         {
-            foreach (SettingsPropertyValue val in vals) {
-                Add (val);
+            foreach (SettingsPropertyValue val in vals)
+            {
+                Add(val);
             }
         }
 
-        public void Clear ()
+        public void Clear()
         {
             if (isReadOnly)
-                throw new NotSupportedException ();
+                throw new NotSupportedException();
 
-            items.Clear ();
+            items.Clear();
         }
 
-        public object Clone ()
+        public object Clone()
         {
-            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection ();
-            col.items = (Hashtable)items.Clone ();
+            SettingsPropertyValueCollection col = new SettingsPropertyValueCollection();
+            col.items = (Hashtable)items.Clone();
 
             return col;
         }
 
-        public void CopyTo (Array array, int index)
+        public void CopyTo(Array array, int index)
         {
-            items.Values.CopyTo (array, index);
+            items.Values.CopyTo(array, index);
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
             return items.Values.GetEnumerator();
         }
 
-        public void Remove (string name)
+        public void Remove(string name)
         {
             if (isReadOnly)
-                throw new NotSupportedException ();
+                throw new NotSupportedException();
 
-            items.Remove (name);
+            items.Remove(name);
         }
 
-        public void SetReadOnly ()
+        public void SetReadOnly()
         {
             isReadOnly = true;
         }
 
-        public int Count {
-            get {
-                return items.Count;
-            }
+        public int Count
+        {
+            get { return items.Count; }
         }
 
-        public bool IsSynchronized {
-            get {
-                throw new NotImplementedException ();
-            }
+        public bool IsSynchronized
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public SettingsPropertyValue this [ string name ] {
-            get {
-                return (SettingsPropertyValue) items [ name ];
-            }
+        public SettingsPropertyValue this[string name]
+        {
+            get { return (SettingsPropertyValue)items[name]; }
         }
 
-        public object SyncRoot {
-            get {
-                throw new NotImplementedException ();
-            }
+        public object SyncRoot
+        {
+            get { throw new NotImplementedException(); }
         }
     }
-
 }
-

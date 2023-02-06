@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 class ConversionTest
 {
-    static int Main ()
+    static int Main()
     {
         byte b = 3;
 
@@ -13,7 +13,7 @@ class ConversionTest
             return 1;
 
         IFormattable c2;
-        c2 = $"format { b }";
+        c2 = $"format {b}";
         if (!(c2 is FormattableString))
             return 2;
 

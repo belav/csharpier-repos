@@ -30,14 +30,12 @@ public class IndentedStringBuilder
     ///     Gets the current indent level.
     /// </summary>
     /// <value>The current indent level.</value>
-    public virtual int IndentCount
-        => _indent;
+    public virtual int IndentCount => _indent;
 
     /// <summary>
     ///     The current length of the built string.
     /// </summary>
-    public virtual int Length
-        => _stringBuilder.Length;
+    public virtual int Length => _stringBuilder.Length;
 
     /// <summary>
     ///     Appends the current indent and then the given string to the string being built.
@@ -214,22 +212,19 @@ public class IndentedStringBuilder
     ///     Creates a scoped indenter that will increment the indent, then decrement it when disposed.
     /// </summary>
     /// <returns>An indenter.</returns>
-    public virtual IDisposable Indent()
-        => new Indenter(this);
+    public virtual IDisposable Indent() => new Indenter(this);
 
     /// <summary>
     ///     Temporarily disables all indentation. Restores the original indentation when the returned object is disposed.
     /// </summary>
     /// <returns>An object that restores the original indentation when disposed.</returns>
-    public virtual IDisposable SuspendIndent()
-        => new IndentSuspender(this);
+    public virtual IDisposable SuspendIndent() => new IndentSuspender(this);
 
     /// <summary>
     ///     Returns the built string.
     /// </summary>
     /// <returns>The built string.</returns>
-    public override string ToString()
-        => _stringBuilder.ToString();
+    public override string ToString() => _stringBuilder.ToString();
 
     private void DoIndent()
     {
@@ -252,8 +247,7 @@ public class IndentedStringBuilder
             _stringBuilder.IncrementIndent();
         }
 
-        public void Dispose()
-            => _stringBuilder.DecrementIndent();
+        public void Dispose() => _stringBuilder.DecrementIndent();
     }
 
     private sealed class IndentSuspender : IDisposable
@@ -268,7 +262,6 @@ public class IndentedStringBuilder
             _stringBuilder._indent = 0;
         }
 
-        public void Dispose()
-            => _stringBuilder._indent = _indent;
+        public void Dispose() => _stringBuilder._indent = _indent;
     }
 }

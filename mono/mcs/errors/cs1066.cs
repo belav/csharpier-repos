@@ -4,7 +4,8 @@
 
 public class C
 {
-    public int this [int i = 1] { 
-        set {}
+    public int this[int i = 1]
+    {
+        set { }
     }
 }

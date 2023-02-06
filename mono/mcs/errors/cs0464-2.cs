@@ -4,7 +4,7 @@
 
 public class X
 {
-    public static bool Compute (int? x)
+    public static bool Compute(int? x)
     {
         return x >= null;
     }

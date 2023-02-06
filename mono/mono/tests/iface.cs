@@ -11,13 +11,13 @@ public class RealWriter : IHelloWorldWriter
     }
 }
 
-public class ProjectName {
+public class ProjectName
+{
     static int Main()
     {
-               IHelloWorldWriter writer = new RealWriter();
+        IHelloWorldWriter writer = new RealWriter();
         if (writer.WriteIt() != 33)
             return 1;
         return 0;
-        }
+    }
 }
-

@@ -1,7 +1,6 @@
 namespace Martin
 {
-    public class Foo<T>
-    { }
+    public class Foo<T> { }
 }
 
 namespace Baulig
@@ -10,7 +9,7 @@ namespace Baulig
 
     class X
     {
-        public static void Main ()
+        public static void Main()
         {
             M.Foo<int> foo;
         }

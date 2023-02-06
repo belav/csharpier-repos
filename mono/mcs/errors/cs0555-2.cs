@@ -3,8 +3,8 @@
 
 struct S
 {
-    public static implicit operator S (S? s)
+    public static implicit operator S(S? s)
     {
-        return new S ();
+        return new S();
     }
 }

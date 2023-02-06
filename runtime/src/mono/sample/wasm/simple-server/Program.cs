@@ -113,7 +113,9 @@ namespace HttpServer
                 if (Verbose)
                     Console.WriteLine($"  writting POST stream to '{path}' file");
 
-                var content = await new StreamReader(context.Request.InputStream).ReadToEndAsync().ConfigureAwait(false);
+                var content = await new StreamReader(context.Request.InputStream)
+                    .ReadToEndAsync()
+                    .ConfigureAwait(false);
                 await File.WriteAllTextAsync(path, content).ConfigureAwait(false);
             }
             else

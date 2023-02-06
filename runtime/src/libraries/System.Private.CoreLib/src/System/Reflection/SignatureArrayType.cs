@@ -18,7 +18,9 @@ namespace System.Reflection
         }
 
         protected sealed override bool IsArrayImpl() => true;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
 
         public sealed override bool IsSZArray => !_isMultiDim;

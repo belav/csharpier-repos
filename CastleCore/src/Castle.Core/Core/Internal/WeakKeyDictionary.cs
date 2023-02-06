@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,7 @@ namespace Castle.Core.Internal
         private readonly WeakKeyComparer<TKey> comparer;
         private KeyCollection keys;
 
-        private       int age;                // Incremented by operations
+        private int age; // Incremented by operations
         private const int AgeThreshold = 128; // Age at which to trim dead objects
 
         public WeakKeyDictionary()
@@ -39,13 +39,17 @@ namespace Castle.Core.Internal
 
         public WeakKeyDictionary(int capacity, IEqualityComparer<TKey> comparer)
         {
-            this.comparer   = new WeakKeyComparer<TKey>(comparer);
+            this.comparer = new WeakKeyComparer<TKey>(comparer);
             this.dictionary = new Dictionary<object, TValue>(capacity, this.comparer);
         }
 
         public int Count
         {
-            get { Age(1); return dictionary.Count; }
+            get
+            {
+                Age(1);
+                return dictionary.Count;
+            }
         }
 
         bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
@@ -65,8 +69,16 @@ namespace Castle.Core.Internal
 
         public TValue this[TKey key]
         {
-            get { Age(1); return dictionary[key]; }
-            set { Age(4); dictionary[comparer.Wrap(key)] = value; }
+            get
+            {
+                Age(1);
+                return dictionary[key];
+            }
+            set
+            {
+                Age(4);
+                dictionary[comparer.Wrap(key)] = value;
+            }
         }
 
         public bool ContainsKey(TKey key)
@@ -95,8 +107,7 @@ namespace Castle.Core.Internal
 
             foreach (var wrapped in dictionary)
             {
-                var item = new KeyValuePair<TKey, TValue>
-                (
+                var item = new KeyValuePair<TKey, TValue>(
                     comparer.Unwrap(wrapped.Key),
                     wrapped.Value
                 );
@@ -205,7 +216,7 @@ namespace Castle.Core.Internal
             {
                 foreach (var key in keys)
                 {
-                    var target = (TKey) ((WeakKey) key).Target;
+                    var target = (TKey)((WeakKey)key).Target;
                     if (target != null)
                         yield return target;
                 }

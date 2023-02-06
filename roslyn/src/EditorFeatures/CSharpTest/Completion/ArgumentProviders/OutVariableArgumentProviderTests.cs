@@ -16,30 +16,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class OutVariableArgumentProviderTests : AbstractCSharpArgumentProviderTests
     {
-        private static readonly OptionsCollection s_useExplicitTypeOptions = new(LanguageNames.CSharp)
-        {
-            { CSharpCodeStyleOptions.VarForBuiltInTypes, false },
-            { CSharpCodeStyleOptions.VarWhenTypeIsApparent, false },
-            { CSharpCodeStyleOptions.VarElsewhere, false },
-        };
+        private static readonly OptionsCollection s_useExplicitTypeOptions =
+            new(LanguageNames.CSharp)
+            {
+                { CSharpCodeStyleOptions.VarForBuiltInTypes, false },
+                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, false },
+                { CSharpCodeStyleOptions.VarElsewhere, false },
+            };
 
-        private static readonly OptionsCollection s_useExplicitMetadataTypeOptions = new(LanguageNames.CSharp)
-        {
-            { CSharpCodeStyleOptions.VarForBuiltInTypes, false },
-            { CSharpCodeStyleOptions.VarWhenTypeIsApparent, false },
-            { CSharpCodeStyleOptions.VarElsewhere, false },
-            { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false },
-        };
+        private static readonly OptionsCollection s_useExplicitMetadataTypeOptions =
+            new(LanguageNames.CSharp)
+            {
+                { CSharpCodeStyleOptions.VarForBuiltInTypes, false },
+                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, false },
+                { CSharpCodeStyleOptions.VarElsewhere, false },
+                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false },
+            };
 
-        private static readonly OptionsCollection s_useImplicitTypeOptions = new(LanguageNames.CSharp)
-        {
-            { CSharpCodeStyleOptions.VarForBuiltInTypes, true },
-            { CSharpCodeStyleOptions.VarWhenTypeIsApparent, true },
-            { CSharpCodeStyleOptions.VarElsewhere, true },
-        };
+        private static readonly OptionsCollection s_useImplicitTypeOptions =
+            new(LanguageNames.CSharp)
+            {
+                { CSharpCodeStyleOptions.VarForBuiltInTypes, true },
+                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, true },
+                { CSharpCodeStyleOptions.VarElsewhere, true },
+            };
 
-        internal override Type GetArgumentProviderType()
-            => typeof(OutVariableArgumentProvider);
+        internal override Type GetArgumentProviderType() => typeof(OutVariableArgumentProvider);
 
         [Theory]
         [InlineData("")]
@@ -47,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [InlineData("in")]
         public async Task TestUnsupportedModifiers(string modifier)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method()
@@ -65,7 +68,8 @@ class C
         [Fact]
         public async Task TestDeclareVariable()
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method()
@@ -76,14 +80,19 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, "out var result");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: null, previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: null,
+                previousDefaultValue: "prior"
+            );
         }
 
         [Theory(Skip = "https://github.com/dotnet/roslyn/issues/53056")]
         [CombinatorialData]
         public async Task TestDeclareVariableBuiltInType(bool preferVar, bool preferBuiltInType)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 class C
 {{
@@ -117,7 +126,8 @@ class C
         [InlineData("int?")]
         public async Task TestDeclareVariableEscapedIdentifier(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method()
@@ -133,7 +143,11 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, "out var @void");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: null, previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: null,
+                previousDefaultValue: "prior"
+            );
         }
     }
 }

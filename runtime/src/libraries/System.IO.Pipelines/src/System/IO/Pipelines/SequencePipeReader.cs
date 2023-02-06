@@ -59,14 +59,20 @@ namespace System.IO.Pipelines
         }
 
         /// <inheritdoc />
-        public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
+        public override ValueTask<ReadResult> ReadAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             if (TryRead(out ReadResult result))
             {
                 return new ValueTask<ReadResult>(result);
             }
 
-            result = new ReadResult(ReadOnlySequence<byte>.Empty, isCanceled: false, isCompleted: true);
+            result = new ReadResult(
+                ReadOnlySequence<byte>.Empty,
+                isCanceled: false,
+                isCompleted: true
+            );
             return new ValueTask<ReadResult>(result);
         }
 

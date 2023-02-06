@@ -34,33 +34,40 @@ namespace System.Windows.Forms.PropertyGridInternal
     internal class CategoryGridEntry : GridEntry
     {
         private string label;
-        public CategoryGridEntry (PropertyGrid owner, string category, GridEntry parent)
-            : base (owner, parent)
+
+        public CategoryGridEntry(PropertyGrid owner, string category, GridEntry parent)
+            : base(owner, parent)
         {
             label = category;
         }
 
-        public override GridItemType GridItemType {
+        public override GridItemType GridItemType
+        {
             get { return GridItemType.Category; }
         }
 
-        public override bool Expandable {
+        public override bool Expandable
+        {
             get { return GridItems.Count > 0; }
         }
 
-        public override string Label {
+        public override string Label
+        {
             get { return label; }
         }
 
-        public override bool IsReadOnly {
+        public override bool IsReadOnly
+        {
             get { return true; }
         }
 
-        public override bool IsEditable {
+        public override bool IsEditable
+        {
             get { return false; }
         }
 
-        public override bool IsResetable {
+        public override bool IsResetable
+        {
             get { return false; }
         }
     }

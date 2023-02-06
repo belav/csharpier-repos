@@ -3,36 +3,37 @@
 //
 using System;
 
-delegate void ClickEvent ();
+delegate void ClickEvent();
 
-class Button {
+class Button
+{
     public event ClickEvent Clicked;
 
-    public void DoClick ()
+    public void DoClick()
     {
-        Clicked ();
+        Clicked();
     }
-    
 }
 
-class X {
+class X
+{
     static bool called = false;
-    
-    public static int Main ()
+
+    public static int Main()
     {
-        Button b = new Button ();
-                       
-        b.Clicked += delegate {
-            Console.WriteLine ("This worked!");
+        Button b = new Button();
+
+        b.Clicked += delegate
+        {
+            Console.WriteLine("This worked!");
             called = true;
         };
 
-        b.DoClick ();
-        
+        b.DoClick();
+
         if (called)
             return 0;
         else
             return 1;
     }
-    
 }

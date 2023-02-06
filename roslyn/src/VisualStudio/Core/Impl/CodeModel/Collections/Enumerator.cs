@@ -43,10 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             return true;
         }
 
-        public void Reset()
-            => _currentItemIndex = -1;
+        public void Reset() => _currentItemIndex = -1;
 
-        public object Clone()
-            => Create(_snapshot);
+        public object Clone() => Create(_snapshot);
     }
 }

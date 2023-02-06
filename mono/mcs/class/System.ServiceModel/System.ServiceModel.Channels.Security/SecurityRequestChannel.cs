@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,14 +56,18 @@ namespace System.ServiceModel.Channels.Security
     {
         SecurityChannelFactory<IRequestChannel> source;
 
-        public SecurityRequestChannel (IRequestChannel innerChannel, SecurityChannelFactory<IRequestChannel> source)
-            : base (innerChannel)
+        public SecurityRequestChannel(
+            IRequestChannel innerChannel,
+            SecurityChannelFactory<IRequestChannel> source
+        )
+            : base(innerChannel)
         {
             this.source = source;
-            InitializeSecurityFunctionality (source.SecuritySupport);
+            InitializeSecurityFunctionality(source.SecuritySupport);
         }
 
-        public override ChannelFactoryBase Factory {
+        public override ChannelFactoryBase Factory
+        {
             get { return source; }
         }
     }
@@ -72,14 +76,18 @@ namespace System.ServiceModel.Channels.Security
     {
         SecurityChannelFactory<IRequestSessionChannel> source;
 
-        public SecurityRequestSessionChannel (IRequestSessionChannel innerChannel, SecurityChannelFactory<IRequestSessionChannel> source)
-            : base (innerChannel)
+        public SecurityRequestSessionChannel(
+            IRequestSessionChannel innerChannel,
+            SecurityChannelFactory<IRequestSessionChannel> source
+        )
+            : base(innerChannel)
         {
             this.source = source;
-            InitializeSecurityFunctionality (source.SecuritySupport);
+            InitializeSecurityFunctionality(source.SecuritySupport);
         }
 
-        public override ChannelFactoryBase Factory {
+        public override ChannelFactoryBase Factory
+        {
             get { return source; }
         }
     }
@@ -88,61 +96,74 @@ namespace System.ServiceModel.Channels.Security
     {
         InitiatorMessageSecurityBindingSupport security;
 
-        protected SecurityRequestChannelBase (IRequestChannel innerChannel)
-            : base (innerChannel)
+        protected SecurityRequestChannelBase(IRequestChannel innerChannel)
+            : base(innerChannel)
         {
-            Opened += new EventHandler (AcquireSecurityKey);
-            Closing += new EventHandler (ReleaseSecurityKey);
+            Opened += new EventHandler(AcquireSecurityKey);
+            Closing += new EventHandler(ReleaseSecurityKey);
         }
 
-        protected void InitializeSecurityFunctionality (InitiatorMessageSecurityBindingSupport security)
+        protected void InitializeSecurityFunctionality(
+            InitiatorMessageSecurityBindingSupport security
+        )
         {
             this.security = security;
         }
 
         SecurityMessageProperty secprop;
 
-        protected override IAsyncResult OnBeginRequest (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             // FIXME: make it really async
-            Message secure = SecureMessage (message);
+            Message secure = SecureMessage(message);
             secprop = secure.Properties.Security;
-            return base.BeginRequest (secure, timeout, callback, state);
+            return base.BeginRequest(secure, timeout, callback, state);
         }
 
-        protected override Message OnEndRequest (IAsyncResult result)
+        protected override Message OnEndRequest(IAsyncResult result)
         {
             // FIXME: it must be also asynchronized.
-            Message raw = base.EndRequest (result);
-            return ProcessReply (raw, secprop);
+            Message raw = base.EndRequest(result);
+            return ProcessReply(raw, secprop);
         }
 
-        protected override Message OnRequest (Message message, TimeSpan timeout)
+        protected override Message OnRequest(Message message, TimeSpan timeout)
         {
-            Message secure = SecureMessage (message);
-            Message raw = base.OnRequest (secure, timeout);
-            return ProcessReply (raw, secure.Properties.Security);
+            Message secure = SecureMessage(message);
+            Message raw = base.OnRequest(secure, timeout);
+            return ProcessReply(raw, secure.Properties.Security);
         }
 
-        Message SecureMessage (Message msg)
+        Message SecureMessage(Message msg)
         {
-            return new InitiatorMessageSecurityGenerator (msg, security, RemoteAddress).SecureMessage ();
+            return new InitiatorMessageSecurityGenerator(
+                msg,
+                security,
+                RemoteAddress
+            ).SecureMessage();
         }
 
-        Message ProcessReply (Message message, SecurityMessageProperty secprop)
+        Message ProcessReply(Message message, SecurityMessageProperty secprop)
         {
             // FIXME: provide correct parameters
-            return message.IsFault ? message : new InitiatorSecureMessageDecryptor (message, secprop, security).DecryptMessage ();
+            return message.IsFault
+                ? message
+                : new InitiatorSecureMessageDecryptor(message, secprop, security).DecryptMessage();
         }
 
-        void AcquireSecurityKey (object o, EventArgs e)
+        void AcquireSecurityKey(object o, EventArgs e)
         {
-            security.Prepare (Factory, RemoteAddress);
+            security.Prepare(Factory, RemoteAddress);
         }
 
-        void ReleaseSecurityKey (object o, EventArgs e)
+        void ReleaseSecurityKey(object o, EventArgs e)
         {
-            security.Release ();
+            security.Release();
         }
     }
 }

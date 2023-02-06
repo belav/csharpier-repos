@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,45 +46,61 @@ namespace System.Security.Authentication.ExtendedProtection.Configuration
     public sealed class ExtendedProtectionPolicyElement : ConfigurationElement
     {
         static ConfigurationPropertyCollection properties;
-        static ConfigurationProperty custom_service_names, policy_enforcement, protection_scenario;
+        static ConfigurationProperty custom_service_names,
+            policy_enforcement,
+            protection_scenario;
 
-        static ExtendedProtectionPolicyElement ()
+        static ExtendedProtectionPolicyElement()
         {
-            properties = new ConfigurationPropertyCollection ();
+            properties = new ConfigurationPropertyCollection();
 
-            var t = typeof (ExtendedProtectionPolicyElement);
-            custom_service_names = ConfigUtil.BuildProperty (t, "CustomServiceNames");
-            policy_enforcement = ConfigUtil.BuildProperty (t, "PolicyEnforcement");
-            protection_scenario = ConfigUtil.BuildProperty (t, "ProtectionScenario");
+            var t = typeof(ExtendedProtectionPolicyElement);
+            custom_service_names = ConfigUtil.BuildProperty(t, "CustomServiceNames");
+            policy_enforcement = ConfigUtil.BuildProperty(t, "PolicyEnforcement");
+            protection_scenario = ConfigUtil.BuildProperty(t, "ProtectionScenario");
 
-            foreach (var cp in new ConfigurationProperty [] {custom_service_names, policy_enforcement, protection_scenario})
-                properties.Add (cp);
-        }
-        
-        [ConfigurationProperty ("customServiceNames")]
-        public ServiceNameElementCollection CustomServiceNames {
-            get { return (ServiceNameElementCollection) this [custom_service_names]; }
-        }
-
-        [ConfigurationProperty ("policyEnforcement")]
-        public PolicyEnforcement PolicyEnforcement {
-            get { return (PolicyEnforcement) this [policy_enforcement]; }
-            set { this [policy_enforcement] = value; }
+            foreach (
+                var cp in new ConfigurationProperty[]
+                {
+                    custom_service_names,
+                    policy_enforcement,
+                    protection_scenario
+                }
+            )
+                properties.Add(cp);
         }
 
-        [ConfigurationProperty ("protectionScenario", DefaultValue = ProtectionScenario.TransportSelected)]
-        public ProtectionScenario ProtectionScenario {
-            get { return (ProtectionScenario) this [protection_scenario]; }
-            set { this [protection_scenario] = value; }
+        [ConfigurationProperty("customServiceNames")]
+        public ServiceNameElementCollection CustomServiceNames
+        {
+            get { return (ServiceNameElementCollection)this[custom_service_names]; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        [ConfigurationProperty("policyEnforcement")]
+        public PolicyEnforcement PolicyEnforcement
+        {
+            get { return (PolicyEnforcement)this[policy_enforcement]; }
+            set { this[policy_enforcement] = value; }
+        }
+
+        [ConfigurationProperty(
+            "protectionScenario",
+            DefaultValue = ProtectionScenario.TransportSelected
+        )]
+        public ProtectionScenario ProtectionScenario
+        {
+            get { return (ProtectionScenario)this[protection_scenario]; }
+            set { this[protection_scenario] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        public ExtendedProtectionPolicy BuildPolicy ()
+        public ExtendedProtectionPolicy BuildPolicy()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

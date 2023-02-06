@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class CheckBoxList_RepeatLayout
-        : GHTBaseWeb 
+    public class CheckBoxList_RepeatLayout : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,36 +46,36 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
-      
+
             // Ilegal RepeateLayout value - not a number
             GHTSubTestBegin("Ilegal RepeateLayout value - not a number");
-            try 
+            try
             {
                 throw new InvalidCastException();
                 //System.Web.UI.WebControls.CheckBoxList cbl = new System.Web.UI.WebControls.CheckBoxList();
                 //cbl.RepeatLayout = "Non valid value";
                 //GHTSubTestExpectedExceptionNotCaught("InvalidCastException");
             }
-            catch (InvalidCastException ex) 
+            catch (InvalidCastException ex)
             {
                 GHTSubTestExpectedExceptionCaught(ex);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
@@ -84,20 +83,21 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 
             //Ilegal RepeateLayout value - out of range
             GHTSubTestBegin("Ilegal RepeateLayout value - out of range");
-                try 
-                {
-                    System.Web.UI.WebControls.CheckBoxList cbl = new System.Web.UI.WebControls.CheckBoxList();
-                    cbl.RepeatLayout = (RepeatLayout)10;
-                    GHTSubTestExpectedExceptionNotCaught("ArgumentException");
-                }
-                catch (ArgumentException ex) 
-                {
-                    GHTSubTestExpectedExceptionCaught(ex);
-                }
-                catch (Exception ex) 
-                {
-                    GHTSubTestUnexpectedExceptionCaught(ex);
-                }
+            try
+            {
+                System.Web.UI.WebControls.CheckBoxList cbl =
+                    new System.Web.UI.WebControls.CheckBoxList();
+                cbl.RepeatLayout = (RepeatLayout)10;
+                GHTSubTestExpectedExceptionNotCaught("ArgumentException");
+            }
+            catch (ArgumentException ex)
+            {
+                GHTSubTestExpectedExceptionCaught(ex);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
             GHTSubTestEnd();
 
             GHTTestEnd();

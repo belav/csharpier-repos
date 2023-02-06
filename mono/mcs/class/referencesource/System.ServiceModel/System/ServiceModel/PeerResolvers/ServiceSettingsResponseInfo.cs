@@ -22,7 +22,8 @@ namespace System.ServiceModel.PeerResolvers
             }
         }
 
-        public ServiceSettingsResponseInfo() : this(false) { }
+        public ServiceSettingsResponseInfo()
+            : this(false) { }
 
         public ServiceSettingsResponseInfo(bool control)
         {
@@ -44,4 +45,3 @@ namespace System.ServiceModel.PeerResolvers
         }
     }
 }
-

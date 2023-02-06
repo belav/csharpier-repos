@@ -13,7 +13,7 @@ namespace System.Data.Common
         internal const string Dsn = "";
         internal const string Driver = "";
     }
-    
+
     partial class DbConnectionStringKeywords
     {
         internal const string Dsn = "Dsn";

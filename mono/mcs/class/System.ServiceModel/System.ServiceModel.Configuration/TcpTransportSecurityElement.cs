@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,57 +55,69 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class TcpTransportSecurityElement
-         : ConfigurationElement
+    public sealed partial class TcpTransportSecurityElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty client_credential_type;
         static ConfigurationProperty protection_level;
 
-        static TcpTransportSecurityElement ()
+        static TcpTransportSecurityElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            client_credential_type = new ConfigurationProperty ("clientCredentialType",
-                typeof (TcpClientCredentialType), "Windows", null/* FIXME: get converter for TcpClientCredentialType*/, null,
-                ConfigurationPropertyOptions.None);
+            properties = new ConfigurationPropertyCollection();
+            client_credential_type = new ConfigurationProperty(
+                "clientCredentialType",
+                typeof(TcpClientCredentialType),
+                "Windows",
+                null /* FIXME: get converter for TcpClientCredentialType*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            protection_level = new ConfigurationProperty ("protectionLevel",
-                typeof (ProtectionLevel), "EncryptAndSign", null/* FIXME: get converter for ProtectionLevel*/, null,
-                ConfigurationPropertyOptions.None);
+            protection_level = new ConfigurationProperty(
+                "protectionLevel",
+                typeof(ProtectionLevel),
+                "EncryptAndSign",
+                null /* FIXME: get converter for ProtectionLevel*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (client_credential_type);
-            properties.Add (protection_level);
+            properties.Add(client_credential_type);
+            properties.Add(protection_level);
         }
 
-        public TcpTransportSecurityElement ()
-        {
-        }
-
+        public TcpTransportSecurityElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("clientCredentialType",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Windows")]
-        public TcpClientCredentialType ClientCredentialType {
-            get { return (TcpClientCredentialType) base [client_credential_type]; }
-            set { base [client_credential_type] = value; }
+        [ConfigurationProperty(
+            "clientCredentialType",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Windows"
+        )]
+        public TcpClientCredentialType ClientCredentialType
+        {
+            get { return (TcpClientCredentialType)base[client_credential_type]; }
+            set { base[client_credential_type] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        [ConfigurationProperty ("protectionLevel",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "EncryptAndSign")]
-        public ProtectionLevel ProtectionLevel {
-            get { return (ProtectionLevel) base [protection_level]; }
-            set { base [protection_level] = value; }
+        [ConfigurationProperty(
+            "protectionLevel",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "EncryptAndSign"
+        )]
+        public ProtectionLevel ProtectionLevel
+        {
+            get { return (ProtectionLevel)base[protection_level]; }
+            set { base[protection_level] = value; }
         }
-
-
     }
-
 }

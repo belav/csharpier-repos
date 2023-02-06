@@ -7,8 +7,8 @@ using System.Runtime.CompilerServices;
 class C
 {
     [MethodImplAttribute(MethodImplOptions.Synchronized)]
-    public static async Task SynchronousCall (int arg)
+    public static async Task SynchronousCall(int arg)
     {
-        await Task.FromResult (1);
+        await Task.FromResult(1);
     }
 }

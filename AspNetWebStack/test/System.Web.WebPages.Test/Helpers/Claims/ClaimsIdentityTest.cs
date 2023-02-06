@@ -14,7 +14,9 @@ namespace System.Web.Helpers.Claims.Test
         public void TryConvert_GetClaims()
         {
             // Act
-            ClaimsIdentity claimsIdentity = ClaimsIdentity.TryConvert<IClaimsIdentity, IClaim>(new MyClaimsIdentity());
+            ClaimsIdentity claimsIdentity = ClaimsIdentity.TryConvert<IClaimsIdentity, IClaim>(
+                new MyClaimsIdentity()
+            );
             var claims = claimsIdentity.GetClaims().ToArray();
 
             // Assert

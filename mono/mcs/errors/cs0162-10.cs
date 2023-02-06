@@ -4,7 +4,7 @@
 
 class Error
 {
-    void Test ()
+    void Test()
     {
         switch (10)
         {
@@ -12,5 +12,4 @@ class Error
                 break;
         }
     }
-
 }

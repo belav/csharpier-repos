@@ -16,16 +16,19 @@ public class Startup
     public void Configure(IApplicationBuilder app)
     {
         app.UseRequestDecompression();
-        app.Map("/test", testApp =>
-        {
-            testApp.Run(async context =>
+        app.Map(
+            "/test",
+            testApp =>
             {
-                using var reader = new StreamReader(context.Request.Body);
-                var decompressedBody = await reader.ReadToEndAsync(context.RequestAborted);
+                testApp.Run(async context =>
+                {
+                    using var reader = new StreamReader(context.Request.Body);
+                    var decompressedBody = await reader.ReadToEndAsync(context.RequestAborted);
 
-                await context.Response.WriteAsync(decompressedBody, context.RequestAborted);
-            });
-        });
+                    await context.Response.WriteAsync(decompressedBody, context.RequestAborted);
+                });
+            }
+        );
     }
 
     public static Task Main(string[] args)
@@ -34,14 +37,14 @@ public class Startup
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseKestrel()
-                .ConfigureLogging(factory =>
-                {
-                    factory.AddConsole()
-                    .SetMinimumLevel(LogLevel.Debug);
-                })
-                .UseStartup<Startup>();
-            }).Build();
+                    .UseKestrel()
+                    .ConfigureLogging(factory =>
+                    {
+                        factory.AddConsole().SetMinimumLevel(LogLevel.Debug);
+                    })
+                    .UseStartup<Startup>();
+            })
+            .Build();
 
         return host.RunAsync();
     }

@@ -4,30 +4,26 @@ namespace Mono.Linker.Tests.Cases.Inheritance.VirtualMethods
 {
     public class UsedOverrideOfVirtualMethodIsKept
     {
-        public static void Main ()
+        public static void Main()
         {
-            var tmp = new B ();
-            tmp.Call ();
+            var tmp = new B();
+            tmp.Call();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Base
         {
             [Kept]
-            public virtual void Call ()
-            {
-            }
+            public virtual void Call() { }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (Base))]
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(Base))]
         class B : Base
         {
             [Kept]
-            public override void Call ()
-            {
-            }
+            public override void Call() { }
         }
     }
 }

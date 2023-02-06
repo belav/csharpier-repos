@@ -17,7 +17,18 @@ namespace System.Text.Tests
             int charsUsed;
             bool completed;
             Decoder decoder = new UnicodeEncoding().GetDecoder();
-            decoder.Convert(bytes, 0, 20, destinationChars, 0, 10, true, out bytesUsed, out charsUsed, out completed);
+            decoder.Convert(
+                bytes,
+                0,
+                20,
+                destinationChars,
+                0,
+                10,
+                true,
+                out bytesUsed,
+                out charsUsed,
+                out completed
+            );
             if (completed)
             {
                 Assert.Equal(sourceChars, destinationChars);

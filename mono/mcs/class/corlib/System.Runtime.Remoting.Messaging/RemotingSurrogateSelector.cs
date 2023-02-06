@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,31 +34,31 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace System.Runtime.Remoting.Messaging {
-
-    [System.Runtime.InteropServices.ComVisible (true)]
+namespace System.Runtime.Remoting.Messaging
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
     public class RemotingSurrogateSelector : ISurrogateSelector
     {
         static Type s_cachedTypeObjRef = typeof(ObjRef);
         static ObjRefSurrogate _objRefSurrogate = new ObjRefSurrogate();
         static RemotingSurrogate _objRemotingSurrogate = new RemotingSurrogate();
 
-        Object _rootObj = null;    
+        Object _rootObj = null;
         MessageSurrogateFilter _filter = null;
         ISurrogateSelector _next;
 
-        public RemotingSurrogateSelector ()
+        public RemotingSurrogateSelector() { }
+
+        public MessageSurrogateFilter Filter
         {
-        }
-        
-        public MessageSurrogateFilter Filter {
             get { return _filter; }
             set { _filter = value; }
         }
 
-        public virtual void ChainSelector (ISurrogateSelector selector)
+        public virtual void ChainSelector(ISurrogateSelector selector)
         {
-            if (_next != null) selector.ChainSelector (_next);
+            if (_next != null)
+                selector.ChainSelector(_next);
             _next = selector;
         }
 
@@ -67,13 +67,16 @@ namespace System.Runtime.Remoting.Messaging {
             return _next;
         }
 
-        public object GetRootObject ()
+        public object GetRootObject()
         {
             return _rootObj;
         }
 
-        public virtual ISerializationSurrogate GetSurrogate (
-            Type type, StreamingContext context, out ISurrogateSelector ssout)
+        public virtual ISerializationSurrogate GetSurrogate(
+            Type type,
+            StreamingContext context,
+            out ISurrogateSelector ssout
+        )
         {
             if (type.IsMarshalByRef)
             {
@@ -81,30 +84,31 @@ namespace System.Runtime.Remoting.Messaging {
                 return _objRemotingSurrogate;
             }
 
-            if (s_cachedTypeObjRef.IsAssignableFrom (type))
+            if (s_cachedTypeObjRef.IsAssignableFrom(type))
             {
                 ssout = this;
                 return _objRefSurrogate;
             }
 
-            if (_next != null) return _next.GetSurrogate (type, context, out ssout);
+            if (_next != null)
+                return _next.GetSurrogate(type, context, out ssout);
 
             ssout = null;
             return null;
         }
 
-        public void SetRootObject (object obj)
+        public void SetRootObject(object obj)
         {
             if (obj == null)
-                throw new ArgumentNullException ();
-            
+                throw new ArgumentNullException();
+
             _rootObj = obj;
         }
-        
+
         [MonoTODO]
-        public virtual void UseSoapFormat ()
+        public virtual void UseSoapFormat()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

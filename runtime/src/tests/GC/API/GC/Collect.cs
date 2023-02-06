@@ -4,12 +4,13 @@
 
 using System;
 
-public class Test_Collect {
-    public static int Main() {
-
+public class Test_Collect
+{
+    public static int Main()
+    {
         Object obj1 = new Object();
         int[] array = new int[25];
-        
+
         int gen1 = GC.GetGeneration(array);
 
         Console.WriteLine("Array is in generation: " + gen1);
@@ -18,12 +19,13 @@ public class Test_Collect {
         int gen2 = GC.GetGeneration(array);
         Console.WriteLine("Array is in generation: " + gen2);
 
-        if(((gen1==2) && (gen2==2)) || (gen2>gen1)) {     // was already in gen 2!
+        if (((gen1 == 2) && (gen2 == 2)) || (gen2 > gen1))
+        { // was already in gen 2!
             Console.WriteLine("Test for GC.Collect() passed!");
             return 100;
         }
-
-        else {
+        else
+        {
             Console.WriteLine("Test for GC.Collect() failed!");
             return 1;
         }

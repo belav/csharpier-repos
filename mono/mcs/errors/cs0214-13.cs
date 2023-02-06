@@ -5,8 +5,6 @@
 class C
 {
     int*[] data = new int*[16];
-    
-    unsafe C ()
-    {
-    }
+
+    unsafe C() { }
 }

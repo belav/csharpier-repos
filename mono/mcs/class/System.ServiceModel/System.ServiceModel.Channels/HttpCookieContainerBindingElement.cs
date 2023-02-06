@@ -4,53 +4,57 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-    [Obsolete ("Use AllowCookies.")]
+    [Obsolete("Use AllowCookies.")]
     public class HttpCookieContainerBindingElement : BindingElement
     {
         HttpCookieContainerManager manager;
 
-        public HttpCookieContainerBindingElement ()
+        public HttpCookieContainerBindingElement()
         {
-            manager = new HttpCookieContainerManager ();
+            manager = new HttpCookieContainerManager();
         }
 
-        protected HttpCookieContainerBindingElement (HttpCookieContainerBindingElement elementToBeCloned)
+        protected HttpCookieContainerBindingElement(
+            HttpCookieContainerBindingElement elementToBeCloned
+        )
         {
             if (elementToBeCloned == null)
-                throw new ArgumentNullException ("elementToBeCloned");
+                throw new ArgumentNullException("elementToBeCloned");
 
-            manager = new HttpCookieContainerManager (elementToBeCloned.manager);
+            manager = new HttpCookieContainerManager(elementToBeCloned.manager);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
-                throw new ArgumentNullException ("context");
+                throw new ArgumentNullException("context");
             //context.RemainingBindingElements.Add (this);
-            return base.BuildChannelFactory<TChannel> (context);
+            return base.BuildChannelFactory<TChannel>(context);
         }
 
-        public override BindingElement Clone ()
+        public override BindingElement Clone()
         {
-            return new HttpCookieContainerBindingElement (this);
+            return new HttpCookieContainerBindingElement(this);
         }
 
-        public override T GetProperty<T> (BindingContext context)
+        public override T GetProperty<T>(BindingContext context)
         {
             if (manager is T)
-                return (T) (object) manager;
-            return context.GetInnerProperty<T> ();
+                return (T)(object)manager;
+            return context.GetInnerProperty<T>();
         }
     }
 
     class HttpCookieContainerManager : IHttpCookieContainerManager
     {
-        public HttpCookieContainerManager ()
+        public HttpCookieContainerManager()
         {
-            CookieContainer = new CookieContainer ();
+            CookieContainer = new CookieContainer();
         }
 
-        public HttpCookieContainerManager (HttpCookieContainerManager original)
+        public HttpCookieContainerManager(HttpCookieContainerManager original)
         {
             CookieContainer = original.CookieContainer;
         }

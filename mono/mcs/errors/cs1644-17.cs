@@ -2,6 +2,4 @@
 // Line: 5
 // Compiler options: -langversion:3
 
-public interface IFoo<in T>
-{
-}
+public interface IFoo<in T> { }

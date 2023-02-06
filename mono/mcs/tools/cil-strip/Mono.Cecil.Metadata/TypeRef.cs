@@ -29,52 +29,51 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
-    internal sealed class TypeRefTable : IMetadataTable {
-
+namespace Mono.Cecil.Metadata
+{
+    internal sealed class TypeRefTable : IMetadataTable
+    {
         public const int RId = 0x01;
 
         RowCollection m_rows;
 
-        public TypeRefRow this [int index] {
-            get { return m_rows [index] as TypeRefRow; }
-            set { m_rows [index] = value; }
+        public TypeRefRow this[int index]
+        {
+            get { return m_rows[index] as TypeRefRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal TypeRefTable ()
-        {
-        }
+        internal TypeRefTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitTypeRefTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitTypeRefTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class TypeRefRow : IMetadataRow {
-
+    internal sealed class TypeRefRow : IMetadataRow
+    {
         public MetadataToken ResolutionScope;
         public uint Name;
         public uint Namespace;
 
-        internal TypeRefRow ()
-        {
-        }
+        internal TypeRefRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitTypeRefRow (this);
+            visitor.VisitTypeRefRow(this);
         }
     }
 }

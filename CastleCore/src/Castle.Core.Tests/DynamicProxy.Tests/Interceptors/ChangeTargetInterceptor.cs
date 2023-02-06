@@ -25,7 +25,7 @@ namespace Castle.DynamicProxy.Tests.Interceptors
 
         public void Intercept(IInvocation invocation)
         {
-            IChangeProxyTarget changeTarget = (IChangeProxyTarget) invocation;
+            IChangeProxyTarget changeTarget = (IChangeProxyTarget)invocation;
             changeTarget.ChangeInvocationTarget(target);
             invocation.Proceed();
         }

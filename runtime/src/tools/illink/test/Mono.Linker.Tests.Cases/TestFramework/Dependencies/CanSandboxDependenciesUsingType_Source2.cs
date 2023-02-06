@@ -12,9 +12,7 @@ namespace Mono.Linker.Tests.Cases.TestFramework.Dependencies
             public class Nested2
             {
                 [Kept]
-                public static void Method ()
-                {
-                }
+                public static void Method() { }
             }
         }
     }

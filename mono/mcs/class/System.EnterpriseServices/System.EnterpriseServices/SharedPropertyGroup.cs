@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.SharedPropertyGroup.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,10 +31,11 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-    [ComVisible (false)]
-    public sealed class SharedPropertyGroup {
-
+namespace System.EnterpriseServices
+{
+    [ComVisible(false)]
+    public sealed class SharedPropertyGroup
+    {
         #region Fields
 
         ISharedPropertyGroup propertyGroup;
@@ -43,7 +44,7 @@ namespace System.EnterpriseServices {
 
         #region Constructors
 
-        internal SharedPropertyGroup (ISharedPropertyGroup propertyGroup)
+        internal SharedPropertyGroup(ISharedPropertyGroup propertyGroup)
         {
             this.propertyGroup = propertyGroup;
         }
@@ -52,24 +53,26 @@ namespace System.EnterpriseServices {
 
         #region Methods
 
-        public SharedProperty CreateProperty (string name, out bool fExists)
+        public SharedProperty CreateProperty(string name, out bool fExists)
         {
-            return new SharedProperty (propertyGroup.CreateProperty (name, out fExists));
+            return new SharedProperty(propertyGroup.CreateProperty(name, out fExists));
         }
 
-        public SharedProperty CreatePropertyByPosition (int position, out bool fExists)
+        public SharedProperty CreatePropertyByPosition(int position, out bool fExists)
         {
-            return new SharedProperty (propertyGroup.CreatePropertyByPosition (position, out fExists));
+            return new SharedProperty(
+                propertyGroup.CreatePropertyByPosition(position, out fExists)
+            );
         }
 
-        public SharedProperty Property (string name)
+        public SharedProperty Property(string name)
         {
-            return new SharedProperty (propertyGroup.Property (name));
+            return new SharedProperty(propertyGroup.Property(name));
         }
 
-        public SharedProperty PropertyByPosition (int position)
+        public SharedProperty PropertyByPosition(int position)
         {
-            return new SharedProperty (propertyGroup.PropertyByPosition (position));
+            return new SharedProperty(propertyGroup.PropertyByPosition(position));
         }
 
         #endregion // Methods

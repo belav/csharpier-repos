@@ -6,7 +6,7 @@ using System.Linq;
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
         var e = from a in "aaa" select a;
     }

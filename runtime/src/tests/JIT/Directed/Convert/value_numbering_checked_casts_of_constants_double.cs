@@ -19,7 +19,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)integerZero) != 0)
             {
-                Console.WriteLine($"'(sbyte)0.0' was evaluated to '{(sbyte)integerZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(sbyte)0.0' was evaluated to '{(sbyte)integerZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -34,7 +36,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleMinusZero) != 0)
             {
-                Console.WriteLine($"'(sbyte)-0d' was evaluated to '{(sbyte)doubleMinusZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(sbyte)-0d' was evaluated to '{(sbyte)doubleMinusZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -49,7 +53,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleZero) != 0)
             {
-                Console.WriteLine($"'(sbyte)0d' was evaluated to '{(sbyte)doubleZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(sbyte)0d' was evaluated to '{(sbyte)doubleZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -63,9 +69,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleMaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -77,9 +88,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmSByteMinValueCastToSByteIsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -92,7 +108,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)sByteMinValue) != -128)
             {
-                Console.WriteLine($"'(sbyte)-128.0' was evaluated to '{(sbyte)sByteMinValue}'. Expected: '-128'.");
+                Console.WriteLine(
+                    $"'(sbyte)-128.0' was evaluated to '{(sbyte)sByteMinValue}'. Expected: '-128'."
+                );
                 _counter++;
             }
         }
@@ -107,7 +125,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)sByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(sbyte)127.0' was evaluated to '{(sbyte)sByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(sbyte)127.0' was evaluated to '{(sbyte)sByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -122,7 +142,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleOneDecrementUnderSByteMinValue) != -128)
             {
-                Console.WriteLine($"'(sbyte)-128.00000000000003d' was evaluated to '{(sbyte)doubleOneDecrementUnderSByteMinValue}'. Expected: '-128'.");
+                Console.WriteLine(
+                    $"'(sbyte)-128.00000000000003d' was evaluated to '{(sbyte)doubleOneDecrementUnderSByteMinValue}'. Expected: '-128'."
+                );
                 _counter++;
             }
         }
@@ -136,7 +158,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)-129d)' did not throw OverflowException.");
         }
@@ -151,7 +176,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleOneIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(sbyte)-127.99999999999999d' was evaluated to '{(sbyte)doubleOneIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(sbyte)-127.99999999999999d' was evaluated to '{(sbyte)doubleOneIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -166,7 +193,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleOneFullIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(sbyte)-127d' was evaluated to '{(sbyte)doubleOneFullIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(sbyte)-127d' was evaluated to '{(sbyte)doubleOneFullIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -181,7 +210,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(sbyte)126.99999999999999d' was evaluated to '{(sbyte)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(sbyte)126.99999999999999d' was evaluated to '{(sbyte)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -196,7 +227,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleOneFullDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(sbyte)126d' was evaluated to '{(sbyte)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(sbyte)126d' was evaluated to '{(sbyte)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -211,7 +244,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleOneIncrementAboveSByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(sbyte)127.00000000000001d' was evaluated to '{(sbyte)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(sbyte)127.00000000000001d' was evaluated to '{(sbyte)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -225,7 +260,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)128d)' did not throw OverflowException.");
         }
@@ -239,7 +277,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)-129.0)' did not throw OverflowException.");
         }
@@ -254,7 +295,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)integerOneIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(sbyte)-127.0' was evaluated to '{(sbyte)integerOneIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(sbyte)-127.0' was evaluated to '{(sbyte)integerOneIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -269,7 +312,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)integerOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(sbyte)126.0' was evaluated to '{(sbyte)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(sbyte)126.0' was evaluated to '{(sbyte)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -283,7 +328,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)128.0)' did not throw OverflowException.");
         }
@@ -297,7 +345,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)255.0)' did not throw OverflowException.");
         }
@@ -312,7 +363,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleOneDecrementUnderByteMinValue) != 0)
             {
-                Console.WriteLine($"'(sbyte)-5E-324d' was evaluated to '{(sbyte)doubleOneDecrementUnderByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(sbyte)-5E-324d' was evaluated to '{(sbyte)doubleOneDecrementUnderByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -327,7 +380,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleOneFullDecrementUnderByteMinValue) != -1)
             {
-                Console.WriteLine($"'(sbyte)-1d' was evaluated to '{(sbyte)doubleOneFullDecrementUnderByteMinValue}'. Expected: '-1'.");
+                Console.WriteLine(
+                    $"'(sbyte)-1d' was evaluated to '{(sbyte)doubleOneFullDecrementUnderByteMinValue}'. Expected: '-1'."
+                );
                 _counter++;
             }
         }
@@ -342,7 +397,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleOneIncrementAboveByteMinValue) != 0)
             {
-                Console.WriteLine($"'(sbyte)5E-324d' was evaluated to '{(sbyte)doubleOneIncrementAboveByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(sbyte)5E-324d' was evaluated to '{(sbyte)doubleOneIncrementAboveByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -357,7 +414,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)doubleOneFullIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(sbyte)1d' was evaluated to '{(sbyte)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(sbyte)1d' was evaluated to '{(sbyte)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -371,9 +430,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)254.99999999999997d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)254.99999999999997d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderByteMaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -385,7 +449,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)254d)' did not throw OverflowException.");
         }
@@ -399,9 +466,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)255.00000000000003d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)255.00000000000003d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveByteMaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -413,7 +485,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)256d)' did not throw OverflowException.");
         }
@@ -428,7 +503,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)integerOneDecrementUnderByteMinValue) != -1)
             {
-                Console.WriteLine($"'(sbyte)-1.0' was evaluated to '{(sbyte)integerOneDecrementUnderByteMinValue}'. Expected: '-1'.");
+                Console.WriteLine(
+                    $"'(sbyte)-1.0' was evaluated to '{(sbyte)integerOneDecrementUnderByteMinValue}'. Expected: '-1'."
+                );
                 _counter++;
             }
         }
@@ -443,7 +520,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((sbyte)integerOneIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(sbyte)1.0' was evaluated to '{(sbyte)integerOneIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(sbyte)1.0' was evaluated to '{(sbyte)integerOneIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -457,7 +536,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)254.0)' did not throw OverflowException.");
         }
@@ -471,7 +553,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)256.0)' did not throw OverflowException.");
         }
@@ -485,7 +570,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)-32768.0)' did not throw OverflowException.");
         }
@@ -499,7 +587,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)32767.0)' did not throw OverflowException.");
         }
@@ -513,9 +604,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-32768.00000000001d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-32768.00000000001d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt16MinValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -527,7 +623,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)-32769d)' did not throw OverflowException.");
         }
@@ -541,9 +640,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-32767.999999999996d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-32767.999999999996d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt16MinValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -555,7 +659,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)-32767d)' did not throw OverflowException.");
         }
@@ -569,9 +676,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)32766.999999999996d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)32766.999999999996d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt16MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -583,7 +695,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)32766d)' did not throw OverflowException.");
         }
@@ -597,9 +712,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)32767.000000000004d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)32767.000000000004d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt16MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -611,7 +731,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)32768d)' did not throw OverflowException.");
         }
@@ -625,7 +748,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)-32769.0)' did not throw OverflowException.");
         }
@@ -639,7 +765,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)-32767.0)' did not throw OverflowException.");
         }
@@ -653,7 +782,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)32766.0)' did not throw OverflowException.");
         }
@@ -667,7 +799,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)32768.0)' did not throw OverflowException.");
         }
@@ -681,7 +816,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)65535.0)' did not throw OverflowException.");
         }
@@ -695,9 +833,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)65534.99999999999d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)65534.99999999999d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderUInt16MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -709,7 +852,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)65534d)' did not throw OverflowException.");
         }
@@ -723,9 +869,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)65535.00000000001d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)65535.00000000001d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveUInt16MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -737,7 +888,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)65536d)' did not throw OverflowException.");
         }
@@ -751,7 +905,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)65534.0)' did not throw OverflowException.");
         }
@@ -765,7 +922,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)65536.0)' did not throw OverflowException.");
         }
@@ -779,9 +939,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-2147483648.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-2147483648.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -793,9 +958,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)2147483647.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)2147483647.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt32MinValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -807,9 +977,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-2147483648.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-2147483648.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt32MinValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -821,9 +996,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-2147483649d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-2147483649d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt32MinValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -835,9 +1015,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-2147483647.9999998d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-2147483647.9999998d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt32MinValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -849,9 +1034,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-2147483647d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-2147483647d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -863,9 +1053,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)2147483646.9999998d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)2147483646.9999998d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -877,7 +1072,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)2147483646d)' did not throw OverflowException.");
         }
@@ -891,9 +1089,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)2147483647.0000002d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)2147483647.0000002d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -905,7 +1108,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)2147483648d)' did not throw OverflowException.");
         }
@@ -919,9 +1125,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-2147483649.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-2147483649.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt32MinValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -933,9 +1144,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-2147483647.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-2147483647.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -947,9 +1163,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)2147483646.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)2147483646.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -961,9 +1182,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)2147483648.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)2147483648.0)' did not throw OverflowException."
+                );
         }
         ConfirmUInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -975,9 +1201,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)4294967295.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)4294967295.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -989,9 +1220,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)4294967294.9999995d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)4294967294.9999995d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderUInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1003,7 +1239,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)4294967294d)' did not throw OverflowException.");
         }
@@ -1017,9 +1256,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)4294967295.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)4294967295.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveUInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1031,7 +1275,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((sbyte)4294967296d)' did not throw OverflowException.");
         }
@@ -1045,9 +1292,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)4294967294.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)4294967294.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveUInt32MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1059,9 +1311,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)4294967296.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)4294967296.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt64MinValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1073,9 +1330,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt64MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1087,9 +1349,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MinValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1101,9 +1368,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt64MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1115,9 +1387,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1129,9 +1406,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)9.223372036854778E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)9.223372036854778E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt64MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1143,9 +1425,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)9.223372036854776E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)9.223372036854776E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MinValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1157,9 +1444,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)-9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)-9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt64MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1171,9 +1463,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)9223372036854775806.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)9223372036854775806.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1185,9 +1482,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmUInt64MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1199,9 +1501,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)18446744073709551615.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)18446744073709551615.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt64MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1213,9 +1520,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)1.844674407370955E+19d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)1.844674407370955E+19d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderUInt64MaxValueCastToSByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1227,9 +1539,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((sbyte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((sbyte)18446744073709551614.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((sbyte)18446744073709551614.0)' did not throw OverflowException."
+                );
         }
     }
 
@@ -1246,7 +1563,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)integerZero) != 0)
             {
-                Console.WriteLine($"'(byte)0.0' was evaluated to '{(byte)integerZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(byte)0.0' was evaluated to '{(byte)integerZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -1261,7 +1580,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleMinusZero) != 0)
             {
-                Console.WriteLine($"'(byte)-0d' was evaluated to '{(byte)doubleMinusZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(byte)-0d' was evaluated to '{(byte)doubleMinusZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -1276,7 +1597,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleZero) != 0)
             {
-                Console.WriteLine($"'(byte)0d' was evaluated to '{(byte)doubleZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(byte)0d' was evaluated to '{(byte)doubleZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -1290,9 +1613,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleMaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1304,9 +1632,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmSByteMinValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1318,7 +1651,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-128.0)' did not throw OverflowException.");
         }
@@ -1333,7 +1669,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)sByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(byte)127.0' was evaluated to '{(byte)sByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(byte)127.0' was evaluated to '{(byte)sByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -1347,9 +1685,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-128.00000000000003d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-128.00000000000003d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderSByteMinValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1361,7 +1704,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-129d)' did not throw OverflowException.");
         }
@@ -1375,9 +1721,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-127.99999999999999d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-127.99999999999999d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveSByteMinValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1389,7 +1740,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-127d)' did not throw OverflowException.");
         }
@@ -1404,7 +1758,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(byte)126.99999999999999d' was evaluated to '{(byte)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(byte)126.99999999999999d' was evaluated to '{(byte)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -1419,7 +1775,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleOneFullDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(byte)126d' was evaluated to '{(byte)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(byte)126d' was evaluated to '{(byte)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -1434,7 +1792,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleOneIncrementAboveSByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(byte)127.00000000000001d' was evaluated to '{(byte)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(byte)127.00000000000001d' was evaluated to '{(byte)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -1449,7 +1809,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleOneFullIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(byte)128d' was evaluated to '{(byte)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(byte)128d' was evaluated to '{(byte)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -1463,7 +1825,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-129.0)' did not throw OverflowException.");
         }
@@ -1477,7 +1842,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-127.0)' did not throw OverflowException.");
         }
@@ -1492,7 +1860,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)integerOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(byte)126.0' was evaluated to '{(byte)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(byte)126.0' was evaluated to '{(byte)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -1507,7 +1877,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)integerOneIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(byte)128.0' was evaluated to '{(byte)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(byte)128.0' was evaluated to '{(byte)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -1522,7 +1894,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)byteMaxValue) != 255)
             {
-                Console.WriteLine($"'(byte)255.0' was evaluated to '{(byte)byteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(byte)255.0' was evaluated to '{(byte)byteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -1537,7 +1911,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleOneDecrementUnderByteMinValue) != 0)
             {
-                Console.WriteLine($"'(byte)-5E-324d' was evaluated to '{(byte)doubleOneDecrementUnderByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(byte)-5E-324d' was evaluated to '{(byte)doubleOneDecrementUnderByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -1551,7 +1927,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-1d)' did not throw OverflowException.");
         }
@@ -1566,7 +1945,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleOneIncrementAboveByteMinValue) != 0)
             {
-                Console.WriteLine($"'(byte)5E-324d' was evaluated to '{(byte)doubleOneIncrementAboveByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(byte)5E-324d' was evaluated to '{(byte)doubleOneIncrementAboveByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -1581,7 +1962,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleOneFullIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(byte)1d' was evaluated to '{(byte)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(byte)1d' was evaluated to '{(byte)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -1596,7 +1979,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(byte)254.99999999999997d' was evaluated to '{(byte)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(byte)254.99999999999997d' was evaluated to '{(byte)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -1611,7 +1996,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleOneFullDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(byte)254d' was evaluated to '{(byte)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(byte)254d' was evaluated to '{(byte)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -1626,7 +2013,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)doubleOneIncrementAboveByteMaxValue) != 255)
             {
-                Console.WriteLine($"'(byte)255.00000000000003d' was evaluated to '{(byte)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(byte)255.00000000000003d' was evaluated to '{(byte)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -1640,7 +2029,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)256d)' did not throw OverflowException.");
         }
@@ -1654,7 +2046,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-1.0)' did not throw OverflowException.");
         }
@@ -1669,7 +2064,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)integerOneIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(byte)1.0' was evaluated to '{(byte)integerOneIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(byte)1.0' was evaluated to '{(byte)integerOneIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -1684,7 +2081,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((byte)integerOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(byte)254.0' was evaluated to '{(byte)integerOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(byte)254.0' was evaluated to '{(byte)integerOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -1698,7 +2097,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)256.0)' did not throw OverflowException.");
         }
@@ -1712,7 +2114,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-32768.0)' did not throw OverflowException.");
         }
@@ -1726,7 +2131,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)32767.0)' did not throw OverflowException.");
         }
@@ -1740,9 +2148,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-32768.00000000001d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-32768.00000000001d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt16MinValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1754,7 +2167,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-32769d)' did not throw OverflowException.");
         }
@@ -1768,9 +2184,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-32767.999999999996d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-32767.999999999996d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt16MinValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1782,7 +2203,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-32767d)' did not throw OverflowException.");
         }
@@ -1796,9 +2220,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)32766.999999999996d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)32766.999999999996d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt16MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1810,7 +2239,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)32766d)' did not throw OverflowException.");
         }
@@ -1824,9 +2256,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)32767.000000000004d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)32767.000000000004d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt16MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1838,7 +2275,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)32768d)' did not throw OverflowException.");
         }
@@ -1852,7 +2292,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-32769.0)' did not throw OverflowException.");
         }
@@ -1866,7 +2309,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-32767.0)' did not throw OverflowException.");
         }
@@ -1880,7 +2326,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)32766.0)' did not throw OverflowException.");
         }
@@ -1894,7 +2343,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)32768.0)' did not throw OverflowException.");
         }
@@ -1908,7 +2360,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)65535.0)' did not throw OverflowException.");
         }
@@ -1922,9 +2377,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)65534.99999999999d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)65534.99999999999d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderUInt16MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1936,7 +2396,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)65534d)' did not throw OverflowException.");
         }
@@ -1950,9 +2413,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)65535.00000000001d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)65535.00000000001d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveUInt16MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1964,7 +2432,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)65536d)' did not throw OverflowException.");
         }
@@ -1978,7 +2449,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)65534.0)' did not throw OverflowException.");
         }
@@ -1992,7 +2466,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)65536.0)' did not throw OverflowException.");
         }
@@ -2006,9 +2483,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-2147483648.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-2147483648.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt32MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2020,7 +2502,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)2147483647.0)' did not throw OverflowException.");
         }
@@ -2034,9 +2519,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-2147483648.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-2147483648.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt32MinValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2048,7 +2538,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-2147483649d)' did not throw OverflowException.");
         }
@@ -2062,9 +2555,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-2147483647.9999998d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-2147483647.9999998d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt32MinValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2076,7 +2574,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)-2147483647d)' did not throw OverflowException.");
         }
@@ -2090,9 +2591,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)2147483646.9999998d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)2147483646.9999998d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt32MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2104,7 +2610,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)2147483646d)' did not throw OverflowException.");
         }
@@ -2118,9 +2627,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)2147483647.0000002d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)2147483647.0000002d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt32MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2132,7 +2646,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)2147483648d)' did not throw OverflowException.");
         }
@@ -2146,9 +2663,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-2147483649.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-2147483649.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt32MinValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2160,9 +2682,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-2147483647.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-2147483647.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt32MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2174,7 +2701,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)2147483646.0)' did not throw OverflowException.");
         }
@@ -2188,7 +2718,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)2147483648.0)' did not throw OverflowException.");
         }
@@ -2202,7 +2735,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)4294967295.0)' did not throw OverflowException.");
         }
@@ -2216,9 +2752,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)4294967294.9999995d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)4294967294.9999995d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderUInt32MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2230,7 +2771,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)4294967294d)' did not throw OverflowException.");
         }
@@ -2244,9 +2788,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)4294967295.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)4294967295.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveUInt32MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2258,7 +2807,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)4294967296d)' did not throw OverflowException.");
         }
@@ -2272,7 +2824,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)4294967294.0)' did not throw OverflowException.");
         }
@@ -2286,7 +2841,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((byte)4294967296.0)' did not throw OverflowException.");
         }
@@ -2300,9 +2858,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt64MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2314,9 +2877,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MinValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2328,9 +2896,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt64MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2342,9 +2915,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2356,9 +2934,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)9.223372036854778E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)9.223372036854778E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt64MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2370,9 +2953,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)9.223372036854776E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)9.223372036854776E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MinValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2384,9 +2972,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)-9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)-9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt64MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2398,9 +2991,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)9223372036854775806.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)9223372036854775806.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2412,9 +3010,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmUInt64MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2426,9 +3029,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)18446744073709551615.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)18446744073709551615.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt64MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2440,9 +3048,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)1.844674407370955E+19d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)1.844674407370955E+19d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderUInt64MaxValueCastToByteOverflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2454,9 +3067,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((byte)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((byte)18446744073709551614.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((byte)18446744073709551614.0)' did not throw OverflowException."
+                );
         }
     }
 
@@ -2473,7 +3091,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerZero) != 0)
             {
-                Console.WriteLine($"'(short)0.0' was evaluated to '{(short)integerZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(short)0.0' was evaluated to '{(short)integerZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -2488,7 +3108,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleMinusZero) != 0)
             {
-                Console.WriteLine($"'(short)-0d' was evaluated to '{(short)doubleMinusZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(short)-0d' was evaluated to '{(short)doubleMinusZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -2503,7 +3125,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleZero) != 0)
             {
-                Console.WriteLine($"'(short)0d' was evaluated to '{(short)doubleZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(short)0d' was evaluated to '{(short)doubleZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -2517,9 +3141,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleMaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2531,9 +3160,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmSByteMinValueCastToInt16IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2546,7 +3180,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)sByteMinValue) != -128)
             {
-                Console.WriteLine($"'(short)-128.0' was evaluated to '{(short)sByteMinValue}'. Expected: '-128'.");
+                Console.WriteLine(
+                    $"'(short)-128.0' was evaluated to '{(short)sByteMinValue}'. Expected: '-128'."
+                );
                 _counter++;
             }
         }
@@ -2561,7 +3197,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)sByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(short)127.0' was evaluated to '{(short)sByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(short)127.0' was evaluated to '{(short)sByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -2576,7 +3214,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneDecrementUnderSByteMinValue) != -128)
             {
-                Console.WriteLine($"'(short)-128.00000000000003d' was evaluated to '{(short)doubleOneDecrementUnderSByteMinValue}'. Expected: '-128'.");
+                Console.WriteLine(
+                    $"'(short)-128.00000000000003d' was evaluated to '{(short)doubleOneDecrementUnderSByteMinValue}'. Expected: '-128'."
+                );
                 _counter++;
             }
         }
@@ -2591,7 +3231,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneFullDecrementUnderSByteMinValue) != -129)
             {
-                Console.WriteLine($"'(short)-129d' was evaluated to '{(short)doubleOneFullDecrementUnderSByteMinValue}'. Expected: '-129'.");
+                Console.WriteLine(
+                    $"'(short)-129d' was evaluated to '{(short)doubleOneFullDecrementUnderSByteMinValue}'. Expected: '-129'."
+                );
                 _counter++;
             }
         }
@@ -2606,7 +3248,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(short)-127.99999999999999d' was evaluated to '{(short)doubleOneIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(short)-127.99999999999999d' was evaluated to '{(short)doubleOneIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -2621,7 +3265,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneFullIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(short)-127d' was evaluated to '{(short)doubleOneFullIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(short)-127d' was evaluated to '{(short)doubleOneFullIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -2636,7 +3282,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(short)126.99999999999999d' was evaluated to '{(short)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(short)126.99999999999999d' was evaluated to '{(short)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -2651,7 +3299,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneFullDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(short)126d' was evaluated to '{(short)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(short)126d' was evaluated to '{(short)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -2666,7 +3316,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneIncrementAboveSByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(short)127.00000000000001d' was evaluated to '{(short)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(short)127.00000000000001d' was evaluated to '{(short)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -2681,7 +3333,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneFullIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(short)128d' was evaluated to '{(short)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(short)128d' was evaluated to '{(short)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -2696,7 +3350,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerOneDecrementUnderSByteMinValue) != -129)
             {
-                Console.WriteLine($"'(short)-129.0' was evaluated to '{(short)integerOneDecrementUnderSByteMinValue}'. Expected: '-129'.");
+                Console.WriteLine(
+                    $"'(short)-129.0' was evaluated to '{(short)integerOneDecrementUnderSByteMinValue}'. Expected: '-129'."
+                );
                 _counter++;
             }
         }
@@ -2711,7 +3367,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerOneIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(short)-127.0' was evaluated to '{(short)integerOneIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(short)-127.0' was evaluated to '{(short)integerOneIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -2726,7 +3384,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(short)126.0' was evaluated to '{(short)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(short)126.0' was evaluated to '{(short)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -2741,7 +3401,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerOneIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(short)128.0' was evaluated to '{(short)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(short)128.0' was evaluated to '{(short)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -2756,7 +3418,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)byteMaxValue) != 255)
             {
-                Console.WriteLine($"'(short)255.0' was evaluated to '{(short)byteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(short)255.0' was evaluated to '{(short)byteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -2771,7 +3435,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneDecrementUnderByteMinValue) != 0)
             {
-                Console.WriteLine($"'(short)-5E-324d' was evaluated to '{(short)doubleOneDecrementUnderByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(short)-5E-324d' was evaluated to '{(short)doubleOneDecrementUnderByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -2786,7 +3452,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneFullDecrementUnderByteMinValue) != -1)
             {
-                Console.WriteLine($"'(short)-1d' was evaluated to '{(short)doubleOneFullDecrementUnderByteMinValue}'. Expected: '-1'.");
+                Console.WriteLine(
+                    $"'(short)-1d' was evaluated to '{(short)doubleOneFullDecrementUnderByteMinValue}'. Expected: '-1'."
+                );
                 _counter++;
             }
         }
@@ -2801,7 +3469,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneIncrementAboveByteMinValue) != 0)
             {
-                Console.WriteLine($"'(short)5E-324d' was evaluated to '{(short)doubleOneIncrementAboveByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(short)5E-324d' was evaluated to '{(short)doubleOneIncrementAboveByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -2816,7 +3486,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneFullIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(short)1d' was evaluated to '{(short)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(short)1d' was evaluated to '{(short)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -2831,7 +3503,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(short)254.99999999999997d' was evaluated to '{(short)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(short)254.99999999999997d' was evaluated to '{(short)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -2846,7 +3520,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneFullDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(short)254d' was evaluated to '{(short)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(short)254d' was evaluated to '{(short)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -2861,7 +3537,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneIncrementAboveByteMaxValue) != 255)
             {
-                Console.WriteLine($"'(short)255.00000000000003d' was evaluated to '{(short)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(short)255.00000000000003d' was evaluated to '{(short)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -2876,7 +3554,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneFullIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(short)256d' was evaluated to '{(short)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(short)256d' was evaluated to '{(short)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -2891,7 +3571,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerOneDecrementUnderByteMinValue) != -1)
             {
-                Console.WriteLine($"'(short)-1.0' was evaluated to '{(short)integerOneDecrementUnderByteMinValue}'. Expected: '-1'.");
+                Console.WriteLine(
+                    $"'(short)-1.0' was evaluated to '{(short)integerOneDecrementUnderByteMinValue}'. Expected: '-1'."
+                );
                 _counter++;
             }
         }
@@ -2906,7 +3588,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerOneIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(short)1.0' was evaluated to '{(short)integerOneIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(short)1.0' was evaluated to '{(short)integerOneIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -2921,7 +3605,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(short)254.0' was evaluated to '{(short)integerOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(short)254.0' was evaluated to '{(short)integerOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -2936,7 +3622,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerOneIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(short)256.0' was evaluated to '{(short)integerOneIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(short)256.0' was evaluated to '{(short)integerOneIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -2951,7 +3639,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)int16MinValue) != -32768)
             {
-                Console.WriteLine($"'(short)-32768.0' was evaluated to '{(short)int16MinValue}'. Expected: '-32768'.");
+                Console.WriteLine(
+                    $"'(short)-32768.0' was evaluated to '{(short)int16MinValue}'. Expected: '-32768'."
+                );
                 _counter++;
             }
         }
@@ -2966,7 +3656,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)int16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(short)32767.0' was evaluated to '{(short)int16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(short)32767.0' was evaluated to '{(short)int16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -2981,7 +3673,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneDecrementUnderInt16MinValue) != -32768)
             {
-                Console.WriteLine($"'(short)-32768.00000000001d' was evaluated to '{(short)doubleOneDecrementUnderInt16MinValue}'. Expected: '-32768'.");
+                Console.WriteLine(
+                    $"'(short)-32768.00000000001d' was evaluated to '{(short)doubleOneDecrementUnderInt16MinValue}'. Expected: '-32768'."
+                );
                 _counter++;
             }
         }
@@ -2995,7 +3689,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)-32769d)' did not throw OverflowException.");
         }
@@ -3010,7 +3707,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneIncrementAboveInt16MinValue) != -32767)
             {
-                Console.WriteLine($"'(short)-32767.999999999996d' was evaluated to '{(short)doubleOneIncrementAboveInt16MinValue}'. Expected: '-32767'.");
+                Console.WriteLine(
+                    $"'(short)-32767.999999999996d' was evaluated to '{(short)doubleOneIncrementAboveInt16MinValue}'. Expected: '-32767'."
+                );
                 _counter++;
             }
         }
@@ -3025,7 +3724,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneFullIncrementAboveInt16MinValue) != -32767)
             {
-                Console.WriteLine($"'(short)-32767d' was evaluated to '{(short)doubleOneFullIncrementAboveInt16MinValue}'. Expected: '-32767'.");
+                Console.WriteLine(
+                    $"'(short)-32767d' was evaluated to '{(short)doubleOneFullIncrementAboveInt16MinValue}'. Expected: '-32767'."
+                );
                 _counter++;
             }
         }
@@ -3040,7 +3741,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(short)32766.999999999996d' was evaluated to '{(short)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(short)32766.999999999996d' was evaluated to '{(short)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -3055,7 +3758,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneFullDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(short)32766d' was evaluated to '{(short)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(short)32766d' was evaluated to '{(short)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -3070,7 +3775,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)doubleOneIncrementAboveInt16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(short)32767.000000000004d' was evaluated to '{(short)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(short)32767.000000000004d' was evaluated to '{(short)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -3084,7 +3791,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)32768d)' did not throw OverflowException.");
         }
@@ -3098,7 +3808,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)-32769.0)' did not throw OverflowException.");
         }
@@ -3113,7 +3826,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerOneIncrementAboveInt16MinValue) != -32767)
             {
-                Console.WriteLine($"'(short)-32767.0' was evaluated to '{(short)integerOneIncrementAboveInt16MinValue}'. Expected: '-32767'.");
+                Console.WriteLine(
+                    $"'(short)-32767.0' was evaluated to '{(short)integerOneIncrementAboveInt16MinValue}'. Expected: '-32767'."
+                );
                 _counter++;
             }
         }
@@ -3128,7 +3843,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((short)integerOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(short)32766.0' was evaluated to '{(short)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(short)32766.0' was evaluated to '{(short)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -3142,7 +3859,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)32768.0)' did not throw OverflowException.");
         }
@@ -3156,7 +3876,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)65535.0)' did not throw OverflowException.");
         }
@@ -3170,9 +3893,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)65534.99999999999d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)65534.99999999999d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderUInt16MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3184,7 +3912,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)65534d)' did not throw OverflowException.");
         }
@@ -3198,9 +3929,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)65535.00000000001d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)65535.00000000001d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveUInt16MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3212,7 +3948,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)65536d)' did not throw OverflowException.");
         }
@@ -3226,7 +3965,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)65534.0)' did not throw OverflowException.");
         }
@@ -3240,7 +3982,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)65536.0)' did not throw OverflowException.");
         }
@@ -3254,9 +3999,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-2147483648.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-2147483648.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3268,9 +4018,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)2147483647.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)2147483647.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt32MinValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3282,9 +4037,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-2147483648.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-2147483648.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt32MinValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3296,9 +4056,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-2147483649d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-2147483649d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt32MinValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3310,9 +4075,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-2147483647.9999998d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-2147483647.9999998d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt32MinValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3324,9 +4094,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-2147483647d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-2147483647d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3338,9 +4113,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)2147483646.9999998d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)2147483646.9999998d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3352,7 +4132,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)2147483646d)' did not throw OverflowException.");
         }
@@ -3366,9 +4149,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)2147483647.0000002d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)2147483647.0000002d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3380,7 +4168,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)2147483648d)' did not throw OverflowException.");
         }
@@ -3394,9 +4185,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-2147483649.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-2147483649.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt32MinValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3408,9 +4204,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-2147483647.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-2147483647.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3422,9 +4223,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)2147483646.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)2147483646.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3436,9 +4242,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)2147483648.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)2147483648.0)' did not throw OverflowException."
+                );
         }
         ConfirmUInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3450,9 +4261,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)4294967295.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)4294967295.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3464,9 +4280,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)4294967294.9999995d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)4294967294.9999995d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderUInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3478,7 +4299,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)4294967294d)' did not throw OverflowException.");
         }
@@ -3492,9 +4316,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)4294967295.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)4294967295.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveUInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3506,7 +4335,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((short)4294967296d)' did not throw OverflowException.");
         }
@@ -3520,9 +4352,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)4294967294.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)4294967294.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveUInt32MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3534,9 +4371,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)4294967296.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)4294967296.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt64MinValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3548,9 +4390,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt64MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3562,9 +4409,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MinValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3576,9 +4428,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt64MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3590,9 +4447,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3604,9 +4466,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)9.223372036854778E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)9.223372036854778E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt64MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3618,9 +4485,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)9.223372036854776E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)9.223372036854776E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MinValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3632,9 +4504,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)-9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)-9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt64MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3646,9 +4523,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)9223372036854775806.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)9223372036854775806.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3660,9 +4542,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmUInt64MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3674,9 +4561,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)18446744073709551615.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)18446744073709551615.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt64MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3688,9 +4580,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)1.844674407370955E+19d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)1.844674407370955E+19d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderUInt64MaxValueCastToInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3702,9 +4599,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((short)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((short)18446744073709551614.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((short)18446744073709551614.0)' did not throw OverflowException."
+                );
         }
     }
 
@@ -3721,7 +4623,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)integerZero) != 0)
             {
-                Console.WriteLine($"'(ushort)0.0' was evaluated to '{(ushort)integerZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(ushort)0.0' was evaluated to '{(ushort)integerZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -3736,7 +4640,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleMinusZero) != 0)
             {
-                Console.WriteLine($"'(ushort)-0d' was evaluated to '{(ushort)doubleMinusZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(ushort)-0d' was evaluated to '{(ushort)doubleMinusZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -3751,7 +4657,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleZero) != 0)
             {
-                Console.WriteLine($"'(ushort)0d' was evaluated to '{(ushort)doubleZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(ushort)0d' was evaluated to '{(ushort)doubleZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -3765,9 +4673,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleMaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3779,9 +4692,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmSByteMinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3793,7 +4711,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-128.0)' did not throw OverflowException.");
         }
@@ -3808,7 +4729,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)sByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(ushort)127.0' was evaluated to '{(ushort)sByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(ushort)127.0' was evaluated to '{(ushort)sByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -3822,9 +4745,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-128.00000000000003d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-128.00000000000003d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderSByteMinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3836,7 +4764,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-129d)' did not throw OverflowException.");
         }
@@ -3850,9 +4781,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-127.99999999999999d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-127.99999999999999d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveSByteMinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3864,7 +4800,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-127d)' did not throw OverflowException.");
         }
@@ -3879,7 +4818,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(ushort)126.99999999999999d' was evaluated to '{(ushort)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(ushort)126.99999999999999d' was evaluated to '{(ushort)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -3894,7 +4835,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneFullDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(ushort)126d' was evaluated to '{(ushort)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(ushort)126d' was evaluated to '{(ushort)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -3909,7 +4852,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneIncrementAboveSByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(ushort)127.00000000000001d' was evaluated to '{(ushort)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(ushort)127.00000000000001d' was evaluated to '{(ushort)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -3924,7 +4869,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneFullIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(ushort)128d' was evaluated to '{(ushort)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(ushort)128d' was evaluated to '{(ushort)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -3938,7 +4885,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-129.0)' did not throw OverflowException.");
         }
@@ -3952,7 +4902,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-127.0)' did not throw OverflowException.");
         }
@@ -3967,7 +4920,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)integerOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(ushort)126.0' was evaluated to '{(ushort)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(ushort)126.0' was evaluated to '{(ushort)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -3982,7 +4937,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)integerOneIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(ushort)128.0' was evaluated to '{(ushort)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(ushort)128.0' was evaluated to '{(ushort)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -3997,7 +4954,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)byteMaxValue) != 255)
             {
-                Console.WriteLine($"'(ushort)255.0' was evaluated to '{(ushort)byteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(ushort)255.0' was evaluated to '{(ushort)byteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -4012,7 +4971,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneDecrementUnderByteMinValue) != 0)
             {
-                Console.WriteLine($"'(ushort)-5E-324d' was evaluated to '{(ushort)doubleOneDecrementUnderByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(ushort)-5E-324d' was evaluated to '{(ushort)doubleOneDecrementUnderByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -4026,7 +4987,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-1d)' did not throw OverflowException.");
         }
@@ -4041,7 +5005,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneIncrementAboveByteMinValue) != 0)
             {
-                Console.WriteLine($"'(ushort)5E-324d' was evaluated to '{(ushort)doubleOneIncrementAboveByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(ushort)5E-324d' was evaluated to '{(ushort)doubleOneIncrementAboveByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -4056,7 +5022,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneFullIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(ushort)1d' was evaluated to '{(ushort)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(ushort)1d' was evaluated to '{(ushort)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -4071,7 +5039,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(ushort)254.99999999999997d' was evaluated to '{(ushort)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(ushort)254.99999999999997d' was evaluated to '{(ushort)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -4086,7 +5056,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneFullDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(ushort)254d' was evaluated to '{(ushort)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(ushort)254d' was evaluated to '{(ushort)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -4101,7 +5073,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneIncrementAboveByteMaxValue) != 255)
             {
-                Console.WriteLine($"'(ushort)255.00000000000003d' was evaluated to '{(ushort)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(ushort)255.00000000000003d' was evaluated to '{(ushort)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -4116,7 +5090,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneFullIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(ushort)256d' was evaluated to '{(ushort)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(ushort)256d' was evaluated to '{(ushort)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -4130,7 +5106,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-1.0)' did not throw OverflowException.");
         }
@@ -4145,7 +5124,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)integerOneIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(ushort)1.0' was evaluated to '{(ushort)integerOneIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(ushort)1.0' was evaluated to '{(ushort)integerOneIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -4160,7 +5141,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)integerOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(ushort)254.0' was evaluated to '{(ushort)integerOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(ushort)254.0' was evaluated to '{(ushort)integerOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -4175,7 +5158,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)integerOneIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(ushort)256.0' was evaluated to '{(ushort)integerOneIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(ushort)256.0' was evaluated to '{(ushort)integerOneIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -4189,7 +5174,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-32768.0)' did not throw OverflowException.");
         }
@@ -4204,7 +5192,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)int16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(ushort)32767.0' was evaluated to '{(ushort)int16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(ushort)32767.0' was evaluated to '{(ushort)int16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -4218,9 +5208,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-32768.00000000001d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-32768.00000000001d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt16MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4232,7 +5227,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-32769d)' did not throw OverflowException.");
         }
@@ -4246,9 +5244,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-32767.999999999996d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-32767.999999999996d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt16MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4260,7 +5263,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-32767d)' did not throw OverflowException.");
         }
@@ -4275,7 +5281,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(ushort)32766.999999999996d' was evaluated to '{(ushort)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(ushort)32766.999999999996d' was evaluated to '{(ushort)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -4290,7 +5298,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneFullDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(ushort)32766d' was evaluated to '{(ushort)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(ushort)32766d' was evaluated to '{(ushort)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -4305,7 +5315,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneIncrementAboveInt16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(ushort)32767.000000000004d' was evaluated to '{(ushort)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(ushort)32767.000000000004d' was evaluated to '{(ushort)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -4320,7 +5332,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneFullIncrementAboveInt16MaxValue) != 32768)
             {
-                Console.WriteLine($"'(ushort)32768d' was evaluated to '{(ushort)doubleOneFullIncrementAboveInt16MaxValue}'. Expected: '32768'.");
+                Console.WriteLine(
+                    $"'(ushort)32768d' was evaluated to '{(ushort)doubleOneFullIncrementAboveInt16MaxValue}'. Expected: '32768'."
+                );
                 _counter++;
             }
         }
@@ -4334,7 +5348,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-32769.0)' did not throw OverflowException.");
         }
@@ -4348,7 +5365,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)-32767.0)' did not throw OverflowException.");
         }
@@ -4363,7 +5383,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)integerOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(ushort)32766.0' was evaluated to '{(ushort)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(ushort)32766.0' was evaluated to '{(ushort)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -4378,7 +5400,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)integerOneIncrementAboveInt16MaxValue) != 32768)
             {
-                Console.WriteLine($"'(ushort)32768.0' was evaluated to '{(ushort)integerOneIncrementAboveInt16MaxValue}'. Expected: '32768'.");
+                Console.WriteLine(
+                    $"'(ushort)32768.0' was evaluated to '{(ushort)integerOneIncrementAboveInt16MaxValue}'. Expected: '32768'."
+                );
                 _counter++;
             }
         }
@@ -4393,7 +5417,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)uInt16MaxValue) != 65535)
             {
-                Console.WriteLine($"'(ushort)65535.0' was evaluated to '{(ushort)uInt16MaxValue}'. Expected: '65535'.");
+                Console.WriteLine(
+                    $"'(ushort)65535.0' was evaluated to '{(ushort)uInt16MaxValue}'. Expected: '65535'."
+                );
                 _counter++;
             }
         }
@@ -4408,7 +5434,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(ushort)65534.99999999999d' was evaluated to '{(ushort)doubleOneDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(ushort)65534.99999999999d' was evaluated to '{(ushort)doubleOneDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -4423,7 +5451,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneFullDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(ushort)65534d' was evaluated to '{(ushort)doubleOneFullDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(ushort)65534d' was evaluated to '{(ushort)doubleOneFullDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -4438,7 +5468,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)doubleOneIncrementAboveUInt16MaxValue) != 65535)
             {
-                Console.WriteLine($"'(ushort)65535.00000000001d' was evaluated to '{(ushort)doubleOneIncrementAboveUInt16MaxValue}'. Expected: '65535'.");
+                Console.WriteLine(
+                    $"'(ushort)65535.00000000001d' was evaluated to '{(ushort)doubleOneIncrementAboveUInt16MaxValue}'. Expected: '65535'."
+                );
                 _counter++;
             }
         }
@@ -4452,7 +5484,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)65536d)' did not throw OverflowException.");
         }
@@ -4467,7 +5502,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ushort)integerOneDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(ushort)65534.0' was evaluated to '{(ushort)integerOneDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(ushort)65534.0' was evaluated to '{(ushort)integerOneDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -4481,7 +5518,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ushort)65536.0)' did not throw OverflowException.");
         }
@@ -4495,9 +5535,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-2147483648.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-2147483648.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4509,9 +5554,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)2147483647.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)2147483647.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt32MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4523,9 +5573,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-2147483648.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-2147483648.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt32MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4537,9 +5592,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-2147483649d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-2147483649d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt32MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4551,9 +5611,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-2147483647.9999998d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-2147483647.9999998d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt32MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4565,9 +5630,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-2147483647d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-2147483647d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4579,9 +5649,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)2147483646.9999998d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)2147483646.9999998d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4593,9 +5668,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)2147483646d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)2147483646d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4607,9 +5687,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)2147483647.0000002d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)2147483647.0000002d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4621,9 +5706,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)2147483648d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)2147483648d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt32MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4635,9 +5725,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-2147483649.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-2147483649.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt32MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4649,9 +5744,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-2147483647.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-2147483647.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4663,9 +5763,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)2147483646.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)2147483646.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4677,9 +5782,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)2147483648.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)2147483648.0)' did not throw OverflowException."
+                );
         }
         ConfirmUInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4691,9 +5801,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)4294967295.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)4294967295.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4705,9 +5820,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)4294967294.9999995d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)4294967294.9999995d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderUInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4719,9 +5839,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)4294967294d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)4294967294d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveUInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4733,9 +5858,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)4294967295.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)4294967295.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveUInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4747,9 +5877,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)4294967296d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)4294967296d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderUInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4761,9 +5896,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)4294967294.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)4294967294.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveUInt32MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4775,9 +5915,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)4294967296.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)4294967296.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt64MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4789,9 +5934,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt64MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4803,9 +5953,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4817,9 +5972,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt64MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4831,9 +5991,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4845,9 +6010,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)9.223372036854778E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)9.223372036854778E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt64MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4859,9 +6029,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)9.223372036854776E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)9.223372036854776E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MinValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4873,9 +6048,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)-9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)-9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt64MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4887,9 +6067,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)9223372036854775806.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)9223372036854775806.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4901,9 +6086,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmUInt64MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4915,9 +6105,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)18446744073709551615.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)18446744073709551615.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt64MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4929,9 +6124,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)1.844674407370955E+19d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)1.844674407370955E+19d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderUInt64MaxValueCastToUInt16Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -4943,9 +6143,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ushort)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ushort)18446744073709551614.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ushort)18446744073709551614.0)' did not throw OverflowException."
+                );
         }
     }
 
@@ -4962,7 +6167,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerZero) != 0)
             {
-                Console.WriteLine($"'(int)0.0' was evaluated to '{(int)integerZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(int)0.0' was evaluated to '{(int)integerZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -4977,7 +6184,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleMinusZero) != 0)
             {
-                Console.WriteLine($"'(int)-0d' was evaluated to '{(int)doubleMinusZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(int)-0d' was evaluated to '{(int)doubleMinusZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -4992,7 +6201,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleZero) != 0)
             {
-                Console.WriteLine($"'(int)0d' was evaluated to '{(int)doubleZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(int)0d' was evaluated to '{(int)doubleZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -5006,9 +6217,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)-1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)-1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleMaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -5020,9 +6236,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmSByteMinValueCastToInt32IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -5035,7 +6256,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)sByteMinValue) != -128)
             {
-                Console.WriteLine($"'(int)-128.0' was evaluated to '{(int)sByteMinValue}'. Expected: '-128'.");
+                Console.WriteLine(
+                    $"'(int)-128.0' was evaluated to '{(int)sByteMinValue}'. Expected: '-128'."
+                );
                 _counter++;
             }
         }
@@ -5050,7 +6273,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)sByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(int)127.0' was evaluated to '{(int)sByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(int)127.0' was evaluated to '{(int)sByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -5065,7 +6290,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneDecrementUnderSByteMinValue) != -128)
             {
-                Console.WriteLine($"'(int)-128.00000000000003d' was evaluated to '{(int)doubleOneDecrementUnderSByteMinValue}'. Expected: '-128'.");
+                Console.WriteLine(
+                    $"'(int)-128.00000000000003d' was evaluated to '{(int)doubleOneDecrementUnderSByteMinValue}'. Expected: '-128'."
+                );
                 _counter++;
             }
         }
@@ -5080,7 +6307,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullDecrementUnderSByteMinValue) != -129)
             {
-                Console.WriteLine($"'(int)-129d' was evaluated to '{(int)doubleOneFullDecrementUnderSByteMinValue}'. Expected: '-129'.");
+                Console.WriteLine(
+                    $"'(int)-129d' was evaluated to '{(int)doubleOneFullDecrementUnderSByteMinValue}'. Expected: '-129'."
+                );
                 _counter++;
             }
         }
@@ -5095,7 +6324,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(int)-127.99999999999999d' was evaluated to '{(int)doubleOneIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(int)-127.99999999999999d' was evaluated to '{(int)doubleOneIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -5110,7 +6341,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(int)-127d' was evaluated to '{(int)doubleOneFullIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(int)-127d' was evaluated to '{(int)doubleOneFullIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -5125,7 +6358,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(int)126.99999999999999d' was evaluated to '{(int)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(int)126.99999999999999d' was evaluated to '{(int)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -5140,7 +6375,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(int)126d' was evaluated to '{(int)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(int)126d' was evaluated to '{(int)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -5155,7 +6392,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneIncrementAboveSByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(int)127.00000000000001d' was evaluated to '{(int)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(int)127.00000000000001d' was evaluated to '{(int)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -5170,7 +6409,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(int)128d' was evaluated to '{(int)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(int)128d' was evaluated to '{(int)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -5185,7 +6426,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneDecrementUnderSByteMinValue) != -129)
             {
-                Console.WriteLine($"'(int)-129.0' was evaluated to '{(int)integerOneDecrementUnderSByteMinValue}'. Expected: '-129'.");
+                Console.WriteLine(
+                    $"'(int)-129.0' was evaluated to '{(int)integerOneDecrementUnderSByteMinValue}'. Expected: '-129'."
+                );
                 _counter++;
             }
         }
@@ -5200,7 +6443,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(int)-127.0' was evaluated to '{(int)integerOneIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(int)-127.0' was evaluated to '{(int)integerOneIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -5215,7 +6460,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(int)126.0' was evaluated to '{(int)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(int)126.0' was evaluated to '{(int)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -5230,7 +6477,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(int)128.0' was evaluated to '{(int)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(int)128.0' was evaluated to '{(int)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -5245,7 +6494,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)byteMaxValue) != 255)
             {
-                Console.WriteLine($"'(int)255.0' was evaluated to '{(int)byteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(int)255.0' was evaluated to '{(int)byteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -5260,7 +6511,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneDecrementUnderByteMinValue) != 0)
             {
-                Console.WriteLine($"'(int)-5E-324d' was evaluated to '{(int)doubleOneDecrementUnderByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(int)-5E-324d' was evaluated to '{(int)doubleOneDecrementUnderByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -5275,7 +6528,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullDecrementUnderByteMinValue) != -1)
             {
-                Console.WriteLine($"'(int)-1d' was evaluated to '{(int)doubleOneFullDecrementUnderByteMinValue}'. Expected: '-1'.");
+                Console.WriteLine(
+                    $"'(int)-1d' was evaluated to '{(int)doubleOneFullDecrementUnderByteMinValue}'. Expected: '-1'."
+                );
                 _counter++;
             }
         }
@@ -5290,7 +6545,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneIncrementAboveByteMinValue) != 0)
             {
-                Console.WriteLine($"'(int)5E-324d' was evaluated to '{(int)doubleOneIncrementAboveByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(int)5E-324d' was evaluated to '{(int)doubleOneIncrementAboveByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -5305,7 +6562,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(int)1d' was evaluated to '{(int)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(int)1d' was evaluated to '{(int)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -5320,7 +6579,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(int)254.99999999999997d' was evaluated to '{(int)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(int)254.99999999999997d' was evaluated to '{(int)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -5335,7 +6596,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(int)254d' was evaluated to '{(int)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(int)254d' was evaluated to '{(int)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -5350,7 +6613,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneIncrementAboveByteMaxValue) != 255)
             {
-                Console.WriteLine($"'(int)255.00000000000003d' was evaluated to '{(int)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(int)255.00000000000003d' was evaluated to '{(int)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -5365,7 +6630,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(int)256d' was evaluated to '{(int)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(int)256d' was evaluated to '{(int)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -5380,7 +6647,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneDecrementUnderByteMinValue) != -1)
             {
-                Console.WriteLine($"'(int)-1.0' was evaluated to '{(int)integerOneDecrementUnderByteMinValue}'. Expected: '-1'.");
+                Console.WriteLine(
+                    $"'(int)-1.0' was evaluated to '{(int)integerOneDecrementUnderByteMinValue}'. Expected: '-1'."
+                );
                 _counter++;
             }
         }
@@ -5395,7 +6664,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(int)1.0' was evaluated to '{(int)integerOneIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(int)1.0' was evaluated to '{(int)integerOneIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -5410,7 +6681,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(int)254.0' was evaluated to '{(int)integerOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(int)254.0' was evaluated to '{(int)integerOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -5425,7 +6698,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(int)256.0' was evaluated to '{(int)integerOneIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(int)256.0' was evaluated to '{(int)integerOneIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -5440,7 +6715,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)int16MinValue) != -32768)
             {
-                Console.WriteLine($"'(int)-32768.0' was evaluated to '{(int)int16MinValue}'. Expected: '-32768'.");
+                Console.WriteLine(
+                    $"'(int)-32768.0' was evaluated to '{(int)int16MinValue}'. Expected: '-32768'."
+                );
                 _counter++;
             }
         }
@@ -5455,7 +6732,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)int16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(int)32767.0' was evaluated to '{(int)int16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(int)32767.0' was evaluated to '{(int)int16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -5470,7 +6749,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneDecrementUnderInt16MinValue) != -32768)
             {
-                Console.WriteLine($"'(int)-32768.00000000001d' was evaluated to '{(int)doubleOneDecrementUnderInt16MinValue}'. Expected: '-32768'.");
+                Console.WriteLine(
+                    $"'(int)-32768.00000000001d' was evaluated to '{(int)doubleOneDecrementUnderInt16MinValue}'. Expected: '-32768'."
+                );
                 _counter++;
             }
         }
@@ -5485,7 +6766,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullDecrementUnderInt16MinValue) != -32769)
             {
-                Console.WriteLine($"'(int)-32769d' was evaluated to '{(int)doubleOneFullDecrementUnderInt16MinValue}'. Expected: '-32769'.");
+                Console.WriteLine(
+                    $"'(int)-32769d' was evaluated to '{(int)doubleOneFullDecrementUnderInt16MinValue}'. Expected: '-32769'."
+                );
                 _counter++;
             }
         }
@@ -5500,7 +6783,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneIncrementAboveInt16MinValue) != -32767)
             {
-                Console.WriteLine($"'(int)-32767.999999999996d' was evaluated to '{(int)doubleOneIncrementAboveInt16MinValue}'. Expected: '-32767'.");
+                Console.WriteLine(
+                    $"'(int)-32767.999999999996d' was evaluated to '{(int)doubleOneIncrementAboveInt16MinValue}'. Expected: '-32767'."
+                );
                 _counter++;
             }
         }
@@ -5515,7 +6800,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullIncrementAboveInt16MinValue) != -32767)
             {
-                Console.WriteLine($"'(int)-32767d' was evaluated to '{(int)doubleOneFullIncrementAboveInt16MinValue}'. Expected: '-32767'.");
+                Console.WriteLine(
+                    $"'(int)-32767d' was evaluated to '{(int)doubleOneFullIncrementAboveInt16MinValue}'. Expected: '-32767'."
+                );
                 _counter++;
             }
         }
@@ -5530,7 +6817,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(int)32766.999999999996d' was evaluated to '{(int)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(int)32766.999999999996d' was evaluated to '{(int)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -5545,7 +6834,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(int)32766d' was evaluated to '{(int)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(int)32766d' was evaluated to '{(int)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -5560,7 +6851,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneIncrementAboveInt16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(int)32767.000000000004d' was evaluated to '{(int)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(int)32767.000000000004d' was evaluated to '{(int)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -5575,7 +6868,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullIncrementAboveInt16MaxValue) != 32768)
             {
-                Console.WriteLine($"'(int)32768d' was evaluated to '{(int)doubleOneFullIncrementAboveInt16MaxValue}'. Expected: '32768'.");
+                Console.WriteLine(
+                    $"'(int)32768d' was evaluated to '{(int)doubleOneFullIncrementAboveInt16MaxValue}'. Expected: '32768'."
+                );
                 _counter++;
             }
         }
@@ -5590,7 +6885,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneDecrementUnderInt16MinValue) != -32769)
             {
-                Console.WriteLine($"'(int)-32769.0' was evaluated to '{(int)integerOneDecrementUnderInt16MinValue}'. Expected: '-32769'.");
+                Console.WriteLine(
+                    $"'(int)-32769.0' was evaluated to '{(int)integerOneDecrementUnderInt16MinValue}'. Expected: '-32769'."
+                );
                 _counter++;
             }
         }
@@ -5605,7 +6902,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneIncrementAboveInt16MinValue) != -32767)
             {
-                Console.WriteLine($"'(int)-32767.0' was evaluated to '{(int)integerOneIncrementAboveInt16MinValue}'. Expected: '-32767'.");
+                Console.WriteLine(
+                    $"'(int)-32767.0' was evaluated to '{(int)integerOneIncrementAboveInt16MinValue}'. Expected: '-32767'."
+                );
                 _counter++;
             }
         }
@@ -5620,7 +6919,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(int)32766.0' was evaluated to '{(int)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(int)32766.0' was evaluated to '{(int)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -5635,7 +6936,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneIncrementAboveInt16MaxValue) != 32768)
             {
-                Console.WriteLine($"'(int)32768.0' was evaluated to '{(int)integerOneIncrementAboveInt16MaxValue}'. Expected: '32768'.");
+                Console.WriteLine(
+                    $"'(int)32768.0' was evaluated to '{(int)integerOneIncrementAboveInt16MaxValue}'. Expected: '32768'."
+                );
                 _counter++;
             }
         }
@@ -5650,7 +6953,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)uInt16MaxValue) != 65535)
             {
-                Console.WriteLine($"'(int)65535.0' was evaluated to '{(int)uInt16MaxValue}'. Expected: '65535'.");
+                Console.WriteLine(
+                    $"'(int)65535.0' was evaluated to '{(int)uInt16MaxValue}'. Expected: '65535'."
+                );
                 _counter++;
             }
         }
@@ -5665,7 +6970,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(int)65534.99999999999d' was evaluated to '{(int)doubleOneDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(int)65534.99999999999d' was evaluated to '{(int)doubleOneDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -5680,7 +6987,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(int)65534d' was evaluated to '{(int)doubleOneFullDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(int)65534d' was evaluated to '{(int)doubleOneFullDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -5695,7 +7004,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneIncrementAboveUInt16MaxValue) != 65535)
             {
-                Console.WriteLine($"'(int)65535.00000000001d' was evaluated to '{(int)doubleOneIncrementAboveUInt16MaxValue}'. Expected: '65535'.");
+                Console.WriteLine(
+                    $"'(int)65535.00000000001d' was evaluated to '{(int)doubleOneIncrementAboveUInt16MaxValue}'. Expected: '65535'."
+                );
                 _counter++;
             }
         }
@@ -5710,7 +7021,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullIncrementAboveUInt16MaxValue) != 65536)
             {
-                Console.WriteLine($"'(int)65536d' was evaluated to '{(int)doubleOneFullIncrementAboveUInt16MaxValue}'. Expected: '65536'.");
+                Console.WriteLine(
+                    $"'(int)65536d' was evaluated to '{(int)doubleOneFullIncrementAboveUInt16MaxValue}'. Expected: '65536'."
+                );
                 _counter++;
             }
         }
@@ -5725,7 +7038,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(int)65534.0' was evaluated to '{(int)integerOneDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(int)65534.0' was evaluated to '{(int)integerOneDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -5740,7 +7055,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneIncrementAboveUInt16MaxValue) != 65536)
             {
-                Console.WriteLine($"'(int)65536.0' was evaluated to '{(int)integerOneIncrementAboveUInt16MaxValue}'. Expected: '65536'.");
+                Console.WriteLine(
+                    $"'(int)65536.0' was evaluated to '{(int)integerOneIncrementAboveUInt16MaxValue}'. Expected: '65536'."
+                );
                 _counter++;
             }
         }
@@ -5755,7 +7072,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)int32MinValue) != -2147483648)
             {
-                Console.WriteLine($"'(int)-2147483648.0' was evaluated to '{(int)int32MinValue}'. Expected: '-2147483648'.");
+                Console.WriteLine(
+                    $"'(int)-2147483648.0' was evaluated to '{(int)int32MinValue}'. Expected: '-2147483648'."
+                );
                 _counter++;
             }
         }
@@ -5770,7 +7089,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)int32MaxValue) != 2147483647)
             {
-                Console.WriteLine($"'(int)2147483647.0' was evaluated to '{(int)int32MaxValue}'. Expected: '2147483647'.");
+                Console.WriteLine(
+                    $"'(int)2147483647.0' was evaluated to '{(int)int32MaxValue}'. Expected: '2147483647'."
+                );
                 _counter++;
             }
         }
@@ -5785,7 +7106,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneDecrementUnderInt32MinValue) != -2147483648)
             {
-                Console.WriteLine($"'(int)-2147483648.0000005d' was evaluated to '{(int)doubleOneDecrementUnderInt32MinValue}'. Expected: '-2147483648'.");
+                Console.WriteLine(
+                    $"'(int)-2147483648.0000005d' was evaluated to '{(int)doubleOneDecrementUnderInt32MinValue}'. Expected: '-2147483648'."
+                );
                 _counter++;
             }
         }
@@ -5799,7 +7122,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((int)-2147483649d)' did not throw OverflowException.");
         }
@@ -5814,7 +7140,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneIncrementAboveInt32MinValue) != -2147483647)
             {
-                Console.WriteLine($"'(int)-2147483647.9999998d' was evaluated to '{(int)doubleOneIncrementAboveInt32MinValue}'. Expected: '-2147483647'.");
+                Console.WriteLine(
+                    $"'(int)-2147483647.9999998d' was evaluated to '{(int)doubleOneIncrementAboveInt32MinValue}'. Expected: '-2147483647'."
+                );
                 _counter++;
             }
         }
@@ -5829,7 +7157,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullIncrementAboveInt32MinValue) != -2147483647)
             {
-                Console.WriteLine($"'(int)-2147483647d' was evaluated to '{(int)doubleOneFullIncrementAboveInt32MinValue}'. Expected: '-2147483647'.");
+                Console.WriteLine(
+                    $"'(int)-2147483647d' was evaluated to '{(int)doubleOneFullIncrementAboveInt32MinValue}'. Expected: '-2147483647'."
+                );
                 _counter++;
             }
         }
@@ -5844,7 +7174,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(int)2147483646.9999998d' was evaluated to '{(int)doubleOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(int)2147483646.9999998d' was evaluated to '{(int)doubleOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -5859,7 +7191,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneFullDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(int)2147483646d' was evaluated to '{(int)doubleOneFullDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(int)2147483646d' was evaluated to '{(int)doubleOneFullDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -5874,7 +7208,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)doubleOneIncrementAboveInt32MaxValue) != 2147483647)
             {
-                Console.WriteLine($"'(int)2147483647.0000002d' was evaluated to '{(int)doubleOneIncrementAboveInt32MaxValue}'. Expected: '2147483647'.");
+                Console.WriteLine(
+                    $"'(int)2147483647.0000002d' was evaluated to '{(int)doubleOneIncrementAboveInt32MaxValue}'. Expected: '2147483647'."
+                );
                 _counter++;
             }
         }
@@ -5888,7 +7224,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((int)2147483648d)' did not throw OverflowException.");
         }
@@ -5902,7 +7241,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((int)-2147483649.0)' did not throw OverflowException.");
         }
@@ -5917,7 +7259,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneIncrementAboveInt32MinValue) != -2147483647)
             {
-                Console.WriteLine($"'(int)-2147483647.0' was evaluated to '{(int)integerOneIncrementAboveInt32MinValue}'. Expected: '-2147483647'.");
+                Console.WriteLine(
+                    $"'(int)-2147483647.0' was evaluated to '{(int)integerOneIncrementAboveInt32MinValue}'. Expected: '-2147483647'."
+                );
                 _counter++;
             }
         }
@@ -5932,7 +7276,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((int)integerOneDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(int)2147483646.0' was evaluated to '{(int)integerOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(int)2147483646.0' was evaluated to '{(int)integerOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -5946,7 +7292,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((int)2147483648.0)' did not throw OverflowException.");
         }
@@ -5960,7 +7309,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((int)4294967295.0)' did not throw OverflowException.");
         }
@@ -5974,9 +7326,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)4294967294.9999995d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)4294967294.9999995d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderUInt32MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -5988,7 +7345,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((int)4294967294d)' did not throw OverflowException.");
         }
@@ -6002,9 +7362,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)4294967295.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)4294967295.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveUInt32MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6016,7 +7381,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((int)4294967296d)' did not throw OverflowException.");
         }
@@ -6030,7 +7398,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((int)4294967294.0)' did not throw OverflowException.");
         }
@@ -6044,7 +7415,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((int)4294967296.0)' did not throw OverflowException.");
         }
@@ -6058,9 +7432,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)-9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)-9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt64MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6072,9 +7451,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MinValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6086,9 +7470,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)-9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)-9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt64MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6100,9 +7489,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6114,9 +7508,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)9.223372036854778E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)9.223372036854778E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt64MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6128,9 +7527,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)9.223372036854776E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)9.223372036854776E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MinValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6142,9 +7546,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)-9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)-9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt64MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6156,9 +7565,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)9223372036854775806.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)9223372036854775806.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6170,9 +7584,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmUInt64MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6184,9 +7603,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)18446744073709551615.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)18446744073709551615.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt64MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6198,9 +7622,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)1.844674407370955E+19d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)1.844674407370955E+19d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderUInt64MaxValueCastToInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6212,9 +7641,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((int)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((int)18446744073709551614.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((int)18446744073709551614.0)' did not throw OverflowException."
+                );
         }
     }
 
@@ -6231,7 +7665,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerZero) != 0)
             {
-                Console.WriteLine($"'(uint)0.0' was evaluated to '{(uint)integerZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(uint)0.0' was evaluated to '{(uint)integerZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -6246,7 +7682,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleMinusZero) != 0)
             {
-                Console.WriteLine($"'(uint)-0d' was evaluated to '{(uint)doubleMinusZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(uint)-0d' was evaluated to '{(uint)doubleMinusZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -6261,7 +7699,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleZero) != 0)
             {
-                Console.WriteLine($"'(uint)0d' was evaluated to '{(uint)doubleZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(uint)0d' was evaluated to '{(uint)doubleZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -6275,9 +7715,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleMaxValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6289,9 +7734,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmSByteMinValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6303,7 +7753,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-128.0)' did not throw OverflowException.");
         }
@@ -6318,7 +7771,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)sByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(uint)127.0' was evaluated to '{(uint)sByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(uint)127.0' was evaluated to '{(uint)sByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -6332,9 +7787,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-128.00000000000003d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-128.00000000000003d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderSByteMinValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6346,7 +7806,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-129d)' did not throw OverflowException.");
         }
@@ -6360,9 +7823,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-127.99999999999999d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-127.99999999999999d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveSByteMinValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6374,7 +7842,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-127d)' did not throw OverflowException.");
         }
@@ -6389,7 +7860,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(uint)126.99999999999999d' was evaluated to '{(uint)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(uint)126.99999999999999d' was evaluated to '{(uint)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -6404,7 +7877,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(uint)126d' was evaluated to '{(uint)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(uint)126d' was evaluated to '{(uint)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -6419,7 +7894,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneIncrementAboveSByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(uint)127.00000000000001d' was evaluated to '{(uint)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(uint)127.00000000000001d' was evaluated to '{(uint)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -6434,7 +7911,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(uint)128d' was evaluated to '{(uint)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(uint)128d' was evaluated to '{(uint)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -6448,7 +7927,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-129.0)' did not throw OverflowException.");
         }
@@ -6462,7 +7944,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-127.0)' did not throw OverflowException.");
         }
@@ -6477,7 +7962,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(uint)126.0' was evaluated to '{(uint)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(uint)126.0' was evaluated to '{(uint)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -6492,7 +7979,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(uint)128.0' was evaluated to '{(uint)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(uint)128.0' was evaluated to '{(uint)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -6507,7 +7996,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)byteMaxValue) != 255)
             {
-                Console.WriteLine($"'(uint)255.0' was evaluated to '{(uint)byteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(uint)255.0' was evaluated to '{(uint)byteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -6522,7 +8013,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneDecrementUnderByteMinValue) != 0)
             {
-                Console.WriteLine($"'(uint)-5E-324d' was evaluated to '{(uint)doubleOneDecrementUnderByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(uint)-5E-324d' was evaluated to '{(uint)doubleOneDecrementUnderByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -6536,7 +8029,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-1d)' did not throw OverflowException.");
         }
@@ -6551,7 +8047,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneIncrementAboveByteMinValue) != 0)
             {
-                Console.WriteLine($"'(uint)5E-324d' was evaluated to '{(uint)doubleOneIncrementAboveByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(uint)5E-324d' was evaluated to '{(uint)doubleOneIncrementAboveByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -6566,7 +8064,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(uint)1d' was evaluated to '{(uint)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(uint)1d' was evaluated to '{(uint)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -6581,7 +8081,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(uint)254.99999999999997d' was evaluated to '{(uint)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(uint)254.99999999999997d' was evaluated to '{(uint)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -6596,7 +8098,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(uint)254d' was evaluated to '{(uint)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(uint)254d' was evaluated to '{(uint)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -6611,7 +8115,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneIncrementAboveByteMaxValue) != 255)
             {
-                Console.WriteLine($"'(uint)255.00000000000003d' was evaluated to '{(uint)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(uint)255.00000000000003d' was evaluated to '{(uint)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -6626,7 +8132,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(uint)256d' was evaluated to '{(uint)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(uint)256d' was evaluated to '{(uint)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -6640,7 +8148,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-1.0)' did not throw OverflowException.");
         }
@@ -6655,7 +8166,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(uint)1.0' was evaluated to '{(uint)integerOneIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(uint)1.0' was evaluated to '{(uint)integerOneIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -6670,7 +8183,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(uint)254.0' was evaluated to '{(uint)integerOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(uint)254.0' was evaluated to '{(uint)integerOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -6685,7 +8200,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(uint)256.0' was evaluated to '{(uint)integerOneIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(uint)256.0' was evaluated to '{(uint)integerOneIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -6699,7 +8216,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-32768.0)' did not throw OverflowException.");
         }
@@ -6714,7 +8234,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)int16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(uint)32767.0' was evaluated to '{(uint)int16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(uint)32767.0' was evaluated to '{(uint)int16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -6728,9 +8250,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-32768.00000000001d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-32768.00000000001d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt16MinValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6742,7 +8269,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-32769d)' did not throw OverflowException.");
         }
@@ -6756,9 +8286,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-32767.999999999996d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-32767.999999999996d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt16MinValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6770,7 +8305,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-32767d)' did not throw OverflowException.");
         }
@@ -6785,7 +8323,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(uint)32766.999999999996d' was evaluated to '{(uint)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(uint)32766.999999999996d' was evaluated to '{(uint)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -6800,7 +8340,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(uint)32766d' was evaluated to '{(uint)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(uint)32766d' was evaluated to '{(uint)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -6815,7 +8357,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneIncrementAboveInt16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(uint)32767.000000000004d' was evaluated to '{(uint)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(uint)32767.000000000004d' was evaluated to '{(uint)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -6830,7 +8374,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullIncrementAboveInt16MaxValue) != 32768)
             {
-                Console.WriteLine($"'(uint)32768d' was evaluated to '{(uint)doubleOneFullIncrementAboveInt16MaxValue}'. Expected: '32768'.");
+                Console.WriteLine(
+                    $"'(uint)32768d' was evaluated to '{(uint)doubleOneFullIncrementAboveInt16MaxValue}'. Expected: '32768'."
+                );
                 _counter++;
             }
         }
@@ -6844,7 +8390,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-32769.0)' did not throw OverflowException.");
         }
@@ -6858,7 +8407,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-32767.0)' did not throw OverflowException.");
         }
@@ -6873,7 +8425,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(uint)32766.0' was evaluated to '{(uint)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(uint)32766.0' was evaluated to '{(uint)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -6888,7 +8442,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneIncrementAboveInt16MaxValue) != 32768)
             {
-                Console.WriteLine($"'(uint)32768.0' was evaluated to '{(uint)integerOneIncrementAboveInt16MaxValue}'. Expected: '32768'.");
+                Console.WriteLine(
+                    $"'(uint)32768.0' was evaluated to '{(uint)integerOneIncrementAboveInt16MaxValue}'. Expected: '32768'."
+                );
                 _counter++;
             }
         }
@@ -6903,7 +8459,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)uInt16MaxValue) != 65535)
             {
-                Console.WriteLine($"'(uint)65535.0' was evaluated to '{(uint)uInt16MaxValue}'. Expected: '65535'.");
+                Console.WriteLine(
+                    $"'(uint)65535.0' was evaluated to '{(uint)uInt16MaxValue}'. Expected: '65535'."
+                );
                 _counter++;
             }
         }
@@ -6918,7 +8476,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(uint)65534.99999999999d' was evaluated to '{(uint)doubleOneDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(uint)65534.99999999999d' was evaluated to '{(uint)doubleOneDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -6933,7 +8493,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(uint)65534d' was evaluated to '{(uint)doubleOneFullDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(uint)65534d' was evaluated to '{(uint)doubleOneFullDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -6948,7 +8510,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneIncrementAboveUInt16MaxValue) != 65535)
             {
-                Console.WriteLine($"'(uint)65535.00000000001d' was evaluated to '{(uint)doubleOneIncrementAboveUInt16MaxValue}'. Expected: '65535'.");
+                Console.WriteLine(
+                    $"'(uint)65535.00000000001d' was evaluated to '{(uint)doubleOneIncrementAboveUInt16MaxValue}'. Expected: '65535'."
+                );
                 _counter++;
             }
         }
@@ -6963,7 +8527,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullIncrementAboveUInt16MaxValue) != 65536)
             {
-                Console.WriteLine($"'(uint)65536d' was evaluated to '{(uint)doubleOneFullIncrementAboveUInt16MaxValue}'. Expected: '65536'.");
+                Console.WriteLine(
+                    $"'(uint)65536d' was evaluated to '{(uint)doubleOneFullIncrementAboveUInt16MaxValue}'. Expected: '65536'."
+                );
                 _counter++;
             }
         }
@@ -6978,7 +8544,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(uint)65534.0' was evaluated to '{(uint)integerOneDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(uint)65534.0' was evaluated to '{(uint)integerOneDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -6993,7 +8561,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneIncrementAboveUInt16MaxValue) != 65536)
             {
-                Console.WriteLine($"'(uint)65536.0' was evaluated to '{(uint)integerOneIncrementAboveUInt16MaxValue}'. Expected: '65536'.");
+                Console.WriteLine(
+                    $"'(uint)65536.0' was evaluated to '{(uint)integerOneIncrementAboveUInt16MaxValue}'. Expected: '65536'."
+                );
                 _counter++;
             }
         }
@@ -7007,9 +8577,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-2147483648.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-2147483648.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt32MaxValueCastToUInt32IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7022,7 +8597,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)int32MaxValue) != 2147483647)
             {
-                Console.WriteLine($"'(uint)2147483647.0' was evaluated to '{(uint)int32MaxValue}'. Expected: '2147483647'.");
+                Console.WriteLine(
+                    $"'(uint)2147483647.0' was evaluated to '{(uint)int32MaxValue}'. Expected: '2147483647'."
+                );
                 _counter++;
             }
         }
@@ -7036,9 +8613,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-2147483648.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-2147483648.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt32MinValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7050,7 +8632,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-2147483649d)' did not throw OverflowException.");
         }
@@ -7064,9 +8649,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-2147483647.9999998d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-2147483647.9999998d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt32MinValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7078,7 +8668,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)-2147483647d)' did not throw OverflowException.");
         }
@@ -7093,7 +8686,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(uint)2147483646.9999998d' was evaluated to '{(uint)doubleOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(uint)2147483646.9999998d' was evaluated to '{(uint)doubleOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -7108,7 +8703,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(uint)2147483646d' was evaluated to '{(uint)doubleOneFullDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(uint)2147483646d' was evaluated to '{(uint)doubleOneFullDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -7123,7 +8720,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneIncrementAboveInt32MaxValue) != 2147483647)
             {
-                Console.WriteLine($"'(uint)2147483647.0000002d' was evaluated to '{(uint)doubleOneIncrementAboveInt32MaxValue}'. Expected: '2147483647'.");
+                Console.WriteLine(
+                    $"'(uint)2147483647.0000002d' was evaluated to '{(uint)doubleOneIncrementAboveInt32MaxValue}'. Expected: '2147483647'."
+                );
                 _counter++;
             }
         }
@@ -7138,7 +8737,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullIncrementAboveInt32MaxValue) != 2147483648)
             {
-                Console.WriteLine($"'(uint)2147483648d' was evaluated to '{(uint)doubleOneFullIncrementAboveInt32MaxValue}'. Expected: '2147483648'.");
+                Console.WriteLine(
+                    $"'(uint)2147483648d' was evaluated to '{(uint)doubleOneFullIncrementAboveInt32MaxValue}'. Expected: '2147483648'."
+                );
                 _counter++;
             }
         }
@@ -7152,9 +8753,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-2147483649.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-2147483649.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt32MinValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7166,9 +8772,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-2147483647.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-2147483647.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt32MaxValueCastToUInt32IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7181,7 +8792,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(uint)2147483646.0' was evaluated to '{(uint)integerOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(uint)2147483646.0' was evaluated to '{(uint)integerOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -7196,7 +8809,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneIncrementAboveInt32MaxValue) != 2147483648)
             {
-                Console.WriteLine($"'(uint)2147483648.0' was evaluated to '{(uint)integerOneIncrementAboveInt32MaxValue}'. Expected: '2147483648'.");
+                Console.WriteLine(
+                    $"'(uint)2147483648.0' was evaluated to '{(uint)integerOneIncrementAboveInt32MaxValue}'. Expected: '2147483648'."
+                );
                 _counter++;
             }
         }
@@ -7211,7 +8826,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)uInt32MaxValue) != 4294967295)
             {
-                Console.WriteLine($"'(uint)4294967295.0' was evaluated to '{(uint)uInt32MaxValue}'. Expected: '4294967295'.");
+                Console.WriteLine(
+                    $"'(uint)4294967295.0' was evaluated to '{(uint)uInt32MaxValue}'. Expected: '4294967295'."
+                );
                 _counter++;
             }
         }
@@ -7226,7 +8843,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneDecrementUnderUInt32MaxValue) != 4294967294)
             {
-                Console.WriteLine($"'(uint)4294967294.9999995d' was evaluated to '{(uint)doubleOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'.");
+                Console.WriteLine(
+                    $"'(uint)4294967294.9999995d' was evaluated to '{(uint)doubleOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'."
+                );
                 _counter++;
             }
         }
@@ -7241,7 +8860,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneFullDecrementUnderUInt32MaxValue) != 4294967294)
             {
-                Console.WriteLine($"'(uint)4294967294d' was evaluated to '{(uint)doubleOneFullDecrementUnderUInt32MaxValue}'. Expected: '4294967294'.");
+                Console.WriteLine(
+                    $"'(uint)4294967294d' was evaluated to '{(uint)doubleOneFullDecrementUnderUInt32MaxValue}'. Expected: '4294967294'."
+                );
                 _counter++;
             }
         }
@@ -7256,7 +8877,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)doubleOneIncrementAboveUInt32MaxValue) != 4294967295)
             {
-                Console.WriteLine($"'(uint)4294967295.0000005d' was evaluated to '{(uint)doubleOneIncrementAboveUInt32MaxValue}'. Expected: '4294967295'.");
+                Console.WriteLine(
+                    $"'(uint)4294967295.0000005d' was evaluated to '{(uint)doubleOneIncrementAboveUInt32MaxValue}'. Expected: '4294967295'."
+                );
                 _counter++;
             }
         }
@@ -7270,7 +8893,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)4294967296d)' did not throw OverflowException.");
         }
@@ -7285,7 +8911,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((uint)integerOneDecrementUnderUInt32MaxValue) != 4294967294)
             {
-                Console.WriteLine($"'(uint)4294967294.0' was evaluated to '{(uint)integerOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'.");
+                Console.WriteLine(
+                    $"'(uint)4294967294.0' was evaluated to '{(uint)integerOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'."
+                );
                 _counter++;
             }
         }
@@ -7299,7 +8927,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((uint)4294967296.0)' did not throw OverflowException.");
         }
@@ -7313,9 +8944,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt64MaxValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7327,9 +8963,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MinValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7341,9 +8982,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt64MaxValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7355,9 +9001,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MaxValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7369,9 +9020,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)9.223372036854778E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)9.223372036854778E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt64MaxValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7383,9 +9039,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)9.223372036854776E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)9.223372036854776E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MinValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7397,9 +9058,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)-9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)-9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt64MaxValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7411,9 +9077,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)9223372036854775806.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)9223372036854775806.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MaxValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7425,9 +9096,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmUInt64MaxValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7439,9 +9115,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)18446744073709551615.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)18446744073709551615.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt64MaxValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7453,9 +9134,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)1.844674407370955E+19d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)1.844674407370955E+19d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderUInt64MaxValueCastToUInt32Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7467,9 +9153,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((uint)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((uint)18446744073709551614.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((uint)18446744073709551614.0)' did not throw OverflowException."
+                );
         }
     }
 
@@ -7486,7 +9177,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerZero) != 0)
             {
-                Console.WriteLine($"'(long)0.0' was evaluated to '{(long)integerZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(long)0.0' was evaluated to '{(long)integerZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -7501,7 +9194,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleMinusZero) != 0)
             {
-                Console.WriteLine($"'(long)-0d' was evaluated to '{(long)doubleMinusZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(long)-0d' was evaluated to '{(long)doubleMinusZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -7516,7 +9211,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleZero) != 0)
             {
-                Console.WriteLine($"'(long)0d' was evaluated to '{(long)doubleZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(long)0d' was evaluated to '{(long)doubleZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -7530,9 +9227,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((long)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((long)-1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((long)-1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleMaxValueCastToInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7544,9 +9246,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((long)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((long)1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((long)1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmSByteMinValueCastToInt64IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7559,7 +9266,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)sByteMinValue) != -128)
             {
-                Console.WriteLine($"'(long)-128.0' was evaluated to '{(long)sByteMinValue}'. Expected: '-128'.");
+                Console.WriteLine(
+                    $"'(long)-128.0' was evaluated to '{(long)sByteMinValue}'. Expected: '-128'."
+                );
                 _counter++;
             }
         }
@@ -7574,7 +9283,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)sByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(long)127.0' was evaluated to '{(long)sByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(long)127.0' was evaluated to '{(long)sByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -7589,7 +9300,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderSByteMinValue) != -128)
             {
-                Console.WriteLine($"'(long)-128.00000000000003d' was evaluated to '{(long)doubleOneDecrementUnderSByteMinValue}'. Expected: '-128'.");
+                Console.WriteLine(
+                    $"'(long)-128.00000000000003d' was evaluated to '{(long)doubleOneDecrementUnderSByteMinValue}'. Expected: '-128'."
+                );
                 _counter++;
             }
         }
@@ -7604,7 +9317,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullDecrementUnderSByteMinValue) != -129)
             {
-                Console.WriteLine($"'(long)-129d' was evaluated to '{(long)doubleOneFullDecrementUnderSByteMinValue}'. Expected: '-129'.");
+                Console.WriteLine(
+                    $"'(long)-129d' was evaluated to '{(long)doubleOneFullDecrementUnderSByteMinValue}'. Expected: '-129'."
+                );
                 _counter++;
             }
         }
@@ -7619,7 +9334,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(long)-127.99999999999999d' was evaluated to '{(long)doubleOneIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(long)-127.99999999999999d' was evaluated to '{(long)doubleOneIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -7634,7 +9351,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(long)-127d' was evaluated to '{(long)doubleOneFullIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(long)-127d' was evaluated to '{(long)doubleOneFullIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -7649,7 +9368,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(long)126.99999999999999d' was evaluated to '{(long)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(long)126.99999999999999d' was evaluated to '{(long)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -7664,7 +9385,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(long)126d' was evaluated to '{(long)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(long)126d' was evaluated to '{(long)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -7679,7 +9402,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveSByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(long)127.00000000000001d' was evaluated to '{(long)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(long)127.00000000000001d' was evaluated to '{(long)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -7694,7 +9419,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(long)128d' was evaluated to '{(long)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(long)128d' was evaluated to '{(long)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -7709,7 +9436,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneDecrementUnderSByteMinValue) != -129)
             {
-                Console.WriteLine($"'(long)-129.0' was evaluated to '{(long)integerOneDecrementUnderSByteMinValue}'. Expected: '-129'.");
+                Console.WriteLine(
+                    $"'(long)-129.0' was evaluated to '{(long)integerOneDecrementUnderSByteMinValue}'. Expected: '-129'."
+                );
                 _counter++;
             }
         }
@@ -7724,7 +9453,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveSByteMinValue) != -127)
             {
-                Console.WriteLine($"'(long)-127.0' was evaluated to '{(long)integerOneIncrementAboveSByteMinValue}'. Expected: '-127'.");
+                Console.WriteLine(
+                    $"'(long)-127.0' was evaluated to '{(long)integerOneIncrementAboveSByteMinValue}'. Expected: '-127'."
+                );
                 _counter++;
             }
         }
@@ -7739,7 +9470,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(long)126.0' was evaluated to '{(long)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(long)126.0' was evaluated to '{(long)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -7754,7 +9487,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(long)128.0' was evaluated to '{(long)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(long)128.0' was evaluated to '{(long)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -7769,7 +9504,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)byteMaxValue) != 255)
             {
-                Console.WriteLine($"'(long)255.0' was evaluated to '{(long)byteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(long)255.0' was evaluated to '{(long)byteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -7784,7 +9521,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderByteMinValue) != 0)
             {
-                Console.WriteLine($"'(long)-5E-324d' was evaluated to '{(long)doubleOneDecrementUnderByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(long)-5E-324d' was evaluated to '{(long)doubleOneDecrementUnderByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -7799,7 +9538,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullDecrementUnderByteMinValue) != -1)
             {
-                Console.WriteLine($"'(long)-1d' was evaluated to '{(long)doubleOneFullDecrementUnderByteMinValue}'. Expected: '-1'.");
+                Console.WriteLine(
+                    $"'(long)-1d' was evaluated to '{(long)doubleOneFullDecrementUnderByteMinValue}'. Expected: '-1'."
+                );
                 _counter++;
             }
         }
@@ -7814,7 +9555,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveByteMinValue) != 0)
             {
-                Console.WriteLine($"'(long)5E-324d' was evaluated to '{(long)doubleOneIncrementAboveByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(long)5E-324d' was evaluated to '{(long)doubleOneIncrementAboveByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -7829,7 +9572,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(long)1d' was evaluated to '{(long)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(long)1d' was evaluated to '{(long)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -7844,7 +9589,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(long)254.99999999999997d' was evaluated to '{(long)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(long)254.99999999999997d' was evaluated to '{(long)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -7859,7 +9606,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(long)254d' was evaluated to '{(long)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(long)254d' was evaluated to '{(long)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -7874,7 +9623,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveByteMaxValue) != 255)
             {
-                Console.WriteLine($"'(long)255.00000000000003d' was evaluated to '{(long)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(long)255.00000000000003d' was evaluated to '{(long)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -7889,7 +9640,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(long)256d' was evaluated to '{(long)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(long)256d' was evaluated to '{(long)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -7904,7 +9657,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneDecrementUnderByteMinValue) != -1)
             {
-                Console.WriteLine($"'(long)-1.0' was evaluated to '{(long)integerOneDecrementUnderByteMinValue}'. Expected: '-1'.");
+                Console.WriteLine(
+                    $"'(long)-1.0' was evaluated to '{(long)integerOneDecrementUnderByteMinValue}'. Expected: '-1'."
+                );
                 _counter++;
             }
         }
@@ -7919,7 +9674,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(long)1.0' was evaluated to '{(long)integerOneIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(long)1.0' was evaluated to '{(long)integerOneIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -7934,7 +9691,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(long)254.0' was evaluated to '{(long)integerOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(long)254.0' was evaluated to '{(long)integerOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -7949,7 +9708,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(long)256.0' was evaluated to '{(long)integerOneIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(long)256.0' was evaluated to '{(long)integerOneIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -7964,7 +9725,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)int16MinValue) != -32768)
             {
-                Console.WriteLine($"'(long)-32768.0' was evaluated to '{(long)int16MinValue}'. Expected: '-32768'.");
+                Console.WriteLine(
+                    $"'(long)-32768.0' was evaluated to '{(long)int16MinValue}'. Expected: '-32768'."
+                );
                 _counter++;
             }
         }
@@ -7979,7 +9742,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)int16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(long)32767.0' was evaluated to '{(long)int16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(long)32767.0' was evaluated to '{(long)int16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -7994,7 +9759,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderInt16MinValue) != -32768)
             {
-                Console.WriteLine($"'(long)-32768.00000000001d' was evaluated to '{(long)doubleOneDecrementUnderInt16MinValue}'. Expected: '-32768'.");
+                Console.WriteLine(
+                    $"'(long)-32768.00000000001d' was evaluated to '{(long)doubleOneDecrementUnderInt16MinValue}'. Expected: '-32768'."
+                );
                 _counter++;
             }
         }
@@ -8009,7 +9776,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullDecrementUnderInt16MinValue) != -32769)
             {
-                Console.WriteLine($"'(long)-32769d' was evaluated to '{(long)doubleOneFullDecrementUnderInt16MinValue}'. Expected: '-32769'.");
+                Console.WriteLine(
+                    $"'(long)-32769d' was evaluated to '{(long)doubleOneFullDecrementUnderInt16MinValue}'. Expected: '-32769'."
+                );
                 _counter++;
             }
         }
@@ -8024,7 +9793,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveInt16MinValue) != -32767)
             {
-                Console.WriteLine($"'(long)-32767.999999999996d' was evaluated to '{(long)doubleOneIncrementAboveInt16MinValue}'. Expected: '-32767'.");
+                Console.WriteLine(
+                    $"'(long)-32767.999999999996d' was evaluated to '{(long)doubleOneIncrementAboveInt16MinValue}'. Expected: '-32767'."
+                );
                 _counter++;
             }
         }
@@ -8039,7 +9810,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullIncrementAboveInt16MinValue) != -32767)
             {
-                Console.WriteLine($"'(long)-32767d' was evaluated to '{(long)doubleOneFullIncrementAboveInt16MinValue}'. Expected: '-32767'.");
+                Console.WriteLine(
+                    $"'(long)-32767d' was evaluated to '{(long)doubleOneFullIncrementAboveInt16MinValue}'. Expected: '-32767'."
+                );
                 _counter++;
             }
         }
@@ -8054,7 +9827,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(long)32766.999999999996d' was evaluated to '{(long)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(long)32766.999999999996d' was evaluated to '{(long)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -8069,7 +9844,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(long)32766d' was evaluated to '{(long)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(long)32766d' was evaluated to '{(long)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -8084,7 +9861,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveInt16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(long)32767.000000000004d' was evaluated to '{(long)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(long)32767.000000000004d' was evaluated to '{(long)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -8099,7 +9878,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullIncrementAboveInt16MaxValue) != 32768)
             {
-                Console.WriteLine($"'(long)32768d' was evaluated to '{(long)doubleOneFullIncrementAboveInt16MaxValue}'. Expected: '32768'.");
+                Console.WriteLine(
+                    $"'(long)32768d' was evaluated to '{(long)doubleOneFullIncrementAboveInt16MaxValue}'. Expected: '32768'."
+                );
                 _counter++;
             }
         }
@@ -8114,7 +9895,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneDecrementUnderInt16MinValue) != -32769)
             {
-                Console.WriteLine($"'(long)-32769.0' was evaluated to '{(long)integerOneDecrementUnderInt16MinValue}'. Expected: '-32769'.");
+                Console.WriteLine(
+                    $"'(long)-32769.0' was evaluated to '{(long)integerOneDecrementUnderInt16MinValue}'. Expected: '-32769'."
+                );
                 _counter++;
             }
         }
@@ -8129,7 +9912,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveInt16MinValue) != -32767)
             {
-                Console.WriteLine($"'(long)-32767.0' was evaluated to '{(long)integerOneIncrementAboveInt16MinValue}'. Expected: '-32767'.");
+                Console.WriteLine(
+                    $"'(long)-32767.0' was evaluated to '{(long)integerOneIncrementAboveInt16MinValue}'. Expected: '-32767'."
+                );
                 _counter++;
             }
         }
@@ -8144,7 +9929,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(long)32766.0' was evaluated to '{(long)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(long)32766.0' was evaluated to '{(long)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -8159,7 +9946,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveInt16MaxValue) != 32768)
             {
-                Console.WriteLine($"'(long)32768.0' was evaluated to '{(long)integerOneIncrementAboveInt16MaxValue}'. Expected: '32768'.");
+                Console.WriteLine(
+                    $"'(long)32768.0' was evaluated to '{(long)integerOneIncrementAboveInt16MaxValue}'. Expected: '32768'."
+                );
                 _counter++;
             }
         }
@@ -8174,7 +9963,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)uInt16MaxValue) != 65535)
             {
-                Console.WriteLine($"'(long)65535.0' was evaluated to '{(long)uInt16MaxValue}'. Expected: '65535'.");
+                Console.WriteLine(
+                    $"'(long)65535.0' was evaluated to '{(long)uInt16MaxValue}'. Expected: '65535'."
+                );
                 _counter++;
             }
         }
@@ -8189,7 +9980,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(long)65534.99999999999d' was evaluated to '{(long)doubleOneDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(long)65534.99999999999d' was evaluated to '{(long)doubleOneDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -8204,7 +9997,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(long)65534d' was evaluated to '{(long)doubleOneFullDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(long)65534d' was evaluated to '{(long)doubleOneFullDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -8219,7 +10014,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveUInt16MaxValue) != 65535)
             {
-                Console.WriteLine($"'(long)65535.00000000001d' was evaluated to '{(long)doubleOneIncrementAboveUInt16MaxValue}'. Expected: '65535'.");
+                Console.WriteLine(
+                    $"'(long)65535.00000000001d' was evaluated to '{(long)doubleOneIncrementAboveUInt16MaxValue}'. Expected: '65535'."
+                );
                 _counter++;
             }
         }
@@ -8234,7 +10031,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullIncrementAboveUInt16MaxValue) != 65536)
             {
-                Console.WriteLine($"'(long)65536d' was evaluated to '{(long)doubleOneFullIncrementAboveUInt16MaxValue}'. Expected: '65536'.");
+                Console.WriteLine(
+                    $"'(long)65536d' was evaluated to '{(long)doubleOneFullIncrementAboveUInt16MaxValue}'. Expected: '65536'."
+                );
                 _counter++;
             }
         }
@@ -8249,7 +10048,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(long)65534.0' was evaluated to '{(long)integerOneDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(long)65534.0' was evaluated to '{(long)integerOneDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -8264,7 +10065,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveUInt16MaxValue) != 65536)
             {
-                Console.WriteLine($"'(long)65536.0' was evaluated to '{(long)integerOneIncrementAboveUInt16MaxValue}'. Expected: '65536'.");
+                Console.WriteLine(
+                    $"'(long)65536.0' was evaluated to '{(long)integerOneIncrementAboveUInt16MaxValue}'. Expected: '65536'."
+                );
                 _counter++;
             }
         }
@@ -8279,7 +10082,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)int32MinValue) != -2147483648)
             {
-                Console.WriteLine($"'(long)-2147483648.0' was evaluated to '{(long)int32MinValue}'. Expected: '-2147483648'.");
+                Console.WriteLine(
+                    $"'(long)-2147483648.0' was evaluated to '{(long)int32MinValue}'. Expected: '-2147483648'."
+                );
                 _counter++;
             }
         }
@@ -8294,7 +10099,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)int32MaxValue) != 2147483647)
             {
-                Console.WriteLine($"'(long)2147483647.0' was evaluated to '{(long)int32MaxValue}'. Expected: '2147483647'.");
+                Console.WriteLine(
+                    $"'(long)2147483647.0' was evaluated to '{(long)int32MaxValue}'. Expected: '2147483647'."
+                );
                 _counter++;
             }
         }
@@ -8309,7 +10116,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderInt32MinValue) != -2147483648)
             {
-                Console.WriteLine($"'(long)-2147483648.0000005d' was evaluated to '{(long)doubleOneDecrementUnderInt32MinValue}'. Expected: '-2147483648'.");
+                Console.WriteLine(
+                    $"'(long)-2147483648.0000005d' was evaluated to '{(long)doubleOneDecrementUnderInt32MinValue}'. Expected: '-2147483648'."
+                );
                 _counter++;
             }
         }
@@ -8324,7 +10133,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullDecrementUnderInt32MinValue) != -2147483649)
             {
-                Console.WriteLine($"'(long)-2147483649d' was evaluated to '{(long)doubleOneFullDecrementUnderInt32MinValue}'. Expected: '-2147483649'.");
+                Console.WriteLine(
+                    $"'(long)-2147483649d' was evaluated to '{(long)doubleOneFullDecrementUnderInt32MinValue}'. Expected: '-2147483649'."
+                );
                 _counter++;
             }
         }
@@ -8339,7 +10150,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveInt32MinValue) != -2147483647)
             {
-                Console.WriteLine($"'(long)-2147483647.9999998d' was evaluated to '{(long)doubleOneIncrementAboveInt32MinValue}'. Expected: '-2147483647'.");
+                Console.WriteLine(
+                    $"'(long)-2147483647.9999998d' was evaluated to '{(long)doubleOneIncrementAboveInt32MinValue}'. Expected: '-2147483647'."
+                );
                 _counter++;
             }
         }
@@ -8354,7 +10167,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullIncrementAboveInt32MinValue) != -2147483647)
             {
-                Console.WriteLine($"'(long)-2147483647d' was evaluated to '{(long)doubleOneFullIncrementAboveInt32MinValue}'. Expected: '-2147483647'.");
+                Console.WriteLine(
+                    $"'(long)-2147483647d' was evaluated to '{(long)doubleOneFullIncrementAboveInt32MinValue}'. Expected: '-2147483647'."
+                );
                 _counter++;
             }
         }
@@ -8369,7 +10184,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(long)2147483646.9999998d' was evaluated to '{(long)doubleOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(long)2147483646.9999998d' was evaluated to '{(long)doubleOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -8384,7 +10201,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(long)2147483646d' was evaluated to '{(long)doubleOneFullDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(long)2147483646d' was evaluated to '{(long)doubleOneFullDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -8399,7 +10218,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveInt32MaxValue) != 2147483647)
             {
-                Console.WriteLine($"'(long)2147483647.0000002d' was evaluated to '{(long)doubleOneIncrementAboveInt32MaxValue}'. Expected: '2147483647'.");
+                Console.WriteLine(
+                    $"'(long)2147483647.0000002d' was evaluated to '{(long)doubleOneIncrementAboveInt32MaxValue}'. Expected: '2147483647'."
+                );
                 _counter++;
             }
         }
@@ -8414,7 +10235,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullIncrementAboveInt32MaxValue) != 2147483648)
             {
-                Console.WriteLine($"'(long)2147483648d' was evaluated to '{(long)doubleOneFullIncrementAboveInt32MaxValue}'. Expected: '2147483648'.");
+                Console.WriteLine(
+                    $"'(long)2147483648d' was evaluated to '{(long)doubleOneFullIncrementAboveInt32MaxValue}'. Expected: '2147483648'."
+                );
                 _counter++;
             }
         }
@@ -8429,7 +10252,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneDecrementUnderInt32MinValue) != -2147483649)
             {
-                Console.WriteLine($"'(long)-2147483649.0' was evaluated to '{(long)integerOneDecrementUnderInt32MinValue}'. Expected: '-2147483649'.");
+                Console.WriteLine(
+                    $"'(long)-2147483649.0' was evaluated to '{(long)integerOneDecrementUnderInt32MinValue}'. Expected: '-2147483649'."
+                );
                 _counter++;
             }
         }
@@ -8444,7 +10269,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveInt32MinValue) != -2147483647)
             {
-                Console.WriteLine($"'(long)-2147483647.0' was evaluated to '{(long)integerOneIncrementAboveInt32MinValue}'. Expected: '-2147483647'.");
+                Console.WriteLine(
+                    $"'(long)-2147483647.0' was evaluated to '{(long)integerOneIncrementAboveInt32MinValue}'. Expected: '-2147483647'."
+                );
                 _counter++;
             }
         }
@@ -8459,7 +10286,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(long)2147483646.0' was evaluated to '{(long)integerOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(long)2147483646.0' was evaluated to '{(long)integerOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -8474,7 +10303,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveInt32MaxValue) != 2147483648)
             {
-                Console.WriteLine($"'(long)2147483648.0' was evaluated to '{(long)integerOneIncrementAboveInt32MaxValue}'. Expected: '2147483648'.");
+                Console.WriteLine(
+                    $"'(long)2147483648.0' was evaluated to '{(long)integerOneIncrementAboveInt32MaxValue}'. Expected: '2147483648'."
+                );
                 _counter++;
             }
         }
@@ -8489,7 +10320,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)uInt32MaxValue) != 4294967295)
             {
-                Console.WriteLine($"'(long)4294967295.0' was evaluated to '{(long)uInt32MaxValue}'. Expected: '4294967295'.");
+                Console.WriteLine(
+                    $"'(long)4294967295.0' was evaluated to '{(long)uInt32MaxValue}'. Expected: '4294967295'."
+                );
                 _counter++;
             }
         }
@@ -8504,7 +10337,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderUInt32MaxValue) != 4294967294)
             {
-                Console.WriteLine($"'(long)4294967294.9999995d' was evaluated to '{(long)doubleOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'.");
+                Console.WriteLine(
+                    $"'(long)4294967294.9999995d' was evaluated to '{(long)doubleOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'."
+                );
                 _counter++;
             }
         }
@@ -8519,7 +10354,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullDecrementUnderUInt32MaxValue) != 4294967294)
             {
-                Console.WriteLine($"'(long)4294967294d' was evaluated to '{(long)doubleOneFullDecrementUnderUInt32MaxValue}'. Expected: '4294967294'.");
+                Console.WriteLine(
+                    $"'(long)4294967294d' was evaluated to '{(long)doubleOneFullDecrementUnderUInt32MaxValue}'. Expected: '4294967294'."
+                );
                 _counter++;
             }
         }
@@ -8534,7 +10371,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveUInt32MaxValue) != 4294967295)
             {
-                Console.WriteLine($"'(long)4294967295.0000005d' was evaluated to '{(long)doubleOneIncrementAboveUInt32MaxValue}'. Expected: '4294967295'.");
+                Console.WriteLine(
+                    $"'(long)4294967295.0000005d' was evaluated to '{(long)doubleOneIncrementAboveUInt32MaxValue}'. Expected: '4294967295'."
+                );
                 _counter++;
             }
         }
@@ -8549,7 +10388,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneFullIncrementAboveUInt32MaxValue) != 4294967296)
             {
-                Console.WriteLine($"'(long)4294967296d' was evaluated to '{(long)doubleOneFullIncrementAboveUInt32MaxValue}'. Expected: '4294967296'.");
+                Console.WriteLine(
+                    $"'(long)4294967296d' was evaluated to '{(long)doubleOneFullIncrementAboveUInt32MaxValue}'. Expected: '4294967296'."
+                );
                 _counter++;
             }
         }
@@ -8564,7 +10405,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneDecrementUnderUInt32MaxValue) != 4294967294)
             {
-                Console.WriteLine($"'(long)4294967294.0' was evaluated to '{(long)integerOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'.");
+                Console.WriteLine(
+                    $"'(long)4294967294.0' was evaluated to '{(long)integerOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'."
+                );
                 _counter++;
             }
         }
@@ -8579,7 +10422,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveUInt32MaxValue) != 4294967296)
             {
-                Console.WriteLine($"'(long)4294967296.0' was evaluated to '{(long)integerOneIncrementAboveUInt32MaxValue}'. Expected: '4294967296'.");
+                Console.WriteLine(
+                    $"'(long)4294967296.0' was evaluated to '{(long)integerOneIncrementAboveUInt32MaxValue}'. Expected: '4294967296'."
+                );
                 _counter++;
             }
         }
@@ -8594,7 +10439,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)int64MinValue) != -9223372036854775808)
             {
-                Console.WriteLine($"'(long)-9223372036854775808.0' was evaluated to '{(long)int64MinValue}'. Expected: '-9223372036854775808'.");
+                Console.WriteLine(
+                    $"'(long)-9223372036854775808.0' was evaluated to '{(long)int64MinValue}'. Expected: '-9223372036854775808'."
+                );
                 _counter++;
             }
         }
@@ -8608,9 +10455,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((long)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((long)9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((long)9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt64MinValueCastToInt64IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8623,7 +10475,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneIncrementAboveInt64MinValue) != -9223372036854774784)
             {
-                Console.WriteLine($"'(long)-9.223372036854775E+18d' was evaluated to '{(long)doubleOneIncrementAboveInt64MinValue}'. Expected: '-9223372036854774784'.");
+                Console.WriteLine(
+                    $"'(long)-9.223372036854775E+18d' was evaluated to '{(long)doubleOneIncrementAboveInt64MinValue}'. Expected: '-9223372036854774784'."
+                );
                 _counter++;
             }
         }
@@ -8638,7 +10492,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)doubleOneDecrementUnderInt64MaxValue) != 9223372036854774784)
             {
-                Console.WriteLine($"'(long)9.223372036854775E+18d' was evaluated to '{(long)doubleOneDecrementUnderInt64MaxValue}'. Expected: '9223372036854774784'.");
+                Console.WriteLine(
+                    $"'(long)9.223372036854775E+18d' was evaluated to '{(long)doubleOneDecrementUnderInt64MaxValue}'. Expected: '9223372036854774784'."
+                );
                 _counter++;
             }
         }
@@ -8652,9 +10508,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((long)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((long)9.223372036854778E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((long)9.223372036854778E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt64MaxValueCastToInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8666,9 +10527,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((long)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((long)9.223372036854776E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((long)9.223372036854776E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MinValueCastToInt64IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8681,7 +10547,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((long)integerOneIncrementAboveInt64MinValue) != -9223372036854775808)
             {
-                Console.WriteLine($"'(long)-9223372036854775807.0' was evaluated to '{(long)integerOneIncrementAboveInt64MinValue}'. Expected: '-9223372036854775808'.");
+                Console.WriteLine(
+                    $"'(long)-9223372036854775807.0' was evaluated to '{(long)integerOneIncrementAboveInt64MinValue}'. Expected: '-9223372036854775808'."
+                );
                 _counter++;
             }
         }
@@ -8695,9 +10563,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((long)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((long)9223372036854775806.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((long)9223372036854775806.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt64MaxValueCastToInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8709,9 +10582,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((long)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((long)9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((long)9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmUInt64MaxValueCastToInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8723,9 +10601,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((long)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((long)18446744073709551615.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((long)18446744073709551615.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt64MaxValueCastToInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8737,9 +10620,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((long)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((long)1.844674407370955E+19d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((long)1.844674407370955E+19d)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderUInt64MaxValueCastToInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8751,9 +10639,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((long)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((long)18446744073709551614.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((long)18446744073709551614.0)' did not throw OverflowException."
+                );
         }
     }
 
@@ -8770,7 +10663,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerZero) != 0)
             {
-                Console.WriteLine($"'(ulong)0.0' was evaluated to '{(ulong)integerZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(ulong)0.0' was evaluated to '{(ulong)integerZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -8785,7 +10680,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleMinusZero) != 0)
             {
-                Console.WriteLine($"'(ulong)-0d' was evaluated to '{(ulong)doubleMinusZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(ulong)-0d' was evaluated to '{(ulong)doubleMinusZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -8800,7 +10697,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleZero) != 0)
             {
-                Console.WriteLine($"'(ulong)0d' was evaluated to '{(ulong)doubleZero}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(ulong)0d' was evaluated to '{(ulong)doubleZero}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -8814,9 +10713,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleMaxValueCastToUInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8828,9 +10732,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)1.7976931348623157E+308d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)1.7976931348623157E+308d)' did not throw OverflowException."
+                );
         }
         ConfirmSByteMinValueCastToUInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8842,7 +10751,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-128.0)' did not throw OverflowException.");
         }
@@ -8857,7 +10769,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)sByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(ulong)127.0' was evaluated to '{(ulong)sByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(ulong)127.0' was evaluated to '{(ulong)sByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -8871,9 +10785,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-128.00000000000003d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-128.00000000000003d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderSByteMinValueCastToUInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8885,7 +10804,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-129d)' did not throw OverflowException.");
         }
@@ -8899,9 +10821,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-127.99999999999999d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-127.99999999999999d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveSByteMinValueCastToUInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -8913,7 +10840,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-127d)' did not throw OverflowException.");
         }
@@ -8928,7 +10858,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(ulong)126.99999999999999d' was evaluated to '{(ulong)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(ulong)126.99999999999999d' was evaluated to '{(ulong)doubleOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -8943,7 +10875,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(ulong)126d' was evaluated to '{(ulong)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(ulong)126d' was evaluated to '{(ulong)doubleOneFullDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -8958,7 +10892,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneIncrementAboveSByteMaxValue) != 127)
             {
-                Console.WriteLine($"'(ulong)127.00000000000001d' was evaluated to '{(ulong)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'.");
+                Console.WriteLine(
+                    $"'(ulong)127.00000000000001d' was evaluated to '{(ulong)doubleOneIncrementAboveSByteMaxValue}'. Expected: '127'."
+                );
                 _counter++;
             }
         }
@@ -8973,7 +10909,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(ulong)128d' was evaluated to '{(ulong)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(ulong)128d' was evaluated to '{(ulong)doubleOneFullIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -8987,7 +10925,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-129.0)' did not throw OverflowException.");
         }
@@ -9001,7 +10942,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-127.0)' did not throw OverflowException.");
         }
@@ -9016,7 +10960,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneDecrementUnderSByteMaxValue) != 126)
             {
-                Console.WriteLine($"'(ulong)126.0' was evaluated to '{(ulong)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'.");
+                Console.WriteLine(
+                    $"'(ulong)126.0' was evaluated to '{(ulong)integerOneDecrementUnderSByteMaxValue}'. Expected: '126'."
+                );
                 _counter++;
             }
         }
@@ -9031,7 +10977,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneIncrementAboveSByteMaxValue) != 128)
             {
-                Console.WriteLine($"'(ulong)128.0' was evaluated to '{(ulong)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'.");
+                Console.WriteLine(
+                    $"'(ulong)128.0' was evaluated to '{(ulong)integerOneIncrementAboveSByteMaxValue}'. Expected: '128'."
+                );
                 _counter++;
             }
         }
@@ -9046,7 +10994,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)byteMaxValue) != 255)
             {
-                Console.WriteLine($"'(ulong)255.0' was evaluated to '{(ulong)byteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(ulong)255.0' was evaluated to '{(ulong)byteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -9061,7 +11011,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneDecrementUnderByteMinValue) != 0)
             {
-                Console.WriteLine($"'(ulong)-5E-324d' was evaluated to '{(ulong)doubleOneDecrementUnderByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(ulong)-5E-324d' was evaluated to '{(ulong)doubleOneDecrementUnderByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -9075,7 +11027,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-1d)' did not throw OverflowException.");
         }
@@ -9090,7 +11045,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneIncrementAboveByteMinValue) != 0)
             {
-                Console.WriteLine($"'(ulong)5E-324d' was evaluated to '{(ulong)doubleOneIncrementAboveByteMinValue}'. Expected: '0'.");
+                Console.WriteLine(
+                    $"'(ulong)5E-324d' was evaluated to '{(ulong)doubleOneIncrementAboveByteMinValue}'. Expected: '0'."
+                );
                 _counter++;
             }
         }
@@ -9105,7 +11062,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(ulong)1d' was evaluated to '{(ulong)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(ulong)1d' was evaluated to '{(ulong)doubleOneFullIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -9120,7 +11079,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(ulong)254.99999999999997d' was evaluated to '{(ulong)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(ulong)254.99999999999997d' was evaluated to '{(ulong)doubleOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -9135,7 +11096,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(ulong)254d' was evaluated to '{(ulong)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(ulong)254d' was evaluated to '{(ulong)doubleOneFullDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -9150,7 +11113,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneIncrementAboveByteMaxValue) != 255)
             {
-                Console.WriteLine($"'(ulong)255.00000000000003d' was evaluated to '{(ulong)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'.");
+                Console.WriteLine(
+                    $"'(ulong)255.00000000000003d' was evaluated to '{(ulong)doubleOneIncrementAboveByteMaxValue}'. Expected: '255'."
+                );
                 _counter++;
             }
         }
@@ -9165,7 +11130,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(ulong)256d' was evaluated to '{(ulong)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(ulong)256d' was evaluated to '{(ulong)doubleOneFullIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -9179,7 +11146,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-1.0)' did not throw OverflowException.");
         }
@@ -9194,7 +11164,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneIncrementAboveByteMinValue) != 1)
             {
-                Console.WriteLine($"'(ulong)1.0' was evaluated to '{(ulong)integerOneIncrementAboveByteMinValue}'. Expected: '1'.");
+                Console.WriteLine(
+                    $"'(ulong)1.0' was evaluated to '{(ulong)integerOneIncrementAboveByteMinValue}'. Expected: '1'."
+                );
                 _counter++;
             }
         }
@@ -9209,7 +11181,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneDecrementUnderByteMaxValue) != 254)
             {
-                Console.WriteLine($"'(ulong)254.0' was evaluated to '{(ulong)integerOneDecrementUnderByteMaxValue}'. Expected: '254'.");
+                Console.WriteLine(
+                    $"'(ulong)254.0' was evaluated to '{(ulong)integerOneDecrementUnderByteMaxValue}'. Expected: '254'."
+                );
                 _counter++;
             }
         }
@@ -9224,7 +11198,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneIncrementAboveByteMaxValue) != 256)
             {
-                Console.WriteLine($"'(ulong)256.0' was evaluated to '{(ulong)integerOneIncrementAboveByteMaxValue}'. Expected: '256'.");
+                Console.WriteLine(
+                    $"'(ulong)256.0' was evaluated to '{(ulong)integerOneIncrementAboveByteMaxValue}'. Expected: '256'."
+                );
                 _counter++;
             }
         }
@@ -9238,7 +11214,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-32768.0)' did not throw OverflowException.");
         }
@@ -9253,7 +11232,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)int16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(ulong)32767.0' was evaluated to '{(ulong)int16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(ulong)32767.0' was evaluated to '{(ulong)int16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -9267,9 +11248,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-32768.00000000001d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-32768.00000000001d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt16MinValueCastToUInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9281,7 +11267,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-32769d)' did not throw OverflowException.");
         }
@@ -9295,9 +11284,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-32767.999999999996d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-32767.999999999996d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt16MinValueCastToUInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9309,7 +11303,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-32767d)' did not throw OverflowException.");
         }
@@ -9324,7 +11321,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(ulong)32766.999999999996d' was evaluated to '{(ulong)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(ulong)32766.999999999996d' was evaluated to '{(ulong)doubleOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -9339,7 +11338,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(ulong)32766d' was evaluated to '{(ulong)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(ulong)32766d' was evaluated to '{(ulong)doubleOneFullDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -9354,7 +11355,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneIncrementAboveInt16MaxValue) != 32767)
             {
-                Console.WriteLine($"'(ulong)32767.000000000004d' was evaluated to '{(ulong)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'.");
+                Console.WriteLine(
+                    $"'(ulong)32767.000000000004d' was evaluated to '{(ulong)doubleOneIncrementAboveInt16MaxValue}'. Expected: '32767'."
+                );
                 _counter++;
             }
         }
@@ -9369,7 +11372,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullIncrementAboveInt16MaxValue) != 32768)
             {
-                Console.WriteLine($"'(ulong)32768d' was evaluated to '{(ulong)doubleOneFullIncrementAboveInt16MaxValue}'. Expected: '32768'.");
+                Console.WriteLine(
+                    $"'(ulong)32768d' was evaluated to '{(ulong)doubleOneFullIncrementAboveInt16MaxValue}'. Expected: '32768'."
+                );
                 _counter++;
             }
         }
@@ -9383,7 +11388,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-32769.0)' did not throw OverflowException.");
         }
@@ -9397,7 +11405,10 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
                 Console.WriteLine("'checked((ulong)-32767.0)' did not throw OverflowException.");
         }
@@ -9412,7 +11423,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneDecrementUnderInt16MaxValue) != 32766)
             {
-                Console.WriteLine($"'(ulong)32766.0' was evaluated to '{(ulong)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'.");
+                Console.WriteLine(
+                    $"'(ulong)32766.0' was evaluated to '{(ulong)integerOneDecrementUnderInt16MaxValue}'. Expected: '32766'."
+                );
                 _counter++;
             }
         }
@@ -9427,7 +11440,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneIncrementAboveInt16MaxValue) != 32768)
             {
-                Console.WriteLine($"'(ulong)32768.0' was evaluated to '{(ulong)integerOneIncrementAboveInt16MaxValue}'. Expected: '32768'.");
+                Console.WriteLine(
+                    $"'(ulong)32768.0' was evaluated to '{(ulong)integerOneIncrementAboveInt16MaxValue}'. Expected: '32768'."
+                );
                 _counter++;
             }
         }
@@ -9442,7 +11457,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)uInt16MaxValue) != 65535)
             {
-                Console.WriteLine($"'(ulong)65535.0' was evaluated to '{(ulong)uInt16MaxValue}'. Expected: '65535'.");
+                Console.WriteLine(
+                    $"'(ulong)65535.0' was evaluated to '{(ulong)uInt16MaxValue}'. Expected: '65535'."
+                );
                 _counter++;
             }
         }
@@ -9457,7 +11474,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(ulong)65534.99999999999d' was evaluated to '{(ulong)doubleOneDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(ulong)65534.99999999999d' was evaluated to '{(ulong)doubleOneDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -9472,7 +11491,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(ulong)65534d' was evaluated to '{(ulong)doubleOneFullDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(ulong)65534d' was evaluated to '{(ulong)doubleOneFullDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -9487,7 +11508,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneIncrementAboveUInt16MaxValue) != 65535)
             {
-                Console.WriteLine($"'(ulong)65535.00000000001d' was evaluated to '{(ulong)doubleOneIncrementAboveUInt16MaxValue}'. Expected: '65535'.");
+                Console.WriteLine(
+                    $"'(ulong)65535.00000000001d' was evaluated to '{(ulong)doubleOneIncrementAboveUInt16MaxValue}'. Expected: '65535'."
+                );
                 _counter++;
             }
         }
@@ -9502,7 +11525,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullIncrementAboveUInt16MaxValue) != 65536)
             {
-                Console.WriteLine($"'(ulong)65536d' was evaluated to '{(ulong)doubleOneFullIncrementAboveUInt16MaxValue}'. Expected: '65536'.");
+                Console.WriteLine(
+                    $"'(ulong)65536d' was evaluated to '{(ulong)doubleOneFullIncrementAboveUInt16MaxValue}'. Expected: '65536'."
+                );
                 _counter++;
             }
         }
@@ -9517,7 +11542,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneDecrementUnderUInt16MaxValue) != 65534)
             {
-                Console.WriteLine($"'(ulong)65534.0' was evaluated to '{(ulong)integerOneDecrementUnderUInt16MaxValue}'. Expected: '65534'.");
+                Console.WriteLine(
+                    $"'(ulong)65534.0' was evaluated to '{(ulong)integerOneDecrementUnderUInt16MaxValue}'. Expected: '65534'."
+                );
                 _counter++;
             }
         }
@@ -9532,7 +11559,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneIncrementAboveUInt16MaxValue) != 65536)
             {
-                Console.WriteLine($"'(ulong)65536.0' was evaluated to '{(ulong)integerOneIncrementAboveUInt16MaxValue}'. Expected: '65536'.");
+                Console.WriteLine(
+                    $"'(ulong)65536.0' was evaluated to '{(ulong)integerOneIncrementAboveUInt16MaxValue}'. Expected: '65536'."
+                );
                 _counter++;
             }
         }
@@ -9546,9 +11575,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-2147483648.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-2147483648.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt32MaxValueCastToUInt64IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9561,7 +11595,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)int32MaxValue) != 2147483647)
             {
-                Console.WriteLine($"'(ulong)2147483647.0' was evaluated to '{(ulong)int32MaxValue}'. Expected: '2147483647'.");
+                Console.WriteLine(
+                    $"'(ulong)2147483647.0' was evaluated to '{(ulong)int32MaxValue}'. Expected: '2147483647'."
+                );
                 _counter++;
             }
         }
@@ -9575,9 +11611,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-2147483648.0000005d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-2147483648.0000005d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullDecrementUnderInt32MinValueCastToUInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9589,9 +11630,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-2147483649d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-2147483649d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneIncrementAboveInt32MinValueCastToUInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9603,9 +11649,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-2147483647.9999998d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-2147483647.9999998d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneFullIncrementAboveInt32MinValueCastToUInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9617,9 +11668,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-2147483647d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-2147483647d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt32MaxValueCastToUInt64IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9632,7 +11688,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(ulong)2147483646.9999998d' was evaluated to '{(ulong)doubleOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(ulong)2147483646.9999998d' was evaluated to '{(ulong)doubleOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -9647,7 +11705,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(ulong)2147483646d' was evaluated to '{(ulong)doubleOneFullDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(ulong)2147483646d' was evaluated to '{(ulong)doubleOneFullDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -9662,7 +11722,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneIncrementAboveInt32MaxValue) != 2147483647)
             {
-                Console.WriteLine($"'(ulong)2147483647.0000002d' was evaluated to '{(ulong)doubleOneIncrementAboveInt32MaxValue}'. Expected: '2147483647'.");
+                Console.WriteLine(
+                    $"'(ulong)2147483647.0000002d' was evaluated to '{(ulong)doubleOneIncrementAboveInt32MaxValue}'. Expected: '2147483647'."
+                );
                 _counter++;
             }
         }
@@ -9677,7 +11739,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullIncrementAboveInt32MaxValue) != 2147483648)
             {
-                Console.WriteLine($"'(ulong)2147483648d' was evaluated to '{(ulong)doubleOneFullIncrementAboveInt32MaxValue}'. Expected: '2147483648'.");
+                Console.WriteLine(
+                    $"'(ulong)2147483648d' was evaluated to '{(ulong)doubleOneFullIncrementAboveInt32MaxValue}'. Expected: '2147483648'."
+                );
                 _counter++;
             }
         }
@@ -9691,9 +11755,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-2147483649.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-2147483649.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneIncrementAboveInt32MinValueCastToUInt64Overflows();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9705,9 +11774,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-2147483647.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-2147483647.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt32MaxValueCastToUInt64IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9720,7 +11794,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneDecrementUnderInt32MaxValue) != 2147483646)
             {
-                Console.WriteLine($"'(ulong)2147483646.0' was evaluated to '{(ulong)integerOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'.");
+                Console.WriteLine(
+                    $"'(ulong)2147483646.0' was evaluated to '{(ulong)integerOneDecrementUnderInt32MaxValue}'. Expected: '2147483646'."
+                );
                 _counter++;
             }
         }
@@ -9735,7 +11811,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneIncrementAboveInt32MaxValue) != 2147483648)
             {
-                Console.WriteLine($"'(ulong)2147483648.0' was evaluated to '{(ulong)integerOneIncrementAboveInt32MaxValue}'. Expected: '2147483648'.");
+                Console.WriteLine(
+                    $"'(ulong)2147483648.0' was evaluated to '{(ulong)integerOneIncrementAboveInt32MaxValue}'. Expected: '2147483648'."
+                );
                 _counter++;
             }
         }
@@ -9750,7 +11828,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)uInt32MaxValue) != 4294967295)
             {
-                Console.WriteLine($"'(ulong)4294967295.0' was evaluated to '{(ulong)uInt32MaxValue}'. Expected: '4294967295'.");
+                Console.WriteLine(
+                    $"'(ulong)4294967295.0' was evaluated to '{(ulong)uInt32MaxValue}'. Expected: '4294967295'."
+                );
                 _counter++;
             }
         }
@@ -9765,7 +11845,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneDecrementUnderUInt32MaxValue) != 4294967294)
             {
-                Console.WriteLine($"'(ulong)4294967294.9999995d' was evaluated to '{(ulong)doubleOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'.");
+                Console.WriteLine(
+                    $"'(ulong)4294967294.9999995d' was evaluated to '{(ulong)doubleOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'."
+                );
                 _counter++;
             }
         }
@@ -9780,7 +11862,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullDecrementUnderUInt32MaxValue) != 4294967294)
             {
-                Console.WriteLine($"'(ulong)4294967294d' was evaluated to '{(ulong)doubleOneFullDecrementUnderUInt32MaxValue}'. Expected: '4294967294'.");
+                Console.WriteLine(
+                    $"'(ulong)4294967294d' was evaluated to '{(ulong)doubleOneFullDecrementUnderUInt32MaxValue}'. Expected: '4294967294'."
+                );
                 _counter++;
             }
         }
@@ -9795,7 +11879,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneIncrementAboveUInt32MaxValue) != 4294967295)
             {
-                Console.WriteLine($"'(ulong)4294967295.0000005d' was evaluated to '{(ulong)doubleOneIncrementAboveUInt32MaxValue}'. Expected: '4294967295'.");
+                Console.WriteLine(
+                    $"'(ulong)4294967295.0000005d' was evaluated to '{(ulong)doubleOneIncrementAboveUInt32MaxValue}'. Expected: '4294967295'."
+                );
                 _counter++;
             }
         }
@@ -9810,7 +11896,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullIncrementAboveUInt32MaxValue) != 4294967296)
             {
-                Console.WriteLine($"'(ulong)4294967296d' was evaluated to '{(ulong)doubleOneFullIncrementAboveUInt32MaxValue}'. Expected: '4294967296'.");
+                Console.WriteLine(
+                    $"'(ulong)4294967296d' was evaluated to '{(ulong)doubleOneFullIncrementAboveUInt32MaxValue}'. Expected: '4294967296'."
+                );
                 _counter++;
             }
         }
@@ -9825,7 +11913,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneDecrementUnderUInt32MaxValue) != 4294967294)
             {
-                Console.WriteLine($"'(ulong)4294967294.0' was evaluated to '{(ulong)integerOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'.");
+                Console.WriteLine(
+                    $"'(ulong)4294967294.0' was evaluated to '{(ulong)integerOneDecrementUnderUInt32MaxValue}'. Expected: '4294967294'."
+                );
                 _counter++;
             }
         }
@@ -9840,7 +11930,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneIncrementAboveUInt32MaxValue) != 4294967296)
             {
-                Console.WriteLine($"'(ulong)4294967296.0' was evaluated to '{(ulong)integerOneIncrementAboveUInt32MaxValue}'. Expected: '4294967296'.");
+                Console.WriteLine(
+                    $"'(ulong)4294967296.0' was evaluated to '{(ulong)integerOneIncrementAboveUInt32MaxValue}'. Expected: '4294967296'."
+                );
                 _counter++;
             }
         }
@@ -9854,9 +11946,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-9223372036854775808.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-9223372036854775808.0)' did not throw OverflowException."
+                );
         }
         ConfirmInt64MaxValueCastToUInt64IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9869,7 +11966,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)int64MaxValue) != 9223372036854775808)
             {
-                Console.WriteLine($"'(ulong)9223372036854775807.0' was evaluated to '{(ulong)int64MaxValue}'. Expected: '9223372036854775808'.");
+                Console.WriteLine(
+                    $"'(ulong)9223372036854775807.0' was evaluated to '{(ulong)int64MaxValue}'. Expected: '9223372036854775808'."
+                );
                 _counter++;
             }
         }
@@ -9883,9 +11982,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-9.223372036854775E+18d)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-9.223372036854775E+18d)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderInt64MaxValueCastToUInt64IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9898,7 +12002,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneDecrementUnderInt64MaxValue) != 9223372036854774784)
             {
-                Console.WriteLine($"'(ulong)9.223372036854775E+18d' was evaluated to '{(ulong)doubleOneDecrementUnderInt64MaxValue}'. Expected: '9223372036854774784'.");
+                Console.WriteLine(
+                    $"'(ulong)9.223372036854775E+18d' was evaluated to '{(ulong)doubleOneDecrementUnderInt64MaxValue}'. Expected: '9223372036854774784'."
+                );
                 _counter++;
             }
         }
@@ -9913,7 +12019,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneIncrementAboveInt64MaxValue) != 9223372036854777856)
             {
-                Console.WriteLine($"'(ulong)9.223372036854778E+18d' was evaluated to '{(ulong)doubleOneIncrementAboveInt64MaxValue}'. Expected: '9223372036854777856'.");
+                Console.WriteLine(
+                    $"'(ulong)9.223372036854778E+18d' was evaluated to '{(ulong)doubleOneIncrementAboveInt64MaxValue}'. Expected: '9223372036854777856'."
+                );
                 _counter++;
             }
         }
@@ -9928,7 +12036,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneFullIncrementAboveInt64MaxValue) != 9223372036854775808)
             {
-                Console.WriteLine($"'(ulong)9.223372036854776E+18d' was evaluated to '{(ulong)doubleOneFullIncrementAboveInt64MaxValue}'. Expected: '9223372036854775808'.");
+                Console.WriteLine(
+                    $"'(ulong)9.223372036854776E+18d' was evaluated to '{(ulong)doubleOneFullIncrementAboveInt64MaxValue}'. Expected: '9223372036854775808'."
+                );
                 _counter++;
             }
         }
@@ -9942,9 +12052,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)-9223372036854775807.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)-9223372036854775807.0)' did not throw OverflowException."
+                );
         }
         ConfirmIntegerOneDecrementUnderInt64MaxValueCastToUInt64IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -9957,7 +12072,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneDecrementUnderInt64MaxValue) != 9223372036854775808)
             {
-                Console.WriteLine($"'(ulong)9223372036854775806.0' was evaluated to '{(ulong)integerOneDecrementUnderInt64MaxValue}'. Expected: '9223372036854775808'.");
+                Console.WriteLine(
+                    $"'(ulong)9223372036854775806.0' was evaluated to '{(ulong)integerOneDecrementUnderInt64MaxValue}'. Expected: '9223372036854775808'."
+                );
                 _counter++;
             }
         }
@@ -9972,7 +12089,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)integerOneIncrementAboveInt64MaxValue) != 9223372036854775808)
             {
-                Console.WriteLine($"'(ulong)9223372036854775808.0' was evaluated to '{(ulong)integerOneIncrementAboveInt64MaxValue}'. Expected: '9223372036854775808'.");
+                Console.WriteLine(
+                    $"'(ulong)9223372036854775808.0' was evaluated to '{(ulong)integerOneIncrementAboveInt64MaxValue}'. Expected: '9223372036854775808'."
+                );
                 _counter++;
             }
         }
@@ -9986,9 +12105,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)18446744073709551615.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)18446744073709551615.0)' did not throw OverflowException."
+                );
         }
         ConfirmDoubleOneDecrementUnderUInt64MaxValueCastToUInt64IsFoldedCorrectly();
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -10001,7 +12125,9 @@ public partial class ValueNumberingCheckedCastsOfConstants
 
             if (checked((ulong)doubleOneDecrementUnderUInt64MaxValue) != 18446744073709549568)
             {
-                Console.WriteLine($"'(ulong)1.844674407370955E+19d' was evaluated to '{(ulong)doubleOneDecrementUnderUInt64MaxValue}'. Expected: '18446744073709549568'.");
+                Console.WriteLine(
+                    $"'(ulong)1.844674407370955E+19d' was evaluated to '{(ulong)doubleOneDecrementUnderUInt64MaxValue}'. Expected: '18446744073709549568'."
+                );
                 _counter++;
             }
         }
@@ -10015,9 +12141,14 @@ public partial class ValueNumberingCheckedCastsOfConstants
             {
                 _ = checked((ulong)from);
             }
-            catch (OverflowException) { _counter--; }
+            catch (OverflowException)
+            {
+                _counter--;
+            }
             if (_counter != 100)
-                Console.WriteLine("'checked((ulong)18446744073709551614.0)' did not throw OverflowException.");
+                Console.WriteLine(
+                    "'checked((ulong)18446744073709551614.0)' did not throw OverflowException."
+                );
         }
     }
 }

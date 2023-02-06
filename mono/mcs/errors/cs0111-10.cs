@@ -5,12 +5,8 @@ namespace Test
 {
     public class EmptyClass
     {
-        ~EmptyClass ()
-        {
-        }
+        ~EmptyClass() { }
 
-        ~EmptyClass ()
-        {
-        }
+        ~EmptyClass() { }
     }
 }

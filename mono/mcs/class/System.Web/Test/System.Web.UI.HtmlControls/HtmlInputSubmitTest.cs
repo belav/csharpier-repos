@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,78 +34,76 @@ using System.Web.UI.HtmlControls;
 
 using NUnit.Framework;
 
-
-namespace MonoTests.System.Web.UI.HtmlControls {
-
-    public class HtmlInputSubmitPoker : HtmlInputSubmit {
-
-        public HtmlInputSubmitPoker ()
+namespace MonoTests.System.Web.UI.HtmlControls
+{
+    public class HtmlInputSubmitPoker : HtmlInputSubmit
+    {
+        public HtmlInputSubmitPoker()
         {
-            TrackViewState ();
+            TrackViewState();
         }
 
-        public object SaveState ()
+        public object SaveState()
         {
-            return SaveViewState ();
+            return SaveViewState();
         }
 
-        public void LoadState (object state)
+        public void LoadState(object state)
         {
-            LoadViewState (state);
+            LoadViewState(state);
         }
 
-        public void DoRenderAttributes (HtmlTextWriter writer)
+        public void DoRenderAttributes(HtmlTextWriter writer)
         {
-            RenderAttributes (writer);
+            RenderAttributes(writer);
         }
     }
 
     [TestFixture]
-    public class HtmlInputSubmitTest {
-
+    public class HtmlInputSubmitTest
+    {
         [Test]
-        public void Defaults ()
+        public void Defaults()
         {
-            HtmlInputSubmitPoker p = new HtmlInputSubmitPoker ();
+            HtmlInputSubmitPoker p = new HtmlInputSubmitPoker();
 
-            Assert.IsTrue (p.CausesValidation, "A1");
-            Assert.AreEqual ("", p.ValidationGroup, "A2");
+            Assert.IsTrue(p.CausesValidation, "A1");
+            Assert.AreEqual("", p.ValidationGroup, "A2");
         }
 
         [Test]
-        public void CleanProperties ()
+        public void CleanProperties()
         {
-            HtmlInputSubmitPoker p = new HtmlInputSubmitPoker ();
+            HtmlInputSubmitPoker p = new HtmlInputSubmitPoker();
 
             p.CausesValidation = false;
-            Assert.IsFalse (p.CausesValidation, "A1");
+            Assert.IsFalse(p.CausesValidation, "A1");
 
             p.CausesValidation = true;
-            Assert.IsTrue (p.CausesValidation, "A2");
+            Assert.IsTrue(p.CausesValidation, "A2");
 
             p.CausesValidation = false;
-            Assert.IsFalse (p.CausesValidation, "A3");
+            Assert.IsFalse(p.CausesValidation, "A3");
 
             p.ValidationGroup = "hi";
-            Assert.AreEqual ("hi", p.ValidationGroup, "A4");
+            Assert.AreEqual("hi", p.ValidationGroup, "A4");
 
             p.ValidationGroup = "";
-            Assert.AreEqual ("", p.ValidationGroup, "A4");
+            Assert.AreEqual("", p.ValidationGroup, "A4");
         }
 
         [Test]
-        public void RenderAttributes ()
+        public void RenderAttributes()
         {
-            StringWriter sw = new StringWriter ();
-            HtmlTextWriter tw = new HtmlTextWriter (sw);
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter tw = new HtmlTextWriter(sw);
 
-            HtmlInputSubmitPoker p = new HtmlInputSubmitPoker ();
+            HtmlInputSubmitPoker p = new HtmlInputSubmitPoker();
 
-            Assert.AreEqual (p.Attributes.Count, 1, "A1");
+            Assert.AreEqual(p.Attributes.Count, 1, "A1");
 
-            p.DoRenderAttributes (tw);
-            Assert.AreEqual (sw.ToString (), " name type=\"submit\" /", "A2");
+            p.DoRenderAttributes(tw);
+            Assert.AreEqual(sw.ToString(), " name type=\"submit\" /", "A2");
         }
-    }    
+    }
 }
-

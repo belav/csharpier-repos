@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,93 +27,121 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if WIN_PLATFORM
-namespace System.Net.NetworkInformation {
+namespace System.Net.NetworkInformation
+{
     class Win32IcmpV4Statistics : IcmpV4Statistics
     {
-        Win32_MIBICMPSTATS iin, iout;
+        Win32_MIBICMPSTATS iin,
+            iout;
 
-        public Win32IcmpV4Statistics (Win32_MIBICMPINFO info)
+        public Win32IcmpV4Statistics(Win32_MIBICMPINFO info)
         {
             iin = info.InStats;
             iout = info.OutStats;
         }
 
-        public override long AddressMaskRepliesReceived {
+        public override long AddressMaskRepliesReceived
+        {
             get { return iin.AddrMaskReps; }
         }
-        public override long AddressMaskRepliesSent {
+        public override long AddressMaskRepliesSent
+        {
             get { return iout.AddrMaskReps; }
         }
-        public override long AddressMaskRequestsReceived {
+        public override long AddressMaskRequestsReceived
+        {
             get { return iin.AddrMasks; }
         }
-        public override long AddressMaskRequestsSent {
+        public override long AddressMaskRequestsSent
+        {
             get { return iout.AddrMasks; }
         }
-        public override long DestinationUnreachableMessagesReceived {
+        public override long DestinationUnreachableMessagesReceived
+        {
             get { return iin.DestUnreachs; }
         }
-        public override long DestinationUnreachableMessagesSent {
+        public override long DestinationUnreachableMessagesSent
+        {
             get { return iout.DestUnreachs; }
         }
-        public override long EchoRepliesReceived {
+        public override long EchoRepliesReceived
+        {
             get { return iin.EchoReps; }
         }
-        public override long EchoRepliesSent {
+        public override long EchoRepliesSent
+        {
             get { return iout.EchoReps; }
         }
-        public override long EchoRequestsReceived {
+        public override long EchoRequestsReceived
+        {
             get { return iin.Echos; }
         }
-        public override long EchoRequestsSent {
+        public override long EchoRequestsSent
+        {
             get { return iout.Echos; }
         }
-        public override long ErrorsReceived {
+        public override long ErrorsReceived
+        {
             get { return iin.Errors; }
         }
-        public override long ErrorsSent {
+        public override long ErrorsSent
+        {
             get { return iout.Errors; }
         }
-        public override long MessagesReceived {
+        public override long MessagesReceived
+        {
             get { return iin.Msgs; }
         }
-        public override long MessagesSent {
+        public override long MessagesSent
+        {
             get { return iout.Msgs; }
         }
-        public override long ParameterProblemsReceived {
+        public override long ParameterProblemsReceived
+        {
             get { return iin.ParmProbs; }
         }
-        public override long ParameterProblemsSent {
+        public override long ParameterProblemsSent
+        {
             get { return iout.ParmProbs; }
         }
-        public override long RedirectsReceived {
+        public override long RedirectsReceived
+        {
             get { return iin.Redirects; }
         }
-        public override long RedirectsSent {
+        public override long RedirectsSent
+        {
             get { return iout.Redirects; }
         }
-        public override long SourceQuenchesReceived {
+        public override long SourceQuenchesReceived
+        {
             get { return iin.SrcQuenchs; }
         }
-        public override long SourceQuenchesSent {
+        public override long SourceQuenchesSent
+        {
             get { return iout.SrcQuenchs; }
         }
-        public override long TimeExceededMessagesReceived {
+        public override long TimeExceededMessagesReceived
+        {
             get { return iin.TimeExcds; }
         }
-        public override long TimeExceededMessagesSent {
+        public override long TimeExceededMessagesSent
+        {
             get { return iout.TimeExcds; }
         }
-        public override long TimestampRepliesReceived {
+        public override long TimestampRepliesReceived
+        {
             get { return iin.TimestampReps; }
         }
-        public override long TimestampRepliesSent {
+        public override long TimestampRepliesSent
+        {
             get { return iout.TimestampReps; }
         }
-        public override long TimestampRequestsReceived {
+        public override long TimestampRequestsReceived
+        {
             get { return iin.Timestamps; }
         }
-        public override long TimestampRequestsSent {
+        public override long TimestampRequestsSent
+        {
             get { return iout.Timestamps; }
         }
     }

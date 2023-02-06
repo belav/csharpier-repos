@@ -4,14 +4,14 @@
 /*
     This is regression test for DevDiv #607
     Runtime was throwing a TypeLoadException
-    Unhandled Exception: System.TypeLoadException: 
-    The type 'I6' in assembly 'check2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' 
+    Unhandled Exception: System.TypeLoadException:
+    The type 'I6' in assembly 'check2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
     has a contracting interface set for some instantiations.
 */
 using System;
 
 public class Test_DevDiv607
-{    
+{
     public static int Main()
     {
         try
@@ -25,7 +25,5 @@ public class Test_DevDiv607
             Console.WriteLine("FAIL: Caught unexpected exception: " + e);
             return 101;
         }
-        
     }
-
 }

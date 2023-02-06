@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,67 +30,65 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Mono.Mozilla {
-
-    [Guid ("BA434C60-9D52-11d3-AFB0-00A024FFC08C")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIWebBrowserChrome {
-
+namespace Mono.Mozilla
+{
+    [Guid("BA434C60-9D52-11d3-AFB0-00A024FFC08C")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIWebBrowserChrome
+    {
 #region nsIWebBrowserChrome
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setStatus (
-                   uint statusType,
-                [MarshalAs(UnmanagedType.LPWStr)]   string status);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setStatus(uint statusType, [MarshalAs(UnmanagedType.LPWStr)] string status);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getWebBrowser ([MarshalAs (UnmanagedType.Interface)]  out nsIWebBrowser ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getWebBrowser([MarshalAs(UnmanagedType.Interface)] out nsIWebBrowser ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setWebBrowser ([MarshalAs (UnmanagedType.Interface)]  nsIWebBrowser value);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setWebBrowser([MarshalAs(UnmanagedType.Interface)] nsIWebBrowser value);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getChromeFlags ( out uint ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getChromeFlags(out uint ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setChromeFlags ( uint value);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setChromeFlags(uint value);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int destroyBrowserWindow ();
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int destroyBrowserWindow();
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int sizeBrowserTo (
-                   int aCX,
-                   int aCY);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int sizeBrowserTo(int aCX, int aCY);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int showAsModal ();
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int showAsModal();
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int isWindowModal ( out bool ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int isWindowModal(out bool ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int exitModalEventLoop (
-                   int aStatus);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int exitModalEventLoop(int aStatus);
 
 #endregion
     }
 
-
-    internal class nsWebBrowserChrome {
-        public static nsIWebBrowserChrome GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebBrowserChrome obj)
+    internal class nsWebBrowserChrome
+    {
+        public static nsIWebBrowserChrome GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIWebBrowserChrome obj
+        )
         {
-            object o = Base.GetProxyForObject (control, typeof(nsIWebBrowserChrome).GUID, obj);
+            object o = Base.GetProxyForObject(control, typeof(nsIWebBrowserChrome).GUID, obj);
             return o as nsIWebBrowserChrome;
         }
     }

@@ -3,9 +3,9 @@
 // correctly the return type in the presence of null (as null
 // will be implicitly convertible to anything
 //
-class X {
-
-    public static int Main ()
+class X
+{
+    public static int Main()
     {
         object o = null;
 

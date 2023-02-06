@@ -28,12 +28,10 @@ namespace Roslyn.Utilities
         }
 
         public SpellChecker(Checksum checksum, IEnumerable<string> corpus)
-            : this(checksum, BKTree.Create(corpus))
-        {
-        }
+            : this(checksum, BKTree.Create(corpus)) { }
 
-        public IList<string> FindSimilarWords(string value)
-            => FindSimilarWords(value, substringsAreSimilar: false);
+        public IList<string> FindSimilarWords(string value) =>
+            FindSimilarWords(value, substringsAreSimilar: false);
 
         public IList<string> FindSimilarWords(string value, bool substringsAreSimilar)
         {

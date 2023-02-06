@@ -26,12 +26,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
+namespace Mono.Cecil.Binary
+{
     using System;
 
     [Flags]
-    internal enum SectionCharacteristics : uint {
+    internal enum SectionCharacteristics : uint
+    {
         TypeNoPad = 0x0000008,
         ContainsCode = 0x00000020,
         ContainsInitializedData = 0x00000040,

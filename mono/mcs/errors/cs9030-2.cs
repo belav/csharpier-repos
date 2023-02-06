@@ -8,10 +8,10 @@ public class Test1
         public System.EventHandler<System.EventArgs> E;
     }
 
-    public Test2 test2 = new Test2 ();
+    public Test2 test2 = new Test2();
 
-    static void Main ()
+    static void Main()
     {
-        new Test1 ()?.test2.E += null;
+        new Test1()?.test2.E += null;
     }
 }

@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,10 +23,9 @@
 
 using System;
 using System.Data;
-using System.Data.OracleClient ;
+using System.Data.OracleClient;
 
 using MonoTests.System.Data.Utils;
-
 
 using NUnit.Framework;
 
@@ -44,8 +43,14 @@ namespace MonoTests.System.Data.OracleClient
                 tc.BeginTest("OracleCommand_Prepare");
                 tc.run();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         [Test]
@@ -55,10 +60,11 @@ namespace MonoTests.System.Data.OracleClient
             int intRecordsAffected = 0;
 
             string sql = "Update Shippers Set CompanyName=:CompName Where ShipperID = 2";
-            OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            OracleConnection con = new OracleConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
             OracleCommand cmd = new OracleCommand("", con);
             con.Open();
-
 
             //get expected result
             cmd.CommandText = "select count(*) from Shippers where ShipperID = 2";
@@ -69,7 +75,7 @@ namespace MonoTests.System.Data.OracleClient
             //Currently not running on DB2: .Net-Failed, GH:Pass
             //if (con.Provider.IndexOf("IBMDADB2") >= 0) return ;
 
-            cmd.Parameters.Add(new OracleParameter()); 
+            cmd.Parameters.Add(new OracleParameter());
             cmd.Parameters[0].ParameterName = "CompName";
             cmd.Parameters[0].OracleType = OracleType.VarChar; //System.InvalidOperationException:
             cmd.Parameters[0].Size = 20; //System.InvalidOperationException
@@ -80,26 +86,33 @@ namespace MonoTests.System.Data.OracleClient
             {
                 BeginCase("Prepare Exception - missing OracleType");
                 cmd.Prepare();
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-            cmd.Parameters[0].OracleType = OracleType.VarChar; 
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
+            cmd.Parameters[0].OracleType = OracleType.VarChar;
 
-//            try
-//            {
-//                BeginCase("Prepare Exception - missing Size");
-//                try
-//                {
-//                    cmd.Parameters[0].Size = 0;
-//                    cmd.Prepare();
-//                }
-//                catch (Exception ex) {exp = ex;}
-//                Compare(exp.GetType().FullName, typeof(InvalidOperationException).FullName );
-//                exp=null;
-//            } 
-//            catch(Exception ex){exp = ex;}
-//            finally{EndCase(exp); exp = null;}
-//            cmd.Parameters[0].Size = 20;
+            //            try
+            //            {
+            //                BeginCase("Prepare Exception - missing Size");
+            //                try
+            //                {
+            //                    cmd.Parameters[0].Size = 0;
+            //                    cmd.Prepare();
+            //                }
+            //                catch (Exception ex) {exp = ex;}
+            //                Compare(exp.GetType().FullName, typeof(InvalidOperationException).FullName );
+            //                exp=null;
+            //            }
+            //            catch(Exception ex){exp = ex;}
+            //            finally{EndCase(exp); exp = null;}
+            //            cmd.Parameters[0].Size = 20;
 
             try
             {
@@ -109,37 +122,59 @@ namespace MonoTests.System.Data.OracleClient
                     con.Close();
                     cmd.Prepare();
                 }
-                catch (Exception ex) {exp = ex;}
-                Compare(exp.GetType().FullName, typeof(InvalidOperationException).FullName );
-                exp=null;
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                catch (Exception ex)
+                {
+                    exp = ex;
+                }
+                Compare(exp.GetType().FullName, typeof(InvalidOperationException).FullName);
+                exp = null;
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
             con.Open();
 
             try
             {
                 BeginCase("ExecuteNonQuery first time");
                 intRecordsAffected = cmd.ExecuteNonQuery();
-                Compare(intRecordsAffected , ExpectedRows);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-
+                Compare(intRecordsAffected, ExpectedRows);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             try
             {
                 BeginCase("ExecuteNonQuery second time, chage value");
                 cmd.Parameters[0].Value = "Comp2";
-                intRecordsAffected  = cmd.ExecuteNonQuery();
-                Compare(intRecordsAffected , ExpectedRows);
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-    
-            if (con.State == ConnectionState.Open) con.Close();
+                intRecordsAffected = cmd.ExecuteNonQuery();
+                Compare(intRecordsAffected, ExpectedRows);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
+            if (con.State == ConnectionState.Open)
+                con.Close();
         }
     }
-
 }

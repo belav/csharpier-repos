@@ -3,8 +3,8 @@
 
 class Item
 {
-    public int this[int i] {
-        set {}
+    public int this[int i]
+    {
+        set { }
     }
 }
-

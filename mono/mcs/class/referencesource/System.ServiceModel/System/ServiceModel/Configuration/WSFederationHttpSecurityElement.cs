@@ -15,7 +15,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class WSFederationHttpSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = WSFederationHttpSecurity.DefaultMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            DefaultValue = WSFederationHttpSecurity.DefaultMode
+        )]
         [ServiceModelEnumValidator(typeof(WSFederationHttpSecurityModeHelper))]
         public WSFederationHttpSecurityMode Mode
         {
@@ -26,7 +29,10 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.Message)]
         public FederatedMessageSecurityOverHttpElement Message
         {
-            get { return (FederatedMessageSecurityOverHttpElement)base[ConfigurationStrings.Message]; }
+            get
+            {
+                return (FederatedMessageSecurityOverHttpElement)base[ConfigurationStrings.Message];
+            }
         }
 
         internal void ApplyConfiguration(WSFederationHttpSecurity security)

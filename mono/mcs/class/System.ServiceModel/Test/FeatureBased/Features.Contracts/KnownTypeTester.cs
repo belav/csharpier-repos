@@ -6,47 +6,47 @@ using System.ServiceModel;
 
 namespace MonoTests.Features.Contracts
 {
-    [ServiceContract (Namespace = "http://MonoTests.Features.Contracts")]
+    [ServiceContract(Namespace = "http://MonoTests.Features.Contracts")]
     public interface IKnownTypeTesterContract
     {
         [OperationContract]
-        Point2D Move (Point2D point, Point2D delta);
+        Point2D Move(Point2D point, Point2D delta);
 
         [OperationContract]
-        double Distance (Point2D point1, Point2D point2);
+        double Distance(Point2D point1, Point2D point2);
 
         [OperationContract]
-        BaseContract [] foo ();
+        BaseContract[] foo();
     }
 
     public class KnownTypeTester : IKnownTypeTesterContract
     {
-        public Point2D Move (Point2D point, Point2D delta)
+        public Point2D Move(Point2D point, Point2D delta)
         {
-            return new AdvPoint2D (point.X + delta.X, point.Y + delta.Y);
+            return new AdvPoint2D(point.X + delta.X, point.Y + delta.Y);
         }
 
-        public double Distance (Point2D point1, Point2D point2)
+        public double Distance(Point2D point1, Point2D point2)
         {
-            return Math.Sqrt (Math.Abs (point1.X - point2.X) +
-                Math.Abs (point1.Y - point2.Y));
+            return Math.Sqrt(Math.Abs(point1.X - point2.X) + Math.Abs(point1.Y - point2.Y));
         }
 
-        public BaseContract [] foo () {
-            return new BaseContract[] {new DerivedContract ()};
+        public BaseContract[] foo()
+        {
+            return new BaseContract[] { new DerivedContract() };
         }
-
     }
 
-    [DataContract (Namespace = "http://MonoTests.Features.Contracts")]
-    [KnownType (typeof (AdvPoint2D))]
+    [DataContract(Namespace = "http://MonoTests.Features.Contracts")]
+    [KnownType(typeof(AdvPoint2D))]
     public class Point2D
     {
         int x;
         int y;
-        public Point2D () { }
 
-        public Point2D (int x, int y)
+        public Point2D() { }
+
+        public Point2D(int x, int y)
         {
             this.x = x;
             this.y = y;
@@ -67,24 +67,22 @@ namespace MonoTests.Features.Contracts
         }
     }
 
-    [DataContract (Namespace = "http://MonoTests.Features.Contracts")]
+    [DataContract(Namespace = "http://MonoTests.Features.Contracts")]
     public class AdvPoint2D : Point2D
     {
-        public AdvPoint2D (int x, int y)
-            : base (x, y)
-        {
-        }
+        public AdvPoint2D(int x, int y)
+            : base(x, y) { }
 
         [DataMember]
         public double ZeroDistance
         {
-            get { return Math.Sqrt (X * X + Y * Y); }
+            get { return Math.Sqrt(X * X + Y * Y); }
             set { }
         }
     }
 
     [DataContract]
-    [KnownType (typeof (DerivedContract))]
+    [KnownType(typeof(DerivedContract))]
     public class BaseContract
     {
         [DataMember]
@@ -97,6 +95,4 @@ namespace MonoTests.Features.Contracts
         [DataMember]
         bool blah;
     }
-
-
 }

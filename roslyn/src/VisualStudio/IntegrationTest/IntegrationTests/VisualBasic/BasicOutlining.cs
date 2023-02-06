@@ -20,14 +20,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicOutlining(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicOutlining))
-        {
-        }
+            : base(instanceFactory, nameof(BasicOutlining)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public void Outlining()
         {
-            var input = @"
+            var input =
+                @"
 [|Imports System
 Imports System.Text|]
 

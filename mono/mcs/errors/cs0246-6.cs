@@ -5,8 +5,7 @@ using System;
 using System.Xml;
 using Document = XmlDocument;
 
-public class Test {
-    public static void Main ()
-    {
-    }
+public class Test
+{
+    public static void Main() { }
 }

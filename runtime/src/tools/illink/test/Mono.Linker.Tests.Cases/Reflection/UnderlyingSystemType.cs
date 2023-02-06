@@ -15,41 +15,43 @@ namespace Mono.Linker.Tests.Cases.Reflection
     [ExpectedNoWarnings]
     class UnderlyingSystemType
     {
-        public static void Main ()
+        public static void Main()
         {
-            TestTypeUsedWithUnderlyingSystemType ();
-            TestNullValue ();
-            TestNoValue ();
+            TestTypeUsedWithUnderlyingSystemType();
+            TestNullValue();
+            TestNoValue();
         }
 
         [Kept]
         static class TypeUsedWithUnderlyingSystemType
         {
             [Kept]
-            public static void Method () { }
+            public static void Method() { }
 
-            public static void OtherMethod () { }
+            public static void OtherMethod() { }
         }
 
         [Kept]
-        static void TestTypeUsedWithUnderlyingSystemType ()
+        static void TestTypeUsedWithUnderlyingSystemType()
         {
-            _ = typeof (TypeUsedWithUnderlyingSystemType).UnderlyingSystemType.GetMethod (nameof (TypeUsedWithUnderlyingSystemType.Method));
+            _ = typeof(TypeUsedWithUnderlyingSystemType).UnderlyingSystemType.GetMethod(
+                nameof(TypeUsedWithUnderlyingSystemType.Method)
+            );
         }
 
         [Kept]
-        static void TestNullValue ()
-        {
-            Type t = null;
-            t.UnderlyingSystemType.RequiresAll ();
-        }
-
-        [Kept]
-        static void TestNoValue ()
+        static void TestNullValue()
         {
             Type t = null;
-            Type noValue = Type.GetTypeFromHandle (t.TypeHandle);
-            t.UnderlyingSystemType.RequiresAll ();
+            t.UnderlyingSystemType.RequiresAll();
+        }
+
+        [Kept]
+        static void TestNoValue()
+        {
+            Type t = null;
+            Type noValue = Type.GetTypeFromHandle(t.TypeHandle);
+            t.UnderlyingSystemType.RequiresAll();
         }
     }
 }

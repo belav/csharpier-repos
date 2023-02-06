@@ -12,71 +12,45 @@ namespace System.Reflection.Emit
 
         public override PropertyAttributes Attributes
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override bool CanRead
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Module Module
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override string Name
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type PropertyType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
-        public void AddOtherMethod(MethodBuilder mdBuilder)
-        {
-        }
+        public void AddOtherMethod(MethodBuilder mdBuilder) { }
 
         public override MethodInfo[] GetAccessors(bool nonPublic)
         {
@@ -113,7 +87,13 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, Globalization.CultureInfo? culture)
+        public override object? GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            Globalization.CultureInfo? culture
+        )
         {
             return default;
         }
@@ -123,32 +103,25 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public void SetConstant(object defaultValue)
-        {
-        }
+        public void SetConstant(object defaultValue) { }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
-        {
-        }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
-        {
-        }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
 
-        public void SetGetMethod(MethodBuilder mdBuilder)
-        {
-        }
+        public void SetGetMethod(MethodBuilder mdBuilder) { }
 
-        public void SetSetMethod(MethodBuilder mdBuilder)
-        {
-        }
+        public void SetSetMethod(MethodBuilder mdBuilder) { }
 
-        public override void SetValue(object? obj, object? value, object?[]? index)
-        {
-        }
+        public override void SetValue(object? obj, object? value, object?[]? index) { }
 
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, Globalization.CultureInfo? culture)
-        {
-        }
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            Globalization.CultureInfo? culture
+        ) { }
     }
 }

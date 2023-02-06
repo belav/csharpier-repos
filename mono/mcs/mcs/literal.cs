@@ -45,52 +45,60 @@ namespace Mono.CSharp
         //
         // Default type of null is an object
         //
-        public NullLiteral (Location loc)
-            : base (InternalType.NullLiteral, loc)
-        {
-        }
+        public NullLiteral(Location loc)
+            : base(InternalType.NullLiteral, loc) { }
 
-        public override void Error_ValueCannotBeConverted (ResolveContext ec, TypeSpec t, bool expl)
+        public override void Error_ValueCannotBeConverted(ResolveContext ec, TypeSpec t, bool expl)
         {
-            if (t.IsGenericParameter) {
-                ec.Report.Error(403, loc,
-                    "Cannot convert null to the type parameter `{0}' because it could be a value " +
-                    "type. Consider using `default ({0})' instead", t.Name);
+            if (t.IsGenericParameter)
+            {
+                ec.Report.Error(
+                    403,
+                    loc,
+                    "Cannot convert null to the type parameter `{0}' because it could be a value "
+                        + "type. Consider using `default ({0})' instead",
+                    t.Name
+                );
                 return;
             }
 
-            if (TypeSpec.IsValueType (t)) {
-                ec.Report.Error(37, loc, "Cannot convert null to `{0}' because it is a value type",
-                    t.GetSignatureForError ());
+            if (TypeSpec.IsValueType(t))
+            {
+                ec.Report.Error(
+                    37,
+                    loc,
+                    "Cannot convert null to `{0}' because it is a value type",
+                    t.GetSignatureForError()
+                );
                 return;
             }
 
-            base.Error_ValueCannotBeConverted (ec, t, expl);
+            base.Error_ValueCannotBeConverted(ec, t, expl);
         }
 
-        public override string GetValueAsLiteral ()
+        public override string GetValueAsLiteral()
         {
             return "null";
         }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
-        public override System.Linq.Expressions.Expression MakeExpression (BuilderContext ctx)
+        public override System.Linq.Expressions.Expression MakeExpression(BuilderContext ctx)
         {
-            return System.Linq.Expressions.Expression.Constant (null);
+            return System.Linq.Expressions.Expression.Constant(null);
         }
     }
 
     public class BoolLiteral : BoolConstant, ILiteralConstant
     {
-        public BoolLiteral (BuiltinTypes types, bool val, Location loc)
-            : base (types, val, loc)
-        {
-        }
+        public BoolLiteral(BuiltinTypes types, bool val, Location loc)
+            : base(types, val, loc) { }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
@@ -98,20 +106,19 @@ namespace Mono.CSharp
         public char[] ParsedValue { get; set; }
 #endif
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     public class CharLiteral : CharConstant, ILiteralConstant
     {
-        public CharLiteral (BuiltinTypes types, char c, Location loc)
-            : base (types, c, loc)
-        {
-        }
+        public CharLiteral(BuiltinTypes types, char c, Location loc)
+            : base(types, c, loc) { }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
@@ -119,36 +126,36 @@ namespace Mono.CSharp
         public char[] ParsedValue { get; set; }
 #endif
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     public class IntLiteral : IntConstant, ILiteralConstant
     {
-        public IntLiteral (BuiltinTypes types, int l, Location loc)
-            : base (types, l, loc)
-        {
-        }
+        public IntLiteral(BuiltinTypes types, int l, Location loc)
+            : base(types, l, loc) { }
 
-        public override Constant ConvertImplicitly (TypeSpec type)
+        public override Constant ConvertImplicitly(TypeSpec type)
         {
             //
             // The 0 literal can be converted to an enum value
             //
-            if (Value == 0 && type.IsEnum) {
-                Constant c = ConvertImplicitly (EnumSpec.GetUnderlyingType (type));
+            if (Value == 0 && type.IsEnum)
+            {
+                Constant c = ConvertImplicitly(EnumSpec.GetUnderlyingType(type));
                 if (c == null)
                     return null;
 
-                return new EnumConstant (c, type);
+                return new EnumConstant(c, type);
             }
 
-            return base.ConvertImplicitly (type);
+            return base.ConvertImplicitly(type);
         }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
@@ -156,20 +163,19 @@ namespace Mono.CSharp
         public char[] ParsedValue { get; set; }
 #endif
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     public class UIntLiteral : UIntConstant, ILiteralConstant
     {
-        public UIntLiteral (BuiltinTypes types, uint l, Location loc)
-            : base (types, l, loc)
-        {
-        }
+        public UIntLiteral(BuiltinTypes types, uint l, Location loc)
+            : base(types, l, loc) { }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
@@ -177,20 +183,19 @@ namespace Mono.CSharp
         public char[] ParsedValue { get; set; }
 #endif
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     public class LongLiteral : LongConstant, ILiteralConstant
     {
-        public LongLiteral (BuiltinTypes types, long l, Location loc)
-            : base (types, l, loc)
-        {
-        }
+        public LongLiteral(BuiltinTypes types, long l, Location loc)
+            : base(types, l, loc) { }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
@@ -198,20 +203,19 @@ namespace Mono.CSharp
         public char[] ParsedValue { get; set; }
 #endif
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     public class ULongLiteral : ULongConstant, ILiteralConstant
     {
-        public ULongLiteral (BuiltinTypes types, ulong l, Location loc)
-            : base (types, l, loc)
-        {
-        }
+        public ULongLiteral(BuiltinTypes types, ulong l, Location loc)
+            : base(types, l, loc) { }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
@@ -219,20 +223,19 @@ namespace Mono.CSharp
         public char[] ParsedValue { get; set; }
 #endif
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     public class FloatLiteral : FloatConstant, ILiteralConstant
     {
-        public FloatLiteral (BuiltinTypes types, float f, Location loc)
-            : base (types, f, loc)
-        {
-        }
+        public FloatLiteral(BuiltinTypes types, float f, Location loc)
+            : base(types, f, loc) { }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
@@ -240,42 +243,51 @@ namespace Mono.CSharp
         public char[] ParsedValue { get; set; }
 #endif
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     public class DoubleLiteral : DoubleConstant, ILiteralConstant
     {
-        public DoubleLiteral (BuiltinTypes types, double d, Location loc)
-            : base (types, d, loc)
-        {
-        }
+        public DoubleLiteral(BuiltinTypes types, double d, Location loc)
+            : base(types, d, loc) { }
 
-        public override void Error_ValueCannotBeConverted (ResolveContext ec, TypeSpec target, bool expl)
+        public override void Error_ValueCannotBeConverted(
+            ResolveContext ec,
+            TypeSpec target,
+            bool expl
+        )
         {
-            if (target.BuiltinType == BuiltinTypeSpec.Type.Float) {
-                Error_664 (ec, loc, "float", "f");
+            if (target.BuiltinType == BuiltinTypeSpec.Type.Float)
+            {
+                Error_664(ec, loc, "float", "f");
                 return;
             }
 
-            if (target.BuiltinType == BuiltinTypeSpec.Type.Decimal) {
-                Error_664 (ec, loc, "decimal", "m");
+            if (target.BuiltinType == BuiltinTypeSpec.Type.Decimal)
+            {
+                Error_664(ec, loc, "decimal", "m");
                 return;
             }
 
-            base.Error_ValueCannotBeConverted (ec, target, expl);
+            base.Error_ValueCannotBeConverted(ec, target, expl);
         }
 
-        static void Error_664 (ResolveContext ec, Location loc, string type, string suffix)
+        static void Error_664(ResolveContext ec, Location loc, string type, string suffix)
         {
-            ec.Report.Error (664, loc,
+            ec.Report.Error(
+                664,
+                loc,
                 "Literal of type double cannot be implicitly converted to type `{0}'. Add suffix `{1}' to create a literal of this type",
-                type, suffix);
+                type,
+                suffix
+            );
         }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
@@ -283,20 +295,19 @@ namespace Mono.CSharp
         public char[] ParsedValue { get; set; }
 #endif
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     public class DecimalLiteral : DecimalConstant, ILiteralConstant
     {
-        public DecimalLiteral (BuiltinTypes types, decimal d, Location loc)
-            : base (types, d, loc)
-        {
-        }
+        public DecimalLiteral(BuiltinTypes types, decimal d, Location loc)
+            : base(types, d, loc) { }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
@@ -304,20 +315,19 @@ namespace Mono.CSharp
         public char[] ParsedValue { get; set; }
 #endif
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 
     public class StringLiteral : StringConstant, ILiteralConstant
     {
-        public StringLiteral (BuiltinTypes types, string s, Location loc)
-            : base (types, s, loc)
-        {
-        }
+        public StringLiteral(BuiltinTypes types, string s, Location loc)
+            : base(types, s, loc) { }
 
-        public override bool IsLiteral {
+        public override bool IsLiteral
+        {
             get { return true; }
         }
 
@@ -325,9 +335,9 @@ namespace Mono.CSharp
         public char[] ParsedValue { get; set; }
 #endif
 
-        public override object Accept (StructuralVisitor visitor)
+        public override object Accept(StructuralVisitor visitor)
         {
-            return visitor.Visit (this);
+            return visitor.Visit(this);
         }
     }
 }

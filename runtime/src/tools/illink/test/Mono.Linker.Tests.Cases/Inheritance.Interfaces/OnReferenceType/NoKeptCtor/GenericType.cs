@@ -4,24 +4,18 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class GenericType
     {
-        public static void Main ()
+        public static void Main()
         {
-            object o = new Bar<Foo> ();
+            object o = new Bar<Foo>();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        class Bar<T>
-        {
-        }
+        [KeptMember(".ctor()")]
+        class Bar<T> { }
 
         [Kept]
-        class Foo : IFoo
-        {
-        }
+        class Foo : IFoo { }
 
-        interface IFoo
-        {
-        }
+        interface IFoo { }
     }
 }

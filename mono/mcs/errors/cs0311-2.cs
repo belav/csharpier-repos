@@ -2,24 +2,17 @@
 // Line: 21
 
 public class Foo<T>
-    where T : A, I
-{
-}
+    where T : A, I { }
 
-public interface I
-{ }
+public interface I { }
 
-public class A
-{ }
+public class A { }
 
-public class B : A
-{ }
+public class B : A { }
 
 class X
 {
     Foo<B> foo;
 
-    static void Main ()
-    {
-    }
+    static void Main() { }
 }

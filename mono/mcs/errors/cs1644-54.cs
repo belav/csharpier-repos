@@ -4,8 +4,8 @@
 
 class Class
 {
-    static void Main ()
+    static void Main()
     {
         var t = (a: 1, b: 2);
-    }    
+    }
 }

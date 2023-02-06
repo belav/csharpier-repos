@@ -12,7 +12,7 @@ public class Outer
 
 public class C
 {
-    public static bool Test ()
+    public static bool Test()
     {
         Outer outer = null;
         return 0 == outer.Inner.ONE;

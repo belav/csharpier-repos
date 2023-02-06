@@ -28,22 +28,22 @@ namespace System.Transactions
         IsolationLevel level;
         TransactionInformation info;
 
-        ArrayList dependents = new ArrayList ();
+        ArrayList dependents = new ArrayList();
 
         /* Volatile enlistments */
-        List <IEnlistmentNotification> volatiles;
+        List<IEnlistmentNotification> volatiles;
 
-        /* Durable enlistments 
+        /* Durable enlistments
            Durable RMs can also have 2 Phase commit but
            not in LTM, and that is what we are supporting
-           right now   
+           right now
          */
-        List <ISinglePhaseNotification> durables;
+        List<ISinglePhaseNotification> durables;
 
         IPromotableSinglePhaseNotification pspe = null;
 
-        delegate void AsyncCommit ();
-        
+        delegate void AsyncCommit();
+
         AsyncCommit asyncCommit = null;
         bool committing;
         bool committed = false;
@@ -51,33 +51,40 @@ namespace System.Transactions
         TransactionScope scope = null;
 
         Exception innerException;
-        Guid tag = Guid.NewGuid ();
+        Guid tag = Guid.NewGuid();
 
-        internal List <IEnlistmentNotification> Volatiles {
-            get {
+        internal List<IEnlistmentNotification> Volatiles
+        {
+            get
+            {
                 if (volatiles == null)
-                    volatiles = new List <IEnlistmentNotification> ();
+                    volatiles = new List<IEnlistmentNotification>();
                 return volatiles;
             }
         }
 
-        internal List <ISinglePhaseNotification> Durables {
-            get {
+        internal List<ISinglePhaseNotification> Durables
+        {
+            get
+            {
                 if (durables == null)
-                    durables = new List <ISinglePhaseNotification> ();
+                    durables = new List<ISinglePhaseNotification>();
                 return durables;
             }
         }
 
-        internal IPromotableSinglePhaseNotification Pspe { get { return pspe; } }
-
-        internal Transaction (IsolationLevel isolationLevel)
+        internal IPromotableSinglePhaseNotification Pspe
         {
-            info = new TransactionInformation ();
+            get { return pspe; }
+        }
+
+        internal Transaction(IsolationLevel isolationLevel)
+        {
+            info = new TransactionInformation();
             level = isolationLevel;
         }
 
-        internal Transaction (Transaction other)
+        internal Transaction(Transaction other)
         {
             level = other.level;
             info = other.info;
@@ -90,10 +97,9 @@ namespace System.Transactions
         }
 
         [MonoTODO]
-        void ISerializable.GetObjectData (SerializationInfo info,
-            StreamingContext context)
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         internal event TransactionCompletedEventHandler TransactionCompletedInternal;
@@ -110,7 +116,6 @@ namespace System.Transactions
 
                 TransactionCompletedInternal += value;
             }
-
             remove
             {
                 if (this.internalTransaction != null)
@@ -120,89 +125,108 @@ namespace System.Transactions
             }
         }
 
-        public static Transaction Current {
-            get { 
-                EnsureIncompleteCurrentScope ();
+        public static Transaction Current
+        {
+            get
+            {
+                EnsureIncompleteCurrentScope();
                 return CurrentInternal;
             }
-            set { 
-                EnsureIncompleteCurrentScope ();
+            set
+            {
+                EnsureIncompleteCurrentScope();
                 CurrentInternal = value;
             }
         }
 
-        internal static Transaction CurrentInternal {
+        internal static Transaction CurrentInternal
+        {
             get { return ambient; }
             set { ambient = value; }
         }
 
-        public IsolationLevel IsolationLevel {
-            get { 
-                EnsureIncompleteCurrentScope ();
-                return level; 
-            }
-        }
-
-        public TransactionInformation TransactionInformation {
-            get { 
-                EnsureIncompleteCurrentScope ();
-                return info; 
-            }
-        }
-
-        public Transaction Clone ()
+        public IsolationLevel IsolationLevel
         {
-            return new Transaction (this);
+            get
+            {
+                EnsureIncompleteCurrentScope();
+                return level;
+            }
         }
 
-        public void Dispose ()
+        public TransactionInformation TransactionInformation
+        {
+            get
+            {
+                EnsureIncompleteCurrentScope();
+                return info;
+            }
+        }
+
+        public Transaction Clone()
+        {
+            return new Transaction(this);
+        }
+
+        public void Dispose()
         {
             if (TransactionInformation.Status == TransactionStatus.Active)
                 Rollback();
         }
 
         [MonoTODO]
-        public DependentTransaction DependentClone (
-            DependentCloneOption cloneOption)
+        public DependentTransaction DependentClone(DependentCloneOption cloneOption)
         {
-            DependentTransaction d = 
-                new DependentTransaction (this, cloneOption);
-            dependents.Add (d);
+            DependentTransaction d = new DependentTransaction(this, cloneOption);
+            dependents.Add(d);
             return d;
         }
 
-        [MonoTODO ("Only SinglePhase commit supported for durable resource managers.")]
-        [PermissionSetAttribute (SecurityAction.LinkDemand)]
-        public Enlistment EnlistDurable (Guid resourceManagerIdentifier,
+        [MonoTODO("Only SinglePhase commit supported for durable resource managers.")]
+        [PermissionSetAttribute(SecurityAction.LinkDemand)]
+        public Enlistment EnlistDurable(
+            Guid resourceManagerIdentifier,
             IEnlistmentNotification enlistmentNotification,
-            EnlistmentOptions enlistmentOptions)
+            EnlistmentOptions enlistmentOptions
+        )
         {
-            throw new NotImplementedException ("DTC unsupported, only SinglePhase commit supported for durable resource managers.");
+            throw new NotImplementedException(
+                "DTC unsupported, only SinglePhase commit supported for durable resource managers."
+            );
         }
 
-        [MonoTODO ("Only Local Transaction Manager supported. Cannot have more than 1 durable resource per transaction. Only EnlistmentOptions.None supported yet.")]
-        [PermissionSetAttribute (SecurityAction.LinkDemand)]
-        public Enlistment EnlistDurable (Guid resourceManagerIdentifier,
+        [MonoTODO(
+            "Only Local Transaction Manager supported. Cannot have more than 1 durable resource per transaction. Only EnlistmentOptions.None supported yet."
+        )]
+        [PermissionSetAttribute(SecurityAction.LinkDemand)]
+        public Enlistment EnlistDurable(
+            Guid resourceManagerIdentifier,
             ISinglePhaseNotification singlePhaseNotification,
-            EnlistmentOptions enlistmentOptions)
+            EnlistmentOptions enlistmentOptions
+        )
         {
-            EnsureIncompleteCurrentScope ();
+            EnsureIncompleteCurrentScope();
             if (pspe != null || Durables.Count > 0)
-                throw new NotImplementedException ("DTC unsupported, multiple durable resource managers aren't supported.");
+                throw new NotImplementedException(
+                    "DTC unsupported, multiple durable resource managers aren't supported."
+                );
 
             if (enlistmentOptions != EnlistmentOptions.None)
-                throw new NotImplementedException ("EnlistmentOptions other than None aren't supported");
+                throw new NotImplementedException(
+                    "EnlistmentOptions other than None aren't supported"
+                );
 
-            Durables.Add (singlePhaseNotification);
+            Durables.Add(singlePhaseNotification);
 
             /* FIXME: Enlistment ?? */
-            return new Enlistment ();
+            return new Enlistment();
         }
 
-        public bool EnlistPromotableSinglePhase (
-            IPromotableSinglePhaseNotification promotableSinglePhaseNotification)
+        public bool EnlistPromotableSinglePhase(
+            IPromotableSinglePhaseNotification promotableSinglePhaseNotification
+        )
         {
-            EnsureIncompleteCurrentScope ();
+            EnsureIncompleteCurrentScope();
 
             // The specs aren't entirely clear on whether we can have volatile RMs along with a PSPE, but
             // I'm assuming that yes based on: http://social.msdn.microsoft.com/Forums/br/windowstransactionsprogramming/thread/3df6d4d3-0d82-47c4-951a-cd31140950b3
@@ -215,121 +239,136 @@ namespace System.Transactions
             return true;
         }
 
-        public void SetDistributedTransactionIdentifier (IPromotableSinglePhaseNotification promotableNotification, Guid distributedTransactionIdentifier)
+        public void SetDistributedTransactionIdentifier(
+            IPromotableSinglePhaseNotification promotableNotification,
+            Guid distributedTransactionIdentifier
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-         public bool EnlistPromotableSinglePhase (IPromotableSinglePhaseNotification promotableSinglePhaseNotification, Guid promoterType)
+        public bool EnlistPromotableSinglePhase(
+            IPromotableSinglePhaseNotification promotableSinglePhaseNotification,
+            Guid promoterType
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public byte[] GetPromotedToken ()
+        public byte[] GetPromotedToken()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         public Guid PromoterType
         {
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        [MonoTODO ("EnlistmentOptions being ignored")]
-        public Enlistment EnlistVolatile (
+        [MonoTODO("EnlistmentOptions being ignored")]
+        public Enlistment EnlistVolatile(
             IEnlistmentNotification enlistmentNotification,
-            EnlistmentOptions enlistmentOptions)
+            EnlistmentOptions enlistmentOptions
+        )
         {
-            return EnlistVolatileInternal (enlistmentNotification, enlistmentOptions);
+            return EnlistVolatileInternal(enlistmentNotification, enlistmentOptions);
         }
 
-        [MonoTODO ("EnlistmentOptions being ignored")]
-        public Enlistment EnlistVolatile (
+        [MonoTODO("EnlistmentOptions being ignored")]
+        public Enlistment EnlistVolatile(
             ISinglePhaseNotification singlePhaseNotification,
-            EnlistmentOptions enlistmentOptions)
+            EnlistmentOptions enlistmentOptions
+        )
         {
             /* FIXME: Anything extra reqd for this? */
-            return EnlistVolatileInternal (singlePhaseNotification, enlistmentOptions);
+            return EnlistVolatileInternal(singlePhaseNotification, enlistmentOptions);
         }
 
-        private Enlistment EnlistVolatileInternal (
+        private Enlistment EnlistVolatileInternal(
             IEnlistmentNotification notification,
-            EnlistmentOptions options)
+            EnlistmentOptions options
+        )
         {
-            EnsureIncompleteCurrentScope (); 
+            EnsureIncompleteCurrentScope();
             /* FIXME: Handle options.EnlistDuringPrepareRequired */
-            Volatiles.Add (notification);
+            Volatiles.Add(notification);
 
             /* FIXME: Enlistment.. ? */
-            return new Enlistment ();
+            return new Enlistment();
         }
 
-        [MonoTODO ("Only Local Transaction Manager supported. Cannot have more than 1 durable resource per transaction.")]
-        [PermissionSetAttribute (SecurityAction.LinkDemand)]
-        public Enlistment PromoteAndEnlistDurable (
+        [MonoTODO(
+            "Only Local Transaction Manager supported. Cannot have more than 1 durable resource per transaction."
+        )]
+        [PermissionSetAttribute(SecurityAction.LinkDemand)]
+        public Enlistment PromoteAndEnlistDurable(
             Guid manager,
             IPromotableSinglePhaseNotification promotableNotification,
             ISinglePhaseNotification notification,
-            EnlistmentOptions options)
+            EnlistmentOptions options
+        )
         {
-            throw new NotImplementedException ("DTC unsupported, multiple durable resource managers aren't supported.");
+            throw new NotImplementedException(
+                "DTC unsupported, multiple durable resource managers aren't supported."
+            );
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
-            return Equals (obj as Transaction);
+            return Equals(obj as Transaction);
         }
 
         // FIXME: Check whether this is correct (currently, GetHashCode() uses 'dependents' but this doesn't)
-        private bool Equals (Transaction t)
+        private bool Equals(Transaction t)
         {
-            if (ReferenceEquals (t, this))
+            if (ReferenceEquals(t, this))
                 return true;
-            if (ReferenceEquals (t, null))
+            if (ReferenceEquals(t, null))
                 return false;
-            return this.level == t.level &&
-                this.info == t.info;
+            return this.level == t.level && this.info == t.info;
         }
 
-        public static bool operator == (Transaction x, Transaction y)
+        public static bool operator ==(Transaction x, Transaction y)
         {
-            if (ReferenceEquals (x, null))
-                return ReferenceEquals (y, null);
-            return x.Equals (y);
+            if (ReferenceEquals(x, null))
+                return ReferenceEquals(y, null);
+            return x.Equals(y);
         }
 
-        public static bool operator != (Transaction x, Transaction y)
+        public static bool operator !=(Transaction x, Transaction y)
         {
             return !(x == y);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return (int) level ^ info.GetHashCode () ^ dependents.GetHashCode ();
+            return (int)level ^ info.GetHashCode() ^ dependents.GetHashCode();
         }
 
-        public void Rollback ()
+        public void Rollback()
         {
-            Rollback (null);
+            Rollback(null);
         }
 
-        public void Rollback (Exception e)
+        public void Rollback(Exception e)
         {
-            EnsureIncompleteCurrentScope ();
-            Rollback (e, null);
+            EnsureIncompleteCurrentScope();
+            Rollback(e, null);
         }
 
-        internal void Rollback (Exception ex, object abortingEnlisted)
+        internal void Rollback(Exception ex, object abortingEnlisted)
         {
             if (aborted)
             {
-                FireCompleted ();
+                FireCompleted();
                 return;
             }
 
             /* See test ExplicitTransaction7 */
             if (info.Status == TransactionStatus.Committed)
-                throw new TransactionException ("Transaction has already been committed. Cannot accept any new work.");
+                throw new TransactionException(
+                    "Transaction has already been committed. Cannot accept any new work."
+                );
 
             // Save thrown exception as 'reason' of transaction's abort.
             innerException = ex;
@@ -337,59 +376,67 @@ namespace System.Transactions
             SinglePhaseEnlistment e = new SinglePhaseEnlistment();
             foreach (IEnlistmentNotification prep in Volatiles)
                 if (prep != abortingEnlisted)
-                    prep.Rollback (e);
+                    prep.Rollback(e);
 
             var durables = Durables;
-            if (durables.Count > 0 && durables [0] != abortingEnlisted)
-                durables [0].Rollback (e);
+            if (durables.Count > 0 && durables[0] != abortingEnlisted)
+                durables[0].Rollback(e);
 
             if (pspe != null && pspe != abortingEnlisted)
-                pspe.Rollback (e);
+                pspe.Rollback(e);
 
             Aborted = true;
 
-            FireCompleted ();
+            FireCompleted();
         }
 
-        bool Aborted {
+        bool Aborted
+        {
             get { return aborted; }
-            set {
+            set
+            {
                 aborted = value;
                 if (aborted)
                     info.Status = TransactionStatus.Aborted;
             }
         }
-        
-        internal TransactionScope Scope {
+
+        internal TransactionScope Scope
+        {
             get { return scope; }
             set { scope = value; }
         }
 
-        protected IAsyncResult BeginCommitInternal (AsyncCallback callback)
+        protected IAsyncResult BeginCommitInternal(AsyncCallback callback)
         {
             if (committed || committing)
-                throw new InvalidOperationException ("Commit has already been called for this transaction.");
+                throw new InvalidOperationException(
+                    "Commit has already been called for this transaction."
+                );
 
             this.committing = true;
 
-            asyncCommit = new AsyncCommit (DoCommit);
-            return asyncCommit.BeginInvoke (callback, null);
+            asyncCommit = new AsyncCommit(DoCommit);
+            return asyncCommit.BeginInvoke(callback, null);
         }
 
-        protected void EndCommitInternal (IAsyncResult ar)
+        protected void EndCommitInternal(IAsyncResult ar)
         {
-            asyncCommit.EndInvoke (ar);
+            asyncCommit.EndInvoke(ar);
         }
 
-        internal void CommitInternal ()
+        internal void CommitInternal()
         {
             if (committed || committing)
-                throw new InvalidOperationException ("Commit has already been called for this transaction.");
+                throw new InvalidOperationException(
+                    "Commit has already been called for this transaction."
+                );
 
             this.committing = true;
 
-            try {
-                DoCommit ();
+            try
+            {
+                DoCommit();
             }
             catch (TransactionException)
             {
@@ -400,14 +447,15 @@ namespace System.Transactions
                 throw new TransactionAbortedException("Transaction failed", ex);
             }
         }
-        
-        private void DoCommit ()
+
+        private void DoCommit()
         {
             /* Scope becomes null in TransactionScope.Dispose */
-            if (Scope != null && (!Scope.IsComplete || !Scope.IsDisposed)) {
+            if (Scope != null && (!Scope.IsComplete || !Scope.IsDisposed))
+            {
                 /* See test ExplicitTransaction8 */
-                Rollback (null, null);
-                CheckAborted ();
+                Rollback(null, null);
+                CheckAborted();
             }
 
             var volatiles = Volatiles;
@@ -435,11 +483,11 @@ namespace System.Transactions
 
             if (volatiles.Count > 0)
                 DoCommitPhase();
-            
+
             Complete();
         }
 
-        private void Complete ()
+        private void Complete()
         {
             committing = false;
             committed = true;
@@ -447,19 +495,21 @@ namespace System.Transactions
             if (!aborted)
                 info.Status = TransactionStatus.Committed;
 
-            FireCompleted ();
+            FireCompleted();
         }
 
-        internal void InitScope (TransactionScope scope)
+        internal void InitScope(TransactionScope scope)
         {
             /* See test NestedTransactionScope10 */
-            CheckAborted ();
+            CheckAborted();
 
             /* See test ExplicitTransaction6a */
             if (committed)
-                throw new InvalidOperationException ("Commit has already been called on this transaction."); 
+                throw new InvalidOperationException(
+                    "Commit has already been called on this transaction."
+                );
 
-            Scope = scope;    
+            Scope = scope;
         }
 
         static void PrepareCallbackWrapper(object state)
@@ -487,16 +537,17 @@ namespace System.Transactions
             }
         }
 
-        void DoPreparePhase ()
+        void DoPreparePhase()
         {
             // Call prepare on all volatile managers.
             foreach (IEnlistmentNotification enlist in Volatiles)
             {
-                PreparingEnlistment pe = new PreparingEnlistment (this, enlist);
-                ThreadPool.QueueUserWorkItem (new WaitCallback(PrepareCallbackWrapper), pe);
+                PreparingEnlistment pe = new PreparingEnlistment(this, enlist);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(PrepareCallbackWrapper), pe);
 
                 /* Wait (with timeout) for manager to prepare */
-                TimeSpan timeout = Scope != null ? Scope.Timeout : TransactionManager.DefaultTimeout;
+                TimeSpan timeout =
+                    Scope != null ? Scope.Timeout : TransactionManager.DefaultTimeout;
 
                 // FIXME: Should we managers in parallel or on-by-one?
                 if (!pe.WaitHandle.WaitOne(timeout, true))
@@ -514,63 +565,66 @@ namespace System.Transactions
 
                 if (!pe.IsPrepared)
                 {
-                    /* FIXME: if not prepared & !aborted as yet, then 
+                    /* FIXME: if not prepared & !aborted as yet, then
                         this is inDoubt ? . For now, setting aborted = true */
                     Aborted = true;
                     break;
                 }
-            }            
-            
+            }
+
             /* Either InDoubt(tmp) or Prepare failed and
                Tx has rolledback */
-            CheckAborted ();
+            CheckAborted();
         }
 
-        void DoCommitPhase ()
+        void DoCommitPhase()
         {
-            foreach (IEnlistmentNotification enlisted in Volatiles) {
-                Enlistment e = new Enlistment ();
-                enlisted.Commit (e);
+            foreach (IEnlistmentNotification enlisted in Volatiles)
+            {
+                Enlistment e = new Enlistment();
+                enlisted.Commit(e);
                 /* Note: e.Done doesn't matter for volatile RMs */
             }
         }
 
-        void DoSingleCommit (ISinglePhaseNotification single)
+        void DoSingleCommit(ISinglePhaseNotification single)
         {
             if (single == null)
                 return;
 
-            single.SinglePhaseCommit (new SinglePhaseEnlistment (this, single));
-            CheckAborted ();
+            single.SinglePhaseCommit(new SinglePhaseEnlistment(this, single));
+            CheckAborted();
         }
 
-        void DoSingleCommit (IPromotableSinglePhaseNotification single)
+        void DoSingleCommit(IPromotableSinglePhaseNotification single)
         {
             if (single == null)
                 return;
 
-            single.SinglePhaseCommit (new SinglePhaseEnlistment (this, single));
-            CheckAborted ();
+            single.SinglePhaseCommit(new SinglePhaseEnlistment(this, single));
+            CheckAborted();
         }
 
-        void CheckAborted ()
+        void CheckAborted()
         {
             if (aborted || (Scope != null && Scope.IsAborted))
-                throw new TransactionAbortedException ("Transaction has aborted", innerException);
+                throw new TransactionAbortedException("Transaction has aborted", innerException);
         }
 
-        void FireCompleted ()
+        void FireCompleted()
         {
             if (TransactionCompletedInternal != null)
-                TransactionCompletedInternal (this, new TransactionEventArgs(this));
+                TransactionCompletedInternal(this, new TransactionEventArgs(this));
         }
 
-        static void EnsureIncompleteCurrentScope ()
+        static void EnsureIncompleteCurrentScope()
         {
             if (CurrentInternal == null)
                 return;
             if (CurrentInternal.Scope != null && CurrentInternal.Scope.IsComplete)
-                throw new InvalidOperationException ("The current TransactionScope is already complete");
+                throw new InvalidOperationException(
+                    "The current TransactionScope is already complete"
+                );
         }
-  }
+    }
 }

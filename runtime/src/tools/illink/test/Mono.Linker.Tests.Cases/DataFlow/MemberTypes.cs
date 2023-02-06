@@ -11,134 +11,159 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.DataFlow
 {
-    [SetupCompileArgument ("/optimize+")]
+    [SetupCompileArgument("/optimize+")]
     [ExpectedNoWarnings]
     public class MemberTypes
     {
         // Some of the types below declare delegates and will mark all members on them, this includes the Delegate .ctor(object, string) which has RUC and other members
-        [ExpectedWarning ("IL2026", nameof (Delegate) + ".Delegate")]
-        [ExpectedWarning ("IL2026", nameof (Delegate) + ".Delegate")]
-        [ExpectedWarning ("IL2026", nameof (Delegate) + ".Delegate")]
-        [ExpectedWarning ("IL2026", nameof (Delegate) + ".Delegate")]
-        [ExpectedWarning ("IL2026", nameof (Delegate) + ".Delegate")]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2026", nameof (MulticastDelegate) + ".MulticastDelegate")]
-        [ExpectedWarning ("IL2026", nameof (MulticastDelegate) + ".MulticastDelegate")]
-        [ExpectedWarning ("IL2026", nameof (MulticastDelegate) + ".MulticastDelegate")]
-        [ExpectedWarning ("IL2026", nameof (MulticastDelegate) + ".MulticastDelegate")]
-        [ExpectedWarning ("IL2026", nameof (MulticastDelegate) + ".MulticastDelegate")]
+        [ExpectedWarning("IL2026", nameof(Delegate) + ".Delegate")]
+        [ExpectedWarning("IL2026", nameof(Delegate) + ".Delegate")]
+        [ExpectedWarning("IL2026", nameof(Delegate) + ".Delegate")]
+        [ExpectedWarning("IL2026", nameof(Delegate) + ".Delegate")]
+        [ExpectedWarning("IL2026", nameof(Delegate) + ".Delegate")]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2026", nameof(MulticastDelegate) + ".MulticastDelegate")]
+        [ExpectedWarning("IL2026", nameof(MulticastDelegate) + ".MulticastDelegate")]
+        [ExpectedWarning("IL2026", nameof(MulticastDelegate) + ".MulticastDelegate")]
+        [ExpectedWarning("IL2026", nameof(MulticastDelegate) + ".MulticastDelegate")]
+        [ExpectedWarning("IL2026", nameof(MulticastDelegate) + ".MulticastDelegate")]
         // Some of the types below declare delegates and will mark all members on them, this includes the Delegate .ctor(Type, string) which has DAM annotations and other members
-        [ExpectedWarning ("IL2111", nameof (Delegate) + ".Delegate")]
-        [ExpectedWarning ("IL2111", nameof (Delegate) + ".Delegate")]
-        [ExpectedWarning ("IL2111", nameof (Delegate) + ".Delegate")]
-        [ExpectedWarning ("IL2111", nameof (Delegate) + ".Delegate")]
-        [ExpectedWarning ("IL2111", nameof (Delegate) + ".Delegate")]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (Delegate.CreateDelegate))]
-        [ExpectedWarning ("IL2111", nameof (MulticastDelegate) + ".MulticastDelegate")]
-        [ExpectedWarning ("IL2111", nameof (MulticastDelegate) + ".MulticastDelegate")]
-        [ExpectedWarning ("IL2111", nameof (MulticastDelegate) + ".MulticastDelegate")]
-        [ExpectedWarning ("IL2111", nameof (MulticastDelegate) + ".MulticastDelegate")]
-        [ExpectedWarning ("IL2111", nameof (MulticastDelegate) + ".MulticastDelegate")]
-        [ExpectedWarning ("IL2111", nameof (Delegate) + ".BindToMethodName", ProducedBy = ProducedBy.Trimmer)]
-        [ExpectedWarning ("IL2111", nameof (Delegate) + ".BindToMethodName", ProducedBy = ProducedBy.Trimmer)]
-        [ExpectedWarning ("IL2111", nameof (Delegate) + ".BindToMethodName", ProducedBy = ProducedBy.Trimmer)]
-        [ExpectedWarning ("IL2111", nameof (Delegate) + ".BindToMethodName", ProducedBy = ProducedBy.Trimmer)]
-        [ExpectedWarning ("IL2111", nameof (Delegate) + ".BindToMethodName", ProducedBy = ProducedBy.Trimmer)]
-        public static void Main ()
+        [ExpectedWarning("IL2111", nameof(Delegate) + ".Delegate")]
+        [ExpectedWarning("IL2111", nameof(Delegate) + ".Delegate")]
+        [ExpectedWarning("IL2111", nameof(Delegate) + ".Delegate")]
+        [ExpectedWarning("IL2111", nameof(Delegate) + ".Delegate")]
+        [ExpectedWarning("IL2111", nameof(Delegate) + ".Delegate")]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(Delegate.CreateDelegate))]
+        [ExpectedWarning("IL2111", nameof(MulticastDelegate) + ".MulticastDelegate")]
+        [ExpectedWarning("IL2111", nameof(MulticastDelegate) + ".MulticastDelegate")]
+        [ExpectedWarning("IL2111", nameof(MulticastDelegate) + ".MulticastDelegate")]
+        [ExpectedWarning("IL2111", nameof(MulticastDelegate) + ".MulticastDelegate")]
+        [ExpectedWarning("IL2111", nameof(MulticastDelegate) + ".MulticastDelegate")]
+        [ExpectedWarning(
+            "IL2111",
+            nameof(Delegate) + ".BindToMethodName",
+            ProducedBy = ProducedBy.Trimmer
+        )]
+        [ExpectedWarning(
+            "IL2111",
+            nameof(Delegate) + ".BindToMethodName",
+            ProducedBy = ProducedBy.Trimmer
+        )]
+        [ExpectedWarning(
+            "IL2111",
+            nameof(Delegate) + ".BindToMethodName",
+            ProducedBy = ProducedBy.Trimmer
+        )]
+        [ExpectedWarning(
+            "IL2111",
+            nameof(Delegate) + ".BindToMethodName",
+            ProducedBy = ProducedBy.Trimmer
+        )]
+        [ExpectedWarning(
+            "IL2111",
+            nameof(Delegate) + ".BindToMethodName",
+            ProducedBy = ProducedBy.Trimmer
+        )]
+        public static void Main()
         {
-            RequirePublicParameterlessConstructor (typeof (PublicParameterlessConstructorType));
-            RequirePublicParameterlessConstructor (typeof (PrivateParameterlessConstructorType));
-            RequirePublicParameterlessConstructor (typeof (PublicParameterlessConstructorBeforeFieldInitType));
-            RequirePublicConstructors (typeof (PublicConstructorsType));
-            RequirePublicConstructors (typeof (PublicConstructorsBeforeFieldInitType));
-            RequirePublicConstructors (typeof (PublicConstructorsPrivateParameterlessConstructorType));
-            RequireNonPublicConstructors (typeof (NonPublicConstructorsType));
-            RequireNonPublicConstructors (typeof (NonPublicConstructorsBeforeFieldInitType));
-            RequireAllConstructors (typeof (AllConstructorsType));
-            RequireAllConstructors (typeof (AllConstructorsBeforeFieldInitType));
-            RequirePublicMethods (typeof (PublicMethodsType));
-            RequireNonPublicMethods (typeof (NonPublicMethodsType));
-            RequireAllMethods (typeof (AllMethodsType));
-            RequirePublicFields (typeof (PublicFieldsType));
-            RequireNonPublicFields (typeof (NonPublicFieldsType));
-            RequireAllFields (typeof (AllFieldsType));
-            RequirePublicNestedTypes (typeof (PublicNestedTypesType));
-            RequireNonPublicNestedTypes (typeof (NonPublicNestedTypesType));
-            RequireAllNestedTypes (typeof (AllNestedTypesType));
-            RequirePublicProperties (typeof (PublicPropertiesType));
-            RequireNonPublicProperties (typeof (NonPublicPropertiesType));
-            RequireAllProperties (typeof (AllPropertiesType));
-            RequirePublicEvents (typeof (PublicEventsType));
-            RequireNonPublicEvents (typeof (NonPublicEventsType));
-            RequireAllEvents (typeof (AllEventsType));
-            RequireInterfaces (typeof (InterfacesType));
-            RequireAll (typeof (AllType));
-            RequireAll (typeof (RequireAllWithRecursiveTypeReferences));
+            RequirePublicParameterlessConstructor(typeof(PublicParameterlessConstructorType));
+            RequirePublicParameterlessConstructor(typeof(PrivateParameterlessConstructorType));
+            RequirePublicParameterlessConstructor(
+                typeof(PublicParameterlessConstructorBeforeFieldInitType)
+            );
+            RequirePublicConstructors(typeof(PublicConstructorsType));
+            RequirePublicConstructors(typeof(PublicConstructorsBeforeFieldInitType));
+            RequirePublicConstructors(
+                typeof(PublicConstructorsPrivateParameterlessConstructorType)
+            );
+            RequireNonPublicConstructors(typeof(NonPublicConstructorsType));
+            RequireNonPublicConstructors(typeof(NonPublicConstructorsBeforeFieldInitType));
+            RequireAllConstructors(typeof(AllConstructorsType));
+            RequireAllConstructors(typeof(AllConstructorsBeforeFieldInitType));
+            RequirePublicMethods(typeof(PublicMethodsType));
+            RequireNonPublicMethods(typeof(NonPublicMethodsType));
+            RequireAllMethods(typeof(AllMethodsType));
+            RequirePublicFields(typeof(PublicFieldsType));
+            RequireNonPublicFields(typeof(NonPublicFieldsType));
+            RequireAllFields(typeof(AllFieldsType));
+            RequirePublicNestedTypes(typeof(PublicNestedTypesType));
+            RequireNonPublicNestedTypes(typeof(NonPublicNestedTypesType));
+            RequireAllNestedTypes(typeof(AllNestedTypesType));
+            RequirePublicProperties(typeof(PublicPropertiesType));
+            RequireNonPublicProperties(typeof(NonPublicPropertiesType));
+            RequireAllProperties(typeof(AllPropertiesType));
+            RequirePublicEvents(typeof(PublicEventsType));
+            RequireNonPublicEvents(typeof(NonPublicEventsType));
+            RequireAllEvents(typeof(AllEventsType));
+            RequireInterfaces(typeof(InterfacesType));
+            RequireAll(typeof(AllType));
+            RequireAll(typeof(RequireAllWithRecursiveTypeReferences));
         }
-
 
         [Kept]
-        private static void RequirePublicParameterlessConstructor (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+        private static void RequirePublicParameterlessConstructor(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class PublicParameterlessConstructorBaseType
         {
             [Kept]
-            public PublicParameterlessConstructorBaseType () { }
+            public PublicParameterlessConstructorBaseType() { }
 
-            public PublicParameterlessConstructorBaseType (int i) { }
+            public PublicParameterlessConstructorBaseType(int i) { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (PublicParameterlessConstructorBaseType))]
+        [KeptBaseType(typeof(PublicParameterlessConstructorBaseType))]
         class PublicParameterlessConstructorType : PublicParameterlessConstructorBaseType
         {
             [Kept]
-            public PublicParameterlessConstructorType () { }
+            public PublicParameterlessConstructorType() { }
 
-            public PublicParameterlessConstructorType (int i) { }
+            public PublicParameterlessConstructorType(int i) { }
 
-            private PublicParameterlessConstructorType (int i, int j) { }
+            private PublicParameterlessConstructorType(int i, int j) { }
 
             // Not implied by the DynamicallyAccessedMemberTypes logic, but
             // explicit cctors would be kept by the linker.
             // [Kept]
             // static PublicParameterlessConstructorType () { }
 
-            public void Method1 () { }
+            public void Method1() { }
+
             public bool Property1 { get; set; }
             public bool Field1;
         }
@@ -149,29 +174,29 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             static int i = 10;
 
             [Kept]
-            public PublicParameterlessConstructorBeforeFieldInitType () { }
+            public PublicParameterlessConstructorBeforeFieldInitType() { }
         }
 
         [Kept]
         class PrivateParameterlessConstructorBaseType
         {
-            protected PrivateParameterlessConstructorBaseType () { }
+            protected PrivateParameterlessConstructorBaseType() { }
 
-            PrivateParameterlessConstructorBaseType (int i) { }
+            PrivateParameterlessConstructorBaseType(int i) { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (PrivateParameterlessConstructorBaseType))]
+        [KeptBaseType(typeof(PrivateParameterlessConstructorBaseType))]
         class PrivateParameterlessConstructorType : PrivateParameterlessConstructorBaseType
         {
             // Private parameterless .ctor is not considered "default .ctor"
             // "default .ctor" is typically the one auto-generated by the compiler
             // which is always public.
-            PrivateParameterlessConstructorType () { }
+            PrivateParameterlessConstructorType() { }
 
-            public PrivateParameterlessConstructorType (int i) { }
+            public PrivateParameterlessConstructorType(int i) { }
 
-            public void Method1 () { }
+            public void Method1() { }
 
             public bool Property1 { get; set; }
 
@@ -179,39 +204,39 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        private static void RequirePublicConstructors (
+        private static void RequirePublicConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class PublicConstructorsBaseType
         {
             [Kept]
-            public PublicConstructorsBaseType () { }
+            public PublicConstructorsBaseType() { }
 
-            public PublicConstructorsBaseType (int i) { }
+            public PublicConstructorsBaseType(int i) { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (PublicConstructorsBaseType))]
+        [KeptBaseType(typeof(PublicConstructorsBaseType))]
         class PublicConstructorsType : PublicConstructorsBaseType
         {
-            private PublicConstructorsType () { }
+            private PublicConstructorsType() { }
 
             [Kept]
-            public PublicConstructorsType (int i) { }
+            public PublicConstructorsType(int i) { }
 
-            private PublicConstructorsType (int i, int j) { }
+            private PublicConstructorsType(int i, int j) { }
 
             // Not implied by the DynamicallyAccessedMemberTypes logic, but
             // explicit cctors would be kept by the linker.
             // [Kept]
             // static PublicConstructorsType () { }
 
-            public void Method1 () { }
+            public void Method1() { }
+
             public bool Property1 { get; set; }
             public bool Field1;
         }
@@ -222,50 +247,49 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             static int i = 10;
 
             [Kept]
-            public PublicConstructorsBeforeFieldInitType () { }
+            public PublicConstructorsBeforeFieldInitType() { }
         }
 
         [Kept]
         class PublicConstructorsPrivateParameterlessConstructorType
         {
-            private PublicConstructorsPrivateParameterlessConstructorType () { }
+            private PublicConstructorsPrivateParameterlessConstructorType() { }
         }
-
 
         [Kept]
-        private static void RequireNonPublicConstructors (
+        private static void RequireNonPublicConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class NonPublicConstructorsBaseType
         {
             [Kept]
-            protected NonPublicConstructorsBaseType () { }
+            protected NonPublicConstructorsBaseType() { }
 
-            protected NonPublicConstructorsBaseType (int i) { }
+            protected NonPublicConstructorsBaseType(int i) { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (NonPublicConstructorsBaseType))]
+        [KeptBaseType(typeof(NonPublicConstructorsBaseType))]
         class NonPublicConstructorsType : NonPublicConstructorsBaseType
         {
             [Kept]
-            private NonPublicConstructorsType () { }
+            private NonPublicConstructorsType() { }
 
-            public NonPublicConstructorsType (int i) { }
+            public NonPublicConstructorsType(int i) { }
 
             [Kept]
-            private NonPublicConstructorsType (int i, int j) { }
+            private NonPublicConstructorsType(int i, int j) { }
 
             // Kept by the DynamicallyAccessedMembers logic
             [Kept]
-            static NonPublicConstructorsType () { }
+            static NonPublicConstructorsType() { }
 
-            public void Method1 () { }
+            public void Method1() { }
+
             public bool Property1 { get; set; }
             public bool Field1;
         }
@@ -275,45 +299,47 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         {
             public int i = 10;
 
-            public NonPublicConstructorsBeforeFieldInitType () { }
+            public NonPublicConstructorsBeforeFieldInitType() { }
         }
-
 
         [Kept]
-        private static void RequireAllConstructors (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        private static void RequireAllConstructors(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class AllConstructorsBaseType
         {
             [Kept]
-            protected AllConstructorsBaseType () { }
+            protected AllConstructorsBaseType() { }
 
-            protected AllConstructorsBaseType (int i) { }
+            protected AllConstructorsBaseType(int i) { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (AllConstructorsBaseType))]
+        [KeptBaseType(typeof(AllConstructorsBaseType))]
         class AllConstructorsType : AllConstructorsBaseType
         {
             [Kept]
-            private AllConstructorsType () { }
+            private AllConstructorsType() { }
 
             [Kept]
-            public AllConstructorsType (int i) { }
+            public AllConstructorsType(int i) { }
 
             [Kept]
-            private AllConstructorsType (int i, int j) { }
+            private AllConstructorsType(int i, int j) { }
 
             // Kept by the DynamicallyAccessedMembers logic
             [Kept]
-            static AllConstructorsType () { }
+            static AllConstructorsType() { }
 
-            public void Method1 () { }
+            public void Method1() { }
+
             public bool Property1 { get; set; }
             public bool Field1;
         }
@@ -325,34 +351,52 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public int i = 10;
 
             [Kept]
-            public AllConstructorsBeforeFieldInitType () { }
+            public AllConstructorsBeforeFieldInitType() { }
         }
-
 
         [Kept]
-        private static void RequirePublicMethods (
+        private static void RequirePublicMethods(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class PublicMethodsBaseType
         {
             [Kept]
-            public void PublicBaseMethod () { }
-            private void PrivateBaseMethod () { }
-            protected void ProtectedBaseMethod () { }
-            [Kept]
-            public void HideMethod () { }
+            public void PublicBaseMethod() { }
+
+            private void PrivateBaseMethod() { }
+
+            protected void ProtectedBaseMethod() { }
 
             [Kept]
-            public bool PublicPropertyOnBase { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public void HideMethod() { }
+
+            [Kept]
+            public bool PublicPropertyOnBase
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
             protected bool ProtectedPropertyOnBase { get; set; }
             private bool PrivatePropertyOnBase { get; set; }
+
             [Kept]
-            public bool HideProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool HideProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
 
             [Kept]
             [KeptEventAddMethod]
@@ -361,6 +405,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> PublicEventOnBase;
             protected event EventHandler<EventArgs> ProtectedEventOnBase;
             private event EventHandler<EventArgs> PrivateEventOnBase;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -368,20 +413,36 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> HideEvent;
 
             [Kept]
-            public static void PublicStaticBaseMethod () { }
-            private static void PrivateStaticBaseMethod () { }
-            protected static void ProtectedStaticBaseMethod () { }
+            public static void PublicStaticBaseMethod() { }
+
+            private static void PrivateStaticBaseMethod() { }
+
+            protected static void ProtectedStaticBaseMethod() { }
+
             [Kept]
-            public static void HideStaticMethod () { }
+            public static void HideStaticMethod() { }
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static public bool PublicStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
             static protected bool ProtectedStaticPropertyOnBase { get; set; }
             static private bool PrivateStaticPropertyOnBase { get; set; }
+
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty { [Kept] get; [Kept] set; }
+            static public bool HideStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
@@ -390,6 +451,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public static event EventHandler<EventArgs> PublicStaticEventOnBase;
             protected static event EventHandler<EventArgs> ProtectedStaticEventOnBase;
             private static event EventHandler<EventArgs> PrivateStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -398,28 +460,52 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        [KeptBaseType (typeof (PublicMethodsBaseType))]
+        [KeptBaseType(typeof(PublicMethodsBaseType))]
         class PublicMethodsType : PublicMethodsBaseType
         {
-            public PublicMethodsType () { }
+            public PublicMethodsType() { }
 
             [Kept]
-            public void PublicMethod1 () { }
-            [Kept]
-            public bool PublicMethod2 (int i) { return false; }
-
-            internal void InternalMethod () { }
-            protected void ProtectedMethod () { }
-            private void PrivateMethod () { }
-            [Kept]
-            public void HideMethod () { }
+            public void PublicMethod1() { }
 
             [Kept]
-            public bool PublicProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool PublicMethod2(int i)
+            {
+                return false;
+            }
+
+            internal void InternalMethod() { }
+
+            protected void ProtectedMethod() { }
+
+            private void PrivateMethod() { }
+
+            [Kept]
+            public void HideMethod() { }
+
+            [Kept]
+            public bool PublicProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
             protected bool ProtectedProperty { get; set; }
             private bool PrivateProperty { get; set; }
+
             [Kept]
-            public bool HideProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool HideProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
 
             [Kept]
             [KeptEventAddMethod]
@@ -428,6 +514,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> PublicEvent;
             protected event EventHandler<EventArgs> ProtectedEvent;
             private event EventHandler<EventArgs> PrivateEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -435,20 +522,36 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> HideEvent;
 
             [Kept]
-            public static void PublicStaticMethod () { }
-            private static void PrivateStaticMethod () { }
-            protected static void ProtectedStaticMethod () { }
+            public static void PublicStaticMethod() { }
+
+            private static void PrivateStaticMethod() { }
+
+            protected static void ProtectedStaticMethod() { }
+
             [Kept]
-            public static void HideStaticMethod () { }
+            public static void HideStaticMethod() { }
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticProperty { [Kept] get; [Kept] set; }
+            static public bool PublicStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
             static protected bool ProtectedStaticProperty { get; set; }
             static private bool PrivateStaticProperty { get; set; }
+
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty { [Kept] get; [Kept] set; }
+            static public bool HideStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
@@ -457,6 +560,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public static event EventHandler<EventArgs> PublicStaticEvent;
             protected static event EventHandler<EventArgs> ProtectedStaticEvent;
             private static event EventHandler<EventArgs> PrivateStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -464,31 +568,42 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public static event EventHandler<EventArgs> HideStaticEvent;
         }
 
-
         [Kept]
-        private static void RequireNonPublicMethods (
+        private static void RequireNonPublicMethods(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class NonPublicMethodsBaseType
         {
-            public void PublicBaseMethod () { }
-            private void PrivateBaseMethod () { }
+            public void PublicBaseMethod() { }
+
+            private void PrivateBaseMethod() { }
+
             [Kept]
-            protected void ProtectedBaseMethod () { }
-            public void HideMethod () { }
+            protected void ProtectedBaseMethod() { }
+
+            public void HideMethod() { }
 
             public bool PublicPropertyOnBase { get; set; }
+
             [Kept]
-            protected bool ProtectedPropertyOnBase { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            protected bool ProtectedPropertyOnBase
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
             private bool PrivatePropertyOnBase { get; set; }
             public bool HideProperty { get; set; }
 
             public event EventHandler<EventArgs> PublicEventOnBase;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -497,20 +612,31 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             private event EventHandler<EventArgs> PrivateEventOnBase;
             public event EventHandler<EventArgs> HideEvent;
 
-            public static void PublicStaticBaseMethod () { }
-            private static void PrivateStaticBaseMethod () { }
+            public static void PublicStaticBaseMethod() { }
+
+            private static void PrivateStaticBaseMethod() { }
+
             [Kept]
-            protected static void ProtectedStaticBaseMethod () { }
-            public static void HideStaticMethod () { }
+            protected static void ProtectedStaticBaseMethod() { }
+
+            public static void HideStaticMethod() { }
 
             static public bool PublicStaticPropertyOnBase { get; set; }
+
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static protected bool ProtectedStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
             static private bool PrivateStaticPropertyOnBase { get; set; }
             static public bool HideStaticProperty { get; set; }
 
             public static event EventHandler<EventArgs> PublicStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -521,35 +647,62 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        [KeptBaseType (typeof (NonPublicMethodsBaseType))]
+        [KeptBaseType(typeof(NonPublicMethodsBaseType))]
         class NonPublicMethodsType : NonPublicMethodsBaseType
         {
-            private NonPublicMethodsType () { }
+            private NonPublicMethodsType() { }
 
-            public void PublicMethod1 () { }
-            public bool PublicMethod2 (int i) { return false; }
+            public void PublicMethod1() { }
+
+            public bool PublicMethod2(int i)
+            {
+                return false;
+            }
 
             [Kept]
-            internal void InternalMethod () { }
+            internal void InternalMethod() { }
+
             [Kept]
-            protected void ProtectedMethod () { }
+            protected void ProtectedMethod() { }
+
             [Kept]
-            private void PrivateMethod () { }
-            public void HideMethod () { }
+            private void PrivateMethod() { }
+
+            public void HideMethod() { }
 
             public bool PublicProperty { get; set; }
+
             [Kept]
-            protected bool ProtectedProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            protected bool ProtectedProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
             [Kept]
-            private bool PrivateProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            private bool PrivateProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
             public bool HideProperty { get; set; }
 
             public event EventHandler<EventArgs> PublicEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             protected event EventHandler<EventArgs> ProtectedEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -557,28 +710,47 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             private event EventHandler<EventArgs> PrivateEvent;
             public event EventHandler<EventArgs> HideEvent;
 
-            public static void PublicStaticMethod () { }
+            public static void PublicStaticMethod() { }
+
             [Kept]
-            private static void PrivateStaticMethod () { }
+            private static void PrivateStaticMethod() { }
+
             [Kept]
-            protected static void ProtectedStaticMethod () { }
-            public static void HideStaticMethod () { }
+            protected static void ProtectedStaticMethod() { }
+
+            public static void HideStaticMethod() { }
 
             static public bool PublicStaticProperty { get; set; }
+
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty { [Kept] get; [Kept] set; }
+            static protected bool ProtectedStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticProperty { [Kept] get; [Kept] set; }
+            static private bool PrivateStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
             static public bool HideStaticProperty { get; set; }
 
             public static event EventHandler<EventArgs> PublicStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             protected static event EventHandler<EventArgs> ProtectedStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -589,45 +761,77 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public bool Field1;
         }
 
-
         [Kept]
-        private static void RequireAllMethods (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
+        private static void RequireAllMethods(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class AllMethodsBaseType
         {
             [Kept]
-            public void PublicBaseMethod () { }
-            private void PrivateBaseMethod () { }
-            [Kept]
-            protected void ProtectedBaseMethod () { }
-            [Kept]
-            public void HideMethod () { }
+            public void PublicBaseMethod() { }
+
+            private void PrivateBaseMethod() { }
 
             [Kept]
-            public bool PublicPropertyOnBase { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            protected void ProtectedBaseMethod() { }
+
             [Kept]
-            protected bool ProtectedPropertyOnBase { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public void HideMethod() { }
+
+            [Kept]
+            public bool PublicPropertyOnBase
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
+            [Kept]
+            protected bool ProtectedPropertyOnBase
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
             private bool PrivatePropertyOnBase { get; set; }
+
             [Kept]
-            public bool HideProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool HideProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
 
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             public event EventHandler<EventArgs> PublicEventOnBase;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             protected event EventHandler<EventArgs> ProtectedEventOnBase;
             private event EventHandler<EventArgs> PrivateEventOnBase;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -635,35 +839,60 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> HideEvent;
 
             [Kept]
-            public static void PublicStaticBaseMethod () { }
-            private static void PrivateStaticBaseMethod () { }
+            public static void PublicStaticBaseMethod() { }
+
+            private static void PrivateStaticBaseMethod() { }
+
             [Kept]
-            protected static void ProtectedStaticBaseMethod () { }
+            protected static void ProtectedStaticBaseMethod() { }
+
             [Kept]
-            public static void HideStaticMethod () { }
+            public static void HideStaticMethod() { }
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static public bool PublicStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static protected bool ProtectedStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
             static private bool PrivateStaticPropertyOnBase { get; set; }
+
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty { [Kept] get; [Kept] set; }
+            static public bool HideStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             public static event EventHandler<EventArgs> PublicStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             protected static event EventHandler<EventArgs> ProtectedStaticEventOnBase;
             private static event EventHandler<EventArgs> PrivateStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -672,49 +901,94 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        [KeptBaseType (typeof (AllMethodsBaseType))]
+        [KeptBaseType(typeof(AllMethodsBaseType))]
         class AllMethodsType : AllMethodsBaseType
         {
-            public AllMethodsType () { }
+            public AllMethodsType() { }
 
             [Kept]
-            public void PublicMethod1 () { }
-            [Kept]
-            public bool PublicMethod2 (int i) { return false; }
+            public void PublicMethod1() { }
 
             [Kept]
-            internal void InternalMethod () { }
-            [Kept]
-            protected void ProtectedMethod () { }
-            [Kept]
-            private void PrivateMethod () { }
-            [Kept]
-            public void HideMethod () { }
+            public bool PublicMethod2(int i)
+            {
+                return false;
+            }
 
             [Kept]
-            public bool PublicProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            internal void InternalMethod() { }
+
             [Kept]
-            protected bool ProtectedProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            protected void ProtectedMethod() { }
+
             [Kept]
-            private bool PrivateProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            private void PrivateMethod() { }
+
             [Kept]
-            public bool HideProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public void HideMethod() { }
+
+            [Kept]
+            public bool PublicProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
+            [Kept]
+            protected bool ProtectedProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
+            [Kept]
+            private bool PrivateProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
+            [Kept]
+            public bool HideProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
 
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             public event EventHandler<EventArgs> PublicEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             protected event EventHandler<EventArgs> ProtectedEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             private event EventHandler<EventArgs> PrivateEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -722,42 +996,75 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> HideEvent;
 
             [Kept]
-            public static void PublicStaticMethod () { }
+            public static void PublicStaticMethod() { }
+
             [Kept]
-            private static void PrivateStaticMethod () { }
+            private static void PrivateStaticMethod() { }
+
             [Kept]
-            protected static void ProtectedStaticMethod () { }
+            protected static void ProtectedStaticMethod() { }
+
             [Kept]
-            public static void HideStaticMethod () { }
+            public static void HideStaticMethod() { }
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticProperty { [Kept] get; [Kept] set; }
+            static public bool PublicStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty { [Kept] get; [Kept] set; }
+            static protected bool ProtectedStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticProperty { [Kept] get; [Kept] set; }
+            static private bool PrivateStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty { [Kept] get; [Kept] set; }
+            static public bool HideStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             public static event EventHandler<EventArgs> PublicStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             protected static event EventHandler<EventArgs> ProtectedStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             private static event EventHandler<EventArgs> PrivateStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -767,14 +1074,12 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public bool Field1;
         }
 
-
         [Kept]
-        private static void RequirePublicFields (
+        private static void RequirePublicFields(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class PublicFieldsBaseType
@@ -783,6 +1088,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public bool PublicBaseField;
             protected bool ProtectedBaseField;
             private bool PrivateBaseField;
+
             [Kept]
             public bool HideField;
 
@@ -799,6 +1105,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             static public bool StaticPublicBaseField;
             static protected bool StaticProtectedBaseField;
             static private bool StaticPrivateBaseField;
+
             [Kept]
             static public bool HideStaticField;
 
@@ -814,16 +1121,18 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        [KeptBaseType (typeof (PublicFieldsBaseType))]
+        [KeptBaseType(typeof(PublicFieldsBaseType))]
         class PublicFieldsType : PublicFieldsBaseType
         {
             [Kept]
             public bool PublicField;
+
             [Kept]
             public string PublicStringField;
             internal bool InternalField;
             protected bool ProtectedField;
             private bool PrivateField;
+
             [Kept]
             public bool HideField;
 
@@ -840,10 +1149,12 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             static public bool StaticPublicField;
+
             [Kept]
             static public string StaticPublicStringField;
             static protected bool StaticProtectedField;
             static private bool StaticPrivateField;
+
             [Kept]
             static public bool HideStaticField;
 
@@ -859,17 +1170,17 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        private static void RequireNonPublicFields (
+        private static void RequireNonPublicFields(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class NonPublicFieldsBaseType
         {
             public bool PublicBaseField;
+
             [Kept]
             protected bool ProtectedBaseField;
             private bool PrivateBaseField;
@@ -885,6 +1196,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             private event EventHandler<EventArgs> PrivateEventOnBase;
 
             static public bool StaticPublicBaseField;
+
             [Kept]
             static protected bool StaticProtectedBaseField;
             static private bool StaticPrivateBaseField;
@@ -902,15 +1214,18 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        [KeptBaseType (typeof (NonPublicFieldsBaseType))]
+        [KeptBaseType(typeof(NonPublicFieldsBaseType))]
         class NonPublicFieldsType : NonPublicFieldsBaseType
         {
             public bool PublicField;
             public string PublicStringField;
+
             [Kept]
             internal bool InternalField;
+
             [Kept]
             protected bool ProtectedField;
+
             [Kept]
             private bool PrivateField;
             public bool HideField;
@@ -918,66 +1233,83 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             // Backing fields are always private, so they will be kept even if the property itself is public
             [KeptBackingField]
             public bool PublicProperty { get; set; }
+
             [KeptBackingField]
             protected bool ProtectedProperty { get; set; }
+
             [KeptBackingField]
             private bool PrivateProperty { get; set; }
+
             [KeptBackingField]
             public bool HideProperty { get; set; }
 
             [KeptBackingField]
             public event EventHandler<EventArgs> PublicEvent;
+
             [KeptBackingField]
             protected event EventHandler<EventArgs> ProtectedEvent;
+
             [KeptBackingField]
             private event EventHandler<EventArgs> PrivateEvent;
+
             [KeptBackingField]
             public event EventHandler<EventArgs> HideEvent;
 
             static public bool StaticPublicField;
             static public string StaticPublicStringField;
+
             [Kept]
             static protected bool StaticProtectedField;
+
             [Kept]
             static private bool StaticPrivateField;
             static public bool HideStaticField;
 
             [KeptBackingField]
             static public bool PublicStaticProperty { get; set; }
+
             [KeptBackingField]
             static protected bool ProtectedStaticProperty { get; set; }
+
             [KeptBackingField]
             static private bool PrivateStaticProperty { get; set; }
+
             [KeptBackingField]
             static public bool HideStaticProperty { get; set; }
 
             [KeptBackingField]
             public static event EventHandler<EventArgs> PublicStaticEvent;
+
             [KeptBackingField]
             protected static event EventHandler<EventArgs> ProtectedStaticEvent;
+
             [KeptBackingField]
             private static event EventHandler<EventArgs> PrivateStaticEvent;
+
             [KeptBackingField]
             public static event EventHandler<EventArgs> HideStaticEvent;
         }
 
-
         [Kept]
-        private static void RequireAllFields (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        private static void RequireAllFields(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.NonPublicFields
+            )]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class AllFieldsBaseType
         {
             [Kept]
             public bool PublicBaseField;
+
             [Kept]
             protected bool ProtectedBaseField;
             private bool PrivateBaseField;
+
             [Kept]
             public bool HideField;
 
@@ -992,9 +1324,11 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             static public bool StaticPublicBaseField;
+
             [Kept]
             static protected bool StaticProtectedBaseField;
             static private bool StaticPrivateBaseField;
+
             [Kept]
             static public bool HideStaticField;
 
@@ -1010,418 +1344,793 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        [KeptBaseType (typeof (AllFieldsBaseType))]
+        [KeptBaseType(typeof(AllFieldsBaseType))]
         class AllFieldsType : AllFieldsBaseType
         {
             [Kept]
             public bool PublicField;
+
             [Kept]
             public string PublicStringField;
+
             [Kept]
             internal bool InternalField;
+
             [Kept]
             protected bool ProtectedField;
+
             [Kept]
             private bool PrivateField;
+
             [Kept]
             public bool HideField;
 
             [KeptBackingField]
             public bool PublicProperty { get; set; }
+
             [KeptBackingField]
             protected bool ProtectedProperty { get; set; }
+
             [KeptBackingField]
             private bool PrivateProperty { get; set; }
+
             [KeptBackingField]
             public bool HideProperty { get; set; }
 
             [KeptBackingField]
             public event EventHandler<EventArgs> PublicEvent;
+
             [KeptBackingField]
             protected event EventHandler<EventArgs> ProtectedEvent;
+
             [KeptBackingField]
             private event EventHandler<EventArgs> PrivateEvent;
+
             [KeptBackingField]
             public event EventHandler<EventArgs> HideEvent;
 
             [Kept]
             static public bool StaticPublicField;
+
             [Kept]
             static public string StaticPublicStringField;
+
             [Kept]
             static protected bool StaticProtectedField;
+
             [Kept]
             static private bool StaticPrivateField;
+
             [Kept]
             static public bool HideStaticField;
 
             [KeptBackingField]
             static public bool PublicStaticProperty { get; set; }
+
             [KeptBackingField]
             static protected bool ProtectedStaticProperty { get; set; }
+
             [KeptBackingField]
             static private bool PrivateStaticProperty { get; set; }
+
             [KeptBackingField]
             static public bool HideStaticProperty { get; set; }
 
             [KeptBackingField]
             public static event EventHandler<EventArgs> PublicStaticEvent;
+
             [KeptBackingField]
             protected static event EventHandler<EventArgs> ProtectedStaticEvent;
+
             [KeptBackingField]
             private static event EventHandler<EventArgs> PrivateStaticEvent;
+
             [KeptBackingField]
             public static event EventHandler<EventArgs> HideStaticEvent;
         }
 
-
         [Kept]
-        private static void RequirePublicNestedTypes (
+        private static void RequirePublicNestedTypes(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class PublicNestedTypesBaseType
         {
             // Nested types are not propagated from base class at all
             public class PublicBaseNestedType { }
+
             protected class ProtectedBaseNestedType { }
+
             private class PrivateBaseNestedType { }
+
             public class HideBaseNestedType { }
-            public delegate int PublicDelegate ();
-            private delegate int PrivateDelegate ();
+
+            public delegate int PublicDelegate();
+            private delegate int PrivateDelegate();
         }
 
         [Kept]
-        [KeptBaseType (typeof (PublicNestedTypesBaseType))]
+        [KeptBaseType(typeof(PublicNestedTypesBaseType))]
         class PublicNestedTypesType : PublicNestedTypesBaseType
         {
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             public class PublicNestedType { }
+
             protected class ProtectedNestedType { }
+
             private class PrivateNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             public class HideNestedType { }
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            [KeptMember ("Invoke()")]
-            public delegate int PublicDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            [KeptMember("Invoke()")]
+            public delegate int PublicDelegate();
 
-            private delegate int PrivateDelegate ();
+            private delegate int PrivateDelegate();
         }
-
 
         [Kept]
-        private static void RequireNonPublicNestedTypes (
+        private static void RequireNonPublicNestedTypes(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class NonPublicNestedTypesBaseType
         {
             // Nested types are not propagated from base class at all
             public class PublicBaseNestedType { }
+
             protected class ProtectedBaseNestedType { }
+
             private class PrivateBaseNestedType { }
+
             public class HideBaseNestedType { }
-            public delegate int PublicDelegate ();
-            private delegate int PrivateDelegate ();
+
+            public delegate int PublicDelegate();
+            private delegate int PrivateDelegate();
         }
 
         [Kept]
-        [KeptBaseType (typeof (NonPublicNestedTypesBaseType))]
+        [KeptBaseType(typeof(NonPublicNestedTypesBaseType))]
         class NonPublicNestedTypesType : NonPublicNestedTypesBaseType
         {
             public class PublicNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             protected class ProtectedNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             private class PrivateNestedType { }
+
             public class HideNestedType { }
 
-            public delegate int PublicDelegate ();
+            public delegate int PublicDelegate();
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            [KeptMember ("Invoke()")]
-            private delegate int PrivateDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            [KeptMember("Invoke()")]
+            private delegate int PrivateDelegate();
         }
-
 
         [Kept]
-        private static void RequireAllNestedTypes (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        private static void RequireAllNestedTypes(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicNestedTypes
+                    | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+            )]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class AllNestedTypesBaseType
         {
             // Nested types are not propagated from base class at all
             public class PublicBaseNestedType { }
+
             protected class ProtectedBaseNestedType { }
+
             private class PrivateBaseNestedType { }
+
             public class HideBaseNestedType { }
-            public delegate int PublicBaseDelegate ();
-            private delegate int PrivateBaseDelegate ();
+
+            public delegate int PublicBaseDelegate();
+            private delegate int PrivateBaseDelegate();
         }
 
         [Kept]
-        [KeptBaseType (typeof (AllNestedTypesBaseType))]
+        [KeptBaseType(typeof(AllNestedTypesBaseType))]
         class AllNestedTypesType : AllNestedTypesBaseType
         {
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             public class PublicNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             protected class ProtectedNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             private class PrivateNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             public class HideNestedType { }
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            [KeptMember ("Invoke()")]
-            public delegate int PublicDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            [KeptMember("Invoke()")]
+            public delegate int PublicDelegate();
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            [KeptMember ("Invoke()")]
-            private delegate int PrivateDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            [KeptMember("Invoke()")]
+            private delegate int PrivateDelegate();
         }
-
 
         [Kept]
-        private static void RequirePublicProperties (
+        private static void RequirePublicProperties(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class PublicPropertiesBaseType
         {
             [Kept]
-            public bool PublicPropertyOnBase { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool PublicPropertyOnBase
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
             [Kept]
-            public bool PublicPropertyGetterOnBase { [Kept] get { return false; } [Kept] private set { } }
+            public bool PublicPropertyGetterOnBase
+            {
+                [Kept]
+                get { return false; }
+                [Kept]
+                private set { }
+            }
+
             [Kept]
-            public bool PublicPropertySetterOnBase { [Kept] private get { return false; } [Kept] set { } }
+            public bool PublicPropertySetterOnBase
+            {
+                [Kept]
+                private get { return false; }
+                [Kept]
+                set { }
+            }
+
             [Kept]
-            public bool PublicPropertyOnlyGetterOnBase { [Kept] get { return false; } }
+            public bool PublicPropertyOnlyGetterOnBase
+            {
+                [Kept]
+                get { return false; }
+            }
+
             [Kept]
-            public bool PublicPropertyOnlySetterOnBase { [Kept] set { } }
+            public bool PublicPropertyOnlySetterOnBase
+            {
+                [Kept]
+                set { }
+            }
             protected bool ProtectedPropertyOnBase { get; set; }
             private bool PrivatePropertyOnBase { get; set; }
+
             [Kept]
-            public bool HideProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool HideProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static public bool PublicStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
             static protected bool ProtectedStaticPropertyOnBase { get; set; }
             static private bool PrivateStaticPropertyOnBase { get; set; }
+
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty { [Kept] get; [Kept] set; }
+            static public bool HideStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
         }
 
         [Kept]
-        [KeptBaseType (typeof (PublicPropertiesBaseType))]
+        [KeptBaseType(typeof(PublicPropertiesBaseType))]
         class PublicPropertiesType : PublicPropertiesBaseType
         {
             [Kept]
-            public bool PublicProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool PublicProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
             [Kept]
-            public bool PublicPropertyGetter { [Kept] get { return false; } [Kept] private set { } }
+            public bool PublicPropertyGetter
+            {
+                [Kept]
+                get { return false; }
+                [Kept]
+                private set { }
+            }
+
             [Kept]
-            public bool PublicPropertySetter { [Kept] private get { return false; } [Kept] set { } }
+            public bool PublicPropertySetter
+            {
+                [Kept]
+                private get { return false; }
+                [Kept]
+                set { }
+            }
+
             [Kept]
-            public bool PublicPropertyOnlyGetter { [Kept] get { return false; } }
+            public bool PublicPropertyOnlyGetter
+            {
+                [Kept]
+                get { return false; }
+            }
+
             [Kept]
-            public bool PublicPropertyOnlySetter { [Kept] set { } }
+            public bool PublicPropertyOnlySetter
+            {
+                [Kept]
+                set { }
+            }
             protected bool ProtectedProperty { get; set; }
             private bool PrivateProperty { get; set; }
+
             [Kept]
-            public bool HideProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool HideProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticProperty { [Kept] get; [Kept] set; }
+            static public bool PublicStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
             static protected bool ProtectedStaticProperty { get; set; }
             static private bool PrivateStaticProperty { get; set; }
+
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty { [Kept] get; [Kept] set; }
+            static public bool HideStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
         }
-
 
         [Kept]
-        private static void RequireNonPublicProperties (
+        private static void RequireNonPublicProperties(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicProperties)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class NonPublicPropertiesBaseType
         {
             public bool PublicPropertyOnBase { get; set; }
-            public bool PublicPropertyGetterOnBase { get { return false; } private set { } }
-            public bool PublicPropertySetterOnBase { private get { return false; } set { } }
-            public bool PublicPropertyOnlyGetterOnBase { get { return false; } }
-            public bool PublicPropertyOnlySetterOnBase { set { } }
+            public bool PublicPropertyGetterOnBase
+            {
+                get { return false; }
+                private set { }
+            }
+            public bool PublicPropertySetterOnBase
+            {
+                private get { return false; }
+                set { }
+            }
+            public bool PublicPropertyOnlyGetterOnBase
+            {
+                get { return false; }
+            }
+            public bool PublicPropertyOnlySetterOnBase
+            {
+                set { }
+            }
+
             [Kept]
-            protected bool ProtectedPropertyOnBase { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            protected bool ProtectedPropertyOnBase
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
             private bool PrivatePropertyOnBase { get; set; }
             public bool HideProperty { get; set; }
 
             static public bool PublicStaticPropertyOnBase { get; set; }
+
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static protected bool ProtectedStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
             static private bool PrivateStaticPropertyOnBase { get; set; }
             static public bool HideStaticProperty { get; set; }
         }
 
         [Kept]
-        [KeptBaseType (typeof (NonPublicPropertiesBaseType))]
+        [KeptBaseType(typeof(NonPublicPropertiesBaseType))]
         class NonPublicPropertiesType : NonPublicPropertiesBaseType
         {
             public bool PublicProperty { get; set; }
-            public bool PublicPropertyGetter { get { return false; } private set { } }
-            public bool PublicPropertySetter { private get { return false; } set { } }
-            public bool PublicPropertyOnlyGetter { get { return false; } }
-            public bool PublicPropertyOnlySetter { set { } }
+            public bool PublicPropertyGetter
+            {
+                get { return false; }
+                private set { }
+            }
+            public bool PublicPropertySetter
+            {
+                private get { return false; }
+                set { }
+            }
+            public bool PublicPropertyOnlyGetter
+            {
+                get { return false; }
+            }
+            public bool PublicPropertyOnlySetter
+            {
+                set { }
+            }
+
             [Kept]
-            protected bool ProtectedProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            protected bool ProtectedProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
             [Kept]
-            private bool PrivateProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            private bool PrivateProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
             public bool HideProperty { get; set; }
 
             static public bool PublicStaticProperty { get; set; }
+
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty { [Kept] get; [Kept] set; }
+            static protected bool ProtectedStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticProperty { [Kept] get; [Kept] set; }
+            static private bool PrivateStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
             static public bool HideStaticProperty { get; set; }
         }
 
         [Kept]
-        private static void RequireAllProperties (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+        private static void RequireAllProperties(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.NonPublicProperties
+            )]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class AllPropertiesBaseType
         {
             [Kept]
-            public bool PublicPropertyOnBase { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool PublicPropertyOnBase
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
             [Kept]
-            public bool PublicPropertyGetterOnBase { [Kept] get { return false; } [Kept] private set { } }
+            public bool PublicPropertyGetterOnBase
+            {
+                [Kept]
+                get { return false; }
+                [Kept]
+                private set { }
+            }
+
             [Kept]
-            public bool PublicPropertySetterOnBase { [Kept] private get { return false; } [Kept] set { } }
+            public bool PublicPropertySetterOnBase
+            {
+                [Kept]
+                private get { return false; }
+                [Kept]
+                set { }
+            }
+
             [Kept]
-            public bool PublicPropertyOnlyGetterOnBase { [Kept] get { return false; } }
+            public bool PublicPropertyOnlyGetterOnBase
+            {
+                [Kept]
+                get { return false; }
+            }
+
             [Kept]
-            public bool PublicPropertyOnlySetterOnBase { [Kept] set { } }
+            public bool PublicPropertyOnlySetterOnBase
+            {
+                [Kept]
+                set { }
+            }
+
             [Kept]
-            protected bool ProtectedPropertyOnBase { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            protected bool ProtectedPropertyOnBase
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
             private bool PrivatePropertyOnBase { get; set; }
+
             [Kept]
-            public bool HideProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool HideProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static public bool PublicStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static protected bool ProtectedStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
             static private bool PrivateStaticPropertyOnBase { get; set; }
+
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty { [Kept] get; [Kept] set; }
+            static public bool HideStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
         }
 
         [Kept]
-        [KeptBaseType (typeof (AllPropertiesBaseType))]
+        [KeptBaseType(typeof(AllPropertiesBaseType))]
         class AllPropertiesType : AllPropertiesBaseType
         {
             [Kept]
-            public bool PublicProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool PublicProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
             [Kept]
-            public bool PublicPropertyGetter { [Kept] get { return false; } [Kept] private set { } }
+            public bool PublicPropertyGetter
+            {
+                [Kept]
+                get { return false; }
+                [Kept]
+                private set { }
+            }
+
             [Kept]
-            public bool PublicPropertySetter { [Kept] private get { return false; } [Kept] set { } }
+            public bool PublicPropertySetter
+            {
+                [Kept]
+                private get { return false; }
+                [Kept]
+                set { }
+            }
+
             [Kept]
-            public bool PublicPropertyOnlyGetter { [Kept] get { return false; } }
+            public bool PublicPropertyOnlyGetter
+            {
+                [Kept]
+                get { return false; }
+            }
+
             [Kept]
-            public bool PublicPropertyOnlySetter { [Kept] set { } }
+            public bool PublicPropertyOnlySetter
+            {
+                [Kept]
+                set { }
+            }
+
             [Kept]
-            protected bool ProtectedProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            protected bool ProtectedProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
             [Kept]
-            private bool PrivateProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            private bool PrivateProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
+
             [Kept]
-            public bool HideProperty { [Kept][ExpectBodyModified] get; [Kept][ExpectBodyModified] set; }
+            public bool HideProperty
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                [Kept]
+                [ExpectBodyModified]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticProperty { [Kept] get; [Kept] set; }
+            static public bool PublicStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty { [Kept] get; [Kept] set; }
+            static protected bool ProtectedStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticProperty { [Kept] get; [Kept] set; }
+            static private bool PrivateStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty { [Kept] get; [Kept] set; }
+            static public bool HideStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
         }
-
 
         [Kept]
-        private static void RequirePublicEvents (
+        private static void RequirePublicEvents(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class PublicEventsBaseType
@@ -1433,6 +2142,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> PublicEventOnBase;
             protected event EventHandler<EventArgs> ProtectedEventOnBase;
             private event EventHandler<EventArgs> PrivateEventOnBase;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -1446,6 +2156,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             static public event EventHandler<EventArgs> PublicStaticEventOnBase;
             static protected event EventHandler<EventArgs> ProtectedStaticEventOnBase;
             static private event EventHandler<EventArgs> PrivateStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -1454,7 +2165,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        [KeptBaseType (typeof (PublicEventsBaseType))]
+        [KeptBaseType(typeof(PublicEventsBaseType))]
         class PublicEventsType : PublicEventsBaseType
         {
             [Kept]
@@ -1464,6 +2175,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> PublicEvent;
             protected event EventHandler<EventArgs> ProtectedEvent;
             private event EventHandler<EventArgs> PrivateEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -1477,6 +2189,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             static public event EventHandler<EventArgs> PublicStaticEvent;
             static protected event EventHandler<EventArgs> ProtectedStaticEvent;
             static private event EventHandler<EventArgs> PrivateStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -1484,19 +2197,18 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             static public event EventHandler<EventArgs> HideStaticEvent;
         }
 
-
         [Kept]
-        private static void RequireNonPublicEvents (
+        private static void RequireNonPublicEvents(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicEvents)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class NonPublicEventsBaseType
         {
             public event EventHandler<EventArgs> PublicEventOnBase;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -1506,6 +2218,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> HideEvent;
 
             static public event EventHandler<EventArgs> PublicStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -1516,15 +2229,17 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        [KeptBaseType (typeof (NonPublicEventsBaseType))]
+        [KeptBaseType(typeof(NonPublicEventsBaseType))]
         class NonPublicEventsType : NonPublicEventsBaseType
         {
             public event EventHandler<EventArgs> PublicEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             protected event EventHandler<EventArgs> ProtectedEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -1533,11 +2248,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> HideEvent;
 
             static public event EventHandler<EventArgs> PublicStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             static protected event EventHandler<EventArgs> ProtectedStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -1547,12 +2264,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        private static void RequireAllEvents (
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        private static void RequireAllEvents(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.NonPublicEvents
+            )]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         class AllEventsBaseType
@@ -1562,12 +2281,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             public event EventHandler<EventArgs> PublicEventOnBase;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             protected event EventHandler<EventArgs> ProtectedEventOnBase;
             private event EventHandler<EventArgs> PrivateEventOnBase;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -1579,12 +2300,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             static public event EventHandler<EventArgs> PublicStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             static protected event EventHandler<EventArgs> ProtectedStaticEventOnBase;
             static private event EventHandler<EventArgs> PrivateStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -1593,7 +2316,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        [KeptBaseType (typeof (AllEventsBaseType))]
+        [KeptBaseType(typeof(AllEventsBaseType))]
         class AllEventsType : AllEventsBaseType
         {
             [Kept]
@@ -1601,16 +2324,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             public event EventHandler<EventArgs> PublicEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             protected event EventHandler<EventArgs> ProtectedEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             [method: ExpectBodyModified]
             private event EventHandler<EventArgs> PrivateEvent;
+
             [Kept]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
@@ -1622,16 +2348,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             static public event EventHandler<EventArgs> PublicStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             static protected event EventHandler<EventArgs> ProtectedStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             static private event EventHandler<EventArgs> PrivateStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -1640,173 +2369,198 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        private static void RequireInterfaces (
+        private static void RequireInterfaces(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
-        interface IInterfaceOnBaseBase
-        {
-        }
+        interface IInterfaceOnBaseBase { }
 
         [Kept]
-        [KeptInterface (typeof (IInterfaceOnBaseBase))]
+        [KeptInterface(typeof(IInterfaceOnBaseBase))]
         interface IInterfacesOnBase : IInterfaceOnBaseBase
         {
-            void OnBaseInterfaceMethod ();
+            void OnBaseInterfaceMethod();
         }
 
         [Kept]
-        [KeptInterface (typeof (IInterfacesOnBase))] // Interface implementations are collected across all base types, so this one has to be included as well
-        [KeptInterface (typeof (IInterfaceOnBaseBase))] // Roslyn adds transitively implemented interfaces automatically
+        [KeptInterface(typeof(IInterfacesOnBase))] // Interface implementations are collected across all base types, so this one has to be included as well
+        [KeptInterface(typeof(IInterfaceOnBaseBase))] // Roslyn adds transitively implemented interfaces automatically
         class InterfacesBaseType : IInterfacesOnBase
         {
-            public void OnBaseInterfaceMethod () { }
+            public void OnBaseInterfaceMethod() { }
         }
 
         [Kept]
-        interface IInterfacesEmpty
-        {
-        }
+        interface IInterfacesEmpty { }
 
         [Kept]
         interface IInterfacesWithMethods
         {
-            void InterfaceMethod ();
+            void InterfaceMethod();
         }
 
         [Kept]
         interface IInterfaceGeneric<T>
         {
-            void GenericMethod<U> (T t, U u);
+            void GenericMethod<U>(T t, U u);
         }
 
         [Kept]
         interface IInterfacesBase
         {
-            void BaseMethod ();
+            void BaseMethod();
         }
 
         [Kept]
-        [KeptInterface (typeof (IInterfacesBase))]
+        [KeptInterface(typeof(IInterfacesBase))]
         interface IInterfacesDerived : IInterfacesBase
         {
-            void DerivedMethod ();
+            void DerivedMethod();
         }
 
         interface IInterfacesSuperDerived : IInterfacesDerived
         {
-            void SuperDerivedMethod ();
+            void SuperDerivedMethod();
         }
 
         [Kept]
-        [KeptInterface (typeof (IInterfacesEmpty))]
-        [KeptInterface (typeof (IInterfacesWithMethods))]
-        [KeptInterface (typeof (IInterfacesBase))] // Roslyn adds transitively implemented interfaces automatically
-        [KeptInterface (typeof (IInterfacesDerived))]
-        [KeptInterface (typeof (IInterfaceGeneric<int>))]
-        [KeptBaseType (typeof (InterfacesBaseType))]
-        class InterfacesType : InterfacesBaseType, IInterfacesEmpty, IInterfacesWithMethods, IInterfacesDerived, IInterfaceGeneric<int>
+        [KeptInterface(typeof(IInterfacesEmpty))]
+        [KeptInterface(typeof(IInterfacesWithMethods))]
+        [KeptInterface(typeof(IInterfacesBase))] // Roslyn adds transitively implemented interfaces automatically
+        [KeptInterface(typeof(IInterfacesDerived))]
+        [KeptInterface(typeof(IInterfaceGeneric<int>))]
+        [KeptBaseType(typeof(InterfacesBaseType))]
+        class InterfacesType
+            : InterfacesBaseType,
+                IInterfacesEmpty,
+                IInterfacesWithMethods,
+                IInterfacesDerived,
+                IInterfaceGeneric<int>
         {
-            public void InterfaceMethod ()
-            {
-            }
+            public void InterfaceMethod() { }
 
-            public void BaseMethod ()
-            {
-            }
+            public void BaseMethod() { }
 
-            public void DerivedMethod ()
-            {
-            }
+            public void DerivedMethod() { }
 
-            public void GenericMethod<U> (int t, U u)
-            {
-            }
+            public void GenericMethod<U>(int t, U u) { }
         }
 
         [Kept]
-        private static void RequireAll (
+        private static void RequireAll(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
         interface IAllBaseGenericInterface<T>
         {
             [Kept]
-            void BaseInterfaceMethod ();
+            void BaseInterfaceMethod();
+
             [Kept]
-            void BaseDefaultMethod () { }
+            void BaseDefaultMethod() { }
         }
 
         [Kept]
-        [KeptInterface (typeof (IAllBaseGenericInterface<Int64>))]
+        [KeptInterface(typeof(IAllBaseGenericInterface<Int64>))]
         interface IAllDerivedInterface : IAllBaseGenericInterface<Int64>
         {
             [Kept]
-            void DerivedInterfaceMethod ();
+            void DerivedInterfaceMethod();
 
             [Kept]
-            void DerivedDefaultMethod () { }
+            void DerivedDefaultMethod() { }
         }
 
         [Kept]
-        [KeptInterface (typeof (IAllDerivedInterface))]
-        [KeptInterface (typeof (IAllBaseGenericInterface<Int64>))]
+        [KeptInterface(typeof(IAllDerivedInterface))]
+        [KeptInterface(typeof(IAllBaseGenericInterface<Int64>))]
         class AllBaseType : IAllDerivedInterface
         {
             // This is different from all of the above cases.
             // All means really everything - so we include everything on base class as well - including private stuff
 
             [Kept]
-            protected AllBaseType () { }
+            protected AllBaseType() { }
 
             [Kept]
-            protected AllBaseType (int i) { }
+            protected AllBaseType(int i) { }
 
             [Kept]
-            public void PublicBaseMethod () { }
+            public void PublicBaseMethod() { }
+
             [Kept]
-            private void PrivateBaseMethod () { }
+            private void PrivateBaseMethod() { }
+
             [Kept]
-            protected void ProtectedBaseMethod () { }
+            protected void ProtectedBaseMethod() { }
+
             [Kept]
-            public void HideMethod () { }
+            public void HideMethod() { }
 
             [Kept]
             [KeptBackingField]
-            public bool PublicPropertyOnBase { [Kept] get; [Kept] set; }
+            public bool PublicPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            protected bool ProtectedPropertyOnBase { [Kept] get; [Kept] set; }
+            protected bool ProtectedPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            private bool PrivatePropertyOnBase { [Kept] get; [Kept] set; }
+            private bool PrivatePropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            public bool HideProperty { [Kept] get; [Kept] set; }
+            public bool HideProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             public event EventHandler<EventArgs> PublicEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             protected event EventHandler<EventArgs> ProtectedEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             private event EventHandler<EventArgs> PrivateEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -1814,47 +2568,81 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> HideEvent;
 
             [Kept]
-            public static void PublicStaticBaseMethod () { }
-            [Kept]
-            private static void PrivateStaticBaseMethod () { }
-            [Kept]
-            protected static void ProtectedStaticBaseMethod () { }
-            [Kept]
-            public static void HideStaticMethod () { }
+            public static void PublicStaticBaseMethod() { }
 
             [Kept]
-            public void DerivedInterfaceMethod () { }
+            private static void PrivateStaticBaseMethod() { }
+
             [Kept]
-            public void BaseInterfaceMethod () { }
+            protected static void ProtectedStaticBaseMethod() { }
+
+            [Kept]
+            public static void HideStaticMethod() { }
+
+            [Kept]
+            public void DerivedInterfaceMethod() { }
+
+            [Kept]
+            public void BaseInterfaceMethod() { }
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static public bool PublicStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static protected bool ProtectedStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticPropertyOnBase { [Kept] get; [Kept] set; }
+            static private bool PrivateStaticPropertyOnBase
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty { [Kept] get; [Kept] set; }
+            static public bool HideStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             public static event EventHandler<EventArgs> PublicStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             protected static event EventHandler<EventArgs> ProtectedStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             private static event EventHandler<EventArgs> PrivateStaticEventOnBase;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -1863,113 +2651,158 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             public bool PublicBaseField;
+
             [Kept]
             protected bool ProtectedBaseField;
+
             [Kept]
             private bool PrivateBaseField;
+
             [Kept]
             public bool HideField;
 
             [Kept]
             static public bool StaticPublicBaseField;
+
             [Kept]
             static protected bool StaticProtectedBaseField;
+
             [Kept]
             static private bool StaticPrivateBaseField;
+
             [Kept]
             static public bool HideStaticField;
 
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             public class PublicBaseNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             protected class ProtectedBaseNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             private class PrivateBaseNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             public class HideBaseNestedType { }
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("Invoke()")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            public delegate int PublicBaseDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("Invoke()")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            public delegate int PublicBaseDelegate();
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("Invoke()")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            private delegate int PrivateBaseDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("Invoke()")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            private delegate int PrivateBaseDelegate();
         }
 
         [Kept]
-        [KeptBaseType (typeof (AllBaseType))]
-        [AddedPseudoAttributeAttribute ((uint) TypeAttributes.BeforeFieldInit)]
+        [KeptBaseType(typeof(AllBaseType))]
+        [AddedPseudoAttributeAttribute((uint)TypeAttributes.BeforeFieldInit)]
         class AllType : AllBaseType
         {
             [Kept]
-            private AllType () { }
+            private AllType() { }
 
             [Kept]
-            public AllType (int i) { }
+            public AllType(int i) { }
 
             [Kept]
-            private AllType (int i, int j) { }
+            private AllType(int i, int j) { }
 
             // Kept by the DynamicallyAccessedMembers logic
             [Kept]
-            static AllType () { }
-
-
-            [Kept]
-            public void PublicMethod1 () { }
-            [Kept]
-            public bool PublicMethod2 (int i) { return false; }
+            static AllType() { }
 
             [Kept]
-            internal void InternalMethod () { }
+            public void PublicMethod1() { }
+
             [Kept]
-            protected void ProtectedMethod () { }
+            public bool PublicMethod2(int i)
+            {
+                return false;
+            }
+
             [Kept]
-            private void PrivateMethod () { }
+            internal void InternalMethod() { }
+
             [Kept]
-            public void HideMethod () { }
+            protected void ProtectedMethod() { }
+
+            [Kept]
+            private void PrivateMethod() { }
+
+            [Kept]
+            public void HideMethod() { }
 
             [Kept]
             [KeptBackingField]
-            public bool PublicProperty { [Kept] get; [Kept] set; }
+            public bool PublicProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            protected bool ProtectedProperty { [Kept] get; [Kept] set; }
+            protected bool ProtectedProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            private bool PrivateProperty { [Kept] get; [Kept] set; }
+            private bool PrivateProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            public bool HideProperty { [Kept] get; [Kept] set; }
+            public bool HideProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             public event EventHandler<EventArgs> PublicEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             protected event EventHandler<EventArgs> ProtectedEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             private event EventHandler<EventArgs> PrivateEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -1977,42 +2810,75 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public event EventHandler<EventArgs> HideEvent;
 
             [Kept]
-            public static void PublicStaticMethod () { }
+            public static void PublicStaticMethod() { }
+
             [Kept]
-            private static void PrivateStaticMethod () { }
+            private static void PrivateStaticMethod() { }
+
             [Kept]
-            protected static void ProtectedStaticMethod () { }
+            protected static void ProtectedStaticMethod() { }
+
             [Kept]
-            public static void HideStaticMethod () { }
+            public static void HideStaticMethod() { }
 
             [Kept]
             [KeptBackingField]
-            static public bool PublicStaticProperty { [Kept] get; [Kept] set; }
+            static public bool PublicStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static protected bool ProtectedStaticProperty { [Kept] get; [Kept] set; }
+            static protected bool ProtectedStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static private bool PrivateStaticProperty { [Kept] get; [Kept] set; }
+            static private bool PrivateStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+
             [Kept]
             [KeptBackingField]
-            static public bool HideStaticProperty { [Kept] get; [Kept] set; }
+            static public bool HideStaticProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
 
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             public static event EventHandler<EventArgs> PublicStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             protected static event EventHandler<EventArgs> ProtectedStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
             [KeptEventRemoveMethod]
             private static event EventHandler<EventArgs> PrivateStaticEvent;
+
             [Kept]
             [KeptBackingField]
             [KeptEventAddMethod]
@@ -2021,108 +2887,113 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             public bool PublicField;
+
             [Kept]
             public string PublicStringField;
+
             [Kept]
             internal bool InternalField;
+
             [Kept]
             protected bool ProtectedField;
+
             [Kept]
             private bool PrivateField;
+
             [Kept]
             public bool HideField;
 
             [Kept]
             static public bool StaticPublicField;
+
             [Kept]
             static public string StaticPublicStringField;
+
             [Kept]
             static protected bool StaticProtectedField;
+
             [Kept]
             static private bool StaticPrivateField;
+
             [Kept]
             static public bool HideStaticField;
 
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             public class PublicNestedType
             {
                 [Kept]
-                private void Method () { }
+                private void Method() { }
             }
 
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             protected class ProtectedNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             private class PrivateNestedType { }
+
             [Kept]
-            [KeptMember (".ctor()")]
+            [KeptMember(".ctor()")]
             public class HideNestedType { }
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("Invoke()")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            public delegate int PublicDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("Invoke()")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            public delegate int PublicDelegate();
 
             [Kept]
-            [KeptBaseType (typeof (MulticastDelegate))]
-            [KeptMember (".ctor(System.Object,System.IntPtr)")]
-            [KeptMember ("Invoke()")]
-            [KeptMember ("BeginInvoke(System.AsyncCallback,System.Object)")]
-            [KeptMember ("EndInvoke(System.IAsyncResult)")]
-            private delegate int PrivateDelegate ();
+            [KeptBaseType(typeof(MulticastDelegate))]
+            [KeptMember(".ctor(System.Object,System.IntPtr)")]
+            [KeptMember("Invoke()")]
+            [KeptMember("BeginInvoke(System.AsyncCallback,System.Object)")]
+            [KeptMember("EndInvoke(System.IAsyncResult)")]
+            private delegate int PrivateDelegate();
         }
 
         [Kept]
         class RequireAllWithRecursiveTypeReferences
         {
             [Kept]
-            RequireAllWithRecursiveTypeReferences ()
-            {
-            }
+            RequireAllWithRecursiveTypeReferences() { }
 
             [Kept]
             class NestedType
             {
                 [Kept]
-                NestedType ()
-                {
-                }
+                NestedType() { }
 
                 [Kept]
                 RequireAllWithRecursiveTypeReferences parent;
             }
 
             [Kept]
-            [KeptMember (".ctor()")]
-            [KeptBaseType (typeof (RequireAllWithRecursiveTypeReferences))]
-            class NestedTypeWithRecursiveBase : RequireAllWithRecursiveTypeReferences
-            {
-            }
+            [KeptMember(".ctor()")]
+            [KeptBaseType(typeof(RequireAllWithRecursiveTypeReferences))]
+            class NestedTypeWithRecursiveBase : RequireAllWithRecursiveTypeReferences { }
 
             [Kept]
-            [KeptInterface (typeof (IEquatable<RequireAllWithRecursiveTypeReferences>))]
-            [KeptMember (".ctor()")]
-            class NestedTypeWithRecursiveGenericInterface : IEquatable<RequireAllWithRecursiveTypeReferences>
+            [KeptInterface(typeof(IEquatable<RequireAllWithRecursiveTypeReferences>))]
+            [KeptMember(".ctor()")]
+            class NestedTypeWithRecursiveGenericInterface
+                : IEquatable<RequireAllWithRecursiveTypeReferences>
             {
                 [Kept]
-                public bool Equals (RequireAllWithRecursiveTypeReferences other)
+                public bool Equals(RequireAllWithRecursiveTypeReferences other)
                 {
-                    throw new NotImplementedException ();
+                    throw new NotImplementedException();
                 }
             }
 
             [Kept]
-            [KeptMember (".ctor()")]
-            [KeptBaseType (typeof (List<RequireAllWithRecursiveTypeReferences>))]
-            class NestedTypeWithRecursiveGenericBaseClass : List<RequireAllWithRecursiveTypeReferences>
-            {
-            }
+            [KeptMember(".ctor()")]
+            [KeptBaseType(typeof(List<RequireAllWithRecursiveTypeReferences>))]
+            class NestedTypeWithRecursiveGenericBaseClass
+                : List<RequireAllWithRecursiveTypeReferences> { }
         }
     }
 }

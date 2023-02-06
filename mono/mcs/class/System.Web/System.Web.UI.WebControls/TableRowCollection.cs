@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,167 +29,181 @@
 using System.ComponentModel;
 using System.Collections;
 
-namespace System.Web.UI.WebControls {
-
-    [Editor ("System.Web.UI.Design.WebControls.TableRowsCollectionEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
+namespace System.Web.UI.WebControls
+{
+    [Editor(
+        "System.Web.UI.Design.WebControls.TableRowsCollectionEditor, "
+            + Consts.AssemblySystem_Design,
+        "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+    )]
     public sealed class TableRowCollection : IList, ICollection, IEnumerable
     {
         ControlCollection cc;
         Table owner;
-        
-        internal TableRowCollection (Table table)
+
+        internal TableRowCollection(Table table)
         {
             if (table == null)
-                throw new ArgumentNullException ("table");
-            
+                throw new ArgumentNullException("table");
+
             cc = table.Controls;
             owner = table;
         }
 
-        public int Count {
+        public int Count
+        {
             get { return cc.Count; }
         }
 
-        public bool IsReadOnly {
-            get { return false; }    // documented as always false
+        public bool IsReadOnly
+        {
+            get { return false; } // documented as always false
         }
 
-        public bool IsSynchronized {
-            get { return false; }    // documented as always false
+        public bool IsSynchronized
+        {
+            get { return false; } // documented as always false
         }
 
-        public TableRow this [int index] {
-            get { return (TableRow) cc [index]; }
+        public TableRow this[int index]
+        {
+            get { return (TableRow)cc[index]; }
         }
 
-        public object SyncRoot {
-            get { return this; }    // as documented
+        public object SyncRoot
+        {
+            get { return this; } // as documented
         }
 
-        public int Add (TableRow row)
+        public int Add(TableRow row)
         {
             if (row == null)
-                throw new NullReferenceException (); // .NET compatibility
+                throw new NullReferenceException(); // .NET compatibility
             if (row.TableRowSectionSet)
                 owner.GenerateTableSections = true;
             row.Container = this;
-            int index = cc.IndexOf (row);
-            if (index < 0) {
-                cc.Add (row);
+            int index = cc.IndexOf(row);
+            if (index < 0)
+            {
+                cc.Add(row);
                 index = cc.Count;
             }
             return index;
         }
 
-        public void AddAt (int index, TableRow row)
+        public void AddAt(int index, TableRow row)
         {
             if (row == null)
-                throw new NullReferenceException (); // .NET compatibility
-            
-            if (cc.IndexOf (row) < 0) {
+                throw new NullReferenceException(); // .NET compatibility
+
+            if (cc.IndexOf(row) < 0)
+            {
                 if (row.TableRowSectionSet)
                     owner.GenerateTableSections = true;
                 row.Container = this;
-                cc.AddAt (index, row);
+                cc.AddAt(index, row);
             }
         }
 
-        public void AddRange (TableRow[] rows)
+        public void AddRange(TableRow[] rows)
         {
-            foreach (TableRow tr in rows) {
+            foreach (TableRow tr in rows)
+            {
                 if (tr == null)
-                    throw new NullReferenceException (); // .NET compatibility
-                
-                if (cc.IndexOf (tr) < 0) {
+                    throw new NullReferenceException(); // .NET compatibility
+
+                if (cc.IndexOf(tr) < 0)
+                {
                     if (tr.TableRowSectionSet)
                         owner.GenerateTableSections = true;
                     tr.Container = this;
-                    cc.Add (tr);
+                    cc.Add(tr);
                 }
             }
         }
 
-        public void Clear ()
+        public void Clear()
         {
             owner.GenerateTableSections = false;
-            cc.Clear ();
+            cc.Clear();
         }
 
-        public void CopyTo (Array array, int index)
+        public void CopyTo(Array array, int index)
         {
-            cc.CopyTo (array, index);
+            cc.CopyTo(array, index);
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return cc.GetEnumerator ();
+            return cc.GetEnumerator();
         }
 
-        public int GetRowIndex (TableRow row)
+        public int GetRowIndex(TableRow row)
         {
-            return cc.IndexOf (row);
+            return cc.IndexOf(row);
         }
 
-        internal void RowTableSectionSet ()
+        internal void RowTableSectionSet()
         {
             owner.GenerateTableSections = true;
         }
-        
-        public void Remove (TableRow row)
+
+        public void Remove(TableRow row)
         {
             if (row != null)
                 row.Container = null;
-            cc.Remove (row);
+            cc.Remove(row);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            TableRow row = this [index] as TableRow;
+            TableRow row = this[index] as TableRow;
             if (row != null)
                 row.Container = null;
-            
-            cc.RemoveAt (index);
-        }
 
+            cc.RemoveAt(index);
+        }
 
         // implements IList but doesn't make some members public
 
-        bool IList.IsFixedSize {
+        bool IList.IsFixedSize
+        {
             get { return false; }
         }
 
-        object IList.this [int index] {
-            get { return cc [index]; }
-            set {
-                cc.AddAt (index, (TableRow)value);
-                cc.RemoveAt (index + 1);
+        object IList.this[int index]
+        {
+            get { return cc[index]; }
+            set
+            {
+                cc.AddAt(index, (TableRow)value);
+                cc.RemoveAt(index + 1);
             }
         }
 
-
-        int IList.Add (object value)
+        int IList.Add(object value)
         {
-            return Add (value as TableRow);
+            return Add(value as TableRow);
         }
 
-        bool IList.Contains (object value)
+        bool IList.Contains(object value)
         {
-            return cc.Contains (value as TableRow);
+            return cc.Contains(value as TableRow);
         }
 
-        int IList.IndexOf (object value)
+        int IList.IndexOf(object value)
         {
-            return cc.IndexOf (value as TableRow);
+            return cc.IndexOf(value as TableRow);
         }
 
-        void IList.Insert (int index, object value)
+        void IList.Insert(int index, object value)
         {
-            AddAt (index, value as TableRow);
+            AddAt(index, value as TableRow);
         }
 
-        void IList.Remove (object value)
+        void IList.Remove(object value)
         {
-            Remove (value as TableRow);
+            Remove(value as TableRow);
         }
     }
 }

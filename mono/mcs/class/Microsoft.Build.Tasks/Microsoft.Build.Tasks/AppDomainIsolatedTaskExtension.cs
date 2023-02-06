@@ -30,19 +30,16 @@
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
+namespace Microsoft.Build.Tasks
+{
     [LoadInSeparateAppDomain]
-    public abstract class AppDomainIsolatedTaskExtension : AppDomainIsolatedTask {
+    public abstract class AppDomainIsolatedTaskExtension : AppDomainIsolatedTask
+    {
+        internal AppDomainIsolatedTaskExtension() { }
 
-        internal AppDomainIsolatedTaskExtension ()
+        public new TaskLoggingHelper Log
         {
-        }
-
-        public new TaskLoggingHelper Log {
-            get {
-                return base.Log;
-            }
+            get { return base.Log; }
         }
     }
 }
-

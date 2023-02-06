@@ -13,10 +13,9 @@ namespace System.Web.UI.HtmlControls
 {
     class HtmlControlBuilder : ControlBuilder
     {
-        public override bool HasBody ()
+        public override bool HasBody()
         {
             return false;
         }
     }
 }
-

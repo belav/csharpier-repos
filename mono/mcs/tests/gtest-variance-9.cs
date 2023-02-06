@@ -1,18 +1,13 @@
-interface IIn<in T>
-{
-}
+interface IIn<in T> { }
 
 class Test
 {
+    static void Foo(IIn<string> f) { }
 
-    static void Foo (IIn<string> f)
-    {
-    }
-
-    public static int Main ()
+    public static int Main()
     {
         IIn<object> test = null;
-        Foo (test);
+        Foo(test);
 
         return 0;
     }

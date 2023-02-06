@@ -17,8 +17,6 @@ namespace POS_Server.Models
         public Nullable<System.DateTime> updateDate { get; set; }
         public byte isActive { get; set; }
 
-
         public bool canDelete { get; set; }
-
     }
 }

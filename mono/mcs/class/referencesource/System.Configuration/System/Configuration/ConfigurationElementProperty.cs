@@ -18,26 +18,29 @@ using System.ComponentModel;
 using System.Security;
 using System.Text;
 
-namespace System.Configuration {
-
-    //  Although in Whidbey this class contain just one property, but we still do this this way, 
-    // instead of exposing a Validator property in ConfigurationElement, because if we need 
-    // another property in the future we'll expand this ElementProperty class rather than adding a 
+namespace System.Configuration
+{
+    //  Although in Whidbey this class contain just one property, but we still do this this way,
+    // instead of exposing a Validator property in ConfigurationElement, because if we need
+    // another property in the future we'll expand this ElementProperty class rather than adding a
     // new overridable on ConfigurationElement
-    public sealed class ConfigurationElementProperty {
+    public sealed class ConfigurationElementProperty
+    {
         private ConfigurationValidatorBase _validator;
 
-        public ConfigurationElementProperty(ConfigurationValidatorBase validator) {
-            if (validator == null) {
+        public ConfigurationElementProperty(ConfigurationValidatorBase validator)
+        {
+            if (validator == null)
+            {
                 throw new ArgumentNullException("validator");
             }
 
             _validator = validator;
         }
-        public ConfigurationValidatorBase Validator {
-            get {
-                return _validator;
-            }
+
+        public ConfigurationValidatorBase Validator
+        {
+            get { return _validator; }
         }
     }
 }

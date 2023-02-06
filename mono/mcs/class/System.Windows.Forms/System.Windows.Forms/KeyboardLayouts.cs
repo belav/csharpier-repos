@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,52 +27,60 @@
 using System;
 using System.Resources;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    internal class KeyboardLayouts
+    {
+        private KeyboardLayout[] keyboard_layouts;
+        public int[][] vkey_table;
+        public short[][] scan_table;
 
-    internal class KeyboardLayouts {
-
-        private KeyboardLayout [] keyboard_layouts;
-        public int [][] vkey_table;
-        public short [][] scan_table;
-
-        public void LoadLayouts ()
+        public void LoadLayouts()
         {
-            ResourceManager    rm;
-            rm = new ResourceManager ("keyboards", System.Reflection.Assembly.GetExecutingAssembly());
-            keyboard_layouts = (KeyboardLayout []) rm.GetObject ("keyboard_table");
+            ResourceManager rm;
+            rm = new ResourceManager(
+                "keyboards",
+                System.Reflection.Assembly.GetExecutingAssembly()
+            );
+            keyboard_layouts = (KeyboardLayout[])rm.GetObject("keyboard_table");
 
-            vkey_table = (int [][]) rm.GetObject ("vkey_table");
-            scan_table = (short [][]) rm.GetObject ("scan_table");
+            vkey_table = (int[][])rm.GetObject("vkey_table");
+            scan_table = (short[][])rm.GetObject("scan_table");
         }
 
-        public KeyboardLayout [] Layouts {
-            get {
+        public KeyboardLayout[] Layouts
+        {
+            get
+            {
                 if (keyboard_layouts == null)
-                    LoadLayouts ();
+                    LoadLayouts();
                 return keyboard_layouts;
             }
         }
     }
 
-
-
     [Serializable]
 #if GENERATING_RESOURCES
     [CLSCompliant(false)]
     public
-#else 
+#else
     internal
 #endif
-        class KeyboardLayout {
-
+    class KeyboardLayout
+    {
         public int Lcid;
         public string Name;
         public ScanTableIndex ScanIndex;
         public VKeyTableIndex VKeyIndex;
-        public uint [][] Keys;
+        public uint[][] Keys;
 
-        public KeyboardLayout (int lcid, string name, ScanTableIndex scan_index,
-                VKeyTableIndex vkey_index, uint [][] keys)
+        public KeyboardLayout(
+            int lcid,
+            string name,
+            ScanTableIndex scan_index,
+            VKeyTableIndex vkey_index,
+            uint[][] keys
+        )
         {
             Lcid = lcid;
             Name = name;
@@ -81,19 +89,17 @@ namespace System.Windows.Forms {
             Keys = keys;
         }
 
-        public KeyboardLayout (int lcid, string name, int scan_index,
-                int vkey_index, uint [][] keys) : this (lcid, name, (ScanTableIndex) scan_index,
-                        (VKeyTableIndex) vkey_index, keys)
-        {
-        }
+        public KeyboardLayout(int lcid, string name, int scan_index, int vkey_index, uint[][] keys)
+            : this(lcid, name, (ScanTableIndex)scan_index, (VKeyTableIndex)vkey_index, keys) { }
     }
 
 #if GENERATING_RESOURCES
     public
-#else 
+#else
     internal
 #endif
-     enum VKeyTableIndex {
+    enum VKeyTableIndex
+    {
         Qwerty,
         Qwertz,
         Dvorak,
@@ -107,16 +113,15 @@ namespace System.Windows.Forms {
 
 #if GENERATING_RESOURCES
     public
-#else 
+#else
     internal
 #endif
-     enum ScanTableIndex {
+    enum ScanTableIndex
+    {
         Qwerty,
         Dvorak,
         AbntQwerty,
         QwertyJp106,
         Vnc
     }
-
 }
-

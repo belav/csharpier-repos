@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,14 +11,14 @@
 //
 //    Classes:    NamedImagesCollection, NamedImage
 //
-//  Purpose:    Every property in the chart references images by names. 
-//              This means that you can set MarkerImage property to a 
-//              full image path or URL. In case when the user wants to 
-//              dynamically generate an image or load it from other 
-//              location (like database) you can use named image 
-//              collection which is exposed as Images property of the 
-//              chart. Any Image can be added to this collection with 
-//              unique name and than this name can be used in all the 
+//  Purpose:    Every property in the chart references images by names.
+//              This means that you can set MarkerImage property to a
+//              full image path or URL. In case when the user wants to
+//              dynamically generate an image or load it from other
+//              location (like database) you can use named image
+//              collection which is exposed as Images property of the
+//              chart. Any Image can be added to this collection with
+//              unique name and than this name can be used in all the
 //              chart properties which require image names.
 //
 //    Reviewed:    AG - Microsoft 14, 2007
@@ -38,9 +38,9 @@ using System.ComponentModel.Design.Serialization;
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
-    namespace System.Web.UI.DataVisualization.Charting
+namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
     /// <summary>
@@ -48,8 +48,14 @@ using System.ComponentModel.Design.Serialization;
     /// objects.
     /// </summary>
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-        [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class NamedImagesCollection : ChartNamedElementCollection<NamedImage>
     {
@@ -58,30 +64,31 @@ using System.ComponentModel.Design.Serialization;
         /// <summary>
         /// Constructor
         /// </summary>
-        internal NamedImagesCollection() : base(null)
-        {
-        }
+        internal NamedImagesCollection()
+            : base(null) { }
 
         #endregion
-
     }
 
     /// <summary>
     /// The NamedImage class stores a single Image with its unique name.
     /// </summary>
-    [
-        SRDescription("DescriptionAttributeNamedImage_NamedImage"),
-        DefaultProperty("Name"),
-    ]
+    [SRDescription("DescriptionAttributeNamedImage_NamedImage"), DefaultProperty("Name"),]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-        [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class NamedImage : ChartNamedElement
     {
         #region Fields
 
-        private    string _name  = string.Empty;
+        private string _name = string.Empty;
         private System.Drawing.Image _image = null;
 
         #endregion
@@ -91,9 +98,7 @@ using System.ComponentModel.Design.Serialization;
         /// <summary>
         /// NamedImage constructor.
         /// </summary>
-        public NamedImage()
-        {
-        }
+        public NamedImage() { }
 
         /// <summary>
         /// NamedImage constructor.
@@ -113,39 +118,21 @@ using System.ComponentModel.Design.Serialization;
         /// <summary>
         /// Gets or sets the image name.
         /// </summary>
-        [
-        Bindable(false),
-        SRDescription("DescriptionAttributeNamedImage_Name"),
-        ]
+        [Bindable(false), SRDescription("DescriptionAttributeNamedImage_Name"),]
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get { return _name; }
+            set { _name = value; }
         }
 
         /// <summary>
         /// Gets or sets the image object.
         /// </summary>
-        [
-        Bindable(false),
-        SRDescription("DescriptionAttributeNamedImage_Image"),
-        ]
+        [Bindable(false), SRDescription("DescriptionAttributeNamedImage_Image"),]
         public System.Drawing.Image Image
         {
-            get
-            {
-                return _image;
-            }
-            set
-            {
-                _image = value;
-            }
+            get { return _image; }
+            set { _image = value; }
         }
 
         #endregion

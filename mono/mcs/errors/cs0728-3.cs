@@ -4,10 +4,11 @@
 
 public class Foo
 {
-    public static void Test (ref string s)
+    public static void Test(ref string s)
     {
-        lock (s) {
-            lock (s) {}
+        lock (s)
+        {
+            lock (s) { }
             s = null;
         }
     }

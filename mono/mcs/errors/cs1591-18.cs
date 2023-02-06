@@ -11,8 +11,6 @@ namespace Testing
     /// </summary>
     public class Test
     {
-        public struct InternalStruct
-        {
-        }
+        public struct InternalStruct { }
     }
 }

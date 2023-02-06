@@ -2,14 +2,14 @@ using System;
 
 struct S
 {
-    public static bool operator == (S s, S i)
+    public static bool operator ==(S s, S i)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 
-    public static bool operator != (S s, S i)
+    public static bool operator !=(S s, S i)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 }
 
@@ -17,18 +17,17 @@ struct S2
 {
     public static int counter;
 
-    public static bool operator == (S2 s, S2 i)
+    public static bool operator ==(S2 s, S2 i)
     {
         counter++;
         return true;
     }
 
-    public static bool operator != (S2 s, S2 i)
+    public static bool operator !=(S2 s, S2 i)
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 }
-
 
 struct S3
 {
@@ -43,9 +42,9 @@ struct S3
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        S? s = new S ();
+        S? s = new S();
         S? s2 = null;
         S? s4 = null;
 
@@ -58,7 +57,7 @@ class C
         if ((s2 == s4) != true)
             return 3;
 
-        S x = new S ();
+        S x = new S();
 
         if ((s2 == x) != false)
             return 5;
@@ -66,9 +65,9 @@ class C
         if ((x == s2) != false)
             return 6;
 
-        S2? s2_1 = new S2 ();
-        S2? s2_3 = new S2 ();
-        S2 x2 = new S2 ();
+        S2? s2_1 = new S2();
+        S2? s2_3 = new S2();
+        S2 x2 = new S2();
 
         if ((s2_1 == s2_3) != true)
             return 7;

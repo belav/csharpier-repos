@@ -5,16 +5,15 @@ using System.Linq.Expressions;
 public static class TestCase
 {
     // This causes all the trouble:
-    public static bool DUMMY = StaticMethodTakingAnExpression ((i) => true);
+    public static bool DUMMY = StaticMethodTakingAnExpression((i) => true);
 
-    public static bool StaticMethodTakingAnExpression (
-      Expression<Func<object, bool>> expression)
+    public static bool StaticMethodTakingAnExpression(Expression<Func<object, bool>> expression)
     {
         // I don't execute the expression here!!!
         return false;
     }
 
-    public static void DummyToMakeTheStaticsInitialize ()
+    public static void DummyToMakeTheStaticsInitialize()
     {
         // Just a dummy method to make this static class get initialized
     }
@@ -22,9 +21,9 @@ public static class TestCase
 
 public class Program
 {
-    public static int Main ()
+    public static int Main()
     {
-        TestCase.DummyToMakeTheStaticsInitialize ();
+        TestCase.DummyToMakeTheStaticsInitialize();
         return 0;
     }
 }

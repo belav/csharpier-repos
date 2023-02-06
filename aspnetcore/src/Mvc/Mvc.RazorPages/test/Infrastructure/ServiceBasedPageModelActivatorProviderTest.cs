@@ -21,7 +21,8 @@ public class ServiceBasedPageModelActivatorProviderTest
         ExceptionAssert.ThrowsArgument(
             () => activatorProvider.CreateActivator(descriptor),
             "descriptor",
-            "The 'ModelTypeInfo' property of 'descriptor' must not be null.");
+            "The 'ModelTypeInfo' property of 'descriptor' must not be null."
+        );
     }
 
     [Fact]
@@ -30,17 +31,15 @@ public class ServiceBasedPageModelActivatorProviderTest
         // Arrange
         var simpleModel = new DISimpleModel();
         var serviceProvider = new Mock<IServiceProvider>(MockBehavior.Strict);
-        serviceProvider.Setup(s => s.GetService(typeof(DISimpleModel)))
+        serviceProvider
+            .Setup(s => s.GetService(typeof(DISimpleModel)))
             .Returns(simpleModel)
             .Verifiable();
 
         var activatorProvider = new ServiceBasedPageModelActivatorProvider();
         var pageContext = new PageContext
         {
-            HttpContext = new DefaultHttpContext
-            {
-                RequestServices = serviceProvider.Object,
-            },
+            HttpContext = new DefaultHttpContext { RequestServices = serviceProvider.Object, },
             ActionDescriptor = new CompiledPageActionDescriptor
             {
                 ModelTypeInfo = typeof(DISimpleModel).GetTypeInfo(),
@@ -62,17 +61,15 @@ public class ServiceBasedPageModelActivatorProviderTest
         // Arrange
         var simpleModel = new DISimpleModel();
         var serviceProvider = new Mock<IServiceProvider>(MockBehavior.Strict);
-        serviceProvider.Setup(s => s.GetService(typeof(DISimpleModel)))
+        serviceProvider
+            .Setup(s => s.GetService(typeof(DISimpleModel)))
             .Returns(simpleModel)
             .Verifiable();
 
         var activatorProvider = new ServiceBasedPageModelActivatorProvider();
         var pageContext = new PageContext
         {
-            HttpContext = new DefaultHttpContext
-            {
-                RequestServices = serviceProvider.Object,
-            },
+            HttpContext = new DefaultHttpContext { RequestServices = serviceProvider.Object, },
             ActionDescriptor = new CompiledPageActionDescriptor
             {
                 ModelTypeInfo = typeof(DISimpleModel).GetTypeInfo(),
@@ -95,10 +92,7 @@ public class ServiceBasedPageModelActivatorProviderTest
         var expected = "No service for type '" + typeof(DISimpleModel) + "' has been registered.";
         var model = new DISimpleModel();
 
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = Mock.Of<IServiceProvider>()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = Mock.Of<IServiceProvider>() };
 
         var activatorProvider = new ServiceBasedPageModelActivatorProvider();
         var context = new PageContext
@@ -112,8 +106,7 @@ public class ServiceBasedPageModelActivatorProviderTest
 
         // Act and Assert
         var activator = activatorProvider.CreateActivator(context.ActionDescriptor);
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => activator(context));
+        var ex = Assert.Throws<InvalidOperationException>(() => activator(context));
 
         Assert.Equal(expected, ex.Message);
     }
@@ -138,11 +131,7 @@ public class ServiceBasedPageModelActivatorProviderTest
         Assert.Null(releaser);
     }
 
-    private class SimpleModel
-    {
-    }
+    private class SimpleModel { }
 
-    private class DISimpleModel : SimpleModel
-    {
-    }
+    private class DISimpleModel : SimpleModel { }
 }

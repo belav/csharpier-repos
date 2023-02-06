@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,9 +30,11 @@
 
 // These values are taken from 'man 5 terminfo' and /usr/include/term.h.
 // They are the indexes for the boolean capabilities in a terminfo file.
-namespace System {
-    enum TermInfoBooleans {
-        AutoLeftMargin,        // 0
+namespace System
+{
+    enum TermInfoBooleans
+    {
+        AutoLeftMargin, // 0
         AutoRightMargin,
         NoEscCtlc,
         CeolStandoutGlitch,
@@ -68,8 +70,7 @@ namespace System {
         RowAddrGlitch,
         SemiAutoRightMargin,
         CpiChangesRes,
-        LpiChangesRes,        // 36
+        LpiChangesRes, // 36
         Last
     }
 }
-

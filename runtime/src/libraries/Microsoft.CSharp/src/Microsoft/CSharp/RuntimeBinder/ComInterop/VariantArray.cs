@@ -22,19 +22,30 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     [StructLayout(LayoutKind.Sequential)]
     internal struct VariantArray2
     {
-        public Variant Element0, Element1;
+        public Variant Element0,
+            Element1;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct VariantArray4
     {
-        public Variant Element0, Element1, Element2, Element3;
+        public Variant Element0,
+            Element1,
+            Element2,
+            Element3;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct VariantArray8
     {
-        public Variant Element0, Element1, Element2, Element3, Element4, Element5, Element6, Element7;
+        public Variant Element0,
+            Element1,
+            Element2,
+            Element3,
+            Element4,
+            Element5,
+            Element6,
+            Element7;
     }
 
     //
@@ -54,22 +65,32 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         [DynamicDependency(DynamicallyAccessedMemberTypes.PublicFields, typeof(VariantArray2))]
         [DynamicDependency(DynamicallyAccessedMemberTypes.PublicFields, typeof(VariantArray4))]
         [DynamicDependency(DynamicallyAccessedMemberTypes.PublicFields, typeof(VariantArray8))]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Types are either dynamically created or have dynamic dependency.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Types are either dynamically created or have dynamic dependency."
+        )]
         internal static MemberExpression GetStructField(ParameterExpression variantArray, int field)
         {
             return Expression.Field(variantArray, "Element" + field);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2055:UnrecognizedReflectionPattern",
-            Justification = "MakeGenericType is called on a dynamically created type that doesn't contain trimming annotations.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2055:UnrecognizedReflectionPattern",
+            Justification = "MakeGenericType is called on a dynamically created type that doesn't contain trimming annotations."
+        )]
         internal static Type GetStructType(int args)
         {
             Debug.Assert(args >= 0);
-            if (args <= 1) return typeof(VariantArray1);
-            if (args <= 2) return typeof(VariantArray2);
-            if (args <= 4) return typeof(VariantArray4);
-            if (args <= 8) return typeof(VariantArray8);
+            if (args <= 1)
+                return typeof(VariantArray1);
+            if (args <= 2)
+                return typeof(VariantArray2);
+            if (args <= 4)
+                return typeof(VariantArray4);
+            if (args <= 8)
+                return typeof(VariantArray8);
 
             int size = 1;
             while (args > size)
@@ -82,7 +103,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 // See if we can find an existing type
                 foreach (Type t in s_generatedTypes)
                 {
-                    int arity = int.Parse(t.Name.AsSpan("VariantArray".Length), provider: CultureInfo.InvariantCulture);
+                    int arity = int.Parse(
+                        t.Name.AsSpan("VariantArray".Length),
+                        provider: CultureInfo.InvariantCulture
+                    );
                     if (size == arity)
                     {
                         return t;
@@ -99,7 +123,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private static Type CreateCustomType(int size)
         {
             TypeAttributes attrs = TypeAttributes.NotPublic | TypeAttributes.SequentialLayout;
-            TypeBuilder type = UnsafeMethods.DynamicModule.DefineType("VariantArray" + size, attrs, typeof(ValueType));
+            TypeBuilder type = UnsafeMethods.DynamicModule.DefineType(
+                "VariantArray" + size,
+                attrs,
+                typeof(ValueType)
+            );
             GenericTypeParameterBuilder T = type.DefineGenericParameters(new string[] { "T" })[0];
             for (int i = 0; i < size; i++)
             {

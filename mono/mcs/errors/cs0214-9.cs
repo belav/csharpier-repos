@@ -2,22 +2,23 @@
 // Line: 21
 // Compiler options: -unsafe
 
-public unsafe delegate int* Bar ();
+public unsafe delegate int* Bar();
 
 class X
 {
-    unsafe static int* Test ()
+    unsafe static int* Test()
     {
         return null;
     }
 
-    static void Main ()
+    static void Main()
     {
         Bar b;
-        unsafe {
+        unsafe
+        {
             b = Test;
         }
-        
-        b ();
+
+        b();
     }
 }

@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             _globalOptions = globalOptions;
         }
 
-        public bool IsServiceHubProcessCoreClr
-            => _globalOptions.GetOption(RemoteHostOptions.OOPCoreClrFeatureFlag);
+        public bool IsServiceHubProcessCoreClr =>
+            _globalOptions.GetOption(RemoteHostOptions.OOPCoreClrFeatureFlag);
     }
 }

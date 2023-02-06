@@ -3,13 +3,13 @@
 namespace A.X
 {
     using A.B;
-    
+
     class Test
     {
-        public static void Main ()
+        public static void Main()
         {
-            C c = new C ();
-            c.Foo ();
+            C c = new C();
+            c.Foo();
         }
     }
 }

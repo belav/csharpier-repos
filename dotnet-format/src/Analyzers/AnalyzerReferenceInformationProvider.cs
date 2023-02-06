@@ -14,16 +14,20 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 {
     internal class AnalyzerReferenceInformationProvider : IAnalyzerInformationProvider
     {
-        private static readonly Dictionary<string, Assembly> s_pathsToAssemblies = new(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, Assembly> s_pathsToAssemblies =
+            new(StringComparer.OrdinalIgnoreCase);
         private static readonly object s_guard = new();
 
         public ImmutableDictionary<ProjectId, AnalyzersAndFixers> GetAnalyzersAndFixers(
             Solution solution,
             FormatOptions formatOptions,
-            ILogger logger)
+            ILogger logger
+        )
         {
-            return solution.Projects
-                .ToImmutableDictionary(project => project.Id, GetAnalyzersAndFixers);
+            return solution.Projects.ToImmutableDictionary(
+                project => project.Id,
+                GetAnalyzersAndFixers
+            );
         }
 
         private AnalyzersAndFixers GetAnalyzersAndFixers(Project project)
@@ -78,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             return null;
         }
 
-        public DiagnosticSeverity GetSeverity(FormatOptions formatOptions) => formatOptions.AnalyzerSeverity;
+        public DiagnosticSeverity GetSeverity(FormatOptions formatOptions) =>
+            formatOptions.AnalyzerSeverity;
 
         internal sealed class AnalyzerLoadContext : AssemblyLoadContext
         {
@@ -95,18 +100,23 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 // AssemblyDependencyResolver which resolves depenendency assembly paths
                 // from AssemblyName by using the .deps.json.
 
-                foreach (var searchPath in
-                    new[]
+                foreach (
+                    var searchPath in new[]
                     {
                         AssemblyFolderPath,
                         Path.Combine(AssemblyFolderPath, "cs"),
                         Path.Combine(AssemblyFolderPath, "vb")
-                    })
+                    }
+                )
                 {
                     try
                     {
                         // Search for assembly based on assembly name and culture within the analyzer folder.
-                        var assembly = AssemblyResolver.TryResolveAssemblyFromPaths(this, assemblyName, searchPath);
+                        var assembly = AssemblyResolver.TryResolveAssemblyFromPaths(
+                            this,
+                            assemblyName,
+                            searchPath
+                        );
 
                         if (assembly != null)
                         {

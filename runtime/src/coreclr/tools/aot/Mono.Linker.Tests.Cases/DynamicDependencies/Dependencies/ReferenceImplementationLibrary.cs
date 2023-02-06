@@ -7,7 +7,5 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies
 {
     [NotATestCase]
-    public class ReferenceImplementationLibrary
-    {
-    }
+    public class ReferenceImplementationLibrary { }
 }

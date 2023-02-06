@@ -4,5 +4,4 @@
 using System.Diagnostics;
 
 [Conditional("DEBUG")]
-public class Test {}
-    
+public class Test { }

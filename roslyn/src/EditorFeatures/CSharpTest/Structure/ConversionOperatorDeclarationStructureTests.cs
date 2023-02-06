@@ -14,14 +14,17 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
     [Trait(Traits.Feature, Traits.Features.Outlining)]
-    public class ConversionOperatorDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<ConversionOperatorDeclarationSyntax>
+    public class ConversionOperatorDeclarationStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<ConversionOperatorDeclarationSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new ConversionOperatorDeclarationStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new ConversionOperatorDeclarationStructureProvider();
 
         [Fact]
         public async Task TestOperator1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:$$public static explicit operator C(byte i){|textspan:
@@ -29,14 +32,17 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestOperator2()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:$$public static explicit operator C(byte i){|textspan:
@@ -47,14 +53,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestOperator3()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:$$public static explicit operator C(byte i){|textspan:
@@ -66,14 +75,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact]
         public async Task TestOperatorWithLeadingComments()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|span1:// Goo
@@ -83,9 +95,11 @@ class C
     }|}|}
 }";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("span1", "// Goo ...", autoCollapse: true),
-                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
     }
 }

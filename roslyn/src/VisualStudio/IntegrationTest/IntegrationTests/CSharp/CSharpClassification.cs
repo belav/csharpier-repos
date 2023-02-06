@@ -19,14 +19,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpClassification(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpClassification))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpClassification)) { }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Classification), Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Classification),
+            Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)
+        ]
         public void VerifyColorOfSomeTokens()
         {
-            VisualStudio.Editor.SetText(@"using System;
+            VisualStudio.Editor.SetText(
+                @"using System;
 using System.Collections.Generic;
 using System.Text;
 namespace ConsoleApplication1
@@ -43,7 +46,8 @@ namespace ConsoleApplication1
                 Console.WriteLine(""Hello World"");
             }
         }
-    }");
+    }"
+            );
 
             VisualStudio.Editor.PlaceCaret("class");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "keyword");
@@ -66,15 +70,22 @@ namespace ConsoleApplication1
             VisualStudio.Editor.PlaceCaret("CDATA");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "xml doc comment - delimiter");
             VisualStudio.Editor.PlaceCaret("cdata");
-            VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "xml doc comment - cdata section");
+            VisualStudio.Editor.Verify.CurrentTokenType(
+                tokenType: "xml doc comment - cdata section"
+            );
             VisualStudio.Editor.PlaceCaret("attribute");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "identifier");
         }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Classification), Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Classification),
+            Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)
+        ]
         public void SemanticClassification()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 using System;
 using System.Collections.Generic;
 class Program : Attribute
@@ -84,7 +95,8 @@ class Program : Attribute
         List<int> list = new List<int>();
         Program.Main(null);
     }
-}");
+}"
+            );
             VisualStudio.Editor.PlaceCaret("Attribute");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "class name");
             VisualStudio.Editor.PlaceCaret("list", charsOffset: 8);
@@ -109,7 +121,8 @@ class Program : Attribute
         [WpfFact, Trait(Traits.Feature, Traits.Features.Classification)]
         public void VerifyProjectConfigChange()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 namespace ClassLibrary1
 {
     public class Class1
@@ -125,9 +138,13 @@ namespace ClassLibrary1
 #endif
     }
 }
-");
+"
+            );
 
-            VisualStudio.ExecuteCommand(WellKnownCommandNames.Build_SolutionConfigurations, argument: "Debug");
+            VisualStudio.ExecuteCommand(
+                WellKnownCommandNames.Build_SolutionConfigurations,
+                argument: "Debug"
+            );
             VisualStudio.Editor.PlaceCaret("Goo");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "method name");
             VisualStudio.Editor.PlaceCaret("Bar");

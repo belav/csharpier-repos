@@ -2,11 +2,14 @@
 // Line: 8
 using System;
 
-struct A { int a; }
+struct A
+{
+    int a;
+}
 
-class X {
+class X
+{
     public volatile A a;
-    static void Main ()
-        {
-        }
+
+    static void Main() { }
 }

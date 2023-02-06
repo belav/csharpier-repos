@@ -5,129 +5,144 @@ using System.Runtime.Serialization;
 
 using Mono.Options;
 
-[assembly: AssemblyTitle ("Mono service contract conversion tool")]
-[assembly: AssemblyDescription ("")]
-[assembly: AssemblyVersion ("0.1.0")]
-[assembly: AssemblyCopyright ("Copyright (C) 2006 Novell, Inc.")]
+[assembly: AssemblyTitle("Mono service contract conversion tool")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyVersion("0.1.0")]
+[assembly: AssemblyCopyright("Copyright (C) 2006 Novell, Inc.")]
 
 namespace Mono.ServiceContractTool
 {
     public enum OutputType
     {
         None,
-        [EnumMember (Value = "code")]
+
+        [EnumMember(Value = "code")]
         Code,
-        [EnumMember (Value = "metadata")]
+
+        [EnumMember(Value = "metadata")]
         Metadata,
-        [EnumMember (Value = "xmlSerializer")]
+
+        [EnumMember(Value = "xmlSerializer")]
         XmlSerializer,
     }
 
     public class CommandLineOptions
     {
-        public CommandLineOptions ()
+        public CommandLineOptions()
         {
-            options = CreateOptions ();
+            options = CreateOptions();
         }
 
-        public bool Help, Usage, Version;
+        public bool Help,
+            Usage,
+            Version;
         OptionSet options;
 
-        public OptionSet CreateOptions ()
+        public OptionSet CreateOptions()
         {
-            return new OptionSet {
-                { "a|async",
-                    "Generate async methods.",
-                    v => GenerateAsync = v != null },
-                { "config=",
+            return new OptionSet
+            {
+                { "a|async", "Generate async methods.", v => GenerateAsync = v != null },
+                {
+                    "config=",
                     "Configuration file names to generate.",
-                    v => ConfigFiles.AddRange (v.Split (',')) },
-                { "i|internal",
+                    v => ConfigFiles.AddRange(v.Split(','))
+                },
+                {
+                    "i|internal",
                     "Generate types as internal.",
-                    v => GenerateTypesAsInternal = v != null },
-                { "l|language=",
+                    v => GenerateTypesAsInternal = v != null
+                },
+                {
+                    "l|language=",
                     "Specify target code {LANGUAGE}. Default is 'csharp'.",
-                    v => Language = v },
-                { "monotouch",
+                    v => Language = v
+                },
+                {
+                    "monotouch",
                     "Generate MonoTouch client. (This option may vanish)",
-                    v => GenerateMonoTouchProxy = v != null },
-                { "moonlight",
+                    v => GenerateMonoTouchProxy = v != null
+                },
+                {
+                    "moonlight",
                     "Generate moonlight client. (This option may vanish)",
-                    v => GenerateMoonlightProxy = v != null },
-                { "n|namespace=",
-                    "Code namespace name to generate.",
-                    v => Namespace = v },
-                { "noConfig",
-                    "Do not generate config file.",
-                    v => NoConfig = v != null },
-                { "noLogo",
-                    "Do not show tool logo.",
-                    v => NoLogo = v != null },
-                { "o|out=",
-                    "Output code filename.",
-                    v => OutputFilename = v },
-                { "r|reference=",
+                    v => GenerateMoonlightProxy = v != null
+                },
+                { "n|namespace=", "Code namespace name to generate.", v => Namespace = v },
+                { "noConfig", "Do not generate config file.", v => NoConfig = v != null },
+                { "noLogo", "Do not show tool logo.", v => NoLogo = v != null },
+                { "o|out=", "Output code filename.", v => OutputFilename = v },
+                {
+                    "r|reference=",
                     "Referenced assembly files.",
-                    v => ReferencedAssemblies.AddRange (v.Split (',')) },
-                { "tcv|targetClientVersion:",
-                    "Indicate target client version. Valid values:\n" +
-                    "  Version35",
-                    v => {
+                    v => ReferencedAssemblies.AddRange(v.Split(','))
+                },
+                {
+                    "tcv|targetClientVersion:",
+                    "Indicate target client version. Valid values:\n" + "  Version35",
+                    v =>
+                    {
                         if (v == null)
                             return;
-                        switch (v.ToLowerInvariant ()) {
+                        switch (v.ToLowerInvariant())
+                        {
                             case "version35":
                                 TargetClientVersion35 = true;
                                 break;
                         }
-                    } },
-                { "tm|typedMessage",
+                    }
+                },
+                {
+                    "tm|typedMessage",
                     "Generate typed messages.",
-                    v => GenerateTypedMessages = v != null },
-                { "usage",
-                    "Show usage syntax and exit.",
-                    v => Usage = v != null },
-                { "V|version",
+                    v => GenerateTypedMessages = v != null
+                },
+                { "usage", "Show usage syntax and exit.", v => Usage = v != null },
+                {
+                    "V|version",
                     "Display version and licensing information.",
-                    v=> Version = v != null },
-                { "h|?|help",
-                    "Show this help list.",
-                    v => Help = v != null },
+                    v => Version = v != null
+                },
+                { "h|?|help", "Show this help list.", v => Help = v != null },
             };
         }
 
-        public void ProcessArgs (string[] args)
+        public void ProcessArgs(string[] args)
         {
-            RemainingArguments = options.Parse (args);
+            RemainingArguments = options.Parse(args);
         }
 
-        public void DoHelp ()
+        public void DoHelp()
         {
-            ShowBanner ();
-            Console.WriteLine ();
-            DoUsage ();
-            Console.WriteLine ("Options:");
-            options.WriteOptionDescriptions (Console.Out);
-            Console.WriteLine ();
-            Console.WriteLine ("metadataPath : ws-mex file path.");
-            Console.WriteLine ("metadataUrl: URL to ws-mex");
-            Console.WriteLine ("assemblyPath: path to an assembly");
+            ShowBanner();
+            Console.WriteLine();
+            DoUsage();
+            Console.WriteLine("Options:");
+            options.WriteOptionDescriptions(Console.Out);
+            Console.WriteLine();
+            Console.WriteLine("metadataPath : ws-mex file path.");
+            Console.WriteLine("metadataUrl: URL to ws-mex");
+            Console.WriteLine("assemblyPath: path to an assembly");
         }
 
-        public void DoUsage ()
+        public void DoUsage()
         {
-            Console.WriteLine ("Usage: svcutil [options] [metadataPath* | metadataUrl* | assemblyPath*]");
+            Console.WriteLine(
+                "Usage: svcutil [options] [metadataPath* | metadataUrl* | assemblyPath*]"
+            );
         }
 
-        public void DoVersion ()
+        public void DoVersion()
         {
-            ShowBanner ();
+            ShowBanner();
         }
 
-        public void ShowBanner ()
+        public void ShowBanner()
         {
-            Console.WriteLine ("Mono service contract conversion tool  {0} - Copyright (C) 2006 Novell, Inc.",
-                    Assembly.GetExecutingAssembly ().GetName ().Version);
+            Console.WriteLine(
+                "Mono service contract conversion tool  {0} - Copyright (C) 2006 Novell, Inc.",
+                Assembly.GetExecutingAssembly().GetName().Version
+            );
         }
 
         public List<string> RemainingArguments;
@@ -143,7 +158,7 @@ namespace Mono.ServiceContractTool
         //[Option ("Validate all service endpoints", 'v', "validate")]
         public bool Validate;
 
-        public List<string> ConfigFiles = new List<string> ();
+        public List<string> ConfigFiles = new List<string>();
 
         // FIXME: support it
         public bool ChannelInterface;
@@ -157,11 +172,14 @@ namespace Mono.ServiceContractTool
 
         public bool TargetClientVersion35;
 
-        bool generate_moonlight_proxy, generate_monotouch_proxy;
+        bool generate_moonlight_proxy,
+            generate_monotouch_proxy;
 
-        public bool GenerateMoonlightProxy {
+        public bool GenerateMoonlightProxy
+        {
             get { return generate_moonlight_proxy; }
-            set {
+            set
+            {
                 if (!value)
                     return;
                 generate_moonlight_proxy = true;
@@ -169,10 +187,12 @@ namespace Mono.ServiceContractTool
             }
         }
 
-        public bool GenerateMonoTouchProxy {
+        public bool GenerateMonoTouchProxy
+        {
             // this is a hack. It does not differentiate from GenerateMoonlightProxy on getter.
             get { return generate_monotouch_proxy; }
-            set {
+            set
+            {
                 if (!value)
                     return;
                 GenerateMoonlightProxy = true;
@@ -188,9 +208,8 @@ namespace Mono.ServiceContractTool
 
         public string Namespace = String.Empty;
 
-        public List<string> ReferencedAssemblies = new List<string> ();
+        public List<string> ReferencedAssemblies = new List<string>();
 
         public bool NoLogo;
     }
 }
-

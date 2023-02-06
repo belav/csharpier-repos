@@ -35,34 +35,38 @@ using System.Xml;
 
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.BuildEngine {
+namespace Microsoft.Build.BuildEngine
+{
     internal class TargetBatchingImpl : BatchingImplBase
     {
-        string        inputs;
-        string        outputs;
-        string        name;
+        string inputs;
+        string outputs;
+        string name;
 
-        public TargetBatchingImpl (Project project, XmlElement targetElement)
-            : base (project)
+        public TargetBatchingImpl(Project project, XmlElement targetElement)
+            : base(project)
         {
             if (targetElement == null)
-                throw new ArgumentNullException ("targetElement");
+                throw new ArgumentNullException("targetElement");
 
-            inputs = targetElement.GetAttribute ("Inputs");
-            outputs = targetElement.GetAttribute ("Outputs");
-            name = targetElement.GetAttribute ("Name");
+            inputs = targetElement.GetAttribute("Inputs");
+            outputs = targetElement.GetAttribute("Outputs");
+            name = targetElement.GetAttribute("Name");
         }
 
-        public bool Build (Target target, out bool executeOnErrors)
+        public bool Build(Target target, out bool executeOnErrors)
         {
             executeOnErrors = false;
-            try {
-                Init ();
+            try
+            {
+                Init();
 
-                ParseTargetAttributes (target);
-                BatchAndPrepareBuckets ();
-                return Run (target, out executeOnErrors);
-            } finally {
+                ParseTargetAttributes(target);
+                BatchAndPrepareBuckets();
+                return Run(target, out executeOnErrors);
+            }
+            finally
+            {
                 consumedItemsByName = null;
                 consumedMetadataReferences = null;
                 consumedQMetadataReferences = null;
@@ -72,54 +76,67 @@ namespace Microsoft.Build.BuildEngine {
             }
         }
 
-        bool Run (Target target, out bool executeOnErrors)
+        bool Run(Target target, out bool executeOnErrors)
         {
             executeOnErrors = false;
-            if (buckets.Count > 0) {
+            if (buckets.Count > 0)
+            {
                 foreach (Dictionary<string, BuildItemGroup> bucket in buckets)
-                    if (!RunTargetWithBucket (bucket, target, out executeOnErrors))
+                    if (!RunTargetWithBucket(bucket, target, out executeOnErrors))
                         return false;
 
                 return true;
-            } else {
-                return RunTargetWithBucket (null, target, out executeOnErrors);
+            }
+            else
+            {
+                return RunTargetWithBucket(null, target, out executeOnErrors);
             }
         }
 
-        bool RunTargetWithBucket (Dictionary<string, BuildItemGroup> bucket, Target target, out bool executeOnErrors)
+        bool RunTargetWithBucket(
+            Dictionary<string, BuildItemGroup> bucket,
+            Target target,
+            out bool executeOnErrors
+        )
         {
             bool target_result = true;
             executeOnErrors = false;
 
-            LogTargetStarted (target);
+            LogTargetStarted(target);
 
             if (bucket != null)
-                project.PushBatch (bucket, commonItemsByName);
+                project.PushBatch(bucket, commonItemsByName);
 
-            try {
+            try
+            {
                 TaskExecutionMode taskExecutionMode;
                 string reason;
                 bool skip_completely;
-                if (!BuildTargetNeeded (out reason, out skip_completely)) {
-                    LogTargetSkipped (target, reason);
+                if (!BuildTargetNeeded(out reason, out skip_completely))
+                {
+                    LogTargetSkipped(target, reason);
                     if (skip_completely)
                         return true;
 
                     taskExecutionMode = TaskExecutionMode.SkipAndSetOutput;
-                } else {
+                }
+                else
+                {
                     taskExecutionMode = TaskExecutionMode.Complete;
 
-                    if (!String.IsNullOrEmpty (reason))
-                        target.Engine.LogMessage (MessageImportance.Low, reason);
+                    if (!String.IsNullOrEmpty(reason))
+                        target.Engine.LogMessage(MessageImportance.Low, reason);
                 }
 
-                for (int i = 0; i < target.BuildTasks.Count; i ++) {
+                for (int i = 0; i < target.BuildTasks.Count; i++)
+                {
                     //FIXME: parsing attributes repeatedly
-                    IBuildTask bt = target.BuildTasks [i];
+                    IBuildTask bt = target.BuildTasks[i];
 
                     // HACK: need some form of cross references checks
                     var tem = taskExecutionMode;
-                    if (tem == TaskExecutionMode.SkipAndSetOutput) {
+                    if (tem == TaskExecutionMode.SkipAndSetOutput)
+                    {
                         var bti = bt as BuildTask;
 
                         //
@@ -136,8 +153,8 @@ namespace Microsoft.Build.BuildEngine {
                             tem = TaskExecutionMode.Complete;
                     }
 
-                    TaskBatchingImpl batchingImpl = new TaskBatchingImpl (project);
-                    bool task_result = batchingImpl.Build (bt, tem, out executeOnErrors);
+                    TaskBatchingImpl batchingImpl = new TaskBatchingImpl(project);
+                    bool task_result = batchingImpl.Build(bt, tem, out executeOnErrors);
                     if (task_result)
                         continue;
 
@@ -145,17 +162,19 @@ namespace Microsoft.Build.BuildEngine {
                     // ignore failed state for target
                     target_result = bt.ContinueOnError;
 
-                    if (!bt.ContinueOnError) {
+                    if (!bt.ContinueOnError)
+                    {
                         executeOnErrors = true;
                         return false;
                     }
-
                 }
-            } finally {
+            }
+            finally
+            {
                 if (bucket != null)
-                    project.PopBatch ();
+                    project.PopBatch();
 
-                LogTargetFinished (target, target_result);
+                LogTargetFinished(target, target_result);
             }
 
             return target_result;
@@ -163,126 +182,179 @@ namespace Microsoft.Build.BuildEngine {
 
         // Parse target's Input and Output attributes to get list of referenced
         // metadata and items to determine batching
-        void ParseTargetAttributes (Target target)
+        void ParseTargetAttributes(Target target)
         {
-            if (!String.IsNullOrEmpty (inputs))
-                ParseAttribute (inputs);
+            if (!String.IsNullOrEmpty(inputs))
+                ParseAttribute(inputs);
 
-            if (!String.IsNullOrEmpty (outputs))
-                ParseAttribute (outputs);
+            if (!String.IsNullOrEmpty(outputs))
+                ParseAttribute(outputs);
         }
 
-        bool BuildTargetNeeded (out string reason, out bool skipCompletely)
+        bool BuildTargetNeeded(out string reason, out bool skipCompletely)
         {
             reason = String.Empty;
-            ITaskItem [] inputFiles;
-            ITaskItem [] outputFiles;
-            DateTime youngestInput, oldestOutput;
+            ITaskItem[] inputFiles;
+            ITaskItem[] outputFiles;
+            DateTime youngestInput,
+                oldestOutput;
             skipCompletely = false;
 
-            if (String.IsNullOrEmpty (inputs.Trim ())) {
+            if (String.IsNullOrEmpty(inputs.Trim()))
+            {
                 return true;
             }
 
-            if (String.IsNullOrEmpty (outputs.Trim ())) {
-                project.ParentEngine.LogError ("Target {0} has inputs but no outputs specified.", name);
+            if (String.IsNullOrEmpty(outputs.Trim()))
+            {
+                project.ParentEngine.LogError(
+                    "Target {0} has inputs but no outputs specified.",
+                    name
+                );
                 return true;
             }
 
-            Expression e = new Expression ();
-            e.Parse (inputs, ParseOptions.AllowItemsMetadataAndSplit);
-            inputFiles = (ITaskItem[]) e.ConvertTo (project, typeof (ITaskItem[]), ExpressionOptions.ExpandItemRefs);
+            Expression e = new Expression();
+            e.Parse(inputs, ParseOptions.AllowItemsMetadataAndSplit);
+            inputFiles = (ITaskItem[])
+                e.ConvertTo(project, typeof(ITaskItem[]), ExpressionOptions.ExpandItemRefs);
 
-            e = new Expression ();
-            e.Parse (outputs, ParseOptions.AllowItemsMetadataAndSplit);
-            outputFiles = (ITaskItem[]) e.ConvertTo (project, typeof (ITaskItem[]), ExpressionOptions.ExpandItemRefs);
+            e = new Expression();
+            e.Parse(outputs, ParseOptions.AllowItemsMetadataAndSplit);
+            outputFiles = (ITaskItem[])
+                e.ConvertTo(project, typeof(ITaskItem[]), ExpressionOptions.ExpandItemRefs);
 
-            if (outputFiles == null || outputFiles.Length == 0) {
-                reason = String.Format ("No output files were specified for target {0}, skipping.", name);
+            if (outputFiles == null || outputFiles.Length == 0)
+            {
+                reason = String.Format(
+                    "No output files were specified for target {0}, skipping.",
+                    name
+                );
                 return false;
             }
 
-            if (inputFiles == null || inputFiles.Length == 0) {
+            if (inputFiles == null || inputFiles.Length == 0)
+            {
                 skipCompletely = true;
-                reason = String.Format ("No input files were specified for target {0}, skipping.", name);
+                reason = String.Format(
+                    "No input files were specified for target {0}, skipping.",
+                    name
+                );
                 return false;
             }
 
             youngestInput = DateTime.MinValue;
             oldestOutput = DateTime.MaxValue;
 
-            string youngestInputFile, oldestOutputFile;
+            string youngestInputFile,
+                oldestOutputFile;
             youngestInputFile = oldestOutputFile = String.Empty;
-            foreach (ITaskItem item in inputFiles) {
-                string file = item.ItemSpec.Trim ();
+            foreach (ITaskItem item in inputFiles)
+            {
+                string file = item.ItemSpec.Trim();
                 if (file.Length == 0)
                     continue;
 
-                if (!File.Exists (file)) {
-                    reason = String.Format ("Target {0} needs to be built as input file '{1}' does not exist.", name, file);
+                if (!File.Exists(file))
+                {
+                    reason = String.Format(
+                        "Target {0} needs to be built as input file '{1}' does not exist.",
+                        name,
+                        file
+                    );
                     return true;
                 }
 
-                DateTime lastWriteTime = File.GetLastWriteTime (file);
-                if (lastWriteTime > youngestInput) {
+                DateTime lastWriteTime = File.GetLastWriteTime(file);
+                if (lastWriteTime > youngestInput)
+                {
                     youngestInput = lastWriteTime;
                     youngestInputFile = file;
                 }
             }
 
-            foreach (ITaskItem item in outputFiles) {
-                string file = item.ItemSpec.Trim ();
+            foreach (ITaskItem item in outputFiles)
+            {
+                string file = item.ItemSpec.Trim();
                 if (file.Length == 0)
                     continue;
 
-                if (!File.Exists (file)) {
-                    reason = String.Format ("Target {0} needs to be built as output file '{1}' does not exist.", name, file);
+                if (!File.Exists(file))
+                {
+                    reason = String.Format(
+                        "Target {0} needs to be built as output file '{1}' does not exist.",
+                        name,
+                        file
+                    );
                     return true;
                 }
 
-                DateTime lastWriteTime = File.GetLastWriteTime (file);
-                if (lastWriteTime < oldestOutput) {
+                DateTime lastWriteTime = File.GetLastWriteTime(file);
+                if (lastWriteTime < oldestOutput)
+                {
                     oldestOutput = lastWriteTime;
                     oldestOutputFile = file;
                 }
             }
 
-            if (youngestInput > oldestOutput) {
-                reason = String.Format ("Target {0} needs to be built as input file '{1}' is newer than output file '{2}'",
-                        name, youngestInputFile, oldestOutputFile);
+            if (youngestInput > oldestOutput)
+            {
+                reason = String.Format(
+                    "Target {0} needs to be built as input file '{1}' is newer than output file '{2}'",
+                    name,
+                    youngestInputFile,
+                    oldestOutputFile
+                );
                 return true;
             }
 
             return false;
         }
 
-        void LogTargetSkipped (Target target, string reason)
+        void LogTargetSkipped(Target target, string reason)
         {
             BuildMessageEventArgs bmea;
-            bmea = new BuildMessageEventArgs (String.IsNullOrEmpty (reason)
-                                ? String.Format ("Skipping target \"{0}\" because its outputs are up-to-date.", target.Name)
-                                : reason,
-                            null, "MSBuild", MessageImportance.Normal);
-            target.Engine.EventSource.FireMessageRaised (this, bmea);
+            bmea = new BuildMessageEventArgs(
+                String.IsNullOrEmpty(reason)
+                    ? String.Format(
+                        "Skipping target \"{0}\" because its outputs are up-to-date.",
+                        target.Name
+                    )
+                    : reason,
+                null,
+                "MSBuild",
+                MessageImportance.Normal
+            );
+            target.Engine.EventSource.FireMessageRaised(this, bmea);
         }
 
-        void LogTargetStarted (Target target)
+        void LogTargetStarted(Target target)
         {
             TargetStartedEventArgs tsea;
             string projectFile = project.FullFileName;
-            tsea = new TargetStartedEventArgs (String.Format ("Target {0} started.", target.Name), null,
-                    target.Name, projectFile, target.TargetFile);
-            target.Engine.EventSource.FireTargetStarted (this, tsea);
+            tsea = new TargetStartedEventArgs(
+                String.Format("Target {0} started.", target.Name),
+                null,
+                target.Name,
+                projectFile,
+                target.TargetFile
+            );
+            target.Engine.EventSource.FireTargetStarted(this, tsea);
         }
 
-        void LogTargetFinished (Target target, bool succeeded)
+        void LogTargetFinished(Target target, bool succeeded)
         {
             TargetFinishedEventArgs tfea;
             string projectFile = project.FullFileName;
-            tfea = new TargetFinishedEventArgs (String.Format ("Target {0} finished.", target.Name), null,
-                    target.Name, projectFile, target.TargetFile, succeeded);
-            target.Engine.EventSource.FireTargetFinished (this, tfea);
+            tfea = new TargetFinishedEventArgs(
+                String.Format("Target {0} finished.", target.Name),
+                null,
+                target.Name,
+                projectFile,
+                target.TargetFile,
+                succeeded
+            );
+            target.Engine.EventSource.FireTargetFinished(this, tfea);
         }
-
     }
 }

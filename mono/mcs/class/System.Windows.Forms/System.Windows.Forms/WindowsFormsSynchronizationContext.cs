@@ -24,7 +24,6 @@ using System;
 using System.Threading;
 using System.ComponentModel;
 
-
 // Some implementation details:
 // http://msdn.microsoft.com/msdnmag/issues/06/06/NETMatters/default.aspx
 namespace System.Windows.Forms
@@ -34,55 +33,52 @@ namespace System.Windows.Forms
         private static bool auto_installed;
         private static Control invoke_control;
         private static SynchronizationContext previous_context;
-        
+
         #region Public Constructor
-        public WindowsFormsSynchronizationContext ()
+        public WindowsFormsSynchronizationContext() { }
+
+        static WindowsFormsSynchronizationContext()
         {
-        }
-        
-        static WindowsFormsSynchronizationContext ()
-        {
-            invoke_control = new Control ();
-            invoke_control.CreateControl ();
+            invoke_control = new Control();
+            invoke_control.CreateControl();
             auto_installed = true;
             previous_context = SynchronizationContext.Current;
         }
         #endregion
 
         #region Public Properties
-        [EditorBrowsable (EditorBrowsableState.Advanced)]
-        public static bool AutoInstall {
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public static bool AutoInstall
+        {
             get { return auto_installed; }
             set { auto_installed = value; }
         }
         #endregion
 
         #region Public Methods
-        public override SynchronizationContext CreateCopy ()
+        public override SynchronizationContext CreateCopy()
         {
-            return base.CreateCopy ();
-        }
-        
-        public void Dispose ()
-        {
+            return base.CreateCopy();
         }
 
-        public override void Post (SendOrPostCallback d, object state)
+        public void Dispose() { }
+
+        public override void Post(SendOrPostCallback d, object state)
         {
-            invoke_control.BeginInvoke (d, new object[] { state });
+            invoke_control.BeginInvoke(d, new object[] { state });
         }
 
-        public override void Send (SendOrPostCallback d, object state)
+        public override void Send(SendOrPostCallback d, object state)
         {
-            invoke_control.Invoke (d, new object[] { state });
+            invoke_control.Invoke(d, new object[] { state });
         }
-        
-        public static void Uninstall ()
+
+        public static void Uninstall()
         {
             if (previous_context == null)
-                previous_context = new SynchronizationContext ();
-                
-            SynchronizationContext.SetSynchronizationContext (previous_context);
+                previous_context = new SynchronizationContext();
+
+            SynchronizationContext.SetSynchronizationContext(previous_context);
         }
         #endregion
     }

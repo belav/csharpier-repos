@@ -22,20 +22,33 @@ namespace System.Web.WebPages
         {
             if (httpContext.Items.Contains(UrlWasRewrittenServerVar))
             {
-                return Object.Equals(httpContext.Items[UrlWasRewrittenServerVar], UrlWasRequestRewrittenTrueValue);
+                return Object.Equals(
+                    httpContext.Items[UrlWasRewrittenServerVar],
+                    UrlWasRequestRewrittenTrueValue
+                );
             }
             else
             {
-                HttpWorkerRequest httpWorkerRequest = (HttpWorkerRequest)httpContext.GetService(typeof(HttpWorkerRequest));
-                bool requestWasRewritten = (httpWorkerRequest != null && httpWorkerRequest.GetServerVariable(UrlWasRewrittenServerVar) != null);
+                HttpWorkerRequest httpWorkerRequest = (HttpWorkerRequest)
+                    httpContext.GetService(typeof(HttpWorkerRequest));
+                bool requestWasRewritten = (
+                    httpWorkerRequest != null
+                    && httpWorkerRequest.GetServerVariable(UrlWasRewrittenServerVar) != null
+                );
 
                 if (requestWasRewritten)
                 {
-                    httpContext.Items.Add(UrlWasRewrittenServerVar, UrlWasRequestRewrittenTrueValue);
+                    httpContext.Items.Add(
+                        UrlWasRewrittenServerVar,
+                        UrlWasRequestRewrittenTrueValue
+                    );
                 }
                 else
                 {
-                    httpContext.Items.Add(UrlWasRewrittenServerVar, UrlWasRequestRewrittenFalseValue);
+                    httpContext.Items.Add(
+                        UrlWasRewrittenServerVar,
+                        UrlWasRequestRewrittenFalseValue
+                    );
                 }
 
                 return requestWasRewritten;
@@ -51,8 +64,13 @@ namespace System.Web.WebPages
                 {
                     if (!_urlRewriterIsTurnedOnCalculated)
                     {
-                        HttpWorkerRequest httpWorkerRequest = (HttpWorkerRequest)httpContext.GetService(typeof(HttpWorkerRequest));
-                        bool urlRewriterIsEnabled = (httpWorkerRequest != null && httpWorkerRequest.GetServerVariable(UrlRewriterEnabledServerVar) != null);
+                        HttpWorkerRequest httpWorkerRequest = (HttpWorkerRequest)
+                            httpContext.GetService(typeof(HttpWorkerRequest));
+                        bool urlRewriterIsEnabled = (
+                            httpWorkerRequest != null
+                            && httpWorkerRequest.GetServerVariable(UrlRewriterEnabledServerVar)
+                                != null
+                        );
                         _urlRewriterIsTurnedOnValue = urlRewriterIsEnabled;
                         _urlRewriterIsTurnedOnCalculated = true;
                     }

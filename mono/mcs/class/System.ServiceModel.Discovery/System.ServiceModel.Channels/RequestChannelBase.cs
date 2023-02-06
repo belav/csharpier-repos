@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,86 +42,102 @@ namespace System.ServiceModel.Channels
         EndpointAddress address;
         Uri via;
 
-        public RequestChannelBase (ChannelFactoryBase factory, EndpointAddress address, Uri via)
-            : base (factory)
+        public RequestChannelBase(ChannelFactoryBase factory, EndpointAddress address, Uri via)
+            : base(factory)
         {
             this.channel_factory = factory;
             this.address = address;
             this.via = via;
         }
 
-        public EndpointAddress RemoteAddress {
+        public EndpointAddress RemoteAddress
+        {
             get { return address; }
         }
 
-        public Uri Via {
+        public Uri Via
+        {
             get { return via ?? RemoteAddress.Uri; }
         }
 
-        public override T GetProperty<T> ()
+        public override T GetProperty<T>()
         {
-            if (typeof (T) == typeof (MessageVersion) && channel_factory is IHasMessageEncoder)
-                return (T) (object) ((IHasMessageEncoder) channel_factory).MessageEncoder.MessageVersion;
-            if (typeof (T) == typeof (IChannelFactory))
-                return (T) (object) channel_factory;
-            return base.GetProperty<T> ();
+            if (typeof(T) == typeof(MessageVersion) && channel_factory is IHasMessageEncoder)
+                return (T)
+                    (object)((IHasMessageEncoder)channel_factory).MessageEncoder.MessageVersion;
+            if (typeof(T) == typeof(IChannelFactory))
+                return (T)(object)channel_factory;
+            return base.GetProperty<T>();
         }
 
         // Request
 
-        public Message Request (Message message)
+        public Message Request(Message message)
         {
-            return Request (message, DefaultSendTimeout);
+            return Request(message, DefaultSendTimeout);
         }
 
-        public abstract Message Request (Message message, TimeSpan timeout);
+        public abstract Message Request(Message message, TimeSpan timeout);
 
-        public IAsyncResult BeginRequest (Message message, AsyncCallback callback, object state)
+        public IAsyncResult BeginRequest(Message message, AsyncCallback callback, object state)
         {
-            return BeginRequest (message, DefaultSendTimeout, callback, state);
+            return BeginRequest(message, DefaultSendTimeout, callback, state);
         }
 
-        Func<Message,TimeSpan,Message> request_delegate;
+        Func<Message, TimeSpan, Message> request_delegate;
 
-        public virtual IAsyncResult BeginRequest (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (request_delegate == null)
-                request_delegate = new Func<Message,TimeSpan,Message> (Request);
-            return request_delegate.BeginInvoke (message, timeout, callback, state);
+                request_delegate = new Func<Message, TimeSpan, Message>(Request);
+            return request_delegate.BeginInvoke(message, timeout, callback, state);
         }
 
-        public virtual Message EndRequest (IAsyncResult result)
+        public virtual Message EndRequest(IAsyncResult result)
         {
-            return request_delegate.EndInvoke (result);
+            return request_delegate.EndInvoke(result);
         }
 
         // Open and Close
         Action<TimeSpan> open_delegate;
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (open_delegate == null)
-                open_delegate = new Action<TimeSpan> (OnOpen);
-            return open_delegate.BeginInvoke (timeout, callback, state);
+                open_delegate = new Action<TimeSpan>(OnOpen);
+            return open_delegate.BeginInvoke(timeout, callback, state);
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            open_delegate.EndInvoke (result);
+            open_delegate.EndInvoke(result);
         }
 
         Action<TimeSpan> close_delegate;
 
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (close_delegate == null)
-                close_delegate = new Action<TimeSpan> (OnClose);
-            return close_delegate.BeginInvoke (timeout, callback, state);
+                close_delegate = new Action<TimeSpan>(OnClose);
+            return close_delegate.BeginInvoke(timeout, callback, state);
         }
 
-        protected override void OnEndClose (IAsyncResult result)
+        protected override void OnEndClose(IAsyncResult result)
         {
-            close_delegate.EndInvoke (result);
+            close_delegate.EndInvoke(result);
         }
     }
 }

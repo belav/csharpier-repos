@@ -2,14 +2,12 @@
 
 class Test
 {
-    void test ()
+    void test()
     {
         IFoo f = null;
         int v = f.Prop;
-        f.NestedProp = 4;        
+        f.NestedProp = 4;
     }
-    
-    public static void Main ()
-    {
-    }
+
+    public static void Main() { }
 }

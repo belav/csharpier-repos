@@ -30,21 +30,23 @@ using System;
 using System.Data.Services;
 using NUnit.Framework;
 
-namespace MonoTests.System.Data.Services {
+namespace MonoTests.System.Data.Services
+{
     [TestFixture]
-    public class ChangeInterceptorAttributeTests {
+    public class ChangeInterceptorAttributeTests
+    {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CtorNull()
         {
-            new ChangeInterceptorAttribute (null);
+            new ChangeInterceptorAttribute(null);
         }
 
         [Test]
         public void Ctor()
         {
-            var ci = new ChangeInterceptorAttribute ("setName");
-            Assert.AreEqual ("setName", ci.EntitySetName);
+            var ci = new ChangeInterceptorAttribute("setName");
+            Assert.AreEqual("setName", ci.EntitySetName);
         }
     }
 }

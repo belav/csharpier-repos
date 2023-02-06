@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ArrowExpressio
 {
     using Verify = CSharpCodeFixVerifier<
         ArrowExpressionClausePlacementDiagnosticAnalyzer,
-        ArrowExpressionClausePlacementCodeFixProvider>;
+        ArrowExpressionClausePlacementCodeFixProvider
+    >;
 
     public class ArrowExpressionClausePlacementTests
     {
@@ -23,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ArrowExpressio
         public async Task TestNotWithOptionOff()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() =>
@@ -34,7 +35,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -42,7 +49,7 @@ class C
         public async Task TestNotWithSingleLineMethod()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() => 1 + 2;
@@ -52,7 +59,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -60,7 +73,7 @@ class C
         public async Task TestNotWithSingleLineProperty()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add => 1 + 2;
@@ -70,7 +83,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -78,7 +97,7 @@ class C
         public async Task TestNotWithSingleLineLocalFunction()
         {
             var code =
-@"
+                @"
 class C
 {
     public void Main()
@@ -91,7 +110,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -99,7 +124,7 @@ class C
         public async Task TestNotWithLambda()
         {
             var code =
-@"
+                @"
 class C
 {
     public void Main()
@@ -115,7 +140,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -123,7 +154,7 @@ class C
         public async Task TestMethodCase()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() [|=>|]
@@ -131,7 +162,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public int Add()
@@ -142,7 +173,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -150,7 +187,7 @@ class C
         public async Task TestNotPropertyAccessor1()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add
@@ -164,7 +201,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -172,7 +215,7 @@ class C
         public async Task TestProperty()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add [|=>|]
@@ -180,7 +223,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public int Add
@@ -191,7 +234,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -199,7 +248,7 @@ class C
         public async Task TestLocalFunction()
         {
             var code =
-@"
+                @"
 class C
 {
     void Main()
@@ -210,7 +259,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     void Main()
@@ -224,7 +273,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -232,7 +287,7 @@ class C
         public async Task TestNotWithDiagnosticsInDeclaration()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add(int{|CS1001:)|} =>
@@ -243,7 +298,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -251,7 +312,7 @@ class C
         public async Task TestNotWithDiagnosticsInExpression()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() =>
@@ -262,7 +323,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -270,7 +337,7 @@ class C
         public async Task TestNotWithDiagnosticsAtEnd()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() =>
@@ -281,7 +348,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -289,7 +362,7 @@ class C
         public async Task TestNotWithFirstExprWithPPTrivia1()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() =>
@@ -302,7 +375,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -310,7 +389,7 @@ class C
         public async Task TestNotWithFirstExprWithPPTrivia2()
         {
             var code =
-@"
+                @"
 class C
 {
 #if true
@@ -323,7 +402,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -331,7 +416,7 @@ class C
         public async Task TestWithRegion1()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() [|=>|]
@@ -341,7 +426,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public int Add()
@@ -354,7 +439,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -362,7 +453,7 @@ class C
         public async Task TestWithRegion2()
         {
             var code =
-@"
+                @"
 class C
 {
 #region section
@@ -372,7 +463,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
 #region section
@@ -385,7 +476,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -393,7 +490,7 @@ class C
         public async Task TestWithNullableDirective1()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() [|=>|]
@@ -402,7 +499,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public int Add()
@@ -414,7 +511,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -422,7 +525,7 @@ class C
         public async Task TestTrivia1()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() [|=>|] 
@@ -430,7 +533,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public int Add()
@@ -441,7 +544,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -449,7 +558,7 @@ class C
         public async Task TestTrivia2()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() [|=>|] // comment
@@ -457,7 +566,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public int Add() // comment
@@ -468,7 +577,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -476,7 +591,7 @@ class C
         public async Task TestTrivia3()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() /* comment */ [|=>|]
@@ -484,7 +599,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public int Add() /* comment */
@@ -495,7 +610,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -503,7 +624,7 @@ class C
         public async Task TestTrivia4()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() /* comment */ [|=>|] 
@@ -511,7 +632,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public int Add() /* comment */
@@ -522,7 +643,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -530,7 +657,7 @@ class C
         public async Task TestTrivia5()
         {
             var code =
-@"
+                @"
 class C
 {
     public int Add() /* comment1 */ [|=>|] /* comment2 */
@@ -538,7 +665,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public int Add() /* comment1 */ /* comment2 */
@@ -549,7 +676,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
 
@@ -557,7 +690,7 @@ class C
         public async Task TestWithDiagnosticsElsewhere()
         {
             var code =
-@"
+                @"
 class C
 {
     public C(int{|CS1001:)|}
@@ -569,7 +702,7 @@ class C
 }";
 
             var fixedCode =
-@"
+                @"
 class C
 {
     public C(int{|CS1001:)|}
@@ -584,7 +717,13 @@ class C
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, CodeStyleOptions2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    }
+                }
             }.RunAsync();
         }
     }

@@ -5,45 +5,31 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.Libraries
 {
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     [SetupLinkerLinkPublicAndFamily]
-    [SetupLinkerDescriptorFile ("RootLibraryVisibleAndDescriptor.xml")]
+    [SetupLinkerDescriptorFile("RootLibraryVisibleAndDescriptor.xml")]
     public class RootLibraryVisibleAndDescriptor
     {
         [Kept]
         private int field;
 
         [Kept]
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        public void UnusedPublicMethod ()
-        {
-        }
+        public void UnusedPublicMethod() { }
 
         [Kept]
-        protected void UnusedProtectedMethod ()
-        {
-        }
+        protected void UnusedProtectedMethod() { }
 
         [Kept]
-        protected internal void UnusedProtectedInternalMethod ()
-        {
-        }
+        protected internal void UnusedProtectedInternalMethod() { }
 
-        internal void UnusedInternalMethod ()
-        {
-        }
+        internal void UnusedInternalMethod() { }
 
-        private void UnusedPrivateMethod ()
-        {
-        }
+        private void UnusedPrivateMethod() { }
 
         [Kept]
-        internal void UnusedInternalMethod_Descriptor ()
-        {
-        }
+        internal void UnusedInternalMethod_Descriptor() { }
     }
 }

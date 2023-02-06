@@ -14,7 +14,7 @@ namespace System.IO.Pipes
             throw new PlatformNotSupportedException();
         }
 
-        // Gets the transmission mode for the pipe.  This is virtual so that subclassing types can 
+        // Gets the transmission mode for the pipe.  This is virtual so that subclassing types can
         // override this in cases where only one mode is legal (such as anonymous pipes)
         public virtual PipeTransmissionMode TransmissionMode
         {
@@ -28,9 +28,9 @@ namespace System.IO.Pipes
             get { throw new PlatformNotSupportedException(); }
         }
 
-        // Gets the buffer size in the outbound direction for the pipe. This uses cached version 
+        // Gets the buffer size in the outbound direction for the pipe. This uses cached version
         // if it's an outbound only pipe because GetNamedPipeInfo requires read access to the pipe.
-        // However, returning cached is good fallback, especially if user specified a value in 
+        // However, returning cached is good fallback, especially if user specified a value in
         // the ctor.
         public virtual int OutBufferSize
         {
@@ -68,12 +68,18 @@ namespace System.IO.Pipes
             throw new PlatformNotSupportedException();
         }
 
-        private Task<int> ReadAsyncCore(Memory<byte> destination, CancellationToken cancellationToken)
+        private Task<int> ReadAsyncCore(
+            Memory<byte> destination,
+            CancellationToken cancellationToken
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        private Task WriteAsyncCore(ReadOnlyMemory<byte> source, CancellationToken cancellationToken)
+        private Task WriteAsyncCore(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -88,6 +94,6 @@ namespace System.IO.Pipes
         internal static string GetPipePath(string serverName, string pipeName)
         {
             throw new PlatformNotSupportedException();
-        }        
+        }
     }
 }

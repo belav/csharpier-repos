@@ -6,7 +6,11 @@ using System.Runtime.InteropServices;
 namespace System.Transactions.DtcProxyShim.DtcInterfaces;
 
 // https://docs.microsoft.com/previous-versions/windows/desktop/ms686489(v=vs.85)
-[ComImport, Guid("3A6AD9E0-23B9-11cf-AD60-00AA00A74CCD"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+[
+    ComImport,
+    Guid("3A6AD9E0-23B9-11cf-AD60-00AA00A74CCD"),
+    InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+]
 internal interface ITransactionOptions
 {
     void SetOptions(Xactopt pOptions);

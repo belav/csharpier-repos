@@ -3,19 +3,25 @@
 
 using System;
 
-class C {
-    public static int test5 ()
+class C
+{
+    public static int test5()
     {
         int a;
 
-        try {
-            Console.WriteLine ("TRY");
+        try
+        {
+            Console.WriteLine("TRY");
             a = 8;
-        } catch {
+        }
+        catch
+        {
             a = 9;
-        } finally {
+        }
+        finally
+        {
             // CS0165
-            Console.WriteLine (a);
+            Console.WriteLine(a);
         }
 
         return a;

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,14 +33,11 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Description
 {
-    public class FaultDescriptionCollection
-        : Collection<FaultDescription>
+    public class FaultDescriptionCollection : Collection<FaultDescription>
     {
-        internal FaultDescriptionCollection ()
-        {
-        }
+        internal FaultDescriptionCollection() { }
 
-        public FaultDescription Find (string action)
+        public FaultDescription Find(string action)
         {
             foreach (FaultDescription d in this)
                 if (d.Name == action)
@@ -48,13 +45,12 @@ namespace System.ServiceModel.Description
             return null;
         }
 
-        public Collection<FaultDescription> FindAll (string action)
+        public Collection<FaultDescription> FindAll(string action)
         {
-            Collection<FaultDescription> ret =
-                new Collection<FaultDescription> ();
+            Collection<FaultDescription> ret = new Collection<FaultDescription>();
             foreach (FaultDescription d in this)
                 if (d.Name == action)
-                    ret.Add (d);
+                    ret.Add(d);
             return ret;
         }
     }

@@ -3,17 +3,17 @@
 
 abstract class A<T>
 {
-    public abstract void Foo<U> (U arg) where U : T;
+    public abstract void Foo<U>(U arg)
+        where U : T;
 }
 
 class B : A<int>
 {
-    public override void Foo<U> (U arg)
+    public override void Foo<U>(U arg)
     {
-        Test (arg);
+        Test(arg);
     }
-    
-    void Test<UU> (UU a) where UU : class
-    {
-    }
+
+    void Test<UU>(UU a)
+        where UU : class { }
 }

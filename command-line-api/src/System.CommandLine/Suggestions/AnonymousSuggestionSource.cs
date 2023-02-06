@@ -15,7 +15,10 @@ namespace System.CommandLine.Suggestions
             _suggest = suggest ?? throw new ArgumentNullException(nameof(suggest));
         }
 
-        public IEnumerable<string> GetSuggestions(ParseResult? parseResult = null, string? textToMatch = null)
+        public IEnumerable<string> GetSuggestions(
+            ParseResult? parseResult = null,
+            string? textToMatch = null
+        )
         {
             return _suggest(parseResult, textToMatch);
         }

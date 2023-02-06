@@ -17,6 +17,7 @@ namespace POS_Server.Controllers
     public class dishIngredientsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("GetAll")]
         public string GetAll(string token)
@@ -32,32 +33,30 @@ namespace POS_Server.Controllers
             {
                 try
                 {
-
-                using (incposdbEntities entity = new incposdbEntities())
-                {
-                        var List1 = entity.dishIngredients.ToList();
-                        var List = List1.Select(S => new dishIngredients
-                       
+                    using (incposdbEntities entity = new incposdbEntities())
                     {
+                        var List1 = entity.dishIngredients.ToList();
+                        var List = List1
+                            .Select(
+                                S =>
+                                    new dishIngredients
+                                    {
+                                        dishIngredId = S.dishIngredId,
+                                        name = S.name,
+                                        itemUnitId = S.itemUnitId,
+                                        notes = S.notes,
+                                        isActive = S.isActive,
+                                        createDate = S.createDate,
+                                        updateDate = S.updateDate,
+                                        createUserId = S.createUserId,
+                                        updateUserId = S.updateUserId,
+                                        isBasic = S.isBasic,
+                                    }
+                            )
+                            .ToList();
 
-                        dishIngredId = S.dishIngredId,
-                        name = S.name,
-                        itemUnitId = S.itemUnitId,
-                        notes = S.notes,
-                        isActive = S.isActive,
-                        createDate = S.createDate,
-                        updateDate = S.updateDate,
-                        createUserId = S.createUserId,
-                        updateUserId = S.updateUserId,
-                        isBasic=S.isBasic,
-
-                    }).ToList();
-
-                  
-                    return TokenManager.GenerateToken(List);
-
-                }
-
+                        return TokenManager.GenerateToken(List);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -91,29 +90,31 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var List1 = entity.dishIngredients.ToList();
-                    var List = List1.Where(S => S.itemUnitId == itemUnitId).Select(S => new dishIngredients
-                    {
-
-                        dishIngredId = S.dishIngredId,
-                        name = S.name,
-                        itemUnitId = S.itemUnitId,
-                        notes = S.notes,
-                        isActive = S.isActive,
-                        createDate = S.createDate,
-                        updateDate = S.updateDate,
-                        createUserId = S.createUserId,
-                        updateUserId = S.updateUserId,
-                        isBasic=S.isBasic,
-
-
-                    }).ToList();
-
+                    var List = List1
+                        .Where(S => S.itemUnitId == itemUnitId)
+                        .Select(
+                            S =>
+                                new dishIngredients
+                                {
+                                    dishIngredId = S.dishIngredId,
+                                    name = S.name,
+                                    itemUnitId = S.itemUnitId,
+                                    notes = S.notes,
+                                    isActive = S.isActive,
+                                    createDate = S.createDate,
+                                    updateDate = S.updateDate,
+                                    createUserId = S.createUserId,
+                                    updateUserId = S.updateUserId,
+                                    isBasic = S.isBasic,
+                                }
+                        )
+                        .ToList();
 
                     return TokenManager.GenerateToken(List);
-
                 }
             }
         }
+
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
@@ -173,29 +174,30 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var bank = entity.dishIngredients
-                   .Where(S => S.dishIngredId == dishIngredId)
-                   .Select(S => new
-                   {
-                       S.dishIngredId,
-                       S.name,
-                       S.itemUnitId,
-                       S.notes,
-                       S.isActive,
-                       S.createDate,
-                       S.updateDate,
-                       S.createUserId,
-                       S.updateUserId,
-                       S.isBasic,
-
-                   })
-                   .FirstOrDefault();
+                        .Where(S => S.dishIngredId == dishIngredId)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.dishIngredId,
+                                    S.name,
+                                    S.itemUnitId,
+                                    S.notes,
+                                    S.isActive,
+                                    S.createDate,
+                                    S.updateDate,
+                                    S.createUserId,
+                                    S.updateUserId,
+                                    S.isBasic,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(bank);
-
                 }
             }
         }
 
-        // add or update menu settings 
+        // add or update menu settings
         [HttpPost]
         [Route("Save")]
         public string Save(string token)
@@ -218,7 +220,10 @@ namespace POS_Server.Controllers
                     {
                         itemObject = c.Value.Replace("\\", string.Empty);
                         itemObject = itemObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<dishIngredients>(itemObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<dishIngredients>(
+                            itemObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -239,14 +244,13 @@ namespace POS_Server.Controllers
                 }
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         dishIngredients tmpObject = new dishIngredients();
                         if (newObject.dishIngredId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject.updateUserId = newObject.createUserId;
                             entity.dishIngredients.Add(newObject);
                         }
@@ -258,14 +262,17 @@ namespace POS_Server.Controllers
                             tmpObject.notes = newObject.notes;
                             tmpObject.isActive = newObject.isActive;
                             tmpObject.updateUserId = newObject.createUserId;
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpObject.isBasic = newObject.isBasic;
                         }
                         message = entity.SaveChanges().ToString();
                     }
                     return TokenManager.GenerateToken(message);
                 }
-                catch { return TokenManager.GenerateToken("0"); }
+                catch
+                {
+                    return TokenManager.GenerateToken("0");
+                }
             }
         }
 
@@ -307,7 +314,6 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             dishIngredients objDelete = entity.dishIngredients.Find(dishIngredId);
                             entity.dishIngredients.Remove(objDelete);
                             message = entity.SaveChanges().ToString();
@@ -325,11 +331,10 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             dishIngredients objDelete = entity.dishIngredients.Find(dishIngredId);
                             objDelete.isActive = 0;
                             objDelete.updateUserId = userId;
-                            objDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            objDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }

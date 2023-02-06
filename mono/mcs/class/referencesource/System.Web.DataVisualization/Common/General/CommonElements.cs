@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,10 +11,10 @@
 //
 //    Classes:    CommonElements
 //
-//  Purpose:    CommonElements class provides references to common 
-//              chart classes like DataManager, ChartTypeRegistry, 
-//              ImageLoader and others. It is passed to different 
-//              chart elements to simplify access to those common 
+//  Purpose:    CommonElements class provides references to common
+//              chart classes like DataManager, ChartTypeRegistry,
+//              ImageLoader and others. It is passed to different
+//              chart elements to simplify access to those common
 //              classes.
 //
 //    Reviewed:    GS - August 2, 2002
@@ -32,32 +32,31 @@ using System.Drawing;
 using System.Globalization;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.Formulas;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Formulas;
 #else
-    using System.Web.UI.DataVisualization.Charting.ChartTypes;
-    using System.Web.UI.DataVisualization.Charting.Data;
-    using System.Web.UI.DataVisualization.Charting.Utilities;
-    using System.Web.UI.DataVisualization.Charting.Borders3D;
-    using System.Web.UI.DataVisualization.Charting.Formulas;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting.Borders3D;
+using System.Web.UI.DataVisualization.Charting.Formulas;
 #endif
 
 #endregion
-        
+
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
     /// <summary>
-    /// CommonElements class provides references to common chart classes like 
-    /// DataManager, ChartTypeRegistry, ImageLoader and others. It is passed 
+    /// CommonElements class provides references to common chart classes like
+    /// DataManager, ChartTypeRegistry, ImageLoader and others. It is passed
     /// to different chart elements to simplify access to those common classes.
     /// </summary>
     internal class CommonElements
@@ -65,7 +64,7 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Fields
 
         private Chart _chart;
-        private ChartImage _chartPicture; 
+        private ChartImage _chartPicture;
 
         // Reference to Chart Graphics Object
         internal ChartGraphics graph = null;
@@ -73,7 +72,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Service Container
         /// </summary>
-        internal IServiceContainer    container = null;
+        internal IServiceContainer container = null;
 
         /// <summary>
         /// Indicates painting mode
@@ -98,10 +97,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal DataManager DataManager
         {
-            get
-            {
-                return (DataManager)container.GetService(typeof(DataManager));
-            }
+            get { return (DataManager)container.GetService(typeof(DataManager)); }
         }
 
         /// <summary>
@@ -109,10 +105,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public bool ProcessModePaint
         {
-            get
-            {
-                return processModePaint;
-            }
+            get { return processModePaint; }
         }
 
         /// <summary>
@@ -120,10 +113,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public bool ProcessModeRegions
         {
-            get
-            {
-                return processModeRegions;
-            }
+            get { return processModeRegions; }
         }
 
         /// <summary>
@@ -131,10 +121,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public HotRegionsList HotRegionsList
         {
-            get
-            {
-                return ChartPicture.hotRegionsList;
-            }
+            get { return ChartPicture.hotRegionsList; }
         }
 
         /// <summary>
@@ -142,10 +129,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public DataManipulator DataManipulator
         {
-            get
-            {
-                return ChartPicture.DataManipulator;
-            }
+            get { return ChartPicture.DataManipulator; }
         }
 
         /// <summary>
@@ -153,10 +137,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal ImageLoader ImageLoader
         {
-            get
-            {
-                return (ImageLoader)container.GetService(typeof(ImageLoader));
-            }
+            get { return (ImageLoader)container.GetService(typeof(ImageLoader)); }
         }
 
         /// <summary>
@@ -166,7 +147,7 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             get
             {
-                if (_chart==null)
+                if (_chart == null)
                     _chart = (Chart)container.GetService(typeof(Chart));
                 return _chart;
             }
@@ -177,10 +158,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal ChartTypeRegistry ChartTypeRegistry
         {
-            get
-            {
-                return (ChartTypeRegistry)container.GetService(typeof(ChartTypeRegistry));
-            }
+            get { return (ChartTypeRegistry)container.GetService(typeof(ChartTypeRegistry)); }
         }
 
         /// <summary>
@@ -188,10 +166,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal BorderTypeRegistry BorderTypeRegistry
         {
-            get
-            {
-                return (BorderTypeRegistry)container.GetService(typeof(BorderTypeRegistry));
-            }
+            get { return (BorderTypeRegistry)container.GetService(typeof(BorderTypeRegistry)); }
         }
 
         /// <summary>
@@ -199,13 +174,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal FormulaRegistry FormulaRegistry
         {
-            get
-            {
-                return (FormulaRegistry)container.GetService(typeof(FormulaRegistry));
-            }
+            get { return (FormulaRegistry)container.GetService(typeof(FormulaRegistry)); }
         }
-
-
 
         /// <summary>
         /// Reference to the ChartPicture
@@ -214,7 +184,7 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             get
             {
-                if (_chartPicture ==null)
+                if (_chartPicture == null)
                     _chartPicture = (ChartImage)container.GetService(typeof(ChartImage));
                 return _chartPicture;
             }
@@ -225,14 +195,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal int Width
         {
-            get
-            {
-                return _width;
-            }
-            set
-            {
-                _width = value;
-            }
+            get { return _width; }
+            set { _width = value; }
         }
 
         /// <summary>
@@ -240,14 +204,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal int Height
         {
-            get
-            {
-                return _height;
-            }
-            set
-            {
-                _height = value;
-            }
+            get { return _height; }
+            set { _height = value; }
         }
 
         #endregion
@@ -262,7 +220,6 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             this.container = container;
         }
-        
 
         #endregion
 
@@ -277,27 +234,46 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             return ParseDouble(stringToParse, false);
         }
+
         /// <summary>
         /// Converts string to double.
         /// </summary>
         /// <param name="stringToParse">String to convert.</param>
         /// <param name="throwException">if set to <c>true</c> the exception thrown.</param>
         /// <returns>Double result.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "System.Double.TryParse(System.String,System.Globalization.NumberStyles,System.IFormatProvider,System.Double@)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1806:DoNotIgnoreMethodResults",
+            MessageId = "System.Double.TryParse(System.String,System.Globalization.NumberStyles,System.IFormatProvider,System.Double@)"
+        )]
         internal static double ParseDouble(string stringToParse, bool throwException)
         {
             Double result = 0.0;
 
             if (throwException)
             {
-                result = double.Parse(stringToParse, NumberStyles.Any, CultureInfo.InvariantCulture);
+                result = double.Parse(
+                    stringToParse,
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture
+                );
             }
             else
             {
-                bool parseSucceed = double.TryParse(stringToParse, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                bool parseSucceed = double.TryParse(
+                    stringToParse,
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out result
+                );
                 if (!parseSucceed)
                 {
-                    double.TryParse(stringToParse, NumberStyles.Any, CultureInfo.CurrentCulture, out result);
+                    double.TryParse(
+                        stringToParse,
+                        NumberStyles.Any,
+                        CultureInfo.CurrentCulture,
+                        out result
+                    );
                 }
             }
             return result;
@@ -308,15 +284,29 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="stringToParse">String to convert.</param>
         /// <returns>Double result.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "System.Single.TryParse(System.String,System.Globalization.NumberStyles,System.IFormatProvider,System.Single@)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1806:DoNotIgnoreMethodResults",
+            MessageId = "System.Single.TryParse(System.String,System.Globalization.NumberStyles,System.IFormatProvider,System.Single@)"
+        )]
         internal static float ParseFloat(string stringToParse)
         {
             float result = 0f;
-            bool parseSucceed = float.TryParse(stringToParse, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+            bool parseSucceed = float.TryParse(
+                stringToParse,
+                NumberStyles.Any,
+                CultureInfo.InvariantCulture,
+                out result
+            );
 
             if (!parseSucceed)
             {
-                float.TryParse(stringToParse, NumberStyles.Any, CultureInfo.CurrentCulture, out result);
+                float.TryParse(
+                    stringToParse,
+                    NumberStyles.Any,
+                    CultureInfo.CurrentCulture,
+                    out result
+                );
             }
 
             return result;

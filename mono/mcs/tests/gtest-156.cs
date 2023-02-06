@@ -8,10 +8,10 @@ namespace FLMID.Bugs.Marshal15
         {
             _layout = new X();
         }
+
         public static void Main(string[] args)
         {
             System.Console.WriteLine("OK");
         }
     }
 }
-

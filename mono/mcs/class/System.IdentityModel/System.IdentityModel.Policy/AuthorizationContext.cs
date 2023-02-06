@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,30 +34,28 @@ using System.Xml;
 
 namespace System.IdentityModel.Policy
 {
-    public abstract class AuthorizationContext :
-        IAuthorizationComponent
+    public abstract class AuthorizationContext : IAuthorizationComponent
     {
         [MonoTODO]
-        public static AuthorizationContext 
-            CreateDefaultAuthorizationContext (IList<IAuthorizationPolicy> authorizationPolicies)
+        public static AuthorizationContext CreateDefaultAuthorizationContext(
+            IList<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             if (authorizationPolicies == null)
-                throw new ArgumentNullException ("authorizationPolicies");
+                throw new ArgumentNullException("authorizationPolicies");
 
-            string id = new UniqueId ().ToString ();
-            DefaultEvaluationContext ctx =
-                new DefaultEvaluationContext ();
-            foreach (IAuthorizationPolicy a in authorizationPolicies) {
+            string id = new UniqueId().ToString();
+            DefaultEvaluationContext ctx = new DefaultEvaluationContext();
+            foreach (IAuthorizationPolicy a in authorizationPolicies)
+            {
                 object o = null;
-                a.Evaluate (ctx, ref o);
+                a.Evaluate(ctx, ref o);
             }
 
-            return new DefaultAuthorizationContext (id, ctx);
+            return new DefaultAuthorizationContext(id, ctx);
         }
 
-        protected AuthorizationContext ()
-        {
-        }
+        protected AuthorizationContext() { }
 
         public abstract DateTime ExpirationTime { get; }
 
@@ -65,38 +63,40 @@ namespace System.IdentityModel.Policy
 
         public abstract ReadOnlyCollection<ClaimSet> ClaimSets { get; }
 
-        public abstract IDictionary<string,object> Properties { get; }
+        public abstract IDictionary<string, object> Properties { get; }
 
-        // default implementation: this class will be used for 
+        // default implementation: this class will be used for
         // CreateDefaultAuthorizationContext().
         class DefaultAuthorizationContext : AuthorizationContext
         {
             DefaultEvaluationContext ctx;
             string id;
 
-            public DefaultAuthorizationContext (
-                string id, DefaultEvaluationContext context)
+            public DefaultAuthorizationContext(string id, DefaultEvaluationContext context)
             {
                 this.id = id;
                 this.ctx = context;
             }
 
-            public override DateTime ExpirationTime {
+            public override DateTime ExpirationTime
+            {
                 get { return ctx.ExpirationTime; }
             }
 
-            public override string Id {
+            public override string Id
+            {
                 get { return id; }
             }
 
-            public override ReadOnlyCollection<ClaimSet> ClaimSets {
+            public override ReadOnlyCollection<ClaimSet> ClaimSets
+            {
                 get { return ctx.ClaimSets; }
             }
 
-            public override IDictionary<string,object> Properties {
+            public override IDictionary<string, object> Properties
+            {
                 get { return ctx.Properties; }
             }
         }
-
     }
 }

@@ -7,7 +7,7 @@ namespace POS_Server.Models
 {
     public class PosSettingModel
     {
-        public long  posSettingId { get; set; }
+        public long posSettingId { get; set; }
         public Nullable<long> posId { get; set; }
         public Nullable<long> saleInvPrinterId { get; set; }
         public Nullable<long> reportPrinterId { get; set; }
@@ -20,8 +20,6 @@ namespace POS_Server.Models
         public Nullable<System.DateTime> updateDate { get; set; }
         public Nullable<long> createUserId { get; set; }
         public Nullable<long> updateUserId { get; set; }
-
-       
 
         public Nullable<long> repprinterId { get; set; }
         public string repname { get; set; }
@@ -44,6 +42,5 @@ namespace POS_Server.Models
         public string kitchenPapersize { get; set; }
         public string kitchenprintFor { get; set; }
         public string kitchenSizeValue { get; set; }
-
     }
 }

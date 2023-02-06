@@ -40,15 +40,27 @@ public class ViewDataAttributePageApplicationModelProviderTest
         var viewDataFilter = Assert.IsType<PageViewDataAttributeFilterFactory>(filter);
         Assert.Collection(
             viewDataFilter.Properties,
-            property => Assert.Equal(nameof(TestPageModel_ViewDataProperties.DateTime), property.PropertyInfo.Name));
+            property =>
+                Assert.Equal(
+                    nameof(TestPageModel_ViewDataProperties.DateTime),
+                    property.PropertyInfo.Name
+                )
+        );
     }
 
     private static PageApplicationModelProviderContext CreateProviderContext(Type handlerType)
     {
         var descriptor = new CompiledPageActionDescriptor();
-        var context = new PageApplicationModelProviderContext(descriptor, typeof(TestPage).GetTypeInfo())
+        var context = new PageApplicationModelProviderContext(
+            descriptor,
+            typeof(TestPage).GetTypeInfo()
+        )
         {
-            PageApplicationModel = new PageApplicationModel(descriptor, handlerType.GetTypeInfo(), Array.Empty<object>()),
+            PageApplicationModel = new PageApplicationModel(
+                descriptor,
+                handlerType.GetTypeInfo(),
+                Array.Empty<object>()
+            ),
         };
 
         return context;

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,8 +26,10 @@
 
 using System;
 
-namespace System.Windows.Forms.CarbonInternal {
-    internal class ApplicationHandler : EventHandlerBase, IEventHandler {
+namespace System.Windows.Forms.CarbonInternal
+{
+    internal class ApplicationHandler : EventHandlerBase, IEventHandler
+    {
         internal const uint kEventAppActivated = 1;
         internal const uint kEventAppDeactivated = 2;
         internal const uint kEventAppQuit = 3;
@@ -48,26 +50,49 @@ namespace System.Windows.Forms.CarbonInternal {
         internal const uint kEventAppAvailableWindowBoundsChanged = 110;
         internal const uint kEventAppActiveWindowChanged = 111;
 
-        internal ApplicationHandler (XplatUICarbon driver) : base (driver) {}
+        internal ApplicationHandler(XplatUICarbon driver)
+            : base(driver) { }
 
-        public bool ProcessEvent (IntPtr callref, IntPtr eventref, IntPtr handle, uint kind, ref MSG msg) {
-            switch (kind) {
-                case kEventAppActivated: {
+        public bool ProcessEvent(
+            IntPtr callref,
+            IntPtr eventref,
+            IntPtr handle,
+            uint kind,
+            ref MSG msg
+        )
+        {
+            switch (kind)
+            {
+                case kEventAppActivated:
+                {
                     foreach (IntPtr utility_window in XplatUICarbon.UtilityWindows)
-                        if (!XplatUICarbon.IsWindowVisible (utility_window))
-                            XplatUICarbon.ShowWindow (utility_window);
+                        if (!XplatUICarbon.IsWindowVisible(utility_window))
+                            XplatUICarbon.ShowWindow(utility_window);
                     break;
                 }
-                case kEventAppDeactivated: {
-                    if (XplatUICarbon.FocusWindow != IntPtr.Zero) {
-                        Driver.SendMessage (XplatUICarbon.FocusWindow, Msg.WM_KILLFOCUS, IntPtr.Zero, IntPtr.Zero);
-                    } 
-                    if (XplatUICarbon.Grab.Hwnd != IntPtr.Zero) {
-                        Driver.SendMessage (Hwnd.ObjectFromHandle (XplatUICarbon.Grab.Hwnd).Handle, Msg.WM_LBUTTONDOWN, (IntPtr)MsgButtons.MK_LBUTTON, (IntPtr) (Driver.MousePosition.X << 16 | Driver.MousePosition.Y));
+                case kEventAppDeactivated:
+                {
+                    if (XplatUICarbon.FocusWindow != IntPtr.Zero)
+                    {
+                        Driver.SendMessage(
+                            XplatUICarbon.FocusWindow,
+                            Msg.WM_KILLFOCUS,
+                            IntPtr.Zero,
+                            IntPtr.Zero
+                        );
+                    }
+                    if (XplatUICarbon.Grab.Hwnd != IntPtr.Zero)
+                    {
+                        Driver.SendMessage(
+                            Hwnd.ObjectFromHandle(XplatUICarbon.Grab.Hwnd).Handle,
+                            Msg.WM_LBUTTONDOWN,
+                            (IntPtr)MsgButtons.MK_LBUTTON,
+                            (IntPtr)(Driver.MousePosition.X << 16 | Driver.MousePosition.Y)
+                        );
                     }
                     foreach (IntPtr utility_window in XplatUICarbon.UtilityWindows)
-                        if (XplatUICarbon.IsWindowVisible (utility_window))
-                            XplatUICarbon.HideWindow (utility_window);
+                        if (XplatUICarbon.IsWindowVisible(utility_window))
+                            XplatUICarbon.HideWindow(utility_window);
                     break;
                 }
             }

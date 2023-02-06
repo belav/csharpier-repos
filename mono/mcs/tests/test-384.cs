@@ -4,11 +4,12 @@ class X
 {
     static int Foo = 10;
 
-    static void Test ()
+    static void Test()
     {
-        while (true) {
+        while (true)
+        {
             if (Foo == 1)
-                throw new Exception ("Error Test");
+                throw new Exception("Error Test");
             else
                 break;
         }
@@ -16,9 +17,9 @@ class X
         Foo = 20;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        Test ();
+        Test();
         if (Foo != 20)
             return 1;
         return 0;

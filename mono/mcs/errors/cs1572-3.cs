@@ -7,6 +7,6 @@ namespace Testing
     class Test
     {
         /// <param name='mismatch'>mismatch</param>
-        public delegate void D (int i);
+        public delegate void D(int i);
     }
 }

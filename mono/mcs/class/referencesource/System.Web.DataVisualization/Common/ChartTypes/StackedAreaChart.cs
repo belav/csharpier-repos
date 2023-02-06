@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -28,26 +28,26 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 
 #else
 using System.Web.UI.DataVisualization.Charting;
 
-    using System.Web.UI.DataVisualization.Charting.ChartTypes;
-    using System.Web.UI.DataVisualization.Charting.Data;
-    using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
+namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 #else
-    namespace System.Web.UI.DataVisualization.Charting.ChartTypes
+namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 #endif
 {
     /// <summary>
@@ -68,13 +68,13 @@ using System.Web.UI.DataVisualization.Charting;
             hundredPercentStacked = true;
         }
 
-        #endregion 
+        #endregion
 
         #region Fields
 
         // Array of total points values
-        double[]        _totalPerPoint = null;
-        int             _seriesCount   = -1;
+        double[] _totalPerPoint = null;
+        int _seriesCount = -1;
         #endregion
 
         #region IChartType interface implementation
@@ -82,13 +82,19 @@ using System.Web.UI.DataVisualization.Charting;
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name            { get{ return ChartTypeNames.OneHundredPercentStackedArea;}}
+        override public string Name
+        {
+            get { return ChartTypeNames.OneHundredPercentStackedArea; }
+        }
 
         /// <summary>
         /// Indicates that it's a hundredred percent chart.
         /// Axis scale from 0 to 100 percent should be used.
         /// </summary>
-        override public bool HundredPercent{ get{return true;} }
+        override public bool HundredPercent
+        {
+            get { return true; }
+        }
 
         #endregion
 
@@ -101,14 +107,19 @@ using System.Web.UI.DataVisualization.Charting;
         /// <param name="common">The Common elements object</param>
         /// <param name="area">Chart area for this chart</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        override public void Paint( ChartGraphics graph, CommonElements common, ChartArea area, Series seriesToDraw )
+        override public void Paint(
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area,
+            Series seriesToDraw
+        )
         {
             this.Common = common;
             // Reset total per point value
             _totalPerPoint = null;
             _seriesCount = -1;
             // Call base class implementation
-            base.Paint( graph, common, area, seriesToDraw );
+            base.Paint(graph, common, area, seriesToDraw);
         }
 
         #endregion
@@ -128,9 +139,17 @@ using System.Web.UI.DataVisualization.Charting;
                 int seriesCount = 0;
                 foreach (Series ser in common.DataManager.Series)
                 {
-                    // Use series of the same type which belong to this area 
-                    if (String.Compare(ser.ChartTypeName, Name, true, System.Globalization.CultureInfo.CurrentCulture) == 0
-                        && ser.ChartArea == area.Name && ser.IsVisible())
+                    // Use series of the same type which belong to this area
+                    if (
+                        String.Compare(
+                            ser.ChartTypeName,
+                            Name,
+                            true,
+                            System.Globalization.CultureInfo.CurrentCulture
+                        ) == 0
+                        && ser.ChartArea == area.Name
+                        && ser.IsVisible()
+                    )
                     {
                         ++seriesCount;
                     }
@@ -150,38 +169,52 @@ using System.Web.UI.DataVisualization.Charting;
         /// <param name="pointIndex">Index of the point.</param>
         /// <param name="yValueIndex">Index of the Y value to get.</param>
         /// <returns>Y value of the point.</returns>
-        override public double GetYValue(CommonElements common, ChartArea area, Series series, DataPoint point, int pointIndex, int yValueIndex)
+        override public double GetYValue(
+            CommonElements common,
+            ChartArea area,
+            Series series,
+            DataPoint point,
+            int pointIndex,
+            int yValueIndex
+        )
         {
-
             // Calculate the totals of all Y values for all series
-            if(_totalPerPoint == null)
+            if (_totalPerPoint == null)
             {
                 // Get number of series
                 int seriesCount = GetSeriesCount(common, area);
                 // Fill array of series with this type, which are drawn on this area
-                Series[]    seriesArray = new Series[seriesCount];
-                int            seriesIndex = 0;
-                foreach( Series ser in common.DataManager.Series )
+                Series[] seriesArray = new Series[seriesCount];
+                int seriesIndex = 0;
+                foreach (Series ser in common.DataManager.Series)
                 {
-                    // Use series of the same type which belong to this area 
-                    if( String.Compare( ser.ChartTypeName, Name, true, System.Globalization.CultureInfo.CurrentCulture ) == 0 
-                        && ser.ChartArea == area.Name && ser.IsVisible())
+                    // Use series of the same type which belong to this area
+                    if (
+                        String.Compare(
+                            ser.ChartTypeName,
+                            Name,
+                            true,
+                            System.Globalization.CultureInfo.CurrentCulture
+                        ) == 0
+                        && ser.ChartArea == area.Name
+                        && ser.IsVisible()
+                    )
                     {
                         seriesArray[seriesIndex++] = ser;
                     }
                 }
-                
+
                 // Check if series are aligned
                 common.DataManipulator.CheckXValuesAlignment(seriesArray);
 
                 // Allocate memory for the array
                 _totalPerPoint = new double[series.Points.Count];
 
-                // Calculate the total of Y value per point 
-                for(int index = 0; index < series.Points.Count; index++)
+                // Calculate the total of Y value per point
+                for (int index = 0; index < series.Points.Count; index++)
                 {
                     _totalPerPoint[index] = 0;
-                    foreach( Series ser in seriesArray )
+                    foreach (Series ser in seriesArray)
                     {
                         _totalPerPoint[index] += Math.Abs(ser.Points[index].YValues[0]);
                     }
@@ -189,13 +222,13 @@ using System.Web.UI.DataVisualization.Charting;
             }
 
             // NOTE: In stacked area chart we need to do processing even if Y value is not set
-//            if(point.YValues[0] == 0 || point.IsEmpty)
-//            {
-//                return 0;
-//            }
+            //            if(point.YValues[0] == 0 || point.IsEmpty)
+            //            {
+            //                return 0;
+            //            }
 
             // Calculate stacked area Y value for 2D chart
-            if(area.Area3DStyle.Enable3D == false)
+            if (area.Area3DStyle.Enable3D == false)
             {
                 if (_totalPerPoint[pointIndex] == 0)
                 {
@@ -208,26 +241,26 @@ using System.Web.UI.DataVisualization.Charting;
 
             // Get point Height if pointIndex == -1
             double yValue = double.NaN;
-            if(yValueIndex == -1)
+            if (yValueIndex == -1)
             {
-                Axis    vAxis = area.GetAxis(AxisName.Y, series.YAxisType, series.YSubAxisName);
-                double    areaZeroValue = vAxis.Crossing;
+                Axis vAxis = area.GetAxis(AxisName.Y, series.YAxisType, series.YSubAxisName);
+                double areaZeroValue = vAxis.Crossing;
                 yValue = GetYValue(common, area, series, point, pointIndex, 0);
-                if(area.Area3DStyle.Enable3D && yValue < 0.0)
+                if (area.Area3DStyle.Enable3D && yValue < 0.0)
                 {
                     // No negative values support in 3D stacked area chart
                     yValue = -yValue;
                 }
-                if( yValue >= 0 )
+                if (yValue >= 0)
                 {
-                    if(!double.IsNaN(prevPosY))
+                    if (!double.IsNaN(prevPosY))
                     {
                         areaZeroValue = prevPosY;
                     }
                 }
                 else
                 {
-                    if(!double.IsNaN(prevNegY))
+                    if (!double.IsNaN(prevNegY))
                     {
                         areaZeroValue = prevNegY;
                     }
@@ -236,38 +269,50 @@ using System.Web.UI.DataVisualization.Charting;
                 return yValue - areaZeroValue;
             }
 
-
             // Loop through all series
             prevPosY = double.NaN;
             prevNegY = double.NaN;
             prevPositionX = double.NaN;
-            foreach(Series ser in common.DataManager.Series)
+            foreach (Series ser in common.DataManager.Series)
             {
                 // Check series of the current chart type & area
-                if(String.Compare(series.ChartArea, ser.ChartArea, true, System.Globalization.CultureInfo.CurrentCulture) == 0 &&
-                    String.Compare(series.ChartTypeName, ser.ChartTypeName, true, System.Globalization.CultureInfo.CurrentCulture) == 0 &&
-                    series.IsVisible())
+                if (
+                    String.Compare(
+                        series.ChartArea,
+                        ser.ChartArea,
+                        true,
+                        System.Globalization.CultureInfo.CurrentCulture
+                    ) == 0
+                    && String.Compare(
+                        series.ChartTypeName,
+                        ser.ChartTypeName,
+                        true,
+                        System.Globalization.CultureInfo.CurrentCulture
+                    ) == 0
+                    && series.IsVisible()
+                )
                 {
-                    yValue = (ser.Points[pointIndex].YValues[0] / _totalPerPoint[pointIndex]) * 100.0;
-                    
+                    yValue =
+                        (ser.Points[pointIndex].YValues[0] / _totalPerPoint[pointIndex]) * 100.0;
+
                     // Fix of bug #677411 - Dev10 3D stacked area throws an exception when casting NaN to decimal
                     if (double.IsNaN(yValue) && _totalPerPoint[pointIndex] == 0)
                     {
                         yValue = 100.0 / GetSeriesCount(common, area);
                     }
-                    
-                    if(!double.IsNaN(yValue))
-                        if(area.Area3DStyle.Enable3D && yValue < 0.0)
+
+                    if (!double.IsNaN(yValue))
+                        if (area.Area3DStyle.Enable3D && yValue < 0.0)
                         {
                             // No negative values support in 3D stacked area chart
                             yValue = -yValue;
                         }
                     {
-                        if(yValue >= 0.0 && !double.IsNaN(prevPosY))
+                        if (yValue >= 0.0 && !double.IsNaN(prevPosY))
                         {
                             yValue += prevPosY;
                         }
-                        if(yValue < 0.0 && !double.IsNaN(prevNegY))
+                        if (yValue < 0.0 && !double.IsNaN(prevNegY))
                         {
                             yValue += prevNegY;
                         }
@@ -280,7 +325,7 @@ using System.Web.UI.DataVisualization.Charting;
                     }
 
                     // Remenber privious position
-                    if(yValue >= 0.0)
+                    if (yValue >= 0.0)
                     {
                         prevPosY = yValue;
                     }
@@ -289,7 +334,7 @@ using System.Web.UI.DataVisualization.Charting;
                         prevNegY = yValue;
                     }
                     prevPositionX = ser.Points[pointIndex].XValue;
-                    if(prevPositionX == 0.0 && ChartHelper.IndexedSeries(series))
+                    if (prevPositionX == 0.0 && ChartHelper.IndexedSeries(series))
                     {
                         prevPositionX = pointIndex + 1;
                     }
@@ -297,7 +342,7 @@ using System.Web.UI.DataVisualization.Charting;
             }
 
             // Y value can't be more than a 100%
-            if(yValue > 100.0)
+            if (yValue > 100.0)
             {
                 return 100.0;
             }
@@ -319,27 +364,27 @@ using System.Web.UI.DataVisualization.Charting;
         /// <summary>
         /// Shape of the previous series
         /// </summary>
-        protected    GraphicsPath    areaBottomPath = new GraphicsPath();
+        protected GraphicsPath areaBottomPath = new GraphicsPath();
 
         /// <summary>
         /// Previous stacked positive Y values.
         /// </summary>
-        protected    double            prevPosY = double.NaN;
+        protected double prevPosY = double.NaN;
 
         /// <summary>
         /// Previous stacked negative Y values.
         /// </summary>
-        protected    double            prevNegY = double.NaN;
+        protected double prevNegY = double.NaN;
 
         /// <summary>
         /// Previous X value.
         /// </summary>
-        protected    double            prevPositionX = double.NaN;
+        protected double prevPositionX = double.NaN;
 
         /// <summary>
         /// Indicates if chart is 100% stacked
         /// </summary>
-        protected    bool            hundredPercentStacked = false;
+        protected bool hundredPercentStacked = false;
 
         #endregion
 
@@ -374,12 +419,18 @@ using System.Web.UI.DataVisualization.Charting;
         /// <summary>
         /// Chart type name
         /// </summary>
-        public override string Name            { get{ return ChartTypeNames.StackedArea;}}
+        public override string Name
+        {
+            get { return ChartTypeNames.StackedArea; }
+        }
 
         /// <summary>
         /// True if chart type is stacked
         /// </summary>
-        public override bool Stacked        { get{ return true;}}
+        public override bool Stacked
+        {
+            get { return true; }
+        }
 
         /// <summary>
         /// Gets chart type image.
@@ -388,7 +439,8 @@ using System.Web.UI.DataVisualization.Charting;
         /// <returns>Chart type image.</returns>
         override public System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
-            return (System.Drawing.Image)registry.ResourceManager.GetObject(this.Name + "ChartType");
+            return (System.Drawing.Image)
+                registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
         #endregion
@@ -402,14 +454,19 @@ using System.Web.UI.DataVisualization.Charting;
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        public override void Paint( ChartGraphics graph, CommonElements common, ChartArea area, Series seriesToDraw  )
+        public override void Paint(
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area,
+            Series seriesToDraw
+        )
         {
             this.Common = common;
             // Set Clip Region
-            graph.SetClip( area.PlotAreaPosition.ToRectangleF() );
+            graph.SetClip(area.PlotAreaPosition.ToRectangleF());
 
             // Draw chart
-            ProcessChartType( false, graph, common, area, seriesToDraw );
+            ProcessChartType(false, graph, common, area, seriesToDraw);
 
             // Reset Clip Region
             ((ChartGraphics)graph).ResetClip();
@@ -423,51 +480,54 @@ using System.Web.UI.DataVisualization.Charting;
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        override protected void ProcessChartType( 
-            bool selection, 
-            ChartGraphics graph, 
-            CommonElements common, 
-            ChartArea area, 
-            Series seriesToDraw)
+        override protected void ProcessChartType(
+            bool selection,
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area,
+            Series seriesToDraw
+        )
         {
             this.Common = common;
-            ArrayList    prevPointsArray = null;
-            ArrayList    curentPointsArray = null;
+            ArrayList prevPointsArray = null;
+            ArrayList curentPointsArray = null;
 
             // Prosess 3D chart type
-            if(area.Area3DStyle.Enable3D)
+            if (area.Area3DStyle.Enable3D)
             {
-                base.ProcessChartType( 
-                    selection, 
-                    graph, 
-                    common, 
-                    area, 
-                    seriesToDraw);
+                base.ProcessChartType(selection, graph, common, area, seriesToDraw);
                 return;
             }
 
             // Zero X values mode.
-            bool    indexedSeries = ChartHelper.IndexedSeries(this.Common, area.GetSeriesFromChartType(this.Name).ToArray() );
+            bool indexedSeries = ChartHelper.IndexedSeries(
+                this.Common,
+                area.GetSeriesFromChartType(this.Name).ToArray()
+            );
 
             // Indicates that the second point loop for drawing lines or labels is required
-            bool    requiresSecondPointLoop = false;
-            bool    requiresThirdPointLoop = false;
+            bool requiresSecondPointLoop = false;
+            bool requiresThirdPointLoop = false;
 
             //************************************************************
             //** Loop through all series
             //************************************************************
-            int    seriesPointsNumber = -1;
-            foreach( Series ser in common.DataManager.Series )
+            int seriesPointsNumber = -1;
+            foreach (Series ser in common.DataManager.Series)
             {
                 // Process non empty series of the area with area chart type
-                if( String.Compare( ser.ChartTypeName, this.Name, StringComparison.OrdinalIgnoreCase ) != 0 
-                    || ser.ChartArea != area.Name || !ser.IsVisible())
+                if (
+                    String.Compare(ser.ChartTypeName, this.Name, StringComparison.OrdinalIgnoreCase)
+                        != 0
+                    || ser.ChartArea != area.Name
+                    || !ser.IsVisible()
+                )
                 {
                     continue;
                 }
 
                 // Reset area shape paths
-                if(areaPath != null)
+                if (areaPath != null)
                 {
                     areaPath.Dispose();
                     areaPath = null;
@@ -475,13 +535,17 @@ using System.Web.UI.DataVisualization.Charting;
                 areaBottomPath.Reset();
 
                 // Check that all seres has the same number of points
-                if(seriesPointsNumber == -1)
+                if (seriesPointsNumber == -1)
                 {
                     seriesPointsNumber = ser.Points.Count;
                 }
-                else if(seriesPointsNumber != ser.Points.Count)
+                else if (seriesPointsNumber != ser.Points.Count)
                 {
-                    throw (new ArgumentException(SR.ExceptionStackedAreaChartSeriesDataPointsNumberMismatch));
+                    throw (
+                        new ArgumentException(
+                            SR.ExceptionStackedAreaChartSeriesDataPointsNumberMismatch
+                        )
+                    );
                 }
 
                 // Set active horizontal/vertical axis
@@ -492,14 +556,13 @@ using System.Web.UI.DataVisualization.Charting;
                 vAxisMin = VAxis.ViewMinimum;
                 vAxisMax = VAxis.ViewMaximum;
 
-
                 // Get axis position
                 axisPos.X = (float)VAxis.GetPosition(this.VAxis.Crossing);
                 axisPos.Y = (float)VAxis.GetPosition(this.VAxis.Crossing);
                 axisPos = graph.GetAbsolutePoint(axisPos);
 
-                // Fill previous series values array 
-                if(curentPointsArray == null)
+                // Fill previous series values array
+                if (curentPointsArray == null)
                 {
                     curentPointsArray = new ArrayList(ser.Points.Count);
                 }
@@ -510,28 +573,31 @@ using System.Web.UI.DataVisualization.Charting;
                 }
 
                 // Call Back Paint event
-                if( !selection )
+                if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition));
+                    common.Chart.CallOnPrePaint(
+                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                    );
                 }
 
                 // The data points loop
-                int        index = 0;
-                float    prevYValue1 = axisPos.Y;
-                float    prevYValue2 = axisPos.Y;
-                PointF    firstPoint = PointF.Empty;
-                PointF    secondPoint = PointF.Empty;
-                foreach( DataPoint point in ser.Points )
+                int index = 0;
+                float prevYValue1 = axisPos.Y;
+                float prevYValue2 = axisPos.Y;
+                PointF firstPoint = PointF.Empty;
+                PointF secondPoint = PointF.Empty;
+                foreach (DataPoint point in ser.Points)
                 {
                     // Reset pre-calculated point position
                     point.positionRel = new PointF(float.NaN, float.NaN);
 
-                    // Get point value                    
-                    double yValue = (point.IsEmpty) ? 0.0 : GetYValue(common, area, ser, point, index, 0);
+                    // Get point value
+                    double yValue =
+                        (point.IsEmpty) ? 0.0 : GetYValue(common, area, ser, point, index, 0);
                     double xValue = (indexedSeries) ? (index + 1.0) : point.XValue;
 
                     // Adjust point position with previous value
-                    if(prevPointsArray != null && index < prevPointsArray.Count)
+                    if (prevPointsArray != null && index < prevPointsArray.Count)
                     {
                         yValue += (double)prevPointsArray[index];
                     }
@@ -546,19 +612,21 @@ using System.Web.UI.DataVisualization.Charting;
 
                     yValue = VAxis.GetLogValue(yValue);
                     xValue = HAxis.GetLogValue(xValue);
-    
+
                     // Calculate 2 points to draw area and line
-                    if(firstPoint == PointF.Empty)
+                    if (firstPoint == PointF.Empty)
                     {
                         firstPoint.X = xPosition;
                         firstPoint.Y = yPosition;
-                        if(prevPointsArray != null && index < prevPointsArray.Count)
+                        if (prevPointsArray != null && index < prevPointsArray.Count)
                         {
                             prevYValue1 = (float)VAxis.GetPosition((double)prevPointsArray[index]);
-                            prevYValue1 = graph.GetAbsolutePoint(new PointF(prevYValue1, prevYValue1)).Y;
+                            prevYValue1 = graph
+                                .GetAbsolutePoint(new PointF(prevYValue1, prevYValue1))
+                                .Y;
                         }
                         firstPoint = graph.GetAbsolutePoint(firstPoint);
-                        
+
                         ++index;
                         continue;
                     }
@@ -566,10 +634,12 @@ using System.Web.UI.DataVisualization.Charting;
                     {
                         secondPoint.X = xPosition;
                         secondPoint.Y = yPosition;
-                        if(prevPointsArray != null && index < prevPointsArray.Count)
+                        if (prevPointsArray != null && index < prevPointsArray.Count)
                         {
                             prevYValue2 = (float)VAxis.GetPosition((double)prevPointsArray[index]);
-                            prevYValue2 = graph.GetAbsolutePoint(new PointF(prevYValue2, prevYValue2)).Y;
+                            prevYValue2 = graph
+                                .GetAbsolutePoint(new PointF(prevYValue2, prevYValue2))
+                                .Y;
                         }
                         secondPoint = graph.GetAbsolutePoint(secondPoint);
                     }
@@ -578,7 +648,6 @@ using System.Web.UI.DataVisualization.Charting;
                     firstPoint.X = (float)Math.Round(firstPoint.X);
                     secondPoint.X = (float)Math.Round(secondPoint.X);
 
-                    
                     // Calculate data point area segment path
                     using (GraphicsPath path = new GraphicsPath())
                     {
@@ -590,12 +659,15 @@ using System.Web.UI.DataVisualization.Charting;
                         // Painting mode
                         if (common.ProcessModePaint)
                         {
-                            // Get previous point value                    
-                            double xPrevValue = (indexedSeries) ? (index) : ser.Points[index - 1].XValue;
+                            // Get previous point value
+                            double xPrevValue =
+                                (indexedSeries) ? (index) : ser.Points[index - 1].XValue;
 
                             // Check if line is completly out of the data scaleView
-                            if ((xValue <= hAxisMin && xPrevValue <= hAxisMin) ||
-                                (xValue >= hAxisMax && xPrevValue >= hAxisMax))
+                            if (
+                                (xValue <= hAxisMin && xPrevValue <= hAxisMin)
+                                || (xValue >= hAxisMax && xPrevValue >= hAxisMax)
+                            )
                             {
                                 // Save previous point
                                 firstPoint = secondPoint;
@@ -611,20 +683,33 @@ using System.Web.UI.DataVisualization.Charting;
                             Brush areaBrush = null;
                             if (point.BackHatchStyle != ChartHatchStyle.None)
                             {
-                                areaBrush = graph.GetHatchBrush(point.BackHatchStyle, point.Color, point.BackSecondaryColor);
+                                areaBrush = graph.GetHatchBrush(
+                                    point.BackHatchStyle,
+                                    point.Color,
+                                    point.BackSecondaryColor
+                                );
                             }
                             else if (point.BackGradientStyle != GradientStyle.None)
                             {
                                 this.gradientFill = true;
                                 this.Series = point.series;
                             }
-                            else if (point.BackImage.Length > 0 && point.BackImageWrapMode != ChartImageWrapMode.Unscaled && point.BackImageWrapMode != ChartImageWrapMode.Scaled)
+                            else if (
+                                point.BackImage.Length > 0
+                                && point.BackImageWrapMode != ChartImageWrapMode.Unscaled
+                                && point.BackImageWrapMode != ChartImageWrapMode.Scaled
+                            )
                             {
-                                areaBrush = graph.GetTextureBrush(point.BackImage, point.BackImageTransparentColor, point.BackImageWrapMode, point.Color);
+                                areaBrush = graph.GetTextureBrush(
+                                    point.BackImage,
+                                    point.BackImageTransparentColor,
+                                    point.BackImageWrapMode,
+                                    point.Color
+                                );
                             }
                             else if (point.IsEmpty && point.Color == Color.Empty)
                             {
-                                // Stacked area chart empty points should always use 
+                                // Stacked area chart empty points should always use
                                 // series color, otherwise chart will have empty 'holes'.
                                 areaBrush = new SolidBrush(ser.Color);
                             }
@@ -660,13 +745,30 @@ using System.Web.UI.DataVisualization.Charting;
                                 // Draw top and bottom lines with antialiasing turned On.
                                 // Process only if line is drawn by an angle
                                 Pen areaLinePen = new Pen(areaBrush, 1);
-                                if (!(firstPoint.X == secondPoint.X || firstPoint.Y == secondPoint.Y))
+                                if (
+                                    !(
+                                        firstPoint.X == secondPoint.X
+                                        || firstPoint.Y == secondPoint.Y
+                                    )
+                                )
                                 {
-                                    graph.DrawLine(areaLinePen, firstPoint.X, firstPoint.Y, secondPoint.X, secondPoint.Y);
+                                    graph.DrawLine(
+                                        areaLinePen,
+                                        firstPoint.X,
+                                        firstPoint.Y,
+                                        secondPoint.X,
+                                        secondPoint.Y
+                                    );
                                 }
                                 if (!(firstPoint.X == secondPoint.X || prevYValue2 == prevYValue1))
                                 {
-                                    graph.DrawLine(areaLinePen, secondPoint.X, prevYValue2, firstPoint.X, prevYValue1);
+                                    graph.DrawLine(
+                                        areaLinePen,
+                                        secondPoint.X,
+                                        prevYValue2,
+                                        firstPoint.X,
+                                        prevYValue1
+                                    );
                                 }
 
                                 // End Svg Selection mode
@@ -677,8 +779,18 @@ using System.Web.UI.DataVisualization.Charting;
                             {
                                 areaPath = new GraphicsPath();
                             }
-                            areaPath.AddLine(firstPoint.X, firstPoint.Y, secondPoint.X, secondPoint.Y);
-                            areaBottomPath.AddLine(firstPoint.X, prevYValue1, secondPoint.X, prevYValue2);
+                            areaPath.AddLine(
+                                firstPoint.X,
+                                firstPoint.Y,
+                                secondPoint.X,
+                                secondPoint.Y
+                            );
+                            areaBottomPath.AddLine(
+                                firstPoint.X,
+                                prevYValue1,
+                                secondPoint.X,
+                                prevYValue2
+                            );
 
                             //Clean up
                             if (areaBrush != null)
@@ -708,19 +820,29 @@ using System.Web.UI.DataVisualization.Charting;
                                 coord,
                                 point,
                                 ser.Name,
-                                index);
+                                index
+                            );
 
                             //**************************************************************
                             //** Add area for the top line (with thickness)
                             //**************************************************************
-                            if (point.BorderWidth > 1 && point.BorderDashStyle != ChartDashStyle.NotSet && point.BorderColor != Color.Empty)
+                            if (
+                                point.BorderWidth > 1
+                                && point.BorderDashStyle != ChartDashStyle.NotSet
+                                && point.BorderColor != Color.Empty
+                            )
                             {
                                 // Create grapics path object dor the curve
                                 using (GraphicsPath linePath = new GraphicsPath())
                                 {
                                     try
                                     {
-                                        linePath.AddLine(firstPoint.X, firstPoint.Y, secondPoint.X, secondPoint.Y);
+                                        linePath.AddLine(
+                                            firstPoint.X,
+                                            firstPoint.Y,
+                                            secondPoint.X,
+                                            secondPoint.Y
+                                        );
 
                                         // Widen the lines to the size of pen plus 2
                                         linePath.Widen(new Pen(point.Color, point.BorderWidth + 2));
@@ -730,9 +852,7 @@ using System.Web.UI.DataVisualization.Charting;
                                         // GraphicsPath.Widen incorrectly throws OutOfMemoryException
                                         // catching here and reacting by not widening
                                     }
-                                    catch (ArgumentException)
-                                    {
-                                    }
+                                    catch (ArgumentException) { }
 
                                     // Allocate array of floats
                                     pointNew = PointF.Empty;
@@ -750,7 +870,8 @@ using System.Web.UI.DataVisualization.Charting;
                                         coord,
                                         point,
                                         ser.Name,
-                                        index);
+                                        index
+                                    );
                                 }
                             }
                         }
@@ -761,11 +882,10 @@ using System.Web.UI.DataVisualization.Charting;
 
                     // Increase data point index
                     ++index;
-
                 }
 
                 // Fill whole series area with gradient
-                if(gradientFill && areaPath != null)
+                if (gradientFill && areaPath != null)
                 {
                     // Create gradient path
                     using (GraphicsPath gradientPath = new GraphicsPath())
@@ -775,7 +895,14 @@ using System.Web.UI.DataVisualization.Charting;
                         gradientPath.AddPath(areaBottomPath, true);
 
                         // Create brush
-                        using (Brush areaBrush = graph.GetGradientBrush(gradientPath.GetBounds(), this.Series.Color, this.Series.BackSecondaryColor, this.Series.BackGradientStyle))
+                        using (
+                            Brush areaBrush = graph.GetGradientBrush(
+                                gradientPath.GetBounds(),
+                                this.Series.Color,
+                                this.Series.BackSecondaryColor,
+                                this.Series.BackGradientStyle
+                            )
+                        )
                         {
                             // Fill area with gradient
                             graph.FillPath(areaBrush, gradientPath);
@@ -789,9 +916,11 @@ using System.Web.UI.DataVisualization.Charting;
                 areaBottomPath.Reset();
 
                 // Call Paint event
-                if( !selection )
+                if (!selection)
                 {
-                    common.Chart.CallOnPostPaint(new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition));
+                    common.Chart.CallOnPostPaint(
+                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                    );
                 }
             }
 
@@ -799,14 +928,21 @@ using System.Web.UI.DataVisualization.Charting;
             //** Loop through all series/points for the second time
             //** Draw border lines.
             //************************************************************
-            if(requiresSecondPointLoop)
+            if (requiresSecondPointLoop)
             {
                 prevPointsArray = null;
                 curentPointsArray = null;
-                foreach( Series ser in common.DataManager.Series )
+                foreach (Series ser in common.DataManager.Series)
                 {
-                    if( String.Compare( ser.ChartTypeName, this.Name, StringComparison.OrdinalIgnoreCase ) != 0 
-                        || ser.ChartArea != area.Name || !ser.IsVisible())
+                    if (
+                        String.Compare(
+                            ser.ChartTypeName,
+                            this.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        ) != 0
+                        || ser.ChartArea != area.Name
+                        || !ser.IsVisible()
+                    )
                     {
                         continue;
                     }
@@ -820,8 +956,8 @@ using System.Web.UI.DataVisualization.Charting;
                     axisPos.Y = (float)VAxis.GetPosition(this.VAxis.Crossing);
                     axisPos = graph.GetAbsolutePoint(axisPos);
 
-                    // Fill previous series values array 
-                    if(curentPointsArray == null)
+                    // Fill previous series values array
+                    if (curentPointsArray == null)
                     {
                         curentPointsArray = new ArrayList(ser.Points.Count);
                     }
@@ -832,19 +968,20 @@ using System.Web.UI.DataVisualization.Charting;
                     }
 
                     // The data points loop
-                    int        index = 0;
-                    float    prevYValue1 = axisPos.Y;
-                    float    prevYValue2 = axisPos.Y;
-                    PointF    firstPoint = PointF.Empty;
-                    PointF    secondPoint = PointF.Empty;
-                    foreach( DataPoint point in ser.Points )
+                    int index = 0;
+                    float prevYValue1 = axisPos.Y;
+                    float prevYValue2 = axisPos.Y;
+                    PointF firstPoint = PointF.Empty;
+                    PointF secondPoint = PointF.Empty;
+                    foreach (DataPoint point in ser.Points)
                     {
-                        // Get point value                    
-                        double yValue = (point.IsEmpty) ? 0.0 : GetYValue(common, area, ser, point, index, 0);
+                        // Get point value
+                        double yValue =
+                            (point.IsEmpty) ? 0.0 : GetYValue(common, area, ser, point, index, 0);
                         double xValue = (indexedSeries) ? (index + 1.0) : point.XValue;
 
                         // Adjust point position with previous value
-                        if(prevPointsArray != null && index < prevPointsArray.Count)
+                        if (prevPointsArray != null && index < prevPointsArray.Count)
                         {
                             yValue += (double)prevPointsArray[index];
                         }
@@ -854,16 +991,18 @@ using System.Web.UI.DataVisualization.Charting;
                         float yPosition = (float)VAxis.GetPosition(yValue);
                         float xPosition = (float)HAxis.GetPosition(xValue);
 
-    
                         // Calculate 2 points to draw area and line
-                        if(firstPoint == PointF.Empty)
+                        if (firstPoint == PointF.Empty)
                         {
                             firstPoint.X = xPosition;
                             firstPoint.Y = yPosition;
-                            if(prevPointsArray != null && index < prevPointsArray.Count)
+                            if (prevPointsArray != null && index < prevPointsArray.Count)
                             {
-                                prevYValue1 = (float)VAxis.GetPosition((double)prevPointsArray[index]);
-                                prevYValue1 = graph.GetAbsolutePoint(new PointF(prevYValue1, prevYValue1)).Y;
+                                prevYValue1 = (float)
+                                    VAxis.GetPosition((double)prevPointsArray[index]);
+                                prevYValue1 = graph
+                                    .GetAbsolutePoint(new PointF(prevYValue1, prevYValue1))
+                                    .Y;
                             }
                             firstPoint = graph.GetAbsolutePoint(firstPoint);
                             secondPoint = firstPoint;
@@ -873,24 +1012,35 @@ using System.Web.UI.DataVisualization.Charting;
                         {
                             secondPoint.X = xPosition;
                             secondPoint.Y = yPosition;
-                            if(prevPointsArray != null && index < prevPointsArray.Count)
+                            if (prevPointsArray != null && index < prevPointsArray.Count)
                             {
-                                prevYValue2 = (float)VAxis.GetPosition((double)prevPointsArray[index]);
-                                prevYValue2 = graph.GetAbsolutePoint(new PointF(prevYValue2, prevYValue2)).Y;
+                                prevYValue2 = (float)
+                                    VAxis.GetPosition((double)prevPointsArray[index]);
+                                prevYValue2 = graph
+                                    .GetAbsolutePoint(new PointF(prevYValue2, prevYValue2))
+                                    .Y;
                             }
                             secondPoint = graph.GetAbsolutePoint(secondPoint);
                         }
 
-                        if(index != 0)
+                        if (index != 0)
                         {
                             // Round X coordinates
                             firstPoint.X = (float)Math.Round(firstPoint.X);
                             secondPoint.X = (float)Math.Round(secondPoint.X);
 
                             // Draw border
-                            graph.DrawLineRel(point.BorderColor, point.BorderWidth, point.BorderDashStyle, graph.GetRelativePoint(firstPoint), graph.GetRelativePoint(secondPoint), point.series.ShadowColor, point.series.ShadowOffset );
+                            graph.DrawLineRel(
+                                point.BorderColor,
+                                point.BorderWidth,
+                                point.BorderDashStyle,
+                                graph.GetRelativePoint(firstPoint),
+                                graph.GetRelativePoint(secondPoint),
+                                point.series.ShadowColor,
+                                point.series.ShadowOffset
+                            );
                         }
-                
+
                         // Save previous point
                         firstPoint = secondPoint;
                         prevYValue1 = prevYValue2;
@@ -905,14 +1055,21 @@ using System.Web.UI.DataVisualization.Charting;
             //** Loop through all series/points for the second time
             //** Draw labels.
             //************************************************************
-            if(requiresThirdPointLoop)
+            if (requiresThirdPointLoop)
             {
                 prevPointsArray = null;
                 curentPointsArray = null;
-                foreach( Series ser in common.DataManager.Series )
+                foreach (Series ser in common.DataManager.Series)
                 {
-                    if( String.Compare( ser.ChartTypeName, this.Name, StringComparison.OrdinalIgnoreCase ) != 0 
-                        || ser.ChartArea != area.Name || !ser.IsVisible())
+                    if (
+                        String.Compare(
+                            ser.ChartTypeName,
+                            this.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        ) != 0
+                        || ser.ChartArea != area.Name
+                        || !ser.IsVisible()
+                    )
                     {
                         continue;
                     }
@@ -926,8 +1083,8 @@ using System.Web.UI.DataVisualization.Charting;
                     axisPos.Y = (float)VAxis.GetPosition(this.VAxis.Crossing);
                     axisPos = graph.GetAbsolutePoint(axisPos);
 
-                    // Fill previous series values array 
-                    if(curentPointsArray == null)
+                    // Fill previous series values array
+                    if (curentPointsArray == null)
                     {
                         curentPointsArray = new ArrayList(ser.Points.Count);
                     }
@@ -938,19 +1095,20 @@ using System.Web.UI.DataVisualization.Charting;
                     }
 
                     // The data points loop
-                    int        index = 0;
-                    float    prevYValue1 = axisPos.Y;
-                    float    prevYValue2 = axisPos.Y;
-                    PointF    firstPoint = PointF.Empty;
-                    PointF    secondPoint = PointF.Empty;
-                    foreach( DataPoint point in ser.Points )
+                    int index = 0;
+                    float prevYValue1 = axisPos.Y;
+                    float prevYValue2 = axisPos.Y;
+                    PointF firstPoint = PointF.Empty;
+                    PointF secondPoint = PointF.Empty;
+                    foreach (DataPoint point in ser.Points)
                     {
-                        // Get point value                    
-                        double yValue = (point.IsEmpty) ? 0.0 : GetYValue(common, area, ser, point, index, 0);
+                        // Get point value
+                        double yValue =
+                            (point.IsEmpty) ? 0.0 : GetYValue(common, area, ser, point, index, 0);
                         double xValue = (indexedSeries) ? (index + 1.0) : point.XValue;
 
                         // Adjust point position with previous value
-                        if(prevPointsArray != null && index < prevPointsArray.Count)
+                        if (prevPointsArray != null && index < prevPointsArray.Count)
                         {
                             yValue += (double)prevPointsArray[index];
                         }
@@ -960,16 +1118,18 @@ using System.Web.UI.DataVisualization.Charting;
                         float yPosition = (float)VAxis.GetPosition(yValue);
                         float xPosition = (float)HAxis.GetPosition(xValue);
 
-    
                         // Calculate 2 points to draw area and line
-                        if(firstPoint == PointF.Empty)
+                        if (firstPoint == PointF.Empty)
                         {
                             firstPoint.X = xPosition;
                             firstPoint.Y = yPosition;
-                            if(prevPointsArray != null && index < prevPointsArray.Count)
+                            if (prevPointsArray != null && index < prevPointsArray.Count)
                             {
-                                prevYValue1 = (float)VAxis.GetPosition((double)prevPointsArray[index]);
-                                prevYValue1 = graph.GetAbsolutePoint(new PointF(prevYValue1, prevYValue1)).Y;
+                                prevYValue1 = (float)
+                                    VAxis.GetPosition((double)prevPointsArray[index]);
+                                prevYValue1 = graph
+                                    .GetAbsolutePoint(new PointF(prevYValue1, prevYValue1))
+                                    .Y;
                             }
                             firstPoint = graph.GetAbsolutePoint(firstPoint);
                             secondPoint = firstPoint;
@@ -979,15 +1139,25 @@ using System.Web.UI.DataVisualization.Charting;
                         {
                             secondPoint.X = xPosition;
                             secondPoint.Y = yPosition;
-                            if(prevPointsArray != null && index < prevPointsArray.Count)
+                            if (prevPointsArray != null && index < prevPointsArray.Count)
                             {
-                                prevYValue2 = (float)VAxis.GetPosition((double)prevPointsArray[index]);
-                                prevYValue2 = graph.GetAbsolutePoint(new PointF(prevYValue2, prevYValue2)).Y;
+                                prevYValue2 = (float)
+                                    VAxis.GetPosition((double)prevPointsArray[index]);
+                                prevYValue2 = graph
+                                    .GetAbsolutePoint(new PointF(prevYValue2, prevYValue2))
+                                    .Y;
                             }
                             secondPoint = graph.GetAbsolutePoint(secondPoint);
                         }
 
-                        if(!point.IsEmpty && (ser.IsValueShownAsLabel || point.IsValueShownAsLabel || point.Label.Length > 0))
+                        if (
+                            !point.IsEmpty
+                            && (
+                                ser.IsValueShownAsLabel
+                                || point.IsValueShownAsLabel
+                                || point.Label.Length > 0
+                            )
+                        )
                         {
                             // Label text format
                             using (StringFormat format = new StringFormat())
@@ -999,7 +1169,14 @@ using System.Web.UI.DataVisualization.Charting;
                                 string text;
                                 if (point.Label.Length == 0)
                                 {
-                                    double pointLabelValue = GetYValue(common, area, ser, point, index, 0);
+                                    double pointLabelValue = GetYValue(
+                                        common,
+                                        area,
+                                        ser,
+                                        point,
+                                        index,
+                                        0
+                                    );
                                     // Round Y values for 100% stacked area
                                     if (this.hundredPercentStacked && point.LabelFormat.Length == 0)
                                     {
@@ -1012,7 +1189,8 @@ using System.Web.UI.DataVisualization.Charting;
                                         pointLabelValue,
                                         point.LabelFormat,
                                         ser.YValueType,
-                                        ChartElementType.DataPoint);
+                                        ChartElementType.DataPoint
+                                    );
                                 }
                                 else
                                 {
@@ -1026,16 +1204,19 @@ using System.Web.UI.DataVisualization.Charting;
                                 // Draw label
                                 PointF labelPosition = PointF.Empty;
                                 labelPosition.X = secondPoint.X;
-                                labelPosition.Y = secondPoint.Y - (secondPoint.Y - prevYValue2) / 2f;
+                                labelPosition.Y =
+                                    secondPoint.Y - (secondPoint.Y - prevYValue2) / 2f;
                                 labelPosition = graph.GetRelativePoint(labelPosition);
 
                                 // Measure string
                                 SizeF sizeFont = graph.GetRelativeSize(
                                     graph.MeasureString(
-                                    text,
-                                    point.Font,
-                                    new SizeF(1000f, 1000f),
-                                    StringFormat.GenericTypographic));
+                                        text,
+                                        point.Font,
+                                        new SizeF(1000f, 1000f),
+                                        StringFormat.GenericTypographic
+                                    )
+                                );
 
                                 // Get label background position
                                 RectangleF labelBackPosition = RectangleF.Empty;
@@ -1046,7 +1227,8 @@ using System.Web.UI.DataVisualization.Charting;
                                     labelPosition.X - sizeLabel.Width / 2,
                                     labelPosition.Y - sizeLabel.Height / 2 - sizeFont.Height / 10,
                                     sizeLabel.Width,
-                                    sizeLabel.Height);
+                                    sizeLabel.Height
+                                );
 
                                 // Draw label text
                                 using (Brush brush = new SolidBrush(point.LabelForeColor))
@@ -1066,7 +1248,8 @@ using System.Web.UI.DataVisualization.Charting;
                                         point.LabelBorderDashStyle,
                                         ser,
                                         point,
-                                        index);
+                                        index
+                                    );
                                 }
 
                                 // Restore old clip region
@@ -1074,14 +1257,12 @@ using System.Web.UI.DataVisualization.Charting;
                             }
                         }
 
-                
                         // Save previous point
                         firstPoint = secondPoint;
                         prevYValue1 = prevYValue2;
 
                         // Increase data point index
                         ++index;
-
                     }
                 }
             }
@@ -1113,16 +1294,16 @@ using System.Web.UI.DataVisualization.Charting;
         /// <param name="fourthPointPosition">Position where the fourth point is actually located or float.NaN if same as in "secondPoint".</param>
         /// <param name="clippedSegment">Indicates that drawn segment is 3D clipped. Only top/bottom should be drawn.</param>
         /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
-        protected override GraphicsPath Draw3DSurface( 
+        protected override GraphicsPath Draw3DSurface(
             ChartArea area,
-            ChartGraphics graph, 
+            ChartGraphics graph,
             Matrix3D matrix,
             LightStyle lightStyle,
             DataPoint3D prevDataPointEx,
-            float positionZ, 
-            float depth, 
+            float positionZ,
+            float depth,
             ArrayList points,
-            int pointIndex, 
+            int pointIndex,
             int pointLoopIndex,
             float tension,
             DrawingOperationTypes operationType,
@@ -1130,62 +1311,56 @@ using System.Web.UI.DataVisualization.Charting;
             float bottomDarkening,
             PointF thirdPointPosition,
             PointF fourthPointPosition,
-            bool clippedSegment)
+            bool clippedSegment
+        )
         {
             // Call base method
-            
-            if(pointLoopIndex != 2)
+
+            if (pointLoopIndex != 2)
             {
-                return base.Draw3DSurface( 
+                return base.Draw3DSurface(
                     area,
-                    graph, 
+                    graph,
                     matrix,
                     lightStyle,
                     prevDataPointEx,
-                    positionZ, 
-                    depth, 
+                    positionZ,
+                    depth,
                     points,
-                    pointIndex, 
+                    pointIndex,
                     pointLoopIndex,
                     tension,
                     operationType,
-                    topDarkening, 
+                    topDarkening,
                     bottomDarkening,
-                    thirdPointPosition, 
+                    thirdPointPosition,
                     fourthPointPosition,
-                    clippedSegment);
+                    clippedSegment
+                );
             }
-
             // Draw labels in the third loop
             else
             {
-                DataPoint3D    pointEx = ((DataPoint3D)points[pointIndex]);
+                DataPoint3D pointEx = ((DataPoint3D)points[pointIndex]);
 
                 // Draw label for the first point
-                if(pointEx.index == 2)
+                if (pointEx.index == 2)
                 {
                     // Get point with prev index
                     int neighborPointIndex = 0;
-                    DataPoint3D    pointPrevEx = ChartGraphics.FindPointByIndex(points, pointEx.index - 1, pointEx, ref neighborPointIndex);
+                    DataPoint3D pointPrevEx = ChartGraphics.FindPointByIndex(
+                        points,
+                        pointEx.index - 1,
+                        pointEx,
+                        ref neighborPointIndex
+                    );
 
                     // Draw labels in the third loop
-                    DrawLabels3D( 
-                        area, 
-                        graph, 
-                        area.Common, 
-                        pointPrevEx,
-                        positionZ,
-                        depth);
+                    DrawLabels3D(area, graph, area.Common, pointPrevEx, positionZ, depth);
                 }
 
                 // Draw labels in the third loop
-                DrawLabels3D( 
-                    area, 
-                    graph, 
-                    area.Common, 
-                    pointEx,
-                    positionZ,
-                    depth);
+                DrawLabels3D(area, graph, area.Common, pointEx, positionZ, depth);
             }
 
             return new GraphicsPath();
@@ -1204,32 +1379,50 @@ using System.Web.UI.DataVisualization.Charting;
         /// <param name="visibleSurfaces">Surface visibility reference. Initialized with bounary cube visibility.</param>
         protected override void GetTopSurfaceVisibility(
             ChartArea area,
-            DataPoint3D firstPoint, 
-            DataPoint3D secondPoint, 
+            DataPoint3D firstPoint,
+            DataPoint3D secondPoint,
             bool upSideDown,
-            float positionZ, 
-            float depth, 
+            float positionZ,
+            float depth,
             Matrix3D matrix,
-            ref SurfaceNames visibleSurfaces)
+            ref SurfaceNames visibleSurfaces
+        )
         {
             // Call base class method first
-            base.GetTopSurfaceVisibility(area, firstPoint, secondPoint, upSideDown, 
-                positionZ, depth, matrix, ref visibleSurfaces);
+            base.GetTopSurfaceVisibility(
+                area,
+                firstPoint,
+                secondPoint,
+                upSideDown,
+                positionZ,
+                depth,
+                matrix,
+                ref visibleSurfaces
+            );
 
             // Check if the Top surface is overlapped with data point from other series
-            if( (visibleSurfaces & SurfaceNames.Top) == SurfaceNames.Top )
+            if ((visibleSurfaces & SurfaceNames.Top) == SurfaceNames.Top)
             {
                 // Try to find data point with same index from the series above
-                bool    seriesFound = false;
-                foreach(Series ser in area.Common.DataManager.Series)
+                bool seriesFound = false;
+                foreach (Series ser in area.Common.DataManager.Series)
                 {
-                    if(String.Compare(ser.ChartTypeName, secondPoint.dataPoint.series.ChartTypeName, true, System.Globalization.CultureInfo.CurrentCulture) == 0)
+                    if (
+                        String.Compare(
+                            ser.ChartTypeName,
+                            secondPoint.dataPoint.series.ChartTypeName,
+                            true,
+                            System.Globalization.CultureInfo.CurrentCulture
+                        ) == 0
+                    )
                     {
                         // If series on top of current was found - check point transparency
-                        if(seriesFound)
+                        if (seriesFound)
                         {
-                            DataPointCustomProperties    pointProperties = ser.Points[secondPoint.index - 1];
-                            if(ser.Points[secondPoint.index - 1].IsEmpty)
+                            DataPointCustomProperties pointProperties = ser.Points[
+                                secondPoint.index - 1
+                            ];
+                            if (ser.Points[secondPoint.index - 1].IsEmpty)
                             {
                                 pointProperties = ser.EmptyPointStyle;
                             }
@@ -1241,7 +1434,13 @@ using System.Web.UI.DataVisualization.Charting;
                         }
 
                         // Check series name
-                        if(String.Compare(ser.Name, secondPoint.dataPoint.series.Name, StringComparison.Ordinal) == 0)
+                        if (
+                            String.Compare(
+                                ser.Name,
+                                secondPoint.dataPoint.series.Name,
+                                StringComparison.Ordinal
+                            ) == 0
+                        )
                         {
                             seriesFound = true;
                         }
@@ -1250,34 +1449,46 @@ using System.Web.UI.DataVisualization.Charting;
             }
 
             // Check if the Bottom surface is on top of the transparent data point from other series
-            if( (visibleSurfaces & SurfaceNames.Bottom) != SurfaceNames.Bottom )
+            if ((visibleSurfaces & SurfaceNames.Bottom) != SurfaceNames.Bottom)
             {
                 // Try to find data point with same index from the series above
-                DataPointCustomProperties    pointProperties = null;
-                foreach(Series ser in area.Common.DataManager.Series)
+                DataPointCustomProperties pointProperties = null;
+                foreach (Series ser in area.Common.DataManager.Series)
                 {
-                    if(String.Compare(ser.ChartTypeName, secondPoint.dataPoint.series.ChartTypeName, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        String.Compare(
+                            ser.ChartTypeName,
+                            secondPoint.dataPoint.series.ChartTypeName,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                     {
                         // Check series name
-                        if (pointProperties != null && String.Compare(ser.Name, secondPoint.dataPoint.series.Name, StringComparison.Ordinal) == 0)
+                        if (
+                            pointProperties != null
+                            && String.Compare(
+                                ser.Name,
+                                secondPoint.dataPoint.series.Name,
+                                StringComparison.Ordinal
+                            ) == 0
+                        )
                         {
                             if (pointProperties.Color.A != 255)
                             {
                                 visibleSurfaces |= SurfaceNames.Bottom;
                             }
-                            break;                        
+                            break;
                         }
 
                         // Get properties
                         pointProperties = ser.Points[secondPoint.index - 1];
-                        if(ser.Points[secondPoint.index - 1].IsEmpty)
+                        if (ser.Points[secondPoint.index - 1].IsEmpty)
                         {
                             pointProperties = ser.EmptyPointStyle;
                         }
                     }
                 }
             }
-
         }
 
         /// <summary>
@@ -1293,26 +1504,42 @@ using System.Web.UI.DataVisualization.Charting;
         /// <param name="thirdPoint">Returns third bottom point coordinates.</param>
         /// <param name="fourthPoint">Returns fourth bottom point coordinates.</param>
         protected override void GetBottomPointsPosition(
-            CommonElements common, 
-            ChartArea area, 
-            float axisPosition, 
-            ref DataPoint3D firstPoint, 
+            CommonElements common,
+            ChartArea area,
+            float axisPosition,
+            ref DataPoint3D firstPoint,
             ref DataPoint3D secondPoint,
             PointF thirdPointPosition,
             PointF fourthPointPosition,
-            out PointF thirdPoint, 
-            out PointF fourthPoint)
+            out PointF thirdPoint,
+            out PointF fourthPoint
+        )
         {
             // Set active vertical/horizontal axis
-            Axis    vAxis = area.GetAxis(AxisName.Y, firstPoint.dataPoint.series.YAxisType, firstPoint.dataPoint.series.YSubAxisName);
-            Axis    hAxis = area.GetAxis(AxisName.X, firstPoint.dataPoint.series.XAxisType, firstPoint.dataPoint.series.XSubAxisName);
+            Axis vAxis = area.GetAxis(
+                AxisName.Y,
+                firstPoint.dataPoint.series.YAxisType,
+                firstPoint.dataPoint.series.YSubAxisName
+            );
+            Axis hAxis = area.GetAxis(
+                AxisName.X,
+                firstPoint.dataPoint.series.XAxisType,
+                firstPoint.dataPoint.series.XSubAxisName
+            );
 
             // Find bottom points position
-            double yValue = GetYValue(area.Common, area, firstPoint.dataPoint.series, firstPoint.dataPoint, firstPoint.index - 1, 0);
+            double yValue = GetYValue(
+                area.Common,
+                area,
+                firstPoint.dataPoint.series,
+                firstPoint.dataPoint,
+                firstPoint.index - 1,
+                0
+            );
             double xValue = (float)firstPoint.xPosition;
-            if(yValue >= 0.0)
+            if (yValue >= 0.0)
             {
-                if(double.IsNaN(this.prevPosY))
+                if (double.IsNaN(this.prevPosY))
                 {
                     yValue = axisPosition;
                 }
@@ -1324,7 +1551,7 @@ using System.Web.UI.DataVisualization.Charting;
             }
             else
             {
-                if(double.IsNaN(this.prevNegY))
+                if (double.IsNaN(this.prevNegY))
                 {
                     yValue = axisPosition;
                 }
@@ -1336,12 +1563,18 @@ using System.Web.UI.DataVisualization.Charting;
             }
             thirdPoint = new PointF((float)xValue, (float)yValue);
 
-
-            yValue = GetYValue(area.Common, area, secondPoint.dataPoint.series, secondPoint.dataPoint, secondPoint.index - 1, 0);
+            yValue = GetYValue(
+                area.Common,
+                area,
+                secondPoint.dataPoint.series,
+                secondPoint.dataPoint,
+                secondPoint.index - 1,
+                0
+            );
             xValue = (float)secondPoint.xPosition;
-            if(yValue >= 0.0)
+            if (yValue >= 0.0)
             {
-                if(double.IsNaN(this.prevPosY))
+                if (double.IsNaN(this.prevPosY))
                 {
                     yValue = axisPosition;
                 }
@@ -1353,7 +1586,7 @@ using System.Web.UI.DataVisualization.Charting;
             }
             else
             {
-                if(double.IsNaN(this.prevNegY))
+                if (double.IsNaN(this.prevNegY))
                 {
                     yValue = axisPosition;
                 }
@@ -1366,44 +1599,49 @@ using System.Web.UI.DataVisualization.Charting;
             fourthPoint = new PointF((float)xValue, (float)yValue);
 
             // Check if position of the third and/or fourth point(s) should be adjusted
-            if(!float.IsNaN(thirdPointPosition.X))
+            if (!float.IsNaN(thirdPointPosition.X))
             {
-                thirdPoint.X = (float)((firstPoint.xCenterVal == 0.0) ? firstPoint.xPosition : firstPoint.xCenterVal);
+                thirdPoint.X = (float)(
+                    (firstPoint.xCenterVal == 0.0) ? firstPoint.xPosition : firstPoint.xCenterVal
+                );
 
                 // Calculate new Y value as an intersection point of two lines:
                 // line between current 3d & 4th points and vertical line with X value = thirdPointPositionX.
-                thirdPoint.Y = (thirdPointPosition.X - fourthPoint.X) / 
-                    (thirdPoint.X - fourthPoint.X) * 
-                    (thirdPoint.Y - fourthPoint.Y) + 
-                    fourthPoint.Y;
+                thirdPoint.Y =
+                    (thirdPointPosition.X - fourthPoint.X)
+                        / (thirdPoint.X - fourthPoint.X)
+                        * (thirdPoint.Y - fourthPoint.Y)
+                    + fourthPoint.Y;
 
                 // Set new X value
                 thirdPoint.X = thirdPointPosition.X;
             }
-            if(!float.IsNaN(thirdPointPosition.Y))
+            if (!float.IsNaN(thirdPointPosition.Y))
             {
                 thirdPoint.Y = thirdPointPosition.Y;
-            }            
-            
-            if(!float.IsNaN(fourthPointPosition.X))
+            }
+
+            if (!float.IsNaN(fourthPointPosition.X))
             {
-                fourthPoint.X = (float)((secondPoint.xCenterVal == 0.0) ? secondPoint.xPosition : secondPoint.xCenterVal);
+                fourthPoint.X = (float)(
+                    (secondPoint.xCenterVal == 0.0) ? secondPoint.xPosition : secondPoint.xCenterVal
+                );
 
                 // Calculate new Y value as an intersection point of two lines:
                 // line between current 3d & 4th points and vertical line with X value = thirdPointPositionX.
-                fourthPoint.Y = (fourthPointPosition.X - fourthPoint.X) / 
-                    (thirdPoint.X - fourthPoint.X) * 
-                    (thirdPoint.Y - fourthPoint.Y) + 
-                    fourthPoint.Y;
+                fourthPoint.Y =
+                    (fourthPointPosition.X - fourthPoint.X)
+                        / (thirdPoint.X - fourthPoint.X)
+                        * (thirdPoint.Y - fourthPoint.Y)
+                    + fourthPoint.Y;
 
                 // Set new X value
                 fourthPoint.X = fourthPointPosition.X;
             }
-            if(!float.IsNaN(fourthPointPosition.Y))
+            if (!float.IsNaN(fourthPointPosition.Y))
             {
                 fourthPoint.Y = fourthPointPosition.Y;
-            }            
-
+            }
         }
 
         /// <summary>
@@ -1415,29 +1653,31 @@ using System.Web.UI.DataVisualization.Charting;
         override protected int GetPointLoopNumber(bool selection, ArrayList pointsArray)
         {
             // Always one loop for selection
-            if(selection)
+            if (selection)
             {
                 return 1;
             }
 
             // Second loop will be required for semi-transparent colors
             int loopNumber = 1;
-            foreach(object obj in pointsArray)
+            foreach (object obj in pointsArray)
             {
                 // Get point & series
-                DataPoint3D    pointEx = (DataPoint3D) obj;
+                DataPoint3D pointEx = (DataPoint3D)obj;
 
                 // Check properties
-                if(pointEx.dataPoint.Color.A != 255)
+                if (pointEx.dataPoint.Color.A != 255)
                 {
                     loopNumber = 2;
                 }
 
                 // Check title
                 // VSTS fix #529011: 3-d stacked area and 100% stacked area charts do not show data labels.
-                if( pointEx.dataPoint.Label.Length > 0 ||
-                    pointEx.dataPoint.IsValueShownAsLabel || 
-                    pointEx.dataPoint.series.IsValueShownAsLabel)
+                if (
+                    pointEx.dataPoint.Label.Length > 0
+                    || pointEx.dataPoint.IsValueShownAsLabel
+                    || pointEx.dataPoint.series.IsValueShownAsLabel
+                )
                 {
                     // S loops through all data points required
                     loopNumber = 3;
@@ -1457,23 +1697,32 @@ using System.Web.UI.DataVisualization.Charting;
         /// <param name="pointEx">Data point 3D.</param>
         /// <param name="positionZ">Z position of the back side of the 3D surface.</param>
         /// <param name="depth">Depth of the 3D surface.</param>
-        private void DrawLabels3D( 
-            ChartArea area, 
-            ChartGraphics graph, 
-            CommonElements common, 
+        private void DrawLabels3D(
+            ChartArea area,
+            ChartGraphics graph,
+            CommonElements common,
             DataPoint3D pointEx,
-            float positionZ, 
-            float depth)
+            float positionZ,
+            float depth
+        )
         {
             // Get some properties for performance
-            string    pointLabel = pointEx.dataPoint.Label;
-            bool    pointShowLabelAsValue = pointEx.dataPoint.IsValueShownAsLabel;
+            string pointLabel = pointEx.dataPoint.Label;
+            bool pointShowLabelAsValue = pointEx.dataPoint.IsValueShownAsLabel;
 
             // ****************************
             // Draw data point value label
             // ****************************
-            if((!pointEx.dataPoint.IsEmpty && (pointEx.dataPoint.series.IsValueShownAsLabel || pointShowLabelAsValue || pointLabel.Length > 0)) ||
-                (pointShowLabelAsValue || pointLabel.Length > 0))
+            if (
+                (
+                    !pointEx.dataPoint.IsEmpty
+                    && (
+                        pointEx.dataPoint.series.IsValueShownAsLabel
+                        || pointShowLabelAsValue
+                        || pointLabel.Length > 0
+                    )
+                ) || (pointShowLabelAsValue || pointLabel.Length > 0)
+            )
             {
                 // Label text format
                 using (StringFormat format = new StringFormat())
@@ -1486,7 +1735,9 @@ using System.Web.UI.DataVisualization.Charting;
                     if (pointLabel.Length == 0)
                     {
                         // Round Y values for 100% stacked area
-                        double pointLabelValue = pointEx.dataPoint.YValues[(labelYValueIndex == -1) ? YValueIndex : labelYValueIndex];
+                        double pointLabelValue = pointEx.dataPoint.YValues[
+                            (labelYValueIndex == -1) ? YValueIndex : labelYValueIndex
+                        ];
                         if (this.hundredPercentStacked && pointEx.dataPoint.LabelFormat.Length == 0)
                         {
                             pointLabelValue = Math.Round(pointLabelValue, 2);
@@ -1499,7 +1750,8 @@ using System.Web.UI.DataVisualization.Charting;
                             pointLabelValue,
                             pointEx.dataPoint.LabelFormat,
                             pointEx.dataPoint.series.YValueType,
-                            ChartElementType.DataPoint);
+                            ChartElementType.DataPoint
+                        );
                     }
                     else
                     {
@@ -1508,16 +1760,22 @@ using System.Web.UI.DataVisualization.Charting;
 
                     // Get label position
                     Point3D[] points = new Point3D[1];
-                    points[0] = new Point3D((float)pointEx.xPosition, (float)(pointEx.yPosition + pointEx.height) / 2f, positionZ + depth);
+                    points[0] = new Point3D(
+                        (float)pointEx.xPosition,
+                        (float)(pointEx.yPosition + pointEx.height) / 2f,
+                        positionZ + depth
+                    );
                     area.matrix3D.TransformPoints(points);
 
                     // Measure string
                     SizeF sizeFont = graph.GetRelativeSize(
                         graph.MeasureString(
-                        text,
-                        pointEx.dataPoint.Font,
-                        new SizeF(1000f, 1000f),
-                        StringFormat.GenericTypographic));
+                            text,
+                            pointEx.dataPoint.Font,
+                            new SizeF(1000f, 1000f),
+                            StringFormat.GenericTypographic
+                        )
+                    );
 
                     // Get label background position
                     RectangleF labelBackPosition = RectangleF.Empty;
@@ -1528,7 +1786,8 @@ using System.Web.UI.DataVisualization.Charting;
                         points[0].PointF.X - sizeLabel.Width / 2,
                         points[0].PointF.Y - sizeLabel.Height / 2 - sizeFont.Height / 10,
                         sizeLabel.Width,
-                        sizeLabel.Height);
+                        sizeLabel.Height
+                    );
 
                     // Draw label text
                     using (Brush brush = new SolidBrush(pointEx.dataPoint.LabelForeColor))
@@ -1548,7 +1807,8 @@ using System.Web.UI.DataVisualization.Charting;
                             pointEx.dataPoint.LabelBorderDashStyle,
                             pointEx.dataPoint.series,
                             pointEx.dataPoint,
-                            pointEx.index - 1);
+                            pointEx.index - 1
+                        );
                     }
                 }
             }
@@ -1569,42 +1829,43 @@ using System.Web.UI.DataVisualization.Charting;
         /// <param name="yValueIndex">Index of the Y value to get.  Set to -1 to get the height.</param>
         /// <returns>Y value of the point.</returns>
         override public double GetYValue(
-            CommonElements common, 
-            ChartArea area, 
-            Series series, 
-            DataPoint point, 
-            int pointIndex, 
-            int yValueIndex)
+            CommonElements common,
+            ChartArea area,
+            Series series,
+            DataPoint point,
+            int pointIndex,
+            int yValueIndex
+        )
         {
-            double    yValue = double.NaN;
+            double yValue = double.NaN;
 
             // Calculate stacked column Y value for 2D chart
-            if(area.Area3DStyle.Enable3D == false)
+            if (area.Area3DStyle.Enable3D == false)
             {
                 return point.YValues[0];
             }
 
             // Get point Height if pointIndex == -1
-            if(yValueIndex == -1)
+            if (yValueIndex == -1)
             {
-                Axis    vAxis = area.GetAxis(AxisName.Y, series.YAxisType, series.YSubAxisName);
-                double    areaZeroValue = vAxis.Crossing;
+                Axis vAxis = area.GetAxis(AxisName.Y, series.YAxisType, series.YSubAxisName);
+                double areaZeroValue = vAxis.Crossing;
                 yValue = GetYValue(common, area, series, point, pointIndex, 0);
-                if(area.Area3DStyle.Enable3D && yValue < 0.0)
+                if (area.Area3DStyle.Enable3D && yValue < 0.0)
                 {
                     // No negative values support in 3D stacked area chart
                     yValue = -yValue;
                 }
-                if( yValue >= 0 )
+                if (yValue >= 0)
                 {
-                    if(!double.IsNaN(prevPosY))
+                    if (!double.IsNaN(prevPosY))
                     {
                         areaZeroValue = prevPosY;
                     }
                 }
                 else
                 {
-                    if(!double.IsNaN(prevNegY))
+                    if (!double.IsNaN(prevNegY))
                     {
                         areaZeroValue = prevNegY;
                     }
@@ -1613,31 +1874,36 @@ using System.Web.UI.DataVisualization.Charting;
                 return yValue - areaZeroValue;
             }
 
-
             // Loop through all series
             prevPosY = double.NaN;
             prevNegY = double.NaN;
             prevPositionX = double.NaN;
-            foreach(Series ser in common.DataManager.Series)
+            foreach (Series ser in common.DataManager.Series)
             {
                 // Check series of the current chart type & area
-                if(String.Compare(series.ChartArea, ser.ChartArea, StringComparison.Ordinal) == 0 &&
-                    String.Compare(series.ChartTypeName, ser.ChartTypeName, StringComparison.OrdinalIgnoreCase) == 0 &&
-                    ser.IsVisible())
+                if (
+                    String.Compare(series.ChartArea, ser.ChartArea, StringComparison.Ordinal) == 0
+                    && String.Compare(
+                        series.ChartTypeName,
+                        ser.ChartTypeName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                    && ser.IsVisible()
+                )
                 {
                     yValue = ser.Points[pointIndex].YValues[0];
-                    if(area.Area3DStyle.Enable3D && yValue < 0.0)
+                    if (area.Area3DStyle.Enable3D && yValue < 0.0)
                     {
                         // No negative values support in 3D stacked area chart
                         yValue = -yValue;
                     }
-                    if(!double.IsNaN(yValue))
+                    if (!double.IsNaN(yValue))
                     {
-                        if(yValue >= 0.0 && !double.IsNaN(prevPosY))
+                        if (yValue >= 0.0 && !double.IsNaN(prevPosY))
                         {
                             yValue += prevPosY;
                         }
-                        if(yValue < 0.0 && !double.IsNaN(prevNegY))
+                        if (yValue < 0.0 && !double.IsNaN(prevNegY))
                         {
                             yValue += prevNegY;
                         }
@@ -1650,22 +1916,22 @@ using System.Web.UI.DataVisualization.Charting;
                     }
 
                     // Remember privious position
-                    if(yValue >= 0.0)
+                    if (yValue >= 0.0)
                     {
                         prevPosY = yValue;
                     }
-                    if(yValue < 0.0)
+                    if (yValue < 0.0)
                     {
                         prevNegY = yValue;
                     }
                     prevPositionX = ser.Points[pointIndex].XValue;
-                    if(prevPositionX == 0.0 && ChartHelper.IndexedSeries(series))
+                    if (prevPositionX == 0.0 && ChartHelper.IndexedSeries(series))
                     {
                         prevPositionX = pointIndex + 1;
                     }
                 }
             }
-        
+
             return yValue;
         }
 
@@ -1690,6 +1956,5 @@ using System.Web.UI.DataVisualization.Charting;
             base.Dispose(disposing);
         }
         #endregion
-
     }
 }

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,32 +27,34 @@ namespace System.Xaml
 {
     public class XamlNodeList
     {
-        public XamlNodeList (XamlSchemaContext schemaContext)
+        public XamlNodeList(XamlSchemaContext schemaContext)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public XamlNodeList (XamlSchemaContext schemaContext, int size)
+        public XamlNodeList(XamlSchemaContext schemaContext, int size)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public int Count {
-            get {throw new NotImplementedException (); }
-        }
-
-        public XamlWriter Writer {
-            get {throw new NotImplementedException (); }
-        }
-
-        public void Clear ()
+        public int Count
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public XamlReader GetReader ()
+        public XamlWriter Writer
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public XamlReader GetReader()
+        {
+            throw new NotImplementedException();
         }
     }
 }

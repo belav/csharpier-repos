@@ -167,7 +167,10 @@ public class MemberEntryTest
     public void IsModified_tracks_state_of_owned_entity()
     {
         using var context = new FreezerContext();
-        var chunky = new Chunky { Chunk = new Chunk { Size = 1, Shape = "Sphere" } };
+        var chunky = new Chunky
+        {
+            Chunk = new Chunk { Size = 1, Shape = "Sphere" }
+        };
         context.Add(chunky);
 
         var reference = context.Entry(chunky).Member(nameof(Chunky.Chunk));
@@ -245,8 +248,8 @@ public class MemberEntryTest
 
     private class FreezerContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(FreezerContext));
 

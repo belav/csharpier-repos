@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,13 +27,12 @@ using System.Data.OracleClient;
 
 using MonoTests.System.Data.Utils;
 
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
     [TestFixture]
-    public class OracleDataReader_GetString_I : ADONetTesterClass 
+    public class OracleDataReader_GetString_I : ADONetTesterClass
     {
         public static void Main()
         {
@@ -44,8 +43,14 @@ namespace MonoTests.System.Data.OracleClient
                 tc.BeginTest("OracleDataReader_GetString_I");
                 tc.run();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         [Test]
@@ -53,12 +58,18 @@ namespace MonoTests.System.Data.OracleClient
         {
             Exception exp = null;
 
-        
-            base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            base.PrepareDataForTesting(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
 
-            OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            OracleConnection con = new OracleConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
             con.Open();
-            OracleCommand cmd = new OracleCommand("Select FirstName From Employees Where EmployeeID = 100", con);
+            OracleCommand cmd = new OracleCommand(
+                "Select FirstName From Employees Where EmployeeID = 100",
+                con
+            );
             OracleDataReader rdr = cmd.ExecuteReader();
             rdr.Read();
 
@@ -66,13 +77,20 @@ namespace MonoTests.System.Data.OracleClient
             {
                 BeginCase("check value");
                 string str = rdr.GetString(0);
-                Compare(str,"First100" );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(str, "First100");
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-            if (con.State == ConnectionState.Open) con.Close();
+            if (con.State == ConnectionState.Open)
+                con.Close();
         }
     }
-
 }

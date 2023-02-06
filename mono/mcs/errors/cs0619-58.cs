@@ -11,9 +11,7 @@ namespace Program
     }
 
     [Obsolete(Messages.Test, true)]
-    public sealed class TestEventArgs : EventArgs
-    {
-    }
+    public sealed class TestEventArgs : EventArgs { }
 }
 
 namespace Program

@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 /// Converts <see cref="RemoteUserAccount" /> into a <see cref="ClaimsPrincipal"/>.
 /// </summary>
 /// <typeparam name="TAccount">The account type.</typeparam>
-public class AccountClaimsPrincipalFactory<TAccount> where TAccount : RemoteUserAccount
+public class AccountClaimsPrincipalFactory<TAccount>
+    where TAccount : RemoteUserAccount
 {
     private readonly IAccessTokenProviderAccessor _accessor;
 
@@ -19,7 +20,8 @@ public class AccountClaimsPrincipalFactory<TAccount> where TAccount : RemoteUser
     /// Initialize a new instance of <see cref="AccountClaimsPrincipalFactory{TAccount}"/>.
     /// </summary>
     /// <param name="accessor"></param>
-    public AccountClaimsPrincipalFactory(IAccessTokenProviderAccessor accessor) => _accessor = accessor;
+    public AccountClaimsPrincipalFactory(IAccessTokenProviderAccessor accessor) =>
+        _accessor = accessor;
 
     /// <summary>
     /// Gets or sets the <see cref="IAccessTokenProvider"/>.
@@ -34,12 +36,17 @@ public class AccountClaimsPrincipalFactory<TAccount> where TAccount : RemoteUser
     /// <returns>A <see cref="ValueTask{TResult}"/>that will contain the <see cref="ClaimsPrincipal"/> user when completed.</returns>
     public virtual ValueTask<ClaimsPrincipal> CreateUserAsync(
         TAccount account,
-        RemoteAuthenticationUserOptions options)
+        RemoteAuthenticationUserOptions options
+    )
     {
-        var identity = account != null ? new ClaimsIdentity(
-        options.AuthenticationType,
-        options.NameClaim,
-        options.RoleClaim) : new ClaimsIdentity();
+        var identity =
+            account != null
+                ? new ClaimsIdentity(
+                    options.AuthenticationType,
+                    options.NameClaim,
+                    options.RoleClaim
+                )
+                : new ClaimsIdentity();
 
         if (account != null)
         {
@@ -47,8 +54,14 @@ public class AccountClaimsPrincipalFactory<TAccount> where TAccount : RemoteUser
             {
                 var name = kvp.Key;
                 var value = kvp.Value;
-                if (value != null ||
-                    (value is JsonElement element && element.ValueKind != JsonValueKind.Undefined && element.ValueKind != JsonValueKind.Null))
+                if (
+                    value != null
+                    || (
+                        value is JsonElement element
+                        && element.ValueKind != JsonValueKind.Undefined
+                        && element.ValueKind != JsonValueKind.Null
+                    )
+                )
                 {
                     identity.AddClaim(new Claim(name, value.ToString()!));
                 }

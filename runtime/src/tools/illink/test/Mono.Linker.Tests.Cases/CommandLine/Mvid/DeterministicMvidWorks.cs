@@ -3,17 +3,15 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.CommandLine.Mvid
 {
-    [SetupLinkerArgument ("--deterministic", "true")]
+    [SetupLinkerArgument("--deterministic", "true")]
     public class DeterministicMvidWorks
     {
-        public static void Main ()
+        public static void Main()
         {
-            Method ();
+            Method();
         }
 
         [Kept]
-        static void Method ()
-        {
-        }
+        static void Method() { }
     }
 }

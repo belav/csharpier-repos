@@ -14,7 +14,8 @@ internal class OVFTest
 
     private static sbyte Test_sbyte()
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         sbyte a = 1 + sbyte.MaxValue / 2;
         checked
         {
@@ -32,7 +33,8 @@ internal class OVFTest
 
     private static byte Test_byte()
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         byte a = 1 + byte.MaxValue / 2;
         checked
         {
@@ -50,7 +52,8 @@ internal class OVFTest
 
     private static short Test_short()
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         short a = 1 + short.MaxValue / 2;
         checked
         {
@@ -68,7 +71,8 @@ internal class OVFTest
 
     private static ushort Test_ushort()
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         ushort a = 1 + ushort.MaxValue / 2;
         checked
         {
@@ -86,7 +90,8 @@ internal class OVFTest
 
     private static int Test_int()
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         int a = 1 + int.MaxValue / 2;
         checked
         {
@@ -104,7 +109,8 @@ internal class OVFTest
 
     private static uint Test_uint()
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         uint a = 1U + uint.MaxValue / 2U;
         checked
         {
@@ -122,7 +128,8 @@ internal class OVFTest
 
     private static long Test_long()
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         long a = 1L + long.MaxValue / 2L;
         checked
         {
@@ -140,7 +147,8 @@ internal class OVFTest
 
     private static ulong Test_ulong()
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         ulong a = 1UL + ulong.MaxValue / 2UL;
         checked
         {

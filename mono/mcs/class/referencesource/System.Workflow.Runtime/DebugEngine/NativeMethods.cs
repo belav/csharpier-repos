@@ -23,15 +23,17 @@ namespace System.Workflow.Runtime.DebugEngine
         public const int TOKEN_ADJUST_DEFAULT = (0x0080);
         public const int TOKEN_ADJUST_SESSIONID = (0x0100);
 
-        public const int TOKEN_ALL_ACCESS = (STANDARD_RIGHTS_REQUIRED |
-                          TOKEN_ASSIGN_PRIMARY |
-                          TOKEN_DUPLICATE |
-                          TOKEN_IMPERSONATE |
-                          TOKEN_QUERY |
-                          TOKEN_QUERY_SOURCE |
-                          TOKEN_ADJUST_PRIVILEGES |
-                          TOKEN_ADJUST_GROUPS |
-                          TOKEN_ADJUST_DEFAULT);
+        public const int TOKEN_ALL_ACCESS = (
+            STANDARD_RIGHTS_REQUIRED
+            | TOKEN_ASSIGN_PRIMARY
+            | TOKEN_DUPLICATE
+            | TOKEN_IMPERSONATE
+            | TOKEN_QUERY
+            | TOKEN_QUERY_SOURCE
+            | TOKEN_ADJUST_PRIVILEGES
+            | TOKEN_ADJUST_GROUPS
+            | TOKEN_ADJUST_DEFAULT
+        );
 
         [Flags]
         public enum SECURITY_INFORMATION : uint
@@ -96,18 +98,31 @@ namespace System.Workflow.Runtime.DebugEngine
         public static extern bool RevertToSelf();
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        public static extern bool OpenProcessToken(IntPtr ProcessHandle, UInt32 DesiredAccess, out IntPtr TokenHandle);
+        public static extern bool OpenProcessToken(
+            IntPtr ProcessHandle,
+            UInt32 DesiredAccess,
+            out IntPtr TokenHandle
+        );
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        public static extern bool GetKernelObjectSecurity(IntPtr Handle, SECURITY_INFORMATION RequestedInformation, IntPtr pSecurityDescriptor, UInt32 nLength, out UInt32 lpnLengthNeeded);
+        public static extern bool GetKernelObjectSecurity(
+            IntPtr Handle,
+            SECURITY_INFORMATION RequestedInformation,
+            IntPtr pSecurityDescriptor,
+            UInt32 nLength,
+            out UInt32 lpnLengthNeeded
+        );
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        public static extern bool SetKernelObjectSecurity(IntPtr Handle, SECURITY_INFORMATION SecurityInformation, IntPtr SecurityDescriptor);
+        public static extern bool SetKernelObjectSecurity(
+            IntPtr Handle,
+            SECURITY_INFORMATION SecurityInformation,
+            IntPtr SecurityDescriptor
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool CloseHandle(IntPtr hObject);
-
     }
 
     internal static class Guids

@@ -19,12 +19,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
 {
     internal partial class FormatCommandHandler
     {
-        public CommandState GetCommandState(PasteCommandArgs args, Func<CommandState> nextHandler)
-            => nextHandler();
+        public CommandState GetCommandState(
+            PasteCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => nextHandler();
 
-        public void ExecuteCommand(PasteCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            PasteCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
-            using var _ = context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Formatting_pasted_text);
+            using var _ = context.OperationContext.AddScope(
+                allowCancellation: true,
+                EditorFeaturesResources.Formatting_pasted_text
+            );
             var caretPosition = args.TextView.GetCaretPoint(args.SubjectBuffer);
 
             nextHandler();
@@ -47,21 +56,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             }
         }
 
-        private static void ExecuteCommandWorker(PasteCommandArgs args, SnapshotPoint? caretPosition, CancellationToken cancellationToken)
+        private static void ExecuteCommandWorker(
+            PasteCommandArgs args,
+            SnapshotPoint? caretPosition,
+            CancellationToken cancellationToken
+        )
         {
             if (!caretPosition.HasValue)
             {
                 return;
             }
 
-            var document = args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
             }
 
             var solution = document.Project.Solution;
-            if (!solution.Options.GetOption(FormattingBehaviorOptions.FormatOnPaste, document.Project.Language))
+            if (
+                !solution.Options.GetOption(
+                    FormattingBehaviorOptions.FormatOnPaste,
+                    document.Project.Language
+                )
+            )
             {
                 return;
             }
@@ -71,8 +90,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 return;
             }
 
-            var formattingRuleService = solution.Workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
-            if (formattingRuleService != null && formattingRuleService.ShouldNotFormatOrCommitOnPaste(document))
+            var formattingRuleService =
+                solution.Workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+            if (
+                formattingRuleService != null
+                && formattingRuleService.ShouldNotFormatOrCommitOnPaste(document)
+            )
             {
                 return;
             }
@@ -83,10 +106,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 return;
             }
 
-            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(caretPosition.Value.Position, 0, SpanTrackingMode.EdgeInclusive);
+            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(
+                caretPosition.Value.Position,
+                0,
+                SpanTrackingMode.EdgeInclusive
+            );
             var span = trackingSpan.GetSpan(args.SubjectBuffer.CurrentSnapshot).Span.ToTextSpan();
-            var changes = formattingService.GetFormattingChangesOnPasteAsync(
-                document, span, documentOptions: null, cancellationToken).WaitAndGetResult(cancellationToken);
+            var changes = formattingService
+                .GetFormattingChangesOnPasteAsync(
+                    document,
+                    span,
+                    documentOptions: null,
+                    cancellationToken
+                )
+                .WaitAndGetResult(cancellationToken);
             if (changes.IsEmpty)
             {
                 return;

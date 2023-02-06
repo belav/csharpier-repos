@@ -7,14 +7,14 @@ using System.Collections.Generic;
 
 class Data
 {
-    public delegate int Count ();
+    public delegate int Count();
 }
 
 public class Test
 {
-    delegate void S ();
-    
-    static void Main ()
+    delegate void S();
+
+    static void Main()
     {
         //S s = new S ();
         //string drawBackLabel = string.Length("absDrawBack");

@@ -3,7 +3,8 @@
 
 namespace System.Buffers
 {
-    internal sealed class IndexOfAnyValuesDebugView<T> where T : IEquatable<T>?
+    internal sealed class IndexOfAnyValuesDebugView<T>
+        where T : IEquatable<T>?
     {
         private readonly IndexOfAnyValues<T> _values;
 

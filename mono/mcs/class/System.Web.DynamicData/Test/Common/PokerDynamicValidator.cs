@@ -5,29 +5,29 @@ namespace MonoTests.Common
 {
     public class PokerDynamicValidator : DynamicValidator
     {
-        public Exception GetValidationException ()
+        public Exception GetValidationException()
         {
             return ValidationException;
         }
 
-        public void SetValidationException (Exception ex)
+        public void SetValidationException(Exception ex)
         {
             ValidationException = ex;
         }
 
-        public bool CallControlPropertiesValid ()
+        public bool CallControlPropertiesValid()
         {
-            return ControlPropertiesValid ();
+            return ControlPropertiesValid();
         }
 
-        public bool CallEvaluateIsValid ()
+        public bool CallEvaluateIsValid()
         {
-            return EvaluateIsValid ();
+            return EvaluateIsValid();
         }
 
-        public void CallValidateException (Exception ex)
+        public void CallValidateException(Exception ex)
         {
-            ValidateException (ex);
+            ValidateException(ex);
         }
     }
 }

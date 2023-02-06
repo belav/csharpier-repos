@@ -3,11 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class TPCInheritanceBulkUpdatesSqlServerTest : TPCInheritanceBulkUpdatesTestBase<TPCInheritanceBulkUpdatesSqlServerFixture>
+public class TPCInheritanceBulkUpdatesSqlServerTest
+    : TPCInheritanceBulkUpdatesTestBase<TPCInheritanceBulkUpdatesSqlServerFixture>
 {
     public TPCInheritanceBulkUpdatesSqlServerTest(
         TPCInheritanceBulkUpdatesSqlServerFixture fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         ClearLog();
@@ -15,8 +17,8 @@ public class TPCInheritanceBulkUpdatesSqlServerTest : TPCInheritanceBulkUpdatesT
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_where_hierarchy(bool async)
     {
@@ -30,11 +32,12 @@ public class TPCInheritanceBulkUpdatesSqlServerTest : TPCInheritanceBulkUpdatesT
         await base.Delete_where_hierarchy_derived(async);
 
         AssertSql(
-"""
+            """
 DELETE FROM [k]
 FROM [Kiwi] AS [k]
 WHERE [k].[Name] = N'Great spotted kiwi'
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_using_hierarchy(bool async)
@@ -42,7 +45,7 @@ WHERE [k].[Name] = N'Great spotted kiwi'
         await base.Delete_where_using_hierarchy(async);
 
         AssertSql(
-"""
+            """
 DELETE FROM [c]
 FROM [Countries] AS [c]
 WHERE (
@@ -55,7 +58,8 @@ WHERE (
         FROM [Kiwi] AS [k]
     ) AS [t]
     WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_using_hierarchy_derived(bool async)
@@ -63,7 +67,7 @@ WHERE (
         await base.Delete_where_using_hierarchy_derived(async);
 
         AssertSql(
-"""
+            """
 DELETE FROM [c]
 FROM [Countries] AS [c]
 WHERE (
@@ -73,7 +77,8 @@ WHERE (
         FROM [Kiwi] AS [k]
     ) AS [t]
     WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -130,12 +135,13 @@ WHERE (
         await base.Update_where_hierarchy_derived(async);
 
         AssertExecuteUpdateSql(
-"""
+            """
 UPDATE [k]
 SET [k].[Name] = N'Kiwi'
 FROM [Kiwi] AS [k]
 WHERE [k].[Name] = N'Great spotted kiwi'
-""");
+"""
+        );
     }
 
     public override async Task Update_where_using_hierarchy(bool async)
@@ -143,7 +149,7 @@ WHERE [k].[Name] = N'Great spotted kiwi'
         await base.Update_where_using_hierarchy(async);
 
         AssertExecuteUpdateSql(
-"""
+            """
 UPDATE [c]
 SET [c].[Name] = N'Monovia'
 FROM [Countries] AS [c]
@@ -157,7 +163,8 @@ WHERE (
         FROM [Kiwi] AS [k]
     ) AS [t]
     WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_where_using_hierarchy_derived(bool async)
@@ -165,7 +172,7 @@ WHERE (
         await base.Update_where_using_hierarchy_derived(async);
 
         AssertExecuteUpdateSql(
-"""
+            """
 UPDATE [c]
 SET [c].[Name] = N'Monovia'
 FROM [Countries] AS [c]
@@ -176,7 +183,8 @@ WHERE (
         FROM [Kiwi] AS [k]
     ) AS [t]
     WHERE [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_with_interface_in_property_expression(bool async)
@@ -184,23 +192,27 @@ WHERE (
         await base.Update_with_interface_in_property_expression(async);
 
         AssertExecuteUpdateSql(
-"""
+            """
 UPDATE [c]
 SET [c].[SugarGrams] = 0
 FROM [Coke] AS [c]
-""");
+"""
+        );
     }
 
-    public override async Task Update_with_interface_in_EF_Property_in_property_expression(bool async)
+    public override async Task Update_with_interface_in_EF_Property_in_property_expression(
+        bool async
+    )
     {
         await base.Update_with_interface_in_EF_Property_in_property_expression(async);
 
         AssertExecuteUpdateSql(
-"""
+            """
 UPDATE [c]
 SET [c].[SugarGrams] = 0
 FROM [Coke] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Update_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -210,12 +222,11 @@ FROM [Coke] AS [c]
         AssertExecuteUpdateSql();
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

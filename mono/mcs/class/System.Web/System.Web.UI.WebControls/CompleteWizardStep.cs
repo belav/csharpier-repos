@@ -33,38 +33,38 @@ using System.Text;
 
 namespace System.Web.UI.WebControls
 {
-    [Browsable (false)]
+    [Browsable(false)]
     public sealed class CompleteWizardStep : TemplatedWizardStep
     {
-        public CompleteWizardStep ()
-        {
-        }
+        public CompleteWizardStep() { }
 
-        // MSDN: The StepType property overrides the WizardStepBase.StepType property to ensure that CompleteWizardStep is always set to the Complete value of 
+        // MSDN: The StepType property overrides the WizardStepBase.StepType property to ensure that CompleteWizardStep is always set to the Complete value of
         // the WizardStepType enumeration. Attempting to set the StepType property to a different value will result in an InvalidOperationException.
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Filterable (false)]
-        [Browsable (false)]
-        [ThemeableAttribute (false)]
-        public override WizardStepType StepType {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Filterable(false)]
+        [Browsable(false)]
+        [ThemeableAttribute(false)]
+        public override WizardStepType StepType
+        {
             get { return WizardStepType.Complete; }
-            set { throw new InvalidOperationException (); }
+            set { throw new InvalidOperationException(); }
         }
 
-        [LocalizableAttribute (true)]
-        public override string Title {
-            get {
-                object o = ViewState ["TitleText"];
-                return (o == null) ? Locale.GetText ("Complete") : (string) o;
+        [LocalizableAttribute(true)]
+        public override string Title
+        {
+            get
+            {
+                object o = ViewState["TitleText"];
+                return (o == null) ? Locale.GetText("Complete") : (string)o;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    ViewState.Remove ("TitleText");
+                    ViewState.Remove("TitleText");
                 else
-                    ViewState ["TitleText"] = value;
+                    ViewState["TitleText"] = value;
             }
         }
     }
-
 }
-

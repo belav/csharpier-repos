@@ -24,13 +24,18 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
     public class OptionRoundTripTests : CSharpTestBase
     {
-        public static readonly CSharpCompilationOptions BaseCSharpCompilationOptions = TestOptions.DebugExe.WithDeterministic(true);
+        public static readonly CSharpCompilationOptions BaseCSharpCompilationOptions =
+            TestOptions.DebugExe.WithDeterministic(true);
 
-        public static readonly VisualBasicCompilationOptions BaseVisualBasicCompilationOptions = new VisualBasicCompilationOptions(
-            outputKind: OutputKind.ConsoleApplication,
-            deterministic: true);
+        public static readonly VisualBasicCompilationOptions BaseVisualBasicCompilationOptions =
+            new VisualBasicCompilationOptions(
+                outputKind: OutputKind.ConsoleApplication,
+                deterministic: true
+            );
 
-        public static readonly object[][] Platforms = ((Platform[])Enum.GetValues(typeof(Platform))).Select(p => new[] { (object)p }).ToArray();
+        public static readonly object[][] Platforms = ((Platform[])Enum.GetValues(typeof(Platform)))
+            .Select(p => new[] { (object)p })
+            .ToArray();
 
         [Theory]
         [MemberData(nameof(Platforms))]
@@ -39,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var original = CreateCompilation(
                 "class C { static void Main() { } }",
                 options: BaseCSharpCompilationOptions.WithPlatform(platform),
-                sourceFileName: "test.cs");
+                sourceFileName: "test.cs"
+            );
 
             RoundTripUtil.VerifyRoundTrip(original);
         }
@@ -49,7 +55,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         public void Platform_RoundTrip_VB(Platform platform)
         {
             var original = CreateVisualBasicCompilation(
-                compilationOptions: BaseVisualBasicCompilationOptions.WithPlatform(platform).WithModuleName("test"),
+                compilationOptions: BaseVisualBasicCompilationOptions
+                    .WithPlatform(platform)
+                    .WithModuleName("test"),
                 encoding: Encoding.UTF8,
                 code: @"
 Class C
@@ -57,17 +65,27 @@ Class C
     End Sub
 End Class",
                 assemblyName: "test",
-                sourceFileName: "test.vb");
+                sourceFileName: "test.vb"
+            );
 
             RoundTripUtil.VerifyRoundTrip(original);
         }
 
         [Theory]
         [CombinatorialData]
-        public void OptimizationLevel_ParsePdbSerializedString(OptimizationLevel optimization, bool debugPlus)
+        public void OptimizationLevel_ParsePdbSerializedString(
+            OptimizationLevel optimization,
+            bool debugPlus
+        )
         {
             var data = OptimizationLevelFacts.ToPdbSerializedString(optimization, debugPlus);
-            Assert.True(OptimizationLevelFacts.TryParsePdbSerializedString(data, out var optimization2, out var debugPlus2));
+            Assert.True(
+                OptimizationLevelFacts.TryParsePdbSerializedString(
+                    data,
+                    out var optimization2,
+                    out var debugPlus2
+                )
+            );
             Assert.Equal(optimization, optimization2);
             Assert.Equal(debugPlus, debugPlus2);
         }
@@ -78,9 +96,16 @@ End Class",
             var original = CreateCompilation(
                 @"class C { static void Main() { } }",
                 options: BaseCSharpCompilationOptions,
-                sourceFileName: "test.cs");
+                sourceFileName: "test.cs"
+            );
 
-            RoundTripUtil.VerifyRoundTrip(original, new EmitOptions(debugInformationFormat: DebugInformationFormat.PortablePdb, pdbFilePath: "test.pdb"));
+            RoundTripUtil.VerifyRoundTrip(
+                original,
+                new EmitOptions(
+                    debugInformationFormat: DebugInformationFormat.PortablePdb,
+                    pdbFilePath: "test.pdb"
+                )
+            );
         }
     }
 }

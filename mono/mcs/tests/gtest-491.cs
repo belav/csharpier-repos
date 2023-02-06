@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
 
-interface IFoo
-{
-}
+interface IFoo { }
 
 class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
 {
-    public bool Equals (T[] x, T[] y)
+    public bool Equals(T[] x, T[] y)
     {
         return false;
     }
 
-    public int GetHashCode (T[] args)
+    public int GetHashCode(T[] args)
     {
         return 0;
     }
@@ -20,9 +18,9 @@ class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
 
 public class Program
 {
-    public static int Main ()
+    public static int Main()
     {
-        var d = new Dictionary<IFoo[], IFoo> (new ArrayEqualityComparer<IFoo> ());
+        var d = new Dictionary<IFoo[], IFoo>(new ArrayEqualityComparer<IFoo>());
         return 0;
     }
 }

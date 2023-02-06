@@ -11,19 +11,25 @@ namespace System.Reflection
         {
             _method = method;
 
-            if (LocalAppContextSwitches.ForceInterpretedInvoke && !LocalAppContextSwitches.ForceEmitInvoke)
+            if (
+                LocalAppContextSwitches.ForceInterpretedInvoke
+                && !LocalAppContextSwitches.ForceEmitInvoke
+            )
             {
                 // Always use the native invoke; useful for testing.
                 _strategyDetermined = true;
             }
-            else if (LocalAppContextSwitches.ForceEmitInvoke && !LocalAppContextSwitches.ForceInterpretedInvoke)
+            else if (
+                LocalAppContextSwitches.ForceEmitInvoke
+                && !LocalAppContextSwitches.ForceInterpretedInvoke
+            )
             {
                 // Always use emit invoke (if IsDynamicCodeCompiled == true); useful for testing.
                 _invoked = true;
             }
         }
 
-        private unsafe object? InterpretedInvoke(object? obj, IntPtr *args)
+        private unsafe object? InterpretedInvoke(object? obj, IntPtr* args)
         {
             Exception? exc;
 

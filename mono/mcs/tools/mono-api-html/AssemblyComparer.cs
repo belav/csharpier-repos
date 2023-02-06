@@ -1,9 +1,9 @@
-// 
+//
 // Authors
 //    Sebastien Pouliot  <sebastien@xamarin.com>
 //
 // Copyright 2013 Xamarin Inc. http://www.xamarin.com
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -29,67 +29,66 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
 
-namespace Mono.ApiTools {
-
-    class AssemblyComparer : Comparer {
-
+namespace Mono.ApiTools
+{
+    class AssemblyComparer : Comparer
+    {
         XDocument source;
         XDocument target;
         NamespaceComparer comparer;
 
-        public AssemblyComparer (string sourceFile, string targetFile, State state)
-            : this (XDocument.Load(sourceFile), XDocument.Load(targetFile), state)
-        {
-        }
+        public AssemblyComparer(string sourceFile, string targetFile, State state)
+            : this(XDocument.Load(sourceFile), XDocument.Load(targetFile), state) { }
 
-        public AssemblyComparer (Stream sourceFile, Stream targetFile, State state)
-            : this (XDocument.Load(sourceFile), XDocument.Load(targetFile), state)
-        {
-        }
+        public AssemblyComparer(Stream sourceFile, Stream targetFile, State state)
+            : this(XDocument.Load(sourceFile), XDocument.Load(targetFile), state) { }
 
-        public AssemblyComparer (XDocument sourceFile, XDocument targetFile, State state)
-            : base (state)
+        public AssemblyComparer(XDocument sourceFile, XDocument targetFile, State state)
+            : base(state)
         {
             source = sourceFile;
             target = targetFile;
-            comparer =  new NamespaceComparer (state);
+            comparer = new NamespaceComparer(state);
         }
 
         public string SourceAssembly { get; private set; }
         public string TargetAssembly { get; private set; }
 
-        public void Compare ()
+        public void Compare()
         {
-            Compare (source.Element ("assemblies").Elements ("assembly"), 
-                     target.Element ("assemblies").Elements ("assembly"));
+            Compare(
+                source.Element("assemblies").Elements("assembly"),
+                target.Element("assemblies").Elements("assembly")
+            );
         }
 
-        public override void SetContext (XElement current)
+        public override void SetContext(XElement current)
         {
-            State.Assembly = current.GetAttribute ("name");
+            State.Assembly = current.GetAttribute("name");
         }
 
-        public override void Added (XElement target, bool wasParentAdded)
+        public override void Added(XElement target, bool wasParentAdded)
         {
             // one assembly per xml file
         }
 
-        public override void Modified (XElement source, XElement target, ApiChanges diff)
+        public override void Modified(XElement source, XElement target, ApiChanges diff)
         {
-            SourceAssembly = source.GetAttribute ("name");
-            TargetAssembly = target.GetAttribute ("name");
+            SourceAssembly = source.GetAttribute("name");
+            TargetAssembly = target.GetAttribute("name");
 
-            var sb = source.GetAttribute ("version");
-            var tb = target.GetAttribute ("version");
-            if (sb != tb) {
-                Output.WriteLine ("<h4>Assembly Version Changed: {0} vs {1}</h4>", tb, sb);
+            var sb = source.GetAttribute("version");
+            var tb = target.GetAttribute("version");
+            if (sb != tb)
+            {
+                Output.WriteLine("<h4>Assembly Version Changed: {0} vs {1}</h4>", tb, sb);
             }
 
             // ? custom attributes ?
-            comparer.Compare (source, target);
+            comparer.Compare(source, target);
         }
 
-        public override void Removed (XElement source)
+        public override void Removed(XElement source)
         {
             // one assembly per xml file
         }

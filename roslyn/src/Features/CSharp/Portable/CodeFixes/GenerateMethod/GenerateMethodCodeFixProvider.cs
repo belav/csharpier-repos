@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateMethod
         private const string CS0305 = nameof(CS0305); // error CS0305: Using the generic method 'CA.M<V>()' requires 1 type arguments
         private const string CS0308 = nameof(CS0308); // error CS0308: The non-generic method 'Program.Goo()' cannot be used with type arguments
         private const string CS0539 = nameof(CS0539); // error CS0539: 'A.Goo<T>()' in explicit interface declaration is not a member of interface
-        private const string CS1061 = nameof(CS1061); // error CS1061: Error 'Class' does not contain a definition for 'Goo' and no extension method 'Goo' 
+        private const string CS1061 = nameof(CS1061); // error CS1061: Error 'Class' does not contain a definition for 'Goo' and no extension method 'Goo'
         private const string CS1501 = nameof(CS1501); // error CS1501: No overload for method 'M' takes 1 arguments
         private const string CS1503 = nameof(CS1503); // error CS1503: Argument 1: cannot convert from 'double' to 'int'
         private const string CS1660 = nameof(CS1660); // error CS1660: Cannot convert lambda expression to type 'string[]' because it is not a delegate type
@@ -35,48 +35,60 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateMethod
         private const string CS7036 = nameof(CS7036); // error CS7036: There is no argument given that corresponds to the required parameter 'x' of 'C.M(int)'
         private const string CS1955 = nameof(CS1955); // error CS1955: Non-invocable member 'Goo' cannot be used like a method.
 
-        public static readonly ImmutableArray<string> FixableDiagnosticIds =
-            ImmutableArray.Create(
-                CS0103,
-                CS0117,
-                CS0118,
-                CS0122,
-                CS0305,
-                CS0308,
-                CS0539,
-                CS1061,
-                CS1501,
-                CS1503,
-                CS1660,
-                CS1739,
-                CS7036,
-                CS1955);
+        public static readonly ImmutableArray<string> FixableDiagnosticIds = ImmutableArray.Create(
+            CS0103,
+            CS0117,
+            CS0118,
+            CS0122,
+            CS0305,
+            CS0308,
+            CS0539,
+            CS1061,
+            CS1501,
+            CS1503,
+            CS1660,
+            CS1739,
+            CS7036,
+            CS1955
+        );
     }
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.GenerateMethod), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.GenerateMethod
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.GenerateEnumMember)]
     [ExtensionOrder(Before = PredefinedCodeFixProviderNames.PopulateSwitch)]
     [ExtensionOrder(Before = PredefinedCodeFixProviderNames.GenerateVariable)]
     internal sealed class GenerateMethodCodeFixProvider : AbstractGenerateMemberCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public GenerateMethodCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public GenerateMethodCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             GenerateMethodDiagnosticIds.FixableDiagnosticIds;
 
-        protected override bool IsCandidate(SyntaxNode node, SyntaxToken token, Diagnostic diagnostic)
+        protected override bool IsCandidate(
+            SyntaxNode node,
+            SyntaxToken token,
+            Diagnostic diagnostic
+        )
         {
-            return node.IsKind(SyntaxKind.IdentifierName) ||
-                   node.IsKind(SyntaxKind.MethodDeclaration) ||
-                   node.IsKind(SyntaxKind.InvocationExpression) ||
-                   node.IsKind(SyntaxKind.CastExpression) ||
-                   node is LiteralExpressionSyntax ||
-                   node is SimpleNameSyntax ||
-                   node is ExpressionSyntax;
+            return node.IsKind(SyntaxKind.IdentifierName)
+                || node.IsKind(SyntaxKind.MethodDeclaration)
+                || node.IsKind(SyntaxKind.InvocationExpression)
+                || node.IsKind(SyntaxKind.CastExpression)
+                || node is LiteralExpressionSyntax
+                || node is SimpleNameSyntax
+                || node is ExpressionSyntax;
         }
 
         protected override SyntaxNode? GetTargetNode(SyntaxNode node)
@@ -93,9 +105,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateMethod
         }
 
         protected override Task<ImmutableArray<CodeAction>> GetCodeActionsAsync(
-            Document document, SyntaxNode node, CleanCodeGenerationOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode node,
+            CleanCodeGenerationOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var service = document.GetRequiredLanguageService<IGenerateParameterizedMemberService>();
+            var service =
+                document.GetRequiredLanguageService<IGenerateParameterizedMemberService>();
             return service.GenerateMethodAsync(document, node, fallbackOptions, cancellationToken);
         }
     }

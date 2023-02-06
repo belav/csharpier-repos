@@ -24,11 +24,10 @@ namespace MonoTests.SystemWeb.Framework
         /// Thrown when trying to copy a resource after appdomain was created. Please call
         /// WebTest.Unload before copying resource.
         /// </summary>
-        public class DomainUpException : Exception
-        {
-        }
+        public class DomainUpException : Exception { }
 
         object _userData;
+
         /// <summary>
         /// Any user-defined data. Must be serializable to pass between appdomains.
         /// </summary>
@@ -40,7 +39,7 @@ namespace MonoTests.SystemWeb.Framework
         ///    t.Run ();
         ///    Assert.AreEqual ("Was here", t.UserData.ToString());
         /// }
-        /// 
+        ///
         /// static public void MyCallback ()
         /// {
         ///    WebTest.CurrentTest.UserData = "Was here";
@@ -54,6 +53,7 @@ namespace MonoTests.SystemWeb.Framework
         }
 
         Response _response;
+
         /// <summary>
         /// The result of the last <see cref="Run"/>. See <see cref="MonoTests.SystemWeb.Framework.Response"/>,
         /// <see cref="FormRequest"/>.
@@ -68,6 +68,7 @@ namespace MonoTests.SystemWeb.Framework
         }
 
         BaseInvoker _invoker;
+
         /// <summary>
         /// Set the invoker, which is executed in the web context by <see cref="Invoke"/>
         /// method. Most commonly used <see cref="PageInvoker"/>. See also: <see cref="BaseInvoker"/>,
@@ -84,6 +85,7 @@ namespace MonoTests.SystemWeb.Framework
         }
 
         BaseRequest _request;
+
         /// <summary>
         /// Contains all the data necessary to create an <see cref="System.Web.HttpWorkerRequest"/> in
         /// the application appdomain. See also <see cref="BaseRequest"/>,
@@ -102,8 +104,9 @@ namespace MonoTests.SystemWeb.Framework
         static MyHost host;
         internal static MyHost Host
         {
-            get {
-                EnsureHosting ();
+            get
+            {
+                EnsureHosting();
                 return host;
             }
         }
@@ -117,24 +120,27 @@ namespace MonoTests.SystemWeb.Framework
         /// <seealso cref="Invoker"/>
         /// <seealso cref="Response"/>
         /// <seealso cref="MonoTests.SystemWeb.Framework.Response.Body"/>
-        public string Run ()
+        public string Run()
         {
 #if !DOTNET
-            SystemWebTestShim.BuildManager.SuppressDebugModeMessages ();
+            SystemWebTestShim.BuildManager.SuppressDebugModeMessages();
 #endif
             if (Request.Url == null)
-                Request.Url = Invoker.GetDefaultUrl ();
+                Request.Url = Invoker.GetDefaultUrl();
             _unloadHandler.StartingRequest();
-            try {
-                WebTest newTestInstance = Host.Run (this);
-                CopyFrom (newTestInstance);
-            } finally {
+            try
+            {
+                WebTest newTestInstance = Host.Run(this);
+                CopyFrom(newTestInstance);
+            }
+            finally
+            {
                 _unloadHandler.FinishedRequest();
             }
             return _response.Body;
         }
-        
-        private void CopyFrom (WebTest newTestInstance)
+
+        private void CopyFrom(WebTest newTestInstance)
         {
             this._invoker = newTestInstance._invoker;
             this._request = newTestInstance._request;
@@ -148,7 +154,7 @@ namespace MonoTests.SystemWeb.Framework
         /// </summary>
         public static WebTest CurrentTest
         {
-            get { return MyHost.GetCurrentTest (); }
+            get { return MyHost.GetCurrentTest(); }
         }
 
         /// <summary>
@@ -160,20 +166,22 @@ namespace MonoTests.SystemWeb.Framework
         /// <seealso cref="System.Web.IHttpHandler.ProcessRequest"/>
         /// <seealso cref="BaseInvoker"/>
         /// <seealso cref="PageInvoker"/>
-        public void Invoke (object param)
+        public void Invoke(object param)
         {
-            try {
-                Invoker.DoInvoke (param);
+            try
+            {
+                Invoker.DoInvoke(param);
             }
-            catch (Exception ex) {
-                RegisterException (ex);
+            catch (Exception ex)
+            {
+                RegisterException(ex);
                 throw;
             }
         }
 
-        public void SendHeaders ()
+        public void SendHeaders()
         {
-            Host.SendHeaders (this);
+            Host.SendHeaders(this);
         }
 
         /// <summary>
@@ -187,48 +195,53 @@ namespace MonoTests.SystemWeb.Framework
         /// <seealso cref="MonoTests.SystemWeb.Framework.BaseInvoker.DoInvoke"/>
         /// <seealso cref="WebTest.Run"/>
         /// <seealso cref="System.Web.HttpRuntime"/>
-        public static void RegisterException (Exception ex)
+        public static void RegisterException(Exception ex)
         {
-            Host.RegisterException (ex);
+            Host.RegisterException(ex);
         }
 
         /// <summary>
         /// Unload the web appdomain and delete the temporary application root
         /// directory.
         /// </summary>
-        public static void CleanApp ()
+        public static void CleanApp()
         {
-            if (host != null) {
-                lock (_appUnloadedSync) {
+            if (host != null)
+            {
+                lock (_appUnloadedSync)
+                {
                     EventHandler handler = new EventHandler(PulseAppUnloadedSync);
                     WebTest.AppUnloaded += handler;
-                    WebTest t = new WebTest (PageInvoker.CreateOnLoad (new PageDelegate (UnloadAppDomain_OnLoad)));
-                    t.Run ();
+                    WebTest t = new WebTest(
+                        PageInvoker.CreateOnLoad(new PageDelegate(UnloadAppDomain_OnLoad))
+                    );
+                    t.Run();
                     Monitor.Wait(_appUnloadedSync);
                     WebTest.AppUnloaded -= handler;
-                }            
+                }
             }
-            if (baseDir != null) {
-                Directory.Delete (baseDir, true);
+            if (baseDir != null)
+            {
+                Directory.Delete(baseDir, true);
                 baseDir = null;
                 binDir = null;
             }
         }
-        
+
         private static object _appUnloadedSync = new object();
-        
+
         private static void PulseAppUnloadedSync(object source, EventArgs args)
         {
             lock (_appUnloadedSync)
                 Monitor.PulseAll(_appUnloadedSync);
         }
 
-        public static void UnloadAppDomain_OnLoad (Page p) 
+        public static void UnloadAppDomain_OnLoad(Page p)
         {
             HttpRuntime.UnloadAppDomain();
         }
 
-        public static void Unload () {}
+        public static void Unload() { }
 
         /// <summary>
         /// Default constructor. Initializes <see cref="Invoker"/> with a new
@@ -239,10 +252,10 @@ namespace MonoTests.SystemWeb.Framework
         /// <seealso cref="BaseInvoker"/>
         /// <seealso cref="Request"/>
         /// <seealso cref="BaseRequest"/>
-        public WebTest ()
+        public WebTest()
         {
-            Invoker = new BaseInvoker ();
-            Request = new BaseRequest ();
+            Invoker = new BaseInvoker();
+            Request = new BaseRequest();
         }
 
         /// <summary>
@@ -252,8 +265,8 @@ namespace MonoTests.SystemWeb.Framework
         /// <param name="url">The URL used for the next <see cref="Run"/></param>
         /// <seealso cref="MonoTests.SystemWeb.Framework.BaseRequest.Url"/>
         /// <seealso cref="Run"/>
-        public WebTest (string url)
-            : this ()
+        public WebTest(string url)
+            : this()
         {
             Request.Url = url;
         }
@@ -266,8 +279,8 @@ namespace MonoTests.SystemWeb.Framework
         /// <seealso cref="Invoker"/>
         /// <seealso cref="Request"/>
         /// <seealso cref="BaseRequest"/>
-        public WebTest (BaseInvoker invoker)
-            : this ()
+        public WebTest(BaseInvoker invoker)
+            : this()
         {
             Invoker = invoker;
         }
@@ -280,12 +293,11 @@ namespace MonoTests.SystemWeb.Framework
         /// <seealso cref="Request"/>
         /// <seealso cref="Invoker"/>
         /// <seealso cref="BaseInvoker"/>
-        public WebTest (BaseRequest request)
-            : this ()
+        public WebTest(BaseRequest request)
+            : this()
         {
             Request = request;
         }
-
 
         /// <summary>
         /// Copy a resource embedded in the assembly into the web application
@@ -295,41 +307,55 @@ namespace MonoTests.SystemWeb.Framework
         /// <param name="targetUrl">The URL where the resource will be available</param>
         /// <exception cref="System.ArgumentException">Thrown when resource with name resourceName is not found.</exception>
         /// <example><code>CopyResource (GetType (), "Default.skin", "App_Themes/Black/Default.skin");</code></example>
-        public static void CopyResource (Type type, string resourceName, string targetUrl)
+        public static void CopyResource(Type type, string resourceName, string targetUrl)
         {
             if (type == null)
-                throw new ArgumentNullException ("type");
-            using (Stream source = type.Assembly.GetManifestResourceStream (resourceName)) {
+                throw new ArgumentNullException("type");
+            using (Stream source = type.Assembly.GetManifestResourceStream(resourceName))
+            {
                 if (source == null)
-                    throw new ArgumentException ("resource not found: " + resourceName, "resourceName");
+                    throw new ArgumentException(
+                        "resource not found: " + resourceName,
+                        "resourceName"
+                    );
                 byte[] array = new byte[source.Length];
-                source.Read (array, 0, array.Length);
-                CopyBinary (array, targetUrl);
+                source.Read(array, 0, array.Length);
+                CopyBinary(array, targetUrl);
             }
         }
 
-        public static void CopyPrefixedResources (Type type, string namePrefix, string targetDir)
+        public static void CopyPrefixedResources(Type type, string namePrefix, string targetDir)
         {
             if (type == null)
-                throw new ArgumentNullException ("type");
-            
-            string[] manifestResources = type.Assembly.GetManifestResourceNames ();
+                throw new ArgumentNullException("type");
+
+            string[] manifestResources = type.Assembly.GetManifestResourceNames();
             if (manifestResources == null || manifestResources.Length == 0)
                 return;
 
-            foreach (string resource in manifestResources) {
+            foreach (string resource in manifestResources)
+            {
                 if (resource == null || resource.Length == 0)
                     continue;
-                
-                if (!resource.StartsWith (namePrefix))
+
+                if (!resource.StartsWith(namePrefix))
                     continue;
-                 
+
                 // The Replace part is for VisualStudio which compiles .resx files despite them being marked as
                 // embedded resources, which breaks the tests.
-                CopyResource (type, resource, Path.Combine (targetDir, resource.Substring (namePrefix.Length).Replace (".remove_extension", String.Empty)));
+                CopyResource(
+                    type,
+                    resource,
+                    Path.Combine(
+                        targetDir,
+                        resource
+                            .Substring(namePrefix.Length)
+                            .Replace(".remove_extension", String.Empty)
+                    )
+                );
             }
         }
-        
+
         /// <summary>
         /// Copy a chunk of data as a file into the web application.
         /// </summary>
@@ -337,110 +363,120 @@ namespace MonoTests.SystemWeb.Framework
         /// <param name="targetUrl">The URL where the data will be available.</param>
         /// <returns>The target filename where the data was stored.</returns>
         /// <example><code>CopyBinary (System.Text.Encoding.UTF8.GetBytes ("Hello"), "App_Data/Greeting.txt");</code></example>
-        public static string CopyBinary (byte[] sourceArray, string targetUrl)
+        public static string CopyBinary(byte[] sourceArray, string targetUrl)
         {
-            EnsureWorkingDirectories ();
-            EnsureDirectoryExists (Path.Combine (baseDir, Path.GetDirectoryName (targetUrl)));
-            string targetFile = Path.Combine (baseDir, targetUrl);
+            EnsureWorkingDirectories();
+            EnsureDirectoryExists(Path.Combine(baseDir, Path.GetDirectoryName(targetUrl)));
+            string targetFile = Path.Combine(baseDir, targetUrl);
 
-            if (File.Exists(targetFile)) {
-                using (FileStream existing = File.OpenRead(targetFile)) {
+            if (File.Exists(targetFile))
+            {
+                using (FileStream existing = File.OpenRead(targetFile))
+                {
                     bool equal = false;
-                    if (sourceArray.Length == existing.Length) {
+                    if (sourceArray.Length == existing.Length)
+                    {
                         byte[] existingArray = new byte[sourceArray.Length];
-                        existing.Read (existingArray, 0, existingArray.Length);
-                        
+                        existing.Read(existingArray, 0, existingArray.Length);
+
                         equal = true;
-                        for (int i = 0; i < sourceArray.Length; i ++) {
-                            if (sourceArray[i] != existingArray[i]) {
+                        for (int i = 0; i < sourceArray.Length; i++)
+                        {
+                            if (sourceArray[i] != existingArray[i])
+                            {
                                 equal = false;
                                 break;
                             }
                         }
                     }
-                    
-                    if (equal) {
-                        existing.Close ();
-                        File.SetLastWriteTime (targetFile, DateTime.Now);
+
+                    if (equal)
+                    {
+                        existing.Close();
+                        File.SetLastWriteTime(targetFile, DateTime.Now);
                         return targetFile;
                     }
-                    
                 }
-                
-                CheckDomainIsDown ();
+
+                CheckDomainIsDown();
             }
 
-            using (FileStream target = new FileStream (targetFile, FileMode.Create)) {
-                target.Write (sourceArray, 0, sourceArray.Length);
+            using (FileStream target = new FileStream(targetFile, FileMode.Create))
+            {
+                target.Write(sourceArray, 0, sourceArray.Length);
             }
 
             return targetFile;
         }
 
-        static WebTestResourcesSetupAttribute.SetupHandler CheckResourcesSetupHandler ()
+        static WebTestResourcesSetupAttribute.SetupHandler CheckResourcesSetupHandler()
         {
             // It is assumed WebTest is included in the same assembly which contains the
             // tests themselves
-            object[] attributes = typeof (WebTest).Assembly.GetCustomAttributes (typeof (WebTestResourcesSetupAttribute), true);
+            object[] attributes = typeof(WebTest).Assembly.GetCustomAttributes(
+                typeof(WebTestResourcesSetupAttribute),
+                true
+            );
             if (attributes == null || attributes.Length == 0)
                 return null;
-            
-            WebTestResourcesSetupAttribute attr = attributes [0] as WebTestResourcesSetupAttribute;
+
+            WebTestResourcesSetupAttribute attr = attributes[0] as WebTestResourcesSetupAttribute;
             if (attr == null)
                 return null;
 
             return attr.Handler;
         }
-        
-        public static void EnsureHosting ()
+
+        public static void EnsureHosting()
         {
             if (host != null)
                 return;
-            host = AppDomain.CurrentDomain.GetData (HOST_INSTANCE_NAME) as MyHost;
+            host = AppDomain.CurrentDomain.GetData(HOST_INSTANCE_NAME) as MyHost;
             if (host == null)
-                SetupHosting ();
+                SetupHosting();
         }
-        
-        public static void SetupHosting ()
+
+        public static void SetupHosting()
         {
-            SetupHosting (null);
+            SetupHosting(null);
         }
-        
-        public static void SetupHosting (WebTestResourcesSetupAttribute.SetupHandler resHandler)
+
+        public static void SetupHosting(WebTestResourcesSetupAttribute.SetupHandler resHandler)
         {
             if (host == null)
-                host = AppDomain.CurrentDomain.GetData (HOST_INSTANCE_NAME) as MyHost;
+                host = AppDomain.CurrentDomain.GetData(HOST_INSTANCE_NAME) as MyHost;
             if (host != null)
-                CleanApp ();
+                CleanApp();
             if (resHandler == null)
-                resHandler = CheckResourcesSetupHandler ();
+                resHandler = CheckResourcesSetupHandler();
             if (resHandler == null)
-                CopyResources ();
+                CopyResources();
             else
-                resHandler ();
-            
-            foreach (Assembly ass in AppDomain.CurrentDomain.GetAssemblies ())
-                LoadAssemblyRecursive (ass);
+                resHandler();
 
-            foreach (Assembly ass in AppDomain.CurrentDomain.GetAssemblies ())
-                CopyAssembly (ass, binDir);
+            foreach (Assembly ass in AppDomain.CurrentDomain.GetAssemblies())
+                LoadAssemblyRecursive(ass);
 
-            host = (MyHost) ApplicationHost.CreateApplicationHost (typeof (MyHost), VIRTUAL_BASE_DIR, baseDir);
-            AppDomain.CurrentDomain.SetData (HOST_INSTANCE_NAME, host);
-            host.AppDomain.SetData (HOST_INSTANCE_NAME, host);
-             host.AppDomain.DomainUnload += new EventHandler (_unloadHandler.OnUnload);
+            foreach (Assembly ass in AppDomain.CurrentDomain.GetAssemblies())
+                CopyAssembly(ass, binDir);
+
+            host = (MyHost)
+                ApplicationHost.CreateApplicationHost(typeof(MyHost), VIRTUAL_BASE_DIR, baseDir);
+            AppDomain.CurrentDomain.SetData(HOST_INSTANCE_NAME, host);
+            host.AppDomain.SetData(HOST_INSTANCE_NAME, host);
+            host.AppDomain.DomainUnload += new EventHandler(_unloadHandler.OnUnload);
         }
 
         private static UnloadHandler _unloadHandler = new UnloadHandler();
-                
+
         public class UnloadHandler : MarshalByRefObject
         {
             AutoResetEvent _unloaded = new AutoResetEvent(false);
-            
+
             int _numRequestsPending = 0;
             object _syncUnloading = new object();
             object _syncNumRequestsPending = new object();
-            
+
             internal void StartingRequest()
             {
                 // If the app domain is about to unload, wait
@@ -448,30 +484,33 @@ namespace MonoTests.SystemWeb.Framework
                     lock (_syncNumRequestsPending)
                         _numRequestsPending++;
             }
-            
+
             internal void FinishedRequest()
             {
                 // Let any unloading continue once there are not requests pending
-                lock (_syncNumRequestsPending) {
+                lock (_syncNumRequestsPending)
+                {
                     _numRequestsPending--;
                     if (_numRequestsPending == 0)
                         Monitor.PulseAll(_syncNumRequestsPending);
                 }
             }
-            
-            public void OnUnload (object o, EventArgs args)
+
+            public void OnUnload(object o, EventArgs args)
             {
                 // Block new requests from starting
-                lock (_syncUnloading) {
+                lock (_syncUnloading)
+                {
                     // Wait for pending requests to finish
-                    lock (_syncNumRequestsPending) {
+                    lock (_syncNumRequestsPending)
+                    {
                         while (_numRequestsPending > 0)
                             Monitor.Wait(_syncNumRequestsPending);
                     }
                     // Clear the host so that it will be created again on the next request
-                    AppDomain.CurrentDomain.SetData (HOST_INSTANCE_NAME, null);
+                    AppDomain.CurrentDomain.SetData(HOST_INSTANCE_NAME, null);
                     WebTest.host = null;
-                    
+
                     EventHandler handler = WebTest.AppUnloaded;
                     if (handler != null)
                         handler(this, null);
@@ -481,101 +520,103 @@ namespace MonoTests.SystemWeb.Framework
 
         public static event EventHandler AppUnloaded;
 
-        public static string TestBaseDir {
-            get {
-                return baseDir;
-            }
+        public static string TestBaseDir
+        {
+            get { return baseDir; }
         }
-        
+
         const string VIRTUAL_BASE_DIR = "/NunitWeb";
         private static string baseDir;
         private static string binDir;
         const string HOST_INSTANCE_NAME = "MonoTests/SysWeb/Framework/Host";
-        
-        static void LoadAssemblyRecursive (Assembly ass)
+
+        static void LoadAssemblyRecursive(Assembly ass)
         {
             if (ass.GlobalAssemblyCache)
                 return;
-            foreach (AssemblyName ran in ass.GetReferencedAssemblies ()) {
+            foreach (AssemblyName ran in ass.GetReferencedAssemblies())
+            {
                 bool found = false;
-                foreach (Assembly domain_ass in AppDomain.CurrentDomain.GetAssemblies ()) {
-                    if (domain_ass.FullName == ran.FullName) {
+                foreach (Assembly domain_ass in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if (domain_ass.FullName == ran.FullName)
+                    {
                         found = true;
                         break;
                     }
                 }
                 if (found)
                     continue;
-                Assembly ra = Assembly.Load (ran, null);
-                LoadAssemblyRecursive (ra);
+                Assembly ra = Assembly.Load(ran, null);
+                LoadAssemblyRecursive(ra);
             }
         }
 
-        private static void CopyAssembly (Assembly ass, string dir)
+        private static void CopyAssembly(Assembly ass, string dir)
         {
-            if (ass.GlobalAssemblyCache || ass.FullName.StartsWith ("mscorlib"))
+            if (ass.GlobalAssemblyCache || ass.FullName.StartsWith("mscorlib"))
                 return;
             string oldfn = ass.Location;
-            if (oldfn.EndsWith (".exe"))
+            if (oldfn.EndsWith(".exe"))
                 return;
-            string newfn = Path.Combine (dir, Path.GetFileName (oldfn));
-            if (File.Exists (newfn))
+            string newfn = Path.Combine(dir, Path.GetFileName(oldfn));
+            if (File.Exists(newfn))
                 return;
-            EnsureDirectoryExists (dir);
-            File.Copy (oldfn, newfn);
-            if (File.Exists (oldfn + ".mdb"))
-                File.Copy (oldfn + ".mdb", newfn + ".mdb");
-            if (File.Exists (oldfn + ".pdb"))
-                File.Copy (oldfn + ".pdb", newfn + ".pdb");
+            EnsureDirectoryExists(dir);
+            File.Copy(oldfn, newfn);
+            if (File.Exists(oldfn + ".mdb"))
+                File.Copy(oldfn + ".mdb", newfn + ".mdb");
+            if (File.Exists(oldfn + ".pdb"))
+                File.Copy(oldfn + ".pdb", newfn + ".pdb");
         }
-        
-        private static void EnsureDirectoryExists (string directory)
+
+        private static void EnsureDirectoryExists(string directory)
         {
             if (directory == string.Empty)
                 return;
-            if (Directory.Exists (directory))
+            if (Directory.Exists(directory))
                 return;
-            EnsureDirectoryExists (Path.GetDirectoryName (directory));
-            Directory.CreateDirectory (directory);
+            EnsureDirectoryExists(Path.GetDirectoryName(directory));
+            Directory.CreateDirectory(directory);
         }
 
-        private static void CheckDomainIsDown ()
+        private static void CheckDomainIsDown()
         {
             if (host != null)
-                throw new DomainUpException ();
+                throw new DomainUpException();
         }
 
-        private static void EnsureWorkingDirectories ()
+        private static void EnsureWorkingDirectories()
         {
             if (baseDir != null)
                 return;
-            CreateWorkingDirectories ();
+            CreateWorkingDirectories();
         }
 
-        private static void CreateWorkingDirectories ()
+        private static void CreateWorkingDirectories()
         {
-            string tmpFile = Path.GetTempFileName ();
-            File.Delete (tmpFile);
+            string tmpFile = Path.GetTempFileName();
+            File.Delete(tmpFile);
             baseDir = tmpFile;
-            Directory.CreateDirectory (tmpFile);
-            binDir = Path.Combine (baseDir, "bin");
-            Directory.CreateDirectory (binDir);
+            Directory.CreateDirectory(tmpFile);
+            binDir = Path.Combine(baseDir, "bin");
+            Directory.CreateDirectory(binDir);
         }
 
-        public static void CopyResources ()
+        public static void CopyResources()
         {
-            Type myself = typeof (WebTest);
-            
-            CopyResource (myself, "My.ashx", "My.ashx");
-            CopyResource (myself, "Global.asax", "Global.asax");
-            CopyResource (myself, "MyPage.aspx", "MyPage.aspx");
-            CopyResource (myself, "MyPage.aspx.cs", "MyPage.aspx.cs");
-            CopyResource (myself, "MyPageWithMaster.aspx", "MyPageWithMaster.aspx");
-            CopyResource (myself, "My.master", "My.master");
+            Type myself = typeof(WebTest);
 
-            CopyResourcesLocal ();
+            CopyResource(myself, "My.ashx", "My.ashx");
+            CopyResource(myself, "Global.asax", "Global.asax");
+            CopyResource(myself, "MyPage.aspx", "MyPage.aspx");
+            CopyResource(myself, "MyPage.aspx.cs", "MyPage.aspx.cs");
+            CopyResource(myself, "MyPageWithMaster.aspx", "MyPageWithMaster.aspx");
+            CopyResource(myself, "My.master", "My.master");
+
+            CopyResourcesLocal();
         }
 
-        static partial void CopyResourcesLocal ();
+        static partial void CopyResourcesLocal();
     }
 }

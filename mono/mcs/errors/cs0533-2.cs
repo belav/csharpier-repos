@@ -3,10 +3,12 @@
 
 using System;
 
-abstract class A {
+abstract class A
+{
     public abstract event EventHandler MyEvent;
 }
 
-class B : A {
+class B : A
+{
     public new event EventHandler MyEvent;
 }

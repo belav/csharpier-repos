@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,7 +41,7 @@ using System.Xml;
 
 namespace System.Configuration
 {
-    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
+    [PermissionSet(SecurityAction.LinkDemand, Unrestricted = true)]
     public sealed class ConfigXmlDocument : XmlDocument, IConfigXmlNode
 #if CONFIGURATION_DEP
         , IConfigErrorInfo
@@ -51,69 +51,80 @@ namespace System.Configuration
         string fileName;
         int lineNumber;
 
-        public override XmlAttribute CreateAttribute (string prefix,
-                                  string localName,
-                                  string namespaceUri)
+        public override XmlAttribute CreateAttribute(
+            string prefix,
+            string localName,
+            string namespaceUri
+        )
         {
-            return new ConfigXmlAttribute (this, prefix, localName, namespaceUri);
+            return new ConfigXmlAttribute(this, prefix, localName, namespaceUri);
         }
 
-        public override XmlCDataSection CreateCDataSection (string data)
+        public override XmlCDataSection CreateCDataSection(string data)
         {
-            return new ConfigXmlCDataSection (this, data);
+            return new ConfigXmlCDataSection(this, data);
         }
 
-        public override XmlComment CreateComment (string data)
+        public override XmlComment CreateComment(string data)
         {
-            return new ConfigXmlComment (this, data);
+            return new ConfigXmlComment(this, data);
         }
 
-        public override XmlElement CreateElement (string prefix, string localName, string namespaceUri)
+        public override XmlElement CreateElement(
+            string prefix,
+            string localName,
+            string namespaceUri
+        )
         {
-            return new ConfigXmlElement (this, prefix, localName, namespaceUri);
+            return new ConfigXmlElement(this, prefix, localName, namespaceUri);
         }
 
-        public override XmlSignificantWhitespace CreateSignificantWhitespace (string data)
+        public override XmlSignificantWhitespace CreateSignificantWhitespace(string data)
         {
-            return base.CreateSignificantWhitespace (data);
+            return base.CreateSignificantWhitespace(data);
         }
 
-        public override XmlText CreateTextNode (string text)
+        public override XmlText CreateTextNode(string text)
         {
-            return new ConfigXmlText (this, text);
+            return new ConfigXmlText(this, text);
         }
 
-        public override XmlWhitespace CreateWhitespace (string data)
+        public override XmlWhitespace CreateWhitespace(string data)
         {
-            return base.CreateWhitespace (data);
+            return base.CreateWhitespace(data);
         }
 
-        public override void Load (string filename)
+        public override void Load(string filename)
         {
-            XmlTextReader rd = new XmlTextReader (filename);
-            try {
-                rd.MoveToContent ();
-                LoadSingleElement (filename, rd);
-            } finally {
-                rd.Close ();
+            XmlTextReader rd = new XmlTextReader(filename);
+            try
+            {
+                rd.MoveToContent();
+                LoadSingleElement(filename, rd);
+            }
+            finally
+            {
+                rd.Close();
             }
         }
 
-        public void LoadSingleElement (string filename, XmlTextReader sourceReader)
+        public void LoadSingleElement(string filename, XmlTextReader sourceReader)
         {
             fileName = filename;
             lineNumber = sourceReader.LineNumber;
             string xml = sourceReader.ReadOuterXml();
-            reader = new XmlTextReader (new StringReader (xml), sourceReader.NameTable);
-            Load (reader);
-            reader.Close ();
+            reader = new XmlTextReader(new StringReader(xml), sourceReader.NameTable);
+            Load(reader);
+            reader.Close();
         }
 
         public string Filename
         {
-            get {
-                if ((fileName != null) && (fileName.Length > 0) && SecurityManager.SecurityEnabled) {
-                    new FileIOPermission (FileIOPermissionAccess.PathDiscovery, fileName).Demand ();
+            get
+            {
+                if ((fileName != null) && (fileName.Length > 0) && SecurityManager.SecurityEnabled)
+                {
+                    new FileIOPermission(FileIOPermissionAccess.PathDiscovery, fileName).Demand();
                 }
                 return fileName;
             }
@@ -121,9 +132,7 @@ namespace System.Configuration
 
         public int LineNumber
         {
-            get {
-                return lineNumber;
-            }
+            get { return lineNumber; }
         }
 
 #if CONFIGURATION_DEP
@@ -136,11 +145,13 @@ namespace System.Configuration
         }
 #endif
 
-        string IConfigXmlNode.Filename {
+        string IConfigXmlNode.Filename
+        {
             get { return Filename; }
         }
 
-        int IConfigXmlNode.LineNumber {
+        int IConfigXmlNode.LineNumber
+        {
             get { return LineNumber; }
         }
 
@@ -155,11 +166,13 @@ namespace System.Configuration
             string fileName;
             int lineNumber;
 
-            public ConfigXmlAttribute (ConfigXmlDocument document,
-                           string prefix,
-                           string localName,
-                           string namespaceUri)
-                : base (prefix, localName, namespaceUri, document)
+            public ConfigXmlAttribute(
+                ConfigXmlDocument document,
+                string prefix,
+                string localName,
+                string namespaceUri
+            )
+                : base(prefix, localName, namespaceUri, document)
             {
                 fileName = document.fileName;
                 lineNumber = document.LineNumber;
@@ -167,9 +180,18 @@ namespace System.Configuration
 
             public string Filename
             {
-                get {
-                    if ((fileName != null) && (fileName.Length > 0) && SecurityManager.SecurityEnabled) {
-                        new FileIOPermission (FileIOPermissionAccess.PathDiscovery, fileName).Demand ();
+                get
+                {
+                    if (
+                        (fileName != null)
+                        && (fileName.Length > 0)
+                        && SecurityManager.SecurityEnabled
+                    )
+                    {
+                        new FileIOPermission(
+                            FileIOPermissionAccess.PathDiscovery,
+                            fileName
+                        ).Demand();
                     }
                     return fileName;
                 }
@@ -177,12 +199,10 @@ namespace System.Configuration
 
             public int LineNumber
             {
-                get {
-                    return lineNumber;
-                }
+                get { return lineNumber; }
             }
         }
-        
+
         class ConfigXmlCDataSection : XmlCDataSection, IConfigXmlNode
 #if CONFIGURATION_DEP
             , IConfigErrorInfo
@@ -191,8 +211,8 @@ namespace System.Configuration
             string fileName;
             int lineNumber;
 
-            public ConfigXmlCDataSection (ConfigXmlDocument document, string data)
-                : base (data, document)
+            public ConfigXmlCDataSection(ConfigXmlDocument document, string data)
+                : base(data, document)
             {
                 fileName = document.fileName;
                 lineNumber = document.LineNumber;
@@ -200,9 +220,18 @@ namespace System.Configuration
 
             public string Filename
             {
-                get {
-                    if ((fileName != null) && (fileName.Length > 0) && SecurityManager.SecurityEnabled) {
-                        new FileIOPermission (FileIOPermissionAccess.PathDiscovery, fileName).Demand ();
+                get
+                {
+                    if (
+                        (fileName != null)
+                        && (fileName.Length > 0)
+                        && SecurityManager.SecurityEnabled
+                    )
+                    {
+                        new FileIOPermission(
+                            FileIOPermissionAccess.PathDiscovery,
+                            fileName
+                        ).Demand();
                     }
                     return fileName;
                 }
@@ -210,19 +239,17 @@ namespace System.Configuration
 
             public int LineNumber
             {
-                get {
-                    return lineNumber;
-                }
+                get { return lineNumber; }
             }
         }
-        
+
         class ConfigXmlComment : XmlComment, IConfigXmlNode
         {
             string fileName;
             int lineNumber;
 
-            public ConfigXmlComment (ConfigXmlDocument document, string comment)
-                : base (comment, document)
+            public ConfigXmlComment(ConfigXmlDocument document, string comment)
+                : base(comment, document)
             {
                 fileName = document.fileName;
                 lineNumber = document.LineNumber;
@@ -230,9 +257,18 @@ namespace System.Configuration
 
             public string Filename
             {
-                get {
-                    if ((fileName != null) && (fileName.Length > 0) && SecurityManager.SecurityEnabled) {
-                        new FileIOPermission (FileIOPermissionAccess.PathDiscovery, fileName).Demand ();
+                get
+                {
+                    if (
+                        (fileName != null)
+                        && (fileName.Length > 0)
+                        && SecurityManager.SecurityEnabled
+                    )
+                    {
+                        new FileIOPermission(
+                            FileIOPermissionAccess.PathDiscovery,
+                            fileName
+                        ).Demand();
                     }
                     return fileName;
                 }
@@ -240,12 +276,10 @@ namespace System.Configuration
 
             public int LineNumber
             {
-                get {
-                    return lineNumber;
-                }
+                get { return lineNumber; }
             }
         }
-    
+
         class ConfigXmlElement : XmlElement, IConfigXmlNode
 #if CONFIGURATION_DEP
             , IConfigErrorInfo
@@ -254,11 +288,13 @@ namespace System.Configuration
             string fileName;
             int lineNumber;
 
-            public ConfigXmlElement (ConfigXmlDocument document,
-                         string prefix,
-                         string localName,
-                         string namespaceUri)
-                : base (prefix, localName, namespaceUri, document)
+            public ConfigXmlElement(
+                ConfigXmlDocument document,
+                string prefix,
+                string localName,
+                string namespaceUri
+            )
+                : base(prefix, localName, namespaceUri, document)
             {
                 fileName = document.fileName;
                 lineNumber = document.LineNumber;
@@ -266,9 +302,18 @@ namespace System.Configuration
 
             public string Filename
             {
-                get {
-                    if ((fileName != null) && (fileName.Length > 0) && SecurityManager.SecurityEnabled) {
-                        new FileIOPermission (FileIOPermissionAccess.PathDiscovery, fileName).Demand ();
+                get
+                {
+                    if (
+                        (fileName != null)
+                        && (fileName.Length > 0)
+                        && SecurityManager.SecurityEnabled
+                    )
+                    {
+                        new FileIOPermission(
+                            FileIOPermissionAccess.PathDiscovery,
+                            fileName
+                        ).Demand();
                     }
                     return fileName;
                 }
@@ -276,9 +321,7 @@ namespace System.Configuration
 
             public int LineNumber
             {
-                get {
-                    return lineNumber;
-                }
+                get { return lineNumber; }
             }
         }
 
@@ -290,8 +333,8 @@ namespace System.Configuration
             string fileName;
             int lineNumber;
 
-            public ConfigXmlText (ConfigXmlDocument document, string data)
-                : base (data, document)
+            public ConfigXmlText(ConfigXmlDocument document, string data)
+                : base(data, document)
             {
                 fileName = document.fileName;
                 lineNumber = document.LineNumber;
@@ -299,9 +342,18 @@ namespace System.Configuration
 
             public string Filename
             {
-                get {
-                    if ((fileName != null) && (fileName.Length > 0) && SecurityManager.SecurityEnabled) {
-                        new FileIOPermission (FileIOPermissionAccess.PathDiscovery, fileName).Demand ();
+                get
+                {
+                    if (
+                        (fileName != null)
+                        && (fileName.Length > 0)
+                        && SecurityManager.SecurityEnabled
+                    )
+                    {
+                        new FileIOPermission(
+                            FileIOPermissionAccess.PathDiscovery,
+                            fileName
+                        ).Demand();
                     }
                     return fileName;
                 }
@@ -309,9 +361,7 @@ namespace System.Configuration
 
             public int LineNumber
             {
-                get {
-                    return lineNumber;
-                }
+                get { return lineNumber; }
             }
         }
     }

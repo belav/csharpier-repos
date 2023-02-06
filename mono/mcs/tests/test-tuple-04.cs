@@ -2,9 +2,9 @@
 
 class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        var x = X.Test1 ();
+        var x = X.Test1();
         if (x.b != true)
             return 1;
 

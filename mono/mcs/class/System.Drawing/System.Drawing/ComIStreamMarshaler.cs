@@ -51,18 +51,54 @@ namespace System.Drawing
         private const int S_OK = 0x00000000;
         private const int E_NOINTERFACE = unchecked((int)0x80004002);
 
-        private delegate int QueryInterfaceDelegate(IntPtr @this, [In()] ref Guid riid, IntPtr ppvObject);
+        private delegate int QueryInterfaceDelegate(
+            IntPtr @this,
+            [In()] ref Guid riid,
+            IntPtr ppvObject
+        );
         private delegate int AddRefDelegate(IntPtr @this);
         private delegate int ReleaseDelegate(IntPtr @this);
-        private delegate int ReadDelegate(IntPtr @this, [Out(), MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] pv, int cb, IntPtr pcbRead);
-        private delegate int WriteDelegate(IntPtr @this, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] pv, int cb, IntPtr pcbWritten);
-        private delegate int SeekDelegate(IntPtr @this, long dlibMove, int dwOrigin, IntPtr plibNewPosition);
+        private delegate int ReadDelegate(
+            IntPtr @this,
+            [Out(), MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] pv,
+            int cb,
+            IntPtr pcbRead
+        );
+        private delegate int WriteDelegate(
+            IntPtr @this,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] pv,
+            int cb,
+            IntPtr pcbWritten
+        );
+        private delegate int SeekDelegate(
+            IntPtr @this,
+            long dlibMove,
+            int dwOrigin,
+            IntPtr plibNewPosition
+        );
         private delegate int SetSizeDelegate(IntPtr @this, long libNewSize);
-        private delegate int CopyToDelegate(IntPtr @this, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef=typeof(ComIStreamMarshaler))] IStream pstm, long cb, IntPtr pcbRead, IntPtr pcbWritten);
+        private delegate int CopyToDelegate(
+            IntPtr @this,
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ComIStreamMarshaler))]
+                IStream pstm,
+            long cb,
+            IntPtr pcbRead,
+            IntPtr pcbWritten
+        );
         private delegate int CommitDelegate(IntPtr @this, int grfCommitFlags);
         private delegate int RevertDelegate(IntPtr @this);
-        private delegate int LockRegionDelegate(IntPtr @this, long libOffset, long cb, int dwLockType);
-        private delegate int UnlockRegionDelegate(IntPtr @this, long libOffset, long cb, int dwLockType);
+        private delegate int LockRegionDelegate(
+            IntPtr @this,
+            long libOffset,
+            long cb,
+            int dwLockType
+        );
+        private delegate int UnlockRegionDelegate(
+            IntPtr @this,
+            long libOffset,
+            long cb,
+            int dwLockType
+        );
         private delegate int StatDelegate(IntPtr @this, out STATSTG pstatstg, int grfStatFlag);
         private delegate int CloneDelegate(IntPtr @this, out IntPtr ppstm);
 
@@ -103,9 +139,29 @@ namespace System.Drawing
                 internal ReleaseDelegate Release;
             }
 
-            private static readonly Guid IID_IUnknown = new Guid("00000000-0000-0000-C000-000000000046");
-            private static readonly Guid IID_IStream = new Guid("0000000C-0000-0000-C000-000000000046");
-            private static readonly MethodInfo exceptionGetHResult = typeof(Exception).GetTypeInfo ().GetProperty("HResult", BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.ExactBinding, null, typeof(int), new Type[] {}, null).GetGetMethod(true);
+            private static readonly Guid IID_IUnknown = new Guid(
+                "00000000-0000-0000-C000-000000000046"
+            );
+            private static readonly Guid IID_IStream = new Guid(
+                "0000000C-0000-0000-C000-000000000046"
+            );
+            private static readonly MethodInfo exceptionGetHResult = typeof(Exception)
+                .GetTypeInfo()
+                .GetProperty(
+                    "HResult",
+                    BindingFlags.GetProperty
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly
+                        | BindingFlags.ExactBinding,
+                    null,
+                    typeof(int),
+                    new Type[] { },
+                    null
+                )
+                .GetGetMethod(true);
+
             // Keeps delegates alive while they are marshaled
             private static readonly IStreamVtbl managedVtable;
             private static IntPtr comVtable;
@@ -113,6 +169,7 @@ namespace System.Drawing
 
             private IStream managedInterface;
             private IntPtr comInterface;
+
             // Keeps the object alive when it has no managed references
             private GCHandle gcHandle;
             private int refCount = 1;
@@ -244,7 +301,10 @@ namespace System.Drawing
                 if (managedInterface == null)
                     return IntPtr.Zero;
 #if !RECURSIVE_WRAPPING
-                else if ((comInterface = NativeToManagedWrapper.GetUnderlyingInterface(managedInterface)) == IntPtr.Zero)
+                else if (
+                    (comInterface = NativeToManagedWrapper.GetUnderlyingInterface(managedInterface))
+                    == IntPtr.Zero
+                )
 #endif
                     comInterface = new ManagedToNativeWrapper(managedInterface).comInterface;
 
@@ -261,7 +321,11 @@ namespace System.Drawing
                         Release(comInterface);
                     else
                     {
-                        ReleaseSlot releaseSlot = (ReleaseSlot)Marshal.PtrToStructure((IntPtr)((long)vtable + (long)(IntPtr.Size * 2)), typeof(ReleaseSlot));
+                        ReleaseSlot releaseSlot = (ReleaseSlot)
+                            Marshal.PtrToStructure(
+                                (IntPtr)((long)vtable + (long)(IntPtr.Size * 2)),
+                                typeof(ReleaseSlot)
+                            );
                         releaseSlot.Release(comInterface);
                     }
                 }
@@ -275,7 +339,8 @@ namespace System.Drawing
 
             private static ManagedToNativeWrapper GetObject(IntPtr @this)
             {
-                return (ManagedToNativeWrapper)((GCHandle)Marshal.ReadIntPtr(@this, IntPtr.Size)).Target;
+                return (ManagedToNativeWrapper)
+                    ((GCHandle)Marshal.ReadIntPtr(@this, IntPtr.Size)).Target;
             }
 
             private static int QueryInterface(IntPtr @this, ref Guid riid, IntPtr ppvObject)
@@ -383,7 +448,12 @@ namespace System.Drawing
 #endif
             }
 
-            private static int Seek(IntPtr @this, long dlibMove, int dwOrigin, IntPtr plibNewPosition)
+            private static int Seek(
+                IntPtr @this,
+                long dlibMove,
+                int dwOrigin,
+                IntPtr plibNewPosition
+            )
             {
 #if MAP_EX_TO_HR
                 try
@@ -417,7 +487,13 @@ namespace System.Drawing
 #endif
             }
 
-            private static int CopyTo(IntPtr @this, IStream pstm, long cb, IntPtr pcbRead, IntPtr pcbWritten)
+            private static int CopyTo(
+                IntPtr @this,
+                IStream pstm,
+                long cb,
+                IntPtr pcbRead,
+                IntPtr pcbWritten
+            )
             {
 #if MAP_EX_TO_HR
                 try
@@ -551,7 +627,8 @@ namespace System.Drawing
             private NativeToManagedWrapper(IntPtr comInterface, bool outParam)
             {
                 this.comInterface = comInterface;
-                managedVtable = (IStreamVtbl)Marshal.PtrToStructure(Marshal.ReadIntPtr(comInterface), typeof(IStreamVtbl));
+                managedVtable = (IStreamVtbl)
+                    Marshal.PtrToStructure(Marshal.ReadIntPtr(comInterface), typeof(IStreamVtbl));
                 if (!outParam)
                     managedVtable.AddRef(comInterface);
             }
@@ -592,7 +669,14 @@ namespace System.Drawing
                 if (comInterface == IntPtr.Zero)
                     return null;
 #if !RECURSIVE_WRAPPING
-                else if ((managedInterface = ManagedToNativeWrapper.GetUnderlyingInterface(comInterface, outParam)) == null)
+                else if (
+                    (
+                        managedInterface = ManagedToNativeWrapper.GetUnderlyingInterface(
+                            comInterface,
+                            outParam
+                        )
+                    ) == null
+                )
 #endif
                     managedInterface = (IStream)new NativeToManagedWrapper(comInterface, outParam);
 
@@ -624,7 +708,9 @@ namespace System.Drawing
 
             public void Seek(long dlibMove, int dwOrigin, IntPtr plibNewPosition)
             {
-                ThrowExceptionForHR(managedVtable.Seek(comInterface, dlibMove, dwOrigin, plibNewPosition));
+                ThrowExceptionForHR(
+                    managedVtable.Seek(comInterface, dlibMove, dwOrigin, plibNewPosition)
+                );
             }
 
             public void SetSize(long libNewSize)
@@ -634,7 +720,9 @@ namespace System.Drawing
 
             public void CopyTo(IStream pstm, long cb, IntPtr pcbRead, IntPtr pcbWritten)
             {
-                ThrowExceptionForHR(managedVtable.CopyTo(comInterface, pstm, cb, pcbRead, pcbWritten));
+                ThrowExceptionForHR(
+                    managedVtable.CopyTo(comInterface, pstm, cb, pcbRead, pcbWritten)
+                );
             }
 
             public void Commit(int grfCommitFlags)
@@ -649,12 +737,16 @@ namespace System.Drawing
 
             public void LockRegion(long libOffset, long cb, int dwLockType)
             {
-                ThrowExceptionForHR(managedVtable.LockRegion(comInterface, libOffset, cb, dwLockType));
+                ThrowExceptionForHR(
+                    managedVtable.LockRegion(comInterface, libOffset, cb, dwLockType)
+                );
             }
 
             public void UnlockRegion(long libOffset, long cb, int dwLockType)
             {
-                ThrowExceptionForHR(managedVtable.UnlockRegion(comInterface, libOffset, cb, dwLockType));
+                ThrowExceptionForHR(
+                    managedVtable.UnlockRegion(comInterface, libOffset, cb, dwLockType)
+                );
             }
 
             public void Stat(out STATSTG pstatstg, int grfStatFlag)
@@ -673,9 +765,7 @@ namespace System.Drawing
 
         private static readonly ComIStreamMarshaler defaultInstance = new ComIStreamMarshaler();
 
-        private ComIStreamMarshaler()
-        {
-        }
+        private ComIStreamMarshaler() { }
 
         private static ICustomMarshaler GetInstance(string cookie)
         {
@@ -685,7 +775,10 @@ namespace System.Drawing
         public IntPtr MarshalManagedToNative(object managedObj)
         {
 #if RECURSIVE_WRAPPING
-            managedObj = NativeToManagedWrapper.GetInterface(ManagedToNativeWrapper.GetInterface((IStream)managedObj), true);
+            managedObj = NativeToManagedWrapper.GetInterface(
+                ManagedToNativeWrapper.GetInterface((IStream)managedObj),
+                true
+            );
 #endif
             return ManagedToNativeWrapper.GetInterface((IStream)managedObj);
         }
@@ -698,7 +791,9 @@ namespace System.Drawing
         public object MarshalNativeToManaged(IntPtr pNativeData)
         {
 #if RECURSIVE_WRAPPING
-            pNativeData = ManagedToNativeWrapper.GetInterface(NativeToManagedWrapper.GetInterface(pNativeData, true));
+            pNativeData = ManagedToNativeWrapper.GetInterface(
+                NativeToManagedWrapper.GetInterface(pNativeData, true)
+            );
 #endif
             return NativeToManagedWrapper.GetInterface(pNativeData, false);
         }

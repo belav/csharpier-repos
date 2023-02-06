@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,82 +42,87 @@ namespace MonoTests.System.ServiceModel.Channels
     {
         class MyEncodingBindingElement : MessageEncodingBindingElement
         {
-            public override BindingElement Clone ()
+            public override BindingElement Clone()
             {
-                throw new Exception ();
+                throw new Exception();
             }
 
-            public override MessageEncoderFactory CreateMessageEncoderFactory ()
+            public override MessageEncoderFactory CreateMessageEncoderFactory()
             {
-                throw new Exception ();
+                throw new Exception();
             }
 
-            public override MessageVersion MessageVersion {
+            public override MessageVersion MessageVersion
+            {
                 get { return MessageVersion.None; }
-                set { throw new Exception (); }
+                set { throw new Exception(); }
             }
         }
 
         [Test]
-        public void BuildChannelFactory1 ()
+        public void BuildChannelFactory1()
         {
-            MessageEncodingBindingElement be =
-                new TextMessageEncodingBindingElement ();
-            BindingContext ctx = new BindingContext (
-                new CustomBinding (
-                    new HttpTransportBindingElement ()),
-                new BindingParameterCollection ());
+            MessageEncodingBindingElement be = new TextMessageEncodingBindingElement();
+            BindingContext ctx = new BindingContext(
+                new CustomBinding(new HttpTransportBindingElement()),
+                new BindingParameterCollection()
+            );
             // hmm, it returns HttpChannelFactory, not sure
             // if TextMessageEncodingBindingElement is considered.
-            be.BuildChannelFactory<IRequestChannel> (ctx);
+            be.BuildChannelFactory<IRequestChannel>(ctx);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void BuildChannelFactoryFail1 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void BuildChannelFactoryFail1()
         {
-            MessageEncodingBindingElement be =
-                new TextMessageEncodingBindingElement ();
-            BindingContext ctx = new BindingContext (
+            MessageEncodingBindingElement be = new TextMessageEncodingBindingElement();
+            BindingContext ctx = new BindingContext(
                 // no transport -> fail
-                new CustomBinding (),
-                new BindingParameterCollection ());
-            be.BuildChannelFactory<IRequestChannel> (ctx);
+                new CustomBinding(),
+                new BindingParameterCollection()
+            );
+            be.BuildChannelFactory<IRequestChannel>(ctx);
         }
 
         [Test]
-        public void BuildChannelFactory2 ()
+        public void BuildChannelFactory2()
         {
-            MessageEncodingBindingElement be =
-                new MyEncodingBindingElement ();
-            BindingContext ctx = new BindingContext (
-                new CustomBinding (
-                    new HttpTransportBindingElement ()),
-                new BindingParameterCollection ());
+            MessageEncodingBindingElement be = new MyEncodingBindingElement();
+            BindingContext ctx = new BindingContext(
+                new CustomBinding(new HttpTransportBindingElement()),
+                new BindingParameterCollection()
+            );
             // hmm, it returns HttpChannelFactory, not sure
             // if TextMessageEncodingBindingElement is considered.
-            be.BuildChannelFactory<IRequestChannel> (ctx);
+            be.BuildChannelFactory<IRequestChannel>(ctx);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void BuildChannelFactoryFail2 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void BuildChannelFactoryFail2()
         {
-            MessageEncodingBindingElement be =
-                new MyEncodingBindingElement ();
-            BindingContext ctx = new BindingContext (
+            MessageEncodingBindingElement be = new MyEncodingBindingElement();
+            BindingContext ctx = new BindingContext(
                 // no transport -> fail
-                new CustomBinding (
-                    new TextMessageEncodingBindingElement ()),
-                new BindingParameterCollection ());
-            be.BuildChannelFactory<IRequestChannel> (ctx);
+                new CustomBinding(new TextMessageEncodingBindingElement()),
+                new BindingParameterCollection()
+            );
+            be.BuildChannelFactory<IRequestChannel>(ctx);
         }
 
         [Test]
-        public void GetProperty ()
+        public void GetProperty()
         {
-            var ctx = new BindingContext (new CustomBinding (new HttpTransportBindingElement ()), new BindingParameterCollection ());
-            Assert.AreEqual (MessageVersion.None, new MyEncodingBindingElement ().GetProperty<MessageVersion> (ctx), "#1");
+            var ctx = new BindingContext(
+                new CustomBinding(new HttpTransportBindingElement()),
+                new BindingParameterCollection()
+            );
+            Assert.AreEqual(
+                MessageVersion.None,
+                new MyEncodingBindingElement().GetProperty<MessageVersion>(ctx),
+                "#1"
+            );
         }
     }
 }

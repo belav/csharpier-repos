@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,16 +34,18 @@ namespace System.Web.UI.Design.WebControls
 {
     public class DataSourceIDConverter : TypeConverter
     {
-        public DataSourceIDConverter ()
+        public DataSourceIDConverter() { }
+
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-        }
-        
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-        {
-            return sourceType == typeof (string);
+            return sourceType == typeof(string);
         }
 
-        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value == null)
                 return String.Empty;
@@ -51,26 +53,28 @@ namespace System.Web.UI.Design.WebControls
             if (value is string)
                 return (string)value;
 
-            throw GetConvertFromException (value);
+            throw GetConvertFromException(value);
         }
 
         [MonoTODO]
-        public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+        public override TypeConverter.StandardValuesCollection GetStandardValues(
+            ITypeDescriptorContext context
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             return false;
         }
 
-        public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
             return true;
         }
 
-        protected virtual bool IsValidDataSource (IComponent component)
+        protected virtual bool IsValidDataSource(IComponent component)
         {
             if (component == null)
                 return false;

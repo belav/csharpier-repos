@@ -3,7 +3,7 @@
 // Jonathan Pobst (monkey@jpobst.com)
 // Francis Fisher (frankie@terrorise.me.uk)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,19 +34,22 @@ namespace System.Windows.Forms.DataVisualization.Charting
         private int arrow_size = 5;
 
         #region Constructors
-        public ArrowAnnotation ()
-        {
-        }
+        public ArrowAnnotation() { }
         #endregion
 
         #region Public Properties
         public override ContentAlignment AnchorAlignment { get; set; }
-        public override string AnnotationType { get { throw new NotImplementedException (); } } //FIXME - find out what MS implementation returns here
-        public virtual int ArrowSize {
+        public override string AnnotationType
+        {
+            get { throw new NotImplementedException(); }
+        } //FIXME - find out what MS implementation returns here
+        public virtual int ArrowSize
+        {
             get { return arrow_size; }
-            set {
+            set
+            {
                 if (value <= 0)
-                    throw new ArgumentOutOfRangeException ("ArrowSize", "ArrowSize must be >= 0.");
+                    throw new ArgumentOutOfRangeException("ArrowSize", "ArrowSize must be >= 0.");
 
                 arrow_size = value;
             }

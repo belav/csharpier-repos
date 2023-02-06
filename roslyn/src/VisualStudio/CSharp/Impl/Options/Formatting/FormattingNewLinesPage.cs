@@ -13,11 +13,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting
     [Guid(Guids.CSharpOptionPageFormattingNewLinesIdString)]
     internal class FormattingNewLinesPage : AbstractOptionPage
     {
-        public FormattingNewLinesPage()
-        {
-        }
+        public FormattingNewLinesPage() { }
 
-        protected override AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore)
-            => new OptionPreviewControl(serviceProvider, optionStore, (o, s) => new NewLinesViewModel(o, s));
+        protected override AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        ) =>
+            new OptionPreviewControl(
+                serviceProvider,
+                optionStore,
+                (o, s) => new NewLinesViewModel(o, s)
+            );
     }
 }

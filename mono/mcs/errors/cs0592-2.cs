@@ -9,16 +9,10 @@ public interface ITest
     void Method();
 }
 
-[AttributeUsage (AttributeTargets.Interface)]
-public class MyAttributeAttribute : Attribute
+[AttributeUsage(AttributeTargets.Interface)]
+public class MyAttributeAttribute : Attribute { }
+
+public class Foo
 {
+    public static void Main() { }
 }
-
-public class Foo {
-
-        public static void Main ()
-        {
-        }
-}
-
-

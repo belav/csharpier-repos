@@ -8,9 +8,9 @@ namespace TestWebApp
 {
     public partial class Global : System.Web.HttpApplication
     {
-        protected virtual void Application_Error (Object sender, EventArgs e)
+        protected virtual void Application_Error(Object sender, EventArgs e)
         {
-            Response.Redirect ("http://example.com/");
+            Response.Redirect("http://example.com/");
         }
     }
 }

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -61,81 +61,85 @@ namespace System.Net
         WebConnectionTunnel tunnel;
         int disposed;
 
-        public ServicePoint ServicePoint {
-            get;
-        }
+        public ServicePoint ServicePoint { get; }
 
 #if MONOTOUCH && !MONOTOUCH_TV && !MONOTOUCH_WATCH
         [System.Runtime.InteropServices.DllImport ("__Internal")]
         static extern void xamarin_start_wwan (string uri);
 #endif
 
-        public WebConnection (ServicePoint sPoint)
+        public WebConnection(ServicePoint sPoint)
         {
             ServicePoint = sPoint;
         }
 
 #if MONO_WEB_DEBUG
-        internal static bool EnableWebDebug {
-            get; set;
-        }
+        internal static bool EnableWebDebug { get; set; }
 
-        static WebConnection ()
+        static WebConnection()
         {
-            if (Environment.GetEnvironmentVariable ("MONO_WEB_DEBUG") != null)
+            if (Environment.GetEnvironmentVariable("MONO_WEB_DEBUG") != null)
                 EnableWebDebug = true;
         }
 #endif
 
-        [Conditional ("MONO_WEB_DEBUG")]
-        internal static void Debug (string message, params object[] args)
+        [Conditional("MONO_WEB_DEBUG")]
+        internal static void Debug(string message, params object[] args)
         {
 #if MONO_WEB_DEBUG
             if (EnableWebDebug)
-                Console.Error.WriteLine (string.Format (message, args));
+                Console.Error.WriteLine(string.Format(message, args));
 #endif
         }
 
-        [Conditional ("MONO_WEB_DEBUG")]
-        internal static void Debug (string message)
+        [Conditional("MONO_WEB_DEBUG")]
+        internal static void Debug(string message)
         {
 #if MONO_WEB_DEBUG
             if (EnableWebDebug)
-                Console.Error.WriteLine (message);
+                Console.Error.WriteLine(message);
 #endif
         }
 
-        bool CanReuse ()
+        bool CanReuse()
         {
             // The real condition is !(socket.Poll (0, SelectMode.SelectRead) || socket.Available != 0)
             // but if there's data pending to read (!) we won't reuse the socket.
-            return (socket.Poll (0, SelectMode.SelectRead) == false);
+            return (socket.Poll(0, SelectMode.SelectRead) == false);
         }
 
-        bool CheckReusable ()
+        bool CheckReusable()
         {
-            if (socket != null && socket.Connected) {
-                try {
-                    if (CanReuse ())
+            if (socket != null && socket.Connected)
+            {
+                try
+                {
+                    if (CanReuse())
                         return true;
-                } catch { }
+                }
+                catch { }
             }
 
             return false;
         }
 
-        async Task Connect (WebOperation operation, CancellationToken cancellationToken)
+        async Task Connect(WebOperation operation, CancellationToken cancellationToken)
         {
             IPHostEntry hostEntry = ServicePoint.HostEntry;
 
-            if (hostEntry == null || hostEntry.AddressList.Length == 0) {
+            if (hostEntry == null || hostEntry.AddressList.Length == 0)
+            {
 #if MONOTOUCH && !MONOTOUCH_TV && !MONOTOUCH_WATCH
                     xamarin_start_wwan (ServicePoint.Address.ToString ());
                     hostEntry = ServicePoint.HostEntry;
                     if (hostEntry == null) {
 #endif
-                throw GetException (ServicePoint.UsesProxy ? WebExceptionStatus.ProxyNameResolutionFailure :
-                            WebExceptionStatus.NameResolutionFailure, null);
+                throw GetException(
+                    ServicePoint.UsesProxy
+                        ? WebExceptionStatus.ProxyNameResolutionFailure
+                        : WebExceptionStatus.NameResolutionFailure,
+                    null
+                );
 #if MONOTOUCH && !MONOTOUCH_TV && !MONOTOUCH_WATCH
                     }
 #endif
@@ -143,29 +147,40 @@ namespace System.Net
 
             Exception connectException = null;
 
-            foreach (IPAddress address in hostEntry.AddressList) {
-                operation.ThrowIfDisposed (cancellationToken);
+            foreach (IPAddress address in hostEntry.AddressList)
+            {
+                operation.ThrowIfDisposed(cancellationToken);
 
-                try {
-                    socket = new Socket (address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                } catch (Exception se) {
-                    // The Socket ctor can throw if we run out of FD's
-                    throw GetException (WebExceptionStatus.ConnectFailure, se);
+                try
+                {
+                    socket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 }
-                IPEndPoint remote = new IPEndPoint (address, ServicePoint.Address.Port);
+                catch (Exception se)
+                {
+                    // The Socket ctor can throw if we run out of FD's
+                    throw GetException(WebExceptionStatus.ConnectFailure, se);
+                }
+                IPEndPoint remote = new IPEndPoint(address, ServicePoint.Address.Port);
                 socket.NoDelay = !ServicePoint.UseNagleAlgorithm;
-                try {
-                    ServicePoint.KeepAliveSetup (socket);
-                } catch {
+                try
+                {
+                    ServicePoint.KeepAliveSetup(socket);
+                }
+                catch
+                {
                     // Ignore. Not supported in all platforms.
                 }
 
-                if (!ServicePoint.CallEndPointDelegate (socket, remote)) {
-                    Interlocked.Exchange (ref socket, null)?.Close ();
+                if (!ServicePoint.CallEndPointDelegate(socket, remote))
+                {
+                    Interlocked.Exchange(ref socket, null)?.Close();
                     continue;
-                } else {
-                    try {
-                        operation.ThrowIfDisposed (cancellationToken);
+                }
+                else
+                {
+                    try
+                    {
+                        operation.ThrowIfDisposed(cancellationToken);
 
                         /*
                          * Socket.Tasks.cs from CoreFX introduces a new internal
@@ -177,17 +192,27 @@ namespace System.Net
                          *
                          * Explicitly use our implementation from SocketTaskExtensions.cs here.
                          */
-                        await Task.Factory.FromAsync (
-                            (targetEndPoint, callback, state) => ((Socket)state).BeginConnect (targetEndPoint, callback, state),
-                            asyncResult => ((Socket)asyncResult.AsyncState).EndConnect (asyncResult),
-                            remote, socket).ConfigureAwait (false);
-                    } catch (ObjectDisposedException) {
+                        await Task.Factory
+                            .FromAsync(
+                                (targetEndPoint, callback, state) =>
+                                    ((Socket)state).BeginConnect(targetEndPoint, callback, state),
+                                asyncResult =>
+                                    ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
+                                remote,
+                                socket
+                            )
+                            .ConfigureAwait(false);
+                    }
+                    catch (ObjectDisposedException)
+                    {
                         throw;
-                    } catch (Exception exc) {
-                        Interlocked.Exchange (ref socket, null)?.Close ();
+                    }
+                    catch (Exception exc)
+                    {
+                        Interlocked.Exchange(ref socket, null)?.Close();
                         // Something went wrong, but we might have multiple IP Addresses
                         // and need to probe them all.
-                        connectException = GetException (WebExceptionStatus.ConnectFailure, exc);
+                        connectException = GetException(WebExceptionStatus.ConnectFailure, exc);
                         continue;
                     }
                 }
@@ -197,20 +222,25 @@ namespace System.Net
             }
 
             if (connectException == null)
-                connectException = GetException (WebExceptionStatus.ConnectFailure, null);
+                connectException = GetException(WebExceptionStatus.ConnectFailure, null);
 
             throw connectException;
         }
 
 #if MONO_WEB_DEBUG
-        static int nextID, nextRequestID;
+        static int nextID,
+            nextRequestID;
         readonly int id = ++nextID;
         public int ID => disposed != 0 ? -id : id;
 #else
         internal readonly int ID;
 #endif
 
-        async Task<bool> CreateStream (WebOperation operation, bool reused, CancellationToken cancellationToken)
+        async Task<bool> CreateStream(
+            WebOperation operation,
+            bool reused,
+            CancellationToken cancellationToken
+        )
         {
 #if MONO_WEB_DEBUG
             var requestID = ++nextRequestID;
@@ -218,106 +248,146 @@ namespace System.Net
             var requestID = 0;
 #endif
 
-            try {
-                var stream = new NetworkStream (socket, false);
+            try
+            {
+                var stream = new NetworkStream(socket, false);
 
-                Debug ($"WC CREATE STREAM: Cnc={ID} {requestID} {reused} socket={socket.ID}");
+                Debug($"WC CREATE STREAM: Cnc={ID} {requestID} {reused} socket={socket.ID}");
 
-                if (operation.Request.Address.Scheme == Uri.UriSchemeHttps) {
-                    if (!reused || monoTlsStream == null) {
-                        if (ServicePoint.UseConnect) {
+                if (operation.Request.Address.Scheme == Uri.UriSchemeHttps)
+                {
+                    if (!reused || monoTlsStream == null)
+                    {
+                        if (ServicePoint.UseConnect)
+                        {
                             if (tunnel == null)
-                                tunnel = new WebConnectionTunnel (operation.Request, ServicePoint.Address);
-                            await tunnel.Initialize (stream, cancellationToken).ConfigureAwait (false);
+                                tunnel = new WebConnectionTunnel(
+                                    operation.Request,
+                                    ServicePoint.Address
+                                );
+                            await tunnel
+                                .Initialize(stream, cancellationToken)
+                                .ConfigureAwait(false);
                             if (!tunnel.Success)
                                 return false;
                         }
-                        monoTlsStream = new MonoTlsStream (operation.Request, stream);
-                        networkStream = await monoTlsStream.CreateStream (tunnel, cancellationToken).ConfigureAwait (false);
+                        monoTlsStream = new MonoTlsStream(operation.Request, stream);
+                        networkStream = await monoTlsStream
+                            .CreateStream(tunnel, cancellationToken)
+                            .ConfigureAwait(false);
                     }
                     return true;
                 }
 
                 networkStream = stream;
                 return true;
-            } catch (Exception ex) {
-                ex = HttpWebRequest.FlattenException (ex);
-                Debug ($"WC CREATE STREAM EX: Cnc={ID} {requestID} {operation.Aborted} - {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                ex = HttpWebRequest.FlattenException(ex);
+                Debug(
+                    $"WC CREATE STREAM EX: Cnc={ID} {requestID} {operation.Aborted} - {ex.Message}"
+                );
                 if (operation.Aborted || monoTlsStream == null)
-                    throw GetException (WebExceptionStatus.ConnectFailure, ex);
-                throw GetException (monoTlsStream.ExceptionStatus, ex);
-            } finally {
-                Debug ($"WC CREATE STREAM DONE: Cnc={ID} {requestID}");
+                    throw GetException(WebExceptionStatus.ConnectFailure, ex);
+                throw GetException(monoTlsStream.ExceptionStatus, ex);
+            }
+            finally
+            {
+                Debug($"WC CREATE STREAM DONE: Cnc={ID} {requestID}");
             }
         }
 
-        internal async Task<WebRequestStream> InitConnection (WebOperation operation, CancellationToken cancellationToken)
+        internal async Task<WebRequestStream> InitConnection(
+            WebOperation operation,
+            CancellationToken cancellationToken
+        )
         {
-            Debug ($"WC INIT CONNECTION: Cnc={ID} Req={operation.Request.ID} Op={operation.ID}");
+            Debug($"WC INIT CONNECTION: Cnc={ID} Req={operation.Request.ID} Op={operation.ID}");
 
             bool reset = true;
-        retry:
-            operation.ThrowIfClosedOrDisposed (cancellationToken);
+            retry:
+            operation.ThrowIfClosedOrDisposed(cancellationToken);
 
-            var reused = CheckReusable ();
-            Debug ($"WC INIT CONNECTION #1: Cnc={ID} Op={operation.ID} - {reused} - {operation.WriteBuffer != null} {operation.IsNtlmChallenge}");
-            if (!reused) {
-                CloseSocket ();
+            var reused = CheckReusable();
+            Debug(
+                $"WC INIT CONNECTION #1: Cnc={ID} Op={operation.ID} - {reused} - {operation.WriteBuffer != null} {operation.IsNtlmChallenge}"
+            );
+            if (!reused)
+            {
+                CloseSocket();
                 if (reset)
-                    Reset ();
-                try {
-                    await Connect (operation, cancellationToken).ConfigureAwait (false);
-                    Debug ($"WC INIT CONNECTION #2: Cnc={ID} Op={operation.ID} {socket.LocalEndPoint}");
-                } catch (Exception ex) {
-                    Debug ($"WC INIT CONNECTION #2 FAILED: Cnc={ID} Op={operation.ID} - {ex.Message}\n{ex}");
+                    Reset();
+                try
+                {
+                    await Connect(operation, cancellationToken).ConfigureAwait(false);
+                    Debug(
+                        $"WC INIT CONNECTION #2: Cnc={ID} Op={operation.ID} {socket.LocalEndPoint}"
+                    );
+                }
+                catch (Exception ex)
+                {
+                    Debug(
+                        $"WC INIT CONNECTION #2 FAILED: Cnc={ID} Op={operation.ID} - {ex.Message}\n{ex}"
+                    );
                     throw;
                 }
             }
 
-            var success = await CreateStream (operation, reused, cancellationToken).ConfigureAwait (false);
+            var success = await CreateStream(operation, reused, cancellationToken)
+                .ConfigureAwait(false);
 
-            Debug ($"WC INIT CONNECTION #3: Cnc={ID} Op={operation.ID} - {success}");
-            if (!success) {
+            Debug($"WC INIT CONNECTION #3: Cnc={ID} Op={operation.ID} - {success}");
+            if (!success)
+            {
                 if (tunnel?.Challenge == null)
-                    throw GetException (WebExceptionStatus.ProtocolError, null);
+                    throw GetException(WebExceptionStatus.ProtocolError, null);
 
                 if (tunnel.CloseConnection)
-                    CloseSocket ();
+                    CloseSocket();
                 reset = false;
                 goto retry;
             }
 
             networkStream.ReadTimeout = operation.Request.ReadWriteTimeout;
 
-            return new WebRequestStream (this, operation, networkStream, tunnel);
+            return new WebRequestStream(this, operation, networkStream, tunnel);
         }
 
-        internal static WebException GetException (WebExceptionStatus status, Exception error)
+        internal static WebException GetException(WebExceptionStatus status, Exception error)
         {
             if (error == null)
-                return new WebException ($"Error: {status}", status);
+                return new WebException($"Error: {status}", status);
             if (error is WebException wex)
                 return wex;
-            return new WebException ($"Error: {status} ({error.Message})", status,
-                         WebExceptionInternalStatus.RequestFatal, error);
+            return new WebException(
+                $"Error: {status} ({error.Message})",
+                status,
+                WebExceptionInternalStatus.RequestFatal,
+                error
+            );
         }
 
-        internal static bool ReadLine (byte[] buffer, ref int start, int max, ref string output)
+        internal static bool ReadLine(byte[] buffer, ref int start, int max, ref string output)
         {
             bool foundCR = false;
-            StringBuilder text = new StringBuilder ();
+            StringBuilder text = new StringBuilder();
 
             int c = 0;
-            while (start < max) {
+            while (start < max)
+            {
                 c = (int)buffer[start++];
 
-                if (c == '\n') {                        // newline
+                if (c == '\n')
+                { // newline
                     if ((text.Length > 0) && (text[text.Length - 1] == '\r'))
                         text.Length--;
 
                     foundCR = false;
                     break;
-                } else if (foundCR) {
+                }
+                else if (foundCR)
+                {
                     text.Length--;
                     break;
                 }
@@ -325,14 +395,14 @@ namespace System.Net
                 if (c == '\r')
                     foundCR = true;
 
-
-                text.Append ((char)c);
+                text.Append((char)c);
             }
 
             if (c != '\n' && c != '\r')
                 return false;
 
-            if (text.Length == 0) {
+            if (text.Length == 0)
+            {
                 output = null;
                 return (c == '\n' || c == '\r');
             }
@@ -340,13 +410,14 @@ namespace System.Net
             if (foundCR)
                 text.Length--;
 
-            output = text.ToString ();
+            output = text.ToString();
             return true;
         }
 
-        internal bool CanReuseConnection (WebOperation operation)
+        internal bool CanReuseConnection(WebOperation operation)
         {
-            lock (this) {
+            lock (this)
+            {
                 if (Closed || currentOperation != null)
                     return false;
                 if (!NtlmAuthenticated)
@@ -355,13 +426,24 @@ namespace System.Net
                 NetworkCredential cnc_cred = NtlmCredential;
                 var request = operation.Request;
 
-                bool isProxy = (request.Proxy != null && !request.Proxy.IsBypassed (request.RequestUri));
-                ICredentials req_icreds = (!isProxy) ? request.Credentials : request.Proxy.Credentials;
-                NetworkCredential req_cred = (req_icreds != null) ? req_icreds.GetCredential (request.RequestUri, "NTLM") : null;
+                bool isProxy = (
+                    request.Proxy != null && !request.Proxy.IsBypassed(request.RequestUri)
+                );
+                ICredentials req_icreds =
+                    (!isProxy) ? request.Credentials : request.Proxy.Credentials;
+                NetworkCredential req_cred =
+                    (req_icreds != null)
+                        ? req_icreds.GetCredential(request.RequestUri, "NTLM")
+                        : null;
 
-                if (cnc_cred == null || req_cred == null ||
-                    cnc_cred.Domain != req_cred.Domain || cnc_cred.UserName != req_cred.UserName ||
-                    cnc_cred.Password != req_cred.Password) {
+                if (
+                    cnc_cred == null
+                    || req_cred == null
+                    || cnc_cred.Domain != req_cred.Domain
+                    || cnc_cred.UserName != req_cred.UserName
+                    || cnc_cred.Password != req_cred.Password
+                )
+                {
                     return false;
                 }
 
@@ -371,7 +453,7 @@ namespace System.Net
             }
         }
 
-        bool PrepareSharingNtlm (WebOperation operation)
+        bool PrepareSharingNtlm(WebOperation operation)
         {
             if (operation == null || !NtlmAuthenticated)
                 return true;
@@ -380,17 +462,24 @@ namespace System.Net
             NetworkCredential cnc_cred = NtlmCredential;
             var request = operation.Request;
 
-            bool isProxy = (request.Proxy != null && !request.Proxy.IsBypassed (request.RequestUri));
+            bool isProxy = (request.Proxy != null && !request.Proxy.IsBypassed(request.RequestUri));
             ICredentials req_icreds = (!isProxy) ? request.Credentials : request.Proxy.Credentials;
-            NetworkCredential req_cred = (req_icreds != null) ? req_icreds.GetCredential (request.RequestUri, "NTLM") : null;
+            NetworkCredential req_cred =
+                (req_icreds != null) ? req_icreds.GetCredential(request.RequestUri, "NTLM") : null;
 
-            if (cnc_cred == null || req_cred == null ||
-                cnc_cred.Domain != req_cred.Domain || cnc_cred.UserName != req_cred.UserName ||
-                cnc_cred.Password != req_cred.Password) {
+            if (
+                cnc_cred == null
+                || req_cred == null
+                || cnc_cred.Domain != req_cred.Domain
+                || cnc_cred.UserName != req_cred.UserName
+                || cnc_cred.Password != req_cred.Password
+            )
+            {
                 needs_reset = true;
             }
 
-            if (!needs_reset) {
+            if (!needs_reset)
+            {
                 bool req_sharing = request.UnsafeAuthenticatedConnectionSharing;
                 bool cnc_sharing = UnsafeAuthenticatedConnectionSharing;
                 needs_reset = (req_sharing == false || req_sharing != cnc_sharing);
@@ -399,45 +488,57 @@ namespace System.Net
             return needs_reset;
         }
 
-        void Reset ()
+        void Reset()
         {
-            lock (this) {
+            lock (this)
+            {
                 tunnel = null;
-                ResetNtlm ();
+                ResetNtlm();
             }
         }
 
-        void Close (bool reset)
+        void Close(bool reset)
         {
-            lock (this) {
-                CloseSocket ();
+            lock (this)
+            {
+                CloseSocket();
                 if (reset)
-                    Reset ();
+                    Reset();
             }
         }
 
-        void CloseSocket ()
+        void CloseSocket()
         {
-            lock (this) {
-                Debug ($"WC CLOSE SOCKET: Cnc={ID} NS={networkStream} TLS={monoTlsStream}");
-                if (networkStream != null) {
-                    try {
-                        networkStream.Dispose ();
-                    } catch { }
+            lock (this)
+            {
+                Debug($"WC CLOSE SOCKET: Cnc={ID} NS={networkStream} TLS={monoTlsStream}");
+                if (networkStream != null)
+                {
+                    try
+                    {
+                        networkStream.Dispose();
+                    }
+                    catch { }
                     networkStream = null;
                 }
 
-                if (monoTlsStream != null) {
-                    try {
-                        monoTlsStream.Dispose ();
-                    } catch { }
+                if (monoTlsStream != null)
+                {
+                    try
+                    {
+                        monoTlsStream.Dispose();
+                    }
+                    catch { }
                     monoTlsStream = null;
                 }
 
-                if (socket != null) {
-                    try {
-                        socket.Dispose ();
-                    } catch { }
+                if (socket != null)
+                {
+                    try
+                    {
+                        socket.Dispose();
+                    }
+                    catch { }
                     socket = null;
                 }
 
@@ -450,46 +551,54 @@ namespace System.Net
 
         public bool Closed => disposed != 0;
 
-        public bool Busy {
+        public bool Busy
+        {
             get { return currentOperation != null; }
         }
 
-        public DateTime IdleSince {
+        public DateTime IdleSince
+        {
             get { return idleSince; }
         }
 
-        public bool StartOperation (WebOperation operation, bool reused)
+        public bool StartOperation(WebOperation operation, bool reused)
         {
-            lock (this) {
+            lock (this)
+            {
                 if (Closed)
                     return false;
-                if (Interlocked.CompareExchange (ref currentOperation, operation, null) != null)
+                if (Interlocked.CompareExchange(ref currentOperation, operation, null) != null)
                     return false;
 
-                idleSince = DateTime.UtcNow + TimeSpan.FromDays (3650);
+                idleSince = DateTime.UtcNow + TimeSpan.FromDays(3650);
 
-                if (reused && !PrepareSharingNtlm (operation)) {
-                    Debug ($"WC START - CAN'T REUSE: Cnc={ID} Op={operation.ID}");
-                    Close (true);
+                if (reused && !PrepareSharingNtlm(operation))
+                {
+                    Debug($"WC START - CAN'T REUSE: Cnc={ID} Op={operation.ID}");
+                    Close(true);
                 }
 
-                operation.RegisterRequest (ServicePoint, this);
-                Debug ($"WC START: Cnc={ID} Op={operation.ID}");
+                operation.RegisterRequest(ServicePoint, this);
+                Debug($"WC START: Cnc={ID} Op={operation.ID}");
             }
 
-            operation.Run ();
+            operation.Run();
             return true;
         }
 
-        public bool Continue (WebOperation next)
+        public bool Continue(WebOperation next)
         {
-            lock (this) {
+            lock (this)
+            {
                 if (Closed)
                     return false;
 
-                Debug ($"WC CONTINUE: Cnc={ID} connected={socket?.Connected} next={next?.ID} current={currentOperation?.ID}");
-                if (socket == null || !socket.Connected || !PrepareSharingNtlm (next)) {
-                    Close (true);
+                Debug(
+                    $"WC CONTINUE: Cnc={ID} connected={socket?.Connected} next={next?.ID} current={currentOperation?.ID}"
+                );
+                if (socket == null || !socket.Connected || !PrepareSharingNtlm(next))
+                {
+                    Close(true);
                     return false;
                 }
 
@@ -499,48 +608,50 @@ namespace System.Net
                     return true;
 
                 // Ok, we got another connection.  Let's run it!
-                next.RegisterRequest (ServicePoint, this);
+                next.RegisterRequest(ServicePoint, this);
             }
 
-            next.Run ();
+            next.Run();
             return true;
         }
 
-        void Dispose (bool disposing)
+        void Dispose(bool disposing)
         {
-            if (Interlocked.CompareExchange (ref disposed, 1, 0) != 0)
+            if (Interlocked.CompareExchange(ref disposed, 1, 0) != 0)
                 return;
-            Debug ($"WC DISPOSE: Cnc={ID}");
-            Close (true);
+            Debug($"WC DISPOSE: Cnc={ID}");
+            Close(true);
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
+            Dispose(true);
         }
 
-        void ResetNtlm ()
+        void ResetNtlm()
         {
             ntlm_authenticated = false;
             ntlm_credentials = null;
             unsafe_sharing = false;
         }
 
-        internal bool NtlmAuthenticated {
+        internal bool NtlmAuthenticated
+        {
             get { return ntlm_authenticated; }
             set { ntlm_authenticated = value; }
         }
 
-        internal NetworkCredential NtlmCredential {
+        internal NetworkCredential NtlmCredential
+        {
             get { return ntlm_credentials; }
             set { ntlm_credentials = value; }
         }
 
-        internal bool UnsafeAuthenticatedConnectionSharing {
+        internal bool UnsafeAuthenticatedConnectionSharing
+        {
             get { return unsafe_sharing; }
             set { unsafe_sharing = value; }
         }
         // -
     }
 }
-

@@ -31,17 +31,15 @@ namespace Microsoft.Build.BuildEngine
 {
     public class Toolset
     {
-        public Toolset (string toolsVersion, string toolsPath, BuildPropertyGroup buildProperties)
+        public Toolset(string toolsVersion, string toolsPath, BuildPropertyGroup buildProperties)
         {
             ToolsVersion = toolsVersion;
             ToolsPath = toolsPath;
             BuildProperties = buildProperties;
         }
 
-        public Toolset (string toolsVersion, string toolsPath)
-            : this (toolsVersion, toolsPath, null)
-        {
-        }
+        public Toolset(string toolsVersion, string toolsPath)
+            : this(toolsVersion, toolsPath, null) { }
 
         public BuildPropertyGroup BuildProperties { get; private set; }
 

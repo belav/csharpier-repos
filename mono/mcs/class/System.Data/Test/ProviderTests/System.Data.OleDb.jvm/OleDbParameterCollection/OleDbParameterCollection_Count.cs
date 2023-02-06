@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,7 +26,6 @@ using System.Data;
 using System.Data.OleDb;
 
 using MonoTests.System.Data.Utils;
-
 
 using NUnit.Framework;
 
@@ -44,44 +43,70 @@ namespace MonoTests.System.Data.OleDb
                 tc.BeginTest("OleDbParameterCollection_Count");
                 tc.run();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         [Test]
         public void run()
         {
             Exception exp = null;
-    
+
             OleDbCommand cmd = new OleDbCommand();
 
             try
             {
                 BeginCase("Count - empty");
-                Compare(cmd.Parameters.Count ,0 );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(cmd.Parameters.Count, 0);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             cmd.Parameters.Add(new OleDbParameter("MyParam", "abcd"));
             try
             {
                 BeginCase("Count - add");
-                Compare(cmd.Parameters.Count ,1 );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(cmd.Parameters.Count, 1);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
             cmd.Parameters.Clear();
 
             try
             {
                 BeginCase("Count - clear");
-                Compare(cmd.Parameters.Count ,0 );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
-        
+                Compare(cmd.Parameters.Count, 0);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
         }
     }
 }

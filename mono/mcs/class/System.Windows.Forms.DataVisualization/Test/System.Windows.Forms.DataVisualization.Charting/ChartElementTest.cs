@@ -2,7 +2,7 @@
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,34 +33,32 @@ namespace MonoTests.System.Windows.Forms.DataVisualization.Charting
     public class ChartElementTest
     {
         [Test]
-        public void Constructor ()
+        public void Constructor()
         {
-            ChartElement ce = new MyChartElement ();
+            ChartElement ce = new MyChartElement();
 
-            Assert.AreEqual (null, ce.Tag, "A1");
+            Assert.AreEqual(null, ce.Tag, "A1");
         }
 
         [Test]
-        public void TagProperty ()
+        public void TagProperty()
         {
-            ChartElement ce = new MyChartElement ();
+            ChartElement ce = new MyChartElement();
 
-            Assert.AreEqual (null, ce.Tag, "A1");
+            Assert.AreEqual(null, ce.Tag, "A1");
 
             ce.Tag = "hi";
-            Assert.AreEqual ("hi", ce.Tag, "A2");
+            Assert.AreEqual("hi", ce.Tag, "A2");
         }
 
         [Test]
-        public void ToStringMethod ()
+        public void ToStringMethod()
         {
-            ChartElement ce = new MyChartElement ();
+            ChartElement ce = new MyChartElement();
 
-            Assert.AreEqual ("MyChartElement", ce.ToString (), "A1");
+            Assert.AreEqual("MyChartElement", ce.ToString(), "A1");
         }
 
-        private class MyChartElement : ChartElement
-        {
-        }
+        private class MyChartElement : ChartElement { }
     }
 }

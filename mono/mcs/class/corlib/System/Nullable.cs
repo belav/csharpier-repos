@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,7 +38,8 @@ using System.Diagnostics;
 
 namespace System
 {
-    public partial struct Nullable<T> where T: struct
+    public partial struct Nullable<T>
+        where T : struct
     {
         //
         // These are called by the JIT
@@ -47,29 +48,29 @@ namespace System
         //
         // JIT implementation of box valuetype System.Nullable`1<T>
         //
-        static object Box (T? o)
+        static object Box(T? o)
         {
             if (!o.hasValue)
                 return null;
-                
+
             return o.value;
         }
-        
-        static T? Unbox (object o)
+
+        static T? Unbox(object o)
         {
             if (o == null)
                 return null;
-            return (T) o;
+            return (T)o;
         }
 
-        static T? UnboxExact (object o)
+        static T? UnboxExact(object o)
         {
             if (o == null)
                 return null;
-            if (o.GetType() != typeof (T))
+            if (o.GetType() != typeof(T))
                 throw new InvalidCastException();
 
-            return (T) o;
+            return (T)o;
         }
 
 #pragma warning restore 169

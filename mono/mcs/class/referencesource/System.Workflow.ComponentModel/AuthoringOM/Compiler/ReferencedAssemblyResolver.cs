@@ -20,7 +20,10 @@ namespace System.Workflow.ComponentModel.Compiler
 
         private bool resolving = false;
 
-        public ReferencedAssemblyResolver(StringCollection referencedAssemblies, Assembly localAssembly)
+        public ReferencedAssemblyResolver(
+            StringCollection referencedAssemblies,
+            Assembly localAssembly
+        )
         {
             this.referencedAssemblies = referencedAssemblies;
             this.localAssembly = localAssembly;
@@ -56,8 +59,13 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     try
                     {
-                        AssemblyName referenceAssemblyName = AssemblyName.GetAssemblyName(assemblyPath);
-                        if (referenceAssemblyName != null && ParseHelpers.AssemblyNameEquals(referenceAssemblyName, assemblyName))
+                        AssemblyName referenceAssemblyName = AssemblyName.GetAssemblyName(
+                            assemblyPath
+                        );
+                        if (
+                            referenceAssemblyName != null
+                            && ParseHelpers.AssemblyNameEquals(referenceAssemblyName, assemblyName)
+                        )
                         {
                             Assembly reference = null;
                             try
@@ -75,7 +83,6 @@ namespace System.Workflow.ComponentModel.Compiler
                     {
                         // Eat up any exceptions!
                     }
-
                 }
             }
             finally

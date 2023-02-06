@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,10 +29,10 @@ using System;
 using System.Threading;
 using System.Collections;
 
-namespace System.Windows.Forms.X11Internal {
-
-    internal class X11ThreadQueue {
-
+namespace System.Windows.Forms.X11Internal
+{
+    internal class X11ThreadQueue
+    {
         XEventQueue xqueue;
         PaintQueue paint_queue;
         ConfigureQueue configure_queue;
@@ -41,188 +41,213 @@ namespace System.Windows.Forms.X11Internal {
         bool quit_posted;
         bool dispatch_idle;
         bool need_dispatch_idle = true;
-        object lockobj = new object ();
+        object lockobj = new object();
 
         static readonly int InitialXEventQueueSize = 128;
         static readonly int InitialHwndQueueSize = 50;
 
-        public X11ThreadQueue (Thread thread)
+        public X11ThreadQueue(Thread thread)
         {
-            xqueue = new XEventQueue (InitialXEventQueueSize);
-            paint_queue = new PaintQueue (InitialHwndQueueSize);
-            configure_queue = new ConfigureQueue (InitialHwndQueueSize);
-            timer_list = new ArrayList ();
+            xqueue = new XEventQueue(InitialXEventQueueSize);
+            paint_queue = new PaintQueue(InitialHwndQueueSize);
+            configure_queue = new ConfigureQueue(InitialHwndQueueSize);
+            timer_list = new ArrayList();
             this.thread = thread;
             this.quit_posted = false;
             this.dispatch_idle = true;
         }
 
-        public int CountUnlocked {
+        public int CountUnlocked
+        {
             get { return xqueue.Count + paint_queue.Count; }
         }
 
-        public Thread Thread {
+        public Thread Thread
+        {
             get { return thread; }
         }
 
-        public void EnqueueUnlocked (XEvent xevent)
+        public void EnqueueUnlocked(XEvent xevent)
         {
-            switch (xevent.type) {
-            case XEventName.KeyPress:
-            case XEventName.KeyRelease:
-            case XEventName.ButtonPress:
-            case XEventName.ButtonRelease:
-                NeedDispatchIdle = true;
-                break;
-            case XEventName.MotionNotify:
-                if (xqueue.Count > 0) {
-                    XEvent peek = xqueue.Peek ();
-                    if (peek.AnyEvent.type == XEventName.MotionNotify)
-                        return; // we've already got a pending motion notify.
-                }
+            switch (xevent.type)
+            {
+                case XEventName.KeyPress:
+                case XEventName.KeyRelease:
+                case XEventName.ButtonPress:
+                case XEventName.ButtonRelease:
+                    NeedDispatchIdle = true;
+                    break;
+                case XEventName.MotionNotify:
+                    if (xqueue.Count > 0)
+                    {
+                        XEvent peek = xqueue.Peek();
+                        if (peek.AnyEvent.type == XEventName.MotionNotify)
+                            return; // we've already got a pending motion notify.
+                    }
 
-                // otherwise fall through and enqueue
-                // the event.
-                break;
+                    // otherwise fall through and enqueue
+                    // the event.
+                    break;
             }
 
-            xqueue.Enqueue (xevent);
+            xqueue.Enqueue(xevent);
             // wake up any thread blocking in DequeueUnlocked
-            Monitor.PulseAll (lockobj);
+            Monitor.PulseAll(lockobj);
         }
 
-        public void Enqueue (XEvent xevent)
+        public void Enqueue(XEvent xevent)
         {
-            lock (lockobj) {
-                EnqueueUnlocked (xevent);
+            lock (lockobj)
+            {
+                EnqueueUnlocked(xevent);
             }
         }
 
-        public bool Dequeue (out XEvent xevent)
+        public bool Dequeue(out XEvent xevent)
         {
-        StartOver:
+            StartOver:
             bool got_xevent = false;
 
-            lock (lockobj) {
-                if (xqueue.Count > 0) {
+            lock (lockobj)
+            {
+                if (xqueue.Count > 0)
+                {
                     got_xevent = true;
-                    xevent = xqueue.Dequeue ();
+                    xevent = xqueue.Dequeue();
                 }
                 else
-                    xevent = new XEvent (); /* not strictly needed, but mcs complains */
+                    xevent = new XEvent(); /* not strictly needed, but mcs complains */
             }
 
-            if (got_xevent) {
-                if (xevent.AnyEvent.type == XEventName.Expose) {
+            if (got_xevent)
+            {
+                if (xevent.AnyEvent.type == XEventName.Expose)
+                {
 #if spew
-                    Console.Write ("E");
-                    Console.Out.Flush ();
+                    Console.Write("E");
+                    Console.Out.Flush();
 #endif
-                    X11Hwnd hwnd = (X11Hwnd)Hwnd.GetObjectFromWindow (xevent.AnyEvent.window);
-                    hwnd.AddExpose (xevent.AnyEvent.window == hwnd.ClientWindow,
-                            xevent.ExposeEvent.x, xevent.ExposeEvent.y,
-                            xevent.ExposeEvent.width, xevent.ExposeEvent.height);
+                    X11Hwnd hwnd = (X11Hwnd)Hwnd.GetObjectFromWindow(xevent.AnyEvent.window);
+                    hwnd.AddExpose(
+                        xevent.AnyEvent.window == hwnd.ClientWindow,
+                        xevent.ExposeEvent.x,
+                        xevent.ExposeEvent.y,
+                        xevent.ExposeEvent.width,
+                        xevent.ExposeEvent.height
+                    );
                     goto StartOver;
                 }
-                else if (xevent.AnyEvent.type == XEventName.ConfigureNotify) {
+                else if (xevent.AnyEvent.type == XEventName.ConfigureNotify)
+                {
 #if spew
-                    Console.Write ("C");
-                    Console.Out.Flush ();
+                    Console.Write("C");
+                    Console.Out.Flush();
 #endif
-                    X11Hwnd hwnd = (X11Hwnd)Hwnd.GetObjectFromWindow (xevent.AnyEvent.window);
-                    hwnd.AddConfigureNotify (xevent);
+                    X11Hwnd hwnd = (X11Hwnd)Hwnd.GetObjectFromWindow(xevent.AnyEvent.window);
+                    hwnd.AddConfigureNotify(xevent);
                     goto StartOver;
                 }
-                else {
+                else
+                {
 #if spew
-                    Console.Write ("X");
-                    Console.Out.Flush ();
+                    Console.Write("X");
+                    Console.Out.Flush();
 #endif
                     /* it was an event we can deal with directly, return it */
                     return true;
                 }
             }
-            else {
-                if (paint_queue.Count > 0) {
-                    xevent = paint_queue.Dequeue ();
+            else
+            {
+                if (paint_queue.Count > 0)
+                {
+                    xevent = paint_queue.Dequeue();
 #if spew
-                    Console.Write ("e");
-                    Console.Out.Flush ();
+                    Console.Write("e");
+                    Console.Out.Flush();
 #endif
                     return true;
                 }
-                else if (configure_queue.Count > 0) {
-                    xevent = configure_queue.Dequeue ();
+                else if (configure_queue.Count > 0)
+                {
+                    xevent = configure_queue.Dequeue();
 #if spew
-                    Console.Write ("c");
-                    Console.Out.Flush ();
+                    Console.Write("c");
+                    Console.Out.Flush();
 #endif
                     return true;
                 }
             }
 
-            if (dispatch_idle && need_dispatch_idle) {
-                OnIdle (EventArgs.Empty);
+            if (dispatch_idle && need_dispatch_idle)
+            {
+                OnIdle(EventArgs.Empty);
                 need_dispatch_idle = false;
             }
 
-            lock (lockobj) {
+            lock (lockobj)
+            {
                 if (CountUnlocked > 0)
                     goto StartOver;
 
-                if (Monitor.Wait (lockobj, NextTimeout (), true)) {
+                if (Monitor.Wait(lockobj, NextTimeout(), true))
+                {
                     // the lock was reaquired before the
                     // timeout.  meaning an event was
                     // enqueued by X11Display.XEventThread.
                     goto StartOver;
                 }
-                else {
-                    CheckTimers ();
+                else
+                {
+                    CheckTimers();
                     return false;
                 }
             }
         }
 
-        public void RemovePaint (Hwnd hwnd)
+        public void RemovePaint(Hwnd hwnd)
         {
-            paint_queue.Remove (hwnd);
+            paint_queue.Remove(hwnd);
         }
 
-        public void AddPaint (Hwnd hwnd)
+        public void AddPaint(Hwnd hwnd)
         {
-            paint_queue.Enqueue (hwnd);
+            paint_queue.Enqueue(hwnd);
         }
 
-        public void AddConfigure (Hwnd hwnd)
+        public void AddConfigure(Hwnd hwnd)
         {
-            configure_queue.Enqueue (hwnd);
+            configure_queue.Enqueue(hwnd);
         }
 
-        public ConfigureQueue Configure {
+        public ConfigureQueue Configure
+        {
             get { return configure_queue; }
         }
 
-        public PaintQueue Paint {
+        public PaintQueue Paint
+        {
             get { return paint_queue; }
         }
 
-        public void Lock ()
+        public void Lock()
         {
-            Monitor.Enter (lockobj);
+            Monitor.Enter(lockobj);
         }
 
-        public void Unlock ()
+        public void Unlock()
         {
-            Monitor.Exit (lockobj);
+            Monitor.Exit(lockobj);
         }
 
-        private int NextTimeout ()
+        private int NextTimeout()
         {
-            int timeout = Int32.MaxValue; 
+            int timeout = Int32.MaxValue;
             DateTime now = DateTime.UtcNow;
 
-            foreach (Timer timer in timer_list) {
-                int next = (int) (timer.Expires - now).TotalMilliseconds;
+            foreach (Timer timer in timer_list)
+            {
+                int next = (int)(timer.Expires - now).TotalMilliseconds;
                 if (next < 0)
                     return 0; // Have a timer that has already expired
 
@@ -230,7 +255,8 @@ namespace System.Windows.Forms.X11Internal {
                     timeout = next;
             }
 
-            if (timeout < Timer.Minimum) {
+            if (timeout < Timer.Minimum)
+            {
                 timeout = Timer.Minimum;
             }
 
@@ -240,7 +266,7 @@ namespace System.Windows.Forms.X11Internal {
             return timeout;
         }
 
-        public void CheckTimers ()
+        public void CheckTimers()
         {
             int count;
             DateTime now = DateTime.UtcNow;
@@ -250,88 +276,99 @@ namespace System.Windows.Forms.X11Internal {
             if (count == 0)
                 return;
 
-            for (int i = 0; i < timer_list.Count; i++) {
+            for (int i = 0; i < timer_list.Count; i++)
+            {
                 Timer timer;
 
-                timer = (Timer) timer_list [i];
+                timer = (Timer)timer_list[i];
 
-                if (timer.Enabled && timer.Expires <= now) {
-                    timer.Update (now);
-                    timer.FireTick ();
+                if (timer.Enabled && timer.Expires <= now)
+                {
+                    timer.Update(now);
+                    timer.FireTick();
                 }
             }
         }
 
-        public void SetTimer (Timer timer)
+        public void SetTimer(Timer timer)
         {
-            lock (lockobj) {
-                timer_list.Add (timer);
+            lock (lockobj)
+            {
+                timer_list.Add(timer);
 
                 // we need to wake up any thread waiting in DequeueUnlocked,
                 // since it might need to wait for a different amount of time.
-                Monitor.PulseAll (lockobj);
+                Monitor.PulseAll(lockobj);
             }
-
         }
 
-        public void KillTimer (Timer timer)
+        public void KillTimer(Timer timer)
         {
-            lock (lockobj) {
-                timer_list.Remove (timer);
+            lock (lockobj)
+            {
+                timer_list.Remove(timer);
 
                 // we need to wake up any thread waiting in DequeueUnlocked,
                 // since it might need to wait for a different amount of time.
-                Monitor.PulseAll (lockobj);
+                Monitor.PulseAll(lockobj);
             }
         }
 
         public event EventHandler Idle;
-        public void OnIdle (EventArgs e)
+
+        public void OnIdle(EventArgs e)
         {
             if (Idle != null)
-                Idle (thread, e);
+                Idle(thread, e);
         }
 
-        public bool NeedDispatchIdle {
+        public bool NeedDispatchIdle
+        {
             get { return need_dispatch_idle; }
             set { need_dispatch_idle = value; }
         }
 
-        public bool DispatchIdle {
+        public bool DispatchIdle
+        {
             get { return dispatch_idle; }
             set { dispatch_idle = value; }
         }
 
-        public bool PostQuitState {
+        public bool PostQuitState
+        {
             get { return quit_posted; }
             set { quit_posted = value; }
         }
 
-        public abstract class HwndEventQueue {
+        public abstract class HwndEventQueue
+        {
             protected ArrayList hwnds;
 #if DebugHwndEventQueue
             protected ArrayList stacks;
 #endif
-            public HwndEventQueue (int size)
+
+            public HwndEventQueue(int size)
             {
-                hwnds = new ArrayList (size);
+                hwnds = new ArrayList(size);
 #if DebugHwndEventQueue
-                stacks = new ArrayList (size);
+                stacks = new ArrayList(size);
 #endif
             }
 
-            public int Count {
+            public int Count
+            {
                 get { return hwnds.Count; }
             }
 
-            public void Enqueue (Hwnd hwnd)
+            public void Enqueue(Hwnd hwnd)
             {
-                if (hwnds.Contains (hwnd)) {
+                if (hwnds.Contains(hwnd))
+                {
 #if DebugHwndEventQueue
-                    Console.WriteLine ("hwnds can only appear in the queue once.");
-                    Console.WriteLine (Environment.StackTrace);
-                    Console.WriteLine ("originally added here:");
-                    Console.WriteLine (stacks[hwnds.IndexOf (hwnd)]);
+                    Console.WriteLine("hwnds can only appear in the queue once.");
+                    Console.WriteLine(Environment.StackTrace);
+                    Console.WriteLine("originally added here:");
+                    Console.WriteLine(stacks[hwnds.IndexOf(hwnd)]);
 #endif
 
                     return;
@@ -352,29 +389,27 @@ namespace System.Windows.Forms.X11Internal {
                 hwnds.Remove(hwnd);
             }
 
-            protected abstract XEvent Peek ();
+            protected abstract XEvent Peek();
 
-            public virtual XEvent Dequeue ()
+            public virtual XEvent Dequeue()
             {
                 if (hwnds.Count == 0)
-                    throw new Exception ("Attempt to dequeue empty queue.");
+                    throw new Exception("Attempt to dequeue empty queue.");
 
-                return Peek ();
+                return Peek();
             }
         }
 
-
         public class ConfigureQueue : HwndEventQueue
         {
-            public ConfigureQueue (int size) : base (size)
-            {
-            }
+            public ConfigureQueue(int size)
+                : base(size) { }
 
-            protected override XEvent Peek ()
+            protected override XEvent Peek()
             {
                 X11Hwnd hwnd = (X11Hwnd)hwnds[0];
 
-                XEvent xevent = new XEvent ();
+                XEvent xevent = new XEvent();
                 xevent.AnyEvent.type = XEventName.ConfigureNotify;
 
                 xevent.ConfigureEvent.window = hwnd.ClientWindow;
@@ -382,14 +417,13 @@ namespace System.Windows.Forms.X11Internal {
                 xevent.ConfigureEvent.y = hwnd.Y;
                 xevent.ConfigureEvent.width = hwnd.Width;
                 xevent.ConfigureEvent.height = hwnd.Height;
-                
+
                 return xevent;
             }
 
-            public override XEvent Dequeue ()
+            public override XEvent Dequeue()
             {
-                XEvent xev = base.Dequeue ();
-
+                XEvent xev = base.Dequeue();
 
                 hwnds.RemoveAt(0);
 #if DebugHwndEventQueue
@@ -402,21 +436,23 @@ namespace System.Windows.Forms.X11Internal {
 
         public class PaintQueue : HwndEventQueue
         {
-            public PaintQueue (int size) : base (size)
-            {
-            }
+            public PaintQueue(int size)
+                : base(size) { }
 
-            protected override XEvent Peek ()
+            protected override XEvent Peek()
             {
                 X11Hwnd hwnd = (X11Hwnd)hwnds[0];
 
-                XEvent xevent = new XEvent ();
+                XEvent xevent = new XEvent();
 
                 xevent.AnyEvent.type = XEventName.Expose;
 
-                if (hwnd.PendingExpose) {
+                if (hwnd.PendingExpose)
+                {
                     xevent.ExposeEvent.window = hwnd.ClientWindow;
-                } else {
+                }
+                else
+                {
                     xevent.ExposeEvent.window = hwnd.WholeWindow;
                     xevent.ExposeEvent.x = hwnd.nc_invalid.X;
                     xevent.ExposeEvent.y = hwnd.nc_invalid.Y;
@@ -431,41 +467,42 @@ namespace System.Windows.Forms.X11Internal {
         }
 
         /* a circular queue for holding X events for processing by GetMessage */
-        private class XEventQueue {
-
+        private class XEventQueue
+        {
             XEvent[] xevents;
             int head;
             int tail;
             int size;
-            
-            public XEventQueue (int initial_size)
+
+            public XEventQueue(int initial_size)
             {
                 if (initial_size % 2 != 0)
-                    throw new Exception ("XEventQueue must be a power of 2 size");
+                    throw new Exception("XEventQueue must be a power of 2 size");
 
-                xevents = new XEvent [initial_size];
+                xevents = new XEvent[initial_size];
             }
 
-            public int Count {
+            public int Count
+            {
                 get { return size; }
             }
 
-            public void Enqueue (XEvent xevent)
+            public void Enqueue(XEvent xevent)
             {
                 if (size == xevents.Length)
-                    Grow ();
+                    Grow();
 
-                xevents [tail] = xevent;
+                xevents[tail] = xevent;
                 tail = (tail + 1) & (xevents.Length - 1);
                 size++;
             }
 
-            public XEvent Dequeue ()
+            public XEvent Dequeue()
             {
                 if (size < 1)
-                    throw new Exception ("Attempt to dequeue empty queue.");
+                    throw new Exception("Attempt to dequeue empty queue.");
 
-                XEvent res = xevents [head];
+                XEvent res = xevents[head];
                 head = (head + 1) & (xevents.Length - 1);
                 size--;
                 return res;
@@ -474,22 +511,24 @@ namespace System.Windows.Forms.X11Internal {
             public XEvent Peek()
             {
                 if (size < 1)
-                    throw new Exception ("Attempt to peek at empty queue.");
+                    throw new Exception("Attempt to peek at empty queue.");
 
                 return xevents[head];
             }
 
-            private void Grow ()
+            private void Grow()
             {
                 int newcap = (xevents.Length * 2);
-                XEvent [] na = new XEvent [newcap];
+                XEvent[] na = new XEvent[newcap];
 
-                if (head + size > xevents.Length) {
-                    Array.Copy (xevents, head, na, 0, xevents.Length - head);
-                    Array.Copy (xevents, 0, na, xevents.Length - head, head + size - xevents.Length);
+                if (head + size > xevents.Length)
+                {
+                    Array.Copy(xevents, head, na, 0, xevents.Length - head);
+                    Array.Copy(xevents, 0, na, xevents.Length - head, head + size - xevents.Length);
                 }
-                else {
-                    Array.Copy (xevents, head, na, 0, size);
+                else
+                {
+                    Array.Copy(xevents, head, na, 0, size);
                 }
 
                 xevents = na;
@@ -499,4 +538,3 @@ namespace System.Windows.Forms.X11Internal {
         }
     }
 }
-

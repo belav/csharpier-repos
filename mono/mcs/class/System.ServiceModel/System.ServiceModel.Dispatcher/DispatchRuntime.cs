@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,31 +46,34 @@ namespace System.ServiceModel.Dispatcher
     public sealed class DispatchRuntime
     {
 #if MOBILE || XAMMAC_4_5
-        internal DispatchRuntime (EndpointDispatcher dispatcher, ClientRuntime callbackClientRuntime)
+        internal DispatchRuntime(EndpointDispatcher dispatcher, ClientRuntime callbackClientRuntime)
         {
-            UnhandledDispatchOperation = new DispatchOperation (
-                this, "*", "*", "*");
+            UnhandledDispatchOperation = new DispatchOperation(this, "*", "*", "*");
         }
 #else
         DispatchOperation.DispatchOperationCollection operations =
-            new DispatchOperation.DispatchOperationCollection ();
+            new DispatchOperation.DispatchOperationCollection();
 
-
-        internal DispatchRuntime (EndpointDispatcher dispatcher, ClientRuntime callbackClientRuntime)
+        internal DispatchRuntime(EndpointDispatcher dispatcher, ClientRuntime callbackClientRuntime)
         {
             EndpointDispatcher = dispatcher;
-            CallbackClientRuntime = callbackClientRuntime ?? new ClientRuntime (EndpointDispatcher.ContractName, EndpointDispatcher.ContractNamespace, this);
-            UnhandledDispatchOperation = new DispatchOperation (
-                this, "*", "*", "*");
+            CallbackClientRuntime =
+                callbackClientRuntime
+                ?? new ClientRuntime(
+                    EndpointDispatcher.ContractName,
+                    EndpointDispatcher.ContractNamespace,
+                    this
+                );
+            UnhandledDispatchOperation = new DispatchOperation(this, "*", "*", "*");
 
             AutomaticInputSessionShutdown = true;
             PrincipalPermissionMode = PrincipalPermissionMode.UseWindowsGroups; // silly default value for us.
             SuppressAuditFailure = true;
             ValidateMustUnderstand = true;
 
-            InputSessionShutdownHandlers = new SynchronizedCollection<IInputSessionShutdown> ();
-            InstanceContextInitializers = new SynchronizedCollection<IInstanceContextInitializer> ();
-            MessageInspectors = new SynchronizedCollection<IDispatchMessageInspector> ();
+            InputSessionShutdownHandlers = new SynchronizedCollection<IInputSessionShutdown>();
+            InstanceContextInitializers = new SynchronizedCollection<IInstanceContextInitializer>();
+            MessageInspectors = new SynchronizedCollection<IDispatchMessageInspector>();
         }
 
         [MonoTODO]
@@ -79,7 +82,8 @@ namespace System.ServiceModel.Dispatcher
         [MonoTODO]
         public bool AutomaticInputSessionShutdown { get; set; }
 
-        public ChannelDispatcher ChannelDispatcher {
+        public ChannelDispatcher ChannelDispatcher
+        {
             get { return EndpointDispatcher.ChannelDispatcher; }
         }
 
@@ -100,10 +104,18 @@ namespace System.ServiceModel.Dispatcher
         public bool ImpersonateCallerForAllOperations { get; set; }
 
         [MonoTODO]
-        public SynchronizedCollection<IInputSessionShutdown> InputSessionShutdownHandlers { get; private set; }
+        public SynchronizedCollection<IInputSessionShutdown> InputSessionShutdownHandlers
+        {
+            get;
+            private set;
+        }
 
         [MonoTODO]
-        public SynchronizedCollection<IInstanceContextInitializer> InstanceContextInitializers { get; private set; }
+        public SynchronizedCollection<IInstanceContextInitializer> InstanceContextInitializers
+        {
+            get;
+            private set;
+        }
 
         public IInstanceProvider InstanceProvider { get; set; }
 
@@ -112,9 +124,14 @@ namespace System.ServiceModel.Dispatcher
         [MonoTODO]
         public AuditLevel MessageAuthenticationAuditLevel { get; set; }
 
-        public SynchronizedCollection<IDispatchMessageInspector> MessageInspectors { get; private set; }
+        public SynchronizedCollection<IDispatchMessageInspector> MessageInspectors
+        {
+            get;
+            private set;
+        }
 
-        public SynchronizedKeyedCollection<string,DispatchOperation> Operations {
+        public SynchronizedKeyedCollection<string, DispatchOperation> Operations
+        {
             get { return operations; }
         }
 

@@ -13,8 +13,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
 {
     internal static class InlineExtensions
     {
-        public static string? GetText(this Inline inline)
-            => inline switch
+        public static string? GetText(this Inline inline) =>
+            inline switch
             {
                 Run run => run.Text,
                 Hyperlink hyperlink => string.Join("", hyperlink.Inlines.Select(GetText)),

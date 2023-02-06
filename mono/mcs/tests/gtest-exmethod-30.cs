@@ -4,18 +4,17 @@ using System.Collections.Generic;
 
 class Test : IEnumerable<int>
 {
-    public int First {
-        get {
-            return 1;
-        }
+    public int First
+    {
+        get { return 1; }
     }
-    
-    IEnumerator IEnumerable.GetEnumerator ()
+
+    IEnumerator IEnumerable.GetEnumerator()
     {
         return null;
     }
-    
-    public IEnumerator<int> GetEnumerator ()
+
+    public IEnumerator<int> GetEnumerator()
     {
         return null;
     }
@@ -23,13 +22,11 @@ class Test : IEnumerable<int>
 
 class C
 {
-    public void Test ()
+    public void Test()
     {
-        var t = new Test ();
-        var v = t.First ();        
+        var t = new Test();
+        var v = t.First();
     }
-    
-    public static void Main ()
-    {
-    }
+
+    public static void Main() { }
 }

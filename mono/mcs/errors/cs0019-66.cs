@@ -3,7 +3,7 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
         dynamic x = null;
         var y = x == Main;

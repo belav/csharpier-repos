@@ -27,6 +27,7 @@ namespace BuildBoss
             return relativeName;
         }
 
-        internal static string GetName(this PackagePart part) => Path.GetFileName(GetRelativeName(part));
+        internal static string GetName(this PackagePart part) =>
+            Path.GetFileName(GetRelativeName(part));
     }
 }

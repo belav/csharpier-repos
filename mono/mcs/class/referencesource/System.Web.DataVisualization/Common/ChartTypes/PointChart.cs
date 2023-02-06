@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,7 +11,7 @@
 //
 //    Classes:    PointChart
 //
-//  Purpose:    Provides 2D/3D drawing and hit testing functionality 
+//  Purpose:    Provides 2D/3D drawing and hit testing functionality
 //              for the Point chart.
 //
 //    Reviewed:    AG - Aug 6, 2002
@@ -31,28 +31,28 @@ using System.Drawing.Drawing2D;
 using System.Globalization;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 #else
-    using System.Web.UI.DataVisualization.Charting;
-    using System.Web.UI.DataVisualization.Charting.ChartTypes;
-    using System.Web.UI.DataVisualization.Charting.Data;
-    using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
+namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 #else
-    namespace System.Web.UI.DataVisualization.Charting.ChartTypes
+namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 #endif
 {
     /// <summary>
-    /// PointChart class provides 2D/3D drawing and hit testing 
+    /// PointChart class provides 2D/3D drawing and hit testing
     /// functionality for the Point chart.
     /// </summary>
     internal class PointChart : IChartType
@@ -62,7 +62,7 @@ using System.Globalization;
         /// <summary>
         /// Indicates that markers will be always drawn
         /// </summary>
-        internal bool    alwaysDrawMarkers = true;
+        internal bool alwaysDrawMarkers = true;
 
         /// <summary>
         /// Index of the Y value used to draw chart
@@ -126,9 +126,7 @@ using System.Globalization;
         /// <summary>
         /// Class public constructor.
         /// </summary>
-        public PointChart()
-        {
-        }
+        public PointChart() { }
 
         /// <summary>
         /// Class public constructor.
@@ -146,90 +144,136 @@ using System.Globalization;
         /// <summary>
         /// Chart type name
         /// </summary>
-        virtual public string Name            { get{ return ChartTypeNames.Point;}}
+        virtual public string Name
+        {
+            get { return ChartTypeNames.Point; }
+        }
 
         /// <summary>
         /// True if chart type is stacked
         /// </summary>
-        virtual public bool Stacked        { get{ return false;}}
-
+        virtual public bool Stacked
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// True if stacked chart type supports groups
         /// </summary>
-        virtual public bool SupportStackedGroups    { get { return false; } }
-
+        virtual public bool SupportStackedGroups
+        {
+            get { return false; }
+        }
 
         /// <summary>
-        /// True if stacked chart type should draw separately positive and 
+        /// True if stacked chart type should draw separately positive and
         /// negative data points ( Bar and column Stacked types ).
         /// </summary>
-        public bool StackSign        { get{ return false;}}
+        public bool StackSign
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// True if chart type supports axeses
         /// </summary>
-        virtual public bool RequireAxes    { get{ return true;} }
+        virtual public bool RequireAxes
+        {
+            get { return true; }
+        }
 
         /// <summary>
         /// Chart type with two y values used for scale ( bubble chart type )
         /// </summary>
-        virtual public bool SecondYScale{ get{ return false;} }
+        virtual public bool SecondYScale
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// True if chart type requires circular chart area.
         /// </summary>
-        public bool CircularChartArea    { get{ return false;} }
+        public bool CircularChartArea
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// True if chart type supports logarithmic axes
         /// </summary>
-        virtual public bool SupportLogarithmicAxes    { get{ return true;} }
+        virtual public bool SupportLogarithmicAxes
+        {
+            get { return true; }
+        }
 
         /// <summary>
         /// True if chart type requires to switch the value (Y) axes position
         /// </summary>
-        virtual public bool SwitchValueAxes    { get{ return false;} }
+        virtual public bool SwitchValueAxes
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// True if chart series can be placed side-by-side.
         /// </summary>
-        virtual public bool SideBySideSeries { get{ return false;} }
+        virtual public bool SideBySideSeries
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// True if each data point of a chart must be represented in the legend
         /// </summary>
-        virtual public bool DataPointsInLegend    { get{ return false;} }
+        virtual public bool DataPointsInLegend
+        {
+            get { return false; }
+        }
 
         /// <summary>
-        /// If the crossing value is auto Crossing value should be 
-        /// automatically set to zero for some chart 
+        /// If the crossing value is auto Crossing value should be
+        /// automatically set to zero for some chart
         /// types (Bar, column, area etc.)
         /// </summary>
-        virtual public bool ZeroCrossing { get{ return false;} }
+        virtual public bool ZeroCrossing
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// True if palette colors should be applied for each data paoint.
         /// Otherwise the color is applied to the series.
         /// </summary>
-        virtual public bool ApplyPaletteColorsToPoints    { get { return false; } }
+        virtual public bool ApplyPaletteColorsToPoints
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// Indicates that extra Y values are connected to the scale of the Y axis
         /// </summary>
-        virtual public bool ExtraYValuesConnectedToYAxis{ get { return false; } }
-        
-        /// <summary>
-        /// Indicates that it's a hundredred percent chart.
-        /// Axis scale from 0 to 100 percent should be used.
-        /// </summary>
-        virtual public bool HundredPercent{ get{return false;} }
+        virtual public bool ExtraYValuesConnectedToYAxis
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// Indicates that it's a hundredred percent chart.
         /// Axis scale from 0 to 100 percent should be used.
         /// </summary>
-        virtual public bool HundredPercentSupportNegative{ get{return false;} }
+        virtual public bool HundredPercent
+        {
+            get { return false; }
+        }
+
+        /// <summary>
+        /// Indicates that it's a hundredred percent chart.
+        /// Axis scale from 0 to 100 percent should be used.
+        /// </summary>
+        virtual public bool HundredPercentSupportNegative
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// How to draw series/points in legend:
@@ -243,9 +287,12 @@ using System.Globalization;
         }
 
         /// <summary>
-        /// Number of supported Y value(s) per point 
+        /// Number of supported Y value(s) per point
         /// </summary>
-        virtual public int YValuesPerPoint    { get { return 1; } }
+        virtual public int YValuesPerPoint
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// Gets chart type image.
@@ -254,7 +301,8 @@ using System.Globalization;
         /// <returns>Chart type image.</returns>
         virtual public System.Drawing.Image GetImage(ChartTypeRegistry registry)
         {
-            return (System.Drawing.Image)registry.ResourceManager.GetObject(this.Name + "ChartType");
+            return (System.Drawing.Image)
+                registry.ResourceManager.GetObject(this.Name + "ChartType");
         }
 
         #endregion
@@ -268,15 +316,20 @@ using System.Globalization;
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        virtual public void Paint( ChartGraphics graph, CommonElements common, ChartArea area, Series seriesToDraw )
-        {    
+        virtual public void Paint(
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area,
+            Series seriesToDraw
+        )
+        {
             this.Common = common;
             this.Area = area;
-            ProcessChartType( false, graph, common, area, seriesToDraw);
+            ProcessChartType(false, graph, common, area, seriesToDraw);
         }
 
         /// <summary>
-        /// This method recalculates size of the bars. This method is used 
+        /// This method recalculates size of the bars. This method is used
         /// from Paint or Select method.
         /// </summary>
         /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
@@ -284,45 +337,50 @@ using System.Globalization;
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        virtual protected void ProcessChartType( 
-            bool selection, 
-            ChartGraphics graph, 
-            CommonElements common, 
-            ChartArea area, 
-            Series seriesToDraw )
+        virtual protected void ProcessChartType(
+            bool selection,
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area,
+            Series seriesToDraw
+        )
         {
-            
             this.Common = common;
             // Prosess 3D chart type
-            if(area.Area3DStyle.Enable3D)
+            if (area.Area3DStyle.Enable3D)
             {
-                ProcessChartType3D( selection, graph, common, area, seriesToDraw );
+                ProcessChartType3D(selection, graph, common, area, seriesToDraw);
                 return;
             }
 
             // Check if series is indexed
-            if( ShiftedSerName.Length == 0)
+            if (ShiftedSerName.Length == 0)
             {
-                indexedSeries = ChartHelper.IndexedSeries(this.Common, area.GetSeriesFromChartType(this.Name).ToArray());
+                indexedSeries = ChartHelper.IndexedSeries(
+                    this.Common,
+                    area.GetSeriesFromChartType(this.Name).ToArray()
+                );
             }
             else
             {
-                indexedSeries = ChartHelper.IndexedSeries( common.DataManager.Series[ShiftedSerName] );
+                indexedSeries = ChartHelper.IndexedSeries(
+                    common.DataManager.Series[ShiftedSerName]
+                );
             }
 
             //************************************************************
             //** Loop through all series
             //************************************************************
-            foreach( Series ser in common.DataManager.Series )
+            foreach (Series ser in common.DataManager.Series)
             {
-                // Labels and markers have to be shifted if there 
-                // is more than one series for column chart. This property 
-                // will give a name of the series, which is used, for 
+                // Labels and markers have to be shifted if there
+                // is more than one series for column chart. This property
+                // will give a name of the series, which is used, for
                 // labels and markers.
-                bool    breakSeriesLoop = false;
-                if( ShiftedSerName.Length > 0)
+                bool breakSeriesLoop = false;
+                if (ShiftedSerName.Length > 0)
                 {
-                    if( ShiftedSerName != ser.Name )
+                    if (ShiftedSerName != ser.Name)
                     {
                         continue;
                     }
@@ -330,8 +388,16 @@ using System.Globalization;
                 }
 
                 // Process only point chart series in this chart area
-                if( String.Compare( ser.ChartTypeName, this.Name, true, System.Globalization.CultureInfo.CurrentCulture ) != 0 
-                    || ser.ChartArea != area.Name || !ser.IsVisible())
+                if (
+                    String.Compare(
+                        ser.ChartTypeName,
+                        this.Name,
+                        true,
+                        System.Globalization.CultureInfo.CurrentCulture
+                    ) != 0
+                    || ser.ChartArea != area.Name
+                    || !ser.IsVisible()
+                )
                 {
                     continue;
                 }
@@ -355,17 +421,19 @@ using System.Globalization;
                 //************************************************************
                 //** Call Back Paint event
                 //************************************************************
-                if( !selection )
+                if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition));
+                    common.Chart.CallOnPrePaint(
+                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                    );
                 }
 
                 //************************************************************
                 //** Loop through all data points in the series
                 //************************************************************
-                int    markerIndex = 0;        // Marker index
-                int    index = 1;                // Data points loop
-                foreach( DataPoint point in ser.Points )
+                int markerIndex = 0; // Marker index
+                int index = 1; // Data points loop
+                foreach (DataPoint point in ser.Points)
                 {
                     // Reset pre-calculated point position
                     point.positionRel = new PointF(float.NaN, float.NaN);
@@ -377,37 +445,36 @@ using System.Globalization;
                     // Check for min/max X values
                     double xValue = (indexedSeries) ? (double)index : point.XValue;
                     xValue = HAxis.GetLogValue(xValue);
-                    if(xValue > horizontalViewMax || xValue < horizontalViewMin)
+                    if (xValue > horizontalViewMax || xValue < horizontalViewMin)
                     {
                         index++;
                         continue;
                     }
 
                     // Check for min/max Y values
-                    double    yValue = GetYValue(common, area, ser, point, index - 1, YValueIndex);
+                    double yValue = GetYValue(common, area, ser, point, index - 1, YValueIndex);
 
                     // Axis is logarithmic
-                    yValue = VAxis.GetLogValue( yValue );
-                    
-                    if( yValue > verticalViewMax || yValue < verticalViewMin)
+                    yValue = VAxis.GetLogValue(yValue);
+
+                    if (yValue > verticalViewMax || yValue < verticalViewMin)
                     {
                         index++;
                         continue;
                     }
 
-
                     // Check if point should be drawn on the edge of the data scaleView.
-                    bool    skipMarker = false;
-                    if(!ShouldDrawMarkerOnViewEdgeX())
+                    bool skipMarker = false;
+                    if (!ShouldDrawMarkerOnViewEdgeX())
                     {
                         // Check for min/max X values
-                        if(xValue == horizontalViewMax && ShiftedX >= 0)
+                        if (xValue == horizontalViewMax && ShiftedX >= 0)
                         {
                             skipMarker = true;
                         }
 
                         // Check for min/max X values
-                        if(xValue == horizontalViewMin && ShiftedX <= 0)
+                        if (xValue == horizontalViewMin && ShiftedX <= 0)
                         {
                             skipMarker = true;
                         }
@@ -416,26 +483,25 @@ using System.Globalization;
                     //************************************************************
                     //** Get marker position and size
                     //************************************************************
-                    int            pointMarkerSize = point.MarkerSize;
-                    string        pointMarkerImage = point.MarkerImage;
-                    MarkerStyle    pointMarkerStyle = point.MarkerStyle;
-
+                    int pointMarkerSize = point.MarkerSize;
+                    string pointMarkerImage = point.MarkerImage;
+                    MarkerStyle pointMarkerStyle = point.MarkerStyle;
 
                     // Get marker position
                     PointF markerPosition = PointF.Empty;
                     markerPosition.Y = (float)VAxis.GetLinearPosition(yValue);
-                    if( indexedSeries )
+                    if (indexedSeries)
                     {
-                        // The formula for position is based on a distance 
+                        // The formula for position is based on a distance
                         // from the grid line or nPoints position.
-                        markerPosition.X = (float)HAxis.GetPosition( (double)index );
+                        markerPosition.X = (float)HAxis.GetPosition((double)index);
                     }
                     else
                     {
-                        markerPosition.X = (float)HAxis.GetPosition( point.XValue );
+                        markerPosition.X = (float)HAxis.GetPosition(point.XValue);
                     }
 
-                    // Labels and markers have to be shifted if there 
+                    // Labels and markers have to be shifted if there
                     // is more than one series for column chart.
                     markerPosition.X += (float)ShiftedX;
 
@@ -444,17 +510,18 @@ using System.Globalization;
 
                     // Get marker size
                     SizeF markerSize = GetMarkerSize(
-                        graph, 
-                        common, 
-                        area, 
-                        point, 
-                        pointMarkerSize, 
-                        pointMarkerImage);
+                        graph,
+                        common,
+                        area,
+                        point,
+                        pointMarkerSize,
+                        pointMarkerImage
+                    );
 
                     //************************************************************
                     //** Skip marker drawing
                     //************************************************************
-                    if( skipMarker )
+                    if (skipMarker)
                     {
                         index++;
                         continue;
@@ -463,40 +530,54 @@ using System.Globalization;
                     //************************************************************
                     //** Draw point chart
                     //************************************************************
-                    if(alwaysDrawMarkers || 
-                        pointMarkerStyle != MarkerStyle.None || 
-                        pointMarkerImage.Length > 0)
+                    if (
+                        alwaysDrawMarkers
+                        || pointMarkerStyle != MarkerStyle.None
+                        || pointMarkerImage.Length > 0
+                    )
                     {
-                        if( common.ProcessModePaint )
+                        if (common.ProcessModePaint)
                         {
-                        // Check marker index
-                            if(markerIndex == 0)
+                            // Check marker index
+                            if (markerIndex == 0)
                             {
                                 // Start Svg Selection mode
-                                graph.StartHotRegion( point );
+                                graph.StartHotRegion(point);
 
                                 // Draw the marker
                                 this.DrawPointMarker(
                                     graph,
                                     point.series,
                                     point,
-                                    markerPosition, 
-                                    (pointMarkerStyle == MarkerStyle.None) ? MarkerStyle.Circle : pointMarkerStyle,
+                                    markerPosition,
+                                    (pointMarkerStyle == MarkerStyle.None)
+                                        ? MarkerStyle.Circle
+                                        : pointMarkerStyle,
                                     (int)markerSize.Height,
-                                    (point.MarkerColor == Color.Empty) ? point.Color : point.MarkerColor,
-                                    (point.MarkerBorderColor == Color.Empty) ? point.BorderColor : point.MarkerBorderColor,
+                                    (point.MarkerColor == Color.Empty)
+                                        ? point.Color
+                                        : point.MarkerColor,
+                                    (point.MarkerBorderColor == Color.Empty)
+                                        ? point.BorderColor
+                                        : point.MarkerBorderColor,
                                     GetMarkerBorderSize(point),
                                     pointMarkerImage,
                                     point.MarkerImageTransparentColor,
                                     (point.series != null) ? point.series.ShadowOffset : 0,
                                     (point.series != null) ? point.series.ShadowColor : Color.Empty,
-                                    new RectangleF(markerPosition.X, markerPosition.Y, markerSize.Width, markerSize.Height));
+                                    new RectangleF(
+                                        markerPosition.X,
+                                        markerPosition.Y,
+                                        markerSize.Width,
+                                        markerSize.Height
+                                    )
+                                );
 
                                 // End Svg Selection mode
-                                graph.EndHotRegion( );
+                                graph.EndHotRegion();
                             }
 
-                            if( common.ProcessModeRegions )
+                            if (common.ProcessModeRegions)
                             {
                                 SetHotRegions(
                                     common,
@@ -506,47 +587,50 @@ using System.Globalization;
                                     point.series.Name,
                                     index - 1,
                                     pointMarkerStyle,
-                                    markerPosition );
+                                    markerPosition
+                                );
                             }
                         }
-                    
+
                         // Increase the markers counter
                         ++markerIndex;
-                        if(ser.MarkerStep == markerIndex)
+                        if (ser.MarkerStep == markerIndex)
                         {
                             markerIndex = 0;
                         }
                     }
 
                     // Start Svg Selection mode
-                    graph.StartHotRegion( point, true );
+                    graph.StartHotRegion(point, true);
 
                     // Draw labels
-                    DrawLabels( 
-                        area, 
-                        graph, 
-                        common, 
-                        markerPosition, 
-                        (int)markerSize.Height, 
-                        point, 
-                        ser, 
-                        index - 1);
+                    DrawLabels(
+                        area,
+                        graph,
+                        common,
+                        markerPosition,
+                        (int)markerSize.Height,
+                        point,
+                        ser,
+                        index - 1
+                    );
 
                     // End Svg Selection mode
-                    graph.EndHotRegion( );
+                    graph.EndHotRegion();
 
-                
                     ++index;
                 }
-                        
+
                 // Call Paint event
-                if( !selection )
+                if (!selection)
                 {
-                    common.Chart.CallOnPostPaint(new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition));
+                    common.Chart.CallOnPostPaint(
+                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                    );
                 }
-            
+
                 // Break series loop.
-                if( breakSeriesLoop )
+                if (breakSeriesLoop)
                 {
                     break;
                 }
@@ -574,36 +658,37 @@ using System.Globalization;
             ChartGraphics graph,
             Series series,
             DataPoint dataPoint,
-            PointF point, 
-            MarkerStyle markerStyle, 
-            int markerSize, 
-            Color markerColor, 
-            Color markerBorderColor, 
-            int markerBorderSize, 
-            string markerImage, 
-            Color markerImageTransparentColor, 
-            int shadowSize, 
-            Color shadowColor, 
+            PointF point,
+            MarkerStyle markerStyle,
+            int markerSize,
+            Color markerColor,
+            Color markerBorderColor,
+            int markerBorderSize,
+            string markerImage,
+            Color markerImageTransparentColor,
+            int shadowSize,
+            Color shadowColor,
             RectangleF imageScaleRect
-            )
+        )
         {
             // Draw marker using relative coordinates
             graph.DrawMarkerRel(
-                point, 
+                point,
                 markerStyle,
                 markerSize,
-                markerColor, 
-                markerBorderColor, 
-                markerBorderSize, 
-                markerImage, 
-                markerImageTransparentColor, 
-                shadowSize, 
-                shadowColor, 
-                imageScaleRect);
+                markerColor,
+                markerBorderColor,
+                markerBorderSize,
+                markerImage,
+                markerImageTransparentColor,
+                shadowSize,
+                shadowColor,
+                imageScaleRect
+            );
         }
 
         /// <summary>
-        /// Inserts Hot Regions used for image maps, tool tips and 
+        /// Inserts Hot Regions used for image maps, tool tips and
         /// hit test function
         /// </summary>
         /// <param name="common">Common elements object</param>
@@ -614,30 +699,52 @@ using System.Globalization;
         /// <param name="pointIndex">Data point index</param>
         /// <param name="pointMarkerStyle">Marker Style</param>
         /// <param name="markerPosition">Marker Position</param>
-        private void SetHotRegions( CommonElements common, ChartGraphics graph, DataPoint point, SizeF markerSize, string seriesName, int pointIndex, MarkerStyle pointMarkerStyle, PointF markerPosition )
+        private void SetHotRegions(
+            CommonElements common,
+            ChartGraphics graph,
+            DataPoint point,
+            SizeF markerSize,
+            string seriesName,
+            int pointIndex,
+            MarkerStyle pointMarkerStyle,
+            PointF markerPosition
+        )
         {
-            
             // Get relative marker size
             SizeF relativeMarkerSize = graph.GetRelativeSize(markerSize);
 
             int insertIndex = common.HotRegionsList.FindInsertIndex();
 
             // Insert circle area
-            if( pointMarkerStyle == MarkerStyle.Circle )
+            if (pointMarkerStyle == MarkerStyle.Circle)
             {
-                common.HotRegionsList.AddHotRegion( insertIndex, graph, markerPosition.X, markerPosition.Y, relativeMarkerSize.Width/2f, point, seriesName, pointIndex ); 
+                common.HotRegionsList.AddHotRegion(
+                    insertIndex,
+                    graph,
+                    markerPosition.X,
+                    markerPosition.Y,
+                    relativeMarkerSize.Width / 2f,
+                    point,
+                    seriesName,
+                    pointIndex
+                );
             }
             // All other markers represented as rectangles
             else
             {
                 // Insert area
-                common.HotRegionsList.AddHotRegion( 
-                    new RectangleF(markerPosition.X - relativeMarkerSize.Width/2f, markerPosition.Y - relativeMarkerSize.Height/2f, relativeMarkerSize.Width, relativeMarkerSize.Height),
+                common.HotRegionsList.AddHotRegion(
+                    new RectangleF(
+                        markerPosition.X - relativeMarkerSize.Width / 2f,
+                        markerPosition.Y - relativeMarkerSize.Height / 2f,
+                        relativeMarkerSize.Width,
+                        relativeMarkerSize.Height
+                    ),
                     point,
                     seriesName,
-                    pointIndex );
+                    pointIndex
+                );
             }
-        
         }
 
         /// <summary>
@@ -651,25 +758,30 @@ using System.Globalization;
         /// <param name="point">Data point</param>
         /// <param name="ser">Data series</param>
         /// <param name="pointIndex">Data point index.</param>
-        private void DrawLabels( 
-            ChartArea area, 
-            ChartGraphics graph, 
-            CommonElements common, 
-            PointF markerPosition, 
-            int markerSize, 
-            DataPoint point, 
+        private void DrawLabels(
+            ChartArea area,
+            ChartGraphics graph,
+            CommonElements common,
+            PointF markerPosition,
+            int markerSize,
+            DataPoint point,
             Series ser,
-            int pointIndex)
+            int pointIndex
+        )
         {
             // Get some properties for performance
-            string    pointLabel = point.Label;
-            bool    pointShowLabelAsValue = point.IsValueShownAsLabel;
+            string pointLabel = point.Label;
+            bool pointShowLabelAsValue = point.IsValueShownAsLabel;
 
             // ****************************
             // Draw data point value label
             // ****************************
-            if((!point.IsEmpty && (ser.IsValueShownAsLabel || pointShowLabelAsValue || pointLabel.Length > 0)) ||
-                (pointShowLabelAsValue || pointLabel.Length > 0))
+            if (
+                (
+                    !point.IsEmpty
+                    && (ser.IsValueShownAsLabel || pointShowLabelAsValue || pointLabel.Length > 0)
+                ) || (pointShowLabelAsValue || pointLabel.Length > 0)
+            )
             {
                 // Label text format
                 using (StringFormat format = new StringFormat())
@@ -685,10 +797,13 @@ using System.Globalization;
                             ser.Chart,
                             point,
                             point.Tag,
-                            point.YValues[(labelYValueIndex == -1) ? YValueIndex : labelYValueIndex],
+                            point.YValues[
+                                (labelYValueIndex == -1) ? YValueIndex : labelYValueIndex
+                            ],
                             point.LabelFormat,
                             ser.YValueType,
-                            ChartElementType.DataPoint);
+                            ChartElementType.DataPoint
+                        );
                     }
                     else
                     {
@@ -698,10 +813,22 @@ using System.Globalization;
                     // Get point label style attribute
                     SizeF sizeMarker = graph.GetRelativeSize(new SizeF(markerSize, markerSize));
                     SizeF sizeFont = graph.GetRelativeSize(
-                        graph.MeasureString(text, point.Font, new SizeF(1000f, 1000f), StringFormat.GenericTypographic));
+                        graph.MeasureString(
+                            text,
+                            point.Font,
+                            new SizeF(1000f, 1000f),
+                            StringFormat.GenericTypographic
+                        )
+                    );
 
                     SizeF sizeSingleCharacter = graph.GetRelativeSize(
-                        graph.MeasureString("W", point.Font, new SizeF(1000f, 1000f), StringFormat.GenericTypographic));
+                        graph.MeasureString(
+                            "W",
+                            point.Font,
+                            new SizeF(1000f, 1000f),
+                            StringFormat.GenericTypographic
+                        )
+                    );
 
                     // Increase label size when background is drawn
                     SizeF sizeLabel = new SizeF(sizeFont.Width, sizeFont.Height);
@@ -725,45 +852,76 @@ using System.Globalization;
                         {
                             this.autoLabelPosition = true;
                         }
-                        else if (String.Compare(attrib, "Center", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            String.Compare(attrib, "Center", StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
                         {
                             this.labelPosition = LabelAlignmentStyles.Center;
                         }
-                        else if (String.Compare(attrib, "Bottom", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            String.Compare(attrib, "Bottom", StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
                         {
                             this.labelPosition = LabelAlignmentStyles.Bottom;
                         }
-                        else if (String.Compare(attrib, "TopLeft", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            String.Compare(attrib, "TopLeft", StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
                         {
                             this.labelPosition = LabelAlignmentStyles.TopLeft;
                         }
-                        else if (String.Compare(attrib, "TopRight", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            String.Compare(attrib, "TopRight", StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
                         {
                             this.labelPosition = LabelAlignmentStyles.TopRight;
                         }
-                        else if (String.Compare(attrib, "BottomLeft", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            String.Compare(attrib, "BottomLeft", StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
                         {
                             this.labelPosition = LabelAlignmentStyles.BottomLeft;
                         }
-                        else if (String.Compare(attrib, "BottomRight", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            String.Compare(
+                                attrib,
+                                "BottomRight",
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             this.labelPosition = LabelAlignmentStyles.BottomRight;
                         }
-                        else if (String.Compare(attrib, "Left", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            String.Compare(attrib, "Left", StringComparison.OrdinalIgnoreCase) == 0
+                        )
                         {
                             this.labelPosition = LabelAlignmentStyles.Left;
                         }
-                        else if (String.Compare(attrib, "Right", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            String.Compare(attrib, "Right", StringComparison.OrdinalIgnoreCase) == 0
+                        )
                         {
                             this.labelPosition = LabelAlignmentStyles.Right;
                         }
-                        else if (String.Compare(attrib, "Top", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            String.Compare(attrib, "Top", StringComparison.OrdinalIgnoreCase) == 0
+                        )
                         {
                             this.labelPosition = LabelAlignmentStyles.Top;
                         }
                         else
                         {
-                            throw (new ArgumentException(SR.ExceptionCustomAttributeValueInvalid(attrib, "LabelStyle")));
+                            throw (
+                                new ArgumentException(
+                                    SR.ExceptionCustomAttributeValueInvalid(attrib, "LabelStyle")
+                                )
+                            );
                         }
                     }
 
@@ -830,8 +988,6 @@ using System.Globalization;
                     // Check if text contains white space only
                     if (text.Trim().Length != 0)
                     {
-
-
                         // Check if Smart Labels are enabled
                         if (ser.SmartLabelStyle.Enabled)
                         {
@@ -846,13 +1002,12 @@ using System.Globalization;
                                 format,
                                 markerPosition,
                                 sizeMarker,
-                                this.labelPosition);
+                                this.labelPosition
+                            );
 
                             // Smart labels always use 0 degrees text angle
                             textAngle = 0;
                         }
-
-
 
                         // Adjust alignment of vertical labels
                         // NOTE: Fixes issue #4560
@@ -901,7 +1056,8 @@ using System.Globalization;
                                 position,
                                 sizeLabel,
                                 format,
-                                true);
+                                true
+                            );
 
                             // Adjust rectangle position due to horizontal spacing
                             switch (this.labelPosition)
@@ -944,14 +1100,14 @@ using System.Globalization;
                                     point.LabelBorderDashStyle,
                                     ser,
                                     point,
-                                    pointIndex);
+                                    pointIndex
+                                );
                             }
                         }
                     }
                 }
             }
         }
-
 
         /// <summary>
         /// Gets rectangle position of the label.
@@ -964,61 +1120,62 @@ using System.Globalization;
         /// <returns>Label rectangle position.</returns>
         internal static RectangleF GetLabelPosition(
             ChartGraphics graph,
-            PointF position, 
+            PointF position,
             SizeF size,
             StringFormat format,
-            bool adjustForDrawing)
+            bool adjustForDrawing
+        )
         {
             // Calculate label position rectangle
-            RectangleF    labelPosition = RectangleF.Empty;
+            RectangleF labelPosition = RectangleF.Empty;
             labelPosition.Width = size.Width;
             labelPosition.Height = size.Height;
 
             // Calculate pixel size in relative coordiantes
-            SizeF    pixelSize = SizeF.Empty;
-            if(graph != null)
+            SizeF pixelSize = SizeF.Empty;
+            if (graph != null)
             {
                 pixelSize = graph.GetRelativeSize(new SizeF(1f, 1f));
             }
 
-            if(format.Alignment == StringAlignment.Far)
+            if (format.Alignment == StringAlignment.Far)
             {
                 labelPosition.X = position.X - size.Width;
-                if(adjustForDrawing && !pixelSize.IsEmpty)
+                if (adjustForDrawing && !pixelSize.IsEmpty)
                 {
-                    labelPosition.X -= 4f*pixelSize.Width;
-                    labelPosition.Width += 4f*pixelSize.Width;
+                    labelPosition.X -= 4f * pixelSize.Width;
+                    labelPosition.Width += 4f * pixelSize.Width;
                 }
             }
-            else if(format.Alignment == StringAlignment.Near)
+            else if (format.Alignment == StringAlignment.Near)
             {
                 labelPosition.X = position.X;
-                if(adjustForDrawing && !pixelSize.IsEmpty)
+                if (adjustForDrawing && !pixelSize.IsEmpty)
                 {
-                    labelPosition.Width += 4f*pixelSize.Width;
+                    labelPosition.Width += 4f * pixelSize.Width;
                 }
             }
-            else if(format.Alignment == StringAlignment.Center)
+            else if (format.Alignment == StringAlignment.Center)
             {
-                labelPosition.X = position.X - size.Width/2F;
-                if(adjustForDrawing && !pixelSize.IsEmpty)
+                labelPosition.X = position.X - size.Width / 2F;
+                if (adjustForDrawing && !pixelSize.IsEmpty)
                 {
-                    labelPosition.X -= 2f*pixelSize.Width;
-                    labelPosition.Width += 4f*pixelSize.Width;
+                    labelPosition.X -= 2f * pixelSize.Width;
+                    labelPosition.Width += 4f * pixelSize.Width;
                 }
             }
 
-            if(format.LineAlignment == StringAlignment.Far)
+            if (format.LineAlignment == StringAlignment.Far)
             {
                 labelPosition.Y = position.Y - size.Height;
             }
-            else if(format.LineAlignment == StringAlignment.Near)
+            else if (format.LineAlignment == StringAlignment.Near)
             {
                 labelPosition.Y = position.Y;
             }
-            else if(format.LineAlignment == StringAlignment.Center)
+            else if (format.LineAlignment == StringAlignment.Center)
             {
-                labelPosition.Y = position.Y - size.Height/2F;
+                labelPosition.Y = position.Y - size.Height / 2F;
             }
 
             labelPosition.Y -= 1f * pixelSize.Height;
@@ -1031,7 +1188,7 @@ using System.Globalization;
         #region 3D painting and Selection
 
         /// <summary>
-        /// This method recalculates size of the point marker. This method is used 
+        /// This method recalculates size of the point marker. This method is used
         /// from Paint or Select method.
         /// </summary>
         /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
@@ -1039,18 +1196,17 @@ using System.Globalization;
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         /// <param name="seriesToDraw">Chart series to draw.</param>
-        virtual protected void ProcessChartType3D( 
-            bool selection, 
-            ChartGraphics graph, 
-            CommonElements common, 
-            ChartArea area, 
-            Series seriesToDraw )
+        virtual protected void ProcessChartType3D(
+            bool selection,
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area,
+            Series seriesToDraw
+        )
         {
-            
             // Get list of series to draw
             List<string> typeSeries = null;
-            if( (area.Area3DStyle.IsClustered && this.SideBySideSeries) ||
-                this.Stacked)
+            if ((area.Area3DStyle.IsClustered && this.SideBySideSeries) || this.Stacked)
             {
                 // Draw all series of the same chart type
                 typeSeries = area.GetSeriesFromChartType(Name);
@@ -1062,31 +1218,31 @@ using System.Globalization;
                 typeSeries.Add(seriesToDraw.Name);
             }
 
-
             //************************************************************
             //** Get order of data points drawing
             //************************************************************
-            ArrayList    dataPointDrawingOrder = area.GetDataPointDrawingOrder(typeSeries, this, selection, COPCoordinates.X, null, this.YValueIndex, false);
+            ArrayList dataPointDrawingOrder = area.GetDataPointDrawingOrder(
+                typeSeries,
+                this,
+                selection,
+                COPCoordinates.X,
+                null,
+                this.YValueIndex,
+                false
+            );
 
             //************************************************************
             //** Loop through all data poins
             //************************************************************
-            foreach(object obj in dataPointDrawingOrder)
+            foreach (object obj in dataPointDrawingOrder)
             {
                 // Process single point
-                ProcessSinglePoint3D(
-                    (DataPoint3D) obj,
-                    graph, 
-                    common, 
-                    area
-                    );
+                ProcessSinglePoint3D((DataPoint3D)obj, graph, common, area);
             }
 
             // Finish processing 3D labels
             this.DrawAccumulated3DLabels(graph, common, area);
-            
         }
-
 
         /// <summary>
         /// Draws\Hit tests single 3D point.
@@ -1095,16 +1251,16 @@ using System.Globalization;
         /// <param name="graph">The Chart Graphics object.</param>
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
-        internal void ProcessSinglePoint3D( 
-            DataPoint3D    pointEx,
-            ChartGraphics graph, 
-            CommonElements common, 
+        internal void ProcessSinglePoint3D(
+            DataPoint3D pointEx,
+            ChartGraphics graph,
+            CommonElements common,
             ChartArea area
-            )
+        )
         {
             // Get point & series
-            DataPoint    point = pointEx.dataPoint;
-            Series        ser = point.series;
+            DataPoint point = pointEx.dataPoint;
+            Series ser = point.series;
 
             // Reset pre-calculated point position
             point.positionRel = new PointF(float.NaN, float.NaN);
@@ -1120,12 +1276,19 @@ using System.Globalization;
             //************************************************************
 
             // Check for min/max Y values
-            double    yValue = GetYValue(common, area, ser, pointEx.dataPoint, pointEx.index - 1, YValueIndex);
+            double yValue = GetYValue(
+                common,
+                area,
+                ser,
+                pointEx.dataPoint,
+                pointEx.index - 1,
+                YValueIndex
+            );
 
             // Axis is logarithmic
-            yValue = VAxis.GetLogValue( yValue );
-                
-            if( yValue > VAxis.ViewMaximum || yValue < VAxis.ViewMinimum)
+            yValue = VAxis.GetLogValue(yValue);
+
+            if (yValue > VAxis.ViewMaximum || yValue < VAxis.ViewMinimum)
             {
                 return;
             }
@@ -1133,22 +1296,22 @@ using System.Globalization;
             // Check for min/max X values
             double xValue = (pointEx.indexedSeries) ? (double)pointEx.index : point.XValue;
             xValue = HAxis.GetLogValue(xValue);
-            if(xValue > HAxis.ViewMaximum || xValue < HAxis.ViewMinimum)
+            if (xValue > HAxis.ViewMaximum || xValue < HAxis.ViewMinimum)
             {
                 return;
             }
 
             // Check if point should be drawn on the edge of the data scaleView.
-            if(!ShouldDrawMarkerOnViewEdgeX())
+            if (!ShouldDrawMarkerOnViewEdgeX())
             {
                 // Check for min/max X values
-                if(xValue == HAxis.ViewMaximum && ShiftedX >= 0)
+                if (xValue == HAxis.ViewMaximum && ShiftedX >= 0)
                 {
                     return;
                 }
 
                 // Check for min/max X values
-                if(xValue == HAxis.ViewMinimum && ShiftedX <= 0)
+                if (xValue == HAxis.ViewMinimum && ShiftedX <= 0)
                 {
                     return;
                 }
@@ -1161,9 +1324,9 @@ using System.Globalization;
             // Get marker position
             PointF markerPosition = PointF.Empty;
             markerPosition.Y = (float)pointEx.yPosition;
-            markerPosition.X = (float)HAxis.GetLinearPosition(xValue);    // No Log transformation required. Done above!
+            markerPosition.X = (float)HAxis.GetLinearPosition(xValue); // No Log transformation required. Done above!
 
-            // Labels and markers have to be shifted if there 
+            // Labels and markers have to be shifted if there
             // is more than one series for column chart.
             markerPosition.X += (float)ShiftedX;
 
@@ -1171,92 +1334,116 @@ using System.Globalization;
             point.positionRel = new PointF(markerPosition.X, markerPosition.Y);
 
             // Get point some point properties and save them in variables
-            int            pointMarkerSize = point.MarkerSize;
-            string        pointMarkerImage = point.MarkerImage;
-            MarkerStyle    pointMarkerStyle = point.MarkerStyle;
+            int pointMarkerSize = point.MarkerSize;
+            string pointMarkerImage = point.MarkerImage;
+            MarkerStyle pointMarkerStyle = point.MarkerStyle;
 
             // Get marker size
             SizeF markerSize = GetMarkerSize(
-                graph, 
-                common, 
-                area, 
-                point, 
-                pointMarkerSize, 
-                pointMarkerImage);
+                graph,
+                common,
+                area,
+                point,
+                pointMarkerSize,
+                pointMarkerImage
+            );
 
             //************************************************************
             //** Transform marker position in 3D space
             //************************************************************
             // Get projection coordinates
-            Point3D[]    marker3DPosition = new Point3D[1];
-            marker3DPosition[0] = new Point3D(markerPosition.X, markerPosition.Y, (float)(pointEx.zPosition + ((this.middleMarker) ? pointEx.depth/2f : pointEx.depth)));
+            Point3D[] marker3DPosition = new Point3D[1];
+            marker3DPosition[0] = new Point3D(
+                markerPosition.X,
+                markerPosition.Y,
+                (float)(
+                    pointEx.zPosition + ((this.middleMarker) ? pointEx.depth / 2f : pointEx.depth)
+                )
+            );
 
             // Transform coordinates of text size
             area.matrix3D.TransformPoints(marker3DPosition);
-            PointF    markerRotatedPosition = marker3DPosition[0].PointF;
+            PointF markerRotatedPosition = marker3DPosition[0].PointF;
 
             //************************************************************
             //** Draw point chart
             //************************************************************
             GraphicsPath rectPath = null;
-            
-            if(alwaysDrawMarkers || 
-                pointMarkerStyle != MarkerStyle.None || 
-                pointMarkerImage.Length > 0)
+
+            if (
+                alwaysDrawMarkers
+                || pointMarkerStyle != MarkerStyle.None
+                || pointMarkerImage.Length > 0
+            )
             {
                 // Check marker index
-                if((pointEx.index % ser.MarkerStep) == 0)
+                if ((pointEx.index % ser.MarkerStep) == 0)
                 {
                     // Detect if we need to get graphical path of drawn object
-                    DrawingOperationTypes    drawingOperationType = DrawingOperationTypes.DrawElement;
-                
-                    if( common.ProcessModeRegions )
+                    DrawingOperationTypes drawingOperationType = DrawingOperationTypes.DrawElement;
+
+                    if (common.ProcessModeRegions)
                     {
                         drawingOperationType |= DrawingOperationTypes.CalcElementPath;
                     }
 
                     // Start Svg Selection mode
-                    graph.StartHotRegion( point );
+                    graph.StartHotRegion(point);
 
                     // Draw the marker
-                    rectPath = graph.DrawMarker3D(area.matrix3D, 
+                    rectPath = graph.DrawMarker3D(
+                        area.matrix3D,
                         area.Area3DStyle.LightStyle,
-                        pointEx.zPosition + ((this.middleMarker) ? pointEx.depth/2f : pointEx.depth),
-                        markerPosition, 
-                        (pointMarkerStyle == MarkerStyle.None) ? MarkerStyle.Circle : pointMarkerStyle,
+                        pointEx.zPosition
+                            + ((this.middleMarker) ? pointEx.depth / 2f : pointEx.depth),
+                        markerPosition,
+                        (pointMarkerStyle == MarkerStyle.None)
+                            ? MarkerStyle.Circle
+                            : pointMarkerStyle,
                         (int)markerSize.Height,
                         (point.MarkerColor == Color.Empty) ? point.Color : point.MarkerColor,
-                        (point.MarkerBorderColor == Color.Empty) ? point.BorderColor : point.MarkerBorderColor,
+                        (point.MarkerBorderColor == Color.Empty)
+                            ? point.BorderColor
+                            : point.MarkerBorderColor,
                         GetMarkerBorderSize(point),
                         pointMarkerImage,
                         point.MarkerImageTransparentColor,
                         (point.series != null) ? point.series.ShadowOffset : 0,
                         (point.series != null) ? point.series.ShadowColor : Color.Empty,
-                        new RectangleF(markerRotatedPosition.X, markerRotatedPosition.Y, markerSize.Width, markerSize.Height),
-                        drawingOperationType);
+                        new RectangleF(
+                            markerRotatedPosition.X,
+                            markerRotatedPosition.Y,
+                            markerSize.Width,
+                            markerSize.Height
+                        ),
+                        drawingOperationType
+                    );
 
                     // End Svg Selection mode
-                    graph.EndHotRegion( );
+                    graph.EndHotRegion();
                 }
             }
 
-
             //**********************************************************************
-            //** Data point label is not drawn with the data point. Instead the 
-            //** information about label is collected and drawn when all points 
+            //** Data point label is not drawn with the data point. Instead the
+            //** information about label is collected and drawn when all points
             //** with current Z position are drawn.
             //** This is done to achieve correct Z order layering of labels.
             //**********************************************************************
-            if(this.label3DInfoList != null && 
-                this.label3DInfoList.Count > 0 &&
-                ((Label3DInfo)this.label3DInfoList[this.label3DInfoList.Count-1]).PointEx.zPosition != pointEx.zPosition)
+            if (
+                this.label3DInfoList != null
+                && this.label3DInfoList.Count > 0
+                && ((Label3DInfo)this.label3DInfoList[this.label3DInfoList.Count - 1])
+                    .PointEx
+                    .zPosition != pointEx.zPosition
+            )
             {
                 // Draw labels with information previously collected
                 this.DrawAccumulated3DLabels(graph, common, area);
             }
 
             // Check if labels info list was created
-            if(this.label3DInfoList == null)
+            if (this.label3DInfoList == null)
             {
                 this.label3DInfoList = new ArrayList();
             }
@@ -1268,7 +1455,7 @@ using System.Globalization;
             label3DInfo.MarkerSize = markerSize;
             this.label3DInfoList.Add(label3DInfo);
 
-            if( common.ProcessModeRegions )
+            if (common.ProcessModeRegions)
             {
                 // Get relative marker size
                 SizeF relativeMarkerSize = graph.GetRelativeSize(markerSize);
@@ -1277,47 +1464,51 @@ using System.Globalization;
                 int insertIndex = common.HotRegionsList.FindInsertIndex();
 
                 // Insert circle area
-                if(pointMarkerStyle == MarkerStyle.Circle)
+                if (pointMarkerStyle == MarkerStyle.Circle)
                 {
-                    float[]    circCoord = new float[3];
+                    float[] circCoord = new float[3];
                     circCoord[0] = markerRotatedPosition.X;
                     circCoord[1] = markerRotatedPosition.Y;
-                    circCoord[2] = relativeMarkerSize.Width/2f;
+                    circCoord[2] = relativeMarkerSize.Width / 2f;
 
-                    common.HotRegionsList.AddHotRegion( 
-                        insertIndex, 
-                        graph, 
-                        circCoord[0], 
-                        circCoord[1], 
-                        circCoord[2], 
-                        point, 
-                        ser.Name, 
-                        pointEx.index - 1 
-                        ); 
-                }
-
-                // Insert path for 3D bar
-                if(pointMarkerStyle == MarkerStyle.Square)
-                {
-                    common.HotRegionsList.AddHotRegion( 
-                        rectPath, 
-                        false, 
-                        graph, 
-                        point, 
-                        ser.Name, 
-                        pointEx.index - 1 
-                        );
-                }
-
-                // All other markers represented as rectangles
-                else
-                {
-                    common.HotRegionsList.AddHotRegion( 
-                        new RectangleF(markerRotatedPosition.X - relativeMarkerSize.Width/2f, markerRotatedPosition.Y - relativeMarkerSize.Height/2f, relativeMarkerSize.Width, relativeMarkerSize.Height),
+                    common.HotRegionsList.AddHotRegion(
+                        insertIndex,
+                        graph,
+                        circCoord[0],
+                        circCoord[1],
+                        circCoord[2],
                         point,
                         ser.Name,
                         pointEx.index - 1
-                        );
+                    );
+                }
+
+                // Insert path for 3D bar
+                if (pointMarkerStyle == MarkerStyle.Square)
+                {
+                    common.HotRegionsList.AddHotRegion(
+                        rectPath,
+                        false,
+                        graph,
+                        point,
+                        ser.Name,
+                        pointEx.index - 1
+                    );
+                }
+                // All other markers represented as rectangles
+                else
+                {
+                    common.HotRegionsList.AddHotRegion(
+                        new RectangleF(
+                            markerRotatedPosition.X - relativeMarkerSize.Width / 2f,
+                            markerRotatedPosition.Y - relativeMarkerSize.Height / 2f,
+                            relativeMarkerSize.Width,
+                            relativeMarkerSize.Height
+                        ),
+                        point,
+                        ser.Name,
+                        pointEx.index - 1
+                    );
                 }
             }
             if (rectPath != null)
@@ -1333,25 +1524,26 @@ using System.Globalization;
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
         internal void DrawAccumulated3DLabels(
-            ChartGraphics graph, 
-            CommonElements common, 
-            ChartArea area)
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area
+        )
         {
-            if(this.label3DInfoList != null)
+            if (this.label3DInfoList != null)
             {
-                foreach(Label3DInfo labelInfo in this.label3DInfoList)
+                foreach (Label3DInfo labelInfo in this.label3DInfoList)
                 {
                     // Draw labels
-                    DrawLabels( 
-                        area, 
-                        graph, 
-                        common, 
-                        labelInfo.MarkerPosition, 
-                        (int)labelInfo.MarkerSize.Height, 
-                        labelInfo.PointEx.dataPoint, 
-                        labelInfo.PointEx.dataPoint.series, 
-                        labelInfo.PointEx.index - 1);
-    
+                    DrawLabels(
+                        area,
+                        graph,
+                        common,
+                        labelInfo.MarkerPosition,
+                        (int)labelInfo.MarkerSize.Height,
+                        labelInfo.PointEx.dataPoint,
+                        labelInfo.PointEx.dataPoint.series,
+                        labelInfo.PointEx.index - 1
+                    );
                 }
 
                 // Clear labels info list
@@ -1404,12 +1596,13 @@ using System.Globalization;
         /// <param name="markerImage">Marker image.</param>
         /// <returns>Marker width and height.</returns>
         virtual protected SizeF GetMarkerSize(
-            ChartGraphics graph, 
-            CommonElements common, 
-            ChartArea area, 
-            DataPoint point, 
-            int markerSize, 
-            string markerImage)
+            ChartGraphics graph,
+            CommonElements common,
+            ChartArea area,
+            DataPoint point,
+            int markerSize,
+            string markerImage
+        )
         {
             SizeF size = new SizeF(markerSize, markerSize);
             if (graph != null && graph.Graphics != null)
@@ -1418,7 +1611,7 @@ using System.Globalization;
                 size.Width = markerSize * graph.Graphics.DpiX / 96;
                 size.Height = markerSize * graph.Graphics.DpiY / 96;
             }
-            
+
             if (markerImage.Length > 0) // Get image size
                 common.ImageLoader.GetAdjustedImageSize(markerImage, graph.Graphics, ref size);
 
@@ -1430,41 +1623,31 @@ using System.Globalization;
         #region Labels shifting properties
 
         /// <summary>
-        /// Labels and markers have to be shifted if there 
+        /// Labels and markers have to be shifted if there
         /// is more than one series for column chart.
         /// NOT USED IN POINT CHART.
         /// </summary>
         virtual public double ShiftedX
         {
-            get
-            {
-                return 0;
-            }
-            set
-            {
-            }
+            get { return 0; }
+            set { }
         }
 
         /// <summary>
-        /// Labels and markers have to be shifted if there 
-        /// is more than one series for column chart. This property 
-        /// will give a name of the series, which is used, for 
+        /// Labels and markers have to be shifted if there
+        /// is more than one series for column chart. This property
+        /// will give a name of the series, which is used, for
         /// labels and markers.
         /// NOT USED IN POINT CHART.
         /// </summary>
         virtual public string ShiftedSerName
         {
-            get
-            {
-                return "";
-            }
-            set
-            {
-            }
+            get { return ""; }
+            set { }
         }
 
         #endregion
-        
+
         #region Y values related methods
 
         /// <summary>
@@ -1478,16 +1661,16 @@ using System.Globalization;
         /// <param name="yValueIndex">Index of the Y value to get.</param>
         /// <returns>Y value of the point.</returns>
         virtual public double GetYValue(
-            CommonElements common, 
-            ChartArea area, 
-            Series series, 
-            DataPoint point, 
-            int pointIndex, 
-            int yValueIndex)
+            CommonElements common,
+            ChartArea area,
+            Series series,
+            DataPoint point,
+            int pointIndex,
+            int yValueIndex
+        )
         {
-
             // Point chart do not have height
-            if(yValueIndex == -1)
+            if (yValueIndex == -1)
             {
                 return 0.0;
             }
@@ -1495,13 +1678,20 @@ using System.Globalization;
             // Check required Y values number
             if (point.YValues.Length <= yValueIndex)
             {
-                throw (new InvalidOperationException(SR.ExceptionChartTypeRequiresYValues(this.Name, this.YValuesPerPoint.ToString(CultureInfo.InvariantCulture))));
+                throw (
+                    new InvalidOperationException(
+                        SR.ExceptionChartTypeRequiresYValues(
+                            this.Name,
+                            this.YValuesPerPoint.ToString(CultureInfo.InvariantCulture)
+                        )
+                    )
+                );
             }
-            
+
             // Check empty point
             if (point.IsEmpty || double.IsNaN(point.YValues[yValueIndex]))
             {
-                double result = GetEmptyPointValue( point, pointIndex );
+                double result = GetEmptyPointValue(point, pointIndex);
 
                 // NOTE: Fixes issue #6921
                 // If empty point Y value is zero then check if the scale of
@@ -1529,50 +1719,50 @@ using System.Globalization;
         }
 
         /// <summary>
-        /// This method will find previous and next data point, which is not 
-        /// empty and recalculate a new value for current empty data point. 
-        /// New value depends on custom attribute “EmptyPointValue” and 
+        /// This method will find previous and next data point, which is not
+        /// empty and recalculate a new value for current empty data point.
+        /// New value depends on custom attribute ï¿½EmptyPointValueï¿½ and
         /// it could be zero or average.
         /// </summary>
         /// <param name="point">IsEmpty data point.</param>
         /// <param name="pointIndex">IsEmpty data point index.</param>
         /// <returns>A Value for empty data point.</returns>
-        internal double GetEmptyPointValue( DataPoint point, int pointIndex )
+        internal double GetEmptyPointValue(DataPoint point, int pointIndex)
         {
-            Series    series = point.series;                // Data series
-            double    previousPoint = 0;                    // Previous data point value (not empty)
-            double    nextPoint = 0;                        // Next data point value (not empty)
-            int        prevIndx = 0;                        // Previous data point index
-            int        nextIndx = series.Points.Count - 1;    // Next data point index
+            Series series = point.series; // Data series
+            double previousPoint = 0; // Previous data point value (not empty)
+            double nextPoint = 0; // Next data point value (not empty)
+            int prevIndx = 0; // Previous data point index
+            int nextIndx = series.Points.Count - 1; // Next data point index
 
             //************************************************************
             //** Check custom attribute "EmptyPointValue"
             //************************************************************
             string emptyPointValue = "";
-            if( series.EmptyPointStyle.IsCustomPropertySet(CustomPropertyName.EmptyPointValue) )
+            if (series.EmptyPointStyle.IsCustomPropertySet(CustomPropertyName.EmptyPointValue))
             {
                 emptyPointValue = series.EmptyPointStyle[CustomPropertyName.EmptyPointValue];
             }
-            else if( series.IsCustomPropertySet(CustomPropertyName.EmptyPointValue) )
+            else if (series.IsCustomPropertySet(CustomPropertyName.EmptyPointValue))
             {
                 emptyPointValue = series[CustomPropertyName.EmptyPointValue];
             }
 
             // Take attribute value
-            if( String.Compare(emptyPointValue, "Zero", StringComparison.OrdinalIgnoreCase) == 0 )
+            if (String.Compare(emptyPointValue, "Zero", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 // IsEmpty points represented with zero values
                 return 0.0;
             }
-            
+
             //************************************************************
             //** IsEmpty point value is an average of neighbour points
             //************************************************************
 
             // Find previous non-empty point value
-            for( int indx = pointIndex; indx >= 0; indx-- )
+            for (int indx = pointIndex; indx >= 0; indx--)
             {
-                if( !series.Points[indx].IsEmpty )
+                if (!series.Points[indx].IsEmpty)
                 {
                     previousPoint = series.Points[indx].YValues[YValueIndex];
                     prevIndx = indx;
@@ -1582,9 +1772,9 @@ using System.Globalization;
             }
 
             // Find next non-empty point value
-            for( int indx = pointIndex; indx < series.Points.Count; indx++ )
+            for (int indx = pointIndex; indx < series.Points.Count; indx++)
             {
-                if( !series.Points[indx].IsEmpty )
+                if (!series.Points[indx].IsEmpty)
                 {
                     nextPoint = series.Points[indx].YValues[YValueIndex];
                     nextIndx = indx;
@@ -1594,10 +1784,10 @@ using System.Globalization;
             }
 
             // All Previous points are empty
-            if( Double.IsNaN( previousPoint ) )
+            if (Double.IsNaN(previousPoint))
             {
                 // All points are empty
-                if( Double.IsNaN( nextPoint ) )
+                if (Double.IsNaN(nextPoint))
                 {
                     previousPoint = 0;
                 }
@@ -1608,20 +1798,22 @@ using System.Globalization;
             }
 
             // All next points are empty
-            if( Double.IsNaN( nextPoint ) )
+            if (Double.IsNaN(nextPoint))
             {
                 // Previous point is equal to next point
                 nextPoint = previousPoint;
             }
 
             // If points value are the same use average
-            if( series.Points[nextIndx].XValue == series.Points[prevIndx].XValue )
+            if (series.Points[nextIndx].XValue == series.Points[prevIndx].XValue)
             {
-                return ( previousPoint + nextPoint ) / 2;
+                return (previousPoint + nextPoint) / 2;
             }
 
             // Calculate and return average value
-            double aCoeff = (previousPoint - nextPoint) / (series.Points[nextIndx].XValue - series.Points[prevIndx].XValue);
+            double aCoeff =
+                (previousPoint - nextPoint)
+                / (series.Points[nextIndx].XValue - series.Points[prevIndx].XValue);
             return -aCoeff * (point.XValue - series.Points[prevIndx].XValue) + previousPoint;
         }
 
@@ -1636,11 +1828,19 @@ using System.Globalization;
         /// <param name="area">Chart area.</param>
         /// <param name="series">Series values to be used.</param>
         /// <param name="list">List to add to.</param>
-        public void AddSmartLabelMarkerPositions(CommonElements common, ChartArea area, Series series, ArrayList list)        
+        public void AddSmartLabelMarkerPositions(
+            CommonElements common,
+            ChartArea area,
+            Series series,
+            ArrayList list
+        )
         {
             this.Common = common;
             // Check if series is indexed
-            indexedSeries = ChartHelper.IndexedSeries(this.Common, area.GetSeriesFromChartType(this.Name).ToArray());
+            indexedSeries = ChartHelper.IndexedSeries(
+                this.Common,
+                area.GetSeriesFromChartType(this.Name).ToArray()
+            );
 
             //************************************************************
             //** Set active horizontal/vertical axis
@@ -1651,21 +1851,21 @@ using System.Globalization;
             //************************************************************
             //** Loop through all data points in the series
             //************************************************************
-            int    markerIndex = 0;        // Marker index
-            int    index = 1;                // Data points loop
-            foreach( DataPoint point in series.Points )
+            int markerIndex = 0; // Marker index
+            int index = 1; // Data points loop
+            foreach (DataPoint point in series.Points)
             {
                 //************************************************************
                 //** Check if point values are in the chart area
                 //************************************************************
 
                 // Check for min/max Y values
-                double    yValue = GetYValue(common, area, series, point, index - 1, YValueIndex);
+                double yValue = GetYValue(common, area, series, point, index - 1, YValueIndex);
 
                 // Axis is logarithmic
-                yValue = vAxis.GetLogValue( yValue );
-                
-                if( yValue > vAxis.ViewMaximum || yValue < vAxis.ViewMinimum)
+                yValue = vAxis.GetLogValue(yValue);
+
+                if (yValue > vAxis.ViewMaximum || yValue < vAxis.ViewMinimum)
                 {
                     index++;
                     continue;
@@ -1674,24 +1874,24 @@ using System.Globalization;
                 // Check for min/max X values
                 double xValue = (indexedSeries) ? (double)index : point.XValue;
                 xValue = hAxis.GetLogValue(xValue);
-                if(xValue > hAxis.ViewMaximum || xValue < hAxis.ViewMinimum)
+                if (xValue > hAxis.ViewMaximum || xValue < hAxis.ViewMinimum)
                 {
                     index++;
                     continue;
                 }
 
                 // Check if point should be drawn on the edge of the data scaleView.
-                if(!ShouldDrawMarkerOnViewEdgeX())
+                if (!ShouldDrawMarkerOnViewEdgeX())
                 {
                     // Check for min/max X values
-                    if(xValue == hAxis.ViewMaximum && ShiftedX >= 0)
+                    if (xValue == hAxis.ViewMaximum && ShiftedX >= 0)
                     {
                         index++;
                         continue;
                     }
 
                     // Check for min/max X values
-                    if(xValue == hAxis.ViewMinimum && ShiftedX <= 0)
+                    if (xValue == hAxis.ViewMinimum && ShiftedX <= 0)
                     {
                         index++;
                         continue;
@@ -1705,47 +1905,52 @@ using System.Globalization;
                 // Get marker position
                 PointF markerPosition = PointF.Empty;
                 markerPosition.Y = (float)vAxis.GetLinearPosition(yValue);
-                if( indexedSeries )
+                if (indexedSeries)
                 {
-                    // The formula for position is based on a distance 
+                    // The formula for position is based on a distance
                     // from the grid line or nPoints position.
-                    markerPosition.X = (float)hAxis.GetPosition( (double)index );
+                    markerPosition.X = (float)hAxis.GetPosition((double)index);
                 }
                 else
                 {
-                    markerPosition.X = (float)hAxis.GetPosition( point.XValue );
+                    markerPosition.X = (float)hAxis.GetPosition(point.XValue);
                 }
 
-                // Labels and markers have to be shifted if there 
+                // Labels and markers have to be shifted if there
                 // is more than one series for column chart.
                 markerPosition.X += (float)ShiftedX;
 
                 // Get point some point properties and save them in variables
-                int            pointMarkerSize = point.MarkerSize;
-                string        pointMarkerImage = point.MarkerImage;
-                MarkerStyle    pointMarkerStyle = point.MarkerStyle;
+                int pointMarkerSize = point.MarkerSize;
+                string pointMarkerImage = point.MarkerImage;
+                MarkerStyle pointMarkerStyle = point.MarkerStyle;
 
                 // Get marker size
                 SizeF markerSize = GetMarkerSize(
-                    common.graph, 
-                    common, 
-                    area, 
-                    point, 
-                    pointMarkerSize, 
-                    pointMarkerImage);
+                    common.graph,
+                    common,
+                    area,
+                    point,
+                    pointMarkerSize,
+                    pointMarkerImage
+                );
 
                 // Transform marker position in 3D space
-                if(area.Area3DStyle.Enable3D)
+                if (area.Area3DStyle.Enable3D)
                 {
                     // Get series depth and Z position
-                    float seriesDepth, seriesZPosition;
+                    float seriesDepth,
+                        seriesZPosition;
                     area.GetSeriesZPositionAndDepth(series, out seriesDepth, out seriesZPosition);
 
-                    Point3D[]    marker3DPosition = new Point3D[1];
+                    Point3D[] marker3DPosition = new Point3D[1];
                     marker3DPosition[0] = new Point3D(
-                        markerPosition.X, 
-                        markerPosition.Y, 
-                        (float)(seriesZPosition + ((this.middleMarker) ? seriesDepth/2f : seriesDepth)));
+                        markerPosition.X,
+                        markerPosition.Y,
+                        (float)(
+                            seriesZPosition + ((this.middleMarker) ? seriesDepth / 2f : seriesDepth)
+                        )
+                    );
 
                     // Transform coordinates
                     area.matrix3D.TransformPoints(marker3DPosition);
@@ -1753,27 +1958,30 @@ using System.Globalization;
                 }
 
                 // Check if marker visible
-                if(alwaysDrawMarkers || 
-                    pointMarkerStyle != MarkerStyle.None || 
-                    pointMarkerImage.Length > 0)
+                if (
+                    alwaysDrawMarkers
+                    || pointMarkerStyle != MarkerStyle.None
+                    || pointMarkerImage.Length > 0
+                )
                 {
                     // Check marker index
-                    if(markerIndex == 0)
+                    if (markerIndex == 0)
                     {
                         markerSize = common.graph.GetRelativeSize(markerSize);
 
                         // Add marker position into the list
-                        RectangleF    markerRect = new RectangleF(
+                        RectangleF markerRect = new RectangleF(
                             markerPosition.X - markerSize.Width / 2f,
                             markerPosition.Y - markerSize.Height / 2f,
                             markerSize.Width,
-                            markerSize.Height);
+                            markerSize.Height
+                        );
                         list.Add(markerRect);
                     }
-                    
+
                     // Increase the markers counter
                     ++markerIndex;
-                    if(series.MarkerStep == markerIndex)
+                    if (series.MarkerStep == markerIndex)
                     {
                         markerIndex = 0;
                     }
@@ -1806,7 +2014,7 @@ using System.Globalization;
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
-            //Nothing to dispose at the base class. 
+            //Nothing to dispose at the base class.
         }
 
         /// <summary>

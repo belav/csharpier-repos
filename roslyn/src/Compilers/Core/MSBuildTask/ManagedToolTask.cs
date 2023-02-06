@@ -37,9 +37,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         protected abstract string PathToNativeTool { get; }
 
         protected ManagedToolTask(ResourceManager resourceManager)
-            : base(resourceManager)
-        {
-        }
+            : base(resourceManager) { }
 
         /// <summary>
         /// GenerateCommandLineCommands generates the actual OS-level arguments:
@@ -51,7 +49,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             var commandLineArguments = ToolArguments;
             if (IsManagedTool)
             {
-                (_, commandLineArguments, _) = RuntimeHostInfo.GetProcessInfo(PathToManagedToolWithoutExtension, commandLineArguments);
+                (_, commandLineArguments, _) = RuntimeHostInfo.GetProcessInfo(
+                    PathToManagedToolWithoutExtension,
+                    commandLineArguments
+                );
             }
 
             return commandLineArguments;
@@ -65,7 +66,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         protected sealed override string GenerateFullPathToTool()
         {
             return IsManagedTool
-                ? RuntimeHostInfo.GetProcessInfo(PathToManagedToolWithoutExtension, string.Empty).processFilePath
+                ? RuntimeHostInfo
+                    .GetProcessInfo(PathToManagedToolWithoutExtension, string.Empty)
+                    .processFilePath
                 : PathToNativeTool;
         }
 
@@ -81,6 +84,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// as the implementation of IsManagedTool calls this property. See the comment in
         /// <see cref="ManagedCompiler.HasToolBeenOverridden"/>.
         /// </remarks>
-        protected sealed override string ToolName => $"{ToolNameWithoutExtension}.{RuntimeHostInfo.ToolExtension}";
+        protected sealed override string ToolName =>
+            $"{ToolNameWithoutExtension}.{RuntimeHostInfo.ToolExtension}";
     }
 }

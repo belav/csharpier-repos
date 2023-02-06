@@ -4,25 +4,26 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
 namespace Mono.Linker.Tests.Cases.Attributes.StructLayout
 {
-    [StructLayout (LayoutKind.Sequential)]
-    [KeptMember (".ctor()")]
+    [StructLayout(LayoutKind.Sequential)]
+    [KeptMember(".ctor()")]
     class SequentialClassData
     {
         [Kept]
         public int never_used;
+
         [Kept]
         public int used;
     }
 
     [Kept]
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     class UnallocatedSequentialClassData
     {
         public int never_used;
     }
 
     [Kept]
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     class UnallocatedButReferencedWithReflectionSequentialClassData
     {
         [Kept]
@@ -30,7 +31,7 @@ namespace Mono.Linker.Tests.Cases.Attributes.StructLayout
     }
 
     [Kept]
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     class UnallocatedButWithSingleFieldUsedSequentialClassDataBase
     {
         // We expect this to be kept because of the sequential layout.
@@ -43,9 +44,10 @@ namespace Mono.Linker.Tests.Cases.Attributes.StructLayout
     }
 
     [Kept]
-    [StructLayout (LayoutKind.Sequential)]
-    [KeptBaseType (typeof (UnallocatedButWithSingleFieldUsedSequentialClassDataBase))]
-    class UnallocatedButWithSingleFieldUsedSequentialClassData : UnallocatedButWithSingleFieldUsedSequentialClassDataBase
+    [StructLayout(LayoutKind.Sequential)]
+    [KeptBaseType(typeof(UnallocatedButWithSingleFieldUsedSequentialClassDataBase))]
+    class UnallocatedButWithSingleFieldUsedSequentialClassData
+        : UnallocatedButWithSingleFieldUsedSequentialClassDataBase
     {
         [Kept]
         public int never_used;
@@ -62,18 +64,19 @@ namespace Mono.Linker.Tests.Cases.Attributes.StructLayout
         [Kept]
         static UnallocatedButWithSingleFieldUsedSequentialClassData _otherField;
 
-        public static void Main ()
+        public static void Main()
         {
-            var c = new SequentialClassData ();
+            var c = new SequentialClassData();
             c.used = 1;
-            if (Marshal.SizeOf (c) != 8)
-                throw new ApplicationException ();
+            if (Marshal.SizeOf(c) != 8)
+                throw new ApplicationException();
 
             _field = null;
 
-            typeof (UnallocatedButReferencedWithReflectionSequentialClassData).ToString ();
+            typeof(UnallocatedButReferencedWithReflectionSequentialClassData).ToString();
 
-            if (string.Empty.Length > 0) {
+            if (string.Empty.Length > 0)
+            {
                 _otherField.used = 123;
             }
         }

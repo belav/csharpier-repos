@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,8 +25,10 @@
 
 using System;
 
-namespace System.Windows.Forms.CarbonInternal {
-    internal enum WindowClass : uint {
+namespace System.Windows.Forms.CarbonInternal
+{
+    internal enum WindowClass : uint
+    {
         kAlertWindowClass = 1,
         kMovableAlertWindowClass = 2,
         kModalWindowClass = 3,
@@ -45,7 +47,8 @@ namespace System.Windows.Forms.CarbonInternal {
         kAllWindowClasses = 0xFFFFFFFF
     }
 
-    internal enum WindowAttributes : uint {
+    internal enum WindowAttributes : uint
+    {
         kWindowNoAttributes = 0,
         kWindowCloseBoxAttribute = (1u << 0),
         kWindowHorizontalZoomAttribute = (1u << 1),
@@ -68,11 +71,18 @@ namespace System.Windows.Forms.CarbonInternal {
         kWindowLiveResizeAttribute = (1u << 28),
         kWindowIgnoreClicksAttribute = (1u << 29),
         kWindowNoConstrainAttribute = (1u << 31),
-        kWindowStandardDocumentAttributes = (kWindowCloseBoxAttribute | kWindowFullZoomAttribute | kWindowCollapseBoxAttribute | kWindowResizableAttribute),
+        kWindowStandardDocumentAttributes =
+            (
+                kWindowCloseBoxAttribute
+                | kWindowFullZoomAttribute
+                | kWindowCollapseBoxAttribute
+                | kWindowResizableAttribute
+            ),
         kWindowStandardFloatingAttributes = (kWindowCloseBoxAttribute | kWindowCollapseBoxAttribute)
     }
 
-    internal enum ThemeCursor : uint {
+    internal enum ThemeCursor : uint
+    {
         kThemeArrowCursor = 0,
         kThemeCopyArrowCursor = 1,
         kThemeAliasArrowCursor = 2,
@@ -93,8 +103,9 @@ namespace System.Windows.Forms.CarbonInternal {
         kThemeResizeLeftRightCursor = 17,
         kThemeNotAllowedCursor = 18
     }
-    
-    internal enum MouseTrackingResult : ushort {
+
+    internal enum MouseTrackingResult : ushort
+    {
         kMouseTrackingMouseDown = 1,
         kMouseTrackingMouseUp = 2,
         kMouseTrackingMouseExited = 3,
@@ -106,7 +117,8 @@ namespace System.Windows.Forms.CarbonInternal {
         kMouseTrackingMouseMoved = 9
     }
 
-    internal enum CFStringEncoding : uint {
+    internal enum CFStringEncoding : uint
+    {
         kCFStringEncodingMacRoman = 0,
         kCFStringEncodingWindowsLatin1 = 0x0500,
         kCFStringEncodingISOLatin1 = 0x0201,

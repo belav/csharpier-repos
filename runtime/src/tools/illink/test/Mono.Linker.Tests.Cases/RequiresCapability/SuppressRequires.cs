@@ -16,142 +16,153 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
     [ExpectedNoWarnings]
     class SuppressRequires
     {
-        public static void Main ()
+        public static void Main()
         {
-            SuppressMethodBodyReferences.Test ();
-            SuppressGenericParameters<TestType, TestType>.Test ();
+            SuppressMethodBodyReferences.Test();
+            SuppressGenericParameters<TestType, TestType>.Test();
         }
 
         class SuppressMethodBodyReferences
         {
             static Type _unknownType;
-            static Type GetUnknownType () => null;
 
-            [RequiresUnreferencedCode ("Message for --MethodWithRequires--")]
-            [RequiresAssemblyFiles ("Message for --MethodWithRequires--")]
-            [RequiresDynamicCode ("Message for --MethodWithRequires--")]
-            static void MethodWithRequires ()
-            {
-            }
+            static Type GetUnknownType() => null;
 
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicConstructors)]
+            [RequiresUnreferencedCode("Message for --MethodWithRequires--")]
+            [RequiresAssemblyFiles("Message for --MethodWithRequires--")]
+            [RequiresDynamicCode("Message for --MethodWithRequires--")]
+            static void MethodWithRequires() { }
+
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             static Type _requiresPublicConstructors;
 
-            [RequiresUnreferencedCode ("")]
-            [RequiresAssemblyFiles ("")]
-            [RequiresDynamicCode ("")]
-            static void TestMethodWithRequires ()
+            [RequiresUnreferencedCode("")]
+            [RequiresAssemblyFiles("")]
+            [RequiresDynamicCode("")]
+            static void TestMethodWithRequires()
             {
                 // Normally this would warn, but with the attribute on this method it should be auto-suppressed
-                MethodWithRequires ();
+                MethodWithRequires();
             }
 
-            [RequiresUnreferencedCode ("")]
-            [RequiresAssemblyFiles ("")]
-            [RequiresDynamicCode ("")]
-            static void TestParameter ()
+            [RequiresUnreferencedCode("")]
+            [RequiresAssemblyFiles("")]
+            [RequiresDynamicCode("")]
+            static void TestParameter()
             {
-                _unknownType.RequiresPublicMethods ();
+                _unknownType.RequiresPublicMethods();
             }
 
-            [RequiresUnreferencedCode ("")]
-            [RequiresAssemblyFiles ("")]
-            [RequiresDynamicCode ("")]
-            static void TestReturnValue ()
+            [RequiresUnreferencedCode("")]
+            [RequiresAssemblyFiles("")]
+            [RequiresDynamicCode("")]
+            static void TestReturnValue()
             {
-                GetUnknownType ().RequiresPublicEvents ();
+                GetUnknownType().RequiresPublicEvents();
             }
 
-            [RequiresUnreferencedCode ("")]
-            [RequiresAssemblyFiles ("")]
-            [RequiresDynamicCode ("")]
-            static void TestField ()
+            [RequiresUnreferencedCode("")]
+            [RequiresAssemblyFiles("")]
+            [RequiresDynamicCode("")]
+            static void TestField()
             {
                 _requiresPublicConstructors = _unknownType;
             }
 
-            [UnconditionalSuppressMessage ("Trimming", "IL2026")]
-            [UnconditionalSuppressMessage ("SingleFile", "IL3002")]
-            [UnconditionalSuppressMessage ("AOT", "IL3050")]
-            public static void Test ()
+            [UnconditionalSuppressMessage("Trimming", "IL2026")]
+            [UnconditionalSuppressMessage("SingleFile", "IL3002")]
+            [UnconditionalSuppressMessage("AOT", "IL3050")]
+            public static void Test()
             {
-                TestMethodWithRequires ();
-                TestParameter ();
-                TestReturnValue ();
-                TestField ();
+                TestMethodWithRequires();
+                TestParameter();
+                TestReturnValue();
+                TestField();
             }
         }
 
         [ExpectedNoWarnings]
-        class SuppressGenericParameters<TUnknown, [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicProperties)] TPublicProperties>
+        class SuppressGenericParameters<
+            TUnknown,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                TPublicProperties
+        >
         {
             static Type _unknownType;
 
-            static void GenericMethodRequiresPublicMethods<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)] T> () { }
+            static void GenericMethodRequiresPublicMethods<
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
+            >() { }
 
-            class GenericTypeRequiresPublicFields<[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicFields)] T> { }
+            class GenericTypeRequiresPublicFields<
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T
+            > { }
 
-            [RequiresUnreferencedCode ("")]
-            [RequiresAssemblyFiles ("")]
-            [RequiresDynamicCode ("")]
-            static void TestGenericMethod ()
+            [RequiresUnreferencedCode("")]
+            [RequiresAssemblyFiles("")]
+            [RequiresDynamicCode("")]
+            static void TestGenericMethod()
             {
-                GenericMethodRequiresPublicMethods<TUnknown> ();
+                GenericMethodRequiresPublicMethods<TUnknown>();
             }
 
-            [RequiresUnreferencedCode ("")]
-            [RequiresAssemblyFiles ("")]
-            [RequiresDynamicCode ("")]
-            static void TestGenericMethodMismatch ()
+            [RequiresUnreferencedCode("")]
+            [RequiresAssemblyFiles("")]
+            [RequiresDynamicCode("")]
+            static void TestGenericMethodMismatch()
             {
-                GenericMethodRequiresPublicMethods<TPublicProperties> ();
+                GenericMethodRequiresPublicMethods<TPublicProperties>();
             }
 
-            [RequiresUnreferencedCode ("")]
-            [RequiresAssemblyFiles ("")]
-            [RequiresDynamicCode ("")]
-            static void TestGenericType ()
+            [RequiresUnreferencedCode("")]
+            [RequiresAssemblyFiles("")]
+            [RequiresDynamicCode("")]
+            static void TestGenericType()
             {
-                new GenericTypeRequiresPublicFields<TUnknown> ();
+                new GenericTypeRequiresPublicFields<TUnknown>();
             }
 
-            [RequiresUnreferencedCode ("")]
-            [RequiresAssemblyFiles ("")]
-            [RequiresDynamicCode ("")]
-            static void TestMakeGenericTypeWithStaticTypes ()
+            [RequiresUnreferencedCode("")]
+            [RequiresAssemblyFiles("")]
+            [RequiresDynamicCode("")]
+            static void TestMakeGenericTypeWithStaticTypes()
             {
-                typeof (GenericTypeRequiresPublicFields<>).MakeGenericType (typeof (TUnknown));
+                typeof(GenericTypeRequiresPublicFields<>).MakeGenericType(typeof(TUnknown));
             }
 
-            [RequiresUnreferencedCode ("")]
-            [RequiresAssemblyFiles ("")]
-            [RequiresDynamicCode ("")]
-            static void TestMakeGenericTypeWithDynamicTypes ()
+            [RequiresUnreferencedCode("")]
+            [RequiresAssemblyFiles("")]
+            [RequiresDynamicCode("")]
+            static void TestMakeGenericTypeWithDynamicTypes()
             {
-                typeof (GenericTypeRequiresPublicFields<>).MakeGenericType (_unknownType);
+                typeof(GenericTypeRequiresPublicFields<>).MakeGenericType(_unknownType);
             }
 
-            [RequiresUnreferencedCode ("")]
-            [RequiresAssemblyFiles ("")]
-            [RequiresDynamicCode ("")]
-            static void TestMakeGenericMethod ()
+            [RequiresUnreferencedCode("")]
+            [RequiresAssemblyFiles("")]
+            [RequiresDynamicCode("")]
+            static void TestMakeGenericMethod()
             {
-                typeof (SuppressGenericParameters<TUnknown, TPublicProperties>)
-                    .GetMethod ("GenericMethodRequiresPublicMethods", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)
-                    .MakeGenericMethod (typeof (TPublicProperties));
+                typeof(SuppressGenericParameters<TUnknown, TPublicProperties>)
+                    .GetMethod(
+                        "GenericMethodRequiresPublicMethods",
+                        System.Reflection.BindingFlags.NonPublic
+                            | System.Reflection.BindingFlags.Static
+                    )
+                    .MakeGenericMethod(typeof(TPublicProperties));
             }
 
-            [UnconditionalSuppressMessage ("Trimming", "IL2026")]
-            [UnconditionalSuppressMessage ("SingleFile", "IL3002")]
-            [UnconditionalSuppressMessage ("AOT", "IL3050")]
-            public static void Test ()
+            [UnconditionalSuppressMessage("Trimming", "IL2026")]
+            [UnconditionalSuppressMessage("SingleFile", "IL3002")]
+            [UnconditionalSuppressMessage("AOT", "IL3050")]
+            public static void Test()
             {
-                TestGenericMethod ();
-                TestGenericMethodMismatch ();
-                TestGenericType ();
-                TestMakeGenericTypeWithStaticTypes ();
-                TestMakeGenericTypeWithDynamicTypes ();
-                TestMakeGenericMethod ();
+                TestGenericMethod();
+                TestGenericMethodMismatch();
+                TestGenericType();
+                TestMakeGenericTypeWithStaticTypes();
+                TestMakeGenericTypeWithDynamicTypes();
+                TestMakeGenericMethod();
             }
         }
 

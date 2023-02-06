@@ -31,14 +31,14 @@ namespace Mono.Btls.Interface
 {
     public static class BtlsX509StoreManager
     {
-        public static bool HasStore (BtlsX509StoreType type)
+        public static bool HasStore(BtlsX509StoreType type)
         {
-            return MonoBtlsX509StoreManager.HasStore ((MonoBtlsX509StoreType)type);
+            return MonoBtlsX509StoreManager.HasStore((MonoBtlsX509StoreType)type);
         }
 
-        public static string GetStorePath (BtlsX509StoreType type)
+        public static string GetStorePath(BtlsX509StoreType type)
         {
-            return MonoBtlsX509StoreManager.GetStorePath ((MonoBtlsX509StoreType)type);
+            return MonoBtlsX509StoreManager.GetStorePath((MonoBtlsX509StoreType)type);
         }
     }
 }

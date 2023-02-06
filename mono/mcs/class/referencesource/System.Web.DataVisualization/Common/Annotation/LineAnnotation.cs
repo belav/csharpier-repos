@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -9,12 +9,12 @@
 //
 //  Namespace:    System.Web.UI.WebControls[Windows.Forms].Charting
 //
-//    Classes:    LineAnnotation, VerticalLineAnnotation, 
+//    Classes:    LineAnnotation, VerticalLineAnnotation,
 //                HorizontalLineAnnotation
 //
 //  Purpose:    Line annotation class.
 //
-//    Reviewed:    
+//    Reviewed:
 //
 //===================================================================
 
@@ -30,11 +30,11 @@ using System.Drawing.Design;
 using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 
 #else
 using System.Web;
@@ -44,36 +44,38 @@ using System.Web.UI.DataVisualization.Charting.Data;
 using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 
-
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
     /// <summary>
     /// <b>LineAnnotation</b> is a class that represents a line annotation.
     /// </summary>
-    [
-        SRDescription("DescriptionAttributeLineAnnotation_LineAnnotation"),
-    ]
+    [SRDescription("DescriptionAttributeLineAnnotation_LineAnnotation"),]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class LineAnnotation : Annotation
     {
         #region Fields
 
         // Indicates that an infinitive line should be drawn through 2 specified points.
-        private        bool        _isInfinitive = false;
+        private bool _isInfinitive = false;
 
         // Line start/end caps
-        private        LineAnchorCapStyle        _startCap = LineAnchorCapStyle.None;
-        private        LineAnchorCapStyle        _endCap = LineAnchorCapStyle.None;
+        private LineAnchorCapStyle _startCap = LineAnchorCapStyle.None;
+        private LineAnchorCapStyle _endCap = LineAnchorCapStyle.None;
 
         #endregion
 
@@ -82,7 +84,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Default public constructor.
         /// </summary>
-        public LineAnnotation() 
+        public LineAnnotation()
             : base()
         {
             this.anchorAlignment = ContentAlignment.TopLeft;
@@ -101,16 +103,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <b>True</b> if a line should be drawn infinitively through 2 points provided, <b>false</b> otherwise.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(false),
-        SRDescription("DescriptionAttributeDrawInfinitive"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(false),
+            SRDescription("DescriptionAttributeDrawInfinitive"),
         ]
         virtual public bool IsInfinitive
         {
-            get
-            {
-                return _isInfinitive;
-            }
+            get { return _isInfinitive; }
             set
             {
                 _isInfinitive = value;
@@ -126,16 +125,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="LineAnchorCapStyle"/> value, used for a cap style used at the start of an annotation line.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(LineAnchorCapStyle.None),
-        SRDescription("DescriptionAttributeStartCap3"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(LineAnchorCapStyle.None),
+            SRDescription("DescriptionAttributeStartCap3"),
         ]
         virtual public LineAnchorCapStyle StartCap
         {
-            get
-            {
-                return _startCap;
-            }
+            get { return _startCap; }
             set
             {
                 _startCap = value;
@@ -151,16 +147,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="LineAnchorCapStyle"/> value, used for a cap style used at the end of an annotation line.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(LineAnchorCapStyle.None),
-        SRDescription("DescriptionAttributeStartCap3"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(LineAnchorCapStyle.None),
+            SRDescription("DescriptionAttributeStartCap3"),
         ]
         virtual public LineAnchorCapStyle EndCap
         {
-            get
-            {
-                return _endCap;
-            }
+            get { return _endCap; }
             set
             {
                 _endCap = value;
@@ -179,20 +172,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="ContentAlignment"/> value.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(typeof(ContentAlignment), "MiddleCenter"),
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(typeof(ContentAlignment), "MiddleCenter"),
         ]
         override public ContentAlignment Alignment
         {
-            get
-            {
-                return base.Alignment;
-            }
-            set
-            {
-                base.Alignment = value;
-            }
+            get { return base.Alignment; }
+            set { base.Alignment = value; }
         }
 
         /// <summary>
@@ -207,14 +194,8 @@ namespace System.Web.UI.DataVisualization.Charting
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override TextStyle TextStyle
         {
-            get
-            {
-                return base.TextStyle;
-            }
-            set
-            {
-                base.TextStyle = value;
-            }
+            get { return base.TextStyle; }
+            set { base.TextStyle = value; }
         }
 
         /// <summary>
@@ -225,23 +206,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Color"/> value.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(typeof(Color), "Black"),
-        SRDescription("DescriptionAttributeForeColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(typeof(Color), "Black"),
+            SRDescription("DescriptionAttributeForeColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
         override public Color ForeColor
         {
-            get
-            {
-                return base.ForeColor;
-            }
-            set
-            {
-                base.ForeColor = value;
-            }
+            get { return base.ForeColor; }
+            set { base.ForeColor = value; }
         }
 
         /// <summary>
@@ -252,43 +227,31 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Font"/> object.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(typeof(Font), "Microsoft Sans Serif, 8pt"),
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(typeof(Font), "Microsoft Sans Serif, 8pt"),
         ]
         override public Font Font
         {
-            get
-            {
-                return base.Font;
-            }
-            set
-            {
-                base.Font = value;
-            }
+            get { return base.Font; }
+            set { base.Font = value; }
         }
 
         /// <summary>
         /// Not applicable to this annotation type.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(typeof(Color), ""),
-        NotifyParentPropertyAttribute(true),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(typeof(Color), ""),
+            NotifyParentPropertyAttribute(true),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
         override public Color BackColor
         {
-            get
-            {
-                return base.BackColor;
-            }
-            set
-            {
-                base.BackColor = value;
-            }
+            get { return base.BackColor; }
+            set { base.BackColor = value; }
         }
 
         /// <summary>
@@ -298,67 +261,49 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="ChartHatchStyle"/> value.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(ChartHatchStyle.None),
-        NotifyParentPropertyAttribute(true),
-        Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(ChartHatchStyle.None),
+            NotifyParentPropertyAttribute(true),
+            Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
         ]
         override public ChartHatchStyle BackHatchStyle
         {
-            get
-            {
-                return base.BackHatchStyle;
-            }
-            set
-            {
-                base.BackHatchStyle = value;
-            }
+            get { return base.BackHatchStyle; }
+            set { base.BackHatchStyle = value; }
         }
 
         /// <summary>
         /// Not applicable to this annotation type.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(GradientStyle.None),
-        NotifyParentPropertyAttribute(true),
-        Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
-        ]        
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(GradientStyle.None),
+            NotifyParentPropertyAttribute(true),
+            Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
+        ]
         override public GradientStyle BackGradientStyle
         {
-            get
-            {
-                return base.BackGradientStyle;
-            }
-            set
-            {
-                base.BackGradientStyle = value;
-            }
+            get { return base.BackGradientStyle; }
+            set { base.BackGradientStyle = value; }
         }
 
         /// <summary>
         /// Not applicable to this annotation type.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(typeof(Color), ""),
-        NotifyParentPropertyAttribute(true),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
-        ] 
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(typeof(Color), ""),
+            NotifyParentPropertyAttribute(true),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+        ]
         override public Color BackSecondaryColor
         {
-            get
-            {
-                return base.BackSecondaryColor;
-            }
-            set
-            {
-                base.BackSecondaryColor = value;
-            }
+            get { return base.BackSecondaryColor; }
+            set { base.BackSecondaryColor = value; }
         }
 
         #endregion
@@ -366,39 +311,33 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Position
 
         /// <summary>
-        /// Gets or sets a flag that specifies whether the size of an annotation is always 
+        /// Gets or sets a flag that specifies whether the size of an annotation is always
         /// defined in relative chart coordinates.
         /// <seealso cref="Annotation.Width"/>
         /// <seealso cref="Annotation.Height"/>
         /// </summary>
         /// <value>
-        /// <b>True</b> if an annotation's <see cref="Annotation.Width"/> and <see cref="Annotation.Height"/> are always 
+        /// <b>True</b> if an annotation's <see cref="Annotation.Width"/> and <see cref="Annotation.Height"/> are always
         /// in chart relative coordinates, <b>false</b> otherwise.
         /// </value>
         /// <remarks>
-        /// An annotation's width and height may be set in relative chart or axes coordinates. 
+        /// An annotation's width and height may be set in relative chart or axes coordinates.
         /// By default, relative chart coordinates are used.
         /// <para>
-        /// To use axes coordinates for size set the <b>IsSizeAlwaysRelative</b> property to 
-        /// <b>false</b> and either anchor the annotation to a data point or set the 
+        /// To use axes coordinates for size set the <b>IsSizeAlwaysRelative</b> property to
+        /// <b>false</b> and either anchor the annotation to a data point or set the
         /// <see cref="Annotation.AxisX"/> or <see cref="Annotation.AxisY"/> properties.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(true),
-        SRDescription("DescriptionAttributeSizeAlwaysRelative3"),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(true),
+            SRDescription("DescriptionAttributeSizeAlwaysRelative3"),
         ]
         override public bool IsSizeAlwaysRelative
         {
-            get
-            {
-                return base.IsSizeAlwaysRelative;
-            }
-            set
-            {
-                base.IsSizeAlwaysRelative = value;
-            }
+            get { return base.IsSizeAlwaysRelative; }
+            set { base.IsSizeAlwaysRelative = value; }
         }
 
         #endregion // Position
@@ -414,31 +353,25 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <seealso cref="Annotation.AnchorOffsetY"/>
         /// </summary>
         /// <value>
-        /// A <see cref="ContentAlignment"/> value that represents the annotation's alignment to 
+        /// A <see cref="ContentAlignment"/> value that represents the annotation's alignment to
         /// the anchor point.
         /// </value>
         /// <remarks>
-        /// The annotation must be anchored using either <see cref="Annotation.AnchorDataPoint"/>, or the <see cref="Annotation.AnchorX"/> 
-        /// and <see cref="Annotation.AnchorY"/> properties. Its <see cref="Annotation.X"/> and <see cref="Annotation.Y"/> 
+        /// The annotation must be anchored using either <see cref="Annotation.AnchorDataPoint"/>, or the <see cref="Annotation.AnchorX"/>
+        /// and <see cref="Annotation.AnchorY"/> properties. Its <see cref="Annotation.X"/> and <see cref="Annotation.Y"/>
         /// properties must be set to <b>Double.NaN</b>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchor"),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DefaultValue(typeof(ContentAlignment), "TopLeft"),
-        SRDescription("DescriptionAttributeAnchorAlignment"),
+            SRCategory("CategoryAttributeAnchor"),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DefaultValue(typeof(ContentAlignment), "TopLeft"),
+            SRDescription("DescriptionAttributeAnchorAlignment"),
         ]
         override public ContentAlignment AnchorAlignment
         {
-            get
-            {
-                return base.AnchorAlignment;
-            }
-            set
-            {
-                base.AnchorAlignment = value;
-            }
+            get { return base.AnchorAlignment; }
+            set { base.AnchorAlignment = value; }
         }
 
         #endregion    // Anchoring
@@ -449,27 +382,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets an annotation's type name.
         /// </summary>
         /// <remarks>
-        /// This property is used to get the name of each annotation type 
-        /// (e.g. Line, Rectangle, Ellipse). 
+        /// This property is used to get the name of each annotation type
+        /// (e.g. Line, Rectangle, Ellipse).
         /// <para>
         /// This property is for internal use and is hidden at design and run time.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeAnnotationType"),
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeAnnotationType"),
         ]
         public override string AnnotationType
         {
-            get
-            {
-                return "Line";
-            }
+            get { return "Line"; }
         }
 
         /// <summary>
@@ -483,21 +413,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This property is for internal use and is hidden at design and run time.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(SelectionPointsStyle.Rectangle),
-        ParenthesizePropertyNameAttribute(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeSelectionPointsStyle"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(SelectionPointsStyle.Rectangle),
+            ParenthesizePropertyNameAttribute(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeSelectionPointsStyle"),
         ]
         override internal SelectionPointsStyle SelectionPointsStyle
         {
-            get
-            {
-                return SelectionPointsStyle.TwoPoints;
-            }
+            get { return SelectionPointsStyle.TwoPoints; }
         }
 
         #endregion
@@ -512,17 +439,21 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="point1">First line coordinate.</param>
         /// <param name="point2">Second line coordinate.</param>
         /// <param name="selectionRect">Selection rectangle.</param>
-        virtual internal void AdjustLineCoordinates(ref PointF point1, ref PointF point2, ref RectangleF selectionRect)
+        virtual internal void AdjustLineCoordinates(
+            ref PointF point1,
+            ref PointF point2,
+            ref RectangleF selectionRect
+        )
         {
             // Adjust line points to draw infinitive line
-            if(IsInfinitive)
+            if (IsInfinitive)
             {
-                if(Math.Round(point1.X , 3) == Math.Round(point2.X, 3))
+                if (Math.Round(point1.X, 3) == Math.Round(point2.X, 3))
                 {
                     point1.Y = (point1.Y < point2.Y) ? 0f : 100f;
                     point2.Y = (point1.Y < point2.Y) ? 100f : 0f;
                 }
-                else if(Math.Round(point1.Y , 3) == Math.Round(point2.Y, 3))
+                else if (Math.Round(point1.Y, 3) == Math.Round(point2.Y, 3))
                 {
                     point1.X = (point1.X < point2.X) ? 0f : 100f;
                     point2.X = (point1.X < point2.X) ? 100f : 0f;
@@ -530,18 +461,15 @@ namespace System.Web.UI.DataVisualization.Charting
                 else
                 {
                     // Calculate intersection point of the line with two bounaries Y = 0 and Y = 100
-                    PointF    intersectionPoint1 = PointF.Empty;
+                    PointF intersectionPoint1 = PointF.Empty;
                     intersectionPoint1.Y = 0f;
-                    intersectionPoint1.X = (0f - point1.Y) *
-                        (point2.X - point1.X) / 
-                        (point2.Y - point1.Y) + 
-                        point1.X;
-                    PointF    intersectionPoint2 = PointF.Empty;
+                    intersectionPoint1.X =
+                        (0f - point1.Y) * (point2.X - point1.X) / (point2.Y - point1.Y) + point1.X;
+                    PointF intersectionPoint2 = PointF.Empty;
                     intersectionPoint2.Y = 100f;
-                    intersectionPoint2.X = (100f - point1.Y) *
-                        (point2.X - point1.X) / 
-                        (point2.Y - point1.Y) + 
-                        point1.X;
+                    intersectionPoint2.X =
+                        (100f - point1.Y) * (point2.X - point1.X) / (point2.Y - point1.Y)
+                        + point1.X;
 
                     // Select point closect to the intersection
                     point1 = (point1.Y < point2.Y) ? intersectionPoint1 : intersectionPoint2;
@@ -566,96 +494,104 @@ namespace System.Web.UI.DataVisualization.Charting
             PointF anchorPoint = PointF.Empty;
             SizeF size = SizeF.Empty;
             GetRelativePosition(out firstPoint, out size, out anchorPoint);
-            PointF    secondPoint = new PointF(firstPoint.X + size.Width, firstPoint.Y + size.Height);
+            PointF secondPoint = new PointF(firstPoint.X + size.Width, firstPoint.Y + size.Height);
 
             // Create selection rectangle
-            RectangleF selectionRect = new RectangleF(firstPoint, new SizeF(secondPoint.X - firstPoint.X, secondPoint.Y - firstPoint.Y));
+            RectangleF selectionRect = new RectangleF(
+                firstPoint,
+                new SizeF(secondPoint.X - firstPoint.X, secondPoint.Y - firstPoint.Y)
+            );
 
             // Adjust coordinates
             AdjustLineCoordinates(ref firstPoint, ref secondPoint, ref selectionRect);
 
             // Check if text position is valid
-            if( float.IsNaN(firstPoint.X) || 
-                float.IsNaN(firstPoint.Y) || 
-                float.IsNaN(secondPoint.X) || 
-                float.IsNaN(secondPoint.Y) )
+            if (
+                float.IsNaN(firstPoint.X)
+                || float.IsNaN(firstPoint.Y)
+                || float.IsNaN(secondPoint.X)
+                || float.IsNaN(secondPoint.Y)
+            )
             {
                 return;
             }
 
             // Set line caps
             bool capChanged = false;
-            LineCap    oldStartCap = LineCap.Flat;
-            LineCap    oldEndCap = LineCap.Flat;
-            if(this._startCap != LineAnchorCapStyle.None || 
-                this._endCap != LineAnchorCapStyle.None)
+            LineCap oldStartCap = LineCap.Flat;
+            LineCap oldEndCap = LineCap.Flat;
+            if (
+                this._startCap != LineAnchorCapStyle.None || this._endCap != LineAnchorCapStyle.None
+            )
             {
                 capChanged = true;
                 oldStartCap = graphics.Pen.StartCap;
                 oldEndCap = graphics.Pen.EndCap;
 
                 // Apply anchor cap settings
-                if(this._startCap == LineAnchorCapStyle.Arrow)
+                if (this._startCap == LineAnchorCapStyle.Arrow)
                 {
                     // Adjust arrow size for small line width
-                    if(this.LineWidth < 4)
+                    if (this.LineWidth < 4)
                     {
                         int adjustment = 3 - this.LineWidth;
                         graphics.Pen.StartCap = LineCap.Custom;
                         graphics.Pen.CustomStartCap = new AdjustableArrowCap(
-                            this.LineWidth + adjustment, 
-                            this.LineWidth + adjustment, 
-                            true);
+                            this.LineWidth + adjustment,
+                            this.LineWidth + adjustment,
+                            true
+                        );
                     }
                     else
                     {
                         graphics.Pen.StartCap = LineCap.ArrowAnchor;
                     }
                 }
-                else if(this._startCap == LineAnchorCapStyle.Diamond)
+                else if (this._startCap == LineAnchorCapStyle.Diamond)
                 {
                     graphics.Pen.StartCap = LineCap.DiamondAnchor;
                 }
-                else if(this._startCap == LineAnchorCapStyle.Round)
+                else if (this._startCap == LineAnchorCapStyle.Round)
                 {
                     graphics.Pen.StartCap = LineCap.RoundAnchor;
                 }
-                else if(this._startCap == LineAnchorCapStyle.Square)
+                else if (this._startCap == LineAnchorCapStyle.Square)
                 {
                     graphics.Pen.StartCap = LineCap.SquareAnchor;
                 }
-                if(this._endCap == LineAnchorCapStyle.Arrow)
+                if (this._endCap == LineAnchorCapStyle.Arrow)
                 {
                     // Adjust arrow size for small line width
-                    if(this.LineWidth < 4)
+                    if (this.LineWidth < 4)
                     {
                         int adjustment = 3 - this.LineWidth;
                         graphics.Pen.EndCap = LineCap.Custom;
                         graphics.Pen.CustomEndCap = new AdjustableArrowCap(
-                            this.LineWidth + adjustment, 
-                            this.LineWidth + adjustment, 
-                            true);
+                            this.LineWidth + adjustment,
+                            this.LineWidth + adjustment,
+                            true
+                        );
                     }
                     else
                     {
                         graphics.Pen.EndCap = LineCap.ArrowAnchor;
                     }
                 }
-                else if(this._endCap == LineAnchorCapStyle.Diamond)
+                else if (this._endCap == LineAnchorCapStyle.Diamond)
                 {
                     graphics.Pen.EndCap = LineCap.DiamondAnchor;
                 }
-                else if(this._endCap == LineAnchorCapStyle.Round)
+                else if (this._endCap == LineAnchorCapStyle.Round)
                 {
                     graphics.Pen.EndCap = LineCap.RoundAnchor;
                 }
-                else if(this._endCap == LineAnchorCapStyle.Square)
+                else if (this._endCap == LineAnchorCapStyle.Square)
                 {
                     graphics.Pen.EndCap = LineCap.SquareAnchor;
                 }
             }
 
-            if(this.Common.ProcessModePaint)
+            if (this.Common.ProcessModePaint)
             {
                 // Draw line
                 graphics.DrawLineRel(
@@ -665,17 +601,19 @@ namespace System.Web.UI.DataVisualization.Charting
                     firstPoint,
                     secondPoint,
                     this.ShadowColor,
-                    this.ShadowOffset);
+                    this.ShadowOffset
+                );
             }
 
-            if(this.Common.ProcessModeRegions)
+            if (this.Common.ProcessModeRegions)
             {
                 // Create line graphics path
                 using (GraphicsPath path = new GraphicsPath())
                 {
                     path.AddLine(
                         graphics.GetAbsolutePoint(firstPoint),
-                        graphics.GetAbsolutePoint(secondPoint));
+                        graphics.GetAbsolutePoint(secondPoint)
+                    );
                     using (Pen pen = (Pen)graphics.Pen.Clone())
                     {
                         // Increase pen size by 2 pixels
@@ -690,34 +628,32 @@ namespace System.Web.UI.DataVisualization.Charting
                             // GraphicsPath.Widen incorrectly throws OutOfMemoryException
                             // catching here and reacting by not widening
                         }
-                        catch (ArgumentException)
-                        {
-                        }
+                        catch (ArgumentException) { }
                     }
 
-                // Add hot region
-                this.Common.HotRegionsList.AddHotRegion(
-                    graphics,
-                    path,
-                    false,
-                    ReplaceKeywords(this.ToolTip),
+                    // Add hot region
+                    this.Common.HotRegionsList.AddHotRegion(
+                        graphics,
+                        path,
+                        false,
+                        ReplaceKeywords(this.ToolTip),
 #if Microsoft_CONTROL
-                    String.Empty,
-                    String.Empty,
-                    String.Empty,
+                        String.Empty,
+                        String.Empty,
+                        String.Empty,
 #else // Microsoft_CONTROL
- ReplaceKeywords(this.Url),
+                        ReplaceKeywords(this.Url),
                         ReplaceKeywords(this.MapAreaAttributes),
                         ReplaceKeywords(this.PostBackValue),
 #endif // Microsoft_CONTROL
- this,
-                        ChartElementType.Annotation);
+                        this,
+                        ChartElementType.Annotation
+                    );
                 }
             }
 
-
             // Restore line caps
-            if(capChanged)
+            if (capChanged)
             {
                 graphics.Pen.StartCap = oldStartCap;
                 graphics.Pen.EndCap = oldEndCap;
@@ -733,12 +669,16 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <summary>
     /// <b>VerticalLineAnnotation</b> is a class that represents a vertical line annotation.
     /// </summary>
-    [
-        SRDescription("DescriptionAttributeVerticalLineAnnotation_VerticalLineAnnotation"),
-    ]
+    [SRDescription("DescriptionAttributeVerticalLineAnnotation_VerticalLineAnnotation"),]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class VerticalLineAnnotation : LineAnnotation
     {
@@ -747,10 +687,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Default public constructor.
         /// </summary>
-        public VerticalLineAnnotation() 
-            : base()
-        {
-        }
+        public VerticalLineAnnotation()
+            : base() { }
 
         #endregion
 
@@ -760,27 +698,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets an annotation's type name.
         /// </summary>
         /// <remarks>
-        /// This property is used to get the name of each annotation type 
-        /// (e.g. Line, Rectangle, Ellipse). 
+        /// This property is used to get the name of each annotation type
+        /// (e.g. Line, Rectangle, Ellipse).
         /// <para>
         /// This property is for internal use and is hidden at design and run time.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeAnnotationType"),
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeAnnotationType"),
         ]
         public override string AnnotationType
         {
-            get
-            {
-                return "VerticalLine";
-            }
+            get { return "VerticalLine"; }
         }
 
         #endregion
@@ -793,7 +728,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="point1">First line coordinate.</param>
         /// <param name="point2">Second line coordinate.</param>
         /// <param name="selectionRect">Selection rectangle.</param>
-        override internal void AdjustLineCoordinates(ref PointF point1, ref PointF point2, ref RectangleF selectionRect)
+        override internal void AdjustLineCoordinates(
+            ref PointF point1,
+            ref PointF point2,
+            ref RectangleF selectionRect
+        )
         {
             // Make line vertical
             point2.X = point1.X;
@@ -822,12 +761,16 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <summary>
     /// <b>HorizontalLineAnnotation</b> is a class that represents a horizontal line annotation.
     /// </summary>
-    [
-        SRDescription("DescriptionAttributeHorizontalLineAnnotation_HorizontalLineAnnotation"),
-    ]
+    [SRDescription("DescriptionAttributeHorizontalLineAnnotation_HorizontalLineAnnotation"),]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class HorizontalLineAnnotation : LineAnnotation
     {
@@ -836,10 +779,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Default public constructor.
         /// </summary>
-        public HorizontalLineAnnotation() 
-            : base()
-        {
-        }
+        public HorizontalLineAnnotation()
+            : base() { }
 
         #endregion
 
@@ -849,27 +790,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets an annotation's type name.
         /// </summary>
         /// <remarks>
-        /// This property is used to get the name of each annotation type 
-        /// (e.g. Line, Rectangle, Ellipse). 
+        /// This property is used to get the name of each annotation type
+        /// (e.g. Line, Rectangle, Ellipse).
         /// <para>
         /// This property is for internal use and is hidden at design and run time.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeAnnotationType"),
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeAnnotationType"),
         ]
         public override string AnnotationType
         {
-            get
-            {
-                return "HorizontalLine";
-            }
+            get { return "HorizontalLine"; }
         }
 
         #endregion
@@ -882,7 +820,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="point1">First line coordinate.</param>
         /// <param name="point2">Second line coordinate.</param>
         /// <param name="selectionRect">Selection rectangle.</param>
-        override internal void AdjustLineCoordinates(ref PointF point1, ref PointF point2, ref RectangleF selectionRect)
+        override internal void AdjustLineCoordinates(
+            ref PointF point1,
+            ref PointF point2,
+            ref RectangleF selectionRect
+        )
         {
             // Make line horizontal
             point2.Y = point1.Y;

@@ -3,11 +3,16 @@
 
 using System;
 
-public class Blah {
-    struct S {}
-    enum E { Val }
-    
-    public static void Main ()
+public class Blah
+{
+    struct S { }
+
+    enum E
+    {
+        Val
+    }
+
+    public static void Main()
     {
         S s = (S)(Enum)E.Val;
     }

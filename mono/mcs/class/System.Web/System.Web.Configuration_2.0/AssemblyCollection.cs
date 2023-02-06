@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,59 +35,68 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-    [ConfigurationCollection (typeof (AssemblyInfo), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public sealed class AssemblyCollection: ConfigurationElementCollection
+    [ConfigurationCollection(
+        typeof(AssemblyInfo),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class AssemblyCollection : ConfigurationElementCollection
     {
         static ConfigurationPropertyCollection properties;
 
-        static AssemblyCollection ()
+        static AssemblyCollection()
         {
             properties = new ConfigurationPropertyCollection();
         }
 
-        public void Add (AssemblyInfo assemblyInformation)
+        public void Add(AssemblyInfo assemblyInformation)
         {
-            BaseAdd (assemblyInformation, false);
+            BaseAdd(assemblyInformation, false);
         }
-        
-        public void Clear ()
+
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
-        
-        protected override ConfigurationElement CreateNewElement ()
+
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new AssemblyInfo ();
+            return new AssemblyInfo();
         }
-        
-        protected override object GetElementKey (ConfigurationElement element)
+
+        protected override object GetElementKey(ConfigurationElement element)
         {
             return ((AssemblyInfo)element).Assembly;
         }
-        
-        public void Remove (string key)
+
+        public void Remove(string key)
         {
-            BaseRemove (key);
+            BaseRemove(key);
         }
-        
-        public void RemoveAt (int index)
+
+        public void RemoveAt(int index)
         {
-            BaseRemoveAt (index);
+            BaseRemoveAt(index);
         }
 
-        public AssemblyInfo this [int index] {
-            get { return (AssemblyInfo) BaseGet (index); }
-            set {  if (BaseGet(index) != null)  BaseRemoveAt(index);  BaseAdd(index, value); }
+        public AssemblyInfo this[int index]
+        {
+            get { return (AssemblyInfo)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
         }
 
-        public new AssemblyInfo this [string assemblyName] {
-            get { return (AssemblyInfo) BaseGet (assemblyName); }
+        public new AssemblyInfo this[string assemblyName]
+        {
+            get { return (AssemblyInfo)BaseGet(assemblyName); }
         }
 
-
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
     }
 }
-

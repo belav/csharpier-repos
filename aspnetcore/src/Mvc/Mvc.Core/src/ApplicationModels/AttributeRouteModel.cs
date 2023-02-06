@@ -20,9 +20,7 @@ public class AttributeRouteModel
     /// <summary>
     /// Initializes a new instance of <see cref="AttributeRoute"/>.
     /// </summary>
-    public AttributeRouteModel()
-    {
-    }
+    public AttributeRouteModel() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="AttributeRoute"/> using the specified <paramref name="templateProvider"/>.
@@ -107,7 +105,8 @@ public class AttributeRouteModel
     /// parameters are <c>null</c>.</returns>
     public static AttributeRouteModel? CombineAttributeRouteModel(
         AttributeRouteModel? left,
-        AttributeRouteModel? right)
+        AttributeRouteModel? right
+    )
     {
         right = right ?? _default;
 
@@ -142,7 +141,10 @@ public class AttributeRouteModel
     /// <param name="prefix">The prefix.</param>
     /// <param name="template">The route template.</param>
     /// <returns>The combined pattern.</returns>
-    public static string? CombineTemplates([StringSyntax("Route")] string? prefix, [StringSyntax("Route")] string? template)
+    public static string? CombineTemplates(
+        [StringSyntax("Route")] string? prefix,
+        [StringSyntax("Route")] string? template
+    )
     {
         var result = CombineCore(prefix, template);
         return CleanTemplate(result);
@@ -158,14 +160,11 @@ public class AttributeRouteModel
     /// </remarks>
     public static bool IsOverridePattern([StringSyntax("Route")] string? template)
     {
-        return template != null &&
-            (template.StartsWith("~/", StringComparison.Ordinal) ||
-            template.StartsWith('/'));
+        return template != null
+            && (template.StartsWith("~/", StringComparison.Ordinal) || template.StartsWith('/'));
     }
 
-    private static string? ChooseName(
-        AttributeRouteModel left,
-        AttributeRouteModel right)
+    private static string? ChooseName(AttributeRouteModel left, AttributeRouteModel right)
     {
         if (right.Name == null && string.IsNullOrEmpty(right.Template))
         {
@@ -203,10 +202,10 @@ public class AttributeRouteModel
 
     private static bool IsEmptyLeftSegment(string? template)
     {
-        return template == null ||
-            template.Equals(string.Empty, StringComparison.Ordinal) ||
-            template.Equals("~/", StringComparison.Ordinal) ||
-            template.Equals("/", StringComparison.Ordinal);
+        return template == null
+            || template.Equals(string.Empty, StringComparison.Ordinal)
+            || template.Equals("~/", StringComparison.Ordinal)
+            || template.Equals("/", StringComparison.Ordinal);
     }
 
     private static string? CleanTemplate(string? result)
@@ -255,7 +254,10 @@ public class AttributeRouteModel
     /// <param name="template">The template.</param>
     /// <param name="values">The token values to use.</param>
     /// <returns>A new string with the replaced values.</returns>
-    public static string ReplaceTokens([StringSyntax("Route")] string template, IDictionary<string, string?> values)
+    public static string ReplaceTokens(
+        [StringSyntax("Route")] string template,
+        IDictionary<string, string?> values
+    )
     {
         return ReplaceTokens(template, values, routeTokenTransformer: null);
     }
@@ -267,7 +269,11 @@ public class AttributeRouteModel
     /// <param name="values">The token values to use.</param>
     /// <param name="routeTokenTransformer">The route token transformer.</param>
     /// <returns>A new string with the replaced values.</returns>
-    public static string ReplaceTokens([StringSyntax("Route")] string template, IDictionary<string, string?> values, IOutboundParameterTransformer? routeTokenTransformer)
+    public static string ReplaceTokens(
+        [StringSyntax("Route")] string template,
+        IDictionary<string, string?> values,
+        IOutboundParameterTransformer? routeTokenTransformer
+    )
     {
         var builder = new StringBuilder();
         var state = TemplateParserState.Plaintext;
@@ -316,7 +322,8 @@ public class AttributeRouteModel
                         // This is zero-width parameter - not allowed.
                         var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
                             template,
-                            Resources.AttributeRoute_TokenReplacement_EmptyTokenNotAllowed);
+                            Resources.AttributeRoute_TokenReplacement_EmptyTokenNotAllowed
+                        );
                         throw new InvalidOperationException(message);
                     }
                     else if (c == null)
@@ -324,7 +331,8 @@ public class AttributeRouteModel
                         // This is a left-bracket at the end of the string.
                         var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
                             template,
-                            Resources.AttributeRoute_TokenReplacement_UnclosedToken);
+                            Resources.AttributeRoute_TokenReplacement_UnclosedToken
+                        );
                         throw new InvalidOperationException(message);
                     }
                     else
@@ -346,7 +354,8 @@ public class AttributeRouteModel
                         // This is an imbalanced right-bracket at the end of the string.
                         var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
                             template,
-                            Resources.AttributeRoute_TokenReplacement_ImbalancedSquareBrackets);
+                            Resources.AttributeRoute_TokenReplacement_ImbalancedSquareBrackets
+                        );
                         throw new InvalidOperationException(message);
                     }
                     else
@@ -354,7 +363,8 @@ public class AttributeRouteModel
                         // This is an imbalanced right-bracket.
                         var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
                             template,
-                            Resources.AttributeRoute_TokenReplacement_ImbalancedSquareBrackets);
+                            Resources.AttributeRoute_TokenReplacement_ImbalancedSquareBrackets
+                        );
                         throw new InvalidOperationException(message);
                     }
                 case TemplateParserState.InsideToken:
@@ -374,7 +384,8 @@ public class AttributeRouteModel
                         // This is an unclosed replacement token
                         var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
                             template,
-                            Resources.AttributeRoute_TokenReplacement_UnclosedToken);
+                            Resources.AttributeRoute_TokenReplacement_UnclosedToken
+                        );
                         throw new InvalidOperationException(message);
                     }
                     else
@@ -394,7 +405,8 @@ public class AttributeRouteModel
                         // Unescaped left-bracket is not allowed inside a token.
                         var message = Resources.FormatAttributeRoute_TokenReplacement_InvalidSyntax(
                             template,
-                            Resources.AttributeRoute_TokenReplacement_UnescapedBraceInToken);
+                            Resources.AttributeRoute_TokenReplacement_UnescapedBraceInToken
+                        );
                         throw new InvalidOperationException(message);
                     }
                 case TemplateParserState.InsideToken | TemplateParserState.SeenRight:
@@ -415,10 +427,18 @@ public class AttributeRouteModel
                         if (!values.TryGetValue(token, out var value))
                         {
                             // Value not found
-                            var message = Resources.FormatAttributeRoute_TokenReplacement_ReplacementValueNotFound(
-                                template,
-                                token,
-                                string.Join(", ", values.Keys.OrderBy(k => k, StringComparer.OrdinalIgnoreCase)));
+                            var message =
+                                Resources.FormatAttributeRoute_TokenReplacement_ReplacementValueNotFound(
+                                    template,
+                                    token,
+                                    string.Join(
+                                        ", ",
+                                        values.Keys.OrderBy(
+                                            k => k,
+                                            StringComparer.OrdinalIgnoreCase
+                                        )
+                                    )
+                                );
                             throw new InvalidOperationException(message);
                         }
 

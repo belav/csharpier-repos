@@ -11,10 +11,17 @@ namespace System
             Func<Assembly, string, bool, Type> typeResolver,
             bool throwOnError,
             bool ignoreCase,
-            ref StackCrawlMark stackMark)
+            ref StackCrawlMark stackMark
+        )
         {
-            TypeSpec spec = TypeSpec.Parse (typeName);
-            return spec.Resolve (assemblyResolver, typeResolver, throwOnError, ignoreCase, ref stackMark);
+            TypeSpec spec = TypeSpec.Parse(typeName);
+            return spec.Resolve(
+                assemblyResolver,
+                typeResolver,
+                throwOnError,
+                ignoreCase,
+                ref stackMark
+            );
         }
     }
 }

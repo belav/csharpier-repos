@@ -5,10 +5,10 @@
 using System;
 using System.IO;
 
-namespace Mono.Profiler.Log {
-
-    public class LogStream : Stream {
-
+namespace Mono.Profiler.Log
+{
+    public class LogStream : Stream
+    {
         public Stream BaseStream { get; }
 
         public virtual bool EndOfStream => BaseStream.Position == BaseStream.Length;
@@ -19,63 +19,64 @@ namespace Mono.Profiler.Log {
 
         public override bool CanWrite => false;
 
-        public override long Length => throw new NotSupportedException ();
+        public override long Length => throw new NotSupportedException();
 
-        public override long Position {
-            get => throw new NotSupportedException ();
-            set => throw new NotSupportedException ();
+        public override long Position
+        {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
         }
 
-        readonly byte[] _byteBuffer = new byte [1];
+        readonly byte[] _byteBuffer = new byte[1];
 
-        public LogStream (Stream baseStream)
+        public LogStream(Stream baseStream)
         {
             if (baseStream == null)
-                throw new ArgumentNullException (nameof (baseStream));
+                throw new ArgumentNullException(nameof(baseStream));
 
             if (!baseStream.CanRead)
-                throw new ArgumentException ("Stream does not support reading.", nameof (baseStream));
+                throw new ArgumentException("Stream does not support reading.", nameof(baseStream));
 
             BaseStream = baseStream;
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (disposing)
-                BaseStream.Dispose ();
+                BaseStream.Dispose();
         }
 
-        public override void Flush ()
+        public override void Flush()
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override int ReadByte ()
+        public override int ReadByte()
         {
             // The base method on Stream is extremely inefficient in that it
             // allocates a 1-byte array for every call. Simply use a private
             // buffer instead.
-            return Read (_byteBuffer, 0, sizeof (byte)) == 0 ? -1 : _byteBuffer [0];
+            return Read(_byteBuffer, 0, sizeof(byte)) == 0 ? -1 : _byteBuffer[0];
         }
 
-        public override int Read (byte[] buffer, int offset, int count)
+        public override int Read(byte[] buffer, int offset, int count)
         {
-            return BaseStream.Read (buffer, offset, count);
+            return BaseStream.Read(buffer, offset, count);
         }
 
-        public override long Seek (long offset, SeekOrigin origin)
+        public override long Seek(long offset, SeekOrigin origin)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override void SetLength (long value)
+        public override void SetLength(long value)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override void Write (byte[] buffer, int offset, int count)
+        public override void Write(byte[] buffer, int offset, int count)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
     }
 }

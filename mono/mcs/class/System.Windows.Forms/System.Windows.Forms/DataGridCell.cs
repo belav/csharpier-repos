@@ -39,7 +39,7 @@ namespace System.Windows.Forms
         #endregion    // Local Variables
 
         #region Constructors
-        public DataGridCell (int r,  int c)
+        public DataGridCell(int r, int c)
         {
             row = r;
             column = c;
@@ -47,39 +47,39 @@ namespace System.Windows.Forms
         #endregion
 
         #region Public Instance Properties
-        public int ColumnNumber {
+        public int ColumnNumber
+        {
             get { return column; }
             set { column = value; }
         }
 
-        public int RowNumber {
+        public int RowNumber
+        {
             get { return row; }
             set { row = value; }
         }
         #endregion    // Public Instance Properties
 
         #region Public Instance Methods
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             if (!(o is DataGridCell))
                 return false;
 
-            DataGridCell obj = (DataGridCell) o;
+            DataGridCell obj = (DataGridCell)o;
             return (obj.ColumnNumber == column && obj.RowNumber == row);
-
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return row ^ column;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return "DataGridCell {RowNumber = " + row +", ColumnNumber = " + column + "}";
+            return "DataGridCell {RowNumber = " + row + ", ColumnNumber = " + column + "}";
         }
 
         #endregion    // Public Instance Methods
-
     }
 }

@@ -9,6 +9,5 @@ namespace Testing
     /// <summary>
     /// comment for delegate type
     /// </incorrect>
-    public delegate void MyDelegate2 (object o, EventArgs e);
+    public delegate void MyDelegate2(object o, EventArgs e);
 }
-

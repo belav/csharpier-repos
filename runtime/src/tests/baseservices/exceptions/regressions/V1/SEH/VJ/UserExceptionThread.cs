@@ -4,55 +4,69 @@ using System;
 using System.Threading;
 using System.IO;
 
-public class UserExceptionThread : Exception {
-        static int retVal = 100;
+public class UserExceptionThread : Exception
+{
+    static int retVal = 100;
 
-    public static int Main() {
+    public static int Main()
+    {
         Thread mv_Thread;
         String str = "Done";
         UserExceptionThread ue = new UserExceptionThread();
-        for (int i = 0 ; i < 10; i++){
+        for (int i = 0; i < 10; i++)
+        {
             mv_Thread = new Thread(new ThreadStart(ue.runtest));
-            try {
+            try
+            {
                 mv_Thread.Start();
             }
-            catch (Exception ){
+            catch (Exception)
+            {
                 Console.WriteLine("Exception was caught in main");
             }
         }
         Console.WriteLine(str);
-                return retVal;
+        return retVal;
     }
-        
-    public void runtest(){    
+
+    public void runtest()
+    {
         int counter = 0;
-            for (int j = 0; j < 100; j++){
-                try {
-                    if (j % 2 == 0)
-                        counter = j / (j % 2);
-                    else
-                        throw new UserExceptionThread();
-                }
-                catch ( UserExceptionThread ) {
-                    counter++;
-                    continue;
-                }
-                catch (ArithmeticException ){
-                    counter--;
-                    continue;    
-                }
-                finally {
-                    counter++;
-                }
+        for (int j = 0; j < 100; j++)
+        {
+            try
+            {
+                if (j % 2 == 0)
+                    counter = j / (j % 2);
+                else
+                    throw new UserExceptionThread();
             }
-            if (counter == 100){
-                lock(this){
-                    Console.WriteLine( "TryCatch Test Passed" );
-                }
+            catch (UserExceptionThread)
+            {
+                counter++;
+                continue;
             }
-            else{
-                Console.WriteLine( "TryCatch Test Failed" );
-                retVal = 1;
+            catch (ArithmeticException)
+            {
+                counter--;
+                continue;
             }
+            finally
+            {
+                counter++;
+            }
+        }
+        if (counter == 100)
+        {
+            lock (this)
+            {
+                Console.WriteLine("TryCatch Test Passed");
+            }
+        }
+        else
+        {
+            Console.WriteLine("TryCatch Test Failed");
+            retVal = 1;
+        }
     }
 }

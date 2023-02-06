@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,34 +35,37 @@ namespace Mono.Mozilla.DOM
     {
         protected new nsIDOMNamedNodeMap unmanagedNodes;
 
-        public NamedNodeMap (WebBrowser control, nsIDOMNamedNodeMap nodeMap)
-            : base (control, true)
+        public NamedNodeMap(WebBrowser control, nsIDOMNamedNodeMap nodeMap)
+            : base(control, true)
         {
             if (control.platform != control.enginePlatform)
-                unmanagedNodes = nsDOMNamedNodeMap.GetProxy (control, nodeMap);
+                unmanagedNodes = nsDOMNamedNodeMap.GetProxy(control, nodeMap);
             else
                 unmanagedNodes = nodeMap;
         }
-        
-        internal override void Load ()
+
+        internal override void Load()
         {
-            Clear ();
+            Clear();
             uint count;
-            unmanagedNodes.getLength (out count);
-            nodeCount = (int) count;
+            unmanagedNodes.getLength(out count);
+            nodeCount = (int)count;
             nodes = new Node[count];
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 nsIDOMNode node;
-                unmanagedNodes.item ((uint) i, out node);
-                nodes[i] = new Attribute (control, node as nsIDOMAttr);
+                unmanagedNodes.item((uint)i, out node);
+                nodes[i] = new Attribute(control, node as nsIDOMAttr);
             }
         }
 
-        public override int Count {
-            get {
+        public override int Count
+        {
+            get
+            {
                 if (unmanagedNodes != null && nodes == null)
-                    Load ();
-                return nodeCount; 
+                    Load();
+                return nodeCount;
             }
         }
 
@@ -72,77 +75,87 @@ namespace Mono.Mozilla.DOM
             get
             {
                 if (index < 0 || index >= Count)
-                    throw new ArgumentOutOfRangeException ("index");
+                    throw new ArgumentOutOfRangeException("index");
                 return nodes[index] as INode;
             }
             set { }
         }
 
-        public INode this [string name]
+        public INode this[string name]
         {
-            get {
-                Base.StringSet (storage, name);
+            get
+            {
+                Base.StringSet(storage, name);
                 nsIDOMNode ret;
-                unmanagedNodes.getNamedItem (storage, out ret);
-                for (int i = 0; i < Count; i++) {
-                    if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ()))
+                unmanagedNodes.getNamedItem(storage, out ret);
+                for (int i = 0; i < Count; i++)
+                {
+                    if (nodes[i].GetHashCode().Equals(ret.GetHashCode()))
                         return nodes[i];
                 }
                 return null;
             }
-            set {
-            }
+            set { }
         }
-        
-        public INode RemoveNamedItem (string name) {
-            Base.StringSet (storage, name);
+
+        public INode RemoveNamedItem(string name)
+        {
+            Base.StringSet(storage, name);
             nsIDOMNode ret;
-            unmanagedNodes.removeNamedItem (storage, out ret);
-            for (int i = 0; i < Count; i++) {
-                if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ())) {
+            unmanagedNodes.removeNamedItem(storage, out ret);
+            for (int i = 0; i < Count; i++)
+            {
+                if (nodes[i].GetHashCode().Equals(ret.GetHashCode()))
+                {
                     INode node = nodes[i];
-                    this.Remove (nodes[i]);
+                    this.Remove(nodes[i]);
                     return node;
                 }
             }
-            return null;            
+            return null;
         }
-        
-        public INode this[string namespaceURI, string localName] {
-            get {
-                Base.StringSet (storage, namespaceURI);
+
+        public INode this[string namespaceURI, string localName]
+        {
+            get
+            {
+                Base.StringSet(storage, namespaceURI);
                 UniString str = new Mono.Mozilla.UniString(localName);
                 nsIDOMNode ret;
-                unmanagedNodes.getNamedItemNS (storage, str.Handle, out ret);
-                for (int i = 0; i < Count; i++) {
-                    if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ()))
+                unmanagedNodes.getNamedItemNS(storage, str.Handle, out ret);
+                for (int i = 0; i < Count; i++)
+                {
+                    if (nodes[i].GetHashCode().Equals(ret.GetHashCode()))
                         return nodes[i];
                 }
                 return null;
             }
-            set {
-            }
+            set { }
         }
-        
-        public INode RemoveNamedItemNS(string namespaceURI, string localName) {
-            Base.StringSet (storage, namespaceURI);
+
+        public INode RemoveNamedItemNS(string namespaceURI, string localName)
+        {
+            Base.StringSet(storage, namespaceURI);
             nsIDOMNode ret;
             UniString str = new Mono.Mozilla.UniString(localName);
-            unmanagedNodes.removeNamedItemNS (storage, str.Handle, out ret);
-            for (int i = 0; i < Count; i++) {
-                if (nodes[i].GetHashCode ().Equals (ret.GetHashCode ())) {
+            unmanagedNodes.removeNamedItemNS(storage, str.Handle, out ret);
+            for (int i = 0; i < Count; i++)
+            {
+                if (nodes[i].GetHashCode().Equals(ret.GetHashCode()))
+                {
                     INode node = nodes[i];
-                    this.Remove (nodes[i]);
+                    this.Remove(nodes[i]);
                     return node;
                 }
             }
-            return null;            
+            return null;
         }
-        
+
         #endregion
-        
-        public override int GetHashCode () {
-            return this.unmanagedNodes.GetHashCode ();
-        }        
+
+        public override int GetHashCode()
+        {
+            return this.unmanagedNodes.GetHashCode();
+        }
     }
 }

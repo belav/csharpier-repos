@@ -10,11 +10,14 @@ namespace Microsoft.CodeAnalysis.CSharp
     public partial class SyntaxFactory
     {
         /// <summary>Creates a new LiteralExpressionSyntax instance.</summary>
-        public static LiteralExpressionSyntax LiteralExpression(SyntaxKind kind)
-            => SyntaxFactory.LiteralExpression(kind, SyntaxFactory.Token(GetLiteralExpressionTokenKind(kind)));
+        public static LiteralExpressionSyntax LiteralExpression(SyntaxKind kind) =>
+            SyntaxFactory.LiteralExpression(
+                kind,
+                SyntaxFactory.Token(GetLiteralExpressionTokenKind(kind))
+            );
 
-        private static SyntaxKind GetLiteralExpressionTokenKind(SyntaxKind kind)
-            => kind switch
+        private static SyntaxKind GetLiteralExpressionTokenKind(SyntaxKind kind) =>
+            kind switch
             {
                 SyntaxKind.ArgListExpression => SyntaxKind.ArgListKeyword,
                 SyntaxKind.NumericLiteralExpression => SyntaxKind.NumericLiteralToken,

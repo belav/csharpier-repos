@@ -4,29 +4,35 @@
 using System;
 using System.Collections;
 
-class XX {
-    static void Metodo (Exception e)
+class XX
+{
+    static void Metodo(Exception e)
     {
-        if (e is NotImplementedException){
-            Console.WriteLine ("OK");
-        } else {
-            Console.WriteLine ("Fail");
+        if (e is NotImplementedException)
+        {
+            Console.WriteLine("OK");
+        }
+        else
+        {
+            Console.WriteLine("Fail");
         }
     }
-    
-    static IEnumerable X ()
+
+    static IEnumerable X()
     {
-        try {
-            throw new NotImplementedException ();
-        } catch (Exception e){
-            Metodo (e);
+        try
+        {
+            throw new NotImplementedException();
+        }
+        catch (Exception e)
+        {
+            Metodo(e);
         }
         yield return 0;
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        foreach (int a in X ()){
-        }
+        foreach (int a in X()) { }
     }
 }

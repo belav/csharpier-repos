@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,45 +35,69 @@ namespace System.ServiceModel.Security.Tokens
 {
     public class SecurityContextSecurityToken : SecurityToken
     {
-        #region Static members 
+        #region Static members
 
-        public static SecurityContextSecurityToken CreateCookieSecurityContextToken (
+        public static SecurityContextSecurityToken CreateCookieSecurityContextToken(
             UniqueId contextId,
             string id,
-            byte [] key,
+            byte[] key,
             DateTime validFrom,
             DateTime validTo,
             ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies,
-            SecurityStateEncoder securityStateEncoder)
+            SecurityStateEncoder securityStateEncoder
+        )
         {
-            return CreateCookieSecurityContextToken (
-                contextId, id, key, validFrom, validTo, new UniqueId (Guid.NewGuid ()), validFrom, validTo, authorizationPolicies, securityStateEncoder);
+            return CreateCookieSecurityContextToken(
+                contextId,
+                id,
+                key,
+                validFrom,
+                validTo,
+                new UniqueId(Guid.NewGuid()),
+                validFrom,
+                validTo,
+                authorizationPolicies,
+                securityStateEncoder
+            );
         }
 
-        public static SecurityContextSecurityToken CreateCookieSecurityContextToken (
+        public static SecurityContextSecurityToken CreateCookieSecurityContextToken(
             UniqueId contextId,
             string id,
-            byte [] key,
+            byte[] key,
             DateTime validFrom,
             DateTime validTo,
             UniqueId keyGeneration,
             DateTime keyEffectiveTime,
             DateTime keyExpirationTime,
             ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies,
-            SecurityStateEncoder securityStateEncoder)
+            SecurityStateEncoder securityStateEncoder
+        )
         {
             if (securityStateEncoder == null)
-                throw new ArgumentNullException ("securityStateEncoder");
+                throw new ArgumentNullException("securityStateEncoder");
 
-            SecurityContextSecurityToken sct = new SecurityContextSecurityToken (
-                contextId, id, key, validFrom, validTo,
-                keyGeneration, keyEffectiveTime, 
-                keyExpirationTime,  authorizationPolicies);
-            byte [] rawdata = SslnegoCookieResolver.CreateData (
-                contextId, keyGeneration, key,
-                validFrom, validTo,
-                keyEffectiveTime, keyExpirationTime);
-            sct.cookie = securityStateEncoder.EncodeSecurityState (rawdata);
+            SecurityContextSecurityToken sct = new SecurityContextSecurityToken(
+                contextId,
+                id,
+                key,
+                validFrom,
+                validTo,
+                keyGeneration,
+                keyEffectiveTime,
+                keyExpirationTime,
+                authorizationPolicies
+            );
+            byte[] rawdata = SslnegoCookieResolver.CreateData(
+                contextId,
+                keyGeneration,
+                key,
+                validFrom,
+                validTo,
+                keyEffectiveTime,
+                keyExpirationTime
+            );
+            sct.cookie = securityStateEncoder.EncodeSecurityState(rawdata);
             return sct;
         }
 
@@ -82,49 +106,54 @@ namespace System.ServiceModel.Security.Tokens
         string id;
         InMemorySymmetricSecurityKey key;
         ReadOnlyCollection<SecurityKey> keys;
-        DateTime token_since, token_until, key_since, key_until;
-        UniqueId context_id, key_generation;
+        DateTime token_since,
+            token_until,
+            key_since,
+            key_until;
+        UniqueId context_id,
+            key_generation;
         ReadOnlyCollection<IAuthorizationPolicy> policies;
-        byte [] cookie;
+        byte[] cookie;
 
-        public SecurityContextSecurityToken (
+        public SecurityContextSecurityToken(
             UniqueId contextId,
             byte[] key,
             DateTime validFrom,
-            DateTime validTo)
-            : this (contextId, new UniqueId ().ToString (), key, validFrom, validTo)
-        {
-        }
+            DateTime validTo
+        )
+            : this(contextId, new UniqueId().ToString(), key, validFrom, validTo) { }
 
-        public SecurityContextSecurityToken (
+        public SecurityContextSecurityToken(
             UniqueId contextId,
             string id,
             byte[] key,
             DateTime validFrom,
-            DateTime validTo)
-            : this (contextId, id, key, validFrom, validTo, null)
-        {
-        }
+            DateTime validTo
+        )
+            : this(contextId, id, key, validFrom, validTo, null) { }
 
-        public SecurityContextSecurityToken (
+        public SecurityContextSecurityToken(
             UniqueId contextId,
             string id,
             byte[] key,
             DateTime validFrom,
             DateTime validTo,
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             context_id = contextId;
             this.id = id;
-            this.key = new InMemorySymmetricSecurityKey (key);
+            this.key = new InMemorySymmetricSecurityKey(key);
             token_since = validFrom;
             token_until = validTo;
             if (authorizationPolicies == null)
-                authorizationPolicies = new ReadOnlyCollection<IAuthorizationPolicy> (new Collection<IAuthorizationPolicy> ());
+                authorizationPolicies = new ReadOnlyCollection<IAuthorizationPolicy>(
+                    new Collection<IAuthorizationPolicy>()
+                );
             policies = authorizationPolicies;
         }
 
-        public SecurityContextSecurityToken (
+        public SecurityContextSecurityToken(
             UniqueId contextId,
             string id,
             byte[] key,
@@ -133,85 +162,102 @@ namespace System.ServiceModel.Security.Tokens
             UniqueId keyGeneration,
             DateTime keyEffectiveTime,
             DateTime keyExpirationTime,
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
-            : this (contextId, id, key, validFrom, validTo, authorizationPolicies)
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
+            : this(contextId, id, key, validFrom, validTo, authorizationPolicies)
         {
             key_generation = keyGeneration;
             key_since = keyEffectiveTime;
             key_until = keyExpirationTime;
         }
 
-        public ReadOnlyCollection<IAuthorizationPolicy> AuthorizationPolicies {
+        public ReadOnlyCollection<IAuthorizationPolicy> AuthorizationPolicies
+        {
             get { return policies; }
         }
 
-        public UniqueId ContextId {
+        public UniqueId ContextId
+        {
             get { return context_id; }
         }
 
-        public UniqueId KeyGeneration {
+        public UniqueId KeyGeneration
+        {
             get { return key_generation; }
         }
 
-        public DateTime KeyEffectiveTime {
+        public DateTime KeyEffectiveTime
+        {
             get { return key_since; }
         }
 
-        public DateTime KeyExpirationTime {
+        public DateTime KeyExpirationTime
+        {
             get { return key_until; }
         }
 
-        public override DateTime ValidFrom {
+        public override DateTime ValidFrom
+        {
             get { return token_since; }
         }
 
-        public override DateTime ValidTo {
+        public override DateTime ValidTo
+        {
             get { return token_until; }
         }
 
-        public override string Id {
+        public override string Id
+        {
             get { return id; }
         }
 
-        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-            get {
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys
+        {
+            get
+            {
                 if (keys == null)
-                    keys = new ReadOnlyCollection<SecurityKey> (new SecurityKey [] {key});
+                    keys = new ReadOnlyCollection<SecurityKey>(new SecurityKey[] { key });
                 return keys;
             }
         }
 
-        internal byte [] Cookie {
+        internal byte[] Cookie
+        {
             get { return cookie; }
             set { cookie = value; }
         }
 
-        public override bool CanCreateKeyIdentifierClause<T> ()
+        public override bool CanCreateKeyIdentifierClause<T>()
         {
-            return typeof (T) == typeof (SecurityContextKeyIdentifierClause);
+            return typeof(T) == typeof(SecurityContextKeyIdentifierClause);
         }
 
-        public override T CreateKeyIdentifierClause<T> ()
+        public override T CreateKeyIdentifierClause<T>()
         {
-            Type t = typeof (T);
-            if (t == typeof (SecurityContextKeyIdentifierClause))
-                return (T) (object) new SecurityContextKeyIdentifierClause (ContextId, KeyGeneration);
+            Type t = typeof(T);
+            if (t == typeof(SecurityContextKeyIdentifierClause))
+                return (T)(object)new SecurityContextKeyIdentifierClause(ContextId, KeyGeneration);
 
-            throw new NotSupportedException (String.Format ("X509SecurityToken does not support creation of {0}.", t));
+            throw new NotSupportedException(
+                String.Format("X509SecurityToken does not support creation of {0}.", t)
+            );
         }
 
-        public override bool MatchesKeyIdentifierClause (SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             SecurityContextKeyIdentifierClause sctic =
                 keyIdentifierClause as SecurityContextKeyIdentifierClause;
-            return sctic != null && sctic.ContextId == ContextId &&
-                   sctic.Generation == KeyGeneration;
+            return sctic != null
+                && sctic.ContextId == ContextId
+                && sctic.Generation == KeyGeneration;
         }
 
         [MonoTODO]
-        public override string ToString ()
+        public override string ToString()
         {
-            return base.ToString ();
+            return base.ToString();
         }
     }
 }

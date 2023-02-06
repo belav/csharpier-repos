@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,11 +37,12 @@ using System.Runtime.InteropServices;
 
 using Mono.Security.Cryptography;
 
-namespace System.Security.Cryptography {
-
-    [ComVisible (true)]
-    public sealed class DSACryptoServiceProvider : DSA, ICspAsymmetricAlgorithm {
-        private const int PROV_DSS_DH = 13;        // from WinCrypt.h
+namespace System.Security.Cryptography
+{
+    [ComVisible(true)]
+    public sealed class DSACryptoServiceProvider : DSA, ICspAsymmetricAlgorithm
+    {
+        private const int PROV_DSS_DH = 13; // from WinCrypt.h
 
         private KeyPairPersistence store;
         private bool persistKey;
@@ -52,8 +53,8 @@ namespace System.Security.Cryptography {
 
         private DSAManaged dsa;
 
-        // MS implementation generates a keypair everytime a new DSA 
-        // object is created (unless an existing key container is 
+        // MS implementation generates a keypair everytime a new DSA
+        // object is created (unless an existing key container is
         // specified in the CspParameters).
         // However we:
         // (a) often use DSA to import an existing keypair.
@@ -62,208 +63,230 @@ namespace System.Security.Cryptography {
         // used (or exported). This should save us a lot of time (at
         // least in the unit tests).
 
-        public DSACryptoServiceProvider ()
-            : this (1024)
+        public DSACryptoServiceProvider()
+            : this(1024) { }
+
+        public DSACryptoServiceProvider(CspParameters parameters)
+            : this(1024, parameters) { }
+
+        public DSACryptoServiceProvider(int dwKeySize)
         {
+            Common(dwKeySize, false);
         }
 
-        public DSACryptoServiceProvider (CspParameters parameters)
-            : this (1024, parameters)
-        {
-        }
-
-        public DSACryptoServiceProvider (int dwKeySize)
-        {
-            Common (dwKeySize, false);
-        }
-
-        public DSACryptoServiceProvider (int dwKeySize, CspParameters parameters)
+        public DSACryptoServiceProvider(int dwKeySize, CspParameters parameters)
         {
             bool has_parameters = parameters != null;
-            Common (dwKeySize, has_parameters);
+            Common(dwKeySize, has_parameters);
             if (has_parameters)
-                Common (parameters);
+                Common(parameters);
         }
 
-        void Common (int dwKeySize, bool parameters) 
+        void Common(int dwKeySize, bool parameters)
         {
-            LegalKeySizesValue = new KeySizes [1];
-            LegalKeySizesValue [0] = new KeySizes (512, 1024, 64);
+            LegalKeySizesValue = new KeySizes[1];
+            LegalKeySizesValue[0] = new KeySizes(512, 1024, 64);
 
             // will throw an exception is key size isn't supported
             KeySize = dwKeySize;
-            dsa = new DSAManaged (dwKeySize);
-            dsa.KeyGenerated += new DSAManaged.KeyGeneratedEventHandler (OnKeyGenerated);
+            dsa = new DSAManaged(dwKeySize);
+            dsa.KeyGenerated += new DSAManaged.KeyGeneratedEventHandler(OnKeyGenerated);
 
             persistKey = parameters;
             if (parameters)
                 return;
 
-            var p = new CspParameters (PROV_DSS_DH);
+            var p = new CspParameters(PROV_DSS_DH);
             if (useMachineKeyStore)
                 p.Flags |= CspProviderFlags.UseMachineKeyStore;
-            store = new KeyPairPersistence (p);
+            store = new KeyPairPersistence(p);
             // no need to load - it cannot exists
         }
 
-        void Common (CspParameters parameters)
+        void Common(CspParameters parameters)
         {
-            store = new KeyPairPersistence (parameters);
-            store.Load ();
-            if (store.KeyValue != null) {
+            store = new KeyPairPersistence(parameters);
+            store.Load();
+            if (store.KeyValue != null)
+            {
                 persisted = true;
-                this.FromXmlString (store.KeyValue);
+                this.FromXmlString(store.KeyValue);
             }
             privateKeyExportable = (parameters.Flags & CspProviderFlags.UseNonExportableKey) == 0;
         }
 
-        ~DSACryptoServiceProvider ()
+        ~DSACryptoServiceProvider()
         {
-            Dispose (false);
+            Dispose(false);
         }
 
         // DSA isn't used for key exchange
-        public override string KeyExchangeAlgorithm {
+        public override string KeyExchangeAlgorithm
+        {
             get { return null; }
         }
 
-        public override int KeySize {
+        public override int KeySize
+        {
             get { return dsa.KeySize; }
         }
 
-        public bool PersistKeyInCsp {
+        public bool PersistKeyInCsp
+        {
             get { return persistKey; }
             set { persistKey = value; }
         }
 
-        [ComVisible (false)]
-        public bool PublicOnly {
+        [ComVisible(false)]
+        public bool PublicOnly
+        {
             get { return dsa.PublicOnly; }
         }
 
-        public override string SignatureAlgorithm {
+        public override string SignatureAlgorithm
+        {
             get { return "http://www.w3.org/2000/09/xmldsig#dsa-sha1"; }
         }
 
         private static bool useMachineKeyStore;
 
-        public static bool UseMachineKeyStore {
+        public static bool UseMachineKeyStore
+        {
             get { return useMachineKeyStore; }
             set { useMachineKeyStore = value; }
         }
 
-        public override DSAParameters ExportParameters (bool includePrivateParameters) 
+        public override DSAParameters ExportParameters(bool includePrivateParameters)
         {
-            if ((includePrivateParameters) && (!privateKeyExportable)) {
-                throw new CryptographicException (
-                    Locale.GetText ("Cannot export private key"));
+            if ((includePrivateParameters) && (!privateKeyExportable))
+            {
+                throw new CryptographicException(Locale.GetText("Cannot export private key"));
             }
 
-            return dsa.ExportParameters (includePrivateParameters);
+            return dsa.ExportParameters(includePrivateParameters);
         }
 
-        public override void ImportParameters (DSAParameters parameters) 
+        public override void ImportParameters(DSAParameters parameters)
         {
-            dsa.ImportParameters (parameters);
+            dsa.ImportParameters(parameters);
         }
 
-        public override byte[] CreateSignature (byte[] rgbHash)
+        public override byte[] CreateSignature(byte[] rgbHash)
         {
-            return dsa.CreateSignature (rgbHash);
+            return dsa.CreateSignature(rgbHash);
         }
 
-        public byte[] SignData (byte[] buffer)
-        {
-            // right now only SHA1 is supported by FIPS186-2
-            HashAlgorithm hash = SHA1.Create ();
-            byte[] toBeSigned = hash.ComputeHash (buffer);
-            return dsa.CreateSignature (toBeSigned);
-        }
-
-        public byte[] SignData (byte[] buffer, int offset, int count)
-        {
-            // right now only SHA1 is supported by FIPS186-2
-            HashAlgorithm hash = SHA1.Create ();
-            byte[] toBeSigned = hash.ComputeHash (buffer, offset, count);
-            return dsa.CreateSignature (toBeSigned);
-        }
-
-        public byte[] SignData (Stream inputStream)
-        {
-            // right now only SHA1 is supported by FIPS186-2
-            HashAlgorithm hash = SHA1.Create ();
-            byte[] toBeSigned = hash.ComputeHash (inputStream);
-            return dsa.CreateSignature (toBeSigned);
-        }
-
-        public byte[] SignHash (byte[] rgbHash, string str)
-        {
-            // right now only SHA1 is supported by FIPS186-2
-            if (String.Compare (str, "SHA1", true, CultureInfo.InvariantCulture) != 0) {
-                // not documented
-                throw new CryptographicException (Locale.GetText ("Only SHA1 is supported."));
-            }
-
-            return dsa.CreateSignature (rgbHash);
-        }
-
-        public bool VerifyData (byte[] rgbData, byte[] rgbSignature)
+        public byte[] SignData(byte[] buffer)
         {
             // right now only SHA1 is supported by FIPS186-2
             HashAlgorithm hash = SHA1.Create();
-            byte[] toBeVerified = hash.ComputeHash (rgbData);
-            return dsa.VerifySignature (toBeVerified, rgbSignature);
+            byte[] toBeSigned = hash.ComputeHash(buffer);
+            return dsa.CreateSignature(toBeSigned);
+        }
+
+        public byte[] SignData(byte[] buffer, int offset, int count)
+        {
+            // right now only SHA1 is supported by FIPS186-2
+            HashAlgorithm hash = SHA1.Create();
+            byte[] toBeSigned = hash.ComputeHash(buffer, offset, count);
+            return dsa.CreateSignature(toBeSigned);
+        }
+
+        public byte[] SignData(Stream inputStream)
+        {
+            // right now only SHA1 is supported by FIPS186-2
+            HashAlgorithm hash = SHA1.Create();
+            byte[] toBeSigned = hash.ComputeHash(inputStream);
+            return dsa.CreateSignature(toBeSigned);
+        }
+
+        public byte[] SignHash(byte[] rgbHash, string str)
+        {
+            // right now only SHA1 is supported by FIPS186-2
+            if (String.Compare(str, "SHA1", true, CultureInfo.InvariantCulture) != 0)
+            {
+                // not documented
+                throw new CryptographicException(Locale.GetText("Only SHA1 is supported."));
+            }
+
+            return dsa.CreateSignature(rgbHash);
+        }
+
+        public bool VerifyData(byte[] rgbData, byte[] rgbSignature)
+        {
+            // right now only SHA1 is supported by FIPS186-2
+            HashAlgorithm hash = SHA1.Create();
+            byte[] toBeVerified = hash.ComputeHash(rgbData);
+            return dsa.VerifySignature(toBeVerified, rgbSignature);
         }
 
         // LAMESPEC: MD5 isn't allowed with DSA
-        public bool VerifyHash (byte[] rgbHash, string str, byte[] rgbSignature)
+        public bool VerifyHash(byte[] rgbHash, string str, byte[] rgbSignature)
         {
             if (str == null)
                 str = "SHA1"; // default value
-            if (String.Compare (str, "SHA1", true, CultureInfo.InvariantCulture) != 0) {
-                throw new CryptographicException (Locale.GetText ("Only SHA1 is supported."));
+            if (String.Compare(str, "SHA1", true, CultureInfo.InvariantCulture) != 0)
+            {
+                throw new CryptographicException(Locale.GetText("Only SHA1 is supported."));
             }
 
-            return dsa.VerifySignature (rgbHash, rgbSignature);
+            return dsa.VerifySignature(rgbHash, rgbSignature);
         }
 
-        public override bool VerifySignature (byte[] rgbHash, byte[] rgbSignature)
+        public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature)
         {
-            return dsa.VerifySignature (rgbHash, rgbSignature);
+            return dsa.VerifySignature(rgbHash, rgbSignature);
         }
 
-        protected override byte[] HashData (byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
+        protected override byte[] HashData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
             {
-                throw new CryptographicException(Environment.GetResourceString("Cryptography_UnknownHashAlgorithm", hashAlgorithm.Name));
+                throw new CryptographicException(
+                    Environment.GetResourceString(
+                        "Cryptography_UnknownHashAlgorithm",
+                        hashAlgorithm.Name
+                    )
+                );
             }
 
-            var hash = HashAlgorithm.Create (hashAlgorithm.Name);
-            return hash.ComputeHash (data, offset, count);
+            var hash = HashAlgorithm.Create(hashAlgorithm.Name);
+            return hash.ComputeHash(data, offset, count);
         }
 
-        protected override byte[] HashData (System.IO.Stream data, HashAlgorithmName hashAlgorithm)
+        protected override byte[] HashData(System.IO.Stream data, HashAlgorithmName hashAlgorithm)
         {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
             {
-                throw new CryptographicException(Environment.GetResourceString("Cryptography_UnknownHashAlgorithm", hashAlgorithm.Name));
+                throw new CryptographicException(
+                    Environment.GetResourceString(
+                        "Cryptography_UnknownHashAlgorithm",
+                        hashAlgorithm.Name
+                    )
+                );
             }
 
-            var hash = HashAlgorithm.Create (hashAlgorithm.Name);
-            return hash.ComputeHash (data);
+            var hash = HashAlgorithm.Create(hashAlgorithm.Name);
+            return hash.ComputeHash(data);
         }
 
-        protected override void Dispose (bool disposing) 
+        protected override void Dispose(bool disposing)
         {
-            if (!m_disposed) {
+            if (!m_disposed)
+            {
                 // the key is persisted and we do not want it persisted
-                if ((persisted) && (!persistKey)) {
-                    store.Remove ();    // delete the container
+                if ((persisted) && (!persistKey))
+                {
+                    store.Remove(); // delete the container
                 }
                 if (dsa != null)
-                    dsa.Clear ();
-                // call base class 
+                    dsa.Clear();
+                // call base class
                 // no need as they all are abstract before us
                 m_disposed = true;
             }
@@ -271,55 +294,65 @@ namespace System.Security.Cryptography {
 
         // private stuff
 
-        private void OnKeyGenerated (object sender, EventArgs e) 
+        private void OnKeyGenerated(object sender, EventArgs e)
         {
             // the key isn't persisted and we want it persisted
-            if ((persistKey) && (!persisted)) {
+            if ((persistKey) && (!persisted))
+            {
                 // save the current keypair
-                store.KeyValue = this.ToXmlString (!dsa.PublicOnly);
-                store.Save ();
+                store.KeyValue = this.ToXmlString(!dsa.PublicOnly);
+                store.Save();
                 persisted = true;
             }
         }
+
         // ICspAsymmetricAlgorithm
 
-        [MonoTODO ("call into KeyPairPersistence to get details")]
-        [ComVisible (false)]
-        public CspKeyContainerInfo CspKeyContainerInfo {
+        [MonoTODO("call into KeyPairPersistence to get details")]
+        [ComVisible(false)]
+        public CspKeyContainerInfo CspKeyContainerInfo
+        {
             get { return null; }
         }
 
-        [ComVisible (false)]
-        public byte[] ExportCspBlob (bool includePrivateParameters)
+        [ComVisible(false)]
+        public byte[] ExportCspBlob(bool includePrivateParameters)
         {
             byte[] blob = null;
             if (includePrivateParameters)
-                blob = CryptoConvert.ToCapiPrivateKeyBlob (this);
+                blob = CryptoConvert.ToCapiPrivateKeyBlob(this);
             else
-                blob = CryptoConvert.ToCapiPublicKeyBlob (this);
+                blob = CryptoConvert.ToCapiPublicKeyBlob(this);
             return blob;
         }
 
-        [ComVisible (false)]
-        public void ImportCspBlob (byte[] keyBlob)
+        [ComVisible(false)]
+        public void ImportCspBlob(byte[] keyBlob)
         {
             if (keyBlob == null)
-                throw new ArgumentNullException ("keyBlob");
-            DSA dsa = CryptoConvert.FromCapiKeyBlobDSA (keyBlob);
-            if (dsa is DSACryptoServiceProvider) {
-                DSAParameters dsap = dsa.ExportParameters (!(dsa as DSACryptoServiceProvider).PublicOnly);
-                ImportParameters (dsap);
-            } else {
+                throw new ArgumentNullException("keyBlob");
+            DSA dsa = CryptoConvert.FromCapiKeyBlobDSA(keyBlob);
+            if (dsa is DSACryptoServiceProvider)
+            {
+                DSAParameters dsap = dsa.ExportParameters(
+                    !(dsa as DSACryptoServiceProvider).PublicOnly
+                );
+                ImportParameters(dsap);
+            }
+            else
+            {
                 // we can't know from DSA if the private key is available
-                try {
+                try
+                {
                     // so we try it...
-                    DSAParameters dsap = dsa.ExportParameters (true);
-                    ImportParameters (dsap);
+                    DSAParameters dsap = dsa.ExportParameters(true);
+                    ImportParameters(dsap);
                 }
-                catch {
+                catch
+                {
                     // and fall back
-                    DSAParameters dsap = dsa.ExportParameters (false);
-                    ImportParameters (dsap);
+                    DSAParameters dsap = dsa.ExportParameters(false);
+                    ImportParameters(dsap);
                 }
             }
         }

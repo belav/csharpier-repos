@@ -10,11 +10,17 @@ namespace System.Globalization.Tests
 {
     public class IcuAppLocalTests
     {
-        private static bool SupportsIcuPackageDownload => RemoteExecutor.IsSupported &&
-                                                          ((PlatformDetection.IsWindows && !PlatformDetection.IsArmProcess) ||
-                                                           (PlatformDetection.IsLinux && (PlatformDetection.IsX64Process || PlatformDetection.IsArm64Process) &&
-                                                           !PlatformDetection.IsAlpine && !PlatformDetection.IsLinuxBionic));
-
+        private static bool SupportsIcuPackageDownload =>
+            RemoteExecutor.IsSupported
+            && (
+                (PlatformDetection.IsWindows && !PlatformDetection.IsArmProcess)
+                || (
+                    PlatformDetection.IsLinux
+                    && (PlatformDetection.IsX64Process || PlatformDetection.IsArm64Process)
+                    && !PlatformDetection.IsAlpine
+                    && !PlatformDetection.IsLinuxBionic
+                )
+            );
 
         [ConditionalFact(nameof(SupportsIcuPackageDownload))]
         public void TestIcuAppLocal()
@@ -29,23 +35,40 @@ namespace System.Globalization.Tests
             ProcessStartInfo psi = new ProcessStartInfo();
             psi.Environment.Add("DOTNET_SYSTEM_GLOBALIZATION_APPLOCALICU", "68.2.0.9");
 
-            RemoteExecutor.Invoke(() =>
-            {
-                // Start with calling Globalization to force the initialization.
-                CultureInfo ci = CultureInfo.GetCultureInfo("en-US");
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        // Start with calling Globalization to force the initialization.
+                        CultureInfo ci = CultureInfo.GetCultureInfo("en-US");
 
-                Type? interopGlobalization = Type.GetType("Interop+Globalization, System.Private.CoreLib");
-                Assert.NotNull(interopGlobalization);
+                        Type? interopGlobalization = Type.GetType(
+                            "Interop+Globalization, System.Private.CoreLib"
+                        );
+                        Assert.NotNull(interopGlobalization);
 
-                MethodInfo? methodInfo = interopGlobalization.GetMethod("GetICUVersion", BindingFlags.NonPublic | BindingFlags.Static);
-                Assert.NotNull(methodInfo);
+                        MethodInfo? methodInfo = interopGlobalization.GetMethod(
+                            "GetICUVersion",
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        );
+                        Assert.NotNull(methodInfo);
 
-                // Assert the ICU version 0x44020009 is 68.2.0.9
-                Assert.Equal(0x44020009, (int)methodInfo.Invoke(null, null));
+                        // Assert the ICU version 0x44020009 is 68.2.0.9
+                        Assert.Equal(0x44020009, (int)methodInfo.Invoke(null, null));
 
-                // Now call globalization API to ensure the binding working without any problem.
-                Assert.Equal(-1, ci.CompareInfo.Compare("sample\u0000", "Sample\u0000", CompareOptions.IgnoreSymbols));
-            }, new RemoteInvokeOptions { CheckExitCode = false, StartInfo = psi }).Dispose();
+                        // Now call globalization API to ensure the binding working without any problem.
+                        Assert.Equal(
+                            -1,
+                            ci.CompareInfo.Compare(
+                                "sample\u0000",
+                                "Sample\u0000",
+                                CompareOptions.IgnoreSymbols
+                            )
+                        );
+                    },
+                    new RemoteInvokeOptions { CheckExitCode = false, StartInfo = psi }
+                )
+                .Dispose();
         }
     }
 }

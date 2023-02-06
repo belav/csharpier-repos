@@ -2,15 +2,14 @@ using System;
 
 public class Foo
 {
-    static void GenericLock<T> (T t) where T : class
+    static void GenericLock<T>(T t)
+        where T : class
     {
-        lock (t)
-        {
-        }
+        lock (t) { }
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        GenericLock ("s");
+        GenericLock("s");
     }
 }

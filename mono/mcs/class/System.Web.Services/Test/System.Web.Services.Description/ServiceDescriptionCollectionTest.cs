@@ -20,42 +20,42 @@ namespace MonoTests.System.Web.Services.Description
         ServiceDescriptionCollection sdc;
 
         [SetUp]
-        public void InitializeServiceDescriptionCollection ()
+        public void InitializeServiceDescriptionCollection()
         {
-            sdc = new ServiceDescriptionCollection ();
+            sdc = new ServiceDescriptionCollection();
         }
 
         [Test]
         public void TestDefaultProperties()
         {
-            Assert.IsNull (sdc["hello"]);
-            Assert.AreEqual (0, sdc.Count);
+            Assert.IsNull(sdc["hello"]);
+            Assert.AreEqual(0, sdc.Count);
         }
-        
+
         [Test]
-        public void TestAddServiceDescriptionWithoutTargetNS ()
+        public void TestAddServiceDescriptionWithoutTargetNS()
         {
             const string serviceDescriptionNamespace = "testServiceDescription";
-            
-            ServiceDescription sd = new ServiceDescription ();    
-            sdc.Add (sd);
 
-            Assert.AreEqual (1, sdc.Count);
-            Assert.IsNull (sdc[serviceDescriptionNamespace]);
+            ServiceDescription sd = new ServiceDescription();
+            sdc.Add(sd);
+
+            Assert.AreEqual(1, sdc.Count);
+            Assert.IsNull(sdc[serviceDescriptionNamespace]);
         }
 
         [Test]
-        public void TestAddServiceDescriptionWithTargetNS ()
+        public void TestAddServiceDescriptionWithTargetNS()
         {
             const string serviceDescriptionNamespace = "http://some.urn";
-            
-            ServiceDescription sd = new ServiceDescription ();
-            sd.TargetNamespace = serviceDescriptionNamespace;
-            
-            sdc.Add (sd);
 
-            Assert.AreEqual (1, sdc.Count);
-            Assert.AreEqual (sd, sdc[serviceDescriptionNamespace]);
+            ServiceDescription sd = new ServiceDescription();
+            sd.TargetNamespace = serviceDescriptionNamespace;
+
+            sdc.Add(sd);
+
+            Assert.AreEqual(1, sdc.Count);
+            Assert.AreEqual(sd, sdc[serviceDescriptionNamespace]);
         }
     }
 }

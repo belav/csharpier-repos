@@ -3,12 +3,10 @@
 
 public class Program
 {
-    public static void Main ()
+    public static void Main()
     {
-        M (z: 1, whatever: 0);
+        M(z: 1, whatever: 0);
     }
 
-    void M (int x = 0, int y = 0, int z = 0)
-    {
-    }
+    void M(int x = 0, int y = 0, int z = 0) { }
 }

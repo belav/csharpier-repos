@@ -4,7 +4,7 @@ namespace Test
 {
     public abstract class CustomParentAttribute : Attribute
     {
-        public abstract void DoSomething ();
+        public abstract void DoSomething();
     }
 
     [CustomChild]
@@ -12,14 +12,9 @@ namespace Test
     {
         private sealed class CustomChildAttribute : CustomParentAttribute
         {
-            public override void DoSomething ()
-            {
-            }
+            public override void DoSomething() { }
         }
-        
-        
-        public static void Main ()
-        {
-        }
+
+        public static void Main() { }
     }
 }

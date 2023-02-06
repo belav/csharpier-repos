@@ -2,17 +2,17 @@ using System;
 
 partial class C
 {
-    static partial void Partial (int i = 8);
-    
-    static partial void Partial (int i)
+    static partial void Partial(int i = 8);
+
+    static partial void Partial(int i)
     {
         if (i != 8)
-            throw new ApplicationException ();
+            throw new ApplicationException();
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
-        Partial ();
+        Partial();
         return 0;
     }
 }

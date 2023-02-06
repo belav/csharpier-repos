@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,33 +34,33 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-
-namespace MonoCasTests.System.Web.UI {
-
+namespace MonoCasTests.System.Web.UI
+{
     [TestFixture]
-    [Category ("CAS")]
+    [Category("CAS")]
     public class DataBindingCollectionTest
     {
         bool changed = false;
-        
-        [Test] public void ChangeTest ()
+
+        [Test]
+        public void ChangeTest()
         {
-            DataBindingCollection a = new DataBindingCollection ();
-            a.Changed += delegate {
+            DataBindingCollection a = new DataBindingCollection();
+            a.Changed += delegate
+            {
                 changed = true;
             };
 
-            DataBinding b = new DataBinding ("a", typeof (DataBindingCollectionTest), "b");
-            a.Add (b);
-            Assert.AreEqual (true, changed, "DB1");
+            DataBinding b = new DataBinding("a", typeof(DataBindingCollectionTest), "b");
+            a.Add(b);
+            Assert.AreEqual(true, changed, "DB1");
             changed = false;
 
-            a.Clear ();
-            Assert.AreEqual (false, changed, "DB2");
-            
-            a.Remove (b);
-            Assert.AreEqual (true, changed, "DB3");
+            a.Clear();
+            Assert.AreEqual(false, changed, "DB2");
+
+            a.Remove(b);
+            Assert.AreEqual(true, changed, "DB3");
         }
     }
 }
-    

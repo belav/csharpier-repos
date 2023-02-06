@@ -5,13 +5,9 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo ("MyAssemblyName, Version=")]
+[assembly: InternalsVisibleTo("MyAssemblyName, Version=")]
 
-public class InternalsVisibleToTest 
+public class InternalsVisibleToTest
 {
-    static void Main ()
-    {
-    }
-
+    static void Main() { }
 }
-

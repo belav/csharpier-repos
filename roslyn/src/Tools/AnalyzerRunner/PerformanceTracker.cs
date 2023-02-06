@@ -47,7 +47,8 @@ namespace AnalyzerRunner
         {
 #if NETCOREAPP
             var elapsedTime = Elapsed;
-            var allocatedBytes = GC.GetTotalAllocatedBytes(preciseMemory) - _initialTotalAllocatedBytes;
+            var allocatedBytes =
+                GC.GetTotalAllocatedBytes(preciseMemory) - _initialTotalAllocatedBytes;
 
             return $"{elapsedTime.TotalMilliseconds:0}ms ({allocatedBytes} bytes allocated)";
 #else

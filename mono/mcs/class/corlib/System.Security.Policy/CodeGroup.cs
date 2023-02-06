@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,89 +34,102 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace System.Security.Policy {
-
+namespace System.Security.Policy
+{
     [Serializable]
-    [ComVisible (true)]
-    public abstract class CodeGroup {
+    [ComVisible(true)]
+    public abstract class CodeGroup
+    {
         PolicyStatement m_policy;
         IMembershipCondition m_membershipCondition;
         string m_description;
         string m_name;
         ArrayList m_children = new ArrayList();
-//        PolicyLevel m_level;
 
-        protected CodeGroup (IMembershipCondition membershipCondition, PolicyStatement policy)
+        //        PolicyLevel m_level;
+
+        protected CodeGroup(IMembershipCondition membershipCondition, PolicyStatement policy)
         {
             if (null == membershipCondition)
-                throw new ArgumentNullException ("membershipCondition");
+                throw new ArgumentNullException("membershipCondition");
 
             if (policy != null)
-                m_policy = policy.Copy ();
-            m_membershipCondition = membershipCondition.Copy ();
+                m_policy = policy.Copy();
+            m_membershipCondition = membershipCondition.Copy();
         }
 
         // for PolicyLevel (to avoid validation duplication)
-        internal CodeGroup (SecurityElement e, PolicyLevel level) 
+        internal CodeGroup(SecurityElement e, PolicyLevel level)
         {
-            FromXml (e, level);
+            FromXml(e, level);
         }
 
         // abstract
 
-        public abstract CodeGroup Copy ();
+        public abstract CodeGroup Copy();
 
         public abstract string MergeLogic { get; }
 
-        public abstract PolicyStatement Resolve (Evidence evidence);
+        public abstract PolicyStatement Resolve(Evidence evidence);
 
-        public abstract CodeGroup ResolveMatchingCodeGroups (Evidence evidence);
+        public abstract CodeGroup ResolveMatchingCodeGroups(Evidence evidence);
 
         // properties
 
-        public PolicyStatement PolicyStatement {
+        public PolicyStatement PolicyStatement
+        {
             get { return m_policy; }
             set { m_policy = value; }
         }
 
-        public string Description {
+        public string Description
+        {
             get { return m_description; }
             set { m_description = value; }
         }
 
-        public IMembershipCondition MembershipCondition     {
+        public IMembershipCondition MembershipCondition
+        {
             get { return m_membershipCondition; }
-            set {
+            set
+            {
                 if (null == value)
-                    throw new ArgumentException ("value");
+                    throw new ArgumentException("value");
                 m_membershipCondition = value;
             }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return m_name; }
             set { m_name = value; }
         }
 
-        public IList Children {
+        public IList Children
+        {
             get { return m_children; }
-            set {
+            set
+            {
                 if (null == value)
-                    throw new ArgumentNullException ("value");
-                m_children = new ArrayList (value);
+                    throw new ArgumentNullException("value");
+                m_children = new ArrayList(value);
             }
         }
 
-        public virtual string AttributeString {
-            get {
+        public virtual string AttributeString
+        {
+            get
+            {
                 if (null != m_policy)
                     return m_policy.AttributeString;
                 return null;
             }
         }
 
-        public virtual string PermissionSetName {
-            get {
+        public virtual string PermissionSetName
+        {
+            get
+            {
                 if (m_policy == null)
                     return null;
                 if (m_policy.PermissionSet is Security.NamedPermissionSet)
@@ -125,24 +138,24 @@ namespace System.Security.Policy {
             }
         }
 
-        public void AddChild (CodeGroup group)
+        public void AddChild(CodeGroup group)
         {
             if (null == group)
-                throw new ArgumentNullException ("group");
+                throw new ArgumentNullException("group");
 
-            m_children.Add (group.Copy ());
+            m_children.Add(group.Copy());
         }
 
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             CodeGroup cg = (o as CodeGroup);
             if (cg == null)
                 return false;
 
-            return Equals (cg, false);
+            return Equals(cg, false);
         }
 
-        public bool Equals (CodeGroup cg, bool compareChildren)
+        public bool Equals(CodeGroup cg, bool compareChildren)
         {
             if (cg.Name != this.Name)
                 return false;
@@ -150,83 +163,99 @@ namespace System.Security.Policy {
             if (cg.Description != this.Description)
                 return false;
 
-            if (!cg.MembershipCondition.Equals (m_membershipCondition))
+            if (!cg.MembershipCondition.Equals(m_membershipCondition))
                 return false;
 
-            if (compareChildren) {
+            if (compareChildren)
+            {
                 int childCount = cg.Children.Count;
                 if (this.Children.Count != childCount)
                     return false;
 
-                for (int index = 0; index < childCount; index++) {
+                for (int index = 0; index < childCount; index++)
+                {
                     // not a deep compare
-                    if (!((CodeGroup)(this.Children [index])).Equals ((CodeGroup)(cg.Children [index]), false))
+                    if (
+                        !((CodeGroup)(this.Children[index])).Equals(
+                            (CodeGroup)(cg.Children[index]),
+                            false
+                        )
+                    )
                         return false;
                 }
             }
             return true;
         }
 
-        public void RemoveChild (CodeGroup group)
+        public void RemoveChild(CodeGroup group)
         {
             if (group != null)
-                m_children.Remove (group);
+                m_children.Remove(group);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            int hashCode = m_membershipCondition.GetHashCode ();
+            int hashCode = m_membershipCondition.GetHashCode();
             if (m_policy != null)
-                hashCode += m_policy.GetHashCode ();
+                hashCode += m_policy.GetHashCode();
             return hashCode;
         }
 
-        public void FromXml (SecurityElement e)
+        public void FromXml(SecurityElement e)
         {
-            FromXml (e, null);
+            FromXml(e, null);
         }
 
-        public void FromXml (SecurityElement e, PolicyLevel level)
+        public void FromXml(SecurityElement e, PolicyLevel level)
         {
             if (null == e)
                 throw new ArgumentNullException("e");
 
             PermissionSet ps = null;
-            string psetname = e.Attribute ("PermissionSetName");
-            if ((psetname != null) && (level != null)) {
-                ps = level.GetNamedPermissionSet (psetname);
+            string psetname = e.Attribute("PermissionSetName");
+            if ((psetname != null) && (level != null))
+            {
+                ps = level.GetNamedPermissionSet(psetname);
             }
-            else {
-                SecurityElement pset = e.SearchForChildByTag ("PermissionSet");
-                if (pset != null) {
-                    Type classType = Type.GetType (pset.Attribute ("class"));
-                    ps = (PermissionSet) Activator.CreateInstance (classType, true);
-                    ps.FromXml (pset);
+            else
+            {
+                SecurityElement pset = e.SearchForChildByTag("PermissionSet");
+                if (pset != null)
+                {
+                    Type classType = Type.GetType(pset.Attribute("class"));
+                    ps = (PermissionSet)Activator.CreateInstance(classType, true);
+                    ps.FromXml(pset);
                 }
-                else {
-                    ps = new PermissionSet (new PermissionSet (PermissionState.None));
+                else
+                {
+                    ps = new PermissionSet(new PermissionSet(PermissionState.None));
                 }
             }
-            m_policy = new PolicyStatement (ps);
+            m_policy = new PolicyStatement(ps);
 
-            m_children.Clear ();
-            if ((e.Children != null) && (e.Children.Count > 0)) {
-                foreach (SecurityElement se in e.Children) {
-                    if (se.Tag == "CodeGroup") {
-                        this.AddChild (CodeGroup.CreateFromXml (se, level));
+            m_children.Clear();
+            if ((e.Children != null) && (e.Children.Count > 0))
+            {
+                foreach (SecurityElement se in e.Children)
+                {
+                    if (se.Tag == "CodeGroup")
+                    {
+                        this.AddChild(CodeGroup.CreateFromXml(se, level));
                     }
                 }
             }
-            
+
             m_membershipCondition = null;
-            SecurityElement mc = e.SearchForChildByTag ("IMembershipCondition");
-            if (mc != null) {
-                string className = mc.Attribute ("class");
-                Type classType = Type.GetType (className);
+            SecurityElement mc = e.SearchForChildByTag("IMembershipCondition");
+            if (mc != null)
+            {
+                string className = mc.Attribute("class");
+                Type classType = Type.GetType(className);
                 if (classType == null)
-                    classType = Type.GetType ("System.Security.Policy." + className);
-                m_membershipCondition = (IMembershipCondition) Activator.CreateInstance (classType, true);
-                m_membershipCondition.FromXml (mc, level);
+                    classType = Type.GetType("System.Security.Policy." + className);
+                m_membershipCondition = (IMembershipCondition)
+                    Activator.CreateInstance(classType, true);
+                m_membershipCondition.FromXml(mc, level);
             }
 
             m_name = e.Attribute("Name");
@@ -235,19 +264,17 @@ namespace System.Security.Policy {
             // seems like we might need this to Resolve() in subclasses
             //m_level = level;
 
-            ParseXml (e, level);
+            ParseXml(e, level);
         }
 
-        protected virtual void ParseXml (SecurityElement e, PolicyLevel level)
+        protected virtual void ParseXml(SecurityElement e, PolicyLevel level) { }
+
+        public SecurityElement ToXml()
         {
-        }
-        
-        public SecurityElement ToXml ()
-        {
-            return ToXml (null);
+            return ToXml(null);
         }
 
-        public SecurityElement ToXml (PolicyLevel level)
+        public SecurityElement ToXml(PolicyLevel level)
         {
             SecurityElement e = new SecurityElement("CodeGroup");
             e.AddAttribute("class", this.GetType().AssemblyQualifiedName);
@@ -263,7 +290,7 @@ namespace System.Security.Policy {
                 e.AddChild(MembershipCondition.ToXml());
 
             if ((PolicyStatement != null) && (PolicyStatement.PermissionSet != null))
-                e.AddChild (PolicyStatement.PermissionSet.ToXml ());
+                e.AddChild(PolicyStatement.PermissionSet.ToXml());
 
             foreach (CodeGroup child in Children)
                 e.AddChild(child.ToXml());
@@ -271,42 +298,42 @@ namespace System.Security.Policy {
             CreateXml(e, level);
             return e;
         }
-        
-        protected virtual void CreateXml (SecurityElement element, PolicyLevel level)
-        {
-        }
+
+        protected virtual void CreateXml(SecurityElement element, PolicyLevel level) { }
 
         // internal stuff
 
-        internal static CodeGroup CreateFromXml (SecurityElement se, PolicyLevel level) 
+        internal static CodeGroup CreateFromXml(SecurityElement se, PolicyLevel level)
         {
-            string fullClassName = se.Attribute ("class");
+            string fullClassName = se.Attribute("class");
             string className = fullClassName;
             // many possible formats
             // a. "FirstMatchCodeGroup"
             // b. "System.Security.Policy.FirstMatchCodeGroup"
             // c. "System.Security.Policy.FirstMatchCodeGroup, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\"\r\n           version=\"1\">\r\n   <IMembershipCondition class=\"System.Security.Policy.AllMembershipCondition, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-            int n = className.IndexOf (",");
-            if (n > 0) {
-                className = className.Substring (0, n);
-            }
-            n = className.LastIndexOf (".");
+            int n = className.IndexOf(",");
             if (n > 0)
-                className = className.Substring (n + 1);
+            {
+                className = className.Substring(0, n);
+            }
+            n = className.LastIndexOf(".");
+            if (n > 0)
+                className = className.Substring(n + 1);
             // much faster than calling Activator.CreateInstance
-            switch (className) {
+            switch (className)
+            {
                 case "FileCodeGroup":
-                    return new FileCodeGroup (se, level);
+                    return new FileCodeGroup(se, level);
                 case "FirstMatchCodeGroup":
-                    return new FirstMatchCodeGroup (se, level);
+                    return new FirstMatchCodeGroup(se, level);
                 case "NetCodeGroup":
-                    return new NetCodeGroup (se, level);
+                    return new NetCodeGroup(se, level);
                 case "UnionCodeGroup":
-                    return new UnionCodeGroup (se, level);
+                    return new UnionCodeGroup(se, level);
                 default: // unknown
-                    Type classType = Type.GetType (fullClassName);
-                    CodeGroup cg = (CodeGroup) Activator.CreateInstance (classType, true);
-                    cg.FromXml (se, level);
+                    Type classType = Type.GetType(fullClassName);
+                    CodeGroup cg = (CodeGroup)Activator.CreateInstance(classType, true);
+                    cg.FromXml(se, level);
                     return cg;
             }
         }

@@ -3,8 +3,8 @@
 
 class X
 {
-    public static void Foo<T> (T t)
+    public static void Foo<T>(T t)
     {
-        object o = sizeof (T);
+        object o = sizeof(T);
     }
 }

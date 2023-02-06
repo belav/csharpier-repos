@@ -3,23 +3,17 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupLinkerDescriptorFile ("UnusedInterfaceTypeOnTypeWithPreserveAllIsKept.xml")]
+    [SetupLinkerDescriptorFile("UnusedInterfaceTypeOnTypeWithPreserveAllIsKept.xml")]
     public class UnusedInterfaceTypeOnTypeWithPreserveAllIsKept
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        interface IFoo
-        {
-        }
+        interface IFoo { }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (IFoo))]
-        class Bar : IFoo
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(IFoo))]
+        class Bar : IFoo { }
     }
 }

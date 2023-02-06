@@ -10,25 +10,25 @@ namespace MonoTests.Mono
     {
 #if WIN_PLATFORM
         [TestFixtureSetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            Assert.Ignore ("Mono.Native is not supported on this platform.");
+            Assert.Ignore("Mono.Native is not supported on this platform.");
         }
 #endif
 
         [Test]
-        public void PlatformType ()
+        public void PlatformType()
         {
-            var type = MonoNativePlatform.GetPlatformType ();
-            Assert.That ((int)type, Is.GreaterThan (0), "platform type");
+            var type = MonoNativePlatform.GetPlatformType();
+            Assert.That((int)type, Is.GreaterThan(0), "platform type");
         }
 
         [Test]
-        public void TestInitialize ()
+        public void TestInitialize()
         {
-            MonoNativePlatform.Initialize ();
-            var initialized = MonoNativePlatform.IsInitialized ();
-            Assert.IsTrue (initialized, "MonoNativePlatform.IsInitialized()");
+            MonoNativePlatform.Initialize();
+            var initialized = MonoNativePlatform.IsInitialized();
+            Assert.IsTrue(initialized, "MonoNativePlatform.IsInitialized()");
         }
     }
 }

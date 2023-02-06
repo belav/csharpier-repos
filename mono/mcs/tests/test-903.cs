@@ -1,17 +1,15 @@
 using System;
 
-struct S
-{
-}
+struct S { }
 
 class C
 {
     public static int ConversionCalled;
 
-    public static implicit operator S (C c)
+    public static implicit operator S(C c)
     {
         ++ConversionCalled;
-        return new S ();
+        return new S();
     }
 }
 
@@ -19,20 +17,20 @@ class Program
 {
     static C field;
 
-    static int Main ()
+    static int Main()
     {
-        C c = new C ();
-        var x = c ?? new S ();
+        C c = new C();
+        var x = c ?? new S();
 
         if (C.ConversionCalled != 1)
             return 1;
 
         c = null;
-        x = c ?? new S ();
+        x = c ?? new S();
         if (C.ConversionCalled != 1)
             return 2;
 
-        x = field ?? new S ();
+        x = field ?? new S();
         if (C.ConversionCalled != 1)
             return 3;
 

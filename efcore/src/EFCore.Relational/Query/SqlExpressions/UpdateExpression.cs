@@ -23,16 +23,19 @@ public sealed class UpdateExpression : Expression, IPrintableExpression
     ///     A list of <see cref="ColumnValueSetter" /> which specifies columns and their corresponding values to
     ///     update.
     /// </param>
-    public UpdateExpression(TableExpression table, SelectExpression selectExpression, IReadOnlyList<ColumnValueSetter> columnValueSetters)
-        : this(table, selectExpression, columnValueSetters, new HashSet<string>())
-    {
-    }
+    public UpdateExpression(
+        TableExpression table,
+        SelectExpression selectExpression,
+        IReadOnlyList<ColumnValueSetter> columnValueSetters
+    )
+        : this(table, selectExpression, columnValueSetters, new HashSet<string>()) { }
 
     private UpdateExpression(
         TableExpression table,
         SelectExpression selectExpression,
         IReadOnlyList<ColumnValueSetter> columnValueSetters,
-        ISet<string> tags)
+        ISet<string> tags
+    )
     {
         Table = table;
         SelectExpression = selectExpression;
@@ -64,16 +67,14 @@ public sealed class UpdateExpression : Expression, IPrintableExpression
     ///     Applies a given set of tags.
     /// </summary>
     /// <param name="tags">A list of tags to apply.</param>
-    public UpdateExpression ApplyTags(ISet<string> tags)
-        => new(Table, SelectExpression, ColumnValueSetters, tags);
+    public UpdateExpression ApplyTags(ISet<string> tags) =>
+        new(Table, SelectExpression, ColumnValueSetters, tags);
 
     /// <inheritdoc />
-    public override Type Type
-        => typeof(object);
+    public override Type Type => typeof(object);
 
     /// <inheritdoc />
-    public override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -100,10 +101,13 @@ public sealed class UpdateExpression : Expression, IPrintableExpression
             }
         }
 
-        return selectExpression != SelectExpression
-            || columnValueSetters != null
-                ? new UpdateExpression(Table, selectExpression, columnValueSetters ?? ColumnValueSetters)
-                : this;
+        return selectExpression != SelectExpression || columnValueSetters != null
+            ? new UpdateExpression(
+                Table,
+                selectExpression,
+                columnValueSetters ?? ColumnValueSetters
+            )
+            : this;
     }
 
     /// <summary>
@@ -113,8 +117,12 @@ public sealed class UpdateExpression : Expression, IPrintableExpression
     /// <param name="selectExpression">The <see cref="SelectExpression" /> property of the result.</param>
     /// <param name="columnValueSetters">The <see cref="ColumnValueSetters" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public UpdateExpression Update(SelectExpression selectExpression, IReadOnlyList<ColumnValueSetter> columnValueSetters)
-        => selectExpression != SelectExpression || !ColumnValueSetters.SequenceEqual(columnValueSetters)
+    public UpdateExpression Update(
+        SelectExpression selectExpression,
+        IReadOnlyList<ColumnValueSetter> columnValueSetters
+    ) =>
+        selectExpression != SelectExpression
+        || !ColumnValueSetters.SequenceEqual(columnValueSetters)
             ? new UpdateExpression(Table, selectExpression, columnValueSetters, Tags)
             : this;
 
@@ -148,16 +156,17 @@ public sealed class UpdateExpression : Expression, IPrintableExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is UpdateExpression updateExpression
-                && Equals(updateExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is UpdateExpression updateExpression && Equals(updateExpression)
+        );
 
-    private bool Equals(UpdateExpression updateExpression)
-        => Table == updateExpression.Table
-            && SelectExpression == updateExpression.SelectExpression
-            && ColumnValueSetters.SequenceEqual(updateExpression.ColumnValueSetters);
+    private bool Equals(UpdateExpression updateExpression) =>
+        Table == updateExpression.Table
+        && SelectExpression == updateExpression.SelectExpression
+        && ColumnValueSetters.SequenceEqual(updateExpression.ColumnValueSetters);
 
     /// <inheritdoc />
     public override int GetHashCode()

@@ -13,10 +13,16 @@ namespace System.Drawing.Tests
 
     public class Icon_toolboxBitmapAttributeTest { }
 
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34591",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class ToolboxBitmapAttributeTests
     {
         private static Size DefaultSize = new Size(16, 16);
+
         private void AssertDefaultSize(Image image)
         {
             try
@@ -39,8 +45,16 @@ namespace System.Drawing.Tests
         public static IEnumerable<object[]> Ctor_FileName_TestData()
         {
             yield return new object[] { null, new Size(0, 0) };
-            yield return new object[] { Helpers.GetTestBitmapPath("bitmap_173x183_indexed_8bit.bmp"), new Size(173, 183) };
-            yield return new object[] { Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"), new Size(16, 16) };
+            yield return new object[]
+            {
+                Helpers.GetTestBitmapPath("bitmap_173x183_indexed_8bit.bmp"),
+                new Size(173, 183)
+            };
+            yield return new object[]
+            {
+                Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico"),
+                new Size(16, 16)
+            };
             yield return new object[] { Helpers.GetTestBitmapPath("invalid.ico"), new Size(0, 0) };
         }
 
@@ -96,7 +110,12 @@ namespace System.Drawing.Tests
         [InlineData(typeof(ToolboxBitmapAttributeTests), "48x48_multiple_entries_4bit.ico", 16, 16)]
         [InlineData(typeof(ToolboxBitmapAttributeTests), "empty.file", -1, -1)]
         [InlineData(typeof(ToolboxBitmapAttributeTests), "bitmap_173x183_indexed_8bit", 173, 183)]
-        [InlineData(typeof(ToolboxBitmapAttributeTests), "bitmap_173x183_indexed_8bit.bmp", 173, 183)]
+        [InlineData(
+            typeof(ToolboxBitmapAttributeTests),
+            "bitmap_173x183_indexed_8bit.bmp",
+            173,
+            183
+        )]
         public void Ctor_Type_String(Type type, string fileName, int width, int height)
         {
             var attribute = new ToolboxBitmapAttribute(type, fileName);
@@ -117,15 +136,31 @@ namespace System.Drawing.Tests
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData("bitmap_173x183_indexed_8bit.bmp", 173, 183)]
         [InlineData("48x48_multiple_entries_4bit.ico", 16, 16)]
-        public void GetImage_TypeFileNameBool_ReturnsExpected(string fileName, int width, int height)
+        public void GetImage_TypeFileNameBool_ReturnsExpected(
+            string fileName,
+            int width,
+            int height
+        )
         {
             var attribute = new ToolboxBitmapAttribute((string)null);
-            using (Image image = attribute.GetImage(typeof(ToolboxBitmapAttributeTests), fileName, large: true))
+            using (
+                Image image = attribute.GetImage(
+                    typeof(ToolboxBitmapAttributeTests),
+                    fileName,
+                    large: true
+                )
+            )
             {
                 Assert.Equal(new Size(32, 32), image.Size);
             }
 
-            using (Image image = attribute.GetImage(typeof(ToolboxBitmapAttributeTests), fileName, large: false))
+            using (
+                Image image = attribute.GetImage(
+                    typeof(ToolboxBitmapAttributeTests),
+                    fileName,
+                    large: false
+                )
+            )
             {
                 Assert.Equal(new Size(width, height), image.Size);
             }
@@ -144,11 +179,21 @@ namespace System.Drawing.Tests
         {
             ToolboxBitmapAttribute attribute = new ToolboxBitmapAttribute((string)null);
 
-            using (Image smallImage = attribute.GetImage(new bitmap_173x183_indexed_8bit(), large: false))
+            using (
+                Image smallImage = attribute.GetImage(
+                    new bitmap_173x183_indexed_8bit(),
+                    large: false
+                )
+            )
             {
                 Assert.Equal(new Size(173, 183), smallImage.Size);
 
-                using (Image largeImage = attribute.GetImage(new bitmap_173x183_indexed_8bit(), large: true))
+                using (
+                    Image largeImage = attribute.GetImage(
+                        new bitmap_173x183_indexed_8bit(),
+                        large: true
+                    )
+                )
                 {
                     Assert.Equal(new Size(32, 32), largeImage.Size);
                 }
@@ -160,19 +205,34 @@ namespace System.Drawing.Tests
         {
             ToolboxBitmapAttribute attribute = ToolboxBitmapAttribute.Default;
 
-            using (Image image = attribute.GetImage(typeof(ToolboxBitmapAttributeTests), "bitmap_173x183_indexed_8bit", large: true))
+            using (
+                Image image = attribute.GetImage(
+                    typeof(ToolboxBitmapAttributeTests),
+                    "bitmap_173x183_indexed_8bit",
+                    large: true
+                )
+            )
             {
                 Assert.Equal(new Size(32, 32), image.Size);
             }
 
-            using (Image image = attribute.GetImage(typeof(ToolboxBitmapAttributeTests), "bitmap_173x183_indexed_8bit", large: false))
+            using (
+                Image image = attribute.GetImage(
+                    typeof(ToolboxBitmapAttributeTests),
+                    "bitmap_173x183_indexed_8bit",
+                    large: false
+                )
+            )
             {
                 Assert.Equal(new Size(173, 183), image.Size);
             }
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Logical name with no extension is not supported in .NET Framework")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Logical name with no extension is not supported in .NET Framework"
+        )]
         [InlineData(typeof(Icon_toolboxBitmapAttributeTest), 256, 256)]
         public void GetImage_NoExtension(Type type, int width, int height)
         {
@@ -192,8 +252,21 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { ToolboxBitmapAttribute.Default, ToolboxBitmapAttribute.Default, true };
-            yield return new object[] { ToolboxBitmapAttribute.Default, new ToolboxBitmapAttribute(typeof(ToolboxBitmapAttribute), "bitmap_173x183_indexed_8bit"), true };
+            yield return new object[]
+            {
+                ToolboxBitmapAttribute.Default,
+                ToolboxBitmapAttribute.Default,
+                true
+            };
+            yield return new object[]
+            {
+                ToolboxBitmapAttribute.Default,
+                new ToolboxBitmapAttribute(
+                    typeof(ToolboxBitmapAttribute),
+                    "bitmap_173x183_indexed_8bit"
+                ),
+                true
+            };
 
             yield return new object[] { ToolboxBitmapAttribute.Default, new object(), false };
             yield return new object[] { ToolboxBitmapAttribute.Default, null, false };
@@ -201,7 +274,11 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Other_ReturnsExpected(ToolboxBitmapAttribute attribute, object other, bool expected)
+        public void Equals_Other_ReturnsExpected(
+            ToolboxBitmapAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             Assert.Equal(attribute.GetHashCode(), attribute.GetHashCode());

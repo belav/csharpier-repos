@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,9 +34,7 @@ namespace Microsoft.Build.Execution
 {
     public class TargetResult : ITargetResult
     {
-        internal TargetResult ()
-        {
-        }
+        internal TargetResult() { }
 
         public Exception Exception { get; private set; }
 
@@ -44,22 +42,21 @@ namespace Microsoft.Build.Execution
 
         public TargetResultCode ResultCode { get; private set; }
 
-        internal void Failure (Exception exception)
+        internal void Failure(Exception exception)
         {
             this.Exception = exception;
             ResultCode = TargetResultCode.Failure;
         }
-        
-        internal void Skip ()
+
+        internal void Skip()
         {
             ResultCode = TargetResultCode.Skipped;
         }
-        
-        internal void Success (IEnumerable<ITaskItem> items)
+
+        internal void Success(IEnumerable<ITaskItem> items)
         {
-            Items = items.ToArray ();
-            ResultCode = TargetResultCode.Success; 
+            Items = items.ToArray();
+            ResultCode = TargetResultCode.Success;
         }
     }
 }
-

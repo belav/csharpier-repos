@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,90 +41,93 @@
 using System.Text;
 using System;
 
-namespace System.IO {
-    internal class UnexceptionalStreamWriter: StreamWriter
+namespace System.IO
+{
+    internal class UnexceptionalStreamWriter : StreamWriter
     {
-/*
-        public UnexceptionalStreamWriter (Stream stream)
-            : base (stream)
-        {
-        }
-*/
-        public UnexceptionalStreamWriter (Stream stream,
-                          Encoding encoding)
-            : base (stream, encoding, DefaultBufferSize, true)
-        {
-        }
-/*
-        public UnexceptionalStreamWriter (Stream stream,
-                          Encoding encoding,
-                          int bufferSize)
-            : base (stream, encoding, bufferSize)
-        {
-        }
+        /*
+                public UnexceptionalStreamWriter (Stream stream)
+                    : base (stream)
+                {
+                }
+        */
+        public UnexceptionalStreamWriter(Stream stream, Encoding encoding)
+            : base(stream, encoding, DefaultBufferSize, true) { }
 
-        public UnexceptionalStreamWriter (string path)
-            : base (path)
+        /*
+                public UnexceptionalStreamWriter (Stream stream,
+                                  Encoding encoding,
+                                  int bufferSize)
+                    : base (stream, encoding, bufferSize)
+                {
+                }
+        
+                public UnexceptionalStreamWriter (string path)
+                    : base (path)
+                {
+                }
+        
+                public UnexceptionalStreamWriter (string path, bool append)
+                    : base (path, append)
+                {
+                }
+        
+                public UnexceptionalStreamWriter (string path, bool append,
+                                  Encoding encoding)
+                    : base (path, append, encoding)
+                {
+                }
+        
+                public UnexceptionalStreamWriter (string path, bool append,
+                                  Encoding encoding,
+                                  int bufferSize)
+                    : base (path, append, encoding, bufferSize)
+                {
+                }
+        */
+        public override void Flush()
         {
-        }
-
-        public UnexceptionalStreamWriter (string path, bool append)
-            : base (path, append)
-        {
-        }
-
-        public UnexceptionalStreamWriter (string path, bool append,
-                          Encoding encoding)
-            : base (path, append, encoding)
-        {
-        }
-
-        public UnexceptionalStreamWriter (string path, bool append,
-                          Encoding encoding,
-                          int bufferSize)
-            : base (path, append, encoding, bufferSize)
-        {
-        }
-*/
-        public override void Flush ()
-        {
-            try {
-                base.Flush ();
-            } catch (Exception) {
+            try
+            {
+                base.Flush();
             }
+            catch (Exception) { }
         }
 
-        public override void Write (char[] buffer, int index,
-                        int count)
+        public override void Write(char[] buffer, int index, int count)
         {
-            try {
-                base.Write (buffer, index, count);
-            } catch (Exception) {
+            try
+            {
+                base.Write(buffer, index, count);
             }
+            catch (Exception) { }
         }
 
-        public override void Write (char value)
+        public override void Write(char value)
         {
-            try {
-                base.Write (value);
-            } catch (Exception) {
+            try
+            {
+                base.Write(value);
             }
+            catch (Exception) { }
         }
 
-        public override void Write (char[] value)
+        public override void Write(char[] value)
         {
-            try {
-                base.Write (value);
-            } catch (Exception) {
+            try
+            {
+                base.Write(value);
             }
+            catch (Exception) { }
         }
 
-        public override void Write (string value)
+        public override void Write(string value)
         {
-            try {
-                base.Write (value);
-            } catch (Exception) {
+            try
+            {
+                base.Write(value);
             }
+            catch (Exception) { }
         }
     }
 }

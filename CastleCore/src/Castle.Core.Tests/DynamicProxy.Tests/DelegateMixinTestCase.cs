@@ -20,7 +20,7 @@ namespace Castle.DynamicProxy.Tests
     using NUnit.Framework;
 
     [TestFixture]
-    public class DelegateMixinTestCase  : BasePEVerifyTestCase
+    public class DelegateMixinTestCase : BasePEVerifyTestCase
     {
         [Test]
         public void ProxyGenerationOptions_AddDelegateTypeMixin_when_given_null_throws_ArgumentNullException()
@@ -57,7 +57,6 @@ namespace Castle.DynamicProxy.Tests
             options.AddDelegateMixin(new Action(() => { }));
         }
 
-
         [Test]
         public void ProxyGenerator_CreateClassProxy_can_create_delegate_proxy_without_target()
         {
@@ -73,7 +72,11 @@ namespace Castle.DynamicProxy.Tests
             var options = new ProxyGenerationOptions();
             options.AddDelegateTypeMixin(typeof(Action));
             var _ = new Interceptor();
-            var proxy = generator.CreateInterfaceProxyWithoutTarget(typeof(IComparable), options, _);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget(
+                typeof(IComparable),
+                options,
+                _
+            );
         }
 
         [Test]
@@ -84,7 +87,12 @@ namespace Castle.DynamicProxy.Tests
             var options = new ProxyGenerationOptions();
             options.AddDelegateTypeMixin(typeof(Action));
             var _ = new Interceptor();
-            var proxy = generator.CreateInterfaceProxyWithTarget(typeof(IComparable), target, options, _);
+            var proxy = generator.CreateInterfaceProxyWithTarget(
+                typeof(IComparable),
+                target,
+                options,
+                _
+            );
         }
 
         [Test]
@@ -111,7 +119,11 @@ namespace Castle.DynamicProxy.Tests
 
             var interceptor = new Interceptor();
 
-            var proxy = generator.CreateInterfaceProxyWithoutTarget(typeof(IComparable), options, interceptor);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget(
+                typeof(IComparable),
+                options,
+                interceptor
+            );
             var action = ProxyUtil.CreateDelegateToMixin<Action>(proxy);
             Assert.NotNull(action);
 
@@ -129,7 +141,12 @@ namespace Castle.DynamicProxy.Tests
 
             var interceptor = new Interceptor();
 
-            var proxy = generator.CreateInterfaceProxyWithTarget(typeof(IComparable), target, options, interceptor);
+            var proxy = generator.CreateInterfaceProxyWithTarget(
+                typeof(IComparable),
+                target,
+                options,
+                interceptor
+            );
             var action = ProxyUtil.CreateDelegateToMixin<Action>(proxy);
             Assert.NotNull(action);
 
@@ -160,7 +177,11 @@ namespace Castle.DynamicProxy.Tests
 
             var interceptor = new Interceptor(shouldProceed: true);
 
-            var proxy = generator.CreateInterfaceProxyWithoutTarget(typeof(IComparable), options, interceptor);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget(
+                typeof(IComparable),
+                options,
+                interceptor
+            );
             var action = ProxyUtil.CreateDelegateToMixin<Action>(proxy);
             Assert.NotNull(action);
 
@@ -177,7 +198,12 @@ namespace Castle.DynamicProxy.Tests
 
             var interceptor = new Interceptor(shouldProceed: true);
 
-            var proxy = generator.CreateInterfaceProxyWithTarget(typeof(IComparable), target, options, interceptor);
+            var proxy = generator.CreateInterfaceProxyWithTarget(
+                typeof(IComparable),
+                target,
+                options,
+                interceptor
+            );
             var action = ProxyUtil.CreateDelegateToMixin<Action>(proxy);
             Assert.NotNull(action);
 
@@ -212,7 +238,11 @@ namespace Castle.DynamicProxy.Tests
 
             var interceptor = new Interceptor(shouldProceed: true);
 
-            var proxy = generator.CreateInterfaceProxyWithoutTarget(typeof(IComparable), options, interceptor);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget(
+                typeof(IComparable),
+                options,
+                interceptor
+            );
             var action = ProxyUtil.CreateDelegateToMixin<Action>(proxy);
             Assert.NotNull(action);
 
@@ -230,7 +260,12 @@ namespace Castle.DynamicProxy.Tests
 
             var interceptor = new Interceptor(shouldProceed: true);
 
-            var proxy = generator.CreateInterfaceProxyWithTarget(typeof(IComparable), target, options, interceptor);
+            var proxy = generator.CreateInterfaceProxyWithTarget(
+                typeof(IComparable),
+                target,
+                options,
+                interceptor
+            );
             var action = ProxyUtil.CreateDelegateToMixin<Action>(proxy);
             Assert.NotNull(action);
 

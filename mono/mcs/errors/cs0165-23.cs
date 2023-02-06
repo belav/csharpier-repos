@@ -3,20 +3,21 @@
 
 class Test
 {
-    static string DoStuff (string msg)
+    static string DoStuff(string msg)
     {
         string retval;
 
-        switch (msg) {
-        case "hello":
-            retval = "goodbye";
-            return retval;
-        case "goodbye":
-            return retval;
-        case "other":
-            retval = "other";
-        case "":
-            return msg;
+        switch (msg)
+        {
+            case "hello":
+                retval = "goodbye";
+                return retval;
+            case "goodbye":
+                return retval;
+            case "other":
+                retval = "other";
+            case "":
+                return msg;
         }
         return "";
     }

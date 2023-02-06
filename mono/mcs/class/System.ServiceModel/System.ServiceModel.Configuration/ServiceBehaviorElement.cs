@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,45 +56,51 @@ using System.Diagnostics;
 namespace System.ServiceModel.Configuration
 {
     public class ServiceBehaviorElement
-         : NamedServiceModelExtensionCollectionElement<BehaviorExtensionElement>
+        : NamedServiceModelExtensionCollectionElement<BehaviorExtensionElement>
     {
-        public ServiceBehaviorElement (string name)
+        public ServiceBehaviorElement(string name)
         {
             Name = name;
         }
 
-        public ServiceBehaviorElement () {
-        }
+        public ServiceBehaviorElement() { }
 
-        protected override void DeserializeElement (XmlReader reader, bool serializeCollectionKey)
+        protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
-            base.DeserializeElement (reader, serializeCollectionKey);
+            base.DeserializeElement(reader, serializeCollectionKey);
         }
 
-        [MonoTODO ("implement using EvaluationContext")]
-        internal override BehaviorExtensionElement DeserializeExtensionElement (string elementName, XmlReader reader)
+        [MonoTODO("implement using EvaluationContext")]
+        internal override BehaviorExtensionElement DeserializeExtensionElement(
+            string elementName,
+            XmlReader reader
+        )
         {
             //ExtensionElementCollection extensions = ((ExtensionsSection) EvaluationContext.GetSection ("system.serviceModel/extensions")).BehaviorExtensions;
             ExtensionElementCollection extensions = ConfigUtil.ExtensionsSection.BehaviorExtensions;
 
-            ExtensionElement extension = extensions [elementName];
+            ExtensionElement extension = extensions[elementName];
             if (extension == null)
-                throw new ConfigurationErrorsException ("Invalid element in configuration. The extension name '" + reader.LocalName + "' is not registered in the collection at system.serviceModel/extensions/behaviorExtensions");
+                throw new ConfigurationErrorsException(
+                    "Invalid element in configuration. The extension name '"
+                        + reader.LocalName
+                        + "' is not registered in the collection at system.serviceModel/extensions/behaviorExtensions"
+                );
 
-            BehaviorExtensionElement element = (BehaviorExtensionElement) Activator.CreateInstance (Type.GetType (extension.Type));
-            element.DeserializeElementInternal (reader, false);
+            BehaviorExtensionElement element = (BehaviorExtensionElement)
+                Activator.CreateInstance(Type.GetType(extension.Type));
+            element.DeserializeElementInternal(reader, false);
             return element;
         }
 
-        public override void Add (BehaviorExtensionElement element)
+        public override void Add(BehaviorExtensionElement element)
         {
-            base.Add (element);
+            base.Add(element);
         }
 
-        public override bool CanAdd (BehaviorExtensionElement element)
+        public override bool CanAdd(BehaviorExtensionElement element)
         {
-            return base.CanAdd (element);
+            return base.CanAdd(element);
         }
     }
-
 }

@@ -7,12 +7,12 @@ class X
 {
     public delegate object Function(int arg1);
 
-    static void Main ()
+    static void Main()
     {
-        Delegate d = new Function (f);
+        Delegate d = new Function(f);
     }
 
-    static int f (int a)
+    static int f(int a)
     {
         return 1;
     }

@@ -1,5 +1,5 @@
 //
-// XmlMapping.cs: 
+// XmlMapping.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,17 +40,15 @@ namespace System.Xml.Serialization
         ArrayList relatedMaps;
         SerializationFormat format;
         SerializationSource source;
-        
+
         internal string _elementName;
         internal string _namespace;
-        
+
         string key;
 
-        internal XmlMapping ()
-        {
-        }
+        internal XmlMapping() { }
 
-        internal XmlMapping (string elementName, string ns)
+        internal XmlMapping(string elementName, string ns)
         {
             _elementName = elementName;
             _namespace = ns;
@@ -71,13 +69,13 @@ namespace System.Xml.Serialization
         {
             get { return _namespace; }
         }
-        
-        public void SetKey (string key)
+
+        public void SetKey(string key)
         {
             this.key = key;
         }
-        
-        internal string GetKey ()
+
+        internal string GetKey()
         {
             return key;
         }
@@ -99,7 +97,7 @@ namespace System.Xml.Serialization
             get { return format; }
             set { format = value; }
         }
-        
+
         internal SerializationSource Source
         {
             get { return source; }
@@ -107,9 +105,11 @@ namespace System.Xml.Serialization
         }
     }
 
-    internal class ObjectMap
-    {
-    }
+    internal class ObjectMap { }
 
-    internal enum SerializationFormat { Encoded, Literal }
+    internal enum SerializationFormat
+    {
+        Encoded,
+        Literal
+    }
 }

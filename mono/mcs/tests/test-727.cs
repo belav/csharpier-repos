@@ -4,17 +4,17 @@ namespace IDisposableTest
 {
     class MainClass
     {
-        public static int Main ()
+        public static int Main()
         {
-            using (Foo f = new Foo ())
+            using (Foo f = new Foo())
                 ;
 
-            Console.WriteLine ("Between. Foo.TotalInstances = " + Foo.TotalInstances);
+            Console.WriteLine("Between. Foo.TotalInstances = " + Foo.TotalInstances);
 
-            using (IDisposable f = new Foo ())
+            using (IDisposable f = new Foo())
                 ;
 
-            Console.WriteLine ("After. Foo.TotalInstances = " + Foo.TotalInstances);
+            Console.WriteLine("After. Foo.TotalInstances = " + Foo.TotalInstances);
 
             if (Foo.TotalInstances != 2)
                 return 1;
@@ -23,23 +23,21 @@ namespace IDisposableTest
         }
     }
 
-
     class Foo : IDisposable
     {
         public static int TotalInstances = 0;
 
         private int my_a = 0;
 
-        public Foo ()
+        public Foo()
         {
             my_a = TotalInstances++;
-            Console.WriteLine ("Instance " + my_a + " ctor");
+            Console.WriteLine("Instance " + my_a + " ctor");
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Console.WriteLine ("Instance " + my_a + " Dispose()");
+            Console.WriteLine("Instance " + my_a + " Dispose()");
         }
     }
-
 }

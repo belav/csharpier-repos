@@ -22,16 +22,15 @@ namespace System.Reflection.Runtime.MethodInfos
             : this()
         {
             Debug.Assert(count >= 1);
-            Remainder = (count == 1) ? Array.Empty<RuntimeParameterInfo>() : new RuntimeParameterInfo[count - 1];
+            Remainder =
+                (count == 1)
+                    ? Array.Empty<RuntimeParameterInfo>()
+                    : new RuntimeParameterInfo[count - 1];
         }
 
         public RuntimeParameterInfo this[int index]
         {
-            get
-            {
-                return index == 0 ? First : Remainder[index - 1];
-            }
-
+            get { return index == 0 ? First : Remainder[index - 1]; }
             set
             {
                 if (index == 0)

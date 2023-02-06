@@ -2,13 +2,11 @@
 // Line: 13
 // Compiler options: -langversion:latest
 
-public ref struct S
-{
-}
+public ref struct S { }
 
 class Test<T>
 {
-    public static void Foo ()
+    public static void Foo()
     {
         Test<S> local;
     }

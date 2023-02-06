@@ -8,7 +8,7 @@ public class Test
     public delegate int DelegateA(bool b);
     public delegate int DelegateB(bool b);
 
-    static bool TestCompare (DelegateA a, DelegateB b)
+    static bool TestCompare(DelegateA a, DelegateB b)
     {
         return a != b;
     }

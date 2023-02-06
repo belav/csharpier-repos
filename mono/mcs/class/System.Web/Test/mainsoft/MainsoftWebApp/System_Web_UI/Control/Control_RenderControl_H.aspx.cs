@@ -37,11 +37,10 @@ using System.Text;
 
 namespace GHTTests.System_Web_dll.System_Web_UI
 {
-    public class Control_RenderControl_H
-        : GHTControlBase
+    public class Control_RenderControl_H : GHTControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -49,18 +48,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
@@ -87,36 +86,34 @@ namespace GHTTests.System_Web_dll.System_Web_UI
             // Validation summery is excluded from the test because it throws an exception in the RenderControl method.
             if (ctrlType.Equals(typeof(ValidationSummary)))
                 return;
-            
 
             // visible = true:
-            try 
+            try
             {
                 GHTSubTestBegin(ctrlType, "visible = true:", false);
                 TestedControl.ID = ctrlType.ToString() + "_visible = true";
                 TestedControl.Visible = true;
                 RenderControlTest(TestedControl);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             // visible = false:
-            try 
+            try
             {
                 GHTSubTestBegin(ctrlType, "visible = false:", false);
                 TestedControl.ID = ctrlType.ToString() + "_visible = false";
                 TestedControl.Visible = false;
                 RenderControlTest(TestedControl);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
-
         }
     }
 }

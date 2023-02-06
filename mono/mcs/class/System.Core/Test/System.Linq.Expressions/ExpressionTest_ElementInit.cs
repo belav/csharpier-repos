@@ -33,84 +33,85 @@ using System.Linq;
 using System.Linq.Expressions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Linq.Expressions {
-
+namespace MonoTests.System.Linq.Expressions
+{
     [TestFixture]
     [Category("SRE")]
-    public class ExpressionTest_ElementInit {
-
+    public class ExpressionTest_ElementInit
+    {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void MethodNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void MethodNull()
         {
-            Expression.ElementInit (null, new Expression [] {});
-        }
-
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ArgNull ()
-        {
-            Expression.ElementInit (typeof (Foo).GetMethod ("Add"), null);
+            Expression.ElementInit(null, new Expression[] { });
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void MethodNameDoesntMatchAdd ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ArgNull()
         {
-            Expression.ElementInit (typeof (Foo).GetMethod ("Bar"), new Expression [] {});
+            Expression.ElementInit(typeof(Foo).GetMethod("Add"), null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void AddMethodIsNotAnInstanceMethod ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void MethodNameDoesntMatchAdd()
         {
-            Expression.ElementInit (typeof (Bar).GetMethod ("Add"), new Expression [] {});
+            Expression.ElementInit(typeof(Foo).GetMethod("Bar"), new Expression[] { });
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void MethodArgumentCountDoesnMatchParameterLength ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddMethodIsNotAnInstanceMethod()
         {
-            Expression.ElementInit (typeof (Foo).GetMethod ("Add"), new Expression [] {});
-
+            Expression.ElementInit(typeof(Bar).GetMethod("Add"), new Expression[] { });
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void MethodHasNullArgument ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void MethodArgumentCountDoesnMatchParameterLength()
         {
-            Expression.ElementInit (typeof (Foo).GetMethod ("Add"), new Expression [] {null});
+            Expression.ElementInit(typeof(Foo).GetMethod("Add"), new Expression[] { });
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void MethodArgumentDoesntMatchParameterType ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void MethodHasNullArgument()
         {
-            Expression.ElementInit (typeof (Foo).GetMethod ("Add"), new Expression [] {Expression.Constant (1)});
+            Expression.ElementInit(typeof(Foo).GetMethod("Add"), new Expression[] { null });
         }
 
         [Test]
-        public void ElementInitToString ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void MethodArgumentDoesntMatchParameterType()
         {
-            var ElementInit = Expression.ElementInit (typeof (Foo).GetMethod ("Add"), new Expression [] {Expression.Constant ("")});
-
-            Assert.AreEqual ("Void Add(System.String)(\"\")", ElementInit.ToString ());
+            Expression.ElementInit(
+                typeof(Foo).GetMethod("Add"),
+                new Expression[] { Expression.Constant(1) }
+            );
         }
 
-        public class Foo {
-            public void Add (string s)
-            {
-            }
+        [Test]
+        public void ElementInitToString()
+        {
+            var ElementInit = Expression.ElementInit(
+                typeof(Foo).GetMethod("Add"),
+                new Expression[] { Expression.Constant("") }
+            );
 
-            public void Bar ()
-            {
-            }
+            Assert.AreEqual("Void Add(System.String)(\"\")", ElementInit.ToString());
         }
 
-        public static class Bar {
-            public static void Add ()
-            {
-            }
+        public class Foo
+        {
+            public void Add(string s) { }
+
+            public void Bar() { }
+        }
+
+        public static class Bar
+        {
+            public static void Add() { }
         }
     }
 }

@@ -18,6 +18,7 @@ namespace POS_Server.Controllers
     public class menuSettingsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
@@ -47,12 +48,13 @@ namespace POS_Server.Controllers
                         searchPredicate.And(x => x.itemUnitId == itemUnitId);
 
                     var menuList = entity.menuSettings.Where(searchPredicate).ToList();
-                   
+
                     return TokenManager.GenerateToken(menuList);
                 }
             }
         }
-        // add or update menu settings 
+
+        // add or update menu settings
         [HttpPost]
         [Route("Save")]
         public string Save(string token)
@@ -75,7 +77,10 @@ namespace POS_Server.Controllers
                     {
                         itemObject = c.Value.Replace("\\", string.Empty);
                         itemObject = itemObject.Trim('"');
-                        Object = JsonConvert.DeserializeObject<menuSettings>(itemObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        Object = JsonConvert.DeserializeObject<menuSettings>(
+                            itemObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -86,8 +91,8 @@ namespace POS_Server.Controllers
                         menuSettings tmpObject = new menuSettings();
                         if (Object.menuSettingId == 0)
                         {
-                            Object.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            Object.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             Object.updateUserId = Object.createUserId;
                             entity.menuSettings.Add(Object);
                         }
@@ -104,13 +109,16 @@ namespace POS_Server.Controllers
                             tmpObject.fri = Object.fri;
                             tmpObject.isActive = Object.isActive;
                             tmpObject.updateUserId = Object.updateUserId;
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                         }
                         message = entity.SaveChanges().ToString();
                     }
                     return TokenManager.GenerateToken(message);
                 }
-                catch { return TokenManager.GenerateToken("0"); }
+                catch
+                {
+                    return TokenManager.GenerateToken("0");
+                }
             }
         }
     }

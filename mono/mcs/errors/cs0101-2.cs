@@ -2,14 +2,18 @@
 // Line: 10
 using System;
 
-namespace AA {
-    namespace VV {
-        public enum SomeEnum {
+namespace AA
+{
+    namespace VV
+    {
+        public enum SomeEnum
+        {
             Something1,
             Something2
         }
 
-        public enum SomeEnum {
+        public enum SomeEnum
+        {
             Dog,
             Fish,
             Cat

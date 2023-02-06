@@ -11,7 +11,7 @@ namespace Test_NUnit
 {
 #region HEADER
     /// <summary>
-    /// when a problem crops up in NUnit, you can convert the project from DLL into EXE, 
+    /// when a problem crops up in NUnit, you can convert the project from DLL into EXE,
     /// and debug into the offending method.
     /// </summary>
 #endregion
@@ -38,5 +38,4 @@ namespace Test_NUnit
             //new String_Date_functions().LinqToSqlString01();
         }
     }
-
 }

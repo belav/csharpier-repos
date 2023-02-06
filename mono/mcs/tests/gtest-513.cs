@@ -4,62 +4,56 @@ struct S : IDisposable
 {
     public static int hit;
 
-    void IDisposable.Dispose ()
+    void IDisposable.Dispose()
     {
         hit++;
     }
 
-    public void Dispose ()
+    public void Dispose()
     {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 }
 
 class C : IDisposable
 {
+    void IDisposable.Dispose() { }
 
-    void IDisposable.Dispose ()
+    public void Dispose()
     {
-    }
-
-    public void Dispose ()
-    {
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 }
 
 class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        using (new S? ()) {
-        }
+        using (new S?()) { }
 
         if (S.hit != 0)
             return 1;
 
-        using (new C ()) {
-        }
+        using (new C()) { }
 
-        var s = new S ();
-        using (s) {
-        }
+        var s = new S();
+        using (s) { }
 
         if (S.hit != 1)
             return 2;
 
-        GenMethod (s);
+        GenMethod(s);
 
         if (S.hit != 2)
             return 3;
 
-        Console.WriteLine ("ok");
+        Console.WriteLine("ok");
         return 0;
     }
 
-    static void GenMethod<T> (T t) where T : IDisposable
+    static void GenMethod<T>(T t)
+        where T : IDisposable
     {
-        using (t) {
-        }
+        using (t) { }
     }
 }

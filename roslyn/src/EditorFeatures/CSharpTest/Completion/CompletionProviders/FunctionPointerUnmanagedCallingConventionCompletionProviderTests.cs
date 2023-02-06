@@ -13,14 +13,17 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class FunctionPointerUnmanagedCallingConventionCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class FunctionPointerUnmanagedCallingConventionCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType() => typeof(FunctionPointerUnmanagedCallingConventionCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(FunctionPointerUnmanagedCallingConventionCompletionProvider);
 
         [Fact]
         public async Task TypeFound()
         {
-            var markup = @"
+            var markup =
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class CallConvUnitTest { }
@@ -36,7 +39,8 @@ class C
         [Fact]
         public async Task TypeFoundSecondCallingConvention()
         {
-            var markup = @"
+            var markup =
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class CallConvUnitTest { }
@@ -58,7 +62,8 @@ class C
         {
             // We explicitly create a project with no references (not even common references) to ensure we
             // get the defaults
-            var markup = @"
+            var markup =
+                @"
 <Workspace>
     <Project Language=""C#"">
         <Document>

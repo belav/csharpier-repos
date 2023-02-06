@@ -37,21 +37,24 @@ namespace Microsoft.Build.Framework
         // Initiates a build of a project file. If the build is
         // successful, the outputs (if any) of the specified targets
         // are returned.
-        bool BuildProjectFile (string projectFileName,
-                       string[] targetNames,
-                       IDictionary globalProperties,
-                       IDictionary targetOutputs, string toolsVersion);
+        bool BuildProjectFile(
+            string projectFileName,
+            string[] targetNames,
+            IDictionary globalProperties,
+            IDictionary targetOutputs,
+            string toolsVersion
+        );
 
-        bool BuildProjectFilesInParallel (string[] projectFileNames,
-                    string [] targetNames,
-                    IDictionary[] globalProperties,
-                    IDictionary[] targetOutputsPerProject,
-                    string[] toolsVersion,
-                    bool useResultsCache,
-                    bool unloadProjectsOnCompletion);
+        bool BuildProjectFilesInParallel(
+            string[] projectFileNames,
+            string[] targetNames,
+            IDictionary[] globalProperties,
+            IDictionary[] targetOutputsPerProject,
+            string[] toolsVersion,
+            bool useResultsCache,
+            bool unloadProjectsOnCompletion
+        );
 
         bool IsRunningMultipleNodes { get; }
-
     }
 }
-

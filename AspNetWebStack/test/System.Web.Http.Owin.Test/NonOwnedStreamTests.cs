@@ -43,7 +43,10 @@ namespace System.Web.Http.Owin
 
                 // Assert
                 Assert.Equal(expectedBytesRead, bytesRead);
-                mock.Verify(s => s.Read(expectedBuffer, expectedOffset, expectedCount), Times.Once());
+                mock.Verify(
+                    s => s.Read(expectedBuffer, expectedOffset, expectedCount),
+                    Times.Once()
+                );
             }
         }
 
@@ -76,8 +79,7 @@ namespace System.Web.Http.Owin
         {
             // Arrange
             Mock<Stream> mock = new Mock<Stream>(MockBehavior.Strict);
-            mock.SetupGet(s => s.CanRead)
-                .Returns(expectedCanRead);
+            mock.SetupGet(s => s.CanRead).Returns(expectedCanRead);
             mock.Setup(s => s.Close());
             mock.As<IDisposable>().Setup(s => s.Dispose());
 

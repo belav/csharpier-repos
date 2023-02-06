@@ -26,33 +26,32 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Signatures {
-
+namespace Mono.Cecil.Signatures
+{
     using System;
 
     using Mono.Cecil;
 
-    internal sealed class MarshalSig {
-
+    internal sealed class MarshalSig
+    {
         public NativeType NativeInstrinsic;
         public IMarshalSigSpec Spec;
 
-        public MarshalSig (NativeType nt)
+        public MarshalSig(NativeType nt)
         {
             this.NativeInstrinsic = nt;
         }
 
-        internal interface IMarshalSigSpec {
-        }
+        internal interface IMarshalSigSpec { }
 
-        internal sealed class Array : IMarshalSigSpec {
-
+        internal sealed class Array : IMarshalSigSpec
+        {
             public NativeType ArrayElemType;
             public int ParamNum;
             public int ElemMult;
             public int NumElem;
 
-            public Array ()
+            public Array()
             {
                 this.ParamNum = 0;
                 this.ElemMult = 0;
@@ -60,33 +59,33 @@ namespace Mono.Cecil.Signatures {
             }
         }
 
-        internal sealed class CustomMarshaler : IMarshalSigSpec {
-
+        internal sealed class CustomMarshaler : IMarshalSigSpec
+        {
             public string Guid;
             public string UnmanagedType;
             public string ManagedType;
             public string Cookie;
         }
 
-        internal sealed class FixedArray : IMarshalSigSpec {
-
+        internal sealed class FixedArray : IMarshalSigSpec
+        {
             public int NumElem;
             public NativeType ArrayElemType;
 
-            public FixedArray ()
+            public FixedArray()
             {
                 this.NumElem = 0;
                 this.ArrayElemType = NativeType.NONE;
             }
         }
 
-        internal sealed class SafeArray : IMarshalSigSpec {
-
+        internal sealed class SafeArray : IMarshalSigSpec
+        {
             public VariantType ArrayElemType;
         }
 
-        internal sealed class FixedSysString : IMarshalSigSpec {
-
+        internal sealed class FixedSysString : IMarshalSigSpec
+        {
             public int Size;
         }
     }

@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,48 +34,49 @@ using System;
 using System.Collections;
 using System.Text;
 
-namespace Mono.Data.Tds {
-    internal static class TdsCollation 
+namespace Mono.Data.Tds
+{
+    internal static class TdsCollation
     {
-        public static int LCID (byte[] collation)
+        public static int LCID(byte[] collation)
         {
             if (collation == null)
                 return -1;
-            
+
             return (collation[0] | (collation[1] << 8) | ((collation[2] & 0x0F) << 16));
         }
-        
-        public static int CollationFlags (byte[] collation)
+
+        public static int CollationFlags(byte[] collation)
         {
             if (collation == null)
                 return -1;
-            
+
             return ((collation[2] & 0xF0) | ((collation[3] & 0x0F) << 4));
         }
 
-        public static int Version (byte[] collation)
+        public static int Version(byte[] collation)
         {
             if (collation == null)
                 return -1;
-            
+
             return (collation[3] & 0xF0);
         }
-        
-        public static int SortId (byte[] collation)
+
+        public static int SortId(byte[] collation)
         {
             if (collation == null)
                 return -1;
-            
+
             return (collation[4]);
         }
     }
-    
+
     internal static class TdsCharset
     {
         private static Hashtable lcidCodes = new Hashtable();
         private static Hashtable sortCodes = new Hashtable();
-        
-        static TdsCharset ()
+
+        static TdsCharset()
         {
             lcidCodes[0x436] = 1252;
             lcidCodes[0x41C] = 1250;
@@ -184,7 +185,7 @@ namespace Mono.Data.Tds {
             lcidCodes[0x422] = 1251;
             lcidCodes[0x420] = 1256;
             lcidCodes[0x42A] = 1258;
-                            
+
             sortCodes[30] = 437;
             sortCodes[31] = 437;
             sortCodes[32] = 437;
@@ -281,41 +282,41 @@ namespace Mono.Data.Tds {
             sortCodes[205] = 874;
             sortCodes[206] = 874;
         }
-        
-        public static Encoding GetEncoding (byte[] collation) 
+
+        public static Encoding GetEncoding(byte[] collation)
         {
-            if (TdsCollation.SortId (collation) != 0)
-                return GetEncodingFromSortOrder (collation);
+            if (TdsCollation.SortId(collation) != 0)
+                return GetEncodingFromSortOrder(collation);
             else
-                return GetEncodingFromLCID (collation);
-        }
-        
-        public static Encoding GetEncodingFromLCID (byte[] collation)
-        {
-            int lcid = TdsCollation.LCID (collation);
-            return GetEncodingFromLCID (lcid);
-        }
-        
-        public static Encoding GetEncodingFromLCID (int lcid)
-        {
-            if (lcidCodes[lcid] != null)
-                return Encoding.GetEncoding ((int)lcidCodes[lcid]);
-            else
-                return null;            
-        }
-        
-        public static Encoding GetEncodingFromSortOrder(byte[] collation)
-        {
-            int sortId = TdsCollation.SortId (collation);
-            return GetEncodingFromSortOrder (sortId);
+                return GetEncodingFromLCID(collation);
         }
 
-        public static Encoding GetEncodingFromSortOrder (int sortId)
+        public static Encoding GetEncodingFromLCID(byte[] collation)
+        {
+            int lcid = TdsCollation.LCID(collation);
+            return GetEncodingFromLCID(lcid);
+        }
+
+        public static Encoding GetEncodingFromLCID(int lcid)
+        {
+            if (lcidCodes[lcid] != null)
+                return Encoding.GetEncoding((int)lcidCodes[lcid]);
+            else
+                return null;
+        }
+
+        public static Encoding GetEncodingFromSortOrder(byte[] collation)
+        {
+            int sortId = TdsCollation.SortId(collation);
+            return GetEncodingFromSortOrder(sortId);
+        }
+
+        public static Encoding GetEncodingFromSortOrder(int sortId)
         {
             if (sortCodes[sortId] != null)
-                return Encoding.GetEncoding ((int)sortCodes[sortId]);
+                return Encoding.GetEncoding((int)sortCodes[sortId]);
             else
-                return null;            
+                return null;
         }
-    }     
+    }
 }

@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,44 +34,56 @@ namespace Mono.CodeGeneration
     {
         ModuleBuilder module;
         static CodeModule sharedModule;
-        
-        public CodeModule (string name)
+
+        public CodeModule(string name)
         {
             AppDomain myDomain = System.Threading.Thread.GetDomain();
             AssemblyName myAsmName = new AssemblyName();
             myAsmName.Name = name;
 #if MOBILE
-            AssemblyBuilder myAsmBuilder = myDomain.DefineDynamicAssembly (myAsmName, AssemblyBuilderAccess.Run);
+            AssemblyBuilder myAsmBuilder = myDomain.DefineDynamicAssembly(
+                myAsmName,
+                AssemblyBuilderAccess.Run
+            );
 #else
-            AssemblyBuilder myAsmBuilder = myDomain.DefineDynamicAssembly (myAsmName, AssemblyBuilderAccess.RunAndSave);
+            AssemblyBuilder myAsmBuilder = myDomain.DefineDynamicAssembly(
+                myAsmName,
+                AssemblyBuilderAccess.RunAndSave
+            );
 #endif
-            module = myAsmBuilder.DefineDynamicModule (name);
+            module = myAsmBuilder.DefineDynamicModule(name);
         }
-        
+
         public static CodeModule Shared
         {
-            get {
+            get
+            {
                 if (sharedModule == null)
-                    sharedModule = new CodeModule ("SharedModule");
+                    sharedModule = new CodeModule("SharedModule");
                 return sharedModule;
             }
         }
-        
-        public CodeClass CreateClass (string name)
+
+        public CodeClass CreateClass(string name)
         {
-            return CreateClass (name, TypeAttributes.Public, typeof(object));
+            return CreateClass(name, TypeAttributes.Public, typeof(object));
         }
-        
-        public CodeClass CreateClass (string name, Type baseType, params Type[] interfaces)
+
+        public CodeClass CreateClass(string name, Type baseType, params Type[] interfaces)
         {
-            return CreateClass (name, TypeAttributes.Public, baseType, interfaces);
+            return CreateClass(name, TypeAttributes.Public, baseType, interfaces);
         }
-        
-        public CodeClass CreateClass (string name, TypeAttributes attr, Type baseType, params Type[] interfaces)
+
+        public CodeClass CreateClass(
+            string name,
+            TypeAttributes attr,
+            Type baseType,
+            params Type[] interfaces
+        )
         {
-            return new CodeClass (module, name, attr, baseType, interfaces);
+            return new CodeClass(module, name, attr, baseType, interfaces);
         }
-        
+
         public ModuleBuilder ModuleBuilder
         {
             get { return module; }

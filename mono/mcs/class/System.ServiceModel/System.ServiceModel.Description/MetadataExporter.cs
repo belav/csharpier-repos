@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,61 +40,57 @@ namespace System.ServiceModel.Description
     [MonoTODO]
     public abstract class MetadataExporter
     {
-        Collection<MetadataConversionError> errors = new Collection<MetadataConversionError> ();
+        Collection<MetadataConversionError> errors = new Collection<MetadataConversionError>();
 
-        internal MetadataExporter ()
+        internal MetadataExporter() { }
+
+        public Collection<MetadataConversionError> Errors
         {
-        }
-
-        public Collection<MetadataConversionError> Errors {
             get { return errors; }
         }
 
-        public Dictionary<Object,Object> State {
-            get { throw new NotImplementedException (); }
+        public Dictionary<Object, Object> State
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public abstract void ExportContract (ContractDescription contract);
+        public abstract void ExportContract(ContractDescription contract);
 
-        public abstract void ExportEndpoint (ServiceEndpoint endpoint);
+        public abstract void ExportEndpoint(ServiceEndpoint endpoint);
 
-        public abstract MetadataSet GetGeneratedMetadata ();
+        public abstract MetadataSet GetGeneratedMetadata();
 
-        protected internal PolicyConversionContext ExportPolicy (
-            ServiceEndpoint endpoint)
+        protected internal PolicyConversionContext ExportPolicy(ServiceEndpoint endpoint)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        internal MetadataConversionError AddError (string message, params object[] args)
+        internal MetadataConversionError AddError(string message, params object[] args)
         {
-            var error = new MetadataConversionError (string.Format (message, args));
-            Errors.Add (error);
+            var error = new MetadataConversionError(string.Format(message, args));
+            Errors.Add(error);
             return error;
         }
-        
-        internal MetadataConversionError AddWarning (string message, params object[] args)
+
+        internal MetadataConversionError AddWarning(string message, params object[] args)
         {
-            var error = new MetadataConversionError (string.Format (message, args), true);
-            Errors.Add (error);
+            var error = new MetadataConversionError(string.Format(message, args), true);
+            Errors.Add(error);
             return error;
         }
-        
+
         internal class MetadataExportException : Exception
         {
-            public MetadataConversionError Error {
-                get;
-                private set;
-            }
-            
-            public MetadataExportException (MetadataConversionError error)
-                : base (error.Message)
+            public MetadataConversionError Error { get; private set; }
+
+            public MetadataExportException(MetadataConversionError error)
+                : base(error.Message)
             {
                 this.Error = error;
             }
-            
-            public MetadataExportException (MetadataConversionError error, Exception inner)
-                : base (error.Message, inner)
+
+            public MetadataExportException(MetadataConversionError error, Exception inner)
+                : base(error.Message, inner)
             {
                 this.Error = error;
             }

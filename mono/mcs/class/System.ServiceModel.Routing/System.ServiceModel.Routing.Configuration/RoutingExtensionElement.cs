@@ -12,34 +12,45 @@ namespace System.ServiceModel.Routing.Configuration
 {
     public sealed class RoutingExtensionElement : BehaviorExtensionElement
     {
-        public override Type BehaviorType {
-            get { return typeof (RoutingExtension); }
-        }
-
-        [ConfigurationProperty ("filterTableName", DefaultValue = null)]
-        public string FilterTableName {
-            get { return (string) base ["filterTableName"]; }
-            set { base ["filterTableName"] = value; }
-        }
-
-        [ConfigurationProperty ("routeOnHeadersOnly", DefaultValue = true, Options = ConfigurationPropertyOptions.None)]
-        public bool RouteOnHeadersOnly {
-            get { return (bool) base ["routeOnHeadersOnly"]; }
-            set { base ["routeOnHeadersOnly"] = value; }
-        }
-
-        [ConfigurationProperty ("soapProcessingEnabled", DefaultValue = true)]
-        public bool SoapProcessingEnabled {
-            get { return (bool) base ["soapProcessingEnabled"]; }
-            set { base ["soapProcessingEnabled"] = value; }
-        }
-
-        protected internal override object CreateBehavior ()
+        public override Type BehaviorType
         {
-            var table = RoutingSection.CreateFilterTable (FilterTableName);
+            get { return typeof(RoutingExtension); }
+        }
 
-            var cfg = new RoutingConfiguration (table, RouteOnHeadersOnly) { SoapProcessingEnabled = this.SoapProcessingEnabled };
-            return new RoutingBehavior (cfg);
+        [ConfigurationProperty("filterTableName", DefaultValue = null)]
+        public string FilterTableName
+        {
+            get { return (string)base["filterTableName"]; }
+            set { base["filterTableName"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "routeOnHeadersOnly",
+            DefaultValue = true,
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public bool RouteOnHeadersOnly
+        {
+            get { return (bool)base["routeOnHeadersOnly"]; }
+            set { base["routeOnHeadersOnly"] = value; }
+        }
+
+        [ConfigurationProperty("soapProcessingEnabled", DefaultValue = true)]
+        public bool SoapProcessingEnabled
+        {
+            get { return (bool)base["soapProcessingEnabled"]; }
+            set { base["soapProcessingEnabled"] = value; }
+        }
+
+        protected internal override object CreateBehavior()
+        {
+            var table = RoutingSection.CreateFilterTable(FilterTableName);
+
+            var cfg = new RoutingConfiguration(table, RouteOnHeadersOnly)
+            {
+                SoapProcessingEnabled = this.SoapProcessingEnabled
+            };
+            return new RoutingBehavior(cfg);
         }
     }
 }

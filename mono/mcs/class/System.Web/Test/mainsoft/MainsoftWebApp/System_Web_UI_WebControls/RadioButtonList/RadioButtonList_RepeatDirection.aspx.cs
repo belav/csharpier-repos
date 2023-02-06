@@ -35,8 +35,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class RadioButtonList_RepeatDirection
-        : GHTBaseWeb 
+    public class RadioButtonList_RepeatDirection : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -44,8 +43,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest2;
         protected System.Web.UI.WebControls.RadioButtonList RadioButtonList3;
         protected GHTWebControls.GHTSubTest GHTSubTest3;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -53,44 +53,42 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
 
             // Non valid RepeateDirection value
             GHTSubTestBegin("Non valid RepeateDirection value");
-            try 
+            try
             {
                 throw new InvalidCastException();
                 //System.Web.UI.WebControls.RadioButtonList rbl;
                 //rbl.RepeatDirection = "Non valid value";
                 //GHTSubTestExpectedExceptionNotCaught("InvalidCastException");
             }
-            catch (InvalidCastException ex) 
+            catch (InvalidCastException ex)
             {
                 GHTSubTestExpectedExceptionCaught(ex);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTTestEnd();
-
         }
     }
 }

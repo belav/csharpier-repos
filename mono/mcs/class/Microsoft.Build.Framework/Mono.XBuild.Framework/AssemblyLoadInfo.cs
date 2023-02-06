@@ -6,7 +6,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -32,90 +32,125 @@ using System;
 using System.Globalization;
 using System.Reflection;
 
-namespace Mono.XBuild.Framework {
-    internal class AssemblyLoadInfo {
-    
-        AssemblyName    assemblyName;
-        string        assemblyNameString;
-        string        className;
-        string        filename;
-        LoadInfoType    infoType;
-    
-        public AssemblyLoadInfo ()
+namespace Mono.XBuild.Framework
+{
+    internal class AssemblyLoadInfo
+    {
+        AssemblyName assemblyName;
+        string assemblyNameString;
+        string className;
+        string filename;
+        LoadInfoType infoType;
+
+        public AssemblyLoadInfo() { }
+
+        public AssemblyLoadInfo(string assemblyName, string className)
         {
-        }
-        
-        public AssemblyLoadInfo (string assemblyName, string className)
-        {
-            this.assemblyName = new AssemblyName (assemblyName);
+            this.assemblyName = new AssemblyName(assemblyName);
             this.className = className;
             assemblyNameString = null;
             infoType = LoadInfoType.AssemblyName;
         }
-        
-        public AssemblyLoadInfo (LoadInfoType loadInfoType, string filename, string name,
-                     string version, string culture, string publicKeyToken, string className)
+
+        public AssemblyLoadInfo(
+            LoadInfoType loadInfoType,
+            string filename,
+            string name,
+            string version,
+            string culture,
+            string publicKeyToken,
+            string className
+        )
         {
-            SetAssemblyName (loadInfoType, filename, name, version, culture, publicKeyToken, className);
+            SetAssemblyName(
+                loadInfoType,
+                filename,
+                name,
+                version,
+                culture,
+                publicKeyToken,
+                className
+            );
         }
-        
-        protected void SetAssemblyName (LoadInfoType loadInfoType, string filename, string name, string version,
-                        string culture, string publicKeyToken, string className)
+
+        protected void SetAssemblyName(
+            LoadInfoType loadInfoType,
+            string filename,
+            string name,
+            string version,
+            string culture,
+            string publicKeyToken,
+            string className
+        )
         {
-            assemblyName = new AssemblyName ();
+            assemblyName = new AssemblyName();
             this.infoType = loadInfoType;
             this.className = className;
-            if (infoType == LoadInfoType.AssemblyName) {
+            if (infoType == LoadInfoType.AssemblyName)
+            {
                 if (version != null)
-                    assemblyName.Version = new Version (version);
-                if (culture != null) {
+                    assemblyName.Version = new Version(version);
+                if (culture != null)
+                {
                     if (culture == "neutral")
                         culture = String.Empty;
-                    assemblyName.CultureInfo = new CultureInfo (culture);
+                    assemblyName.CultureInfo = new CultureInfo(culture);
                 }
-                if (publicKeyToken != null) {
-                    char[] chars = publicKeyToken.ToCharArray ();
-                    byte[] bytes = new byte [Buffer.ByteLength (chars)];
-                    
-                    for (int i  = 0; i < Buffer.ByteLength (chars); i++)
-                        bytes [i] = Buffer.GetByte (chars, i); 
-                    assemblyName.SetPublicKeyToken (bytes);
+                if (publicKeyToken != null)
+                {
+                    char[] chars = publicKeyToken.ToCharArray();
+                    byte[] bytes = new byte[Buffer.ByteLength(chars)];
+
+                    for (int i = 0; i < Buffer.ByteLength(chars); i++)
+                        bytes[i] = Buffer.GetByte(chars, i);
+                    assemblyName.SetPublicKeyToken(bytes);
                 }
-                
+
                 assemblyName.Name = name;
-            } else if (infoType == LoadInfoType.AssemblyFilename) {
+            }
+            else if (infoType == LoadInfoType.AssemblyFilename)
+            {
                 this.filename = filename;
-            } else {
+            }
+            else
+            {
                 ;
             }
         }
-        
-        public AssemblyName AssemblyName {
+
+        public AssemblyName AssemblyName
+        {
             get { return assemblyName; }
         }
-        
-        public string AssemblyNameString {
+
+        public string AssemblyNameString
+        {
             get { return assemblyNameString; }
         }
-        
-        public string Filename {
+
+        public string Filename
+        {
             get { return filename; }
         }
-        
-        public LoadInfoType InfoType {
+
+        public LoadInfoType InfoType
+        {
             get { return infoType; }
         }
-        
-        public string ClassName {
+
+        public string ClassName
+        {
             get { return className; }
         }
-        
-        public Type Type {
-            get { return Type.GetType (className); }
+
+        public Type Type
+        {
+            get { return Type.GetType(className); }
         }
     }
 
-    internal enum LoadInfoType {
+    internal enum LoadInfoType
+    {
         AssemblyName,
         AssemblyFilename,
         AssemblyNameFromString

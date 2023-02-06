@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,29 +40,33 @@ namespace System.ServiceModel.Description
     public class MessageHeaderDescription : MessagePartDescription
     {
         string actor;
-        bool must_understand, relay, typed_header;
+        bool must_understand,
+            relay,
+            typed_header;
 
-        public MessageHeaderDescription (string name, string ns)
-            : base (name, ns)
+        public MessageHeaderDescription(string name, string ns)
+            : base(name, ns) { }
+
+        public string Actor
         {
-        }
-
-        public string Actor {
             get { return actor; }
             set { actor = value; }
         }
 
-        public bool MustUnderstand {
+        public bool MustUnderstand
+        {
             get { return must_understand; }
             set { must_understand = value; }
         }
 
-        public bool Relay {
+        public bool Relay
+        {
             get { return relay; }
             set { relay = value; }
         }
 
-        public bool TypedHeader {
+        public bool TypedHeader
+        {
             get { return typed_header; }
             set { typed_header = value; }
         }

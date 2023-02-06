@@ -47,7 +47,8 @@ internal sealed partial class RoslynSearchItemsSourceProvider : ISearchItemsSour
         VisualStudioWorkspace workspace,
         IThreadingContext threadingContext,
         IUIThreadOperationExecutor threadOperationExecutor,
-        IAsynchronousOperationListenerProvider listenerProvider)
+        IAsynchronousOperationListenerProvider listenerProvider
+    )
     {
         _workspace = workspace;
         _threadingContext = threadingContext;
@@ -57,6 +58,5 @@ internal sealed partial class RoslynSearchItemsSourceProvider : ISearchItemsSour
         _viewFactory = new RoslynSearchResultViewFactory(this);
     }
 
-    public ISearchItemsSource CreateItemsSource()
-        => new RoslynSearchItemsSource(this);
+    public ISearchItemsSource CreateItemsSource() => new RoslynSearchItemsSource(this);
 }

@@ -8,12 +8,12 @@ namespace TLens
 {
     static class SizeStatistics
     {
-        public static int GetEstimatedSize (this TypeDefinition type)
+        public static int GetEstimatedSize(this TypeDefinition type)
         {
-            return type.Methods.Sum (l => l.GetEstimatedSize ());
+            return type.Methods.Sum(l => l.GetEstimatedSize());
         }
 
-        public static int GetEstimatedSize (this MethodDefinition method)
+        public static int GetEstimatedSize(this MethodDefinition method)
         {
             return method.HasBody ? method.Body.CodeSize : 0;
         }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,75 +30,77 @@ using System.Collections;
 using System.Security.Permissions;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Policy {
-
+namespace System.Security.Policy
+{
     [Serializable]
-    [ComVisible (true)]
-    public sealed class GacMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
-
+    [ComVisible(true)]
+    public sealed class GacMembershipCondition : IMembershipCondition, IConstantMembershipCondition
+    {
         private readonly int version = 1;
 
-        public GacMembershipCondition ()
-        {
-        }
+        public GacMembershipCondition() { }
 
-        public bool Check (Evidence evidence)
+        public bool Check(Evidence evidence)
         {
             if (evidence == null)
                 return false;
 
             // true only if Gac is in host-supplied evidences
-            IEnumerator e = evidence.GetHostEnumerator ();
-            while (e.MoveNext ()) {
+            IEnumerator e = evidence.GetHostEnumerator();
+            while (e.MoveNext())
+            {
                 if (e.Current is GacInstalled)
                     return true;
             }
             return false;
         }
 
-        public IMembershipCondition Copy ()
+        public IMembershipCondition Copy()
         {
-            return new GacMembershipCondition ();
+            return new GacMembershipCondition();
         }
 
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             if (o == null)
                 return false;
             return (o is GacMembershipCondition);
         }
 
-        public void FromXml (SecurityElement e)
+        public void FromXml(SecurityElement e)
         {
-            FromXml (e, null);
+            FromXml(e, null);
         }
 
-                public void FromXml (SecurityElement e, PolicyLevel level)
-                {
-            MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
+        public void FromXml(SecurityElement e, PolicyLevel level)
+        {
+            MembershipConditionHelper.CheckSecurityElement(e, "e", version, version);
             // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return 0; // always the same
         }
 
         // LAMESPEC: "Gac" is documented - but Fx 2.0 beta 1 returns "GAC"
-        public override string ToString ()
+        public override string ToString()
         {
             return "GAC";
         }
 
-        public SecurityElement ToXml ()
+        public SecurityElement ToXml()
         {
-            return ToXml (null);
+            return ToXml(null);
         }
 
-        public SecurityElement ToXml (PolicyLevel level)
+        public SecurityElement ToXml(PolicyLevel level)
         {
             // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
-            SecurityElement se = MembershipConditionHelper.Element (typeof (GacMembershipCondition), version);
+            SecurityElement se = MembershipConditionHelper.Element(
+                typeof(GacMembershipCondition),
+                version
+            );
             // nothing to add
             return se;
         }

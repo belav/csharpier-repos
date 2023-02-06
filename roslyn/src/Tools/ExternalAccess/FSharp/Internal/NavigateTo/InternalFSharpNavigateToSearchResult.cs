@@ -39,6 +39,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
 
         public string Summary => null;
 
-        public ImmutableArray<PatternMatch> Matches => NavigateToSearchResultHelpers.GetMatches(this);
+        public ImmutableArray<PatternMatch> Matches =>
+            NavigateToSearchResultHelpers.GetMatches(this);
     }
 }

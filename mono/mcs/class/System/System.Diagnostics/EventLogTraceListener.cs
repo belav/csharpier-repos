@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,116 +34,145 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace System.Diagnostics 
+namespace System.Diagnostics
 {
-    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-    public sealed class EventLogTraceListener : TraceListener 
+    [PermissionSet(SecurityAction.LinkDemand, Unrestricted = true)]
+    public sealed class EventLogTraceListener : TraceListener
     {
         private EventLog event_log;
         private string name;
 
-        public EventLogTraceListener ()
-        {
-        }
+        public EventLogTraceListener() { }
 
-        public EventLogTraceListener (EventLog eventLog)
+        public EventLogTraceListener(EventLog eventLog)
         {
             if (eventLog == null)
-                throw new ArgumentNullException ("eventLog");
+                throw new ArgumentNullException("eventLog");
             this.event_log = eventLog;
         }
 
-        public EventLogTraceListener (string source)
+        public EventLogTraceListener(string source)
         {
             if (source == null)
-                throw new ArgumentNullException ("source");
-            event_log = new EventLog ();
+                throw new ArgumentNullException("source");
+            event_log = new EventLog();
             event_log.Source = source;
         }
 
-        public EventLog EventLog {
+        public EventLog EventLog
+        {
             get { return event_log; }
             set { event_log = value; }
         }
 
-        public override string Name {
+        public override string Name
+        {
             get { return name != null ? name : event_log.Source; }
             set { name = value; }
         }
 
-        public override void Close ()
+        public override void Close()
         {
-            event_log.Close ();
+            event_log.Close();
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (disposing)
-                event_log.Dispose ();
+                event_log.Dispose();
         }
 
-        public override void Write (string message)
+        public override void Write(string message)
         {
-            TraceData (new TraceEventCache (), event_log.Source,
-                   TraceEventType.Information, 0, message);
+            TraceData(
+                new TraceEventCache(),
+                event_log.Source,
+                TraceEventType.Information,
+                0,
+                message
+            );
         }
 
-        public override void WriteLine (string message)
+        public override void WriteLine(string message)
         {
-            Write (message);
+            Write(message);
         }
 
-        [ComVisible (false)]
-        public override void TraceData (TraceEventCache eventCache,
-                        string source, TraceEventType severity,
-                        int id, object data)
+        [ComVisible(false)]
+        public override void TraceData(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType severity,
+            int id,
+            object data
+        )
         {
             EventLogEntryType type;
-            switch (severity) {
-            case TraceEventType.Critical:
-            case TraceEventType.Error:
-                type = EventLogEntryType.Error;
-                break;
-            case TraceEventType.Warning:
-                type = EventLogEntryType.Warning;
-                break;
-            default:
-                type = EventLogEntryType.Information;
-                break;
+            switch (severity)
+            {
+                case TraceEventType.Critical:
+                case TraceEventType.Error:
+                    type = EventLogEntryType.Error;
+                    break;
+                case TraceEventType.Warning:
+                    type = EventLogEntryType.Warning;
+                    break;
+                default:
+                    type = EventLogEntryType.Information;
+                    break;
             }
-            event_log.WriteEntry (data != null ? data.ToString () : String.Empty, type, id, 0);
+            event_log.WriteEntry(data != null ? data.ToString() : String.Empty, type, id, 0);
         }
 
-        [ComVisible (false)]
-        public override void TraceData (TraceEventCache eventCache,
-                        string source, TraceEventType severity,
-                        int id, params object [] data)
+        [ComVisible(false)]
+        public override void TraceData(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType severity,
+            int id,
+            params object[] data
+        )
         {
             string s = String.Empty;
-            if (data != null) {
-                string [] arr = new string [data.Length];
+            if (data != null)
+            {
+                string[] arr = new string[data.Length];
                 for (int i = 0; i < data.Length; i++)
-                    arr [i] = data [i] != null ? data [i].ToString () : String.Empty;
-                s = String.Join (", ", arr);
+                    arr[i] = data[i] != null ? data[i].ToString() : String.Empty;
+                s = String.Join(", ", arr);
             }
-            TraceData (eventCache, source, severity, id, s);
+            TraceData(eventCache, source, severity, id, s);
         }
 
-        [ComVisible (false)]
-        public override void TraceEvent (TraceEventCache eventCache,
-                         string source, TraceEventType severity,
-                         int id, string message)
+        [ComVisible(false)]
+        public override void TraceEvent(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType severity,
+            int id,
+            string message
+        )
         {
-            TraceData (eventCache, source, severity, id, message);
+            TraceData(eventCache, source, severity, id, message);
         }
 
-        [ComVisible (false)]
-        public override void TraceEvent (TraceEventCache eventCache,
-                         string source, TraceEventType severity,
-                         int id, string format, params object [] args)
+        [ComVisible(false)]
+        public override void TraceEvent(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType severity,
+            int id,
+            string format,
+            params object[] args
+        )
         {
-            TraceEvent (eventCache, source, severity, id, format != null ? String.Format (format, args) : null);
+            TraceEvent(
+                eventCache,
+                source,
+                severity,
+                id,
+                format != null ? String.Format(format, args) : null
+            );
         }
     }
 }
-

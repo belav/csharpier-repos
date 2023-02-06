@@ -1,10 +1,11 @@
 namespace Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies
 {
-    public class DynamicDependencyMethodInNonReferencedAssemblyChainedReferenceLibrary : DynamicDependencyMethodInNonReferencedAssemblyBase
+    public class DynamicDependencyMethodInNonReferencedAssemblyChainedReferenceLibrary
+        : DynamicDependencyMethodInNonReferencedAssemblyBase
     {
-        public override string Method ()
+        public override string Method()
         {
-            DynamicDependencyMethodInNonReferencedAssemblyChainedLibrary.Dependency ();
+            DynamicDependencyMethodInNonReferencedAssemblyChainedLibrary.Dependency();
             return "Dependency";
         }
     }

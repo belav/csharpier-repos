@@ -34,8 +34,7 @@ class OpenMutexPos
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Unexpected exception thrown: " +
-                    ex.ToString());
+                Console.WriteLine("Unexpected exception thrown: " + ex.ToString());
             }
         }
 

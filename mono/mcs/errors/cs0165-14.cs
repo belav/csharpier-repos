@@ -3,12 +3,12 @@
 
 class test
 {
-        static void Main(string[] args)
+    static void Main(string[] args)
+    {
         {
-                {
-                        int x = 8;
-                }
-                string y;
-                args[0] = y;    // use of unassigned variable y
+            int x = 8;
         }
+        string y;
+        args[0] = y; // use of unassigned variable y
+    }
 }

@@ -25,13 +25,14 @@ namespace MonoTests.SystemWeb.Framework
         /// <param name="formId">The id of the form to use.</param>
         /// <remarks>Currently, the <paramref name="formId"/> is ignored, and the
         /// first form is used.</remarks>
-        public FormRequest (Response response, string formId)
+        public FormRequest(Response response, string formId)
         {
-            _controls = new BaseControlCollection ();
-            ExtractFormAndHiddenControls (response, formId);
+            _controls = new BaseControlCollection();
+            ExtractFormAndHiddenControls(response, formId);
         }
 
         private BaseControlCollection _controls;
+
         /// <summary>
         /// Get or set the collection of controls, posted back to the server.
         /// </summary>
@@ -41,32 +42,33 @@ namespace MonoTests.SystemWeb.Framework
             set { _controls = value; }
         }
 
-        private void ExtractFormAndHiddenControls (Response response, string formId)
+        private void ExtractFormAndHiddenControls(Response response, string formId)
         {
-            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument ();
-            htmlDoc.LoadHtml (response.Body);
+            HtmlAgilityPack.HtmlDocument htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            htmlDoc.LoadHtml(response.Body);
 
-            StringBuilder tempxml = new StringBuilder ();
-            StringWriter tsw = new StringWriter (tempxml);
+            StringBuilder tempxml = new StringBuilder();
+            StringWriter tsw = new StringWriter(tempxml);
             htmlDoc.OptionOutputAsXml = true;
-            htmlDoc.Save (tsw);
+            htmlDoc.Save(tsw);
 
-            XmlDocument doc = new XmlDocument ();
-            doc.LoadXml (tempxml.ToString ());
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(tempxml.ToString());
 
             const string HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
-            XmlNamespaceManager nsmgr = new XmlNamespaceManager (doc.NameTable);
-            nsmgr.AddNamespace ("html", HTML_NAMESPACE);
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("html", HTML_NAMESPACE);
 
 #if USE_CORRECT_FORMID
-            XmlNode formNode = doc.SelectSingleNode ("//html:form[@name='" + formId + "']", nsmgr);
+            XmlNode formNode = doc.SelectSingleNode("//html:form[@name='" + formId + "']", nsmgr);
 #else
-            XmlNode formNode = doc.SelectSingleNode ("//html:form", nsmgr);
+            XmlNode formNode = doc.SelectSingleNode("//html:form", nsmgr);
 #endif
             if (formNode == null)
-                throw new ArgumentException ("Form with id='" + formId +
-                    "' was not found in document: " + response.Body);
+                throw new ArgumentException(
+                    "Form with id='" + formId + "' was not found in document: " + response.Body
+                );
 
             string actionUrl = formNode.Attributes["action"].Value;
             if (actionUrl != null && actionUrl != string.Empty)
@@ -78,12 +80,12 @@ namespace MonoTests.SystemWeb.Framework
                 base.IsPost = false;
 #if USE_CORRECT_FORMID
 
-            foreach (XmlNode inputNode in formNode.SelectNodes ("//html:input", nsmgr))
+            foreach (XmlNode inputNode in formNode.SelectNodes("//html:input", nsmgr))
 #else
-            foreach (XmlNode inputNode in doc.SelectNodes ("//html:input[@type='hidden']", nsmgr))
+            foreach (XmlNode inputNode in doc.SelectNodes("//html:input[@type='hidden']", nsmgr))
 #endif
- {
-                BaseControl bc = new BaseControl ();
+            {
+                BaseControl bc = new BaseControl();
                 bc.Name = inputNode.Attributes["name"].Value;
                 if (bc.Name == null || bc.Name == string.Empty)
                     continue;
@@ -101,7 +103,7 @@ namespace MonoTests.SystemWeb.Framework
         /// property should not be changed, otherwise an <see cref="Exception"/>
         /// is thrown.
         /// </summary>
-        
+
         /// Get returns true if the form method was POST, otherwise returns false.
         /// Unlike the base class, here this property should not be
         /// changed, otherwise an <see cref="Exception"/> is thrown.
@@ -110,7 +112,7 @@ namespace MonoTests.SystemWeb.Framework
         public override bool IsPost
         {
             get { return base.IsPost; }
-            set { throw new Exception ("Must not change IsPost of FormPostback"); }
+            set { throw new Exception("Must not change IsPost of FormPostback"); }
         }
 
         /// <summary>
@@ -120,7 +122,7 @@ namespace MonoTests.SystemWeb.Framework
         public override string ContentType
         {
             get { return "application/x-www-form-urlencoded"; }
-            set { throw new Exception ("Must not change PostContentType of FormPostback"); }
+            set { throw new Exception("Must not change PostContentType of FormPostback"); }
         }
 
         /// <summary>
@@ -131,11 +133,11 @@ namespace MonoTests.SystemWeb.Framework
             get
             {
                 if (IsPost)
-                    return Encoding.ASCII.GetBytes (GetUrlencodedDataset ());
+                    return Encoding.ASCII.GetBytes(GetUrlencodedDataset());
                 else
                     return null;
             }
-            set { throw new Exception ("Must not change EntityBody of FormPostback"); }
+            set { throw new Exception("Must not change EntityBody of FormPostback"); }
         }
 
         /// <summary>
@@ -148,29 +150,30 @@ namespace MonoTests.SystemWeb.Framework
                 if (IsPost)
                     return "";
                 else
-                    return GetUrlencodedDataset ();
+                    return GetUrlencodedDataset();
             }
         }
 
-        private string GetUrlencodedDataset ()
+        private string GetUrlencodedDataset()
         {
-            StringBuilder query = new StringBuilder ();
+            StringBuilder query = new StringBuilder();
             bool first = true;
-             foreach (string key in Controls.Keys) {
-                 BaseControl ctrl = Controls[key];
-                if (!ctrl.IsSuccessful ())
+            foreach (string key in Controls.Keys)
+            {
+                BaseControl ctrl = Controls[key];
+                if (!ctrl.IsSuccessful())
                     continue;
 
                 if (first)
                     first = false;
                 else
-                    query.Append ("&");
+                    query.Append("&");
 
-                query.Append (HttpUtility.UrlEncode (ctrl.Name));
-                query.Append ("=");
-                query.Append (HttpUtility.UrlEncode (ctrl.Value));
+                query.Append(HttpUtility.UrlEncode(ctrl.Name));
+                query.Append("=");
+                query.Append(HttpUtility.UrlEncode(ctrl.Value));
             }
-            return query.ToString ();
+            return query.ToString();
         }
     }
 }

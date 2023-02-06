@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,18 +38,21 @@ namespace System.IdentityModel.Tokens
     {
         XmlElement xml;
         SecurityToken proof_token;
-        DateTime from, to;
-        SecurityKeyIdentifierClause int_tokenref, ext_tokenref;
+        DateTime from,
+            to;
+        SecurityKeyIdentifierClause int_tokenref,
+            ext_tokenref;
         ReadOnlyCollection<IAuthorizationPolicy> auth_policies;
 
-        public GenericXmlSecurityToken (
+        public GenericXmlSecurityToken(
             XmlElement tokenXml,
             SecurityToken proofToken,
             DateTime effectiveTime,
             DateTime expirationTime,
             SecurityKeyIdentifierClause internalTokenReference,
             SecurityKeyIdentifierClause externalTokenReference,
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             xml = tokenXml;
             proof_token = proofToken;
@@ -61,59 +64,69 @@ namespace System.IdentityModel.Tokens
         }
 
         [MonoTODO] // verify
-        public override string Id {
+        public override string Id
+        {
             get { return proof_token.Id; }
         }
 
-        public XmlElement TokenXml {
-            get { return xml; } 
+        public XmlElement TokenXml
+        {
+            get { return xml; }
         }
 
-        public SecurityToken ProofToken { 
-            get { return proof_token; } 
+        public SecurityToken ProofToken
+        {
+            get { return proof_token; }
         }
 
-        public override DateTime ValidFrom { 
-            get { return from; } 
+        public override DateTime ValidFrom
+        {
+            get { return from; }
         }
-        public override DateTime ValidTo { 
-            get { return to; } 
-        }
-
-        public SecurityKeyIdentifierClause InternalTokenReference { 
-            get { return int_tokenref; } 
+        public override DateTime ValidTo
+        {
+            get { return to; }
         }
 
-        public SecurityKeyIdentifierClause ExternalTokenReference { 
-            get { return ext_tokenref; } 
+        public SecurityKeyIdentifierClause InternalTokenReference
+        {
+            get { return int_tokenref; }
         }
 
-        public ReadOnlyCollection<IAuthorizationPolicy> AuthorizationPolicies {
+        public SecurityKeyIdentifierClause ExternalTokenReference
+        {
+            get { return ext_tokenref; }
+        }
+
+        public ReadOnlyCollection<IAuthorizationPolicy> AuthorizationPolicies
+        {
             get { return auth_policies; }
         }
 
         [MonoTODO]
-        public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-            get { throw new NotImplementedException (); }
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys
+        {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        public override bool CanCreateKeyIdentifierClause<T> ()
+        public override bool CanCreateKeyIdentifierClause<T>()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override T CreateKeyIdentifierClause<T> ()
+        public override T CreateKeyIdentifierClause<T>()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override bool MatchesKeyIdentifierClause (
-            SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

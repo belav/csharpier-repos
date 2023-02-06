@@ -16,26 +16,49 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         private readonly Lazy<ImmutableArray<SyntaxReference>> _lazyCachedDeclaringReferences;
 
-        public SymbolDeclaredCompilationEvent(Compilation compilation, ISymbol symbol, SemanticModel? semanticModelWithCachedBoundNodes = null)
+        public SymbolDeclaredCompilationEvent(
+            Compilation compilation,
+            ISymbol symbol,
+            SemanticModel? semanticModelWithCachedBoundNodes = null
+        )
             : base(compilation)
         {
             Symbol = symbol;
             SemanticModelWithCachedBoundNodes = semanticModelWithCachedBoundNodes;
-            _lazyCachedDeclaringReferences = new Lazy<ImmutableArray<SyntaxReference>>(() => symbol.DeclaringSyntaxReferences);
+            _lazyCachedDeclaringReferences = new Lazy<ImmutableArray<SyntaxReference>>(
+                () => symbol.DeclaringSyntaxReferences
+            );
         }
 
         public ISymbol Symbol { get; }
         public SemanticModel? SemanticModelWithCachedBoundNodes { get; }
 
         // PERF: We avoid allocations in re-computing syntax references for declared symbol during event processing by caching them directly on this member.
-        public ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => _lazyCachedDeclaringReferences.Value;
+        public ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            _lazyCachedDeclaringReferences.Value;
 
         public override string ToString()
         {
             var name = Symbol.Name;
-            if (name == "") name = "<empty>";
-            var loc = DeclaringSyntaxReferences.Length != 0 ? " @ " + string.Join(", ", System.Linq.Enumerable.Select(DeclaringSyntaxReferences, r => r.GetLocation().GetLineSpan())) : null;
-            return "SymbolDeclaredCompilationEvent(" + name + " " + Symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat) + loc + ")";
+            if (name == "")
+                name = "<empty>";
+            var loc =
+                DeclaringSyntaxReferences.Length != 0
+                    ? " @ "
+                        + string.Join(
+                            ", ",
+                            System.Linq.Enumerable.Select(
+                                DeclaringSyntaxReferences,
+                                r => r.GetLocation().GetLineSpan()
+                            )
+                        )
+                    : null;
+            return "SymbolDeclaredCompilationEvent("
+                + name
+                + " "
+                + Symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                + loc
+                + ")";
         }
     }
 }

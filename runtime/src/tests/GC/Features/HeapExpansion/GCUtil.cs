@@ -47,7 +47,6 @@ public class GCUtil
         blist.Clear();
     }
 
-
     [SecuritySafeCritical]
     public static void Alloc2(int numNodes, int percentPinned)
     {
@@ -65,7 +64,6 @@ public class GCUtil
         }
     }
 
-
     [SecuritySafeCritical]
     public static void FreePins2()
     {
@@ -76,7 +74,6 @@ public class GCUtil
         list2.Clear();
         blist2.Clear();
     }
-
 
     [SecuritySafeCritical]
     public static void FreeNonPins2()

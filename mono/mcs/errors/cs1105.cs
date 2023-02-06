@@ -3,7 +3,5 @@
 
 static class S
 {
-    void Foo (this int? s)
-    {
-    }
+    void Foo(this int? s) { }
 }

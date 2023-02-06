@@ -29,10 +29,7 @@ namespace Internal.IL
 
         public override MethodDesc OwningMethod
         {
-            get
-            {
-                return _method;
-            }
+            get { return _method; }
         }
 
         public override byte[] GetILBytes()
@@ -42,10 +39,7 @@ namespace Internal.IL
 
         public override int MaxStack
         {
-            get
-            {
-                return _methodIL.MaxStack;
-            }
+            get { return _methodIL.MaxStack; }
         }
 
         public override ILExceptionRegion[] GetExceptionRegions()
@@ -55,10 +49,7 @@ namespace Internal.IL
 
         public override bool IsInitLocals
         {
-            get
-            {
-                return _methodIL.IsInitLocals;
-            }
+            get { return _methodIL.IsInitLocals; }
         }
 
         public override LocalVariableDefinition[] GetLocals()
@@ -69,7 +60,10 @@ namespace Internal.IL
             for (int i = 0; i < locals.Length; i++)
             {
                 TypeDesc uninst = locals[i].Type;
-                TypeDesc inst = uninst.InstantiateSignature(_typeInstantiation, _methodInstantiation);
+                TypeDesc inst = uninst.InstantiateSignature(
+                    _typeInstantiation,
+                    _methodInstantiation
+                );
                 if (uninst != inst)
                 {
                     if (clone == null)
@@ -107,13 +101,18 @@ namespace Internal.IL
             {
                 MethodSignatureBuilder builder = new MethodSignatureBuilder(template);
 
-                builder.ReturnType = template.ReturnType.InstantiateSignature(_typeInstantiation, _methodInstantiation);
+                builder.ReturnType = template.ReturnType.InstantiateSignature(
+                    _typeInstantiation,
+                    _methodInstantiation
+                );
                 for (int i = 0; i < template.Length; i++)
-                    builder[i] = template[i].InstantiateSignature(_typeInstantiation, _methodInstantiation);
+                    builder[i] = template[i].InstantiateSignature(
+                        _typeInstantiation,
+                        _methodInstantiation
+                    );
 
                 o = builder.ToSignature();
             }
-
 
             return o;
         }

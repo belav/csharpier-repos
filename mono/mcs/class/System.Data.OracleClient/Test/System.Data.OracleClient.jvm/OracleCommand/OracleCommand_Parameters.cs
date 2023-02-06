@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,7 +23,7 @@
 
 using System;
 using System.Data;
-using System.Data.OracleClient ;
+using System.Data.OracleClient;
 
 using MonoTests.System.Data.Utils;
 
@@ -34,12 +34,13 @@ using NUnit.Framework;
 namespace MonoTests.System.Data.OracleClient
 {
     [TestFixture]
-    public class OracleCommand_Parameters : ADONetTesterClass 
+    public class OracleCommand_Parameters : ADONetTesterClass
     {
         //Used to test GUID.
         private const string TEST_GUID_STRING = "239A3C5E-8D41-11D1-B675-00C04FA3C554";
 
         private Exception exp;
+
         public static void Main()
         {
             OracleCommand_Parameters tc = new OracleCommand_Parameters();
@@ -49,11 +50,11 @@ namespace MonoTests.System.Data.OracleClient
                 tc.BeginTest("OracleCommand_Parameters");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 tc.EndTest(exp);
             }
@@ -62,19 +63,20 @@ namespace MonoTests.System.Data.OracleClient
         [Test]
         public void run()
         {
-
             #region Simple Tests
             //string str="";
             string sql;
             OracleConnection con = null;
 
-            sql = "UPDATE Employees SET Region = :Region, TitleOfCourtesy = :TitleOfCourtesy WHERE EmployeeID=1";
-            con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-            
-            //not testing with DB2 provider
-            if (ConnectedDataProvider.GetDbType(con) != DataBaseServer.DB2) 
-            {
+            sql =
+                "UPDATE Employees SET Region = :Region, TitleOfCourtesy = :TitleOfCourtesy WHERE EmployeeID=1";
+            con = new OracleConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
 
+            //not testing with DB2 provider
+            if (ConnectedDataProvider.GetDbType(con) != DataBaseServer.DB2)
+            {
                 OracleCommand cmd = new OracleCommand(sql, con);
                 cmd.Parameters.Add(new OracleParameter(":Region", OracleType.VarChar));
                 cmd.Parameters.Add(new OracleParameter(":TitleOfCourtesy", OracleType.VarChar));
@@ -90,12 +92,20 @@ namespace MonoTests.System.Data.OracleClient
                 {
                     BeginCase("Check row count");
                     Compare(i, 1);
-                } 
-                catch(Exception ex){exp = ex;}
-                finally{EndCase(exp); exp = null;}
+                }
+                catch (Exception ex)
+                {
+                    exp = ex;
+                }
+                finally
+                {
+                    EndCase(exp);
+                    exp = null;
+                }
             }
 
-            if (con.State == ConnectionState.Open) con.Close();
+            if (con.State == ConnectionState.Open)
+                con.Close();
             #endregion
             #region Test Parameter Types
             #region General
@@ -107,7 +117,9 @@ namespace MonoTests.System.Data.OracleClient
 
         private void TypesSubTests(DbTypeParametersCollection typesToTest)
         {
-            DbTypeParametersCollection currentlyTested = new DbTypeParametersCollection(typesToTest.TableName);
+            DbTypeParametersCollection currentlyTested = new DbTypeParametersCollection(
+                typesToTest.TableName
+            );
             int affectedRows;
             string rowId = string.Empty;
 
@@ -121,8 +133,8 @@ namespace MonoTests.System.Data.OracleClient
                     currentlyTested.Add(currentParamType);
                     affectedRows = currentlyTested.ExecuteInsert(rowId);
                     Compare(affectedRows, 1);
-                } 
-                catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     exp = ex;
                 }
@@ -141,10 +153,13 @@ namespace MonoTests.System.Data.OracleClient
         {
             if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
                 return;
-            DbTypeParametersCollection guidRow = new DbTypeParametersCollection(ConnectedDataProvider.SPECIFIC_TYPES_TABLE_NAME);
+            DbTypeParametersCollection guidRow = new DbTypeParametersCollection(
+                ConnectedDataProvider.SPECIFIC_TYPES_TABLE_NAME
+            );
             guidRow.Add("UNIQUEIDENTIFIER", new Guid(TEST_GUID_STRING));
             TypesSubTests(guidRow);
         }
+
         //Test problems specific to the TIME type on DB2.
         [Test]
         public void DoTestTimeOnDB2()
@@ -153,7 +168,7 @@ namespace MonoTests.System.Data.OracleClient
                 return;
 
             OracleConnection conn = new OracleConnection(ConnectedDataProvider.ConnectionString);
-            string rowId = string .Empty;
+            string rowId = string.Empty;
 
             try
             {
@@ -162,7 +177,11 @@ namespace MonoTests.System.Data.OracleClient
                 OracleCommand cmd = new OracleCommand();
                 conn.Open();
                 cmd.Connection = conn;
-                cmd.CommandText = string.Format("INSERT INTO {0} (ID, T_TIME) VALUES ('{1}', ?)",ConnectedDataProvider.EXTENDED_TYPES_TABLE_NAME ,rowId);
+                cmd.CommandText = string.Format(
+                    "INSERT INTO {0} (ID, T_TIME) VALUES ('{1}', ?)",
+                    ConnectedDataProvider.EXTENDED_TYPES_TABLE_NAME,
+                    rowId
+                );
                 cmd.Parameters.Add("time", DateTime.Now.TimeOfDay);
                 int affectedRows;
                 affectedRows = cmd.ExecuteNonQuery();
@@ -176,10 +195,12 @@ namespace MonoTests.System.Data.OracleClient
             {
                 EndCase(exp);
                 exp = null;
-                DbTypeParametersCollection.ExecuteDelete(ConnectedDataProvider.EXTENDED_TYPES_TABLE_NAME, rowId);
+                DbTypeParametersCollection.ExecuteDelete(
+                    ConnectedDataProvider.EXTENDED_TYPES_TABLE_NAME,
+                    rowId
+                );
                 conn.Close();
             }
-
         }
 
         [Test]
@@ -192,31 +213,43 @@ namespace MonoTests.System.Data.OracleClient
                 return;
 
             OracleConnection conn = new OracleConnection(ConnectedDataProvider.ConnectionString);
-            string rowId = string .Empty;
+            string rowId = string.Empty;
 
-            try {
+            try
+            {
                 BeginCase("Test INSERT to TIME column using all of the DateTime");
                 rowId = "13282_" + this.TestCaseNumber.ToString();
                 OracleCommand cmd = new OracleCommand();
                 conn.Open();
                 cmd.Connection = conn;
-                cmd.CommandText = string.Format("INSERT INTO {0} (ID, T_TIME) VALUES ('{1}', ?)",ConnectedDataProvider.EXTENDED_TYPES_TABLE_NAME ,rowId);
+                cmd.CommandText = string.Format(
+                    "INSERT INTO {0} (ID, T_TIME) VALUES ('{1}', ?)",
+                    ConnectedDataProvider.EXTENDED_TYPES_TABLE_NAME,
+                    rowId
+                );
                 cmd.Parameters.Add("time", DateTime.Now);
-                try {
+                try
+                {
                     cmd.ExecuteNonQuery();
                     ExpectedExceptionNotCaught("System.OracleException");
                 }
-                catch (OracleException ex) {
+                catch (OracleException ex)
+                {
                     ExpectedExceptionCaught(ex);
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 exp = ex;
             }
-            finally {
+            finally
+            {
                 EndCase(exp);
                 exp = null;
-                DbTypeParametersCollection.ExecuteDelete(ConnectedDataProvider.EXTENDED_TYPES_TABLE_NAME, rowId);
+                DbTypeParametersCollection.ExecuteDelete(
+                    ConnectedDataProvider.EXTENDED_TYPES_TABLE_NAME,
+                    rowId
+                );
                 conn.Close();
             }
         }

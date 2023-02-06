@@ -34,7 +34,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             ObjectDataBuilder builder = new ObjectDataBuilder(factory, relocsOnly);
             builder.AddSymbol(this);

@@ -2,12 +2,12 @@ namespace System.Web.Services
 {
     static class Res
     {
-        public static string GetString (string name)
+        public static string GetString(string name)
         {
             return name;
         }
 
-        public static string GetString (string name, params object[] args)
+        public static string GetString(string name, params object[] args)
         {
             return name;
         }
@@ -18,10 +18,14 @@ namespace System.Web.Services
         public const string BindingInvalidAttribute = "BindingInvalidAttribute";
         public const string BindingMissingAttribute = "BindingMissingAttribute";
         public const string BindingMultipleParts = "BindingMultipleParts";
-        public const string BothAndUseTheMessageNameUseTheMessageName3 = "BothAndUseTheMessageNameUseTheMessageName3";
-        public const string CanTCallTheEndMethodOfAnAsyncCallMoreThan = "CanTCallTheEndMethodOfAnAsyncCallMoreThan";
-        public const string CanTSpecifyElementOnEncodedMessagePartsPart = "CanTSpecifyElementOnEncodedMessagePartsPart";
-        public const string CannotRunInPartialTrustOutsideAspNet = "CannotRunInPartialTrustOutsideAspNet";
+        public const string BothAndUseTheMessageNameUseTheMessageName3 =
+            "BothAndUseTheMessageNameUseTheMessageName3";
+        public const string CanTCallTheEndMethodOfAnAsyncCallMoreThan =
+            "CanTCallTheEndMethodOfAnAsyncCallMoreThan";
+        public const string CanTSpecifyElementOnEncodedMessagePartsPart =
+            "CanTSpecifyElementOnEncodedMessagePartsPart";
+        public const string CannotRunInPartialTrustOutsideAspNet =
+            "CannotRunInPartialTrustOutsideAspNet";
         public const string ClientProtocolAllowAutoRedirect = "ClientProtocolAllowAutoRedirect";
         public const string ClientProtocolClientCertificates = "ClientProtocolClientCertificates";
         public const string ClientProtocolCookieContainer = "ClientProtocolCookieContainer";
@@ -34,27 +38,36 @@ namespace System.Web.Services
         public const string ClientProtocolUserAgent = "ClientProtocolUserAgent";
         public const string CodeGenSupportParameterAttributes = "CodeGenSupportParameterAttributes";
         public const string CodeGenSupportReferenceParameters = "CodeGenSupportReferenceParameters";
-        public const string CodeGenSupportReturnTypeAttributes = "CodeGenSupportReturnTypeAttributes";
+        public const string CodeGenSupportReturnTypeAttributes =
+            "CodeGenSupportReturnTypeAttributes";
         public const string CodeRemarks = "CodeRemarks";
         public const string CodegenWarningDetails = "CodegenWarningDetails";
-        public const string ConfigKeyNotFoundInElementCollection = "ConfigKeyNotFoundInElementCollection";
+        public const string ConfigKeyNotFoundInElementCollection =
+            "ConfigKeyNotFoundInElementCollection";
         public const string ConfigKeysDoNotMatch = "ConfigKeysDoNotMatch";
         public const string ContractOverride = "ContractOverride";
         public const string Description = "Description";
-        public const string DiscoveryIsNotPossibleBecauseTypeIsMissing1 = "DiscoveryIsNotPossibleBecauseTypeIsMissing1";
+        public const string DiscoveryIsNotPossibleBecauseTypeIsMissing1 =
+            "DiscoveryIsNotPossibleBecauseTypeIsMissing1";
         public const string DuplicateInputOutputNames0 = "DuplicateInputOutputNames0";
-        public const string EachMessagePartInAUseLiteralMessageMustSpecify0 = "EachMessagePartInAUseLiteralMessageMustSpecify0";
-        public const string EachMessagePartInAnUseEncodedMessageMustSpecify0 = "EachMessagePartInAnUseEncodedMessageMustSpecify0";
-        public const string EachMessagePartInRpcUseLiteralMessageMustSpecify0 = "EachMessagePartInRpcUseLiteralMessageMustSpecify0";
+        public const string EachMessagePartInAUseLiteralMessageMustSpecify0 =
+            "EachMessagePartInAUseLiteralMessageMustSpecify0";
+        public const string EachMessagePartInAnUseEncodedMessageMustSpecify0 =
+            "EachMessagePartInAnUseEncodedMessageMustSpecify0";
+        public const string EachMessagePartInRpcUseLiteralMessageMustSpecify0 =
+            "EachMessagePartInRpcUseLiteralMessageMustSpecify0";
         public const string Element = "Element";
-        public const string ElementTypeMustBeObjectOrSoapExtensionOrSoapReflectedException = "ElementTypeMustBeObjectOrSoapExtensionOrSoapReflectedException";
-        public const string ElementTypeMustBeObjectOrSoapReflectedException = "ElementTypeMustBeObjectOrSoapReflectedException";
+        public const string ElementTypeMustBeObjectOrSoapExtensionOrSoapReflectedException =
+            "ElementTypeMustBeObjectOrSoapExtensionOrSoapReflectedException";
+        public const string ElementTypeMustBeObjectOrSoapReflectedException =
+            "ElementTypeMustBeObjectOrSoapReflectedException";
         public const string FailedToHandleRequest0 = "FailedToHandleRequest0";
         public const string Fault = "Fault";
         public const string FaultBinding = "FaultBinding";
         public const string HeaderFault = "HeaderFault";
         public const string HelpGeneratorInternalError = "HelpGeneratorInternalError";
-        public const string IfAppSettingBaseUrlArgumentIsSpecifiedThen0 = "IfAppSettingBaseUrlArgumentIsSpecifiedThen0";
+        public const string IfAppSettingBaseUrlArgumentIsSpecifiedThen0 =
+            "IfAppSettingBaseUrlArgumentIsSpecifiedThen0";
         public const string InitFailed = "InitFailed";
         public const string InputElement = "InputElement";
         public const string Invalid_priority_group_value = "Invalid_priority_group_value";
@@ -65,7 +78,8 @@ namespace System.Web.Services
         public const string MissingInputBinding0 = "MissingInputBinding0";
         public const string MissingMatchElement0 = "MissingMatchElement0";
         public const string MissingMessage2 = "MissingMessage2";
-        public const string MissingMessagePartForMessageFromNamespace3 = "MissingMessagePartForMessageFromNamespace3";
+        public const string MissingMessagePartForMessageFromNamespace3 =
+            "MissingMessagePartForMessageFromNamespace3";
         public const string MissingOutputBinding0 = "MissingOutputBinding0";
         public const string MissingSoapBodyInputBinding0 = "MissingSoapBodyInputBinding0";
         public const string MissingSoapBodyOutputBinding0 = "MissingSoapBodyOutputBinding0";
@@ -74,13 +88,18 @@ namespace System.Web.Services
         public const string NeedConcreteType = "NeedConcreteType";
         public const string NoInputHTTPFormatsWereRecognized0 = "NoInputHTTPFormatsWereRecognized0";
         public const string NoInputMIMEFormatsWereRecognized0 = "NoInputMIMEFormatsWereRecognized0";
-        public const string NoMethodsWereFoundInTheWSDLForThisProtocol = "NoMethodsWereFoundInTheWSDLForThisProtocol";
-        public const string NoOutputMIMEFormatsWereRecognized0 = "NoOutputMIMEFormatsWereRecognized0";
+        public const string NoMethodsWereFoundInTheWSDLForThisProtocol =
+            "NoMethodsWereFoundInTheWSDLForThisProtocol";
+        public const string NoOutputMIMEFormatsWereRecognized0 =
+            "NoOutputMIMEFormatsWereRecognized0";
         public const string NotificationIsNotSupported0 = "NotificationIsNotSupported0";
         public const string OneWayIsNotSupported0 = "OneWayIsNotSupported0";
-        public const string OnlyOneWebServiceBindingAttributeMayBeSpecified1 = "OnlyOneWebServiceBindingAttributeMayBeSpecified1";
-        public const string OnlyOperationInputOrOperationOutputTypes = "OnlyOperationInputOrOperationOutputTypes";
-        public const string OnlyXmlElementsOrTypesDerivingFromServiceDescriptionFormatExtension0 = "OnlyXmlElementsOrTypesDerivingFromServiceDescriptionFormatExtension0";
+        public const string OnlyOneWebServiceBindingAttributeMayBeSpecified1 =
+            "OnlyOneWebServiceBindingAttributeMayBeSpecified1";
+        public const string OnlyOperationInputOrOperationOutputTypes =
+            "OnlyOperationInputOrOperationOutputTypes";
+        public const string OnlyXmlElementsOrTypesDerivingFromServiceDescriptionFormatExtension0 =
+            "OnlyXmlElementsOrTypesDerivingFromServiceDescriptionFormatExtension0";
         public const string Operation = "Operation";
         public const string OperationBinding = "OperationBinding";
         public const string OperationFlowNotification = "OperationFlowNotification";
@@ -94,41 +113,64 @@ namespace System.Web.Services
         public const string ProtocolDoesNotAsyncSerialize = "ProtocolDoesNotAsyncSerialize";
         public const string ProtocolWithNameIsNotRecognized1 = "ProtocolWithNameIsNotRecognized1";
         public const string RequestResponseIsNotSupported0 = "RequestResponseIsNotSupported0";
-        public const string RequiredXmlFormatExtensionAttributeIsMissing1 = "RequiredXmlFormatExtensionAttributeIsMissing1";
+        public const string RequiredXmlFormatExtensionAttributeIsMissing1 =
+            "RequiredXmlFormatExtensionAttributeIsMissing1";
         public const string Rxxxx = "Rxxxx";
         public const string SchemaSyntaxErrorDetails = "SchemaSyntaxErrorDetails";
         public const string SchemaValidationError = "SchemaValidationError";
         public const string SchemaValidationWarning = "SchemaValidationWarning";
         public const string ServiceDescriptionWasNotFound0 = "ServiceDescriptionWasNotFound0";
         public const string SolicitResponseIsNotSupported0 = "SolicitResponseIsNotSupported0";
-        public const string SpecifyingATypeForUseLiteralMessagesIs0 = "SpecifyingATypeForUseLiteralMessagesIs0";
-        public const string SpecifyingATypeForUseLiteralMessagesIsAny = "SpecifyingATypeForUseLiteralMessagesIsAny";
-        public const string SpecifyingAnElementForUseEncodedMessageParts0 = "SpecifyingAnElementForUseEncodedMessageParts0";
+        public const string SpecifyingATypeForUseLiteralMessagesIs0 =
+            "SpecifyingATypeForUseLiteralMessagesIs0";
+        public const string SpecifyingATypeForUseLiteralMessagesIsAny =
+            "SpecifyingATypeForUseLiteralMessagesIsAny";
+        public const string SpecifyingAnElementForUseEncodedMessageParts0 =
+            "SpecifyingAnElementForUseEncodedMessageParts0";
         public const string StackTraceEnd = "StackTraceEnd";
         public const string StreamDoesNotRead = "StreamDoesNotRead";
         public const string StreamDoesNotSeek = "StreamDoesNotSeek";
-        public const string TheBinding0FromNamespace1WasIgnored2 = "TheBinding0FromNamespace1WasIgnored2";
-        public const string TheBindingNamedFromNamespaceWasNotFoundIn3 = "TheBindingNamedFromNamespaceWasNotFoundIn3";
-        public const string TheDocumentWasNotRecognizedAsAKnownDocumentType = "TheDocumentWasNotRecognizedAsAKnownDocumentType";
-        public const string TheDocumentWasUnderstoodButContainsErrors = "TheDocumentWasUnderstoodButContainsErrors";
+        public const string TheBinding0FromNamespace1WasIgnored2 =
+            "TheBinding0FromNamespace1WasIgnored2";
+        public const string TheBindingNamedFromNamespaceWasNotFoundIn3 =
+            "TheBindingNamedFromNamespaceWasNotFoundIn3";
+        public const string TheDocumentWasNotRecognizedAsAKnownDocumentType =
+            "TheDocumentWasNotRecognizedAsAKnownDocumentType";
+        public const string TheDocumentWasUnderstoodButContainsErrors =
+            "TheDocumentWasUnderstoodButContainsErrors";
         public const string TheEncodingIsNotSupported1 = "TheEncodingIsNotSupported1";
-        public const string TheHTMLDocumentDoesNotContainDiscoveryInformation = "TheHTMLDocumentDoesNotContainDiscoveryInformation";
-        public const string TheMethodDoesNotHaveARequestElementEither1 = "TheMethodDoesNotHaveARequestElementEither1";
-        public const string TheMethodsAndUseTheSameRequestElementAndSoapActionXmlns6 = "TheMethodsAndUseTheSameRequestElementAndSoapActionXmlns6";
-        public const string TheMethodsAndUseTheSameRequestElementXmlns4 = "TheMethodsAndUseTheSameRequestElementXmlns4";
-        public const string TheMethodsAndUseTheSameSoapActionWhenTheService3 = "TheMethodsAndUseTheSameSoapActionWhenTheService3";
-        public const string TheOperation0FromNamespace1WasIgnored2 = "TheOperation0FromNamespace1WasIgnored2";
-        public const string TheOperationBinding0FromNamespace1WasIgnored = "TheOperationBinding0FromNamespace1WasIgnored";
-        public const string TheOperationBindingFromNamespaceHadInvalid3 = "TheOperationBindingFromNamespaceHadInvalid3";
-        public const string TheOperationFromNamespaceHadInvalidSyntax3 = "TheOperationFromNamespaceHadInvalidSyntax3";
-        public const string TheRequestElementXmlnsWasNotRecognized2 = "TheRequestElementXmlnsWasNotRecognized2";
-        public const string TheRootElementForTheRequestCouldNotBeDetermined0 = "TheRootElementForTheRequestCouldNotBeDetermined0";
-        public const string TheSchemaDocumentContainsLinksThatCouldNotBeResolved = "TheSchemaDocumentContainsLinksThatCouldNotBeResolved";
+        public const string TheHTMLDocumentDoesNotContainDiscoveryInformation =
+            "TheHTMLDocumentDoesNotContainDiscoveryInformation";
+        public const string TheMethodDoesNotHaveARequestElementEither1 =
+            "TheMethodDoesNotHaveARequestElementEither1";
+        public const string TheMethodsAndUseTheSameRequestElementAndSoapActionXmlns6 =
+            "TheMethodsAndUseTheSameRequestElementAndSoapActionXmlns6";
+        public const string TheMethodsAndUseTheSameRequestElementXmlns4 =
+            "TheMethodsAndUseTheSameRequestElementXmlns4";
+        public const string TheMethodsAndUseTheSameSoapActionWhenTheService3 =
+            "TheMethodsAndUseTheSameSoapActionWhenTheService3";
+        public const string TheOperation0FromNamespace1WasIgnored2 =
+            "TheOperation0FromNamespace1WasIgnored2";
+        public const string TheOperationBinding0FromNamespace1WasIgnored =
+            "TheOperationBinding0FromNamespace1WasIgnored";
+        public const string TheOperationBindingFromNamespaceHadInvalid3 =
+            "TheOperationBindingFromNamespaceHadInvalid3";
+        public const string TheOperationFromNamespaceHadInvalidSyntax3 =
+            "TheOperationFromNamespaceHadInvalidSyntax3";
+        public const string TheRequestElementXmlnsWasNotRecognized2 =
+            "TheRequestElementXmlnsWasNotRecognized2";
+        public const string TheRootElementForTheRequestCouldNotBeDetermined0 =
+            "TheRootElementForTheRequestCouldNotBeDetermined0";
+        public const string TheSchemaDocumentContainsLinksThatCouldNotBeResolved =
+            "TheSchemaDocumentContainsLinksThatCouldNotBeResolved";
         public const string TheSyntaxOfTypeMayNotBeExtended1 = "TheSyntaxOfTypeMayNotBeExtended1";
-        public const string TheWSDLDocumentContainsLinksThatCouldNotBeResolved = "TheWSDLDocumentContainsLinksThatCouldNotBeResolved";
-        public const string ThereIsNoSoapTransportImporterThatUnderstands1 = "ThereIsNoSoapTransportImporterThatUnderstands1";
+        public const string TheWSDLDocumentContainsLinksThatCouldNotBeResolved =
+            "TheWSDLDocumentContainsLinksThatCouldNotBeResolved";
+        public const string ThereIsNoSoapTransportImporterThatUnderstands1 =
+            "ThereIsNoSoapTransportImporterThatUnderstands1";
         public const string ThereWasAnErrorDownloading0 = "ThereWasAnErrorDownloading0";
-        public const string ThereWasAnErrorDuringAsyncProcessing = "ThereWasAnErrorDuringAsyncProcessing";
+        public const string ThereWasAnErrorDuringAsyncProcessing =
+            "ThereWasAnErrorDuringAsyncProcessing";
         public const string TraceCallEnter = "TraceCallEnter";
         public const string TraceCallEnterDetails = "TraceCallEnterDetails";
         public const string TraceCallExit = "TraceCallExit";
@@ -149,11 +191,15 @@ namespace System.Web.Services
         public const string TraceWriteHeaders = "TraceWriteHeaders";
         public const string TraceWriteRequest = "TraceWriteRequest";
         public const string TraceWriteResponse = "TraceWriteResponse";
-        public const string TypeIsMissingWebServiceBindingAttributeThat2 = "TypeIsMissingWebServiceBindingAttributeThat2";
+        public const string TypeIsMissingWebServiceBindingAttributeThat2 =
+            "TypeIsMissingWebServiceBindingAttributeThat2";
         public const string UnableToHandleRequest0 = "UnableToHandleRequest0";
-        public const string UnableToHandleRequestActionNotRecognized1 = "UnableToHandleRequestActionNotRecognized1";
-        public const string UnableToHandleRequestActionRequired0 = "UnableToHandleRequestActionRequired0";
-        public const string UnableToImportBindingFromNamespace2 = "UnableToImportBindingFromNamespace2";
+        public const string UnableToHandleRequestActionNotRecognized1 =
+            "UnableToHandleRequestActionNotRecognized1";
+        public const string UnableToHandleRequestActionRequired0 =
+            "UnableToHandleRequestActionRequired0";
+        public const string UnableToImportBindingFromNamespace2 =
+            "UnableToImportBindingFromNamespace2";
         public const string UnableToImportOperation1 = "UnableToImportOperation1";
         public const string UriValueRelative = "UriValueRelative";
         public const string WebAsyncMissingEnd = "WebAsyncMissingEnd";
@@ -170,7 +216,8 @@ namespace System.Web.Services
         public const string WebConfigExtensionError = "WebConfigExtensionError";
         public const string WebConfigInvalidExtensionPriority = "WebConfigInvalidExtensionPriority";
         public const string WebContractReferenceName = "WebContractReferenceName";
-        public const string WebDescriptionHeaderAndBodyUseMismatch = "WebDescriptionHeaderAndBodyUseMismatch";
+        public const string WebDescriptionHeaderAndBodyUseMismatch =
+            "WebDescriptionHeaderAndBodyUseMismatch";
         public const string WebDescriptionMissing = "WebDescriptionMissing";
         public const string WebDescriptionMissingItem = "WebDescriptionMissingItem";
         public const string WebDescriptionPartElementRequired = "WebDescriptionPartElementRequired";
@@ -257,14 +304,17 @@ namespace System.Web.Services
         public const string WebResultNotXml = "WebResultNotXml";
         public const string WebSchemaNotFound = "WebSchemaNotFound";
         public const string WebServiceContext = "WebServiceContext";
-        public const string WebServiceDescriptionIgnoredOptional = "WebServiceDescriptionIgnoredOptional";
-        public const string WebServiceDescriptionIgnoredRequired = "WebServiceDescriptionIgnoredRequired";
+        public const string WebServiceDescriptionIgnoredOptional =
+            "WebServiceDescriptionIgnoredOptional";
+        public const string WebServiceDescriptionIgnoredRequired =
+            "WebServiceDescriptionIgnoredRequired";
         public const string WebServiceServer = "WebServiceServer";
         public const string WebServiceSession = "WebServiceSession";
         public const string WebServiceSoapVersion = "WebServiceSoapVersion";
         public const string WebServiceUser = "WebServiceUser";
         public const string WebShemaReferenceName = "WebShemaReferenceName";
-        public const string WebSoap11EncodingStyleNotSupported1 = "WebSoap11EncodingStyleNotSupported1";
+        public const string WebSoap11EncodingStyleNotSupported1 =
+            "WebSoap11EncodingStyleNotSupported1";
         public const string WebSuppressedExceptionMessage = "WebSuppressedExceptionMessage";
         public const string WebTextMatchBadCaptureIndex = "WebTextMatchBadCaptureIndex";
         public const string WebTextMatchBadGroupIndex = "WebTextMatchBadGroupIndex";
@@ -283,7 +333,8 @@ namespace System.Web.Services
         public const string WebVirtualDisoRoot = "WebVirtualDisoRoot";
         public const string WebWsiContentTypeEncoding = "WebWsiContentTypeEncoding";
         public const string WebWsiViolation = "WebWsiViolation";
-        public const string WhenUsingAMessageStyleOfParametersAsDocument0 = "WhenUsingAMessageStyleOfParametersAsDocument0";
+        public const string WhenUsingAMessageStyleOfParametersAsDocument0 =
+            "WhenUsingAMessageStyleOfParametersAsDocument0";
         public const string WireSignature = "WireSignature";
         public const string WireSignatureEmpty = "WireSignatureEmpty";
         public const string WsdlGenRpcLitAnonimousType = "WsdlGenRpcLitAnonimousType";
@@ -299,4 +350,3 @@ namespace System.Web.Services
         public const string internalError0 = "internalError0";
     }
 }
-

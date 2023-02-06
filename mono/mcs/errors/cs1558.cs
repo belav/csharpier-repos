@@ -4,7 +4,7 @@
 
 public class MainClass
 {
-    public static bool Main() 
+    public static bool Main()
     {
         return false;
     }

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,26 +33,29 @@ using System.Drawing;
 
 namespace System.Windows.Forms
 {
-    [DefaultProperty ("Url")]
-    [DefaultEvent ("DocumentCompleted")]
-    [Docking (DockingBehavior.AutoDock)]
-    [ClassInterface (ClassInterfaceType.AutoDispatch)]
+    [DefaultProperty("Url")]
+    [DefaultEvent("DocumentCompleted")]
+    [Docking(DockingBehavior.AutoDock)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     [ComVisible(true)]
-    [Designer("System.Windows.Forms.Design.WebBrowserDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
+    [Designer(
+        "System.Windows.Forms.Design.WebBrowserDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
     public class WebBrowser : WebBrowserBase
     {
         bool allowNavigation; // if this is true, no other navigation is allowed
-        
+
         bool allowWebBrowserDrop = true;
         bool isWebBrowserContextMenuEnabled;
         object objectForScripting;
         bool webBrowserShortcutsEnabled;
         bool scrollbarsEnabled = true;
-        
+
         WebBrowserReadyState readyState;
 
         HtmlDocument document;
-        
+
         WebBrowserEncryptionLevel securityLevel;
 
         Stream data;
@@ -63,53 +66,62 @@ namespace System.Windows.Forms
         #region Public Properties
 
         [DefaultValue(true)]
-        public bool AllowNavigation {
+        public bool AllowNavigation
+        {
             get { return allowNavigation; }
             set { allowNavigation = value; }
         }
 
-        [DefaultValue (true)]
-        public bool AllowWebBrowserDrop {
+        [DefaultValue(true)]
+        public bool AllowWebBrowserDrop
+        {
             get { return allowWebBrowserDrop; }
             set { allowWebBrowserDrop = value; }
         }
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public bool CanGoBack {
+        public bool CanGoBack
+        {
             get { return this.WebHost.Navigation.CanGoBack; }
         }
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public bool CanGoForward {
+        public bool CanGoForward
+        {
             get { return this.WebHost.Navigation.CanGoForward; }
         }
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public HtmlDocument Document {
-            get {
+        public HtmlDocument Document
+        {
+            get
+            {
                 if (document == null && documentReady)
-                    document = new HtmlDocument (this, this.WebHost);
-                return document; 
+                    document = new HtmlDocument(this, this.WebHost);
+                return document;
             }
         }
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public Stream DocumentStream {
-            get {
+        public Stream DocumentStream
+        {
+            get
+            {
                 if (WebHost.Document == null || WebHost.Document.DocumentElement == null)
                     return null;
 
                 return null; //WebHost.Document.DocumentElement.ContentStream;
             }
-            set { 
+            set
+            {
                 if (this.allowNavigation)
                     return;
 
-                this.Url = new Uri ("about:blank");
+                this.Url = new Uri("about:blank");
 
                 data = value;
                 isStreamSet = true;
@@ -118,13 +130,16 @@ namespace System.Windows.Forms
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public string DocumentText {
-            get { 
+        public string DocumentText
+        {
+            get
+            {
                 if (WebHost.Document == null || WebHost.Document.DocumentElement == null)
                     return String.Empty;
                 return WebHost.Document.DocumentElement.OuterHTML;
             }
-            set {
+            set
+            {
                 if (WebHost.Document != null && WebHost.Document.DocumentElement != null)
                     WebHost.Document.DocumentElement.OuterHTML = value;
             }
@@ -132,8 +147,10 @@ namespace System.Windows.Forms
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public string DocumentTitle {
-            get {
+        public string DocumentTitle
+        {
+            get
+            {
                 if (document != null)
                     return document.Title;
                 return String.Empty;
@@ -142,8 +159,10 @@ namespace System.Windows.Forms
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public string DocumentType {
-            get {
+        public string DocumentType
+        {
+            get
+            {
                 if (document != null)
                     return document.DocType;
                 return String.Empty;
@@ -152,317 +171,350 @@ namespace System.Windows.Forms
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public WebBrowserEncryptionLevel EncryptionLevel {
+        public WebBrowserEncryptionLevel EncryptionLevel
+        {
             get { return securityLevel; }
         }
 
-        public override bool Focused {
+        public override bool Focused
+        {
             get { return base.Focused; }
         }
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public bool IsBusy {
+        public bool IsBusy
+        {
             get { return !documentReady; }
         }
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public bool IsOffline {
+        public bool IsOffline
+        {
             get { return WebHost.Offline; }
         }
 
-        [MonoTODO ("Stub, not implemented")]
+        [MonoTODO("Stub, not implemented")]
         [DefaultValue(true)]
-        public bool IsWebBrowserContextMenuEnabled {
+        public bool IsWebBrowserContextMenuEnabled
+        {
             get { return isWebBrowserContextMenuEnabled; }
             set { isWebBrowserContextMenuEnabled = value; }
         }
 
-        [MonoTODO ("Stub, not implemented")]
+        [MonoTODO("Stub, not implemented")]
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public object ObjectForScripting {
+        public object ObjectForScripting
+        {
             get { return objectForScripting; }
             set { objectForScripting = value; }
         }
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public WebBrowserReadyState ReadyState {
+        public WebBrowserReadyState ReadyState
+        {
             get { return readyState; }
         }
 
         [DefaultValue(false)]
-        public bool ScriptErrorsSuppressed {
+        public bool ScriptErrorsSuppressed
+        {
             get { return SuppressDialogs; }
             set { SuppressDialogs = value; }
         }
-        
+
         [DefaultValue(true)]
-        public bool ScrollBarsEnabled {
+        public bool ScrollBarsEnabled
+        {
             get { return scrollbarsEnabled; }
-            set {
+            set
+            {
                 scrollbarsEnabled = value;
                 if (document != null)
-                    SetScrollbars ();
+                    SetScrollbars();
             }
         }
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public virtual string StatusText {
+        public virtual string StatusText
+        {
             get { return base.status; }
         }
 
-        [BindableAttribute(true)] 
+        [BindableAttribute(true)]
         [DefaultValue(null)]
         [TypeConverter(typeof(WebBrowserUriTypeConverter))]
-        public Uri Url {
-            get {
+        public Uri Url
+        {
+            get
+            {
                 if (url != null)
-                    return new Uri (url);
+                    return new Uri(url);
                 if (WebHost.Document != null && WebHost.Document.Url != null)
-                    return new Uri (WebHost.Document.Url);
+                    return new Uri(WebHost.Document.Url);
                 return null;
             }
-            set {
+            set
+            {
                 url = null;
-                this.Navigate (value); 
+                this.Navigate(value);
             }
         }
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public Version Version {
-            get { 
+        public Version Version
+        {
+            get
+            {
                 Assembly ass = WebHost.GetType().Assembly;
                 return ass.GetName().Version;
             }
         }
 
-        [MonoTODO ("Stub, not implemented")]
+        [MonoTODO("Stub, not implemented")]
         [DefaultValue(true)]
-        public bool WebBrowserShortcutsEnabled {
+        public bool WebBrowserShortcutsEnabled
+        {
             get { return webBrowserShortcutsEnabled; }
             set { webBrowserShortcutsEnabled = value; }
         }
-        
-        protected override Size DefaultSize {
+
+        protected override Size DefaultSize
+        {
             get { return base.DefaultSize; }
         }
 
         [BrowsableAttribute(false)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new Padding Padding {
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new Padding Padding
+        {
             get { return base.Padding; }
             set { base.Padding = value; }
         }
-        
+
         #endregion
 
-        [MonoTODO ("WebBrowser control is only supported on Linux/Windows. No support for OSX.")]
-        public WebBrowser ()
-        {
-        }
+        [MonoTODO("WebBrowser control is only supported on Linux/Windows. No support for OSX.")]
+        public WebBrowser() { }
 
         #region Public Methods
 
-        public bool GoBack ()
+        public bool GoBack()
         {
             documentReady = false;
             document = null;
-            return WebHost.Navigation.Back ();
+            return WebHost.Navigation.Back();
         }
 
-        public bool GoForward ()
+        public bool GoForward()
         {
             documentReady = false;
             document = null;
-            return WebHost.Navigation.Forward ();
+            return WebHost.Navigation.Forward();
         }
 
-        public void GoHome ()
+        public void GoHome()
         {
             documentReady = false;
             document = null;
-            WebHost.Navigation.Home ();
+            WebHost.Navigation.Home();
         }
 
-        public void Navigate (string urlString)
+        public void Navigate(string urlString)
         {
             documentReady = false;
             document = null;
-            WebHost.Navigation.Go (urlString);
+            WebHost.Navigation.Go(urlString);
         }
 
-        public void Navigate (Uri url)
+        public void Navigate(Uri url)
         {
             documentReady = false;
             document = null;
-            WebHost.Navigation.Go (url.ToString ());
+            WebHost.Navigation.Go(url.ToString());
         }
 
-        public void Navigate (string urlString, bool newWindow)
+        public void Navigate(string urlString, bool newWindow)
         {
             documentReady = false;
             document = null;
-            WebHost.Navigation.Go (urlString);
+            WebHost.Navigation.Go(urlString);
         }
 
-        public void Navigate (string urlString, string targetFrameName)
+        public void Navigate(string urlString, string targetFrameName)
         {
             documentReady = false;
             document = null;
-            WebHost.Navigation.Go (urlString);
+            WebHost.Navigation.Go(urlString);
         }
 
-        public void Navigate (Uri url, bool newWindow)
+        public void Navigate(Uri url, bool newWindow)
         {
             documentReady = false;
             document = null;
-            WebHost.Navigation.Go (url.ToString ());
+            WebHost.Navigation.Go(url.ToString());
         }
 
-        public void Navigate (Uri url, string targetFrameName)
+        public void Navigate(Uri url, string targetFrameName)
         {
             documentReady = false;
             document = null;
-            WebHost.Navigation.Go (url.ToString ());
+            WebHost.Navigation.Go(url.ToString());
         }
 
-        public void Navigate (string urlString, string targetFrameName, byte[] postData, string additionalHeaders)
+        public void Navigate(
+            string urlString,
+            string targetFrameName,
+            byte[] postData,
+            string additionalHeaders
+        )
         {
             documentReady = false;
             document = null;
-            WebHost.Navigation.Go (urlString);
+            WebHost.Navigation.Go(urlString);
         }
 
-        public void Navigate (Uri url, string targetFrameName, byte[] postData, string additionalHeaders)
+        public void Navigate(
+            Uri url,
+            string targetFrameName,
+            byte[] postData,
+            string additionalHeaders
+        )
         {
             documentReady = false;
             document = null;
-            WebHost.Navigation.Go (url.ToString ());
+            WebHost.Navigation.Go(url.ToString());
         }
 
-        public override void Refresh ()
+        public override void Refresh()
         {
-            Refresh (WebBrowserRefreshOption.IfExpired);
+            Refresh(WebBrowserRefreshOption.IfExpired);
         }
 
-        public void Refresh (WebBrowserRefreshOption opt)
+        public void Refresh(WebBrowserRefreshOption opt)
         {
             documentReady = false;
             document = null;
-            switch (opt) {
+            switch (opt)
+            {
                 case WebBrowserRefreshOption.Normal:
-                    WebHost.Navigation.Reload (Mono.WebBrowser.ReloadOption.Proxy);
+                    WebHost.Navigation.Reload(Mono.WebBrowser.ReloadOption.Proxy);
                     break;
                 case WebBrowserRefreshOption.IfExpired:
-                    WebHost.Navigation.Reload (Mono.WebBrowser.ReloadOption.None);
+                    WebHost.Navigation.Reload(Mono.WebBrowser.ReloadOption.None);
                     break;
                 case WebBrowserRefreshOption.Completely:
-                    WebHost.Navigation.Reload (Mono.WebBrowser.ReloadOption.Full);
+                    WebHost.Navigation.Reload(Mono.WebBrowser.ReloadOption.Full);
                     break;
             }
         }
 
-        public void Stop ()
+        public void Stop()
         {
-            WebHost.Navigation.Stop ();
+            WebHost.Navigation.Stop();
         }
 
-        public void GoSearch ()
+        public void GoSearch()
         {
             string url = "http://www.example.com";
-            try {
-                Microsoft.Win32.RegistryKey reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey (@"Software\Microsoft\Internet Explorer\Main\Search Page");
-                if (reg != null) {
-                    object searchUrl = reg.GetValue ("Default_Search_URL");
-                    if (searchUrl != null && searchUrl is string) {
+            try
+            {
+                Microsoft.Win32.RegistryKey reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(
+                    @"Software\Microsoft\Internet Explorer\Main\Search Page"
+                );
+                if (reg != null)
+                {
+                    object searchUrl = reg.GetValue("Default_Search_URL");
+                    if (searchUrl != null && searchUrl is string)
+                    {
                         Uri uri;
-                        if (System.Uri.TryCreate (searchUrl as string, UriKind.Absolute, out uri))
-                            url = uri.ToString ();
+                        if (System.Uri.TryCreate(searchUrl as string, UriKind.Absolute, out uri))
+                            url = uri.ToString();
                     }
                 }
-            } catch {
             }
-            Navigate (url);
+            catch { }
+            Navigate(url);
         }
 
-        public void Print ()
+        public void Print()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void ShowPageSetupDialog ()
+        public void ShowPageSetupDialog()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         public void ShowPrintDialog()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         public void ShowPrintPreviewDialog()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         public void ShowPropertiesDialog()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         public void ShowSaveAsDialog()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion
 
         #region Protected Overridden Methods
 
-        [MonoTODO ("Stub, not implemented")]
-        protected override void AttachInterfaces (object nativeActiveXObject)
+        [MonoTODO("Stub, not implemented")]
+        protected override void AttachInterfaces(object nativeActiveXObject)
         {
-            base.AttachInterfaces (nativeActiveXObject);
+            base.AttachInterfaces(nativeActiveXObject);
         }
 
-        [MonoTODO ("Stub, not implemented")]
-        protected override void CreateSink ()
+        [MonoTODO("Stub, not implemented")]
+        protected override void CreateSink()
         {
-            base.CreateSink ();
+            base.CreateSink();
         }
 
-        [MonoTODO ("Stub, not implemented")]
-        protected override WebBrowserSiteBase CreateWebBrowserSiteBase ()
+        [MonoTODO("Stub, not implemented")]
+        protected override WebBrowserSiteBase CreateWebBrowserSiteBase()
         {
-            return base.CreateWebBrowserSiteBase ();
+            return base.CreateWebBrowserSiteBase();
         }
 
-        [MonoTODO ("Stub, not implemented")]
-        protected override void DetachInterfaces ()
+        [MonoTODO("Stub, not implemented")]
+        protected override void DetachInterfaces()
         {
-            base.DetachInterfaces ();
+            base.DetachInterfaces();
         }
 
-        [MonoTODO ("Stub, not implemented")]
-        protected override void DetachSink ()
+        [MonoTODO("Stub, not implemented")]
+        protected override void DetachSink()
         {
-            base.DetachSink ();
+            base.DetachSink();
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose (disposing);
+            base.Dispose(disposing);
         }
 
-        protected override void WndProc (ref Message m)
+        protected override void WndProc(ref Message m)
         {
-            base.WndProc (ref m);
+            base.WndProc(ref m);
         }
 
         #endregion
@@ -472,72 +524,72 @@ namespace System.Windows.Forms
         protected virtual void OnCanGoBackChanged(EventArgs e)
         {
             if (CanGoBackChanged != null)
-                CanGoBackChanged (this, e);
+                CanGoBackChanged(this, e);
         }
 
         protected virtual void OnCanGoForwardChanged(EventArgs e)
-        {            
+        {
             if (CanGoForwardChanged != null)
-                CanGoForwardChanged (this, e);
+                CanGoForwardChanged(this, e);
         }
 
         protected virtual void OnDocumentCompleted(WebBrowserDocumentCompletedEventArgs e)
         {
             if (DocumentCompleted != null)
-                DocumentCompleted (this, e);
+                DocumentCompleted(this, e);
         }
 
         protected virtual void OnDocumentTitleChanged(EventArgs e)
         {
             if (DocumentTitleChanged != null)
-                DocumentTitleChanged (this, e);
+                DocumentTitleChanged(this, e);
         }
 
         protected virtual void OnEncryptionLevelChanged(EventArgs e)
         {
             if (EncryptionLevelChanged != null)
-                EncryptionLevelChanged (this, e);
+                EncryptionLevelChanged(this, e);
         }
 
         protected virtual void OnFileDownload(EventArgs e)
         {
             if (FileDownload != null)
-                FileDownload (this, e);
+                FileDownload(this, e);
         }
 
         protected virtual void OnNavigated(WebBrowserNavigatedEventArgs e)
         {
             if (Navigated != null)
-                Navigated (this, e);
+                Navigated(this, e);
         }
 
         protected virtual void OnNavigating(WebBrowserNavigatingEventArgs e)
         {
             if (Navigating != null)
-                Navigating (this, e);
+                Navigating(this, e);
         }
 
         protected virtual void OnNewWindow(CancelEventArgs e)
         {
             if (NewWindow != null)
-                NewWindow (this, e);
+                NewWindow(this, e);
         }
 
         protected virtual void OnProgressChanged(WebBrowserProgressChangedEventArgs e)
         {
             if (ProgressChanged != null)
-                ProgressChanged (this, e);
+                ProgressChanged(this, e);
         }
 
         protected virtual void OnStatusTextChanged(EventArgs e)
         {
             if (StatusTextChanged != null)
-                StatusTextChanged (this, e);
+                StatusTextChanged(this, e);
         }
 
         #endregion
 
-        #region Events    
+        #region Events
         [BrowsableAttribute(false)]
         public event EventHandler CanGoBackChanged;
 
@@ -559,7 +611,7 @@ namespace System.Windows.Forms
         public event WebBrowserNavigatingEventHandler Navigating;
 
         public event CancelEventHandler NewWindow;
-        
+
         public event WebBrowserProgressChangedEventHandler ProgressChanged;
 
         [BrowsableAttribute(false)]
@@ -567,9 +619,9 @@ namespace System.Windows.Forms
 
 #pragma warning disable 0067
         [MonoTODO]
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new event EventHandler PaddingChanged;
 #pragma warning restore 0067
 
@@ -577,130 +629,174 @@ namespace System.Windows.Forms
 
         #region Internal
 
-        internal override bool OnNewWindowInternal ()
+        internal override bool OnNewWindowInternal()
         {
-            CancelEventArgs c = new CancelEventArgs ();
-            OnNewWindow (c);
+            CancelEventArgs c = new CancelEventArgs();
+            OnNewWindow(c);
             return c.Cancel;
         }
-        
-        internal override void OnWebHostLoadStarted (object sender, Mono.WebBrowser.LoadStartedEventArgs e)
+
+        internal override void OnWebHostLoadStarted(
+            object sender,
+            Mono.WebBrowser.LoadStartedEventArgs e
+        )
         {
             documentReady = false;
             document = null;
             readyState = WebBrowserReadyState.Loading;
-            WebBrowserNavigatingEventArgs n = new WebBrowserNavigatingEventArgs (new Uri (e.Uri), e.FrameName);
-            OnNavigating (n);
+            WebBrowserNavigatingEventArgs n = new WebBrowserNavigatingEventArgs(
+                new Uri(e.Uri),
+                e.FrameName
+            );
+            OnNavigating(n);
         }
 
-        internal override void OnWebHostLoadCommited (object sender, Mono.WebBrowser.LoadCommitedEventArgs e)
+        internal override void OnWebHostLoadCommited(
+            object sender,
+            Mono.WebBrowser.LoadCommitedEventArgs e
+        )
         {
             readyState = WebBrowserReadyState.Loaded;
             url = e.Uri;
-            SetScrollbars ();
-            WebBrowserNavigatedEventArgs n = new WebBrowserNavigatedEventArgs (new Uri (e.Uri));
-            OnNavigated (n);
-        }
-        internal override void OnWebHostProgressChanged (object sender, Mono.WebBrowser.ProgressChangedEventArgs e)
-        {
-            readyState = WebBrowserReadyState.Interactive;
-            WebBrowserProgressChangedEventArgs n = new WebBrowserProgressChangedEventArgs (e.Progress, e.MaxProgress);
-            OnProgressChanged (n);
+            SetScrollbars();
+            WebBrowserNavigatedEventArgs n = new WebBrowserNavigatedEventArgs(new Uri(e.Uri));
+            OnNavigated(n);
         }
 
-        internal override void OnWebHostLoadFinished (object sender, Mono.WebBrowser.LoadFinishedEventArgs e)
+        internal override void OnWebHostProgressChanged(
+            object sender,
+            Mono.WebBrowser.ProgressChangedEventArgs e
+        )
+        {
+            readyState = WebBrowserReadyState.Interactive;
+            WebBrowserProgressChangedEventArgs n = new WebBrowserProgressChangedEventArgs(
+                e.Progress,
+                e.MaxProgress
+            );
+            OnProgressChanged(n);
+        }
+
+        internal override void OnWebHostLoadFinished(
+            object sender,
+            Mono.WebBrowser.LoadFinishedEventArgs e
+        )
         {
             url = null;
             documentReady = true;
             readyState = WebBrowserReadyState.Complete;
-            if (isStreamSet) {
-                byte[] buffer = new byte [data.Length];
+            if (isStreamSet)
+            {
+                byte[] buffer = new byte[data.Length];
                 long len = data.Length;
                 int count = 0;
                 data.Position = 0;
-                do {
-                    count = data.Read (buffer, (int) data.Position, (int) (len - data.Position));
+                do
+                {
+                    count = data.Read(buffer, (int)data.Position, (int)(len - data.Position));
                 } while (count > 0);
-                WebHost.Render (buffer);
+                WebHost.Render(buffer);
                 data = null;
                 isStreamSet = false;
             }
-            SetScrollbars ();
-            WebBrowserDocumentCompletedEventArgs n = new WebBrowserDocumentCompletedEventArgs (new Uri (e.Uri));
-            OnDocumentCompleted (n);
+            SetScrollbars();
+            WebBrowserDocumentCompletedEventArgs n = new WebBrowserDocumentCompletedEventArgs(
+                new Uri(e.Uri)
+            );
+            OnDocumentCompleted(n);
         }
-        
-        internal override void OnWebHostSecurityChanged (object sender, Mono.WebBrowser.SecurityChangedEventArgs e)
+
+        internal override void OnWebHostSecurityChanged(
+            object sender,
+            Mono.WebBrowser.SecurityChangedEventArgs e
+        )
         {
-            switch (e.State) {
+            switch (e.State)
+            {
                 case Mono.WebBrowser.SecurityLevel.Insecure:
                     securityLevel = WebBrowserEncryptionLevel.Insecure;
-                break;
+                    break;
                 case Mono.WebBrowser.SecurityLevel.Mixed:
                     securityLevel = WebBrowserEncryptionLevel.Mixed;
-                break;
+                    break;
                 case Mono.WebBrowser.SecurityLevel.Secure:
                     securityLevel = WebBrowserEncryptionLevel.Bit56;
-                break;
+                    break;
             }
         }
-        
-        internal override void OnWebHostContextMenuShown (object sender, Mono.WebBrowser.ContextMenuEventArgs e) {
+
+        internal override void OnWebHostContextMenuShown(
+            object sender,
+            Mono.WebBrowser.ContextMenuEventArgs e
+        )
+        {
             if (!isWebBrowserContextMenuEnabled)
                 return;
-                    
+
             ContextMenu menu = new ContextMenu();
-                        
-            MenuItem item = new MenuItem("Back", delegate { 
-                GoBack(); 
-            });
+
+            MenuItem item = new MenuItem(
+                "Back",
+                delegate
+                {
+                    GoBack();
+                }
+            );
             item.Enabled = this.CanGoBack;
-            menu.MenuItems.Add (item);
-            
-            item = new MenuItem("Forward", delegate { 
-                GoForward(); 
-            });
+            menu.MenuItems.Add(item);
+
+            item = new MenuItem(
+                "Forward",
+                delegate
+                {
+                    GoForward();
+                }
+            );
             item.Enabled = this.CanGoForward;
-            menu.MenuItems.Add (item);
-            
-            item = new MenuItem("Refresh", delegate { 
-                Refresh (); 
-            });
-            menu.MenuItems.Add (item);
-            
-            menu.MenuItems.Add (new MenuItem ("-"));
-            
+            menu.MenuItems.Add(item);
+
+            item = new MenuItem(
+                "Refresh",
+                delegate
+                {
+                    Refresh();
+                }
+            );
+            menu.MenuItems.Add(item);
+
+            menu.MenuItems.Add(new MenuItem("-"));
+
             menu.Show(this, PointToClient(MousePosition));
         }
 
-        internal override void OnWebHostStatusChanged (object sender, Mono.WebBrowser.StatusChangedEventArgs e) {
+        internal override void OnWebHostStatusChanged(
+            object sender,
+            Mono.WebBrowser.StatusChangedEventArgs e
+        )
+        {
             base.status = e.Message;
-            OnStatusTextChanged (null);
+            OnStatusTextChanged(null);
         }
-        
+
         #endregion
 
 
-        void SetScrollbars () {
+        void SetScrollbars()
+        {
             //if (!scrollbarsEnabled)
             //        WebHost.ExecuteScript ("document.body.style.overflow='hidden';");
             //else
             //        WebHost.ExecuteScript ("document.body.style.overflow='auto';");
         }
 
-        [MonoTODO ("Stub, not implemented")]
-        [ComVisible (false)]
+        [MonoTODO("Stub, not implemented")]
+        [ComVisible(false)]
         protected class WebBrowserSite : WebBrowserSiteBase
         {
-            [MonoTODO ("Stub, not implemented")]
-            public WebBrowserSite (WebBrowser host)
-                : base ()
-            {
-            }
+            [MonoTODO("Stub, not implemented")]
+            public WebBrowserSite(WebBrowser host)
+                : base() { }
         }
     }
 
-    internal class WebBrowserUriTypeConverter : UriTypeConverter
-    {
-    }
+    internal class WebBrowserUriTypeConverter : UriTypeConverter { }
 }

@@ -23,15 +23,15 @@ using System.Reflection;
  * the IL code looks.
  */
 
-class Tests {
-
-    public struct TestStruct1 
+class Tests
+{
+    public struct TestStruct1
     {
         public int a;
     }
-    
+
     public struct TestStruct2
-    {    
+    {
         public int a;
         public int b;
     }
@@ -43,19 +43,20 @@ class Tests {
         public int c;
     }
 
-    static int Main () {
-        return TestDriver.RunTests (typeof (Tests));
+    static int Main()
+    {
+        return TestDriver.RunTests(typeof(Tests));
     }
 
-    static void reg_struct(TestStruct1 regStruct) 
+    static void reg_struct(TestStruct1 regStruct)
     {
         regStruct.a = 1;
     }
 
-    static int test_0_regstruct () 
+    static int test_0_regstruct()
     {
         TestStruct1 myStruct;
-         myStruct.a = 1;
+        myStruct.a = 1;
         reg_struct(myStruct);
         if (myStruct.a == 1)
             return 0;
@@ -63,12 +64,12 @@ class Tests {
             return 1;
     }
 
-    static int reg_struct_ret(TestStruct2 regStruct) 
+    static int reg_struct_ret(TestStruct2 regStruct)
     {
         return regStruct.b;
     }
 
-    static int test_0_reg_return () 
+    static int test_0_reg_return()
     {
         TestStruct2 myStruct;
         myStruct.a = 0;
@@ -78,34 +79,34 @@ class Tests {
         return 2;
     }
 
-    static int spill_regs (int a, int b, int c, int d, int e, int f)
+    static int spill_regs(int a, int b, int c, int d, int e, int f)
     {
         return f;
     }
 
-    static int test_0_spill_regs ()
+    static int test_0_spill_regs()
     {
-        if (spill_regs (1, 2, 3, 4, 5, 6) == 6)
+        if (spill_regs(1, 2, 3, 4, 5, 6) == 6)
             return 0;
         else
             return 3;
     }
 
-    static TestStruct3 spill_struct (TestStruct3 regStruct, int value)
+    static TestStruct3 spill_struct(TestStruct3 regStruct, int value)
     {
         regStruct.c = value;
-        return(regStruct);
+        return (regStruct);
     }
 
-    static TestStruct3 ret_big_struct (int value_a, int value_c)
+    static TestStruct3 ret_big_struct(int value_a, int value_c)
     {
         TestStruct3 regStruct = new TestStruct3();
         regStruct.a = value_a;
         regStruct.c = value_c;
-        return(regStruct);
+        return (regStruct);
     }
 
-    static int spill_struct_void (TestStruct3 regStruct)
+    static int spill_struct_void(TestStruct3 regStruct)
     {
         if (regStruct.c == 255)
             return 0;
@@ -113,7 +114,7 @@ class Tests {
             return 7;
     }
 
-    static int receive_spill_struct (TestStruct2 regStruct)
+    static int receive_spill_struct(TestStruct2 regStruct)
     {
         if (regStruct.b == 181)
             return 0;
@@ -121,14 +122,14 @@ class Tests {
             return 8;
     }
 
-    static int pass_spill_struct_big (int a, int b, int c, int d, int e, TestStruct3 regStruct)
+    static int pass_spill_struct_big(int a, int b, int c, int d, int e, TestStruct3 regStruct)
     {
         int retVal;
         retVal = receive_spill_struct_big(regStruct);
         return retVal;
     }
 
-    static int receive_spill_struct_big (TestStruct3 regStruct)
+    static int receive_spill_struct_big(TestStruct3 regStruct)
     {
         if (regStruct.c == 999)
             return 0;
@@ -136,7 +137,7 @@ class Tests {
             return 9;
     }
 
-    static int receive_struct_spill (int a, int b, int c, int d, int e, TestStruct2 regStruct)
+    static int receive_struct_spill(int a, int b, int c, int d, int e, TestStruct2 regStruct)
     {
         if (regStruct.b == 181)
             return 0;
@@ -144,7 +145,7 @@ class Tests {
             return 10;
     }
 
-    static int receive_struct_spill_big (int a, int b, int c, int d, int e, TestStruct3 regStruct)
+    static int receive_struct_spill_big(int a, int b, int c, int d, int e, TestStruct3 regStruct)
     {
         if (regStruct.c == 999)
             return 0;
@@ -152,45 +153,45 @@ class Tests {
             return 11;
     }
 
-    static int pass_spill_struct (int a, int b, int c, int d, int e, TestStruct2 regStruct)
+    static int pass_spill_struct(int a, int b, int c, int d, int e, TestStruct2 regStruct)
     {
         int retVal;
         retVal = receive_spill_struct(regStruct);
         return retVal;
     }
 
-    static int pass_struct_spill (TestStruct2 regStruct)
+    static int pass_struct_spill(TestStruct2 regStruct)
     {
         int retVal;
-        retVal = receive_struct_spill(1,2,3,4,5,regStruct);
+        retVal = receive_struct_spill(1, 2, 3, 4, 5, regStruct);
         return retVal;
     }
 
     static int pass_struct_spill_big(TestStruct3 regStruct)
     {
         int retVal;
-        retVal = receive_struct_spill_big(1,2,3,4,5,regStruct);
+        retVal = receive_struct_spill_big(1, 2, 3, 4, 5, regStruct);
         return retVal;
     }
 
-    static int pass_spill_struct_spill (int a, int b, int c, int d, int e, TestStruct2 regStruct)
+    static int pass_spill_struct_spill(int a, int b, int c, int d, int e, TestStruct2 regStruct)
     {
         int retVal;
-        retVal = receive_struct_spill(a,b,c,d,e,regStruct);
+        retVal = receive_struct_spill(a, b, c, d, e, regStruct);
         return retVal;
     }
 
     static int pass_spill_struct_spill_big(int a, int b, int c, int d, int e, TestStruct3 regStruct)
     {
         int retVal;
-        retVal = receive_struct_spill_big(a,b,c,d,e,regStruct);
+        retVal = receive_struct_spill_big(a, b, c, d, e, regStruct);
         return retVal;
     }
 
-    static int test_0_spill () 
+    static int test_0_spill()
     {
         TestStruct3 myStruct;
-        myStruct.a = 64;    
+        myStruct.a = 64;
         myStruct.b = 255;
         myStruct.c = 127;
         myStruct = spill_struct(myStruct, 99);
@@ -199,7 +200,7 @@ class Tests {
         return myStruct.c;
     }
 
-    static int test_0_spill_void ()
+    static int test_0_spill_void()
     {
         TestStruct3 myStruct;
         myStruct.a = 0;
@@ -208,16 +209,15 @@ class Tests {
         return (spill_struct_void(myStruct));
     }
 
-    static int spill_struct_ret (TestStruct3 regStruct)
+    static int spill_struct_ret(TestStruct3 regStruct)
     {
         return (regStruct.c);
-        
     }
 
-    static int test_0_spill_ret ()
+    static int test_0_spill_ret()
     {
         TestStruct3 myStruct;
-        myStruct.a = 0;    
+        myStruct.a = 0;
         myStruct.b = 0;
         myStruct.c = 69;
         if (spill_struct_ret(myStruct) == 69)
@@ -229,10 +229,10 @@ class Tests {
     {
         regStruct.a = -1;
         regStruct.b = 72;
-        return(regStruct);
+        return (regStruct);
     }
 
-    static int test_0_struct_ret ()
+    static int test_0_struct_ret()
     {
         TestStruct2 myStruct;
         myStruct.a = 99;
@@ -244,91 +244,93 @@ class Tests {
             return myStruct.b;
     }
 
-    static float TestSingle (float a, float b, float c)
+    static float TestSingle(float a, float b, float c)
     {
         return b;
     }
 
-    static int test_0_TestSingle ()
+    static int test_0_TestSingle()
     {
-        float a = 3F; float b = 4.5F; float c = 900F;
+        float a = 3F;
+        float b = 4.5F;
+        float c = 900F;
         if (TestSingle(a, b, c) == b)
             return 0;
         else
             return 6;
     }
 
-    static int test_0_pass_spill ()
+    static int test_0_pass_spill()
     {
         TestStruct2 myStruct;
         myStruct.a = 32;
         myStruct.b = 181;
-        return (pass_spill_struct (1, 2, 3, 4, 5, myStruct));
+        return (pass_spill_struct(1, 2, 3, 4, 5, myStruct));
     }
-        
-    static int test_0_pass_spill_big ()
+
+    static int test_0_pass_spill_big()
     {
         TestStruct3 myStruct;
         myStruct.a = 32;
         myStruct.b = 181;
         myStruct.c = 999;
-        return (pass_spill_struct_big (1, 2, 3, 4, 5, myStruct));
+        return (pass_spill_struct_big(1, 2, 3, 4, 5, myStruct));
     }
-        
-    static int test_0_pass_struct_spill ()
+
+    static int test_0_pass_struct_spill()
     {
         TestStruct2 myStruct;
         myStruct.a = 32;
         myStruct.b = 181;
-        return (pass_struct_spill (myStruct));
+        return (pass_struct_spill(myStruct));
     }
-        
-    static int test_0_pass_struct_spill_big ()
+
+    static int test_0_pass_struct_spill_big()
     {
         TestStruct3 myStruct;
         myStruct.a = 32;
         myStruct.b = 181;
         myStruct.c = 999;
-        return (pass_struct_spill_big (myStruct));
+        return (pass_struct_spill_big(myStruct));
     }
-        
-    static int test_0_pass_ret_big_struct ()
+
+    static int test_0_pass_ret_big_struct()
     {
         TestStruct3 myStruct;
-        myStruct = ret_big_struct(10,132);
+        myStruct = ret_big_struct(10, 132);
         if (myStruct.c == 132)
             return 0;
         else
             return 1;
     }
-        
-    static int test_0_pass_spill_struct_spill ()
+
+    static int test_0_pass_spill_struct_spill()
     {
         TestStruct2 myStruct;
         myStruct.a = 32;
         myStruct.b = 181;
-        return (pass_spill_struct_spill (1,2,3,4,5,myStruct));
+        return (pass_spill_struct_spill(1, 2, 3, 4, 5, myStruct));
     }
-        
-    static int test_0_pass_spill_struct_spill_big ()
+
+    static int test_0_pass_spill_struct_spill_big()
     {
         TestStruct3 myStruct;
         myStruct.a = 32;
         myStruct.b = 181;
         myStruct.c = 999;
-        return (pass_spill_struct_spill_big (1,2,3,4,5,myStruct));
+        return (pass_spill_struct_spill_big(1, 2, 3, 4, 5, myStruct));
     }
 
-    static long pass_long_odd (int a, long b)
+    static long pass_long_odd(int a, long b)
     {
         return (b);
     }
-        
-    static int test_0_pass_long_odd ()
+
+    static int test_0_pass_long_odd()
     {
         int a = 5;
         long b = 9000;
-        if (pass_long_odd(a,b) == 9000)
+        if (pass_long_odd(a, b) == 9000)
             return 0;
         else
             return 9;
@@ -337,11 +339,11 @@ class Tests {
     static float pass_double_ret_float(double a)
     {
         float b;
-        b = (float) a;
+        b = (float)a;
         return b;
     }
 
-    static int test_0_pass_double_ret_float ()
+    static int test_0_pass_double_ret_float()
     {
         double a = 654.34;
         float b = 654.34f;
@@ -354,11 +356,11 @@ class Tests {
     static double pass_float_ret_double(float a)
     {
         double b;
-        b = (double) a;
+        b = (double)a;
         return b;
     }
 
-    static int test_0_pass_float_ret_double ()
+    static int test_0_pass_float_ret_double()
     {
         float a = 654.34f;
         double b = 654.34;
@@ -367,5 +369,4 @@ class Tests {
         else
             return 11;
     }
-
 }

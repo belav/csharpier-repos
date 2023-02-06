@@ -3,21 +3,22 @@
 
 using System;
 
-public class A {
+public class A
+{
     [Obsolete()]
-    public virtual string Warning {
+    public virtual string Warning
+    {
         get { return ""; }
     }
 }
 
-public class B : A {
+public class B : A
+{
     [Obsolete()]
-    public override string Warning {
+    public override string Warning
+    {
         get { return ""; }
     }
-        
-        public static void Main ()
-        {
-        }
-}
 
+    public static void Main() { }
+}

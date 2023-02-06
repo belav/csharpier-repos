@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,18 +33,16 @@ namespace System.Configuration.Install
 {
     public class TransactedInstaller : Installer
     {
-        public TransactedInstaller ()
+        public TransactedInstaller() { }
+
+        public override void Install(IDictionary savedState)
         {
+            base.Install(savedState);
         }
 
-        public override void Install (IDictionary savedState)
+        public override void Uninstall(IDictionary savedState)
         {
-            base.Install (savedState);
-        }
-
-        public override void Uninstall (IDictionary savedState)
-        {
-            base.Uninstall (savedState);
+            base.Uninstall(savedState);
         }
     }
 }

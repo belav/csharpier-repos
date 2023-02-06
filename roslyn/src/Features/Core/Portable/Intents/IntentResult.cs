@@ -33,7 +33,12 @@ namespace Microsoft.CodeAnalysis.Features.Intents
         /// </summary>
         public readonly string ActionName;
 
-        public IntentProcessorResult(Solution solution, ImmutableArray<DocumentId> changedDocuments, string title, string actionName)
+        public IntentProcessorResult(
+            Solution solution,
+            ImmutableArray<DocumentId> changedDocuments,
+            string title,
+            string actionName
+        )
         {
             Solution = solution;
             ChangedDocuments = changedDocuments;

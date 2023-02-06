@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,179 +32,206 @@ using System.Security.Permissions;
 namespace System.Web.UI.HtmlControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [ParseChildren (true, "Cells")]    
+    [ParseChildren(true, "Cells")]
     public class HtmlTableRow : HtmlContainerControl
     {
         HtmlTableCellCollection _cells;
 
-        public HtmlTableRow ()
-            : base ("tr")
-        {
-        }
+        public HtmlTableRow()
+            : base("tr") { }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Layout")]
-        public string Align {
-            get {
-                string s = Attributes ["align"];
+        public string Align
+        {
+            get
+            {
+                string s = Attributes["align"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("align");
+                    Attributes.Remove("align");
                 else
-                    Attributes ["align"] = value;
+                    Attributes["align"] = value;
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Appearance")]
-        public string BgColor {
-            get {
-                string s = Attributes ["bgcolor"];
+        public string BgColor
+        {
+            get
+            {
+                string s = Attributes["bgcolor"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("bgcolor");
+                    Attributes.Remove("bgcolor");
                 else
-                    Attributes ["bgcolor"] = value;
+                    Attributes["bgcolor"] = value;
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Appearance")]
-        public string BorderColor {
-            get {
-                string s = Attributes ["bordercolor"];
+        public string BorderColor
+        {
+            get
+            {
+                string s = Attributes["bordercolor"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("bordercolor");
+                    Attributes.Remove("bordercolor");
                 else
-                    Attributes ["bordercolor"] = value;
+                    Attributes["bordercolor"] = value;
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public virtual HtmlTableCellCollection Cells {
-            get {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual HtmlTableCellCollection Cells
+        {
+            get
+            {
                 if (_cells == null)
-                    _cells = new HtmlTableCellCollection (this);
+                    _cells = new HtmlTableCellCollection(this);
                 return _cells;
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Layout")]
-        public string Height {
-            get {
-                string s = Attributes ["height"];
+        public string Height
+        {
+            get
+            {
+                string s = Attributes["height"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("height");
+                    Attributes.Remove("height");
                 else
-                    Attributes ["height"] = value;
+                    Attributes["height"] = value;
             }
         }
 
-        public override string InnerHtml {
-            get { throw new NotSupportedException (); }
-            set { throw new NotSupportedException (); }
+        public override string InnerHtml
+        {
+            get { throw new NotSupportedException(); }
+            set { throw new NotSupportedException(); }
         }
 
-        public override string InnerText {
-            get { throw new NotSupportedException (); }
-            set { throw new NotSupportedException (); }
+        public override string InnerText
+        {
+            get { throw new NotSupportedException(); }
+            set { throw new NotSupportedException(); }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Layout")]
-        public string VAlign {
-            get {
-                string s = Attributes ["valign"];
+        public string VAlign
+        {
+            get
+            {
+                string s = Attributes["valign"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("valign");
+                    Attributes.Remove("valign");
                 else
-                    Attributes ["valign"] = value;
+                    Attributes["valign"] = value;
             }
         }
 
-        int Count {
+        int Count
+        {
             get { return (_cells == null) ? 0 : _cells.Count; }
         }
 
-
-        protected override ControlCollection CreateControlCollection ()
+        protected override ControlCollection CreateControlCollection()
         {
-            return new HtmlTableCellControlCollection (this);
+            return new HtmlTableCellControlCollection(this);
         }
 
-        protected internal override void RenderChildren (HtmlTextWriter writer)
+        protected internal override void RenderChildren(HtmlTextWriter writer)
         {
-            if (HasControls ()) {
+            if (HasControls())
+            {
                 writer.Indent++;
-                base.RenderChildren (writer);
+                base.RenderChildren(writer);
                 writer.Indent--;
-                writer.WriteLine ();
+                writer.WriteLine();
             }
         }
 
-        protected override void RenderEndTag (HtmlTextWriter writer)
+        protected override void RenderEndTag(HtmlTextWriter writer)
         {
             if (Count == 0)
-                writer.WriteLine ();
-            writer.WriteEndTag (TagName);
+                writer.WriteLine();
+            writer.WriteEndTag(TagName);
             if (writer.Indent == 0)
-                writer.WriteLine ();
+                writer.WriteLine();
         }
 
+        protected class HtmlTableCellControlCollection : ControlCollection
+        {
+            internal HtmlTableCellControlCollection(HtmlTableRow owner)
+                : base(owner) { }
 
-        protected class HtmlTableCellControlCollection : ControlCollection {
-
-            internal HtmlTableCellControlCollection (HtmlTableRow owner)
-                : base (owner)
-            {
-            }
-
-            public override void Add (Control child)
+            public override void Add(Control child)
             {
                 if (child == null)
-                    throw new NullReferenceException ("null");
+                    throw new NullReferenceException("null");
                 if (!(child is HtmlTableCell))
-                    throw new ArgumentException ("child", Locale.GetText ("Must be an HtmlTableCell instance."));
+                    throw new ArgumentException(
+                        "child",
+                        Locale.GetText("Must be an HtmlTableCell instance.")
+                    );
 
-                base.Add (child);
+                base.Add(child);
             }
 
-            public override void AddAt (int index, Control child)
+            public override void AddAt(int index, Control child)
             {
                 if (child == null)
-                    throw new NullReferenceException ("null");
+                    throw new NullReferenceException("null");
                 if (!(child is HtmlTableCell))
-                    throw new ArgumentException ("child", Locale.GetText ("Must be an HtmlTableCell instance."));
+                    throw new ArgumentException(
+                        "child",
+                        Locale.GetText("Must be an HtmlTableCell instance.")
+                    );
 
-                base.AddAt (index, child);
+                base.AddAt(index, child);
             }
         }
     }

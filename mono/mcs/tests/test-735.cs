@@ -8,13 +8,9 @@ public class B
         {
             public D field;
         }
-        
-        public static void Main ()
-        {
-        }
+
+        public static void Main() { }
     }
-    
-    class D
-    {
-    }
+
+    class D { }
 }

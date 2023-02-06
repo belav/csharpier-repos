@@ -54,14 +54,20 @@ namespace System.Management
         private readonly string propertyOrMethodName;
         private readonly QualifierType qualifierSetType;
 
-        internal QualifierDataCollection(ManagementBaseObject parent) : base()
+        internal QualifierDataCollection(ManagementBaseObject parent)
+            : base()
         {
             this.parent = parent;
             this.qualifierSetType = QualifierType.ObjectQualifier;
             this.propertyOrMethodName = null;
         }
 
-        internal QualifierDataCollection(ManagementBaseObject parent, string propertyOrMethodName, QualifierType type) : base()
+        internal QualifierDataCollection(
+            ManagementBaseObject parent,
+            string propertyOrMethodName,
+            QualifierType type
+        )
+            : base()
         {
             this.parent = parent;
             this.propertyOrMethodName = propertyOrMethodName;
@@ -86,10 +92,19 @@ namespace System.Management
 
             int status = qualifierSetType switch
             {
-                QualifierType.ObjectQualifier => parent.wbemObject.GetQualifierSet_(out qualifierSet),
-                QualifierType.PropertyQualifier => parent.wbemObject.GetPropertyQualifierSet_(propertyOrMethodName, out qualifierSet),
-                QualifierType.MethodQualifier => parent.wbemObject.GetMethodQualifierSet_(propertyOrMethodName, out qualifierSet),
-                _ => throw new ManagementException(ManagementStatus.Unexpected, null, null),    // Is this the best fit error ??
+                QualifierType.ObjectQualifier
+                    => parent.wbemObject.GetQualifierSet_(out qualifierSet),
+                QualifierType.PropertyQualifier
+                    => parent.wbemObject.GetPropertyQualifierSet_(
+                        propertyOrMethodName,
+                        out qualifierSet
+                    ),
+                QualifierType.MethodQualifier
+                    => parent.wbemObject.GetMethodQualifierSet_(
+                        propertyOrMethodName,
+                        out qualifierSet
+                    ),
+                _ => throw new ManagementException(ManagementStatus.Unexpected, null, null), // Is this the best fit error ??
             };
             if (status < 0)
             {
@@ -125,7 +140,10 @@ namespace System.Management
                 catch (ManagementException e)
                 {
                     // If we ask for the number of qualifiers on a system property, we return '0'
-                    if (qualifierSetType == QualifierType.PropertyQualifier && e.ErrorCode == ManagementStatus.SystemProperty)
+                    if (
+                        qualifierSetType == QualifierType.PropertyQualifier
+                        && e.ErrorCode == ManagementStatus.SystemProperty
+                    )
                         return 0;
                     else
                         throw;
@@ -193,7 +211,10 @@ namespace System.Management
             catch (ManagementException e)
             {
                 // There are NO qualifiers on system properties, so we just return
-                if (qualifierSetType == QualifierType.PropertyQualifier && e.ErrorCode == ManagementStatus.SystemProperty)
+                if (
+                    qualifierSetType == QualifierType.PropertyQualifier
+                    && e.ErrorCode == ManagementStatus.SystemProperty
+                )
                     return;
                 else
                     throw;
@@ -212,7 +233,15 @@ namespace System.Management
                 throw new ArgumentException(null, nameof(index));
 
             foreach (string qualifierName in qualifierNames)
-                array.SetValue(new QualifierData(parent, propertyOrMethodName, qualifierName, qualifierSetType), index++);
+                array.SetValue(
+                    new QualifierData(
+                        parent,
+                        propertyOrMethodName,
+                        qualifierName,
+                        qualifierSetType
+                    ),
+                    index++
+                );
 
             return;
         }
@@ -235,7 +264,9 @@ namespace System.Management
         //
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)(new QualifierDataEnumerator(parent, propertyOrMethodName, qualifierSetType));
+            return (IEnumerator)(
+                new QualifierDataEnumerator(parent, propertyOrMethodName, qualifierSetType)
+            );
         }
 
         /// <summary>
@@ -307,8 +338,11 @@ namespace System.Management
             private int index = -1;
 
             //Internal constructor
-            internal QualifierDataEnumerator(ManagementBaseObject parent, string propertyOrMethodName,
-                                                        QualifierType qualifierType)
+            internal QualifierDataEnumerator(
+                ManagementBaseObject parent,
+                string propertyOrMethodName,
+                QualifierType qualifierType
+            )
             {
                 this.parent = parent;
                 this.propertyOrMethodName = propertyOrMethodName;
@@ -320,10 +354,19 @@ namespace System.Management
 
                 status = qualifierType switch
                 {
-                    QualifierType.ObjectQualifier => parent.wbemObject.GetQualifierSet_(out qualifierSet),
-                    QualifierType.PropertyQualifier => parent.wbemObject.GetPropertyQualifierSet_(propertyOrMethodName, out qualifierSet),
-                    QualifierType.MethodQualifier => parent.wbemObject.GetMethodQualifierSet_(propertyOrMethodName, out qualifierSet),
-                    _ => throw new ManagementException(ManagementStatus.Unexpected, null, null),    // Is this the best fit error ??
+                    QualifierType.ObjectQualifier
+                        => parent.wbemObject.GetQualifierSet_(out qualifierSet),
+                    QualifierType.PropertyQualifier
+                        => parent.wbemObject.GetPropertyQualifierSet_(
+                            propertyOrMethodName,
+                            out qualifierSet
+                        ),
+                    QualifierType.MethodQualifier
+                        => parent.wbemObject.GetMethodQualifierSet_(
+                            propertyOrMethodName,
+                            out qualifierSet
+                        ),
+                    _ => throw new ManagementException(ManagementStatus.Unexpected, null, null), // Is this the best fit error ??
                 };
 
                 // If we got an error code back, assume there are NO qualifiers for this object/property/method
@@ -347,7 +390,10 @@ namespace System.Management
 
             //Standard "Current" variant
             /// <internalonly/>
-            object IEnumerator.Current { get { return (object)this.Current; } }
+            object IEnumerator.Current
+            {
+                get { return (object)this.Current; }
+            }
 
             /// <summary>
             /// <para>Gets or sets the current <see cref='System.Management.QualifierData'/> in the <see cref='System.Management.QualifierDataCollection'/> enumeration.</para>
@@ -362,8 +408,12 @@ namespace System.Management
                     if ((index == -1) || (index == qualifierNames.Length))
                         throw new InvalidOperationException();
                     else
-                        return new QualifierData(parent, propertyOrMethodName,
-                                                qualifierNames[index], qualifierType);
+                        return new QualifierData(
+                            parent,
+                            propertyOrMethodName,
+                            qualifierNames[index],
+                            qualifierType
+                        );
                 }
             }
 
@@ -391,9 +441,7 @@ namespace System.Management
             {
                 index = -1;
             }
-
-        }//QualifierDataEnumerator
-
+        } //QualifierDataEnumerator
 
         //
         //Methods
@@ -413,7 +461,12 @@ namespace System.Management
                 if (null == qualifierName)
                     throw new ArgumentNullException(nameof(qualifierName));
 
-                return new QualifierData(parent, propertyOrMethodName, qualifierName, qualifierSetType);
+                return new QualifierData(
+                    parent,
+                    propertyOrMethodName,
+                    qualifierName,
+                    qualifierSetType
+                );
             }
         }
 
@@ -447,8 +500,6 @@ namespace System.Management
             Add(qualifierName, qualifierValue, false, false, false, true);
         }
 
-
-
         /// <summary>
         /// <para>Adds a <see cref='System.Management.QualifierData'/> to the <see cref='System.Management.QualifierDataCollection'/>. This overload
         ///    specifies all property values for a <see cref='System.Management.QualifierData'/> object.</para>
@@ -459,17 +510,27 @@ namespace System.Management
         /// <param name='propagatesToInstance'><see langword='true'/> to propagate this qualifier to instances; otherwise, <see langword='false'/>. </param>
         /// <param name='propagatesToSubclass'><see langword='true'/> to propagate this qualifier to subclasses; otherwise, <see langword='false'/>. </param>
         /// <param name='isOverridable'><see langword='true'/> to specify that this qualifier's value is overridable in instances of subclasses; otherwise, <see langword='false'/>. </param>
-        public virtual void Add(string qualifierName, object qualifierValue, bool isAmended, bool propagatesToInstance, bool propagatesToSubclass, bool isOverridable)
+        public virtual void Add(
+            string qualifierName,
+            object qualifierValue,
+            bool isAmended,
+            bool propagatesToInstance,
+            bool propagatesToSubclass,
+            bool isOverridable
+        )
         {
-
             //Build the flavors bitmask and call the internal Add that takes a bitmask
             int qualFlavor = 0;
-            if (isAmended) qualFlavor |= (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_AMENDED;
-            if (propagatesToInstance) qualFlavor |= (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE;
-            if (propagatesToSubclass) qualFlavor |= (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS;
+            if (isAmended)
+                qualFlavor |= (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_AMENDED;
+            if (propagatesToInstance)
+                qualFlavor |= (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE;
+            if (propagatesToSubclass)
+                qualFlavor |= (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS;
 
             // Note we use the NOT condition here since WBEM_FLAVOR_OVERRIDABLE == 0
-            if (!isOverridable) qualFlavor |= (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_NOT_OVERRIDABLE;
+            if (!isOverridable)
+                qualFlavor |= (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_NOT_OVERRIDABLE;
 
             //Try to add the qualifier to the WMI object
             int status = GetTypeQualifierSet().Put_(qualifierName, ref qualifierValue, qualFlavor);
@@ -482,6 +543,5 @@ namespace System.Management
                     Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
             }
         }
-
-    }//QualifierDataCollection
+    } //QualifierDataCollection
 }

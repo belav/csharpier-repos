@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         {
             private readonly IEventSymbol _symbol;
 
-            public WrappedEventSymbol(IEventSymbol eventSymbol, bool canImplementImplicitly, IDocumentationCommentFormattingService docCommentFormattingService)
+            public WrappedEventSymbol(
+                IEventSymbol eventSymbol,
+                bool canImplementImplicitly,
+                IDocumentationCommentFormattingService docCommentFormattingService
+            )
                 : base(eventSymbol, canImplementImplicitly, docCommentFormattingService)
             {
                 _symbol = eventSymbol;

@@ -9,7 +9,7 @@ namespace HtmlAgilityPack
     /// <summary>
     /// Represents a rewindable buffered TextReader specifically well suited for parsing operations.
     /// </summary>
-    public class ParseReader: Stream
+    public class ParseReader : Stream
     {
         private StringBuilder _sb;
         private int _baseReaderPosition;
@@ -39,10 +39,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public override long Length
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
 
         /// <summary>
@@ -50,10 +47,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public override long Position
         {
-            get
-            {
-                return _position;
-            }
+            get { return _position; }
             set
             {
                 if (value < 0)
@@ -87,10 +81,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public override bool CanSeek
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -99,10 +90,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public override bool CanRead
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -111,10 +99,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public override bool CanWrite
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -140,10 +125,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int BaseReaderPosition
         {
-            get
-            {
-                return _baseReaderPosition;
-            }
+            get { return _baseReaderPosition; }
         }
 
         /// <summary>
@@ -151,10 +133,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int MaxReaderPosition
         {
-            get
-            {
-                return _maxReaderPosition;
-            }
+            get { return _maxReaderPosition; }
         }
 
         private void CheckBaseReader()
@@ -223,7 +202,7 @@ namespace HtmlAgilityPack
             int i;
             if (_position < _baseReaderPosition)
             {
-                i =  Convert.ToInt32(_sb[_position]);
+                i = Convert.ToInt32(_sb[_position]);
                 _position++;
                 return i;
             }
@@ -261,7 +240,7 @@ namespace HtmlAgilityPack
             int i;
             if (count < 0)
             {
-                if ((_position + count ) < 0)
+                if ((_position + count) < 0)
                 {
                     i = _position;
                     _position = 0;
@@ -270,10 +249,10 @@ namespace HtmlAgilityPack
                 else
                 {
                     _position += count;
-                    return - count;
+                    return -count;
                 }
             }
-            for(i=0;i<count;i++)
+            for (i = 0; i < count; i++)
             {
                 int c = Read();
                 if (c < 0)
@@ -333,7 +312,7 @@ namespace HtmlAgilityPack
                 return 0;
             byte[] bytes = System.Text.Encoding.Unicode.GetBytes(s); // probably around 2*count bytes
             int read = 0;
-            for(int i=0;i<bytes.Length;i++)
+            for (int i = 0; i < bytes.Length; i++)
             {
                 buffer[offset + i] = bytes[i];
                 read++;
@@ -366,7 +345,7 @@ namespace HtmlAgilityPack
             if (offset > int.MaxValue)
                 throw new ArgumentException("offset must not be larger than int32 MaxValue.");
 
-            switch(origin)
+            switch (origin)
             {
                 case SeekOrigin.Begin:
                     _position = 0;
@@ -407,10 +386,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int BufferedTextLength
         {
-            get
-            {
-                return _sb.Length;
-            }
+            get { return _sb.Length; }
         }
 
         /// <summary>
@@ -418,10 +394,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public string BufferedText
         {
-            get
-            {
-                return _sb.ToString();
-            }
+            get { return _sb.ToString(); }
         }
 
         /// <summary>
@@ -442,7 +415,5 @@ namespace HtmlAgilityPack
             }
             return BufferedText.Substring(offset, length);
         }
-
     }
-
 }

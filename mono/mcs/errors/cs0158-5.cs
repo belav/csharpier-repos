@@ -18,13 +18,12 @@ class A
 
             case 3:
                 Console.WriteLine("3");
-            LBL4:
+                LBL4:
                 Console.WriteLine("4");
                 return 0;
         }
-    LBL4:
+        LBL4:
         Console.WriteLine("4");
         return 1;
     }
 }
-

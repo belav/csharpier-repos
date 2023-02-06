@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -50,7 +50,7 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(0, pad.Horizontal, "#A6");
             Assert.AreEqual(0, pad.Vertical, "#A7");
             Assert.AreEqual("{Left=0,Top=0,Right=0,Bottom=0}", pad.ToString(), "#A8");
-            Assert.AreEqual(new Size(0,0), pad.Size, "#A9");
+            Assert.AreEqual(new Size(0, 0), pad.Size, "#A9");
 
             Padding pad2 = new Padding(5);
             Assert.AreEqual(5, pad2.All, "#B1");

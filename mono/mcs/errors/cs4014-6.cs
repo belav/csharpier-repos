@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 static class S
 {
-    public static A GetAwaiter (this X x)
+    public static A GetAwaiter(this X x)
     {
-        return new A ();
+        return new A();
     }
 }
 
 class X
 {
-    public X Foo ()
+    public X Foo()
     {
         return this;
     }
@@ -26,25 +26,20 @@ class A : INotifyCompletion
 {
     bool IsCompleted
     {
-        get
-        {
-            return true;
-        }
+        get { return true; }
     }
 
-    public void OnCompleted (Action a)
-    {
-    }
+    public void OnCompleted(Action a) { }
 
-    int GetResult ()
+    int GetResult()
     {
         return 3;
     }
 
-    static async Task Test3 ()
+    static async Task Test3()
     {
-        X x = new X ();
-        x.Foo ();
-        await x.Foo ();
+        X x = new X();
+        x.Foo();
+        await x.Foo();
     }
 }

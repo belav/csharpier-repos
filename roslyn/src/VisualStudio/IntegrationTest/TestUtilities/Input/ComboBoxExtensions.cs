@@ -14,7 +14,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
 {
     public static class ComboBoxExtensions
     {
-        public static async Task<bool> SimulateSelectItemAsync(this ComboBox comboBox, JoinableTaskFactory joinableTaskFactory, string itemText, bool mustExist = true)
+        public static async Task<bool> SimulateSelectItemAsync(
+            this ComboBox comboBox,
+            JoinableTaskFactory joinableTaskFactory,
+            string itemText,
+            bool mustExist = true
+        )
         {
             await joinableTaskFactory.SwitchToMainThreadAsync();
 
@@ -36,12 +41,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             {
                 if (mustExist)
                 {
-                    throw new InvalidOperationException($"Item '{itemText}' was not found in the combo box.");
+                    throw new InvalidOperationException(
+                        $"Item '{itemText}' was not found in the combo box."
+                    );
                 }
 
                 // Collapse the combo box, and then set the value explicitly
-                if (!await comboBox.SimulateCollapseAsync(joinableTaskFactory)
-                    || !await comboBox.SimulateSetTextAsync(joinableTaskFactory, itemText))
+                if (
+                    !await comboBox.SimulateCollapseAsync(joinableTaskFactory)
+                    || !await comboBox.SimulateSetTextAsync(joinableTaskFactory, itemText)
+                )
                 {
                     return false;
                 }
@@ -65,7 +74,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             }
         }
 
-        public static async Task<bool> SimulateExpandAsync(this ComboBox comboBox, JoinableTaskFactory joinableTaskFactory)
+        public static async Task<bool> SimulateExpandAsync(
+            this ComboBox comboBox,
+            JoinableTaskFactory joinableTaskFactory
+        )
         {
             await joinableTaskFactory.SwitchToMainThreadAsync();
 
@@ -88,7 +100,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             return true;
         }
 
-        public static async Task<bool> SimulateCollapseAsync(this ComboBox comboBox, JoinableTaskFactory joinableTaskFactory)
+        public static async Task<bool> SimulateCollapseAsync(
+            this ComboBox comboBox,
+            JoinableTaskFactory joinableTaskFactory
+        )
         {
             await joinableTaskFactory.SwitchToMainThreadAsync();
 
@@ -111,7 +126,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
             return true;
         }
 
-        public static async Task<bool> SimulateSetTextAsync(this ComboBox comboBox, JoinableTaskFactory joinableTaskFactory, string value)
+        public static async Task<bool> SimulateSetTextAsync(
+            this ComboBox comboBox,
+            JoinableTaskFactory joinableTaskFactory,
+            string value
+        )
         {
             if (value == null)
             {

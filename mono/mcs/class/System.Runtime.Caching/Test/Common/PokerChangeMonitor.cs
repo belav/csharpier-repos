@@ -7,7 +7,7 @@ namespace MonoTests.Common
 {
     class PokerChangeMonitor : ChangeMonitor
     {
-        List <string> calls;
+        List<string> calls;
         string uniqueId;
 
         public List<string> Calls
@@ -15,7 +15,7 @@ namespace MonoTests.Common
             get
             {
                 if (calls == null)
-                    calls = new List<string> ();
+                    calls = new List<string>();
 
                 return calls;
             }
@@ -26,20 +26,20 @@ namespace MonoTests.Common
             get { return uniqueId; }
         }
 
-        public PokerChangeMonitor ()
+        public PokerChangeMonitor()
         {
             uniqueId = "UniqueID";
-            InitializationComplete ();
+            InitializationComplete();
         }
 
-        public void SignalChange ()
+        public void SignalChange()
         {
-            OnChanged (null);
+            OnChanged(null);
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            Calls.Add ("Dispose (bool disposing)");
+            Calls.Add("Dispose (bool disposing)");
         }
     }
 }

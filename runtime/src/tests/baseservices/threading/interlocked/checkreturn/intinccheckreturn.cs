@@ -8,7 +8,6 @@ namespace InterlockedTest
 {
     class InterlockTest
     {
-
         public static int Main(string[] Args)
         {
             int rValue;

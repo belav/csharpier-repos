@@ -37,18 +37,23 @@ public class Example
     public static int Main()
     {
         TT();
-        string expected = A.Caught.StackTrace.ToString ();
+        string expected = A.Caught.StackTrace.ToString();
 
-        for (int i = 0; i < 1000; ++i) {
-            Thread t = new Thread (delegate () {
-                    TT ();
-                });
-            t.Start ();
-            t.Join ();
-            GC.Collect ();
-            GC.WaitForPendingFinalizers ();
-            if (A.Caught.StackTrace != expected) {
-                Console.WriteLine ("FAILED");
+        for (int i = 0; i < 1000; ++i)
+        {
+            Thread t = new Thread(
+                delegate()
+                {
+                    TT();
+                }
+            );
+            t.Start();
+            t.Join();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            if (A.Caught.StackTrace != expected)
+            {
+                Console.WriteLine("FAILED");
                 return 1;
             }
         }
@@ -59,7 +64,10 @@ public class Example
     {
         DynamicMethod multiplyHidden = new DynamicMethod(
             "",
-            typeof(void), new[] { typeof(int) }, typeof(Example));
+            typeof(void),
+            new[] { typeof(int) },
+            typeof(Example)
+        );
 
         ILGenerator ig = multiplyHidden.GetILGenerator();
 
@@ -75,11 +83,7 @@ public class Example
 
         ig.Emit(OpCodes.Ret);
 
-        var invoke = (Action<int>)
-            multiplyHidden.CreateDelegate(
-                typeof(Action<int>)
-
-            );
+        var invoke = (Action<int>)multiplyHidden.CreateDelegate(typeof(Action<int>));
 
         invoke(1);
     }

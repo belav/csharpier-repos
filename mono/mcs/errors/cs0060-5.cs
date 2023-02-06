@@ -7,9 +7,7 @@ internal class X
     {
         protected internal class B
         {
-            internal class F : D.E
-            {
-            }
+            internal class F : D.E { }
         }
 
         protected class D : B

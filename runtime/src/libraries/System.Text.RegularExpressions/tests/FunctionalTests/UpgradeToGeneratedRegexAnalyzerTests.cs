@@ -16,7 +16,8 @@ using Microsoft.CodeAnalysis.Testing;
 using Xunit;
 using VerifyCS = System.Text.RegularExpressions.Tests.CSharpCodeFixVerifier<
     System.Text.RegularExpressions.Generator.UpgradeToGeneratedRegexAnalyzer,
-    System.Text.RegularExpressions.Generator.UpgradeToGeneratedRegexCodeFixer>;
+    System.Text.RegularExpressions.Generator.UpgradeToGeneratedRegexCodeFixer
+>;
 
 namespace System.Text.RegularExpressions.Tests
 {
@@ -26,12 +27,14 @@ namespace System.Text.RegularExpressions.Tests
         private const string UseRegexSourceGeneratorDiagnosticId = @"SYSLIB1045";
 
         [Fact]
-        public async Task NoDiagnosticsForEmpty()
-            => await VerifyCS.VerifyAnalyzerAsync(source: string.Empty);
+        public async Task NoDiagnosticsForEmpty() =>
+            await VerifyCS.VerifyAnalyzerAsync(source: string.Empty);
 
         public static IEnumerable<object[]> ConstructorWithTimeoutTestData()
         {
-            yield return new object[] { @"using System;
+            yield return new object[]
+            {
+                @"using System;
 using System.Text.RegularExpressions;
 
 public class Program
@@ -40,9 +43,12 @@ public class Program
     {
         var regex = new Regex("""", RegexOptions.None, TimeSpan.FromSeconds(10));
     }
-}" };
+}"
+            };
 
-            yield return new object[] { @"using System;
+            yield return new object[]
+            {
+                @"using System;
 using System.Text.RegularExpressions;
 
 public class Program
@@ -51,9 +57,12 @@ public class Program
     {
         var regex = new Regex("""", matchTimeout: TimeSpan.FromSeconds(10), options: RegexOptions.None);
     }
-}" };
+}"
+            };
 
-            yield return new object[] { @"using System;
+            yield return new object[]
+            {
+                @"using System;
 using System.Text.RegularExpressions;
 
 public class Program
@@ -62,9 +71,12 @@ public class Program
     {
         var regex = new Regex(matchTimeout: TimeSpan.FromSeconds(10), pattern: """", options: RegexOptions.None);
     }
-}" };
+}"
+            };
 
-            yield return new object[] { @"using System;
+            yield return new object[]
+            {
+                @"using System;
 using System.Text.RegularExpressions;
 
 public class Program
@@ -73,7 +85,8 @@ public class Program
     {
         var regex = new Regex(matchTimeout: TimeSpan.FromSeconds(10), options: RegexOptions.None, pattern: """");
     }
-}" };
+}"
+            };
         }
 
         [Theory]
@@ -87,10 +100,17 @@ public class Program
         [MemberData(nameof(InvocationTypes))]
         public async Task TopLevelStatements(InvocationType invocationType)
         {
-            string isMatchInvocation = invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
-            string test = @"using System.Text.RegularExpressions;
-var isMatch = [|" + ConstructRegexInvocation(invocationType, pattern: "\"\"") + @"|]" + isMatchInvocation + ";";
-            string fixedCode = @"using System.Text.RegularExpressions;
+            string isMatchInvocation =
+                invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
+            string test =
+                @"using System.Text.RegularExpressions;
+var isMatch = [|"
+                + ConstructRegexInvocation(invocationType, pattern: "\"\"")
+                + @"|]"
+                + isMatchInvocation
+                + ";";
+            string fixedCode =
+                @"using System.Text.RegularExpressions;
 var isMatch = MyRegex().IsMatch("""");
 
 partial class Program
@@ -108,22 +128,39 @@ partial class Program
 
         public static IEnumerable<object[]> StaticInvocationWithTimeoutTestData()
         {
-            foreach (string method in new[] { "Count", "EnumerateMatches", "IsMatch", "Match", "Matches", "Split" })
+            foreach (
+                string method in new[]
+                {
+                    "Count",
+                    "EnumerateMatches",
+                    "IsMatch",
+                    "Match",
+                    "Matches",
+                    "Split"
+                }
+            )
             {
-                yield return new object[] { @"using System;
+                yield return new object[]
+                {
+                    @"using System;
 using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        Regex." + method + @"(""input"", ""a|b"", RegexOptions.None, TimeSpan.FromSeconds(10));
+        Regex."
+                        + method
+                        + @"(""input"", ""a|b"", RegexOptions.None, TimeSpan.FromSeconds(10));
     }
-}" };
+}"
+                };
             }
 
             // Replace is special since it takes an extra argument
-            yield return new object[] { @"using System;
+            yield return new object[]
+            {
+                @"using System;
 using System.Text.RegularExpressions;
 
 public class Program
@@ -132,27 +169,33 @@ public class Program
     {
         Regex.Replace(""input"", ""a|b"", ""replacement"" ,RegexOptions.None, TimeSpan.FromSeconds(10));
     }
-}" };
+}"
+            };
         }
 
         [Theory]
         [MemberData(nameof(StaticInvocationWithTimeoutTestData))]
-        public async Task NoDiagnosticForStaticInvocationWithTimeout(string test)
-            => await VerifyCS.VerifyAnalyzerAsync(test);
+        public async Task NoDiagnosticForStaticInvocationWithTimeout(string test) =>
+            await VerifyCS.VerifyAnalyzerAsync(test);
 
         [Theory]
         [MemberData(nameof(InvocationTypes))]
         public async Task NoDiagnosticsForNet60(InvocationType invocationType)
         {
-            string isMatchInvocation = invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
-            string test = @"using System.Text;
+            string isMatchInvocation =
+                invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
+            string test =
+                @"using System.Text;
 using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, pattern: "\"\"") + isMatchInvocation + @";
+        var isMatch = "
+                + ConstructRegexInvocation(invocationType, pattern: "\"\"")
+                + isMatchInvocation
+                + @";
     }
 }";
 
@@ -163,15 +206,20 @@ public class Program
         [MemberData(nameof(InvocationTypes))]
         public async Task NoDiagnosticsForLowerLanguageVersion(InvocationType invocationType)
         {
-            string isMatchInvocation = invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
-            string test = @"using System.Text;
+            string isMatchInvocation =
+                invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
+            string test =
+                @"using System.Text;
 using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, "\"\"") + isMatchInvocation + @";
+        var isMatch = "
+                + ConstructRegexInvocation(invocationType, "\"\"")
+                + isMatchInvocation
+                + @";
     }
 }";
             await new VerifyCS.Test
@@ -184,20 +232,34 @@ public class Program
 
         public static IEnumerable<object[]> ConstantPatternTestData()
         {
-            foreach (InvocationType invocationType in new[] { InvocationType.Constructor, InvocationType.StaticMethods })
+            foreach (
+                InvocationType invocationType in new[]
+                {
+                    InvocationType.Constructor,
+                    InvocationType.StaticMethods
+                }
+            )
             {
-                string isMatchInvocation = invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
+                string isMatchInvocation =
+                    invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
                 // Test constructor with a passed in literal pattern.
-                yield return new object[] { @"using System.Text;
+                yield return new object[]
+                {
+                    @"using System.Text;
 using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        var isMatch = [|" + ConstructRegexInvocation(invocationType, "\"\"") + @"|]" + isMatchInvocation + @";
+        var isMatch = [|"
+                        + ConstructRegexInvocation(invocationType, "\"\"")
+                        + @"|]"
+                        + isMatchInvocation
+                        + @";
     }
-}", @"using System.Text;
+}",
+                    @"using System.Text;
 using System.Text.RegularExpressions;
 
 public partial class Program
@@ -209,10 +271,13 @@ public partial class Program
 
     [GeneratedRegex("""")]
     private static partial Regex MyRegex();
-}" };
+}"
+                };
 
                 // Test constructor with a local constant pattern.
-                yield return new object[] { @"using System.Text;
+                yield return new object[]
+                {
+                    @"using System.Text;
 using System.Text.RegularExpressions;
 
 public class Program
@@ -220,9 +285,14 @@ public class Program
     public static void Main(string[] args)
     {
         const string pattern = @"""";
-        var isMatch = [|" + ConstructRegexInvocation(invocationType, "\"\"") + @"|]" + isMatchInvocation + @";
+        var isMatch = [|"
+                        + ConstructRegexInvocation(invocationType, "\"\"")
+                        + @"|]"
+                        + isMatchInvocation
+                        + @";
     }
-}", @"using System.Text;
+}",
+                    @"using System.Text;
 using System.Text.RegularExpressions;
 
 public partial class Program
@@ -235,10 +305,13 @@ public partial class Program
 
     [GeneratedRegex("""")]
     private static partial Regex MyRegex();
-}" };
+}"
+                };
 
                 // Test constructor with a constant field pattern.
-                yield return new object[] { @"using System.Text;
+                yield return new object[]
+                {
+                    @"using System.Text;
 using System.Text.RegularExpressions;
 
 public class Program
@@ -247,9 +320,14 @@ public class Program
 
     public static void Main(string[] args)
     {
-        var isMatch = [|" + ConstructRegexInvocation(invocationType, "\"\"") + @"|]" + isMatchInvocation + @";
+        var isMatch = [|"
+                        + ConstructRegexInvocation(invocationType, "\"\"")
+                        + @"|]"
+                        + isMatchInvocation
+                        + @";
     }
-}", @"using System.Text;
+}",
+                    @"using System.Text;
 using System.Text.RegularExpressions;
 
 public partial class Program
@@ -263,7 +341,8 @@ public partial class Program
 
     [GeneratedRegex("""")]
     private static partial Regex MyRegex();
-}" };
+}"
+                };
             }
         }
 
@@ -276,23 +355,38 @@ public partial class Program
 
         public static IEnumerable<object[]> VariablePatternTestData()
         {
-            foreach (InvocationType invocationType in new[] { InvocationType.Constructor, InvocationType.StaticMethods })
+            foreach (
+                InvocationType invocationType in new[]
+                {
+                    InvocationType.Constructor,
+                    InvocationType.StaticMethods
+                }
+            )
             {
-                string isMatchInvocation = invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
+                string isMatchInvocation =
+                    invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
                 // Test constructor with passed in parameter
-                yield return new object[] { @"using System.Text;
+                yield return new object[]
+                {
+                    @"using System.Text;
 using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, "args[0]") + isMatchInvocation + @";
+        var isMatch = "
+                        + ConstructRegexInvocation(invocationType, "args[0]")
+                        + isMatchInvocation
+                        + @";
     }
-}" };
+}"
+                };
 
                 // Test constructor with passed in variable
-                yield return new object[] { @"using System.Text;
+                yield return new object[]
+                {
+                    @"using System.Text;
 using System.Text.RegularExpressions;
 
 public class Program
@@ -300,12 +394,18 @@ public class Program
     public static void Main(string[] args)
     {
         string somePattern = """";
-        var isMatch = " + ConstructRegexInvocation(invocationType, "somePattern") + isMatchInvocation + @";
+        var isMatch = "
+                        + ConstructRegexInvocation(invocationType, "somePattern")
+                        + isMatchInvocation
+                        + @";
     }
-}" };
+}"
+                };
 
                 // Test constructor with readonly property
-                yield return new object[] { @"using System.Text.RegularExpressions;
+                yield return new object[]
+                {
+                    @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -313,12 +413,18 @@ public class Program
 
     public void M()
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, "Pattern") + isMatchInvocation + @";
+        var isMatch = "
+                        + ConstructRegexInvocation(invocationType, "Pattern")
+                        + isMatchInvocation
+                        + @";
     }
-}" };
+}"
+                };
 
                 // Test constructor with field
-                yield return new object[] { @"using System.Text.RegularExpressions;
+                yield return new object[]
+                {
+                    @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -326,12 +432,18 @@ public class Program
 
     public void M()
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, "Pattern") + isMatchInvocation + @";
+        var isMatch = "
+                        + ConstructRegexInvocation(invocationType, "Pattern")
+                        + isMatchInvocation
+                        + @";
     }
-}" };
+}"
+                };
 
                 // Test constructor with return method
-                yield return new object[] { @"using System.Text.RegularExpressions;
+                yield return new object[]
+                {
+                    @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -339,32 +451,50 @@ public class Program
 
     public void M()
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, "GetMyPattern()") + isMatchInvocation + @";
+        var isMatch = "
+                        + ConstructRegexInvocation(invocationType, "GetMyPattern()")
+                        + isMatchInvocation
+                        + @";
     }
-}" };
+}"
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(VariablePatternTestData))]
-        public async Task DiagnosticNotEmittedForVariablePattern(string test)
-            => await VerifyCS.VerifyAnalyzerAsync(test);
+        public async Task DiagnosticNotEmittedForVariablePattern(string test) =>
+            await VerifyCS.VerifyAnalyzerAsync(test);
 
         public static IEnumerable<object[]> ConstantOptionsTestData()
         {
-            foreach (InvocationType invocationType in new[] { InvocationType.Constructor, InvocationType.StaticMethods })
+            foreach (
+                InvocationType invocationType in new[]
+                {
+                    InvocationType.Constructor,
+                    InvocationType.StaticMethods
+                }
+            )
             {
-                string isMatchInvocation = invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
+                string isMatchInvocation =
+                    invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
                 // Test options as passed in literal
-                yield return new object[] { @"using System.Text.RegularExpressions;
+                yield return new object[]
+                {
+                    @"using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        var isMatch = [|" + ConstructRegexInvocation(invocationType, "\"\"", "RegexOptions.None") + @"|]" + isMatchInvocation + @";
+        var isMatch = [|"
+                        + ConstructRegexInvocation(invocationType, "\"\"", "RegexOptions.None")
+                        + @"|]"
+                        + isMatchInvocation
+                        + @";
     }
-}", @"using System.Text.RegularExpressions;
+}",
+                    @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -375,19 +505,27 @@ public partial class Program
 
     [GeneratedRegex("""", RegexOptions.None)]
     private static partial Regex MyRegex();
-}" };
+}"
+                };
 
                 // Test options as local constant
-                yield return new object[] { @"using System.Text.RegularExpressions;
+                yield return new object[]
+                {
+                    @"using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
         const RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
-        var isMatch = [|" + ConstructRegexInvocation(invocationType, "\"\"", "options") + @"|]" + isMatchInvocation + @";
+        var isMatch = [|"
+                        + ConstructRegexInvocation(invocationType, "\"\"", "options")
+                        + @"|]"
+                        + isMatchInvocation
+                        + @";
     }
-}", @"using System.Text.RegularExpressions;
+}",
+                    @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -399,10 +537,13 @@ public partial class Program
 
     [GeneratedRegex("""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex MyRegex();
-}" };
+}"
+                };
 
                 // Test options as constant field
-                yield return new object[] { @"using System.Text.RegularExpressions;
+                yield return new object[]
+                {
+                    @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -410,9 +551,14 @@ public class Program
 
     public static void Main(string[] args)
     {
-        var isMatch = [|" + ConstructRegexInvocation(invocationType, "\"\"", "Options") + @"|]" + isMatchInvocation + @";
+        var isMatch = [|"
+                        + ConstructRegexInvocation(invocationType, "\"\"", "Options")
+                        + @"|]"
+                        + isMatchInvocation
+                        + @";
     }
-}", @"using System.Text.RegularExpressions;
+}",
+                    @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -425,7 +571,8 @@ public partial class Program
 
     [GeneratedRegex("""", RegexOptions.None)]
     private static partial Regex MyRegex();
-}" };
+}"
+                };
             }
         }
 
@@ -438,23 +585,38 @@ public partial class Program
 
         public static IEnumerable<object[]> VariableOptionsTestData()
         {
-            foreach (InvocationType invocationType in new[] { InvocationType.Constructor, InvocationType.StaticMethods })
+            foreach (
+                InvocationType invocationType in new[]
+                {
+                    InvocationType.Constructor,
+                    InvocationType.StaticMethods
+                }
+            )
             {
-                string isMatchInvocation = invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
+                string isMatchInvocation =
+                    invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
                 // Test options as passed in parameter
-                yield return new object[] { @"using System.Text;
+                yield return new object[]
+                {
+                    @"using System.Text;
 using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(RegexOptions options)
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, "\"\"", "options") + isMatchInvocation + @";
+        var isMatch = "
+                        + ConstructRegexInvocation(invocationType, "\"\"", "options")
+                        + isMatchInvocation
+                        + @";
     }
-}" };
+}"
+                };
 
                 // Test options as passed in variable
-                yield return new object[] { @"using System.Text;
+                yield return new object[]
+                {
+                    @"using System.Text;
 using System.Text.RegularExpressions;
 
 public class Program
@@ -462,12 +624,18 @@ public class Program
     public static void Main(string[] args)
     {
         RegexOptions options = RegexOptions.None;
-        var isMatch = " + ConstructRegexInvocation(invocationType, "\"\"", "options") + isMatchInvocation + @";
+        var isMatch = "
+                        + ConstructRegexInvocation(invocationType, "\"\"", "options")
+                        + isMatchInvocation
+                        + @";
     }
-}" };
+}"
+                };
 
                 // Test options as readonly property
-                yield return new object[] { @"using System.Text.RegularExpressions;
+                yield return new object[]
+                {
+                    @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -475,12 +643,18 @@ public class Program
 
     public void M()
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, "\"\"", "Options") + isMatchInvocation + @";
+        var isMatch = "
+                        + ConstructRegexInvocation(invocationType, "\"\"", "Options")
+                        + isMatchInvocation
+                        + @";
     }
-}" };
+}"
+                };
 
                 // Test options as readonly field
-                yield return new object[] { @"using System.Text.RegularExpressions;
+                yield return new object[]
+                {
+                    @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -488,12 +662,18 @@ public class Program
 
     public void M()
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, "\"\"", "Options") + isMatchInvocation + @";
+        var isMatch = "
+                        + ConstructRegexInvocation(invocationType, "\"\"", "Options")
+                        + isMatchInvocation
+                        + @";
     }
-}" };
+}"
+                };
 
                 // Test options as return method.
-                yield return new object[] { @"using System.Text.RegularExpressions;
+                yield return new object[]
+                {
+                    @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -501,20 +681,25 @@ public class Program
 
     public void M()
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, "\"\"", "GetMyOptions()") + isMatchInvocation + @";
+        var isMatch = "
+                        + ConstructRegexInvocation(invocationType, "\"\"", "GetMyOptions()")
+                        + isMatchInvocation
+                        + @";
     }
-}" };
+}"
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(VariableOptionsTestData))]
-        public async Task DiagnosticNotEmittedForVariableOptions(string test)
-            => await VerifyCS.VerifyAnalyzerAsync(test);
+        public async Task DiagnosticNotEmittedForVariableOptions(string test) =>
+            await VerifyCS.VerifyAnalyzerAsync(test);
 
         public static IEnumerable<object[]> StaticInvocationsAndFixedSourceTestData()
         {
-            const string testTemplateWithOptions = @"using System.Text.RegularExpressions;
+            const string testTemplateWithOptions =
+                @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -523,7 +708,8 @@ public class Program
         [|Regex.@@Method@@(""input"", ""a|b"", RegexOptions.None)|];
     }
 }";
-            const string fixedSourceWithOptions = @"using System.Text.RegularExpressions;
+            const string fixedSourceWithOptions =
+                @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -536,7 +722,8 @@ public partial class Program
     private static partial Regex MyRegex();
 }";
 
-            const string testTemplateWithoutOptions = @"using System.Text.RegularExpressions;
+            const string testTemplateWithoutOptions =
+                @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -545,7 +732,8 @@ public class Program
         [|Regex.@@Method@@(""input"", ""a|b"")|];
     }
 }";
-            const string fixedSourceWithoutOptions = @"using System.Text.RegularExpressions;
+            const string fixedSourceWithoutOptions =
+                @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -560,23 +748,42 @@ public partial class Program
 
             foreach (bool includeRegexOptions in new[] { true, false })
             {
-                foreach (string methodName in new[] { "Count", "EnumerateMatches", "IsMatch", "Match", "Matches", "Split" })
+                foreach (
+                    string methodName in new[]
+                    {
+                        "Count",
+                        "EnumerateMatches",
+                        "IsMatch",
+                        "Match",
+                        "Matches",
+                        "Split"
+                    }
+                )
                 {
                     if (includeRegexOptions)
                     {
-                        yield return new object[] { testTemplateWithOptions.Replace("@@Method@@", methodName), fixedSourceWithOptions.Replace("@@Method@@", methodName) };
+                        yield return new object[]
+                        {
+                            testTemplateWithOptions.Replace("@@Method@@", methodName),
+                            fixedSourceWithOptions.Replace("@@Method@@", methodName)
+                        };
                     }
                     else
                     {
-                        yield return new object[] { testTemplateWithoutOptions.Replace("@@Method@@", methodName), fixedSourceWithoutOptions.Replace("@@Method@@", methodName) };
-
+                        yield return new object[]
+                        {
+                            testTemplateWithoutOptions.Replace("@@Method@@", methodName),
+                            fixedSourceWithoutOptions.Replace("@@Method@@", methodName)
+                        };
                     }
                 }
             }
 
             // Replace has one additional parameter so we treat that case separately.
 
-            yield return new object[] { @"using System.Text.RegularExpressions;
+            yield return new object[]
+            {
+                @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -585,7 +792,8 @@ public class Program
         [|Regex.Replace(""input"", ""a[b|c]*"", ""replacement"", RegexOptions.CultureInvariant)|];
     }
 }
-", @"using System.Text.RegularExpressions;
+",
+                @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -597,9 +805,12 @@ public partial class Program
     [GeneratedRegex(""a[b|c]*"", RegexOptions.CultureInvariant)]
     private static partial Regex MyRegex();
 }
-" };
+"
+            };
 
-            yield return new object[] { @"using System.Text.RegularExpressions;
+            yield return new object[]
+            {
+                @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -608,7 +819,8 @@ public class Program
         [|Regex.Replace(""input"", ""a[b|c]*"", ""replacement"")|];
     }
 }
-", @"using System.Text.RegularExpressions;
+",
+                @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -620,18 +832,22 @@ public partial class Program
     [GeneratedRegex(""a[b|c]*"")]
     private static partial Regex MyRegex();
 }
-" };
+"
+            };
         }
 
         [Theory]
         [MemberData(nameof(StaticInvocationsAndFixedSourceTestData))]
-        public async Task DiagnosticAndCodeFixForAllStaticMethods(string test, string fixedSource)
-         => await VerifyCS.VerifyCodeFixAsync(test, fixedSource);
+        public async Task DiagnosticAndCodeFixForAllStaticMethods(
+            string test,
+            string fixedSource
+        ) => await VerifyCS.VerifyCodeFixAsync(test, fixedSource);
 
         [Fact]
         public async Task CodeFixSupportsNesting()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 public class A
 {
@@ -650,7 +866,8 @@ public class A
     }
 }
 ";
-            string fixedSource = @"using System.Text.RegularExpressions;
+            string fixedSource =
+                @"using System.Text.RegularExpressions;
 
 public partial class A
 {
@@ -680,14 +897,23 @@ public partial class A
         [MemberData(nameof(InvocationTypes))]
         public async Task NoDiagnosticForRegexOptionsNonBacktracking(InvocationType invocationType)
         {
-            string isMatchInvocation = invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
-            string test = @"using System.Text.RegularExpressions;
+            string isMatchInvocation =
+                invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        var isMatch = " + ConstructRegexInvocation(invocationType, "\"\"", "RegexOptions.IgnoreCase | RegexOptions.NonBacktracking") + isMatchInvocation + @";
+        var isMatch = "
+                + ConstructRegexInvocation(
+                    invocationType,
+                    "\"\"",
+                    "RegexOptions.IgnoreCase | RegexOptions.NonBacktracking"
+                )
+                + isMatchInvocation
+                + @";
     }
 }";
 
@@ -697,7 +923,8 @@ public class Program
         [Fact]
         public async Task AnayzerSupportsMultipleDiagnostics()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 public class Program
 {
@@ -708,7 +935,8 @@ public class Program
     }
 }
 ";
-            string fixedSource = @"using System.Text.RegularExpressions;
+            string fixedSource =
+                @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -735,7 +963,8 @@ public partial class Program
         [Fact]
         public async Task CodeFixerSupportsNamedParameters()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 class Program
 {
@@ -745,7 +974,8 @@ class Program
     }
 }";
 
-            string fixedSource = @"using System.Text.RegularExpressions;
+            string fixedSource =
+                @"using System.Text.RegularExpressions;
 
 partial class Program
 {
@@ -768,18 +998,26 @@ partial class Program
             {
                 TestState =
                 {
-                    Sources = { "public class C { }", @"var r = [|new System.Text.RegularExpressions.Regex("""")|];" },
+                    Sources =
+                    {
+                        "public class C { }",
+                        @"var r = [|new System.Text.RegularExpressions.Regex("""")|];"
+                    },
                     OutputKind = OutputKind.ConsoleApplication,
                 },
                 FixedState =
                 {
-                    Sources = { "public class C { }", @"var r = MyRegex();
+                    Sources =
+                    {
+                        "public class C { }",
+                        @"var r = MyRegex();
 
 partial class Program
 {
     [System.Text.RegularExpressions.GeneratedRegex("""")]
     private static partial System.Text.RegularExpressions.Regex MyRegex();
-}" }
+}"
+                    }
                 },
             }.RunAsync();
         }
@@ -787,7 +1025,8 @@ partial class Program
         [Fact]
         public async Task LeadingAndTrailingTriviaIsPreservedByFixer()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 static class Class
 {
@@ -795,7 +1034,8 @@ static class Class
         [|Regex.Replace(text, "" \\s+"" , ""  "")|];
 }";
 
-            string expectedFixedCode = @"using System.Text.RegularExpressions;
+            string expectedFixedCode =
+                @"using System.Text.RegularExpressions;
 
 static partial class Class
 {
@@ -811,7 +1051,8 @@ static partial class Class
         [Fact]
         public async Task VerbatimStringLiteralSyntaxPreservedByFixer()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 static class Class
 {
@@ -819,7 +1060,8 @@ static class Class
         [|Regex.Replace(text, @"" \s+"" , @""  "")|];
 }";
 
-            string expectedFixedCode = @"using System.Text.RegularExpressions;
+            string expectedFixedCode =
+                @"using System.Text.RegularExpressions;
 
 static partial class Class
 {
@@ -835,7 +1077,8 @@ static partial class Class
         [Fact]
         public async Task RawStringLiteralSyntaxPreservedByFixer()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 static class Class
 {
@@ -846,7 +1089,8 @@ static class Class
                               """""""" hello """""" world """""""")|];
 }";
 
-            string expectedFixedCode = @"using System.Text.RegularExpressions;
+            string expectedFixedCode =
+                @"using System.Text.RegularExpressions;
 
 static partial class Class
 {
@@ -864,7 +1108,8 @@ static partial class Class
         [Fact]
         public async Task InterpolatedStringLiteralSyntaxPreservedByFixer()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 partial class Program
 {
@@ -877,7 +1122,8 @@ partial class Program
     }
 }";
 
-            string expectedFixedCode = @"using System.Text.RegularExpressions;
+            string expectedFixedCode =
+                @"using System.Text.RegularExpressions;
 
 partial class Program
 {
@@ -899,7 +1145,8 @@ partial class Program
         [Fact]
         public async Task TestAsArgument()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 public class C
 {
     void M1(Regex r) => _ = r;
@@ -907,7 +1154,8 @@ public class C
 }
 ";
 
-            string fixedCode = @"using System.Text.RegularExpressions;
+            string fixedCode =
+                @"using System.Text.RegularExpressions;
 public partial class C
 {
     void M1(Regex r) => _ = r;
@@ -923,7 +1171,8 @@ public partial class C
         [Fact]
         public async Task InvalidRegexOptions()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 public class A
 {
@@ -933,7 +1182,8 @@ public class A
     }
 }
 ";
-            string fixedSource = @"using System.Text.RegularExpressions;
+            string fixedSource =
+                @"using System.Text.RegularExpressions;
 
 public partial class A
 {
@@ -953,7 +1203,8 @@ public partial class A
         [Fact]
         public async Task InvalidRegexOptions_LocalConstant()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 public class A
 {
@@ -964,7 +1215,8 @@ public class A
     }
 }
 ";
-            string fixedSource = @"using System.Text.RegularExpressions;
+            string fixedSource =
+                @"using System.Text.RegularExpressions;
 
 public partial class A
 {
@@ -985,7 +1237,8 @@ public partial class A
         [Fact]
         public async Task InvalidRegexOptions_Negative()
         {
-            string test = @"using System.Text.RegularExpressions;
+            string test =
+                @"using System.Text.RegularExpressions;
 
 public class A
 {
@@ -995,7 +1248,8 @@ public class A
     }
 }
 ";
-            string fixedSource = @"using System.Text.RegularExpressions;
+            string fixedSource =
+                @"using System.Text.RegularExpressions;
 
 public partial class A
 {
@@ -1013,25 +1267,43 @@ public partial class A
 
         public static IEnumerable<object[]> DetectsCurrentCultureTestData()
         {
-            foreach (InvocationType invocationType in new[] { InvocationType.Constructor, InvocationType.StaticMethods })
+            foreach (
+                InvocationType invocationType in new[]
+                {
+                    InvocationType.Constructor,
+                    InvocationType.StaticMethods
+                }
+            )
             {
-                string isMatchInvocation = invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
+                string isMatchInvocation =
+                    invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
 
                 foreach (bool useInlineIgnoreCase in new[] { true, false })
                 {
-                    string pattern = useInlineIgnoreCase ? "\"(?:(?>abc)(?:(?s)d|e)(?:(?:(?xi)ki)*))\"" : "\"abc\"";
-                    string options = useInlineIgnoreCase ? "RegexOptions.None" : "RegexOptions.IgnoreCase";
+                    string pattern = useInlineIgnoreCase
+                        ? "\"(?:(?>abc)(?:(?s)d|e)(?:(?:(?xi)ki)*))\""
+                        : "\"abc\"";
+                    string options = useInlineIgnoreCase
+                        ? "RegexOptions.None"
+                        : "RegexOptions.IgnoreCase";
 
                     // Test using current culture
-                    yield return new object[] { @"using System.Text.RegularExpressions;
+                    yield return new object[]
+                    {
+                        @"using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        var isMatch = [|" + ConstructRegexInvocation(invocationType, pattern, options) + @"|]" + isMatchInvocation + @";
+        var isMatch = [|"
+                            + ConstructRegexInvocation(invocationType, pattern, options)
+                            + @"|]"
+                            + isMatchInvocation
+                            + @";
     }
-}", @"using System.Text.RegularExpressions;
+}",
+                        @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -1040,21 +1312,33 @@ public partial class Program
         var isMatch = MyRegex().IsMatch("""");
     }
 
-    [GeneratedRegex(" + $"{pattern}, {options}, \"{CultureInfo.CurrentCulture.Name}" + @""")]
+    [GeneratedRegex("
+                            + $"{pattern}, {options}, \"{CultureInfo.CurrentCulture.Name}"
+                            + @""")]
     private static partial Regex MyRegex();
-}" };
+}"
+                    };
 
                     // Test using CultureInvariant which should default to the 2 parameter constructor
-                    options = useInlineIgnoreCase ? "RegexOptions.CultureInvariant" : "RegexOptions.IgnoreCase | RegexOptions.CultureInvariant";
-                    yield return new object[] { @"using System.Text.RegularExpressions;
+                    options = useInlineIgnoreCase
+                        ? "RegexOptions.CultureInvariant"
+                        : "RegexOptions.IgnoreCase | RegexOptions.CultureInvariant";
+                    yield return new object[]
+                    {
+                        @"using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        var isMatch = [|" + ConstructRegexInvocation(invocationType, pattern, options) + @"|]" + isMatchInvocation + @";
+        var isMatch = [|"
+                            + ConstructRegexInvocation(invocationType, pattern, options)
+                            + @"|]"
+                            + isMatchInvocation
+                            + @";
     }
-}", @"using System.Text.RegularExpressions;
+}",
+                        @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -1063,29 +1347,46 @@ public partial class Program
         var isMatch = MyRegex().IsMatch("""");
     }
 
-    [GeneratedRegex(" + $"{pattern}, {options}" + @")]
+    [GeneratedRegex("
+                            + $"{pattern}, {options}"
+                            + @")]
     private static partial Regex MyRegex();
-}" };
+}"
+                    };
                 }
             }
         }
 
         public static IEnumerable<object[]> NoOptionsCultureTestData()
         {
-            foreach (InvocationType invocationType in new[] { InvocationType.Constructor, InvocationType.StaticMethods })
+            foreach (
+                InvocationType invocationType in new[]
+                {
+                    InvocationType.Constructor,
+                    InvocationType.StaticMethods
+                }
+            )
             {
-                string isMatchInvocation = invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
+                string isMatchInvocation =
+                    invocationType == InvocationType.Constructor ? @".IsMatch("""")" : string.Empty;
 
                 // Test no options passed in
-                yield return new object[] { @"using System.Text.RegularExpressions;
+                yield return new object[]
+                {
+                    @"using System.Text.RegularExpressions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        var isMatch = [|" + ConstructRegexInvocation(invocationType, "\"(?i)abc\"") + @"|]" + isMatchInvocation + @";
+        var isMatch = [|"
+                        + ConstructRegexInvocation(invocationType, "\"(?i)abc\"")
+                        + @"|]"
+                        + isMatchInvocation
+                        + @";
     }
-}", @"using System.Text.RegularExpressions;
+}",
+                    @"using System.Text.RegularExpressions;
 
 public partial class Program
 {
@@ -1094,40 +1395,49 @@ public partial class Program
         var isMatch = MyRegex().IsMatch("""");
     }
 
-    [GeneratedRegex(" + $"\"(?i)abc\", RegexOptions.None, \"{CultureInfo.CurrentCulture.Name}" + @""")]
+    [GeneratedRegex("
+                        + $"\"(?i)abc\", RegexOptions.None, \"{CultureInfo.CurrentCulture.Name}"
+                        + @""")]
     private static partial Regex MyRegex();
-}" };
+}"
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(DetectsCurrentCultureTestData))]
         [MemberData(nameof(NoOptionsCultureTestData))]
-        public async Task DetectsCurrentCulture(string test, string fixedSource)
-            => await VerifyCS.VerifyCodeFixAsync(test, fixedSource);
+        public async Task DetectsCurrentCulture(string test, string fixedSource) =>
+            await VerifyCS.VerifyCodeFixAsync(test, fixedSource);
 
         #region Test helpers
 
-        private static string ConstructRegexInvocation(InvocationType invocationType, string pattern, string? options = null)
-            => invocationType switch
+        private static string ConstructRegexInvocation(
+            InvocationType invocationType,
+            string pattern,
+            string? options = null
+        ) =>
+            invocationType switch
             {
-                InvocationType.StaticMethods => (pattern is null, options is null) switch
-                {
-                    (false, true) => $"Regex.IsMatch(\"\", {pattern})",
-                    (false, false) => $"Regex.IsMatch(\"\", {pattern}, {options})",
-                    _ => throw new InvalidOperationException()
-                },
-                InvocationType.Constructor => (pattern is null, options is null) switch
-                {
-                    (false, true) => $"new Regex({pattern})",
-                    (false, false) => $"new Regex({pattern}, {options})",
-                    _ => throw new InvalidOperationException()
-                },
+                InvocationType.StaticMethods
+                    => (pattern is null, options is null) switch
+                    {
+                        (false, true) => $"Regex.IsMatch(\"\", {pattern})",
+                        (false, false) => $"Regex.IsMatch(\"\", {pattern}, {options})",
+                        _ => throw new InvalidOperationException()
+                    },
+                InvocationType.Constructor
+                    => (pattern is null, options is null) switch
+                    {
+                        (false, true) => $"new Regex({pattern})",
+                        (false, false) => $"new Regex({pattern}, {options})",
+                        _ => throw new InvalidOperationException()
+                    },
                 _ => throw new ArgumentOutOfRangeException(nameof(invocationType))
             };
 
-        public static IEnumerable<object[]> InvocationTypes
-            => new object[][]
+        public static IEnumerable<object[]> InvocationTypes =>
+            new object[][]
             {
                 new object[] { InvocationType.StaticMethods },
                 new object[] { InvocationType.Constructor }

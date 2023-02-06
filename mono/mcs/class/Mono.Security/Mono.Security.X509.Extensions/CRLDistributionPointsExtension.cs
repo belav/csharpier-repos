@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,8 +35,8 @@ using System.Text;
 using Mono.Security;
 using Mono.Security.X509;
 
-namespace Mono.Security.X509.Extensions {
-
+namespace Mono.Security.X509.Extensions
+{
     // References:
     // a.    Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile
     //    http://www.ietf.org/rfc/rfc3280.txt
@@ -45,20 +45,20 @@ namespace Mono.Security.X509.Extensions {
 
     /*
      * id-ce-cRLDistributionPoints OBJECT IDENTIFIER ::=  { id-ce 31 }
-     * 
+     *
      * CRLDistributionPoints ::= SEQUENCE SIZE (1..MAX) OF DistributionPoint
-     * 
+     *
      * DistributionPoint ::= SEQUENCE {
      *    distributionPoint       [0]     DistributionPointName OPTIONAL,
      *    reasons                 [1]     ReasonFlags OPTIONAL,
-     *    cRLIssuer               [2]     GeneralNames OPTIONAL 
+     *    cRLIssuer               [2]     GeneralNames OPTIONAL
      * }
-     * 
+     *
      * DistributionPointName ::= CHOICE {
      *    fullName                [0]     GeneralNames,
-     *    nameRelativeToCRLIssuer [1]     RelativeDistinguishedName 
+     *    nameRelativeToCRLIssuer [1]     RelativeDistinguishedName
      * }
-     * 
+     *
      * ReasonFlags ::= BIT STRING {
      *    unused                  (0),
      *    keyCompromise           (1),
@@ -71,37 +71,42 @@ namespace Mono.Security.X509.Extensions {
      *    aACompromise            (8) }
      */
 
-    public class CRLDistributionPointsExtension : X509Extension {
-
-        public class DistributionPoint {
+    public class CRLDistributionPointsExtension : X509Extension
+    {
+        public class DistributionPoint
+        {
             public string Name { get; private set; }
             public ReasonFlags Reasons { get; private set; }
             public string CRLIssuer { get; private set; }
 
-            public DistributionPoint (string dp, ReasonFlags reasons, string issuer) 
+            public DistributionPoint(string dp, ReasonFlags reasons, string issuer)
             {
                 Name = dp;
                 Reasons = reasons;
                 CRLIssuer = issuer;
             }
 
-            public DistributionPoint (ASN1 dp)
+            public DistributionPoint(ASN1 dp)
             {
-                for (int i = 0; i < dp.Count; i++) {
+                for (int i = 0; i < dp.Count; i++)
+                {
                     ASN1 el = dp[i];
-                    switch (el.Tag) {
-                    case 0xA0: // DistributionPointName OPTIONAL
-                        for (int j = 0; j < el.Count; j++) {
-                            ASN1 dpn = el [j];
-                            if (dpn.Tag == 0xA0) {
-                                Name = new GeneralNames (dpn).ToString ();
+                    switch (el.Tag)
+                    {
+                        case 0xA0: // DistributionPointName OPTIONAL
+                            for (int j = 0; j < el.Count; j++)
+                            {
+                                ASN1 dpn = el[j];
+                                if (dpn.Tag == 0xA0)
+                                {
+                                    Name = new GeneralNames(dpn).ToString();
+                                }
                             }
-                        }
-                        break;
-                    case 0xA1: // ReasonFlags OPTIONAL
-                        break;
-                    case 0xA2: // RelativeDistinguishedName
-                        break;
+                            break;
+                        case 0xA1: // ReasonFlags OPTIONAL
+                            break;
+                        case 0xA2: // RelativeDistinguishedName
+                            break;
                     }
                 }
             }
@@ -123,59 +128,60 @@ namespace Mono.Security.X509.Extensions {
 
         private List<DistributionPoint> dps;
 
-        public CRLDistributionPointsExtension () : base () 
+        public CRLDistributionPointsExtension()
+            : base()
         {
             extnOid = "2.5.29.31";
-            dps = new List<DistributionPoint> ();
+            dps = new List<DistributionPoint>();
         }
 
-        public CRLDistributionPointsExtension (ASN1 asn1) 
-            : base (asn1)
-        {
-        }
+        public CRLDistributionPointsExtension(ASN1 asn1)
+            : base(asn1) { }
 
-        public CRLDistributionPointsExtension (X509Extension extension) 
-            : base (extension)
-        {
-        }
+        public CRLDistributionPointsExtension(X509Extension extension)
+            : base(extension) { }
 
-        protected override void Decode () 
+        protected override void Decode()
         {
-            dps = new List<DistributionPoint> ();
-            ASN1 sequence = new ASN1 (extnValue.Value);
+            dps = new List<DistributionPoint>();
+            ASN1 sequence = new ASN1(extnValue.Value);
             if (sequence.Tag != 0x30)
-                throw new ArgumentException ("Invalid CRLDistributionPoints extension");
+                throw new ArgumentException("Invalid CRLDistributionPoints extension");
             // for every distribution point
-            for (int i=0; i < sequence.Count; i++) {
-                dps.Add (new DistributionPoint (sequence [i]));
+            for (int i = 0; i < sequence.Count; i++)
+            {
+                dps.Add(new DistributionPoint(sequence[i]));
             }
         }
 
-        public override string Name {
+        public override string Name
+        {
             get { return "CRL Distribution Points"; }
         }
 
-        public IEnumerable<DistributionPoint> DistributionPoints {
+        public IEnumerable<DistributionPoint> DistributionPoints
+        {
             get { return dps; }
         }
 
-        public override string ToString () 
+        public override string ToString()
         {
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new StringBuilder();
             int i = 1;
-            foreach (DistributionPoint dp in dps) {
-                sb.Append ("[");
-                sb.Append (i++);
-                sb.Append ("]CRL Distribution Point");
-                sb.Append (Environment.NewLine);
-                sb.Append ("\tDistribution Point Name:");
-                sb.Append ("\t\tFull Name:");
-                sb.Append (Environment.NewLine);
-                sb.Append ("\t\t\t");
-                sb.Append (dp.Name);
-                sb.Append (Environment.NewLine);
+            foreach (DistributionPoint dp in dps)
+            {
+                sb.Append("[");
+                sb.Append(i++);
+                sb.Append("]CRL Distribution Point");
+                sb.Append(Environment.NewLine);
+                sb.Append("\tDistribution Point Name:");
+                sb.Append("\t\tFull Name:");
+                sb.Append(Environment.NewLine);
+                sb.Append("\t\t\t");
+                sb.Append(dp.Name);
+                sb.Append(Environment.NewLine);
             }
-            return sb.ToString ();
+            return sb.ToString();
         }
     }
 }

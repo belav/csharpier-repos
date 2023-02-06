@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,49 +30,60 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Mono.Mozilla {
-
-    [Guid ("9b0c2ed7-111c-4824-adf9-ef0da6dad371")]
-    [InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-    [ComImport ()]
-    internal interface nsIDOMMediaList {
-
+namespace Mono.Mozilla
+{
+    [Guid("9b0c2ed7-111c-4824-adf9-ef0da6dad371")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMMediaList
+    {
 #region nsIDOMMediaList
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getMediaText (  /*DOMString*/ HandleRef ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getMediaText( /*DOMString*/
+            HandleRef ret
+        );
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int setMediaText ( /*DOMString*/ HandleRef value);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setMediaText( /*DOMString*/
+            HandleRef value
+        );
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int getLength ( out uint ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getLength(out uint ret);
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int item (
-                   uint index,  /*DOMString*/ HandleRef ret);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int item(
+            uint index, /*DOMString*/
+            HandleRef ret
+        );
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int deleteMedium (
-                   /*DOMString*/ HandleRef oldMedium);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int deleteMedium(
+            /*DOMString*/HandleRef oldMedium
+        );
 
         [PreserveSigAttribute]
-        [MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        int appendMedium (
-                   /*DOMString*/ HandleRef newMedium);
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int appendMedium(
+            /*DOMString*/HandleRef newMedium
+        );
 
 #endregion
     }
 
-
-    internal class nsDOMMediaList {
-        public static nsIDOMMediaList GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMMediaList obj)
+    internal class nsDOMMediaList
+    {
+        public static nsIDOMMediaList GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIDOMMediaList obj
+        )
         {
-            object o = Base.GetProxyForObject (control, typeof(nsIDOMMediaList).GUID, obj);
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMMediaList).GUID, obj);
             return o as nsIDOMMediaList;
         }
     }

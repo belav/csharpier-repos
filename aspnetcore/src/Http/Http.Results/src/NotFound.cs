@@ -18,9 +18,7 @@ public sealed class NotFound : IResult, IEndpointMetadataProvider, IStatusCodeHt
     /// <summary>
     /// Initializes a new instance of the <see cref="NotFound"/> class with the values.
     /// </summary>
-    internal NotFound()
-    {
-    }
+    internal NotFound() { }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status404NotFound"/>
@@ -36,7 +34,9 @@ public sealed class NotFound : IResult, IEndpointMetadataProvider, IStatusCodeHt
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.NotFoundObjectResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.NotFoundObjectResult"
+        );
 
         HttpResultsHelper.Log.WritingResultAsStatusCode(logger, StatusCode);
         httpContext.Response.StatusCode = StatusCode;
@@ -45,7 +45,10 @@ public sealed class NotFound : IResult, IEndpointMetadataProvider, IStatusCodeHt
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);

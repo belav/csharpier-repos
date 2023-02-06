@@ -13,9 +13,10 @@ namespace System
          * this directory without previously talking to me (Martin Baulig (mabaul@microsoft.com))
          * as I plan to eventually remove / replace them with a more robust mechanism.
          */
-        public static Version OpenSslVersion => new Version (-1, 0);
+        public static Version OpenSslVersion => new Version(-1, 0);
         public static bool SupportsX509Chain => UsingBtls;
         public static bool SupportsCertRevocation => !UsingBtls;
-        public static bool UsingBtls => string.Equals (Environment.GetEnvironmentVariable ("MONO_TLS_PROVIDER"), "btls");
+        public static bool UsingBtls =>
+            string.Equals(Environment.GetEnvironmentVariable("MONO_TLS_PROVIDER"), "btls");
     }
 }

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -13,7 +13,7 @@
 //
 //  Purpose:    Arrow annotation classes.
 //
-//    Reviewed:    
+//    Reviewed:
 //
 //===================================================================
 
@@ -44,15 +44,12 @@ using System.Web.UI.DataVisualization.Charting.Utilities;
 using System.Web.UI.DataVisualization.Charting.Borders3D;
 #endif
 
-
 #endregion
 
 #if Microsoft_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting
-
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
     #region Enumeration
@@ -61,9 +58,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// Arrow annotation styles.
     /// <seealso cref="ArrowAnnotation.ArrowStyle"/>
     /// </summary>
-    [
-    SRDescription("DescriptionAttributeArrowStyle_ArrowStyle")
-    ]
+    [SRDescription("DescriptionAttributeArrowStyle_ArrowStyle")]
     public enum ArrowStyle
     {
         /// <summary>
@@ -91,22 +86,26 @@ namespace System.Web.UI.DataVisualization.Charting
     /// Arrow annotations can be used to connect to points on the chart or highlight a
     /// single chart area. Different arrow styles and sizes may be applied.
     /// </remarks>
-    [
-        SRDescription("DescriptionAttributeArrowAnnotation_ArrowAnnotation"),
-    ]
+    [SRDescription("DescriptionAttributeArrowAnnotation_ArrowAnnotation"),]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class ArrowAnnotation : Annotation
     {
         #region Fields
 
         // Annotation arrow style
-        private        ArrowStyle        _arrowStyle = ArrowStyle.Simple;
+        private ArrowStyle _arrowStyle = ArrowStyle.Simple;
 
         // Annotation arrow size
-        private        int                _arrowSize = 5;
+        private int _arrowSize = 5;
 
         #endregion
 
@@ -115,7 +114,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Default public constructor.
         /// </summary>
-        public ArrowAnnotation() 
+        public ArrowAnnotation()
             : base()
         {
             base.AnchorAlignment = ContentAlignment.TopLeft;
@@ -135,18 +134,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <see cref="ArrowStyle"/> of an annotation.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        DefaultValue(ArrowStyle.Simple),
-        SRDescription("DescriptionAttributeArrowAnnotation_ArrowStyle"),
-        ParenthesizePropertyNameAttribute(true),
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            DefaultValue(ArrowStyle.Simple),
+            SRDescription("DescriptionAttributeArrowAnnotation_ArrowStyle"),
+            ParenthesizePropertyNameAttribute(true),
         ]
         virtual public ArrowStyle ArrowStyle
         {
-            get
-            {
-                return _arrowStyle;
-            }
+            get { return _arrowStyle; }
             set
             {
                 _arrowStyle = value;
@@ -162,33 +158,39 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Integer value that represents arrow size (thickness) in pixels.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        DefaultValue(5),
-        SRDescription("DescriptionAttributeArrowAnnotation_ArrowSize"),
-        ParenthesizePropertyNameAttribute(true),
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            DefaultValue(5),
+            SRDescription("DescriptionAttributeArrowAnnotation_ArrowSize"),
+            ParenthesizePropertyNameAttribute(true),
         ]
         virtual public int ArrowSize
         {
-            get
-            {
-                return _arrowSize;
-            }
+            get { return _arrowSize; }
             set
             {
-                if(value <= 0)
+                if (value <= 0)
                 {
-                    throw(new ArgumentOutOfRangeException("value", SR.ExceptionAnnotationArrowSizeIsZero));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionAnnotationArrowSizeIsZero
+                        )
+                    );
                 }
-                if(value > 100)
+                if (value > 100)
                 {
-                    throw (new ArgumentOutOfRangeException("value", SR.ExceptionAnnotationArrowSizeMustBeLessThen100));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionAnnotationArrowSizeMustBeLessThen100
+                        )
+                    );
                 }
                 _arrowSize = value;
                 Invalidate();
             }
         }
-
 
         #endregion // Arrow properties
 
@@ -203,31 +205,25 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <seealso cref="Annotation.AnchorOffsetY"/>
         /// </summary>
         /// <value>
-        /// A <see cref="ContentAlignment"/> value that represents the annotation's alignment to 
+        /// A <see cref="ContentAlignment"/> value that represents the annotation's alignment to
         /// the anchor point.
         /// </value>
         /// <remarks>
-        /// The annotation must be anchored using either <see cref="Annotation.AnchorDataPoint"/>, or the <see cref="Annotation.AnchorX"/> 
-        /// and <see cref="Annotation.AnchorY"/> properties. Its <see cref="Annotation.X"/> and <see cref="Annotation.Y"/> 
+        /// The annotation must be anchored using either <see cref="Annotation.AnchorDataPoint"/>, or the <see cref="Annotation.AnchorX"/>
+        /// and <see cref="Annotation.AnchorY"/> properties. Its <see cref="Annotation.X"/> and <see cref="Annotation.Y"/>
         /// properties must be set to <b>Double.NaN</b>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchor"),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DefaultValue(typeof(ContentAlignment), "TopLeft"),
-        SRDescription("DescriptionAttributeAnchorAlignment"),
+            SRCategory("CategoryAttributeAnchor"),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DefaultValue(typeof(ContentAlignment), "TopLeft"),
+            SRDescription("DescriptionAttributeAnchorAlignment"),
         ]
         override public ContentAlignment AnchorAlignment
         {
-            get
-            {
-                return base.AnchorAlignment;
-            }
-            set
-            {
-                base.AnchorAlignment = value;
-            }
+            get { return base.AnchorAlignment; }
+            set { base.AnchorAlignment = value; }
         }
 
         #endregion    // Anchoring
@@ -238,27 +234,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets an annotation's type name.
         /// </summary>
         /// <remarks>
-        /// This property is used to get the name of each annotation type  
-        /// (e.g. Line, Rectangle, Ellipse). 
+        /// This property is used to get the name of each annotation type
+        /// (e.g. Line, Rectangle, Ellipse).
         /// <para>
         /// This property is for internal use and is hidden at design and run time.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeAnnotationType"),
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeAnnotationType"),
         ]
         public override string AnnotationType
         {
-            get
-            {
-                return "Arrow";
-            }
+            get { return "Arrow"; }
         }
 
         /// <summary>
@@ -272,21 +265,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This property is for internal use and is hidden at design and run time.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(SelectionPointsStyle.Rectangle),
-        ParenthesizePropertyNameAttribute(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeSelectionPointsStyle"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(SelectionPointsStyle.Rectangle),
+            ParenthesizePropertyNameAttribute(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeSelectionPointsStyle"),
         ]
         override internal SelectionPointsStyle SelectionPointsStyle
         {
-            get
-            {
-                return SelectionPointsStyle.TwoPoints;
-            }
+            get { return SelectionPointsStyle.TwoPoints; }
         }
 
         #endregion
@@ -311,16 +301,21 @@ namespace System.Web.UI.DataVisualization.Charting
             PointF anchorPoint = PointF.Empty;
             SizeF size = SizeF.Empty;
             GetRelativePosition(out firstPoint, out size, out anchorPoint);
-            PointF    secondPoint = new PointF(firstPoint.X + size.Width, firstPoint.Y + size.Height);
+            PointF secondPoint = new PointF(firstPoint.X + size.Width, firstPoint.Y + size.Height);
 
             // Create selection rectangle
-            RectangleF selectionRect = new RectangleF(firstPoint, new SizeF(secondPoint.X - firstPoint.X, secondPoint.Y - firstPoint.Y));
+            RectangleF selectionRect = new RectangleF(
+                firstPoint,
+                new SizeF(secondPoint.X - firstPoint.X, secondPoint.Y - firstPoint.Y)
+            );
 
             // Check if text position is valid
-            if( float.IsNaN(firstPoint.X) || 
-                float.IsNaN(firstPoint.Y) || 
-                float.IsNaN(secondPoint.X) || 
-                float.IsNaN(secondPoint.Y) )
+            if (
+                float.IsNaN(firstPoint.X)
+                || float.IsNaN(firstPoint.Y)
+                || float.IsNaN(secondPoint.X)
+                || float.IsNaN(secondPoint.Y)
+            )
             {
                 return;
             }
@@ -328,7 +323,6 @@ namespace System.Web.UI.DataVisualization.Charting
             // Get arrow shape path
             using (GraphicsPath arrowPathAbs = GetArrowPath(graphics, selectionRect))
             {
-
                 // Draw arrow shape
                 if (this.Common.ProcessModePaint)
                 {
@@ -347,7 +341,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         this.LineDashStyle,
                         PenAlignment.Center,
                         this.ShadowOffset,
-                        this.ShadowColor);
+                        this.ShadowColor
+                    );
                 }
 
                 // Process hot region
@@ -360,16 +355,17 @@ namespace System.Web.UI.DataVisualization.Charting
                         false,
                         ReplaceKeywords(this.ToolTip),
 #if Microsoft_CONTROL
-                    String.Empty,
-                    String.Empty,
-                    String.Empty,
+                        String.Empty,
+                        String.Empty,
+                        String.Empty,
 #else // Microsoft_CONTROL
-                    ReplaceKeywords(this.Url),
-                    ReplaceKeywords(this.MapAreaAttributes),
-                    ReplaceKeywords(this.PostBackValue),
+                        ReplaceKeywords(this.Url),
+                        ReplaceKeywords(this.MapAreaAttributes),
+                        ReplaceKeywords(this.PostBackValue),
 #endif // Microsoft_CONTROL
- this,
-                        ChartElementType.Annotation);
+                        this,
+                        ChartElementType.Annotation
+                    );
                 }
 
                 // Paint selection handles
@@ -383,9 +379,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="graphics"></param>
         /// <param name="position"></param>
         /// <returns></returns>
-        private GraphicsPath GetArrowPath(
-            ChartGraphics graphics,
-            RectangleF position)
+        private GraphicsPath GetArrowPath(ChartGraphics graphics, RectangleF position)
         {
             // Get absolute position
             RectangleF positionAbs = graphics.GetAbsoluteRectangle(position);
@@ -401,45 +395,108 @@ namespace System.Web.UI.DataVisualization.Charting
             // and going to the right for the length of the rotated arrow.
             GraphicsPath path = new GraphicsPath();
 
-            PointF[]    points = null;
-            float        pointerRatio = 2.1f;
-            if(this.ArrowStyle == ArrowStyle.Simple)
+            PointF[] points = null;
+            float pointerRatio = 2.1f;
+            if (this.ArrowStyle == ArrowStyle.Simple)
             {
-                points = new PointF[] {
-                                          firstPoint,
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y - this.ArrowSize*pointerRatio),
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y - this.ArrowSize),
-                                          new PointF(firstPoint.X + arrowLength, firstPoint.Y - this.ArrowSize),
-                                          new PointF(firstPoint.X + arrowLength, firstPoint.Y + this.ArrowSize),
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y + this.ArrowSize),
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y + this.ArrowSize*pointerRatio) };
+                points = new PointF[]
+                {
+                    firstPoint,
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y - this.ArrowSize * pointerRatio
+                    ),
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y - this.ArrowSize
+                    ),
+                    new PointF(firstPoint.X + arrowLength, firstPoint.Y - this.ArrowSize),
+                    new PointF(firstPoint.X + arrowLength, firstPoint.Y + this.ArrowSize),
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y + this.ArrowSize
+                    ),
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y + this.ArrowSize * pointerRatio
+                    )
+                };
             }
-            else if(this.ArrowStyle == ArrowStyle.DoubleArrow)
+            else if (this.ArrowStyle == ArrowStyle.DoubleArrow)
             {
-                points = new PointF[] {
-                                          firstPoint,
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y - this.ArrowSize*pointerRatio),
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y - this.ArrowSize),
-                                          new PointF(firstPoint.X + arrowLength - this.ArrowSize*pointerRatio, firstPoint.Y - this.ArrowSize),
-                                          new PointF(firstPoint.X + arrowLength - this.ArrowSize*pointerRatio, firstPoint.Y - this.ArrowSize*pointerRatio),
-                                          new PointF(firstPoint.X + arrowLength, firstPoint.Y),
-                                          new PointF(firstPoint.X + arrowLength - this.ArrowSize*pointerRatio, firstPoint.Y + this.ArrowSize*pointerRatio),
-                                          new PointF(firstPoint.X + arrowLength - this.ArrowSize*pointerRatio, firstPoint.Y + this.ArrowSize),
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y + this.ArrowSize),
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y + this.ArrowSize*pointerRatio) };
+                points = new PointF[]
+                {
+                    firstPoint,
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y - this.ArrowSize * pointerRatio
+                    ),
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y - this.ArrowSize
+                    ),
+                    new PointF(
+                        firstPoint.X + arrowLength - this.ArrowSize * pointerRatio,
+                        firstPoint.Y - this.ArrowSize
+                    ),
+                    new PointF(
+                        firstPoint.X + arrowLength - this.ArrowSize * pointerRatio,
+                        firstPoint.Y - this.ArrowSize * pointerRatio
+                    ),
+                    new PointF(firstPoint.X + arrowLength, firstPoint.Y),
+                    new PointF(
+                        firstPoint.X + arrowLength - this.ArrowSize * pointerRatio,
+                        firstPoint.Y + this.ArrowSize * pointerRatio
+                    ),
+                    new PointF(
+                        firstPoint.X + arrowLength - this.ArrowSize * pointerRatio,
+                        firstPoint.Y + this.ArrowSize
+                    ),
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y + this.ArrowSize
+                    ),
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y + this.ArrowSize * pointerRatio
+                    )
+                };
             }
-            else if(this.ArrowStyle == ArrowStyle.Tailed)
+            else if (this.ArrowStyle == ArrowStyle.Tailed)
             {
-                float        tailRatio = 2.1f;
-                points = new PointF[] {
-                                          firstPoint,
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y - this.ArrowSize*pointerRatio),
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y - this.ArrowSize),
-                                          new PointF(firstPoint.X + arrowLength, firstPoint.Y - this.ArrowSize*tailRatio),
-                                          new PointF(firstPoint.X + arrowLength - this.ArrowSize*tailRatio, firstPoint.Y),
-                                          new PointF(firstPoint.X + arrowLength, firstPoint.Y + this.ArrowSize*tailRatio),
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y + this.ArrowSize),
-                                          new PointF(firstPoint.X + this.ArrowSize*pointerRatio, firstPoint.Y + this.ArrowSize*pointerRatio) };
+                float tailRatio = 2.1f;
+                points = new PointF[]
+                {
+                    firstPoint,
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y - this.ArrowSize * pointerRatio
+                    ),
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y - this.ArrowSize
+                    ),
+                    new PointF(
+                        firstPoint.X + arrowLength,
+                        firstPoint.Y - this.ArrowSize * tailRatio
+                    ),
+                    new PointF(
+                        firstPoint.X + arrowLength - this.ArrowSize * tailRatio,
+                        firstPoint.Y
+                    ),
+                    new PointF(
+                        firstPoint.X + arrowLength,
+                        firstPoint.Y + this.ArrowSize * tailRatio
+                    ),
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y + this.ArrowSize
+                    ),
+                    new PointF(
+                        firstPoint.X + this.ArrowSize * pointerRatio,
+                        firstPoint.Y + this.ArrowSize * pointerRatio
+                    )
+                };
             }
             else
             {
@@ -451,13 +508,13 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // Calculate arrow angle
             float angle = (float)(Math.Atan(deltaY / deltaX) * 180f / Math.PI);
-            if(deltaX < 0)
+            if (deltaX < 0)
             {
                 angle += 180f;
             }
 
             // Rotate arrow path around the first point
-            using( Matrix matrix = new Matrix() )
+            using (Matrix matrix = new Matrix())
             {
                 matrix.RotateAt(angle, firstPoint);
                 path.Transform(matrix);

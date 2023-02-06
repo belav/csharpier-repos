@@ -34,23 +34,30 @@ namespace System.Net
     {
         readonly BufferOffsetSize readBuffer;
 
-        public BufferedReadStream (WebOperation operation, Stream innerStream,
-                                   BufferOffsetSize readBuffer)
-            : base (operation, innerStream)
+        public BufferedReadStream(
+            WebOperation operation,
+            Stream innerStream,
+            BufferOffsetSize readBuffer
+        )
+            : base(operation, innerStream)
         {
             this.readBuffer = readBuffer;
         }
 
-        protected override async Task<int> ProcessReadAsync (
-            byte[] buffer, int offset, int size,
-            CancellationToken cancellationToken)
+        protected override async Task<int> ProcessReadAsync(
+            byte[] buffer,
+            int offset,
+            int size,
+            CancellationToken cancellationToken
+        )
         {
-            cancellationToken.ThrowIfCancellationRequested ();
+            cancellationToken.ThrowIfCancellationRequested();
 
             var remaining = readBuffer?.Size ?? 0;
-            if (remaining > 0) {
+            if (remaining > 0)
+            {
                 int copy = (remaining > size) ? size : remaining;
-                Buffer.BlockCopy (readBuffer.Buffer, readBuffer.Offset, buffer, offset, copy);
+                Buffer.BlockCopy(readBuffer.Buffer, readBuffer.Offset, buffer, offset, copy);
                 readBuffer.Offset += copy;
                 readBuffer.Size -= copy;
                 offset += copy;
@@ -61,20 +68,22 @@ namespace System.Net
             if (InnerStream == null)
                 return 0;
 
-            return await InnerStream.ReadAsync (
-                buffer, offset, size, cancellationToken).ConfigureAwait (false);
+            return await InnerStream
+                .ReadAsync(buffer, offset, size, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        internal bool TryReadFromBuffer (byte[] buffer, int offset, int size, out int result)
+        internal bool TryReadFromBuffer(byte[] buffer, int offset, int size, out int result)
         {
             var remaining = readBuffer?.Size ?? 0;
-            if (remaining <= 0) {
+            if (remaining <= 0)
+            {
                 result = 0;
                 return InnerStream == null;
             }
 
             int copy = (remaining > size) ? size : remaining;
-            Buffer.BlockCopy (readBuffer.Buffer, readBuffer.Offset, buffer, offset, copy);
+            Buffer.BlockCopy(readBuffer.Buffer, readBuffer.Offset, buffer, offset, copy);
             readBuffer.Offset += copy;
             readBuffer.Size -= copy;
             offset += copy;

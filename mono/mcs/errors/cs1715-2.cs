@@ -3,15 +3,14 @@
 
 using System;
 
-class BaseClass {
-        protected virtual event EventHandler Prop;
+class BaseClass
+{
+    protected virtual event EventHandler Prop;
 }
 
-delegate void TestD ();
+delegate void TestD();
 
-class DerivedClass: BaseClass {
-        protected override event TestD Prop;
+class DerivedClass : BaseClass
+{
+    protected override event TestD Prop;
 }
-
-
-

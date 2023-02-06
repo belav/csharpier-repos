@@ -6,9 +6,9 @@ struct A
     public long b;
     public float c;
 
-    public A (int foo)
+    public A(int foo)
     {
-        b = (long) c;
+        b = (long)c;
         c = 1;
     }
 }

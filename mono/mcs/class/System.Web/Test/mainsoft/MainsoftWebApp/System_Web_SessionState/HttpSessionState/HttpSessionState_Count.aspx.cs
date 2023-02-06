@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_SessionState
 {
-    public class HttpSessionState_Count
-        : GHTBaseWeb 
+    public class HttpSessionState_Count : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,18 +46,18 @@ namespace GHTTests.System_Web_dll.System_Web_SessionState
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -66,45 +65,45 @@ namespace GHTTests.System_Web_dll.System_Web_SessionState
             GHTTestBegin(frm);
 
             GHTSubTestBegin("GHTSubTest1");
-            try 
+            try
             {
                 Session.Clear();
                 string ttt = (string)Session["variable"];
                 GHTSubTestAddResult(Session.Count.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTSubTestBegin("GHTSubTest2");
-            try 
+            try
             {
                 GHTSubTestAddResult(Session.Count.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTSubTestBegin("GHTSubTest3");
-            try 
+            try
             {
                 Session["v1"] = "v1";
                 Session["v2"] = "v2";
                 Session["v3"] = "v3";
                 GHTSubTestAddResult(Session.Count.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTSubTestBegin("GHTSubTest4");
-            try 
+            try
             {
                 Session.Add("v4", "v4");
                 Session.Add("v5", "v5");
@@ -112,21 +111,21 @@ namespace GHTTests.System_Web_dll.System_Web_SessionState
                 Session.Add("v7", "v7");
                 GHTSubTestAddResult(Session.Count.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTSubTestBegin("GHTSubTest4");
-            try 
+            try
             {
                 Session["v8"] = "v8";
                 Session["v9"] = "v9";
                 Session["v10"] = "v10";
                 GHTSubTestAddResult(Session.Count.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

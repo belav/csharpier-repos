@@ -10,7 +10,8 @@ namespace ILLink.RoslynAnalyzer.DataFlow
 {
     // Tracks the set of methods which get analyzed together during interprocedural analysis,
     // and the possible states of hoisted locals in state machine methods and lambdas/local functions.
-    public struct InterproceduralState<TValue, TValueLattice> : IEquatable<InterproceduralState<TValue, TValueLattice>>
+    public struct InterproceduralState<TValue, TValueLattice>
+        : IEquatable<InterproceduralState<TValue, TValueLattice>>
         where TValue : struct, IEquatable<TValue>
         where TValueLattice : ILattice<TValue>
     {
@@ -25,82 +26,99 @@ namespace ILLink.RoslynAnalyzer.DataFlow
 
         readonly InterproceduralStateLattice<TValue, TValueLattice> lattice;
 
-        public InterproceduralState (
+        public InterproceduralState(
             ValueSet<MethodBodyValue> methods,
             DefaultValueDictionary<LocalKey, Maybe<TValue>> hoistedLocals,
-            InterproceduralStateLattice<TValue, TValueLattice> lattice)
+            InterproceduralStateLattice<TValue, TValueLattice> lattice
+        )
         {
             Methods = methods;
             HoistedLocals = hoistedLocals;
             this.lattice = lattice;
         }
 
-        public bool Equals (InterproceduralState<TValue, TValueLattice> other)
-            => Methods.Equals (other.Methods) && HoistedLocals.Equals (other.HoistedLocals);
+        public bool Equals(InterproceduralState<TValue, TValueLattice> other) =>
+            Methods.Equals(other.Methods) && HoistedLocals.Equals(other.HoistedLocals);
 
-        public InterproceduralState<TValue, TValueLattice> Clone ()
-            => new (Methods.Clone (),
-            HoistedLocals.Clone (), lattice);
+        public InterproceduralState<TValue, TValueLattice> Clone() =>
+            new(Methods.Clone(), HoistedLocals.Clone(), lattice);
 
-        public void TrackMethod (MethodBodyValue method)
+        public void TrackMethod(MethodBodyValue method)
         {
-            var methodsList = new List<MethodBodyValue> (Methods);
-            methodsList.Add (method);
-            Methods = new ValueSet<MethodBodyValue> (methodsList);
+            var methodsList = new List<MethodBodyValue>(Methods);
+            methodsList.Add(method);
+            Methods = new ValueSet<MethodBodyValue>(methodsList);
         }
 
-        public void TrackHoistedLocal (LocalKey key)
+        public void TrackHoistedLocal(LocalKey key)
         {
-            var existingValue = HoistedLocals.Get (key);
+            var existingValue = HoistedLocals.Get(key);
             if (existingValue.MaybeValue != null)
                 return; // Already tracked
 
-            HoistedLocals.Set (key, new Maybe<TValue> (lattice.HoistedLocalLattice.ValueLattice.ValueLattice.Top));
+            HoistedLocals.Set(
+                key,
+                new Maybe<TValue>(lattice.HoistedLocalLattice.ValueLattice.ValueLattice.Top)
+            );
         }
 
-        public bool TrySetHoistedLocal (LocalKey key, TValue value)
+        public bool TrySetHoistedLocal(LocalKey key, TValue value)
         {
-            var existingValue = HoistedLocals.Get (key);
+            var existingValue = HoistedLocals.Get(key);
             if (existingValue.MaybeValue == null)
                 return false;
 
             // For hoisted locals, we track the entire set of assigned values seen
             // in the closure of a method, so setting a hoisted local value meets
             // it with any existing value.
-            HoistedLocals.Set (key,
-                lattice.HoistedLocalLattice.ValueLattice.Meet (
-                    existingValue, new (value)));
+            HoistedLocals.Set(
+                key,
+                lattice.HoistedLocalLattice.ValueLattice.Meet(existingValue, new(value))
+            );
             return true;
         }
 
-        public bool TryGetHoistedLocal (LocalKey key, [NotNullWhen (true)] out TValue? value)
-            => (value = HoistedLocals.Get (key).MaybeValue) != null;
+        public bool TryGetHoistedLocal(LocalKey key, [NotNullWhen(true)] out TValue? value) =>
+            (value = HoistedLocals.Get(key).MaybeValue) != null;
     }
 
-    public struct InterproceduralStateLattice<TValue, TValueLattice> : ILattice<InterproceduralState<TValue, TValueLattice>>
+    public struct InterproceduralStateLattice<TValue, TValueLattice>
+        : ILattice<InterproceduralState<TValue, TValueLattice>>
         where TValue : struct, IEquatable<TValue>
         where TValueLattice : ILattice<TValue>
     {
         public readonly ValueSetLattice<MethodBodyValue> MethodLattice;
 
-        public readonly DictionaryLattice<LocalKey, Maybe<TValue>, MaybeLattice<TValue, TValueLattice>> HoistedLocalLattice;
+        public readonly DictionaryLattice<
+            LocalKey,
+            Maybe<TValue>,
+            MaybeLattice<TValue, TValueLattice>
+        > HoistedLocalLattice;
 
-        public InterproceduralStateLattice (
+        public InterproceduralStateLattice(
             ValueSetLattice<MethodBodyValue> methodLattice,
-            DictionaryLattice<LocalKey, Maybe<TValue>, MaybeLattice<TValue, TValueLattice>> hoistedLocalLattice
+            DictionaryLattice<
+                LocalKey,
+                Maybe<TValue>,
+                MaybeLattice<TValue, TValueLattice>
+            > hoistedLocalLattice
         )
         {
             MethodLattice = methodLattice;
             HoistedLocalLattice = hoistedLocalLattice;
         }
 
-        public InterproceduralState<TValue, TValueLattice> Top => new (MethodLattice.Top,
-            HoistedLocalLattice.Top, this);
+        public InterproceduralState<TValue, TValueLattice> Top =>
+            new(MethodLattice.Top, HoistedLocalLattice.Top, this);
 
-        public InterproceduralState<TValue, TValueLattice> Meet (InterproceduralState<TValue, TValueLattice> left, InterproceduralState<TValue, TValueLattice> right)
-            => new (
-                MethodLattice.Meet (left.Methods, right.Methods),
-                HoistedLocalLattice.Meet (left.HoistedLocals, right.HoistedLocals),
-                this);
+        public InterproceduralState<TValue, TValueLattice> Meet(
+            InterproceduralState<TValue, TValueLattice> left,
+            InterproceduralState<TValue, TValueLattice> right
+        ) =>
+            new(
+                MethodLattice.Meet(left.Methods, right.Methods),
+                HoistedLocalLattice.Meet(left.HoistedLocals, right.HoistedLocals),
+                this
+            );
     }
 }

@@ -15,7 +15,10 @@ namespace System.ServiceModel.Configuration
     /// </summary>
     public partial class WebSocketTransportSettingsElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.TransportUsage, DefaultValue = WebSocketDefaults.TransportUsage)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TransportUsage,
+            DefaultValue = WebSocketDefaults.TransportUsage
+        )]
         [ServiceModelEnumValidator(typeof(WebSocketTransportUsageHelper))]
         public virtual WebSocketTransportUsage TransportUsage
         {
@@ -23,18 +26,24 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.TransportUsage] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.CreateNotificationOnConnection, DefaultValue = WebSocketDefaults.CreateNotificationOnConnection)]
+        [ConfigurationProperty(
+            ConfigurationStrings.CreateNotificationOnConnection,
+            DefaultValue = WebSocketDefaults.CreateNotificationOnConnection
+        )]
         public bool CreateNotificationOnConnection
         {
             get { return (bool)base[ConfigurationStrings.CreateNotificationOnConnection]; }
             set { base[ConfigurationStrings.CreateNotificationOnConnection] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.KeepAliveInterval, DefaultValue = WebSocketDefaults.DefaultKeepAliveIntervalString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.KeepAliveInterval,
+            DefaultValue = WebSocketDefaults.DefaultKeepAliveIntervalString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanInfinite)]
         public TimeSpan KeepAliveInterval
-        {   
+        {
             get { return (TimeSpan)base[ConfigurationStrings.KeepAliveInterval]; }
             set { base[ConfigurationStrings.KeepAliveInterval] = value; }
         }
@@ -47,14 +56,20 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.SubProtocol] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DisablePayloadMasking, DefaultValue = WebSocketDefaults.DisablePayloadMasking)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DisablePayloadMasking,
+            DefaultValue = WebSocketDefaults.DisablePayloadMasking
+        )]
         public bool DisablePayloadMasking
         {
             get { return (bool)base[ConfigurationStrings.DisablePayloadMasking]; }
             set { base[ConfigurationStrings.DisablePayloadMasking] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxPendingConnections, DefaultValue = WebSocketDefaults.DefaultMaxPendingConnections)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxPendingConnections,
+            DefaultValue = WebSocketDefaults.DefaultMaxPendingConnections
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxPendingConnections
         {
@@ -69,12 +84,30 @@ namespace System.ServiceModel.Configuration
                 throw FxTrace.Exception.ArgumentNull("settings");
             }
 
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TransportUsage, settings.TransportUsage);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.CreateNotificationOnConnection, settings.CreateNotificationOnConnection);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.KeepAliveInterval, settings.KeepAliveInterval);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SubProtocol, settings.SubProtocol);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.DisablePayloadMasking, settings.DisablePayloadMasking);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxPendingConnections, settings.MaxPendingConnections);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.TransportUsage,
+                settings.TransportUsage
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.CreateNotificationOnConnection,
+                settings.CreateNotificationOnConnection
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.KeepAliveInterval,
+                settings.KeepAliveInterval
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.SubProtocol,
+                settings.SubProtocol
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.DisablePayloadMasking,
+                settings.DisablePayloadMasking
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxPendingConnections,
+                settings.MaxPendingConnections
+            );
         }
 
         public void ApplyConfiguration(WebSocketTransportSettings settings)

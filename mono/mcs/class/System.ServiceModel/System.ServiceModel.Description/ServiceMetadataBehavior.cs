@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,16 +43,15 @@ namespace System.ServiceModel.Description
 
         MetadataExporter exporter;
 
-        public ServiceMetadataBehavior ()
-        {
-        }
+        public ServiceMetadataBehavior() { }
 
         public bool HttpGetEnabled { get; set; }
 
         public bool HttpsGetEnabled { get; set; }
 
-        public MetadataExporter MetadataExporter {
-            get { return exporter ?? (exporter = new WsdlExporter ()); }
+        public MetadataExporter MetadataExporter
+        {
+            get { return exporter ?? (exporter = new WsdlExporter()); }
             set { exporter = value; }
         }
 
@@ -66,51 +65,58 @@ namespace System.ServiceModel.Description
 
         public Binding HttpsGetBinding { get; set; }
 
-        void IServiceBehavior.AddBindingParameters (
+        void IServiceBehavior.AddBindingParameters(
             ServiceDescription description,
             ServiceHostBase serviceHostBase,
             Collection<ServiceEndpoint> endpoints,
-            BindingParameterCollection parameters)
-        {
-        }
+            BindingParameterCollection parameters
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior (
+        void IServiceBehavior.ApplyDispatchBehavior(
             ServiceDescription description,
-            ServiceHostBase serviceHostBase) {
-
-            ServiceMetadataExtension sme = ServiceMetadataExtension.EnsureServiceMetadataExtension (serviceHostBase);
+            ServiceHostBase serviceHostBase
+        )
+        {
+            ServiceMetadataExtension sme = ServiceMetadataExtension.EnsureServiceMetadataExtension(
+                serviceHostBase
+            );
 
             //Find ChannelDispatcher for Mex, and add a MexInstanceContextProvider
             //to it
-            foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers) {
+            foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers)
+            {
                 ChannelDispatcher cd = cdb as ChannelDispatcher;
                 if (cd == null)
                     continue;
 
-                foreach (EndpointDispatcher ed in cd.Endpoints) {
+                foreach (EndpointDispatcher ed in cd.Endpoints)
+                {
                     if (ed.ContractName == MexContractName)
-                        ed.DispatchRuntime.InstanceContextProvider = new MexInstanceContextProvider (serviceHostBase);
+                        ed.DispatchRuntime.InstanceContextProvider = new MexInstanceContextProvider(
+                            serviceHostBase
+                        );
                 }
             }
 
-            if (HttpGetEnabled) {
-                Uri uri = serviceHostBase.CreateUri ("http", HttpGetUrl);
+            if (HttpGetEnabled)
+            {
+                Uri uri = serviceHostBase.CreateUri("http", HttpGetUrl);
                 if (uri != null)
-                    sme.EnsureChannelDispatcher (true, "http", uri, HttpGetBinding);
+                    sme.EnsureChannelDispatcher(true, "http", uri, HttpGetBinding);
             }
 
-            if (HttpsGetEnabled) {
-                Uri uri = serviceHostBase.CreateUri ("https", HttpsGetUrl);
+            if (HttpsGetEnabled)
+            {
+                Uri uri = serviceHostBase.CreateUri("https", HttpsGetUrl);
                 if (uri != null)
-                    sme.EnsureChannelDispatcher (true, "https", uri, HttpsGetBinding);
+                    sme.EnsureChannelDispatcher(true, "https", uri, HttpsGetBinding);
             }
         }
 
         [MonoTODO]
-        void IServiceBehavior.Validate (
+        void IServiceBehavior.Validate(
             ServiceDescription description,
-            ServiceHostBase serviceHostBase)
-        {            
-        }
+            ServiceHostBase serviceHostBase
+        ) { }
     }
 }

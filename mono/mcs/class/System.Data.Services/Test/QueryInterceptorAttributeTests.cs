@@ -30,21 +30,23 @@ using System;
 using System.Data.Services;
 using NUnit.Framework;
 
-namespace MonoTests.System.Data.Services {
+namespace MonoTests.System.Data.Services
+{
     [TestFixture]
-    public class QueryInterceptorAttributeTests {
+    public class QueryInterceptorAttributeTests
+    {
         [Test]
         public void Ctor()
         {
-            var qi = new QueryInterceptorAttribute ("set");
-            Assert.AreEqual ("set", qi.EntitySetName);
+            var qi = new QueryInterceptorAttribute("set");
+            Assert.AreEqual("set", qi.EntitySetName);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CtorNull()
         {
-            new QueryInterceptorAttribute (null);
+            new QueryInterceptorAttribute(null);
         }
     }
 }

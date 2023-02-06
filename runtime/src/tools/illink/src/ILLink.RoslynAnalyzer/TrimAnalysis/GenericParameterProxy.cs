@@ -7,15 +7,16 @@ namespace ILLink.Shared.TypeSystemProxy
 {
     internal readonly partial struct GenericParameterProxy
     {
-        public GenericParameterProxy (ITypeParameterSymbol typeParameterSymbol) => TypeParameterSymbol = typeParameterSymbol;
+        public GenericParameterProxy(ITypeParameterSymbol typeParameterSymbol) =>
+            TypeParameterSymbol = typeParameterSymbol;
 
-        internal partial bool HasDefaultConstructorConstraint () =>
-            TypeParameterSymbol.HasConstructorConstraint |
-            TypeParameterSymbol.HasValueTypeConstraint |
-            TypeParameterSymbol.HasUnmanagedTypeConstraint;
+        internal partial bool HasDefaultConstructorConstraint() =>
+            TypeParameterSymbol.HasConstructorConstraint
+            | TypeParameterSymbol.HasValueTypeConstraint
+            | TypeParameterSymbol.HasUnmanagedTypeConstraint;
 
         public readonly ITypeParameterSymbol TypeParameterSymbol;
 
-        public override string ToString () => TypeParameterSymbol.ToString ();
+        public override string ToString() => TypeParameterSymbol.ToString();
     }
 }

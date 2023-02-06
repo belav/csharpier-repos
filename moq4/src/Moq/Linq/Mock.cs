@@ -14,7 +14,8 @@ namespace Moq
         /// </summary>
         /// <typeparam name="T">The type of the mocked object.</typeparam>
         /// <returns>The mocked object created.</returns>
-        public static T Of<T>() where T : class
+        public static T Of<T>()
+            where T : class
         {
             return Mock.Of<T>(MockBehavior.Default);
         }
@@ -25,7 +26,8 @@ namespace Moq
         /// <param name="behavior">Behavior of the mock.</param>
         /// <typeparam name="T">The type of the mocked object.</typeparam>
         /// <returns>The mocked object created.</returns>
-        public static T Of<T>(MockBehavior behavior) where T : class
+        public static T Of<T>(MockBehavior behavior)
+            where T : class
         {
             // This method was originally implemented as follows:
             //
@@ -47,7 +49,8 @@ namespace Moq
         /// <param name="predicate">The predicate with the specification of how the mocked object should behave.</param>
         /// <typeparam name="T">The type of the mocked object.</typeparam>
         /// <returns>The mocked object created.</returns>
-        public static T Of<T>(Expression<Func<T, bool>> predicate) where T : class
+        public static T Of<T>(Expression<Func<T, bool>> predicate)
+            where T : class
         {
             return Mock.Of<T>(predicate, MockBehavior.Default);
         }
@@ -59,7 +62,8 @@ namespace Moq
         /// <param name="behavior">Behavior of the mock.</param>
         /// <typeparam name="T">The type of the mocked object.</typeparam>
         /// <returns>The mocked object created.</returns>
-        public static T Of<T>(Expression<Func<T, bool>> predicate, MockBehavior behavior) where T : class
+        public static T Of<T>(Expression<Func<T, bool>> predicate, MockBehavior behavior)
+            where T : class
         {
             return Mocks.CreateMockQuery<T>(behavior).First(predicate);
         }

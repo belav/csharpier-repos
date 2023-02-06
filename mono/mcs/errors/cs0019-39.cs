@@ -5,19 +5,25 @@ namespace InternalAccess
 {
     public abstract class Base
     {
-        internal string Prop () { return "a"; }
+        internal string Prop()
+        {
+            return "a";
+        }
     }
 
     public class DerivedProtectedExample : Base
     {
-        protected new string Prop { get { return "E"; } }
+        protected new string Prop
+        {
+            get { return "E"; }
+        }
     }
 
     class MainClass
     {
-        public static int Main ()
+        public static int Main()
         {
-            DerivedProtectedExample dpe = new DerivedProtectedExample ();
+            DerivedProtectedExample dpe = new DerivedProtectedExample();
             if (dpe.Prop != "A")
                 return 2;
 

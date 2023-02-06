@@ -35,8 +35,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class RadioButtonList_RepeatColumns
-        : GHTBaseWeb 
+    public class RadioButtonList_RepeatColumns : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -48,8 +47,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest4;
         protected System.Web.UI.WebControls.RadioButtonList RadioButtonList5;
         protected GHTWebControls.GHTSubTest GHTSubTest5;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -57,28 +57,28 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             HtmlForm frm = (HtmlForm)FindControl("form1");
             GHTTestBegin(frm);
 
             //Non valid RepeatColumns value
             GHTSubTestBegin("Non valid RepeatColumns value");
-            try 
+            try
             {
-                System.Web.UI.WebControls.RadioButtonList rbl = new System.Web.UI.WebControls.RadioButtonList();
+                System.Web.UI.WebControls.RadioButtonList rbl =
+                    new System.Web.UI.WebControls.RadioButtonList();
                 rbl.RepeatColumns = -1;
                 GHTSubTestExpectedExceptionNotCaught("ArgumentOutOfRangeException");
             }
@@ -86,14 +86,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             {
                 GHTSubTestExpectedExceptionCaught(ex);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTTestEnd();
-
         }
     }
 }

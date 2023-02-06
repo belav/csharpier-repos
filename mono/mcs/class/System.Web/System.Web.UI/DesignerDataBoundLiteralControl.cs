@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,22 +33,29 @@ using System.Security.Permissions;
 namespace System.Web.UI
 {
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
     [ToolboxItem(false)]
-    [DataBindingHandler ("System.Web.UI.Design.TextDataBindingHandler, " + Consts.AssemblySystem_Design)]
+    [DataBindingHandler(
+        "System.Web.UI.Design.TextDataBindingHandler, " + Consts.AssemblySystem_Design
+    )]
     public sealed class DesignerDataBoundLiteralControl : Control
     {
         string text = String.Empty;
 
-        public DesignerDataBoundLiteralControl ()
+        public DesignerDataBoundLiteralControl()
         {
             AutoID = false;
         }
 
-        public string Text {
-            get { return text;}
-            set {
+        public string Text
+        {
+            get { return text; }
+            set
+            {
                 if (value == null)
                     text = string.Empty;
                 else
@@ -56,23 +63,23 @@ namespace System.Web.UI
             }
         }
 
-        protected override ControlCollection CreateControlCollection ()
+        protected override ControlCollection CreateControlCollection()
         {
-            return new EmptyControlCollection (this);
+            return new EmptyControlCollection(this);
         }
 
-        protected override void LoadViewState (object savedState)
+        protected override void LoadViewState(object savedState)
         {
             if (savedState != null)
-                text = (string) savedState;
+                text = (string)savedState;
         }
 
-        protected internal override void Render (HtmlTextWriter output)
+        protected internal override void Render(HtmlTextWriter output)
         {
-            output.Write (text);
+            output.Write(text);
         }
 
-        protected override object SaveViewState ()
+        protected override object SaveViewState()
         {
             return text;
         }

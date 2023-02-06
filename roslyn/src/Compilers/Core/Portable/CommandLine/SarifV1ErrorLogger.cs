@@ -28,7 +28,14 @@ namespace Microsoft.CodeAnalysis
     internal sealed class SarifV1ErrorLogger : SarifErrorLogger, IDisposable
     {
         private readonly DiagnosticDescriptorSet _descriptors;
-        public SarifV1ErrorLogger(Stream stream, string toolName, string toolFileVersion, Version toolAssemblyVersion, CultureInfo culture)
+
+        public SarifV1ErrorLogger(
+            Stream stream,
+            string toolName,
+            string toolFileVersion,
+            Version toolAssemblyVersion,
+            CultureInfo culture
+        )
             : base(stream, culture)
         {
             _descriptors = new DiagnosticDescriptorSet();
@@ -101,9 +108,11 @@ namespace Microsoft.CodeAnalysis
             // See https://github.com/dotnet/roslyn/issues/11228 for discussion around
             // whether this is the correct treatment of Diagnostic.AdditionalLocations
             // as SARIF relatedLocations.
-            if (additionalLocations != null &&
-                additionalLocations.Count > 0 &&
-                additionalLocations.Any(l => HasPath(l)))
+            if (
+                additionalLocations != null
+                && additionalLocations.Count > 0
+                && additionalLocations.Any(l => HasPath(l))
+            )
             {
                 _writer.WriteArrayStart("relatedLocations");
 
@@ -124,7 +133,12 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public override void AddAnalyzerDescriptors(ImmutableArray<(DiagnosticDescriptor Descriptor, bool HasAnyExternalSuppression)> descriptors)
+        public override void AddAnalyzerDescriptors(
+            ImmutableArray<(
+                DiagnosticDescriptor Descriptor,
+                bool HasAnyExternalSuppression
+            )> descriptors
+        )
         {
             // We log all analyzer descriptors only in SARIF v2+ format.
         }
@@ -206,19 +220,19 @@ namespace Microsoft.CodeAnalysis
 
         public override void Dispose()
         {
-            _writer.WriteArrayEnd();  // results
+            _writer.WriteArrayEnd(); // results
 
             WriteRules();
 
             _writer.WriteObjectEnd(); // run
-            _writer.WriteArrayEnd();  // runs
+            _writer.WriteArrayEnd(); // runs
             _writer.WriteObjectEnd(); // root
 
             base.Dispose();
         }
 
         /// <summary>
-        /// Represents a distinct set of <see cref="DiagnosticDescriptor"/>s and provides unique string keys 
+        /// Represents a distinct set of <see cref="DiagnosticDescriptor"/>s and provides unique string keys
         /// to distinguish them.
         ///
         /// The first <see cref="DiagnosticDescriptor"/> added with a given <see cref="DiagnosticDescriptor.Id"/>
@@ -231,7 +245,10 @@ namespace Microsoft.CodeAnalysis
             private readonly Dictionary<string, int> _counters = new Dictionary<string, int>();
 
             // DiagnosticDescriptor -> unique key
-            private readonly Dictionary<DiagnosticDescriptor, string> _keys = new Dictionary<DiagnosticDescriptor, string>(SarifDiagnosticComparer.Instance);
+            private readonly Dictionary<DiagnosticDescriptor, string> _keys = new Dictionary<
+                DiagnosticDescriptor,
+                string
+            >(SarifDiagnosticComparer.Instance);
 
             /// <summary>
             /// The total number of descriptors in the set.
@@ -262,12 +279,13 @@ namespace Microsoft.CodeAnalysis
 
                 // Case 3: We've already seen a different descriptor with the same ID -> generate a key.
                 //
-                // This will only need to loop in the corner case where there is an actual descriptor 
+                // This will only need to loop in the corner case where there is an actual descriptor
                 // with non-generated ID=X.NNN and more than one descriptor with ID=X.
                 do
                 {
                     _counters[descriptor.Id] = ++counter;
-                    key = descriptor.Id + "-" + counter.ToString("000", CultureInfo.InvariantCulture);
+                    key =
+                        descriptor.Id + "-" + counter.ToString("000", CultureInfo.InvariantCulture);
                 } while (_counters.ContainsKey(key));
 
                 _keys.Add(descriptor, key);

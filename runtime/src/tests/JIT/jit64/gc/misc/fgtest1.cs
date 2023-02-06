@@ -34,7 +34,7 @@ class T
 
         Console.WriteLine(5);
         return exitcode;
-    L:
+        L:
         Console.WriteLine(6);
         exitcode = 100;
         return exitcode;

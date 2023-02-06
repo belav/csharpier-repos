@@ -81,7 +81,9 @@ namespace System
                 ((long*)dest)[0] = word_val;
                 ((long*)dest)[1] = word_val;
 #else
-                ((int*)dest)[0] = word_val;
+                (
+                    (int*)dest
+                )[0] = word_val;
                 ((int*)dest)[1] = word_val;
                 ((int*)dest)[2] = word_val;
                 ((int*)dest)[3] = word_val;
@@ -94,7 +96,9 @@ namespace System
 #if TARGET_64BIT
                 ((long*)dest)[0] = word_val;
 #else
-                ((int*)dest)[0] = word_val;
+                (
+                    (int*)dest
+                )[0] = word_val;
 #endif
                 dest += word_size;
                 len -= word_size;

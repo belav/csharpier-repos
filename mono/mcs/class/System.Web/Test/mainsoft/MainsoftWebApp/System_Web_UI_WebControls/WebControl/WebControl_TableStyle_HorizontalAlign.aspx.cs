@@ -36,11 +36,10 @@ using System.Collections;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_TableStyle_HorizontalAlign
-        : GHTWebControlBase
+    public class WebControl_TableStyle_HorizontalAlign : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,13 +47,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -70,11 +69,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             base.m_derivedTypes.Add(typeof(DataList));
             base.m_derivedTypes.Add(typeof(Table));
         }
- 
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             foreach (Type currentType in TypesToTest)
             {
@@ -91,8 +89,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             {
                 this.GHTSubTestBegin(ctrlType, "Default value", false);
                 this.AddTestedControlToPage();
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
-                this.GHTSubTestAddResult(((int) style1.HorizontalAlign).ToString());
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
+                this.GHTSubTestAddResult(((int)style1.HorizontalAlign).ToString());
             }
             catch (Exception exception9)
             {
@@ -106,7 +104,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             {
                 this.GHTSubTestBegin(ctrlType, "Set 'Center'", false);
                 this.AddTestedControlToPage();
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.HorizontalAlign = HorizontalAlign.Center;
             }
             catch (Exception exception10)
@@ -121,7 +119,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             {
                 this.GHTSubTestBegin(ctrlType, "Set 'Justify'", false);
                 this.AddTestedControlToPage();
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.HorizontalAlign = HorizontalAlign.Justify;
             }
             catch (Exception exception11)
@@ -136,7 +134,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             {
                 this.GHTSubTestBegin(ctrlType, "Set 'Left'", false);
                 this.AddTestedControlToPage();
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.HorizontalAlign = HorizontalAlign.Left;
             }
             catch (Exception exception12)
@@ -151,7 +149,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             {
                 this.GHTSubTestBegin(ctrlType, "Set 'NotSet'", false);
                 this.AddTestedControlToPage();
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.HorizontalAlign = HorizontalAlign.NotSet;
             }
             catch (Exception exception13)
@@ -166,7 +164,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             {
                 this.GHTSubTestBegin(ctrlType, "Set 'Right'", false);
                 this.AddTestedControlToPage();
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
                 style1.HorizontalAlign = HorizontalAlign.Right;
             }
             catch (Exception exception14)
@@ -179,9 +177,12 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             this.GHTSubTestEnd();
             try
             {
-                this.GHTSubTestBegin(ctrlType, "Causes ArgumentException if set to a non-valid GridLine value.");
-                style1 = (TableStyle) this.TestedControl.ControlStyle;
-                style1.HorizontalAlign = (HorizontalAlign) 13;
+                this.GHTSubTestBegin(
+                    ctrlType,
+                    "Causes ArgumentException if set to a non-valid GridLine value."
+                );
+                style1 = (TableStyle)this.TestedControl.ControlStyle;
+                style1.HorizontalAlign = (HorizontalAlign)13;
                 this.GHTSubTestExpectedExceptionNotCaught("argumentException");
             }
             catch (ArgumentException exception15)
@@ -200,7 +201,6 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
 
         //Adds the tested control to a HorizontalAlign, and the HorizontalAlign to the form.
         //if the tested control is added directly to the form, then the HorizontalAlign property
@@ -213,6 +213,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             base.GHTActiveForm.Controls.Add(panel1);
             panel1.Controls.Add(this.TestedControl);
         }
- 
     }
 }

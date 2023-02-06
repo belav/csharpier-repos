@@ -31,32 +31,32 @@ namespace MonoTests.System.Web.Services.Description
         [Test]
         public void TestDefaultProperties()
         {
-            Assert.AreEqual (OperationFlow.None, operations.Flow);
-            Assert.IsNull (operations.Input);
-            Assert.IsNull (operations.Output);
-            Assert.AreEqual (0, operations.Count);
+            Assert.AreEqual(OperationFlow.None, operations.Flow);
+            Assert.IsNull(operations.Input);
+            Assert.IsNull(operations.Output);
+            Assert.AreEqual(0, operations.Count);
         }
 
         [Test]
         public void TestAddInput()
         {
             operations.Add(new OperationInput());
-            
-            Assert.AreEqual (OperationFlow.OneWay, operations.Flow);
-            Assert.IsNotNull (operations.Input);
-            Assert.IsNull (operations.Output);
-            Assert.AreEqual (1, operations.Count);
+
+            Assert.AreEqual(OperationFlow.OneWay, operations.Flow);
+            Assert.IsNotNull(operations.Input);
+            Assert.IsNull(operations.Output);
+            Assert.AreEqual(1, operations.Count);
         }
-        
+
         [Test]
         public void TestAddOutput()
         {
             operations.Add(new OperationOutput());
-            
-            Assert.AreEqual (OperationFlow.Notification, operations.Flow);
-            Assert.IsNull (operations.Input);
-            Assert.IsNotNull (operations.Output);
-            Assert.AreEqual (1, operations.Count);
+
+            Assert.AreEqual(OperationFlow.Notification, operations.Flow);
+            Assert.IsNull(operations.Input);
+            Assert.IsNotNull(operations.Output);
+            Assert.AreEqual(1, operations.Count);
         }
 
         [Test]
@@ -64,11 +64,11 @@ namespace MonoTests.System.Web.Services.Description
         {
             operations.Add(new OperationInput());
             operations.Add(new OperationOutput());
-            
-            Assert.AreEqual (OperationFlow.RequestResponse, operations.Flow);
-            Assert.IsNotNull (operations.Input);
-            Assert.IsNotNull (operations.Output);
-            Assert.AreEqual (2, operations.Count);
+
+            Assert.AreEqual(OperationFlow.RequestResponse, operations.Flow);
+            Assert.IsNotNull(operations.Input);
+            Assert.IsNotNull(operations.Output);
+            Assert.AreEqual(2, operations.Count);
         }
 
         [Test]
@@ -76,29 +76,29 @@ namespace MonoTests.System.Web.Services.Description
         {
             operations.Add(new OperationOutput());
             operations.Add(new OperationInput());
-            
-            Assert.AreEqual (OperationFlow.SolicitResponse, operations.Flow);
-            Assert.IsNotNull (operations.Input);
-            Assert.IsNotNull (operations.Output);
-            Assert.AreEqual (2, operations.Count);
+
+            Assert.AreEqual(OperationFlow.SolicitResponse, operations.Flow);
+            Assert.IsNotNull(operations.Input);
+            Assert.IsNotNull(operations.Output);
+            Assert.AreEqual(2, operations.Count);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddNull()
         {
             operations.Add(null);
         }
-        
+
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddFault()
         {
             operations.Add(new OperationFault());
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void TestAddInputAndInput()
         {
             operations.Add(new OperationInput());
@@ -106,7 +106,7 @@ namespace MonoTests.System.Web.Services.Description
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void TestAddOutputAndOutput()
         {
             operations.Add(new OperationOutput());
@@ -114,7 +114,7 @@ namespace MonoTests.System.Web.Services.Description
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void TestAddThreeOperationMessages()
         {
             operations.Add(new OperationOutput());
@@ -123,7 +123,7 @@ namespace MonoTests.System.Web.Services.Description
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestAddInputAndFault()
         {
             operations.Add(new OperationInput());

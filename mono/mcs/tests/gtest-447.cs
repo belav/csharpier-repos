@@ -4,9 +4,9 @@ using System;
 
 class B
 {
-    public static int Main ()
+    public static int Main()
     {
-        if (C.Print ("x") != "x")
+        if (C.Print("x") != "x")
             return 1;
 
         return 0;

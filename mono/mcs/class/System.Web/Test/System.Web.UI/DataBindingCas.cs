@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,38 +35,44 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoCasTests.System.Web.UI {
-
+namespace MonoCasTests.System.Web.UI
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class DataBindingCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class DataBindingCas : AspNetHostingMinimal
+    {
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            DataBinding db = new DataBinding ("property", typeof (string), String.Empty);
+            DataBinding db = new DataBinding("property", typeof(string), String.Empty);
 
             db.Expression = "expression";
-            Assert.AreEqual ("expression", db.Expression, "Expression");
-            Assert.AreEqual ("property", db.PropertyName, "PropertyName");
-            Assert.AreEqual (typeof (string), db.PropertyType, "PropertyType");
+            Assert.AreEqual("expression", db.Expression, "Expression");
+            Assert.AreEqual("property", db.PropertyName, "PropertyName");
+            Assert.AreEqual(typeof(string), db.PropertyType, "PropertyType");
 
-            Assert.IsTrue (db.Equals (db), "Equals");
-            Assert.IsTrue (db.GetHashCode () != 0, "GetHashCode"); // likely
+            Assert.IsTrue(db.Equals(db), "Equals");
+            Assert.IsTrue(db.GetHashCode() != 0, "GetHashCode"); // likely
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[3] { typeof (string), typeof (Type), typeof (string) });
-            Assert.IsNotNull (ci, ".ctor(String,Type,String)");
-            return ci.Invoke (new object[3] { String.Empty, typeof (string), String.Empty });
+            ConstructorInfo ci = this.Type.GetConstructor(
+                new Type[3] { typeof(string), typeof(Type), typeof(string) }
+            );
+            Assert.IsNotNull(ci, ".ctor(String,Type,String)");
+            return ci.Invoke(new object[3] { String.Empty, typeof(string), String.Empty });
         }
 
-        public override Type Type {
-            get { return typeof (DataBinding); }
+        public override Type Type
+        {
+            get { return typeof(DataBinding); }
         }
     }
 }

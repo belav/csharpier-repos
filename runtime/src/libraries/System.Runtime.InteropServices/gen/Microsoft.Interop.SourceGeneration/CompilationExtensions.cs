@@ -13,16 +13,31 @@ namespace Microsoft.Interop
     {
         public static StubEnvironment CreateStubEnvironment(this Compilation compilation)
         {
-            TargetFramework targetFramework = DetermineTargetFramework(compilation, out Version targetFrameworkVersion);
+            TargetFramework targetFramework = DetermineTargetFramework(
+                compilation,
+                out Version targetFrameworkVersion
+            );
             return new StubEnvironment(
-                            compilation,
-                            targetFramework,
-                            targetFrameworkVersion,
-                            compilation.SourceModule.GetAttributes().Any(attr => attr.AttributeClass?.ToDisplayString() == TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute));
+                compilation,
+                targetFramework,
+                targetFrameworkVersion,
+                compilation.SourceModule
+                    .GetAttributes()
+                    .Any(
+                        attr =>
+                            attr.AttributeClass?.ToDisplayString()
+                            == TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute
+                    )
+            );
 
-            static TargetFramework DetermineTargetFramework(Compilation compilation, out Version version)
+            static TargetFramework DetermineTargetFramework(
+                Compilation compilation,
+                out Version version
+            )
             {
-                IAssemblySymbol systemAssembly = compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly;
+                IAssemblySymbol systemAssembly = compilation
+                    .GetSpecialType(SpecialType.System_Object)
+                    .ContainingAssembly;
                 version = systemAssembly.Identity.Version;
 
                 return systemAssembly.Identity.Name switch
@@ -32,8 +47,9 @@ namespace Microsoft.Interop
                     // .NET Standard
                     "netstandard" => TargetFramework.Standard,
                     // .NET Core (when version < 5.0) or .NET
-                    "System.Runtime" or "System.Private.CoreLib" =>
-                        (version.Major < 5) ? TargetFramework.Core : TargetFramework.Net,
+                    "System.Runtime"
+                    or "System.Private.CoreLib"
+                        => (version.Major < 5) ? TargetFramework.Core : TargetFramework.Net,
                     _ => TargetFramework.Unknown,
                 };
             }

@@ -12,8 +12,13 @@ namespace System.Collections.Generic.Tests
         [Fact]
         public void TypeHasNoPublicCtors()
         {
-            ConstructorInfo[] ctors = typeof(ReferenceEqualityComparer).GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            Assert.DoesNotContain(ctors, ctor => ctor.IsPublic || ctor.IsFamily || ctor.IsFamilyOrAssembly);
+            ConstructorInfo[] ctors = typeof(ReferenceEqualityComparer).GetConstructors(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
+            Assert.DoesNotContain(
+                ctors,
+                ctor => ctor.IsPublic || ctor.IsFamily || ctor.IsFamilyOrAssembly
+            );
         }
 
         [Fact]
@@ -67,7 +72,8 @@ namespace System.Collections.Generic.Tests
             ReferenceEqualityComparer comparer1 = ReferenceEqualityComparer.Instance;
             IEqualityComparer comparer2 = ReferenceEqualityComparer.Instance;
             IEqualityComparer<object> comparer3 = ReferenceEqualityComparer.Instance;
-            IEqualityComparer<ClassWithBadGetHashCodeImplementation> comparer4 = ReferenceEqualityComparer.Instance; // test contravariance
+            IEqualityComparer<ClassWithBadGetHashCodeImplementation> comparer4 =
+                ReferenceEqualityComparer.Instance; // test contravariance
 
             int runtimeHelpersHashCode = RuntimeHelpers.GetHashCode(o);
             Assert.Equal(runtimeHelpersHashCode, comparer1.GetHashCode(o));
@@ -85,7 +91,9 @@ namespace System.Collections.Generic.Tests
         {
             public int SomeInt;
 
-            public override bool Equals(object obj) => obj is MyClass c && this.SomeInt == c.SomeInt;
+            public override bool Equals(object obj) =>
+                obj is MyClass c && this.SomeInt == c.SomeInt;
+
             public override int GetHashCode() => this.SomeInt;
         }
     }

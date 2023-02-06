@@ -26,9 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal enum VariantType {
+namespace Mono.Cecil
+{
+    internal enum VariantType
+    {
         I2 = 2,
         I4 = 3,
         R4 = 4,

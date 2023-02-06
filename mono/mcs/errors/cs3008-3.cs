@@ -3,7 +3,7 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant(true)]
 
-public class _A {
-}
+[assembly: CLSCompliant(true)]
+
+public class _A { }

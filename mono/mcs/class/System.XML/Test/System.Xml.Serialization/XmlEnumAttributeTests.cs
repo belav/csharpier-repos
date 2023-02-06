@@ -17,10 +17,10 @@ namespace MonoTests.System.XmlSerialization
     public class XmlEnumAttributeTests
     {
         [Test]
-        public void NameDefault ()
+        public void NameDefault()
         {
-            XmlEnumAttribute attr = new XmlEnumAttribute ();
-            Assert.IsNull (attr.Name);
+            XmlEnumAttribute attr = new XmlEnumAttribute();
+            Assert.IsNull(attr.Name);
         }
     }
 }

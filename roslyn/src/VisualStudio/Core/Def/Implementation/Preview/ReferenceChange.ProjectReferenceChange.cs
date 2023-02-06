@@ -15,21 +15,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             private readonly ProjectReference _reference;
             private readonly string _projectReferenceName;
 
-            public ProjectReferenceChange(ProjectReference reference, string projectReferenceName, ProjectId projectId, string projectName, bool isAdded, PreviewEngine engine)
+            public ProjectReferenceChange(
+                ProjectReference reference,
+                string projectReferenceName,
+                ProjectId projectId,
+                string projectName,
+                bool isAdded,
+                PreviewEngine engine
+            )
                 : base(projectId, projectName, isAdded, engine)
             {
                 _reference = reference;
                 _projectReferenceName = projectReferenceName;
             }
 
-            internal override Solution AddToSolution(Solution solution)
-                => solution.AddProjectReference(this.ProjectId, _reference);
+            internal override Solution AddToSolution(Solution solution) =>
+                solution.AddProjectReference(this.ProjectId, _reference);
 
-            internal override Solution RemoveFromSolution(Solution solution)
-                => solution.RemoveProjectReference(this.ProjectId, _reference);
+            internal override Solution RemoveFromSolution(Solution solution) =>
+                solution.RemoveProjectReference(this.ProjectId, _reference);
 
-            protected override string GetDisplayText()
-                => string.Format(ServicesVSResources.Project_reference_to_0_in_project_1, _projectReferenceName, this.ProjectName);
+            protected override string GetDisplayText() =>
+                string.Format(
+                    ServicesVSResources.Project_reference_to_0_in_project_1,
+                    _projectReferenceName,
+                    this.ProjectName
+                );
         }
     }
 }

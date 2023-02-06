@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="MimeParameterWriter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System.IO;
     using System;
     using System.Xml.Serialization;
@@ -18,15 +19,20 @@ namespace System.Web.Services.Protocols {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public abstract class MimeParameterWriter : MimeFormatter {
+    public abstract class MimeParameterWriter : MimeFormatter
+    {
         /// <include file='doc\MimeParameterWriter.uex' path='docs/doc[@for="MimeParameterWriter.UsesWriteRequest"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public virtual bool UsesWriteRequest { get { return false; } }
+        public virtual bool UsesWriteRequest
+        {
+            get { return false; }
+        }
 
         /// <include file='doc\MimeParameterWriter.uex' path='docs/doc[@for="MimeParameterWriter.RequestEncoding"]/*' />
-        public virtual Encoding RequestEncoding { 
+        public virtual Encoding RequestEncoding
+        {
             get { return null; }
             set { }
         }
@@ -35,7 +41,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public virtual string GetRequestUrl(string url, object[] parameters) {
+        public virtual string GetRequestUrl(string url, object[] parameters)
+        {
             return url;
         }
 
@@ -43,17 +50,18 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public virtual void InitializeRequest(WebRequest request, object[] values) {
+        public virtual void InitializeRequest(WebRequest request, object[] values)
+        {
             return;
         }
-    
+
         /// <include file='doc\MimeParameterWriter.uex' path='docs/doc[@for="MimeParameterWriter.WriteRequest"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public virtual void WriteRequest(Stream requestStream, object[] values) {
-            return;            
+        public virtual void WriteRequest(Stream requestStream, object[] values)
+        {
+            return;
         }
     }
-
 }

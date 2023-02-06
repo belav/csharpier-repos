@@ -15,24 +15,42 @@ namespace Microsoft.CodeAnalysis.ExtractMethod;
 
 internal static class ExtractMethodOptionsStorage
 {
-    public static ExtractMethodOptions GetExtractMethodOptions(this IGlobalOptionService globalOptions, string language)
-        => new()
+    public static ExtractMethodOptions GetExtractMethodOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) =>
+        new()
         {
             DontPutOutOrRefOnStruct = globalOptions.GetOption(DontPutOutOrRefOnStruct, language)
         };
 
-    public static ExtractMethodGenerationOptions GetExtractMethodGenerationOptions(this IGlobalOptionService globalOptions, LanguageServices languageServices)
-        => new()
+    public static ExtractMethodGenerationOptions GetExtractMethodGenerationOptions(
+        this IGlobalOptionService globalOptions,
+        LanguageServices languageServices
+    ) =>
+        new()
         {
             CodeGenerationOptions = globalOptions.GetCodeGenerationOptions(languageServices),
             ExtractOptions = globalOptions.GetExtractMethodOptions(languageServices.Language),
             AddImportOptions = globalOptions.GetAddImportPlacementOptions(languageServices),
-            LineFormattingOptions = globalOptions.GetLineFormattingOptions(languageServices.Language)
+            LineFormattingOptions = globalOptions.GetLineFormattingOptions(
+                languageServices.Language
+            )
         };
 
-    public static ValueTask<ExtractMethodGenerationOptions> GetExtractMethodGenerationOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetExtractMethodGenerationOptionsAsync(globalOptions.GetExtractMethodGenerationOptions(document.Project.Services), cancellationToken);
+    public static ValueTask<ExtractMethodGenerationOptions> GetExtractMethodGenerationOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetExtractMethodGenerationOptionsAsync(
+            globalOptions.GetExtractMethodGenerationOptions(document.Project.Services),
+            cancellationToken
+        );
 
-    public static readonly PerLanguageOption2<bool> DontPutOutOrRefOnStruct = new(
-        "ExtractMethodOptions_DontPutOutOrRefOnStruct", ExtractMethodOptions.Default.DontPutOutOrRefOnStruct); // NOTE: the spelling error is what we've shipped and thus should not change
+    public static readonly PerLanguageOption2<bool> DontPutOutOrRefOnStruct =
+        new(
+            "ExtractMethodOptions_DontPutOutOrRefOnStruct",
+            ExtractMethodOptions.Default.DontPutOutOrRefOnStruct
+        ); // NOTE: the spelling error is what we've shipped and thus should not change
 }

@@ -22,9 +22,6 @@ namespace Testing
         */
         const string Constant3 = "CONSTANT STRING";
 
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }
-

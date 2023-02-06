@@ -20,14 +20,17 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         None = 0,
+
         /// <summary>
         /// Marshalling from a managed environment to an unmanaged environment
         /// </summary>
         In = 0x1,
+
         /// <summary>
         /// Marshalling from an unmanaged environment to a managed environment
         /// </summary>
         Out = 0x2,
+
         /// <summary>
         /// Marshalling to and from managed and unmanaged environments
         /// </summary>

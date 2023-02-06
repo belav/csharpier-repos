@@ -47,7 +47,8 @@ namespace Newtonsoft.Json.Tests.Issues
 
             ExceptionAssert.Throws<JsonSerializationException>(
                 () => JsonConvert.SerializeObject(fileInfo.Directory),
-                "Unable to serialize instance of 'System.IO.DirectoryInfo'.");
+                "Unable to serialize instance of 'System.IO.DirectoryInfo'."
+            );
         }
 
         [Test]
@@ -57,7 +58,8 @@ namespace Newtonsoft.Json.Tests.Issues
 
             ExceptionAssert.Throws<JsonSerializationException>(
                 () => JsonConvert.SerializeObject(fileInfo),
-                "Unable to serialize instance of 'System.IO.FileInfo'.");
+                "Unable to serialize instance of 'System.IO.FileInfo'."
+            );
         }
 
 #if !(NETSTANDARD1_0 || NETSTANDARD1_3)
@@ -68,7 +70,8 @@ namespace Newtonsoft.Json.Tests.Issues
 
             ExceptionAssert.Throws<JsonSerializationException>(
                 () => JsonConvert.SerializeObject(drive),
-                "Unable to serialize instance of 'System.IO.DriveInfo'.");
+                "Unable to serialize instance of 'System.IO.DriveInfo'."
+            );
         }
 #endif
 #endif

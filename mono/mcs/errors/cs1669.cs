@@ -3,5 +3,8 @@
 
 public class E
 {
-    int this [__arglist] { get { return 1; } }
+    int this[__arglist]
+    {
+        get { return 1; }
+    }
 }

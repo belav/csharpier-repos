@@ -10,13 +10,13 @@ namespace VectorMathTests
     {
         static int Main()
         {
-            Point a = new Point(10, 50,0,-100);
+            Point a = new Point(10, 50, 0, -100);
             Point b = new Point(10);
             Point c = Point.Max(a, b);
             if (((int)c.Y) != 50 || ((int)c.W) != 10)
             {
                 return 0;
-            }        
+            }
             Point d = Point.Min(a, b);
             Point q = Point.Min(d, d);
             if (q != d)
@@ -26,7 +26,7 @@ namespace VectorMathTests
             if (((int)d.W) != -100)
             {
                 return 0;
-            }            
+            }
             return 100;
         }
     }

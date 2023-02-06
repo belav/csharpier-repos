@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private partial class CSharpSyntaxTreeFactoryService
         {
             /// <summary>
-            /// Represents a syntax reference that doesn't actually hold onto the 
+            /// Represents a syntax reference that doesn't actually hold onto the
             /// referenced node.  Instead, enough data is held onto so that the node
             /// can be recovered and returned if necessary.
             /// </summary>
@@ -39,18 +39,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 public override SyntaxTree SyntaxTree
                 {
-                    get
-                    {
-                        return _tree;
-                    }
+                    get { return _tree; }
                 }
 
                 public override TextSpan Span
                 {
-                    get
-                    {
-                        return _textSpan;
-                    }
+                    get { return _textSpan; }
                 }
 
                 private ImmutableArray<int> ComputePathFromRoot(SyntaxNode node)
@@ -79,7 +73,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                         else if (node != root)
                         {
-                            throw new InvalidOperationException(CSharpWorkspaceResources.Node_does_not_descend_from_root);
+                            throw new InvalidOperationException(
+                                CSharpWorkspaceResources.Node_does_not_descend_from_root
+                            );
                         }
                     }
 
@@ -102,7 +98,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         index++;
                     }
 
-                    throw new InvalidOperationException(CSharpWorkspaceResources.Node_not_in_parent_s_child_list);
+                    throw new InvalidOperationException(
+                        CSharpWorkspaceResources.Node_not_in_parent_s_child_list
+                    );
                 }
 
                 private static int GetTriviaIndex(SyntaxTrivia trivia)
@@ -130,7 +128,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         index++;
                     }
 
-                    throw new InvalidOperationException(CSharpWorkspaceResources.Trivia_is_not_associated_with_token);
+                    throw new InvalidOperationException(
+                        CSharpWorkspaceResources.Trivia_is_not_associated_with_token
+                    );
                 }
 
                 private static SyntaxTrivia GetTrivia(SyntaxToken token, int triviaIndex)
@@ -145,10 +145,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return token.TrailingTrivia.ElementAt(triviaIndex);
                 }
 
-                public override SyntaxNode GetSyntax(CancellationToken cancellationToken)
-                    => this.GetNode(_tree.GetRoot(cancellationToken));
+                public override SyntaxNode GetSyntax(CancellationToken cancellationToken) =>
+                    this.GetNode(_tree.GetRoot(cancellationToken));
 
-                public override async Task<SyntaxNode> GetSyntaxAsync(CancellationToken cancellationToken = default)
+                public override async Task<SyntaxNode> GetSyntaxAsync(
+                    CancellationToken cancellationToken = default
+                )
                 {
                     var root = await _tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
                     return this.GetNode(root);

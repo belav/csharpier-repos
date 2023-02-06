@@ -9,13 +9,11 @@ namespace HasherBuilder
     }
 }
 
-public interface IHasher<T>
-{
-}
+public interface IHasher<T> { }
 
 public class ArrayList<U>
 {
-    public IHasher<U> GetHasher ()
+    public IHasher<U> GetHasher()
     {
         return HasherBuilder.ByPrototype<U>.Examine();
     }
@@ -23,7 +21,5 @@ public class ArrayList<U>
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }
-

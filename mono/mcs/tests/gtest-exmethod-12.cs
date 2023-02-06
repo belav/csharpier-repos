@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Specialized;
 
@@ -20,7 +18,6 @@ class ChatClient
         Console.WriteLine("{0}: {1}", to, message);
     }
 }
-
 
 static class ChatExtensions
 {

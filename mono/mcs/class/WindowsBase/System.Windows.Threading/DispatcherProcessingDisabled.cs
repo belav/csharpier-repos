@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,38 +25,41 @@
 
 using System;
 
-namespace System.Windows.Threading {
-
+namespace System.Windows.Threading
+{
     public struct DispatcherProcessingDisabled : IDisposable
     {
-        internal DispatcherProcessingDisabled (int foo)
+        internal DispatcherProcessingDisabled(int foo) { }
+
+        public void Dispose()
         {
+            throw new NotImplementedException();
         }
 
-        public void Dispose ()
+        public override bool Equals(object obj)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool Equals (object obj)
+        public override int GetHashCode()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override int GetHashCode ()
+        public static bool operator !=(
+            DispatcherProcessingDisabled left,
+            DispatcherProcessingDisabled right
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static bool operator != (DispatcherProcessingDisabled left, DispatcherProcessingDisabled right)
+        public static bool operator ==(
+            DispatcherProcessingDisabled left,
+            DispatcherProcessingDisabled right
+        )
         {
-            throw new NotImplementedException ();
-        }
-
-        public static bool operator == (DispatcherProcessingDisabled left, DispatcherProcessingDisabled right)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
-
 }

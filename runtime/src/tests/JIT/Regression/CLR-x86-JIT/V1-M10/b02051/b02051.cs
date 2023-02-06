@@ -5,11 +5,10 @@
 namespace DefaultNamespace
 {
     using System;
+
     class JITcrash
     {
-        public
-        static
-        int Main(String[] args)
+        public static int Main(String[] args)
         {
             UInt32 x = (0xFFFFFFFF);
             Int64 y = x;

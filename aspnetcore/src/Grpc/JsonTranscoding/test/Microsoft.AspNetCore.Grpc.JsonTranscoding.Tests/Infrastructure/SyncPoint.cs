@@ -10,7 +10,9 @@ public class SyncPoint
 
     public SyncPoint(bool runContinuationsAsynchronously = true)
     {
-        var taskCreationOptions = runContinuationsAsynchronously ? TaskCreationOptions.RunContinuationsAsynchronously : TaskCreationOptions.None;
+        var taskCreationOptions = runContinuationsAsynchronously
+            ? TaskCreationOptions.RunContinuationsAsynchronously
+            : TaskCreationOptions.None;
 
         _atSyncPoint = new TaskCompletionSource<object?>(taskCreationOptions);
         _continueFromSyncPoint = new TaskCompletionSource<object?>(taskCreationOptions);
@@ -26,7 +28,8 @@ public class SyncPoint
     /// Cancel waiting for the code-under-test to reach <see cref="WaitToContinue"/>.
     /// </summary>
     /// <param name="cancellationToken">A cancellation token.</param>
-    public void CancelWaitForSyncPoint(CancellationToken cancellationToken) => _atSyncPoint.TrySetCanceled(cancellationToken);
+    public void CancelWaitForSyncPoint(CancellationToken cancellationToken) =>
+        _atSyncPoint.TrySetCanceled(cancellationToken);
 
     /// <summary>
     /// Releases the code-under-test to continue past where it waited for <see cref="WaitToContinue"/>.
@@ -46,7 +49,10 @@ public class SyncPoint
         return _continueFromSyncPoint.Task;
     }
 
-    public static Func<Task> Create(out SyncPoint syncPoint, bool runContinuationsAsynchronously = true)
+    public static Func<Task> Create(
+        out SyncPoint syncPoint,
+        bool runContinuationsAsynchronously = true
+    )
     {
         var handler = Create(1, out var syncPoints, runContinuationsAsynchronously);
         syncPoint = syncPoints[0];
@@ -59,7 +65,11 @@ public class SyncPoint
     /// <param name="count">The number of sync points to expect</param>
     /// <param name="syncPoints">The <see cref="SyncPoint"/> objects that can be used to coordinate the sync point</param>
     /// <returns></returns>
-    public static Func<Task> Create(int count, out SyncPoint[] syncPoints, bool runContinuationsAsynchronously = true)
+    public static Func<Task> Create(
+        int count,
+        out SyncPoint[] syncPoints,
+        bool runContinuationsAsynchronously = true
+    )
     {
         // Need to use a local so the closure can capture it. You can't use out vars in a closure.
         var localSyncPoints = new SyncPoint[count];

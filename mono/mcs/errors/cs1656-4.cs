@@ -3,12 +3,16 @@
 
 using System.Collections;
 
-class Test {
-    static IEnumerable foo () { return null; }
-
-    static void Main ()
+class Test
+{
+    static IEnumerable foo()
     {
-        IEnumerable f = foo ();
+        return null;
+    }
+
+    static void Main()
+    {
+        IEnumerable f = foo();
         if (f != null)
             foreach (int i in f)
                 i = 0;

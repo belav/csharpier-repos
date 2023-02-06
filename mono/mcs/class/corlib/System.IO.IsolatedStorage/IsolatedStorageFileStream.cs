@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,64 +35,83 @@ using System.Security.Permissions;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-namespace System.IO.IsolatedStorage {
-
-    [ComVisible (true)]
-    public class IsolatedStorageFileStream : FileStream {
-
-        [ReflectionPermission (SecurityAction.Assert, TypeInformation = true)]
-        private static string CreateIsolatedPath (IsolatedStorageFile isf, string path, FileMode mode)
+namespace System.IO.IsolatedStorage
+{
+    [ComVisible(true)]
+    public class IsolatedStorageFileStream : FileStream
+    {
+        [ReflectionPermission(SecurityAction.Assert, TypeInformation = true)]
+        private static string CreateIsolatedPath(
+            IsolatedStorageFile isf,
+            string path,
+            FileMode mode
+        )
         {
             if (path == null)
-                throw new ArgumentNullException ("path");
+                throw new ArgumentNullException("path");
 
-            if (!Enum.IsDefined (typeof (FileMode), mode))
-                throw new ArgumentException ("mode");
+            if (!Enum.IsDefined(typeof(FileMode), mode))
+                throw new ArgumentException("mode");
 
-            if (isf == null) {
-                // we can't call GetUserStoreForDomain here because it depends on 
+            if (isf == null)
+            {
+                // we can't call GetUserStoreForDomain here because it depends on
                 // Assembly.GetCallingAssembly (), which would be our constructor,
-                // i.e. the result would always be mscorlib.dll. So we need to do 
+                // i.e. the result would always be mscorlib.dll. So we need to do
                 // a small stack walk to find who's calling the constructor
 
-                isf = IsolatedStorageFile.GetStore (IsolatedStorageScope.User | IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly,
+                isf = IsolatedStorageFile.GetStore(
+                    IsolatedStorageScope.User
+                        | IsolatedStorageScope.Domain
+                        | IsolatedStorageScope.Assembly,
 #if MOBILE
-                    null, null);
+                    null,
+                    null
+                );
 #else
-                    IsolatedStorageFile.GetDomainIdentityFromEvidence (AppDomain.CurrentDomain.Evidence), 
-                    IsolatedStorageFile.GetAssemblyIdentityFromEvidence (new StackFrame (3).GetMethod ().ReflectedType.Assembly.UnprotectedGetEvidence ())); // skip self and constructor
+                    IsolatedStorageFile.GetDomainIdentityFromEvidence(
+                        AppDomain.CurrentDomain.Evidence
+                    ),
+                    IsolatedStorageFile.GetAssemblyIdentityFromEvidence(
+                        new StackFrame(3)
+                            .GetMethod()
+                            .ReflectedType.Assembly.UnprotectedGetEvidence()
+                    )
+                ); // skip self and constructor
 #endif
             }
 
             if (isf.IsDisposed)
-                throw new ObjectDisposedException ("IsolatedStorageFile");
+                throw new ObjectDisposedException("IsolatedStorageFile");
             if (isf.IsClosed)
-                throw new InvalidOperationException ("Storage needs to be open for this operation.");
+                throw new InvalidOperationException("Storage needs to be open for this operation.");
 
             // ensure that the _root_ isolated storage can be (and is) created.
-            FileInfo fi = new FileInfo (isf.Root);
+            FileInfo fi = new FileInfo(isf.Root);
             if (!fi.Directory.Exists)
-                fi.Directory.Create ();
+                fi.Directory.Create();
 
             // remove the root path character(s) if they exist
-            if (Path.IsPathRooted (path)) {
-                string root = Path.GetPathRoot (path);
-                path = path.Remove (0, root.Length);
+            if (Path.IsPathRooted(path))
+            {
+                string root = Path.GetPathRoot(path);
+                path = path.Remove(0, root.Length);
             }
 
             // other directories (provided by 'path') must already exists
-            string file = Path.Combine (isf.Root, path);
+            string file = Path.Combine(isf.Root, path);
 
-            string full = Path.GetFullPath (file);
-            full = Path.GetFullPath (file);
-            if (!full.StartsWith (isf.Root))
-                throw new IsolatedStorageException ();
+            string full = Path.GetFullPath(file);
+            full = Path.GetFullPath(file);
+            if (!full.StartsWith(isf.Root))
+                throw new IsolatedStorageException();
 
-            fi = new FileInfo (file);
-            if (!fi.Directory.Exists) {
+            fi = new FileInfo(file);
+            if (!fi.Directory.Exists)
+            {
                 // don't leak the path information for isolated storage
-                string msg = Locale.GetText ("Could not find a part of the path \"{0}\".");
-                throw new DirectoryNotFoundException (String.Format (msg, path));
+                string msg = Locale.GetText("Could not find a part of the path \"{0}\".");
+                throw new DirectoryNotFoundException(String.Format(msg, path));
             }
 
             // FIXME: this is probably a good place to Assert our security
@@ -101,153 +120,216 @@ namespace System.IO.IsolatedStorage {
             return file;
         }
 
-        public IsolatedStorageFileStream (string path, FileMode mode)
-            : this (path, mode, (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite), FileShare.Read, DefaultBufferSize, null)
-        {
-        }    
+        public IsolatedStorageFileStream(string path, FileMode mode)
+            : this(
+                path,
+                mode,
+                (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite),
+                FileShare.Read,
+                DefaultBufferSize,
+                null
+            ) { }
 
-        public IsolatedStorageFileStream (string path, FileMode mode, FileAccess access)
-            : this (path, mode, access, access == FileAccess.Write ? FileShare.None : FileShare.Read, DefaultBufferSize, null)
-        {
-        }
+        public IsolatedStorageFileStream(string path, FileMode mode, FileAccess access)
+            : this(
+                path,
+                mode,
+                access,
+                access == FileAccess.Write ? FileShare.None : FileShare.Read,
+                DefaultBufferSize,
+                null
+            ) { }
 
-        public IsolatedStorageFileStream (string path, FileMode mode, FileAccess access, FileShare share)
-            : this (path, mode, access, share, DefaultBufferSize, null)
-        {
-        }
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        )
+            : this(path, mode, access, share, DefaultBufferSize, null) { }
 
-        public IsolatedStorageFileStream (string path, FileMode mode, FileAccess access, FileShare share, int bufferSize)
-            : this (path, mode, access, share, bufferSize, null)
-        {
-        }
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize
+        )
+            : this(path, mode, access, share, bufferSize, null) { }
 
         // FIXME: Further limit the assertion when imperative Assert is implemented
-        [FileIOPermission (SecurityAction.Assert, Unrestricted = true)]
-        public IsolatedStorageFileStream (string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, IsolatedStorageFile isf)
-            : base (CreateIsolatedPath (isf, path, mode), mode, access, share, bufferSize, false, true)
+        [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            IsolatedStorageFile isf
+        )
+            : base(
+                CreateIsolatedPath(isf, path, mode),
+                mode,
+                access,
+                share,
+                bufferSize,
+                false,
+                true
+            ) { }
+
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            IsolatedStorageFile isf
+        )
+            : this(path, mode, access, share, DefaultBufferSize, isf) { }
+
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            IsolatedStorageFile isf
+        )
+            : this(
+                path,
+                mode,
+                access,
+                access == FileAccess.Write ? FileShare.None : FileShare.Read,
+                DefaultBufferSize,
+                isf
+            ) { }
+
+        public IsolatedStorageFileStream(string path, FileMode mode, IsolatedStorageFile isf)
+            : this(
+                path,
+                mode,
+                (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite),
+                FileShare.Read,
+                DefaultBufferSize,
+                isf
+            ) { }
+
+        public override bool CanRead
         {
+            get { return base.CanRead; }
         }
 
-        public IsolatedStorageFileStream (string path, FileMode mode, FileAccess access, FileShare share, IsolatedStorageFile isf)
-            : this (path, mode, access, share, DefaultBufferSize, isf)
+        public override bool CanSeek
         {
+            get { return base.CanSeek; }
         }
 
-        public IsolatedStorageFileStream (string path, FileMode mode, FileAccess access, IsolatedStorageFile isf)
-            : this (path, mode, access, access == FileAccess.Write ? FileShare.None : FileShare.Read, DefaultBufferSize, isf)
+        public override bool CanWrite
         {
+            get { return base.CanWrite; }
         }
 
-        public IsolatedStorageFileStream (string path, FileMode mode, IsolatedStorageFile isf)
-            : this (path, mode, (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite), FileShare.Read, DefaultBufferSize, isf)
+        public override SafeFileHandle SafeFileHandle
         {
+            [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
+            get { throw new IsolatedStorageException(Locale.GetText("Information is restricted")); }
         }
 
-        public override bool CanRead {
-            get {return base.CanRead;}
-        }
-
-        public override bool CanSeek {
-            get {return base.CanSeek;}
-        }
-
-        public override bool CanWrite {
-            get {return base.CanWrite;}
-        }
-
-        public override SafeFileHandle SafeFileHandle {
-            [SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
-            get {
-                throw new IsolatedStorageException (
-                    Locale.GetText ("Information is restricted"));
-            }
-        }
-
-        [Obsolete ("Use SafeFileHandle - once available")]
-        public override IntPtr Handle {
-            [SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
-            get {
-                throw new IsolatedStorageException (
-                    Locale.GetText ("Information is restricted"));
-            }
-        }
-
-        public override bool IsAsync {
-            get {return base.IsAsync;}
-        }
-
-        public override long Length {
-            get {return base.Length;}
-        }
-
-        public override long Position {
-            get {return base.Position;}
-            set {base.Position = value;}
-        }
-
-        public override IAsyncResult BeginRead (byte[] buffer, int offset, int numBytes, AsyncCallback userCallback, object stateObject)
+        [Obsolete("Use SafeFileHandle - once available")]
+        public override IntPtr Handle
         {
-            return base.BeginRead (buffer, offset, numBytes, userCallback, stateObject);
+            [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
+            get { throw new IsolatedStorageException(Locale.GetText("Information is restricted")); }
         }
 
-        public override IAsyncResult BeginWrite (byte[] buffer, int offset, int numBytes, AsyncCallback userCallback, object stateObject)
+        public override bool IsAsync
         {
-            return base.BeginWrite (buffer, offset, numBytes, userCallback, stateObject);
+            get { return base.IsAsync; }
         }
 
-        public override int EndRead (IAsyncResult asyncResult)
+        public override long Length
         {
-            return base.EndRead (asyncResult);
+            get { return base.Length; }
         }
 
-        public override void EndWrite (IAsyncResult asyncResult)
+        public override long Position
         {
-            base.EndWrite (asyncResult);
+            get { return base.Position; }
+            set { base.Position = value; }
         }
 
-        public override void Flush ()
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int numBytes,
+            AsyncCallback userCallback,
+            object stateObject
+        )
         {
-            base.Flush ();
+            return base.BeginRead(buffer, offset, numBytes, userCallback, stateObject);
         }
 
-        public override void Flush (bool flushToDisk)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int numBytes,
+            AsyncCallback userCallback,
+            object stateObject
+        )
         {
-            base.Flush (flushToDisk);
+            return base.BeginWrite(buffer, offset, numBytes, userCallback, stateObject);
         }
 
-        public override int Read (byte[] buffer, int offset, int count)
+        public override int EndRead(IAsyncResult asyncResult)
         {
-            return base.Read (buffer, offset, count);
+            return base.EndRead(asyncResult);
         }
 
-        public override int ReadByte ()
+        public override void EndWrite(IAsyncResult asyncResult)
         {
-            return base.ReadByte ();
+            base.EndWrite(asyncResult);
         }
 
-        public override long Seek (long offset, SeekOrigin origin)
+        public override void Flush()
         {
-            return base.Seek (offset, origin);
+            base.Flush();
         }
 
-        public override void SetLength (long value)
+        public override void Flush(bool flushToDisk)
         {
-            base.SetLength (value);
+            base.Flush(flushToDisk);
         }
 
-        public override void Write (byte[] buffer, int offset, int count)
+        public override int Read(byte[] buffer, int offset, int count)
         {
-            base.Write (buffer, offset, count);
+            return base.Read(buffer, offset, count);
         }
 
-        public override void WriteByte (byte value)
+        public override int ReadByte()
         {
-            base.WriteByte (value);
+            return base.ReadByte();
         }
 
-        protected override void Dispose (bool disposing)
+        public override long Seek(long offset, SeekOrigin origin)
         {
-            base.Dispose (disposing);
+            return base.Seek(offset, origin);
+        }
+
+        public override void SetLength(long value)
+        {
+            base.SetLength(value);
+        }
+
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            base.Write(buffer, offset, count);
+        }
+
+        public override void WriteByte(byte value)
+        {
+            base.WriteByte(value);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
     }
 }

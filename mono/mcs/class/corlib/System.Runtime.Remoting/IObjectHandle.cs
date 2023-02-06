@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,11 +36,9 @@ namespace System.Runtime.Remoting
 {
     [Guid("C460E2B4-E199-412a-8456-84DC3E4838C3")]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface IObjectHandle
     {
-        object Unwrap ();
+        object Unwrap();
     }
-    
 }
-

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,41 +34,45 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoCasTests.System.Web.UI {
-
+namespace MonoCasTests.System.Web.UI
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class StateItemCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class StateItemCas : AspNetHostingMinimal
+    {
         private StateItem item;
 
         [TestFixtureSetUp]
-        public void FixtureSetup ()
+        public void FixtureSetup()
         {
-            item = new StateBag ().Add ("key", "value");
+            item = new StateBag().Add("key", "value");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            Assert.IsFalse (item.IsDirty, "IsDirty");
+            Assert.IsFalse(item.IsDirty, "IsDirty");
             item.IsDirty = true;
-            Assert.AreEqual ("value", item.Value);
+            Assert.AreEqual("value", item.Value);
             item.Value = null;
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            MethodInfo mi = this.Type.GetProperty ("IsDirty").GetGetMethod ();
-            Assert.IsNotNull (mi, ".ctor(TemplateParser)");
-            return mi.Invoke (item, null);
+            MethodInfo mi = this.Type.GetProperty("IsDirty").GetGetMethod();
+            Assert.IsNotNull(mi, ".ctor(TemplateParser)");
+            return mi.Invoke(item, null);
         }
 
-        public override Type Type {
-            get { return typeof (StateItem); }
+        public override Type Type
+        {
+            get { return typeof(StateItem); }
         }
     }
 }

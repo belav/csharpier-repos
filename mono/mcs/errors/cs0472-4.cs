@@ -4,7 +4,7 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         System.Console.WriteLine(5 == (long?)null);
     }

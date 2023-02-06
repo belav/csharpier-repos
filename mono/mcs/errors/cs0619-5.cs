@@ -4,9 +4,9 @@
 using System;
 
 [Obsolete("Do not use it", true)]
-class A {
-}
+class A { }
 
-class B {
-    static A _a = new A ();
+class B
+{
+    static A _a = new A();
 }

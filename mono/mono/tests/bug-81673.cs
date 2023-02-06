@@ -8,20 +8,24 @@ namespace Application
 {
     public class App
     {
-        public static void Test ()
+        public static void Test()
         {
-            MyClass c = new MyClass ();
-            c.Run ();
+            MyClass c = new MyClass();
+            c.Run();
         }
 
-        public static int Main ()
+        public static int Main()
         {
             int numCaught = 0;
 
-            for (int i = 0; i < 10; ++i) {
-                try {
-                    Test ();
-                } catch (Exception ex) {
+            for (int i = 0; i < 10; ++i)
+            {
+                try
+                {
+                    Test();
+                }
+                catch (Exception ex)
+                {
                     ++numCaught;
                 }
             }
@@ -30,11 +34,9 @@ namespace Application
             return 1;
         }
     }
-    
-    class MyClass: IMyInterface
+
+    class MyClass : IMyInterface
     {
-        public void Run ()
-        {
-        }
+        public void Run() { }
     }
 }

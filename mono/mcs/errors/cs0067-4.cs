@@ -9,7 +9,7 @@ public class EventTestClass : IEventTest
     public event EventHandler Elapsed;
 }
 
-public interface IEventTest 
+public interface IEventTest
 {
     event EventHandler Elapsed;
 }

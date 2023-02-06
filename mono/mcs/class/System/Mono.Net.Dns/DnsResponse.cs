@@ -24,10 +24,14 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 
-namespace Mono.Net.Dns {
-    class DnsResponse : DnsPacket {
-        static readonly ReadOnlyCollection<DnsResourceRecord> EmptyRR = new ReadOnlyCollection<DnsResourceRecord> (new DnsResourceRecord [0]);
-        static readonly ReadOnlyCollection<DnsQuestion> EmptyQS = new ReadOnlyCollection<DnsQuestion> (new DnsQuestion [0]);
+namespace Mono.Net.Dns
+{
+    class DnsResponse : DnsPacket
+    {
+        static readonly ReadOnlyCollection<DnsResourceRecord> EmptyRR =
+            new ReadOnlyCollection<DnsResourceRecord>(new DnsResourceRecord[0]);
+        static readonly ReadOnlyCollection<DnsQuestion> EmptyQS =
+            new ReadOnlyCollection<DnsQuestion>(new DnsQuestion[0]);
 
         ReadOnlyCollection<DnsQuestion> question;
         ReadOnlyCollection<DnsResourceRecord> answer;
@@ -35,105 +39,110 @@ namespace Mono.Net.Dns {
         ReadOnlyCollection<DnsResourceRecord> additional;
         int offset = DnsHeader.DnsHeaderLength;
 
-        public DnsResponse (byte [] buffer, int length)
-            : base (buffer, length)
-        {
-        }
+        public DnsResponse(byte[] buffer, int length)
+            : base(buffer, length) { }
 
-        public void Reset ()
+        public void Reset()
         {
             question = null;
             answer = null;
             authority = null;
             additional = null;
             for (int i = 0; i < packet.Length; i++)
-                packet [i] = 0;
+                packet[i] = 0;
         }
 
-        ReadOnlyCollection<DnsResourceRecord> GetRRs (int count)
+        ReadOnlyCollection<DnsResourceRecord> GetRRs(int count)
         {
             if (count <= 0)
                 return EmptyRR;
 
             List<DnsResourceRecord> records = new List<DnsResourceRecord>(count);
             for (int i = 0; i < count; i++)
-                records.Add (DnsResourceRecord.CreateFromBuffer (this, position, ref offset));
-            return records.AsReadOnly ();
+                records.Add(DnsResourceRecord.CreateFromBuffer(this, position, ref offset));
+            return records.AsReadOnly();
         }
 
-        ReadOnlyCollection<DnsQuestion> GetQuestions (int count)
+        ReadOnlyCollection<DnsQuestion> GetQuestions(int count)
         {
             if (count <= 0)
                 return EmptyQS;
 
-            List<DnsQuestion> records = new List<DnsQuestion> (count);
-            for(int i = 0; i < count; i++) {
-                DnsQuestion record = new DnsQuestion ();
-                offset = record.Init (this, offset);
-                records.Add (record);
+            List<DnsQuestion> records = new List<DnsQuestion>(count);
+            for (int i = 0; i < count; i++)
+            {
+                DnsQuestion record = new DnsQuestion();
+                offset = record.Init(this, offset);
+                records.Add(record);
             }
-            return records.AsReadOnly ();
+            return records.AsReadOnly();
         }
 
-        public ReadOnlyCollection<DnsQuestion> GetQuestions ()
+        public ReadOnlyCollection<DnsQuestion> GetQuestions()
         {
             if (question == null)
-                question = GetQuestions (Header.QuestionCount);
+                question = GetQuestions(Header.QuestionCount);
             return question;
         }
 
-        public ReadOnlyCollection<DnsResourceRecord> GetAnswers ()
+        public ReadOnlyCollection<DnsResourceRecord> GetAnswers()
         {
-            if (answer == null) {
-                GetQuestions ();
-                answer = GetRRs (Header.AnswerCount);
+            if (answer == null)
+            {
+                GetQuestions();
+                answer = GetRRs(Header.AnswerCount);
             }
             return answer;
         }
 
-        public ReadOnlyCollection<DnsResourceRecord> GetAuthority ()
+        public ReadOnlyCollection<DnsResourceRecord> GetAuthority()
         {
-            if (authority == null) {
-                GetQuestions ();
-                GetAnswers ();
-                authority = GetRRs (Header.AuthorityCount);
+            if (authority == null)
+            {
+                GetQuestions();
+                GetAnswers();
+                authority = GetRRs(Header.AuthorityCount);
             }
             return authority;
         }
 
-        public ReadOnlyCollection<DnsResourceRecord> GetAdditional ()
+        public ReadOnlyCollection<DnsResourceRecord> GetAdditional()
         {
-            if (additional == null) {
-                GetQuestions ();
-                GetAnswers ();
-                GetAuthority ();
-                additional = GetRRs (Header.AdditionalCount);
+            if (additional == null)
+            {
+                GetQuestions();
+                GetAnswers();
+                GetAuthority();
+                additional = GetRRs(Header.AdditionalCount);
             }
             return additional;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(Header);
             sb.Append("Question:\r\n");
-            foreach(DnsQuestion q in GetQuestions()) {
+            foreach (DnsQuestion q in GetQuestions())
+            {
                 sb.AppendFormat("\t{0}\r\n", q);
             }
             sb.Append("Answer(s):\r\n");
-            foreach(DnsResourceRecord q in GetAnswers()) {
+            foreach (DnsResourceRecord q in GetAnswers())
+            {
                 sb.AppendFormat("\t{0}\r\n", q);
             }
             sb.Append("Authority:\r\n");
-            foreach(DnsResourceRecord q in GetAuthority()) {
+            foreach (DnsResourceRecord q in GetAuthority())
+            {
                 sb.AppendFormat("\t{0}\r\n", q);
             }
             sb.Append("Additional:\r\n");
-            foreach(DnsResourceRecord q in GetAdditional()) {
+            foreach (DnsResourceRecord q in GetAdditional())
+            {
                 sb.AppendFormat("\t{0}\r\n", q);
             }
             return sb.ToString();
         }
     }
 }
-

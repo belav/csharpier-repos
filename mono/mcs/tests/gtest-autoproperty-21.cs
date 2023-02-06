@@ -4,13 +4,13 @@ public class Subclass : Base
 {
     public override string Value { get; }
 
-    public Subclass ()
+    public Subclass()
     {
         Value = "test";
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        new Subclass ();
+        new Subclass();
     }
 }

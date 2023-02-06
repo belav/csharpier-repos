@@ -25,17 +25,22 @@ namespace MonoTests.Common
 
         #region ITestDataContext Members
 
-        public IList GetTableData (string tableName, DataSourceSelectArguments args, string where, ParameterCollection whereParams)
+        public IList GetTableData(
+            string tableName,
+            DataSourceSelectArguments args,
+            string where,
+            ParameterCollection whereParams
+        )
         {
             return null;
         }
 
-        public List<DynamicDataTable> GetTables ()
+        public List<DynamicDataTable> GetTables()
         {
-            var ret = new List<DynamicDataTable> ();
+            var ret = new List<DynamicDataTable>();
 
-            ret.Add (new TestDataTable<FooBarNoScaffold> ());
-            ret.Add (new TestDataTable<AssociatedBar> ());
+            ret.Add(new TestDataTable<FooBarNoScaffold>());
+            ret.Add(new TestDataTable<AssociatedBar>());
 
             return ret;
         }

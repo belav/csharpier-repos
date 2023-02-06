@@ -13,6 +13,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EndConstructGeneration
 {
     internal interface IEndConstructGenerationService : ILanguageService
     {
-        bool TryDo(ITextView textView, ITextBuffer subjectBuffer, char typedChar, CancellationToken cancellationToken);
+        bool TryDo(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            char typedChar,
+            CancellationToken cancellationToken
+        );
     }
 }

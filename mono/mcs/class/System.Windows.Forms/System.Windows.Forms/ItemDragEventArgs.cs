@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,19 +31,19 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-    [ComVisible (true)]
+    [ComVisible(true)]
     public class ItemDragEventArgs : EventArgs
     {
         private MouseButtons button;
         private object item;
 
         #region Public Constructors
-        public ItemDragEventArgs (MouseButtons button)
+        public ItemDragEventArgs(MouseButtons button)
         {
             this.button = button;
         }
 
-        public ItemDragEventArgs (MouseButtons button, object item)
+        public ItemDragEventArgs(MouseButtons button, object item)
         {
             this.button = button;
             this.item = item;
@@ -51,11 +51,13 @@ namespace System.Windows.Forms
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public MouseButtons Button {
+        public MouseButtons Button
+        {
             get { return button; }
         }
 
-        public object Item {
+        public object Item
+        {
             get { return item; }
         }
         #endregion    // Public Instance Properties

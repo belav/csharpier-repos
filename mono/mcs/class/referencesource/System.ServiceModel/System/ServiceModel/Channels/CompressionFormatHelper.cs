@@ -11,14 +11,15 @@ namespace System.ServiceModel.Channels
         {
             if (!IsDefined(value))
             {
-                throw FxTrace.Exception.AsError(new InvalidEnumArgumentException("value", (int)value, typeof(CompressionFormat)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidEnumArgumentException("value", (int)value, typeof(CompressionFormat))
+                );
             }
         }
 
         internal static bool IsDefined(CompressionFormat value)
         {
-            return
-                value == CompressionFormat.None
+            return value == CompressionFormat.None
                 || value == CompressionFormat.Deflate
                 || value == CompressionFormat.GZip;
         }

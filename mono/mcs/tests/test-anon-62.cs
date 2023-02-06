@@ -10,20 +10,20 @@ public class X
         this.a = a;
     }
 
-    public static void Main()
-    {
-    }
+    public static void Main() { }
 }
 
 public class Y : X
 {
     private Z a;
-    
-    public Y(Z a) : base(a.A)
+
+    public Y(Z a)
+        : base(a.A)
     {
         this.a = a;
 
-        FooHandler handler = delegate {
+        FooHandler handler = delegate
+        {
             a.Hello();
         };
     }
@@ -32,8 +32,6 @@ public class Y : X
 public class Z
 {
     public string A;
-    
-    public void Hello ()
-    {
-    }
+
+    public void Hello() { }
 }

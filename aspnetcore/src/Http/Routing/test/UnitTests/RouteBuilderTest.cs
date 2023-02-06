@@ -40,12 +40,15 @@ public class RouteBuilderTest
             .Returns(Mock.Of<IServiceProvider>());
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => new RouteBuilder(applicationBuilderMock.Object));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => new RouteBuilder(applicationBuilderMock.Object)
+        );
 
         Assert.Equal(
-            "Unable to find the required services. Please add all the required services by calling " +
-            "'IServiceCollection.AddRouting' inside the call to 'ConfigureServices(...)'" +
-            " in the application startup code.",
-            exception.Message);
+            "Unable to find the required services. Please add all the required services by calling "
+                + "'IServiceCollection.AddRouting' inside the call to 'ConfigureServices(...)'"
+                + " in the application startup code.",
+            exception.Message
+        );
     }
 }

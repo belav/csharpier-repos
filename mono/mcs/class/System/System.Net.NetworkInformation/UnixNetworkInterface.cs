@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,80 +34,84 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-namespace System.Net.NetworkInformation {
+namespace System.Net.NetworkInformation
+{
     internal abstract class UnixNetworkInterfaceAPI : NetworkInterfaceFactory
     {
 #if ORBIS
         public static int if_nametoindex(string ifname)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        protected static int getifaddrs (out IntPtr ifap)
+        protected static int getifaddrs(out IntPtr ifap)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        protected static void freeifaddrs (IntPtr ifap)
+        protected static void freeifaddrs(IntPtr ifap)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 #else
         [DllImport("libc")]
         public static extern int if_nametoindex(string ifname);
 
-        [DllImport ("libc")]
-        protected static extern int getifaddrs (out IntPtr ifap);
+        [DllImport("libc")]
+        protected static extern int getifaddrs(out IntPtr ifap);
 
-        [DllImport ("libc")]
-        protected static extern void freeifaddrs (IntPtr ifap);
+        [DllImport("libc")]
+        protected static extern void freeifaddrs(IntPtr ifap);
 #endif
     }
 
     abstract class UnixNetworkInterface : NetworkInterface
     {
-
         protected IPv4InterfaceStatistics ipv4stats;
         protected IPInterfaceProperties ipproperties;
 
-        string               name;
+        string name;
+
         //int                  index;
-        protected List <IPAddress> addresses;
-        byte[]               macAddress;
+        protected List<IPAddress> addresses;
+        byte[] macAddress;
         NetworkInterfaceType type;
 
-        internal UnixNetworkInterface (string name)
+        internal UnixNetworkInterface(string name)
         {
             this.name = name;
-            addresses = new List<IPAddress> ();
+            addresses = new List<IPAddress>();
         }
 
-        internal void AddAddress (IPAddress address)
+        internal void AddAddress(IPAddress address)
         {
-            addresses.Add (address);
+            addresses.Add(address);
         }
 
-        internal void SetLinkLayerInfo (int index, byte[] macAddress, NetworkInterfaceType type)
+        internal void SetLinkLayerInfo(int index, byte[] macAddress, NetworkInterfaceType type)
         {
             //this.index = index;
             this.macAddress = macAddress;
             this.type = type;
         }
 
-        public override PhysicalAddress GetPhysicalAddress ()
+        public override PhysicalAddress GetPhysicalAddress()
         {
             if (macAddress != null)
-                return new PhysicalAddress (macAddress);
+                return new PhysicalAddress(macAddress);
             else
                 return PhysicalAddress.None;
         }
 
-        public override bool Supports (NetworkInterfaceComponent networkInterfaceComponent)
+        public override bool Supports(NetworkInterfaceComponent networkInterfaceComponent)
         {
             bool wantIPv4 = networkInterfaceComponent == NetworkInterfaceComponent.IPv4;
-            bool wantIPv6 = wantIPv4 ? false : networkInterfaceComponent == NetworkInterfaceComponent.IPv6;
+            bool wantIPv6 = wantIPv4
+                ? false
+                : networkInterfaceComponent == NetworkInterfaceComponent.IPv6;
 
-            foreach (IPAddress address in addresses) {
+            foreach (IPAddress address in addresses)
+            {
                 if (wantIPv4 && address.AddressFamily == AddressFamily.InterNetwork)
                     return true;
                 else if (wantIPv6 && address.AddressFamily == AddressFamily.InterNetworkV6)
@@ -117,38 +121,44 @@ namespace System.Net.NetworkInformation {
             return false;
         }
 
-        public override string Description {
+        public override string Description
+        {
             get { return name; }
         }
 
-        public override string Id {
+        public override string Id
+        {
             get { return name; }
         }
 
-        public override bool IsReceiveOnly {
+        public override bool IsReceiveOnly
+        {
             get { return false; }
         }
 
-        public override string Name {
+        public override string Name
+        {
             get { return name; }
         }
 
-        public override NetworkInterfaceType NetworkInterfaceType {
+        public override NetworkInterfaceType NetworkInterfaceType
+        {
             get { return type; }
         }
 
-        [MonoTODO ("Parse dmesg?")]
-        public override long Speed {
-            get {
+        [MonoTODO("Parse dmesg?")]
+        public override long Speed
+        {
+            get
+            {
                 // Bits/s
                 return 1000000;
             }
         }
 
-        internal int NameIndex {
-            get {
-                return UnixNetworkInterfaceAPI.if_nametoindex (Name);
-            }
+        internal int NameIndex
+        {
+            get { return UnixNetworkInterfaceAPI.if_nametoindex(Name); }
         }
     }
 }

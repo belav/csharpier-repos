@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,180 +34,206 @@ using System.Web.Util;
 namespace System.Web.UI.HtmlControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [ConstructorNeedsTag (true)]
+    [ConstructorNeedsTag(true)]
     public class HtmlTableCell : HtmlContainerControl
     {
-        public HtmlTableCell ()
-            : base ("td")
-        {
-        }
+        public HtmlTableCell()
+            : base("td") { }
 
-        public HtmlTableCell (string tagName)
-            : base (tagName)
-        {
-        }
+        public HtmlTableCell(string tagName)
+            : base(tagName) { }
 
-
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Layout")]
-        public string Align {
-            get {
-                string s = Attributes ["align"];
+        public string Align
+        {
+            get
+            {
+                string s = Attributes["align"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("align");
+                    Attributes.Remove("align");
                 else
-                    Attributes ["align"] = value;
+                    Attributes["align"] = value;
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Appearance")]
-        public string BgColor {
-            get {
-                string s = Attributes ["bgcolor"];
+        public string BgColor
+        {
+            get
+            {
+                string s = Attributes["bgcolor"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("bgcolor");
+                    Attributes.Remove("bgcolor");
                 else
-                    Attributes ["bgcolor"] = value;
+                    Attributes["bgcolor"] = value;
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Appearance")]
-        public string BorderColor {
-            get {
-                string s = Attributes ["bordercolor"];
+        public string BorderColor
+        {
+            get
+            {
+                string s = Attributes["bordercolor"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("bordercolor");
+                    Attributes.Remove("bordercolor");
                 else
-                    Attributes ["bordercolor"] = value;
+                    Attributes["bordercolor"] = value;
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Layout")]
-        public int ColSpan {
-            get {
-                string s = Attributes ["colspan"];
-                return (s == null) ? -1 : Convert.ToInt32 (s);
+        public int ColSpan
+        {
+            get
+            {
+                string s = Attributes["colspan"];
+                return (s == null) ? -1 : Convert.ToInt32(s);
             }
-            set {
+            set
+            {
                 if (value == -1)
-                    Attributes.Remove ("colspan");
+                    Attributes.Remove("colspan");
                 else
-                    Attributes ["colspan"] = value.ToString (Helpers.InvariantCulture);
+                    Attributes["colspan"] = value.ToString(Helpers.InvariantCulture);
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Layout")]
-        public string Height {
-            get {
-                string s = Attributes ["height"];
+        public string Height
+        {
+            get
+            {
+                string s = Attributes["height"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("align");
+                    Attributes.Remove("align");
                 else
-                    Attributes ["height"] = value;
+                    Attributes["height"] = value;
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [TypeConverter (typeof (MinimizableAttributeTypeConverter))]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [TypeConverter(typeof(MinimizableAttributeTypeConverter))]
         [WebSysDescription("")]
         [WebCategory("Behavior")]
-        public bool NoWrap {
-            get { return (Attributes ["nowrap"] == "nowrap"); }
-            set {
+        public bool NoWrap
+        {
+            get { return (Attributes["nowrap"] == "nowrap"); }
+            set
+            {
                 if (value)
-                    Attributes ["nowrap"] = "nowrap";
+                    Attributes["nowrap"] = "nowrap";
                 else
-                    Attributes.Remove ("nowrap");
+                    Attributes.Remove("nowrap");
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Layout")]
-        public int RowSpan {
-            get {
-                string s = Attributes ["rowspan"];
-                return (s == null) ? -1 : Convert.ToInt32 (s);
+        public int RowSpan
+        {
+            get
+            {
+                string s = Attributes["rowspan"];
+                return (s == null) ? -1 : Convert.ToInt32(s);
             }
-            set {
+            set
+            {
                 if (value == -1)
-                    Attributes.Remove ("rowspan");
+                    Attributes.Remove("rowspan");
                 else
-                    Attributes ["rowspan"] = value.ToString (Helpers.InvariantCulture);
+                    Attributes["rowspan"] = value.ToString(Helpers.InvariantCulture);
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Appearance")]
-        public string VAlign {
-            get {
-                string s = Attributes ["valign"];
+        public string VAlign
+        {
+            get
+            {
+                string s = Attributes["valign"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("valign");
+                    Attributes.Remove("valign");
                 else
-                    Attributes ["valign"] = value;
+                    Attributes["valign"] = value;
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Layout")]
-        public string Width {
-            get {
-                string s = Attributes ["width"];
+        public string Width
+        {
+            get
+            {
+                string s = Attributes["width"];
                 return (s == null) ? String.Empty : s;
             }
-            set {
+            set
+            {
                 if (value == null)
-                    Attributes.Remove ("width");
+                    Attributes.Remove("width");
                 else
-                    Attributes ["width"] = value;
+                    Attributes["width"] = value;
             }
         }
 
-
-        protected override void RenderEndTag (HtmlTextWriter writer)
+        protected override void RenderEndTag(HtmlTextWriter writer)
         {
-            writer.WriteEndTag (TagName);
+            writer.WriteEndTag(TagName);
             if (writer.Indent == 0)
-                writer.WriteLine ();
+                writer.WriteLine();
         }
     }
 }

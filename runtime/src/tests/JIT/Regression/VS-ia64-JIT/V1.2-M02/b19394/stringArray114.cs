@@ -6,13 +6,10 @@ using System;
 
 namespace test
 {
-
     public class LargeArray114
     {
-
         public static int Main()
         {
-
             System.String[] array = new System.String[114];
             array[0] = "string0000";
             array[1] = array[0] + "string0001";

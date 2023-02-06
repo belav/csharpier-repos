@@ -24,17 +24,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             ClassifiedTextElement? definitionText,
             Glyph definitionGlyph,
             SymbolUsageInfo? symbolUsageInfo,
-            LSP.Location? location);
+            LSP.Location? location
+        );
     }
 
     [ExportWorkspaceService(typeof(ILspReferencesResultCreationService)), Shared]
-    internal sealed class DefaultLspReferencesResultCreationService : ILspReferencesResultCreationService
+    internal sealed class DefaultLspReferencesResultCreationService
+        : ILspReferencesResultCreationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultLspReferencesResultCreationService()
-        {
-        }
+        public DefaultLspReferencesResultCreationService() { }
 
         public SumType<VSInternalReferenceItem, LSP.Location>? CreateReference(
             int definitionId,
@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             ClassifiedTextElement? definitionText,
             Glyph definitionGlyph,
             SymbolUsageInfo? symbolUsageInfo,
-            LSP.Location? location)
+            LSP.Location? location
+        )
         {
             if (location is null)
                 return null;

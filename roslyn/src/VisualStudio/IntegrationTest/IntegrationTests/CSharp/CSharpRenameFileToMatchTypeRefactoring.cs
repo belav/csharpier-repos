@@ -21,9 +21,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpRenameFileToMatchTypeRefactoring(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpRenameFileToMatchTypeRefactoring))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpRenameFileToMatchTypeRefactoring)) { }
 
         [WpfFact]
         public void RenameFileToMatchType_ExistingCode()
@@ -33,11 +31,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             SetUpEditor(@"class $$MismatchedClassName { }");
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Rename file to MismatchedClassName.cs", applyFix: true);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Rename file to MismatchedClassName.cs",
+                applyFix: true
+            );
 
             // Ensure the file is still open in the editor, and that the file name change was made & saved
             VisualStudio.Editor.Verify.TextContains("class MismatchedClassName { }");
-            AssertEx.EqualOrDiff(@"class MismatchedClassName { }", VisualStudio.SolutionExplorer.GetFileContents(project, "MismatchedClassName.cs"));
+            AssertEx.EqualOrDiff(
+                @"class MismatchedClassName { }",
+                VisualStudio.SolutionExplorer.GetFileContents(project, "MismatchedClassName.cs")
+            );
         }
 
         [WpfFact]
@@ -50,11 +54,20 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             SetUpEditor(@"class $$MismatchedClassName { }");
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Rename file to MismatchedClassName.cs", applyFix: true);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Rename file to MismatchedClassName.cs",
+                applyFix: true
+            );
 
             // Ensure the file is still open in the editor, and that the file name change was made & saved
             VisualStudio.Editor.Verify.TextContains("class MismatchedClassName { }");
-            AssertEx.EqualOrDiff(@"class MismatchedClassName { }", VisualStudio.SolutionExplorer.GetFileContents(project, @"folder1\folder2\MismatchedClassName.cs"));
+            AssertEx.EqualOrDiff(
+                @"class MismatchedClassName { }",
+                VisualStudio.SolutionExplorer.GetFileContents(
+                    project,
+                    @"folder1\folder2\MismatchedClassName.cs"
+                )
+            );
         }
 
         [WpfFact]
@@ -66,16 +79,25 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.Editor.SendKeys("public ");
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Rename file to MismatchedClassName.cs", applyFix: true);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Rename file to MismatchedClassName.cs",
+                applyFix: true
+            );
 
             // Ensure the file is still open in the editor, and that the file name change was made & saved
             VisualStudio.Editor.Verify.CurrentLineText("public class MismatchedClassName { }");
-            AssertEx.EqualOrDiff(@"public class MismatchedClassName { }", VisualStudio.SolutionExplorer.GetFileContents(project, "MismatchedClassName.cs"));
+            AssertEx.EqualOrDiff(
+                @"public class MismatchedClassName { }",
+                VisualStudio.SolutionExplorer.GetFileContents(project, "MismatchedClassName.cs")
+            );
 
             // The first undo is for the file rename.
             VisualStudio.Editor.Undo();
             VisualStudio.Editor.Verify.CurrentLineText("public class MismatchedClassName { }");
-            AssertEx.EqualOrDiff(@"public class MismatchedClassName { }", VisualStudio.SolutionExplorer.GetFileContents(project, "Class1.cs"));
+            AssertEx.EqualOrDiff(
+                @"public class MismatchedClassName { }",
+                VisualStudio.SolutionExplorer.GetFileContents(project, "Class1.cs")
+            );
 
             // The second undo is for the text changes.
             VisualStudio.Editor.Undo();
@@ -87,7 +109,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             // Redo the file rename
             VisualStudio.Editor.Redo();
-            AssertEx.EqualOrDiff(@"public class MismatchedClassName { }", VisualStudio.SolutionExplorer.GetFileContents(project, "MismatchedClassName.cs"));
+            AssertEx.EqualOrDiff(
+                @"public class MismatchedClassName { }",
+                VisualStudio.SolutionExplorer.GetFileContents(project, "MismatchedClassName.cs")
+            );
         }
     }
 }

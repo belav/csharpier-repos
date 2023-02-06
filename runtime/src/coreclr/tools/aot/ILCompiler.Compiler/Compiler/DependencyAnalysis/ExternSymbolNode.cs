@@ -23,12 +23,14 @@ namespace ILCompiler.DependencyAnalysis
             _isIndirection = isIndirection;
         }
 
-        protected override string GetName(NodeFactory factory) => $"ExternSymbol {_name}{(_isIndirection ? " (indirected)" : "")}";
+        protected override string GetName(NodeFactory factory) =>
+            $"ExternSymbol {_name}{(_isIndirection ? " (indirected)" : "")}";
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(_name);
         }
+
         public int Offset => 0;
         public virtual bool RepresentsIndirectionCell => _isIndirection;
 
@@ -37,9 +39,19 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
 
-        public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+        public override IEnumerable<DependencyListEntry> GetStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
 
 #if !SUPPORT_JIT
         public override int ClassCode => 1092559304;

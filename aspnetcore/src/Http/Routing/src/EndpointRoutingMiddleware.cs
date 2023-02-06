@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Routing;
 
 internal sealed partial class EndpointRoutingMiddleware
 {
-    private const string DiagnosticsEndpointMatchedKey = "Microsoft.AspNetCore.Routing.EndpointMatched";
+    private const string DiagnosticsEndpointMatchedKey =
+        "Microsoft.AspNetCore.Routing.EndpointMatched";
 
     private readonly MatcherFactory _matcherFactory;
     private readonly ILogger _logger;
@@ -28,7 +29,8 @@ internal sealed partial class EndpointRoutingMiddleware
         IEndpointRouteBuilder endpointRouteBuilder,
         EndpointDataSource rootCompositeEndpointDataSource,
         DiagnosticListener diagnosticListener,
-        RequestDelegate next)
+        RequestDelegate next
+    )
     {
         if (endpointRouteBuilder == null)
         {
@@ -37,7 +39,8 @@ internal sealed partial class EndpointRoutingMiddleware
 
         _matcherFactory = matcherFactory ?? throw new ArgumentNullException(nameof(matcherFactory));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _diagnosticListener = diagnosticListener ?? throw new ArgumentNullException(nameof(diagnosticListener));
+        _diagnosticListener =
+            diagnosticListener ?? throw new ArgumentNullException(nameof(diagnosticListener));
         _next = next ?? throw new ArgumentNullException(nameof(next));
 
         // rootCompositeEndpointDataSource is a constructor parameter only so it always gets disposed by DI. This ensures that any
@@ -73,14 +76,22 @@ internal sealed partial class EndpointRoutingMiddleware
         return SetRoutingAndContinue(httpContext);
 
         // Awaited fallbacks for when the Tasks do not synchronously complete
-        static async Task AwaitMatcher(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task<Matcher> matcherTask)
+        static async Task AwaitMatcher(
+            EndpointRoutingMiddleware middleware,
+            HttpContext httpContext,
+            Task<Matcher> matcherTask
+        )
         {
             var matcher = await matcherTask;
             await matcher.MatchAsync(httpContext);
             await middleware.SetRoutingAndContinue(httpContext);
         }
 
-        static async Task AwaitMatch(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task matchTask)
+        static async Task AwaitMatch(
+            EndpointRoutingMiddleware middleware,
+            HttpContext httpContext,
+            Task matchTask
+        )
         {
             await matchTask;
             await middleware.SetRoutingAndContinue(httpContext);
@@ -99,7 +110,10 @@ internal sealed partial class EndpointRoutingMiddleware
         else
         {
             // Raise an event if the route matched
-            if (_diagnosticListener.IsEnabled() && _diagnosticListener.IsEnabled(DiagnosticsEndpointMatchedKey))
+            if (
+                _diagnosticListener.IsEnabled()
+                && _diagnosticListener.IsEnabled(DiagnosticsEndpointMatchedKey)
+            )
             {
                 Write(_diagnosticListener, httpContext);
             }
@@ -109,8 +123,11 @@ internal sealed partial class EndpointRoutingMiddleware
 
         return _next(httpContext);
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-            Justification = "The values being passed into Write are being consumed by the application already.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = "The values being passed into Write are being consumed by the application already."
+        )]
         static void Write(DiagnosticListener diagnosticListener, HttpContext httpContext)
         {
             // We're just going to send the HttpContext since it has all of the relevant information
@@ -137,8 +154,14 @@ internal sealed partial class EndpointRoutingMiddleware
 
     private Task<Matcher> InitializeCoreAsync()
     {
-        var initialization = new TaskCompletionSource<Matcher>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var initializationTask = Interlocked.CompareExchange(ref _initializationTask, initialization.Task, null);
+        var initialization = new TaskCompletionSource<Matcher>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var initializationTask = Interlocked.CompareExchange(
+            ref _initializationTask,
+            initialization.Task,
+            null
+        );
         if (initializationTask != null)
         {
             // This thread lost the race, join the existing task.
@@ -170,19 +193,34 @@ internal sealed partial class EndpointRoutingMiddleware
 
     private static partial class Log
     {
-        public static void MatchSuccess(ILogger logger, Endpoint endpoint)
-            => MatchSuccess(logger, endpoint.DisplayName);
+        public static void MatchSuccess(ILogger logger, Endpoint endpoint) =>
+            MatchSuccess(logger, endpoint.DisplayName);
 
-        [LoggerMessage(1, LogLevel.Debug, "Request matched endpoint '{EndpointName}'", EventName = "MatchSuccess")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Request matched endpoint '{EndpointName}'",
+            EventName = "MatchSuccess"
+        )]
         private static partial void MatchSuccess(ILogger logger, string? endpointName);
 
-        [LoggerMessage(2, LogLevel.Debug, "Request did not match any endpoints", EventName = "MatchFailure")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Request did not match any endpoints",
+            EventName = "MatchFailure"
+        )]
         public static partial void MatchFailure(ILogger logger);
 
-        public static void MatchSkipped(ILogger logger, Endpoint endpoint)
-            => MatchingSkipped(logger, endpoint.DisplayName);
+        public static void MatchSkipped(ILogger logger, Endpoint endpoint) =>
+            MatchingSkipped(logger, endpoint.DisplayName);
 
-        [LoggerMessage(3, LogLevel.Debug, "Endpoint '{EndpointName}' already set, skipping route matching.", EventName = "MatchingSkipped")]
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "Endpoint '{EndpointName}' already set, skipping route matching.",
+            EventName = "MatchingSkipped"
+        )]
         private static partial void MatchingSkipped(ILogger logger, string? endpointName);
     }
 }

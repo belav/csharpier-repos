@@ -19,21 +19,24 @@ namespace System.Web.WebPages
         private const string ModuleRootSyntax = "@/";
         private const string ResourceVirtualPathRoot = "~/r.ashx/";
         private const string ResourceRoute = "r.ashx/{module}/{*path}";
-        private static readonly LazyAction _initApplicationPart = new LazyAction(InitApplicationParts);
+        private static readonly LazyAction _initApplicationPart = new LazyAction(
+            InitApplicationParts
+        );
         private static ApplicationPartRegistry _partRegistry;
         private readonly Lazy<IDictionary<string, string>> _applicationPartResources;
         private readonly Lazy<string> _applicationPartName;
 
         public ApplicationPart(Assembly assembly, string rootVirtualPath)
-            : this(new ResourceAssembly(assembly), rootVirtualPath)
-        {
-        }
+            : this(new ResourceAssembly(assembly), rootVirtualPath) { }
 
         internal ApplicationPart(IResourceAssembly assembly, string rootVirtualPath)
         {
             if (String.IsNullOrEmpty(rootVirtualPath))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "rootVirtualPath");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "rootVirtualPath"
+                );
             }
 
             // Make sure the root path ends with a slash
@@ -44,7 +47,12 @@ namespace System.Web.WebPages
 
             Assembly = assembly;
             RootVirtualPath = rootVirtualPath;
-            _applicationPartResources = new Lazy<IDictionary<string, string>>(() => Assembly.GetManifestResourceNames().ToDictionary(key => key, key => key, StringComparer.OrdinalIgnoreCase));
+            _applicationPartResources = new Lazy<IDictionary<string, string>>(
+                () =>
+                    Assembly
+                        .GetManifestResourceNames()
+                        .ToDictionary(key => key, key => key, StringComparer.OrdinalIgnoreCase)
+            );
             _applicationPartName = new Lazy<string>(() => Assembly.Name);
         }
 
@@ -74,21 +82,34 @@ namespace System.Web.WebPages
             _partRegistry.Register(applicationPart);
         }
 
-        public static string ProcessVirtualPath(Assembly assembly, string baseVirtualPath, string virtualPath)
+        public static string ProcessVirtualPath(
+            Assembly assembly,
+            string baseVirtualPath,
+            string virtualPath
+        )
         {
             if (_partRegistry == null)
             {
                 // This was called without registering a part.
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, WebPageResources.ApplicationPart_ModuleNotRegistered, assembly));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        WebPageResources.ApplicationPart_ModuleNotRegistered,
+                        assembly
+                    )
+                );
             }
 
             ApplicationPart applicationPart = _partRegistry[new ResourceAssembly(assembly)];
             if (applicationPart == null)
             {
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
-                                  WebPageResources.ApplicationPart_ModuleNotRegistered,
-                                  assembly));
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        WebPageResources.ApplicationPart_ModuleNotRegistered,
+                        assembly
+                    )
+                );
             }
 
             return applicationPart.ProcessVirtualPath(baseVirtualPath, virtualPath);
@@ -128,7 +149,11 @@ namespace System.Web.WebPages
         /// Expands a virtual path by replacing a leading "@" with the application part root
         /// or combining it with the specified baseVirtualPath
         /// </summary>
-        internal static string ResolveVirtualPath(string applicationRoot, string baseVirtualPath, string virtualPath)
+        internal static string ResolveVirtualPath(
+            string applicationRoot,
+            string baseVirtualPath,
+            string virtualPath
+        )
         {
             // If it starts with @/, replace that with the package root
             // e.g. @/Sub Folder/foo.jpg ==> ~/admin/Debugger/Sub Folder/foo.jpg
@@ -202,7 +227,11 @@ namespace System.Web.WebPages
             return GetResourceVirtualPath(Name, RootVirtualPath, virtualPath);
         }
 
-        internal static string GetResourceVirtualPath(string moduleName, string moduleRoot, string virtualPath)
+        internal static string GetResourceVirtualPath(
+            string moduleName,
+            string moduleRoot,
+            string virtualPath
+        )
         {
             // The path should always start with the root of the module. Skip it.
             Debug.Assert(virtualPath.StartsWith(moduleRoot, StringComparison.OrdinalIgnoreCase));
@@ -210,7 +239,10 @@ namespace System.Web.WebPages
 
             // Make a path to the resource through our resource route, e.g. ~/r.ashx/sub/foo.jpg
             // e.g. ~/admin/Debugger/Sub Folder/foo.jpg ==> ~/r.ashx/DebuggerPackageName/Sub Folder/foo.jpg
-            return ResourceVirtualPathRoot + HttpUtility.UrlPathEncode(moduleName) + "/" + virtualPath;
+            return ResourceVirtualPathRoot
+                + HttpUtility.UrlPathEncode(moduleName)
+                + "/"
+                + virtualPath;
         }
 
         private static void InitApplicationParts()
@@ -223,7 +255,9 @@ namespace System.Web.WebPages
             _partRegistry = new ApplicationPartRegistry(virtualPathFactory);
 
             // Register the resource route
-            RouteTable.Routes.Add(new Route(ResourceRoute, new ResourceRouteHandler(_partRegistry)));
+            RouteTable.Routes.Add(
+                new Route(ResourceRoute, new ResourceRouteHandler(_partRegistry))
+            );
         }
     }
 }

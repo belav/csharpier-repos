@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             ImmutableArray<AbstractFormattingRule> formattingRules,
             int index,
             SyntaxNode node,
-            List<AnchorIndentationOperation> list)
+            List<AnchorIndentationOperation> list
+        )
         {
             _formattingRules = formattingRules;
             _index = index;
@@ -28,8 +29,8 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             _list = list;
         }
 
-        private NextAnchorIndentationOperationAction NextAction
-            => new(_formattingRules, _index + 1, _node, _list);
+        private NextAnchorIndentationOperationAction NextAction =>
+            new(_formattingRules, _index + 1, _node, _list);
 
         public void Invoke()
         {

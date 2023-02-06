@@ -42,70 +42,83 @@ namespace System.ComponentModel.Design.Serialization
     //
     internal class ComponentCodeDomSerializer : CodeDomSerializer
     {
+        public ComponentCodeDomSerializer() { }
 
-        public ComponentCodeDomSerializer ()
-        {
-        }
-
-        public override object Serialize (IDesignerSerializationManager manager, object value)
+        public override object Serialize(IDesignerSerializationManager manager, object value)
         {
             if (value == null)
-                throw new ArgumentNullException ("value");
+                throw new ArgumentNullException("value");
             if (manager == null)
-                throw new ArgumentNullException ("manager");
+                throw new ArgumentNullException("manager");
 
-            RootContext rootContext = manager.Context[typeof (RootContext)] as RootContext;
+            RootContext rootContext = manager.Context[typeof(RootContext)] as RootContext;
             if (rootContext != null && rootContext.Value == value)
                 return rootContext.Expression;
 
-            CodeStatementCollection statements = new CodeStatementCollection ();
+            CodeStatementCollection statements = new CodeStatementCollection();
 
-            if (((IComponent)value).Site == null) {
-                ReportError (manager, "Component of type '" + value.GetType().Name + "' not sited");
+            if (((IComponent)value).Site == null)
+            {
+                ReportError(manager, "Component of type '" + value.GetType().Name + "' not sited");
                 return statements;
             }
 
             // the trick with the nested components is that GetName will return the full name
             // e.g splitter1.Panel1 and thus the code below will create a reference to that.
-            // 
-            string name = manager.GetName (value);
+            //
+            string name = manager.GetName(value);
 
             CodeExpression componentRef = null;
             if (rootContext != null)
-                componentRef = new CodeFieldReferenceExpression (rootContext.Expression , name);
+                componentRef = new CodeFieldReferenceExpression(rootContext.Expression, name);
             else
-                componentRef = new CodeFieldReferenceExpression (new CodeThisReferenceExpression () , name);
+                componentRef = new CodeFieldReferenceExpression(
+                    new CodeThisReferenceExpression(),
+                    name
+                );
 
-            base.SetExpression (manager, value, componentRef);
+            base.SetExpression(manager, value, componentRef);
 
-            ExpressionContext context = manager.Context[typeof (ExpressionContext)] as ExpressionContext;
-            // Perform some heuristics here. 
-            // 
+            ExpressionContext context =
+                manager.Context[typeof(ExpressionContext)] as ExpressionContext;
+            // Perform some heuristics here.
+            //
             // If there is an ExpressionContext of PropertyReference where PresetValue == this
             // partial serialization doesn't make sense, so perform full. E.g in the case of:
-            // 
-            // PropertyCodeDomSerializer.SerializeContentProperty and splitContainer1.*Panel1* 
             //
-            if (context == null || context.PresetValue != value ||
-                (context.PresetValue == value && (context.Expression is CodeFieldReferenceExpression ||
-                                  context.Expression is CodePropertyReferenceExpression))) {
+            // PropertyCodeDomSerializer.SerializeContentProperty and splitContainer1.*Panel1*
+            //
+            if (
+                context == null
+                || context.PresetValue != value
+                || (
+                    context.PresetValue == value
+                    && (
+                        context.Expression is CodeFieldReferenceExpression
+                        || context.Expression is CodePropertyReferenceExpression
+                    )
+                )
+            )
+            {
                 bool isComplete = true;
-                statements.Add (new CodeCommentStatement (String.Empty));
-                statements.Add (new CodeCommentStatement (name));
-                statements.Add (new CodeCommentStatement (String.Empty));
-    
+                statements.Add(new CodeCommentStatement(String.Empty));
+                statements.Add(new CodeCommentStatement(name));
+                statements.Add(new CodeCommentStatement(String.Empty));
+
                 // Do not serialize a creation expression for Nested components
                 //
-                if (! (((IComponent)value).Site is INestedSite)) {
-                    CodeStatement assignment = new CodeAssignStatement (componentRef, 
-                                    base.SerializeCreationExpression (manager, value, 
-                                                      out isComplete));
+                if (!(((IComponent)value).Site is INestedSite))
+                {
+                    CodeStatement assignment = new CodeAssignStatement(
+                        componentRef,
+                        base.SerializeCreationExpression(manager, value, out isComplete)
+                    );
                     assignment.UserData["statement-order"] = "initializer";
-                    statements.Add (assignment);
+                    statements.Add(assignment);
                 }
-    
-                base.SerializeProperties (manager, statements, value, new Attribute[0]);
-                base.SerializeEvents (manager, statements, value);
+
+                base.SerializeProperties(manager, statements, value, new Attribute[0]);
+                base.SerializeEvents(manager, statements, value);
             }
 
             return statements;

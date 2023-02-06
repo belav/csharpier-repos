@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,87 +42,107 @@ namespace MonoTests.System.ServiceModel.Channels
     {
         ChannelListenerBase channel_listener;
 
-        public ReplyChannelBase (ChannelListenerBase listener)
-            : base (listener)
+        public ReplyChannelBase(ChannelListenerBase listener)
+            : base(listener)
         {
             this.channel_listener = listener;
         }
 
-        protected override TimeSpan DefaultCloseTimeout {
-            get { return TimeSpan.FromSeconds (5); }
+        protected override TimeSpan DefaultCloseTimeout
+        {
+            get { return TimeSpan.FromSeconds(5); }
         }
 
-        protected override TimeSpan DefaultOpenTimeout {
-            get { return TimeSpan.FromSeconds (5); }
+        protected override TimeSpan DefaultOpenTimeout
+        {
+            get { return TimeSpan.FromSeconds(5); }
         }
 
         public abstract EndpointAddress LocalAddress { get; }
 
-        public virtual bool TryReceiveRequest ()
+        public virtual bool TryReceiveRequest()
         {
             RequestContext dummy;
-            return TryReceiveRequest (DefaultReceiveTimeout, out dummy);
+            return TryReceiveRequest(DefaultReceiveTimeout, out dummy);
         }
 
-        public abstract bool TryReceiveRequest (TimeSpan timeout, out RequestContext context);
+        public abstract bool TryReceiveRequest(TimeSpan timeout, out RequestContext context);
 
-        public abstract IAsyncResult BeginTryReceiveRequest (TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginTryReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
-        public virtual bool EndTryReceiveRequest (IAsyncResult result)
+        public virtual bool EndTryReceiveRequest(IAsyncResult result)
         {
             RequestContext dummy;
-            return EndTryReceiveRequest (result, out dummy);
+            return EndTryReceiveRequest(result, out dummy);
         }
 
-        public abstract bool EndTryReceiveRequest (IAsyncResult result, out RequestContext context);
+        public abstract bool EndTryReceiveRequest(IAsyncResult result, out RequestContext context);
 
-        public virtual bool WaitForRequest ()
+        public virtual bool WaitForRequest()
         {
-            return WaitForRequest (DefaultReceiveTimeout);
+            return WaitForRequest(DefaultReceiveTimeout);
         }
 
-        public abstract bool WaitForRequest (TimeSpan timeout);
+        public abstract bool WaitForRequest(TimeSpan timeout);
 
-        public abstract IAsyncResult BeginWaitForRequest (TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginWaitForRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
-        public abstract bool EndWaitForRequest (IAsyncResult result);
+        public abstract bool EndWaitForRequest(IAsyncResult result);
 
-        public virtual RequestContext ReceiveRequest ()
+        public virtual RequestContext ReceiveRequest()
         {
-            return ReceiveRequest (DefaultReceiveTimeout);
+            return ReceiveRequest(DefaultReceiveTimeout);
         }
 
-        public abstract RequestContext ReceiveRequest (TimeSpan timeout);
+        public abstract RequestContext ReceiveRequest(TimeSpan timeout);
 
-        public virtual IAsyncResult BeginReceiveRequest (AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginReceiveRequest(AsyncCallback callback, object state)
         {
-            return BeginReceiveRequest (DefaultReceiveTimeout, callback, state);
+            return BeginReceiveRequest(DefaultReceiveTimeout, callback, state);
         }
 
-        public abstract IAsyncResult BeginReceiveRequest (TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
-        public abstract RequestContext EndReceiveRequest (IAsyncResult result);
+        public abstract RequestContext EndReceiveRequest(IAsyncResult result);
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout,
-            AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout,
-            AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndClose (IAsyncResult result)
+        protected override void OnEndClose(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

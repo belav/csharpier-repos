@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,178 +39,142 @@ namespace System.ServiceProcess
     {
         public bool CanPauseAndContinue
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public bool CanShutdown
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public bool CanStop
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public ServiceController[] DependentServices
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public string DisplayName
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public string MachineName
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public SafeHandle ServiceHandle
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public string ServiceName
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public ServiceController[] ServicesDependedOn
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public ServiceType ServiceType
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public ServiceStartMode StartType
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public ServiceControllerStatus Status
         {
-            get
-            {
-                throw new PlatformNotSupportedException ();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
-        public ServiceController (string name)
+        public ServiceController(string name)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public ServiceController (string name, string machineName)
+        public ServiceController(string name, string machineName)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void Continue ()
+        public void Continue()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public static ServiceController[] GetDevices ()
+        public static ServiceController[] GetDevices()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public static ServiceController[] GetDevices (string machineName)
+        public static ServiceController[] GetDevices(string machineName)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public static ServiceController[] GetServices ()
+        public static ServiceController[] GetServices()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public static ServiceController[] GetServices (string machineName)
+        public static ServiceController[] GetServices(string machineName)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void Pause ()
+        public void Pause()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void Refresh ()
+        public void Refresh()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void Start ()
+        public void Start()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void Start (string[] args)
+        public void Start(string[] args)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void Stop ()
+        public void Stop()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void WaitForStatus (ServiceControllerStatus desiredStatus)
+        public void WaitForStatus(ServiceControllerStatus desiredStatus)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void WaitForStatus (ServiceControllerStatus desiredStatus, TimeSpan timeout)
+        public void WaitForStatus(ServiceControllerStatus desiredStatus, TimeSpan timeout)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
     }
 }

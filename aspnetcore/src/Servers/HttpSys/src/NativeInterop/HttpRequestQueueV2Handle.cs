@@ -10,13 +10,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 internal sealed class HttpRequestQueueV2Handle : SafeHandleZeroOrMinusOneIsInvalid
 {
     private HttpRequestQueueV2Handle()
-        : base(true)
-    {
-    }
+        : base(true) { }
 
     protected override bool ReleaseHandle()
     {
-        return (HttpApi.HttpCloseRequestQueue(handle) ==
-                    UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS);
+        return (
+            HttpApi.HttpCloseRequestQueue(handle) == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+        );
     }
 }

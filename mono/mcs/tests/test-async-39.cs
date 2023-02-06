@@ -3,22 +3,22 @@ using System.Threading.Tasks;
 
 public class CompilerBug
 {
-    public static void Main ()
+    public static void Main()
     {
-        var res = Foo ().Result;
-        Console.WriteLine (res);
+        var res = Foo().Result;
+        Console.WriteLine(res);
         return;
     }
 
-    static async Task<string> Foo ()
+    static async Task<string> Foo()
     {
         Action fnAction;
         {
             fnAction = () => { };
         }
-        await Task.Delay (10);
+        await Task.Delay(10);
         {
-            fnAction ();
+            fnAction();
         }
         return "val";
     }

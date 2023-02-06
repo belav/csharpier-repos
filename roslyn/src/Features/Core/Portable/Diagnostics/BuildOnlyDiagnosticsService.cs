@@ -11,23 +11,30 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    [ExportWorkspaceServiceFactory(typeof(IBuildOnlyDiagnosticsService), ServiceLayer.Default), Shared]
+    [
+        ExportWorkspaceServiceFactory(typeof(IBuildOnlyDiagnosticsService), ServiceLayer.Default),
+        Shared
+    ]
     internal sealed class BuildOnlyDiagnosticsServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public BuildOnlyDiagnosticsServiceFactory()
-        {
-        }
+        public BuildOnlyDiagnosticsServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new BuildOnlyDiagnosticsService(workspaceServices.Workspace);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new BuildOnlyDiagnosticsService(workspaceServices.Workspace);
 
         private sealed class BuildOnlyDiagnosticsService : IBuildOnlyDiagnosticsService
         {
             private readonly object _gate = new();
-            private readonly Dictionary<DocumentId, ImmutableArray<DiagnosticData>> _documentDiagnostics = new();
-            private readonly Dictionary<ProjectId, ImmutableArray<DiagnosticData>> _projectDiagnostics = new();
+            private readonly Dictionary<
+                DocumentId,
+                ImmutableArray<DiagnosticData>
+            > _documentDiagnostics = new();
+            private readonly Dictionary<
+                ProjectId,
+                ImmutableArray<DiagnosticData>
+            > _projectDiagnostics = new();
 
             public BuildOnlyDiagnosticsService(Workspace workspace)
             {
@@ -61,7 +68,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
             }
 
-            public void AddBuildOnlyDiagnostics(Solution solution, ProjectId? projectId, DocumentId? documentId, ImmutableArray<DiagnosticData> diagnostics)
+            public void AddBuildOnlyDiagnostics(
+                Solution solution,
+                ProjectId? projectId,
+                DocumentId? documentId,
+                ImmutableArray<DiagnosticData> diagnostics
+            )
             {
                 lock (_gate)
                 {
@@ -109,7 +121,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
             }
 
-            public void ClearBuildOnlyDiagnostics(Solution solution, ProjectId? projectId, DocumentId? documentId)
+            public void ClearBuildOnlyDiagnostics(
+                Solution solution,
+                ProjectId? projectId,
+                DocumentId? documentId
+            )
             {
                 if (documentId != null)
                     ClearDiagnostics(documentId);

@@ -4,12 +4,10 @@
 
 using System.Collections;
 
-public class Test: ArrayList
+public class Test : ArrayList
 {
     public new string this[string index]
     {
-    set
-    {
-    }
+        set { }
     }
 }

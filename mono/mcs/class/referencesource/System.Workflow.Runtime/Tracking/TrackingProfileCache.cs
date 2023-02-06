@@ -11,7 +11,9 @@ namespace System.Workflow.Runtime.Tracking
     /// <summary>
     /// Manages the runtime's cache of tracking profiles.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public static class TrackingProfileCache
     {
         public static void Clear()

@@ -6,8 +6,8 @@ using System.Linq.Expressions;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        Expression<Func<short?[], short?>> e = l => l [0]++;
+        Expression<Func<short?[], short?>> e = l => l[0]++;
     }
 }

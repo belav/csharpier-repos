@@ -1,4 +1,3 @@
-
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -7,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,16 +26,16 @@ namespace IBM.Data.DB2
 {
     internal sealed class DB2ConnectionSettings
     {
-        private string     connectionString;
-        private string     userName = "";
-        private string     passWord = "";
-        private string     databaseAlias = "";
-        private string     server = "";
-        private bool     pooling = true;
+        private string connectionString;
+        private string userName = "";
+        private string passWord = "";
+        private string databaseAlias = "";
+        private string server = "";
+        private bool pooling = true;
         private TimeSpan connectTimeout = new TimeSpan(0, 0, 15);
-        private TimeSpan connectionLifeTime = new TimeSpan(0, 0, 15);    // 15 seconds
-        private int         connectionPoolSizeMin = 0;
-        private int         connectionPoolSizeMax = -1;    // no maximum
+        private TimeSpan connectionLifeTime = new TimeSpan(0, 0, 15); // 15 seconds
+        private int connectionPoolSizeMin = 0;
+        private int connectionPoolSizeMax = -1; // no maximum
 
         private DB2ConnectionPool pool;
 
@@ -49,12 +48,12 @@ namespace IBM.Data.DB2
         public static DB2ConnectionSettings GetConnectionSettings(string connectionString)
         {
             DB2ConnectionPool pool = DB2ConnectionPool.FindConnectionPool(connectionString);
-            if(pool != null)
+            if (pool != null)
             {
                 return pool.ConnectionSettings;
             }
             DB2ConnectionSettings settings = new DB2ConnectionSettings(connectionString);
-            if(settings.Pooling)
+            if (settings.Pooling)
             {
                 settings.pool = DB2ConnectionPool.GetConnectionPool(settings);
             }
@@ -63,7 +62,7 @@ namespace IBM.Data.DB2
 
         public DB2OpenConnection GetRealOpenConnection(DB2Connection connection)
         {
-            if(pool != null)
+            if (pool != null)
             {
                 return pool.GetOpenConnection(connection);
             }
@@ -87,7 +86,7 @@ namespace IBM.Data.DB2
         {
             get { return userName; }
         }
-        
+
         public string PassWord
         {
             get { return passWord; }
@@ -137,17 +136,16 @@ namespace IBM.Data.DB2
             get { return connectionLifeTime; }
         }
 
-
         /// <summary>
         /// parsed according to IBM DB2 .NET data provider help
         /// </summary>
         public void Parse()
         {
-            string[] parts = connectionString.Split(new char[]{';'});
-            foreach(string part in parts)
+            string[] parts = connectionString.Split(new char[] { ';' });
+            foreach (string part in parts)
             {
-                string[] pairs = part.Split(new char[]{'='});
-                switch(pairs[0].ToLower())
+                string[] pairs = part.Split(new char[] { '=' });
+                switch (pairs[0].ToLower())
                 {
                     case "database":
                     case "dsn":
@@ -165,7 +163,7 @@ namespace IBM.Data.DB2
                         server = pairs[1];
                         break;
                     case "pooling":
-                        pooling = (pairs[1].ToLower() == "true") || (pairs[1]== "1");
+                        pooling = (pairs[1].ToLower() == "true") || (pairs[1] == "1");
                         break;
                     case "connect timeout":
                     case "timeout":
@@ -183,20 +181,20 @@ namespace IBM.Data.DB2
                         break;
                 }
             }
-            if(connectionLifeTime.Ticks <= 0)
+            if (connectionLifeTime.Ticks <= 0)
             {
                 pooling = false;
             }
         }
-    
+
         public override int GetHashCode()
         {
-            return connectionString.GetHashCode ();
+            return connectionString.GetHashCode();
         }
-    
+
         public override bool Equals(object obj)
         {
-            return connectionString.Equals (obj);
+            return connectionString.Equals(obj);
         }
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,27 +36,33 @@ namespace System.Messaging.Design
     internal class MessageQueueConverter : TypeConverter
     {
         [MonoTODO]
-        public MessageQueueConverter ()
+        public MessageQueueConverter() { }
+
+        [MonoTODO]
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

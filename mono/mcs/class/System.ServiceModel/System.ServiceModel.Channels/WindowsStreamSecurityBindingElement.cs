@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,114 +38,123 @@ namespace System.ServiceModel.Channels
 {
     [MonoTODO]
     public class WindowsStreamSecurityBindingElement
-        : BindingElement, ISecurityCapabilities, IPolicyExportExtension,
-        ITransportTokenAssertionProvider
+        : BindingElement,
+            ISecurityCapabilities,
+            IPolicyExportExtension,
+            ITransportTokenAssertionProvider
     {
-        public WindowsStreamSecurityBindingElement ()
-        {
-        }
+        public WindowsStreamSecurityBindingElement() { }
 
-        public WindowsStreamSecurityBindingElement (
-            WindowsStreamSecurityBindingElement other)
-            : base (other)
+        public WindowsStreamSecurityBindingElement(WindowsStreamSecurityBindingElement other)
+            : base(other)
         {
             ProtectionLevel = other.ProtectionLevel;
         }
 
         public ProtectionLevel ProtectionLevel { get; set; }
 
-        public override IChannelFactory<TChannel>
-            BuildChannelFactory<TChannel> (
-            BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
-            return context.BuildInnerChannelFactory<TChannel> ();
+            return context.BuildInnerChannelFactory<TChannel>();
         }
 
 #if !MOBILE && !XAMMAC_4_5
-        public override IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
-            BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
-            return context.BuildInnerChannelListener<TChannel> ();
+            return context.BuildInnerChannelListener<TChannel>();
         }
 #endif
 
-        public override bool CanBuildChannelFactory<TChannel> (
-            BindingContext context)
+        public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
         {
-            return context.CanBuildInnerChannelFactory<TChannel> ();
+            return context.CanBuildInnerChannelFactory<TChannel>();
         }
 
 #if !MOBILE && !XAMMAC_4_5
-        public override bool CanBuildChannelListener<TChannel> (
-            BindingContext context)
+        public override bool CanBuildChannelListener<TChannel>(BindingContext context)
         {
-            return context.CanBuildInnerChannelListener<TChannel> ();
+            return context.CanBuildInnerChannelListener<TChannel>();
         }
 #endif
 
-        public override BindingElement Clone ()
+        public override BindingElement Clone()
         {
-            return new WindowsStreamSecurityBindingElement (this);
+            return new WindowsStreamSecurityBindingElement(this);
         }
 
-        public override T GetProperty<T> (BindingContext context)
+        public override T GetProperty<T>(BindingContext context)
         {
-            if (typeof (T) == typeof (ISecurityCapabilities))
-                return (T) (object) this;
+            if (typeof(T) == typeof(ISecurityCapabilities))
+                return (T)(object)this;
 #if !MOBILE && !XAMMAC_4_5
-            if (typeof (T) == typeof (IdentityVerifier))
-                return (T) (object) IdentityVerifier.CreateDefault ();
+            if (typeof(T) == typeof(IdentityVerifier))
+                return (T)(object)IdentityVerifier.CreateDefault();
 #endif
             return null;
         }
 
         #region explicit interface implementations
         [MonoTODO]
-        ProtectionLevel ISecurityCapabilities.SupportedRequestProtectionLevel {
-            get { throw new NotImplementedException (); }
+        ProtectionLevel ISecurityCapabilities.SupportedRequestProtectionLevel
+        {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        ProtectionLevel ISecurityCapabilities.SupportedResponseProtectionLevel {
-            get { throw new NotImplementedException (); }
+        ProtectionLevel ISecurityCapabilities.SupportedResponseProtectionLevel
+        {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        bool ISecurityCapabilities.SupportsClientAuthentication {
-            get { throw new NotImplementedException (); }
+        bool ISecurityCapabilities.SupportsClientAuthentication
+        {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        bool ISecurityCapabilities.SupportsClientWindowsIdentity {
-            get { throw new NotImplementedException (); }
+        bool ISecurityCapabilities.SupportsClientWindowsIdentity
+        {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        bool ISecurityCapabilities.SupportsServerAuthentication {
-            get { throw new NotImplementedException (); }
+        bool ISecurityCapabilities.SupportsServerAuthentication
+        {
+            get { throw new NotImplementedException(); }
         }
 
 #if !MOBILE && !XAMMAC_4_5
         [MonoTODO]
-        void IPolicyExportExtension.ExportPolicy (
+        void IPolicyExportExtension.ExportPolicy(
             MetadataExporter exporter,
-            PolicyConversionContext context)
+            PolicyConversionContext context
+        )
         {
-            var token = GetTransportTokenAssertion ();
-            var transportBinding = TransportBindingElement.CreateTransportBinding (token);
-            context.GetBindingAssertions ().Add (transportBinding);
+            var token = GetTransportTokenAssertion();
+            var transportBinding = TransportBindingElement.CreateTransportBinding(token);
+            context.GetBindingAssertions().Add(transportBinding);
         }
 
-        public XmlElement GetTransportTokenAssertion ()
+        public XmlElement GetTransportTokenAssertion()
         {
-            var doc = new XmlDocument ();
-            var element = doc.CreateElement (
-                "msf", "WindowsTransportSecurity", PolicyImportHelper.FramingPolicyNS);
-            var protectionLevel = doc.CreateElement (
-                "msf", "ProtectionLevel", PolicyImportHelper.FramingPolicyNS);
-            protectionLevel.InnerText = ProtectionLevel.ToString ();
-            element.AppendChild (protectionLevel);
+            var doc = new XmlDocument();
+            var element = doc.CreateElement(
+                "msf",
+                "WindowsTransportSecurity",
+                PolicyImportHelper.FramingPolicyNS
+            );
+            var protectionLevel = doc.CreateElement(
+                "msf",
+                "ProtectionLevel",
+                PolicyImportHelper.FramingPolicyNS
+            );
+            protectionLevel.InnerText = ProtectionLevel.ToString();
+            element.AppendChild(protectionLevel);
             return element;
         }
 #endif

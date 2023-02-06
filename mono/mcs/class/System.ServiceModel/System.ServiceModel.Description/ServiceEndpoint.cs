@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,8 +35,8 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-    [DebuggerDisplay ("Name={name}")]
-    [DebuggerDisplay ("Address={address}")]
+    [DebuggerDisplay("Name={name}")]
+    [DebuggerDisplay("Address={address}")]
     public class ServiceEndpoint
     {
         ContractDescription contract;
@@ -47,66 +47,77 @@ namespace System.ServiceModel.Description
         ListenUriMode listen_mode;
         string name;
 
-        public ServiceEndpoint (ContractDescription contract)
-            : this (contract, null, null)
-        {
-        }
+        public ServiceEndpoint(ContractDescription contract)
+            : this(contract, null, null) { }
 
-        public ServiceEndpoint(ContractDescription contract,
-            Binding binding, EndpointAddress address)
+        public ServiceEndpoint(
+            ContractDescription contract,
+            Binding binding,
+            EndpointAddress address
+        )
         {
             if (contract == null)
-                throw new ArgumentNullException ("contract");
+                throw new ArgumentNullException("contract");
 
             this.contract = contract;
             this.binding = binding;
             this.address = address;
-            behaviors = new KeyedByTypeCollection<IEndpointBehavior> ();
+            behaviors = new KeyedByTypeCollection<IEndpointBehavior>();
         }
 
-        public KeyedByTypeCollection<IEndpointBehavior> Behaviors {
+        public KeyedByTypeCollection<IEndpointBehavior> Behaviors
+        {
             get { return behaviors; }
         }
 
-        public KeyedCollection<Type,IEndpointBehavior> EndpointBehaviors {
+        public KeyedCollection<Type, IEndpointBehavior> EndpointBehaviors
+        {
             get { return behaviors; }
         }
 
-        public ContractDescription Contract {
+        public ContractDescription Contract
+        {
             get { return contract; }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
+                    throw new ArgumentNullException("value");
                 contract = value;
             }
         }
 
-        public EndpointAddress Address {
+        public EndpointAddress Address
+        {
             get { return address; }
             set { address = value; }
         }
 
-        public Binding Binding {
+        public Binding Binding
+        {
             get { return binding; }
             set { binding = value; }
         }
 
-        public
-        bool IsSystemEndpoint { get; set; }
+        public bool IsSystemEndpoint { get; set; }
 
-        public Uri ListenUri {
+        public Uri ListenUri
+        {
             get { return listen_uri ?? (Address != null ? Address.Uri : null); }
             set { listen_uri = value; }
         }
 
-        public ListenUriMode ListenUriMode {
+        public ListenUriMode ListenUriMode
+        {
             get { return listen_mode; }
             set { listen_mode = value; }
         }
 
-        public string Name {
-            get {
-                if (name == null) {
+        public string Name
+        {
+            get
+            {
+                if (name == null)
+                {
                     // do not create cache when either of Binding or Contract is null.
                     if (Binding == null)
                         return Contract != null ? Contract.Name : null;
@@ -118,32 +129,37 @@ namespace System.ServiceModel.Description
             set { name = value; }
         }
 
-        internal void Validate ()
+        internal void Validate()
         {
             if (Contract.Operations.Count == 0)
-                throw new InvalidOperationException (String.Format ("ContractDescription '{0}' has zero operations; a contract must have at least one operation.", Contract.ContractType.Name));
+                throw new InvalidOperationException(
+                    String.Format(
+                        "ContractDescription '{0}' has zero operations; a contract must have at least one operation.",
+                        Contract.ContractType.Name
+                    )
+                );
 
             foreach (IContractBehavior b in Contract.Behaviors)
-                b.Validate (Contract, this);
+                b.Validate(Contract, this);
             foreach (IEndpointBehavior b in Behaviors)
-                b.Validate (this);
-            foreach (OperationDescription operation in Contract.Operations) {
+                b.Validate(this);
+            foreach (OperationDescription operation in Contract.Operations)
+            {
                 foreach (IOperationBehavior b in operation.Behaviors)
-                    b.Validate (operation);
+                    b.Validate(operation);
             }
         }
 
-
-        internal ClientRuntime CreateClientRuntime (object callbackDispatchRuntime)
+        internal ClientRuntime CreateClientRuntime(object callbackDispatchRuntime)
         {
             ServiceEndpoint se = this;
 
-            var proxy = se.Contract.CreateClientRuntime (callbackDispatchRuntime);
+            var proxy = se.Contract.CreateClientRuntime(callbackDispatchRuntime);
 
             foreach (IEndpointBehavior b in se.Behaviors)
-                b.ApplyClientBehavior (se, proxy);
+                b.ApplyClientBehavior(se, proxy);
             foreach (IContractBehavior b in se.Contract.Behaviors)
-                b.ApplyClientBehavior (se.Contract, se, proxy);
+                b.ApplyClientBehavior(se.Contract, se, proxy);
 
             return proxy;
         }

@@ -18,7 +18,7 @@ class M
 {
     static void Main()
     {
-        A a = new A ();
-        float f = -a;  
+        A a = new A();
+        float f = -a;
     }
 }

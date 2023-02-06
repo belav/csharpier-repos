@@ -1,30 +1,26 @@
-
 using System;
 using Novell.Directory.Ldap;
 using Novell.Directory.Ldap.Extensions;
 using Novell.Directory.Ldap.Rfc2251;
 
-
 namespace Novell.Directory.Ldap.Utilclass
 {
-    
-    /// <summary> 
+    /// <summary>
     /// Takes an LdapExtendedResponse and returns an object
     /// (that implements the base class ParsedExtendedResponse)
     /// based on the OID.
-    /// 
+    ///
     /// <p>You can then call methods defined in the child
     /// class to parse the contents of the response.  The methods available
     /// depend on the child class. All child classes inherit from the
     /// ParsedExtendedResponse.</p>
-    /// 
+    ///
     /// </summary>
     public class ExtResponseFactory
     {
-        
         /// <summary> Used to Convert an RfcLdapMessage object to the appropriate
         /// LdapExtendedResponse object depending on the operation being performed.
-        /// 
+        ///
         /// </summary>
         /// <param name="inResponse">  The LdapExtendedReponse object as returned by the
         /// extendedOperation method in the LdapConnection object.
@@ -33,14 +29,13 @@ namespace Novell.Directory.Ldap.Utilclass
         /// class of this returned object depends on the operation being
         /// performed.
         /// </returns>
-        
+
         static public LdapExtendedResponse convertToExtendedResponse(RfcLdapMessage inResponse)
         {
-            
             LdapExtendedResponse tempResponse = new LdapExtendedResponse(inResponse);
             // Get the oid stored in the Extended response
             System.String inOID = tempResponse.ID;
-            
+
             RespExtensionSet regExtResponses = LdapExtendedResponse.RegisteredResponses;
             try
             {
@@ -49,17 +44,19 @@ namespace Novell.Directory.Ldap.Utilclass
                 {
                     return tempResponse;
                 }
-                System.Type[] argsClass = new System.Type[]{typeof(RfcLdapMessage)};
-                System.Object[] args = new System.Object[]{inResponse};
+                System.Type[] argsClass = new System.Type[] { typeof(RfcLdapMessage) };
+                System.Object[] args = new System.Object[] { inResponse };
                 System.Exception ex;
                 try
                 {
-                    System.Reflection.ConstructorInfo extConstructor = extRespClass.GetConstructor(argsClass);
+                    System.Reflection.ConstructorInfo extConstructor = extRespClass.GetConstructor(
+                        argsClass
+                    );
                     try
                     {
                         System.Object resp = null;
                         resp = extConstructor.Invoke(args);
-                        return (LdapExtendedResponse) resp;
+                        return (LdapExtendedResponse)resp;
                     }
                     catch (System.UnauthorizedAccessException e)
                     {
@@ -84,9 +81,7 @@ namespace Novell.Directory.Ldap.Utilclass
                     ex = e;
                 }
             }
-            catch (System.FieldAccessException e)
-            {
-            }
+            catch (System.FieldAccessException e) { }
             // If we get here we did not have a registered extendedresponse
             // for this oid.  Return a default LdapExtendedResponse object.
             return tempResponse;

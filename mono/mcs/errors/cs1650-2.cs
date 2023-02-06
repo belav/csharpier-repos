@@ -10,9 +10,8 @@ class C
 {
     static readonly S s;
 
-    public static void Main (string[] args)
+    public static void Main(string[] args)
     {
         s.x = 42;
     }
 }
-

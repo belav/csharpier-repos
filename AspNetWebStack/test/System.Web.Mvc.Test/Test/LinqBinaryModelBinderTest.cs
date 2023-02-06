@@ -13,10 +13,7 @@ namespace System.Web.Mvc.Test
         public void BindModelWithNonExistentValueReturnsNull()
         {
             // Arrange
-            SimpleValueProvider valueProvider = new SimpleValueProvider()
-            {
-                { "foo", null }
-            };
+            SimpleValueProvider valueProvider = new SimpleValueProvider() { { "foo", null } };
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
@@ -37,10 +34,7 @@ namespace System.Web.Mvc.Test
         public void BinderWithEmptyStringValueReturnsNull()
         {
             // Arrange
-            SimpleValueProvider valueProvider = new SimpleValueProvider()
-            {
-                { "foo", "" }
-            };
+            SimpleValueProvider valueProvider = new SimpleValueProvider() { { "foo", "" } };
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
@@ -65,7 +59,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { binder.BindModel(null, null); }, "bindingContext");
+                delegate
+                {
+                    binder.BindModel(null, null);
+                },
+                "bindingContext"
+            );
         }
 
         [Fact]

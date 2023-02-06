@@ -15,257 +15,262 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestAtRoot_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyKeywordAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestAfterClass_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"class C { }
-$$");
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
+                @"class C { }
+$$"
+            );
         }
 
         [Fact]
         public async Task TestAfterGlobalStatement_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"System.Console.WriteLine();
-$$");
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
+                @"System.Console.WriteLine();
+$$"
+            );
         }
 
         [Fact]
         public async Task TestAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"int i = 0;
-$$");
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
+                @"int i = 0;
+$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInPreprocessor1()
         {
             await VerifyAbsenceAsync(
-@"class C {
-#$$");
+                @"class C {
+#$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInPreprocessor2()
         {
             await VerifyAbsenceAsync(
-@"class C {
-#line $$");
+                @"class C {
+#line $$"
+            );
         }
 
         [Fact]
         public async Task TestInEmptyStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"$$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestInExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var q = $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"var q = $$"));
         }
 
         [Fact, WorkItem(542970, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542970")]
         public async Task TestInPPIf()
         {
-            await VerifyKeywordAsync(
-@"#if $$");
+            await VerifyKeywordAsync(@"#if $$");
         }
 
         [Fact]
         public async Task TestInPPIf_Or()
         {
-            await VerifyKeywordAsync(
-@"#if a || $$");
+            await VerifyKeywordAsync(@"#if a || $$");
         }
 
         [Fact]
         public async Task TestInPPIf_And()
         {
-            await VerifyKeywordAsync(
-@"#if a && $$");
+            await VerifyKeywordAsync(@"#if a && $$");
         }
 
         [Fact]
         public async Task TestInPPIf_Not()
         {
-            await VerifyKeywordAsync(
-@"#if ! $$");
+            await VerifyKeywordAsync(@"#if ! $$");
         }
 
         [Fact]
         public async Task TestInPPIf_Paren()
         {
-            await VerifyKeywordAsync(
-@"#if ( $$");
+            await VerifyKeywordAsync(@"#if ( $$");
         }
 
         [Fact]
         public async Task TestInPPIf_Equals()
         {
-            await VerifyKeywordAsync(
-@"#if a == $$");
+            await VerifyKeywordAsync(@"#if a == $$");
         }
 
         [Fact]
         public async Task TestInPPIf_NotEquals()
         {
-            await VerifyKeywordAsync(
-@"#if a != $$");
+            await VerifyKeywordAsync(@"#if a != $$");
         }
 
         [Fact]
         public async Task TestInPPElIf()
         {
             await VerifyKeywordAsync(
-@"#if true
-#elif $$");
+                @"#if true
+#elif $$"
+            );
         }
 
         [Fact]
         public async Task TestInPPelIf_Or()
         {
             await VerifyKeywordAsync(
-@"#if true
-#elif a || $$");
+                @"#if true
+#elif a || $$"
+            );
         }
 
         [Fact]
         public async Task TestInPPElIf_And()
         {
             await VerifyKeywordAsync(
-@"#if true
-#elif a && $$");
+                @"#if true
+#elif a && $$"
+            );
         }
 
         [Fact]
         public async Task TestInPPElIf_Not()
         {
             await VerifyKeywordAsync(
-@"#if true
-#elif ! $$");
+                @"#if true
+#elif ! $$"
+            );
         }
 
         [Fact]
         public async Task TestInPPElIf_Paren()
         {
             await VerifyKeywordAsync(
-@"#if true
-#elif ( $$");
+                @"#if true
+#elif ( $$"
+            );
         }
 
         [Fact]
         public async Task TestInPPElIf_Equals()
         {
             await VerifyKeywordAsync(
-@"#if true
-#elif a == $$");
+                @"#if true
+#elif a == $$"
+            );
         }
 
         [Fact]
         public async Task TestInPPElIf_NotEquals()
         {
             await VerifyKeywordAsync(
-@"#if true
-#elif a != $$");
+                @"#if true
+#elif a != $$"
+            );
         }
 
         [Fact]
         public async Task TestAfterUnaryOperator()
         {
             await VerifyKeywordAsync(
-@"class C {
-   public static bool operator $$");
+                @"class C {
+   public static bool operator $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterImplicitOperator()
         {
             await VerifyAbsenceAsync(
-@"class C {
-   public static implicit operator $$");
+                @"class C {
+   public static implicit operator $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterExplicitOperator()
         {
             await VerifyAbsenceAsync(
-@"class C {
-   public static implicit operator $$");
+                @"class C {
+   public static implicit operator $$"
+            );
         }
 
         [Fact]
         public async Task TestBeforeInactiveRegion()
         {
             await VerifyKeywordAsync(
-@"class C
+                @"class C
   {
      void Init()
      {
 #if $$
-         H");
+         H"
+            );
         }
 
         [Fact, WorkItem(538804, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538804")]
         public async Task TestNotAfterTypeOf()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"typeof($$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"typeof($$"));
         }
 
         [Fact, WorkItem(538804, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538804")]
         public async Task TestNotAfterDefault()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"default($$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"default($$"));
         }
 
         [Fact, WorkItem(538804, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538804")]
         public async Task TestNotAfterSizeOf()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"sizeof($$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"sizeof($$"));
         }
 
         [Fact, WorkItem(544219, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544219")]
         public async Task TestNotInObjectInitializerMemberContext()
         {
-            await VerifyAbsenceAsync(@"
+            await VerifyAbsenceAsync(
+                @"
 class C
 {
     public int x, y;
     void M()
     {
-        var c = new C { x = 2, y = 3, $$");
+        var c = new C { x = 2, y = 3, $$"
+            );
         }
 
         [Fact]
         public async Task TestAfterRefExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"ref int x = ref $$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"ref int x = ref $$"));
         }
     }
 }

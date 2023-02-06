@@ -1,4 +1,5 @@
 class A { }
+
 class B { }
 
 interface I<T>
@@ -14,8 +15,8 @@ class C : I<A>, I<B>
 
 class Program
 {
-    public static void Main (string[] args)
+    public static void Main(string[] args)
     {
-        C c = new C ();
+        C c = new C();
     }
 }

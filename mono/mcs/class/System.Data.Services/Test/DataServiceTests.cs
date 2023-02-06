@@ -30,36 +30,37 @@ using System;
 using System.Data.Services;
 using NUnit.Framework;
 
-namespace MonoTests.System.Data.Services {
+namespace MonoTests.System.Data.Services
+{
     [TestFixture]
-    public class DataServiceTests {
+    public class DataServiceTests
+    {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void AttachHostNull()
         {
             var d = new DataService<string>();
-            d.AttachHost (null);
+            d.AttachHost(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void ProcessRequestForMessageNull()
         {
             var d = new DataService<string>();
-            d.ProcessRequestForMessage (null);
+            d.ProcessRequestForMessage(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void HandleExceptionNull()
         {
             var d = new TestDataService<string>();
-            d.TestHandleException (null);
+            d.TestHandleException(null);
         }
     }
 
-    public class TestDataService<T>
-        : DataService<T>
+    public class TestDataService<T> : DataService<T>
     {
         public T TestCurrentDataSource
         {
@@ -71,14 +72,14 @@ namespace MonoTests.System.Data.Services {
             return this.CreateDataSource();
         }
 
-        public void TestHandleException (HandleExceptionArgs args)
+        public void TestHandleException(HandleExceptionArgs args)
         {
-            this.HandleException (args);
+            this.HandleException(args);
         }
 
-        public void TestOnStartProcessingRequest (ProcessRequestArgs args)
+        public void TestOnStartProcessingRequest(ProcessRequestArgs args)
         {
-            this.OnStartProcessingRequest (args);
+            this.OnStartProcessingRequest(args);
         }
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-delegate bool D ();
+delegate bool D();
 
 class Data
 {
@@ -11,34 +11,38 @@ public class Test
 {
     int value;
     D change;
-    
-    static void Foo (int i, D d)
+
+    static void Foo(int i, D d) { }
+
+    public static void Main() { }
+
+    void TestMe()
     {
-    }
-    
-    public static void Main ()
-    {
-    }
-    
-    void TestMe ()
-    {
-        if (true) {
+        if (true)
+        {
             Data data = null;
-            if (data != null) {
-                D d2 = delegate { return true; };
-                change += d2;        
-        
-                data.d += delegate {
+            if (data != null)
+            {
+                D d2 = delegate
+                {
+                    return true;
+                };
+                change += d2;
+
+                data.d += delegate
+                {
                     change -= d2;
-                    Foo (10, delegate { 
-                                data = null;
-                                return false;
-                            }
-                        );
+                    Foo(
+                        10,
+                        delegate
+                        {
+                            data = null;
+                            return false;
+                        }
+                    );
                     return true;
                 };
             }
         }
     }
 }
-

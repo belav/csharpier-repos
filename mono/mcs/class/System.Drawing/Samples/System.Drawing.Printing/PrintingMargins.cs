@@ -35,28 +35,21 @@ using System.Drawing.Printing;
 using System.Drawing.Imaging;
 
 public class PrintingMargins
-{    
-    
-    static private void QueryPageSettings (object sender, QueryPageSettingsEventArgs e)
-    {
-        
-    }
+{
+    static private void QueryPageSettings(object sender, QueryPageSettingsEventArgs e) { }
 
-    static private void PrintPageEvent (object sender, PrintPageEventArgs e)
-    {                    
-        e.Graphics.DrawRectangle (Pens.Red, e.MarginBounds);
-        e.Graphics.DrawRectangle (Pens.Green, e.PageBounds);        
+    static private void PrintPageEvent(object sender, PrintPageEventArgs e)
+    {
+        e.Graphics.DrawRectangle(Pens.Red, e.MarginBounds);
+        e.Graphics.DrawRectangle(Pens.Green, e.PageBounds);
         e.HasMorePages = false;
     }
 
-
-        public static void Main (string[] args)
-        {                
-        PrintDocument p = new PrintDocument ();
-        p.PrintPage += new PrintPageEventHandler (PrintPageEvent);
-        p.QueryPageSettings += new  QueryPageSettingsEventHandler (QueryPageSettings);
-                p.Print ();
-        
-        }
+    public static void Main(string[] args)
+    {
+        PrintDocument p = new PrintDocument();
+        p.PrintPage += new PrintPageEventHandler(PrintPageEvent);
+        p.QueryPageSettings += new QueryPageSettingsEventHandler(QueryPageSettings);
+        p.Print();
+    }
 }
-

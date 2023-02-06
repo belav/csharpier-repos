@@ -3,38 +3,38 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBody
 {
-    [SetupLinkerArgument ("--enable-opt", "unreachablebodies")]
+    [SetupLinkerArgument("--enable-opt", "unreachablebodies")]
     public class ExplicitInstructionCheck
     {
-        public static void Main ()
+        public static void Main()
         {
-            UsedToMarkMethod (null);
+            UsedToMarkMethod(null);
         }
 
         [Kept]
-        static void UsedToMarkMethod (Foo f)
+        static void UsedToMarkMethod(Foo f)
         {
-            f.Method ();
+            f.Method();
         }
 
         [Kept]
         class Foo
         {
             [Kept]
-            [ExpectedInstructionSequence (new[]
+            [ExpectedInstructionSequence(
+                new[]
+                {
+                    "ldstr 'Linked away'",
+                    "newobj System.Void System.NotSupportedException::.ctor(System.String)",
+                    "throw"
+                }
+            )]
+            public void Method()
             {
-                "ldstr 'Linked away'",
-                "newobj System.Void System.NotSupportedException::.ctor(System.String)",
-                "throw"
-            })]
-            public void Method ()
-            {
-                UsedByMethod ();
+                UsedByMethod();
             }
 
-            void UsedByMethod ()
-            {
-            }
+            void UsedByMethod() { }
         }
     }
 }

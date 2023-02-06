@@ -4,13 +4,13 @@ namespace Repro2
 {
     struct Color
     {
-        public static Color Black = new Color (0);
-        public static Color White = new Color (255);
-        public static Color Transparent = new Color (-1);
+        public static Color Black = new Color(0);
+        public static Color White = new Color(255);
+        public static Color Transparent = new Color(-1);
 
         public int ID;
 
-        public Color (int id)
+        public Color(int id)
         {
             this.ID = id;
         }
@@ -18,7 +18,7 @@ namespace Repro2
 
     static class ExtensionMethods
     {
-        public static Color Transparent (this Color c)
+        public static Color Transparent(this Color c)
         {
             return Color.White;
         }
@@ -26,9 +26,9 @@ namespace Repro2
 
     class MainClass
     {
-        public static int Main ()
+        public static int Main()
         {
-            var c = Color.Black.Transparent ();
+            var c = Color.Black.Transparent();
             return 0;
         }
     }

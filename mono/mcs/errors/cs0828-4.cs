@@ -3,7 +3,7 @@
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         var v = new { Value = i => 1 };
     }

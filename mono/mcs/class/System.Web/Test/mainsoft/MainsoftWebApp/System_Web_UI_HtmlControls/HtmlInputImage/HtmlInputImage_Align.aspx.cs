@@ -35,8 +35,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
 {
-    public class HtmlInputImage_Align
-        : GHTBaseWeb 
+    public class HtmlInputImage_Align : GHTBaseWeb
     {
         protected GHTWebControls.GHTSubTest GHTSubTest1;
         protected GHTWebControls.GHTSubTest GHTSubTest2;
@@ -46,8 +45,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
         protected System.Web.UI.HtmlControls.HtmlInputImage Image2;
         protected System.Web.UI.HtmlControls.HtmlInputImage Image3;
         protected System.Web.UI.HtmlControls.HtmlInputImage Image4;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -55,19 +55,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -75,12 +74,12 @@ namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest4;
-            try 
+            try
             {
                 Image4.Align = "left";
                 GHTSubTestAddResult(Image4.Align);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

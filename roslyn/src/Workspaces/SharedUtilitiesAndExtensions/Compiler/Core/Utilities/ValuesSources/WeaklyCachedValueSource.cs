@@ -27,15 +27,16 @@ namespace Microsoft.CodeAnalysis.Host
             _weakReference = null;
         }
 
-        private SemaphoreSlim Gate => LazyInitialization.EnsureInitialized(ref _lazyGate, SemaphoreSlimFactory.Instance);
+        private SemaphoreSlim Gate =>
+            LazyInitialization.EnsureInitialized(ref _lazyGate, SemaphoreSlimFactory.Instance);
 
 #pragma warning disable CS8610 // Nullability of reference types in type of parameter doesn't match overridden member. (The compiler incorrectly identifies this as a change.)
         public override bool TryGetValue([NotNullWhen(true)] out T? value)
 #pragma warning restore CS8610 // Nullability of reference types in type of parameter doesn't match overridden member.
         {
             var weakReference = _weakReference;
-            return weakReference != null && weakReference.TryGetTarget(out value) ||
-                _source.TryGetValue(out value);
+            return weakReference != null && weakReference.TryGetTarget(out value)
+                || _source.TryGetValue(out value);
         }
 
         public override T GetValue(CancellationToken cancellationToken = default)
@@ -65,7 +66,9 @@ namespace Microsoft.CodeAnalysis.Host
                 {
                     if (_weakReference == null || !_weakReference.TryGetTarget(out value))
                     {
-                        value = await _source.GetValueAsync(cancellationToken).ConfigureAwait(false);
+                        value = await _source
+                            .GetValueAsync(cancellationToken)
+                            .ConfigureAwait(false);
                         _weakReference = new WeakReference<T>(value);
                     }
                 }

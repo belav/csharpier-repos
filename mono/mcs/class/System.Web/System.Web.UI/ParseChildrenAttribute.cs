@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,73 +30,79 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [AttributeUsage (AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class ParseChildrenAttribute : Attribute
     {
         bool childrenAsProperties;
         string defaultProperty;
-        public static readonly ParseChildrenAttribute Default = new ParseChildrenAttribute ();
-        public static readonly ParseChildrenAttribute ParseAsChildren = new ParseChildrenAttribute (false);
-        public static readonly ParseChildrenAttribute ParseAsProperties = new ParseChildrenAttribute (true);
+        public static readonly ParseChildrenAttribute Default = new ParseChildrenAttribute();
+        public static readonly ParseChildrenAttribute ParseAsChildren = new ParseChildrenAttribute(
+            false
+        );
+        public static readonly ParseChildrenAttribute ParseAsProperties =
+            new ParseChildrenAttribute(true);
 
         Type childType = typeof(System.Web.UI.Control);
 
         // LAMESPEC
-        public ParseChildrenAttribute ()
+        public ParseChildrenAttribute()
         {
             childrenAsProperties = false;
             defaultProperty = "";
         }
 
-        public ParseChildrenAttribute (bool childrenAsProperties)
+        public ParseChildrenAttribute(bool childrenAsProperties)
         {
             this.childrenAsProperties = childrenAsProperties;
             this.defaultProperty = "";
         }
 
-        public ParseChildrenAttribute (bool childrenAsProperties,
-                           string defaultProperty)
+        public ParseChildrenAttribute(bool childrenAsProperties, string defaultProperty)
         {
             this.childrenAsProperties = childrenAsProperties;
             if (childrenAsProperties)
                 this.defaultProperty = defaultProperty;
         }
 
-        public ParseChildrenAttribute (Type childControlType)
+        public ParseChildrenAttribute(Type childControlType)
         {
             childType = childControlType;
             defaultProperty = "";
         }
 
-        public bool ChildrenAsProperties {
-
+        public bool ChildrenAsProperties
+        {
             get { return childrenAsProperties; }
-
             set { childrenAsProperties = value; }
         }
 
-        public string DefaultProperty {
+        public string DefaultProperty
+        {
             get { return defaultProperty; }
-
             set { defaultProperty = value; }
         }
 
-        public Type ChildControlType {
+        public Type ChildControlType
+        {
             get { return childType; }
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             ParseChildrenAttribute o = (obj as ParseChildrenAttribute);
             if (o == null)
                 return false;
 
-            if (childrenAsProperties == o.childrenAsProperties){
+            if (childrenAsProperties == o.childrenAsProperties)
+            {
                 if (childrenAsProperties == false)
                     return true;
                 return (defaultProperty == o.DefaultProperty);
@@ -104,14 +110,14 @@ namespace System.Web.UI {
             return false;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return base.GetHashCode ();
+            return base.GetHashCode();
         }
 
-        public override bool IsDefaultAttribute ()
+        public override bool IsDefaultAttribute()
         {
-            return Equals (Default);
+            return Equals(Default);
         }
     }
 }

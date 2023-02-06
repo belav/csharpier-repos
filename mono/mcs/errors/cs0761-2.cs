@@ -3,9 +3,8 @@
 
 partial class C
 {
-    partial void Foo<T> () where T : new ();
-    
-    partial void Foo<U> ()
-    {
-    }
+    partial void Foo<T>()
+        where T : new();
+
+    partial void Foo<U>() { }
 }

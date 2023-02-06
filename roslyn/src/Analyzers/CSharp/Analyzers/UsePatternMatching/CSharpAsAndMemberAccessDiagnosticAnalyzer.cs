@@ -17,7 +17,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 {
-
     /// <summary>
     /// Looks for code of the forms:
     /// <code>
@@ -29,19 +28,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
     /// </code>
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal partial class CSharpAsAndMemberAccessDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal partial class CSharpAsAndMemberAccessDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpAsAndMemberAccessDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UsePatternMatchingAsAndMemberAccessDiagnosticId,
-                   EnforceOnBuildValues.UsePatternMatchingAsAndMemberAccess,
-                   CSharpCodeStyleOptions.PreferPatternMatchingOverAsWithNullCheck,
-                   new LocalizableResourceString(
-                        nameof(CSharpAnalyzersResources.Use_pattern_matching), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UsePatternMatchingAsAndMemberAccessDiagnosticId,
+                EnforceOnBuildValues.UsePatternMatchingAsAndMemberAccess,
+                CSharpCodeStyleOptions.PreferPatternMatchingOverAsWithNullCheck,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_pattern_matching),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -52,13 +55,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 if (context.Compilation.LanguageVersion() < LanguageVersion.CSharp8)
                     return;
 
-                context.RegisterSyntaxNodeAction(context => AnalyzeAsExpression(context), SyntaxKind.AsExpression);
+                context.RegisterSyntaxNodeAction(
+                    context => AnalyzeAsExpression(context),
+                    SyntaxKind.AsExpression
+                );
             });
         }
 
         private void AnalyzeAsExpression(SyntaxNodeAnalysisContext context)
         {
-            var styleOption = context.GetCSharpAnalyzerOptions().PreferPatternMatchingOverAsWithNullCheck;
+            var styleOption = context
+                .GetCSharpAnalyzerOptions()
+                .PreferPatternMatchingOverAsWithNullCheck;
             if (!styleOption.Value)
             {
                 // Bail immediately if the user has disabled this feature.
@@ -69,8 +77,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var semanticModel = context.SemanticModel;
             var asExpression = (BinaryExpressionSyntax)context.Node;
 
-            if (!UsePatternMatchingHelpers.TryGetPartsOfAsAndMemberAccessCheck(
-                    asExpression, out var conditionalAccessExpression, out var binaryExpression, out var isPatternExpression, out var requiredLanguageVersion))
+            if (
+                !UsePatternMatchingHelpers.TryGetPartsOfAsAndMemberAccessCheck(
+                    asExpression,
+                    out var conditionalAccessExpression,
+                    out var binaryExpression,
+                    out var isPatternExpression,
+                    out var requiredLanguageVersion
+                )
+            )
             {
                 return;
             }
@@ -84,12 +99,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             // Looks good!
 
             // Put a diagnostic with the appropriate severity on the declaration-statement itself.
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                asExpression.GetLocation(),
-                styleOption.Notification.Severity,
-                additionalLocations: null,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    asExpression.GetLocation(),
+                    styleOption.Notification.Severity,
+                    additionalLocations: null,
+                    properties: null
+                )
+            );
 
             bool IsSafeToConvert()
             {
@@ -98,7 +116,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     // `(expr as T)?... == other_expr
                     //
                     // in this case we can only convert if other_expr is a constant.
-                    var constantValue = semanticModel.GetConstantValue(binaryExpression.Right, cancellationToken);
+                    var constantValue = semanticModel.GetConstantValue(
+                        binaryExpression.Right,
+                        cancellationToken
+                    );
                     if (!constantValue.HasValue)
                         return false;
 
@@ -122,7 +143,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                         // `(a as T)?.Prop != null` *does* have the same semantics as `a is T { Prop: not null }`.
                         //
                         // However, that's still only allowed if `Prop` is not a value type.
-                        var symbol = semanticModel.GetSymbolInfo(conditionalAccessExpression.WhenNotNull, cancellationToken).GetAnySymbol();
+                        var symbol = semanticModel
+                            .GetSymbolInfo(
+                                conditionalAccessExpression.WhenNotNull,
+                                cancellationToken
+                            )
+                            .GetAnySymbol();
                         if (symbol.GetMemberType().IsNonNullableValueType())
                             return false;
 
@@ -139,9 +165,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
                     // similar to the binary cases above.
 
-                    if (isPatternExpression.Pattern is ConstantPatternSyntax { Expression: var expression1 })
+                    if (
+                        isPatternExpression.Pattern is ConstantPatternSyntax
+                        {
+                            Expression: var expression1
+                        }
+                    )
                     {
-                        var constantValue = semanticModel.GetConstantValue(expression1, cancellationToken);
+                        var constantValue = semanticModel.GetConstantValue(
+                            expression1,
+                            cancellationToken
+                        );
                         if (!constantValue.HasValue)
                             return false;
 
@@ -153,9 +187,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                         // `(a as T)?.Prop is constant` does* have the same semantics as `a is T { Prop: constant }`
                         return true;
                     }
-                    else if (isPatternExpression.Pattern is UnaryPatternSyntax { Pattern: ConstantPatternSyntax { Expression: var expression2 } })
+                    else if (
+                        isPatternExpression.Pattern is UnaryPatternSyntax
+                        {
+                            Pattern: ConstantPatternSyntax { Expression: var expression2 }
+                        }
+                    )
                     {
-                        var constantValue = semanticModel.GetConstantValue(expression2, cancellationToken);
+                        var constantValue = semanticModel.GetConstantValue(
+                            expression2,
+                            cancellationToken
+                        );
                         if (!constantValue.HasValue)
                             return false;
 
@@ -167,7 +209,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                         // `(a as T)?.Prop is not null` *does* have the same semantics as `a is T { Prop: not null }`.
                         //
                         // However, that's still only allowed if `Prop` is not a value type.
-                        var symbol = semanticModel.GetSymbolInfo(conditionalAccessExpression.WhenNotNull, cancellationToken).GetAnySymbol();
+                        var symbol = semanticModel
+                            .GetSymbolInfo(
+                                conditionalAccessExpression.WhenNotNull,
+                                cancellationToken
+                            )
+                            .GetAnySymbol();
                         if (symbol.GetMemberType().IsNonNullableValueType())
                             return false;
 

@@ -18,25 +18,38 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
 {
     internal abstract class PythiaServiceBase : ServiceBase
     {
-        protected PythiaServiceBase(IServiceProvider serviceProvider, Stream stream, IEnumerable<JsonConverter>? jsonConverters = null)
-            : base(serviceProvider, stream, jsonConverters)
-        {
-        }
+        protected PythiaServiceBase(
+            IServiceProvider serviceProvider,
+            Stream stream,
+            IEnumerable<JsonConverter>? jsonConverters = null
+        )
+            : base(serviceProvider, stream, jsonConverters) { }
 
-        protected new void StartService()
-            => base.StartService();
+        protected new void StartService() => base.StartService();
 
-        public Task<Solution> GetSolutionAsync(JObject solutionInfo, CancellationToken cancellationToken)
-            => GetSolutionImplAsync(solutionInfo, cancellationToken);
-
-#pragma warning disable IDE0060 // Remove unused parameter - Avoiding breaking change in External access API
-        protected Task<T> RunServiceAsync<T>(Func<Task<T>> callAsync, CancellationToken cancellationToken, [CallerMemberName] string? callerName = null)
-#pragma warning restore IDE0060 // Remove unused parameter
-            => base.RunServiceAsync(callAsync, cancellationToken);
+        public Task<Solution> GetSolutionAsync(
+            JObject solutionInfo,
+            CancellationToken cancellationToken
+        ) => GetSolutionImplAsync(solutionInfo, cancellationToken);
 
 #pragma warning disable IDE0060 // Remove unused parameter - Avoiding breaking change in External access API
-        protected Task RunServiceAsync(Func<Task> callAsync, CancellationToken cancellationToken, [CallerMemberName] string? callerName = null)
+        protected Task<T> RunServiceAsync<T>(
+            Func<Task<T>> callAsync,
+            CancellationToken cancellationToken,
+            [CallerMemberName] string? callerName = null
+        )
 #pragma warning restore IDE0060 // Remove unused parameter
-            => base.RunServiceAsync(callAsync, cancellationToken);
+            =>
+            base.RunServiceAsync(callAsync, cancellationToken);
+
+#pragma warning disable IDE0060 // Remove unused parameter - Avoiding breaking change in External access API
+        protected Task RunServiceAsync(
+            Func<Task> callAsync,
+            CancellationToken cancellationToken,
+            [CallerMemberName] string? callerName = null
+        )
+#pragma warning restore IDE0060 // Remove unused parameter
+            =>
+            base.RunServiceAsync(callAsync, cancellationToken);
     }
 }

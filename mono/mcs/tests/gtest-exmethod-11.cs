@@ -1,12 +1,10 @@
-
-
 using System;
 
 public class Test
 {
-    public static int Main (String [] args)
+    public static int Main(String[] args)
     {
-        if (1.OneEleven ())
+        if (1.OneEleven())
             return 0;
 
         return 1;
@@ -15,7 +13,7 @@ public class Test
 
 public static class Lol
 {
-    public static bool OneEleven (this object o)
+    public static bool OneEleven(this object o)
     {
         return true;
     }

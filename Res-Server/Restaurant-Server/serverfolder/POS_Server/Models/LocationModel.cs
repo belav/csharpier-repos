@@ -22,11 +22,9 @@ namespace POS_Server.Models
         public byte isFreeZone { get; set; }
         public byte isKitchen { get; set; }
 
-
         public Boolean canDelete { get; set; }
-     
+
         public string sectionName { get; set; }
         public string branchName { get; set; }
-       
     }
 }

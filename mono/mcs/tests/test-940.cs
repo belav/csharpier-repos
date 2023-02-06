@@ -4,12 +4,12 @@ using System;
 
 struct nint
 {
-    public static nint operator * (nint a, nint b)
+    public static nint operator *(nint a, nint b)
     {
         return a;
     }
 
-    public static implicit operator long (nint v)
+    public static implicit operator long(nint v)
     {
         return 0;
     }
@@ -17,12 +17,12 @@ struct nint
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         nint width;
         nint bytesPerRow;
-
-        unsafe {
+        unsafe
+        {
             var da = (uint*)0;
             var dp1 = da + width * bytesPerRow;
             var dp2 = width * bytesPerRow + da;

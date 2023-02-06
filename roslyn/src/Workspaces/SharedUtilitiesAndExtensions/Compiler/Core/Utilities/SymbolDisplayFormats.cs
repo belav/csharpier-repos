@@ -17,16 +17,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
                 propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters | SymbolDisplayMemberOptions.IncludeExplicitInterface,
-                parameterOptions:
-                    SymbolDisplayParameterOptions.IncludeParamsRefOut |
-                    SymbolDisplayParameterOptions.IncludeExtensionThis |
-                    SymbolDisplayParameterOptions.IncludeType |
-                    SymbolDisplayParameterOptions.IncludeName,
-                miscellaneousOptions:
-                    SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance,
+                memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                    | SymbolDisplayMemberOptions.IncludeExplicitInterface,
+                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                    | SymbolDisplayParameterOptions.IncludeExtensionThis
+                    | SymbolDisplayParameterOptions.IncludeType
+                    | SymbolDisplayParameterOptions.IncludeName,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         /// <summary>
         /// Contains enough information to determine whether two symbols have the same signature.
@@ -36,17 +37,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
                 propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance,
-                memberOptions:
-                    SymbolDisplayMemberOptions.IncludeParameters |
-                    SymbolDisplayMemberOptions.IncludeContainingType |
-                    SymbolDisplayMemberOptions.IncludeExplicitInterface |
-                    SymbolDisplayMemberOptions.IncludeType,
-                kindOptions:
-                    SymbolDisplayKindOptions.IncludeMemberKeyword,
-                parameterOptions:
-                    SymbolDisplayParameterOptions.IncludeParamsRefOut |
-                    SymbolDisplayParameterOptions.IncludeExtensionThis |
-                    SymbolDisplayParameterOptions.IncludeType);
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance,
+                memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                    | SymbolDisplayMemberOptions.IncludeContainingType
+                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                    | SymbolDisplayMemberOptions.IncludeType,
+                kindOptions: SymbolDisplayKindOptions.IncludeMemberKeyword,
+                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                    | SymbolDisplayParameterOptions.IncludeExtensionThis
+                    | SymbolDisplayParameterOptions.IncludeType
+            );
     }
 }

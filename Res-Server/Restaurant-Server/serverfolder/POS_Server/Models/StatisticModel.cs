@@ -7,7 +7,6 @@ namespace POS_Server.Models
 {
     public class ItemUnitCostModel
     {
-
         ///////////////
         public long itemUnitId { get; set; }
 
@@ -16,6 +15,7 @@ namespace POS_Server.Models
         public Nullable<long> unitId { get; set; }
         public string unitName { get; set; }
         public Nullable<decimal> avgPurchasePrice { get; set; }
+
         //  public Nullable<decimal> smallunitcost { get; set; }
         public Nullable<decimal> cost { get; set; }
         public Nullable<decimal> finalcost { get; set; }
@@ -36,17 +36,18 @@ namespace POS_Server.Models
         public Nullable<long> createUserId { get; set; }
         public Nullable<long> updateUserId { get; set; }
 
-
         // item
         public string itemName { get; set; }
         public Nullable<long> itemUnitId { get; set; }
         public int quantity { get; set; }
+
         //order
         public string status { get; set; }
         public int num { get; set; }
         public decimal remainingTime { get; set; }
         public string tables { get; set; }
         public string waiter { get; set; }
+
         //invoice
 
         public string invType { get; set; }
@@ -55,6 +56,7 @@ namespace POS_Server.Models
         public Nullable<long> branchId { get; set; }
 
         public List<itemOrderPreparingModel> items { get; set; }
+
         //
         public Nullable<long> categoryId { get; set; }
         public string categoryName { get; set; }
@@ -70,6 +72,7 @@ namespace POS_Server.Models
         public string shipUserLastName { get; set; }
         public string shippingCompanyName { get; set; }
         public Nullable<long> shipUserId { get; set; }
+
         //   agentId
         public Nullable<long> agentId { get; set; }
         public string agentName { get; set; }
@@ -78,11 +81,8 @@ namespace POS_Server.Models
         public string agentCode { get; set; }
         public List<orderPreparingStatusModel> orderStatusList { get; set; }
         public decimal orderDuration { get; set; }
-
-
-
-
     }
+
     public class orderPreparingStatusModel
     {
         public long orderStatusId { get; set; }
@@ -95,20 +95,18 @@ namespace POS_Server.Models
         public string notes { get; set; }
         public Nullable<long> createUserId { get; set; }
         public Nullable<long> updateUserId { get; set; }
- 
+
         public Nullable<byte> isActive { get; set; }
         public string updateUserName { get; set; }
-
     }
 
     public class ItemUnitInvoiceProfitModel
     {
-
         ///////////////
         //public Nullable<decimal> itemAdminPay { get; set; }
         //public Nullable<decimal>  AdminPay { get; set; }
         //public Nullable<decimal> itemunitProfitOld { get; set; }
-        
+
         //public Nullable<decimal> itemPricePercent { get; set; }
         //public Nullable<decimal> invoiceTotal { get; set; }
         //
@@ -124,7 +122,8 @@ namespace POS_Server.Models
         public Nullable<long> ITquantity { get; set; }
 
         public Nullable<System.DateTime> ITupdateDate { get; set; }
-        //  public Nullable<int> IT.createUserId { get; set; } 
+
+        //  public Nullable<int> IT.createUserId { get; set; }
         public Nullable<long> ITupdateUserId { get; set; }
 
         public Nullable<decimal> ITprice { get; set; }
@@ -144,20 +143,19 @@ namespace POS_Server.Models
 
         public Nullable<System.DateTime> updateDate { get; set; }
         public Nullable<System.DateTime> invDate { get; set; }
-       
-        
+
         public Nullable<long> updateUserId { get; set; }
         public Nullable<long> branchId { get; set; }
         public Nullable<decimal> discountValue { get; set; }
         public string discountType { get; set; }
         public Nullable<decimal> tax { get; set; }
+
         // public string name { get; set; }
         //  isApproved { get; set; }
 
 
         public Nullable<long> branchCreatorId { get; set; }
         public string branchCreatorName { get; set; }
-
 
         public string posName { get; set; }
         public string posCode { get; set; }
@@ -172,7 +170,7 @@ namespace POS_Server.Models
         public Nullable<decimal> subTotal { get; set; }
         public decimal purchasePrice { get; set; }
         public decimal totalwithTax { get; set; }
-        public decimal subTotalNet { get; set; } // with invoice discount 
+        public decimal subTotalNet { get; set; } // with invoice discount
         public decimal itemunitProfit { get; set; }
         public decimal invoiceProfit { get; set; }
         public decimal shippingCost { get; set; }
@@ -181,6 +179,7 @@ namespace POS_Server.Models
         public decimal totalNoShip { get; set; }
         public decimal totalNetNoShip { get; set; }
         public string itemType { get; set; }
+
         //  public Nullable<decimal> ITdiscountpercent { get; set; }
         //net profit
         public long cashTransId { get; set; }
@@ -190,14 +189,12 @@ namespace POS_Server.Models
         public string side { get; set; }
         public string processType { get; set; }
         public Nullable<long> cardId { get; set; }
-    
     }
 
     public class ItemTransferInvoiceTax
-    {// new properties
+    { // new properties
         public Nullable<System.DateTime> updateDate { get; set; }
-       
-        
+
         public string agentCompany { get; set; }
 
         // ItemTransfer
@@ -241,7 +238,6 @@ namespace POS_Server.Models
         public Nullable<System.DateTime> vendorInvDate { get; set; }
         public Nullable<long> branchId { get; set; }
 
-
         public Nullable<int> taxtype { get; set; }
         public Nullable<long> posId { get; set; }
 
@@ -260,12 +256,9 @@ namespace POS_Server.Models
         public string uUserAccName { get; set; }
         public Nullable<decimal> itemUnitPrice { get; set; }
 
-
         public Nullable<decimal> subTotalTax { get; set; }
 
-
         public Nullable<decimal> OneitemUnitTax { get; set; }
-
 
         public Nullable<decimal> OneItemOfferVal { get; set; }
         public Nullable<decimal> OneItemPriceNoTax { get; set; }
@@ -274,27 +267,26 @@ namespace POS_Server.Models
 
         public Nullable<decimal> itemsTaxvalue { get; set; }
 
-
         //invoice
 
-        public Nullable<decimal> tax { get; set; }//???? ???????
-        public Nullable<decimal> totalwithTax { get; set; }//???? ???????? ???????? Totalnet
-        public Nullable<decimal> totalNoTax { get; set; }//???? ???????? ??? ??????? total
-        public Nullable<decimal> invTaxVal { get; set; }//???? ????? ???????? TAX
-        public Nullable<int> itemsRowsCount { get; set; }//??????? ????????
+        public Nullable<decimal> tax { get; set; } //???? ???????
+        public Nullable<decimal> totalwithTax { get; set; } //???? ???????? ???????? Totalnet
+        public Nullable<decimal> totalNoTax { get; set; } //???? ???????? ??? ??????? total
+        public Nullable<decimal> invTaxVal { get; set; } //???? ????? ???????? TAX
+        public Nullable<int> itemsRowsCount { get; set; } //??????? ????????
 
         //item
-        public string ITitemName { get; set; }//??? ??????
-        public string ITunitName { get; set; }//???? ??????
+        public string ITitemName { get; set; } //??? ??????
+        public string ITunitName { get; set; } //???? ??????
 
-        public Nullable<long> ITquantity { get; set; }//??????
-        public Nullable<decimal> subTotalNotax { get; set; }//??? ??????? ??? ??????? Price
-        public Nullable<decimal> itemUnitTaxwithQTY { get; set; }//??? ??????? ???????
-        public string invNumber { get; set; }//??? ????????//item
-        public string invBarcode { get; set; }//barcode ????????//item
-        public Nullable<System.DateTime> IupdateDate { get; set; }//????? ????????//item
+        public Nullable<long> ITquantity { get; set; } //??????
+        public Nullable<decimal> subTotalNotax { get; set; } //??? ??????? ??? ??????? Price
+        public Nullable<decimal> itemUnitTaxwithQTY { get; set; } //??? ??????? ???????
+        public string invNumber { get; set; } //??? ????????//item
+        public string invBarcode { get; set; } //barcode ????????//item
+        public Nullable<System.DateTime> IupdateDate { get; set; } //????? ????????//item
 
-        public Nullable<decimal> ItemTaxes { get; set; }//???? ????? ??????
+        public Nullable<decimal> ItemTaxes { get; set; } //???? ????? ??????
 
         //public string invNumber { get; set; }//??? ????????
         //public Nullable<System.DateTime> IupdateDate { get; set; }//????? ????????
@@ -304,7 +296,6 @@ namespace POS_Server.Models
         //public Nullable<decimal> invTaxVal { get; set; }//???? ????? ???????? TAX
         //public Nullable<int> itemsRowsCount { get; set; }//??????? ????????
         // public Nullable<decimal> totalNet { get; set; }
-
     }
 
     public class OpenClosOperatinModel
@@ -315,6 +306,7 @@ namespace POS_Server.Models
         public string invType { get; set; }
         public Nullable<decimal> commissionValue { get; set; }
         public Nullable<decimal> commissionRatio { get; set; }
+
         //
         public long cashTransId { get; set; }
         public string transType { get; set; }
@@ -373,11 +365,8 @@ namespace POS_Server.Models
         public string branchName { get; set; }
         public Nullable<long> branch2Id { get; set; }
         public string branch2Name { get; set; }
-
-
-
-
     }
+
     public class POSOpenCloseModel
     {
         public long cashTransId { get; set; }
@@ -396,10 +385,7 @@ namespace POS_Server.Models
 
         public string posName { get; set; }
 
-
-
         public string processType { get; set; }
-
 
         public Nullable<long> branchId { get; set; }
         public string branchName { get; set; }
@@ -408,14 +394,10 @@ namespace POS_Server.Models
         public Nullable<System.DateTime> openDate { get; set; }
         public Nullable<decimal> openCash { get; set; }
         public Nullable<long> openCashTransId { get; set; }
-
-
-
     }
 
     public class ItemTransferInvoiceSTS
-    {// new properties
-
+    { // new properties
         public Nullable<long> membershipId { get; set; }
         public string membershipsName { get; set; }
         public string membershipsCode { get; set; }
@@ -464,7 +446,6 @@ namespace POS_Server.Models
         public Nullable<System.DateTime> vendorInvDate { get; set; }
         public Nullable<long> branchId { get; set; }
 
-
         public Nullable<int> taxtype { get; set; }
         public Nullable<long> posId { get; set; }
 
@@ -483,12 +464,9 @@ namespace POS_Server.Models
         public string uUserAccName { get; set; }
         public Nullable<decimal> itemUnitPrice { get; set; }
 
-
         public Nullable<decimal> subTotalTax { get; set; }
 
-
         public Nullable<decimal> OneitemUnitTax { get; set; }
-
 
         public Nullable<decimal> OneItemOfferVal { get; set; }
         public Nullable<decimal> OneItemPriceNoTax { get; set; }
@@ -497,34 +475,31 @@ namespace POS_Server.Models
 
         public Nullable<decimal> itemsTaxvalue { get; set; }
 
-
         //invoice
 
-        public Nullable<decimal> tax { get; set; }//???? ???????
-        public Nullable<decimal> totalwithTax { get; set; }//???? ???????? ???????? Totalnet
-        public Nullable<decimal> totalNoTax { get; set; }//???? ???????? ??? ??????? total
-        public Nullable<decimal> invTaxVal { get; set; }//???? ????? ???????? TAX
-        public Nullable<int> itemsRowsCount { get; set; }//??????? ????????
+        public Nullable<decimal> tax { get; set; } //???? ???????
+        public Nullable<decimal> totalwithTax { get; set; } //???? ???????? ???????? Totalnet
+        public Nullable<decimal> totalNoTax { get; set; } //???? ???????? ??? ??????? total
+        public Nullable<decimal> invTaxVal { get; set; } //???? ????? ???????? TAX
+        public Nullable<int> itemsRowsCount { get; set; } //??????? ????????
 
         //item
-        public string ITitemName { get; set; }//??? ??????
-        public string ITunitName { get; set; }//???? ??????
+        public string ITitemName { get; set; } //??? ??????
+        public string ITunitName { get; set; } //???? ??????
 
-        public Nullable<long> ITquantity { get; set; }//??????
-        public Nullable<decimal> subTotalNotax { get; set; }//??? ??????? ??? ??????? Price
-        public Nullable<decimal> itemUnitTaxwithQTY { get; set; }//??? ??????? ???????
-        public string invNumber { get; set; }//??? ????????//item
-        public Nullable<System.DateTime> IupdateDate { get; set; }//????? ????????//item
+        public Nullable<long> ITquantity { get; set; } //??????
+        public Nullable<decimal> subTotalNotax { get; set; } //??? ??????? ??? ??????? Price
+        public Nullable<decimal> itemUnitTaxwithQTY { get; set; } //??? ??????? ???????
+        public string invNumber { get; set; } //??? ????????//item
+        public Nullable<System.DateTime> IupdateDate { get; set; } //????? ????????//item
 
-        public Nullable<decimal> ItemTaxes { get; set; }//???? ????? ??????
+        public Nullable<decimal> ItemTaxes { get; set; } //???? ????? ??????
 
         public List<invoiceClassDiscount> invoiceClassDiscountList { get; set; }
-
     }
 
     public class SalesMembership
     {
-
         //invoice
         public long invoiceId { get; set; }
         public string invNumber { get; set; }
@@ -545,7 +520,7 @@ namespace POS_Server.Models
         public string invCase { get; set; }
         public Nullable<System.TimeSpan> invTime { get; set; }
         public string notes { get; set; }
-        public Nullable<System.DateTime> createDate { get; set; }//
+        public Nullable<System.DateTime> createDate { get; set; } //
         public Nullable<System.DateTime> updateDate { get; set; }
         public Nullable<byte> isApproved { get; set; }
         public Nullable<decimal> tax { get; set; }
@@ -553,12 +528,11 @@ namespace POS_Server.Models
         public Nullable<long> updateUserId { get; set; }
         public int count { get; set; }
 
-
-
         //pos
         public Nullable<long> posId { get; set; }
         public string posName { get; set; }
         public string posCode { get; set; }
+
         //branch
 
         public Nullable<long> branchCreatorId { get; set; }
@@ -566,7 +540,6 @@ namespace POS_Server.Models
         public Nullable<long> branchId { get; set; }
         public string branchName { get; set; }
         public string branchType { get; set; }
-
 
         //agent
         public Nullable<long> agentId { get; set; }
@@ -577,8 +550,8 @@ namespace POS_Server.Models
         public string agentCode { get; set; }
         public string vendorInvNum { get; set; }
 
-
         public Nullable<System.DateTime> vendorInvDate { get; set; }
+
         //user
         public Nullable<long> createUserId { get; set; }
         public string cuserName { get; set; }
@@ -588,6 +561,7 @@ namespace POS_Server.Models
         public string uuserLast { get; set; }
         public string uUserAccName { get; set; }
         public Nullable<long> userId { get; set; }
+
         //membership
 
         public Nullable<long> membershipId { get; set; }
@@ -613,11 +587,10 @@ namespace POS_Server.Models
         public byte invClassdiscountType { get; set; }
         public decimal invClassdiscountValue { get; set; }
         public decimal finalDiscount { get; set; }
-
     }
 
     public class ItemTransferInvoice
-    {// new properties
+    { // new properties
         public Nullable<decimal> totalNetRep { get; set; }
         public string mainInvNumber { get; set; }
         public string processType0 { get; set; }
@@ -658,7 +631,6 @@ namespace POS_Server.Models
         public Nullable<long> ITquantity { get; set; }
         public Nullable<decimal> ITprice { get; set; }
 
-
         public Nullable<System.DateTime> ITcreateDate { get; set; }
         public Nullable<System.DateTime> ITupdateDate { get; set; }
         public Nullable<int> ITcreateUserId { get; set; }
@@ -673,6 +645,7 @@ namespace POS_Server.Models
         public string ITUpdateuserName { get; set; }
         public string ITUpdateuserLName { get; set; }
         public string ITUpdateuserAccName { get; set; }
+
         //invoice
         public Nullable<int> sliceId { get; set; }
         public string sliceName { get; set; }
@@ -709,8 +682,9 @@ namespace POS_Server.Models
         public Nullable<int> branchCreatorId { get; set; }
         public string branchCreatorName { get; set; }
         public string ITtype { get; set; }
-        private string invTypeNumber;//number
-                                     //public string InvTypeNumber { get => invTypeNumber = invType + "-" + invNumber; set => invTypeNumber = value; }
+        private string invTypeNumber; //number
+
+        //public string InvTypeNumber { get => invTypeNumber = invType + "-" + invNumber; set => invTypeNumber = value; }
 
 
         // for report
@@ -727,7 +701,6 @@ namespace POS_Server.Models
         public string posCode { get; set; }
         public string agentName { get; set; }
 
-
         public string agentType { get; set; }
         public string agentCode { get; set; }
         public string cuserName { get; set; }
@@ -737,7 +710,6 @@ namespace POS_Server.Models
         public string uuserLast { get; set; }
         public string uUserAccName { get; set; }
 
-
         public int countPb { get; set; }
         public int countD { get; set; }
         public Nullable<decimal> totalPb { get; set; }
@@ -745,13 +717,13 @@ namespace POS_Server.Models
         public Nullable<decimal> totalNetPb { get; set; }
         public Nullable<decimal> totalNetD { get; set; }
 
-
         public Nullable<decimal> paidPb { get; set; }
         public Nullable<decimal> deservedPb { get; set; }
         public Nullable<decimal> discountValuePb { get; set; }
         public Nullable<decimal> paidD { get; set; }
         public Nullable<decimal> deservedD { get; set; }
         public Nullable<decimal> discountValueD { get; set; }
+
         // coupon
 
 
@@ -774,6 +746,7 @@ namespace POS_Server.Models
         public Nullable<int> CopupdateUserId { get; set; }
         public string Copbarcode { get; set; }
         public Nullable<decimal> couponTotalValue { get; set; }
+
         // offer
 
         public int OofferId { get; set; }
@@ -796,6 +769,7 @@ namespace POS_Server.Models
         //external
         public int movbranchid { get; set; }
         public string movbranchname { get; set; }
+
         // internal
         public string exportBranch { get; set; }
         public string importBranch { get; set; }
@@ -807,11 +781,10 @@ namespace POS_Server.Models
         public string processType { get; set; }
 
         public List<itemsTransfer> invoiceItems { get; set; }
-   
+
         public List<CashTransferModel> cachTransferList { get; set; }
         public List<InvoiceModel> returnInvList { get; set; }
         public InvoiceModel ChildInvoice { get; set; }
-
 
         /////////////////////
 
@@ -842,6 +815,7 @@ namespace POS_Server.Models
         public bool isOrginal { get; set; }
         public string agentAddress { get; set; }
         public string agentMobile { get; set; }
+
         //
         public Nullable<int> DBAgentId { get; set; }
         public Nullable<decimal> DBDiscountValue { get; set; }

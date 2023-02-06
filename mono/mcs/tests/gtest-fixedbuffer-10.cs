@@ -4,9 +4,9 @@ using System;
 
 public class Program
 {
-    public static void Main ()
+    public static void Main()
     {
-        new TestStruct ("a");
+        new TestStruct("a");
     }
 }
 
@@ -14,12 +14,12 @@ public unsafe struct TestStruct
 {
     private fixed byte symbol[30];
 
-    public TestStruct (string a)
+    public TestStruct(string a) { }
+
+    public static TestStruct Default
     {
-    }
-    
-    public static TestStruct Default {
-        get {
+        get
+        {
             TestStruct h;
             return h;
         }

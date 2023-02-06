@@ -34,107 +34,104 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using NUnit.Framework;
 
-
 namespace MonoTests.System.Web.UI.WebControls
 {
-    
-
     [TestFixture]
     public class PagerSettingsTest
     {
         private bool _eventchecker;
 
         [Test]
-        public void PagerSettings_DefaultProperty ()
+        public void PagerSettings_DefaultProperty()
         {
-            PagerSettings pager = new PagerSettings ();
-            Assert.AreEqual ("", pager.FirstPageImageUrl, "FirstPageImageUrl");
-            Assert.AreEqual ("&lt;&lt;", pager.FirstPageText, "FirstPageText");
-            Assert.AreEqual ("", pager.LastPageImageUrl, "LastPageImageUrl");
-            Assert.AreEqual ("&gt;&gt;", pager.LastPageText, "LastPageText");
-            Assert.AreEqual (PagerButtons.Numeric, pager.Mode, "Mode");
-            Assert.AreEqual ("", pager.NextPageImageUrl, "NextPageImageUrl");
-            Assert.AreEqual ("&gt;", pager.NextPageText, "NextPageText");
-            Assert.AreEqual (10, pager.PageButtonCount, "PageButtonCount");
-            Assert.AreEqual (PagerPosition.Bottom, pager.Position, "Position");
-            Assert.AreEqual ("", pager.PreviousPageImageUrl, "PreviousPageImageUrl");
-            Assert.AreEqual ("&lt;", pager.PreviousPageText, "PreviousPageText");
-            Assert.AreEqual (true, pager.Visible, "Visible");
+            PagerSettings pager = new PagerSettings();
+            Assert.AreEqual("", pager.FirstPageImageUrl, "FirstPageImageUrl");
+            Assert.AreEqual("&lt;&lt;", pager.FirstPageText, "FirstPageText");
+            Assert.AreEqual("", pager.LastPageImageUrl, "LastPageImageUrl");
+            Assert.AreEqual("&gt;&gt;", pager.LastPageText, "LastPageText");
+            Assert.AreEqual(PagerButtons.Numeric, pager.Mode, "Mode");
+            Assert.AreEqual("", pager.NextPageImageUrl, "NextPageImageUrl");
+            Assert.AreEqual("&gt;", pager.NextPageText, "NextPageText");
+            Assert.AreEqual(10, pager.PageButtonCount, "PageButtonCount");
+            Assert.AreEqual(PagerPosition.Bottom, pager.Position, "Position");
+            Assert.AreEqual("", pager.PreviousPageImageUrl, "PreviousPageImageUrl");
+            Assert.AreEqual("&lt;", pager.PreviousPageText, "PreviousPageText");
+            Assert.AreEqual(true, pager.Visible, "Visible");
         }
 
         [Test]
-        public void PagerSettings_AssignProperty ()
+        public void PagerSettings_AssignProperty()
         {
-            PagerSettings pager = new PagerSettings ();
+            PagerSettings pager = new PagerSettings();
             pager.FirstPageImageUrl = "test";
-            Assert.AreEqual ("test", pager.FirstPageImageUrl, "FirstPageImageUrl");
+            Assert.AreEqual("test", pager.FirstPageImageUrl, "FirstPageImageUrl");
             pager.FirstPageText = "test";
-            Assert.AreEqual ("test", pager.FirstPageText, "FirstPageText");
+            Assert.AreEqual("test", pager.FirstPageText, "FirstPageText");
             pager.LastPageImageUrl = "test";
-            Assert.AreEqual ("test", pager.LastPageImageUrl, "LastPageImageUrl");
+            Assert.AreEqual("test", pager.LastPageImageUrl, "LastPageImageUrl");
             pager.LastPageText = "test";
-            Assert.AreEqual ("test", pager.LastPageText, "LastPageText");
+            Assert.AreEqual("test", pager.LastPageText, "LastPageText");
             pager.Mode = PagerButtons.NextPrevious;
-            Assert.AreEqual (PagerButtons.NextPrevious, pager.Mode, "Mode");
+            Assert.AreEqual(PagerButtons.NextPrevious, pager.Mode, "Mode");
             pager.NextPageImageUrl = "test";
-            Assert.AreEqual ("test", pager.NextPageImageUrl, "NextPageImageUrl");
+            Assert.AreEqual("test", pager.NextPageImageUrl, "NextPageImageUrl");
             pager.NextPageText = "test";
-            Assert.AreEqual ("test", pager.NextPageText, "NextPageText");
+            Assert.AreEqual("test", pager.NextPageText, "NextPageText");
             pager.PageButtonCount = 20;
-            Assert.AreEqual (20, pager.PageButtonCount, "PageButtonCount");
+            Assert.AreEqual(20, pager.PageButtonCount, "PageButtonCount");
             pager.Position = PagerPosition.Top;
-            Assert.AreEqual (PagerPosition.Top, pager.Position, "Position");
+            Assert.AreEqual(PagerPosition.Top, pager.Position, "Position");
             pager.PreviousPageImageUrl = "test";
-            Assert.AreEqual ("test", pager.PreviousPageImageUrl, "PreviousPageImageUrl");
+            Assert.AreEqual("test", pager.PreviousPageImageUrl, "PreviousPageImageUrl");
             pager.PreviousPageText = "test";
-            Assert.AreEqual ("test", pager.PreviousPageText, "PreviousPageText");
+            Assert.AreEqual("test", pager.PreviousPageText, "PreviousPageText");
             pager.Visible = false;
-            Assert.AreEqual (false, pager.Visible, "Visible");
+            Assert.AreEqual(false, pager.Visible, "Visible");
         }
 
         [Test]
-        public void PagerSettings_ToString ()
+        public void PagerSettings_ToString()
         {
-            PagerSettings pager = new PagerSettings ();
-            string result = pager.ToString ();
-            Assert.AreEqual ("", result, "ToString");
+            PagerSettings pager = new PagerSettings();
+            string result = pager.ToString();
+            Assert.AreEqual("", result, "ToString");
         }
 
         [Test]
-        public void PagerSettings_PropertyChanged ()
+        public void PagerSettings_PropertyChanged()
         {
-            PagerSettings pager = new PagerSettings ();
-            pager.PropertyChanged += new EventHandler (pager_PropertyChanged);
+            PagerSettings pager = new PagerSettings();
+            pager.PropertyChanged += new EventHandler(pager_PropertyChanged);
             pager.FirstPageImageUrl = "test";
-            eventassert ("FirstPageImageUrl");
+            eventassert("FirstPageImageUrl");
             pager.FirstPageText = "test";
-            eventassert ("FirstPageText");
+            eventassert("FirstPageText");
             pager.LastPageImageUrl = "test";
-            eventassert ("LastPageImageUrl");
+            eventassert("LastPageImageUrl");
             pager.LastPageText = "test";
-            eventassert ("LastPageText");
+            eventassert("LastPageText");
             pager.Mode = PagerButtons.NextPrevious;
-            eventassert ("Mode");
+            eventassert("Mode");
             pager.NextPageImageUrl = "test";
-            eventassert ("NextPageImageUrl");
+            eventassert("NextPageImageUrl");
             pager.NextPageText = "test";
-            eventassert ("NextPageText");
+            eventassert("NextPageText");
             pager.PageButtonCount = 20;
-            eventassert ("PageButtonCount");
+            eventassert("PageButtonCount");
             pager.PreviousPageImageUrl = "test";
-            eventassert ("PreviousPageImageUrl");
+            eventassert("PreviousPageImageUrl");
             pager.PreviousPageText = "test";
-            eventassert ("PreviousPageText");
+            eventassert("PreviousPageText");
         }
 
-        private void pager_PropertyChanged (object o, EventArgs e)
+        private void pager_PropertyChanged(object o, EventArgs e)
         {
             _eventchecker = true;
         }
 
-        private void eventassert (string message)
+        private void eventassert(string message)
         {
-            Assert.IsTrue (_eventchecker, message);
+            Assert.IsTrue(_eventchecker, message);
             _eventchecker = false;
         }
     }

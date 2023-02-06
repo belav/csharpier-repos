@@ -40,54 +40,56 @@ namespace MonoTests.System.Data.Common
     public class DataContainerTest : MSSqlTestClient
     {
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            OpenConnection ();
-            CreateTestSetup (); // create test database & tables
+            OpenConnection();
+            CreateTestSetup(); // create test database & tables
         }
 
         [TearDown]
-        public void Clean ()
+        public void Clean()
         {
-            CleanTestSetup (); // clean test database
-            CloseConnection ();
+            CleanTestSetup(); // clean test database
+            CloseConnection();
         }
 
         [Test]
-        public void DateTimeTest ()
+        public void DateTimeTest()
         {
-            try {
-                SqlDataAdapter myadapter = new SqlDataAdapter ("select * from datetimetest;", conn);
+            try
+            {
+                SqlDataAdapter myadapter = new SqlDataAdapter("select * from datetimetest;", conn);
 
-                DataTable dt = new DataTable ();
-                myadapter.Fill (dt);
-                Assert.AreEqual (3, dt.Rows.Count, "Row count must be three");
-            } finally {
-                CleanTestSetup ();
-                CloseConnection ();
+                DataTable dt = new DataTable();
+                myadapter.Fill(dt);
+                Assert.AreEqual(3, dt.Rows.Count, "Row count must be three");
+            }
+            finally
+            {
+                CleanTestSetup();
+                CloseConnection();
             }
         }
 
-        private void CreateTestSetup ()
+        private void CreateTestSetup()
         {
             if (!isConnAlive)
-                return ;
+                return;
             // Create test database & tables
-            string createQuery = "DROP TABLE datetimetest;" ;
-            ExecuteQuery (createQuery);
-            createQuery = "CREATE TABLE datetimetest (" +
-                    "col_char CHAR(20)," +
-                    "col_date DATETIME );";
-            ExecuteQuery (createQuery);
-            createQuery = "INSERT INTO datetimetest VALUES ('one', '4/12/2004 4:59:00');" ;
-            ExecuteQuery (createQuery);
-            createQuery = "INSERT INTO datetimetest VALUES ('two',null);" ;
-            ExecuteQuery (createQuery);
-            createQuery = "INSERT INTO datetimetest (col_char) VALUES ('three');" ;
-            ExecuteQuery (createQuery);
+            string createQuery = "DROP TABLE datetimetest;";
+            ExecuteQuery(createQuery);
+            createQuery =
+                "CREATE TABLE datetimetest (" + "col_char CHAR(20)," + "col_date DATETIME );";
+            ExecuteQuery(createQuery);
+            createQuery = "INSERT INTO datetimetest VALUES ('one', '4/12/2004 4:59:00');";
+            ExecuteQuery(createQuery);
+            createQuery = "INSERT INTO datetimetest VALUES ('two',null);";
+            ExecuteQuery(createQuery);
+            createQuery = "INSERT INTO datetimetest (col_char) VALUES ('three');";
+            ExecuteQuery(createQuery);
         }
 
-        private void CleanTestSetup ()
+        private void CleanTestSetup()
         {
             if (!isConnAlive)
                 return;

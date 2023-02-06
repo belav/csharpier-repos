@@ -36,11 +36,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_ApplyStyle_S
-        : GHTWebControlBase
+    public class WebControl_ApplyStyle_S : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,13 +47,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -65,14 +64,14 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         private Style m_blankStyle;
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
-            try 
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
+            try
             {
                 InitStyles();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestBegin("Styles initialization");
                 GHTSubTestUnexpectedExceptionCaught(ex);
@@ -117,7 +116,6 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
 
         private void InitStyles()
         {

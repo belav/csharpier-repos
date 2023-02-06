@@ -16,27 +16,33 @@ using System.Threading;
 
 namespace MonoTests.Remoting
 {
-    [Serializable,AttributeUsage(AttributeTargets.Class)]
-    public class ContextHookAttribute: Attribute, IContextAttribute, IContextProperty, IContributeObjectSink, IContributeServerContextSink, IContributeEnvoySink, IContributeClientContextSink
+    [Serializable, AttributeUsage(AttributeTargets.Class)]
+    public class ContextHookAttribute
+        : Attribute,
+            IContextAttribute,
+            IContextProperty,
+            IContributeObjectSink,
+            IContributeServerContextSink,
+            IContributeEnvoySink,
+            IContributeClientContextSink
     {
         bool newContext = false;
 
         string id = "";
-        public ContextHookAttribute()
-        {
-        }
+
+        public ContextHookAttribute() { }
 
         public ContextHookAttribute(string idp, bool newContext)
         {
             id = idp;
-            if (id != "") id += ".";
+            if (id != "")
+                id += ".";
             id += "d" + CallSeq.CommonDomainId;
             this.newContext = newContext;
         }
 
         public override object TypeId
         {
-
             get { return "ContextHook"; }
         }
 
@@ -61,41 +67,43 @@ namespace MonoTests.Remoting
         {
             get { return "ContextHook(" + id + ")"; }
         }
-    
 
         void IContextAttribute.GetPropertiesForNewContext(IConstructionCallMessage ctor)
         {
             CallSeq.Add("IContextAttribute(" + id + ").GetPropertiesForNewContext");
             ctor.ContextProperties.Add(this);
-        }    
+        }
 
         IMessageSink IContributeObjectSink.GetObjectSink(MarshalByRefObject o, IMessageSink next)
         {
             CallSeq.Add("IContributeObjectSink(" + id + ").GetObjectSink");
-            return new GenericMessageSink(o,next,"ObjectSink(" + id + ")");
+            return new GenericMessageSink(o, next, "ObjectSink(" + id + ")");
         }
-        
+
         IMessageSink IContributeServerContextSink.GetServerContextSink(IMessageSink next)
         {
             CallSeq.Add("IContributeServerContextSink(" + id + ").GetServerContextSink");
-            return new GenericMessageSink(null,next,"ServerContextSink(" + id + ")");
+            return new GenericMessageSink(null, next, "ServerContextSink(" + id + ")");
         }
 
-        IMessageSink IContributeEnvoySink.GetEnvoySink(MarshalByRefObject obj, IMessageSink nextSink)
+        IMessageSink IContributeEnvoySink.GetEnvoySink(
+            MarshalByRefObject obj,
+            IMessageSink nextSink
+        )
         {
             CallSeq.Add("IContributeEnvoySink(" + id + ").GetEnvoySink");
-            return new GenericMessageSink(obj,nextSink,"EnvoySink(" + id + ")");
+            return new GenericMessageSink(obj, nextSink, "EnvoySink(" + id + ")");
         }
 
-        IMessageSink IContributeClientContextSink.GetClientContextSink (IMessageSink nextSink )
+        IMessageSink IContributeClientContextSink.GetClientContextSink(IMessageSink nextSink)
         {
             CallSeq.Add("IContributeClientContextSink(" + id + ").GetClientContextSink");
-            return new GenericMessageSink(null,nextSink,"ClientContextSink(" + id + ")");
+            return new GenericMessageSink(null, nextSink, "ClientContextSink(" + id + ")");
         }
     }
 
     [Serializable]
-    class GenericMessageSink: IMessageSink
+    class GenericMessageSink : IMessageSink
     {
         IMessageSink _next;
         string _type;
@@ -106,16 +114,20 @@ namespace MonoTests.Remoting
             _next = nextSink;
         }
 
-        public IMessageSink NextSink 
-        {    
+        public IMessageSink NextSink
+        {
             get { return _next; }
         }
 
         public IMessage SyncProcessMessage(IMessage imCall)
         {
-            CallSeq.Add("--> " + _type + " SyncProcessMessage " + imCall.Properties["__MethodName"]);
+            CallSeq.Add(
+                "--> " + _type + " SyncProcessMessage " + imCall.Properties["__MethodName"]
+            );
             IMessage ret = _next.SyncProcessMessage(imCall);
-            CallSeq.Add("<-- " + _type + " SyncProcessMessage " + imCall.Properties["__MethodName"]);
+            CallSeq.Add(
+                "<-- " + _type + " SyncProcessMessage " + imCall.Properties["__MethodName"]
+            );
             return ret;
         }
 
@@ -129,30 +141,45 @@ namespace MonoTests.Remoting
     }
 
     [Serializable]
-    class GenericDynamicSink: IDynamicMessageSink
+    class GenericDynamicSink : IDynamicMessageSink
     {
         string _name;
-        
-        public GenericDynamicSink (string name)
+
+        public GenericDynamicSink(string name)
         {
             _name = name;
         }
 
         void IDynamicMessageSink.ProcessMessageFinish(IMessage replyMsg, bool bCliSide, bool bAsync)
         {
-            CallSeq.Add("<-> " + _name + " DynamicSink Finish " + replyMsg.Properties["__MethodName"] + " client:" + bCliSide);
+            CallSeq.Add(
+                "<-> "
+                    + _name
+                    + " DynamicSink Finish "
+                    + replyMsg.Properties["__MethodName"]
+                    + " client:"
+                    + bCliSide
+            );
         }
 
         void IDynamicMessageSink.ProcessMessageStart(IMessage replyMsg, bool bCliSide, bool bAsync)
         {
-            CallSeq.Add("<-> " + _name + " DynamicSink Start " + replyMsg.Properties["__MethodName"] + " client:" + bCliSide);
+            CallSeq.Add(
+                "<-> "
+                    + _name
+                    + " DynamicSink Start "
+                    + replyMsg.Properties["__MethodName"]
+                    + " client:"
+                    + bCliSide
+            );
         }
     }
 
-    public class DynProperty: IDynamicProperty, IContributeDynamicSink
+    public class DynProperty : IDynamicProperty, IContributeDynamicSink
     {
         string _name;
-        public DynProperty (string name)
+
+        public DynProperty(string name)
         {
             _name = name;
         }

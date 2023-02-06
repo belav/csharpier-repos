@@ -2,7 +2,7 @@ using System;
 
 public class TestProgram
 {
-    public static void Main ()
+    public static void Main()
     {
         IMyStruct myStruct = null;
         MyStruct? structValue;
@@ -11,10 +11,6 @@ public class TestProgram
     }
 }
 
-public struct MyStruct : IMyStruct
-{
-}
+public struct MyStruct : IMyStruct { }
 
-public interface IMyStruct
-{
-}
+public interface IMyStruct { }

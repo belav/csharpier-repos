@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,7 +32,8 @@ using System;
 using System.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
+namespace MonoTests.System.Configuration
+{
     [TestFixture]
     public class KeyValueConfigurationCollectionTest
     {
@@ -40,36 +41,38 @@ namespace MonoTests.System.Configuration {
         {
             bool useElementPoker;
 
-            public Poker () : this (false)
-            { }
+            public Poker()
+                : this(false) { }
 
-            public Poker (bool useElementPoker)
+            public Poker(bool useElementPoker)
             {
                 this.useElementPoker = useElementPoker;
             }
 
-            public ConfigurationPropertyCollection GetProperties () {
+            public ConfigurationPropertyCollection GetProperties()
+            {
                 return base.Properties;
             }
 
-            public ConfigurationElement DoCreateNewElement () {
-                if (useElementPoker)
-                    return new ElementPoker ("", "");
-                else
-                    return base.CreateNewElement ();
-            }
-
-            public object DoGetElementKey (ConfigurationElement element)
+            public ConfigurationElement DoCreateNewElement()
             {
-                return base.GetElementKey (element);
+                if (useElementPoker)
+                    return new ElementPoker("", "");
+                else
+                    return base.CreateNewElement();
             }
 
-            public object[] GetAllKeys ()
+            public object DoGetElementKey(ConfigurationElement element)
+            {
+                return base.GetElementKey(element);
+            }
+
+            public object[] GetAllKeys()
             {
                 return base.BaseGetAllKeys();
             }
 
-            public bool GetThrowOnDuplicate ()
+            public bool GetThrowOnDuplicate()
             {
                 return base.ThrowOnDuplicate;
             }
@@ -77,111 +80,107 @@ namespace MonoTests.System.Configuration {
 
         class ElementPoker : KeyValueConfigurationElement
         {
-            public ElementPoker (string name, string value)
-                : base (name, value)
-            {
-            }
+            public ElementPoker(string name, string value)
+                : base(name, value) { }
 
             protected override void InitializeDefault()
             {
-                Console.WriteLine (Environment.StackTrace);
+                Console.WriteLine(Environment.StackTrace);
                 base.InitializeDefault();
             }
 
-            protected override void Init ()
+            protected override void Init()
             {
                 //                Console.WriteLine (Environment.StackTrace);
                 base.Init();
             }
 
-            public ConfigurationPropertyCollection GetProperties () {
+            public ConfigurationPropertyCollection GetProperties()
+            {
                 return base.Properties;
             }
         }
 
         [Test]
-        public void ThrowOnDuplicate ()
+        public void ThrowOnDuplicate()
         {
-            Poker p = new Poker ();
-            Assert.IsFalse (p.GetThrowOnDuplicate (), "A1");
+            Poker p = new Poker();
+            Assert.IsFalse(p.GetThrowOnDuplicate(), "A1");
         }
 
         [Test]
-        public void Properties ()
+        public void Properties()
         {
-            Poker p = new Poker ();
+            Poker p = new Poker();
             ConfigurationPropertyCollection props = p.GetProperties();
 
-            Assert.IsNotNull (props, "A1");
-            Assert.AreEqual (0, props.Count, "A2");
+            Assert.IsNotNull(props, "A1");
+            Assert.AreEqual(0, props.Count, "A2");
         }
 
         [Test]
-        public void CreateNewElement ()
+        public void CreateNewElement()
         {
-            Poker p = new Poker ();
-            ConfigurationElement e = p.DoCreateNewElement ();
+            Poker p = new Poker();
+            ConfigurationElement e = p.DoCreateNewElement();
 
-            Assert.AreEqual (typeof (KeyValueConfigurationElement), e.GetType(), "A1");
+            Assert.AreEqual(typeof(KeyValueConfigurationElement), e.GetType(), "A1");
 
             KeyValueConfigurationElement kv = (KeyValueConfigurationElement)e;
 
-            Assert.AreEqual ("", kv.Key, "A2");
-            Assert.AreEqual ("", kv.Value, "A3");
+            Assert.AreEqual("", kv.Key, "A2");
+            Assert.AreEqual("", kv.Value, "A3");
         }
 
         [Test]
-        public void Add ()
+        public void Add()
         {
-            Poker p = new Poker (true);
-            ElementPoker ep = new ElementPoker ("", "");
+            Poker p = new Poker(true);
+            ElementPoker ep = new ElementPoker("", "");
 
-            p.Add (ep);
+            p.Add(ep);
         }
 
-
         [Test]
-        public void AddDuplicate ()
+        public void AddDuplicate()
         {
-            Poker p = new Poker (true);
+            Poker p = new Poker(true);
             ElementPoker ep;
 
-            ep = new ElementPoker ("hi", "bye");
-            p.Add (ep);
+            ep = new ElementPoker("hi", "bye");
+            p.Add(ep);
 
-            ep = new ElementPoker ("hi", "bye2");
-            p.Add (ep);
+            ep = new ElementPoker("hi", "bye2");
+            p.Add(ep);
 
-            Assert.AreEqual (1, p.AllKeys.Length, "A1");
-            Assert.AreEqual (1, p.GetAllKeys().Length, "A2");
+            Assert.AreEqual(1, p.AllKeys.Length, "A1");
+            Assert.AreEqual(1, p.GetAllKeys().Length, "A2");
         }
 
         [Test]
         public void GetElementKey()
         {
-            Poker p = new Poker ();
-            ElementPoker ep = new ElementPoker ("foo", "there");
-            p.Add (ep);
-            Assert.AreEqual ("foo", p.DoGetElementKey (ep), "A1");
+            Poker p = new Poker();
+            ElementPoker ep = new ElementPoker("foo", "there");
+            p.Add(ep);
+            Assert.AreEqual("foo", p.DoGetElementKey(ep), "A1");
         }
 
         [Test]
-        [Category ("NotWorking")]
+        [Category("NotWorking")]
         public void GetElementKey_withoutAdd()
         {
-            Poker p = new Poker ();
-            ElementPoker ep = new ElementPoker ("hi", "there");
-            Assert.AreEqual ("", p.DoGetElementKey (ep), "A1");
+            Poker p = new Poker();
+            ElementPoker ep = new ElementPoker("hi", "there");
+            Assert.AreEqual("", p.DoGetElementKey(ep), "A1");
         }
 
         [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void GetElementKey_null ()
+        [ExpectedException(typeof(NullReferenceException))]
+        public void GetElementKey_null()
         {
-            Poker p = new Poker ();
-            Assert.AreEqual ("", p.DoGetElementKey (null), "A1");
+            Poker p = new Poker();
+            Assert.AreEqual("", p.DoGetElementKey(null), "A1");
         }
     }
-
 }
-

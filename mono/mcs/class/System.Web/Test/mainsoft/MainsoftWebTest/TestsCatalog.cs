@@ -3,10 +3,10 @@
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Vladimir Krasnov <vladimirk@mainsoft.com>
-//   
-// 
+//
+//
 // Copyright (c) 2002-2005 Mainsoft Corporation.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,13 +39,13 @@ namespace MonoTests.stand_alone.WebHarness
 
         public string Url
         {
-            get {return _url;}
-            set {_url = value;}
+            get { return _url; }
+            set { _url = value; }
         }
         public string Name
         {
-            get {return _name;}
-            set {_name = value;}
+            get { return _name; }
+            set { _name = value; }
         }
     }
 
@@ -54,12 +54,11 @@ namespace MonoTests.stand_alone.WebHarness
         private XmlDocument _testsListXml = null;
         private IEnumerator _tests = null;
 
-        public TestsCatalog() : this("")
-        {
-        }
-        public TestsCatalog(string catalogName) : this(catalogName, false)
-        {
-        }
+        public TestsCatalog()
+            : this("") { }
+
+        public TestsCatalog(string catalogName)
+            : this(catalogName, false) { }
 
         public TestsCatalog(string catalogName, bool collectExluded)
         {
@@ -73,7 +72,7 @@ namespace MonoTests.stand_alone.WebHarness
                 _testsListXml = new XmlDocument();
                 _testsListXml.Load(catalogName);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
@@ -83,9 +82,11 @@ namespace MonoTests.stand_alone.WebHarness
                 if (collectExluded)
                     _tests = _testsListXml.SelectNodes("/TestCases/TestCase").GetEnumerator();
                 else
-                    _tests = _testsListXml.SelectNodes("/TestCases/TestCase[@Exclude='N']").GetEnumerator();
+                    _tests = _testsListXml
+                        .SelectNodes("/TestCases/TestCase[@Exclude='N']")
+                        .GetEnumerator();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
@@ -98,7 +99,7 @@ namespace MonoTests.stand_alone.WebHarness
 
         public object Current
         {
-            get {return GetCurrentTestInfo();}
+            get { return GetCurrentTestInfo(); }
         }
 
         public bool MoveNext()

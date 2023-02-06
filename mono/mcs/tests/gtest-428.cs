@@ -4,45 +4,42 @@ public struct CInt
 {
     int data;
 
-    public CInt (int data)
+    public CInt(int data)
     {
         this.data = data;
     }
 
-    public static implicit operator CInt (int xx)
+    public static implicit operator CInt(int xx)
     {
-        return new CInt (xx);
+        return new CInt(xx);
     }
 
-    public static implicit operator int (CInt xx)
+    public static implicit operator int(CInt xx)
     {
         return xx.data;
     }
 }
 
-
 public class Klass
 {
     CInt? t;
-    public Klass (CInt? t)
+
+    public Klass(CInt? t)
     {
         this.t = t;
     }
 
     public CInt? Value
     {
-        get
-        {
-            return t;
-        }
+        get { return t; }
     }
 }
 
 public class MainClass
 {
-    public static int Main ()
+    public static int Main()
     {
-        var v = new Klass (new CInt (3));
+        var v = new Klass(new CInt(3));
 
         if (v.Value == 1)
             return 1;
@@ -53,12 +50,12 @@ public class MainClass
         if (v.Value == null)
             return 3;
 
-        var v2 = new Klass (null);
+        var v2 = new Klass(null);
 
         if (v2.Value != null)
             return 4;
 
-        Console.WriteLine ("OK");
+        Console.WriteLine("OK");
         return 0;
     }
 }

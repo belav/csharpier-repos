@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,43 +37,42 @@ namespace MonoTests.Mono.ServiceModel.IdentitySelectors
     public class IdentityCardTest
     {
         [Test]
-        public void Load ()
+        public void Load()
         {
-            IdentityCard ic = new IdentityCard ();
-            ic.Load (XmlReader.Create ("Test/resources/rupert.xml"));
-            Assert.AreEqual (DateTimeKind.Utc, ic.TimeIssued.Kind, "#1");
-            Assert.AreEqual (11, ic.TimeIssued.Hour, "#2");
-            Assert.AreEqual (23, ic.TimeExpires.Hour, "#3");
-            new IdentityCard ().Load (XmlReader.Create (
-                "Test/resources/managed.xml"));
+            IdentityCard ic = new IdentityCard();
+            ic.Load(XmlReader.Create("Test/resources/rupert.xml"));
+            Assert.AreEqual(DateTimeKind.Utc, ic.TimeIssued.Kind, "#1");
+            Assert.AreEqual(11, ic.TimeIssued.Hour, "#2");
+            Assert.AreEqual(23, ic.TimeExpires.Hour, "#3");
+            new IdentityCard().Load(XmlReader.Create("Test/resources/managed.xml"));
         }
 
         [Test]
-        public void SaveRoundtrip ()
+        public void SaveRoundtrip()
         {
-            SaveRoundtrip ("Test/resources/rupert.xml");
-            SaveRoundtrip ("Test/resources/managed.xml");
+            SaveRoundtrip("Test/resources/rupert.xml");
+            SaveRoundtrip("Test/resources/managed.xml");
         }
-        
-        void SaveRoundtrip (string file)
+
+        void SaveRoundtrip(string file)
         {
-            IdentityCard ic = new IdentityCard ();
-            ic.Load (XmlReader.Create (file));
-            MemoryStream ms = new MemoryStream ();
-            XmlWriterSettings xws = new XmlWriterSettings ();
+            IdentityCard ic = new IdentityCard();
+            ic.Load(XmlReader.Create(file));
+            MemoryStream ms = new MemoryStream();
+            XmlWriterSettings xws = new XmlWriterSettings();
             xws.OmitXmlDeclaration = true;
-            using (XmlWriter xw = XmlWriter.Create (ms, xws)) {
-                ic.Save (xw);
+            using (XmlWriter xw = XmlWriter.Create(ms, xws))
+            {
+                ic.Save(xw);
             }
-            XmlDocument doc = new XmlDocument ();
-            doc.Load (file);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
             if (doc.FirstChild is XmlDeclaration)
-                doc.RemoveChild (doc.FirstChild);
+                doc.RemoveChild(doc.FirstChild);
             string expected = doc.OuterXml;
-            doc.Load (new MemoryStream (ms.ToArray ()));
+            doc.Load(new MemoryStream(ms.ToArray()));
             string actual = doc.OuterXml;
-            Assert.AreEqual (expected, actual, file);
+            Assert.AreEqual(expected, actual, file);
         }
     }
 }
-

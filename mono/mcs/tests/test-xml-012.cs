@@ -5,9 +5,7 @@ namespace Testing
 {
     public class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         /// <summary>
         /// comment for private field
@@ -27,4 +25,3 @@ namespace Testing
         private string PrivateField3;
     }
 }
-

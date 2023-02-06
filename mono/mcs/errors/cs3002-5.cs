@@ -3,14 +3,23 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant(true)]
+
+[assembly: CLSCompliant(true)]
 
 [CLSCompliant(false)]
-public interface I {}
+public interface I { }
 
-public class C {}
+public class C { }
 
-public class CLSClass {
-    public I Test1() { return null; } 
-    public C Test2() { return null; }
+public class CLSClass
+{
+    public I Test1()
+    {
+        return null;
+    }
+
+    public C Test2()
+    {
+        return null;
+    }
 }

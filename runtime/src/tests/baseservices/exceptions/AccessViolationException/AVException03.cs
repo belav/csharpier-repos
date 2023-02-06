@@ -25,7 +25,10 @@ public class test
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Invalid write (assigning an object) = {0} (should be NullRef)",ex.GetType());
+            Console.WriteLine(
+                "Invalid write (assigning an object) = {0} (should be NullRef)",
+                ex.GetType()
+            );
             ret = 10;
         }
         Console.WriteLine(100 == ret ? "Test Passed" : "Test Failed");

@@ -3,14 +3,14 @@
 
 using System;
 
-interface IList 
+interface IList
 {
-    int Count ();
+    int Count();
 }
 
-interface ICounter 
+interface ICounter
 {
-    int Count ();
+    int Count();
 }
 
 interface ICollection
@@ -18,18 +18,14 @@ interface ICollection
     int Count { set; }
 }
 
-interface IListCounter: IList, ICounter, ICollection
-{
-}
+interface IListCounter : IList, ICounter, ICollection { }
 
-interface IListCounterNew : IListCounter
-{
-}
+interface IListCounterNew : IListCounter { }
 
 class Test
 {
-    static void Foo (IListCounterNew t)
+    static void Foo(IListCounterNew t)
     {
-        t.Count ();
+        t.Count();
     }
 }

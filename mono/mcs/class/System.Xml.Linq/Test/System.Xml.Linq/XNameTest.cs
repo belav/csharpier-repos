@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,98 +37,96 @@ namespace MonoTests.System.Xml.Linq
     public class XNameTest
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void GetNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetNull()
         {
-            XName.Get (null);
+            XName.Get(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void GetEmpty ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetEmpty()
         {
-            XName.Get (String.Empty);
+            XName.Get(String.Empty);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void GetBrokenFormat ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetBrokenFormat()
         {
-            XName.Get ("{");
+            XName.Get("{");
         }
 
         [Test]
-        [ExpectedException (typeof (XmlException))]
-        public void GetBrokenFormat2 ()
+        [ExpectedException(typeof(XmlException))]
+        public void GetBrokenFormat2()
         {
-            XName.Get ("}");
+            XName.Get("}");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void GetBrokenFormat3 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetBrokenFormat3()
         {
-            XName.Get ("{x_x}");
+            XName.Get("{x_x}");
         }
 
         [Test]
-        [ExpectedException (typeof (XmlException))]
-        public void GetBrokenFormat4 ()
+        [ExpectedException(typeof(XmlException))]
+        public void GetBrokenFormat4()
         {
-            XName.Get (":");
+            XName.Get(":");
         }
 
         [Test]
-        [ExpectedException (typeof (XmlException))]
-        public void GetBrokenFormat5 ()
+        [ExpectedException(typeof(XmlException))]
+        public void GetBrokenFormat5()
         {
-            XName.Get ("whoa!");
+            XName.Get("whoa!");
         }
 
         [Test]
-        [ExpectedException (typeof (XmlException))]
-        public void GetBrokenFormat6 ()
+        [ExpectedException(typeof(XmlException))]
+        public void GetBrokenFormat6()
         {
-            XName.Get ("x{y}");
+            XName.Get("x{y}");
         }
 
         [Test]
-        [ExpectedException (typeof (XmlException))]
-        public void GetBrokenFormat7 ()
+        [ExpectedException(typeof(XmlException))]
+        public void GetBrokenFormat7()
         {
-            XName.Get (" {x}y");
+            XName.Get(" {x}y");
         }
 
         [Test]
-        [ExpectedException (typeof (XmlException))]
-        public void GetBrokenFormat8 ()
+        [ExpectedException(typeof(XmlException))]
+        public void GetBrokenFormat8()
         {
-            XName.Get ("{x}y ");
+            XName.Get("{x}y ");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void GetBrokenFormat9 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetBrokenFormat9()
         {
-            XName.Get ("{xyz");
+            XName.Get("{xyz");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void GetBrokenFormat10 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetBrokenFormat10()
         {
-            XName.Get ("{}x");
+            XName.Get("{}x");
         }
 
         [Test]
-        public void Get1 ()
+        public void Get1()
         {
-            XName n = XName.Get ("{{}}x");
-            Assert.AreEqual ("x", n.LocalName, "#1");
+            XName n = XName.Get("{{}}x");
+            Assert.AreEqual("x", n.LocalName, "#1");
             // huh, looks like there is no URI format validation.
-            Assert.AreEqual ("{}", n.NamespaceName, "#2");
+            Assert.AreEqual("{}", n.NamespaceName, "#2");
         }
-
-
     }
 }

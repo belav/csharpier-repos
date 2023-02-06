@@ -26,25 +26,24 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class AttributeMetadataCollection : ReadOnlyCollectionBase
     {
-        public AttributeMetadata this [int index] {
-            get {
-                throw new NotImplementedException ();
-            }
+        public AttributeMetadata this[int index]
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public bool Contains (AttributeMetadata metadata)
+        public bool Contains(AttributeMetadata metadata)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public int IndexOf (AttributeMetadata metadata)
+        public int IndexOf(AttributeMetadata metadata)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void CopyTo (AttributeMetadata[] metadata, int index)
+        public void CopyTo(AttributeMetadata[] metadata, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

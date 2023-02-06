@@ -3,5 +3,5 @@
 
 public struct S
 {
-    public fixed decimal test [4];
+    public fixed decimal test[4];
 }

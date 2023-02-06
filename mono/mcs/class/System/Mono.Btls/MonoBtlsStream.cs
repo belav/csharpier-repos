@@ -46,15 +46,20 @@ namespace Mono.Btls
 {
     class MonoBtlsStream : MNS.MobileAuthenticatedStream
     {
-        public MonoBtlsStream (Stream innerStream, bool leaveInnerStreamOpen, SslStream owner,
-                               MonoTlsSettings settings, MNS.MobileTlsProvider provider)
-            : base (innerStream, leaveInnerStreamOpen, owner, settings, provider)
-        {
-        }
+        public MonoBtlsStream(
+            Stream innerStream,
+            bool leaveInnerStreamOpen,
+            SslStream owner,
+            MonoTlsSettings settings,
+            MNS.MobileTlsProvider provider
+        )
+            : base(innerStream, leaveInnerStreamOpen, owner, settings, provider) { }
 
-        protected override MNS.MobileTlsContext CreateContext (MNS.MonoSslAuthenticationOptions options)
+        protected override MNS.MobileTlsContext CreateContext(
+            MNS.MonoSslAuthenticationOptions options
+        )
         {
-            return new MonoBtlsContext (this, options);
+            return new MonoBtlsContext(this, options);
         }
     }
 }

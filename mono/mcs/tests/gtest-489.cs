@@ -1,6 +1,6 @@
 abstract class sample
 {
-    public abstract TValue Value<TKey, TValue> ();
+    public abstract TValue Value<TKey, TValue>();
 
     class nested<T> : sample
     {
@@ -9,13 +9,11 @@ abstract class sample
             public static TValue Val;
         }
 
-        public override sealed TValue Value<TKey, TValue> ()
+        public override sealed TValue Value<TKey, TValue>()
         {
             return holder<TKey, TValue>.Val;
         }
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

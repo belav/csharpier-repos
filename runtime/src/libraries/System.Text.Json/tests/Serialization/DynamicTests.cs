@@ -86,12 +86,16 @@ namespace System.Text.Json.Serialization.Tests
 
             void VerifyObject()
             {
-                Assert.Equal("World", elem.GetProperty("MyObject").GetProperty("MyString").GetString());
+                Assert.Equal(
+                    "World",
+                    elem.GetProperty("MyObject").GetProperty("MyString").GetString()
+                );
             }
 
             void VerifyArray()
             {
-                JsonElement.ArrayEnumerator enumerator = elem.GetProperty("MyArray").EnumerateArray();
+                JsonElement.ArrayEnumerator enumerator = elem.GetProperty("MyArray")
+                    .EnumerateArray();
                 Assert.Equal(2, enumerator.Count());
                 enumerator.MoveNext();
                 Assert.Equal(1, enumerator.Current.GetInt32());

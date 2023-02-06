@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,80 +34,84 @@ using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms
 {
-    [ToolStripItemDesignerAvailability (ToolStripItemDesignerAvailability.None)]
+    [ToolStripItemDesignerAvailability(ToolStripItemDesignerAvailability.None)]
     public class ToolStripOverflowButton : ToolStripDropDownButton
     {
         #region Internal Constructor
-        internal ToolStripOverflowButton (ToolStrip ts)
+        internal ToolStripOverflowButton(ToolStrip ts)
         {
             this.InternalOwner = ts;
             this.Parent = ts;
             this.Visible = false;
         }
         #endregion
-        
+
         #region Public Properties
-        public override bool HasDropDownItems {
-            get { 
+        public override bool HasDropDownItems
+        {
+            get
+            {
                 if (this.drop_down == null)
                     return false;
-                    
-                return this.DropDown.DisplayedItems.Count > 0; 
+
+                return this.DropDown.DisplayedItems.Count > 0;
             }
         }
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public new bool RightToLeftAutoMirrorImage {
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool RightToLeftAutoMirrorImage
+        {
             get { return base.RightToLeftAutoMirrorImage; }
             set { base.RightToLeftAutoMirrorImage = value; }
         }
         #endregion
 
         #region Protected Properties
-        protected internal override Padding DefaultMargin {
-            get { return new Padding (0, 1, 0, 2); }
+        protected internal override Padding DefaultMargin
+        {
+            get { return new Padding(0, 1, 0, 2); }
         }
         #endregion
 
         #region Public Methods
-        public override Size GetPreferredSize (Size constrainingSize)
+        public override Size GetPreferredSize(Size constrainingSize)
         {
-            return new Size (16, this.Parent.Height);
+            return new Size(16, this.Parent.Height);
         }
         #endregion
 
         #region Protected Methods
-        protected override AccessibleObject CreateAccessibilityInstance ()
+        protected override AccessibleObject CreateAccessibilityInstance()
         {
-            return new ToolStripOverflowButtonAccessibleObject ();
+            return new ToolStripOverflowButtonAccessibleObject();
         }
-        
-        protected override ToolStripDropDown CreateDefaultDropDown ()
+
+        protected override ToolStripDropDown CreateDefaultDropDown()
         {
-            ToolStripDropDown tsdd = new ToolStripOverflow (this);
+            ToolStripDropDown tsdd = new ToolStripOverflow(this);
             tsdd.DefaultDropDownDirection = ToolStripDropDownDirection.BelowLeft;
             tsdd.OwnerItem = this;
             return tsdd;
         }
 
-        protected override void OnPaint (PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
         {
             if (this.Owner != null)
-                this.Owner.Renderer.DrawOverflowButtonBackground (new ToolStripItemRenderEventArgs (e.Graphics, this));
+                this.Owner.Renderer.DrawOverflowButtonBackground(
+                    new ToolStripItemRenderEventArgs(e.Graphics, this)
+                );
         }
 
-        protected internal override void SetBounds (Rectangle bounds)
+        protected internal override void SetBounds(Rectangle bounds)
         {
-            base.SetBounds (bounds);
+            base.SetBounds(bounds);
         }
         #endregion
 
         #region ToolStripOverflowButtonAccessibleObject Class
-        private class ToolStripOverflowButtonAccessibleObject : AccessibleObject
-        {
-        }
+        private class ToolStripOverflowButtonAccessibleObject : AccessibleObject { }
         #endregion
     }
 }

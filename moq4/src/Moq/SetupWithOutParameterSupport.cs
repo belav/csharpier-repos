@@ -15,12 +15,19 @@ namespace Moq
     {
         private readonly List<KeyValuePair<int, object>> outValues;
 
-        protected SetupWithOutParameterSupport(Expression originalExpression, Mock mock, MethodExpectation expectation)
+        protected SetupWithOutParameterSupport(
+            Expression originalExpression,
+            Mock mock,
+            MethodExpectation expectation
+        )
             : base(originalExpression, mock, expectation)
         {
             Debug.Assert(expectation != null);
 
-            this.outValues = GetOutValues(expectation.Arguments, expectation.Method.GetParameters());
+            this.outValues = GetOutValues(
+                expectation.Arguments,
+                expectation.Method.GetParameters()
+            );
         }
 
         public sealed override void SetOutParameters(Invocation invocation)
@@ -34,7 +41,10 @@ namespace Moq
             }
         }
 
-        private static List<KeyValuePair<int, object>> GetOutValues(IReadOnlyList<Expression> arguments, ParameterInfo[] parameters)
+        private static List<KeyValuePair<int, object>> GetOutValues(
+            IReadOnlyList<Expression> arguments,
+            ParameterInfo[] parameters
+        )
         {
             List<KeyValuePair<int, object>> outValues = null;
             for (int i = 0, n = parameters.Length; i < n; ++i)
@@ -42,12 +52,17 @@ namespace Moq
                 var parameter = parameters[i];
                 if (parameter.ParameterType.IsByRef)
                 {
-                    if ((parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out)) == ParameterAttributes.Out)
+                    if (
+                        (parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out))
+                        == ParameterAttributes.Out
+                    )
                     {
                         var constant = arguments[i].PartialEval() as ConstantExpression;
                         if (constant == null)
                         {
-                            throw new NotSupportedException(Resources.OutExpressionMustBeConstantValue);
+                            throw new NotSupportedException(
+                                Resources.OutExpressionMustBeConstantValue
+                            );
                         }
 
                         if (outValues == null)

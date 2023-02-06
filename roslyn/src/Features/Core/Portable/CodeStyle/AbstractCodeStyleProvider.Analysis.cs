@@ -22,28 +22,34 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             public readonly TCodeStyleProvider _codeStyleProvider;
 
             protected DiagnosticAnalyzer(bool isUnnecessary = true, bool configurable = true)
-                : this(new TCodeStyleProvider(), isUnnecessary, configurable)
-            {
-            }
+                : this(new TCodeStyleProvider(), isUnnecessary, configurable) { }
 
-            private DiagnosticAnalyzer(TCodeStyleProvider codeStyleProvider, bool isUnnecessary, bool configurable)
-                : base(codeStyleProvider._descriptorId,
-                       codeStyleProvider._enforceOnBuild,
-                       codeStyleProvider._option,
-                       codeStyleProvider._language,
-                       codeStyleProvider._title,
-                       codeStyleProvider._message,
-                       isUnnecessary,
-                       configurable)
+            private DiagnosticAnalyzer(
+                TCodeStyleProvider codeStyleProvider,
+                bool isUnnecessary,
+                bool configurable
+            )
+                : base(
+                    codeStyleProvider._descriptorId,
+                    codeStyleProvider._enforceOnBuild,
+                    codeStyleProvider._option,
+                    codeStyleProvider._language,
+                    codeStyleProvider._title,
+                    codeStyleProvider._message,
+                    isUnnecessary,
+                    configurable
+                )
             {
                 _codeStyleProvider = codeStyleProvider;
             }
 
-            protected sealed override void InitializeWorker(Diagnostics.AnalysisContext context)
-                => _codeStyleProvider.DiagnosticAnalyzerInitialize(new AnalysisContext(_codeStyleProvider, context));
+            protected sealed override void InitializeWorker(Diagnostics.AnalysisContext context) =>
+                _codeStyleProvider.DiagnosticAnalyzerInitialize(
+                    new AnalysisContext(_codeStyleProvider, context)
+                );
 
-            public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-                => _codeStyleProvider.GetAnalyzerCategory();
+            public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+                _codeStyleProvider.GetAnalyzerCategory();
         }
 
         /// <summary>
@@ -63,7 +69,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             private readonly TCodeStyleProvider _codeStyleProvider;
             private readonly Diagnostics.AnalysisContext _context;
 
-            public AnalysisContext(TCodeStyleProvider codeStyleProvider, Diagnostics.AnalysisContext context)
+            public AnalysisContext(
+                TCodeStyleProvider codeStyleProvider,
+                Diagnostics.AnalysisContext context
+            )
             {
                 _codeStyleProvider = codeStyleProvider;
                 _context = context;
@@ -72,56 +81,103 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             public void RegisterCompilationStartAction(Action<Compilation, AnalysisContext> analyze)
             {
                 var _this = this;
-                _context.RegisterCompilationStartAction(
-                    c => analyze(c.Compilation, _this));
+                _context.RegisterCompilationStartAction(c => analyze(c.Compilation, _this));
             }
 
-            public void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext, CodeStyleOption2<TOptionValue>> analyze)
+            public void RegisterCodeBlockAction(
+                Action<CodeBlockAnalysisContext, CodeStyleOption2<TOptionValue>> analyze
+            )
             {
                 var provider = _codeStyleProvider;
                 _context.RegisterCodeBlockAction(
-                    c => AnalyzeIfEnabled(provider, c, analyze, c.Options, c.SemanticModel.SyntaxTree));
+                    c =>
+                        AnalyzeIfEnabled(
+                            provider,
+                            c,
+                            analyze,
+                            c.Options,
+                            c.SemanticModel.SyntaxTree
+                        )
+                );
             }
 
-            public void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext, CodeStyleOption2<TOptionValue>> analyze)
+            public void RegisterSemanticModelAction(
+                Action<SemanticModelAnalysisContext, CodeStyleOption2<TOptionValue>> analyze
+            )
             {
                 var provider = _codeStyleProvider;
                 _context.RegisterSemanticModelAction(
-                    c => AnalyzeIfEnabled(provider, c, analyze, c.Options, c.SemanticModel.SyntaxTree));
+                    c =>
+                        AnalyzeIfEnabled(
+                            provider,
+                            c,
+                            analyze,
+                            c.Options,
+                            c.SemanticModel.SyntaxTree
+                        )
+                );
             }
 
-            public void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext, CodeStyleOption2<TOptionValue>> analyze)
+            public void RegisterSyntaxTreeAction(
+                Action<SyntaxTreeAnalysisContext, CodeStyleOption2<TOptionValue>> analyze
+            )
             {
                 var provider = _codeStyleProvider;
                 _context.RegisterSyntaxTreeAction(
-                    c => AnalyzeIfEnabled(provider, c, analyze, c.Options, c.Tree));
+                    c => AnalyzeIfEnabled(provider, c, analyze, c.Options, c.Tree)
+                );
             }
 
             public void RegisterOperationAction(
                 Action<OperationAnalysisContext, CodeStyleOption2<TOptionValue>> analyze,
-                params OperationKind[] operationKinds)
+                params OperationKind[] operationKinds
+            )
             {
                 var provider = _codeStyleProvider;
                 _context.RegisterOperationAction(
-                    c => AnalyzeIfEnabled(provider, c, analyze, c.Options, c.Operation.SemanticModel.SyntaxTree),
-                    operationKinds);
+                    c =>
+                        AnalyzeIfEnabled(
+                            provider,
+                            c,
+                            analyze,
+                            c.Options,
+                            c.Operation.SemanticModel.SyntaxTree
+                        ),
+                    operationKinds
+                );
             }
 
             public void RegisterSyntaxNodeAction<TSyntaxKind>(
                 Action<SyntaxNodeAnalysisContext, CodeStyleOption2<TOptionValue>> analyze,
-                params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct
+                params TSyntaxKind[] syntaxKinds
+            )
+                where TSyntaxKind : struct
             {
                 var provider = _codeStyleProvider;
                 _context.RegisterSyntaxNodeAction(
-                    c => AnalyzeIfEnabled(provider, c, analyze, c.Options, c.SemanticModel.SyntaxTree),
-                    syntaxKinds);
+                    c =>
+                        AnalyzeIfEnabled(
+                            provider,
+                            c,
+                            analyze,
+                            c.Options,
+                            c.SemanticModel.SyntaxTree
+                        ),
+                    syntaxKinds
+                );
             }
 
             private static void AnalyzeIfEnabled<TContext>(
-                TCodeStyleProvider provider, TContext context, Action<TContext, CodeStyleOption2<TOptionValue>> analyze,
-                AnalyzerOptions analyzerOptions, SyntaxTree syntaxTree)
+                TCodeStyleProvider provider,
+                TContext context,
+                Action<TContext, CodeStyleOption2<TOptionValue>> analyze,
+                AnalyzerOptions analyzerOptions,
+                SyntaxTree syntaxTree
+            )
             {
-                var optionValue = provider.GetCodeStyleOption(analyzerOptions.GetAnalyzerOptions(syntaxTree));
+                var optionValue = provider.GetCodeStyleOption(
+                    analyzerOptions.GetAnalyzerOptions(syntaxTree)
+                );
                 var severity = GetOptionSeverity(optionValue);
                 switch (severity)
                 {

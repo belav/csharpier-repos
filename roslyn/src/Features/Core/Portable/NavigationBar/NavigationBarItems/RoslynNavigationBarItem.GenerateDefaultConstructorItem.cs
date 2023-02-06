@@ -8,24 +8,29 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 {
     internal abstract partial class RoslynNavigationBarItem
     {
-        public class GenerateDefaultConstructor : AbstractGenerateCodeItem, IEquatable<GenerateDefaultConstructor>
+        public class GenerateDefaultConstructor
+            : AbstractGenerateCodeItem,
+                IEquatable<GenerateDefaultConstructor>
         {
             public GenerateDefaultConstructor(string text, SymbolKey destinationTypeSymbolKey)
-                : base(RoslynNavigationBarItemKind.GenerateDefaultConstructor, text, Glyph.MethodPublic, destinationTypeSymbolKey)
-            {
-            }
+                : base(
+                    RoslynNavigationBarItemKind.GenerateDefaultConstructor,
+                    text,
+                    Glyph.MethodPublic,
+                    destinationTypeSymbolKey
+                ) { }
 
-            protected internal override SerializableNavigationBarItem Dehydrate()
-                => SerializableNavigationBarItem.GenerateDefaultConstructor(Text, DestinationTypeSymbolKey);
+            protected internal override SerializableNavigationBarItem Dehydrate() =>
+                SerializableNavigationBarItem.GenerateDefaultConstructor(
+                    Text,
+                    DestinationTypeSymbolKey
+                );
 
-            public override bool Equals(object? obj)
-                => Equals(obj as GenerateDefaultConstructor);
+            public override bool Equals(object? obj) => Equals(obj as GenerateDefaultConstructor);
 
-            public bool Equals(GenerateDefaultConstructor? other)
-                => base.Equals(other);
+            public bool Equals(GenerateDefaultConstructor? other) => base.Equals(other);
 
-            public override int GetHashCode()
-                => throw new NotImplementedException();
+            public override int GetHashCode() => throw new NotImplementedException();
         }
     }
 }

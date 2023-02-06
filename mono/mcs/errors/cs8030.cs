@@ -5,12 +5,13 @@ using System;
 
 class C
 {
-    public void Test ()
+    public void Test()
     {
-        Action a = () => { return Skip (); };
+        Action a = () =>
+        {
+            return Skip();
+        };
     }
-    
-    void Skip ()
-    {
-    }
+
+    void Skip() { }
 }

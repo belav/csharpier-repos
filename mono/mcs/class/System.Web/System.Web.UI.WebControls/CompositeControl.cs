@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,56 +32,70 @@ using System.Security.Permissions;
 namespace System.Web.UI.WebControls
 {
     // CAS
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [Designer ("System.Web.UI.Design.WebControls.CompositeControlDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    public abstract class CompositeControl : WebControl, INamingContainer, ICompositeControlDesignerAccessor
+    [Designer(
+        "System.Web.UI.Design.WebControls.CompositeControlDesigner, "
+            + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    public abstract class CompositeControl
+        : WebControl,
+            INamingContainer,
+            ICompositeControlDesignerAccessor
     {
-        public override bool SupportsDisabledAttribute {
+        public override bool SupportsDisabledAttribute
+        {
             get { return RenderingCompatibilityLessThan40; }
         }
-        protected CompositeControl ()
-        {
-        }
 
-        public override void DataBind ()
+        protected CompositeControl() { }
+
+        public override void DataBind()
         {
             /* make sure all the child controls have been created */
-            EnsureChildControls ();
+            EnsureChildControls();
             /* and then... */
             base.DataBind();
         }
 
-        protected internal override void Render (HtmlTextWriter writer)
+        protected internal override void Render(HtmlTextWriter writer)
         {
             /* make sure all the child controls have been created */
-            EnsureChildControls ();
+            EnsureChildControls();
             /* and then... */
-            base.Render (writer);
+            base.Render(writer);
         }
 
-        void ICompositeControlDesignerAccessor.RecreateChildControls ()
+        void ICompositeControlDesignerAccessor.RecreateChildControls()
         {
-            RecreateChildControls ();
+            RecreateChildControls();
         }
 
         [MonoTODO("not sure exactly what this one does..")]
-        protected virtual void RecreateChildControls ()
+        protected virtual void RecreateChildControls()
         {
             /* for now just call CreateChildControls to force
              * the recreation of our children. */
-            CreateChildControls ();
+            CreateChildControls();
         }
-    
-        public override ControlCollection Controls {
-            get {
+
+        public override ControlCollection Controls
+        {
+            get
+            {
                 /* make sure all the child controls have been created */
-                EnsureChildControls ();
+                EnsureChildControls();
                 /* and then... */
                 return base.Controls;
             }
         }
     }
 }
-

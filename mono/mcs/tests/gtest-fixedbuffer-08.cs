@@ -3,7 +3,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-[StructLayout (LayoutKind.Auto, CharSet = CharSet.Auto)]
+[StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
 struct S
 {
     public unsafe fixed byte o[6];
@@ -11,9 +11,9 @@ struct S
 
 class A
 {
-    public static int Main ()
+    public static int Main()
     {
-        Type t = typeof (S);
+        Type t = typeof(S);
         var sa = t.StructLayoutAttribute;
         if (sa.Value != LayoutKind.Auto)
             return 1;
@@ -27,7 +27,7 @@ class A
         if (sa.Size != 0)
             return 4;
 
-        t = t.GetNestedTypes ()[0];
+        t = t.GetNestedTypes()[0];
         sa = t.StructLayoutAttribute;
         if (sa.Value != LayoutKind.Sequential)
             return 11;

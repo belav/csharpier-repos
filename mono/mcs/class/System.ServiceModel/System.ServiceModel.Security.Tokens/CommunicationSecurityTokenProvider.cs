@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,95 +44,103 @@ namespace System.ServiceModel.Security.Tokens
     {
         public abstract ProviderCommunicationObject Communication { get; }
 
-        protected override SecurityToken GetTokenCore (TimeSpan timeout)
+        protected override SecurityToken GetTokenCore(TimeSpan timeout)
         {
             if (State != CommunicationState.Opened)
-                throw new InvalidOperationException ("Open the provider before issuing actual request to get token.");
-            return GetOnlineToken (timeout);
+                throw new InvalidOperationException(
+                    "Open the provider before issuing actual request to get token."
+                );
+            return GetOnlineToken(timeout);
         }
 
-        public abstract SecurityToken GetOnlineToken (TimeSpan timeout);
+        public abstract SecurityToken GetOnlineToken(TimeSpan timeout);
 
-        public CommunicationState State {
+        public CommunicationState State
+        {
             get { return Communication.State; }
         }
 
-        public void Abort ()
+        public void Abort()
         {
-            Communication.Abort ();
+            Communication.Abort();
         }
 
-        public void Open ()
+        public void Open()
         {
-            Communication.Open ();
+            Communication.Open();
         }
 
-        public void Open (TimeSpan timeout)
+        public void Open(TimeSpan timeout)
         {
-            Communication.Open (timeout);
+            Communication.Open(timeout);
         }
 
-        public IAsyncResult BeginOpen (AsyncCallback callback, object state)
+        public IAsyncResult BeginOpen(AsyncCallback callback, object state)
         {
-            return Communication.BeginOpen (callback, state);
+            return Communication.BeginOpen(callback, state);
         }
 
-        public IAsyncResult BeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            return Communication.BeginOpen (timeout, callback, state);
+            return Communication.BeginOpen(timeout, callback, state);
         }
 
-        public void EndOpen (IAsyncResult result)
+        public void EndOpen(IAsyncResult result)
         {
-            Communication.EndOpen (result);
+            Communication.EndOpen(result);
         }
 
-        public void Close ()
+        public void Close()
         {
-            Communication.Close ();
+            Communication.Close();
         }
 
-        public void Close (TimeSpan timeout)
+        public void Close(TimeSpan timeout)
         {
-            Communication.Close (timeout);
+            Communication.Close(timeout);
         }
 
-        public IAsyncResult BeginClose (AsyncCallback callback, object state)
+        public IAsyncResult BeginClose(AsyncCallback callback, object state)
         {
-            return Communication.BeginClose (callback, state);
+            return Communication.BeginClose(callback, state);
         }
 
-        public IAsyncResult BeginClose (TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            return Communication.BeginClose (timeout, callback, state);
+            return Communication.BeginClose(timeout, callback, state);
         }
 
-        public void EndClose (IAsyncResult result)
+        public void EndClose(IAsyncResult result)
         {
-            Communication.EndClose (result);
+            Communication.EndClose(result);
         }
 
-        public event EventHandler Opening {
+        public event EventHandler Opening
+        {
             add { Communication.Opening += value; }
             remove { Communication.Opening -= value; }
         }
 
-        public event EventHandler Opened {
+        public event EventHandler Opened
+        {
             add { Communication.Opened += value; }
             remove { Communication.Opened -= value; }
         }
 
-        public event EventHandler Closing {
+        public event EventHandler Closing
+        {
             add { Communication.Closing += value; }
             remove { Communication.Closing -= value; }
         }
 
-        public event EventHandler Closed {
+        public event EventHandler Closed
+        {
             add { Communication.Closed += value; }
             remove { Communication.Closed -= value; }
         }
 
-        public event EventHandler Faulted {
+        public event EventHandler Faulted
+        {
             add { Communication.Faulted += value; }
             remove { Communication.Faulted -= value; }
         }

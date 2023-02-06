@@ -32,6 +32,5 @@ public class CustomContentTemplate : System.Web.UI.ITemplate
         Page page = button1.Page;
         Label label1 = (Label)page.FindControl("Label1");
         label1.Text = "Panel refreshed at " + DateTime.Now.ToString();
-
     }
 }

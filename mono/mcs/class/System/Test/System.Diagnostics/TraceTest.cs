@@ -7,7 +7,7 @@
 //
 // (C) Jonathan Pryor
 // (C) 2003 Martin Willemoes Hansen
-// 
+//
 
 #if !MOBILE
 
@@ -20,84 +20,87 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 
-namespace MonoTests.System.Diagnostics {
-
+namespace MonoTests.System.Diagnostics
+{
     [TestFixture]
-    public class TraceTest {
-    
+    public class TraceTest
+    {
         private StringWriter buffer;
         private TraceListener listener;
 
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
             // We don't want to deal with the default listener, which can send the
             // output to various places (Debug stream, Console.Out, ...)
             // Trace.Listeners.Remove ("Default");
 
-            buffer = new StringWriter ();
-            listener = new TextWriterTraceListener (buffer, "TestOutput");
-            Trace.Listeners.Clear ();
-            Trace.Listeners.Add (listener);
+            buffer = new StringWriter();
+            listener = new TextWriterTraceListener(buffer, "TestOutput");
+            Trace.Listeners.Clear();
+            Trace.Listeners.Add(listener);
             Trace.AutoFlush = true;
         }
 
         [TearDown]
-        public void Clear ()
+        public void Clear()
         {
             // Trace.Listeners.Add (new DefaultTraceListener ());
-            Trace.Listeners.Remove (listener);
+            Trace.Listeners.Remove(listener);
         }
 
         // Make sure that when we get the output we expect....
         [Test]
-        public void Tracing ()
+        public void Tracing()
         {
             Trace.IndentLevel = 0;
             Trace.IndentSize = 4;
 
-            string value =  
-                "Entering Main" + Environment.NewLine +
-                "Exiting Main" + Environment.NewLine;
+            string value =
+                "Entering Main" + Environment.NewLine + "Exiting Main" + Environment.NewLine;
 
-            Trace.WriteLine ("Entering Main");
-            Trace.WriteLine ("Exiting Main");
+            Trace.WriteLine("Entering Main");
+            Trace.WriteLine("Exiting Main");
 
-            Assert.AreEqual (value, buffer.ToString (), "#Tr01");
+            Assert.AreEqual(value, buffer.ToString(), "#Tr01");
         }
 
         // Make sure we get the output we expect in the presence of indenting...
         [Test]
-        public void Indent ()
+        public void Indent()
         {
             Trace.IndentLevel = 0;
             Trace.IndentSize = 4;
 
-            string value =  
-                "List of errors:" + Environment.NewLine +
-                "    Error 1: File not found" + Environment.NewLine +
-                "    Error 2: Directory not found" + Environment.NewLine +
-                "End of list of errors" + Environment.NewLine;
+            string value =
+                "List of errors:"
+                + Environment.NewLine
+                + "    Error 1: File not found"
+                + Environment.NewLine
+                + "    Error 2: Directory not found"
+                + Environment.NewLine
+                + "End of list of errors"
+                + Environment.NewLine;
 
-            Trace.WriteLine ("List of errors:");
-            Trace.Indent ();
-            Assert.AreEqual (1, Trace.IndentLevel);
-            Trace.WriteLine ("Error 1: File not found");
-            Trace.WriteLine ("Error 2: Directory not found");
-            Trace.Unindent ();
-            Assert.AreEqual (0, Trace.IndentLevel);
-            Trace.WriteLine ("End of list of errors");
+            Trace.WriteLine("List of errors:");
+            Trace.Indent();
+            Assert.AreEqual(1, Trace.IndentLevel);
+            Trace.WriteLine("Error 1: File not found");
+            Trace.WriteLine("Error 2: Directory not found");
+            Trace.Unindent();
+            Assert.AreEqual(0, Trace.IndentLevel);
+            Trace.WriteLine("End of list of errors");
 
-            Assert.AreEqual (value, buffer.ToString(), "#In01");
+            Assert.AreEqual(value, buffer.ToString(), "#In01");
         }
 
         // Make sure that TraceListener properties (IndentLevel, IndentSize) are
         // modified when the corresponding Trace properties are changed.
         [Test]
-        public void AddedTraceListenerProperties ()
+        public void AddedTraceListenerProperties()
         {
-            TraceListener t1 = new TextWriterTraceListener (Console.Out);
-            TraceListener t2 = new TextWriterTraceListener (Console.Error);
+            TraceListener t1 = new TextWriterTraceListener(Console.Out);
+            TraceListener t2 = new TextWriterTraceListener(Console.Error);
             Trace.Listeners.Add(t1);
             Trace.Listeners.Add(t2);
 
@@ -107,11 +110,12 @@ namespace MonoTests.System.Diagnostics {
             Trace.IndentSize = ExpectedSize;
             Trace.IndentLevel = ExpectedLevel;
 
-            foreach (TraceListener t in Trace.Listeners) {
+            foreach (TraceListener t in Trace.Listeners)
+            {
                 string ids = "#TATLP-S-" + t.Name;
                 string idl = "#TATLP-L-" + t.Name;
-                Assert.AreEqual (ExpectedSize, t.IndentSize, ids);
-                Assert.AreEqual (ExpectedLevel, t.IndentLevel, idl);
+                Assert.AreEqual(ExpectedSize, t.IndentSize, ids);
+                Assert.AreEqual(ExpectedLevel, t.IndentLevel, idl);
             }
 
             Trace.Listeners.Remove(t1);
@@ -130,23 +134,23 @@ namespace MonoTests.System.Diagnostics {
             Trace.IndentSize = ExpectedSize;
             TraceListener tl = new TextWriterTraceListener(Console.Out);
 
-            tl.IndentLevel = 2*ExpectedLevel;
-            tl.IndentSize = 2*ExpectedSize;
+            tl.IndentLevel = 2 * ExpectedLevel;
+            tl.IndentSize = 2 * ExpectedSize;
 
             Trace.Listeners.Add(tl);
 
             // Assertion.Assert that the listener we added has been set to the correct indent
             // level.
-            Assert.AreEqual (ExpectedLevel, tl.IndentLevel, "#LATL-L");
-            Assert.AreEqual (ExpectedSize, tl.IndentSize, "#LATL-S");
+            Assert.AreEqual(ExpectedLevel, tl.IndentLevel, "#LATL-L");
+            Assert.AreEqual(ExpectedSize, tl.IndentSize, "#LATL-S");
 
             // Assertion.Assert that all listeners in the collection have the same level.
             foreach (TraceListener t in Trace.Listeners)
             {
                 string idl = "#LATL-L:" + t.Name;
                 string ids = "#LATL-S:" + t.Name;
-                Assert.AreEqual (ExpectedLevel, t.IndentLevel, idl);
-                Assert.AreEqual (ExpectedSize, t.IndentSize, ids);
+                Assert.AreEqual(ExpectedLevel, t.IndentLevel, idl);
+                Assert.AreEqual(ExpectedSize, t.IndentSize, ids);
             }
         }
 
@@ -157,17 +161,15 @@ namespace MonoTests.System.Diagnostics {
             public int Writes;
             public int WriteLines;
 
-            public MyTraceListener ()
-                : base ("mt-test")
-            {
-            }
+            public MyTraceListener()
+                : base("mt-test") { }
 
-            public override void Write (string msg)
+            public override void Write(string msg)
             {
                 ++Writes;
             }
 
-            public override void WriteLine (string msg)
+            public override void WriteLine(string msg)
             {
                 ++WriteLines;
             }
@@ -175,60 +177,71 @@ namespace MonoTests.System.Diagnostics {
 
         class MultiThreadModify
         {
-            public MyTraceListener listener = new MyTraceListener ();
+            public MyTraceListener listener = new MyTraceListener();
 
             public const int MaxIterations = 10000;
 
             public String Exception = null;
 
-            public MultiThreadModify ()
+            public MultiThreadModify()
             {
-                Trace.Listeners.Add (listener);
+                Trace.Listeners.Add(listener);
             }
 
-            public void Write ()
+            public void Write()
             {
-                try {
+                try
+                {
                     for (int i = 0; i < MaxIterations; ++i)
-                        Trace.WriteLine ("message " + i + "... ");
+                        Trace.WriteLine("message " + i + "... ");
                 }
-                catch (Exception e) {
-                    Exception = string.Format (
-                            "#MTMW: Exception emitted from Trace.WriteLine: {0}", e);
+                catch (Exception e)
+                {
+                    Exception = string.Format(
+                        "#MTMW: Exception emitted from Trace.WriteLine: {0}",
+                        e
+                    );
                 }
             }
 
-            public void Remove ()
+            public void Remove()
             {
-                try {
-                    Trace.Listeners.Remove (listener);
+                try
+                {
+                    Trace.Listeners.Remove(listener);
                 }
-                catch (Exception e) {
-                    Exception = string.Format (
-                            "#MTMR: Exception emitted from Trace.Listeners.Remove: {0}", e);
+                catch (Exception e)
+                {
+                    Exception = string.Format(
+                        "#MTMR: Exception emitted from Trace.Listeners.Remove: {0}",
+                        e
+                    );
                 }
             }
         }
 
         [Test]
-        [Category ("NotWorking")]
+        [Category("NotWorking")]
         // Is this even valid !?!?!?!
-        public void TestMultiThreadModify ()
+        public void TestMultiThreadModify()
         {
-            MultiThreadModify m = new MultiThreadModify ();
+            MultiThreadModify m = new MultiThreadModify();
 
-            Thread t1 = new Thread (new ThreadStart (m.Write));
-            Thread t2 = new Thread (new ThreadStart (m.Remove));
+            Thread t1 = new Thread(new ThreadStart(m.Write));
+            Thread t2 = new Thread(new ThreadStart(m.Remove));
 
-            t1.Start ();
-            t2.Start ();
+            t1.Start();
+            t2.Start();
 
-            t1.Join ();
-            t2.Join ();
+            t1.Join();
+            t2.Join();
 
-            Assert.IsTrue (m.Exception == null, m.Exception);
-            Assert.AreEqual (MultiThreadModify.MaxIterations, m.listener.WriteLines,
-                    "#tmtm: listener was removed before iterations were completed");
+            Assert.IsTrue(m.Exception == null, m.Exception);
+            Assert.AreEqual(
+                MultiThreadModify.MaxIterations,
+                m.listener.WriteLines,
+                "#tmtm: listener was removed before iterations were completed"
+            );
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,37 +54,56 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public class BehaviorsSection
-         : ConfigurationSection
+    public class BehaviorsSection : ConfigurationSection
     {
         ConfigurationPropertyCollection _properties;
-        
+
         // Properties
 
-        [ConfigurationProperty ("endpointBehaviors",
-             Options = ConfigurationPropertyOptions.None)]
-        public EndpointBehaviorElementCollection EndpointBehaviors {
-            get { return (EndpointBehaviorElementCollection) base ["endpointBehaviors"]; }
+        [ConfigurationProperty("endpointBehaviors", Options = ConfigurationPropertyOptions.None)]
+        public EndpointBehaviorElementCollection EndpointBehaviors
+        {
+            get { return (EndpointBehaviorElementCollection)base["endpointBehaviors"]; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = new ConfigurationPropertyCollection ();
-                    _properties.Add (new ConfigurationProperty ("endpointBehaviors", typeof (EndpointBehaviorElementCollection), null, null/* FIXME: get converter for EndpointBehaviorElementCollection*/, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("serviceBehaviors", typeof (ServiceBehaviorElementCollection), null, null/* FIXME: get converter for ServiceBehaviorElementCollection*/, null, ConfigurationPropertyOptions.None));
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
+                    _properties = new ConfigurationPropertyCollection();
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "endpointBehaviors",
+                            typeof(EndpointBehaviorElementCollection),
+                            null,
+                            null /* FIXME: get converter for EndpointBehaviorElementCollection*/
+                            ,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "serviceBehaviors",
+                            typeof(ServiceBehaviorElementCollection),
+                            null,
+                            null /* FIXME: get converter for ServiceBehaviorElementCollection*/
+                            ,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
                 }
                 return _properties;
             }
         }
 
-        [ConfigurationProperty ("serviceBehaviors",
-             Options = ConfigurationPropertyOptions.None)]
-        public ServiceBehaviorElementCollection ServiceBehaviors {
-            get { return (ServiceBehaviorElementCollection) base ["serviceBehaviors"]; }
+        [ConfigurationProperty("serviceBehaviors", Options = ConfigurationPropertyOptions.None)]
+        public ServiceBehaviorElementCollection ServiceBehaviors
+        {
+            get { return (ServiceBehaviorElementCollection)base["serviceBehaviors"]; }
         }
-
-
     }
-
 }

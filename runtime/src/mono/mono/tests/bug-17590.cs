@@ -8,7 +8,7 @@ using System;
 
 class X
 {
-    public static void Test (Action<int> allocator)
+    public static void Test(Action<int> allocator)
     {
         for (int i = 0; i < 1000; ++i)
         {
@@ -16,7 +16,7 @@ class X
             try
             {
                 //Console.WriteLine ("allocating with " + i);
-                allocator (i);
+                allocator(i);
             }
             catch (OutOfMemoryException)
             {
@@ -32,44 +32,42 @@ class X
         }
     }
 
-    public static void Ignore<T> (T x)
-    {
-    }
+    public static void Ignore<T>(T x) { }
 
-    public static void ProbeArray<T> (T[] a)
+    public static void ProbeArray<T>(T[] a)
     {
         if (a == null)
             return;
 
         for (int i = 0; i < 1000; ++i)
         {
-            a [i] = default (T);
-            a [a.Length - i - 1] = default (T);
+            a[i] = default(T);
+            a[a.Length - i - 1] = default(T);
         }
     }
 
-    public static void ProbeString (string s)
+    public static void ProbeString(string s)
     {
         for (int i = 0; i < 1000; ++i)
         {
-            if (s [s.Length - i - 1] != ' ')
-                Environment.Exit (1);
+            if (s[s.Length - i - 1] != ' ')
+                Environment.Exit(1);
         }
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        Console.WriteLine ("byte arrays");
-        Test (i => ProbeArray (new byte [int.MaxValue - i]));
-        Test (i => ProbeArray (new byte [int.MaxValue - i * 100]));
+        Console.WriteLine("byte arrays");
+        Test(i => ProbeArray(new byte[int.MaxValue - i]));
+        Test(i => ProbeArray(new byte[int.MaxValue - i * 100]));
 
-        Console.WriteLine ("int arrays");
-        Test (i => ProbeArray (new int [int.MaxValue / 4 - i]));
-        Test (i => ProbeArray (new int [int.MaxValue / 4 - i * 100]));
+        Console.WriteLine("int arrays");
+        Test(i => ProbeArray(new int[int.MaxValue / 4 - i]));
+        Test(i => ProbeArray(new int[int.MaxValue / 4 - i * 100]));
 
-        Console.WriteLine ("large int arrays");
-        Test (i => ProbeArray (new int [int.MaxValue - i]));
-        Test (i => ProbeArray (new int [int.MaxValue - i * 100]));
+        Console.WriteLine("large int arrays");
+        Test(i => ProbeArray(new int[int.MaxValue - i]));
+        Test(i => ProbeArray(new int[int.MaxValue - i * 100]));
 
         // FIXME: This commit 4gb of memory
         /*

@@ -6,41 +6,48 @@ class X
 {
     static bool unobserved;
 
-    public static int Main ()
+    public static int Main()
     {
         TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
-        try {
-            Test ().Wait ();
+        try
+        {
+            Test().Wait();
 
-            GC.Collect ();
-            GC.WaitForPendingFinalizers ();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             if (unobserved)
                 return 1;
 
             return 0;
-        } finally {
+        }
+        finally
+        {
             TaskScheduler.UnobservedTaskException -= TaskScheduler_UnobservedTaskException;
         }
     }
 
-    static void TaskScheduler_UnobservedTaskException (object sender, UnobservedTaskExceptionEventArgs e)
+    static void TaskScheduler_UnobservedTaskException(
+        object sender,
+        UnobservedTaskExceptionEventArgs e
+    )
     {
         unobserved = true;
-        Console.WriteLine ("unobserved");
+        Console.WriteLine("unobserved");
     }
 
-    static async Task Test ()
+    static async Task Test()
     {
-        try {
-            await ThrowAsync ();
-        } catch {            
+        try
+        {
+            await ThrowAsync();
         }
+        catch { }
     }
 
     static async Task ThrowAsync()
     {
-        await Task.Delay (5);
+        await Task.Delay(5);
 
-        throw new Exception ("boom");
+        throw new Exception("boom");
     }
 }

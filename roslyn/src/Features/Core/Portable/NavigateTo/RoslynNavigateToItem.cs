@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             NavigateToMatchKind matchKind,
             bool isCaseSensitive,
             ImmutableArray<TextSpan> nameMatchSpans,
-            ImmutableArray<PatternMatch> matches)
+            ImmutableArray<PatternMatch> matches
+        )
         {
             IsStale = isStale;
             DocumentId = documentId;
@@ -79,7 +80,10 @@ namespace Microsoft.CodeAnalysis.NavigateTo
         }
 
         public async Task<INavigateToSearchResult?> TryCreateSearchResultAsync(
-            Solution solution, Document? activeDocument, CancellationToken cancellationToken)
+            Solution solution,
+            Document? activeDocument,
+            CancellationToken cancellationToken
+        )
         {
             if (IsStale)
             {
@@ -92,8 +96,13 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             }
             else
             {
-                var document = await solution.GetRequiredDocumentAsync(
-                    DocumentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
+                var document = await solution
+                    .GetRequiredDocumentAsync(
+                        DocumentId,
+                        includeSourceGenerated: true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return new NavigateToSearchResult(this, document, activeDocument);
             }
         }
@@ -120,7 +129,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             public NavigateToSearchResult(
                 RoslynNavigateToItem item,
                 Document itemDocument,
-                Document? activeDocument)
+                Document? activeDocument
+            )
             {
                 _item = item;
                 _itemDocument = itemDocument;
@@ -135,10 +145,27 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 var combinedProjectName = ComputeCombinedProjectName();
                 return (_item.DeclaredSymbolInfo.IsPartial, IsNonNestedNamedType()) switch
                 {
-                    (true, true) => string.Format(FeaturesResources._0_dash_1, _itemDocument.Name, combinedProjectName),
-                    (true, false) => string.Format(FeaturesResources.in_0_1_2, _item.DeclaredSymbolInfo.ContainerDisplayName, _itemDocument.Name, combinedProjectName),
-                    (false, true) => string.Format(FeaturesResources.project_0, combinedProjectName),
-                    (false, false) => string.Format(FeaturesResources.in_0_project_1, _item.DeclaredSymbolInfo.ContainerDisplayName, combinedProjectName),
+                    (true, true)
+                        => string.Format(
+                            FeaturesResources._0_dash_1,
+                            _itemDocument.Name,
+                            combinedProjectName
+                        ),
+                    (true, false)
+                        => string.Format(
+                            FeaturesResources.in_0_1_2,
+                            _item.DeclaredSymbolInfo.ContainerDisplayName,
+                            _itemDocument.Name,
+                            combinedProjectName
+                        ),
+                    (false, true)
+                        => string.Format(FeaturesResources.project_0, combinedProjectName),
+                    (false, false)
+                        => string.Format(
+                            FeaturesResources.in_0_project_1,
+                            _item.DeclaredSymbolInfo.ContainerDisplayName,
+                            combinedProjectName
+                        ),
                 };
             }
 
@@ -164,8 +191,12 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                         // with then we can't merge these.
                         foreach (var additionalProjectId in _item.AdditionalMatchingProjects)
                         {
-                            var additionalProject = solution.GetRequiredProject(additionalProjectId);
-                            var (projectName, projectFlavor) = additionalProject.State.NameAndFlavor;
+                            var additionalProject = solution.GetRequiredProject(
+                                additionalProjectId
+                            );
+                            var (projectName, projectFlavor) = additionalProject
+                                .State
+                                .NameAndFlavor;
                             if (projectName == firstProjectName)
                                 flavors.Add(projectFlavor!);
                         }
@@ -183,8 +214,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
 
             string INavigateToSearchResult.AdditionalInformation => _additionalInformation;
 
-            private bool IsNonNestedNamedType()
-                => !_item.DeclaredSymbolInfo.IsNestedType && IsNamedType();
+            private bool IsNonNestedNamedType() =>
+                !_item.DeclaredSymbolInfo.IsNestedType && IsNamedType();
 
             private bool IsNamedType()
             {
@@ -229,7 +260,7 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 parts.Add(_item.DeclaredSymbolInfo.Name);
 
                 // For partial types, we break up the file name into pieces.  i.e. If we have
-                // Outer.cs and Outer.Inner.cs  then we add "Outer" and "Outer Inner" to 
+                // Outer.cs and Outer.Inner.cs  then we add "Outer" and "Outer Inner" to
                 // the secondary sort string.  That way "Outer.cs" will be weighted above
                 // "Outer.Inner.cs"
                 var fileName = Path.GetFileNameWithoutExtension(_itemDocument.FilePath ?? "");
@@ -289,10 +320,11 @@ namespace Microsoft.CodeAnalysis.NavigateTo
 
             #region INavigableItem
 
-            Glyph INavigableItem.Glyph => GetGlyph(_item.DeclaredSymbolInfo.Kind, _item.DeclaredSymbolInfo.Accessibility);
+            Glyph INavigableItem.Glyph =>
+                GetGlyph(_item.DeclaredSymbolInfo.Kind, _item.DeclaredSymbolInfo.Accessibility);
 
-            private static Glyph GetPublicGlyph(DeclaredSymbolInfoKind kind)
-                => kind switch
+            private static Glyph GetPublicGlyph(DeclaredSymbolInfoKind kind) =>
+                kind switch
                 {
                     DeclaredSymbolInfoKind.Class => Glyph.ClassPublic,
                     DeclaredSymbolInfoKind.Constant => Glyph.ConstantPublic,
@@ -341,9 +373,13 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 return rawGlyph;
             }
 
-            ImmutableArray<TaggedText> INavigableItem.DisplayTaggedParts
-                => ImmutableArray.Create(new TaggedText(
-                    TextTags.Text, _item.DeclaredSymbolInfo.Name + _item.DeclaredSymbolInfo.NameSuffix));
+            ImmutableArray<TaggedText> INavigableItem.DisplayTaggedParts =>
+                ImmutableArray.Create(
+                    new TaggedText(
+                        TextTags.Text,
+                        _item.DeclaredSymbolInfo.Name + _item.DeclaredSymbolInfo.NameSuffix
+                    )
+                );
 
             bool INavigableItem.DisplayFileLocation => false;
 
@@ -359,7 +395,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
 
             bool INavigableItem.IsStale => _item.IsStale;
 
-            ImmutableArray<INavigableItem> INavigableItem.ChildItems => ImmutableArray<INavigableItem>.Empty;
+            ImmutableArray<INavigableItem> INavigableItem.ChildItems =>
+                ImmutableArray<INavigableItem>.Empty;
 
             #endregion
         }

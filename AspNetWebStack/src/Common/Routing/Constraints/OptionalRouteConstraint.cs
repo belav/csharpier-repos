@@ -52,9 +52,21 @@ namespace System.Web.Mvc.Routing.Constraints
 
         /// <inheritdoc />
 #if ASPNETWEBAPI
-        public bool Match(HttpRequestMessage request, IHttpRoute route, string parameterName, IDictionary<string, object> values, HttpRouteDirection routeDirection)
+        public bool Match(
+            HttpRequestMessage request,
+            IHttpRoute route,
+            string parameterName,
+            IDictionary<string, object> values,
+            HttpRouteDirection routeDirection
+        )
 #else
-        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+        public bool Match(
+            HttpContextBase httpContext,
+            Route route,
+            string parameterName,
+            RouteValueDictionary values,
+            RouteDirection routeDirection
+        )
 #endif
         {
             if (route == null)
@@ -79,7 +91,10 @@ namespace System.Web.Mvc.Routing.Constraints
 #else
             var optionalParameter = UrlParameter.Optional;
 #endif
-            if (route.Defaults.TryGetValue(parameterName, out defaultValue) && defaultValue == optionalParameter)
+            if (
+                route.Defaults.TryGetValue(parameterName, out defaultValue)
+                && defaultValue == optionalParameter
+            )
             {
                 object value;
                 if (values.TryGetValue(parameterName, out value) && value == optionalParameter)

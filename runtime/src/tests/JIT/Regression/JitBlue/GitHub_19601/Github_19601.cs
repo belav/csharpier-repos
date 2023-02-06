@@ -4,8 +4,9 @@
 public class GitHub_19601
 {
     static ushort s_2;
-    static short[] s_5 = new short[]{1};
+    static short[] s_5 = new short[] { 1 };
     static ulong s_8;
+
     public static int Main()
     {
         var vr2 = s_5[0];
@@ -21,4 +22,3 @@ public class GitHub_19601
         s_8 <<= (0 & s_2) + 186;
     }
 }
-

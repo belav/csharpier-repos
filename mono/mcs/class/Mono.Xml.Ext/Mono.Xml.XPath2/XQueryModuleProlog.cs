@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,17 +43,20 @@ namespace Mono.Xml.XPath2
         Prolog prolog;
         IXmlNamespaceResolver nsResolver;
 
-        public string Version {
+        public string Version
+        {
             get { return version; }
             set { version = value; }
         }
 
-        public Prolog Prolog {
+        public Prolog Prolog
+        {
             get { return prolog; }
             set { prolog = value; }
         }
 
-        public IXmlNamespaceResolver NSResolver {
+        public IXmlNamespaceResolver NSResolver
+        {
             get { return nsResolver; }
             set { nsResolver = value; }
         }
@@ -63,7 +66,8 @@ namespace Mono.Xml.XPath2
     {
         ExprSequence queryBody;
 
-        public ExprSequence QueryBody {
+        public ExprSequence QueryBody
+        {
             get { return queryBody; }
             set { queryBody = value; }
         }
@@ -73,7 +77,8 @@ namespace Mono.Xml.XPath2
     {
         ModuleDecl moduleDecl;
 
-        public ModuleDecl ModuleDecl {
+        public ModuleDecl ModuleDecl
+        {
             get { return moduleDecl; }
             set { moduleDecl = value; }
         }
@@ -83,13 +88,15 @@ namespace Mono.Xml.XPath2
     {
         string prefix;
         string ns;
-        
-        public string Prefix {
+
+        public string Prefix
+        {
             get { return prefix; }
             set { prefix = value; }
         }
 
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }
@@ -97,13 +104,13 @@ namespace Mono.Xml.XPath2
 
     internal class Prolog
     {
-        public Prolog ()
+        public Prolog()
         {
-            namespaceDecls = new StringDictionary ();
-            schemaImports = new SchemaImportCollection ();
-            moduleImports = new ModuleImportCollection ();
-            variables = new XQueryVariableTable ();
-            functions = new FunctionCollection ();
+            namespaceDecls = new StringDictionary();
+            schemaImports = new SchemaImportCollection();
+            moduleImports = new ModuleImportCollection();
+            variables = new XQueryVariableTable();
+            functions = new FunctionCollection();
         }
 
         string version;
@@ -121,86 +128,108 @@ namespace Mono.Xml.XPath2
         XmlSchemaContentProcessing validationType;
         FunctionCollection functions;
 
-        public string Version {
+        public string Version
+        {
             get { return version; }
             set { version = value; }
         }
 
-        public StringDictionary NamespaceDecls {
+        public StringDictionary NamespaceDecls
+        {
             get { return namespaceDecls; }
         }
 
-        public XmlSpace XmlSpace {
+        public XmlSpace XmlSpace
+        {
             get { return xmlSpaceDecl; }
             set { xmlSpaceDecl = value; }
         }
 
-        public XmlSpace Constructor {
+        public XmlSpace Constructor
+        {
             get { return constructorDecl; }
             set { constructorDecl = value; }
         }
 
-        public bool DefaultOrdered {
+        public bool DefaultOrdered
+        {
             get { return defaultOrdered; }
             set { defaultOrdered = value; }
         }
 
-        public string DefaultElementNamespace {
+        public string DefaultElementNamespace
+        {
             get { return defaultElementNamespace; }
             set { defaultElementNamespace = value; }
         }
 
-        public string DefaultFunctionNamespace {
+        public string DefaultFunctionNamespace
+        {
             get { return defaultFunctionNamespace; }
             set { defaultFunctionNamespace = value; }
         }
 
-        public string DefaultCollation {
+        public string DefaultCollation
+        {
             get { return defaultCollation; }
             set { defaultCollation = value; }
         }
 
-        public string BaseUri {
+        public string BaseUri
+        {
             get { return baseUri; }
             set { baseUri = value; }
         }
 
-        public SchemaImportCollection SchemaImports {
+        public SchemaImportCollection SchemaImports
+        {
             get { return schemaImports; }
         }
 
-        public ModuleImportCollection ModuleImports {
+        public ModuleImportCollection ModuleImports
+        {
             get { return moduleImports; }
         }
 
-        public XQueryVariableTable Variables {
+        public XQueryVariableTable Variables
+        {
             get { return variables; }
         }
 
-        public XmlSchemaContentProcessing ValidationType {
+        public XmlSchemaContentProcessing ValidationType
+        {
             get { return validationType; }
             set { validationType = value; }
         }
 
-        public FunctionCollection Functions {
+        public FunctionCollection Functions
+        {
             get { return functions; }
         }
 
-        public void Add (object item)
+        public void Add(object item)
         {
             if (item is bool)
-                DefaultOrdered = (bool) item;
-            else if (item is XmlQualifiedName) {
-                XmlQualifiedName q = (XmlQualifiedName) item;
-                NamespaceDecls.Add (q.Name, q.Namespace);
-            } else if (item is XmlSpaceDecl) {
-                XmlSpace = ((XmlSpaceDecl) item).Value;
-            } else if (item is ConstructionDecl) {
-                Constructor = ((ConstructionDecl) item).Value;
-            } else if (item is SimplePrologContent) {
-                SimplePrologContent c = (SimplePrologContent) item;
+                DefaultOrdered = (bool)item;
+            else if (item is XmlQualifiedName)
+            {
+                XmlQualifiedName q = (XmlQualifiedName)item;
+                NamespaceDecls.Add(q.Name, q.Namespace);
+            }
+            else if (item is XmlSpaceDecl)
+            {
+                XmlSpace = ((XmlSpaceDecl)item).Value;
+            }
+            else if (item is ConstructionDecl)
+            {
+                Constructor = ((ConstructionDecl)item).Value;
+            }
+            else if (item is SimplePrologContent)
+            {
+                SimplePrologContent c = (SimplePrologContent)item;
                 string s = c.LiteralValue;
-                switch (c.Type) {
+                switch (c.Type)
+                {
                     case PrologContentType.DefaultElementNamespace:
                         DefaultElementNamespace = s;
                         break;
@@ -214,21 +243,34 @@ namespace Mono.Xml.XPath2
                         BaseUri = s;
                         break;
                     default:
-                        throw new XmlQueryCompileException ("Invalid XQuery prolog content was found.");
+                        throw new XmlQueryCompileException(
+                            "Invalid XQuery prolog content was found."
+                        );
                 }
-            } else if (item is SchemaImport) {
-                SchemaImports.Add (item as SchemaImport);
-            } else if (item is ModuleImport) {
-                ModuleImports.Add (item as ModuleImport);
-            } else if (item is XQueryVariable) {
-                XQueryVariable var = item  as XQueryVariable;
-                Variables.Add (var);
-            } else if (item is XmlSchemaContentProcessing) {
-                ValidationType = (XmlSchemaContentProcessing) item;
-            } else if (item is FunctionDeclaration) {
-                Functions.Add (item as FunctionDeclaration);
-            } else
-                throw new XmlQueryCompileException ("Invalid XQuery prolog content item was found.");
+            }
+            else if (item is SchemaImport)
+            {
+                SchemaImports.Add(item as SchemaImport);
+            }
+            else if (item is ModuleImport)
+            {
+                ModuleImports.Add(item as ModuleImport);
+            }
+            else if (item is XQueryVariable)
+            {
+                XQueryVariable var = item as XQueryVariable;
+                Variables.Add(var);
+            }
+            else if (item is XmlSchemaContentProcessing)
+            {
+                ValidationType = (XmlSchemaContentProcessing)item;
+            }
+            else if (item is FunctionDeclaration)
+            {
+                Functions.Add(item as FunctionDeclaration);
+            }
+            else
+                throw new XmlQueryCompileException("Invalid XQuery prolog content item was found.");
         }
     }
 
@@ -236,7 +278,7 @@ namespace Mono.Xml.XPath2
     {
         public XmlSpace Value;
 
-        public XmlSpaceDecl (XmlSpace value)
+        public XmlSpaceDecl(XmlSpace value)
         {
             Value = value;
         }
@@ -246,7 +288,7 @@ namespace Mono.Xml.XPath2
     {
         public XmlSpace Value;
 
-        public ConstructionDecl (XmlSpace value)
+        public ConstructionDecl(XmlSpace value)
         {
             Value = value;
         }
@@ -254,21 +296,22 @@ namespace Mono.Xml.XPath2
 
     public class ModuleImportCollection : CollectionBase
     {
-        public void Add (ModuleImport import)
+        public void Add(ModuleImport import)
         {
-            List.Add (import);
+            List.Add(import);
         }
     }
 
     public class SchemaImportCollection : CollectionBase
     {
-        public void Add (SchemaImport import)
+        public void Add(SchemaImport import)
         {
-            List.Add (import);
+            List.Add(import);
         }
     }
 
-    public enum PrologContentType {
+    public enum PrologContentType
+    {
         DefaultElementNamespace,
         DefaultFunctionNamespace,
         DefaultCollation,
@@ -277,7 +320,7 @@ namespace Mono.Xml.XPath2
 
     public class SimplePrologContent
     {
-        public SimplePrologContent (PrologContentType type, string literalValue)
+        public SimplePrologContent(PrologContentType type, string literalValue)
         {
             this.type = type;
             this.literalValue = literalValue;
@@ -286,12 +329,14 @@ namespace Mono.Xml.XPath2
         PrologContentType type;
         string literalValue;
 
-        public PrologContentType Type {
+        public PrologContentType Type
+        {
             get { return type; }
             set { type = value; }
         }
 
-        public string LiteralValue {
+        public string LiteralValue
+        {
             get { return literalValue; }
             set { literalValue = value; }
         }
@@ -299,41 +344,49 @@ namespace Mono.Xml.XPath2
 
     public abstract class AbstractImport
     {
-        public AbstractImport (string prefix, string ns, ICollection locations)
+        public AbstractImport(string prefix, string ns, ICollection locations)
         {
             this.prefix = prefix;
             this.ns = ns;
             this.locations = locations;
             if (locations == null)
-                this.locations = new ArrayList (); // empty list
+                this.locations = new ArrayList(); // empty list
         }
 
-        string prefix, ns;
+        string prefix,
+            ns;
         ICollection locations;
 
-        public string Prefix {
+        public string Prefix
+        {
             get { return prefix; }
             set { prefix = value; }
         }
 
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }
 
-        public ICollection Locations {
+        public ICollection Locations
+        {
             get { return locations; }
-            set { locations = value != null ? value : new ArrayList (); }
+            set { locations = value != null ? value : new ArrayList(); }
         }
     }
 
     public class SchemaImport : AbstractImport
     {
-        public SchemaImport (string prefix, string ns, ICollection schemaLocations)
-            : base (prefix == "default element namespace" ? String.Empty : prefix, ns, schemaLocations)
+        public SchemaImport(string prefix, string ns, ICollection schemaLocations)
+            : base(
+                prefix == "default element namespace" ? String.Empty : prefix,
+                ns,
+                schemaLocations
+            )
         {
             // Prefix might 1) String.Empty for non-specified prefix,
-            // 2) "default element namespace" that is as is 
+            // 2) "default element namespace" that is as is
             // specified in xquery.
             if (prefix == "default element namespace")
                 useDefaultElementNamespace = true;
@@ -341,7 +394,8 @@ namespace Mono.Xml.XPath2
 
         bool useDefaultElementNamespace;
 
-        public bool UseDefaultElementNamespace {
+        public bool UseDefaultElementNamespace
+        {
             get { return useDefaultElementNamespace; }
             set { useDefaultElementNamespace = value; }
         }
@@ -349,35 +403,36 @@ namespace Mono.Xml.XPath2
 
     public class ModuleImport : AbstractImport
     {
-        public ModuleImport (string prefix, string ns, ICollection moduleLocations)
-            : base (prefix, ns, moduleLocations)
-        {
-        }
+        public ModuleImport(string prefix, string ns, ICollection moduleLocations)
+            : base(prefix, ns, moduleLocations) { }
     }
 
     public class XQueryVariableTable : DictionaryBase
     {
-        public void Add (XQueryVariable decl)
+        public void Add(XQueryVariable decl)
         {
-            Dictionary.Add (decl.Name, decl);
+            Dictionary.Add(decl.Name, decl);
         }
 
-        public ICollection Keys {
+        public ICollection Keys
+        {
             get { return Dictionary.Keys; }
         }
 
-        public ICollection Values {
+        public ICollection Values
+        {
             get { return Dictionary.Values; }
         }
 
-        public XQueryVariable this [XmlQualifiedName name] {
-            get { return Dictionary [name] as XQueryVariable; }
+        public XQueryVariable this[XmlQualifiedName name]
+        {
+            get { return Dictionary[name] as XQueryVariable; }
         }
     }
 
     public class XQueryVariable
     {
-        public XQueryVariable (XmlQualifiedName name, SequenceType type, ExprSequence varBody)
+        public XQueryVariable(XmlQualifiedName name, SequenceType type, ExprSequence varBody)
         {
             this.name = name;
             this.type = type;
@@ -388,49 +443,58 @@ namespace Mono.Xml.XPath2
         SequenceType type;
         ExprSequence varBody;
 
-        public XmlQualifiedName Name {
+        public XmlQualifiedName Name
+        {
             get { return name; }
         }
 
-        public SequenceType VariableType {
+        public SequenceType VariableType
+        {
             get { return type; }
         }
 
-        public bool External {
+        public bool External
+        {
             get { return varBody == null; }
         }
 
-        public ExprSequence VariableBody {
+        public ExprSequence VariableBody
+        {
             get { return varBody; }
         }
     }
 
     internal class FunctionCollection : DictionaryBase
     {
-        public void Add (FunctionDeclaration decl)
+        public void Add(FunctionDeclaration decl)
         {
-            Dictionary.Add (decl.Name, decl);
+            Dictionary.Add(decl.Name, decl);
         }
 
-        public ICollection Keys {
+        public ICollection Keys
+        {
             get { return Dictionary.Keys; }
         }
 
-        public ICollection Values {
+        public ICollection Values
+        {
             get { return Dictionary.Values; }
         }
 
-        public FunctionDeclaration this [XmlQualifiedName name] {
-            get { return Dictionary [name] as FunctionDeclaration; }
+        public FunctionDeclaration this[XmlQualifiedName name]
+        {
+            get { return Dictionary[name] as FunctionDeclaration; }
         }
     }
 
     internal class FunctionDeclaration
     {
-        public FunctionDeclaration (XmlQualifiedName name,
+        public FunctionDeclaration(
+            XmlQualifiedName name,
             XQueryFunctionArgumentList parameters,
             SequenceType type,
-            EnclosedExpr expr)
+            EnclosedExpr expr
+        )
         {
             this.name = name;
             this.parameters = parameters;
@@ -443,47 +507,53 @@ namespace Mono.Xml.XPath2
         XQueryFunctionArgumentList parameters;
         EnclosedExpr funcBody;
 
-        public XmlQualifiedName Name {
+        public XmlQualifiedName Name
+        {
             get { return name; }
         }
 
-        public SequenceType ReturnType {
+        public SequenceType ReturnType
+        {
             get { return returnType; }
         }
 
-        public bool External {
+        public bool External
+        {
             get { return funcBody == null; }
         }
 
-        public XQueryFunctionArgumentList Parameters {
+        public XQueryFunctionArgumentList Parameters
+        {
             get { return parameters; }
         }
 
-        public EnclosedExpr FunctionBody {
+        public EnclosedExpr FunctionBody
+        {
             get { return funcBody; }
         }
     }
 
     public class XQueryFunctionArgumentList : CollectionBase
     {
-        public void Add (XQueryFunctionArgument p)
+        public void Add(XQueryFunctionArgument p)
         {
-            List.Add (p);
+            List.Add(p);
         }
 
-        public void Insert (int pos, XQueryFunctionArgument p)
+        public void Insert(int pos, XQueryFunctionArgument p)
         {
-            List.Insert (pos, p);
+            List.Insert(pos, p);
         }
 
-        public XQueryFunctionArgument this [int i] {
-            get { return (XQueryFunctionArgument) List [i]; }
+        public XQueryFunctionArgument this[int i]
+        {
+            get { return (XQueryFunctionArgument)List[i]; }
         }
 
-        public XQueryFunctionArgument [] ToArray ()
+        public XQueryFunctionArgument[] ToArray()
         {
-            XQueryFunctionArgument [] arr = new XQueryFunctionArgument [List.Count];
-            List.CopyTo (arr, 0);
+            XQueryFunctionArgument[] arr = new XQueryFunctionArgument[List.Count];
+            List.CopyTo(arr, 0);
             return arr;
         }
     }
@@ -493,35 +563,32 @@ namespace Mono.Xml.XPath2
         XmlQualifiedName name;
         string text;
 
-        protected PragmaMUExtensionBase (XmlQualifiedName name, string text)
+        protected PragmaMUExtensionBase(XmlQualifiedName name, string text)
         {
             this.name = name;
             this.text = text;
         }
 
-        public XmlQualifiedName Name {
+        public XmlQualifiedName Name
+        {
             get { return name; }
         }
 
-        public string Text {
+        public string Text
+        {
             get { return text; }
         }
     }
 
     public class Pragma : PragmaMUExtensionBase
     {
-        public Pragma (XmlQualifiedName name, string text)
-            : base (name, text)
-        {
-        }
+        public Pragma(XmlQualifiedName name, string text)
+            : base(name, text) { }
     }
 
     public class MUExtension : PragmaMUExtensionBase
     {
-        public MUExtension (XmlQualifiedName name, string text)
-            : base (name, text)
-        {
-        }
+        public MUExtension(XmlQualifiedName name, string text)
+            : base(name, text) { }
     }
 }
-

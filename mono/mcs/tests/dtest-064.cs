@@ -2,22 +2,19 @@ using System;
 
 public class A
 {
-    public A (Action action)
-    {
-    }
+    public A(Action action) { }
 }
 
 public class B : A
 {
-    public B () 
-        : base (() => {
+    public B()
+        : base(() =>
+        {
             dynamic d = 1;
-            Test (d);
-        })
-    {
-    }
+            Test(d);
+        }) { }
 
-    static decimal Test (dynamic arg)
+    static decimal Test(dynamic arg)
     {
         return 3m;
     }
@@ -25,12 +22,13 @@ public class B : A
 
 public class B2
 {
-    public Action a = () => {
-            dynamic d = 1;
-            Test (d);
-        };
+    public Action a = () =>
+    {
+        dynamic d = 1;
+        Test(d);
+    };
 
-    static decimal Test (dynamic arg)
+    static decimal Test(dynamic arg)
     {
         return 3m;
     }
@@ -38,9 +36,9 @@ public class B2
 
 class M
 {
-    static void Main ()
+    static void Main()
     {
-        new B ();
-        new B2 ();
-    }    
+        new B();
+        new B2();
+    }
 }

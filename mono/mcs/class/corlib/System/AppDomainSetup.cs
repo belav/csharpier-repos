@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,9 +46,9 @@ using System.Security.Policy;
 namespace System
 {
     [Serializable]
-    [ClassInterface (ClassInterfaceType.None)]
-    [ComVisible (true)]
-    [StructLayout (LayoutKind.Sequential)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [ComVisible(true)]
+    [StructLayout(LayoutKind.Sequential)]
 #if MOBILE
     public sealed class AppDomainSetup
 #else
@@ -82,25 +82,24 @@ namespace System
 #else
         private ActivationArguments _activationArguments;
         AppDomainInitializer domain_initializer;
+
         [NonSerialized]
         ApplicationTrust application_trust;
 #endif
-        string [] domain_initializer_args;
+        string[] domain_initializer_args;
 
         bool disallow_appbase_probe;
-        byte [] configuration_bytes;
+        byte[] configuration_bytes;
 
-        byte [] serialized_non_primitives;
+        byte[] serialized_non_primitives;
 
         string manager_assembly;
         string manager_type;
-        string [] partial_visible_assemblies;
+        string[] partial_visible_assemblies;
 
-        public AppDomainSetup ()
-        {
-        }
+        public AppDomainSetup() { }
 
-        internal AppDomainSetup (AppDomainSetup setup)
+        internal AppDomainSetup(AppDomainSetup setup)
         {
             application_base = setup.application_base;
             application_name = setup.application_name;
@@ -128,134 +127,143 @@ namespace System
             partial_visible_assemblies = setup.partial_visible_assemblies;
         }
 
-        public AppDomainSetup (ActivationArguments activationArguments)
+        public AppDomainSetup(ActivationArguments activationArguments)
         {
             _activationArguments = activationArguments;
         }
 
-        public AppDomainSetup (ActivationContext activationContext)
+        public AppDomainSetup(ActivationContext activationContext)
         {
-            _activationArguments = new ActivationArguments (activationContext);
+            _activationArguments = new ActivationArguments(activationContext);
         }
 
-        static string GetAppBase (string appBase)
+        static string GetAppBase(string appBase)
         {
             if (appBase == null)
                 return null;
 
-            if (appBase.StartsWith ("file://", StringComparison.OrdinalIgnoreCase)) {
-                appBase = new Mono.Security.Uri (appBase).LocalPath;
+            if (appBase.StartsWith("file://", StringComparison.OrdinalIgnoreCase))
+            {
+                appBase = new Mono.Security.Uri(appBase).LocalPath;
                 if (Path.DirectorySeparatorChar != '/')
-                    appBase = appBase.Replace ('/', Path.DirectorySeparatorChar);
+                    appBase = appBase.Replace('/', Path.DirectorySeparatorChar);
             }
-            appBase = Path.GetFullPath (appBase);
+            appBase = Path.GetFullPath(appBase);
 
-            if (Path.DirectorySeparatorChar != '/') {
-                bool isExtendedPath = appBase.StartsWith (@"\\?\", StringComparison.Ordinal);
-                if (appBase.IndexOf (':', isExtendedPath ? 6 : 2) != -1) {
-                    throw new NotSupportedException ("The given path's format is not supported.");
+            if (Path.DirectorySeparatorChar != '/')
+            {
+                bool isExtendedPath = appBase.StartsWith(@"\\?\", StringComparison.Ordinal);
+                if (appBase.IndexOf(':', isExtendedPath ? 6 : 2) != -1)
+                {
+                    throw new NotSupportedException("The given path's format is not supported.");
                 }
             }
 
             // validate the path
-            string dir = Path.GetDirectoryName (appBase);
-            if ((dir != null) && (dir.LastIndexOfAny (Path.GetInvalidPathChars ()) >= 0)) {
-                string msg = String.Format (Locale.GetText ("Invalid path characters in path: '{0}'"), appBase);
-                throw new ArgumentException (msg, "appBase");
+            string dir = Path.GetDirectoryName(appBase);
+            if ((dir != null) && (dir.LastIndexOfAny(Path.GetInvalidPathChars()) >= 0))
+            {
+                string msg = String.Format(
+                    Locale.GetText("Invalid path characters in path: '{0}'"),
+                    appBase
+                );
+                throw new ArgumentException(msg, "appBase");
             }
 
-            string fname = Path.GetFileName (appBase);
-            if ((fname != null) && (fname.LastIndexOfAny (Path.GetInvalidFileNameChars ()) >= 0)) {
-                string msg = String.Format (Locale.GetText ("Invalid filename characters in path: '{0}'"), appBase);
-                throw new ArgumentException (msg, "appBase");
+            string fname = Path.GetFileName(appBase);
+            if ((fname != null) && (fname.LastIndexOfAny(Path.GetInvalidFileNameChars()) >= 0))
+            {
+                string msg = String.Format(
+                    Locale.GetText("Invalid filename characters in path: '{0}'"),
+                    appBase
+                );
+                throw new ArgumentException(msg, "appBase");
             }
 
             return appBase;
         }
 
-        public string ApplicationBase {
-            get { return GetAppBase (application_base); }
-            set { application_base = value; } 
+        public string ApplicationBase
+        {
+            get { return GetAppBase(application_base); }
+            set { application_base = value; }
         }
 
-        public string ApplicationName {
-            get {
-                return application_name;
-            }
-            set {
-                application_name = value;
-            }
+        public string ApplicationName
+        {
+            get { return application_name; }
+            set { application_name = value; }
         }
 
-        public string CachePath {
-            get {
-                return cache_path;
-            }
-            set {
-                cache_path = value;
-            }
+        public string CachePath
+        {
+            get { return cache_path; }
+            set { cache_path = value; }
         }
 
-        public string ConfigurationFile {
-            get {
+        public string ConfigurationFile
+        {
+            get
+            {
                 if (configuration_file == null)
                     return null;
                 if (Path.IsPathRooted(configuration_file))
                     return configuration_file;
                 if (ApplicationBase == null)
-                    throw new MemberAccessException("The ApplicationBase must be set before retrieving this property.");
+                    throw new MemberAccessException(
+                        "The ApplicationBase must be set before retrieving this property."
+                    );
                 return Path.Combine(ApplicationBase, configuration_file);
             }
-            set {
-                configuration_file = value;
-            }
+            set { configuration_file = value; }
         }
 
-        public bool DisallowPublisherPolicy {
-            get {
-                return publisher_policy;
-            }
-            set {
-                publisher_policy = value;
-            }
+        public bool DisallowPublisherPolicy
+        {
+            get { return publisher_policy; }
+            set { publisher_policy = value; }
         }
 
-        public string DynamicBase {
-            get {
+        public string DynamicBase
+        {
+            get
+            {
                 if (dynamic_base == null)
                     return null;
 
-                if (Path.IsPathRooted (dynamic_base))
+                if (Path.IsPathRooted(dynamic_base))
                     return dynamic_base;
 
                 if (ApplicationBase == null)
-                    throw new MemberAccessException ("The ApplicationBase must be set before retrieving this property.");
-                
-                return Path.Combine (ApplicationBase, dynamic_base);
+                    throw new MemberAccessException(
+                        "The ApplicationBase must be set before retrieving this property."
+                    );
+
+                return Path.Combine(ApplicationBase, dynamic_base);
             }
-            set {
+            set
+            {
                 if (application_name == null)
-                    throw new MemberAccessException ("ApplicationName must be set before the DynamicBase can be set.");
-                uint id = (uint) application_name.GetHashCode ();
-                dynamic_base = Path.Combine (value, id.ToString("x"));
+                    throw new MemberAccessException(
+                        "ApplicationName must be set before the DynamicBase can be set."
+                    );
+                uint id = (uint)application_name.GetHashCode();
+                dynamic_base = Path.Combine(value, id.ToString("x"));
             }
         }
 
-        public string LicenseFile {
-            get {
-                return license_file;
-            }
-            set {
-                license_file = value;
-            }
+        public string LicenseFile
+        {
+            get { return license_file; }
+            set { license_file = value; }
         }
 
-        [MonoLimitation ("In Mono this is controlled by the --share-code flag")]
-        public LoaderOptimization LoaderOptimization {
-            get {
-                return (LoaderOptimization)loader_optimization;
-            }
-            set {
+        [MonoLimitation("In Mono this is controlled by the --share-code flag")]
+        public LoaderOptimization LoaderOptimization
+        {
+            get { return (LoaderOptimization)loader_optimization; }
+            set
+            {
 #if MOBILE
                 loader_optimization = (int)value;
 #else
@@ -264,196 +272,210 @@ namespace System
             }
         }
 
-        // AppDomainManagerAssembly, ManagerType, and PartialTrustVisibleAssemblies 
-        // don't really do anything within Mono, but will help with refsrc compat. 
-        public string AppDomainManagerAssembly {
+        // AppDomainManagerAssembly, ManagerType, and PartialTrustVisibleAssemblies
+        // don't really do anything within Mono, but will help with refsrc compat.
+        public string AppDomainManagerAssembly
+        {
             get { return manager_assembly; }
             set { manager_assembly = value; }
         }
 
-        public string AppDomainManagerType {
+        public string AppDomainManagerType
+        {
             get { return manager_type; }
             set { manager_type = value; }
         }
 
-        public string [] PartialTrustVisibleAssemblies {
+        public string[] PartialTrustVisibleAssemblies
+        {
             get { return partial_visible_assemblies; }
-            set {
-                if (value != null) {
-                    partial_visible_assemblies = (string [])value.Clone();
-                    Array.Sort<string> (partial_visible_assemblies, StringComparer.OrdinalIgnoreCase);
+            set
+            {
+                if (value != null)
+                {
+                    partial_visible_assemblies = (string[])value.Clone();
+                    Array.Sort<string>(
+                        partial_visible_assemblies,
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
-                else {
+                else
+                {
                     partial_visible_assemblies = null;
                 }
             }
         }
 
-        public string PrivateBinPath {
-            get {
-                return private_bin_path;
-            }
-            set {
+        public string PrivateBinPath
+        {
+            get { return private_bin_path; }
+            set
+            {
                 private_bin_path = value;
                 path_changed = true;
             }
         }
 
-        public string PrivateBinPathProbe {
-            get {
-                return private_bin_path_probe;
-            }
-            set {
+        public string PrivateBinPathProbe
+        {
+            get { return private_bin_path_probe; }
+            set
+            {
                 private_bin_path_probe = value;
                 path_changed = true;
             }
         }
 
-        public string ShadowCopyDirectories {
-            get {
-                return shadow_copy_directories;
-            }
-            set {
-                shadow_copy_directories = value;
-            }
+        public string ShadowCopyDirectories
+        {
+            get { return shadow_copy_directories; }
+            set { shadow_copy_directories = value; }
         }
 
-        public string ShadowCopyFiles {
-            get {
-                return shadow_copy_files;
-            }
-            set {
-                shadow_copy_files = value;
-            }
+        public string ShadowCopyFiles
+        {
+            get { return shadow_copy_files; }
+            set { shadow_copy_files = value; }
         }
 
-        public bool DisallowBindingRedirects {
-            get {
-                return disallow_binding_redirects;
-            }
-            set {
-                disallow_binding_redirects = value;
-            }
+        public bool DisallowBindingRedirects
+        {
+            get { return disallow_binding_redirects; }
+            set { disallow_binding_redirects = value; }
         }
 
-        public bool DisallowCodeDownload {
-            get {
-                return disallow_code_downloads;
-            }
-            set {
-                disallow_code_downloads = value;
-            }
+        public bool DisallowCodeDownload
+        {
+            get { return disallow_code_downloads; }
+            set { disallow_code_downloads = value; }
         }
 
         public string TargetFrameworkName { get; set; }
 
-        public ActivationArguments ActivationArguments {
-            get {
+        public ActivationArguments ActivationArguments
+        {
+            get
+            {
                 if (_activationArguments != null)
                     return (ActivationArguments)_activationArguments;
-                DeserializeNonPrimitives ();
+                DeserializeNonPrimitives();
                 return (ActivationArguments)_activationArguments;
             }
             set { _activationArguments = value; }
         }
 
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
-        [MonoLimitation ("it needs to be invoked within the created domain")]
-        public AppDomainInitializer AppDomainInitializer {
-            get {
+        [MonoLimitation("it needs to be invoked within the created domain")]
+        public AppDomainInitializer AppDomainInitializer
+        {
+            get
+            {
                 if (domain_initializer != null)
                     return (AppDomainInitializer)domain_initializer;
-                DeserializeNonPrimitives ();
+                DeserializeNonPrimitives();
                 return (AppDomainInitializer)domain_initializer;
             }
             set { domain_initializer = value; }
         }
 #else
-        [Obsolete ("AppDomainSetup.AppDomainInitializer is not supported on this platform.", true)]
-        public AppDomainInitializer AppDomainInitializer {
-            get { throw new PlatformNotSupportedException ("AppDomainSetup.AppDomainInitializer is not supported on this platform."); }
-            set { throw new PlatformNotSupportedException ("AppDomainSetup.AppDomainInitializer is not supported on this platform."); }
+        [Obsolete("AppDomainSetup.AppDomainInitializer is not supported on this platform.", true)]
+        public AppDomainInitializer AppDomainInitializer
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    "AppDomainSetup.AppDomainInitializer is not supported on this platform."
+                );
+            }
+            set
+            {
+                throw new PlatformNotSupportedException(
+                    "AppDomainSetup.AppDomainInitializer is not supported on this platform."
+                );
+            }
         }
 #endif // MONO_FEATURE_MULTIPLE_APPDOMAINS
 
-
-        [MonoLimitation ("it needs to be used to invoke the initializer within the created domain")]
-        public string [] AppDomainInitializerArguments {
+        [MonoLimitation("it needs to be used to invoke the initializer within the created domain")]
+        public string[] AppDomainInitializerArguments
+        {
             get { return domain_initializer_args; }
             set { domain_initializer_args = value; }
         }
 
-        [MonoNotSupported ("This property exists but not considered.")]
-        public ApplicationTrust ApplicationTrust {
-            get {
+        [MonoNotSupported("This property exists but not considered.")]
+        public ApplicationTrust ApplicationTrust
+        {
+            get
+            {
                 if (application_trust != null)
                     return (ApplicationTrust)application_trust;
-                DeserializeNonPrimitives ();
+                DeserializeNonPrimitives();
                 if (application_trust == null)
-                    application_trust = new ApplicationTrust ();
+                    application_trust = new ApplicationTrust();
                 return (ApplicationTrust)application_trust;
             }
             set { application_trust = value; }
         }
 
-        [MonoNotSupported ("This property exists but not considered.")]
-        public bool DisallowApplicationBaseProbing {
+        [MonoNotSupported("This property exists but not considered.")]
+        public bool DisallowApplicationBaseProbing
+        {
             get { return disallow_appbase_probe; }
             set { disallow_appbase_probe = value; }
         }
 
-        [MonoNotSupported ("This method exists but not considered.")]
-        public byte [] GetConfigurationBytes ()
+        [MonoNotSupported("This method exists but not considered.")]
+        public byte[] GetConfigurationBytes()
         {
-            return configuration_bytes != null ? configuration_bytes.Clone () as byte [] : null;
+            return configuration_bytes != null ? configuration_bytes.Clone() as byte[] : null;
         }
 
-        [MonoNotSupported ("This method exists but not considered.")]
-        public void SetConfigurationBytes (byte [] value)
+        [MonoNotSupported("This method exists but not considered.")]
+        public void SetConfigurationBytes(byte[] value)
         {
             configuration_bytes = value;
         }
 
-        private void DeserializeNonPrimitives ()
+        private void DeserializeNonPrimitives()
         {
-            lock (this) {
+            lock (this)
+            {
                 if (serialized_non_primitives == null)
                     return;
 
-                BinaryFormatter bf = new BinaryFormatter ();
-                MemoryStream ms = new MemoryStream (serialized_non_primitives);
+                BinaryFormatter bf = new BinaryFormatter();
+                MemoryStream ms = new MemoryStream(serialized_non_primitives);
 
-                object [] arr = (object []) bf.Deserialize (ms);
+                object[] arr = (object[])bf.Deserialize(ms);
 
-                _activationArguments = (ActivationArguments) arr [0];
+                _activationArguments = (ActivationArguments)arr[0];
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
-                domain_initializer = (AppDomainInitializer) arr [1];
+                domain_initializer = (AppDomainInitializer)arr[1];
 #endif
-                application_trust = (ApplicationTrust) arr [2];
+                application_trust = (ApplicationTrust)arr[2];
 
                 serialized_non_primitives = null;
             }
         }
 
-        internal void SerializeNonPrimitives ()
+        internal void SerializeNonPrimitives()
         {
-            object [] arr = new object [3];
+            object[] arr = new object[3];
 
-            arr [0] = _activationArguments;
-            arr [1] = domain_initializer;
-            arr [2] = application_trust;
+            arr[0] = _activationArguments;
+            arr[1] = domain_initializer;
+            arr[2] = application_trust;
 
-            BinaryFormatter bf = new BinaryFormatter ();
-            MemoryStream ms = new MemoryStream ();
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
 
-            bf.Serialize (ms, arr);
+            bf.Serialize(ms, arr);
 
-            serialized_non_primitives = ms.ToArray ();
+            serialized_non_primitives = ms.ToArray();
         }
 
-        [MonoTODO ("not implemented, does not throw because it's used in testing moonlight")]
-        public void SetCompatibilitySwitches (IEnumerable<string> switches)
-        {
-        }
+        [MonoTODO("not implemented, does not throw because it's used in testing moonlight")]
+        public void SetCompatibilitySwitches(IEnumerable<string> switches) { }
     }
 }

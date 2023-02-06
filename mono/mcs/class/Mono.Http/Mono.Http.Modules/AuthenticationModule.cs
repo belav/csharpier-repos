@@ -20,10 +20,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,76 +43,85 @@ namespace Mono.Http.Modules
     {
         string authMethod;
 
-        public AuthenticationModule (string authenticationMethod) 
+        public AuthenticationModule(string authenticationMethod)
         {
             authMethod = authenticationMethod;
         }
 
-        public string AuthenticationMethod { 
+        public string AuthenticationMethod
+        {
             get { return authMethod; }
         }
 
         #region IHttpModule Members
 
-        public virtual void Init (HttpApplication context) 
+        public virtual void Init(HttpApplication context)
         {
-            context.AuthenticateRequest += new EventHandler (this.OnAuthenticateRequest);
-            context.EndRequest += new EventHandler (this.OnEndRequest);
+            context.AuthenticateRequest += new EventHandler(this.OnAuthenticateRequest);
+            context.EndRequest += new EventHandler(this.OnEndRequest);
         }
 
-        public virtual void Dispose () {}
+        public virtual void Dispose() { }
 
         #endregion
 
         #region Event Handlers
 
-        public virtual void OnAuthenticateRequest (object source, EventArgs eventArgs) 
+        public virtual void OnAuthenticateRequest(object source, EventArgs eventArgs)
         {
             if (!AuthenticationRequired)
                 return;
 
-            HttpApplication app = (HttpApplication) source;
-            string authdata = Authorization (app, AuthenticationMethod);
-            if ((authdata == null) || (!AcceptCredentials (app, authdata))) {
-                DenyAccess (app);
+            HttpApplication app = (HttpApplication)source;
+            string authdata = Authorization(app, AuthenticationMethod);
+            if ((authdata == null) || (!AcceptCredentials(app, authdata)))
+            {
+                DenyAccess(app);
                 return;
             }
         }
 
-        abstract public void OnEndRequest (object source, EventArgs eventArgs);
+        abstract public void OnEndRequest(object source, EventArgs eventArgs);
 
         #endregion
 
-        abstract protected bool AcceptCredentials (HttpApplication app, string authentication);
+        abstract protected bool AcceptCredentials(HttpApplication app, string authentication);
 
-        protected bool AuthenticationRequired {
-            get { return (AuthenticationMethod == ConfigurationSettings.AppSettings ["Authentication"]); }
+        protected bool AuthenticationRequired
+        {
+            get
+            {
+                return (
+                    AuthenticationMethod == ConfigurationSettings.AppSettings["Authentication"]
+                );
+            }
         }
 
-        protected void DenyAccess (HttpApplication app) 
+        protected void DenyAccess(HttpApplication app)
         {
             app.Response.StatusCode = 401;
             app.Response.StatusDescription = "Access Denied";
-            // Write to response stream as well, to give user visual 
+            // Write to response stream as well, to give user visual
             // indication of error during development
-            app.Response.Write ("401 Access Denied");
-            app.CompleteRequest ();
+            app.Response.Write("401 Access Denied");
+            app.CompleteRequest();
         }
 
-        protected string Authorization (HttpApplication app, string authenticationMethod) 
+        protected string Authorization(HttpApplication app, string authenticationMethod)
         {
-            string autz = app.Request.Headers ["Authorization"];
-            if ((autz == null) || (autz.Length == 0)) {
+            string autz = app.Request.Headers["Authorization"];
+            if ((autz == null) || (autz.Length == 0))
+            {
                 // No credentials; anonymous request
                 return null;
             }
-            
-            if (autz.ToUpper ().StartsWith (authenticationMethod.ToUpper ())) {
-                return autz.Substring (authenticationMethod.Length + 1);
+
+            if (autz.ToUpper().StartsWith(authenticationMethod.ToUpper()))
+            {
+                return autz.Substring(authenticationMethod.Length + 1);
             }
 
             return null;
         }
     }
 }
-

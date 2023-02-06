@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,54 +54,55 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class AuthorizationPolicyTypeElement
-         : ConfigurationElement
+    public sealed class AuthorizationPolicyTypeElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty policy_type;
 
-        static AuthorizationPolicyTypeElement ()
+        static AuthorizationPolicyTypeElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            policy_type = new ConfigurationProperty ("policyType",
-                typeof (string), null, null, new StringValidator (1, int.MaxValue), 
-                ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+            properties = new ConfigurationPropertyCollection();
+            policy_type = new ConfigurationProperty(
+                "policyType",
+                typeof(string),
+                null,
+                null,
+                new StringValidator(1, int.MaxValue),
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-            properties.Add (policy_type);
+            properties.Add(policy_type);
         }
 
-        public AuthorizationPolicyTypeElement ()
+        public AuthorizationPolicyTypeElement() { }
+
+        public AuthorizationPolicyTypeElement(string policyType)
         {
-        }
-        
-        public AuthorizationPolicyTypeElement (string policyType) {
             if (policyType == null)
-                throw new ArgumentNullException ("policyType");
+                throw new ArgumentNullException("policyType");
 
             PolicyType = policyType;
         }
 
-
         // Properties
 
-        [StringValidator ( MinLength = 1,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        [ConfigurationProperty ("policyType",
-             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "policyType",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
             IsRequired = true,
-            IsKey = true)]
-        public string PolicyType {
-            get { return (string) base [policy_type]; }
-            set { base [policy_type] = value; }
+            IsKey = true
+        )]
+        public string PolicyType
+        {
+            get { return (string)base[policy_type]; }
+            set { base[policy_type] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
-
     }
-
 }

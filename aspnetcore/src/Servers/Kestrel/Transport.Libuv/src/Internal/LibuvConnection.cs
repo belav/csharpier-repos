@@ -18,32 +18,44 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
     {
         private static readonly int MinAllocBufferSize = PinnedBlockMemoryPool.BlockSize / 2;
 
-        private static readonly Action<UvStreamHandle, int, object> _readCallback =
-            (handle, status, state) => ReadCallback(handle, status, state);
+        private static readonly Action<UvStreamHandle, int, object> _readCallback = (
+            handle,
+            status,
+            state
+        ) => ReadCallback(handle, status, state);
 
-        private static readonly Func<UvStreamHandle, int, object, LibuvFunctions.uv_buf_t> _allocCallback =
-            (handle, suggestedSize, state) => AllocCallback(handle, suggestedSize, state);
+        private static readonly Func<
+            UvStreamHandle,
+            int,
+            object,
+            LibuvFunctions.uv_buf_t
+        > _allocCallback = (handle, suggestedSize, state) =>
+            AllocCallback(handle, suggestedSize, state);
 
         private readonly UvStreamHandle _socket;
         private readonly IDuplexPipe _originalTransport;
-        private readonly CancellationTokenSource _connectionClosedTokenSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource _connectionClosedTokenSource =
+            new CancellationTokenSource();
 
         private volatile ConnectionAbortedException _abortReason;
 
         private MemoryHandle _bufferHandle;
         private Task _processingTask;
-        private readonly TaskCompletionSource _waitForConnectionClosedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _waitForConnectionClosedTcs =
+            new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         private bool _connectionClosed;
 
-        public LibuvConnection(UvStreamHandle socket,
-                               ILibuvTrace log,
-                               LibuvThread thread,
-                               IPEndPoint remoteEndPoint,
-                               IPEndPoint localEndPoint,
-                               PipeOptions inputOptions = null,
-                               PipeOptions outputOptions = null,
-                               long? maxReadBufferSize = null,
-                               long? maxWriteBufferSize = null)
+        public LibuvConnection(
+            UvStreamHandle socket,
+            ILibuvTrace log,
+            LibuvThread thread,
+            IPEndPoint remoteEndPoint,
+            IPEndPoint localEndPoint,
+            PipeOptions inputOptions = null,
+            PipeOptions outputOptions = null,
+            long? maxReadBufferSize = null,
+            long? maxWriteBufferSize = null
+        )
         {
             _socket = socket;
 
@@ -57,8 +69,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             maxReadBufferSize ??= 0;
             maxWriteBufferSize ??= 0;
 
-            inputOptions ??= new PipeOptions(MemoryPool, PipeScheduler.ThreadPool, Thread, maxReadBufferSize.Value, maxReadBufferSize.Value / 2, useSynchronizationContext: false);
-            outputOptions ??= new PipeOptions(MemoryPool, Thread, PipeScheduler.ThreadPool, maxWriteBufferSize.Value, maxWriteBufferSize.Value / 2, useSynchronizationContext: false);
+            inputOptions ??= new PipeOptions(
+                MemoryPool,
+                PipeScheduler.ThreadPool,
+                Thread,
+                maxReadBufferSize.Value,
+                maxReadBufferSize.Value / 2,
+                useSynchronizationContext: false
+            );
+            outputOptions ??= new PipeOptions(
+                MemoryPool,
+                Thread,
+                PipeScheduler.ThreadPool,
+                maxWriteBufferSize.Value,
+                maxWriteBufferSize.Value / 2,
+                useSynchronizationContext: false
+            );
 
             var pair = DuplexPipe.CreateConnectionPair(inputOptions, outputOptions);
 
@@ -85,7 +111,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         {
             try
             {
-                OutputConsumer = new LibuvOutputConsumer(Output, Thread, _socket, ConnectionId, Log);
+                OutputConsumer = new LibuvOutputConsumer(
+                    Output,
+                    Thread,
+                    _socket,
+                    ConnectionId,
+                    Log
+                );
 
                 StartReading();
 
@@ -122,7 +154,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 }
                 finally
                 {
-                    inputError ??= _abortReason ?? new ConnectionAbortedException("The libuv transport's send loop completed gracefully.");
+                    inputError ??=
+                        _abortReason
+                        ?? new ConnectionAbortedException(
+                            "The libuv transport's send loop completed gracefully."
+                        );
 
                     // Now, complete the input so that no more reads can happen
                     Input.Complete(inputError);
@@ -146,7 +182,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             }
             catch (Exception e)
             {
-                Log.LogCritical(0, e, $"{nameof(LibuvConnection)}.{nameof(Start)}() {ConnectionId}");
+                Log.LogCritical(
+                    0,
+                    e,
+                    $"{nameof(LibuvConnection)}.{nameof(Start)}() {ConnectionId}"
+                );
             }
         }
 
@@ -175,7 +215,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         }
 
         // Called on Libuv thread
-        private static LibuvFunctions.uv_buf_t AllocCallback(UvStreamHandle handle, int suggestedSize, object state)
+        private static LibuvFunctions.uv_buf_t AllocCallback(
+            UvStreamHandle handle,
+            int suggestedSize,
+            object state
+        )
         {
             return ((LibuvConnection)state).OnAlloc(handle, suggestedSize);
         }
@@ -185,7 +229,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             var currentWritableBuffer = Input.GetMemory(MinAllocBufferSize);
             _bufferHandle = currentWritableBuffer.Pin();
 
-            return handle.Libuv.buf_init((IntPtr)_bufferHandle.Pointer, currentWritableBuffer.Length);
+            return handle.Libuv.buf_init(
+                (IntPtr)_bufferHandle.Pointer,
+                currentWritableBuffer.Length
+            );
         }
 
         private static void ReadCallback(UvStreamHandle handle, int status, object state)
@@ -250,14 +297,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
             _connectionClosed = true;
 
-            ThreadPool.UnsafeQueueUserWorkItem(state =>
-            {
-                state.CancelConnectionClosedToken();
+            ThreadPool.UnsafeQueueUserWorkItem(
+                state =>
+                {
+                    state.CancelConnectionClosedToken();
 
-                state._waitForConnectionClosedTcs.TrySetResult();
-            },
-            this,
-            preferLocal: false);
+                    state._waitForConnectionClosedTcs.TrySetResult();
+                },
+                this,
+                preferLocal: false
+            );
         }
 
         private async Task ApplyBackpressureAsync(ValueTask<FlushResult> flushTask)
@@ -318,7 +367,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             }
             catch (Exception ex)
             {
-                Log.LogError(0, ex, $"Unexpected exception in {nameof(LibuvConnection)}.{nameof(CancelConnectionClosedToken)}.");
+                Log.LogError(
+                    0,
+                    ex,
+                    $"Unexpected exception in {nameof(LibuvConnection)}.{nameof(CancelConnectionClosedToken)}."
+                );
             }
         }
     }

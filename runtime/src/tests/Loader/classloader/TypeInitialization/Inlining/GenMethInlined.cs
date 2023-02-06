@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// test that .cctor of NotInlined and Inlined (class/struct) is called when Foo.Meth_In and Foo_Meth_NotIn 
+// test that .cctor of NotInlined and Inlined (class/struct) is called when Foo.Meth_In and Foo_Meth_NotIn
 // is invoked.
 
 using System;
@@ -37,65 +37,49 @@ public class Foo
 
 public class NotInlined
 {
-
     static NotInlined()
     {
         Console.WriteLine("Inside NotInlined::.cctor");
         File.WriteAllText("notinlined.txt", "inside .cctor");
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)] 
-    public static void NotInlinedMeth<T>()
-    {
-    }
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void NotInlinedMeth<T>() { }
 }
-
 
 public class Inlined
 {
-
     static Inlined()
     {
         Console.WriteLine("Inside Inlined::.cctor");
         File.WriteAllText("inlined.txt", "inside .cctor");
     }
 
-    public static void InlinedMeth<T>()
-    {
-    }
+    public static void InlinedMeth<T>() { }
 }
-
 
 public struct NotInlinedVal
 {
-
     static NotInlinedVal()
     {
         Console.WriteLine("Inside NotInlinedVal::.cctor");
         File.WriteAllText("notinlinedval.txt", "inside .cctor");
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)] 
-    public static void NotInlinedValMeth<T>()
-    {
-    }
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void NotInlinedValMeth<T>() { }
 }
-
 
 public struct InlinedVal
 {
-
     static InlinedVal()
     {
         Console.WriteLine("Inside InlinedVal::.cctor");
         File.WriteAllText("inlinedval.txt", "inside .cctor");
     }
 
-    public static void InlinedValMeth<T>()
-    {
-    }
+    public static void InlinedValMeth<T>() { }
 }
-
 
 public class Test_GenMethInlined
 {
@@ -107,7 +91,12 @@ public class Test_GenMethInlined
         Foo.ValMeth_In();
         Foo.ValMeth_NotIn();
 
-        if (!File.Exists("inlined.txt") || !File.Exists("notinlined.txt") || !File.Exists("inlinedval.txt") || !File.Exists("notinlinedval.txt") )
+        if (
+            !File.Exists("inlined.txt")
+            || !File.Exists("notinlined.txt")
+            || !File.Exists("inlinedval.txt")
+            || !File.Exists("notinlinedval.txt")
+        )
         {
             Console.WriteLine("FAIL: Cctor wasn't called");
             return 101;
@@ -121,6 +110,5 @@ public class Test_GenMethInlined
             File.Delete("notinlinedval.txt");
             return 100;
         }
-        
     }
 }

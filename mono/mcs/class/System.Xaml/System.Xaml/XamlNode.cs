@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,48 +34,52 @@ namespace System.Xaml
 {
     internal struct XamlNodeInfo
     {
-        public XamlNodeInfo (XamlNodeType nodeType, XamlObject value)
+        public XamlNodeInfo(XamlNodeType nodeType, XamlObject value)
         {
             node_type = nodeType;
             this.value = value;
-            member = default (XamlNodeMember);
+            member = default(XamlNodeMember);
         }
-        
-        public XamlNodeInfo (XamlNodeType nodeType, XamlNodeMember member)
+
+        public XamlNodeInfo(XamlNodeType nodeType, XamlNodeMember member)
         {
             node_type = nodeType;
-            this.value = default (XamlObject);
+            this.value = default(XamlObject);
             this.member = member;
         }
-        
-        public XamlNodeInfo (object value)
+
+        public XamlNodeInfo(object value)
         {
             node_type = XamlNodeType.Value;
             this.value = value;
-            member = default (XamlNodeMember);
+            member = default(XamlNodeMember);
         }
-        
-        public XamlNodeInfo (NamespaceDeclaration ns)
+
+        public XamlNodeInfo(NamespaceDeclaration ns)
         {
             node_type = XamlNodeType.NamespaceDeclaration;
             this.value = ns;
-            member = default (XamlNodeMember);
+            member = default(XamlNodeMember);
         }
 
         XamlNodeType node_type;
         object value;
         XamlNodeMember member;
-        
-        public XamlNodeType NodeType {
+
+        public XamlNodeType NodeType
+        {
             get { return node_type; }
         }
-        public XamlObject Object {
-            get { return (XamlObject) value; }
+        public XamlObject Object
+        {
+            get { return (XamlObject)value; }
         }
-        public XamlNodeMember Member {
+        public XamlNodeMember Member
+        {
             get { return member; }
         }
-        public object Value {
+        public object Value
+        {
             get { return value; }
         }
     }
@@ -83,91 +87,101 @@ namespace System.Xaml
     internal struct XamlNodeLineInfo
     {
         public readonly XamlNodeInfo Node;
-        public readonly int LineNumber, LinePosition;
-        public XamlNodeLineInfo (XamlNodeInfo node, int line, int column)
+        public readonly int LineNumber,
+            LinePosition;
+
+        public XamlNodeLineInfo(XamlNodeInfo node, int line, int column)
         {
             Node = node;
             LineNumber = line;
             LinePosition = column;
         }
     }
-    
+
     internal struct XamlObject
     {
-        public XamlObject (XamlType type, object instance)
-            : this (type, new InstanceContext (instance))
-        {
-        }
+        public XamlObject(XamlType type, object instance)
+            : this(type, new InstanceContext(instance)) { }
 
-        public XamlObject (XamlType type, InstanceContext context)
+        public XamlObject(XamlType type, InstanceContext context)
         {
             this.type = type;
             this.context = context;
         }
-        
+
         readonly XamlType type;
         readonly InstanceContext context;
-        
-        public XamlType Type {
+
+        public XamlType Type
+        {
             get { return type; }
         }
-        
-        public InstanceContext Context {
+
+        public InstanceContext Context
+        {
             get { return context; }
         }
-        
-        XamlType GetType (object obj)
+
+        XamlType GetType(object obj)
         {
-            return type.SchemaContext.GetXamlType (obj.GetType ());
+            return type.SchemaContext.GetXamlType(obj.GetType());
         }
-        
-        public object GetRawValue ()
+
+        public object GetRawValue()
         {
-            return context.GetRawValue ();
+            return context.GetRawValue();
         }
     }
-    
+
     internal struct XamlNodeMember
     {
-        public XamlNodeMember (XamlObject owner, XamlMember member)
+        public XamlNodeMember(XamlObject owner, XamlMember member)
         {
             this.owner = owner;
             this.member = member;
         }
-        
+
         readonly XamlObject owner;
         readonly XamlMember member;
-        
-        public XamlObject Owner {
+
+        public XamlObject Owner
+        {
             get { return owner; }
         }
-        public XamlMember Member {
+        public XamlMember Member
+        {
             get { return member; }
         }
-        public XamlObject Value {
-            get {
-                var mv = Owner.GetMemberValue (Member);
-                return new XamlObject (GetType (mv), mv);
+        public XamlObject Value
+        {
+            get
+            {
+                var mv = Owner.GetMemberValue(Member);
+                return new XamlObject(GetType(mv), mv);
             }
         }
 
-        XamlType GetType (object obj)
+        XamlType GetType(object obj)
         {
-            return obj == null ? XamlLanguage.Null : owner.Type.SchemaContext.GetXamlType (new InstanceContext (obj).GetRawValue ().GetType ());
+            return obj == null
+                ? XamlLanguage.Null
+                : owner.Type.SchemaContext.GetXamlType(
+                    new InstanceContext(obj).GetRawValue().GetType()
+                );
         }
     }
-    
+
     // Its original purpose was to enable delayed reflection, but it's not supported yet.
     internal struct InstanceContext
     {
-        public InstanceContext (object value)
+        public InstanceContext(object value)
         {
             this.value = value;
         }
-        
+
         object value;
-        
-        public object GetRawValue ()
+
+        public object GetRawValue()
         {
             return value; // so far.
         }
@@ -176,62 +190,73 @@ namespace System.Xaml
     internal static class TypeExtensionMethods2
     {
         // Note that this returns XamlMember which might not actually appear in XamlObjectReader. For example, XamlLanguage.Items won't be returned when there is no item in the collection.
-        public static IEnumerable<XamlMember> GetAllObjectReaderMembersByType (this XamlType type, IValueSerializerContext vsctx)
+        public static IEnumerable<XamlMember> GetAllObjectReaderMembersByType(
+            this XamlType type,
+            IValueSerializerContext vsctx
+        )
         {
-            if (type.HasPositionalParameters (vsctx)) {
+            if (type.HasPositionalParameters(vsctx))
+            {
                 yield return XamlLanguage.PositionalParameters;
                 yield break;
             }
 
             // Note that if the XamlType has the default constructor, we don't need "Arguments".
-            IEnumerable<XamlMember> args = type.ConstructionRequiresArguments ? type.GetSortedConstructorArguments () : null;
-            if (args != null && args.Any ())
+            IEnumerable<XamlMember> args = type.ConstructionRequiresArguments
+                ? type.GetSortedConstructorArguments()
+                : null;
+            if (args != null && args.Any())
                 yield return XamlLanguage.Arguments;
 
-            if (type.IsContentValue (vsctx)) {
+            if (type.IsContentValue(vsctx))
+            {
                 yield return XamlLanguage.Initialization;
                 yield break;
             }
 
-            if (type.IsDictionary) {
+            if (type.IsDictionary)
+            {
                 yield return XamlLanguage.Items;
                 yield break;
             }
 
-            foreach (var m in type.GetAllMembers ()) {
+            foreach (var m in type.GetAllMembers())
+            {
                 // do not read constructor arguments twice (they are written inside Arguments).
-                if (args != null && args.Contains (m))
+                if (args != null && args.Contains(m))
                     continue;
                 // do not return non-public members (of non-collection/xdata). Not sure why .NET filters out them though.
                 if (!m.IsReadPublic)
                     continue;
-                if (!m.IsWritePublic &&
-                    !m.Type.IsXData &&
-                    !m.Type.IsArray &&
-                    !m.Type.IsCollection &&
-                    !m.Type.IsDictionary)
+                if (
+                    !m.IsWritePublic
+                    && !m.Type.IsXData
+                    && !m.Type.IsArray
+                    && !m.Type.IsCollection
+                    && !m.Type.IsDictionary
+                )
                     continue;
 
                 yield return m;
             }
-            
+
             if (type.IsCollection)
                 yield return XamlLanguage.Items;
         }
     }
-    
+
     internal static class XamlNodeExtensions
     {
-        internal static object GetMemberValue (this XamlObject xobj, XamlMember xm)
+        internal static object GetMemberValue(this XamlObject xobj, XamlMember xm)
         {
             if (xm.IsUnknown)
                 return null;
 
             if (xm.IsAttachable)
-                return xobj.GetRawValue (); // attachable property value
+                return xobj.GetRawValue(); // attachable property value
 
             // FIXME: this looks like an ugly hack. Is this really true? What if there's MarkupExtension that uses another MarkupExtension type as a member type.
-            var obj = xobj.Context.GetRawValue ();
+            var obj = xobj.Context.GetRawValue();
             if (xm == XamlLanguage.Initialization)
                 return obj;
             if (xm == XamlLanguage.Items) // collection itself.
@@ -239,8 +264,8 @@ namespace System.Xaml
             if (xm == XamlLanguage.Arguments) // object itself
                 return obj;
             if (xm == XamlLanguage.PositionalParameters)
-                return xobj.GetRawValue (); // dummy value
-            return xm.Invoker.GetValue (xobj.GetRawValue ());
+                return xobj.GetRawValue(); // dummy value
+            return xm.Invoker.GetValue(xobj.GetRawValue());
         }
     }
 }

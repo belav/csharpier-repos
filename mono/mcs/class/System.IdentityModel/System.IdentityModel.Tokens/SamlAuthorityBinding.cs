@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,104 +39,125 @@ namespace System.IdentityModel.Tokens
     public class SamlAuthorityBinding
     {
         XmlQualifiedName kind;
-        string binding, location;
+        string binding,
+            location;
         bool is_readonly;
 
-        public SamlAuthorityBinding ()
-        {
-        }
+        public SamlAuthorityBinding() { }
 
-        public SamlAuthorityBinding (XmlQualifiedName authorityKind, string binding, string location)
+        public SamlAuthorityBinding(XmlQualifiedName authorityKind, string binding, string location)
         {
             if (authorityKind == null)
-                throw new ArgumentNullException ("authorityKind");
+                throw new ArgumentNullException("authorityKind");
             AuthorityKind = authorityKind;
             Binding = binding;
             Location = location;
         }
 
         [DataMember]
-        public XmlQualifiedName AuthorityKind {
+        public XmlQualifiedName AuthorityKind
+        {
             get { return kind; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 if (value == null)
-                    throw new ArgumentNullException ("value");
-                if (value.Equals (XmlQualifiedName.Empty))
-                    throw new ArgumentException ("non-empty XmlQualifiedName must be set to AuthorityKind of SamlAuthorityBinding.");
+                    throw new ArgumentNullException("value");
+                if (value.Equals(XmlQualifiedName.Empty))
+                    throw new ArgumentException(
+                        "non-empty XmlQualifiedName must be set to AuthorityKind of SamlAuthorityBinding."
+                    );
                 kind = value;
             }
         }
 
         [DataMember]
-        public string Binding {
+        public string Binding
+        {
             get { return binding; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 if (value == null || value.Length == 0)
-                    throw new ArgumentException ("non-zero length string must be set to Binding of SamlAuthorityBinding.");
+                    throw new ArgumentException(
+                        "non-zero length string must be set to Binding of SamlAuthorityBinding."
+                    );
                 binding = value;
             }
         }
 
         [DataMember]
-        public string Location {
+        public string Location
+        {
             get { return location; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 if (value == null || value.Length == 0)
-                    throw new ArgumentException ("non-zero length string must be set to Location of SamlAuthorityBinding.");
+                    throw new ArgumentException(
+                        "non-zero length string must be set to Location of SamlAuthorityBinding."
+                    );
                 location = value;
             }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return is_readonly; }
         }
 
-        void CheckReadOnly ()
+        void CheckReadOnly()
         {
             if (IsReadOnly)
-                throw new InvalidOperationException ("This object is read-only.");
+                throw new InvalidOperationException("This object is read-only.");
         }
 
-        public void MakeReadOnly ()
+        public void MakeReadOnly()
         {
             is_readonly = true;
         }
 
         [MonoTODO]
-        public virtual void ReadXml (XmlDictionaryReader reader,
+        public virtual void ReadXml(
+            XmlDictionaryReader reader,
             SamlSerializer samlSerializer,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public virtual void WriteXml (
+        public virtual void WriteXml(
             XmlDictionaryWriter writer,
             SamlSerializer samlSerializer,
-            SecurityTokenSerializer keyInfoSerializer)
+            SecurityTokenSerializer keyInfoSerializer
+        )
         {
             if (writer == null)
-                throw new ArgumentNullException ("writer");
+                throw new ArgumentNullException("writer");
             if (samlSerializer == null)
-                throw new ArgumentNullException ("samlSerializer");
+                throw new ArgumentNullException("samlSerializer");
 
             if (AuthorityKind == null)
-                throw new SecurityTokenException ("AuthorityKind must be set to SAML AuthorityBinding before being written.");
+                throw new SecurityTokenException(
+                    "AuthorityKind must be set to SAML AuthorityBinding before being written."
+                );
             if (Binding == null)
-                throw new SecurityTokenException ("non-zero length Binding must be set to SAML AuthorityBinding before being written.");
+                throw new SecurityTokenException(
+                    "non-zero length Binding must be set to SAML AuthorityBinding before being written."
+                );
             if (Location == null)
-                throw new SecurityTokenException ("non-zero length Location must be set to SAML AuthorityBinding before being written.");
+                throw new SecurityTokenException(
+                    "non-zero length Location must be set to SAML AuthorityBinding before being written."
+                );
 
-            writer.WriteStartElement ("saml", "AuthorityBinding", SamlConstants.Namespace);
-            writer.WriteXmlnsAttribute (String.Empty, AuthorityKind.Namespace);
-            writer.WriteAttributeString ("AuthorityKind", AuthorityKind.Name);
-            writer.WriteAttributeString ("Location", Location);
-            writer.WriteAttributeString ("Binding", Binding);
-            writer.WriteEndElement ();
+            writer.WriteStartElement("saml", "AuthorityBinding", SamlConstants.Namespace);
+            writer.WriteXmlnsAttribute(String.Empty, AuthorityKind.Namespace);
+            writer.WriteAttributeString("AuthorityKind", AuthorityKind.Name);
+            writer.WriteAttributeString("Location", Location);
+            writer.WriteAttributeString("Binding", Binding);
+            writer.WriteEndElement();
         }
     }
 }

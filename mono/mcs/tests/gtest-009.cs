@@ -2,25 +2,21 @@ using System;
 
 interface I
 {
-    void Hello ();
+    void Hello();
 }
 
 class Stack<T>
     where T : ICloneable
 {
-    public object Test (T t)
+    public object Test(T t)
     {
-        return t.Clone ();
+        return t.Clone();
     }
 }
 
-class Test
-{
-}
+class Test { }
 
 class X
 {
-    public static void Main()
-    {
-    }
+    public static void Main() { }
 }

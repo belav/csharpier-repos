@@ -4,15 +4,13 @@
 
 using System;
 
-public ref struct S
-{
-}
+public ref struct S { }
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        var s = new S ();
+        var s = new S();
         Func<string> f = s.ToString;
     }
 }

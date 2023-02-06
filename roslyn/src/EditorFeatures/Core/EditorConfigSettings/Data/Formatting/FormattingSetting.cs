@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         protected OptionUpdater Updater { get; }
         protected string? Language { get; }
 
-        protected FormattingSetting(string description, OptionUpdater updater, string? language = null)
+        protected FormattingSetting(
+            string description,
+            OptionUpdater updater,
+            string? language = null
+        )
         {
             Description = description ?? throw new ArgumentNullException(nameof(description));
             Updater = updater;
@@ -29,24 +33,40 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         public abstract object? GetValue();
         public abstract bool IsDefinedInEditorConfig { get; }
 
-        public static PerLanguageFormattingSetting<TOption> Create<TOption>(PerLanguageOption2<TOption> option,
-                                                                            string description,
-                                                                            AnalyzerConfigOptions editorConfigOptions,
-                                                                            OptionSet visualStudioOptions,
-                                                                            OptionUpdater updater)
+        public static PerLanguageFormattingSetting<TOption> Create<TOption>(
+            PerLanguageOption2<TOption> option,
+            string description,
+            AnalyzerConfigOptions editorConfigOptions,
+            OptionSet visualStudioOptions,
+            OptionUpdater updater
+        )
             where TOption : notnull
         {
-            return new PerLanguageFormattingSetting<TOption>(option, description, editorConfigOptions, visualStudioOptions, updater);
+            return new PerLanguageFormattingSetting<TOption>(
+                option,
+                description,
+                editorConfigOptions,
+                visualStudioOptions,
+                updater
+            );
         }
 
-        public static FormattingSetting<TOption> Create<TOption>(Option2<TOption> option,
-                                                                 string description,
-                                                                 AnalyzerConfigOptions editorConfigOptions,
-                                                                 OptionSet visualStudioOptions,
-                                                                 OptionUpdater updater)
+        public static FormattingSetting<TOption> Create<TOption>(
+            Option2<TOption> option,
+            string description,
+            AnalyzerConfigOptions editorConfigOptions,
+            OptionSet visualStudioOptions,
+            OptionUpdater updater
+        )
             where TOption : struct
         {
-            return new FormattingSetting<TOption>(option, description, editorConfigOptions, visualStudioOptions, updater);
+            return new FormattingSetting<TOption>(
+                option,
+                description,
+                editorConfigOptions,
+                visualStudioOptions,
+                updater
+            );
         }
     }
 }

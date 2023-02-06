@@ -6,8 +6,6 @@ class C
 {
     static class S
     {
-        static void Foo (this string s)
-        {
-        }
+        static void Foo(this string s) { }
     }
 }

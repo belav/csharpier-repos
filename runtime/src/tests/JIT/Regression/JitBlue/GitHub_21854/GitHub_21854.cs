@@ -12,7 +12,8 @@ namespace GitHub_21854
     {
         public static int Main()
         {
-            try {
+            try
+            {
                 var unused = new object[] { Vector<int>.Zero };
             }
             catch (Exception e)

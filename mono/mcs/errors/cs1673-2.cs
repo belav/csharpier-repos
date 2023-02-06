@@ -2,42 +2,43 @@
 // Line: 19
 using System;
 
-public delegate void Hello ();
+public delegate void Hello();
 
 struct Foo
 {
     public int ID;
 
-    public Foo (int id)
+    public Foo(int id)
     {
         this.ID = id;
     }
 
-    public void Test (Foo foo)
+    public void Test(Foo foo)
     {
-        Hello hello = delegate {
-            Hello (3);
+        Hello hello = delegate
+        {
+            Hello(3);
         };
-        hello ();
+        hello();
     }
 
-    public void Hello (int value)
+    public void Hello(int value)
     {
         if (ID != value)
-            throw new InvalidOperationException ();
+            throw new InvalidOperationException();
     }
 
-    public override string ToString ()
+    public override string ToString()
     {
-        return String.Format ("Foo ({0})", ID);
+        return String.Format("Foo ({0})", ID);
     }
 }
 
 class X
 {
-    static void Main ()
+    static void Main()
     {
-        Foo foo = new Foo (3);
-        foo.Test (new Foo (8));
+        Foo foo = new Foo(3);
+        foo.Test(new Foo(8));
     }
 }

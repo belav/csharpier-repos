@@ -49,9 +49,7 @@ internal class LocallocTest
                 }
             }
         }
-        catch
-        {
-        }
+        catch { }
         if (!testPassed)
             return 1;
 

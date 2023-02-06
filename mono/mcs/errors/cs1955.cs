@@ -5,16 +5,19 @@ using System;
 
 class Y
 {
-    public int x { get { return 1; } }
+    public int x
+    {
+        get { return 1; }
+    }
 }
 
 class X
 {
-    static int Main ()
+    static int Main()
     {
-        Y y = new Y ();
+        Y y = new Y();
 
-        y.x ();
+        y.x();
         return 0;
     }
 }

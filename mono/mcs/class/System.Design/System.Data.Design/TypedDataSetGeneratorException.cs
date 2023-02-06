@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,64 +36,58 @@ using System.Collections;
 using System.Globalization;
 using System.Runtime.Serialization;
 
-namespace System.Data.Design {
-
+namespace System.Data.Design
+{
     [Serializable]
     public class TypedDataSetGeneratorException : DataException
     {
-
         IList errorList;
 
         #region Constructors
-        public TypedDataSetGeneratorException ()
-            : base (Locale.GetText ("System error."))
-        {
-        }
+        public TypedDataSetGeneratorException()
+            : base(Locale.GetText("System error.")) { }
 
-        public TypedDataSetGeneratorException (IList list)
-            : base (Locale.GetText ("System error."))
+        public TypedDataSetGeneratorException(IList list)
+            : base(Locale.GetText("System error."))
         {
             errorList = list;
         }
 
-        protected TypedDataSetGeneratorException (SerializationInfo info, StreamingContext context)
-            : base (info, context)
+        protected TypedDataSetGeneratorException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
-            int count = info.GetInt32 ("KEY_ARRAYCOUNT");
-            errorList = new ArrayList (count);
+            int count = info.GetInt32("KEY_ARRAYCOUNT");
+            errorList = new ArrayList(count);
 
-            for (int i=0; i < count; i++)
-                errorList.Add (info.GetString("KEY_ARRAYVALUES" + i));
+            for (int i = 0; i < count; i++)
+                errorList.Add(info.GetString("KEY_ARRAYVALUES" + i));
         }
 
-        public TypedDataSetGeneratorException (String message) : base (message)
-        {
-        }
-        
-        public TypedDataSetGeneratorException (String message, Exception innerException) 
-            : base (message, innerException)
-        {
-        }
-        #endregion //Constructors    
+        public TypedDataSetGeneratorException(String message)
+            : base(message) { }
 
-        public IList ErrorList {
-                        get { return errorList; }
+        public TypedDataSetGeneratorException(String message, Exception innerException)
+            : base(message, innerException) { }
+        #endregion //Constructors
+
+        public IList ErrorList
+        {
+            get { return errorList; }
         }
 
         #region Methods
-                                                                                                    
-                public override void GetObjectData (SerializationInfo info, StreamingContext context)
-                {
-            base.GetObjectData (info, context);
-                                                
-            int count = (errorList != null) ? ErrorList.Count : 0;
-            info.AddValue ("KEY_ARRAYCOUNT", count);
 
-            for (int i=0; i < count; i++)
-                info.AddValue("KEY_ARRAYVALUES" + i, ErrorList [i]);
-                }
-                                                                                                    
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+
+            int count = (errorList != null) ? ErrorList.Count : 0;
+            info.AddValue("KEY_ARRAYCOUNT", count);
+
+            for (int i = 0; i < count; i++)
+                info.AddValue("KEY_ARRAYVALUES" + i, ErrorList[i]);
+        }
+
                 #endregion // Methods
     }
 }
-

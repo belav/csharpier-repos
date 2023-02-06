@@ -21,20 +21,24 @@ namespace CSharpSyntaxGenerator
         /// <summary>
         /// ? This value may be accessed by multiple threads.
         /// </summary>
-        private static readonly WeakReference<CachedSourceGeneratorResult> s_cachedResult = new(null);
+        private static readonly WeakReference<CachedSourceGeneratorResult> s_cachedResult =
+            new(null);
 
-        protected abstract bool TryGetRelevantInput(in GeneratorExecutionContext context, out AdditionalText? input, out SourceText? inputText);
+        protected abstract bool TryGetRelevantInput(
+            in GeneratorExecutionContext context,
+            out AdditionalText? input,
+            out SourceText? inputText
+        );
 
         protected abstract bool TryGenerateSources(
             AdditionalText input,
             SourceText inputText,
             out ImmutableArray<(string hintName, SourceText sourceText)> sources,
             out ImmutableArray<Diagnostic> diagnostics,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
-        public void Initialize(GeneratorInitializationContext context)
-        {
-        }
+        public void Initialize(GeneratorInitializationContext context) { }
 
         public void Execute(GeneratorExecutionContext context)
         {
@@ -48,15 +52,25 @@ namespace CSharpSyntaxGenerator
             var currentChecksum = inputText.GetChecksum();
 
             // Read the current cached result once to avoid race conditions
-            if (s_cachedResult.TryGetTarget(out var cachedResult)
-                && cachedResult.Checksum.SequenceEqual(currentChecksum))
+            if (
+                s_cachedResult.TryGetTarget(out var cachedResult)
+                && cachedResult.Checksum.SequenceEqual(currentChecksum)
+            )
             {
                 // Add the previously-cached sources, and leave the cache as it was
                 AddSources(in context, sources: cachedResult.Sources);
                 return;
             }
 
-            if (TryGenerateSources(input, inputText, out var sources, out var diagnostics, context.CancellationToken))
+            if (
+                TryGenerateSources(
+                    input,
+                    inputText,
+                    out var sources,
+                    out var diagnostics,
+                    context.CancellationToken
+                )
+            )
             {
                 AddSources(in context, sources);
 
@@ -72,7 +86,9 @@ namespace CSharpSyntaxGenerator
                     // the write is atomic (which it is for SetTarget) synchronization is unnecessary. We allocate an
                     // array on the Large Object Heap (which is always part of Generation 2) and give it a reference to
                     // the cached object to ensure this weak reference is not reclaimed prior to a full GC pass.
-                    var largeArray = new CachedSourceGeneratorResult[Threshold / Unsafe.SizeOf<CachedSourceGeneratorResult>()];
+                    var largeArray = new CachedSourceGeneratorResult[
+                        Threshold / Unsafe.SizeOf<CachedSourceGeneratorResult>()
+                    ];
                     Debug.Assert(GC.GetGeneration(largeArray) >= 2);
                     largeArray[0] = result;
                     s_cachedResult.SetTarget(result);
@@ -99,7 +115,8 @@ namespace CSharpSyntaxGenerator
 
         private static void AddSources(
             in GeneratorExecutionContext context,
-            ImmutableArray<(string hintName, SourceText sourceText)> sources)
+            ImmutableArray<(string hintName, SourceText sourceText)> sources
+        )
         {
             foreach (var (hintName, sourceText) in sources)
             {
@@ -109,7 +126,8 @@ namespace CSharpSyntaxGenerator
 
         private sealed record CachedSourceGeneratorResult(
             ImmutableArray<byte> Checksum,
-            ImmutableArray<(string hintName, SourceText sourceText)> Sources);
+            ImmutableArray<(string hintName, SourceText sourceText)> Sources
+        );
     }
 }
 

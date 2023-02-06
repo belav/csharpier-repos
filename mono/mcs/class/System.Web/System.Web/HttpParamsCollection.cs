@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,89 +40,94 @@ namespace System.Web
         HttpCookieCollection _cookies;
         bool _merged;
 
-        public HttpParamsCollection (NameValueCollection queryString,
-                         NameValueCollection form,
-                         NameValueCollection serverVariables,
-                         HttpCookieCollection cookies)
+        public HttpParamsCollection(
+            NameValueCollection queryString,
+            NameValueCollection form,
+            NameValueCollection serverVariables,
+            HttpCookieCollection cookies
+        )
         {
             _queryString = queryString;
             _form = form;
             _serverVariables = serverVariables;
             _cookies = cookies;
             _merged = false;
-            Protect ();
+            Protect();
         }
 
-        public override string Get (string name)
+        public override string Get(string name)
         {
-            MergeCollections ();
-            return base.Get (name);
+            MergeCollections();
+            return base.Get(name);
         }
 
-        void MergeCollections ()
+        void MergeCollections()
         {
             if (_merged)
-                return;            
+                return;
 
-            Unprotect ();
+            Unprotect();
 
-            Add (_queryString);
-            Add (_form);
-            Add (_serverVariables);
+            Add(_queryString);
+            Add(_form);
+            Add(_serverVariables);
 
             /* special handling for Cookies since
              * it isn't a NameValueCollection. */
-            for (int i = 0; i < _cookies.Count; i++) {
-                HttpCookie cookie = _cookies [i];
-                Add (cookie.Name, cookie.Value);
+            for (int i = 0; i < _cookies.Count; i++)
+            {
+                HttpCookie cookie = _cookies[i];
+                Add(cookie.Name, cookie.Value);
             }
 
             _merged = true;
 
-            Protect ();
+            Protect();
         }
 
-        public override string Get (int index)
+        public override string Get(int index)
         {
-            MergeCollections ();
-            return base.Get (index);
+            MergeCollections();
+            return base.Get(index);
         }
 
-        public override string GetKey (int index)
+        public override string GetKey(int index)
         {
-            MergeCollections ();
-            return base.GetKey (index);
+            MergeCollections();
+            return base.GetKey(index);
         }
 
-        public override string[] GetValues (int index)
-                {
-            MergeCollections ();
-            return base.GetValues (index);
-                }
-                
-                public override string[] GetValues (string name)
-                {
-            MergeCollections ();
-            return base.GetValues (name);
-                }
-        
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        public override string[] GetValues(int index)
         {
-            throw new SerializationException ();
+            MergeCollections();
+            return base.GetValues(index);
         }
 
-        public override string [] AllKeys
+        public override string[] GetValues(string name)
         {
-            get {
-                MergeCollections ();
+            MergeCollections();
+            return base.GetValues(name);
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new SerializationException();
+        }
+
+        public override string[] AllKeys
+        {
+            get
+            {
+                MergeCollections();
                 return base.AllKeys;
             }
         }
 
         public override int Count
         {
-            get {
-                MergeCollections ();
+            get
+            {
+                MergeCollections();
                 return base.Count;
             }
         }

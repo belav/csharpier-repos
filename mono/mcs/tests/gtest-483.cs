@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 class Program
 {
-    public static int Main ()
+    public static int Main()
     {
-        Int32Collection src = new Int32Collection ();
-        Int32Collection dest = new Int32Collection ();
+        Int32Collection src = new Int32Collection();
+        Int32Collection dest = new Int32Collection();
 
-        src.Add (5);
-        src.Add (7);
-        dest.Add (4);
+        src.Add(5);
+        src.Add(7);
+        dest.Add(4);
 
-        ReplaceContentsWith<Int32Collection> (src, dest);
+        ReplaceContentsWith<Int32Collection>(src, dest);
 
         if (dest.Count != 2)
             return 1;
@@ -25,18 +25,18 @@ class Program
         return 0;
     }
 
-    private static void ReplaceContentsWith<T> (T src, T dst)
+    private static void ReplaceContentsWith<T>(T src, T dst)
         where T : Int32Collection
     {
-        dst.Clear ();
+        dst.Clear();
         foreach (int value in src)
-            dst.Add (value);
+            dst.Add(value);
     }
 }
 
 class Int32Collection : IEnumerable
 {
-    List<int> list = new List<int> ();
+    List<int> list = new List<int>();
 
     public int Count
     {
@@ -45,22 +45,22 @@ class Int32Collection : IEnumerable
 
     public int this[int index]
     {
-        get { return (int) list[index]; }
+        get { return (int)list[index]; }
         set { list[index] = value; }
     }
 
-    public void Add (int value)
+    public void Add(int value)
     {
-        list.Add (value);
+        list.Add(value);
     }
 
-    public void Clear ()
+    public void Clear()
     {
-        list.Clear ();
+        list.Clear();
     }
 
-    IEnumerator IEnumerable.GetEnumerator ()
+    IEnumerator IEnumerable.GetEnumerator()
     {
-        return list.GetEnumerator ();
+        return list.GetEnumerator();
     }
 }

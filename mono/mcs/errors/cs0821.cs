@@ -10,15 +10,12 @@ public class Point
 
 public class Test
 {
-    unsafe static void Main ()
+    unsafe static void Main()
     {
-        Point p = new Point ();
+        Point p = new Point();
         p.X = 42;
         p.Y = 16;
-        
-        fixed (var x = &p.X)
-        {
-        }
+
+        fixed (var x = &p.X) { }
     }
 }
-

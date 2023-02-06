@@ -5,8 +5,11 @@ using System;
 
 class T
 {
-    public void Foo (int i)
+    public void Foo(int i)
     {
-        Action<int> v = x => { int i = 9; };
+        Action<int> v = x =>
+        {
+            int i = 9;
+        };
     }
 }

@@ -41,7 +41,9 @@ namespace System.Diagnostics.Tracing
                     position++;
                 }
 
-                throw new System.Collections.Generic.KeyNotFoundException(SR.Format(SR.Arg_KeyNotFoundWithKey, key));
+                throw new System.Collections.Generic.KeyNotFoundException(
+                    SR.Format(SR.Arg_KeyNotFoundWithKey, key)
+                );
             }
             set => throw new System.NotSupportedException();
         }

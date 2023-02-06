@@ -11,14 +11,18 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
     ///        or if the override is not found in the original assembly
     /// </Summary>
     /// <seealso cref="KeptOverrideAttribute" />
-    [AttributeUsage (AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
     public class RemovedOverrideAttribute : BaseInAssemblyAttribute
     {
         public Type TypeWithOverriddenMethodDeclaration;
-        public RemovedOverrideAttribute (Type typeWithOverriddenMethod)
+
+        public RemovedOverrideAttribute(Type typeWithOverriddenMethod)
         {
             if (typeWithOverriddenMethod == null)
-                throw new ArgumentException ("Value cannot be null or empty.", nameof (typeWithOverriddenMethod));
+                throw new ArgumentException(
+                    "Value cannot be null or empty.",
+                    nameof(typeWithOverriddenMethod)
+                );
             TypeWithOverriddenMethodDeclaration = typeWithOverriddenMethod;
         }
     }

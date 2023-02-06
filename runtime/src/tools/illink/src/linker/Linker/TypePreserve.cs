@@ -31,7 +31,6 @@
 
 namespace Mono.Linker
 {
-
     public enum TypePreserve
     {
         Nothing, // This is actually Declaration

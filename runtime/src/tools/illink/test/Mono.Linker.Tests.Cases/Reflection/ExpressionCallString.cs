@@ -7,115 +7,135 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Reflection
 {
-    [SetupCSharpCompilerToUse ("csc")]
-    [Reference ("System.Core.dll")]
+    [SetupCSharpCompilerToUse("csc")]
+    [Reference("System.Core.dll")]
     [ExpectedNoWarnings]
-    [KeptPrivateImplementationDetails ("ThrowSwitchExpressionException")]
+    [KeptPrivateImplementationDetails("ThrowSwitchExpressionException")]
     public class ExpressionCallString
     {
-        public static void Main ()
+        public static void Main()
         {
-            PublicMethods.Test ();
-            ProtectedMethods.Test ();
-            PrivateMethods.Test ();
+            PublicMethods.Test();
+            ProtectedMethods.Test();
+            PrivateMethods.Test();
 
-            Expression.Call (typeof (Derived), "PublicOnBase", Type.EmptyTypes);
-            Expression.Call (typeof (Derived), "ProtectedOnBase", Type.EmptyTypes);
-            Expression.Call (typeof (Derived), "PrivateOnBase", Type.EmptyTypes);
+            Expression.Call(typeof(Derived), "PublicOnBase", Type.EmptyTypes);
+            Expression.Call(typeof(Derived), "ProtectedOnBase", Type.EmptyTypes);
+            Expression.Call(typeof(Derived), "PrivateOnBase", Type.EmptyTypes);
 
             // Keep all methods on type UnknownNameMethodClass
-            Expression.Call (typeof (UnknownNameMethodClass), GetUnknownString (), Type.EmptyTypes);
+            Expression.Call(typeof(UnknownNameMethodClass), GetUnknownString(), Type.EmptyTypes);
 
-            TestUnknownType.Test ();
-            TestNullType ();
-            TestNoValue ();
-            TestNullString ();
-            TestEmptyString ();
-            TestNoValueString ();
+            TestUnknownType.Test();
+            TestNullType();
+            TestNoValue();
+            TestNullString();
+            TestEmptyString();
+            TestNoValueString();
 
-            TestGenericMethods.Test ();
+            TestGenericMethods.Test();
         }
 
         [Kept]
         class PublicMethods
         {
             [Kept]
-            public static void PublicStaticMethod () { }
+            public static void PublicStaticMethod() { }
 
-            public void PublicInstanceMethod () { }
+            public void PublicInstanceMethod() { }
 
-            protected static void ProtectedStaticMethod () { }
+            protected static void ProtectedStaticMethod() { }
 
-            protected void ProtectedInstanceMethod () { }
+            protected void ProtectedInstanceMethod() { }
 
-            private static void PrivateStaticMethod () { }
+            private static void PrivateStaticMethod() { }
 
-            private void PrivateInstanceMethod () { }
+            private void PrivateInstanceMethod() { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                Expression.Call (typeof (PublicMethods), nameof (PublicStaticMethod), Type.EmptyTypes);
+                Expression.Call(typeof(PublicMethods), nameof(PublicStaticMethod), Type.EmptyTypes);
 
                 // This should not mark anything, but it should also not warn (it should fail at runtime to find the method as well)
-                Expression.Call (typeof (PublicMethods), nameof (PublicInstanceMethod), Type.EmptyTypes);
+                Expression.Call(
+                    typeof(PublicMethods),
+                    nameof(PublicInstanceMethod),
+                    Type.EmptyTypes
+                );
             }
         }
 
         [Kept]
         class ProtectedMethods
         {
-            public static void PublicStaticMethod () { }
+            public static void PublicStaticMethod() { }
 
-            public void PublicInstanceMethod () { }
-
-            [Kept]
-            protected static void ProtectedStaticMethod () { }
-
-            protected void ProtectedInstanceMethod () { }
-
-            private static void PrivateStaticMethod () { }
-
-            private void PrivateInstanceMethod () { }
+            public void PublicInstanceMethod() { }
 
             [Kept]
-            public static void Test ()
+            protected static void ProtectedStaticMethod() { }
+
+            protected void ProtectedInstanceMethod() { }
+
+            private static void PrivateStaticMethod() { }
+
+            private void PrivateInstanceMethod() { }
+
+            [Kept]
+            public static void Test()
             {
-                Expression.Call (typeof (ProtectedMethods), nameof (ProtectedStaticMethod), Type.EmptyTypes);
+                Expression.Call(
+                    typeof(ProtectedMethods),
+                    nameof(ProtectedStaticMethod),
+                    Type.EmptyTypes
+                );
 
                 // This should not mark anything, but it should also not warn (it should fail at runtime to find the method as well)
-                Expression.Call (typeof (ProtectedMethods), nameof (ProtectedInstanceMethod), Type.EmptyTypes);
+                Expression.Call(
+                    typeof(ProtectedMethods),
+                    nameof(ProtectedInstanceMethod),
+                    Type.EmptyTypes
+                );
             }
         }
 
         [Kept]
         class PrivateMethods
         {
-            public static void PublicStaticMethod () { }
+            public static void PublicStaticMethod() { }
 
-            public void PublicInstanceMethod () { }
+            public void PublicInstanceMethod() { }
 
-            protected static void ProtectedStaticMethod () { }
+            protected static void ProtectedStaticMethod() { }
 
-            protected void ProtectedInstanceMethod () { }
-
-            [Kept]
-            private static void PrivateStaticMethod () { }
-
-            private void PrivateInstanceMethod () { }
+            protected void ProtectedInstanceMethod() { }
 
             [Kept]
-            public static void Test ()
+            private static void PrivateStaticMethod() { }
+
+            private void PrivateInstanceMethod() { }
+
+            [Kept]
+            public static void Test()
             {
-                Expression.Call (typeof (PrivateMethods), nameof (PrivateStaticMethod), Type.EmptyTypes);
+                Expression.Call(
+                    typeof(PrivateMethods),
+                    nameof(PrivateStaticMethod),
+                    Type.EmptyTypes
+                );
 
                 // This should not mark anything, but it should also not warn (it should fail at runtime to find the method as well)
-                Expression.Call (typeof (PrivateMethods), nameof (PrivateInstanceMethod), Type.EmptyTypes);
+                Expression.Call(
+                    typeof(PrivateMethods),
+                    nameof(PrivateInstanceMethod),
+                    Type.EmptyTypes
+                );
             }
         }
 
         [Kept]
-        static string GetUnknownString ()
+        static string GetUnknownString()
         {
             return "unknownstring";
         }
@@ -124,289 +144,323 @@ namespace Mono.Linker.Tests.Cases.Reflection
         class TestUnknownType
         {
             [Kept]
-            [ExpectedWarning ("IL2072", nameof (Expression) + "." + nameof (Expression.Call))]
-            public static void Test ()
+            [ExpectedWarning("IL2072", nameof(Expression) + "." + nameof(Expression.Call))]
+            public static void Test()
             {
                 // Keep all methods of the type that made the call
-                Expression.Call (GetUnknownType (), "This string will not be reached", Type.EmptyTypes);
+                Expression.Call(
+                    GetUnknownType(),
+                    "This string will not be reached",
+                    Type.EmptyTypes
+                );
                 // IL2072
-                Expression.Call (TriggerUnrecognizedPattern (), "This string will not be reached", Type.EmptyTypes);
+                Expression.Call(
+                    TriggerUnrecognizedPattern(),
+                    "This string will not be reached",
+                    Type.EmptyTypes
+                );
             }
 
             [Kept]
-            [return: KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [return: DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-            static Type GetUnknownType ()
+            [return: KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [return: DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+            static Type GetUnknownType()
             {
-                return typeof (TestType);
+                return typeof(TestType);
             }
 
             [Kept]
-            static Type TriggerUnrecognizedPattern ()
+            static Type TriggerUnrecognizedPattern()
             {
-                return typeof (TestType);
+                return typeof(TestType);
             }
         }
 
         [Kept]
-        static void TestNullType ()
+        static void TestNullType()
         {
             Type t = null;
-            Expression.Call (t, "This string will not be reached", Type.EmptyTypes);
+            Expression.Call(t, "This string will not be reached", Type.EmptyTypes);
         }
 
         [Kept]
-        static void TestNoValue ()
+        static void TestNoValue()
         {
             Type t = null;
-            Type noValue = Type.GetTypeFromHandle (t.TypeHandle);
-            Expression.Call (noValue, "This string will not be reached", Type.EmptyTypes);
+            Type noValue = Type.GetTypeFromHandle(t.TypeHandle);
+            Expression.Call(noValue, "This string will not be reached", Type.EmptyTypes);
         }
 
         [Kept]
-        static void TestNullString ()
+        static void TestNullString()
         {
-            Expression.Call (typeof (TestType), null, Type.EmptyTypes);
+            Expression.Call(typeof(TestType), null, Type.EmptyTypes);
         }
 
         [Kept]
-        static void TestEmptyString ()
+        static void TestEmptyString()
         {
-            Expression.Call (typeof (TestType), string.Empty, Type.EmptyTypes);
+            Expression.Call(typeof(TestType), string.Empty, Type.EmptyTypes);
         }
 
         [Kept]
-        static void TestNoValueString ()
+        static void TestNoValueString()
         {
             Type t = null;
             string noValue = t.AssemblyQualifiedName;
-            Expression.Call (typeof (TestType), noValue, Type.EmptyTypes);
+            Expression.Call(typeof(TestType), noValue, Type.EmptyTypes);
         }
 
         [Kept]
         class UnknownNameMethodClass
         {
             [Kept]
-            public static void PublicStaticMethod ()
-            {
-            }
+            public static void PublicStaticMethod() { }
 
             [Kept]
-            public void PublicNonStaticMethod ()
-            {
-            }
+            public void PublicNonStaticMethod() { }
 
             [Kept]
-            protected static void ProtectedStaticMethod ()
-            {
-            }
+            protected static void ProtectedStaticMethod() { }
 
             [Kept]
-            protected void ProtectedNonStaticMethod ()
-            {
-            }
+            protected void ProtectedNonStaticMethod() { }
 
             [Kept]
-            private static void PrivateStaticMethod ()
-            {
-            }
+            private static void PrivateStaticMethod() { }
 
             [Kept]
-            private void PrivateNonStaticMethod ()
-            {
-            }
+            private void PrivateNonStaticMethod() { }
         }
 
         [Kept]
         class Base
         {
             [Kept]
-            public static void PublicOnBase ()
-            {
-            }
+            public static void PublicOnBase() { }
 
             [Kept]
-            protected static void ProtectedOnBase ()
-            {
-            }
+            protected static void ProtectedOnBase() { }
 
-            private static void PrivateOnBase ()
-            {
-            }
+            private static void PrivateOnBase() { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (Base))]
-        class Derived : Base
-        {
-        }
+        [KeptBaseType(typeof(Base))]
+        class Derived : Base { }
 
         [Kept]
         class TestGenericMethods
         {
             [Kept]
-            public static void GenericMethodCalledAsNonGeneric<T> () { }
+            public static void GenericMethodCalledAsNonGeneric<T>() { }
 
             [Kept]
-            public static void GenericMethodWithNoRequirements<T> () { }
+            public static void GenericMethodWithNoRequirements<T>() { }
 
             [Kept]
             public static void GenericMethodWithRequirements<
-                [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicProperties)] T> ()
-            { }
+                [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                    T
+            >() { }
 
             [Kept]
             public static void GenericMethodWithRequirementsNoArguments<
-                [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicProperties)] T> ()
-            { }
+                [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                    T
+            >() { }
 
             [Kept]
-            static void TestWithNoTypeParameters ()
+            static void TestWithNoTypeParameters()
             {
                 // Linker should not warn even if the type parameters don't match since the target method has no requirements
                 // the fact that the reflection API may fail in this case is not something linker should worry about.
-                Expression.Call (typeof (TestGenericMethods), nameof (GenericMethodCalledAsNonGeneric), Type.EmptyTypes);
+                Expression.Call(
+                    typeof(TestGenericMethods),
+                    nameof(GenericMethodCalledAsNonGeneric),
+                    Type.EmptyTypes
+                );
             }
 
             [Kept]
-            static void TestMethodWithoutRequirements ()
+            static void TestMethodWithoutRequirements()
             {
                 // This may not warn - as it's safe
-                Expression.Call (typeof (TestGenericMethods), nameof (GenericMethodWithNoRequirements), new Type[] { GetUnknownType () });
+                Expression.Call(
+                    typeof(TestGenericMethods),
+                    nameof(GenericMethodWithNoRequirements),
+                    new Type[] { GetUnknownType() }
+                );
             }
 
             [Kept]
-            static void TestMethodWithRequirements ()
+            static void TestMethodWithRequirements()
             {
                 // This may not warn - as it's safe
-                Expression.Call (typeof (TestGenericMethods), nameof (GenericMethodWithRequirements), new Type[] { GetUnknownTypeWithRequrements () });
+                Expression.Call(
+                    typeof(TestGenericMethods),
+                    nameof(GenericMethodWithRequirements),
+                    new Type[] { GetUnknownTypeWithRequrements() }
+                );
             }
 
             [Kept]
             // https://github.com/dotnet/linker/issues/2755
-            [ExpectedWarning ("IL2060", "Expression.Call", ProducedBy = ProducedBy.Trimmer)]
-            static void TestMethodWithRequirementsUnknownTypeArray (Type[] types)
+            [ExpectedWarning("IL2060", "Expression.Call", ProducedBy = ProducedBy.Trimmer)]
+            static void TestMethodWithRequirementsUnknownTypeArray(Type[] types)
             {
                 // The passed in types array cannot be analyzed, so a warning is produced.
-                Expression.Call (typeof (TestGenericMethods), nameof (GenericMethodWithRequirements), types);
+                Expression.Call(
+                    typeof(TestGenericMethods),
+                    nameof(GenericMethodWithRequirements),
+                    types
+                );
             }
 
             [Kept]
-            [ExpectedWarning ("IL2060", "Expression.Call")]
-            static void TestMethodWithRequirementsButNoTypeArguments ()
+            [ExpectedWarning("IL2060", "Expression.Call")]
+            static void TestMethodWithRequirementsButNoTypeArguments()
             {
-                Expression.Call (typeof (TestGenericMethods), nameof (GenericMethodWithRequirementsNoArguments), Type.EmptyTypes);
+                Expression.Call(
+                    typeof(TestGenericMethods),
+                    nameof(GenericMethodWithRequirementsNoArguments),
+                    Type.EmptyTypes
+                );
             }
 
             [Kept]
-            [KeptMember (".cctor()")]
+            [KeptMember(".cctor()")]
             class UnknownMethodWithRequirements
             {
                 [Kept]
                 public static void GenericMethodWithRequirements<
-                    [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicProperties)] T> ()
-                { }
+                    [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                        T
+                >() { }
 
                 [Kept]
                 static string _unknownMethodName = "NoMethod";
 
                 [Kept]
-                [ExpectedWarning ("IL2060")]
-                public static void TestWithTypeParameters ()
+                [ExpectedWarning("IL2060")]
+                public static void TestWithTypeParameters()
                 {
                     // Linker has no idea which method to mark - so it should warn if there are type parameters
-                    Expression.Call (typeof (UnknownMethodWithRequirements), _unknownMethodName, new Type[] { GetUnknownType () });
+                    Expression.Call(
+                        typeof(UnknownMethodWithRequirements),
+                        _unknownMethodName,
+                        new Type[] { GetUnknownType() }
+                    );
                 }
 
                 [Kept]
-                public static void TestWithoutTypeParameters ()
+                public static void TestWithoutTypeParameters()
                 {
                     // Linker has no idea which method to mark - so it should warn if there are type parameters
-                    Expression.Call (typeof (UnknownMethodWithRequirements), _unknownMethodName, Type.EmptyTypes);
+                    Expression.Call(
+                        typeof(UnknownMethodWithRequirements),
+                        _unknownMethodName,
+                        Type.EmptyTypes
+                    );
                 }
             }
 
             [Kept]
-            [KeptMember (".cctor()")]
+            [KeptMember(".cctor()")]
             class UnknownTypeWithRequirements
             {
                 public static void GenericMethodWithRequirements<
-                    [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicProperties)] T> ()
-                { }
+                    [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                        T
+                >() { }
 
                 [Kept]
-                [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
+                [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicMethods
+                        | DynamicallyAccessedMemberTypes.NonPublicMethods
+                )]
                 static Type _unknownType = null;
 
                 [Kept]
-                [ExpectedWarning ("IL2060")]
-                public static void TestWithTypeParameters ()
+                [ExpectedWarning("IL2060")]
+                public static void TestWithTypeParameters()
                 {
                     // Linker has no idea which method to mark - so it should warn if there are type parameters
-                    Expression.Call (_unknownType, "NoMethod", new Type[] { GetUnknownType () });
+                    Expression.Call(_unknownType, "NoMethod", new Type[] { GetUnknownType() });
                 }
 
                 [Kept]
-                public static void TestWithoutTypeParameters ()
+                public static void TestWithoutTypeParameters()
                 {
                     // Linker has no idea which method to mark - so it should warn if there are type parameters
-                    Expression.Call (_unknownType, "NoMethod", Type.EmptyTypes);
+                    Expression.Call(_unknownType, "NoMethod", Type.EmptyTypes);
                 }
             }
 
             [Kept]
-            [KeptMember (".cctor()")]
+            [KeptMember(".cctor()")]
             class TwoKnownTypeArrays
             {
                 [Kept]
                 public static void GenericMethodWithRequirements<
-                    [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicProperties)] T> ()
-                { }
+                    [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                        T
+                >() { }
 
                 [Kept]
                 static string _unknownMethodName = "NoMethod";
 
                 [Kept]
-                [ExpectedWarning ("IL2060", "Expression.Call")]
-                public static void Test (int p = 0)
+                [ExpectedWarning("IL2060", "Expression.Call")]
+                public static void Test(int p = 0)
                 {
-                    Type[] types = p switch {
-                        0 => new Type[] { typeof (TestType) },
-                        1 => new Type[] { typeof (TestType) }
+                    Type[] types = p switch
+                    {
+                        0 => new Type[] { typeof(TestType) },
+                        1 => new Type[] { typeof(TestType) }
                     };
 
-                    Expression.Call (typeof (TwoKnownTypeArrays), _unknownMethodName, types);
+                    Expression.Call(typeof(TwoKnownTypeArrays), _unknownMethodName, types);
                 }
             }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                TestWithNoTypeParameters ();
-                TestMethodWithoutRequirements ();
-                TestMethodWithRequirements ();
-                TestMethodWithRequirementsUnknownTypeArray (null);
-                TestMethodWithRequirementsButNoTypeArguments ();
-                UnknownMethodWithRequirements.TestWithTypeParameters ();
-                UnknownMethodWithRequirements.TestWithoutTypeParameters ();
-                UnknownTypeWithRequirements.TestWithTypeParameters ();
-                UnknownTypeWithRequirements.TestWithoutTypeParameters ();
-                TwoKnownTypeArrays.Test ();
+                TestWithNoTypeParameters();
+                TestMethodWithoutRequirements();
+                TestMethodWithRequirements();
+                TestMethodWithRequirementsUnknownTypeArray(null);
+                TestMethodWithRequirementsButNoTypeArguments();
+                UnknownMethodWithRequirements.TestWithTypeParameters();
+                UnknownMethodWithRequirements.TestWithoutTypeParameters();
+                UnknownTypeWithRequirements.TestWithTypeParameters();
+                UnknownTypeWithRequirements.TestWithoutTypeParameters();
+                TwoKnownTypeArrays.Test();
             }
 
             [Kept]
-            static Type GetUnknownType () { return null; }
+            static Type GetUnknownType()
+            {
+                return null;
+            }
 
             [Kept]
-            [return: KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [return: DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicProperties)]
-            static Type GetUnknownTypeWithRequrements () { return null; }
+            [return: KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+            static Type GetUnknownTypeWithRequrements()
+            {
+                return null;
+            }
         }
 
         [Kept]

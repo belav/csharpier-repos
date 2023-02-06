@@ -5,24 +5,23 @@ using System;
 namespace NS
 {
     extern alias MyAssembly01;
-    
+
     public class MyClass
     {
-        public static int GetInt ()
+        public static int GetInt()
         {
-            return MyAssembly01::GlobalClass.StaticMethod ();
+            return MyAssembly01::GlobalClass.StaticMethod();
         }
     }
 }
 
 public class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        if (NS.MyClass.GetInt () != 1)
+        if (NS.MyClass.GetInt() != 1)
             return 1;
-        
+
         return 0;
     }
 }
-

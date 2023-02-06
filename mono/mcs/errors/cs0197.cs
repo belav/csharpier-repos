@@ -3,23 +3,17 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-class T : MarshalByRefObject {
+
+class T : MarshalByRefObject
+{
     int bar;
 
-    static void Foo (ref int i)
-    {
-    }
+    static void Foo(ref int i) { }
 
     static void Main()
     {
-        T t = new T ();
+        T t = new T();
         t.bar = 12;
-        Foo (ref t.bar);
+        Foo(ref t.bar);
     }
 }
-
-
-
-
-
-

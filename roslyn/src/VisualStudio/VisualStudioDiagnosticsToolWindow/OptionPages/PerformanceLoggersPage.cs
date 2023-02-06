@@ -30,11 +30,15 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
         private IThreadingContext _threadingContext;
         private SolutionServices _workspaceServices;
 
-        protected override AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore)
+        protected override AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        )
         {
             if (_globalOptions == null)
             {
-                var componentModel = (IComponentModel)serviceProvider.GetService(typeof(SComponentModel));
+                var componentModel = (IComponentModel)
+                    serviceProvider.GetService(typeof(SComponentModel));
 
                 _globalOptions = componentModel.GetService<IGlobalOptionService>();
                 _threadingContext = componentModel.GetService<IThreadingContext>();
@@ -53,7 +57,11 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             SetLoggers(_globalOptions, _threadingContext, _workspaceServices);
         }
 
-        public static void SetLoggers(IGlobalOptionService globalOptions, IThreadingContext threadingContext, SolutionServices workspaceServices)
+        public static void SetLoggers(
+            IGlobalOptionService globalOptions,
+            IThreadingContext threadingContext,
+            SolutionServices workspaceServices
+        )
         {
             var loggerTypeNames = GetLoggerTypes(globalOptions).ToImmutableArray();
 
@@ -65,14 +73,30 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             SetRoslynLogger(loggerTypeNames, () => new OutputWindowLogger(isEnabled));
 
             // update loggers in remote process
-            var client = threadingContext.JoinableTaskFactory.Run(() => RemoteHostClient.TryGetClientAsync(workspaceServices, CancellationToken.None));
+            var client = threadingContext.JoinableTaskFactory.Run(
+                () => RemoteHostClient.TryGetClientAsync(workspaceServices, CancellationToken.None)
+            );
             if (client != null)
             {
-                var functionIds = Enum.GetValues(typeof(FunctionId)).Cast<FunctionId>().Where(isEnabled).ToImmutableArray();
+                var functionIds = Enum.GetValues(typeof(FunctionId))
+                    .Cast<FunctionId>()
+                    .Where(isEnabled)
+                    .ToImmutableArray();
 
-                threadingContext.JoinableTaskFactory.Run(async () => _ = await client.TryInvokeAsync<IRemoteProcessTelemetryService>(
-                    (service, cancellationToken) => service.EnableLoggingAsync(loggerTypeNames, functionIds, cancellationToken),
-                    CancellationToken.None).ConfigureAwait(false));
+                threadingContext.JoinableTaskFactory.Run(
+                    async () =>
+                        _ = await client
+                            .TryInvokeAsync<IRemoteProcessTelemetryService>(
+                                (service, cancellationToken) =>
+                                    service.EnableLoggingAsync(
+                                        loggerTypeNames,
+                                        functionIds,
+                                        cancellationToken
+                                    ),
+                                CancellationToken.None
+                            )
+                            .ConfigureAwait(false)
+                );
             }
         }
 
@@ -94,11 +118,17 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             }
         }
 
-        private static void SetRoslynLogger<T>(ImmutableArray<string> loggerTypeNames, Func<T> creator) where T : ILogger
+        private static void SetRoslynLogger<T>(
+            ImmutableArray<string> loggerTypeNames,
+            Func<T> creator
+        )
+            where T : ILogger
         {
             if (loggerTypeNames.Contains(typeof(T).Name))
             {
-                Logger.SetLogger(AggregateLogger.AddOrReplace(creator(), Logger.GetLogger(), l => l is T));
+                Logger.SetLogger(
+                    AggregateLogger.AddOrReplace(creator(), Logger.GetLogger(), l => l is T)
+                );
             }
             else
             {

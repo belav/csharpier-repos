@@ -2,18 +2,17 @@
 // Line : 11
 using System;
 
-class Test {
-
-    enum Zub :byte {
+class Test
+{
+    enum Zub : byte
+    {
         Foo = 99,
         Bar,
         Baz
     }
-    
 
-    static void Main ()
+    static void Main()
     {
         object v = (Zub.Foo + Zub.Foo);
     }
 }
-    

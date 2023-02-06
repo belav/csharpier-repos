@@ -5,11 +5,11 @@ namespace Mono.Linker.Steps
 {
     public class ProcessWarningsStep : BaseStep
     {
-        protected override void Process ()
+        protected override void Process()
         {
-            // Flush all cached messages before the sweep and clean steps are run to be confident 
+            // Flush all cached messages before the sweep and clean steps are run to be confident
             // that we have all the information needed to gracefully generate the string.
-            Context.FlushCachedWarnings ();
+            Context.FlushCachedWarnings();
         }
     }
 }

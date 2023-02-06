@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,16 +36,13 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-    [MonoTODO ("We aren't actually going to implement this windows-only protocol")]
+    [MonoTODO("We aren't actually going to implement this windows-only protocol")]
     public class PnrpPeerResolverBindingElement : PeerResolverBindingElement
     {
-        public PnrpPeerResolverBindingElement ()
-        {
-        }
+        public PnrpPeerResolverBindingElement() { }
 
-        private PnrpPeerResolverBindingElement (
-            PnrpPeerResolverBindingElement other)
-            : base (other)
+        private PnrpPeerResolverBindingElement(PnrpPeerResolverBindingElement other)
+            : base(other)
         {
             ReferralPolicy = other.ReferralPolicy;
         }
@@ -53,66 +50,78 @@ namespace System.ServiceModel.Channels
         public override PeerReferralPolicy ReferralPolicy { get; set; }
 
         [MonoTODO]
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (
-            BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public override IChannelListener<TChannel>
-            BuildChannelListener<TChannel> (
-            BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override BindingElement Clone ()
+        public override BindingElement Clone()
         {
-            return new PnrpPeerResolverBindingElement (this);
-        }
-
-        [MonoTODO]
-        public override PeerResolver CreatePeerResolver ()
-        {
-            return new PnrpPeerResolver (this);
+            return new PnrpPeerResolverBindingElement(this);
         }
 
         [MonoTODO]
-        public override T GetProperty<T> (BindingContext context)
+        public override PeerResolver CreatePeerResolver()
         {
-            throw new NotImplementedException ();
+            return new PnrpPeerResolver(this);
+        }
+
+        [MonoTODO]
+        public override T GetProperty<T>(BindingContext context)
+        {
+            throw new NotImplementedException();
         }
     }
 
     class PnrpPeerResolver : PeerResolver
     {
-        public PnrpPeerResolver (PnrpPeerResolverBindingElement binding)
+        public PnrpPeerResolver(PnrpPeerResolverBindingElement binding) { }
+
+        public override bool CanShareReferrals
         {
+            get { throw new NotImplementedException(); }
         }
 
-        public override bool CanShareReferrals {
-            get{ throw new NotImplementedException (); }
+        public override object Register(
+            string meshId,
+            PeerNodeAddress nodeAddress,
+            TimeSpan timeout
+        )
+        {
+            throw new NotImplementedException();
         }
 
-        public override object Register (string meshId, PeerNodeAddress nodeAddress, TimeSpan timeout)
+        public override ReadOnlyCollection<PeerNodeAddress> Resolve(
+            string meshId,
+            int maxAddresses,
+            TimeSpan timeout
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override ReadOnlyCollection<PeerNodeAddress> Resolve (string meshId, int maxAddresses, TimeSpan timeout)
+        public override void Unregister(object registrationId, TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override void Unregister (object registrationId, TimeSpan timeout)
+        public override void Update(
+            object registrationId,
+            PeerNodeAddress updatedNodeAddress,
+            TimeSpan timeout
+        )
         {
-            throw new NotImplementedException ();
-        }
-
-        public override void Update (object registrationId, PeerNodeAddress updatedNodeAddress, TimeSpan timeout)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

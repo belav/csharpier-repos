@@ -32,66 +32,67 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-    
-    [ComVisible (false)]
-    public sealed class FileReferenceCollection : IEnumerable {
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class FileReferenceCollection : IEnumerable
+    {
+        List<FileReference> list;
 
-        List <FileReference> list;
-
-        FileReferenceCollection ()
+        FileReferenceCollection()
         {
-            list = new List <FileReference> ();
+            list = new List<FileReference>();
         }
-    
+
         [MonoTODO]
-        public FileReference Add (FileReference file)
+        public FileReference Add(FileReference file)
         {
-            list.Add (file);
+            list.Add(file);
             return file;
         }
 
         [MonoTODO]
-        public FileReference Add (string path)
+        public FileReference Add(string path)
         {
-            FileReference fr = new FileReference (path);
-            list.Add (fr);
+            FileReference fr = new FileReference(path);
+            list.Add(fr);
             return fr;
         }
-        
+
         [MonoTODO]
-        public void Clear ()
+        public void Clear()
         {
-            list.Clear ();
+            list.Clear();
         }
-        
+
         [MonoTODO]
-        public FileReference FindTargetPath (string targetPath)
+        public FileReference FindTargetPath(string targetPath)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return list.GetEnumerator ();
+            return list.GetEnumerator();
         }
-        
+
         [MonoTODO]
-        public void Remove (FileReference file)
+        public void Remove(FileReference file)
         {
-            list.Remove (file);
+            list.Remove(file);
         }
-        
+
         [MonoTODO]
-        public int Count {
+        public int Count
+        {
             get { return list.Count; }
         }
-        
+
         [MonoTODO]
-        public FileReference this [int index] {
-            get { return list [index]; }
+        public FileReference this[int index]
+        {
+            get { return list[index]; }
         }
     }
 }
-

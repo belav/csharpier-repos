@@ -11,9 +11,9 @@ public class Person
         set { _name = value; }
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Person johnDoe = new Person ();
-        (string) johnDoe.Name = "John Doe";
+        Person johnDoe = new Person();
+        (string)johnDoe.Name = "John Doe";
     }
 }

@@ -5,7 +5,7 @@ class X
 {
     static int f;
 
-    public static void Main ()
+    public static void Main()
     {
         ref int j = f;
     }

@@ -1,6 +1,4 @@
 public class A
 {
-    public static void Test (B b)
-    {
-    }
+    public static void Test(B b) { }
 }

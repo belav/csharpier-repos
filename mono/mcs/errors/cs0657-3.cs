@@ -4,8 +4,5 @@
 
 using System;
 
-[method: CLSCompliant (false)]
-
-public class C
-{
-}
+[method: CLSCompliant(false)]
+public class C { }

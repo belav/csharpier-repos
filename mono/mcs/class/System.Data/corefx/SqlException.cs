@@ -11,21 +11,25 @@ namespace System.Data.SqlClient
     {
         private const string DEF_MESSAGE = "SQL Exception has occured.";
 
-        public override string Message {
-            get {
+        public override string Message
+        {
+            get
+            {
                 if (Errors.Count == 0)
                     return base.Message;
-                StringBuilder result = new StringBuilder ();
-                if (base.Message != DEF_MESSAGE) {
-                    result.Append (base.Message);
-                    result.Append ("\n");
+                StringBuilder result = new StringBuilder();
+                if (base.Message != DEF_MESSAGE)
+                {
+                    result.Append(base.Message);
+                    result.Append("\n");
                 }
-                for (int i = 0; i < Errors.Count -1; i++) {
-                    result.Append (Errors [i].Message);
-                    result.Append ("\n");
+                for (int i = 0; i < Errors.Count - 1; i++)
+                {
+                    result.Append(Errors[i].Message);
+                    result.Append("\n");
                 }
-                result.Append (Errors [Errors.Count - 1].Message);
-                return result.ToString ();
+                result.Append(Errors[Errors.Count - 1].Message);
+                return result.ToString();
             }
         }
     }

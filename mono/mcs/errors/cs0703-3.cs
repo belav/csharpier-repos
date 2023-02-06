@@ -3,11 +3,8 @@
 
 public class C
 {
-    interface I
-    {
-    }
+    interface I { }
 
-    public void Foo<T>()  where T : I
-    {
-    }
+    public void Foo<T>()
+        where T : I { }
 }

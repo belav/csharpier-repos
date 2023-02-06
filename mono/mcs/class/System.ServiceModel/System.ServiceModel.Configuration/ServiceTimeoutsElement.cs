@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,35 +54,36 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class ServiceTimeoutsElement
-         : BehaviorExtensionElement
+    public sealed class ServiceTimeoutsElement : BehaviorExtensionElement
     {
-        public ServiceTimeoutsElement () {
-        }
-
+        public ServiceTimeoutsElement() { }
 
         // Properties
 
-        public override Type BehaviorType {
-            get { return typeof (ServiceTimeoutsBehavior); }
+        public override Type BehaviorType
+        {
+            get { return typeof(ServiceTimeoutsBehavior); }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return base.Properties; }
         }
 
-        [ConfigurationProperty ("transactionTimeout",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:00:00")]
-        public TimeSpan TransactionTimeout {
-            get { return (TimeSpan) base ["transactionTimeout"]; }
-            set { base ["transactionTimeout"] = value; }
+        [ConfigurationProperty(
+            "transactionTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:00:00"
+        )]
+        public TimeSpan TransactionTimeout
+        {
+            get { return (TimeSpan)base["transactionTimeout"]; }
+            set { base["transactionTimeout"] = value; }
         }
 
-        protected internal override object CreateBehavior () {
-            return new ServiceTimeoutsBehavior (TransactionTimeout);
+        protected internal override object CreateBehavior()
+        {
+            return new ServiceTimeoutsBehavior(TransactionTimeout);
         }
-
     }
-
 }

@@ -6,11 +6,11 @@
 
 using System;
 
-public class Node<a> 
+public class Node<a>
 {
     public static Node<a> leaf;
 
-    static Node() 
+    static Node()
     {
         leaf = new Node<a>();
         Console.WriteLine("Node<A>'s .cctor ran, where A was {0}.", typeof(a));
@@ -18,12 +18,11 @@ public class Node<a>
     }
 }
 
-
 public class NodeSys<a>
 {
     public static NodeSys<a> leafSys;
-    
-    static NodeSys() 
+
+    static NodeSys()
     {
         leafSys = new NodeSys<a>();
         Console.WriteLine("NodeSys<A>'s .cctor ran, where A was {0}.", typeof(a));
@@ -33,17 +32,17 @@ public class NodeSys<a>
 
 public class SystemMap<a>
 {
-        public NodeSys<a> rootSys;
+    public NodeSys<a> rootSys;
     public Node<NodeSys<a>> root;
 
-        public SystemMap(a x)
-        {
-            Console.WriteLine("Accessing a static from NodeSys<a>...");
-            this.rootSys = NodeSys<a>.leafSys;
-       
-                Console.WriteLine("\nAccessing a static from Node<NodeSys<a>>...");
-            this.root = Node<NodeSys<a>>.leaf;
-        }
+    public SystemMap(a x)
+    {
+        Console.WriteLine("Accessing a static from NodeSys<a>...");
+        this.rootSys = NodeSys<a>.leafSys;
+
+        Console.WriteLine("\nAccessing a static from Node<NodeSys<a>>...");
+        this.root = Node<NodeSys<a>>.leaf;
+    }
 
     public bool Eval()
     {
@@ -51,7 +50,7 @@ public class SystemMap<a>
         Console.WriteLine("Got: {0}", (this.rootSys == null) ? "<null>" : this.rootSys.ToString());
 
         Console.WriteLine("Read a static from Node<NodeSys<a>>.");
-            Console.WriteLine("Got: {0}", (this.root == null) ? "<null>" : this.root.ToString());
+        Console.WriteLine("Got: {0}", (this.root == null) ? "<null>" : this.root.ToString());
 
         if (rootSys == null || root == null)
             return false;
@@ -60,20 +59,19 @@ public class SystemMap<a>
     }
 }
 
-
 class Test
 {
-    public static int Main () 
-        { 
-            Console.WriteLine("-------------------------------------------------------------------");
-        SystemMap<Int32>  y1 = new SystemMap<Int32> (5);
+    public static int Main()
+    {
         Console.WriteLine("-------------------------------------------------------------------");
-           SystemMap<Object> y2 = new SystemMap<Object> ("S");
+        SystemMap<Int32> y1 = new SystemMap<Int32>(5);
         Console.WriteLine("-------------------------------------------------------------------");
-           SystemMap<string> y3 = new SystemMap<string> ("S");
+        SystemMap<Object> y2 = new SystemMap<Object>("S");
+        Console.WriteLine("-------------------------------------------------------------------");
+        SystemMap<string> y3 = new SystemMap<string>("S");
         Console.WriteLine("-------------------------------------------------------------------");
 
-        if (y1.Eval() && y2.Eval() && y3.Eval() )
+        if (y1.Eval() && y2.Eval() && y3.Eval())
         {
             Console.WriteLine("PASS");
             return 100;

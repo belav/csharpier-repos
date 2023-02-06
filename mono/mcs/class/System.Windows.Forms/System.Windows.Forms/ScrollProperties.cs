@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,62 +34,70 @@ namespace System.Windows.Forms
         #endregion
 
         #region constructor
-        protected ScrollProperties (ScrollableControl container)
+        protected ScrollProperties(ScrollableControl container)
         {
             parentControl = container;
         }
         #endregion
 
         #region Public Properties
-        [DefaultValue (true)]
-        public bool Enabled {
+        [DefaultValue(true)]
+        public bool Enabled
+        {
             get { return scroll_bar.Enabled; }
             set { scroll_bar.Enabled = value; }
         }
-        
-        [DefaultValue (10)]
-        [RefreshProperties (RefreshProperties.Repaint)]
-        public int LargeChange {
+
+        [DefaultValue(10)]
+        [RefreshProperties(RefreshProperties.Repaint)]
+        public int LargeChange
+        {
             get { return scroll_bar.LargeChange; }
             set { scroll_bar.LargeChange = value; }
         }
 
-        [DefaultValue (100)]
-        [RefreshProperties (RefreshProperties.Repaint)]
-        public int Maximum {
+        [DefaultValue(100)]
+        [RefreshProperties(RefreshProperties.Repaint)]
+        public int Maximum
+        {
             get { return scroll_bar.Maximum; }
             set { scroll_bar.Maximum = value; }
         }
 
-        [DefaultValue (0)]
-        [RefreshProperties (RefreshProperties.Repaint)]
-        public int Minimum {
+        [DefaultValue(0)]
+        [RefreshProperties(RefreshProperties.Repaint)]
+        public int Minimum
+        {
             get { return scroll_bar.Minimum; }
             set { scroll_bar.Minimum = value; }
         }
 
-        [DefaultValue (1)]
-        public int SmallChange {
+        [DefaultValue(1)]
+        public int SmallChange
+        {
             get { return scroll_bar.SmallChange; }
             set { scroll_bar.SmallChange = value; }
         }
 
-        [DefaultValue (0)]
-        [BindableAttribute (true)]
-        public int Value {
+        [DefaultValue(0)]
+        [BindableAttribute(true)]
+        public int Value
+        {
             get { return scroll_bar.Value; }
             set { scroll_bar.Value = value; }
         }
 
-        [DefaultValue (false)]
-        public bool Visible {
+        [DefaultValue(false)]
+        public bool Visible
+        {
             get { return scroll_bar.Visible; }
             set { scroll_bar.Visible = value; }
         }
         #endregion
 
         #region Protected Properties
-        protected ScrollableControl ParentControl {
+        protected ScrollableControl ParentControl
+        {
             get { return parentControl; }
         }
         #endregion

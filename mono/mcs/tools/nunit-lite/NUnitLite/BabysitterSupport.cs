@@ -19,17 +19,28 @@ namespace Xamarin
 
     public class BabysitterSupport
     {
-        enum OverrideMode {None, Run, Exclude};
+        enum OverrideMode
+        {
+            None,
+            Run,
+            Exclude
+        };
+
         public static Dictionary<string, bool> OverrideTests = new Dictionary<string, bool>();
         private static OverrideMode Override = OverrideMode.None;
-        private static string CurrentTestFile = null, RanTestFile = null, FailedTestFile = null;
+        private static string CurrentTestFile = null,
+            RanTestFile = null,
+            FailedTestFile = null;
 
         private static void DeleteFile(string path)
         {
-            try {
+            try
+            {
                 File.Delete(path);
-            } catch (Exception) {}
+            }
+            catch (Exception) { }
         }
+
         private static void WriteFile(string path, string contents)
         {
             DeleteFile(path);
@@ -39,27 +50,38 @@ namespace Xamarin
         // Environment variables are available from process start, so safe to do setup in a static constructor
         static BabysitterSupport()
         {
-            string overrideModeString = Environment.GetEnvironmentVariable("MONO_BABYSITTER_NUNIT_RUN_MODE");
-            string overrideTestString = Environment.GetEnvironmentVariable("MONO_BABYSITTER_NUNIT_RUN_TEST");
+            string overrideModeString = Environment.GetEnvironmentVariable(
+                "MONO_BABYSITTER_NUNIT_RUN_MODE"
+            );
+            string overrideTestString = Environment.GetEnvironmentVariable(
+                "MONO_BABYSITTER_NUNIT_RUN_TEST"
+            );
             if (overrideModeString == "RUN")
                 Override = OverrideMode.Run;
             else if (overrideModeString == "EXCLUDE")
                 Override = OverrideMode.Exclude;
             if (Override != OverrideMode.None)
             {
-                string[] overrideTests = overrideTestString.Split(new char[] {';'}, StringSplitOptions.RemoveEmptyEntries);
+                string[] overrideTests = overrideTestString.Split(
+                    new char[] { ';' },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 foreach (string s in overrideTests)
                     OverrideTests[s] = true;
             }
 
-            CurrentTestFile = Environment.GetEnvironmentVariable("MONO_BABYSITTER_NUNIT_CURRENT_TEST_FILE");
+            CurrentTestFile = Environment.GetEnvironmentVariable(
+                "MONO_BABYSITTER_NUNIT_CURRENT_TEST_FILE"
+            );
             RanTestFile = Environment.GetEnvironmentVariable("MONO_BABYSITTER_NUNIT_RAN_TEST_FILE");
-            FailedTestFile = Environment.GetEnvironmentVariable("MONO_BABYSITTER_NUNIT_FAILED_TEST_FILE");
+            FailedTestFile = Environment.GetEnvironmentVariable(
+                "MONO_BABYSITTER_NUNIT_FAILED_TEST_FILE"
+            );
         }
 
         // Entry points
 
-        public static void RecordEnterTest( string testName )
+        public static void RecordEnterTest(string testName)
         {
             if (CurrentTestFile != null)
                 WriteFile(CurrentTestFile, testName);
@@ -67,13 +89,13 @@ namespace Xamarin
                 File.AppendAllText(RanTestFile, testName + Environment.NewLine);
         }
 
-        public static void RecordLeaveTest( string testName )
+        public static void RecordLeaveTest(string testName)
         {
             if (CurrentTestFile != null)
                 DeleteFile(CurrentTestFile);
         }
 
-        public static void RecordFailedTest( string testName )
+        public static void RecordFailedTest(string testName)
         {
             if (FailedTestFile != null)
                 File.AppendAllText(FailedTestFile, testName + Environment.NewLine);

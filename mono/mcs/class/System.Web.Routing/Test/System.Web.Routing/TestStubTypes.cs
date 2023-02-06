@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,64 +40,65 @@ namespace MonoTests.System.Web.Routing
         HttpRequestStub req;
         bool returnNullRequest;
 
-        public HttpContextStub ()
-            : this (null)
-        {
-        }
+        public HttpContextStub()
+            : this(null) { }
 
-        public HttpContextStub (bool returnNullRequest)
-            : this (null)
+        public HttpContextStub(bool returnNullRequest)
+            : this(null)
         {
             this.returnNullRequest = returnNullRequest;
         }
 
-        public HttpContextStub (string dummyRequestPath)
-            : this (dummyRequestPath, null)
-        {
-        }
+        public HttpContextStub(string dummyRequestPath)
+            : this(dummyRequestPath, null) { }
 
-        public HttpContextStub (string dummyRequestPath, string pathInfo)
-            : this (dummyRequestPath, pathInfo, null)
-        {
-        }
+        public HttpContextStub(string dummyRequestPath, string pathInfo)
+            : this(dummyRequestPath, pathInfo, null) { }
 
-        public HttpContextStub (string dummyRequestPath, string pathInfo, string method)
+        public HttpContextStub(string dummyRequestPath, string pathInfo, string method)
         {
-            if (dummyRequestPath != null) {
-                req = new HttpRequestStub (dummyRequestPath, pathInfo);
+            if (dummyRequestPath != null)
+            {
+                req = new HttpRequestStub(dummyRequestPath, pathInfo);
                 req.Method = method;
             }
         }
 
-        public override HttpRequestBase Request {
-            get {
+        public override HttpRequestBase Request
+        {
+            get
+            {
                 if (returnNullRequest)
                     return null;
 
-                return req != null ? req : base.Request; 
+                return req != null ? req : base.Request;
             }
         }
     }
 
     class HttpRequestStub : HttpRequestBase
     {
-        public HttpRequestStub (string dummyRequestPath, string pathInfo)
+        public HttpRequestStub(string dummyRequestPath, string pathInfo)
         {
             req_path = dummyRequestPath;
             path_info = pathInfo;
         }
 
-        string req_path, path_info;
-        
-        public override string AppRelativeCurrentExecutionFilePath {
+        string req_path,
+            path_info;
+
+        public override string AppRelativeCurrentExecutionFilePath
+        {
             get { return req_path ?? base.AppRelativeCurrentExecutionFilePath; }
         }
 
-        public override string PathInfo {
+        public override string PathInfo
+        {
             get { return path_info ?? base.PathInfo; }
         }
 
-        public override string HttpMethod {
+        public override string HttpMethod
+        {
             get { return Method; }
         }
 
@@ -106,66 +107,69 @@ namespace MonoTests.System.Web.Routing
 
     class MyDictionary : Hashtable
     {
-        public override ICollection Keys {
+        public override ICollection Keys
+        {
             get { return null; }
         }
 
-        public override object this [object key] {
-            get {
+        public override object this[object key]
+        {
+            get
+            {
                 //Console.Error.WriteLine ("Get: {0} {1}", key, key.GetHashCode ());
-                return base [key];
+                return base[key];
             }
-            set {
+            set
+            {
                 //Console.Error.WriteLine ("Set: {0} {1} = {2}", key, key.GetHashCode (), value);
-                base [key] = value; 
+                base[key] = value;
             }
         }
     }
 
     class HttpContextStub2 : HttpContextBase
     {
-        public HttpContextStub2 ()
-            : this (null, null)
+        public HttpContextStub2()
+            : this(null, null) { }
+
+        public HttpContextStub2(string requestUrl, string path)
+            : this(requestUrl, path, null) { }
+
+        public HttpContextStub2(string requestUrl, string path, string appPath)
         {
+            request = new HttpRequestStub2(requestUrl, path, appPath);
         }
 
-        public HttpContextStub2 (string requestUrl, string path)
-            : this (requestUrl, path, null)
-        {
-        }
-
-        public HttpContextStub2 (string requestUrl, string path, string appPath)
-        {
-            request = new HttpRequestStub2 (requestUrl, path, appPath);
-        }
-
-        Hashtable items = new MyDictionary ();
+        Hashtable items = new MyDictionary();
         HttpRequestStub request;
         HttpResponseBase response;
 
-        public override IDictionary Items {
+        public override IDictionary Items
+        {
             get { return items; }
         }
 
-        public override HttpRequestBase Request {
+        public override HttpRequestBase Request
+        {
             get { return request ?? base.Request; }
         }
 
-        public override HttpResponseBase Response {
+        public override HttpResponseBase Response
+        {
             get { return response ?? base.Response; }
         }
 
-        public override void RewritePath (string path)
+        public override void RewritePath(string path)
         {
-            throw new ApplicationException (path);
+            throw new ApplicationException(path);
         }
 
-        public void SetResponse (HttpResponseBase response)
+        public void SetResponse(HttpResponseBase response)
         {
             this.response = response;
         }
 
-        public void SetRequest (HttpRequestStub request)
+        public void SetRequest(HttpRequestStub request)
         {
             this.request = request;
         }
@@ -173,62 +177,64 @@ namespace MonoTests.System.Web.Routing
 
     class HttpRequestStub2 : HttpRequestStub
     {
-        public HttpRequestStub2 (string dummyRequestPath, string dummyPath, string appPath)
-            : base (dummyRequestPath, String.Empty)
+        public HttpRequestStub2(string dummyRequestPath, string dummyPath, string appPath)
+            : base(dummyRequestPath, String.Empty)
         {
             path = dummyPath;
             app_path = appPath;
         }
 
-        string path, app_path;
+        string path,
+            app_path;
 
-        public override string ApplicationPath {
+        public override string ApplicationPath
+        {
             get { return app_path ?? base.ApplicationPath; }
         }
 
-        public override string Path {
+        public override string Path
+        {
             get { return path ?? base.Path; }
         }
     }
 
     public class HttpResponseStub : HttpResponseBase
     {
-        public HttpResponseStub ()
-            : this (0)
-        {
-        }
+        public HttpResponseStub()
+            : this(0) { }
 
         int impl_type;
 
-        public HttpResponseStub (int implType)
+        public HttpResponseStub(int implType)
         {
             this.impl_type = implType;
         }
 
-        public override string ApplyAppPathModifier (string virtualPath)
+        public override string ApplyAppPathModifier(string virtualPath)
         {
-            switch (impl_type) {
-            case 3:
-                return virtualPath; // pass thru
-            case 2:
-                return virtualPath + "_modified";
-            case 1:
-                throw new ApplicationException (virtualPath);
-            default:
-                return base.ApplyAppPathModifier (virtualPath);
+            switch (impl_type)
+            {
+                case 3:
+                    return virtualPath; // pass thru
+                case 2:
+                    return virtualPath + "_modified";
+                case 1:
+                    throw new ApplicationException(virtualPath);
+                default:
+                    return base.ApplyAppPathModifier(virtualPath);
             }
         }
     }
 
     class HttpContextStub3 : HttpContextStub2
     {
-        public HttpContextStub3 (string requestUrl, string path, string appPath, bool supportHandler)
-            : base (requestUrl, path, appPath)
+        public HttpContextStub3(string requestUrl, string path, string appPath, bool supportHandler)
+            : base(requestUrl, path, appPath)
         {
             this.support_handler = supportHandler;
         }
 
-        public override void RewritePath (string path)
+        public override void RewritePath(string path)
         {
             RewrittenPath = path;
         }
@@ -236,9 +242,11 @@ namespace MonoTests.System.Web.Routing
         bool support_handler;
         public IHttpHandler HttpHandler { get; set; }
 
-        public override IHttpHandler Handler {
+        public override IHttpHandler Handler
+        {
             get { return support_handler ? HttpHandler : base.Handler; }
-            set {
+            set
+            {
                 if (support_handler)
                     HttpHandler = value;
                 else
@@ -248,14 +256,15 @@ namespace MonoTests.System.Web.Routing
 
         public string RewrittenPath { get; set; }
     }
+
     class FakeHttpRequestWrapper : HttpRequestWrapper
     {
         string requestUrl;
         string path;
         string appPath;
 
-        public FakeHttpRequestWrapper (string requestUrl, string path, string appPath)
-            : base (new HttpRequest (path, "http://localhost/", String.Empty))
+        public FakeHttpRequestWrapper(string requestUrl, string path, string appPath)
+            : base(new HttpRequest(path, "http://localhost/", String.Empty))
         {
             this.requestUrl = requestUrl;
             this.path = path;
@@ -264,10 +273,7 @@ namespace MonoTests.System.Web.Routing
 
         public override string AppRelativeCurrentExecutionFilePath
         {
-            get
-            {
-                return appPath;
-            }
+            get { return appPath; }
         }
     }
 
@@ -277,16 +283,13 @@ namespace MonoTests.System.Web.Routing
 
         public override HttpRequestBase Request
         {
-            get
-            {
-                return wrapper;
-            }
+            get { return wrapper; }
         }
 
-        public HttpContextStub4 (string requestUrl, string path, string appPath, bool supportHandler)
-            : base (requestUrl, path, appPath, supportHandler)
+        public HttpContextStub4(string requestUrl, string path, string appPath, bool supportHandler)
+            : base(requestUrl, path, appPath, supportHandler)
         {
-            wrapper = new FakeHttpRequestWrapper (requestUrl, path, appPath);
+            wrapper = new FakeHttpRequestWrapper(requestUrl, path, appPath);
         }
     }
 
@@ -296,73 +299,67 @@ namespace MonoTests.System.Web.Routing
 
         public override HttpRequestBase Request
         {
-            get
-            {
-                return wrapper;
-            }
+            get { return wrapper; }
         }
 
-        public HttpContextStub5 ()
-            : this (null, null)
-        {
-        }
+        public HttpContextStub5()
+            : this(null, null) { }
 
-        public HttpContextStub5 (string requestUrl, string path)
-            : this (requestUrl, path, null)
-        {
-            
-        }
+        public HttpContextStub5(string requestUrl, string path)
+            : this(requestUrl, path, null) { }
 
-        public HttpContextStub5 (string requestUrl, string path, string appPath)
-            : base (requestUrl, path, appPath)
+        public HttpContextStub5(string requestUrl, string path, string appPath)
+            : base(requestUrl, path, appPath)
         {
-            wrapper = new FakeHttpRequestWrapper (requestUrl, path, appPath);
+            wrapper = new FakeHttpRequestWrapper(requestUrl, path, appPath);
         }
     }
+
     public class MyStopRoutingHandler : StopRoutingHandler
     {
-        public IHttpHandler CallGetHttpHandler (RequestContext rc)
+        public IHttpHandler CallGetHttpHandler(RequestContext rc)
         {
-            return GetHttpHandler (rc);
+            return GetHttpHandler(rc);
         }
     }
 
     public class MyUrlRoutingHandler : UrlRoutingHandler
     {
-        public void DoProcessRequest (HttpContextBase httpContext)
+        public void DoProcessRequest(HttpContextBase httpContext)
         {
-            ProcessRequest (httpContext);
+            ProcessRequest(httpContext);
         }
 
-        protected override void VerifyAndProcessRequest (IHttpHandler httpHandler, HttpContextBase httpContext)
+        protected override void VerifyAndProcessRequest(
+            IHttpHandler httpHandler,
+            HttpContextBase httpContext
+        )
         {
-            throw new ApplicationException ("MyUrlRoutingHandler");
+            throw new ApplicationException("MyUrlRoutingHandler");
         }
     }
 
     public class ErrorRouteHandler : IRouteHandler
     {
-        public IHttpHandler GetHttpHandler (RequestContext requestContext)
+        public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            throw new ApplicationException ("ErrorRouteHandler");
+            throw new ApplicationException("ErrorRouteHandler");
         }
     }
 
     public class MyRouteHandler : IRouteHandler
     {
-        public MyRouteHandler ()
-            : this (new MyHttpHandler ())
-        {
-        }
+        public MyRouteHandler()
+            : this(new MyHttpHandler()) { }
 
-        public MyRouteHandler (IHttpHandler handler)
+        public MyRouteHandler(IHttpHandler handler)
         {
             this.handler = handler;
         }
 
         IHttpHandler handler;
 
-        public IHttpHandler GetHttpHandler (RequestContext requestContext)
+        public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
             return handler;
         }
@@ -370,24 +367,26 @@ namespace MonoTests.System.Web.Routing
 
     public class MyHttpHandler : IHttpHandler
     {
-        public bool IsReusable {
+        public bool IsReusable
+        {
             get { return true; }
         }
 
-        public void ProcessRequest (HttpContext ctx)
+        public void ProcessRequest(HttpContext ctx)
         {
-            throw new MyException ("HOGE");
+            throw new MyException("HOGE");
         }
     }
 
     public class MyException : Exception
     {
-        public MyException (string msg) : base (msg) {}
+        public MyException(string msg)
+            : base(msg) { }
     }
 
     public class NullRouteHandler : IRouteHandler
     {
-        public IHttpHandler GetHttpHandler (RequestContext requestContext)
+        public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
             return null;
         }
@@ -395,29 +394,42 @@ namespace MonoTests.System.Web.Routing
 
     public class MyRoute : Route
     {
-        public MyRoute (string url, IRouteHandler handler)
-            : this (url, handler, null)
-        {
-        }
+        public MyRoute(string url, IRouteHandler handler)
+            : this(url, handler, null) { }
 
-        public MyRoute (string url, IRouteHandler handler, Exception ex)
-            : base (url, handler)
+        public MyRoute(string url, IRouteHandler handler, Exception ex)
+            : base(url, handler)
         {
             this.ex = ex;
         }
 
         Exception ex;
 
-        public override VirtualPathData GetVirtualPath (RequestContext requestContext, RouteValueDictionary values)
+        public override VirtualPathData GetVirtualPath(
+            RequestContext requestContext,
+            RouteValueDictionary values
+        )
         {
             if (ex != null)
                 throw ex;
-            return base.GetVirtualPath (requestContext, values);
+            return base.GetVirtualPath(requestContext, values);
         }
 
-        public bool DoProcessConstraint (HttpContextBase httpContext, object constraint, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+        public bool DoProcessConstraint(
+            HttpContextBase httpContext,
+            object constraint,
+            string parameterName,
+            RouteValueDictionary values,
+            RouteDirection routeDirection
+        )
         {
-            return ProcessConstraint (httpContext, constraint, parameterName, values, routeDirection);
+            return ProcessConstraint(
+                httpContext,
+                constraint,
+                parameterName,
+                values,
+                routeDirection
+            );
         }
     }
 }

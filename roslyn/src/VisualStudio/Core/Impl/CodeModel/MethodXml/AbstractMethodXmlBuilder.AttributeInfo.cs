@@ -23,11 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Metho
 
             public bool IsEmpty
             {
-                get
-                {
-                    return this.Name == null
-                        && this.Value == null;
-                }
+                get { return this.Name == null && this.Value == null; }
             }
         }
     }

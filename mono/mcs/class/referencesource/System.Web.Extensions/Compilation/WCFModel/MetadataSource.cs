@@ -94,10 +94,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string Address
         {
-            get
-            {
-                return m_Address;
-            }
+            get { return m_Address; }
             set
             {
                 if (value == null)
@@ -116,10 +113,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string Protocol
         {
-            get
-            {
-                return m_Protocol;
-            }
+            get { return m_Protocol; }
             set
             {
                 if (value == null)
@@ -138,10 +132,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public int SourceId
         {
-            get
-            {
-                return m_SourceId;
-            }
+            get { return m_SourceId; }
             set
             {
                 if (value < 0)
@@ -152,9 +143,5 @@ namespace Microsoft.VSDesigner.WCFModel
                 m_SourceId = value;
             }
         }
-
     }
-
 }
-
-

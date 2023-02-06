@@ -7,17 +7,14 @@ using System.Collections.Generic;
 class MemberAccessData
 {
     public volatile uint VolatileValue;
-    public string [] StringValues;
+    public string[] StringValues;
     public List<string> ListValues;
-    
+
     int? mt;
-    public int? MyTypeProperty {
-        set    {
-            mt = value;
-        }
-        get {
-            return mt;
-        }
+    public int? MyTypeProperty
+    {
+        set { mt = value; }
+        get { return mt; }
     }
 }
 
@@ -30,87 +27,94 @@ enum E
 
 public class B
 {
-    protected virtual void BaseM ()
-    {
-    }
+    protected virtual void BaseM() { }
 }
 
 public class C : B
 {
-    delegate void D ();
-    
-    static void Test (D d)
+    delegate void D();
+
+    static void Test(D d) { }
+
+    static void Test(Action<E> func)
     {
+        func(E.E1);
     }
-    
-    static void Test (Action<E> func)
+
+    void InstanceTests()
     {
-        func (E.E1);
+        Test(() => base.BaseM());
     }
-    
-    void InstanceTests ()
-    {
-        Test (() => base.BaseM ());
-    }
-    
-    public static void Main ()
+
+    public static void Main()
     {
         Exception diffException;
-        
-        Test (() => {
+
+        Test(() =>
+        {
             diffException = null;
-                    try {
-                    } catch (Exception ex) {
-                        diffException = ex;
-                    } finally {
-                    }
-                    
-                    try {
-                    } catch {
-                    }
-                });
-                
-        int[] i_a = new int [] { 1,2,3 };
-        
-        Test (() => {
-                foreach (int t in i_a) {
-                }
-            });
-            
-        Test (() => {
-            Console.WriteLine (typeof (void));
+            try { }
+            catch (Exception ex)
+            {
+                diffException = ex;
+            }
+            finally { }
+
+            try { }
+            catch { }
         });
-        
-        Test (() => {
-            Console.WriteLine (typeof (Func<,>));
+
+        int[] i_a = new int[] { 1, 2, 3 };
+
+        Test(() =>
+        {
+            foreach (int t in i_a) { }
         });
-        
-        Test (() => {
+
+        Test(() =>
+        {
+            Console.WriteLine(typeof(void));
+        });
+
+        Test(() =>
+        {
+            Console.WriteLine(typeof(Func<,>));
+        });
+
+        Test(() =>
+        {
             object o = new List<object> { "Hello", "", null, "World", 5 };
         });
-        
-        Test (() => {
-            var v = new MemberAccessData { 
-                VolatileValue = 2, StringValues = new string [] { "sv" }, MyTypeProperty = null
+
+        Test(() =>
+        {
+            var v = new MemberAccessData
+            {
+                VolatileValue = 2,
+                StringValues = new string[] { "sv" },
+                MyTypeProperty = null
             };
         });
-        
-        Test (x => {
-            switch (x) {
-            case E.E1:
-                goto case E.E2;
-            case E.E2:
-                break;
-            default:
-                break;
+
+        Test(x =>
+        {
+            switch (x)
+            {
+                case E.E1:
+                    goto case E.E2;
+                case E.E2:
+                    break;
+                default:
+                    break;
             }
         });
 
-        Test (() => {
+        Test(() =>
+        {
             char ch = default;
         });
-        
-        var c = new C ();
-        c.InstanceTests ();
+
+        var c = new C();
+        c.InstanceTests();
     }
 }

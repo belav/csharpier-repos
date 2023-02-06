@@ -84,7 +84,16 @@ internal class DirectoryNode
             // path, filePath -> /Views/Home/Index.cshtml
             // directory.Path -> /Views/Home/
             // We only need to match the file name portion since we've already matched the directory segment.
-            if (string.Compare(path, directoryLength, filePath, directoryLength, path.Length - directoryLength, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                string.Compare(
+                    path,
+                    directoryLength,
+                    filePath,
+                    directoryLength,
+                    path.Length - directoryLength,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
             {
                 return file.ProjectItem;
             }
@@ -108,7 +117,8 @@ internal class DirectoryNode
     private static DirectoryNode GetOrAddDirectory(
         DirectoryNode directory,
         string path,
-        bool createIfNotExists = false)
+        bool createIfNotExists = false
+    )
     {
         Debug.Assert(!string.IsNullOrEmpty(path));
         if (path[path.Length - 1] != '/')
@@ -154,7 +164,16 @@ internal class DirectoryNode
             var directoryPath = currentDirectory.Path;
             var startIndex = parentDirectory.Path.Length;
 
-            if (string.Compare(path, startIndex, directoryPath, startIndex, directoryPath.Length - startIndex, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                string.Compare(
+                    path,
+                    startIndex,
+                    directoryPath,
+                    startIndex,
+                    directoryPath.Length - startIndex,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
             {
                 return currentDirectory;
             }

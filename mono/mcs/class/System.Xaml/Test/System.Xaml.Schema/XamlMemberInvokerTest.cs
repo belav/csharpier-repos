@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,266 +36,258 @@ namespace MonoTests.System.Xaml.Schema
     [TestFixture]
     public class XamlMemberInvokerTest
     {
-        XamlSchemaContext sctx = new XamlSchemaContext (new XamlSchemaContextSettings ());
-        PropertyInfo str_len = typeof (string).GetProperty ("Length");
-        PropertyInfo sb_len = typeof (StringBuilder).GetProperty ("Length");
-        PropertyInfo xr_resolver = typeof (XmlResolver).GetProperty ("Credentials");
-        EventInfo ass_load = typeof (AppDomain).GetEvent ("AssemblyLoad");
+        XamlSchemaContext sctx = new XamlSchemaContext(new XamlSchemaContextSettings());
+        PropertyInfo str_len = typeof(string).GetProperty("Length");
+        PropertyInfo sb_len = typeof(StringBuilder).GetProperty("Length");
+        PropertyInfo xr_resolver = typeof(XmlResolver).GetProperty("Credentials");
+        EventInfo ass_load = typeof(AppDomain).GetEvent("AssemblyLoad");
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorNull()
         {
-            new XamlMemberInvoker (null);
+            new XamlMemberInvoker(null);
         }
 
         // Property
 
         [Test]
-        public void FromProperty ()
+        public void FromProperty()
         {
             var pi = str_len;
-            var i = new XamlMemberInvoker (new XamlMember (pi, sctx));
-            Assert.AreEqual (pi.GetGetMethod (), i.UnderlyingGetter, "#1");
-            Assert.IsNull (i.UnderlyingSetter, "#2");
-            Assert.AreEqual (5, i.GetValue ("hello"), "#3");
+            var i = new XamlMemberInvoker(new XamlMember(pi, sctx));
+            Assert.AreEqual(pi.GetGetMethod(), i.UnderlyingGetter, "#1");
+            Assert.IsNull(i.UnderlyingSetter, "#2");
+            Assert.AreEqual(5, i.GetValue("hello"), "#3");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void GetValueNullObject ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetValueNullObject()
         {
             var pi = str_len;
-            var i = new XamlMemberInvoker (new XamlMember (pi, sctx));
-            i.GetValue (null);
+            var i = new XamlMemberInvoker(new XamlMember(pi, sctx));
+            i.GetValue(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void SetValueNullObject ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void SetValueNullObject()
         {
             var pi = sb_len;
-            var i = new XamlMemberInvoker (new XamlMember (pi, sctx));
-            i.SetValue (null, 5);
+            var i = new XamlMemberInvoker(new XamlMember(pi, sctx));
+            i.SetValue(null, 5);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void GetValueOnWriteOnlyProperty ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetValueOnWriteOnlyProperty()
         {
             var pi = xr_resolver;
-            var i = new XamlMemberInvoker (new XamlMember (pi, sctx));
-            i.GetValue (new XmlUrlResolver ());
+            var i = new XamlMemberInvoker(new XamlMember(pi, sctx));
+            i.GetValue(new XmlUrlResolver());
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void SetValueOnReadOnlyProperty ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void SetValueOnReadOnlyProperty()
         {
             var pi = str_len;
-            var i = new XamlMemberInvoker (new XamlMember (pi, sctx));
-            i.SetValue ("hello", 5);
+            var i = new XamlMemberInvoker(new XamlMember(pi, sctx));
+            i.SetValue("hello", 5);
         }
 
         [Test]
-        public void SetValueOnReadWriteProperty ()
+        public void SetValueOnReadWriteProperty()
         {
             var pi = sb_len;
-            var i = new XamlMemberInvoker (new XamlMember (pi, sctx));
-            var sb = new StringBuilder ();
-            i.SetValue (sb, 5);
-            Assert.AreEqual (5, sb.Length, "#1");
+            var i = new XamlMemberInvoker(new XamlMember(pi, sctx));
+            var sb = new StringBuilder();
+            i.SetValue(sb, 5);
+            Assert.AreEqual(5, sb.Length, "#1");
         }
 
         [Test]
-        [ExpectedException (typeof (TargetException))]
-        public void GetValueOnIrrelevantObject ()
+        [ExpectedException(typeof(TargetException))]
+        public void GetValueOnIrrelevantObject()
         {
             var pi = str_len;
-            var i = new XamlMemberInvoker (new XamlMember (pi, sctx));
-            i.GetValue (new StringBuilder ());
+            var i = new XamlMemberInvoker(new XamlMember(pi, sctx));
+            i.GetValue(new StringBuilder());
         }
 
         [Test]
-        public void GetValueOnTypeValue ()
+        public void GetValueOnTypeValue()
         {
-            var xm = XamlLanguage.Type.GetMember ("Type");
-            var i = new XamlMemberInvoker (xm);
-            var o = i.GetValue (new TypeExtension (typeof (int)));
-            Assert.AreEqual (typeof (int), o, "#1");
+            var xm = XamlLanguage.Type.GetMember("Type");
+            var i = new XamlMemberInvoker(xm);
+            var o = i.GetValue(new TypeExtension(typeof(int)));
+            Assert.AreEqual(typeof(int), o, "#1");
         }
 
         [Test]
-        public void GetValueArrayExtension ()
+        public void GetValueArrayExtension()
         {
-            var xt = sctx.GetXamlType (typeof (TestClass));
-            var xm = xt.GetMember ("ArrayMember");
-            Assert.IsNotNull (xm, "#-1");
-            Assert.AreEqual (XamlLanguage.Array, xm.Type, "#0");
-            var o = xm.Invoker.GetValue (new TestClass ());
-            Assert.AreEqual (typeof (ArrayExtension), o.GetType (), "#1");
+            var xt = sctx.GetXamlType(typeof(TestClass));
+            var xm = xt.GetMember("ArrayMember");
+            Assert.IsNotNull(xm, "#-1");
+            Assert.AreEqual(XamlLanguage.Array, xm.Type, "#0");
+            var o = xm.Invoker.GetValue(new TestClass());
+            Assert.AreEqual(typeof(ArrayExtension), o.GetType(), "#1");
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void GetValueInitialization ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetValueInitialization()
         {
             var xm = XamlLanguage.Initialization;
             var i = xm.Invoker;
-            i.GetValue ("foo");
+            i.GetValue("foo");
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void GetValuePositionalParameter ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetValuePositionalParameter()
         {
             var xm = XamlLanguage.PositionalParameters;
             var i = xm.Invoker;
-            i.GetValue (new TypeExtension (typeof (int)));
+            i.GetValue(new TypeExtension(typeof(int)));
         }
 
         [Test]
-        [ExpectedException (typeof (TargetException))]
-        public void SetValueOnIrrelevantObject ()
+        [ExpectedException(typeof(TargetException))]
+        public void SetValueOnIrrelevantObject()
         {
             var pi = sb_len;
-            var i = new XamlMemberInvoker (new XamlMember (pi, sctx));
-            i.SetValue ("hello", 5);
+            var i = new XamlMemberInvoker(new XamlMember(pi, sctx));
+            i.SetValue("hello", 5);
         }
 
         // Event
 
         [Test]
-        public void FromEvent ()
+        public void FromEvent()
         {
             var ei = ass_load;
-            var i = new XamlMemberInvoker (new XamlMember (ei, sctx));
-            Assert.IsNull (i.UnderlyingGetter, "#1");
-            Assert.AreEqual (ei.GetAddMethod (), i.UnderlyingSetter, "#2");
+            var i = new XamlMemberInvoker(new XamlMember(ei, sctx));
+            Assert.IsNull(i.UnderlyingGetter, "#1");
+            Assert.AreEqual(ei.GetAddMethod(), i.UnderlyingSetter, "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void GetValueOnEvent ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetValueOnEvent()
         {
             var ei = ass_load;
-            var i = new XamlMemberInvoker (new XamlMember (ei, sctx));
-            i.GetValue (AppDomain.CurrentDomain);
+            var i = new XamlMemberInvoker(new XamlMember(ei, sctx));
+            i.GetValue(AppDomain.CurrentDomain);
         }
 
         [Test]
-        public void SetValueOnEventNull ()
+        public void SetValueOnEventNull()
         {
             var ei = ass_load;
-            var i = new XamlMemberInvoker (new XamlMember (ei, sctx));
-            i.SetValue (AppDomain.CurrentDomain, null);
+            var i = new XamlMemberInvoker(new XamlMember(ei, sctx));
+            i.SetValue(AppDomain.CurrentDomain, null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void SetValueOnEventValueMismatch ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void SetValueOnEventValueMismatch()
         {
             var ei = ass_load;
-            var i = new XamlMemberInvoker (new XamlMember (ei, sctx));
-            i.SetValue (AppDomain.CurrentDomain, 5);
+            var i = new XamlMemberInvoker(new XamlMember(ei, sctx));
+            i.SetValue(AppDomain.CurrentDomain, 5);
         }
 
-        void DummyAssemblyLoad (object o, AssemblyLoadEventArgs e)
-        {
-        }
+        void DummyAssemblyLoad(object o, AssemblyLoadEventArgs e) { }
 
         [Test]
-        public void SetValueOnEvent ()
+        public void SetValueOnEvent()
         {
             var ei = ass_load;
-            var i = new XamlMemberInvoker (new XamlMember (ei, sctx));
-            i.SetValue (AppDomain.CurrentDomain, new AssemblyLoadEventHandler (DummyAssemblyLoad));
+            var i = new XamlMemberInvoker(new XamlMember(ei, sctx));
+            i.SetValue(AppDomain.CurrentDomain, new AssemblyLoadEventHandler(DummyAssemblyLoad));
         }
 
         [Test]
-        public void CustomTypeDefaultValues ()
+        public void CustomTypeDefaultValues()
         {
-            var i = new MyXamlMemberInvoker ();
-            Assert.IsNull (i.UnderlyingGetter, "#1");
-            Assert.IsNull (i.UnderlyingSetter, "#2");
+            var i = new MyXamlMemberInvoker();
+            Assert.IsNull(i.UnderlyingGetter, "#1");
+            Assert.IsNull(i.UnderlyingSetter, "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (MyException))]
-        public void UnderlyingGetter ()
+        [ExpectedException(typeof(MyException))]
+        public void UnderlyingGetter()
         {
-            var i = new XamlMemberInvoker (new MyXamlMember (str_len, sctx));
+            var i = new XamlMemberInvoker(new MyXamlMember(str_len, sctx));
             // call XamlMember's UnderlyingGetter.
-            Assert.IsNotNull (i.UnderlyingGetter, "#1");
+            Assert.IsNotNull(i.UnderlyingGetter, "#1");
         }
 
         [Test]
-        [ExpectedException (typeof (MyException))]
-        public void UnderlyingSetter ()
+        [ExpectedException(typeof(MyException))]
+        public void UnderlyingSetter()
         {
-            var i = new XamlMemberInvoker (new MyXamlMember (str_len, sctx));
+            var i = new XamlMemberInvoker(new MyXamlMember(str_len, sctx));
             // call XamlMember's UnderlyingSetter.
-            Assert.IsNull (i.UnderlyingSetter, "#1");
+            Assert.IsNull(i.UnderlyingSetter, "#1");
         }
 
         class MyXamlMember : XamlMember
         {
-            public MyXamlMember (PropertyInfo pi, XamlSchemaContext context)
-                : base (pi, context)
+            public MyXamlMember(PropertyInfo pi, XamlSchemaContext context)
+                : base(pi, context) { }
+
+            protected override MethodInfo LookupUnderlyingGetter()
             {
-            }
-            
-            protected override MethodInfo LookupUnderlyingGetter ()
-            {
-                throw new MyException ();
+                throw new MyException();
             }
 
-            protected override MethodInfo LookupUnderlyingSetter ()
+            protected override MethodInfo LookupUnderlyingSetter()
             {
-                throw new MyException ();
+                throw new MyException();
             }
         }
 
-        class MyException : Exception
-        {
-        }
+        class MyException : Exception { }
 
-        class MyXamlMemberInvoker : XamlMemberInvoker
-        {
-        }
+        class MyXamlMemberInvoker : XamlMemberInvoker { }
 
         class TestClass
         {
-            public TestClass ()
+            public TestClass()
             {
-                ArrayMember = new ArrayExtension (typeof (int));
-                ArrayMember.AddChild (5);
-                ArrayMember.AddChild (3);
-                ArrayMember.AddChild (-1);
+                ArrayMember = new ArrayExtension(typeof(int));
+                ArrayMember.AddChild(5);
+                ArrayMember.AddChild(3);
+                ArrayMember.AddChild(-1);
             }
 
             public ArrayExtension ArrayMember { get; set; }
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void UnknownInvokerGetValue ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void UnknownInvokerGetValue()
         {
-            XamlMemberInvoker.UnknownInvoker.GetValue (new object ());
+            XamlMemberInvoker.UnknownInvoker.GetValue(new object());
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void UnknownInvokerSetValue ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void UnknownInvokerSetValue()
         {
-            XamlMemberInvoker.UnknownInvoker.SetValue (new object (), new object ());
+            XamlMemberInvoker.UnknownInvoker.SetValue(new object(), new object());
         }
 
         [Test]
-        public void UnknownInvoker ()
+        public void UnknownInvoker()
         {
-            Assert.IsNull (XamlMemberInvoker.UnknownInvoker.UnderlyingGetter, "#1");
-            Assert.IsNull (XamlMemberInvoker.UnknownInvoker.UnderlyingSetter, "#2");
+            Assert.IsNull(XamlMemberInvoker.UnknownInvoker.UnderlyingGetter, "#1");
+            Assert.IsNull(XamlMemberInvoker.UnknownInvoker.UnderlyingSetter, "#2");
         }
     }
 }

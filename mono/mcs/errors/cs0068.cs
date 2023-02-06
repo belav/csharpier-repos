@@ -3,13 +3,16 @@
 
 using System;
 
-class ErrorCS0068 {
-    public delegate void FooHandler ();
-    public void method () {}
-    public static void Main () {
-    }
+class ErrorCS0068
+{
+    public delegate void FooHandler();
+
+    public void method() { }
+
+    public static void Main() { }
 }
 
-interface IFoo {
-    event ErrorCS0068.FooHandler OnFoo = new ErrorCS0068.FooHandler (ErrorCS0068.method);
+interface IFoo
+{
+    event ErrorCS0068.FooHandler OnFoo = new ErrorCS0068.FooHandler(ErrorCS0068.method);
 }

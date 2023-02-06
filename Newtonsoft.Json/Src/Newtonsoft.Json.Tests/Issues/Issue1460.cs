@@ -71,7 +71,12 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             StringWriter sw = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(sw);
-            await JsonWriter.WriteValueAsync(writer, PrimitiveTypeCode.Object, null, CancellationToken.None);
+            await JsonWriter.WriteValueAsync(
+                writer,
+                PrimitiveTypeCode.Object,
+                null,
+                CancellationToken.None
+            );
 
             Assert.AreEqual("null", sw.ToString());
         }

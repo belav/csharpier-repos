@@ -24,8 +24,7 @@ namespace Moq
 
         public bool Equals(Pair<T1, T2> other)
         {
-            return object.Equals(this.Item1, other.Item1)
-                && object.Equals(this.Item2, other.Item2);
+            return object.Equals(this.Item1, other.Item1) && object.Equals(this.Item2, other.Item2);
         }
 
         public override bool Equals(object obj)
@@ -35,7 +34,9 @@ namespace Moq
 
         public override int GetHashCode()
         {
-            return unchecked(1001 * this.Item1?.GetHashCode() ?? 101 + this.Item2?.GetHashCode() ?? 11);
+            return unchecked(
+                1001 * this.Item1?.GetHashCode() ?? 101 + this.Item2?.GetHashCode() ?? 11
+            );
         }
     }
 }

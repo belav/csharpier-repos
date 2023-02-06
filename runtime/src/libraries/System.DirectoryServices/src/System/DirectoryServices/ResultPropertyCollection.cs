@@ -11,9 +11,7 @@ namespace System.DirectoryServices
     /// </devdoc>
     public class ResultPropertyCollection : DictionaryBase
     {
-        internal ResultPropertyCollection()
-        {
-        }
+        internal ResultPropertyCollection() { }
 
         /// <devdoc>
         /// Gets the property with the given name.

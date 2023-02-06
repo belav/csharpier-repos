@@ -2,7 +2,7 @@ public class MyList<T>
 {
     public class Helper<U, V> { }
 
-    public Helper<U, V> GetHelper<U, V> ()
+    public Helper<U, V> GetHelper<U, V>()
     {
         return null;
     }
@@ -10,9 +10,9 @@ public class MyList<T>
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        new MyList<int> ().GetHelper<string, bool> ();
+        new MyList<int>().GetHelper<string, bool>();
         return 0;
     }
 }

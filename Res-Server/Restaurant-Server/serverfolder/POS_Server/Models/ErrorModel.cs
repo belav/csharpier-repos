@@ -19,6 +19,5 @@ namespace POS_Server.Models
 
         public string source { get; set; }
         public string method { get; set; }
-
     }
 }

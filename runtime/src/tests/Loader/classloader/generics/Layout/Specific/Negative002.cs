@@ -8,13 +8,21 @@ using System.Runtime.InteropServices;
 public class GenBase<T>
 {
     T t;
-    T Dummy(T t) { this.t = t; return t;}
+
+    T Dummy(T t)
+    {
+        this.t = t;
+        return t;
+    }
 }
 
 [StructLayout(LayoutKind.Sequential)]
 public class Gen<T> : GenBase<T>
 {
-    T Dummy(T t) { return t;}
+    T Dummy(T t)
+    {
+        return t;
+    }
 }
 
 public class GenTest<T>
@@ -28,6 +36,7 @@ public class GenTest<T>
     {
         InternalTest();
     }
+
     public bool Test_Negative002()
     {
         try
@@ -36,11 +45,11 @@ public class GenTest<T>
             Console.WriteLine("Test did not throw expected TypeLoadException");
             return false;
         }
-        catch(TypeLoadException)
+        catch (TypeLoadException)
         {
             return true;
         }
-        catch(Exception E)
+        catch (Exception E)
         {
             Console.WriteLine("Test caught unexpected Exception " + E);
             return false;
@@ -52,6 +61,7 @@ public class Test_Negative002
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -60,19 +70,16 @@ public class Test_Negative002
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
-
         Eval(new GenTest<int>().Test_Negative002());
         Eval(new GenTest<double>().Test_Negative002());
         Eval(new GenTest<Guid>().Test_Negative002());
         Eval(new GenTest<string>().Test_Negative002());
         Eval(new GenTest<object>().Test_Negative002());
-        
-        
+
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -85,14 +92,3 @@ public class Test_Negative002
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

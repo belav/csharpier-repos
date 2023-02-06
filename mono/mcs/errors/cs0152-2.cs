@@ -10,7 +10,7 @@ enum E
 
 class X
 {
-    void Foo (E e)
+    void Foo(E e)
     {
         switch (e)
         {

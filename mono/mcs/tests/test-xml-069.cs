@@ -20,8 +20,6 @@ namespace XmlComments
         /// <see cref="XmlComments.Program.MyEnum.One"/>
         /// <see cref="F:XmlComments.Program.MyEnum.One"/>
         /// </summary>
-        static void Main(string[] args)
-        {
-        }
+        static void Main(string[] args) { }
     }
 }

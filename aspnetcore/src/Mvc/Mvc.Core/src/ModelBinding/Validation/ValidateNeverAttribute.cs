@@ -11,7 +11,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 /// When applied to a parameter, the validation system excludes that parameter.
 /// When applied to a type, the validation system excludes all properties within that type.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Parameter,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public sealed class ValidateNeverAttribute : Attribute, IPropertyValidationFilter
 {
     /// <inheritdoc />

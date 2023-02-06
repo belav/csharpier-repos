@@ -8,10 +8,9 @@ public struct S
     public Action a;
 }
 
-
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         S s;
         s.a += delegate { };

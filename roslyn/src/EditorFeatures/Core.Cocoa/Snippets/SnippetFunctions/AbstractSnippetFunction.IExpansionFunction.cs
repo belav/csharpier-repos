@@ -39,8 +39,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             return string.Empty;
         }
 
-        void IExpansionFunction.ReleaseFunction()
-        {
-        }
+        void IExpansionFunction.ReleaseFunction() { }
     }
 }

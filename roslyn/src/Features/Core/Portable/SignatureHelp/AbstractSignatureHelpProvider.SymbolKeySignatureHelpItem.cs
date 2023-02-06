@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
 {
     internal abstract partial class AbstractSignatureHelpProvider
     {
-        internal class SymbolKeySignatureHelpItem : SignatureHelpItem, IEquatable<SymbolKeySignatureHelpItem>
+        internal class SymbolKeySignatureHelpItem
+            : SignatureHelpItem,
+                IEquatable<SymbolKeySignatureHelpItem>
         {
             public SymbolKey? SymbolKey { get; }
 
@@ -22,21 +24,33 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                 IEnumerable<TaggedText> separatorParts,
                 IEnumerable<TaggedText> suffixParts,
                 IEnumerable<SignatureHelpParameter> parameters,
-                IEnumerable<TaggedText>? descriptionParts)
-                : base(isVariadic, documentationFactory, prefixParts, separatorParts, suffixParts, parameters, descriptionParts)
+                IEnumerable<TaggedText>? descriptionParts
+            )
+                : base(
+                    isVariadic,
+                    documentationFactory,
+                    prefixParts,
+                    separatorParts,
+                    suffixParts,
+                    parameters,
+                    descriptionParts
+                )
             {
                 SymbolKey = symbol?.GetSymbolKey();
             }
 
-            public override bool Equals(object? obj)
-                => Equals(obj as SymbolKeySignatureHelpItem);
+            public override bool Equals(object? obj) => Equals(obj as SymbolKeySignatureHelpItem);
 
             public bool Equals(SymbolKeySignatureHelpItem? obj)
             {
-                return ReferenceEquals(this, obj) ||
-                    (obj?.SymbolKey != null &&
-                     SymbolKey != null &&
-                     CodeAnalysis.SymbolKey.GetComparer(ignoreCase: false, ignoreAssemblyKeys: false).Equals(SymbolKey.Value, obj.SymbolKey.Value));
+                return ReferenceEquals(this, obj)
+                    || (
+                        obj?.SymbolKey != null
+                        && SymbolKey != null
+                        && CodeAnalysis.SymbolKey
+                            .GetComparer(ignoreCase: false, ignoreAssemblyKeys: false)
+                            .Equals(SymbolKey.Value, obj.SymbolKey.Value)
+                    );
             }
 
             public override int GetHashCode()
@@ -46,7 +60,10 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                     return 0;
                 }
 
-                var comparer = CodeAnalysis.SymbolKey.GetComparer(ignoreCase: false, ignoreAssemblyKeys: false);
+                var comparer = CodeAnalysis.SymbolKey.GetComparer(
+                    ignoreCase: false,
+                    ignoreAssemblyKeys: false
+                );
                 return comparer.GetHashCode(SymbolKey.Value);
             }
         }

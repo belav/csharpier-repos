@@ -2,19 +2,18 @@
 // Line: 16
 // Compiler options: -unsafe
 
-class Box {
+class Box
+{
     public int value;
 }
 
-unsafe struct Obsolete {
-}
+unsafe struct Obsolete { }
 
-class MainClass {
-        unsafe public static void Main ()
-        {
-                Box b = new Box ();
-                fixed (long* p = (long*)&b.value)
-                {
-                }
-        }
+class MainClass
+{
+    unsafe public static void Main()
+    {
+        Box b = new Box();
+        fixed (long* p = (long*)&b.value) { }
+    }
 }

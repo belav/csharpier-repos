@@ -3,7 +3,6 @@
 using System;
 using System.Threading;
 
-
 interface IGen<T>
 {
     void Target(object p);
@@ -12,33 +11,36 @@ interface IGen<T>
 
 class Gen<T> : IGen<T>
 {
-    public T Dummy(T t) { return t; }
+    public T Dummy(T t)
+    {
+        return t;
+    }
 
     public virtual void Target(object p)
-    {            
-        if (Test_thread12.Xcounter>=Test_thread12.nThreads)
+    {
+        if (Test_thread12.Xcounter >= Test_thread12.nThreads)
         {
-            ManualResetEvent evt = (ManualResetEvent) p;    
+            ManualResetEvent evt = (ManualResetEvent)p;
             evt.Set();
         }
         else
         {
-            Interlocked.Increment(ref Test_thread12.Xcounter);    
+            Interlocked.Increment(ref Test_thread12.Xcounter);
         }
     }
-    
+
     public static void ThreadPoolTest()
     {
-        ManualResetEvent evt = new ManualResetEvent(false);        
-        
+        ManualResetEvent evt = new ManualResetEvent(false);
+
         IGen<T> obj = new Gen<T>();
 
         TimerCallback tcb = new TimerCallback(obj.Target);
-        Timer timer = new Timer(tcb,evt,Test_thread12.delay,Test_thread12.period);
-    
+        Timer timer = new Timer(tcb, evt, Test_thread12.delay, Test_thread12.period);
+
         evt.WaitOne();
         timer.Dispose();
-        Test_thread12.Eval(Test_thread12.Xcounter>=Test_thread12.nThreads);
+        Test_thread12.Eval(Test_thread12.Xcounter >= Test_thread12.nThreads);
         Test_thread12.Xcounter = 0;
     }
 }
@@ -51,6 +53,7 @@ public class Test_thread12
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -59,20 +62,19 @@ public class Test_thread12
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         Gen<int>.ThreadPoolTest();
         Gen<double>.ThreadPoolTest();
         Gen<string>.ThreadPoolTest();
-        Gen<object>.ThreadPoolTest(); 
-        Gen<Guid>.ThreadPoolTest(); 
+        Gen<object>.ThreadPoolTest();
+        Gen<Guid>.ThreadPoolTest();
 
-        Gen<int[]>.ThreadPoolTest(); 
+        Gen<int[]>.ThreadPoolTest();
         Gen<double[,]>.ThreadPoolTest();
-        Gen<string[][][]>.ThreadPoolTest(); 
+        Gen<string[][][]>.ThreadPoolTest();
         Gen<object[,,,]>.ThreadPoolTest();
         Gen<Guid[][,,,][]>.ThreadPoolTest();
 
@@ -87,6 +89,4 @@ public class Test_thread12
             return 1;
         }
     }
-}        
-
-
+}

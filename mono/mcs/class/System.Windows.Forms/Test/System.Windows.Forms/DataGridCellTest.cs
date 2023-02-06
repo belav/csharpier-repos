@@ -36,21 +36,19 @@ namespace MonoTests.System.Windows.Forms
     {
         private bool eventhandled;
 
-
         [Test]
-        public void TestDefaultValues ()
+        public void TestDefaultValues()
         {
-            DataGridCell cell = new DataGridCell (5, 10);
+            DataGridCell cell = new DataGridCell(5, 10);
 
-            Assert.AreEqual (5, cell.RowNumber, "A1 RowNumber");
-            Assert.AreEqual (10, cell.ColumnNumber, "A2 ColumnNumber");
+            Assert.AreEqual(5, cell.RowNumber, "A1 RowNumber");
+            Assert.AreEqual(10, cell.ColumnNumber, "A2 ColumnNumber");
 
             cell.ColumnNumber = 20;
             cell.RowNumber = 30;
 
-            Assert.AreEqual (30, cell.RowNumber, "A3 RowNumber");
-            Assert.AreEqual (20, cell.ColumnNumber, "A4 ColumnNumber");
+            Assert.AreEqual(30, cell.RowNumber, "A3 RowNumber");
+            Assert.AreEqual(20, cell.ColumnNumber, "A4 ColumnNumber");
         }
-
     }
 }

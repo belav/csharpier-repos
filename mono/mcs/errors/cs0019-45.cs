@@ -3,7 +3,7 @@
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
         bool a = DelegateMethod == null;
     }
@@ -11,5 +11,5 @@ public class C
     static int DelegateMethod(bool b)
     {
         return 3;
-    }    
+    }
 }

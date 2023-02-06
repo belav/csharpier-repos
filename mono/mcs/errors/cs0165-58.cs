@@ -3,12 +3,14 @@
 
 struct Vector3
 {
-    int field1, field2, field3;
+    int field1,
+        field2,
+        field3;
 }
 
 public class C
 {
-    void Update ()
+    void Update()
     {
         int v1 = 0;
         int v2 = 0;
@@ -36,14 +38,15 @@ public class C
         int v24 = 0;
         int v25 = 0;
         int v26 = 0;
-        int v27 = 0;        
+        int v27 = 0;
         int v29;
 
         Vector3 v;
-        while (v8 != 0) {
-            v = new Vector3 ();
+        while (v8 != 0)
+        {
+            v = new Vector3();
         }
 
-        System.GC.KeepAlive (v);
+        System.GC.KeepAlive(v);
     }
 }

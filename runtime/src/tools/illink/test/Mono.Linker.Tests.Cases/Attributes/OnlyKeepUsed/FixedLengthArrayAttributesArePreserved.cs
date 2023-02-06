@@ -4,37 +4,34 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
 {
-    [SetupLinkerArgument ("--used-attrs-only", "true")]
-    [SetupCompileArgument ("/unsafe")]
-
+    [SetupLinkerArgument("--used-attrs-only", "true")]
+    [SetupCompileArgument("/unsafe")]
     // Can't verify because the test contains unsafe code
     [SkipPeVerify]
     public class FixedLengthArrayAttributesArePreserved
     {
-        public static void Main ()
+        public static void Main()
         {
-            Helper ();
+            Helper();
         }
 
         [Kept]
-        static unsafe void Helper ()
+        static unsafe void Helper()
         {
-            var tmp = new WithFixedArrayField ();
+            var tmp = new WithFixedArrayField();
             var v = tmp.Values;
-            AMethodToUseTheReturnValue (v);
+            AMethodToUseTheReturnValue(v);
         }
 
         [Kept]
-        static unsafe void AMethodToUseTheReturnValue (int* ptr)
-        {
-        }
+        static unsafe void AMethodToUseTheReturnValue(int* ptr) { }
 
         [Kept]
         public unsafe struct WithFixedArrayField
         {
             [Kept]
             [KeptFixedBuffer]
-            [KeptAttributeAttribute (typeof (FixedBufferAttribute))]
+            [KeptAttributeAttribute(typeof(FixedBufferAttribute))]
             public fixed int Values[10];
         }
     }

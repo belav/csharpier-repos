@@ -29,56 +29,55 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
+namespace Mono.Cecil.Metadata
+{
     using Mono.Cecil;
 
-    internal sealed class ExportedTypeTable : IMetadataTable {
-
+    internal sealed class ExportedTypeTable : IMetadataTable
+    {
         public const int RId = 0x27;
 
         RowCollection m_rows;
 
-        public ExportedTypeRow this [int index] {
-            get { return m_rows [index] as ExportedTypeRow; }
-            set { m_rows [index] = value; }
+        public ExportedTypeRow this[int index]
+        {
+            get { return m_rows[index] as ExportedTypeRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal ExportedTypeTable ()
-        {
-        }
+        internal ExportedTypeTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitExportedTypeTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitExportedTypeTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class ExportedTypeRow : IMetadataRow {
-
+    internal sealed class ExportedTypeRow : IMetadataRow
+    {
         public TypeAttributes Flags;
         public uint TypeDefId;
         public uint TypeName;
         public uint TypeNamespace;
         public MetadataToken Implementation;
 
-        internal ExportedTypeRow ()
-        {
-        }
+        internal ExportedTypeRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitExportedTypeRow (this);
+            visitor.VisitExportedTypeRow(this);
         }
     }
 }

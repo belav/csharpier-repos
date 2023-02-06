@@ -4,154 +4,172 @@
 using System;
 using System.Security;
 
-class TestClass {
+class TestClass
+{
+    static int iExitCode;
 
-        static int iExitCode;
-    
-    void TestMain() 
+    void TestMain()
     {
         int caught = 0;
         int fincount = 0;
 
-        try {
+        try
+        {
             throw new ArgumentException();
-//                    Console.WriteLine("Exception not thrown.");
-//              iExitCode = 1;
+            //                    Console.WriteLine("Exception not thrown.");
+            //              iExitCode = 1;
         }
-        catch (ArithmeticException ) {
+        catch (ArithmeticException)
+        {
             Console.WriteLine("Caught wrong exception.");
             iExitCode = 2;
         }
-         catch (ArgumentException ) {
-            caught ++;
-            try {
-                try{
-                try{
-                    try{
-                    try{
-                        try{
-                        try{
-                            try{
-                              int [] arr = new int[1000];
-                                  throw new SecurityException();
-//                            Console.WriteLine("Exception not thrown.");
-//                              iExitCode = 1;
+        catch (ArgumentException)
+        {
+            caught++;
+            try
+            {
+                try
+                {
+                    try
+                    {
+                        try
+                        {
+                            try
+                            {
+                                try
+                                {
+                                    try
+                                    {
+                                        try
+                                        {
+                                            int[] arr = new int[1000];
+                                            throw new SecurityException();
+                                            //                            Console.WriteLine("Exception not thrown.");
+                                            //                              iExitCode = 1;
+                                        }
+                                        catch (DivideByZeroException) { }
+                                        finally
+                                        {
+                                            double[] s = new double[1];
+                                        }
+                                    }
+                                    catch (DivideByZeroException) { }
+                                }
+                                catch (DivideByZeroException) { }
+                                finally
+                                {
+                                    Console.WriteLine("Somewhere in a finally");
+                                    float[] j = new float[99];
+                                }
                             }
-                            catch(DivideByZeroException ){
-                            }
-                            finally
-                              {
-                            double [] s = new double[1];
-                              }
-                            
+                            catch (DivideByZeroException) { }
                         }
-                        catch(DivideByZeroException ){
-                        }
-                        }
-                        catch(DivideByZeroException ){
-                        }
-                        finally
-                          {
-                        Console.WriteLine("Somewhere in a finally");
-                        float [] j = new float[99];
-                          }
-                        
+                        catch (DivideByZeroException) { }
                     }
-                    catch(DivideByZeroException ){
-                    }
-                    }
-                    catch(DivideByZeroException ){
-                    }
+                    catch (DivideByZeroException) { }
                 }
-                catch(DivideByZeroException ){
-                }
-                }
-                catch(DivideByZeroException ){
-                }
+                catch (DivideByZeroException) { }
             }
-            catch(DivideByZeroException ){
+            catch (DivideByZeroException) { }
+            catch (SecurityException)
+            {
+                caught++;
             }
-            catch (SecurityException ) {
-                caught ++;
-            }
-            catch (Exception ) {
-                    Console.WriteLine("Didn't catch specific exception.");
+            catch (Exception)
+            {
+                Console.WriteLine("Didn't catch specific exception.");
                 iExitCode = 3;
-                try{
+                try
+                {
                     Console.WriteLine("Something new");
                 }
-                catch(DivideByZeroException ){
-                }
-                finally{
+                catch (DivideByZeroException) { }
+                finally
+                {
                     Console.WriteLine("Is this ever reached?");
                 }
-                
             }
-            finally {
-              int [] i = new int[10];
-              try{
-                throw new NullReferenceException();
-//                  Console.WriteLine("Exception Not Thrown in Finally");                        
-              }
-              catch(NullReferenceException e){
-                  Console.WriteLine(e.StackTrace);
-                  caught++;                
-              }
-              catch(Exception ){
-                Console.WriteLine("Correct Exception not caught");
-              }
-              finally
+            finally
+            {
+                int[] i = new int[10];
+                try
                 {
-                GC.Collect();
-                      fincount++;
+                    throw new NullReferenceException();
+                    //                  Console.WriteLine("Exception Not Thrown in Finally");
                 }
-              
-              fincount ++;
-            }    
+                catch (NullReferenceException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    caught++;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Correct Exception not caught");
+                }
+                finally
+                {
+                    GC.Collect();
+                    fincount++;
+                }
+
+                fincount++;
+            }
         }
-        catch (Exception ) {
+        catch (Exception)
+        {
             Console.WriteLine("Didn't catch specific exception.");
             iExitCode = 3;
         }
-        finally {
-                GC.Collect();
-            fincount ++;
-        }    
+        finally
+        {
+            GC.Collect();
+            fincount++;
+        }
 
-        try {
-            try {
+        try
+        {
+            try
+            {
                 throw new NullReferenceException();
-//                  Console.WriteLine("Exception not thrown.");
-//                  iExitCode = 1;
+                //                  Console.WriteLine("Exception not thrown.");
+                //                  iExitCode = 1;
             }
-            catch (NullReferenceException ) {
-                caught ++;
+            catch (NullReferenceException)
+            {
+                caught++;
                 throw new OutOfMemoryException();
-//                  Console.WriteLine("Exception not thrown.");
-//                  iExitCode = 1;
+                //                  Console.WriteLine("Exception not thrown.");
+                //                  iExitCode = 1;
             }
-            catch (Exception ) {
+            catch (Exception)
+            {
                 Console.WriteLine("Didn't catch specific exception.");
                 iExitCode = 3;
             }
-            finally {
+            finally
+            {
                 GC.Collect();
-                fincount ++;
-            }    
+                fincount++;
+            }
         }
-        catch (OutOfMemoryException ) {
-            caught ++;
+        catch (OutOfMemoryException)
+        {
+            caught++;
         }
-        finally {
+        finally
+        {
             GC.Collect();
-            fincount ++;
-        }    
+            fincount++;
+        }
 
-        if (caught != 5) {
+        if (caught != 5)
+        {
             Console.WriteLine("Didn't catch enough exceptions.");
             iExitCode = 4;
         }
-        if (fincount != 5) {
+        if (fincount != 5)
+        {
             Console.WriteLine("Didn't execute enough finallys.");
             iExitCode = 5;
         }
@@ -162,16 +180,16 @@ class TestClass {
         int retVal = 100;
         String str = "Done";
         (new TestClass()).TestMain();
-        if (iExitCode == 0) {
+        if (iExitCode == 0)
+        {
             Console.WriteLine("Test Passed.");
-        } else {
+        }
+        else
+        {
             Console.WriteLine("Test FAILED.");
             retVal = iExitCode;
-        }    
+        }
         Console.WriteLine(str);
-                return retVal;
-}
-
+        return retVal;
+    }
 };
-
-

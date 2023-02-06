@@ -24,30 +24,30 @@ namespace MonoTests.Commons.Xml.Relaxng
         RdpPattern pattern1;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            pattern1 = new RdpElement (new RdpName ("foo", "urn:foo"), RdpEmpty.Instance);
+            pattern1 = new RdpElement(new RdpName("foo", "urn:foo"), RdpEmpty.Instance);
         }
-        
-        private void AssertPattern (string s, RelaxngPatternType expected, RdpPattern p)
+
+        private void AssertPattern(string s, RelaxngPatternType expected, RdpPattern p)
         {
-            Assert.AreEqual (expected, p.PatternType, s);
+            Assert.AreEqual(expected, p.PatternType, s);
         }
 
         [Test]
-        public void ElementStartTagOpenDeriv ()
+        public void ElementStartTagOpenDeriv()
         {
-            result = pattern1.StartTagOpenDeriv ("bar", "urn:foo");
-            AssertPattern ("#element.start.1", RelaxngPatternType.NotAllowed, result);
+            result = pattern1.StartTagOpenDeriv("bar", "urn:foo");
+            AssertPattern("#element.start.1", RelaxngPatternType.NotAllowed, result);
 
-            result = pattern1.StartTagOpenDeriv ("foo", "urn:bar");
-            AssertPattern ("#element.start.2", RelaxngPatternType.NotAllowed, result);
+            result = pattern1.StartTagOpenDeriv("foo", "urn:bar");
+            AssertPattern("#element.start.2", RelaxngPatternType.NotAllowed, result);
 
-            result = pattern1.StartTagOpenDeriv ("foo", "urn:foo");
-            AssertPattern ("#element.start.3", RelaxngPatternType.After, result);
-            RdpAfter after= result as RdpAfter;
-            AssertPattern ("#element.start.4", RelaxngPatternType.Empty, after.LValue);
-            AssertPattern ("#element.start.5", RelaxngPatternType.Empty, after.RValue);
+            result = pattern1.StartTagOpenDeriv("foo", "urn:foo");
+            AssertPattern("#element.start.3", RelaxngPatternType.After, result);
+            RdpAfter after = result as RdpAfter;
+            AssertPattern("#element.start.4", RelaxngPatternType.Empty, after.LValue);
+            AssertPattern("#element.start.5", RelaxngPatternType.Empty, after.RValue);
         }
     }
 }

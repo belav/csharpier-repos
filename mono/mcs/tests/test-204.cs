@@ -4,42 +4,42 @@ class X
 {
     public readonly int x;
 
-    public X (int x)
+    public X(int x)
     {
         this.x = x;
     }
 
-    public override string ToString ()
+    public override string ToString()
     {
-        return String.Format ("X ({0})", x);
+        return String.Format("X ({0})", x);
     }
 
-    public static X operator & (X a, X b)
+    public static X operator &(X a, X b)
     {
-        return new X (a.x * b.x);
+        return new X(a.x * b.x);
     }
 
-    public static X operator | (X a, X b)
+    public static X operator |(X a, X b)
     {
-        return new X (a.x + b.x);
+        return new X(a.x + b.x);
     }
 
     // Returns true if the value is odd.
-    public static bool operator true (X x)
+    public static bool operator true(X x)
     {
         return (x.x % 2) != 0;
     }
 
     // Returns true if the value is even.
-    public static bool operator false (X x)
+    public static bool operator false(X x)
     {
         return (x.x % 2) == 0;
     }
 
-    public static int Test ()
+    public static int Test()
     {
-        X x = new X (3);
-        X y = new X (4);
+        X x = new X(3);
+        X y = new X(4);
 
         X t1 = x && y;
         X t2 = y && x;
@@ -60,10 +60,10 @@ class X
         return 0;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        int result = Test ();
-        Console.WriteLine ("RESULT: {0}", result);
+        int result = Test();
+        Console.WriteLine("RESULT: {0}", result);
         return result;
     }
 }

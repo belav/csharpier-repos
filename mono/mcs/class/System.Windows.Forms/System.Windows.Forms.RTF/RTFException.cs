@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,27 +29,29 @@
 using System;
 using System.Text;
 
-namespace System.Windows.Forms.RTF {
-
+namespace System.Windows.Forms.RTF
+{
 #if RTF_LIB
     public
 #else
     internal
 #endif
-    class RTFException : ApplicationException {
+    class RTFException : ApplicationException
+    {
         #region Local Variables
-        private int        pos;
-        private int        line;
-        private TokenClass    token_class;
-        private Major        major;
-        private Minor        minor;
-        private int        param;
-        private string        text;
-        private string        error_message;
+        private int pos;
+        private int line;
+        private TokenClass token_class;
+        private Major major;
+        private Minor minor;
+        private int param;
+        private string text;
+        private string error_message;
         #endregion    // Local Variables
 
         #region Constructors
-        public RTFException(RTF rtf, string error_message) {
+        public RTFException(RTF rtf, string error_message)
+        {
             this.pos = rtf.LinePos;
             this.line = rtf.LineNumber;
             this.token_class = rtf.TokenClass;
@@ -62,9 +64,11 @@ namespace System.Windows.Forms.RTF {
         #endregion    // Constructors
 
         #region Properties
-        public override string Message {
-            get {
-                StringBuilder    sb;
+        public override string Message
+        {
+            get
+            {
+                StringBuilder sb;
 
                 sb = new StringBuilder();
                 sb.Append(error_message);

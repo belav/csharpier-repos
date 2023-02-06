@@ -1,20 +1,21 @@
 // Compiler options: -doc:xml-029.xml
 using System;
 
-class Test1 {
+class Test1
+{
     /// <summary>
     /// Some test documentation
     /// </summary>
-    void Foo(){}
+    void Foo() { }
 
-    public static void Main () {}
+    public static void Main() { }
 }
 
 /// <summary>
 /// Publicly available interface
 /// </summary>
-public interface ITest2 {
-
+public interface ITest2
+{
     /// <summary>
     /// Some test documentation
     /// </summary>
@@ -30,5 +31,3 @@ public interface ITest2 {
     /// </summary>
     event EventHandler EventRaised;
 }
-
-

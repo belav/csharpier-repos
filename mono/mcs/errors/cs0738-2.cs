@@ -11,15 +11,14 @@ public interface I2
     IA Key { get; }
 }
 
-public interface IB : IA
-{
-}
+public interface IB : IA { }
 
-public interface IA
-{
-}
+public interface IA { }
 
 public class C : I1, I2
 {
-    public IB Key { get { return null; } }
+    public IB Key
+    {
+        get { return null; }
+    }
 }

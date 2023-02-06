@@ -5,33 +5,33 @@ public struct MyType
 {
     int value;
 
-    public MyType (int value)
+    public MyType(int value)
     {
         this.value = value;
     }
 
-    public static bool operator == (MyType a, MyType b)
+    public static bool operator ==(MyType a, MyType b)
     {
         return a.value == b.value;
     }
 
-    public static bool operator != (MyType a, MyType b)
+    public static bool operator !=(MyType a, MyType b)
     {
         return a.value != b.value;
     }
-    
-    public static bool operator > (MyType a, MyType b)
+
+    public static bool operator >(MyType a, MyType b)
     {
         return a.value > b.value;
     }
 
-    public static bool operator >= (MyType a, MyType b)
+    public static bool operator >=(MyType a, MyType b)
     {
         return a.value >= b.value;
-    }    
+    }
 
-    public override string ToString ()
+    public override string ToString()
     {
-        return value.ToString ();
+        return value.ToString();
     }
 }

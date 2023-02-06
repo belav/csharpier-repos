@@ -25,9 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private sealed partial class AnonymousTypeToStringMethodSymbol : SynthesizedMethodBase
         {
             internal AnonymousTypeToStringMethodSymbol(NamedTypeSymbol container)
-                : base(container, WellKnownMemberNames.ObjectToString)
-            {
-            }
+                : base(container, WellKnownMemberNames.ObjectToString) { }
 
             public override MethodKind MethodKind
             {
@@ -46,7 +44,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override TypeWithAnnotations ReturnTypeWithAnnotations
             {
-                get { return TypeWithAnnotations.Create(this.Manager.System_String, NullableAnnotation.NotAnnotated); }
+                get
+                {
+                    return TypeWithAnnotations.Create(
+                        this.Manager.System_String,
+                        NullableAnnotation.NotAnnotated
+                    );
+                }
             }
 
             public override ImmutableArray<ParameterSymbol> Parameters
@@ -59,17 +63,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return true; }
             }
 
-            internal sealed override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
+            internal sealed override bool IsMetadataVirtual(
+                bool ignoreInterfaceImplementationChanges = false
+            )
             {
                 return true;
             }
 
             internal override bool IsMetadataFinal
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
         }
     }

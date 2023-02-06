@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,9 +32,8 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 
-
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     public sealed class HostingEnvironmentSection : ConfigurationSection
     {
         static ConfigurationProperty idleTimeoutProp;
@@ -42,53 +41,70 @@ namespace System.Web.Configuration {
         static ConfigurationProperty shutdownTimeoutProp;
         static ConfigurationPropertyCollection properties;
 
-        static HostingEnvironmentSection ()
+        static HostingEnvironmentSection()
         {
-            idleTimeoutProp = new ConfigurationProperty ("idleTimeout", typeof (TimeSpan), TimeSpan.MaxValue,
-                                     PropertyHelper.TimeSpanMinutesOrInfiniteConverter,
-                                     PropertyHelper.PositiveTimeSpanValidator,
-                                     ConfigurationPropertyOptions.None);
-            shadowCopyBinAssembliesProp = new ConfigurationProperty ("shadowCopyBinAssemblies", typeof (bool), true);
-            shutdownTimeoutProp = new ConfigurationProperty ("shutdownTimeout", typeof (TimeSpan), TimeSpan.FromSeconds (30),
-                                     PropertyHelper.TimeSpanSecondsConverter,
-                                     PropertyHelper.PositiveTimeSpanValidator,
-                                     ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
+            idleTimeoutProp = new ConfigurationProperty(
+                "idleTimeout",
+                typeof(TimeSpan),
+                TimeSpan.MaxValue,
+                PropertyHelper.TimeSpanMinutesOrInfiniteConverter,
+                PropertyHelper.PositiveTimeSpanValidator,
+                ConfigurationPropertyOptions.None
+            );
+            shadowCopyBinAssembliesProp = new ConfigurationProperty(
+                "shadowCopyBinAssemblies",
+                typeof(bool),
+                true
+            );
+            shutdownTimeoutProp = new ConfigurationProperty(
+                "shutdownTimeout",
+                typeof(TimeSpan),
+                TimeSpan.FromSeconds(30),
+                PropertyHelper.TimeSpanSecondsConverter,
+                PropertyHelper.PositiveTimeSpanValidator,
+                ConfigurationPropertyOptions.None
+            );
+            properties = new ConfigurationPropertyCollection();
 
-            properties.Add (idleTimeoutProp);
-            properties.Add (shadowCopyBinAssembliesProp);
-            properties.Add (shutdownTimeoutProp);
-
+            properties.Add(idleTimeoutProp);
+            properties.Add(shadowCopyBinAssembliesProp);
+            properties.Add(shutdownTimeoutProp);
         }
 
-        [TypeConverter (typeof (TimeSpanMinutesOrInfiniteConverter))]
-        [TimeSpanValidator (MinValueString = "00:00:00", MaxValueString = "10675199.02:48:05.4775807")]
-        [ConfigurationProperty ("idleTimeout", DefaultValue = "10675199.02:48:05.4775807")]
-        public TimeSpan IdleTimeout {
-            get { return (TimeSpan) base [idleTimeoutProp];}
+        [TypeConverter(typeof(TimeSpanMinutesOrInfiniteConverter))]
+        [TimeSpanValidator(
+            MinValueString = "00:00:00",
+            MaxValueString = "10675199.02:48:05.4775807"
+        )]
+        [ConfigurationProperty("idleTimeout", DefaultValue = "10675199.02:48:05.4775807")]
+        public TimeSpan IdleTimeout
+        {
+            get { return (TimeSpan)base[idleTimeoutProp]; }
             set { base[idleTimeoutProp] = value; }
         }
 
-        [ConfigurationProperty ("shadowCopyBinAssemblies", DefaultValue = "True")]
-        public bool ShadowCopyBinAssemblies {
-            get { return (bool) base [shadowCopyBinAssembliesProp];}
+        [ConfigurationProperty("shadowCopyBinAssemblies", DefaultValue = "True")]
+        public bool ShadowCopyBinAssemblies
+        {
+            get { return (bool)base[shadowCopyBinAssembliesProp]; }
             set { base[shadowCopyBinAssembliesProp] = value; }
         }
 
-        [TypeConverter (typeof (TimeSpanSecondsConverter))]
-        [TimeSpanValidator (MinValueString = "00:00:00", MaxValueString = "10675199.02:48:05.4775807")]
-        [ConfigurationProperty ("shutdownTimeout", DefaultValue = "00:00:30")]
-        public TimeSpan ShutdownTimeout {
-            get { return (TimeSpan) base [shutdownTimeoutProp];}
+        [TypeConverter(typeof(TimeSpanSecondsConverter))]
+        [TimeSpanValidator(
+            MinValueString = "00:00:00",
+            MaxValueString = "10675199.02:48:05.4775807"
+        )]
+        [ConfigurationProperty("shutdownTimeout", DefaultValue = "00:00:30")]
+        public TimeSpan ShutdownTimeout
+        {
+            get { return (TimeSpan)base[shutdownTimeoutProp]; }
             set { base[shutdownTimeoutProp] = value; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
     }
-
 }
-
-

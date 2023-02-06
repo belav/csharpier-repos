@@ -33,26 +33,17 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     [ComVisibleAttribute(false)]
     public class NamespaceResolveEventArgs : EventArgs
     {
-        public NamespaceResolveEventArgs (string namespaceName, Assembly requestingAssembly)
+        public NamespaceResolveEventArgs(string namespaceName, Assembly requestingAssembly)
         {
             NamespaceName = namespaceName;
             RequestingAssembly = requestingAssembly;
-            ResolvedAssemblies = new Collection<Assembly> ();
+            ResolvedAssemblies = new Collection<Assembly>();
         }
 
-        public string NamespaceName {
-            get;
-            private set;
-        }
+        public string NamespaceName { get; private set; }
 
-        public Assembly RequestingAssembly {
-            get;
-            private set;
-        }
+        public Assembly RequestingAssembly { get; private set; }
 
-        public Collection<Assembly> ResolvedAssemblies {
-            get;
-            private set;
-        }
+        public Collection<Assembly> ResolvedAssemblies { get; private set; }
     }
 }

@@ -8,9 +8,8 @@ public abstract class A
 
 public class B : A
 {
-    public override ref long Foo {
-        get {
-            throw null;
-        }
+    public override ref long Foo
+    {
+        get { throw null; }
     }
 }

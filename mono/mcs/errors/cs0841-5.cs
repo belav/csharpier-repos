@@ -4,12 +4,12 @@
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo (x, out var x);
+        Foo(x, out var x);
     }
 
-    static void Foo (int arg, out int value)
+    static void Foo(int arg, out int value)
     {
         value = 3;
     }

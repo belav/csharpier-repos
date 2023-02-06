@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Context = context;
         }
 
-        public CodeGenerationContextInfo WithContext(CodeGenerationContext value)
-            => WithContextImpl(value);
+        public CodeGenerationContextInfo WithContext(CodeGenerationContext value) =>
+            WithContextImpl(value);
 
         public CodeGenerationOptions Options => OptionsImpl;
 

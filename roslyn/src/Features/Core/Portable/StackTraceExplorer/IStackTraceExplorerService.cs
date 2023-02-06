@@ -15,15 +15,25 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
     {
         /// <summary>
         /// If the <paramref name="frame"/> has file information, attempts to map it to existing documents
-        /// in a solution. Looks for an exact filepath match first, then defaults to 
+        /// in a solution. Looks for an exact filepath match first, then defaults to
         /// a best guess.
         /// </summary>
         (Document? document, int line) GetDocumentAndLine(Solution solution, ParsedFrame frame);
-        Task<DefinitionItem?> TryFindDefinitionAsync(Solution solution, ParsedFrame frame, StackFrameSymbolPart symbolPart, CancellationToken cancellationToken);
+        Task<DefinitionItem?> TryFindDefinitionAsync(
+            Solution solution,
+            ParsedFrame frame,
+            StackFrameSymbolPart symbolPart,
+            CancellationToken cancellationToken
+        );
     }
 
     internal interface IRemoteStackTraceExplorerService
     {
-        ValueTask<SerializableDefinitionItem?> TryFindDefinitionAsync(Checksum solutionChecksum, string frameString, StackFrameSymbolPart symbolPart, CancellationToken cancellationToken);
+        ValueTask<SerializableDefinitionItem?> TryFindDefinitionAsync(
+            Checksum solutionChecksum,
+            string frameString,
+            StackFrameSymbolPart symbolPart,
+            CancellationToken cancellationToken
+        );
     }
 }

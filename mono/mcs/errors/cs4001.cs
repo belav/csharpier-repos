@@ -5,8 +5,8 @@ using System;
 
 class A
 {
-    static async void Test ()
+    static async void Test()
     {
-        await Console.WriteLine ("await");
+        await Console.WriteLine("await");
     }
 }

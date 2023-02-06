@@ -2,11 +2,10 @@ using System;
 
 public class Type0
 {
-    int a,b;
+    int a,
+        b;
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }
 
 public class Type1

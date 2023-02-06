@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,74 +40,98 @@ namespace System.ServiceModel.Channels
     {
         IHttpCookieContainerManager cookie_manager;
 
-        public HttpChannelFactory (HttpTransportBindingElement source, BindingContext ctx)
-            : base (source, ctx)
+        public HttpChannelFactory(HttpTransportBindingElement source, BindingContext ctx)
+            : base(source, ctx)
         {
-            ClientCredentials = ctx.BindingParameters.Find<ClientCredentials> ();
-            foreach (BindingElement be in ctx.Binding.Elements) {
+            ClientCredentials = ctx.BindingParameters.Find<ClientCredentials>();
+            foreach (BindingElement be in ctx.Binding.Elements)
+            {
                 MessageEncodingBindingElement mbe = be as MessageEncodingBindingElement;
-                if (mbe != null) {
-                    MessageEncoder = CreateEncoder<TChannel> (mbe);
+                if (mbe != null)
+                {
+                    MessageEncoder = CreateEncoder<TChannel>(mbe);
                     continue;
                 }
                 var tbe = be as HttpTransportBindingElement;
                 if (tbe != null)
-                    cookie_manager = tbe.GetProperty<IHttpCookieContainerManager> (ctx);
+                    cookie_manager = tbe.GetProperty<IHttpCookieContainerManager>(ctx);
             }
             if (MessageEncoder == null)
-                MessageEncoder = new TextMessageEncoder (MessageVersion.Default, Encoding.UTF8);
+                MessageEncoder = new TextMessageEncoder(MessageVersion.Default, Encoding.UTF8);
         }
 
         public ClientCredentials ClientCredentials { get; private set; }
 
-        protected override TChannel OnCreateChannel (
-            EndpointAddress address, Uri via)
+        protected override TChannel OnCreateChannel(EndpointAddress address, Uri via)
         {
-            ThrowIfDisposedOrNotOpen ();
+            ThrowIfDisposedOrNotOpen();
 
             //if (Transport.Scheme != address.Uri.Scheme)
             if (!address.Uri.Scheme.StartsWith(Transport.Scheme))
-                throw new ArgumentException (String.Format ("Argument EndpointAddress has unsupported URI scheme: {0}", address.Uri.Scheme));
+                throw new ArgumentException(
+                    String.Format(
+                        "Argument EndpointAddress has unsupported URI scheme: {0}",
+                        address.Uri.Scheme
+                    )
+                );
 
-            if (MessageEncoder.MessageVersion.Addressing.Equals (AddressingVersion.None) &&
-                via != null && !address.Uri.Equals (via))
-                throw new ArgumentException (String.Format ("The endpoint address '{0}' and via uri '{1}' must match when the corresponding binding has addressing version in the message version value as None.", address.Uri, via));
+            if (
+                MessageEncoder.MessageVersion.Addressing.Equals(AddressingVersion.None)
+                && via != null
+                && !address.Uri.Equals(via)
+            )
+                throw new ArgumentException(
+                    String.Format(
+                        "The endpoint address '{0}' and via uri '{1}' must match when the corresponding binding has addressing version in the message version value as None.",
+                        address.Uri,
+                        via
+                    )
+                );
 
-            Type t = typeof (TChannel);
-            if (t == typeof (IRequestChannel))
-                return (TChannel) (object) new HttpRequestChannel ((HttpChannelFactory<IRequestChannel>) (object) this, address, via);
-            else if (t == typeof (IOutputChannel))
+            Type t = typeof(TChannel);
+            if (t == typeof(IRequestChannel))
+                return (TChannel)
+                    (object)
+                        new HttpRequestChannel(
+                            (HttpChannelFactory<IRequestChannel>)(object)this,
+                            address,
+                            via
+                        );
+            else if (t == typeof(IOutputChannel))
                 // FIXME: implement
-                throw new NotImplementedException ();
-            throw new InvalidOperationException (String.Format ("channel type {0} is not supported.", typeof (TChannel).Name));
+                throw new NotImplementedException();
+            throw new InvalidOperationException(
+                String.Format("channel type {0} is not supported.", typeof(TChannel).Name)
+            );
         }
 
         Action<TimeSpan> open_delegate;
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout,
-            AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (open_delegate == null)
-                open_delegate = new Action<TimeSpan> (OnOpen);
-            return open_delegate.BeginInvoke (timeout, callback, state);
+                open_delegate = new Action<TimeSpan>(OnOpen);
+            return open_delegate.BeginInvoke(timeout, callback, state);
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
             if (open_delegate == null)
-                throw new InvalidOperationException ("Async open operation has not started");
-            open_delegate.EndInvoke (result);
+                throw new InvalidOperationException("Async open operation has not started");
+            open_delegate.EndInvoke(result);
         }
 
-        protected override void OnOpen (TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
-        public override T GetProperty<T> ()
+        public override T GetProperty<T>()
         {
             if (cookie_manager is T)
-                return (T) (object) cookie_manager;
-            return base.GetProperty<T> ();
+                return (T)(object)cookie_manager;
+            return base.GetProperty<T>();
         }
     }
 }

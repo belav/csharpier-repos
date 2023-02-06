@@ -3,18 +3,14 @@
 
 class BaseGeneric<T>
 {
-    public class InnerDerived
-    {
-    }
+    public class InnerDerived { }
 }
 
-class BaseConcrete : BaseGeneric<string>
-{
-}
+class BaseConcrete : BaseGeneric<string> { }
 
 class Program
 {
-    static void Main ()
+    static void Main()
     {
         new BaseConcrete.InnerDerived<int>();
     }

@@ -4,14 +4,14 @@ public class Stack<T>
 {
     T[] data;
 
-    public Stack ()
+    public Stack()
     {
-        data = new T [10];
+        data = new T[10];
     }
 
-    public void Add (T t)
+    public void Add(T t)
     {
-        data [0] = t;
+        data[0] = t;
     }
 }
 
@@ -22,10 +22,10 @@ struct Foo
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo foo = new Foo ();
-        Stack<Foo> stack = new Stack<Foo> ();
-        stack.Add (foo);
+        Foo foo = new Foo();
+        Stack<Foo> stack = new Stack<Foo>();
+        stack.Add(foo);
     }
 }

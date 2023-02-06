@@ -17,6 +17,7 @@ namespace POS_Server.Controllers
     public class ShippingCompaniesController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
@@ -34,31 +35,30 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = (from S in entity.shippingCompanies
-                                select new ShippingCompaniesModel()
-                                {
-                                    shippingCompanyId = S.shippingCompanyId,
-                                    name = S.name,
-                                    realDeliveryCost = S.realDeliveryCost,
-                                    deliveryCost = S.deliveryCost,
-                                    deliveryType = S.deliveryType,
-                                    notes = S.notes,
-                                    isActive = S.isActive,
-                                    createDate = S.createDate,
-                                    updateDate = S.updateDate,
-                                    createUserId = S.createUserId,
-                                    updateUserId = S.updateUserId,
-                                    balance = S.balance,
-                                    balanceType = S.balanceType,
-
-                                    email = S.email,
-                                    phone = S.phone,
-                                    mobile = S.mobile,
-                                    fax = S.fax,
-                                    address = S.address,
-
-
-                                }).ToList();
+                    var List = (
+                        from S in entity.shippingCompanies
+                        select new ShippingCompaniesModel()
+                        {
+                            shippingCompanyId = S.shippingCompanyId,
+                            name = S.name,
+                            realDeliveryCost = S.realDeliveryCost,
+                            deliveryCost = S.deliveryCost,
+                            deliveryType = S.deliveryType,
+                            notes = S.notes,
+                            isActive = S.isActive,
+                            createDate = S.createDate,
+                            updateDate = S.updateDate,
+                            createUserId = S.createUserId,
+                            updateUserId = S.updateUserId,
+                            balance = S.balance,
+                            balanceType = S.balanceType,
+                            email = S.email,
+                            phone = S.phone,
+                            mobile = S.mobile,
+                            fax = S.fax,
+                            address = S.address,
+                        }
+                    ).ToList();
                     if (List.Count > 0)
                     {
                         for (int i = 0; i < List.Count; i++)
@@ -66,7 +66,10 @@ namespace POS_Server.Controllers
                             if (List[i].isActive == 1)
                             {
                                 long shippingCompanyId = (long)List[i].shippingCompanyId;
-                                var itemsI = entity.invoices.Where(x => x.shippingCompanyId == shippingCompanyId).Select(b => new { b.invoiceId }).FirstOrDefault();
+                                var itemsI = entity.invoices
+                                    .Where(x => x.shippingCompanyId == shippingCompanyId)
+                                    .Select(b => new { b.invoiceId })
+                                    .FirstOrDefault();
 
                                 if ((itemsI is null))
                                     canDelete = true;
@@ -75,7 +78,6 @@ namespace POS_Server.Controllers
                         }
                     }
                     return TokenManager.GenerateToken(List);
-
                 }
             }
         }
@@ -105,38 +107,43 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var usersList = entity.shippingCompanies.Where(s => s.isActive == 1 ||
-                                                 (s.isActive == 0 && payType == "p" && s.balanceType == 0) ||
-                                                 (s.isActive == 0 && payType == "d" && s.balanceType == 1))
-                    .Select(S => new ShippingCompaniesModel
-                    {
-                        shippingCompanyId = S.shippingCompanyId,
-                        name = S.name,
-                        realDeliveryCost = S.realDeliveryCost,
-                        deliveryCost = S.deliveryCost,
-                        deliveryType = S.deliveryType,
-                        notes = S.notes,
-                        isActive = S.isActive,
-                        createDate = S.createDate,
-                        updateDate = S.updateDate,
-                        createUserId = S.createUserId,
-                        updateUserId = S.updateUserId,
-                        balance = S.balance,
-                        balanceType = S.balanceType,
-
-                        email = S.email,
-                        phone = S.phone,
-                        mobile = S.mobile,
-                        fax = S.fax,
-                        address = S.address
-                    })
-                    .ToList();
+                    var usersList = entity.shippingCompanies
+                        .Where(
+                            s =>
+                                s.isActive == 1
+                                || (s.isActive == 0 && payType == "p" && s.balanceType == 0)
+                                || (s.isActive == 0 && payType == "d" && s.balanceType == 1)
+                        )
+                        .Select(
+                            S =>
+                                new ShippingCompaniesModel
+                                {
+                                    shippingCompanyId = S.shippingCompanyId,
+                                    name = S.name,
+                                    realDeliveryCost = S.realDeliveryCost,
+                                    deliveryCost = S.deliveryCost,
+                                    deliveryType = S.deliveryType,
+                                    notes = S.notes,
+                                    isActive = S.isActive,
+                                    createDate = S.createDate,
+                                    updateDate = S.updateDate,
+                                    createUserId = S.createUserId,
+                                    updateUserId = S.updateUserId,
+                                    balance = S.balance,
+                                    balanceType = S.balanceType,
+                                    email = S.email,
+                                    phone = S.phone,
+                                    mobile = S.mobile,
+                                    fax = S.fax,
+                                    address = S.address
+                                }
+                        )
+                        .ToList();
 
                     return TokenManager.GenerateToken(usersList);
                 }
             }
         }
-
 
         // GET api/<controller>
         [HttpPost]
@@ -163,33 +170,34 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var row = entity.shippingCompanies
-                   .Where(u => u.shippingCompanyId == shippingCompanyId)
-                   .Select(S => new
-                   {
-                       S.shippingCompanyId,
-                       S.name,
-                       S.realDeliveryCost,
-                       S.deliveryCost,
-                       S.deliveryType,
-                       S.notes,
-                       S.createDate,
-                       S.updateDate,
-                       S.createUserId,
-                       S.updateUserId,
-                       S.isActive,
-                       S.balance,
-                       S.balanceType,
-                       S.email,
-                       S.phone,
-                       S.mobile,
-                       S.fax,
-                       S.address,
-
-                   })
-                   .FirstOrDefault();
+                        .Where(u => u.shippingCompanyId == shippingCompanyId)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.shippingCompanyId,
+                                    S.name,
+                                    S.realDeliveryCost,
+                                    S.deliveryCost,
+                                    S.deliveryType,
+                                    S.notes,
+                                    S.createDate,
+                                    S.updateDate,
+                                    S.createUserId,
+                                    S.updateUserId,
+                                    S.isActive,
+                                    S.balance,
+                                    S.balanceType,
+                                    S.email,
+                                    S.phone,
+                                    S.mobile,
+                                    S.fax,
+                                    S.address,
+                                }
+                        )
+                        .FirstOrDefault();
 
                     return TokenManager.GenerateToken(row);
-
                 }
             }
         }
@@ -217,7 +225,10 @@ namespace POS_Server.Controllers
                     {
                         shippingCompaniesObject = c.Value.Replace("\\", string.Empty);
                         shippingCompaniesObject = shippingCompaniesObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<shippingCompanies>(shippingCompaniesObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<shippingCompanies>(
+                            shippingCompaniesObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -239,10 +250,9 @@ namespace POS_Server.Controllers
                         var locationEntity = entity.Set<shippingCompanies>();
                         if (newObject.shippingCompanyId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject.updateUserId = newObject.createUserId;
-
 
                             locationEntity.Add(newObject);
                             entity.SaveChanges();
@@ -250,9 +260,11 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpObject = entity.shippingCompanies.Where(p => p.shippingCompanyId == newObject.shippingCompanyId).FirstOrDefault();
+                            var tmpObject = entity.shippingCompanies
+                                .Where(p => p.shippingCompanyId == newObject.shippingCompanyId)
+                                .FirstOrDefault();
 
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpObject.updateUserId = newObject.updateUserId;
 
                             tmpObject.name = newObject.name;
@@ -273,7 +285,6 @@ namespace POS_Server.Controllers
 
                             message = tmpObject.shippingCompanyId.ToString();
                         }
-
                     }
                 }
                 catch
@@ -384,7 +395,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            shippingCompanies objectDelete = entity.shippingCompanies.Find(shippingCompanyId);
+                            shippingCompanies objectDelete = entity.shippingCompanies.Find(
+                                shippingCompanyId
+                            );
 
                             entity.shippingCompanies.Remove(objectDelete);
                             message = entity.SaveChanges().ToString();
@@ -394,9 +407,8 @@ namespace POS_Server.Controllers
                     }
                     catch
                     {
-                        message =  "-1";
+                        message = "-1";
                         return TokenManager.GenerateToken(message);
-
                     }
                 }
                 else
@@ -405,11 +417,13 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            shippingCompanies objectDelete = entity.shippingCompanies.Find(shippingCompanyId);
+                            shippingCompanies objectDelete = entity.shippingCompanies.Find(
+                                shippingCompanyId
+                            );
 
                             objectDelete.isActive = 0;
                             objectDelete.updateUserId = userId;
-                            objectDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            objectDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
 
                             return TokenManager.GenerateToken(message);

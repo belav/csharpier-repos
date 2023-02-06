@@ -99,11 +99,11 @@ namespace HtmlAgilityPack
             {
                 try
                 {
-                    ArgValue = Convert.ToInt32(Arg.Substring(Name.Length + 2, Arg.Length - Name.Length - 2));
+                    ArgValue = Convert.ToInt32(
+                        Arg.Substring(Name.Length + 2, Arg.Length - Name.Length - 2)
+                    );
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 

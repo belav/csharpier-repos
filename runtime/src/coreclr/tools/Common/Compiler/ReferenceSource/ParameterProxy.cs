@@ -8,10 +8,12 @@ namespace ILLink.Shared.TypeSystemProxy
 {
     internal partial struct ParameterProxy
     {
-        public partial ReferenceKind GetReferenceKind ()
+        public partial ReferenceKind GetReferenceKind()
         {
             if (IsImplicitThis)
-                return Method.Method.DeclaringType.IsValueType ? ReferenceKind.Ref : ReferenceKind.None;
+                return Method.Method.DeclaringType.IsValueType
+                    ? ReferenceKind.Ref
+                    : ReferenceKind.None;
 #pragma warning disable RS0030 // MethodReference.Parameters is banned -- this class provides wrappers to use
             var param = Method.Method.Parameters[MetadataIndex];
 #pragma warning restore RS0030 // Do not used banned APIs
@@ -24,8 +26,10 @@ namespace ILLink.Shared.TypeSystemProxy
             return ReferenceKind.Ref;
         }
 
-        public TypeReference ParameterType {
-            get {
+        public TypeReference ParameterType
+        {
+            get
+            {
                 if (IsImplicitThis)
                     return Method.Method.DeclaringType;
 #pragma warning disable RS0030 // MethodReference.Parameters is banned -- this class provides wrappers to use
@@ -35,12 +39,15 @@ namespace ILLink.Shared.TypeSystemProxy
         }
 
 #pragma warning disable RS0030 // MethodReference.Parameters is banned -- this class provides wrappers to use
-        public partial string GetDisplayName () => IsImplicitThis ? "this"
-            : !string.IsNullOrEmpty (Method.Method.Parameters[MetadataIndex].Name) ? Method.Method.Parameters[MetadataIndex].Name
-            : $"#{Index}";
+        public partial string GetDisplayName() =>
+            IsImplicitThis
+                ? "this"
+                : !string.IsNullOrEmpty(Method.Method.Parameters[MetadataIndex].Name)
+                    ? Method.Method.Parameters[MetadataIndex].Name
+                    : $"#{Index}";
 #pragma warning restore RS0030 // Do not used banned APIs
 
-        public ICustomAttributeProvider GetCustomAttributeProvider ()
+        public ICustomAttributeProvider GetCustomAttributeProvider()
         {
             if (IsImplicitThis)
                 return Method.Method;
@@ -49,8 +56,8 @@ namespace ILLink.Shared.TypeSystemProxy
 #pragma warning restore RS0030 // Do not used banned APIs
         }
 
-        public partial bool IsTypeOf (string typeName) => ParameterType.IsTypeOf (typeName);
+        public partial bool IsTypeOf(string typeName) => ParameterType.IsTypeOf(typeName);
 
-        public bool IsTypeOf (WellKnownType type) => ParameterType.IsTypeOf (type);
+        public bool IsTypeOf(WellKnownType type) => ParameterType.IsTypeOf(type);
     }
 }

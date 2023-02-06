@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,25 +36,27 @@ namespace System.ServiceModel
 #endif
         MessageCredentialType client_credential_type;
 
-        public MessageSecurityOverTcp ()
+        public MessageSecurityOverTcp()
         {
 #if !MOBILE && !XAMMAC_4_5
             alg_suite = SecurityAlgorithmSuite.Default;
 #endif
             // This default value is *silly* but anyways
-            // such code that does not change this ClientCredentialType 
+            // such code that does not change this ClientCredentialType
             // won't work on Mono.
             client_credential_type = MessageCredentialType.Windows;
         }
 
 #if !MOBILE && !XAMMAC_4_5
-        public SecurityAlgorithmSuite AlgorithmSuite {
+        public SecurityAlgorithmSuite AlgorithmSuite
+        {
             get { return alg_suite; }
             set { alg_suite = value; }
         }
 #endif
 
-        public MessageCredentialType ClientCredentialType {
+        public MessageCredentialType ClientCredentialType
+        {
             get { return client_credential_type; }
             set { client_credential_type = value; }
         }

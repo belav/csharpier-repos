@@ -30,9 +30,7 @@ namespace System.Web.Helpers.Test
         private class DynamicWrapperMetaObject : DynamicMetaObject
         {
             public DynamicWrapperMetaObject(Expression expression, object value)
-                : base(expression, BindingRestrictions.Empty, value)
-            {
-            }
+                : base(expression, BindingRestrictions.Empty, value) { }
 
             private object WrappedObject
             {
@@ -46,37 +44,48 @@ namespace System.Web.Helpers.Test
 
             private Expression GetWrappedObjectExpression()
             {
-                FieldInfo fieldInfo = typeof(DynamicWrapper).GetField("_object", BindingFlags.NonPublic | BindingFlags.Instance);
+                FieldInfo fieldInfo = typeof(DynamicWrapper).GetField(
+                    "_object",
+                    BindingFlags.NonPublic | BindingFlags.Instance
+                );
                 Debug.Assert(fieldInfo != null);
                 return Expression.Convert(
                     Expression.Field(GetDynamicExpression(), fieldInfo),
-                    WrappedObject.GetType());
+                    WrappedObject.GetType()
+                );
             }
 
             private Expression GetMemberAccessExpression(string memberName)
             {
-                return Expression.Property(
-                    GetWrappedObjectExpression(),
-                    memberName);
+                return Expression.Property(GetWrappedObjectExpression(), memberName);
             }
 
             public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
             {
                 var binderDefault = binder.FallbackGetMember(this);
 
-                var expression = Expression.Convert(GetMemberAccessExpression(binder.Name), typeof(object));
+                var expression = Expression.Convert(
+                    GetMemberAccessExpression(binder.Name),
+                    typeof(object)
+                );
 
-                var dynamicSuggestion = new DynamicMetaObject(expression, BindingRestrictions.GetTypeRestriction(Expression, LimitType)
-                                                                              .Merge(binderDefault.Restrictions));
+                var dynamicSuggestion = new DynamicMetaObject(
+                    expression,
+                    BindingRestrictions
+                        .GetTypeRestriction(Expression, LimitType)
+                        .Merge(binderDefault.Restrictions)
+                );
 
                 return binder.FallbackGetMember(this, dynamicSuggestion);
             }
 
             public override IEnumerable<string> GetDynamicMemberNames()
             {
-                return (from p in WrappedObject.GetType().GetProperties()
-                        orderby p.Name
-                        select p.Name).ToArray();
+                return (
+                    from p in WrappedObject.GetType().GetProperties()
+                    orderby p.Name
+                    select p.Name
+                ).ToArray();
             }
         }
     }

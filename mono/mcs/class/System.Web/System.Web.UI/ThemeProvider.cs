@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,21 +31,24 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 
-namespace System.Web.UI 
+namespace System.Web.UI
 {
     public sealed class ThemeProvider
     {
         IDesignerHost host;
         string name;
         string[] cssFiles;
+
         //string themeDefinition;
         //string themePath;
 
-        public ThemeProvider (IDesignerHost host,
-                      string name,
-                      string themeDefinition,
-                      string[] cssFiles,
-                      string themePath)
+        public ThemeProvider(
+            IDesignerHost host,
+            string name,
+            string themeDefinition,
+            string[] cssFiles,
+            string themePath
+        )
         {
             this.host = host;
             this.name = name;
@@ -55,39 +58,42 @@ namespace System.Web.UI
         }
 
         [MonoTODO("Not implemented")]
-        public SkinBuilder GetSkinBuilder (Control control)
+        public SkinBuilder GetSkinBuilder(Control control)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO ("Not implemented")]
-        public IDictionary GetSkinControlBuildersForControlType (Type type)
+        [MonoTODO("Not implemented")]
+        public IDictionary GetSkinControlBuildersForControlType(Type type)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO ("Not implemented")]
-        public ICollection GetSkinsForControl (Type type)
+        [MonoTODO("Not implemented")]
+        public ICollection GetSkinsForControl(Type type)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO ("Not implemented")]
-        public int ContentHashCode {
-            get { throw new NotImplementedException (); }
+        [MonoTODO("Not implemented")]
+        public int ContentHashCode
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public ICollection CssFiles {
+        public ICollection CssFiles
+        {
             get { return cssFiles; }
         }
 
-        public IDesignerHost DesignerHost {
+        public IDesignerHost DesignerHost
+        {
             get { return host; }
         }
 
-        public string ThemeName {
+        public string ThemeName
+        {
             get { return name; }
         }
     }
-
 }

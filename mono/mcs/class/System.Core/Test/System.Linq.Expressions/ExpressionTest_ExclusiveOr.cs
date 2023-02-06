@@ -32,74 +32,89 @@ namespace MonoTests.System.Linq.Expressions
     public class ExpressionTest_ExclusiveOr
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Arg1Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg1Null()
         {
-            Expression.ExclusiveOr (null, Expression.Constant (1));
+            Expression.ExclusiveOr(null, Expression.Constant(1));
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Arg2Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg2Null()
         {
-            Expression.ExclusiveOr (Expression.Constant (1), null);
+            Expression.ExclusiveOr(Expression.Constant(1), null);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void NoOperatorClass ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void NoOperatorClass()
         {
-            Expression.ExclusiveOr (Expression.Constant (new NoOpClass ()), Expression.Constant (new NoOpClass ()));
+            Expression.ExclusiveOr(
+                Expression.Constant(new NoOpClass()),
+                Expression.Constant(new NoOpClass())
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ArgTypesDifferent ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ArgTypesDifferent()
         {
-            Expression.ExclusiveOr (Expression.Constant (1), Expression.Constant (true));
+            Expression.ExclusiveOr(Expression.Constant(1), Expression.Constant(true));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void Double ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Double()
         {
-            Expression.ExclusiveOr (Expression.Constant (1.0), Expression.Constant (2.0));
+            Expression.ExclusiveOr(Expression.Constant(1.0), Expression.Constant(2.0));
         }
 
         [Test]
-        public void Integer ()
+        public void Integer()
         {
-            BinaryExpression expr = Expression.ExclusiveOr (Expression.Constant (1), Expression.Constant (2));
-            Assert.AreEqual (ExpressionType.ExclusiveOr, expr.NodeType, "ExclusiveOr#01");
-            Assert.AreEqual (typeof (int), expr.Type, "ExclusiveOr#02");
-            Assert.IsNull (expr.Method, "ExclusiveOr#03");
-            Assert.AreEqual ("(1 ^ 2)", expr.ToString(), "ExclusiveOr#04");
+            BinaryExpression expr = Expression.ExclusiveOr(
+                Expression.Constant(1),
+                Expression.Constant(2)
+            );
+            Assert.AreEqual(ExpressionType.ExclusiveOr, expr.NodeType, "ExclusiveOr#01");
+            Assert.AreEqual(typeof(int), expr.Type, "ExclusiveOr#02");
+            Assert.IsNull(expr.Method, "ExclusiveOr#03");
+            Assert.AreEqual("(1 ^ 2)", expr.ToString(), "ExclusiveOr#04");
         }
 
         [Test]
-        public void Boolean ()
+        public void Boolean()
         {
-            BinaryExpression expr = Expression.ExclusiveOr (Expression.Constant (true), Expression.Constant (false));
-            Assert.AreEqual (ExpressionType.ExclusiveOr, expr.NodeType, "ExclusiveOr#05");
-            Assert.AreEqual (typeof (bool), expr.Type, "ExclusiveOr#06");
-            Assert.IsNull (expr.Method, "ExclusiveOr#07");
-            Assert.AreEqual ("(True ^ False)", expr.ToString(), "ExclusiveOr#08");
+            BinaryExpression expr = Expression.ExclusiveOr(
+                Expression.Constant(true),
+                Expression.Constant(false)
+            );
+            Assert.AreEqual(ExpressionType.ExclusiveOr, expr.NodeType, "ExclusiveOr#05");
+            Assert.AreEqual(typeof(bool), expr.Type, "ExclusiveOr#06");
+            Assert.IsNull(expr.Method, "ExclusiveOr#07");
+            Assert.AreEqual("(True ^ False)", expr.ToString(), "ExclusiveOr#08");
         }
 
         [Test]
-        public void UserDefinedClass ()
+        public void UserDefinedClass()
         {
             // We can use the simplest version of GetMethod because we already know only one
             // exists in the very simple class we're using for the tests.
-            MethodInfo mi = typeof (OpClass).GetMethod ("op_ExclusiveOr");
+            MethodInfo mi = typeof(OpClass).GetMethod("op_ExclusiveOr");
 
-            BinaryExpression expr = Expression.ExclusiveOr (Expression.Constant (new OpClass ()), Expression.Constant (new OpClass ()));
-            Assert.AreEqual (ExpressionType.ExclusiveOr, expr.NodeType, "ExclusiveOr#09");
-            Assert.AreEqual (typeof (OpClass), expr.Type, "ExclusiveOr#10");
-            Assert.AreEqual (mi, expr.Method, "ExclusiveOr#11");
-            Assert.AreEqual ("op_ExclusiveOr", expr.Method.Name, "ExclusiveOr#12");
-            Assert.AreEqual ("(value(MonoTests.System.Linq.Expressions.OpClass) ^ value(MonoTests.System.Linq.Expressions.OpClass))",
-                expr.ToString(), "ExclusiveOr#13");
+            BinaryExpression expr = Expression.ExclusiveOr(
+                Expression.Constant(new OpClass()),
+                Expression.Constant(new OpClass())
+            );
+            Assert.AreEqual(ExpressionType.ExclusiveOr, expr.NodeType, "ExclusiveOr#09");
+            Assert.AreEqual(typeof(OpClass), expr.Type, "ExclusiveOr#10");
+            Assert.AreEqual(mi, expr.Method, "ExclusiveOr#11");
+            Assert.AreEqual("op_ExclusiveOr", expr.Method.Name, "ExclusiveOr#12");
+            Assert.AreEqual(
+                "(value(MonoTests.System.Linq.Expressions.OpClass) ^ value(MonoTests.System.Linq.Expressions.OpClass))",
+                expr.ToString(),
+                "ExclusiveOr#13"
+            );
         }
     }
 }

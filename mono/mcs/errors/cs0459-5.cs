@@ -4,10 +4,8 @@
 
 readonly struct X
 {
-    unsafe void Test ()
+    unsafe void Test()
     {
-        fixed (X* x = &this) {
-
-        }
+        fixed (X* x = &this) { }
     }
 }

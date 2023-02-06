@@ -26,22 +26,27 @@ class TestReadIntAsDouble
     {
         [FieldOffset(0)]
         public int uflags;
+
         [FieldOffset(4)]
         public int uhi;
+
         [FieldOffset(8)]
         public int ulo;
+
         [FieldOffset(12)]
         public int umid;
+
         [FieldOffset(8)]
         public double ulomidLE;
     }
 
     public struct Data
     {
-        public int x, y, z;
+        public int x,
+            y,
+            z;
         public double m;
     }
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void TestDoubleAssignment(Data d)
@@ -58,15 +63,18 @@ class TestReadIntAsDouble
     {
         [FieldOffset(0)]
         public int uflags;
+
         [FieldOffset(4)]
         public int uhi;
+
         [FieldOffset(8)]
         public double ulomidLE;
+
         [FieldOffset(8)]
         public int ulo;
+
         [FieldOffset(12)]
         public int umid;
-
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

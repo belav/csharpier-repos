@@ -34,16 +34,16 @@ namespace System.Net.Http
 {
     public class FormUrlEncodedContent : ByteArrayContent
     {
-        public FormUrlEncodedContent (IEnumerable<KeyValuePair<string, string>> nameValueCollection)
-            : base (EncodeContent (nameValueCollection))
+        public FormUrlEncodedContent(IEnumerable<KeyValuePair<string, string>> nameValueCollection)
+            : base(EncodeContent(nameValueCollection))
         {
-            Headers.ContentType = new MediaTypeHeaderValue ("application/x-www-form-urlencoded");
+            Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
         }
 
-        static byte[] EncodeContent (IEnumerable<KeyValuePair<string, string>> nameValueCollection)
+        static byte[] EncodeContent(IEnumerable<KeyValuePair<string, string>> nameValueCollection)
         {
             if (nameValueCollection == null)
-                throw new ArgumentNullException ("nameValueCollection");
+                throw new ArgumentNullException("nameValueCollection");
 
             //
             // Serialization as application/x-www-form-urlencoded
@@ -59,31 +59,32 @@ namespace System.Net.Http
             // the uppercase hexadecimal notation for the octet value and % is a literal character. Line breaks
             // are represented as "CR LF" pairs (i.e., %0D%0A).
             //
-            var sb = new List<byte> ();
-            foreach (var item in nameValueCollection) {
+            var sb = new List<byte>();
+            foreach (var item in nameValueCollection)
+            {
                 if (sb.Count != 0)
-                    sb.Add ((byte) '&');
+                    sb.Add((byte)'&');
 
-                var data = SerializeValue (item.Key);
+                var data = SerializeValue(item.Key);
                 if (data != null)
-                    sb.AddRange (data);
-                sb.Add ((byte) '=');
+                    sb.AddRange(data);
+                sb.Add((byte)'=');
 
-                data = SerializeValue (item.Value);
+                data = SerializeValue(item.Value);
                 if (data != null)
-                    sb.AddRange (data);
+                    sb.AddRange(data);
             }
 
-            return sb.ToArray ();
+            return sb.ToArray();
         }
 
-        static byte[] SerializeValue (string value)
+        static byte[] SerializeValue(string value)
         {
             if (value == null)
                 return null;
 
-            value = Uri.EscapeDataString (value).Replace ("%20", "+");
-            return Encoding.ASCII.GetBytes (value);
+            value = Uri.EscapeDataString(value).Replace("%20", "+");
+            return Encoding.ASCII.GetBytes(value);
         }
     }
 }

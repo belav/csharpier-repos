@@ -8,18 +8,17 @@ using System;
 class E : IEnumerable
 {
     [Obsolete]
-    public IEnumerator GetEnumerator ()
+    public IEnumerator GetEnumerator()
     {
-        throw new System.NotImplementedException ();
+        throw new System.NotImplementedException();
     }
 }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        var e = new E ();
-        foreach (var entry in e) {
-        }
+        var e = new E();
+        foreach (var entry in e) { }
     }
 }

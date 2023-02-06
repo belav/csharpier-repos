@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,91 +39,101 @@ namespace System.Diagnostics
     public class Stopwatch
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern long GetTimestamp ();
+        public static extern long GetTimestamp();
 
         public static readonly long Frequency = 10000000;
 
         public static readonly bool IsHighResolution = true;
 
-        public static Stopwatch StartNew ()
+        public static Stopwatch StartNew()
         {
-            Stopwatch s = new Stopwatch ();
-            s.Start ();
+            Stopwatch s = new Stopwatch();
+            s.Start();
             return s;
         }
 
-        public Stopwatch ()
-        {
-        }
+        public Stopwatch() { }
 
         long elapsed;
         long started;
         bool is_running;
 
-        public TimeSpan Elapsed {
-            get {
-                if (IsHighResolution) {
+        public TimeSpan Elapsed
+        {
+            get
+            {
+                if (IsHighResolution)
+                {
                     // convert our ticks to TimeSpace ticks, 100 nano second units
                     // using two divisions helps avoid overflow
-                    return TimeSpan.FromTicks ((long)(ElapsedTicks / (Frequency / TimeSpan.TicksPerSecond)));
+                    return TimeSpan.FromTicks(
+                        (long)(ElapsedTicks / (Frequency / TimeSpan.TicksPerSecond))
+                    );
                 }
-                else {
-                    return TimeSpan.FromTicks (ElapsedTicks); 
+                else
+                {
+                    return TimeSpan.FromTicks(ElapsedTicks);
                 }
             }
         }
 
-        public long ElapsedMilliseconds {
-            get { 
-                checked {
-                    if (IsHighResolution) {
+        public long ElapsedMilliseconds
+        {
+            get
+            {
+                checked
+                {
+                    if (IsHighResolution)
+                    {
                         return (long)(ElapsedTicks / (Frequency / 1000));
                     }
-                    else {
-                        return (long) Elapsed.TotalMilliseconds;
+                    else
+                    {
+                        return (long)Elapsed.TotalMilliseconds;
                     }
-                } 
+                }
             }
         }
 
-        public long ElapsedTicks {
-            get { return is_running ? GetTimestamp () - started + elapsed : elapsed; }
+        public long ElapsedTicks
+        {
+            get { return is_running ? GetTimestamp() - started + elapsed : elapsed; }
         }
 
-        public bool IsRunning {
+        public bool IsRunning
+        {
             get { return is_running; }
         }
 
-        public void Reset ()
+        public void Reset()
         {
             elapsed = 0;
             is_running = false;
         }
 
-        public void Start ()
+        public void Start()
         {
             if (is_running)
                 return;
-            started = GetTimestamp ();
+            started = GetTimestamp();
             is_running = true;
         }
 
-        public void Stop ()
+        public void Stop()
         {
             if (!is_running)
                 return;
-            elapsed += GetTimestamp () - started;
+            elapsed += GetTimestamp() - started;
             if (elapsed < 0)
                 elapsed = 0;
             is_running = false;
         }
 
-        public void Restart ()
+        public void Restart()
         {
-            started = GetTimestamp ();
+            started = GetTimestamp();
             elapsed = 0;
             is_running = true;
         }
     }
 }
-

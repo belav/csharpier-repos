@@ -84,11 +84,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             var sb = new StringBuilder();
             if (this.Best.HasValue)
             {
-                sb.AppendLine("Overload resolution succeeded and chose " + this.Best.Signature.ToString());
+                sb.AppendLine(
+                    "Overload resolution succeeded and chose " + this.Best.Signature.ToString()
+                );
             }
             else if (CountKind(OperatorAnalysisResultKind.Applicable) > 1)
             {
-                sb.AppendLine("Overload resolution failed because of ambiguous possible best operators.");
+                sb.AppendLine(
+                    "Overload resolution failed because of ambiguous possible best operators."
+                );
             }
             else
             {
@@ -98,7 +102,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             sb.AppendLine("Detailed results:");
             foreach (var result in Results)
             {
-                sb.AppendFormat("operator: {0} reason: {1}\n", result.Signature.ToString(), result.Kind.ToString());
+                sb.AppendFormat(
+                    "operator: {0} reason: {1}\n",
+                    result.Signature.ToString(),
+                    result.Kind.ToString()
+                );
             }
 
             return sb.ToString();
@@ -134,12 +142,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         //2) Expose the pool or the way to create a pool or the way to get an instance.
         //       for now we will expose both and figure which way works better
-        public static readonly ObjectPool<UnaryOperatorOverloadResolutionResult> Pool = CreatePool();
+        public static readonly ObjectPool<UnaryOperatorOverloadResolutionResult> Pool =
+            CreatePool();
 
         private static ObjectPool<UnaryOperatorOverloadResolutionResult> CreatePool()
         {
             ObjectPool<UnaryOperatorOverloadResolutionResult> pool = null;
-            pool = new ObjectPool<UnaryOperatorOverloadResolutionResult>(() => new UnaryOperatorOverloadResolutionResult(), 10);
+            pool = new ObjectPool<UnaryOperatorOverloadResolutionResult>(
+                () => new UnaryOperatorOverloadResolutionResult(),
+                10
+            );
             return pool;
         }
 

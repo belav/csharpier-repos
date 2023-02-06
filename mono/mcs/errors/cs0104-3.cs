@@ -17,17 +17,18 @@ namespace C
     using A;
     using B;
 
-    class Test 
+    class Test
     {
-        static void Main ()
+        static void Main()
         {
-            Foo (delegate {
-                X x;
-            });
+            Foo(
+                delegate
+                {
+                    X x;
+                }
+            );
         }
-        
-        static void Foo (Action a)
-        {
-        }
+
+        static void Foo(Action a) { }
     }
 }

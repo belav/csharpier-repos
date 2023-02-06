@@ -4,23 +4,24 @@
 using System;
 using System.Threading;
 
-interface IFoo<T> 
-{    
-    string Function<U>(U u, T t);        
+interface IFoo<T>
+{
+    string Function<U>(U u, T t);
 }
 
 class Foo<T> : IFoo<T>
 {
     public virtual string Function<U>(U u, T t)
     {
-        return u.ToString()+t.ToString();
-    }        
+        return u.ToString() + t.ToString();
+    }
 }
 
 public class Test_method012
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -29,21 +30,19 @@ public class Test_method012
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
         IFoo<int> IFooInt = new Foo<int>();
         IFoo<string> IFooString = new Foo<string>();
 
-        Eval(IFooInt.Function<int>(1,1).Equals("11"));
-        Eval(IFooInt.Function<string>("string",1).Equals("string1"));
+        Eval(IFooInt.Function<int>(1, 1).Equals("11"));
+        Eval(IFooInt.Function<string>("string", 1).Equals("string1"));
 
-        Eval(IFooString.Function<int>(1,"string").Equals("1string"));
-        Eval(IFooString.Function<string>("string1","string2").Equals("string1string2"));
-        
-        
+        Eval(IFooString.Function<int>(1, "string").Equals("1string"));
+        Eval(IFooString.Function<string>("string1", "string2").Equals("string1string2"));
+
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -54,7 +53,5 @@ public class Test_method012
             Console.WriteLine("Test Failed");
             return 1;
         }
-        
     }
 }
-

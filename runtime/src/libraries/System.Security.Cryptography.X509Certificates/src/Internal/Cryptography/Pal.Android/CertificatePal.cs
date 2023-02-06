@@ -23,12 +23,20 @@ namespace Internal.Cryptography.Pal
             return AndroidCertificatePal.FromOtherCert(cert);
         }
 
-        public static ICertificatePal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ICertificatePal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             return AndroidCertificatePal.FromBlob(rawData, password, keyStorageFlags);
         }
 
-        public static ICertificatePal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ICertificatePal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             return AndroidCertificatePal.FromFile(fileName, password, keyStorageFlags);
         }

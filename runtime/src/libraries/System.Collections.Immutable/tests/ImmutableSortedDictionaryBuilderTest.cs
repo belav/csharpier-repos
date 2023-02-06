@@ -18,11 +18,16 @@ namespace System.Collections.Immutable.Tests
             var builder = ImmutableSortedDictionary.CreateBuilder<string, string>();
             Assert.NotNull(builder);
 
-            builder = ImmutableSortedDictionary.CreateBuilder<string, string>(StringComparer.Ordinal);
+            builder = ImmutableSortedDictionary.CreateBuilder<string, string>(
+                StringComparer.Ordinal
+            );
             Assert.Same(StringComparer.Ordinal, builder.KeyComparer);
             Assert.Same(EqualityComparer<string>.Default, builder.ValueComparer);
 
-            builder = ImmutableSortedDictionary.CreateBuilder<string, string>(StringComparer.Ordinal, StringComparer.OrdinalIgnoreCase);
+            builder = ImmutableSortedDictionary.CreateBuilder<string, string>(
+                StringComparer.Ordinal,
+                StringComparer.OrdinalIgnoreCase
+            );
             Assert.Same(StringComparer.Ordinal, builder.KeyComparer);
             Assert.Same(StringComparer.OrdinalIgnoreCase, builder.ValueComparer);
         }
@@ -99,10 +104,10 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void RemoveRange()
         {
-            var builder =
-                ImmutableSortedDictionary.Create<string, int>()
-                                   .AddRange(new Dictionary<string, int> { { "a", 1 }, { "b", 2 }, { "c", 3 } })
-                                   .ToBuilder();
+            var builder = ImmutableSortedDictionary
+                .Create<string, int>()
+                .AddRange(new Dictionary<string, int> { { "a", 1 }, { "b", 2 }, { "c", 3 } })
+                .ToBuilder();
             Assert.Equal(3, builder.Count);
             builder.RemoveRange(new[] { "a", "b" });
             Assert.Equal(1, builder.Count);
@@ -113,11 +118,14 @@ namespace System.Collections.Immutable.Tests
         public void EnumerateBuilderWhileMutating()
         {
             var builder = ImmutableSortedDictionary<int, string>.Empty
-                .AddRange(Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string>(n, null)))
+                .AddRange(
+                    Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string>(n, null))
+                )
                 .ToBuilder();
             Assert.Equal(
                 Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string>(n, null)),
-                builder);
+                builder
+            );
 
             var enumerator = builder.GetEnumerator();
             Assert.True(enumerator.MoveNext());
@@ -126,7 +134,8 @@ namespace System.Collections.Immutable.Tests
             // Verify that a new enumerator will succeed.
             Assert.Equal(
                 Enumerable.Range(1, 11).Select(n => new KeyValuePair<int, string>(n, null)),
-                builder);
+                builder
+            );
 
             // Try enumerating further with the previous enumerable now that we've changed the collection.
             Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
@@ -136,7 +145,8 @@ namespace System.Collections.Immutable.Tests
             // Verify that by obtaining a new enumerator, we can enumerate all the contents.
             Assert.Equal(
                 Enumerable.Range(1, 11).Select(n => new KeyValuePair<int, string>(n, null)),
-                builder);
+                builder
+            );
         }
 
         [Fact]
@@ -183,8 +193,11 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void KeyComparer()
         {
-            var builder = ImmutableSortedDictionary.Create<string, string>()
-                .Add("a", "1").Add("B", "1").ToBuilder();
+            var builder = ImmutableSortedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("B", "1")
+                .ToBuilder();
             Assert.Same(Comparer<string>.Default, builder.KeyComparer);
             Assert.True(builder.ContainsKey("a"));
             Assert.False(builder.ContainsKey("A"));
@@ -207,8 +220,11 @@ namespace System.Collections.Immutable.Tests
         public void KeyComparerCollisions()
         {
             // First check where collisions have matching values.
-            var builder = ImmutableSortedDictionary.Create<string, string>()
-                .Add("a", "1").Add("A", "1").ToBuilder();
+            var builder = ImmutableSortedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("A", "1")
+                .ToBuilder();
             builder.KeyComparer = StringComparer.OrdinalIgnoreCase;
             Assert.Equal(1, builder.Count);
             Assert.True(builder.ContainsKey("a"));
@@ -219,9 +235,16 @@ namespace System.Collections.Immutable.Tests
             Assert.True(set.ContainsKey("a"));
 
             // Now check where collisions have conflicting values.
-            builder = ImmutableSortedDictionary.Create<string, string>()
-                .Add("a", "1").Add("A", "2").Add("b", "3").ToBuilder();
-            AssertExtensions.Throws<ArgumentException>(null, () => builder.KeyComparer = StringComparer.OrdinalIgnoreCase);
+            builder = ImmutableSortedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("A", "2")
+                .Add("b", "3")
+                .ToBuilder();
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => builder.KeyComparer = StringComparer.OrdinalIgnoreCase
+            );
 
             // Force all values to be considered equal.
             builder.ValueComparer = EverythingEqual<string>.Default;
@@ -235,8 +258,11 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void KeyComparerEmptyCollection()
         {
-            var builder = ImmutableSortedDictionary.Create<string, string>()
-                .Add("a", "1").Add("B", "1").ToBuilder();
+            var builder = ImmutableSortedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("B", "1")
+                .ToBuilder();
             Assert.Same(Comparer<string>.Default, builder.KeyComparer);
             builder.KeyComparer = StringComparer.OrdinalIgnoreCase;
             Assert.Same(StringComparer.OrdinalIgnoreCase, builder.KeyComparer);
@@ -255,35 +281,53 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(5, populated.GetValueOrDefault("a", 1));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public void DebuggerAttributesValid()
         {
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSortedDictionary.CreateBuilder<string, int>());
-            ImmutableSortedDictionary<int, string>.Builder builder = ImmutableSortedDictionary.CreateBuilder<int, string>();
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                ImmutableSortedDictionary.CreateBuilder<string, int>()
+            );
+            ImmutableSortedDictionary<int, string>.Builder builder =
+                ImmutableSortedDictionary.CreateBuilder<int, string>();
             builder.Add(1, "One");
             builder.Add(2, "Two");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(builder);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
-            KeyValuePair<int, string>[] items = itemProperty.GetValue(info.Instance) as KeyValuePair<int, string>[];
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                builder
+            );
+            PropertyInfo itemProperty = info.Properties.Single(
+                pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+            );
+            KeyValuePair<int, string>[] items =
+                itemProperty.GetValue(info.Instance) as KeyValuePair<int, string>[];
             Assert.Equal(builder, items);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void TestDebuggerAttributes_Null()
         {
-            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableSortedDictionary.CreateBuilder<int, string>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            Type proxyType = DebuggerAttributes.GetProxyType(
+                ImmutableSortedDictionary.CreateBuilder<int, string>()
+            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
         [Fact]
         public void ValueRef()
         {
-            var builder = new Dictionary<string, int>()
-            {
-                { "a", 1 },
-                { "b", 2 }
-            }.ToImmutableSortedDictionary().ToBuilder();
+            var builder = new Dictionary<string, int>() { { "a", 1 }, { "b", 2 } }
+                .ToImmutableSortedDictionary()
+                .ToBuilder();
 
             ref readonly var safeRef = ref builder.ValueRef("a");
             ref var unsafeRef = ref Unsafe.AsRef(safeRef);
@@ -298,11 +342,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ValueRef_NonExistentKey()
         {
-            var builder = new Dictionary<string, int>()
-            {
-                { "a", 1 },
-                { "b", 2 }
-            }.ToImmutableSortedDictionary().ToBuilder();
+            var builder = new Dictionary<string, int>() { { "a", 1 }, { "b", 2 } }
+                .ToImmutableSortedDictionary()
+                .ToBuilder();
 
             Assert.Throws<KeyNotFoundException>(() => builder.ValueRef("c"));
         }
@@ -310,7 +352,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ToImmutableSortedDictionary()
         {
-            ImmutableSortedDictionary<int, int>.Builder builder = ImmutableSortedDictionary.CreateBuilder<int, int>();
+            ImmutableSortedDictionary<int, int>.Builder builder =
+                ImmutableSortedDictionary.CreateBuilder<int, int>();
             builder.Add(1, 1);
             builder.Add(2, 2);
             builder.Add(3, 3);
@@ -329,27 +372,48 @@ namespace System.Collections.Immutable.Tests
             Assert.False(dictionary.IsEmpty);
 
             ImmutableSortedDictionary<int, int>.Builder nullBuilder = null;
-            AssertExtensions.Throws<ArgumentNullException>("builder", () => nullBuilder.ToImmutableSortedDictionary());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "builder",
+                () => nullBuilder.ToImmutableSortedDictionary()
+            );
         }
 
-        protected override IImmutableDictionary<TKey, TValue> GetEmptyImmutableDictionary<TKey, TValue>()
+        protected override IImmutableDictionary<TKey, TValue> GetEmptyImmutableDictionary<
+            TKey,
+            TValue
+        >()
         {
             return ImmutableSortedDictionary.Create<TKey, TValue>();
         }
 
-        protected override IImmutableDictionary<string, TValue> Empty<TValue>(StringComparer comparer)
+        protected override IImmutableDictionary<string, TValue> Empty<TValue>(
+            StringComparer comparer
+        )
         {
             return ImmutableSortedDictionary.Create<string, TValue>(comparer);
         }
 
-        protected override bool TryGetKeyHelper<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey equalKey, out TKey actualKey)
+        protected override bool TryGetKeyHelper<TKey, TValue>(
+            IDictionary<TKey, TValue> dictionary,
+            TKey equalKey,
+            out TKey actualKey
+        )
         {
-            return ((ImmutableSortedDictionary<TKey, TValue>.Builder)dictionary).TryGetKey(equalKey, out actualKey);
+            return ((ImmutableSortedDictionary<TKey, TValue>.Builder)dictionary).TryGetKey(
+                equalKey,
+                out actualKey
+            );
         }
 
-        protected override IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(IImmutableDictionary<TKey, TValue> basis)
+        protected override IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> basis
+        )
         {
-            return ((ImmutableSortedDictionary<TKey, TValue>)(basis ?? GetEmptyImmutableDictionary<TKey, TValue>())).ToBuilder();
+            return (
+                (ImmutableSortedDictionary<TKey, TValue>)(
+                    basis ?? GetEmptyImmutableDictionary<TKey, TValue>()
+                )
+            ).ToBuilder();
         }
     }
 }

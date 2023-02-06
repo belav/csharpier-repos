@@ -5,7 +5,7 @@ namespace Microsoft.Build.Execution
 {
     public class ProjectTaskOutputPropertyInstance : ProjectTaskInstanceChild
     {
-        internal ProjectTaskOutputPropertyInstance (ProjectOutputElement xml)
+        internal ProjectTaskOutputPropertyInstance(ProjectOutputElement xml)
         {
             condition = xml.Condition;
             PropertyName = xml.PropertyName;
@@ -19,21 +19,26 @@ namespace Microsoft.Build.Execution
         public string TaskParameter { get; private set; }
 
         readonly string condition;
-        public override string Condition {
+        public override string Condition
+        {
             get { return condition; }
         }
-        
-        readonly ElementLocation condition_location, location, task_parameter_location;
+
+        readonly ElementLocation condition_location,
+            location,
+            task_parameter_location;
         public ElementLocation PropertyNameLocation { get; private set; }
-        public override ElementLocation ConditionLocation {
+        public override ElementLocation ConditionLocation
+        {
             get { return condition_location; }
-        }        
-        public override ElementLocation Location {
+        }
+        public override ElementLocation Location
+        {
             get { return location; }
         }
-        public override ElementLocation TaskParameterLocation {
+        public override ElementLocation TaskParameterLocation
+        {
             get { return task_parameter_location; }
         }
     }
 }
-

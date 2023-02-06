@@ -21,15 +21,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpSignatureHelp(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpSignatureHelp))
-        {
-
-        }
+            : base(instanceFactory, nameof(CSharpSignatureHelp)) { }
 
         [WpfFact]
         public void MethodSignatureHelp()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 using System;
 class C
 {
@@ -65,31 +63,46 @@ class C
     /// <param name=""d"">Dynamic and Params param</param>
     /// <returns>Null</returns>
     void OutAndParam(ref string[][,] strings, out string[] outArr, params dynamic d) {outArr = null;}
-}");
+}"
+            );
 
             VisualStudio.SendKeys.Send("var m = Method(1,");
             VisualStudio.Editor.InvokeSignatureHelp();
-            VisualStudio.Editor.Verify.CurrentSignature("C C.Method(int i, int i2)\r\nHello World 2.0!");
+            VisualStudio.Editor.Verify.CurrentSignature(
+                "C C.Method(int i, int i2)\r\nHello World 2.0!"
+            );
             VisualStudio.Editor.Verify.CurrentParameter("i2", "an integer, anything you like.");
             VisualStudio.Editor.Verify.Parameters(
                 ("i", "an integer, preferably 42."),
-                ("i2", "an integer, anything you like."));
+                ("i2", "an integer, anything you like.")
+            );
 
-            VisualStudio.Editor.SendKeys(new object[] { VirtualKey.Home, new KeyPress(VirtualKey.End, ShiftState.Shift), VirtualKey.Delete });
+            VisualStudio.Editor.SendKeys(
+                new object[]
+                {
+                    VirtualKey.Home,
+                    new KeyPress(VirtualKey.End, ShiftState.Shift),
+                    VirtualKey.Delete
+                }
+            );
             VisualStudio.Editor.SendKeys("var op = OutAndParam(");
 
-            VisualStudio.Editor.Verify.CurrentSignature("void C.OutAndParam(ref string[][,] strings, out string[] outArr, params dynamic d)\r\nComplex Method Params");
+            VisualStudio.Editor.Verify.CurrentSignature(
+                "void C.OutAndParam(ref string[][,] strings, out string[] outArr, params dynamic d)\r\nComplex Method Params"
+            );
             VisualStudio.Editor.Verify.CurrentParameter("strings", "Jagged MultiDimensional Array");
             VisualStudio.Editor.Verify.Parameters(
                 ("strings", "Jagged MultiDimensional Array"),
                 ("outArr", "Out Array"),
-                ("d", "Dynamic and Params param"));
+                ("d", "Dynamic and Params param")
+            );
         }
 
         [WpfFact]
         public void GenericMethodSignatureHelp1()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 using System;
 class C
 {
@@ -124,20 +137,20 @@ class C
     /// <param name=""d"">Dynamic and Params param</param>
     /// <returns>Null</returns>
     void OutAndParam(ref string[][,] strings, out string[] outArr, params dynamic d) {outArr = null;}
-}");
+}"
+            );
 
             VisualStudio.Editor.InvokeSignatureHelp();
             VisualStudio.Editor.Verify.CurrentSignature("C C.GenericMethod<T1, T2>(T1 i, T2 i2)");
             VisualStudio.Editor.Verify.CurrentParameter("T1", "");
-            VisualStudio.Editor.Verify.Parameters(
-                ("T1", ""),
-                ("T2", ""));
+            VisualStudio.Editor.Verify.Parameters(("T1", ""), ("T2", ""));
         }
 
         [WpfFact]
         public void GenericMethodSignatureHelp2()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 using System;
 class C
 {
@@ -172,20 +185,22 @@ class C
     /// <param name=""d"">Dynamic and Params param</param>
     /// <returns>Null</returns>
     void OutAndParam(ref string[][,] strings, out string[] outArr, params dynamic d) {outArr = null;}
-}");
+}"
+            );
 
             VisualStudio.Editor.InvokeSignatureHelp();
-            VisualStudio.Editor.Verify.CurrentSignature("C C.GenericMethod<string, int>(string i, int i2)");
+            VisualStudio.Editor.Verify.CurrentSignature(
+                "C C.GenericMethod<string, int>(string i, int i2)"
+            );
             VisualStudio.Editor.Verify.CurrentParameter("i", "");
-            VisualStudio.Editor.Verify.Parameters(
-                ("i", ""),
-                ("i2", ""));
+            VisualStudio.Editor.Verify.Parameters(("i", ""), ("i2", ""));
         }
 
         [WpfFact, WorkItem(42484, "https://github.com/dotnet/roslyn/issues/42484")]
         public void ExplicitSignatureHelpDismissesCompletion()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 class C
 {
     void M()
@@ -197,7 +212,8 @@ class C
     void Test(int x) { }
     void Test(int x, int y) { }
     void Test(int x, int y, int z) { }    
-}");
+}"
+            );
 
             VisualStudio.Workspace.SetTriggerCompletionInArgumentLists(true);
 

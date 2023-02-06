@@ -21,54 +21,65 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
         public IOperation Operation { init; get; }
         public ISymbol OwningSymbol { init; get; }
 
-        public TrimAnalysisMethodCallPattern (
+        public TrimAnalysisMethodCallPattern(
             IMethodSymbol calledMethod,
             MultiValue instance,
             ImmutableArray<MultiValue> arguments,
             IOperation operation,
-            ISymbol owningSymbol)
+            ISymbol owningSymbol
+        )
         {
             CalledMethod = calledMethod;
-            Instance = instance.Clone ();
-            if (arguments.IsEmpty) {
+            Instance = instance.Clone();
+            if (arguments.IsEmpty)
+            {
                 Arguments = ImmutableArray<MultiValue>.Empty;
-            } else {
-                var builder = ImmutableArray.CreateBuilder<MultiValue> ();
-                foreach (var argument in arguments) {
-                    builder.Add (argument.Clone ());
+            }
+            else
+            {
+                var builder = ImmutableArray.CreateBuilder<MultiValue>();
+                foreach (var argument in arguments)
+                {
+                    builder.Add(argument.Clone());
                 }
-                Arguments = builder.ToImmutableArray ();
+                Arguments = builder.ToImmutableArray();
             }
             Operation = operation;
             OwningSymbol = owningSymbol;
         }
 
-        public TrimAnalysisMethodCallPattern Merge (ValueSetLattice<SingleValue> lattice, TrimAnalysisMethodCallPattern other)
+        public TrimAnalysisMethodCallPattern Merge(
+            ValueSetLattice<SingleValue> lattice,
+            TrimAnalysisMethodCallPattern other
+        )
         {
-            Debug.Assert (Operation == other.Operation);
-            Debug.Assert (SymbolEqualityComparer.Default.Equals (CalledMethod, other.CalledMethod));
-            Debug.Assert (Arguments.Length == other.Arguments.Length);
+            Debug.Assert(Operation == other.Operation);
+            Debug.Assert(SymbolEqualityComparer.Default.Equals(CalledMethod, other.CalledMethod));
+            Debug.Assert(Arguments.Length == other.Arguments.Length);
 
-            var argumentsBuilder = ImmutableArray.CreateBuilder<MultiValue> ();
-            for (int i = 0; i < Arguments.Length; i++) {
-                argumentsBuilder.Add (lattice.Meet (Arguments[i], other.Arguments[i]));
+            var argumentsBuilder = ImmutableArray.CreateBuilder<MultiValue>();
+            for (int i = 0; i < Arguments.Length; i++)
+            {
+                argumentsBuilder.Add(lattice.Meet(Arguments[i], other.Arguments[i]));
             }
 
-            return new TrimAnalysisMethodCallPattern (
+            return new TrimAnalysisMethodCallPattern(
                 CalledMethod,
-                lattice.Meet (Instance, other.Instance),
-                argumentsBuilder.ToImmutable (),
+                lattice.Meet(Instance, other.Instance),
+                argumentsBuilder.ToImmutable(),
                 Operation,
-                OwningSymbol);
+                OwningSymbol
+            );
         }
 
-        public IEnumerable<Diagnostic> CollectDiagnostics ()
+        public IEnumerable<Diagnostic> CollectDiagnostics()
         {
-            DiagnosticContext diagnosticContext = new (Operation.Syntax.GetLocation ());
-            HandleCallAction handleCallAction = new (diagnosticContext, OwningSymbol, Operation);
-            MethodProxy method = new (CalledMethod);
-            IntrinsicId intrinsicId = Intrinsics.GetIntrinsicIdForMethod (method);
-            if (!handleCallAction.Invoke (method, Instance, Arguments, intrinsicId, out _)) {
+            DiagnosticContext diagnosticContext = new(Operation.Syntax.GetLocation());
+            HandleCallAction handleCallAction = new(diagnosticContext, OwningSymbol, Operation);
+            MethodProxy method = new(CalledMethod);
+            IntrinsicId intrinsicId = Intrinsics.GetIntrinsicIdForMethod(method);
+            if (!handleCallAction.Invoke(method, Instance, Arguments, intrinsicId, out _))
+            {
                 // If this returns false it means the intrinsic needs special handling:
                 // case IntrinsicId.TypeDelegator_Ctor:
                 //    No diagnostics to report - this is an "identity" operation for data flow, can't produce diagnostics on its own

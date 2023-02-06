@@ -25,14 +25,19 @@ namespace Testing
     /// </summary>
     class Test
     {
-        public static void Main () { System.Console.Error.WriteLine ("xml-027 is running fine ;-)"); }
+        public static void Main()
+        {
+            System.Console.Error.WriteLine("xml-027 is running fine ;-)");
+        }
 
         // I don't put any documentation here, but cref still works.
-        public void Foo () {}
+        public void Foo() { }
 
         public string Bar;
 
-        public string Baz { get { return ""; } }
+        public string Baz
+        {
+            get { return ""; }
+        }
     }
 }
-

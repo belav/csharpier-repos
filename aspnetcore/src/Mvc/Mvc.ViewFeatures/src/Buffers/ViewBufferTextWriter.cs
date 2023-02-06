@@ -52,7 +52,12 @@ internal sealed class ViewBufferTextWriter : TextWriter
     /// <param name="inner">
     /// The inner <see cref="TextWriter"/> to write output to when this instance is no longer buffering.
     /// </param>
-    public ViewBufferTextWriter(ViewBuffer buffer, Encoding encoding, HtmlEncoder htmlEncoder, TextWriter inner)
+    public ViewBufferTextWriter(
+        ViewBuffer buffer,
+        Encoding encoding,
+        HtmlEncoder htmlEncoder,
+        TextWriter inner
+    )
     {
         if (buffer == null)
         {

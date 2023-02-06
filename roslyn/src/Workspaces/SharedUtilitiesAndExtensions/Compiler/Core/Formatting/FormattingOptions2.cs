@@ -24,45 +24,74 @@ namespace Microsoft.CodeAnalysis.Formatting
         private const string PublicFeatureName = "FormattingOptions";
 
         public static PerLanguageOption2<bool> UseTabs = new PerLanguageOption2<bool>(
-            "indent_style", LineFormattingOptions.Default.UseTabs, FormattingOptionGroups.IndentationAndSpacing, isEditorConfigOption: true,
-            serializer: new EditorConfigValueSerializer<bool>(str => str == "tab", value => value ? "tab" : "space"))
-            .WithPublicOption(PublicFeatureName, "UseTabs");
+            "indent_style",
+            LineFormattingOptions.Default.UseTabs,
+            FormattingOptionGroups.IndentationAndSpacing,
+            isEditorConfigOption: true,
+            serializer: new EditorConfigValueSerializer<bool>(
+                str => str == "tab",
+                value => value ? "tab" : "space"
+            )
+        ).WithPublicOption(PublicFeatureName, "UseTabs");
 
         public static PerLanguageOption2<int> TabSize = new PerLanguageOption2<int>(
-            "tab_width", LineFormattingOptions.Default.TabSize, FormattingOptionGroups.IndentationAndSpacing, isEditorConfigOption: true)
-            .WithPublicOption(PublicFeatureName, "TabSize");
+            "tab_width",
+            LineFormattingOptions.Default.TabSize,
+            FormattingOptionGroups.IndentationAndSpacing,
+            isEditorConfigOption: true
+        ).WithPublicOption(PublicFeatureName, "TabSize");
 
         public static PerLanguageOption2<int> IndentationSize = new PerLanguageOption2<int>(
-            "indent_size", LineFormattingOptions.Default.IndentationSize, FormattingOptionGroups.IndentationAndSpacing, isEditorConfigOption: true)
-            .WithPublicOption(PublicFeatureName, "IndentationSize");
+            "indent_size",
+            LineFormattingOptions.Default.IndentationSize,
+            FormattingOptionGroups.IndentationAndSpacing,
+            isEditorConfigOption: true
+        ).WithPublicOption(PublicFeatureName, "IndentationSize");
 
         public static PerLanguageOption2<string> NewLine = new PerLanguageOption2<string>(
-            "end_of_line", LineFormattingOptions.Default.NewLine, FormattingOptionGroups.NewLine, isEditorConfigOption: true,
+            "end_of_line",
+            LineFormattingOptions.Default.NewLine,
+            FormattingOptionGroups.NewLine,
+            isEditorConfigOption: true,
             serializer: new EditorConfigValueSerializer<string>(
-                parseValue: value => value.Trim() switch
-                {
-                    "lf" => "\n",
-                    "cr" => "\r",
-                    "crlf" => "\r\n",
-                    _ => Environment.NewLine
-                },
-                serializeValue: value => value switch
-                {
-                    "\n" => "lf",
-                    "\r" => "cr",
-                    "\r\n" => "crlf",
-                    _ => "unset"
-                }))
-            .WithPublicOption(PublicFeatureName, "NewLine");
+                parseValue: value =>
+                    value.Trim() switch
+                    {
+                        "lf" => "\n",
+                        "cr" => "\r",
+                        "crlf" => "\r\n",
+                        _ => Environment.NewLine
+                    },
+                serializeValue: value =>
+                    value switch
+                    {
+                        "\n" => "lf",
+                        "\r" => "cr",
+                        "\r\n" => "crlf",
+                        _ => "unset"
+                    }
+            )
+        ).WithPublicOption(PublicFeatureName, "NewLine");
 
-        internal static Option2<bool> InsertFinalNewLine = new(
-            "insert_final_newline", DocumentFormattingOptions.Default.InsertFinalNewLine, FormattingOptionGroups.NewLine, isEditorConfigOption: true);
+        internal static Option2<bool> InsertFinalNewLine =
+            new(
+                "insert_final_newline",
+                DocumentFormattingOptions.Default.InsertFinalNewLine,
+                FormattingOptionGroups.NewLine,
+                isEditorConfigOption: true
+            );
 
-        public static PerLanguageOption2<IndentStyle> SmartIndent = new PerLanguageOption2<IndentStyle>(
-            "FormattingOptions_SmartIndent",
-            defaultValue: IndentationOptions.DefaultIndentStyle,
-            group: FormattingOptionGroups.IndentationAndSpacing)
-            .WithPublicOption(PublicFeatureName, "SmartIndent", static value => (PublicIndentStyle)value, static value => (IndentStyle)value);
+        public static PerLanguageOption2<IndentStyle> SmartIndent =
+            new PerLanguageOption2<IndentStyle>(
+                "FormattingOptions_SmartIndent",
+                defaultValue: IndentationOptions.DefaultIndentStyle,
+                group: FormattingOptionGroups.IndentationAndSpacing
+            ).WithPublicOption(
+                PublicFeatureName,
+                "SmartIndent",
+                static value => (PublicIndentStyle)value,
+                static value => (IndentStyle)value
+            );
 
 #if !CODE_STYLE
         internal static readonly ImmutableArray<IOption2> Options = ImmutableArray.Create<IOption2>(
@@ -70,13 +99,16 @@ namespace Microsoft.CodeAnalysis.Formatting
             TabSize,
             IndentationSize,
             NewLine,
-            InsertFinalNewLine);
+            InsertFinalNewLine
+        );
 #endif
     }
 
     internal static class FormattingOptionGroups
     {
-        public static readonly OptionGroup IndentationAndSpacing = new(WorkspacesResources.Indentation_and_spacing, priority: 1);
-        public static readonly OptionGroup NewLine = new(WorkspacesResources.New_line_preferences, priority: 2);
+        public static readonly OptionGroup IndentationAndSpacing =
+            new(WorkspacesResources.Indentation_and_spacing, priority: 1);
+        public static readonly OptionGroup NewLine =
+            new(WorkspacesResources.New_line_preferences, priority: 2);
     }
 }

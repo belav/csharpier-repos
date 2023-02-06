@@ -7,7 +7,10 @@ namespace System.Net.Test.Common
     {
         // Stolen from product code
         // See https://github.com/dotnet/corefx/blob/ae7b3970bb2c8d76004ea397083ce7ceb1238133/src/System.Net.Http/src/System/Net/Http/SocketsHttpHandler/HPack/Huffman.cs#L12
-        private static readonly (uint code, int bitLength)[] s_encodingTable = new (uint code, int bitLength)[]
+        private static readonly (uint code, int bitLength)[] s_encodingTable = new (
+            uint code,
+            int bitLength
+        )[]
         {
             (0b11111111_11000000_00000000_00000000, 13),
             (0b11111111_11111111_10110000_00000000, 23),

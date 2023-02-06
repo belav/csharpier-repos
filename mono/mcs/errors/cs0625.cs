@@ -4,15 +4,19 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace CS0625 {
+namespace CS0625
+{
     [StructLayout(LayoutKind.Explicit)]
-    struct GValue {
+    struct GValue
+    {
         public string name;
-        [ FieldOffset (4) ] public int value;
+
+        [FieldOffset(4)]
+        public int value;
     }
-    
-    class Tests {
-        public static void Main () {
-        }
+
+    class Tests
+    {
+        public static void Main() { }
     }
 }

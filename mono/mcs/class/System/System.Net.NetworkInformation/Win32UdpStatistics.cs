@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,33 +27,39 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if WIN_PLATFORM
-namespace System.Net.NetworkInformation {
+namespace System.Net.NetworkInformation
+{
     class Win32UdpStatistics : UdpStatistics
     {
         Win32_MIB_UDPSTATS info;
 
-        public Win32UdpStatistics (Win32_MIB_UDPSTATS info)
+        public Win32UdpStatistics(Win32_MIB_UDPSTATS info)
         {
             this.info = info;
         }
 
-        public override long DatagramsReceived {
+        public override long DatagramsReceived
+        {
             get { return info.InDatagrams; }
         }
 
-        public override long DatagramsSent {
+        public override long DatagramsSent
+        {
             get { return info.OutDatagrams; }
         }
 
-        public override long IncomingDatagramsDiscarded {
+        public override long IncomingDatagramsDiscarded
+        {
             get { return info.NoPorts; }
         }
 
-        public override long IncomingDatagramsWithErrors {
+        public override long IncomingDatagramsWithErrors
+        {
             get { return info.InErrors; }
         }
 
-        public override int UdpListeners {
+        public override int UdpListeners
+        {
             get { return info.NumAddrs; }
         }
     }

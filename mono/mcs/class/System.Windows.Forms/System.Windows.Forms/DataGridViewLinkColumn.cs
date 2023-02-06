@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,25 +32,24 @@ using System.Drawing;
 
 namespace System.Windows.Forms
 {
-    [ToolboxBitmap ("")]
+    [ToolboxBitmap("")]
     public class DataGridViewLinkColumn : DataGridViewColumn
     {
-        
-        public DataGridViewLinkColumn ()
+        public DataGridViewLinkColumn()
         {
-            base.CellTemplate = new DataGridViewLinkCell ();
+            base.CellTemplate = new DataGridViewLinkCell();
         }
 
-        public override object Clone ()
+        public override object Clone()
         {
-            DataGridViewLinkColumn clone = (DataGridViewLinkColumn)base.Clone ();
-            clone.CellTemplate = (DataGridViewCell) this.CellTemplate.Clone ();
+            DataGridViewLinkColumn clone = (DataGridViewLinkColumn)base.Clone();
+            clone.CellTemplate = (DataGridViewCell)this.CellTemplate.Clone();
             return clone;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return base.ToString ();
+            return base.ToString();
         }
 
         #region private fields
@@ -61,57 +60,71 @@ namespace System.Windows.Forms
 
         #region Public Properties
 
-        public Color ActiveLinkColor {
-            get {
+        public Color ActiveLinkColor
+        {
+            get
+            {
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
-                return template.ActiveLinkColor; 
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
+                return template.ActiveLinkColor;
             }
-            set {
-                if (this.ActiveLinkColor == value) 
+            set
+            {
+                if (this.ActiveLinkColor == value)
                     return;
 
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
 
                 template.ActiveLinkColor = value;
                 if (DataGridView == null)
                     return;
-                foreach (DataGridViewRow row in DataGridView.Rows) {
+                foreach (DataGridViewRow row in DataGridView.Rows)
+                {
                     DataGridViewLinkCell cell = row.Cells[Index] as DataGridViewLinkCell;
                     if (cell != null)
                         cell.ActiveLinkColor = value;
                 }
-                DataGridView.InvalidateColumn (Index);
-
+                DataGridView.InvalidateColumn(Index);
             }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
-        public override DataGridViewCell CellTemplate {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public override DataGridViewCell CellTemplate
+        {
             get { return base.CellTemplate; }
             set { base.CellTemplate = value as DataGridViewLinkCell; }
         }
 
-
-        [DefaultValue (LinkBehavior.SystemDefault)]
-        public LinkBehavior LinkBehavior {
-            get    {
+        [DefaultValue(LinkBehavior.SystemDefault)]
+        public LinkBehavior LinkBehavior
+        {
+            get
+            {
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
                 return template.LinkBehavior;
             }
-            set    {
-                if (this.LinkBehavior == value) 
+            set
+            {
+                if (this.LinkBehavior == value)
                     return;
 
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
 
                 template.LinkBehavior = value;
                 if (DataGridView == null)
@@ -122,23 +135,30 @@ namespace System.Windows.Forms
                     if (cell != null)
                         cell.LinkBehavior = value;
                 }
-                DataGridView.InvalidateColumn (Index);
+                DataGridView.InvalidateColumn(Index);
             }
         }
 
-        public Color LinkColor {
-            get    {
+        public Color LinkColor
+        {
+            get
+            {
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
                 return template.LinkColor;
             }
-            set    {
+            set
+            {
                 if (this.LinkColor == value)
                     return;
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
                 template.LinkColor = value;
                 if (DataGridView == null)
                     return;
@@ -148,16 +168,17 @@ namespace System.Windows.Forms
                     if (cell != null)
                         cell.LinkColor = value;
                 }
-                DataGridView.InvalidateColumn (Index);
+                DataGridView.InvalidateColumn(Index);
             }
         }
-        [MonoInternalNote ("")]
-        [DefaultValue ((string) null)]
-        public string Text {
-            get {
-                return text;
-            }
-            set {
+
+        [MonoInternalNote("")]
+        [DefaultValue((string)null)]
+        public string Text
+        {
+            get { return text; }
+            set
+            {
                 if (this.Text == value)
                     return;
                 text = value;
@@ -169,25 +190,32 @@ namespace System.Windows.Forms
                     if (cell != null && cell.UseColumnTextForLinkValue)
                         cell.Value = value;
                 }
-                DataGridView.InvalidateColumn (Index);
+                DataGridView.InvalidateColumn(Index);
             }
         }
 
         //When TrackVisitedState is true, the VisitedLinkColor property value is used to display links that have already been visited.
-        [DefaultValue (true)]
-        public bool TrackVisitedState {
-            get {
+        [DefaultValue(true)]
+        public bool TrackVisitedState
+        {
+            get
+            {
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
                 return template.TrackVisitedState;
             }
-            set {
+            set
+            {
                 if (this.TrackVisitedState == value)
                     return;
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
                 template.TrackVisitedState = value;
                 if (DataGridView == null)
                     return;
@@ -197,25 +225,32 @@ namespace System.Windows.Forms
                     if (cell != null)
                         cell.TrackVisitedState = value;
                 }
-                DataGridView.InvalidateColumn (Index);
+                DataGridView.InvalidateColumn(Index);
             }
         }
 
         // true if the Text property value is displayed as the link text; false if the cell FormattedValue property value is displayed as the link text. The default is false.
-        [DefaultValue (false)]
-        public bool UseColumnTextForLinkValue {
-            get {
+        [DefaultValue(false)]
+        public bool UseColumnTextForLinkValue
+        {
+            get
+            {
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
                 return template.UseColumnTextForLinkValue;
             }
-            set {
+            set
+            {
                 if (this.UseColumnTextForLinkValue == value)
                     return;
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
                 template.UseColumnTextForLinkValue = value;
                 if (DataGridView == null)
                     return;
@@ -225,24 +260,31 @@ namespace System.Windows.Forms
                     if (cell != null)
                         cell.UseColumnTextForLinkValue = value;
                 }
-                DataGridView.InvalidateColumn (Index);
+                DataGridView.InvalidateColumn(Index);
             }
         }
 
         //If the TrackVisitedState property is set to false, the VisitedLinkColor property is ignored.
-        public Color VisitedLinkColor {
-            get {
+        public Color VisitedLinkColor
+        {
+            get
+            {
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
                 return template.VisitedLinkColor;
             }
-            set {
+            set
+            {
                 if (this.VisitedLinkColor == value)
                     return;
                 DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
                 if (template == null)
-                    throw new InvalidOperationException ("CellTemplate is null when getting this property.");
+                    throw new InvalidOperationException(
+                        "CellTemplate is null when getting this property."
+                    );
                 template.VisitedLinkColor = value;
                 if (DataGridView == null)
                     return;
@@ -252,7 +294,7 @@ namespace System.Windows.Forms
                     if (cell != null)
                         cell.VisitedLinkColor = value;
                 }
-                DataGridView.InvalidateColumn (Index);
+                DataGridView.InvalidateColumn(Index);
             }
         }
         #endregion

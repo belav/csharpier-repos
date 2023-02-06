@@ -16,7 +16,10 @@ internal static class AcceptHeaderParser
         return parsedValues;
     }
 
-    public static void ParseAcceptHeader(IList<string> acceptHeaders, IList<MediaTypeSegmentWithQuality> parsedValues)
+    public static void ParseAcceptHeader(
+        IList<string> acceptHeaders,
+        IList<MediaTypeSegmentWithQuality> parsedValues
+    )
     {
         if (acceptHeaders == null)
         {
@@ -54,7 +57,11 @@ internal static class AcceptHeaderParser
         }
     }
 
-    private static bool TryParseValue(string value, ref int index, out MediaTypeSegmentWithQuality parsedValue)
+    private static bool TryParseValue(
+        string value,
+        ref int index,
+        out MediaTypeSegmentWithQuality parsedValue
+    )
     {
         parsedValue = default(MediaTypeSegmentWithQuality);
 
@@ -108,7 +115,11 @@ internal static class AcceptHeaderParser
         }
 
         currentIndex = currentIndex + length;
-        currentIndex = GetNextNonEmptyOrWhitespaceIndex(value, currentIndex, out var separatorFound);
+        currentIndex = GetNextNonEmptyOrWhitespaceIndex(
+            value,
+            currentIndex,
+            out var separatorFound
+        );
 
         // If we've not reached the end of the string, then we must have a separator.
         // E. g application/json, text/plain <- We must be at ',' otherwise, we've failed parsing.
@@ -126,7 +137,8 @@ internal static class AcceptHeaderParser
     private static int GetNextNonEmptyOrWhitespaceIndex(
         string input,
         int startIndex,
-        out bool separatorFound)
+        out bool separatorFound
+    )
     {
         Debug.Assert(input != null);
         Debug.Assert(startIndex <= input.Length); // it's OK if index == value.Length.
@@ -157,7 +169,8 @@ internal static class AcceptHeaderParser
     private static int GetMediaTypeWithQualityLength(
         string input,
         int start,
-        out MediaTypeSegmentWithQuality result)
+        out MediaTypeSegmentWithQuality result
+    )
     {
         result = MediaType.CreateMediaTypeSegmentWithQuality(input, start);
         if (result.MediaType.HasValue)

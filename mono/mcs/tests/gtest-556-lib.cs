@@ -4,9 +4,9 @@ public class A
 {
     public class N<T>
     {
-        public static N<T> Method ()
+        public static N<T> Method()
         {
-            return default (N<T>);
+            return default(N<T>);
         }
     }
 }

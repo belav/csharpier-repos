@@ -21,11 +21,7 @@ public class CancellationTokenModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "CustomParameter",
-            },
-
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter", },
             ParameterType = typeof(Person)
         };
 
@@ -96,11 +92,7 @@ public class CancellationTokenModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "CustomParameter",
-            },
-
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter", },
             ParameterType = typeof(CancellationToken)
         };
 

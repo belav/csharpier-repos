@@ -13,8 +13,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests;
 
 internal class MockPdbMatchingSourceTextProvider : IPdbMatchingSourceTextProvider
 {
-    public Func<string, ImmutableArray<byte>, SourceHashAlgorithm, string?>? TryGetMatchingSourceTextImpl;
+    public Func<
+        string,
+        ImmutableArray<byte>,
+        SourceHashAlgorithm,
+        string?
+    >? TryGetMatchingSourceTextImpl;
 
-    public ValueTask<string?> TryGetMatchingSourceTextAsync(string filePath, ImmutableArray<byte> requiredChecksum, SourceHashAlgorithm checksumAlgorithm, CancellationToken cancellationToken)
-        => ValueTaskFactory.FromResult(TryGetMatchingSourceTextImpl?.Invoke(filePath, requiredChecksum, checksumAlgorithm));
+    public ValueTask<string?> TryGetMatchingSourceTextAsync(
+        string filePath,
+        ImmutableArray<byte> requiredChecksum,
+        SourceHashAlgorithm checksumAlgorithm,
+        CancellationToken cancellationToken
+    ) =>
+        ValueTaskFactory.FromResult(
+            TryGetMatchingSourceTextImpl?.Invoke(filePath, requiredChecksum, checksumAlgorithm)
+        );
 }

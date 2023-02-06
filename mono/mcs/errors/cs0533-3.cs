@@ -7,16 +7,10 @@ public abstract class MyAbstractBase
 
 public abstract class MyAbstract : MyAbstractBase
 {
-    public void Initialize() {
-    }
+    public void Initialize() { }
 }
-
 
 public class Program
 {
-    public static void Main(string[] args)
-    {
-    }
+    public static void Main(string[] args) { }
 }
-
-

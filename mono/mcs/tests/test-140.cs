@@ -6,23 +6,23 @@ using System;
 public class BreakTest
 {
     static int ok = 0;
-    
-    public static void B ()
+
+    public static void B()
     {
         ok++;
-                while (true)
-                {
+        while (true)
+        {
             ok++;
-                        break;
-                }
+            break;
+        }
         ok++;
     }
-    
-        public static int Main()
-        {
-        B ();
+
+    public static int Main()
+    {
+        B();
         if (ok != 3)
             return 1;
         return 0;
-        }
+    }
 }

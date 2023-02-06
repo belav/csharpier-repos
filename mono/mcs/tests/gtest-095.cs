@@ -12,26 +12,24 @@ public interface IDirectedCollectionValue<T> : IDirectedEnumerable<T>
 
 public class GuardedCollectionValue<T> : IDirectedCollectionValue<T>
 {
-    IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards ()
+    IDirectedEnumerable<T> IDirectedEnumerable<T>.Backwards()
     {
         return this;
     }
 
-    public IDirectedCollectionValue<T> Backwards ()
+    public IDirectedCollectionValue<T> Backwards()
     {
         return this;
     }
 }
 
-public interface ISequenced<T> : IDirectedCollectionValue<T>
-{
-}
+public interface ISequenced<T> : IDirectedCollectionValue<T> { }
 
 public class GuardedSequenced<T>
 {
     ISequenced<T> sequenced;
 
-    public IDirectedCollectionValue<T> Test ()
+    public IDirectedCollectionValue<T> Test()
     {
         return sequenced.Backwards();
     }
@@ -39,6 +37,5 @@ public class GuardedSequenced<T>
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

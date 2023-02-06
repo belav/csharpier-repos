@@ -9,20 +9,23 @@ namespace Foo
             int DestinationDimension { get; }
         }
 
-        public static int Main ()
+        public static int Main()
         {
-            Magic<decimal>.Upsample (new Instance ());
+            Magic<decimal>.Upsample(new Instance());
             return 0;
         }
     }
 
     public static class Magic<T>
     {
-        public interface IAccessible { T this[int index] { get; set; } }
+        public interface IAccessible
+        {
+            T this[int index] { get; set; }
+        }
 
         public interface IUpDown : Magic.IUpDown, IAccessible { }
 
-        public static void Upsample (IUpDown o)
+        public static void Upsample(IUpDown o)
         {
             var count = o.DestinationDimension;
         }
@@ -34,10 +37,7 @@ namespace Foo
 
         public int DestinationDimension
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
 
         #endregion
@@ -46,14 +46,8 @@ namespace Foo
 
         public decimal this[int index]
         {
-            get
-            {
-                throw new NotImplementedException ();
-            }
-            set
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         #endregion

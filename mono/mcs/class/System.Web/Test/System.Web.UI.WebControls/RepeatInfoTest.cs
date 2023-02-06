@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,18 +37,17 @@ using System.Web.UI.WebControls;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.WebControls {
-
-    public class RepeatInfoUser : IRepeatInfoUser {
-
+namespace MonoTests.System.Web.UI.WebControls
+{
+    public class RepeatInfoUser : IRepeatInfoUser
+    {
         private bool footer;
         private bool header;
         private bool separators;
         private int count;
         private int counter;
 
-
-        public RepeatInfoUser (bool footer, bool header, bool separators, int count)
+        public RepeatInfoUser(bool footer, bool header, bool separators, int count)
         {
             counter = 0;
             this.footer = footer;
@@ -57,128 +56,159 @@ namespace MonoTests.System.Web.UI.WebControls {
             this.count = count;
         }
 
-
-        public bool HasFooter {
+        public bool HasFooter
+        {
             get { return footer; }
         }
 
-        public bool HasHeader {
+        public bool HasHeader
+        {
             get { return header; }
         }
-        
-        public bool HasSeparators {
+
+        public bool HasSeparators
+        {
             get { return separators; }
         }
 
-        public int RepeatedItemCount {
+        public int RepeatedItemCount
+        {
             get { return count; }
         }
 
-        public Style GetItemStyle (ListItemType itemType, int repeatIndex)
+        public Style GetItemStyle(ListItemType itemType, int repeatIndex)
         {
             return null;
         }
 
-        public void RenderItem (ListItemType itemType, int repeatIndex, RepeatInfo repeatInfo, HtmlTextWriter writer)
+        public void RenderItem(
+            ListItemType itemType,
+            int repeatIndex,
+            RepeatInfo repeatInfo,
+            HtmlTextWriter writer
+        )
         {
-            writer.Write ((counter++).ToString ());
+            writer.Write((counter++).ToString());
         }
     }
 
     [TestFixture]
-    public class RepeatInfoTest {
-
-        private HtmlTextWriter GetWriter ()
+    public class RepeatInfoTest
+    {
+        private HtmlTextWriter GetWriter()
         {
-            StringWriter sw = new StringWriter ();
+            StringWriter sw = new StringWriter();
             sw.NewLine = "\n";
-            return new HtmlTextWriter (sw);
+            return new HtmlTextWriter(sw);
         }
 
-        string DoTest (int cols, int cnt, RepeatDirection d, RepeatLayout l, bool OuterTableImplied, bool ftr, bool hdr, bool sep)
+        string DoTest(
+            int cols,
+            int cnt,
+            RepeatDirection d,
+            RepeatLayout l,
+            bool OuterTableImplied,
+            bool ftr,
+            bool hdr,
+            bool sep
+        )
         {
-            HtmlTextWriter htw = GetWriter ();
-            RepeatInfo ri = new RepeatInfo ();
+            HtmlTextWriter htw = GetWriter();
+            RepeatInfo ri = new RepeatInfo();
             ri.RepeatColumns = cols;
             ri.RepeatDirection = d;
             ri.RepeatLayout = l;
             ri.OuterTableImplied = OuterTableImplied;
 
-            ri.RenderRepeater (htw, new RepeatInfoUser (ftr, hdr, sep, cnt), new TableStyle (), new DataList ());
-            return htw.InnerWriter.ToString ();
+            ri.RenderRepeater(
+                htw,
+                new RepeatInfoUser(ftr, hdr, sep, cnt),
+                new TableStyle(),
+                new DataList()
+            );
+            return htw.InnerWriter.ToString();
         }
 
         [Test]
-        public void DefaultValues ()
+        public void DefaultValues()
         {
-            RepeatInfo ri = new RepeatInfo ();
-            Assert.AreEqual (0, ri.RepeatColumns, "RepeatColumns");
-            Assert.AreEqual (RepeatDirection.Vertical, ri.RepeatDirection, "RepeatDirection");
-            Assert.AreEqual (RepeatLayout.Table, ri.RepeatLayout, "RepeatLayout");
-            Assert.IsFalse (ri.OuterTableImplied, "OuterTableImplied");
+            RepeatInfo ri = new RepeatInfo();
+            Assert.AreEqual(0, ri.RepeatColumns, "RepeatColumns");
+            Assert.AreEqual(RepeatDirection.Vertical, ri.RepeatDirection, "RepeatDirection");
+            Assert.AreEqual(RepeatLayout.Table, ri.RepeatLayout, "RepeatLayout");
+            Assert.IsFalse(ri.OuterTableImplied, "OuterTableImplied");
         }
 
         [Test]
-        public void RepeatColumns_Negative ()
+        public void RepeatColumns_Negative()
         {
-            RepeatInfo ri = new RepeatInfo ();
+            RepeatInfo ri = new RepeatInfo();
             ri.RepeatColumns = -1;
-            Assert.AreEqual (-1, ri.RepeatColumns, "-1");
+            Assert.AreEqual(-1, ri.RepeatColumns, "-1");
             ri.RepeatColumns = Int32.MinValue;
-            Assert.AreEqual (Int32.MinValue, ri.RepeatColumns, "Int32.MinValue");
+            Assert.AreEqual(Int32.MinValue, ri.RepeatColumns, "Int32.MinValue");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void RepeatDirection_Invalid ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void RepeatDirection_Invalid()
         {
-            RepeatInfo ri = new RepeatInfo ();
-            ri.RepeatDirection = (RepeatDirection) Int32.MinValue;
+            RepeatInfo ri = new RepeatInfo();
+            ri.RepeatDirection = (RepeatDirection)Int32.MinValue;
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void RepeatLayout_Invalid ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void RepeatLayout_Invalid()
         {
-            RepeatInfo ri = new RepeatInfo ();
-            ri.RepeatLayout = (RepeatLayout) Int32.MinValue;
+            RepeatInfo ri = new RepeatInfo();
+            ri.RepeatLayout = (RepeatLayout)Int32.MinValue;
         }
 
-        private void RenderRepeater_BaseControl (string s, string msg, WebControl wc)
+        private void RenderRepeater_BaseControl(string s, string msg, WebControl wc)
         {
-            RepeatInfo ri = new RepeatInfo ();
+            RepeatInfo ri = new RepeatInfo();
             ri.RepeatColumns = 3;
             ri.RepeatDirection = RepeatDirection.Vertical;
             ri.RepeatLayout = RepeatLayout.Table;
 
-            HtmlTextWriter writer = GetWriter ();
-            ri.RenderRepeater (writer, new RepeatInfoUser (false, false, false, 1), new TableStyle (), wc);
-            string rendered = writer.InnerWriter.ToString ();
-            Assert.AreEqual (s, rendered, msg);
+            HtmlTextWriter writer = GetWriter();
+            ri.RenderRepeater(
+                writer,
+                new RepeatInfoUser(false, false, false, 1),
+                new TableStyle(),
+                wc
+            );
+            string rendered = writer.InnerWriter.ToString();
+            Assert.AreEqual(s, rendered, msg);
         }
 
         [Test]
-        [ExpectedException (typeof (NullReferenceException))]
-        public void RenderRepeater_BaseControl_Null ()
+        [ExpectedException(typeof(NullReferenceException))]
+        public void RenderRepeater_BaseControl_Null()
         {
-            RenderRepeater_BaseControl ("shouldn't get here", "null", null);
+            RenderRepeater_BaseControl("shouldn't get here", "null", null);
         }
-        
+
         [Test]
-        public void RenderRepeater_BaseControl ()
+        public void RenderRepeater_BaseControl()
         {
             string noid = "<table>\n\t<tr>\n\t\t<td>0</td><td></td><td></td>\n\t</tr>\n</table>";
-            string id_enabled = "<table id=\"foo\" class=\"aspNetDisabled\">\n\t<tr>\n\t\t<td>0</td><td></td><td></td>\n\t</tr>\n</table>";
-            RenderRepeater_BaseControl (noid, "Table", new Table ());
-            RenderRepeater_BaseControl (noid, "DataList", new DataList ());
-            RenderRepeater_BaseControl (noid, "DataListItem", new DataListItem (0, ListItemType.Item));
+            string id_enabled =
+                "<table id=\"foo\" class=\"aspNetDisabled\">\n\t<tr>\n\t\t<td>0</td><td></td><td></td>\n\t</tr>\n</table>";
+            RenderRepeater_BaseControl(noid, "Table", new Table());
+            RenderRepeater_BaseControl(noid, "DataList", new DataList());
+            RenderRepeater_BaseControl(
+                noid,
+                "DataListItem",
+                new DataListItem(0, ListItemType.Item)
+            );
 
-            Label l = new Label ();
+            Label l = new Label();
             l.Enabled = false;
             l.ID = "foo";
-            
-            RenderRepeater_BaseControl (id_enabled, "id and disabled", l);            
+
+            RenderRepeater_BaseControl(id_enabled, "id and disabled", l);
         }
     }
 }
-

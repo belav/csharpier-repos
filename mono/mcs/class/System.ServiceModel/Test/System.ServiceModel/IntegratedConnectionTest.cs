@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,99 +46,128 @@ namespace MonoTests.System.ServiceModel
 {
     // FIXME: uncomment when NUnit tests on HTTP connection got as
     // stable as non-nunit samples.
-    
+
     [TestFixture]
     public class IntegratedConnectionTest
     {
         [Test]
-        [Ignore ("With Orcas it does not work fine")]
+        [Ignore("With Orcas it does not work fine")]
         // It is almost identical to samples/basic-http-binding
-        public void SimpleHttpConnection ()
+        public void SimpleHttpConnection()
         {
             // Service
-            ServiceHost host = new ServiceHost (typeof (Foo));
-            int port = NetworkHelpers.FindFreePort ();
-            try {
-                Binding binding = new BasicHttpBinding ();
-                binding.SendTimeout = binding.ReceiveTimeout = TimeSpan.FromSeconds (5);
-                ServiceEndpoint se = host.AddServiceEndpoint ("MonoTests.System.ServiceModel.IFoo",
-                    binding, new Uri ("http://localhost:" + port));
-                host.Open ();
+            ServiceHost host = new ServiceHost(typeof(Foo));
+            int port = NetworkHelpers.FindFreePort();
+            try
+            {
+                Binding binding = new BasicHttpBinding();
+                binding.SendTimeout = binding.ReceiveTimeout = TimeSpan.FromSeconds(5);
+                ServiceEndpoint se = host.AddServiceEndpoint(
+                    "MonoTests.System.ServiceModel.IFoo",
+                    binding,
+                    new Uri("http://localhost:" + port)
+                );
+                host.Open();
 
                 // Client
-                ChannelFactory<IFoo> cf = new ChannelFactory<IFoo> (
-                    new BasicHttpBinding (),
-                    new EndpointAddress ("http://localhost:" + port + "/"));
-                IFoo foo  = cf.CreateChannel ();
-                Assert.AreEqual ("Test for EchoTest for Echo", foo.Echo ("Test for Echo"));
-            } finally {
+                ChannelFactory<IFoo> cf = new ChannelFactory<IFoo>(
+                    new BasicHttpBinding(),
+                    new EndpointAddress("http://localhost:" + port + "/")
+                );
+                IFoo foo = cf.CreateChannel();
+                Assert.AreEqual("Test for EchoTest for Echo", foo.Echo("Test for Echo"));
+            }
+            finally
+            {
                 if (host.State == CommunicationState.Opened)
-                    host.Close ();
+                    host.Close();
             }
         }
 
         [Test]
-        [Ignore ("With Orcas it does not work fine")]
-        public void SimpleClientBase ()
+        [Ignore("With Orcas it does not work fine")]
+        public void SimpleClientBase()
         {
             // Service
-            ServiceHost host = new ServiceHost (typeof (Foo2));
-            int port = NetworkHelpers.FindFreePort ();
-            try {
-                Binding binding = new BasicHttpBinding ();
-                binding.SendTimeout = binding.ReceiveTimeout = TimeSpan.FromSeconds (5);
-                host.AddServiceEndpoint ("MonoTests.System.ServiceModel.IFoo2",
-                binding, new Uri ("http://localhost:" + port));
-                host.Open ();
+            ServiceHost host = new ServiceHost(typeof(Foo2));
+            int port = NetworkHelpers.FindFreePort();
+            try
+            {
+                Binding binding = new BasicHttpBinding();
+                binding.SendTimeout = binding.ReceiveTimeout = TimeSpan.FromSeconds(5);
+                host.AddServiceEndpoint(
+                    "MonoTests.System.ServiceModel.IFoo2",
+                    binding,
+                    new Uri("http://localhost:" + port)
+                );
+                host.Open();
 
                 // Client
-                Foo2Proxy proxy = new Foo2Proxy (
-                    new BasicHttpBinding (),
-                    new EndpointAddress ("http://localhost:" + port + "/"));
-                proxy.Open ();
-                try {
-                    Assert.AreEqual ("TEST FOR ECHOTEST FOR ECHO",
-                        proxy.Echo ("TEST FOR ECHO"));
-                } finally {
-                    proxy.Close ();
+                Foo2Proxy proxy = new Foo2Proxy(
+                    new BasicHttpBinding(),
+                    new EndpointAddress("http://localhost:" + port + "/")
+                );
+                proxy.Open();
+                try
+                {
+                    Assert.AreEqual("TEST FOR ECHOTEST FOR ECHO", proxy.Echo("TEST FOR ECHO"));
                 }
-            } finally {
+                finally
+                {
+                    proxy.Close();
+                }
+            }
+            finally
+            {
                 // Service
                 if (host.State == CommunicationState.Opened)
-                    host.Close ();
+                    host.Close();
             }
         }
 
         [Test]
-        [Ignore ("With Orcas it does not work fine")]
-        public void ExchangeMetadata ()
+        [Ignore("With Orcas it does not work fine")]
+        public void ExchangeMetadata()
         {
             // Service
-            ServiceHost host = new ServiceHost (typeof (MetadataExchange));
-            int port = NetworkHelpers.FindFreePort ();
-            try {
-                Binding binding = new BasicHttpBinding ();
-                binding.ReceiveTimeout = TimeSpan.FromSeconds (5);
-                host.AddServiceEndpoint ("IMetadataExchange",
-                binding, new Uri ("http://localhost:" + port));
-                host.Open ();
+            ServiceHost host = new ServiceHost(typeof(MetadataExchange));
+            int port = NetworkHelpers.FindFreePort();
+            try
+            {
+                Binding binding = new BasicHttpBinding();
+                binding.ReceiveTimeout = TimeSpan.FromSeconds(5);
+                host.AddServiceEndpoint(
+                    "IMetadataExchange",
+                    binding,
+                    new Uri("http://localhost:" + port)
+                );
+                host.Open();
                 // Client
 
-                MetadataExchangeProxy proxy = new MetadataExchangeProxy (
-                    new BasicHttpBinding (),
-                    new EndpointAddress ("http://localhost:" + port + "/"));
-                proxy.Open ();
+                MetadataExchangeProxy proxy = new MetadataExchangeProxy(
+                    new BasicHttpBinding(),
+                    new EndpointAddress("http://localhost:" + port + "/")
+                );
+                proxy.Open();
 
-                try {
-                    Message req = Message.CreateMessage (MessageVersion.Soap11, "http://schemas.xmlsoap.org/ws/2004/09/transfer/Get");
-                    Message res = proxy.Get (req);
-                } finally {
-                    proxy.Close ();
+                try
+                {
+                    Message req = Message.CreateMessage(
+                        MessageVersion.Soap11,
+                        "http://schemas.xmlsoap.org/ws/2004/09/transfer/Get"
+                    );
+                    Message res = proxy.Get(req);
                 }
-            } finally {
+                finally
+                {
+                    proxy.Close();
+                }
+            }
+            finally
+            {
                 // Service
                 if (host.State == CommunicationState.Opened)
-                    host.Close ();
+                    host.Close();
             }
         }
 
@@ -146,74 +175,97 @@ namespace MonoTests.System.ServiceModel
         interface IFoo3
         {
             [OperationContract]
-            int GetInstanceCounter ();
+            int GetInstanceCounter();
         }
 
-            [ServiceBehavior (InstanceContextMode = InstanceContextMode.PerSession)]
+        [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
         class Foo3 : IFoo3, IDisposable
         {
             public static int CreatedInstances { get; set; }
             public static int DisposedInstances { get; set; }
 
-            public static int InstanceCounter {
+            public static int InstanceCounter
+            {
                 get { return CreatedInstances - DisposedInstances; }
             }
 
-            public Foo3 ()
+            public Foo3()
             {
                 CreatedInstances++;
             }
 
-            public int GetInstanceCounter ()
+            public int GetInstanceCounter()
             {
                 return InstanceCounter;
             }
 
-            public virtual void Dispose ()
+            public virtual void Dispose()
             {
                 DisposedInstances++;
             }
-
         }
 
-        private void TestSessionbehaviour (Binding binding, Uri address)
+        private void TestSessionbehaviour(Binding binding, Uri address)
         {
-            ServiceHost host = new ServiceHost (typeof (Foo3), address);
-            host.AddServiceEndpoint (typeof (IFoo3), binding, address);
-            host.Description.Behaviors.Add (new ServiceThrottlingBehavior () { MaxConcurrentSessions = 1 });
+            ServiceHost host = new ServiceHost(typeof(Foo3), address);
+            host.AddServiceEndpoint(typeof(IFoo3), binding, address);
+            host.Description.Behaviors.Add(
+                new ServiceThrottlingBehavior() { MaxConcurrentSessions = 1 }
+            );
             Foo3.CreatedInstances = Foo3.DisposedInstances = 0; // Reset
-            host.Open ();
-            Assert.AreEqual (0, Foo3.InstanceCounter, "Initial state wrong"); // just to be sure
-            var cd = (ChannelDispatcher) host.ChannelDispatchers [0];
-            for (int i = 1; i <= 3; ++i) {
-                var factory = new ChannelFactory<IFoo3Client> (binding, address.ToString ());
-                var proxy = factory.CreateChannel ();
-                Assert.AreEqual (1, proxy.GetInstanceCounter (), "One server instance after first call in session #" + i);
-                Assert.AreEqual (1, proxy.GetInstanceCounter (), "One server instance after second call in session #" + i);
-                factory.Close (); // should close session even when no IsTerminating method has been invoked
-                Thread.Sleep (500); // give WCF time to dispose service object
-                Assert.AreEqual (0, Foo3.InstanceCounter, "Service instances must be disposed after channel is closed, in session #" + i);
-                Assert.AreEqual (i, Foo3.CreatedInstances, "One new instance per session, in session #" + i);
+            host.Open();
+            Assert.AreEqual(0, Foo3.InstanceCounter, "Initial state wrong"); // just to be sure
+            var cd = (ChannelDispatcher)host.ChannelDispatchers[0];
+            for (int i = 1; i <= 3; ++i)
+            {
+                var factory = new ChannelFactory<IFoo3Client>(binding, address.ToString());
+                var proxy = factory.CreateChannel();
+                Assert.AreEqual(
+                    1,
+                    proxy.GetInstanceCounter(),
+                    "One server instance after first call in session #" + i
+                );
+                Assert.AreEqual(
+                    1,
+                    proxy.GetInstanceCounter(),
+                    "One server instance after second call in session #" + i
+                );
+                factory.Close(); // should close session even when no IsTerminating method has been invoked
+                Thread.Sleep(500); // give WCF time to dispose service object
+                Assert.AreEqual(
+                    0,
+                    Foo3.InstanceCounter,
+                    "Service instances must be disposed after channel is closed, in session #" + i
+                );
+                Assert.AreEqual(
+                    i,
+                    Foo3.CreatedInstances,
+                    "One new instance per session, in session #" + i
+                );
             }
-            host.Close ();
+            host.Close();
         }
 
-        interface IFoo3Client : IFoo3, IClientChannel {}
+        interface IFoo3Client : IFoo3, IClientChannel { }
 
-        [Test (Description = "Tests InstanceContextMode.PerSession behavior for NetTcp binding")]
-        public void TestSessionInstancesNetTcp ()
+        [Test(Description = "Tests InstanceContextMode.PerSession behavior for NetTcp binding")]
+        public void TestSessionInstancesNetTcp()
         {
-            Binding binding = new NetTcpBinding (SecurityMode.None, false);
-            Uri address = new Uri (binding.Scheme + "://localhost:" + NetworkHelpers.FindFreePort () + "/test");
-            TestSessionbehaviour (binding, address);
+            Binding binding = new NetTcpBinding(SecurityMode.None, false);
+            Uri address = new Uri(
+                binding.Scheme + "://localhost:" + NetworkHelpers.FindFreePort() + "/test"
+            );
+            TestSessionbehaviour(binding, address);
         }
 
-        [Test (Description = "Tests InstanceContextMode.PerSession behavior for WsHttp binding")]
-        [Category ("NotWorking")] // no working WSHttpBinding in mono.
-        public void TestSessionInstancesWsHttp ()
+        [Test(Description = "Tests InstanceContextMode.PerSession behavior for WsHttp binding")]
+        [Category("NotWorking")] // no working WSHttpBinding in mono.
+        public void TestSessionInstancesWsHttp()
         {
-            Binding binding = new WSHttpBinding (SecurityMode.None, true);
-            Uri address = new Uri (binding.Scheme + "://localhost:" + NetworkHelpers.FindFreePort () + "/test");
+            Binding binding = new WSHttpBinding(SecurityMode.None, true);
+            Uri address = new Uri(
+                binding.Scheme + "://localhost:" + NetworkHelpers.FindFreePort() + "/test"
+            );
             TestSessionbehaviour(binding, address);
         }
     }
@@ -224,22 +276,22 @@ namespace MonoTests.System.ServiceModel
     public interface IFoo
     {
         [OperationContract]
-        string Echo (string msg);
+        string Echo(string msg);
     }
 
     class Foo : IFoo
     {
-        public string Echo (string msg)
+        public string Echo(string msg)
         {
             return msg + msg;
         }
     }
 
     // This is manually created type for strongly typed request.
-    [DataContract (Name = "Echo", Namespace = "http://tempuri.org/")]
+    [DataContract(Name = "Echo", Namespace = "http://tempuri.org/")]
     public class EchoType
     {
-        public EchoType (string msg)
+        public EchoType(string msg)
         {
             this.msg = msg;
         }
@@ -256,12 +308,12 @@ namespace MonoTests.System.ServiceModel
     public interface IFoo2
     {
         [OperationContract]
-        string Echo (string msg);
+        string Echo(string msg);
     }
 
     class Foo2 : IFoo2
     {
-        public string Echo (string msg)
+        public string Echo(string msg)
         {
             return msg + msg;
         }
@@ -269,14 +321,12 @@ namespace MonoTests.System.ServiceModel
 
     public class Foo2Proxy : ClientBase<IFoo2>, IFoo2
     {
-        public Foo2Proxy (Binding binding, EndpointAddress address)
-            : base (binding, address)
-        {
-        }
+        public Foo2Proxy(Binding binding, EndpointAddress address)
+            : base(binding, address) { }
 
-        public string Echo (string msg)
+        public string Echo(string msg)
         {
-            return Channel.Echo (msg);
+            return Channel.Echo(msg);
         }
     }
 
@@ -286,46 +336,48 @@ namespace MonoTests.System.ServiceModel
 
     class MetadataExchange : IMetadataExchange
     {
-        public Message Get (Message request)
+        public Message Get(Message request)
         {
-            XmlDocument doc = new XmlDocument ();
-            doc.AppendChild (doc.CreateElement ("Metadata", "http://schemas.xmlsoap.org/ws/2004/09/mex"));
-            return Message.CreateMessage (request.Version,
+            XmlDocument doc = new XmlDocument();
+            doc.AppendChild(
+                doc.CreateElement("Metadata", "http://schemas.xmlsoap.org/ws/2004/09/mex")
+            );
+            return Message.CreateMessage(
+                request.Version,
                 "http://schemas.xmlsoap.org/ws/2004/09/transfer/GetResponse",
-                new XmlNodeReader (doc));
+                new XmlNodeReader(doc)
+            );
         }
 
-        public IAsyncResult BeginGet (Message request, AsyncCallback cb, object state)
+        public IAsyncResult BeginGet(Message request, AsyncCallback cb, object state)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public Message EndGet (IAsyncResult result)
+        public Message EndGet(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 
     public class MetadataExchangeProxy : ClientBase<IMetadataExchange>, IMetadataExchange
     {
-        public MetadataExchangeProxy (Binding binding, EndpointAddress address)
-            : base (binding, address)
+        public MetadataExchangeProxy(Binding binding, EndpointAddress address)
+            : base(binding, address) { }
+
+        public Message Get(Message request)
         {
+            return Channel.Get(request);
         }
 
-        public Message Get (Message request)
+        public IAsyncResult BeginGet(Message request, AsyncCallback callback, object state)
         {
-            return Channel.Get (request);
+            throw new NotImplementedException();
         }
 
-        public IAsyncResult BeginGet (Message request, AsyncCallback callback, object state)
+        public Message EndGet(IAsyncResult result)
         {
-            throw new NotImplementedException ();
-        }
-
-        public Message EndGet (IAsyncResult result)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 

@@ -4,9 +4,9 @@
 
 class Main
 {
-    public int Method (int[] array)
+    public int Method(int[] array)
     {
-       const int index = 5;
-       return array [index - 10];
+        const int index = 5;
+        return array[index - 10];
     }
 }

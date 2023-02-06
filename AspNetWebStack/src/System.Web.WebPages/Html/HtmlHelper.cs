@@ -50,7 +50,11 @@ namespace System.Web.WebPages.Html
 
         public static string ValidationInputValidCssClassName
         {
-            get { return ScopeStorage.CurrentScope[_validationInputValidClassKey] as string ?? DefaultValidationInputValidCssClass; }
+            get
+            {
+                return ScopeStorage.CurrentScope[_validationInputValidClassKey] as string
+                    ?? DefaultValidationInputValidCssClass;
+            }
             set
             {
                 if (value == null)
@@ -63,7 +67,11 @@ namespace System.Web.WebPages.Html
 
         public static string ValidationInputCssClassName
         {
-            get { return ScopeStorage.CurrentScope[_validationInputErrorClassKey] as string ?? DefaultValidationInputErrorCssClass; }
+            get
+            {
+                return ScopeStorage.CurrentScope[_validationInputErrorClassKey] as string
+                    ?? DefaultValidationInputErrorCssClass;
+            }
             set
             {
                 if (value == null)
@@ -76,7 +84,11 @@ namespace System.Web.WebPages.Html
 
         public static string ValidationMessageValidCssClassName
         {
-            get { return ScopeStorage.CurrentScope[_validationMessageValidClassKey] as string ?? DefaultValidationMessageValidCssClass; }
+            get
+            {
+                return ScopeStorage.CurrentScope[_validationMessageValidClassKey] as string
+                    ?? DefaultValidationMessageValidCssClass;
+            }
             set
             {
                 if (value == null)
@@ -89,7 +101,11 @@ namespace System.Web.WebPages.Html
 
         public static string ValidationMessageCssClassName
         {
-            get { return ScopeStorage.CurrentScope[_validationMesssageErrorClassKey] as string ?? DefaultValidationMessageErrorCssClass; }
+            get
+            {
+                return ScopeStorage.CurrentScope[_validationMesssageErrorClassKey] as string
+                    ?? DefaultValidationMessageErrorCssClass;
+            }
             set
             {
                 if (value == null)
@@ -102,7 +118,11 @@ namespace System.Web.WebPages.Html
 
         public static string ValidationSummaryClass
         {
-            get { return ScopeStorage.CurrentScope[_validationSummaryClassKey] as string ?? DefaultValidationSummaryErrorCssClass; }
+            get
+            {
+                return ScopeStorage.CurrentScope[_validationSummaryClassKey] as string
+                    ?? DefaultValidationSummaryErrorCssClass;
+            }
             set
             {
                 if (value == null)
@@ -115,7 +135,11 @@ namespace System.Web.WebPages.Html
 
         public static string ValidationSummaryValidClass
         {
-            get { return ScopeStorage.CurrentScope[_validationSummaryValidClassKey] as string ?? DefaultValidationSummaryValidCssClassName; }
+            get
+            {
+                return ScopeStorage.CurrentScope[_validationSummaryValidClassKey] as string
+                    ?? DefaultValidationSummaryValidCssClassName;
+            }
             set
             {
                 if (value == null)
@@ -143,8 +167,11 @@ namespace System.Web.WebPages.Html
             return AttributeEncode(Convert.ToString(value, CultureInfo.InvariantCulture));
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public string AttributeEncode(string value)
         {
             if (String.IsNullOrEmpty(value))
@@ -162,8 +189,11 @@ namespace System.Web.WebPages.Html
             return Encode(Convert.ToString(value, CultureInfo.InvariantCulture));
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public string Encode(string value)
         {
             if (String.IsNullOrEmpty(value))
@@ -182,8 +212,11 @@ namespace System.Web.WebPages.Html
         /// </summary>
         /// <param name="value">HTML markup string.</param>
         /// <returns>An IHtmlString that represents HTML markup.</returns>
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public IHtmlString Raw(string value)
         {
             return new HtmlString(value);
@@ -195,15 +228,18 @@ namespace System.Web.WebPages.Html
         /// </summary>
         /// <param name="value">object with string representation as HTML markup</param>
         /// <returns>An IHtmlString that represents HTML markup.</returns>
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public IHtmlString Raw(object value)
         {
             return new HtmlString(value == null ? null : value.ToString());
         }
 
         /// <summary>
-        /// Creates a dictionary of HTML attributes from the input object, 
+        /// Creates a dictionary of HTML attributes from the input object,
         /// translating underscores to dashes.
         /// </summary>
         /// <example>
@@ -218,7 +254,11 @@ namespace System.Web.WebPages.Html
 
             if (htmlAttributes != null)
             {
-                foreach (PropertyHelper property in HtmlAttributePropertyHelper.GetProperties(htmlAttributes))
+                foreach (
+                    PropertyHelper property in HtmlAttributePropertyHelper.GetProperties(
+                        htmlAttributes
+                    )
+                )
                 {
                     result.Add(property.Name, property.GetValue(htmlAttributes));
                 }
@@ -228,7 +268,7 @@ namespace System.Web.WebPages.Html
         }
 
         /// <summary>
-        /// Creates a dictionary from an object, by adding each public instance property as a key with its associated 
+        /// Creates a dictionary from an object, by adding each public instance property as a key with its associated
         /// value to the dictionary. It will expose public properties from derived types as well. This is typically used
         /// with objects of an anonymous type.
         /// </summary>

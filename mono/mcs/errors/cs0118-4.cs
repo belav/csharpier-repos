@@ -7,8 +7,11 @@ namespace x
 {
     class a
     {
-        bool B { set {} }
-        
-        void Test (B b) {}
+        bool B
+        {
+            set { }
+        }
+
+        void Test(B b) { }
     }
 }

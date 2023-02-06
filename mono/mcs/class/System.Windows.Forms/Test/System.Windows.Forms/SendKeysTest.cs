@@ -1,21 +1,21 @@
 /**
  * SendKeysTest.cs: Test cases for SendKeys
- * 
+ *
  * These tests can only run in ms.net one at a time.
- * Since ms.net apparently hooks the keyboard to 
+ * Since ms.net apparently hooks the keyboard to
  * implement this, running two tests in a row
  * makes the second test run before the hook
  * of the first test is released, effectively
  * hanging the keyboard. CTRL-ALT-DEL releases
  * the keyboard, but the test still hangs.
  * Running each test separately works.
- * 
+ *
  * Author:
  *        Andreia Gaita (avidigal@novell.com)
- * 
+ *
  * (C) 2005 Novell, Inc. (http://www.novell.com)
- * 
-*/ 
+ *
+*/
 
 using System;
 using System.Windows.Forms;
@@ -27,22 +27,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {
-    [TestFixture]    
+    [TestFixture]
     [Category("NotDotNet")]
     [Category("NotWithXvfb")]
     [Category("Interactive")]
-    public class SendKeysTest  : TestHelper {
-
+    public class SendKeysTest : TestHelper
+    {
         static Queue keys = new Queue();
 
-        internal struct Keys {
+        internal struct Keys
+        {
             public string key;
             public bool up;
             public bool shift;
             public bool ctrl;
             public bool alt;
 
-            public Keys(string key, bool up, bool shift, bool ctrl, bool alt) {
+            public Keys(string key, bool up, bool shift, bool ctrl, bool alt)
+            {
                 this.key = key;
                 this.up = up;
                 this.shift = shift;
@@ -51,51 +53,53 @@ namespace MonoTests.System.Windows.Forms
             }
         }
 
-        internal class Custom: TextBox {
-
-            protected override void OnKeyDown(KeyEventArgs e) {
+        internal class Custom : TextBox
+        {
+            protected override void OnKeyDown(KeyEventArgs e)
+            {
                 keys.Enqueue(new Keys(e.KeyData.ToString(), false, e.Shift, e.Control, e.Alt));
-                base.OnKeyDown (e);
+                base.OnKeyDown(e);
             }
 
-            protected override void OnKeyUp(KeyEventArgs e) {
+            protected override void OnKeyUp(KeyEventArgs e)
+            {
                 keys.Enqueue(new Keys(e.KeyData.ToString(), true, e.Shift, e.Control, e.Alt));
-                base.OnKeyUp (e);
+                base.OnKeyUp(e);
             }
         }
 
-        
-        
-        public SendKeysTest() {
-        }
+        public SendKeysTest() { }
 
         Form f;
         Timer t;
         Custom c;
 
         [Test]
-        public void SendKeysTest1() {
+        public void SendKeysTest1()
+        {
             f = new Form();
-            f.Activated +=new EventHandler(SendKeysTest1_activated);
+            f.Activated += new EventHandler(SendKeysTest1_activated);
             c = new Custom();
             f.Controls.Add(c);
             Application.Run(f);
             c.Dispose();
         }
 
-        private void SendKeysTest1_activated(object sender, EventArgs e) {
+        private void SendKeysTest1_activated(object sender, EventArgs e)
+        {
             SendKeys.SendWait("a");
 
-            t = new  Timer();
+            t = new Timer();
             t.Interval = 1;
-            t.Tick +=new EventHandler(SendKeysTest1_tick);
+            t.Tick += new EventHandler(SendKeysTest1_tick);
             t.Start();
-            
         }
 
-        private void SendKeysTest1_tick(object sender, EventArgs e) {
-            if (f.InvokeRequired) {
-                f.Invoke (new EventHandler (SendKeysTest1_tick), new object [] { sender, e });
+        private void SendKeysTest1_tick(object sender, EventArgs e)
+        {
+            if (f.InvokeRequired)
+            {
+                f.Invoke(new EventHandler(SendKeysTest1_tick), new object[] { sender, e });
                 return;
             }
             t.Stop();
@@ -113,43 +117,45 @@ namespace MonoTests.System.Windows.Forms
             Assert.IsFalse(k.ctrl, "#A4");
             Assert.IsFalse(k.alt, "#A5");
             Assert.AreEqual("A", k.key, "#A6");
-            
+
             t.Dispose();
-            f.Close ();
+            f.Close();
         }
 
         [SetUp]
-        protected override void SetUp () {
+        protected override void SetUp()
+        {
             keys.Clear();
-            base.SetUp ();
+            base.SetUp();
         }
 
-
         [Test]
-        public void SendKeysTest2() {
+        public void SendKeysTest2()
+        {
             f = new Form();
-            f.Activated +=new EventHandler(SendKeysTest2_activated);
+            f.Activated += new EventHandler(SendKeysTest2_activated);
             c = new Custom();
             f.Controls.Add(c);
             Application.Run(f);
             c.Dispose();
         }
 
-
-        private void SendKeysTest2_activated(object sender, EventArgs e) {
+        private void SendKeysTest2_activated(object sender, EventArgs e)
+        {
             SendKeys.SendWait("+(abc){BACKSPACE 2}");
 
             t = new Timer();
             t.Interval = 1;
-            t.Tick +=new EventHandler(SendKeysTest2_tick);
+            t.Tick += new EventHandler(SendKeysTest2_tick);
             t.Start();
-            
         }
 
-        private void SendKeysTest2_tick(object sender, EventArgs e) {
+        private void SendKeysTest2_tick(object sender, EventArgs e)
+        {
             t.Stop();
-            if (f.InvokeRequired) {
-                f.Invoke (new EventHandler (SendKeysTest2_tick), new object [] {sender, e});
+            if (f.InvokeRequired)
+            {
+                f.Invoke(new EventHandler(SendKeysTest2_tick), new object[] { sender, e });
                 return;
             }
             Assert.AreEqual(12, keys.Count, "#A1");
@@ -166,7 +172,7 @@ namespace MonoTests.System.Windows.Forms
             Assert.IsFalse(k.ctrl, "#A9");
             Assert.IsFalse(k.alt, "#A10");
             Assert.AreEqual("A, Shift", k.key, "#A11");
-            
+
             k = (Keys)keys.Dequeue();
             Assert.IsTrue(k.up, "#A12");
             Assert.IsTrue(k.shift, "#A13");
@@ -242,8 +248,7 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual("A", c.Text, "#e1");
 
             t.Dispose();
-            f.Close ();
+            f.Close();
         }
-
     }
 }

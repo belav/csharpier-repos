@@ -36,14 +36,15 @@ namespace MonoTests.Microsoft.Build.Logging
     public class LoggerDescriptionTest
     {
         [Test]
-        public void CreateLogger ()
+        public void CreateLogger()
         {
-            new LoggerDescription ("Microsoft.Build.Logging.ConsoleLogger",
-                    typeof (ConsoleLogger).Assembly.FullName,
-                    null,
-                    null,
-                    LoggerVerbosity.Normal)
-                .CreateLogger();
+            new LoggerDescription(
+                "Microsoft.Build.Logging.ConsoleLogger",
+                typeof(ConsoleLogger).Assembly.FullName,
+                null,
+                null,
+                LoggerVerbosity.Normal
+            ).CreateLogger();
         }
     }
 }

@@ -25,11 +25,12 @@ namespace MonoTests.System.Data.SqlClient
                 tc.BeginTest("SqlCommand_ExecuteXmlReader");
 
                 //testing only on SQLServer
-                if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) return ; 
+                if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+                    return;
 
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -43,9 +44,15 @@ namespace MonoTests.System.Data.SqlClient
         [Test]
         public void run()
         {
-            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer) {
+            if (ConnectedDataProvider.GetDbType() != DataBaseServer.SQLServer)
+            {
                 //All tests in this class are only for MSSQLServer.
-                Log(string.Format("All tests in this class are only for MSSQLServer and cannot be tested on {0}", ConnectedDataProvider.GetDbType()));
+                Log(
+                    string.Format(
+                        "All tests in this class are only for MSSQLServer and cannot be tested on {0}",
+                        ConnectedDataProvider.GetDbType()
+                    )
+                );
                 return;
             }
 
@@ -57,27 +64,30 @@ namespace MonoTests.System.Data.SqlClient
                 // Every Sub Test must begin with BeginCase
                 BeginCase("ExecuteXmlReader 1");
 
-                SqlConnection con = new SqlConnection(ConnectedDataProvider.ConnectionStringSQLClient);
+                SqlConnection con = new SqlConnection(
+                    ConnectedDataProvider.ConnectionStringSQLClient
+                );
 
                 con.Open();
-                string selectStr =    "SELECT * FROM Products WHERE PRODUCTID=1 FOR XML AUTO, XMLDATA;" + 
-                    "SELECT * FROM Orders WHERE ORDERID=1 FOR XML AUTO, XMLDATA;" + 
-                    "SELECT * FROM Customers WHERE CustomerID like 'A%' FOR XML AUTO, XMLDATA";
-            
-                SqlCommand comm = new SqlCommand(selectStr,con);
+                string selectStr =
+                    "SELECT * FROM Products WHERE PRODUCTID=1 FOR XML AUTO, XMLDATA;"
+                    + "SELECT * FROM Orders WHERE ORDERID=1 FOR XML AUTO, XMLDATA;"
+                    + "SELECT * FROM Customers WHERE CustomerID like 'A%' FOR XML AUTO, XMLDATA";
+
+                SqlCommand comm = new SqlCommand(selectStr, con);
                 // ExecuteXmlReader is not supported yet
                 XmlReader xr = comm.ExecuteXmlReader();
 
                 StringBuilder sb = new StringBuilder();
-                while(xr.Read()) 
+                while (xr.Read())
                 {
                     sb.Append(xr.ReadOuterXml());
                 }
                 // Every Sub Test must have a Compare
                 string strXml = null;
-                Compare(sb.ToString().Length,4391);
-            } 
-            catch(Exception ex)
+                Compare(sb.ToString().Length, 4391);
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -89,7 +99,5 @@ namespace MonoTests.System.Data.SqlClient
             }
             // End Sub Test
         }
-
-
     }
 }

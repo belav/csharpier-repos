@@ -73,9 +73,17 @@ namespace System.Collections.Immutable
                 _stack = null;
                 if (!_root.IsEmpty)
                 {
-                    if (!SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>.TryTake(this, out _stack))
+                    if (
+                        !SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>.TryTake(
+                            this,
+                            out _stack
+                        )
+                    )
                     {
-                        _stack = SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>.PrepNew(this, new Stack<RefAsValueType<Node>>(root.Height));
+                        _stack = SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>.PrepNew(
+                            this,
+                            new Stack<RefAsValueType<Node>>(root.Height)
+                        );
                     }
 
                     this.PushLeft(_root);
@@ -120,7 +128,10 @@ namespace System.Collections.Immutable
             {
                 _root = null!;
                 _current = null;
-                if (_stack != null && _stack.TryUse(ref this, out Stack<RefAsValueType<Node>>? stack))
+                if (
+                    _stack != null
+                    && _stack.TryUse(ref this, out Stack<RefAsValueType<Node>>? stack)
+                )
                 {
                     stack.ClearFastWhenEmpty();
                     SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>.TryAdd(this, _stack!);

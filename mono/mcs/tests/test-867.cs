@@ -1,19 +1,15 @@
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        new BaseJobController ();
-        new JobController ();
+        new BaseJobController();
+        new JobController();
     }
 }
 
-public interface IUser
-{
-}
+public interface IUser { }
 
-public class User : IUser
-{
-}
+public class User : IUser { }
 
 public interface IJobController
 {
@@ -30,6 +26,4 @@ public class BaseJobController : BaseController
     public new User User { get; set; }
 }
 
-public class JobController : BaseJobController, IJobController
-{
-}
+public class JobController : BaseJobController, IJobController { }

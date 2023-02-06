@@ -34,180 +34,206 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     // CAS
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [ValidationProperty ("SelectedItem")]
+    [ValidationProperty("SelectedItem")]
     [SupportsEventValidation]
-    public class RadioButtonList : ListControl, IRepeatInfoUser, INamingContainer, IPostBackDataHandler
+    public class RadioButtonList
+        : ListControl,
+            IRepeatInfoUser,
+            INamingContainer,
+            IPostBackDataHandler
     {
         short tabIndex = 0;
 
-        public RadioButtonList ()
+        public RadioButtonList() { }
+
+        [DefaultValue(-1)]
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual int CellPadding
         {
-
-        }
-
-        [DefaultValue (-1)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual int CellPadding {
-            get {
+            get
+            {
                 if (ControlStyleCreated == false)
                     return -1; // default value
 
-                return ((TableStyle) ControlStyle).CellPadding;
+                return ((TableStyle)ControlStyle).CellPadding;
             }
-
-            set {
-                ((TableStyle) ControlStyle).CellPadding = value;
-            }
+            set { ((TableStyle)ControlStyle).CellPadding = value; }
         }
 
-        [DefaultValue (-1)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual int CellSpacing {
-            get {
+        [DefaultValue(-1)]
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual int CellSpacing
+        {
+            get
+            {
                 if (ControlStyleCreated == false)
                     return -1; // default value
 
-                return ((TableStyle) ControlStyle).CellSpacing;
+                return ((TableStyle)ControlStyle).CellSpacing;
             }
-
-            set {
-                ((TableStyle) ControlStyle).CellSpacing = value;
-            }
+            set { ((TableStyle)ControlStyle).CellSpacing = value; }
         }
 
-        [DefaultValue (0)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual int RepeatColumns  {
-            get {
-                return ViewState.GetInt ("RepeatColumns", 0);
-            }
-
-            set {
+        [DefaultValue(0)]
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual int RepeatColumns
+        {
+            get { return ViewState.GetInt("RepeatColumns", 0); }
+            set
+            {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException ("The number of columns is set to a negative value.");
+                    throw new ArgumentOutOfRangeException(
+                        "The number of columns is set to a negative value."
+                    );
 
-                ViewState ["RepeatColumns"] = value;
+                ViewState["RepeatColumns"] = value;
             }
         }
 
-        [DefaultValue (RepeatDirection.Vertical)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual RepeatDirection RepeatDirection {
-            get {
-                return (RepeatDirection) ViewState.GetInt ("RepeatDirection", (int) RepeatDirection.Vertical);
+        [DefaultValue(RepeatDirection.Vertical)]
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual RepeatDirection RepeatDirection
+        {
+            get
+            {
+                return (RepeatDirection)
+                    ViewState.GetInt("RepeatDirection", (int)RepeatDirection.Vertical);
             }
-
-            set {
+            set
+            {
                 if (value != RepeatDirection.Horizontal && value != RepeatDirection.Vertical)
-                    throw new ArgumentOutOfRangeException ("he display direction of the list is not one of the RepeatDirection values.");
+                    throw new ArgumentOutOfRangeException(
+                        "he display direction of the list is not one of the RepeatDirection values."
+                    );
 
-                ViewState ["RepeatDirection"] = value;
+                ViewState["RepeatDirection"] = value;
             }
         }
 
-        [DefaultValue (RepeatLayout.Table)]
-        [WebSysDescription ("")]
-        [WebCategory ("Layout")]
-        public virtual RepeatLayout RepeatLayout {
-            get {
-                return (RepeatLayout) ViewState.GetInt ("RepeatLayout", (int) RepeatLayout.Table);
-            }
-
-            set {
+        [DefaultValue(RepeatLayout.Table)]
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual RepeatLayout RepeatLayout
+        {
+            get { return (RepeatLayout)ViewState.GetInt("RepeatLayout", (int)RepeatLayout.Table); }
+            set
+            {
                 bool outOfRange;
                 outOfRange = value < RepeatLayout.Table || value > RepeatLayout.OrderedList;
                 if (outOfRange)
-                    throw new ArgumentOutOfRangeException ("The radio buttons layout is not one of the RepeatLayout values.");
+                    throw new ArgumentOutOfRangeException(
+                        "The radio buttons layout is not one of the RepeatLayout values."
+                    );
 
-                ViewState ["RepeatLayout"] = value;
+                ViewState["RepeatLayout"] = value;
             }
         }
 
-        [DefaultValue (TextAlign.Right)]
-        [WebSysDescription ("")]
-        [WebCategory ("Appearance")]
-        public virtual TextAlign TextAlign {
-            get {
-                return (TextAlign )ViewState.GetInt ("TextAlign", (int) TextAlign.Right);
-            }
-
-            set {
+        [DefaultValue(TextAlign.Right)]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public virtual TextAlign TextAlign
+        {
+            get { return (TextAlign)ViewState.GetInt("TextAlign", (int)TextAlign.Right); }
+            set
+            {
                 if (value != TextAlign.Left && value != TextAlign.Right)
-                    throw new ArgumentOutOfRangeException ("The label text alignment associated with the radio buttons is not one of the TextAlign values.");
+                    throw new ArgumentOutOfRangeException(
+                        "The label text alignment associated with the radio buttons is not one of the TextAlign values."
+                    );
 
-                ViewState ["TextAlign"] = value;
+                ViewState["TextAlign"] = value;
             }
         }
 
         // Interface properties
 
-        protected virtual bool HasFooter {
+        protected virtual bool HasFooter
+        {
             get { return false; }
         }
 
-        protected virtual bool HasHeader {
+        protected virtual bool HasHeader
+        {
             get { return false; }
         }
 
-        protected virtual bool HasSeparators {
+        protected virtual bool HasSeparators
+        {
             get { return false; }
         }
 
-        protected virtual int RepeatedItemCount {
+        protected virtual int RepeatedItemCount
+        {
             get { return Items.Count; }
         }
-        
-        bool IRepeatInfoUser.HasFooter {
+
+        bool IRepeatInfoUser.HasFooter
+        {
             get { return HasFooter; }
         }
 
-        bool IRepeatInfoUser.HasHeader {
+        bool IRepeatInfoUser.HasHeader
+        {
             get { return HasHeader; }
         }
 
-        bool IRepeatInfoUser.HasSeparators {
+        bool IRepeatInfoUser.HasSeparators
+        {
             get { return HasSeparators; }
         }
 
-        int IRepeatInfoUser.RepeatedItemCount {
+        int IRepeatInfoUser.RepeatedItemCount
+        {
             get { return RepeatedItemCount; }
         }
 
-        protected override Style CreateControlStyle ()
+        protected override Style CreateControlStyle()
         {
-            return new TableStyle (ViewState);
+            return new TableStyle(ViewState);
         }
 
-        // MSDN: Searches the current naming container for a server control 
-        // with the specified ID and path offset. The FindControl method 
-        // always returns the RadioButtonList object. 
-        protected override Control FindControl (string id, int pathOffset)
+        // MSDN: Searches the current naming container for a server control
+        // with the specified ID and path offset. The FindControl method
+        // always returns the RadioButtonList object.
+        protected override Control FindControl(string id, int pathOffset)
         {
             return this;
         }
 
-        protected virtual Style GetItemStyle (ListItemType itemType, int repeatIndex)
+        protected virtual Style GetItemStyle(ListItemType itemType, int repeatIndex)
         {
             return null;
         }
 
-        protected virtual void RenderItem (ListItemType itemType, int repeatIndex, RepeatInfo repeatInfo, HtmlTextWriter writer)
+        protected virtual void RenderItem(
+            ListItemType itemType,
+            int repeatIndex,
+            RepeatInfo repeatInfo,
+            HtmlTextWriter writer
+        )
         {
-            ListItem item = Items [repeatIndex];
+            ListItem item = Items[repeatIndex];
 
-            RadioButton radio = new RadioButton ();
+            RadioButton radio = new RadioButton();
             radio.Text = item.Text;
-            radio.ID = ClientID + "_"  + repeatIndex;
+            radio.ID = ClientID + "_" + repeatIndex;
             radio.TextAlign = TextAlign;
             radio.GroupName = UniqueID;
             radio.Page = Page;
@@ -219,26 +245,28 @@ namespace System.Web.UI.WebControls {
             radio.ValidationGroup = ValidationGroup;
             radio.CausesValidation = CausesValidation;
             if (radio.HasAttributes)
-                radio.Attributes.Clear ();
+                radio.Attributes.Clear();
             if (item.HasAttributes)
-                radio.Attributes.CopyFrom (item.Attributes);
+                radio.Attributes.CopyFrom(item.Attributes);
 
-            radio.RenderControl (writer);
+            radio.RenderControl(writer);
         }
 
-        protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
         {
-            EnsureDataBound ();
-            string val = postCollection [postDataKey];
+            EnsureDataBound();
+            string val = postCollection[postDataKey];
             ListItemCollection items = Items;
             int end = items.Count;
             int selected = SelectedIndex;
-            for (int i = 0; i < end; i++) {
-                ListItem item = items [i];
+            for (int i = 0; i < end; i++)
+            {
+                ListItem item = items[i];
                 if (item == null || val != item.Value)
                     continue;
 
-                if (i != selected) {
+                if (i != selected)
+                {
                     SelectedIndex = i;
                     return true;
                 }
@@ -247,46 +275,54 @@ namespace System.Web.UI.WebControls {
             return false;
         }
 
-        protected virtual void RaisePostDataChangedEvent ()
+        protected virtual void RaisePostDataChangedEvent()
         {
-            ValidateEvent (UniqueID, String.Empty);
+            ValidateEvent(UniqueID, String.Empty);
             Page page = Page;
             if (CausesValidation && page != null)
-                page.Validate (ValidationGroup);
+                page.Validate(ValidationGroup);
 
-            OnSelectedIndexChanged (EventArgs.Empty);
+            OnSelectedIndexChanged(EventArgs.Empty);
         }
 
-        bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
         {
-            return LoadPostData (postDataKey, postCollection);
-        }
-        
-        void IPostBackDataHandler.RaisePostDataChangedEvent ()
-        {
-            RaisePostDataChangedEvent ();
+            return LoadPostData(postDataKey, postCollection);
         }
 
-        Style IRepeatInfoUser.GetItemStyle (ListItemType itemType,  int repeatIndex)
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
         {
-            return GetItemStyle (itemType, repeatIndex);
+            RaisePostDataChangedEvent();
         }
 
-        void IRepeatInfoUser.RenderItem (ListItemType itemType, int repeatIndex, RepeatInfo repeatInfo, HtmlTextWriter writer)
+        Style IRepeatInfoUser.GetItemStyle(ListItemType itemType, int repeatIndex)
         {
-            RenderItem (itemType, repeatIndex, repeatInfo, writer);
+            return GetItemStyle(itemType, repeatIndex);
         }
 
-        protected internal override void Render (HtmlTextWriter writer)
+        void IRepeatInfoUser.RenderItem(
+            ListItemType itemType,
+            int repeatIndex,
+            RepeatInfo repeatInfo,
+            HtmlTextWriter writer
+        )
+        {
+            RenderItem(itemType, repeatIndex, repeatInfo, writer);
+        }
+
+        protected internal override void Render(HtmlTextWriter writer)
         {
             Page page = Page;
             if (page != null)
-                page.ClientScript.RegisterForEventValidation (UniqueID);
+                page.ClientScript.RegisterForEventValidation(UniqueID);
 
             if (Items.Count == 0)
                 return;
 
-            RepeatInfo repeat = new RepeatInfo ();
+            RepeatInfo repeat = new RepeatInfo();
             repeat.RepeatColumns = RepeatColumns;
             repeat.RepeatDirection = RepeatDirection;
             repeat.RepeatLayout = RepeatLayout;
@@ -294,15 +330,9 @@ namespace System.Web.UI.WebControls {
             tabIndex = TabIndex;
             TabIndex = 0;
 
-            repeat.RenderRepeater (writer, this, ControlStyle, this);
+            repeat.RenderRepeater(writer, this, ControlStyle, this);
 
             TabIndex = tabIndex;
         }
     }
-
 }
-
-
-
-
-

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,7 +35,10 @@ using System.Security.Permissions;
 namespace System.Web.Security
 {
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
     [Serializable]
     public sealed class FormsAuthenticationTicket
@@ -61,64 +64,64 @@ namespace System.Web.Security
         }
         */
 
-        internal byte [] ToByteArray ()
+        internal byte[] ToByteArray()
         {
-            MemoryStream ms = new MemoryStream ();
-            BinaryWriter writer = new BinaryWriter (ms);
-            writer.Write (version);
-            writer.Write (persistent);
-            writer.Write (issue_date.Ticks);
-            writer.Write (expiration.Ticks);
-            writer.Write (name != null);
+            MemoryStream ms = new MemoryStream();
+            BinaryWriter writer = new BinaryWriter(ms);
+            writer.Write(version);
+            writer.Write(persistent);
+            writer.Write(issue_date.Ticks);
+            writer.Write(expiration.Ticks);
+            writer.Write(name != null);
             if (name != null)
-                writer.Write (name);
+                writer.Write(name);
 
-            writer.Write (cookie_path != null);
+            writer.Write(cookie_path != null);
             if (cookie_path != null)
-                writer.Write (cookie_path);
+                writer.Write(cookie_path);
 
-            writer.Write (user_data != null);
+            writer.Write(user_data != null);
             if (user_data != null)
-                writer.Write (user_data);
+                writer.Write(user_data);
 
-            writer.Flush ();
-            return ms.ToArray ();
+            writer.Flush();
+            return ms.ToArray();
         }
 
-        internal static FormsAuthenticationTicket FromByteArray (byte [] bytes)
+        internal static FormsAuthenticationTicket FromByteArray(byte[] bytes)
         {
             if (bytes == null)
-                throw new ArgumentNullException ("bytes");
-            
-            MemoryStream ms = new MemoryStream (bytes);
-            BinaryReader reader = new BinaryReader (ms);
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket ();
-            ticket.version = reader.ReadInt32 ();
-            ticket.persistent = reader.ReadBoolean ();
-            ticket.issue_date = new DateTime (reader.ReadInt64 ());
-            ticket.expiration = new DateTime (reader.ReadInt64 ());
-            if (reader.ReadBoolean ())
-                ticket.name = reader.ReadString ();
+                throw new ArgumentNullException("bytes");
 
-            if (reader.ReadBoolean ())
-                ticket.cookie_path = reader.ReadString ();
+            MemoryStream ms = new MemoryStream(bytes);
+            BinaryReader reader = new BinaryReader(ms);
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket();
+            ticket.version = reader.ReadInt32();
+            ticket.persistent = reader.ReadBoolean();
+            ticket.issue_date = new DateTime(reader.ReadInt64());
+            ticket.expiration = new DateTime(reader.ReadInt64());
+            if (reader.ReadBoolean())
+                ticket.name = reader.ReadString();
 
-            if (reader.ReadBoolean ())
-                ticket.user_data = reader.ReadString ();
+            if (reader.ReadBoolean())
+                ticket.cookie_path = reader.ReadString();
+
+            if (reader.ReadBoolean())
+                ticket.user_data = reader.ReadString();
 
             return ticket;
         }
 
-        FormsAuthenticationTicket ()
-        {
-        }
+        FormsAuthenticationTicket() { }
 
-        public FormsAuthenticationTicket (int version,
-                          string name,
-                          DateTime issueDate,
-                          DateTime expiration,
-                          bool isPersistent,
-                          string userData)
+        public FormsAuthenticationTicket(
+            int version,
+            string name,
+            DateTime issueDate,
+            DateTime expiration,
+            bool isPersistent,
+            string userData
+        )
         {
             this.version = version;
             this.name = name;
@@ -129,13 +132,15 @@ namespace System.Web.Security
             this.cookie_path = "/";
         }
 
-        public FormsAuthenticationTicket (int version,
-                          string name,
-                          DateTime issueDate,
-                          DateTime expiration,
-                          bool isPersistent,
-                          string userData,
-                          string cookiePath)
+        public FormsAuthenticationTicket(
+            int version,
+            string name,
+            DateTime issueDate,
+            DateTime expiration,
+            bool isPersistent,
+            string userData,
+            string cookiePath
+        )
         {
             this.version = version;
             this.name = name;
@@ -146,69 +151,78 @@ namespace System.Web.Security
             this.cookie_path = cookiePath;
         }
 
-        public FormsAuthenticationTicket (string name, bool isPersistent, int timeout)
+        public FormsAuthenticationTicket(string name, bool isPersistent, int timeout)
         {
             this.version = 1;
             this.name = name;
             this.issue_date = DateTime.Now;
             this.persistent = isPersistent;
             if (persistent)
-                expiration = issue_date.AddYears (50);
+                expiration = issue_date.AddYears(50);
             else
-                expiration = issue_date.AddMinutes ((double) timeout);
+                expiration = issue_date.AddMinutes((double)timeout);
 
             this.user_data = "";
             this.cookie_path = "/";
         }
 
-        internal void SetDates (DateTime issue_date, DateTime expiration)
+        internal void SetDates(DateTime issue_date, DateTime expiration)
         {
             this.issue_date = issue_date;
             this.expiration = expiration;
         }
-        
-        internal FormsAuthenticationTicket Clone ()
+
+        internal FormsAuthenticationTicket Clone()
         {
-            return new FormsAuthenticationTicket   (version,
-                                name,
-                                issue_date,
-                                expiration,
-                                persistent,
-                                user_data,
-                                cookie_path);
+            return new FormsAuthenticationTicket(
+                version,
+                name,
+                issue_date,
+                expiration,
+                persistent,
+                user_data,
+                cookie_path
+            );
         }
 
-        public string CookiePath {
+        public string CookiePath
+        {
             get { return cookie_path; }
         }
 
-        public DateTime Expiration {
+        public DateTime Expiration
+        {
             get { return expiration; }
         }
 
-        public bool Expired {
+        public bool Expired
+        {
             get { return DateTime.UtcNow > expiration.ToUniversalTime(); }
         }
 
-        public bool IsPersistent {
+        public bool IsPersistent
+        {
             get { return persistent; }
         }
 
-        public DateTime IssueDate {
+        public DateTime IssueDate
+        {
             get { return issue_date; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
-        public string UserData {
+        public string UserData
+        {
             get { return user_data; }
         }
 
-        public int Version {
+        public int Version
+        {
             get { return version; }
         }
     }
 }
-

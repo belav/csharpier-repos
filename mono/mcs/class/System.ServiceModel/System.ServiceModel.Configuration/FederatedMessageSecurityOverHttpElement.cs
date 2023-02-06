@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,8 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class FederatedMessageSecurityOverHttpElement
-         : ConfigurationElement
+    public sealed partial class FederatedMessageSecurityOverHttpElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
@@ -70,154 +69,231 @@ namespace System.ServiceModel.Configuration
         static ConfigurationProperty negotiate_service_credential;
         static ConfigurationProperty token_request_parameters;
 
-        static FederatedMessageSecurityOverHttpElement ()
+        static FederatedMessageSecurityOverHttpElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            algorithm_suite = new ConfigurationProperty ("algorithmSuite",
-                typeof (SecurityAlgorithmSuite), "Default", new SecurityAlgorithmSuiteConverter (), null,
-                ConfigurationPropertyOptions.None);
+            properties = new ConfigurationPropertyCollection();
+            algorithm_suite = new ConfigurationProperty(
+                "algorithmSuite",
+                typeof(SecurityAlgorithmSuite),
+                "Default",
+                new SecurityAlgorithmSuiteConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            claim_type_requirements = new ConfigurationProperty ("claimTypeRequirements",
-                typeof (ClaimTypeElementCollection), null, null/* FIXME: get converter for ClaimTypeElementCollection*/, null,
-                ConfigurationPropertyOptions.None);
+            claim_type_requirements = new ConfigurationProperty(
+                "claimTypeRequirements",
+                typeof(ClaimTypeElementCollection),
+                null,
+                null /* FIXME: get converter for ClaimTypeElementCollection*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            establish_security_context = new ConfigurationProperty ("establishSecurityContext",
-                typeof (bool), "true", new BooleanConverter (), null,
-                ConfigurationPropertyOptions.None);
+            establish_security_context = new ConfigurationProperty(
+                "establishSecurityContext",
+                typeof(bool),
+                "true",
+                new BooleanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            issued_key_type = new ConfigurationProperty ("issuedKeyType",
-                typeof (SecurityKeyType), "SymmetricKey", null/* FIXME: get converter for SecurityKeyType*/, null,
-                ConfigurationPropertyOptions.None);
+            issued_key_type = new ConfigurationProperty(
+                "issuedKeyType",
+                typeof(SecurityKeyType),
+                "SymmetricKey",
+                null /* FIXME: get converter for SecurityKeyType*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            issued_token_type = new ConfigurationProperty ("issuedTokenType",
-                typeof (string), "", new StringConverter (), null,
-                ConfigurationPropertyOptions.None);
+            issued_token_type = new ConfigurationProperty(
+                "issuedTokenType",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            issuer = new ConfigurationProperty ("issuer",
-                typeof (IssuedTokenParametersEndpointAddressElement), null, null/* FIXME: get converter for IssuedTokenParametersEndpointAddressElement*/, null,
-                ConfigurationPropertyOptions.None);
+            issuer = new ConfigurationProperty(
+                "issuer",
+                typeof(IssuedTokenParametersEndpointAddressElement),
+                null,
+                null /* FIXME: get converter for IssuedTokenParametersEndpointAddressElement*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            issuer_metadata = new ConfigurationProperty ("issuerMetadata",
-                typeof (EndpointAddressElementBase), null, null/* FIXME: get converter for EndpointAddressElementBase*/, null,
-                ConfigurationPropertyOptions.None);
+            issuer_metadata = new ConfigurationProperty(
+                "issuerMetadata",
+                typeof(EndpointAddressElementBase),
+                null,
+                null /* FIXME: get converter for EndpointAddressElementBase*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            negotiate_service_credential = new ConfigurationProperty ("negotiateServiceCredential",
-                typeof (bool), "true", new BooleanConverter (), null,
-                ConfigurationPropertyOptions.None);
+            negotiate_service_credential = new ConfigurationProperty(
+                "negotiateServiceCredential",
+                typeof(bool),
+                "true",
+                new BooleanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            token_request_parameters = new ConfigurationProperty ("tokenRequestParameters",
-                typeof (XmlElementElementCollection), null, null/* FIXME: get converter for XmlElementElementCollection*/, null,
-                ConfigurationPropertyOptions.None);
+            token_request_parameters = new ConfigurationProperty(
+                "tokenRequestParameters",
+                typeof(XmlElementElementCollection),
+                null,
+                null /* FIXME: get converter for XmlElementElementCollection*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (algorithm_suite);
-            properties.Add (claim_type_requirements);
-            properties.Add (establish_security_context);
-            properties.Add (issued_key_type);
-            properties.Add (issued_token_type);
-            properties.Add (issuer);
-            properties.Add (issuer_metadata);
-            properties.Add (negotiate_service_credential);
-            properties.Add (token_request_parameters);
+            properties.Add(algorithm_suite);
+            properties.Add(claim_type_requirements);
+            properties.Add(establish_security_context);
+            properties.Add(issued_key_type);
+            properties.Add(issued_token_type);
+            properties.Add(issuer);
+            properties.Add(issuer_metadata);
+            properties.Add(negotiate_service_credential);
+            properties.Add(token_request_parameters);
         }
 
-        public FederatedMessageSecurityOverHttpElement ()
-        {
-        }
-
+        public FederatedMessageSecurityOverHttpElement() { }
 
         // Properties
 
-        [TypeConverter (typeof (SecurityAlgorithmSuiteConverter))]
-        [ConfigurationProperty ("algorithmSuite",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Default")]
-        public SecurityAlgorithmSuite AlgorithmSuite {
-            get { return (SecurityAlgorithmSuite) base [algorithm_suite]; }
-            set { base [algorithm_suite] = value; }
+        [TypeConverter(typeof(SecurityAlgorithmSuiteConverter))]
+        [ConfigurationProperty(
+            "algorithmSuite",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Default"
+        )]
+        public SecurityAlgorithmSuite AlgorithmSuite
+        {
+            get { return (SecurityAlgorithmSuite)base[algorithm_suite]; }
+            set { base[algorithm_suite] = value; }
         }
 
-        [ConfigurationProperty ("claimTypeRequirements",
-             Options = ConfigurationPropertyOptions.None)]
-        public ClaimTypeElementCollection ClaimTypeRequirements {
-            get { return (ClaimTypeElementCollection) base [claim_type_requirements]; }
+        [ConfigurationProperty(
+            "claimTypeRequirements",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public ClaimTypeElementCollection ClaimTypeRequirements
+        {
+            get { return (ClaimTypeElementCollection)base[claim_type_requirements]; }
         }
 
-        [ConfigurationProperty ("establishSecurityContext",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = true)]
-        public bool EstablishSecurityContext {
-            get { return (bool) base [establish_security_context]; }
-            set { base [establish_security_context] = value; }
+        [ConfigurationProperty(
+            "establishSecurityContext",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = true
+        )]
+        public bool EstablishSecurityContext
+        {
+            get { return (bool)base[establish_security_context]; }
+            set { base[establish_security_context] = value; }
         }
 
-        [ConfigurationProperty ("issuedKeyType",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "SymmetricKey")]
-        public SecurityKeyType IssuedKeyType {
-            get { return (SecurityKeyType) base [issued_key_type]; }
-            set { base [issued_key_type] = value; }
+        [ConfigurationProperty(
+            "issuedKeyType",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "SymmetricKey"
+        )]
+        public SecurityKeyType IssuedKeyType
+        {
+            get { return (SecurityKeyType)base[issued_key_type]; }
+            set { base[issued_key_type] = value; }
         }
 
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        [ConfigurationProperty ("issuedTokenType",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "")]
-        public string IssuedTokenType {
-            get { return (string) base [issued_token_type]; }
-            set { base [issued_token_type] = value; }
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "issuedTokenType",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = ""
+        )]
+        public string IssuedTokenType
+        {
+            get { return (string)base[issued_token_type]; }
+            set { base[issued_token_type] = value; }
         }
 
-        [ConfigurationProperty ("issuer",
-             Options = ConfigurationPropertyOptions.None)]
-        public IssuedTokenParametersEndpointAddressElement Issuer {
-            get { return (IssuedTokenParametersEndpointAddressElement) base [issuer]; }
+        [ConfigurationProperty("issuer", Options = ConfigurationPropertyOptions.None)]
+        public IssuedTokenParametersEndpointAddressElement Issuer
+        {
+            get { return (IssuedTokenParametersEndpointAddressElement)base[issuer]; }
         }
 
-        [ConfigurationProperty ("issuerMetadata",
-             Options = ConfigurationPropertyOptions.None)]
-        public EndpointAddressElementBase IssuerMetadata {
-            get { return (EndpointAddressElementBase) base [issuer_metadata]; }
+        [ConfigurationProperty("issuerMetadata", Options = ConfigurationPropertyOptions.None)]
+        public EndpointAddressElementBase IssuerMetadata
+        {
+            get { return (EndpointAddressElementBase)base[issuer_metadata]; }
         }
 
-        [ConfigurationProperty ("negotiateServiceCredential",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = true)]
-        public bool NegotiateServiceCredential {
-            get { return (bool) base [negotiate_service_credential]; }
-            set { base [negotiate_service_credential] = value; }
+        [ConfigurationProperty(
+            "negotiateServiceCredential",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = true
+        )]
+        public bool NegotiateServiceCredential
+        {
+            get { return (bool)base[negotiate_service_credential]; }
+            set { base[negotiate_service_credential] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        [ConfigurationProperty ("tokenRequestParameters",
-             Options = ConfigurationPropertyOptions.None)]
-        public XmlElementElementCollection TokenRequestParameters {
-            get { return (XmlElementElementCollection) base [token_request_parameters]; }
+        [ConfigurationProperty(
+            "tokenRequestParameters",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public XmlElementElementCollection TokenRequestParameters
+        {
+            get { return (XmlElementElementCollection)base[token_request_parameters]; }
         }
 
         // Methods
-        internal void ApplyConfiguration (FederatedMessageSecurityOverHttp s)
+        internal void ApplyConfiguration(FederatedMessageSecurityOverHttp s)
         {
             s.AlgorithmSuite = AlgorithmSuite;
             foreach (ClaimTypeElement cte in ClaimTypeRequirements)
-                s.ClaimTypeRequirements.Add (cte.Create ());
+                s.ClaimTypeRequirements.Add(cte.Create());
             s.EstablishSecurityContext = EstablishSecurityContext;
             s.IssuedKeyType = IssuedKeyType;
             s.IssuedTokenType = IssuedTokenType;
             if (Issuer.Address != null)
-                s.IssuerAddress = new EndpointAddress (Issuer.Address, Issuer.Identity.Create (), Issuer.Headers.Headers);
-            if (!String.IsNullOrEmpty (Issuer.Binding))
-                s.IssuerBinding = ConfigUtil.CreateBinding (Issuer.Binding, Issuer.BindingConfiguration);
+                s.IssuerAddress = new EndpointAddress(
+                    Issuer.Address,
+                    Issuer.Identity.Create(),
+                    Issuer.Headers.Headers
+                );
+            if (!String.IsNullOrEmpty(Issuer.Binding))
+                s.IssuerBinding = ConfigUtil.CreateBinding(
+                    Issuer.Binding,
+                    Issuer.BindingConfiguration
+                );
             if (IssuerMetadata.Address != null)
-                s.IssuerMetadataAddress = new EndpointAddress (IssuerMetadata.Address, IssuerMetadata.Identity.Create (), IssuerMetadata.Headers.Headers);
+                s.IssuerMetadataAddress = new EndpointAddress(
+                    IssuerMetadata.Address,
+                    IssuerMetadata.Identity.Create(),
+                    IssuerMetadata.Headers.Headers
+                );
             s.NegotiateServiceCredential = NegotiateServiceCredential;
             foreach (XmlElementElement xee in TokenRequestParameters)
-                s.TokenRequestParameters.Add (xee.XmlElement);
+                s.TokenRequestParameters.Add(xee.XmlElement);
         }
     }
-
 }

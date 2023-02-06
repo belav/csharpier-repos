@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,26 +29,26 @@ using System.Reflection;
 using System.Collections;
 using System.ComponentModel;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
     [DefaultMember("Item")]
-    internal class RelatedCurrencyManager : CurrencyManager {
-
+    internal class RelatedCurrencyManager : CurrencyManager
+    {
         BindingManagerBase parent;
         PropertyDescriptor prop_desc;
 
-        public RelatedCurrencyManager (BindingManagerBase parent, PropertyDescriptor prop_desc)
-            : base (prop_desc.GetValue (parent.Current))
+        public RelatedCurrencyManager(BindingManagerBase parent, PropertyDescriptor prop_desc)
+            : base(prop_desc.GetValue(parent.Current))
         {
             this.parent = parent;
             this.prop_desc = prop_desc;
 
-            parent.PositionChanged += new EventHandler (parent_PositionChanged);
+            parent.PositionChanged += new EventHandler(parent_PositionChanged);
         }
 
-        private void parent_PositionChanged (object sender, EventArgs args)
+        private void parent_PositionChanged(object sender, EventArgs args)
         {
-            SetDataSource (prop_desc.GetValue (parent.Current));
+            SetDataSource(prop_desc.GetValue(parent.Current));
         }
     }
 }
-

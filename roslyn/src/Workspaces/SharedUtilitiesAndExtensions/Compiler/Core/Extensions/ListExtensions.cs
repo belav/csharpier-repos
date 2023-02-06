@@ -20,7 +20,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <param name="transform">A function which transforms each element. The function returns the transformed list
         /// element, or <see langword="null"/> to remove the current item from the list.</param>
         /// <param name="arg">The state argument to pass to the transformation callback.</param>
-        public static void RemoveOrTransformAll<T, TArg>(this List<T> list, Func<T, TArg, T?> transform, TArg arg)
+        public static void RemoveOrTransformAll<T, TArg>(
+            this List<T> list,
+            Func<T, TArg, T?> transform,
+            TArg arg
+        )
             where T : class
         {
             RoslynDebug.AssertNotNull(list);
@@ -45,7 +49,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <returns>
         /// True if any item has been removed.
         /// </returns>
-        public static bool TryRemoveFirst<T, TArg>(this IList<T> list, Func<T, TArg, bool> selector, TArg arg, [NotNullWhen(true)] out T? removedItem)
+        public static bool TryRemoveFirst<T, TArg>(
+            this IList<T> list,
+            Func<T, TArg, bool> selector,
+            TArg arg,
+            [NotNullWhen(true)] out T? removedItem
+        )
             where T : notnull
         {
             for (var i = 0; i < list.Count; i++)

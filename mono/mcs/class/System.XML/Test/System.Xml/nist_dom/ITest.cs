@@ -3,7 +3,7 @@
 //
 //                       National Institute Of Standards and Technology
 //                                     DTS Version 1.0
-//         
+//
 //
 //
 // Ported to System.Xml by: Mizrahi Rafael rafim@mainsoft.com

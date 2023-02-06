@@ -44,7 +44,12 @@ namespace MonoTests.System.Data.Connected
         private readonly string connectionString;
         private readonly EngineConfig engine;
 
-        private ConnectionConfig (string name, string factory, string connectionString, EngineConfig engine)
+        private ConnectionConfig(
+            string name,
+            string factory,
+            string connectionString,
+            EngineConfig engine
+        )
         {
             this.name = name;
             this.factory = factory;
@@ -52,63 +57,76 @@ namespace MonoTests.System.Data.Connected
             this.engine = engine;
         }
 
-        internal static ConnectionConfig FromXml (XmlNode connNode, Hashtable engines)
+        internal static ConnectionConfig FromXml(XmlNode connNode, Hashtable engines)
         {
-            return new ConnectionConfig (
-                GetAttribValue (connNode, "name", true),
-                GetAttribValue (connNode, "factory", true),
-                GetAttribValue (connNode, "connectionString", true),
-                GetEngine (connNode, engines));
+            return new ConnectionConfig(
+                GetAttribValue(connNode, "name", true),
+                GetAttribValue(connNode, "factory", true),
+                GetAttribValue(connNode, "connectionString", true),
+                GetEngine(connNode, engines)
+            );
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
-        public string Factory {
+        public string Factory
+        {
             get { return factory; }
         }
 
-        public string ConnectionString {
+        public string ConnectionString
+        {
             get { return connectionString; }
         }
 
-        public EngineConfig Engine {
+        public EngineConfig Engine
+        {
             get { return engine; }
         }
 
-        static string GetAttribValue (XmlNode node, string name, bool required)
+        static string GetAttribValue(XmlNode node, string name, bool required)
         {
-            XmlAttribute attr = node.Attributes [name];
-            if (attr == null) {
+            XmlAttribute attr = node.Attributes[name];
+            if (attr == null)
+            {
                 if (required)
-                    throw CreateAttributeMissingException (name, node);
+                    throw CreateAttributeMissingException(name, node);
                 return null;
             }
             return attr.Value;
         }
 
-        static EngineConfig GetEngine (XmlNode connNode, Hashtable engines)
+        static EngineConfig GetEngine(XmlNode connNode, Hashtable engines)
         {
-            XmlAttribute engineAttr = connNode.Attributes ["engine"];
+            XmlAttribute engineAttr = connNode.Attributes["engine"];
             if (engineAttr == null)
-                throw CreateAttributeMissingException ("engine", connNode);
+                throw CreateAttributeMissingException("engine", connNode);
 
             string engineName = engineAttr.Value;
-            EngineConfig engine = (EngineConfig) engines [engineName];
-            if (engine == null) {
-                string msg = string.Format (CultureInfo.InvariantCulture,
-                    "Engine '{0}' does not exist.", engineName);
-                throw new ConfigurationErrorsException (msg, engineAttr);
+            EngineConfig engine = (EngineConfig)engines[engineName];
+            if (engine == null)
+            {
+                string msg = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Engine '{0}' does not exist.",
+                    engineName
+                );
+                throw new ConfigurationErrorsException(msg, engineAttr);
             }
             return engine;
         }
 
-        static Exception CreateAttributeMissingException (string name, XmlNode node)
+        static Exception CreateAttributeMissingException(string name, XmlNode node)
         {
-            string msg = string.Format (CultureInfo.InvariantCulture,
-                "Missing '{0}' attribute.", name);
-            throw new ConfigurationErrorsException (msg, node);
+            string msg = string.Format(
+                CultureInfo.InvariantCulture,
+                "Missing '{0}' attribute.",
+                name
+            );
+            throw new ConfigurationErrorsException(msg, node);
         }
     }
 }

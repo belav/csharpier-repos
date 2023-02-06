@@ -32,7 +32,8 @@ public class EnumerableExpression : Expression, IPrintableExpression
         Expression selector,
         bool distinct,
         SqlExpression? predicate,
-        IReadOnlyList<OrderingExpression> orderings)
+        IReadOnlyList<OrderingExpression> orderings
+    )
     {
         Selector = selector;
         IsDistinct = distinct;
@@ -64,15 +65,15 @@ public class EnumerableExpression : Expression, IPrintableExpression
     ///     Applies new selector to the <see cref="EnumerableExpression" />.
     /// </summary>
     /// <returns>The new expression with specified component updated.</returns>
-    public virtual EnumerableExpression ApplySelector(Expression expression)
-        => new(expression, IsDistinct, Predicate, Orderings);
+    public virtual EnumerableExpression ApplySelector(Expression expression) =>
+        new(expression, IsDistinct, Predicate, Orderings);
 
     /// <summary>
     ///     Applies DISTINCT operator to the selector of the <see cref="EnumerableExpression" />.
     /// </summary>
     /// <returns>The new expression with specified component updated.</returns>
-    public virtual EnumerableExpression ApplyDistinct()
-        => new(Selector, distinct: true, Predicate, Orderings);
+    public virtual EnumerableExpression ApplyDistinct() =>
+        new(Selector, distinct: true, Predicate, Orderings);
 
     /// <summary>
     ///     Applies filter predicate to the <see cref="EnumerableExpression" />.
@@ -81,21 +82,25 @@ public class EnumerableExpression : Expression, IPrintableExpression
     /// <returns>The new expression with specified component updated.</returns>
     public virtual EnumerableExpression ApplyPredicate(SqlExpression sqlExpression)
     {
-        if (sqlExpression is SqlConstantExpression sqlConstant
+        if (
+            sqlExpression is SqlConstantExpression sqlConstant
             && sqlConstant.Value is bool boolValue
-            && boolValue)
+            && boolValue
+        )
         {
             return this;
         }
 
-        var predicate = Predicate == null
-            ? sqlExpression
-            : new SqlBinaryExpression(
-                ExpressionType.AndAlso,
-                Predicate,
-                sqlExpression,
-                typeof(bool),
-                sqlExpression.TypeMapping);
+        var predicate =
+            Predicate == null
+                ? sqlExpression
+                : new SqlBinaryExpression(
+                    ExpressionType.AndAlso,
+                    Predicate,
+                    sqlExpression,
+                    typeof(bool),
+                    sqlExpression.TypeMapping
+                );
 
         return new EnumerableExpression(Selector, IsDistinct, predicate, Orderings);
     }
@@ -126,7 +131,10 @@ public class EnumerableExpression : Expression, IPrintableExpression
         return new EnumerableExpression(Selector, IsDistinct, Predicate, orderings);
     }
 
-    private static void AppendOrdering(List<OrderingExpression> orderings, OrderingExpression orderingExpression)
+    private static void AppendOrdering(
+        List<OrderingExpression> orderings,
+        OrderingExpression orderingExpression
+    )
     {
         if (!orderings.Any(o => o.Expression.Equals(orderingExpression.Expression)))
         {
@@ -135,17 +143,16 @@ public class EnumerableExpression : Expression, IPrintableExpression
     }
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => throw new InvalidOperationException(
-            CoreStrings.VisitIsNotAllowed($"{nameof(EnumerableExpression)}.{nameof(VisitChildren)}"));
+    protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+        throw new InvalidOperationException(
+            CoreStrings.VisitIsNotAllowed($"{nameof(EnumerableExpression)}.{nameof(VisitChildren)}")
+        );
 
     /// <inheritdoc />
-    public override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
-    public override Type Type
-        => typeof(IEnumerable<>).MakeGenericType(Selector.Type);
+    public override Type Type => typeof(IEnumerable<>).MakeGenericType(Selector.Type);
 
     /// <inheritdoc />
     public virtual void Print(ExpressionPrinter expressionPrinter)
@@ -178,19 +185,22 @@ public class EnumerableExpression : Expression, IPrintableExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is EnumerableExpression enumerableExpression
-                && Equals(enumerableExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is EnumerableExpression enumerableExpression && Equals(enumerableExpression)
+        );
 
-    private bool Equals(EnumerableExpression enumerableExpression)
-        => IsDistinct == enumerableExpression.IsDistinct
-            && (Predicate == null
+    private bool Equals(EnumerableExpression enumerableExpression) =>
+        IsDistinct == enumerableExpression.IsDistinct
+        && (
+            Predicate == null
                 ? enumerableExpression.Predicate == null
-                : Predicate.Equals(enumerableExpression.Predicate))
-            && ExpressionEqualityComparer.Instance.Equals(Selector, enumerableExpression.Selector)
-            && Orderings.SequenceEqual(enumerableExpression.Orderings);
+                : Predicate.Equals(enumerableExpression.Predicate)
+        )
+        && ExpressionEqualityComparer.Instance.Equals(Selector, enumerableExpression.Selector)
+        && Orderings.SequenceEqual(enumerableExpression.Orderings);
 
     /// <inheritdoc />
     public override int GetHashCode()

@@ -12,6 +12,7 @@ internal static partial class Interop
         internal static unsafe partial SafeCertContextHandle CertCreateCertificateContext(
             MsgEncodingType dwCertEncodingType,
             void* pbCertEncoded,
-            int cbCertEncoded);
+            int cbCertEncoded
+        );
     }
 }

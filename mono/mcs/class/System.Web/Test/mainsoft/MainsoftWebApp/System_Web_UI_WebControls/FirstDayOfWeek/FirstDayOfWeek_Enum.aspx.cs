@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class FirstDayOfWeek_Enum
-        : GHTBaseWeb 
+    public class FirstDayOfWeek_Enum : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,34 +46,35 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             HtmlForm frm = (HtmlForm)FindControl("form1");
             GHTTestBegin(frm);
             // Testing if the object is not nothing
             GHTSubTestBegin("System.Web.UI.WebControls.FirstDayOfWeek");
-            try 
+            try
             {
                 GHTSubTestAddResult(Test());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
             GHTTestEnd();
         }
+
         public string Test()
         {
             string text2 = string.Empty;
@@ -85,7 +85,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 string text1 = textArray2[num3];
                 text2 = text2 + text1 + "; ";
             }
-            int[] numArray1 = (int[]) Enum.GetValues(typeof(FirstDayOfWeek));
+            int[] numArray1 = (int[])Enum.GetValues(typeof(FirstDayOfWeek));
             int[] numArray2 = numArray1;
             for (int num2 = 0; num2 < numArray2.Length; num2++)
             {
@@ -94,5 +94,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             return text2;
         }
-     }
+    }
 }

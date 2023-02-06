@@ -10,8 +10,6 @@ namespace Mono.Linker.Tests.Cases.Expectations.Metadata
     /// this means that by default none of the framework assemblies are compiled.
     /// Adding this attribute modifies the runner to compile all framework assemblies as well.
     /// </summary>
-    [AttributeUsage (AttributeTargets.Class, AllowMultiple = true)]
-    public class SetupIlcWholeProgramAnalysisAttribute : BaseMetadataAttribute
-    {
-    }
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    public class SetupIlcWholeProgramAnalysisAttribute : BaseMetadataAttribute { }
 }

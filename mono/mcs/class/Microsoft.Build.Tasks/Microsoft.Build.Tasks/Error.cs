@@ -28,39 +28,48 @@
 
 using System;
 
-namespace Microsoft.Build.Tasks {
-    public sealed class Error : TaskExtension {
-    
-        string    code;
-        string    helpKeyword;
-        string    text;
-        
-        public Error ()
-        {
-        }
+namespace Microsoft.Build.Tasks
+{
+    public sealed class Error : TaskExtension
+    {
+        string code;
+        string helpKeyword;
+        string text;
 
-        public override bool Execute ()
+        public Error() { }
+
+        public override bool Execute()
         {
             if (Log != null)
-                Log.LogError (null, code, helpKeyword,
-                    String.IsNullOrEmpty (File) ? BuildEngine.ProjectFileOfTaskNode : File,
-                    BuildEngine.LineNumberOfTaskNode, BuildEngine.ColumnNumberOfTaskNode,
-                    BuildEngine.LineNumberOfTaskNode, BuildEngine.ColumnNumberOfTaskNode,
-                    text ?? String.Empty, null);
+                Log.LogError(
+                    null,
+                    code,
+                    helpKeyword,
+                    String.IsNullOrEmpty(File) ? BuildEngine.ProjectFileOfTaskNode : File,
+                    BuildEngine.LineNumberOfTaskNode,
+                    BuildEngine.ColumnNumberOfTaskNode,
+                    BuildEngine.LineNumberOfTaskNode,
+                    BuildEngine.ColumnNumberOfTaskNode,
+                    text ?? String.Empty,
+                    null
+                );
             return false;
         }
 
-        public string Code {
+        public string Code
+        {
             get { return code; }
             set { code = value; }
         }
-        
-        public string HelpKeyword {
+
+        public string HelpKeyword
+        {
             get { return helpKeyword; }
             set { helpKeyword = value; }
         }
-        
-        public string Text {
+
+        public string Text
+        {
             get { return text; }
             set { text = value; }
         }
@@ -68,4 +77,3 @@ namespace Microsoft.Build.Tasks {
         public string File { get; set; }
     }
 }
-

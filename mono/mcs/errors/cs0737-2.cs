@@ -10,4 +10,3 @@ public class MyTest : ICloneable
         return MemberwiseClone();
     }
 }
-

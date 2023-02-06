@@ -10,6 +10,6 @@ public sealed class BoundAttribute : System.Attribute
 
 class C
 {
-    [Bound (D = 300d)]
+    [Bound(D = 300d)]
     double d2;
 }

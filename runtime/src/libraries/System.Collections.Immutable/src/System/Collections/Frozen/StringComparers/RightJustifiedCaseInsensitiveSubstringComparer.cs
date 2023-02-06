@@ -15,8 +15,14 @@ namespace System.Collections.Frozen
     /// </remarks>
     internal sealed class RightJustifiedCaseInsensitiveSubstringComparer : SubstringComparerBase
     {
-        public override bool Equals(string? x, string? y) => StringComparer.OrdinalIgnoreCase.Equals(x, y);
-        public override bool EqualsPartial(string? x, string? y) => x.AsSpan(x!.Length + Index, Count).Equals(y.AsSpan(y!.Length + Index, Count), StringComparison.OrdinalIgnoreCase);
-        public override int GetHashCode(string s) => GetHashCodeOrdinalIgnoreCase(s.AsSpan(s.Length + Index, Count));
+        public override bool Equals(string? x, string? y) =>
+            StringComparer.OrdinalIgnoreCase.Equals(x, y);
+
+        public override bool EqualsPartial(string? x, string? y) =>
+            x.AsSpan(x!.Length + Index, Count)
+                .Equals(y.AsSpan(y!.Length + Index, Count), StringComparison.OrdinalIgnoreCase);
+
+        public override int GetHashCode(string s) =>
+            GetHashCodeOrdinalIgnoreCase(s.AsSpan(s.Length + Index, Count));
     }
 }

@@ -37,8 +37,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class Repeater_FooterTemplate
-        : GHTBaseWeb 
+    public class Repeater_FooterTemplate : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.Repeater Repeater1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -50,8 +49,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest4;
         protected System.Web.UI.WebControls.Repeater Repeater5;
         protected GHTWebControls.GHTSubTest GHTSubTest5;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -59,15 +59,14 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
@@ -89,8 +88,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container = (RepeaterItem)lc.NamingContainer;
                 lc.Text = container.DataItem + "</div>";
             }
-
         }
+
         public class t_EmptyLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -99,8 +98,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 l.Text = "";
                 container.Controls.Add(l);
             }
-
         }
+
         public class t_PlainTextLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -109,8 +108,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 l.Text = "Plain text template create at run time";
                 container.Controls.Add(l);
             }
-
         }
+
         public class t_HtmlLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -119,8 +118,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 l.Text = "<div><b><i>Html template created at run time</i></b></div>";
                 container.Controls.Add(l);
             }
-
         }
+
         public class t_ControlLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -129,11 +128,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 l.Value = "Control template";
                 container.Controls.Add(l);
             }
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -141,119 +139,123 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
                 Repeater1.DataSource = GHTTests.GHDataSources.DSArrayList();
                 Repeater1.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest2;
-            try 
+            try
             {
                 Repeater2.DataSource = GHTTests.GHDataSources.DSArrayList();
                 Repeater2.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest3;
-            try 
+            try
             {
                 Repeater3.DataSource = GHTTests.GHDataSources.DSArrayList();
                 Repeater3.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest4;
-            try 
+            try
             {
                 Repeater4.DataSource = GHTTests.GHDataSources.DSArrayList();
                 Repeater4.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest5;
-            try 
+            try
             {
                 Repeater5.DataSource = GHTTests.GHDataSources.DSArrayList();
                 Repeater5.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTSubTestBegin("Code base template 1");
-            try 
+            try
             {
-                System.Web.UI.WebControls.Repeater Repeater6 = new System.Web.UI.WebControls.Repeater();
+                System.Web.UI.WebControls.Repeater Repeater6 =
+                    new System.Web.UI.WebControls.Repeater();
                 GHTActiveSubTest.Controls.Add(Repeater6);
                 Repeater6.DataSource = GHTTests.GHDataSources.DSArrayList();
                 Repeater6.FooterTemplate = new t_EmptyLitTemplate();
                 Repeater6.ItemTemplate = new t_DBLitTemplate();
                 Repeater6.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTSubTestBegin("Code base template 2");
-            try 
+            try
             {
-                System.Web.UI.WebControls.Repeater Repeater7 = new System.Web.UI.WebControls.Repeater();
+                System.Web.UI.WebControls.Repeater Repeater7 =
+                    new System.Web.UI.WebControls.Repeater();
                 GHTActiveSubTest.Controls.Add(Repeater7);
                 Repeater7.DataSource = GHTTests.GHDataSources.DSArrayList();
                 Repeater7.FooterTemplate = new t_PlainTextLitTemplate();
                 Repeater7.ItemTemplate = new t_DBLitTemplate();
                 Repeater7.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTSubTestBegin("Code base template 3");
-                try 
-                {
-                    System.Web.UI.WebControls.Repeater Repeater8 = new System.Web.UI.WebControls.Repeater();
-                    GHTActiveSubTest.Controls.Add(Repeater8);
-                    Repeater8.DataSource = GHTTests.GHDataSources.DSArrayList();
-                    Repeater8.FooterTemplate = new t_HtmlLitTemplate();
-                    Repeater8.ItemTemplate = new t_DBLitTemplate();
-                    Repeater8.DataBind();
-                }
-                catch (Exception ex) 
-                {
-                    GHTSubTestUnexpectedExceptionCaught(ex);
-                }
+            try
+            {
+                System.Web.UI.WebControls.Repeater Repeater8 =
+                    new System.Web.UI.WebControls.Repeater();
+                GHTActiveSubTest.Controls.Add(Repeater8);
+                Repeater8.DataSource = GHTTests.GHDataSources.DSArrayList();
+                Repeater8.FooterTemplate = new t_HtmlLitTemplate();
+                Repeater8.ItemTemplate = new t_DBLitTemplate();
+                Repeater8.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
             GHTSubTestEnd();
 
             GHTSubTestBegin("Code base template 4");
-            try 
+            try
             {
-                System.Web.UI.WebControls.Repeater Repeater9 = new System.Web.UI.WebControls.Repeater();
+                System.Web.UI.WebControls.Repeater Repeater9 =
+                    new System.Web.UI.WebControls.Repeater();
                 GHTActiveSubTest.Controls.Add(Repeater9);
                 Repeater9.DataSource = GHTTests.GHDataSources.DSArrayList();
                 Repeater9.FooterTemplate = new t_ControlLitTemplate();
                 Repeater9.ItemTemplate = new t_DBLitTemplate();
                 Repeater9.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

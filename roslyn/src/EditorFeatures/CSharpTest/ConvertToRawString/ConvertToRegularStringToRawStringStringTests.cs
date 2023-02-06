@@ -12,13 +12,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
 {
-    using VerifyCS = CSharpCodeRefactoringVerifier<
-        ConvertRegularStringToRawStringCodeRefactoringProvider>;
+    using VerifyCS = CSharpCodeRefactoringVerifier<ConvertRegularStringToRawStringCodeRefactoringProvider>;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertRegularToRawString)]
     public class ConvertToRegularStringToRawStringStringTests
     {
-        private static async Task VerifyRefactoringAsync(string testCode, string fixedCode, int index = 0, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+        private static async Task VerifyRefactoringAsync(
+            string testCode,
+            string fixedCode,
+            int index = 0,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary
+        )
         {
             await new VerifyCS.Test
             {
@@ -26,17 +30,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp11,
                 CodeActionIndex = index,
-                TestState =
-                {
-                    OutputKind = outputKind,
-                },
+                TestState = { OutputKind = outputKind, },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotInDirective()
         {
-            var code = @"
+            var code =
+                @"
 #line 1 [||]""goo.cs""";
 
             await VerifyRefactoringAsync(code, code);
@@ -45,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         [Fact]
         public async Task TestNotOnEmptyString()
         {
-            var code = @"public class C
+            var code =
+                @"public class C
 {
     void M()
     {
@@ -59,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         [Fact]
         public async Task TestNotOnEmptyVerbatimString()
         {
-            var code = @"public class C
+            var code =
+                @"public class C
 {
     void M()
     {
@@ -73,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         [Fact]
         public async Task TestNotOnHighSurrogateChar()
         {
-            var code = @"public class C
+            var code =
+                @"public class C
 {
     void M()
     {
@@ -87,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         [Fact]
         public async Task TestNotOnLowSurrogateChar1()
         {
-            var code = @"public class C
+            var code =
+                @"public class C
 {
     void M()
     {
@@ -102,26 +108,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         public async Task TestOnCombinedSurrogate()
         {
             await VerifyRefactoringAsync(
-@"public class C
+                @"public class C
 {
     void M()
     {
         var v = [||]""\uD83D\uDC69"";
     }
 }",
-@"public class C
+                @"public class C
 {
     void M()
     {
         var v = """"""??"""""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnNullChar()
         {
-            var code = @"public class C
+            var code =
+                @"public class C
 {
     void M()
     {
@@ -135,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         [Fact]
         public async Task TestNotOnControlCharacter()
         {
-            var code = @"public class C
+            var code =
+                @"public class C
 {
     void M()
     {
@@ -149,95 +158,113 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         [Fact]
         public async Task TestSimpleString()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]""a"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
         var v = """"""a"""""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimSimpleString()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]@""a"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
         var v = """"""a"""""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestSimpleStringTopLevel()
         {
-            await VerifyRefactoringAsync(@"
+            await VerifyRefactoringAsync(
+                @"
 var v = [||]""a"";
-", @"
+",
+                @"
 var v = """"""a"""""";
-", outputKind: OutputKind.ConsoleApplication);
+",
+                outputKind: OutputKind.ConsoleApplication
+            );
         }
 
         [Fact]
         public async Task TestStringWithQuoteInMiddle()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]""goo\""bar"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
         var v = """"""goo""bar"""""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringWithQuoteInMiddle()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]@""goo""""bar"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
         var v = """"""goo""bar"""""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestStringWithQuoteAtStart()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]""\""goobar"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -245,19 +272,22 @@ var v = """"""a"""""";
             ""goobar
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringWithQuoteAtStart()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]@""""""goobar"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -265,19 +295,22 @@ var v = """"""a"""""";
             ""goobar
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestStringWithQuoteAtEnd()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]""goobar\"""";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -285,19 +318,22 @@ var v = """"""a"""""";
             goobar""
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringWithQuoteAtEnd()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]@""goobar"""""";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -305,19 +341,22 @@ var v = """"""a"""""";
             goobar""
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestStringWithNewLine()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]""goo\r\nbar"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -326,20 +365,23 @@ var v = """"""a"""""";
             bar
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringWithNewLine()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]@""goo
 bar"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -348,19 +390,22 @@ bar"";
             bar
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestStringWithNewLineAtStartAndEnd()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]""\r\ngoobar\r\n"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -370,13 +415,15 @@ bar"";
 
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringWithNewLineAtStartAndEnd()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
@@ -384,7 +431,8 @@ bar"";
 goobar
 "";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -394,13 +442,15 @@ goobar
 
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNoIndentVerbatimStringWithNewLineAtStartAndEnd()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
@@ -408,7 +458,8 @@ goobar
 goobar
 "";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -416,19 +467,23 @@ goobar
             goobar
             """""";
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestIndentedString()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]""goo\r\nbar"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -437,13 +492,15 @@ goobar
             bar
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace1()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
@@ -452,7 +509,8 @@ from x in y
 where x > 0
 select x"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -462,50 +520,63 @@ select x"";
             select x
             """""";
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestIndentedStringTopLevel()
         {
-            await VerifyRefactoringAsync(@"
+            await VerifyRefactoringAsync(
+                @"
 var v = [||]""goo\r\nbar"";
-", @"
+",
+                @"
 var v = """"""
     goo
     bar
     """""";
-", outputKind: OutputKind.ConsoleApplication);
+",
+                outputKind: OutputKind.ConsoleApplication
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespaceTopLevel()
         {
-            await VerifyRefactoringAsync(@"
+            await VerifyRefactoringAsync(
+                @"
 var v = [||]@""
 from x in y
 where x > 0
 select x"";
-", @"
+",
+                @"
 var v = """"""
     from x in y
     where x > 0
     select x
     """""";
-", index: 1, outputKind: OutputKind.ConsoleApplication);
+",
+                index: 1,
+                outputKind: OutputKind.ConsoleApplication
+            );
         }
 
         [Fact]
         public async Task TestVerbatimIndentedString()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v = [||]@""goo
 bar"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -514,20 +585,23 @@ bar"";
             bar
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIndentedStringOnOwnLine()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
         var v =
                 [||]""goo\r\nbar"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -537,13 +611,15 @@ bar"";
                 bar
                 """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimIndentedStringOnOwnLine()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
@@ -551,7 +627,8 @@ bar"";
                 [||]@""goo
 bar"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -561,13 +638,15 @@ bar"";
                 bar
                 """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace2()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
@@ -576,7 +655,8 @@ bar"";
             where x > 0
             select x"";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -586,13 +666,16 @@ bar"";
             select x
             """""";
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace3()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
@@ -602,7 +685,8 @@ bar"";
             select x
             "";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -612,13 +696,16 @@ bar"";
             select x
             """""";
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace4()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
@@ -628,7 +715,8 @@ bar"";
                 select x
             "";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -638,13 +726,16 @@ bar"";
                 select x
             """""";
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace5()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
@@ -654,7 +745,8 @@ bar"";
             select x
             "";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -664,13 +756,16 @@ bar"";
             select x
             """""";
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace6()
         {
-            await VerifyRefactoringAsync(@"public class C
+            await VerifyRefactoringAsync(
+                @"public class C
 {
     void M()
     {
@@ -682,7 +777,8 @@ bar"";
             select x
             "";
     }
-}", @"public class C
+}",
+                @"public class C
 {
     void M()
     {
@@ -694,7 +790,9 @@ bar"";
             select x
             """""";
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
     }
 }

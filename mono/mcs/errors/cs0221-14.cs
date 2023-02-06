@@ -3,12 +3,15 @@
 
 class C
 {
-    delegate void D ();
+    delegate void D();
 
-    static void Main ()
+    static void Main()
     {
-        D d = unchecked (delegate {
-            const ushort s = (ushort) -1;
-        });
+        D d = unchecked(
+            delegate
+            {
+                const ushort s = (ushort)-1;
+            }
+        );
     }
 }

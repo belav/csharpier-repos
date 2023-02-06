@@ -38,7 +38,12 @@ namespace Microsoft.CodeAnalysis.Classification
     {
         private static readonly ObjectPool<Stack<SyntaxNodeOrToken>> s_pool = new(() => new());
 
-        public static TextChangeRange ComputeSyntacticChangeRange(SyntaxNode oldRoot, SyntaxNode newRoot, TimeSpan timeout, CancellationToken cancellationToken)
+        public static TextChangeRange ComputeSyntacticChangeRange(
+            SyntaxNode oldRoot,
+            SyntaxNode newRoot,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        )
         {
             if (oldRoot == newRoot)
                 return default;
@@ -104,15 +109,19 @@ namespace Microsoft.CodeAnalysis.Classification
             Contract.ThrowIfTrue(commonRightWidth > newRootWidth);
 
             // it's possible for the common left/right to overlap.  This can happen as some tokens
-            // in the parser have a true shared underlying state, so they may get consumed both on 
+            // in the parser have a true shared underlying state, so they may get consumed both on
             // a leftward and rightward walk.  Cap the right width so that it never overlaps hte left
             // width in either the old or new tree.
             commonRightWidth = Math.Min(commonRightWidth, oldRootWidth - commonLeftWidth.Value);
             commonRightWidth = Math.Min(commonRightWidth, newRootWidth - commonLeftWidth.Value);
 
             return new TextChangeRange(
-                TextSpan.FromBounds(start: commonLeftWidth.Value, end: oldRootWidth - commonRightWidth),
-                newRootWidth - commonLeftWidth.Value - commonRightWidth);
+                TextSpan.FromBounds(
+                    start: commonLeftWidth.Value,
+                    end: oldRootWidth - commonRightWidth
+                ),
+                newRootWidth - commonLeftWidth.Value - commonRightWidth
+            );
 
             int? ComputeCommonLeftWidth()
             {
@@ -151,10 +160,14 @@ namespace Microsoft.CodeAnalysis.Classification
                     // want to see and skip.  Crumble the node and deal with its left side.
                     //
                     // Reverse so that we process the leftmost child first and walk left to right.
-                    foreach (var nodeOrToken in currentOld.AsNode()!.ChildNodesAndTokens().Reverse())
+                    foreach (
+                        var nodeOrToken in currentOld.AsNode()!.ChildNodesAndTokens().Reverse()
+                    )
                         oldStack.Push(nodeOrToken);
 
-                    foreach (var nodeOrToken in currentNew.AsNode()!.ChildNodesAndTokens().Reverse())
+                    foreach (
+                        var nodeOrToken in currentNew.AsNode()!.ChildNodesAndTokens().Reverse()
+                    )
                         newStack.Push(nodeOrToken);
                 }
 
@@ -188,8 +201,10 @@ namespace Microsoft.CodeAnalysis.Classification
                     var currentNew = newStack.Pop();
 
                     // The width on the right we've moved past on both old/new should be the same.
-                    Contract.ThrowIfFalse((oldRoot.FullSpan.End - currentOld.FullSpan.End) ==
-                                          (newRoot.FullSpan.End - currentNew.FullSpan.End));
+                    Contract.ThrowIfFalse(
+                        (oldRoot.FullSpan.End - currentOld.FullSpan.End)
+                            == (newRoot.FullSpan.End - currentNew.FullSpan.End)
+                    );
 
                     // If the two nodes/tokens were the same just skip past them.  They're part of the common right width.
                     // Critically though, we can only skip past if this wasn't already something we consumed when determining
@@ -199,9 +214,11 @@ namespace Microsoft.CodeAnalysis.Classification
                     // This can occur in incremental settings when the similar tokens are written successsively.
                     // Because the parser can reuse underlying token data, it may end up with many incrementally
                     // identical tokens in a row.
-                    if (currentOld.IsIncrementallyIdenticalTo(currentNew) &&
-                        currentOld.FullSpan.Start >= commonLeftWidth &&
-                        currentNew.FullSpan.Start >= commonLeftWidth)
+                    if (
+                        currentOld.IsIncrementallyIdenticalTo(currentNew)
+                        && currentOld.FullSpan.Start >= commonLeftWidth
+                        && currentNew.FullSpan.Start >= commonLeftWidth
+                    )
                     {
                         continue;
                     }

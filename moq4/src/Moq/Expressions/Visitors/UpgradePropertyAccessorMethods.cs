@@ -29,9 +29,7 @@ namespace Moq.Expressions.Visitors
     {
         public static readonly ExpressionVisitor Rewriter = new UpgradePropertyAccessorMethods();
 
-        private UpgradePropertyAccessorMethods()
-        {
-        }
+        private UpgradePropertyAccessorMethods() { }
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
@@ -48,8 +46,13 @@ namespace Moq.Expressions.Visitors
                     if (argumentCount == 0)
                     {
                         // getter:
-                        var property = node.Method.DeclaringType.GetProperty(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                        Debug.Assert(property != null && property.GetGetMethod(true) == node.Method);
+                        var property = node.Method.DeclaringType.GetProperty(
+                            name,
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                        );
+                        Debug.Assert(
+                            property != null && property.GetGetMethod(true) == node.Method
+                        );
 
                         return Expression.MakeMemberAccess(instance, property);
                     }
@@ -58,7 +61,11 @@ namespace Moq.Expressions.Visitors
                         // indexer getter:
                         var parameterTypes = node.Method.GetParameterTypes();
                         var argumentTypes = parameterTypes.ToArray();
-                        var indexer = node.Method.DeclaringType.GetProperty(name, node.Method.ReturnType, argumentTypes);
+                        var indexer = node.Method.DeclaringType.GetProperty(
+                            name,
+                            node.Method.ReturnType,
+                            argumentTypes
+                        );
                         Debug.Assert(indexer != null && indexer.GetGetMethod(true) == node.Method);
 
                         return Expression.MakeIndex(instance, indexer, arguments);
@@ -72,29 +79,45 @@ namespace Moq.Expressions.Visitors
                     if (argumentCount == 1)
                     {
                         // setter:
-                        var property = node.Method.DeclaringType.GetProperty(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                        Debug.Assert(property != null && property.GetSetMethod(true) == node.Method);
+                        var property = node.Method.DeclaringType.GetProperty(
+                            name,
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                        );
+                        Debug.Assert(
+                            property != null && property.GetSetMethod(true) == node.Method
+                        );
 
                         var value = node.Arguments[0];
-                        return Expression.Assign(Expression.MakeMemberAccess(instance, property), value);
+                        return Expression.Assign(
+                            Expression.MakeMemberAccess(instance, property),
+                            value
+                        );
                     }
                     else
                     {
                         // indexer setter:
                         var parameterTypes = node.Method.GetParameterTypes();
                         var argumentTypes = parameterTypes.Take(parameterTypes.Count - 1).ToArray();
-                        var indexer = node.Method.DeclaringType.GetProperty(name, parameterTypes.Last(), argumentTypes);
+                        var indexer = node.Method.DeclaringType.GetProperty(
+                            name,
+                            parameterTypes.Last(),
+                            argumentTypes
+                        );
                         Debug.Assert(indexer != null && indexer.GetSetMethod(true) == node.Method);
 
                         var indices = arguments.Take(argumentCount - 1);
                         var value = arguments.Last();
-                        return Expression.Assign(Expression.MakeIndex(instance, indexer, indices), value);
+                        return Expression.Assign(
+                            Expression.MakeIndex(instance, indexer, indices),
+                            value
+                        );
                     }
                 }
             }
 
-            return instance != node.Object || arguments != node.Arguments ? Expression.Call(instance, node.Method, arguments)
-                                                                          : node;
+            return instance != node.Object || arguments != node.Arguments
+                ? Expression.Call(instance, node.Method, arguments)
+                : node;
         }
     }
 }

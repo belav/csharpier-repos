@@ -18,12 +18,12 @@ namespace POS_Server.Controllers
     public class PackageController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
         {
-
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
@@ -32,52 +32,46 @@ namespace POS_Server.Controllers
             }
             else
             {
-
                 try
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var List = (from S in entity.packages
-                                    select new PackageModel()
-                                    {
-                                        packageId = S.packageId,
-                                        parentIUId = S.parentIUId,
-                                        childIUId = S.childIUId,
-                                        quantity = S.quantity,
-                                        isActive = S.isActive,
-                                        notes = S.notes,
-                                        createUserId = S.createUserId,
-                                        updateUserId = S.updateUserId,
-                                        createDate = S.createDate,
-                                        updateDate = S.updateDate,
-                                        canDelete = true,
+                        var List = (
+                            from S in entity.packages
+                            select new PackageModel()
+                            {
+                                packageId = S.packageId,
+                                parentIUId = S.parentIUId,
+                                childIUId = S.childIUId,
+                                quantity = S.quantity,
+                                isActive = S.isActive,
+                                notes = S.notes,
+                                createUserId = S.createUserId,
+                                updateUserId = S.updateUserId,
+                                createDate = S.createDate,
+                                updateDate = S.updateDate,
+                                canDelete = true,
+                            }
+                        ).ToList();
 
+                        var list = (
+                            from iu in entity.itemsUnits
+                            join it in entity.items on iu.itemId equals it.itemId
+                            join iuloc in entity.itemsLocations
+                                on iu.itemUnitId equals iuloc.itemUnitId
 
-
-                                    }).ToList();
-
-                        var list = (from iu in entity.itemsUnits
-                                    join it in entity.items on iu.itemId equals it.itemId
-                                    join iuloc in entity.itemsLocations on iu.itemUnitId equals iuloc.itemUnitId
-
-                                    where it.type == "p"
-                                    select new
-                                    {
-                                        piuId = iu.itemUnitId,
-                                        iuloc.itemsLocId,
-                                        it.itemId,
-                                        iu.unitId,
-
-                                    }
-
-
-                                    //  select()
-                                    ).ToList();
-
-
+                            where it.type == "p"
+                            select new
+                            {
+                                piuId = iu.itemUnitId,
+                                iuloc.itemsLocId,
+                                it.itemId,
+                                iu.unitId,
+                            }
+                        //  select()
+                        ).ToList();
 
                         return TokenManager.GenerateToken(List);
-
                     }
                 }
                 catch
@@ -85,7 +79,6 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-
 
             //var re = Request;
             //var headers = re.Headers;
@@ -103,7 +96,7 @@ namespace POS_Server.Controllers
             //{
             //    using (incposdbEntities entity = new incposdbEntities())
             //    {
-            //        var List = (from S in  entity.packages                                         
+            //        var List = (from S in  entity.packages
             //                             select new PackageModel()
             //                             {
             //                           packageId=S.packageId,
@@ -131,7 +124,6 @@ namespace POS_Server.Controllers
             ////else
             //return NotFound();
         }
-
 
         //
         //[HttpPost]
@@ -196,33 +188,35 @@ namespace POS_Server.Controllers
 
         public List<long> canNotUpdatePack()
         {
-
             List<long> listg = new List<long>();
 
             using (incposdbEntities entity = new incposdbEntities())
             {
+                var list = (
+                    from iu in entity.itemsUnits
+                    join it in entity.items on iu.itemId equals it.itemId
+                    join iuloc in entity.itemsLocations on iu.itemUnitId equals iuloc.itemUnitId
 
-                var list = (from iu in entity.itemsUnits
-                            join it in entity.items on iu.itemId equals it.itemId
-                            join iuloc in entity.itemsLocations on iu.itemUnitId equals iuloc.itemUnitId
+                    where it.type == "p"
+                    select new
+                    {
+                        //piuId = iu.itemUnitId,
+                        //itemsLocId= iuloc.itemsLocId,
+                        it.itemId,
+                        iuloc.quantity,
+                        //unitId=   iu.unitId,
+                        //type=it.type,
+                    }
+                ).ToList();
 
-                            where it.type == "p"
-                            select new
-                            {
-                                //piuId = iu.itemUnitId,
-                                //itemsLocId= iuloc.itemsLocId,
-                                it.itemId,
-                                iuloc.quantity,
-                                //unitId=   iu.unitId,
-                                //type=it.type,
-                            }).ToList();
-
-                listg = list.GroupBy(g => g.itemId).Where(q => q.Sum(s => s.quantity) > 0).Select(x =>
-                          x.First().itemId).ToList();
-
+                listg = list.GroupBy(g => g.itemId)
+                    .Where(q => q.Sum(s => s.quantity) > 0)
+                    .Select(x => x.First().itemId)
+                    .ToList();
             }
             return listg;
         }
+
         [HttpPost]
         [Route("GetPackages")]
         public string GetPackages(string token)
@@ -238,7 +232,6 @@ namespace POS_Server.Controllers
             }
             else
             {
-
                 try
                 {
                     List<long> noUpdateList = new List<long>();
@@ -246,44 +239,39 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         noUpdateList = canNotUpdatePack();
-                        var List = (from I in entity.items
-                                    join C in entity.categories on I.categoryId equals C.categoryId into JC
+                        var List = (
+                            from I in entity.items
+                            join C in entity.categories on I.categoryId equals C.categoryId into JC
+                            from CC in JC.DefaultIfEmpty()
+                            where I.type == "p"
 
-                                    from CC in JC.DefaultIfEmpty()
-                                    where I.type == "p"
-
-                                    select new ItemModel()
-                                    {
-                                        itemId = I.itemId,
-                                        code = I.code,
-                                        name = I.name,
-                                        details = I.details,
-                                        type = I.type,
-                                        image = I.image,
-                                        taxes = I.taxes,
-                                        isActive = I.isActive,
-                                        min = I.min,
-                                        max = I.max,
-                                        categoryId = I.categoryId,
-
-                                        parentId = I.parentId,
-                                        createDate = I.createDate,
-                                        updateDate = I.updateDate,
-                                        createUserId = I.createUserId,
-                                        updateUserId = I.updateUserId,
-                                        minUnitId = I.minUnitId,
-                                        maxUnitId = I.maxUnitId,
-                                        categoryName = CC.name,
-
-                                        canDelete = true,
-                                        canUpdate = noUpdateList.Contains(I.itemId) ? false : true,
-
-
-                                    }).ToList();
-
+                            select new ItemModel()
+                            {
+                                itemId = I.itemId,
+                                code = I.code,
+                                name = I.name,
+                                details = I.details,
+                                type = I.type,
+                                image = I.image,
+                                taxes = I.taxes,
+                                isActive = I.isActive,
+                                min = I.min,
+                                max = I.max,
+                                categoryId = I.categoryId,
+                                parentId = I.parentId,
+                                createDate = I.createDate,
+                                updateDate = I.updateDate,
+                                createUserId = I.createUserId,
+                                updateUserId = I.updateUserId,
+                                minUnitId = I.minUnitId,
+                                maxUnitId = I.maxUnitId,
+                                categoryName = CC.name,
+                                canDelete = true,
+                                canUpdate = noUpdateList.Contains(I.itemId) ? false : true,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(List);
-
                     }
                 }
                 catch
@@ -291,7 +279,6 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-
 
             //var re = Request;
             //var headers = re.Headers;
@@ -380,7 +367,8 @@ namespace POS_Server.Controllers
         public string GetByID(string token)
         {
             // public string GetUsersByGroupId(string token)
-            token = TokenManager.readToken(HttpContext.Current.Request); var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -389,7 +377,6 @@ namespace POS_Server.Controllers
             {
                 long packageId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -397,8 +384,6 @@ namespace POS_Server.Controllers
                     {
                         packageId = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
@@ -407,23 +392,24 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var row = entity.packages
-                       .Where(u => u.packageId == packageId)
-                       .Select(S => new
-                       {
-                           S.packageId,
-                           S.parentIUId,
-                           S.childIUId,
-                           S.quantity,
-                           S.isActive,
-                           S.notes,
-                           S.createUserId,
-                           S.updateUserId,
-                           S.createDate,
-                           S.updateDate,
-
-
-                       })
-                       .FirstOrDefault();
+                            .Where(u => u.packageId == packageId)
+                            .Select(
+                                S =>
+                                    new
+                                    {
+                                        S.packageId,
+                                        S.parentIUId,
+                                        S.childIUId,
+                                        S.quantity,
+                                        S.isActive,
+                                        S.notes,
+                                        S.createUserId,
+                                        S.updateUserId,
+                                        S.createDate,
+                                        S.updateDate,
+                                    }
+                            )
+                            .FirstOrDefault();
 
                         return TokenManager.GenerateToken(row);
                     }
@@ -482,7 +468,6 @@ namespace POS_Server.Controllers
         [Route("Savep")]
         public string Save(string token)
         {
-
             string message = "";
 
             token = TokenManager.readToken(HttpContext.Current.Request);
@@ -502,14 +487,15 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<packages>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<packages>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
                     //  bondes tmpObject = null;
 
                     if (newObject.updateUserId == 0 || newObject.updateUserId == null)
@@ -540,10 +526,9 @@ namespace POS_Server.Controllers
                             var locationEntity = entity.Set<packages>();
                             if (newObject.packageId == 0)
                             {
-                                newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 newObject.updateUserId = newObject.createUserId;
-
 
                                 locationEntity.Add(newObject);
                                 entity.SaveChanges();
@@ -551,9 +536,11 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var tmpObject = entity.packages.Where(p => p.packageId == newObject.packageId).FirstOrDefault();
+                                var tmpObject = entity.packages
+                                    .Where(p => p.packageId == newObject.packageId)
+                                    .FirstOrDefault();
 
-                                tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 tmpObject.updateUserId = newObject.updateUserId;
 
                                 tmpObject.packageId = newObject.packageId;
@@ -576,15 +563,11 @@ namespace POS_Server.Controllers
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
                 }
                 else
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
 
             //var re = Request;
@@ -673,13 +656,9 @@ namespace POS_Server.Controllers
         [Route("Delete")]
         public string Delete(string token)
         {
-
-
             //int packageId, long userId, bool final
 
             string message = "";
-
-
 
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
@@ -708,7 +687,6 @@ namespace POS_Server.Controllers
                     {
                         final = bool.Parse(c.Value);
                     }
-
                 }
 
                 if (final)
@@ -721,7 +699,6 @@ namespace POS_Server.Controllers
 
                             entity.packages.Remove(objectDelete);
                             message = entity.SaveChanges().ToString();
-
 
                             return TokenManager.GenerateToken(message);
                         }
@@ -741,7 +718,7 @@ namespace POS_Server.Controllers
 
                             objectDelete.isActive = 0;
                             objectDelete.updateUserId = userId;
-                            objectDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            objectDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
 
                             //  return message.ToString();
@@ -818,8 +795,6 @@ namespace POS_Server.Controllers
         [Route("GetChildsByParentId")]
         public string GetChildsByParentId(string token)
         {
-
-
             //public string Get(string token)
             //{
 
@@ -839,35 +814,32 @@ namespace POS_Server.Controllers
                     {
                         parentIUId = long.Parse(c.Value);
                     }
-
-
                 }
                 try
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var list = entity.packages
-                       .Where(u => u.parentIUId == parentIUId)
-                       .Select(S => new
-                       {
-                           S.packageId,
-                           S.parentIUId,
-                           S.childIUId,
-                           S.quantity,
-                           S.isActive,
-                           S.notes,
-                           S.createUserId,
-                           S.updateUserId,
-                           S.createDate,
-                           S.updateDate,
-
-
-                       })
-                       .ToList();
-
+                            .Where(u => u.parentIUId == parentIUId)
+                            .Select(
+                                S =>
+                                    new
+                                    {
+                                        S.packageId,
+                                        S.parentIUId,
+                                        S.childIUId,
+                                        S.quantity,
+                                        S.isActive,
+                                        S.notes,
+                                        S.createUserId,
+                                        S.updateUserId,
+                                        S.createDate,
+                                        S.updateDate,
+                                    }
+                            )
+                            .ToList();
 
                         return TokenManager.GenerateToken(list);
-
                     }
                 }
                 catch
@@ -923,7 +895,6 @@ namespace POS_Server.Controllers
         [Route("UpdatePackByParentId")]
         public string UpdatePackByParentId(string token)
         {
-
             //newplist
 
 
@@ -941,7 +912,6 @@ namespace POS_Server.Controllers
                 long userId = 0;
                 long parentIUId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -949,8 +919,10 @@ namespace POS_Server.Controllers
                     {
                         newlist = c.Value.Replace("\\", string.Empty);
                         newlist = newlist.Trim('"');
-                        newitofObj = JsonConvert.DeserializeObject<List<packages>>(newlist, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        newitofObj = JsonConvert.DeserializeObject<List<packages>>(
+                            newlist,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "userId")
                     {
@@ -960,8 +932,6 @@ namespace POS_Server.Controllers
                     {
                         parentIUId = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
@@ -983,19 +953,17 @@ namespace POS_Server.Controllers
 
                                 if (newitofrow.createUserId == null || newitofrow.createUserId == 0)
                                 {
-                                    newitofrow.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                    newitofrow.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                    newitofrow.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                    newitofrow.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
 
                                     newitofrow.createUserId = userId;
                                     newitofrow.updateUserId = userId;
                                 }
                                 else
                                 {
-                                    newitofrow.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                    newitofrow.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                     newitofrow.updateUserId = userId;
-
                                 }
-
                             }
                             entity.packages.AddRange(newitofObj);
                         }
@@ -1009,8 +977,6 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
 
             //long userId = 0;
@@ -1080,7 +1046,6 @@ namespace POS_Server.Controllers
             //{
             //    return -1;
             //}
-
         }
         #endregion
         public List<PackageModel> GetChildsByParentId(long parentIUId)
@@ -1091,25 +1056,25 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    list = (from S in entity.packages
-                            join IU in entity.itemsUnits on S.childIUId equals IU.itemUnitId
-                            join I in entity.items on IU.itemId equals I.itemId
-                            where S.parentIUId == parentIUId
-                            select new PackageModel()
-                            {
-
-                                packageId = S.packageId,
-                                parentIUId = S.parentIUId,
-                                childIUId = S.childIUId,
-                                quantity = S.quantity,
-                                isActive = S.isActive,
-                                avgPurchasePrice = I.avgPurchasePrice,
-                                citemId = I.itemId,
-                                type = I.type,
-                            }).ToList();
+                    list = (
+                        from S in entity.packages
+                        join IU in entity.itemsUnits on S.childIUId equals IU.itemUnitId
+                        join I in entity.items on IU.itemId equals I.itemId
+                        where S.parentIUId == parentIUId
+                        select new PackageModel()
+                        {
+                            packageId = S.packageId,
+                            parentIUId = S.parentIUId,
+                            childIUId = S.childIUId,
+                            quantity = S.quantity,
+                            isActive = S.isActive,
+                            avgPurchasePrice = I.avgPurchasePrice,
+                            citemId = I.itemId,
+                            type = I.type,
+                        }
+                    ).ToList();
 
                     return list;
-
                 }
             }
             catch
@@ -1117,7 +1082,5 @@ namespace POS_Server.Controllers
                 return list;
             }
         }
-
-      
     }
 }

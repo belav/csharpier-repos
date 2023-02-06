@@ -36,7 +36,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return Path.Combine(this.SolutionDirectory.Path, relativeFileName);
         }
 
-        protected void CreateFiles(IEnumerable<(string filePath, object fileContent)> fileNamesAndContent)
+        protected void CreateFiles(
+            IEnumerable<(string filePath, object fileContent)> fileNamesAndContent
+        )
         {
             foreach (var (filePath, fileContent) in fileNamesAndContent)
             {
@@ -68,15 +70,26 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         protected void CreateCSharpFilesWith(string propertyName, string value)
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.AllOptions)
-                .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", propertyName, value));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.AllOptions
+                    )
+                    .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", propertyName, value)
+            );
         }
 
         protected void CreateVBFilesWith(string propertyName, string value)
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .ReplaceFileElement(@"VisualBasicProject\VisualBasicProject.vbproj", propertyName, value));
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .ReplaceFileElement(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        propertyName,
+                        value
+                    )
+            );
         }
 
         protected void CreateCSharpFiles()
@@ -89,7 +102,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return new FileSet(
                 (@"NuGet.Config", Resources.NuGet_Config),
                 (@"Directory.Build.props", Resources.Directory_Build_props),
-                (@"Directory.Build.targets", Resources.Directory_Build_targets));
+                (@"Directory.Build.targets", Resources.Directory_Build_targets)
+            );
         }
 
         protected static FileSet GetSimpleCSharpSolutionFiles()
@@ -99,9 +113,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"TestSolution.sln", Resources.SolutionFiles.CSharp),
-                (@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.CSharpProject),
+                (
+                    @"CSharpProject\CSharpProject.csproj",
+                    Resources.ProjectFiles.CSharp.CSharpProject
+                ),
                 (@"CSharpProject\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass),
-                (@"CSharpProject\Properties\AssemblyInfo.cs", Resources.SourceFiles.CSharp.AssemblyInfo));
+                (
+                    @"CSharpProject\Properties\AssemblyInfo.cs",
+                    Resources.SourceFiles.CSharp.AssemblyInfo
+                )
+            );
         }
 
         protected static FileSet GetSimpleVisualBasicSolutionFiles()
@@ -111,15 +132,43 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"TestSolution.sln", Resources.SolutionFiles.VisualBasic),
-                (@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.VisualBasicProject),
-                (@"VisualBasicProject\VisualBasicClass.vb", Resources.SourceFiles.VisualBasic.VisualBasicClass),
-                (@"VisualBasicProject\My Project\Application.Designer.vb", Resources.SourceFiles.VisualBasic.Application_Designer),
-                (@"VisualBasicProject\My Project\Application.myapp", Resources.SourceFiles.VisualBasic.Application),
-                (@"VisualBasicProject\My Project\AssemblyInfo.vb", Resources.SourceFiles.VisualBasic.AssemblyInfo),
-                (@"VisualBasicProject\My Project\Resources.Designer.vb", Resources.SourceFiles.VisualBasic.Resources_Designer),
-                (@"VisualBasicProject\My Project\Resources.resx", Resources.SourceFiles.VisualBasic.Resources),
-                (@"VisualBasicProject\My Project\Settings.Designer.vb", Resources.SourceFiles.VisualBasic.Settings_Designer),
-                (@"VisualBasicProject\My Project\Settings.settings", Resources.SourceFiles.VisualBasic.Settings));
+                (
+                    @"VisualBasicProject\VisualBasicProject.vbproj",
+                    Resources.ProjectFiles.VisualBasic.VisualBasicProject
+                ),
+                (
+                    @"VisualBasicProject\VisualBasicClass.vb",
+                    Resources.SourceFiles.VisualBasic.VisualBasicClass
+                ),
+                (
+                    @"VisualBasicProject\My Project\Application.Designer.vb",
+                    Resources.SourceFiles.VisualBasic.Application_Designer
+                ),
+                (
+                    @"VisualBasicProject\My Project\Application.myapp",
+                    Resources.SourceFiles.VisualBasic.Application
+                ),
+                (
+                    @"VisualBasicProject\My Project\AssemblyInfo.vb",
+                    Resources.SourceFiles.VisualBasic.AssemblyInfo
+                ),
+                (
+                    @"VisualBasicProject\My Project\Resources.Designer.vb",
+                    Resources.SourceFiles.VisualBasic.Resources_Designer
+                ),
+                (
+                    @"VisualBasicProject\My Project\Resources.resx",
+                    Resources.SourceFiles.VisualBasic.Resources
+                ),
+                (
+                    @"VisualBasicProject\My Project\Settings.Designer.vb",
+                    Resources.SourceFiles.VisualBasic.Settings_Designer
+                ),
+                (
+                    @"VisualBasicProject\My Project\Settings.settings",
+                    Resources.SourceFiles.VisualBasic.Settings
+                )
+            );
         }
 
         protected static FileSet GetSimpleCSharpSolutionWithAdditionaFile()
@@ -129,10 +178,20 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"TestSolution.sln", Resources.SolutionFiles.CSharp),
-                (@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.AdditionalFile),
+                (
+                    @"CSharpProject\CSharpProject.csproj",
+                    Resources.ProjectFiles.CSharp.AdditionalFile
+                ),
                 (@"CSharpProject\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass),
-                (@"CSharpProject\Properties\AssemblyInfo.cs", Resources.SourceFiles.CSharp.AssemblyInfo),
-                (@"CSharpProject\ValidAdditionalFile.txt", Resources.SourceFiles.Text.ValidAdditionalFile));
+                (
+                    @"CSharpProject\Properties\AssemblyInfo.cs",
+                    Resources.SourceFiles.CSharp.AssemblyInfo
+                ),
+                (
+                    @"CSharpProject\ValidAdditionalFile.txt",
+                    Resources.SourceFiles.Text.ValidAdditionalFile
+                )
+            );
         }
 
         protected static FileSet GetNetCoreAppFiles()
@@ -142,7 +201,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"Project.csproj", Resources.ProjectFiles.CSharp.NetCoreApp_Project),
-                (@"Program.cs", Resources.SourceFiles.CSharp.NetCoreApp_Program));
+                (@"Program.cs", Resources.SourceFiles.CSharp.NetCoreApp_Program)
+            );
         }
 
         protected static FileSet GetNetCoreAppAndLibraryFiles()
@@ -151,10 +211,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"NuGet.Config", Resources.NuGet_Config),
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
-                (@"Project\Project.csproj", Resources.ProjectFiles.CSharp.NetCoreAppAndLibrary_Project),
+                (
+                    @"Project\Project.csproj",
+                    Resources.ProjectFiles.CSharp.NetCoreAppAndLibrary_Project
+                ),
                 (@"Project\Program.cs", Resources.SourceFiles.CSharp.NetCoreAppAndLibrary_Program),
-                (@"Library\Library.csproj", Resources.ProjectFiles.CSharp.NetCoreAppAndLibrary_Library),
-                (@"Library\Class1.cs", Resources.SourceFiles.CSharp.NetCoreAppAndLibrary_Class1));
+                (
+                    @"Library\Library.csproj",
+                    Resources.ProjectFiles.CSharp.NetCoreAppAndLibrary_Library
+                ),
+                (@"Library\Class1.cs", Resources.SourceFiles.CSharp.NetCoreAppAndLibrary_Class1)
+            );
         }
 
         protected static FileSet GetNetCoreAppAndTwoLibrariesFiles()
@@ -163,12 +230,31 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"NuGet.Config", Resources.NuGet_Config),
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
-                (@"Project\Project.csproj", Resources.ProjectFiles.CSharp.NetCoreAppAndTwoLibraries_Project),
-                (@"Project\Program.cs", Resources.SourceFiles.CSharp.NetCoreAppAndTwoLibraries_Program),
-                (@"Library1\Library1.csproj", Resources.ProjectFiles.CSharp.NetCoreAppAndTwoLibraries_Library1),
-                (@"Library1\Class1.cs", Resources.SourceFiles.CSharp.NetCoreAppAndTwoLibraries_Class1),
-                (@"Library2\Library2.csproj", Resources.ProjectFiles.CSharp.NetCoreAppAndTwoLibraries_Library2),
-                (@"Library2\Class2.cs", Resources.SourceFiles.CSharp.NetCoreAppAndTwoLibraries_Class2));
+                (
+                    @"Project\Project.csproj",
+                    Resources.ProjectFiles.CSharp.NetCoreAppAndTwoLibraries_Project
+                ),
+                (
+                    @"Project\Program.cs",
+                    Resources.SourceFiles.CSharp.NetCoreAppAndTwoLibraries_Program
+                ),
+                (
+                    @"Library1\Library1.csproj",
+                    Resources.ProjectFiles.CSharp.NetCoreAppAndTwoLibraries_Library1
+                ),
+                (
+                    @"Library1\Class1.cs",
+                    Resources.SourceFiles.CSharp.NetCoreAppAndTwoLibraries_Class1
+                ),
+                (
+                    @"Library2\Library2.csproj",
+                    Resources.ProjectFiles.CSharp.NetCoreAppAndTwoLibraries_Library2
+                ),
+                (
+                    @"Library2\Class2.cs",
+                    Resources.SourceFiles.CSharp.NetCoreAppAndTwoLibraries_Class2
+                )
+            );
         }
 
         protected static FileSet GetNetCoreMultiTFMFiles()
@@ -178,7 +264,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"Project.csproj", Resources.ProjectFiles.CSharp.NetCoreMultiTFM_Project),
-                (@"Program.cs", Resources.SourceFiles.CSharp.NetCoreApp_Program));
+                (@"Program.cs", Resources.SourceFiles.CSharp.NetCoreApp_Program)
+            );
         }
 
         protected static FileSet GetNetCoreMultiTFMFiles_ExtensionWithConditionOnTFM()
@@ -187,8 +274,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"NuGet.Config", Resources.NuGet_Config),
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
-                (@"Project.csproj", Resources.ProjectFiles.CSharp.NetCoreMultiTFM_ExtensionWithConditionOnTFM_Project),
-                (@"obj\Project.csproj.test.props", Resources.ProjectFiles.CSharp.NetCoreMultiTFM_ExtensionWithConditionOnTFM_ProjectTestProps));
+                (
+                    @"Project.csproj",
+                    Resources
+                        .ProjectFiles
+                        .CSharp
+                        .NetCoreMultiTFM_ExtensionWithConditionOnTFM_Project
+                ),
+                (
+                    @"obj\Project.csproj.test.props",
+                    Resources
+                        .ProjectFiles
+                        .CSharp
+                        .NetCoreMultiTFM_ExtensionWithConditionOnTFM_ProjectTestProps
+                )
+            );
         }
 
         protected static FileSet GetNetCoreMultiTFMFiles_ProjectReference()
@@ -197,10 +297,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"NuGet.Config", Resources.NuGet_Config),
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
-                (@"Project\Project.csproj", Resources.ProjectFiles.CSharp.NetCoreMultiTFM_ProjectReference_Project),
-                (@"Project\Program.cs", Resources.SourceFiles.CSharp.NetCoreMultiTFM_ProjectReference_Program),
-                (@"Library\Library.csproj", Resources.ProjectFiles.CSharp.NetCoreMultiTFM_ProjectReference_Library),
-                (@"Library\Class1.cs", Resources.SourceFiles.CSharp.NetCoreMultiTFM_ProjectReference_Class1));
+                (
+                    @"Project\Project.csproj",
+                    Resources.ProjectFiles.CSharp.NetCoreMultiTFM_ProjectReference_Project
+                ),
+                (
+                    @"Project\Program.cs",
+                    Resources.SourceFiles.CSharp.NetCoreMultiTFM_ProjectReference_Program
+                ),
+                (
+                    @"Library\Library.csproj",
+                    Resources.ProjectFiles.CSharp.NetCoreMultiTFM_ProjectReference_Library
+                ),
+                (
+                    @"Library\Class1.cs",
+                    Resources.SourceFiles.CSharp.NetCoreMultiTFM_ProjectReference_Class1
+                )
+            );
         }
 
         protected static FileSet GetNetCoreMultiTFMFiles_ProjectReferenceToFSharp()
@@ -210,10 +323,29 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"Solution.sln", Resources.SolutionFiles.NetCoreMultiTFM_ProjectReferenceToFSharp),
-                (@"csharplib\csharplib.csproj", Resources.ProjectFiles.CSharp.NetCoreMultiTFM_ProjectReferenceToFSharp_CSharpLib),
-                (@"csharplib\Class1.cs", Resources.SourceFiles.CSharp.NetCoreMultiTFM_ProjectReferenceToFSharp_CSharpLib_Class1),
-                (@"fsharplib\fsharplib.fsproj", Resources.ProjectFiles.FSharp.NetCoreMultiTFM_ProjectReferenceToFSharp_FSharpLib),
-                (@"fsharplib\Library.fs", Resources.SourceFiles.FSharp.NetCoreMultiTFM_ProjectReferenceToFSharp_FSharpLib_Library));
+                (
+                    @"csharplib\csharplib.csproj",
+                    Resources.ProjectFiles.CSharp.NetCoreMultiTFM_ProjectReferenceToFSharp_CSharpLib
+                ),
+                (
+                    @"csharplib\Class1.cs",
+                    Resources
+                        .SourceFiles
+                        .CSharp
+                        .NetCoreMultiTFM_ProjectReferenceToFSharp_CSharpLib_Class1
+                ),
+                (
+                    @"fsharplib\fsharplib.fsproj",
+                    Resources.ProjectFiles.FSharp.NetCoreMultiTFM_ProjectReferenceToFSharp_FSharpLib
+                ),
+                (
+                    @"fsharplib\Library.fs",
+                    Resources
+                        .SourceFiles
+                        .FSharp
+                        .NetCoreMultiTFM_ProjectReferenceToFSharp_FSharpLib_Library
+                )
+            );
         }
 
         protected static FileSet GetMultiProjectSolutionFiles()
@@ -223,18 +355,52 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"TestSolution.sln", Resources.SolutionFiles.VB_and_CSharp),
-                (@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.CSharpProject),
+                (
+                    @"CSharpProject\CSharpProject.csproj",
+                    Resources.ProjectFiles.CSharp.CSharpProject
+                ),
                 (@"CSharpProject\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass),
-                (@"CSharpProject\Properties\AssemblyInfo.cs", Resources.SourceFiles.CSharp.AssemblyInfo),
-                (@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.VisualBasicProject),
-                (@"VisualBasicProject\VisualBasicClass.vb", Resources.SourceFiles.VisualBasic.VisualBasicClass),
-                (@"VisualBasicProject\My Project\Application.Designer.vb", Resources.SourceFiles.VisualBasic.Application_Designer),
-                (@"VisualBasicProject\My Project\Application.myapp", Resources.SourceFiles.VisualBasic.Application),
-                (@"VisualBasicProject\My Project\AssemblyInfo.vb", Resources.SourceFiles.VisualBasic.AssemblyInfo),
-                (@"VisualBasicProject\My Project\Resources.Designer.vb", Resources.SourceFiles.VisualBasic.Resources_Designer),
-                (@"VisualBasicProject\My Project\Resources.resx", Resources.SourceFiles.VisualBasic.Resources),
-                (@"VisualBasicProject\My Project\Settings.Designer.vb", Resources.SourceFiles.VisualBasic.Settings_Designer),
-                (@"VisualBasicProject\My Project\Settings.settings", Resources.SourceFiles.VisualBasic.Settings));
+                (
+                    @"CSharpProject\Properties\AssemblyInfo.cs",
+                    Resources.SourceFiles.CSharp.AssemblyInfo
+                ),
+                (
+                    @"VisualBasicProject\VisualBasicProject.vbproj",
+                    Resources.ProjectFiles.VisualBasic.VisualBasicProject
+                ),
+                (
+                    @"VisualBasicProject\VisualBasicClass.vb",
+                    Resources.SourceFiles.VisualBasic.VisualBasicClass
+                ),
+                (
+                    @"VisualBasicProject\My Project\Application.Designer.vb",
+                    Resources.SourceFiles.VisualBasic.Application_Designer
+                ),
+                (
+                    @"VisualBasicProject\My Project\Application.myapp",
+                    Resources.SourceFiles.VisualBasic.Application
+                ),
+                (
+                    @"VisualBasicProject\My Project\AssemblyInfo.vb",
+                    Resources.SourceFiles.VisualBasic.AssemblyInfo
+                ),
+                (
+                    @"VisualBasicProject\My Project\Resources.Designer.vb",
+                    Resources.SourceFiles.VisualBasic.Resources_Designer
+                ),
+                (
+                    @"VisualBasicProject\My Project\Resources.resx",
+                    Resources.SourceFiles.VisualBasic.Resources
+                ),
+                (
+                    @"VisualBasicProject\My Project\Settings.Designer.vb",
+                    Resources.SourceFiles.VisualBasic.Settings_Designer
+                ),
+                (
+                    @"VisualBasicProject\My Project\Settings.settings",
+                    Resources.SourceFiles.VisualBasic.Settings
+                )
+            );
         }
 
         protected static FileSet GetProjectReferenceSolutionFiles()
@@ -244,11 +410,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"CSharpProjectReference.sln", Resources.SolutionFiles.CSharp_ProjectReference),
-                (@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.CSharpProject),
+                (
+                    @"CSharpProject\CSharpProject.csproj",
+                    Resources.ProjectFiles.CSharp.CSharpProject
+                ),
                 (@"CSharpProject\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass),
-                (@"CSharpProject\Properties\AssemblyInfo.cs", Resources.SourceFiles.CSharp.AssemblyInfo),
-                (@"CSharpProject\CSharpProject_ProjectReference.csproj", Resources.ProjectFiles.CSharp.ProjectReference),
-                (@"CSharpProject\CSharpConsole.cs", Resources.SourceFiles.CSharp.CSharpConsole));
+                (
+                    @"CSharpProject\Properties\AssemblyInfo.cs",
+                    Resources.SourceFiles.CSharp.AssemblyInfo
+                ),
+                (
+                    @"CSharpProject\CSharpProject_ProjectReference.csproj",
+                    Resources.ProjectFiles.CSharp.ProjectReference
+                ),
+                (@"CSharpProject\CSharpConsole.cs", Resources.SourceFiles.CSharp.CSharpConsole)
+            );
         }
 
         protected static FileSet GetDuplicateProjectReferenceSolutionFiles()
@@ -258,12 +434,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"CSharpProjectReference.sln", Resources.SolutionFiles.CSharp_ProjectReference),
-                (@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.CSharpProject),
+                (
+                    @"CSharpProject\CSharpProject.csproj",
+                    Resources.ProjectFiles.CSharp.CSharpProject
+                ),
                 (@"CSharpProject\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass),
-                (@"CSharpProject\Properties\AssemblyInfo.cs", Resources.SourceFiles.CSharp.AssemblyInfo),
-                (@"CSharpProject\CSharpProject_ProjectReference.csproj", Resources.ProjectFiles.CSharp.DuplicateReferences),
+                (
+                    @"CSharpProject\Properties\AssemblyInfo.cs",
+                    Resources.SourceFiles.CSharp.AssemblyInfo
+                ),
+                (
+                    @"CSharpProject\CSharpProject_ProjectReference.csproj",
+                    Resources.ProjectFiles.CSharp.DuplicateReferences
+                ),
                 (@"CSharpProject\CSharpConsole.cs", Resources.SourceFiles.CSharp.CSharpConsole),
-                (@"CSharpProject\EmptyLibrary.dll", Resources.Dlls.EmptyLibrary));
+                (@"CSharpProject\EmptyLibrary.dll", Resources.Dlls.EmptyLibrary)
+            );
         }
 
         protected static FileSet GetAnalyzerReferenceSolutionFiles()
@@ -274,18 +460,49 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"AnalyzerReference.sln", Resources.SolutionFiles.AnalyzerReference),
                 (@"AnalyzerSolution\CSharpProject.dll", Resources.Dlls.CSharpProject),
-                (@"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj", Resources.ProjectFiles.CSharp.AnalyzerReference),
+                (
+                    @"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj",
+                    Resources.ProjectFiles.CSharp.AnalyzerReference
+                ),
                 (@"AnalyzerSolution\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass),
                 (@"AnalyzerSolution\XamlFile.xaml", Resources.SourceFiles.Xaml.MainWindow),
-                (@"AnalyzerSolution\VisualBasicProject_AnalyzerReference.vbproj", Resources.ProjectFiles.VisualBasic.AnalyzerReference),
-                (@"AnalyzerSolution\VisualBasicClass.vb", Resources.SourceFiles.VisualBasic.VisualBasicClass),
-                (@"AnalyzerSolution\My Project\Application.Designer.vb", Resources.SourceFiles.VisualBasic.Application_Designer),
-                (@"AnalyzerSolution\My Project\Application.myapp", Resources.SourceFiles.VisualBasic.Application),
-                (@"AnalyzerSolution\My Project\AssemblyInfo.vb", Resources.SourceFiles.VisualBasic.AssemblyInfo),
-                (@"AnalyzerSolution\My Project\Resources.Designer.vb", Resources.SourceFiles.VisualBasic.Resources_Designer),
-                (@"AnalyzerSolution\My Project\Resources.resx", Resources.SourceFiles.VisualBasic.Resources),
-                (@"AnalyzerSolution\My Project\Settings.Designer.vb", Resources.SourceFiles.VisualBasic.Settings_Designer),
-                (@"AnalyzerSolution\My Project\Settings.settings", Resources.SourceFiles.VisualBasic.Settings));
+                (
+                    @"AnalyzerSolution\VisualBasicProject_AnalyzerReference.vbproj",
+                    Resources.ProjectFiles.VisualBasic.AnalyzerReference
+                ),
+                (
+                    @"AnalyzerSolution\VisualBasicClass.vb",
+                    Resources.SourceFiles.VisualBasic.VisualBasicClass
+                ),
+                (
+                    @"AnalyzerSolution\My Project\Application.Designer.vb",
+                    Resources.SourceFiles.VisualBasic.Application_Designer
+                ),
+                (
+                    @"AnalyzerSolution\My Project\Application.myapp",
+                    Resources.SourceFiles.VisualBasic.Application
+                ),
+                (
+                    @"AnalyzerSolution\My Project\AssemblyInfo.vb",
+                    Resources.SourceFiles.VisualBasic.AssemblyInfo
+                ),
+                (
+                    @"AnalyzerSolution\My Project\Resources.Designer.vb",
+                    Resources.SourceFiles.VisualBasic.Resources_Designer
+                ),
+                (
+                    @"AnalyzerSolution\My Project\Resources.resx",
+                    Resources.SourceFiles.VisualBasic.Resources
+                ),
+                (
+                    @"AnalyzerSolution\My Project\Settings.Designer.vb",
+                    Resources.SourceFiles.VisualBasic.Settings_Designer
+                ),
+                (
+                    @"AnalyzerSolution\My Project\Settings.settings",
+                    Resources.SourceFiles.VisualBasic.Settings
+                )
+            );
         }
 
         protected static FileSet GetSolutionWithDuplicatedGuidFiles()
@@ -295,9 +512,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"DuplicatedGuids.sln", Resources.SolutionFiles.DuplicatedGuids),
-                (@"ReferenceTest\ReferenceTest.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidReferenceTest),
+                (
+                    @"ReferenceTest\ReferenceTest.csproj",
+                    Resources.ProjectFiles.CSharp.DuplicatedGuidReferenceTest
+                ),
                 (@"Library1\Library1.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidLibrary1),
-                (@"Library2\Library2.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidLibrary2));
+                (@"Library2\Library2.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidLibrary2)
+            );
         }
 
         protected static FileSet GetSolutionWithCircularProjectReferences()
@@ -307,8 +528,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (@"CircularSolution.sln", Resources.SolutionFiles.CircularSolution),
-                (@"CircularCSharpProject1.csproj", Resources.ProjectFiles.CSharp.CircularProjectReferences_CircularCSharpProject1),
-                (@"CircularCSharpProject2.csproj", Resources.ProjectFiles.CSharp.CircularProjectReferences_CircularCSharpProject2));
+                (
+                    @"CircularCSharpProject1.csproj",
+                    Resources.ProjectFiles.CSharp.CircularProjectReferences_CircularCSharpProject1
+                ),
+                (
+                    @"CircularCSharpProject2.csproj",
+                    Resources.ProjectFiles.CSharp.CircularProjectReferences_CircularCSharpProject2
+                )
+            );
         }
 
         protected static FileSet GetVBNetCoreAppWithGlobalImportAndLibraryFiles()
@@ -317,10 +545,29 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"NuGet.Config", Resources.NuGet_Config),
                 (@"Directory.Build.props", Resources.Directory_Build_props),
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
-                (@"VBProject\VBProject.vbproj", Resources.ProjectFiles.VisualBasic.VBNetCoreAppWithGlobalImportAndLibrary_VBProject),
-                (@"VBProject\Program.vb", Resources.SourceFiles.VisualBasic.VBNetCoreAppWithGlobalImportAndLibrary_Program),
-                (@"Library\Library.csproj", Resources.ProjectFiles.CSharp.VBNetCoreAppWithGlobalImportAndLibrary_Library),
-                (@"Library\MyHelperClass.cs", Resources.SourceFiles.CSharp.VBNetCoreAppWithGlobalImportAndLibrary_MyHelperClass));
+                (
+                    @"VBProject\VBProject.vbproj",
+                    Resources
+                        .ProjectFiles
+                        .VisualBasic
+                        .VBNetCoreAppWithGlobalImportAndLibrary_VBProject
+                ),
+                (
+                    @"VBProject\Program.vb",
+                    Resources.SourceFiles.VisualBasic.VBNetCoreAppWithGlobalImportAndLibrary_Program
+                ),
+                (
+                    @"Library\Library.csproj",
+                    Resources.ProjectFiles.CSharp.VBNetCoreAppWithGlobalImportAndLibrary_Library
+                ),
+                (
+                    @"Library\MyHelperClass.cs",
+                    Resources
+                        .SourceFiles
+                        .CSharp
+                        .VBNetCoreAppWithGlobalImportAndLibrary_MyHelperClass
+                )
+            );
         }
     }
 }

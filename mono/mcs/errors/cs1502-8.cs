@@ -5,12 +5,12 @@ using System;
 
 public class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        return Test_C (typeof (C), null, null);
+        return Test_C(typeof(C), null, null);
     }
-    
-    static int Test_C (Type t, params int[] a)
+
+    static int Test_C(Type t, params int[] a)
     {
         return 1;
     }

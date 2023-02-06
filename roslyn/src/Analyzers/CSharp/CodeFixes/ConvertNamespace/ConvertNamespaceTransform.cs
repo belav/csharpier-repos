@@ -27,15 +27,31 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
 {
     internal static class ConvertNamespaceTransform
     {
-        public static async Task<Document> ConvertAsync(Document document, BaseNamespaceDeclarationSyntax baseNamespace, SyntaxFormattingOptions options, CancellationToken cancellationToken)
+        public static async Task<Document> ConvertAsync(
+            Document document,
+            BaseNamespaceDeclarationSyntax baseNamespace,
+            SyntaxFormattingOptions options,
+            CancellationToken cancellationToken
+        )
         {
             switch (baseNamespace)
             {
                 case FileScopedNamespaceDeclarationSyntax fileScopedNamespace:
-                    return await ConvertFileScopedNamespaceAsync(document, fileScopedNamespace, cancellationToken).ConfigureAwait(false);
+                    return await ConvertFileScopedNamespaceAsync(
+                            document,
+                            fileScopedNamespace,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 case NamespaceDeclarationSyntax namespaceDeclaration:
-                    return await ConvertNamespaceDeclarationAsync(document, namespaceDeclaration, options, cancellationToken).ConfigureAwait(false);
+                    return await ConvertNamespaceDeclarationAsync(
+                            document,
+                            namespaceDeclaration,
+                            options,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 default:
                     throw ExceptionUtilities.UnexpectedValue(baseNamespace.Kind());
@@ -45,43 +61,80 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
         /// <summary>
         /// Asynchrounous implementation for code fixes.
         /// </summary>
-        public static async ValueTask<Document> ConvertNamespaceDeclarationAsync(Document document, NamespaceDeclarationSyntax namespaceDeclaration, SyntaxFormattingOptions options, CancellationToken cancellationToken)
+        public static async ValueTask<Document> ConvertNamespaceDeclarationAsync(
+            Document document,
+            NamespaceDeclarationSyntax namespaceDeclaration,
+            SyntaxFormattingOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var parsedDocument = await ParsedDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+            var parsedDocument = await ParsedDocument
+                .CreateAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             // Replace the block namespace with the file scoped namespace.
             var annotation = new SyntaxAnnotation();
-            var (updatedRoot, _) = ReplaceWithFileScopedNamespace(parsedDocument, namespaceDeclaration, annotation);
+            var (updatedRoot, _) = ReplaceWithFileScopedNamespace(
+                parsedDocument,
+                namespaceDeclaration,
+                annotation
+            );
             var updatedDocument = document.WithSyntaxRoot(updatedRoot);
 
             // Determine how much indentation we had inside the original block namespace. We'll attempt to remove
             // that much indentation from each applicable line after we conver the block namespace to a file scoped
             // namespace.
-            var indentation = GetIndentation(parsedDocument, namespaceDeclaration, options, cancellationToken);
+            var indentation = GetIndentation(
+                parsedDocument,
+                namespaceDeclaration,
+                options,
+                cancellationToken
+            );
             if (indentation == null)
                 return updatedDocument;
 
             // Now, find the file scoped namespace in the updated doc and go and dedent every line if applicable.
-            var updatedParsedDocument = await ParsedDocument.CreateAsync(updatedDocument, cancellationToken).ConfigureAwait(false);
-            var (dedentedText, _) = DedentNamespace(updatedParsedDocument, indentation, annotation, cancellationToken);
+            var updatedParsedDocument = await ParsedDocument
+                .CreateAsync(updatedDocument, cancellationToken)
+                .ConfigureAwait(false);
+            var (dedentedText, _) = DedentNamespace(
+                updatedParsedDocument,
+                indentation,
+                annotation,
+                cancellationToken
+            );
             return document.WithText(dedentedText);
         }
 
         /// <summary>
         /// Synchronous implementation for a command handler.
         /// </summary>
-        public static (SourceText text, TextSpan semicolonSpan) ConvertNamespaceDeclaration(ParsedDocument document, NamespaceDeclarationSyntax namespaceDeclaration, SyntaxFormattingOptions options, CancellationToken cancellationToken)
+        public static (SourceText text, TextSpan semicolonSpan) ConvertNamespaceDeclaration(
+            ParsedDocument document,
+            NamespaceDeclarationSyntax namespaceDeclaration,
+            SyntaxFormattingOptions options,
+            CancellationToken cancellationToken
+        )
         {
             // Replace the block namespace with the file scoped namespace.
             var annotation = new SyntaxAnnotation();
-            var (updatedRoot, semicolonSpan) = ReplaceWithFileScopedNamespace(document, namespaceDeclaration, annotation);
+            var (updatedRoot, semicolonSpan) = ReplaceWithFileScopedNamespace(
+                document,
+                namespaceDeclaration,
+                annotation
+            );
             var updatedDocument = document.WithChangedRoot(updatedRoot, cancellationToken);
 
             // Determine how much indentation we had inside the original block namespace. We'll attempt to remove
             // that much indentation from each applicable line after we conver the block namespace to a file scoped
             // namespace.
 
-            var indentation = GetIndentation(document, namespaceDeclaration, options, cancellationToken);
+            var indentation = GetIndentation(
+                document,
+                namespaceDeclaration,
+                options,
+                cancellationToken
+            );
             if (indentation == null)
                 return (updatedDocument.Text, semicolonSpan);
 
@@ -90,52 +143,96 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
         }
 
         private static (SyntaxNode root, TextSpan semicolonSpan) ReplaceWithFileScopedNamespace(
-            ParsedDocument document, NamespaceDeclarationSyntax namespaceDeclaration, SyntaxAnnotation annotation)
+            ParsedDocument document,
+            NamespaceDeclarationSyntax namespaceDeclaration,
+            SyntaxAnnotation annotation
+        )
         {
             var converted = ConvertNamespaceDeclaration(namespaceDeclaration);
             var updatedRoot = document.Root.ReplaceNode(
                 namespaceDeclaration,
-                converted.WithAdditionalAnnotations(annotation));
-            var fileScopedNamespace = (FileScopedNamespaceDeclarationSyntax)updatedRoot.GetAnnotatedNodes(annotation).Single();
+                converted.WithAdditionalAnnotations(annotation)
+            );
+            var fileScopedNamespace = (FileScopedNamespaceDeclarationSyntax)
+                updatedRoot.GetAnnotatedNodes(annotation).Single();
             return (updatedRoot, fileScopedNamespace.SemicolonToken.Span);
         }
 
-        private static string? GetIndentation(ParsedDocument document, NamespaceDeclarationSyntax namespaceDeclaration, SyntaxFormattingOptions options, CancellationToken cancellationToken)
+        private static string? GetIndentation(
+            ParsedDocument document,
+            NamespaceDeclarationSyntax namespaceDeclaration,
+            SyntaxFormattingOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var openBraceLine = document.Text.Lines.GetLineFromPosition(namespaceDeclaration.OpenBraceToken.SpanStart).LineNumber;
-            var closeBraceLine = document.Text.Lines.GetLineFromPosition(namespaceDeclaration.CloseBraceToken.SpanStart).LineNumber;
+            var openBraceLine = document.Text.Lines
+                .GetLineFromPosition(namespaceDeclaration.OpenBraceToken.SpanStart)
+                .LineNumber;
+            var closeBraceLine = document.Text.Lines
+                .GetLineFromPosition(namespaceDeclaration.CloseBraceToken.SpanStart)
+                .LineNumber;
             if (openBraceLine == closeBraceLine)
                 return null;
 
             // Auto-formatting options are not relevant since they only control behavior on typing.
             var indentationOptions = new IndentationOptions(options);
 
-            var indentationService = document.LanguageServices.GetRequiredService<IIndentationService>();
-            var indentation = indentationService.GetIndentation(document, openBraceLine + 1, indentationOptions, cancellationToken);
+            var indentationService =
+                document.LanguageServices.GetRequiredService<IIndentationService>();
+            var indentation = indentationService.GetIndentation(
+                document,
+                openBraceLine + 1,
+                indentationOptions,
+                cancellationToken
+            );
 
-            return indentation.GetIndentationString(document.Text, options.UseTabs, options.TabSize);
+            return indentation.GetIndentationString(
+                document.Text,
+                options.UseTabs,
+                options.TabSize
+            );
         }
 
         private static (SourceText text, TextSpan semicolonSpan) DedentNamespace(
-            ParsedDocument document, string indentation, SyntaxAnnotation annotation, CancellationToken cancellationToken)
+            ParsedDocument document,
+            string indentation,
+            SyntaxAnnotation annotation,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = document.SyntaxTree;
             var text = document.Text;
             var root = document.Root;
 
-            var fileScopedNamespace = (FileScopedNamespaceDeclarationSyntax)root.GetAnnotatedNodes(annotation).Single();
-            var semicolonLine = text.Lines.GetLineFromPosition(fileScopedNamespace.SemicolonToken.SpanStart).LineNumber;
+            var fileScopedNamespace = (FileScopedNamespaceDeclarationSyntax)
+                root.GetAnnotatedNodes(annotation).Single();
+            var semicolonLine = text.Lines
+                .GetLineFromPosition(fileScopedNamespace.SemicolonToken.SpanStart)
+                .LineNumber;
 
             using var _ = ArrayBuilder<TextChange>.GetInstance(out var changes);
             for (var line = semicolonLine + 1; line < text.Lines.Count; line++)
-                changes.AddIfNotNull(TryDedentLine(syntaxTree, text, indentation, text.Lines[line], cancellationToken));
+                changes.AddIfNotNull(
+                    TryDedentLine(
+                        syntaxTree,
+                        text,
+                        indentation,
+                        text.Lines[line],
+                        cancellationToken
+                    )
+                );
 
             var dedentedText = text.WithChanges(changes);
             return (dedentedText, fileScopedNamespace.SemicolonToken.Span);
         }
 
         private static TextChange? TryDedentLine(
-            SyntaxTree tree, SourceText text, string indentation, TextLine textLine, CancellationToken cancellationToken)
+            SyntaxTree tree,
+            SourceText text,
+            string indentation,
+            TextLine textLine,
+            CancellationToken cancellationToken
+        )
         {
             // if this line is inside a string-literal or interpolated-text-content, then we definitely do not want to
             // touch what is inside there.  Note: this will not apply to raw-string literals, which can potentially be
@@ -145,7 +242,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
 
             // Determine the amount of indentation this text line starts with.
             var commonIndentation = 0;
-            while (commonIndentation < indentation.Length && commonIndentation < textLine.Span.Length)
+            while (
+                commonIndentation < indentation.Length && commonIndentation < textLine.Span.Length
+            )
             {
                 if (indentation[commonIndentation] != text[textLine.Start + commonIndentation])
                     break;
@@ -157,14 +256,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
         }
 
         public static async Task<Document> ConvertFileScopedNamespaceAsync(
-            Document document, FileScopedNamespaceDeclarationSyntax fileScopedNamespace, CancellationToken cancellationToken)
+            Document document,
+            FileScopedNamespaceDeclarationSyntax fileScopedNamespace,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            return document.WithSyntaxRoot(root.ReplaceNode(fileScopedNamespace, ConvertFileScopedNamespace(fileScopedNamespace)));
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            return document.WithSyntaxRoot(
+                root.ReplaceNode(
+                    fileScopedNamespace,
+                    ConvertFileScopedNamespace(fileScopedNamespace)
+                )
+            );
         }
 
-        private static bool HasLeadingBlankLine(
-            SyntaxToken token, out SyntaxToken withoutBlankLine)
+        private static bool HasLeadingBlankLine(SyntaxToken token, out SyntaxToken withoutBlankLine)
         {
             var leadingTrivia = token.LeadingTrivia;
 
@@ -174,7 +282,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 return true;
             }
 
-            if (leadingTrivia is [(kind: SyntaxKind.WhitespaceTrivia), (kind: SyntaxKind.EndOfLineTrivia), ..])
+            if (
+                leadingTrivia
+                is [(kind: SyntaxKind.WhitespaceTrivia), (kind: SyntaxKind.EndOfLineTrivia), ..]
+            )
             {
                 withoutBlankLine = token.WithLeadingTrivia(leadingTrivia.Skip(2));
                 return true;
@@ -184,16 +295,25 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             return false;
         }
 
-        private static FileScopedNamespaceDeclarationSyntax ConvertNamespaceDeclaration(NamespaceDeclarationSyntax namespaceDeclaration)
+        private static FileScopedNamespaceDeclarationSyntax ConvertNamespaceDeclaration(
+            NamespaceDeclarationSyntax namespaceDeclaration
+        )
         {
             // If the open-brace token has any special trivia, then move them to after the semicolon.
-            var semiColon = SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+            var semiColon = SyntaxFactory
+                .Token(SyntaxKind.SemicolonToken)
                 .WithoutTrivia()
                 .WithTrailingTrivia(namespaceDeclaration.Name.GetTrailingTrivia())
                 .WithAppendedTrailingTrivia(namespaceDeclaration.OpenBraceToken.LeadingTrivia);
 
-            if (!namespaceDeclaration.OpenBraceToken.TrailingTrivia.All(static t => t.IsWhitespace()))
-                semiColon = semiColon.WithAppendedTrailingTrivia(namespaceDeclaration.OpenBraceToken.TrailingTrivia);
+            if (
+                !namespaceDeclaration.OpenBraceToken.TrailingTrivia.All(
+                    static t => t.IsWhitespace()
+                )
+            )
+                semiColon = semiColon.WithAppendedTrailingTrivia(
+                    namespaceDeclaration.OpenBraceToken.TrailingTrivia
+                );
 
             // Move trivia after the original name token to now be after the new semicolon token.
             var fileScopedNamespace = SyntaxFactory.FileScopedNamespaceDeclaration(
@@ -204,14 +324,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 semiColon,
                 namespaceDeclaration.Externs,
                 namespaceDeclaration.Usings,
-                namespaceDeclaration.Members);
+                namespaceDeclaration.Members
+            );
 
             // Copy trivia from the close brace to the end of the file scoped namespace (which means after all of the members)
             fileScopedNamespace = fileScopedNamespace
                 .WithAppendedTrailingTrivia(namespaceDeclaration.CloseBraceToken.LeadingTrivia)
                 .WithAppendedTrailingTrivia(namespaceDeclaration.CloseBraceToken.TrailingTrivia);
 
-            var originalHadTrailingNewLine = namespaceDeclaration.GetTrailingTrivia() is [.., (kind: SyntaxKind.EndOfLineTrivia)];
+            var originalHadTrailingNewLine =
+                namespaceDeclaration.GetTrailingTrivia()
+                    is [.., (kind: SyntaxKind.EndOfLineTrivia)];
 
             // now, intelligently trim excess newlines to try to match what the original namespace looked like.
             while (fileScopedNamespace.HasTrailingTrivia)
@@ -225,45 +348,67 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 // if the original had a newline, then we only want to trim the newlines as long as there is still one
                 // left at the end.
 
-                if (originalHadTrailingNewLine && trailingTrivia is not
-                    [
-                        ..,
-                        (kind: SyntaxKind.EndOfLineTrivia or SyntaxKind.EndIfDirectiveTrivia or SyntaxKind.EndRegionDirectiveTrivia),
-                        (kind: SyntaxKind.EndOfLineTrivia)
-                    ])
+                if (
+                    originalHadTrailingNewLine
+                    && trailingTrivia
+                        is not [
+                            ..,
+
+                            (
+                                kind: SyntaxKind.EndOfLineTrivia
+                                    or SyntaxKind.EndIfDirectiveTrivia
+                                    or SyntaxKind.EndRegionDirectiveTrivia
+                            ),
+
+                            (kind: SyntaxKind.EndOfLineTrivia)
+                        ]
+                )
                 {
                     break;
                 }
 
                 // New namespace has excess newlines, remove the last one and try again.
                 fileScopedNamespace = fileScopedNamespace.WithTrailingTrivia(
-                    trailingTrivia.Take(trailingTrivia.Count - 1));
+                    trailingTrivia.Take(trailingTrivia.Count - 1)
+                );
             }
 
             return fileScopedNamespace;
         }
 
-        private static NamespaceDeclarationSyntax ConvertFileScopedNamespace(FileScopedNamespaceDeclarationSyntax fileScopedNamespace)
+        private static NamespaceDeclarationSyntax ConvertFileScopedNamespace(
+            FileScopedNamespaceDeclarationSyntax fileScopedNamespace
+        )
         {
-            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(
-                fileScopedNamespace.AttributeLists,
-                fileScopedNamespace.Modifiers,
-                fileScopedNamespace.NamespaceKeyword,
-                fileScopedNamespace.Name,
-                SyntaxFactory.Token(SyntaxKind.OpenBraceToken).WithTrailingTrivia(fileScopedNamespace.SemicolonToken.TrailingTrivia),
-                fileScopedNamespace.Externs,
-                fileScopedNamespace.Usings,
-                fileScopedNamespace.Members,
-                SyntaxFactory.Token(SyntaxKind.CloseBraceToken),
-                semicolonToken: default).WithAdditionalAnnotations(Formatter.Annotation);
+            var namespaceDeclaration = SyntaxFactory
+                .NamespaceDeclaration(
+                    fileScopedNamespace.AttributeLists,
+                    fileScopedNamespace.Modifiers,
+                    fileScopedNamespace.NamespaceKeyword,
+                    fileScopedNamespace.Name,
+                    SyntaxFactory
+                        .Token(SyntaxKind.OpenBraceToken)
+                        .WithTrailingTrivia(fileScopedNamespace.SemicolonToken.TrailingTrivia),
+                    fileScopedNamespace.Externs,
+                    fileScopedNamespace.Usings,
+                    fileScopedNamespace.Members,
+                    SyntaxFactory.Token(SyntaxKind.CloseBraceToken),
+                    semicolonToken: default
+                )
+                .WithAdditionalAnnotations(Formatter.Annotation);
 
             // Ensure there is no errant blank line between the open curly and the first body element.
             var firstBodyToken = namespaceDeclaration.OpenBraceToken.GetNextToken();
-            if (firstBodyToken != namespaceDeclaration.CloseBraceToken &&
-                firstBodyToken.Kind() != SyntaxKind.EndOfFileToken &&
-                HasLeadingBlankLine(firstBodyToken, out var firstBodyTokenWithoutBlankLine))
+            if (
+                firstBodyToken != namespaceDeclaration.CloseBraceToken
+                && firstBodyToken.Kind() != SyntaxKind.EndOfFileToken
+                && HasLeadingBlankLine(firstBodyToken, out var firstBodyTokenWithoutBlankLine)
+            )
             {
-                namespaceDeclaration = namespaceDeclaration.ReplaceToken(firstBodyToken, firstBodyTokenWithoutBlankLine);
+                namespaceDeclaration = namespaceDeclaration.ReplaceToken(
+                    firstBodyToken,
+                    firstBodyTokenWithoutBlankLine
+                );
             }
 
             return namespaceDeclaration;

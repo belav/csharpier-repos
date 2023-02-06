@@ -8,7 +8,7 @@ namespace plj
     public abstract class aClass
     {
         public static implicit operator aClass(object o)
-        { 
+        {
             return null;
         }
     }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,8 +28,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Data.Tds.Protocol {
-    public class TdsBigDecimal 
+namespace Mono.Data.Tds.Protocol
+{
+    public class TdsBigDecimal
     {
         #region Fields
 
@@ -42,7 +43,7 @@ namespace Mono.Data.Tds.Protocol {
 
         #region Constructors
 
-        public TdsBigDecimal (byte precision, byte scale, bool isNegative, int[] data)
+        public TdsBigDecimal(byte precision, byte scale, bool isNegative, int[] data)
         {
             this.isNegative = isNegative;
             this.precision = precision;
@@ -54,19 +55,23 @@ namespace Mono.Data.Tds.Protocol {
 
         #region Properties
 
-        public int[] Data {
+        public int[] Data
+        {
             get { return data; }
         }
 
-        public byte Precision {
+        public byte Precision
+        {
             get { return precision; }
         }
 
-        public byte Scale {
+        public byte Scale
+        {
             get { return scale; }
         }
 
-        public bool IsNegative {
+        public bool IsNegative
+        {
             get { return isNegative; }
         }
 

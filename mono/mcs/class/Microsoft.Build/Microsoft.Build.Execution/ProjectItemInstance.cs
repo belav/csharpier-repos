@@ -14,7 +14,7 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
@@ -39,179 +39,203 @@ using System.IO;
 
 namespace Microsoft.Build.Execution
 {
-    public class ProjectItemInstance
-                : ITaskItem2
+    public class ProjectItemInstance : ITaskItem2
     {
-        internal ProjectItemInstance (ProjectInstance project, string itemType, IEnumerable<KeyValuePair<string,string>> metadata, string evaluatedInclude)
+        internal ProjectItemInstance(
+            ProjectInstance project,
+            string itemType,
+            IEnumerable<KeyValuePair<string, string>> metadata,
+            string evaluatedInclude
+        )
         {
             this.project = project;
             this.evaluated_include = evaluatedInclude;
             this.item_type = itemType;
-            this.metadata = new List<ProjectMetadataInstance> ();
-            SetMetadata (metadata);
+            this.metadata = new List<ProjectMetadataInstance>();
+            SetMetadata(metadata);
         }
-        
+
         readonly ProjectInstance project;
         readonly string item_type;
         string evaluated_include;
         readonly List<ProjectMetadataInstance> metadata;
-        
-        public ProjectMetadataInstance GetMetadata (string name)
+
+        public ProjectMetadataInstance GetMetadata(string name)
         {
             if (name == null)
-                throw new ArgumentNullException ("name");
+                throw new ArgumentNullException("name");
             // This does not return any Well Known metadata
-            return Metadata.FirstOrDefault (m => m.Name.Equals (name, StringComparison.OrdinalIgnoreCase));
+            return Metadata.FirstOrDefault(
+                m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+            );
         }
 
-        public string GetMetadataValue (string name)
+        public string GetMetadataValue(string name)
         {
             if (name == null)
-                throw new ArgumentNullException ("name");
-            var wk = ProjectCollection.GetWellKnownMetadata (name, EvaluatedInclude, project.GetFullPath, RecursiveDir);
+                throw new ArgumentNullException("name");
+            var wk = ProjectCollection.GetWellKnownMetadata(
+                name,
+                EvaluatedInclude,
+                project.GetFullPath,
+                RecursiveDir
+            );
             if (wk != null)
                 return wk;
-            var m = GetMetadata (name);
+            var m = GetMetadata(name);
             return m != null ? m.EvaluatedValue : string.Empty;
         }
 
-        public bool HasMetadata (string name)
+        public bool HasMetadata(string name)
         {
-            return GetMetadata (name) != null;
+            return GetMetadata(name) != null;
         }
 
-        public void RemoveMetadata (string metadataName)
+        public void RemoveMetadata(string metadataName)
         {
-            var m = GetMetadata (metadataName);
+            var m = GetMetadata(metadataName);
             if (m != null)
-                metadata.Remove (m);
+                metadata.Remove(m);
         }
 
-        public void SetMetadata (IEnumerable<KeyValuePair<string, string>> metadataDictionary)
+        public void SetMetadata(IEnumerable<KeyValuePair<string, string>> metadataDictionary)
         {
             foreach (var p in metadataDictionary)
-                SetMetadata (p.Key, p.Value);
+                SetMetadata(p.Key, p.Value);
         }
 
-        public ProjectMetadataInstance SetMetadata (string name, string evaluatedValue)
+        public ProjectMetadataInstance SetMetadata(string name, string evaluatedValue)
         {
-            var m = metadata.FirstOrDefault (_ => _.Name.Equals (name, StringComparison.OrdinalIgnoreCase));
+            var m = metadata.FirstOrDefault(
+                _ => _.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+            );
             if (m != null)
-                metadata.Remove (m);
-            m = new ProjectMetadataInstance (name, evaluatedValue);
-            metadata.Add (m);
+                metadata.Remove(m);
+            m = new ProjectMetadataInstance(name, evaluatedValue);
+            metadata.Add(m);
             return m;
         }
 
-        public int DirectMetadataCount {
-            get { throw new NotImplementedException (); }
+        public int DirectMetadataCount
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public string EvaluatedInclude {
+        public string EvaluatedInclude
+        {
             get { return evaluated_include; }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
+                    throw new ArgumentNullException("value");
                 evaluated_include = value;
             }
         }
 
-        public string ItemType {
+        public string ItemType
+        {
             get { return item_type; }
         }
 
-        public IEnumerable<ProjectMetadataInstance> Metadata {
+        public IEnumerable<ProjectMetadataInstance> Metadata
+        {
             get { return metadata; }
         }
 
-        public int MetadataCount {
+        public int MetadataCount
+        {
             get { return metadata.Count; }
         }
 
-        public ICollection<string> MetadataNames {
-            get { return metadata.Select (m => m.Name).ToArray (); }
+        public ICollection<string> MetadataNames
+        {
+            get { return metadata.Select(m => m.Name).ToArray(); }
         }
 
-        public ProjectInstance Project {
+        public ProjectInstance Project
+        {
             get { return project; }
         }
-        
+
         internal string RecursiveDir { get; set; }
 
         #region ITaskItem2 implementation
 
-        string ITaskItem2.GetMetadataValueEscaped (string metadataName)
+        string ITaskItem2.GetMetadataValueEscaped(string metadataName)
         {
-            return ProjectCollection.Escape (GetMetadataValue (metadataName));
+            return ProjectCollection.Escape(GetMetadataValue(metadataName));
         }
 
-        void ITaskItem2.SetMetadataValueLiteral (string metadataName, string metadataValue)
+        void ITaskItem2.SetMetadataValueLiteral(string metadataName, string metadataValue)
         {
-            SetMetadata (metadataName, metadataValue);
+            SetMetadata(metadataName, metadataValue);
         }
 
-        System.Collections.IDictionary ITaskItem2.CloneCustomMetadataEscaped ()
+        System.Collections.IDictionary ITaskItem2.CloneCustomMetadataEscaped()
         {
-            var dic = ((ITaskItem) this).CloneCustomMetadata ();
+            var dic = ((ITaskItem)this).CloneCustomMetadata();
             foreach (DictionaryEntry p in dic)
-                dic [p.Key] = ProjectCollection.Escape ((string) p.Value);
+                dic[p.Key] = ProjectCollection.Escape((string)p.Value);
             return dic;
         }
 
-        string ITaskItem2.EvaluatedIncludeEscaped {
-            get { return ProjectCollection.Escape (EvaluatedInclude); }
-            set { EvaluatedInclude = ProjectCollection.Unescape (value); }
+        string ITaskItem2.EvaluatedIncludeEscaped
+        {
+            get { return ProjectCollection.Escape(EvaluatedInclude); }
+            set { EvaluatedInclude = ProjectCollection.Unescape(value); }
         }
 
         #endregion
 
         #region ITaskItem implementation
 
-        IDictionary ITaskItem.CloneCustomMetadata ()
+        IDictionary ITaskItem.CloneCustomMetadata()
         {
-            var dic = new Hashtable ();
+            var dic = new Hashtable();
             foreach (var md in Metadata)
-                dic [md.Name] = md.EvaluatedValue;
+                dic[md.Name] = md.EvaluatedValue;
             return dic;
         }
 
-        void ITaskItem.CopyMetadataTo (ITaskItem destinationItem)
+        void ITaskItem.CopyMetadataTo(ITaskItem destinationItem)
         {
             if (destinationItem == null)
-                throw new ArgumentNullException ("destinationItem");
+                throw new ArgumentNullException("destinationItem");
             foreach (var md in Metadata)
-                destinationItem.SetMetadata (md.Name, md.EvaluatedValue);
+                destinationItem.SetMetadata(md.Name, md.EvaluatedValue);
         }
 
-        string ITaskItem.GetMetadata (string metadataName)
+        string ITaskItem.GetMetadata(string metadataName)
         {
-            return GetMetadataValue (metadataName);
+            return GetMetadataValue(metadataName);
         }
 
-        void ITaskItem.RemoveMetadata (string metadataName)
+        void ITaskItem.RemoveMetadata(string metadataName)
         {
-            RemoveMetadata (metadataName);
+            RemoveMetadata(metadataName);
         }
 
-        void ITaskItem.SetMetadata (string metadataName, string metadataValue)
+        void ITaskItem.SetMetadata(string metadataName, string metadataValue)
         {
-            SetMetadata (metadataName, ProjectCollection.Unescape (metadataValue));
+            SetMetadata(metadataName, ProjectCollection.Unescape(metadataValue));
         }
 
-        string ITaskItem.ItemSpec {
+        string ITaskItem.ItemSpec
+        {
             get { return EvaluatedInclude; }
             set { EvaluatedInclude = value; }
         }
 
-        int ITaskItem.MetadataCount {
+        int ITaskItem.MetadataCount
+        {
             get { return MetadataCount; }
         }
 
-        ICollection ITaskItem.MetadataNames {
-            get { return MetadataNames.ToArray (); }
+        ICollection ITaskItem.MetadataNames
+        {
+            get { return MetadataNames.ToArray(); }
         }
 
         #endregion
     }
 }
-

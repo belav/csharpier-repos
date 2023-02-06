@@ -4,15 +4,15 @@
 
 using System;
 
-unsafe class X {
-    static void Main ()
+unsafe class X
+{
+    static void Main()
     {
         int foo = 0;
-        Blah (ref foo);
-
+        Blah(ref foo);
     }
-    
-    static void Blah (ref int mptr)
+
+    static void Blah(ref int mptr)
     {
         int* x = &mptr;
     }

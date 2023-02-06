@@ -53,7 +53,8 @@ public static class MvcDataAnnotationsMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcCoreBuilder AddDataAnnotationsLocalization(
         this IMvcCoreBuilder builder,
-        Action<MvcDataAnnotationsLocalizationOptions>? setupAction)
+        Action<MvcDataAnnotationsLocalizationOptions>? setupAction
+    )
     {
         if (builder == null)
         {
@@ -68,15 +69,26 @@ public static class MvcDataAnnotationsMvcCoreBuilderExtensions
     internal static void AddDataAnnotationsServices(IServiceCollection services)
     {
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, MvcDataAnnotationsMvcOptionsSetup>());
-        services.TryAddSingleton<IValidationAttributeAdapterProvider, ValidationAttributeAdapterProvider>();
+            ServiceDescriptor.Transient<
+                IConfigureOptions<MvcOptions>,
+                MvcDataAnnotationsMvcOptionsSetup
+            >()
+        );
+        services.TryAddSingleton<
+            IValidationAttributeAdapterProvider,
+            ValidationAttributeAdapterProvider
+        >();
     }
 
     // Internal for testing.
     internal static void AddDataAnnotationsLocalizationServices(
         IServiceCollection services,
-        Action<MvcDataAnnotationsLocalizationOptions>? setupAction)
+        Action<MvcDataAnnotationsLocalizationOptions>? setupAction
+    )
     {
-        DataAnnotationsLocalizationServices.AddDataAnnotationsLocalizationServices(services, setupAction);
+        DataAnnotationsLocalizationServices.AddDataAnnotationsLocalizationServices(
+            services,
+            setupAction
+        );
     }
 }

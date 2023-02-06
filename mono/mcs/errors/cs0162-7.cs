@@ -2,13 +2,14 @@
 // Line: 9
 // Compiler options: -warnaserror -warn:2
 
-class Foo {
-    static void Main ()
+class Foo
+{
+    static void Main()
     {
         goto skip;
-    a:
+        a:
         goto a;
-    skip:
+        skip:
         return;
     }
 }

@@ -17,7 +17,9 @@ namespace System.Reflection.Runtime.MethodInfos
         public static MethodInvoker GetCustomMethodInvokerIfNeeded(this MethodBase methodBase)
         {
             Type declaringType = methodBase.DeclaringType;
-            bool isNullable = declaringType.IsConstructedGenericType && declaringType.GetGenericTypeDefinition() == typeof(Nullable<>);
+            bool isNullable =
+                declaringType.IsConstructedGenericType
+                && declaringType.GetGenericTypeDefinition() == typeof(Nullable<>);
 
             Dictionary<MethodBase, CustomMethodInvokerAction> map;
             if (isNullable)
@@ -27,7 +29,14 @@ namespace System.Reflection.Runtime.MethodInfos
             else
                 return null;
 
-            if (!(map.TryGetValue(methodBase.MetadataDefinitionMethod, out CustomMethodInvokerAction action)))
+            if (
+                !(
+                    map.TryGetValue(
+                        methodBase.MetadataDefinitionMethod,
+                        out CustomMethodInvokerAction action
+                    )
+                )
+            )
                 return null;
 
             ParameterInfo[] parameterInfos = methodBase.GetParametersNoCopy();
@@ -37,20 +46,42 @@ namespace System.Reflection.Runtime.MethodInfos
                 parameterTypes[i] = parameterInfos[i].ParameterType;
             }
 
-            InvokerOptions options = (methodBase.IsStatic || methodBase is ConstructorInfo || isNullable) ? InvokerOptions.AllowNullThis : InvokerOptions.None;
+            InvokerOptions options =
+                (methodBase.IsStatic || methodBase is ConstructorInfo || isNullable)
+                    ? InvokerOptions.AllowNullThis
+                    : InvokerOptions.None;
             return new CustomMethodInvoker(declaringType, parameterTypes, options, action);
         }
 
-        private static void AddConstructor(this Dictionary<MethodBase, CustomMethodInvokerAction> map, Type declaringType, Type[] parameterTypes, CustomMethodInvokerAction action)
+        private static void AddConstructor(
+            this Dictionary<MethodBase, CustomMethodInvokerAction> map,
+            Type declaringType,
+            Type[] parameterTypes,
+            CustomMethodInvokerAction action
+        )
         {
             map.AddMethod(declaringType, ConstructorInfo.ConstructorName, parameterTypes, action);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "GetConstructor/GetMethod being null is handled and expected.")]
-        private static void AddMethod(this Dictionary<MethodBase, CustomMethodInvokerAction> map, Type declaringType, string name, Type[] parameterTypes, CustomMethodInvokerAction action)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "GetConstructor/GetMethod being null is handled and expected."
+        )]
+        private static void AddMethod(
+            this Dictionary<MethodBase, CustomMethodInvokerAction> map,
+            Type declaringType,
+            string name,
+            Type[] parameterTypes,
+            CustomMethodInvokerAction action
+        )
         {
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.ExactBinding;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly
+                | BindingFlags.ExactBinding;
 
             MethodBase methodBase;
             if (name == ConstructorInfo.ConstructorName)

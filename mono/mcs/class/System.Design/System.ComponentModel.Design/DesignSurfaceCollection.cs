@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.DesignSurfaceCollection
 //
-// Authors:     
+// Authors:
 //      Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,100 +40,105 @@ namespace System.ComponentModel.Design
     //
     public sealed class DesignSurfaceCollection : ICollection, IEnumerable
     {
-        
         private class DesignSurfaceEnumerator : IEnumerator
         {
             IEnumerator _designerCollectionEnumerator;
-            
-            public DesignSurfaceEnumerator (IEnumerator designerCollectionEnumerator)
+
+            public DesignSurfaceEnumerator(IEnumerator designerCollectionEnumerator)
             {
                 _designerCollectionEnumerator = designerCollectionEnumerator;
             }
 
-            public bool MoveNext ()
+            public bool MoveNext()
             {
-                return _designerCollectionEnumerator.MoveNext ();
+                return _designerCollectionEnumerator.MoveNext();
             }
 
-            public void Reset ()
+            public void Reset()
             {
-                _designerCollectionEnumerator.Reset ();
+                _designerCollectionEnumerator.Reset();
             }
 
-            public object Current {
-                get {
-                    IDesignerHost designer = (IDesignerHost) _designerCollectionEnumerator.Current;
-                    DesignSurface surface = designer.GetService (typeof (DesignSurface)) as DesignSurface;
+            public object Current
+            {
+                get
+                {
+                    IDesignerHost designer = (IDesignerHost)_designerCollectionEnumerator.Current;
+                    DesignSurface surface =
+                        designer.GetService(typeof(DesignSurface)) as DesignSurface;
                     if (surface == null)
-                        throw new NotSupportedException ();
-                    
+                        throw new NotSupportedException();
+
                     return surface;
                 }
             }
-            
         } // DesignSurfaceEnumerator
 
-        
         private DesignerCollection _designers;
-        
-        internal DesignSurfaceCollection (DesignerCollection designers)
+
+        internal DesignSurfaceCollection(DesignerCollection designers)
         {
             if (designers == null)
-                designers = new DesignerCollection (null);
+                designers = new DesignerCollection(null);
 
             _designers = designers;
         }
 
-        public int Count {
+        public int Count
+        {
             get { return _designers.Count; }
         }
 
-        public DesignSurface this[int index] {
-            get {
+        public DesignSurface this[int index]
+        {
+            get
+            {
                 IDesignerHost designer = _designers[index];
-                DesignSurface surface = designer.GetService (typeof (DesignSurface)) as DesignSurface;
+                DesignSurface surface = designer.GetService(typeof(DesignSurface)) as DesignSurface;
                 if (surface == null)
-                    throw new NotSupportedException ();
+                    throw new NotSupportedException();
 
                 return surface;
             }
         }
 
-        public void CopyTo (DesignSurface[] array, int index)
+        public void CopyTo(DesignSurface[] array, int index)
         {
-            ((ICollection) this).CopyTo (array, index);
+            ((ICollection)this).CopyTo(array, index);
         }
 
-        void ICollection.CopyTo (Array array, int index)
+        void ICollection.CopyTo(Array array, int index)
         {
-            foreach (DesignSurface surface in this) {
-                array.SetValue (surface, index);
+            foreach (DesignSurface surface in this)
+            {
+                array.SetValue(surface, index);
                 index++;
             }
         }
-        
-        public IEnumerator GetEnumerator ()
+
+        public IEnumerator GetEnumerator()
         {
-            return new DesignSurfaceEnumerator (_designers.GetEnumerator ());
+            return new DesignSurfaceEnumerator(_designers.GetEnumerator());
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator ();
+            return GetEnumerator();
         }
 
-        int ICollection.Count {
+        int ICollection.Count
+        {
             get { return this.Count; }
         }
 
-        bool ICollection.IsSynchronized {
+        bool ICollection.IsSynchronized
+        {
             get { return false; }
         }
 
-        object ICollection.SyncRoot {
+        object ICollection.SyncRoot
+        {
             get { return null; }
         }
-        
     }
-    
 }

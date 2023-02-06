@@ -5,23 +5,21 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class InterfaceFromCopiedAssemblyCanBeRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            Foo.StaticMethod ();
+            Foo.StaticMethod();
         }
 
         [Kept]
         class Foo : IComparer
         {
-            public int Compare (object x, object y)
+            public int Compare(object x, object y)
             {
-                throw new System.NotImplementedException ();
+                throw new System.NotImplementedException();
             }
 
             [Kept]
-            public static void StaticMethod ()
-            {
-            }
+            public static void StaticMethod() { }
         }
     }
 }

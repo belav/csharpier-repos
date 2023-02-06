@@ -23,15 +23,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Reflection.Emit;
 using System.Data.SqlTypes;
 
-namespace Microsoft.SqlServer.Server {
-    
+namespace Microsoft.SqlServer.Server
+{
     // This interface is used by types that want full control over the
     // binary serialization format.
-    public interface IBinarySerialize {
+    public interface IBinarySerialize
+    {
         // Read from the specified binary reader.
         void Read(BinaryReader r);
+
         // Write to the specified binary writer.
         void Write(BinaryWriter w);
     }
 }
-

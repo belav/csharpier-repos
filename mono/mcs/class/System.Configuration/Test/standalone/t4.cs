@@ -12,12 +12,14 @@ class T1
         try
         {
             NameValueCollection AppSettings = ConfigurationManager.AppSettings;
-            Configuration config = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
+            Configuration config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
 
             AppSettingsSection appsettings = config.AppSettings;
 
-            Console.WriteLine ("Count: {0}", appsettings.Settings.AllKeys.Length);
-            Console.WriteLine ("AppSettings.Count: {0}", AppSettings.Count);
+            Console.WriteLine("Count: {0}", appsettings.Settings.AllKeys.Length);
+            Console.WriteLine("AppSettings.Count: {0}", AppSettings.Count);
         }
         catch (Exception e)
         {

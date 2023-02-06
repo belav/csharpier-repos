@@ -32,17 +32,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
     [ContentType(ContentTypeNames.VisualBasicContentType)]
     [ContentType(ContentTypeNames.XamlContentType)]
     [Name(PredefinedCommandHandlerNames.OrganizeDocument)]
-    internal class OrganizeDocumentCommandHandler :
-        ICommandHandler<OrganizeDocumentCommandArgs>,
-        ICommandHandler<SortImportsCommandArgs>,
-        ICommandHandler<SortAndRemoveUnnecessaryImportsCommandArgs>
+    internal class OrganizeDocumentCommandHandler
+        : ICommandHandler<OrganizeDocumentCommandArgs>,
+            ICommandHandler<SortImportsCommandArgs>,
+            ICommandHandler<SortAndRemoveUnnecessaryImportsCommandArgs>
     {
         private readonly IThreadingContext _threadingContext;
         private readonly IGlobalOptionService _globalOptions;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public OrganizeDocumentCommandHandler(IThreadingContext threadingContext, IGlobalOptionService globalOptions)
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public OrganizeDocumentCommandHandler(
+            IThreadingContext threadingContext,
+            IGlobalOptionService globalOptions
+        )
         {
             _threadingContext = threadingContext;
             _globalOptions = globalOptions;
@@ -50,22 +57,41 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
 
         public string DisplayName => EditorFeaturesResources.Organize_Document;
 
-        public CommandState GetCommandState(OrganizeDocumentCommandArgs args)
-            => GetCommandState(args, _ => EditorFeaturesResources.Organize_Document, needsSemantics: true);
+        public CommandState GetCommandState(OrganizeDocumentCommandArgs args) =>
+            GetCommandState(
+                args,
+                _ => EditorFeaturesResources.Organize_Document,
+                needsSemantics: true
+            );
 
-        public bool ExecuteCommand(OrganizeDocumentCommandArgs args, CommandExecutionContext context)
+        public bool ExecuteCommand(
+            OrganizeDocumentCommandArgs args,
+            CommandExecutionContext context
+        )
         {
-            using (context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Organizing_document))
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Organizing_document
+                )
+            )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
-                var document = args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
-                    context.OperationContext, _threadingContext);
+                var document =
+                    args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                        context.OperationContext,
+                        _threadingContext
+                    );
                 if (document != null)
                 {
-                    var newDocument = OrganizingService.OrganizeAsync(document, cancellationToken: cancellationToken).WaitAndGetResult(cancellationToken);
+                    var newDocument = OrganizingService
+                        .OrganizeAsync(document, cancellationToken: cancellationToken)
+                        .WaitAndGetResult(cancellationToken);
                     if (document != newDocument)
                     {
-                        var changes = newDocument.GetTextChangesAsync(document, cancellationToken).WaitAndGetResult(cancellationToken);
+                        var changes = newDocument
+                            .GetTextChangesAsync(document, cancellationToken)
+                            .WaitAndGetResult(cancellationToken);
                         args.SubjectBuffer.ApplyChanges(changes);
                     }
                 }
@@ -74,18 +100,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
             return true;
         }
 
-        public CommandState GetCommandState(SortImportsCommandArgs args)
-            => GetCommandState(args, o => o.SortImportsDisplayStringWithAccelerator, needsSemantics: false);
+        public CommandState GetCommandState(SortImportsCommandArgs args) =>
+            GetCommandState(
+                args,
+                o => o.SortImportsDisplayStringWithAccelerator,
+                needsSemantics: false
+            );
 
-        public CommandState GetCommandState(SortAndRemoveUnnecessaryImportsCommandArgs args)
-            => GetCommandState(args, o => o.SortAndRemoveUnusedImportsDisplayStringWithAccelerator, needsSemantics: true);
+        public CommandState GetCommandState(SortAndRemoveUnnecessaryImportsCommandArgs args) =>
+            GetCommandState(
+                args,
+                o => o.SortAndRemoveUnusedImportsDisplayStringWithAccelerator,
+                needsSemantics: true
+            );
 
-        private static CommandState GetCommandState(EditorCommandArgs args, Func<IOrganizeImportsService, string> descriptionString, bool needsSemantics)
+        private static CommandState GetCommandState(
+            EditorCommandArgs args,
+            Func<IOrganizeImportsService, string> descriptionString,
+            bool needsSemantics
+        )
         {
             if (IsCommandSupported(args, needsSemantics, out var workspace))
             {
-                var organizeImportsService = workspace.Services.SolutionServices.GetProjectServices(args.SubjectBuffer).GetService<IOrganizeImportsService>();
-                return new CommandState(isAvailable: true, displayText: descriptionString(organizeImportsService));
+                var organizeImportsService = workspace.Services.SolutionServices
+                    .GetProjectServices(args.SubjectBuffer)
+                    .GetService<IOrganizeImportsService>();
+                return new CommandState(
+                    isAvailable: true,
+                    displayText: descriptionString(organizeImportsService)
+                );
             }
             else
             {
@@ -93,7 +136,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
             }
         }
 
-        private static bool IsCommandSupported(EditorCommandArgs args, bool needsSemantics, out Workspace workspace)
+        private static bool IsCommandSupported(
+            EditorCommandArgs args,
+            bool needsSemantics,
+            out Workspace workspace
+        )
         {
             workspace = null;
             if (args.SubjectBuffer.TryGetWorkspace(out var retrievedWorkspace))
@@ -117,7 +164,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
 
         public bool ExecuteCommand(SortImportsCommandArgs args, CommandExecutionContext context)
         {
-            using (context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Organizing_document))
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Organizing_document
+                )
+            )
             {
                 SortImports(args.SubjectBuffer, context.OperationContext);
             }
@@ -125,9 +177,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
             return true;
         }
 
-        public bool ExecuteCommand(SortAndRemoveUnnecessaryImportsCommandArgs args, CommandExecutionContext context)
+        public bool ExecuteCommand(
+            SortAndRemoveUnnecessaryImportsCommandArgs args,
+            CommandExecutionContext context
+        )
         {
-            using (context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Organizing_document))
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Organizing_document
+                )
+            )
             {
                 this.SortAndRemoveUnusedImports(args.SubjectBuffer, context.OperationContext);
             }
@@ -135,38 +195,72 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
             return true;
         }
 
-        private void SortImports(ITextBuffer subjectBuffer, IUIThreadOperationContext operationContext)
+        private void SortImports(
+            ITextBuffer subjectBuffer,
+            IUIThreadOperationContext operationContext
+        )
         {
             var cancellationToken = operationContext.UserCancellationToken;
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document != null)
             {
-                var organizeImportsService = document.GetRequiredLanguageService<IOrganizeImportsService>();
-                var options = document.GetOrganizeImportsOptionsAsync(_globalOptions, cancellationToken).AsTask().WaitAndGetResult(cancellationToken);
-                var newDocument = organizeImportsService.OrganizeImportsAsync(document, options, cancellationToken).WaitAndGetResult(cancellationToken);
+                var organizeImportsService =
+                    document.GetRequiredLanguageService<IOrganizeImportsService>();
+                var options = document
+                    .GetOrganizeImportsOptionsAsync(_globalOptions, cancellationToken)
+                    .AsTask()
+                    .WaitAndGetResult(cancellationToken);
+                var newDocument = organizeImportsService
+                    .OrganizeImportsAsync(document, options, cancellationToken)
+                    .WaitAndGetResult(cancellationToken);
                 if (document != newDocument)
                 {
-                    var changes = newDocument.GetTextChangesAsync(document, cancellationToken).WaitAndGetResult(cancellationToken);
+                    var changes = newDocument
+                        .GetTextChangesAsync(document, cancellationToken)
+                        .WaitAndGetResult(cancellationToken);
                     subjectBuffer.ApplyChanges(changes);
                 }
             }
         }
 
-        private void SortAndRemoveUnusedImports(ITextBuffer subjectBuffer, IUIThreadOperationContext operationContext)
+        private void SortAndRemoveUnusedImports(
+            ITextBuffer subjectBuffer,
+            IUIThreadOperationContext operationContext
+        )
         {
             var cancellationToken = operationContext.UserCancellationToken;
-            var document = subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
-                operationContext, _threadingContext);
+            var document =
+                subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                    operationContext,
+                    _threadingContext
+                );
             if (document != null)
             {
-                var formattingOptions = document.SupportsSyntaxTree ? document.GetSyntaxFormattingOptionsAsync(_globalOptions, cancellationToken).AsTask().WaitAndGetResult(cancellationToken) : null;
-                var newDocument = document.GetRequiredLanguageService<IRemoveUnnecessaryImportsService>().RemoveUnnecessaryImportsAsync(document, formattingOptions, cancellationToken).WaitAndGetResult(cancellationToken);
-                var organizeImportsService = document.GetRequiredLanguageService<IOrganizeImportsService>();
-                var options = document.GetOrganizeImportsOptionsAsync(_globalOptions, cancellationToken).AsTask().WaitAndGetResult(cancellationToken);
-                newDocument = organizeImportsService.OrganizeImportsAsync(newDocument, options, cancellationToken).WaitAndGetResult(cancellationToken);
+                var formattingOptions = document.SupportsSyntaxTree
+                    ? document
+                        .GetSyntaxFormattingOptionsAsync(_globalOptions, cancellationToken)
+                        .AsTask()
+                        .WaitAndGetResult(cancellationToken)
+                    : null;
+                var newDocument = document
+                    .GetRequiredLanguageService<IRemoveUnnecessaryImportsService>()
+                    .RemoveUnnecessaryImportsAsync(document, formattingOptions, cancellationToken)
+                    .WaitAndGetResult(cancellationToken);
+                var organizeImportsService =
+                    document.GetRequiredLanguageService<IOrganizeImportsService>();
+                var options = document
+                    .GetOrganizeImportsOptionsAsync(_globalOptions, cancellationToken)
+                    .AsTask()
+                    .WaitAndGetResult(cancellationToken);
+                newDocument = organizeImportsService
+                    .OrganizeImportsAsync(newDocument, options, cancellationToken)
+                    .WaitAndGetResult(cancellationToken);
                 if (document != newDocument)
                 {
-                    var changes = newDocument.GetTextChangesAsync(document, cancellationToken).WaitAndGetResult(cancellationToken);
+                    var changes = newDocument
+                        .GetTextChangesAsync(document, cancellationToken)
+                        .WaitAndGetResult(cancellationToken);
                     subjectBuffer.ApplyChanges(changes);
                 }
             }

@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,53 +36,62 @@ namespace System.ServiceModel.Channels
         string address;
         string fault_ns;
 
-        AddressingVersion (string name, string address, string faultNS)
+        AddressingVersion(string name, string address, string faultNS)
         {
             this.name = name;
             this.address = address;
             this.fault_ns = faultNS;
         }
 
-        static AddressingVersion addressing200408 = new AddressingVersion (
+        static AddressingVersion addressing200408 = new AddressingVersion(
             "Addressing200408",
             "http://schemas.xmlsoap.org/ws/2004/08/addressing",
-            "http://schemas.xmlsoap.org/ws/2004/08/addressing/fault");
+            "http://schemas.xmlsoap.org/ws/2004/08/addressing/fault"
+        );
 
-        static AddressingVersion addressing1_0 = new AddressingVersion (
+        static AddressingVersion addressing1_0 = new AddressingVersion(
             "Addressing10",
             "http://www.w3.org/2005/08/addressing",
-            "http://www.w3.org/2005/08/addressing/fault");
+            "http://www.w3.org/2005/08/addressing/fault"
+        );
 
-        static AddressingVersion none = new AddressingVersion (
+        static AddressingVersion none = new AddressingVersion(
             "AddressingNone",
             "http://schemas.microsoft.com/ws/2005/05/addressing/none",
-            null);
+            null
+        );
 
-        public static AddressingVersion WSAddressing10 {
+        public static AddressingVersion WSAddressing10
+        {
             get { return addressing1_0; }
         }
 
-        public static AddressingVersion WSAddressingAugust2004 {
+        public static AddressingVersion WSAddressingAugust2004
+        {
             get { return addressing200408; }
         }
 
-        public static AddressingVersion None {
+        public static AddressingVersion None
+        {
             get { return none; }
         }
 
-        internal string Namespace {
+        internal string Namespace
+        {
             get { return address; }
         }
 
-        internal string FaultNamespace {
+        internal string FaultNamespace
+        {
             get { return fault_ns; }
         }
 
-        internal string ActionNotSupported {
+        internal string ActionNotSupported
+        {
             get { return "ActionNotSupported"; }
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return name + " (" + address + ")";
         }

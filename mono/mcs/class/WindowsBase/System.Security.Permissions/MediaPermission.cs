@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,86 +26,92 @@
 using System;
 using System.Security;
 
-namespace System.Security.Permissions {
-
+namespace System.Security.Permissions
+{
     public sealed class MediaPermission : CodeAccessPermission, IUnrestrictedPermission
     {
-        public MediaPermission ()
+        public MediaPermission()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public MediaPermission (MediaPermissionAudio permissionAudio)
+        public MediaPermission(MediaPermissionAudio permissionAudio)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public MediaPermission (MediaPermissionImage permissionImage)
+        public MediaPermission(MediaPermissionImage permissionImage)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public MediaPermission (MediaPermissionVideo permissionVideo)
+        public MediaPermission(MediaPermissionVideo permissionVideo)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public MediaPermission (PermissionState state)
+        public MediaPermission(PermissionState state)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public MediaPermission (MediaPermissionAudio permissionAudio, MediaPermissionVideo permissionVideo, MediaPermissionImage permissionImage)
+        public MediaPermission(
+            MediaPermissionAudio permissionAudio,
+            MediaPermissionVideo permissionVideo,
+            MediaPermissionImage permissionImage
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public MediaPermissionAudio Audio {
-            get { throw new NotImplementedException (); }
-        }
-
-        public MediaPermissionVideo Video {
-            get { throw new NotImplementedException (); }
-        }
-
-        public MediaPermissionImage Image {
-            get { throw new NotImplementedException (); }
-        }
-
-        public override IPermission Copy ()
+        public MediaPermissionAudio Audio
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override void FromXml (SecurityElement securityElement)
+        public MediaPermissionVideo Video
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override IPermission Intersect (IPermission target)
+        public MediaPermissionImage Image
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override bool IsSubsetOf (IPermission target)
+        public override IPermission Copy()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool IsUnrestricted ()
+        public override void FromXml(SecurityElement securityElement)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override SecurityElement ToXml ()
+        public override IPermission Intersect(IPermission target)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override IPermission Union (IPermission target)
+        public override bool IsSubsetOf(IPermission target)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
+        }
+
+        public bool IsUnrestricted()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override SecurityElement ToXml()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IPermission Union(IPermission target)
+        {
+            throw new NotImplementedException();
         }
     }
-
 }

@@ -9,7 +9,6 @@ namespace Mono.Linker.Tests.TestCases
 {
     public class All
     {
-
         [Theory]
         [MemberData(nameof(TestDatabase.DataFlow), MemberType = typeof(TestDatabase))]
         public void DataFlow(string t)
@@ -18,17 +17,17 @@ namespace Mono.Linker.Tests.TestCases
         }
 
         [Theory]
-        [MemberData (nameof (TestDatabase.DynamicDependencies), MemberType = typeof (TestDatabase))]
-        public void DynamicDependencies (string t)
+        [MemberData(nameof(TestDatabase.DynamicDependencies), MemberType = typeof(TestDatabase))]
+        public void DynamicDependencies(string t)
         {
-            Run (t);
+            Run(t);
         }
 
         [Theory]
-        [MemberData (nameof (TestDatabase.Repro), MemberType = typeof (TestDatabase))]
-        public void Repro (string t)
+        [MemberData(nameof(TestDatabase.Repro), MemberType = typeof(TestDatabase))]
+        public void Repro(string t)
         {
-            Run (t);
+            Run(t);
         }
 
         [Theory]
@@ -40,7 +39,9 @@ namespace Mono.Linker.Tests.TestCases
 
         protected virtual void Run(string testName)
         {
-            TestCase testCase = TestDatabase.GetTestCaseFromName(testName) ?? throw new InvalidOperationException($"Unknown test {testName}");
+            TestCase testCase =
+                TestDatabase.GetTestCaseFromName(testName)
+                ?? throw new InvalidOperationException($"Unknown test {testName}");
             var runner = new TestRunner(new ObjectFactory());
             var linkedResult = runner.Run(testCase);
             if (linkedResult != null)

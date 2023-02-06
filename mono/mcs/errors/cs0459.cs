@@ -4,9 +4,10 @@
 
 class C
 {
-    public static unsafe void Main ()
+    public static unsafe void Main()
     {
-        foreach (char c in "test") {
+        foreach (char c in "test")
+        {
             char* ch = &c;
         }
     }

@@ -4,8 +4,14 @@
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
-        var v = new { Value = delegate () { return 1; } };
+        var v = new
+        {
+            Value = delegate()
+            {
+                return 1;
+            }
+        };
     }
 }

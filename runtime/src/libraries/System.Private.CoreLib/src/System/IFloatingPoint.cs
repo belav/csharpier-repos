@@ -12,8 +12,7 @@ namespace System
     /// <summary>Defines a floating-point type.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface IFloatingPoint<TSelf>
-        : ISignedNumber<TSelf>
+    public interface IFloatingPoint<TSelf> : ISignedNumber<TSelf>
         where TSelf : IFloatingPoint<TSelf>
     {
         /// <summary>Gets the mathematical constant <c>e</c>.</summary>
@@ -333,10 +332,6 @@ namespace System
     /// <summary>Defines a floating-point type that is represented in a base-2 format.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface IBinaryFloatingPoint<TSelf>
-        : IBinaryNumber<TSelf>,
-          IFloatingPoint<TSelf>
-        where TSelf : IBinaryFloatingPoint<TSelf>
-    {
-    }
+    public interface IBinaryFloatingPoint<TSelf> : IBinaryNumber<TSelf>, IFloatingPoint<TSelf>
+        where TSelf : IBinaryFloatingPoint<TSelf> { }
 }

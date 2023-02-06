@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,13 +33,14 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace System.Reflection {
-
-    [ComVisible (true)]
+namespace System.Reflection
+{
+    [ComVisible(true)]
     [Serializable]
-    public
-    class CustomAttributeData {
-        class LazyCAttrData {
+    public class CustomAttributeData
+    {
+        class LazyCAttrData
+        {
             internal Assembly assembly;
             internal IntPtr data;
             internal uint data_length;
@@ -50,153 +51,192 @@ namespace System.Reflection {
         IList<CustomAttributeNamedArgument> namedArgs;
         LazyCAttrData lazyData;
 
-
-        protected CustomAttributeData ()
-        {
-        }
+        protected CustomAttributeData() { }
 
         // custom-attrs.c:create_custom_attr_data ()
-        internal CustomAttributeData (ConstructorInfo ctorInfo, Assembly assembly, IntPtr data, uint data_length)
+        internal CustomAttributeData(
+            ConstructorInfo ctorInfo,
+            Assembly assembly,
+            IntPtr data,
+            uint data_length
+        )
         {
             this.ctorInfo = ctorInfo;
-            this.lazyData = new LazyCAttrData ();
+            this.lazyData = new LazyCAttrData();
             this.lazyData.assembly = assembly;
             this.lazyData.data = data;
             this.lazyData.data_length = data_length;
         }
 
-        internal CustomAttributeData (ConstructorInfo ctorInfo)
-            : this (ctorInfo, Array.Empty<CustomAttributeTypedArgument> (), Array.Empty<CustomAttributeNamedArgument> ())
-        {
-        }
+        internal CustomAttributeData(ConstructorInfo ctorInfo)
+            : this(
+                ctorInfo,
+                Array.Empty<CustomAttributeTypedArgument>(),
+                Array.Empty<CustomAttributeNamedArgument>()
+            ) { }
 
-        internal CustomAttributeData (ConstructorInfo ctorInfo, IList<CustomAttributeTypedArgument> ctorArgs, IList<CustomAttributeNamedArgument> namedArgs)
+        internal CustomAttributeData(
+            ConstructorInfo ctorInfo,
+            IList<CustomAttributeTypedArgument> ctorArgs,
+            IList<CustomAttributeNamedArgument> namedArgs
+        )
         {
             this.ctorInfo = ctorInfo;
             this.ctorArgs = ctorArgs;
             this.namedArgs = namedArgs;
         }
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        static extern void ResolveArgumentsInternal (ConstructorInfo ctor, Assembly assembly, IntPtr data, uint data_length, out object[] ctorArgs, out object[] namedArgs); 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern void ResolveArgumentsInternal(
+            ConstructorInfo ctor,
+            Assembly assembly,
+            IntPtr data,
+            uint data_length,
+            out object[] ctorArgs,
+            out object[] namedArgs
+        );
 
-        void ResolveArguments ()
+        void ResolveArguments()
         {
-            object[] ctor_args, named_args;
+            object[] ctor_args,
+                named_args;
             if (lazyData == null)
                 return;
 
-            ResolveArgumentsInternal (ctorInfo, lazyData.assembly, lazyData.data, lazyData.data_length, out ctor_args, out named_args);
+            ResolveArgumentsInternal(
+                ctorInfo,
+                lazyData.assembly,
+                lazyData.data,
+                lazyData.data_length,
+                out ctor_args,
+                out named_args
+            );
 
-            this.ctorArgs = Array.AsReadOnly<CustomAttributeTypedArgument>
-                (ctor_args != null ? UnboxValues<CustomAttributeTypedArgument> (ctor_args) : Array.Empty<CustomAttributeTypedArgument>());
-            this.namedArgs = Array.AsReadOnly<CustomAttributeNamedArgument> 
-                (named_args != null ? UnboxValues<CustomAttributeNamedArgument> (named_args) : Array.Empty<CustomAttributeNamedArgument>());
-            
+            this.ctorArgs = Array.AsReadOnly<CustomAttributeTypedArgument>(
+                ctor_args != null
+                    ? UnboxValues<CustomAttributeTypedArgument>(ctor_args)
+                    : Array.Empty<CustomAttributeTypedArgument>()
+            );
+            this.namedArgs = Array.AsReadOnly<CustomAttributeNamedArgument>(
+                named_args != null
+                    ? UnboxValues<CustomAttributeNamedArgument>(named_args)
+                    : Array.Empty<CustomAttributeNamedArgument>()
+            );
+
             lazyData = null;
         }
-        
-        [ComVisible (true)]
-        public
-        virtual
-        ConstructorInfo Constructor {
-            get {
-                return ctorInfo;
-            }
+
+        [ComVisible(true)]
+        public virtual ConstructorInfo Constructor
+        {
+            get { return ctorInfo; }
         }
 
-        [ComVisible (true)]
-        public
-        virtual
-        IList<CustomAttributeTypedArgument> ConstructorArguments {
-            get {
-                ResolveArguments ();
+        [ComVisible(true)]
+        public virtual IList<CustomAttributeTypedArgument> ConstructorArguments
+        {
+            get
+            {
+                ResolveArguments();
                 return ctorArgs;
             }
         }
 
-        public
-        virtual
-        IList<CustomAttributeNamedArgument> NamedArguments {
-            get {
-                ResolveArguments ();
+        public virtual IList<CustomAttributeNamedArgument> NamedArguments
+        {
+            get
+            {
+                ResolveArguments();
                 return namedArgs;
             }
         }
 
-        public static IList<CustomAttributeData> GetCustomAttributes (Assembly target) {
-            return MonoCustomAttrs.GetCustomAttributesData (target);
+        public static IList<CustomAttributeData> GetCustomAttributes(Assembly target)
+        {
+            return MonoCustomAttrs.GetCustomAttributesData(target);
         }
 
-        public static IList<CustomAttributeData> GetCustomAttributes (MemberInfo target) {
-            return MonoCustomAttrs.GetCustomAttributesData (target);
+        public static IList<CustomAttributeData> GetCustomAttributes(MemberInfo target)
+        {
+            return MonoCustomAttrs.GetCustomAttributesData(target);
         }
 
-        internal static IList<CustomAttributeData> GetCustomAttributesInternal (RuntimeType target) {
-            return MonoCustomAttrs.GetCustomAttributesData (target);
+        internal static IList<CustomAttributeData> GetCustomAttributesInternal(RuntimeType target)
+        {
+            return MonoCustomAttrs.GetCustomAttributesData(target);
         }
 
-        public static IList<CustomAttributeData> GetCustomAttributes (Module target) {
-            return MonoCustomAttrs.GetCustomAttributesData (target);
+        public static IList<CustomAttributeData> GetCustomAttributes(Module target)
+        {
+            return MonoCustomAttrs.GetCustomAttributesData(target);
         }
 
-        public static IList<CustomAttributeData> GetCustomAttributes (ParameterInfo target) {
-            return MonoCustomAttrs.GetCustomAttributesData (target);
+        public static IList<CustomAttributeData> GetCustomAttributes(ParameterInfo target)
+        {
+            return MonoCustomAttrs.GetCustomAttributesData(target);
         }
 
-        public Type AttributeType {
+        public Type AttributeType
+        {
             get { return ctorInfo.DeclaringType; }
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            ResolveArguments ();
+            ResolveArguments();
 
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new StringBuilder();
 
-            sb.Append ("[" + ctorInfo.DeclaringType.FullName + "(");
-            for (int i = 0; i < ctorArgs.Count; i++) {
-                sb.Append (ctorArgs [i].ToString ());
+            sb.Append("[" + ctorInfo.DeclaringType.FullName + "(");
+            for (int i = 0; i < ctorArgs.Count; i++)
+            {
+                sb.Append(ctorArgs[i].ToString());
                 if (i + 1 < ctorArgs.Count)
-                    sb.Append (", ");
+                    sb.Append(", ");
             }
 
             if (namedArgs.Count > 0)
-                sb.Append (", ");
-            
-            for (int j = 0; j < namedArgs.Count; j++) {
-                sb.Append (namedArgs [j].ToString ());
-                if (j + 1 < namedArgs.Count)
-                    sb.Append (", ");
-            }
-            sb.AppendFormat (")]");
+                sb.Append(", ");
 
-            return sb.ToString ();
+            for (int j = 0; j < namedArgs.Count; j++)
+            {
+                sb.Append(namedArgs[j].ToString());
+                if (j + 1 < namedArgs.Count)
+                    sb.Append(", ");
+            }
+            sb.AppendFormat(")]");
+
+            return sb.ToString();
         }
 
-        static T [] UnboxValues<T> (object [] values)
+        static T[] UnboxValues<T>(object[] values)
         {
-            T [] retval = new T [values.Length];
+            T[] retval = new T[values.Length];
             for (int i = 0; i < values.Length; i++)
-                retval [i] = (T) values [i];
+                retval[i] = (T)values[i];
 
             return retval;
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             CustomAttributeData other = obj as CustomAttributeData;
-            if (other == null || other.ctorInfo != ctorInfo ||
-                other.ctorArgs.Count != ctorArgs.Count ||
-                other.namedArgs.Count != namedArgs.Count)
+            if (
+                other == null
+                || other.ctorInfo != ctorInfo
+                || other.ctorArgs.Count != ctorArgs.Count
+                || other.namedArgs.Count != namedArgs.Count
+            )
                 return false;
             for (int i = 0; i < ctorArgs.Count; i++)
-                if (ctorArgs [i].Equals (other.ctorArgs [i]))
+                if (ctorArgs[i].Equals(other.ctorArgs[i]))
                     return false;
-            for (int i = 0; i < namedArgs.Count; i++) {
+            for (int i = 0; i < namedArgs.Count; i++)
+            {
                 bool matched = false;
                 for (int j = 0; j < other.namedArgs.Count; j++)
-                    if (namedArgs [i].Equals (other.namedArgs [j])) {
+                    if (namedArgs[i].Equals(other.namedArgs[j]))
+                    {
                         matched = true;
                         break;
                     }
@@ -206,23 +246,24 @@ namespace System.Reflection {
             return true;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            int ret = ctorInfo == null ? 13 : (ctorInfo.GetHashCode () << 16);
+            int ret = ctorInfo == null ? 13 : (ctorInfo.GetHashCode() << 16);
             // argument order-dependent
-            if (ctorArgs != null) {
-                for (int i = 0; i < ctorArgs.Count; i++) {
-                    ret += ret ^ 7 + ctorArgs [i].GetHashCode () << (i * 4);
+            if (ctorArgs != null)
+            {
+                for (int i = 0; i < ctorArgs.Count; i++)
+                {
+                    ret += ret ^ 7 + ctorArgs[i].GetHashCode() << (i * 4);
                 }
             }
             // argument order-independent
-            if (namedArgs != null) {
+            if (namedArgs != null)
+            {
                 for (int i = 0; i < namedArgs.Count; i++)
-                    ret += (namedArgs [i].GetHashCode () << 5);
+                    ret += (namedArgs[i].GetHashCode() << 5);
             }
             return ret;
         }
     }
-
 }
-

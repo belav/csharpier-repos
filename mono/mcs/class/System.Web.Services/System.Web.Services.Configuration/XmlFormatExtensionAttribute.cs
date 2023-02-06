@@ -1,4 +1,4 @@
- // 
+//
 // System.Web.Services.Configuration.XmlFormatExtensionAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,10 +28,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Configuration {
-    [AttributeUsage (AttributeTargets.Class, Inherited = true)]
-    public sealed class XmlFormatExtensionAttribute : Attribute {
-
+namespace System.Web.Services.Configuration
+{
+    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
+    public sealed class XmlFormatExtensionAttribute : Attribute
+    {
         #region Fields
 
         string elementName;
@@ -42,53 +43,72 @@ namespace System.Web.Services.Configuration {
 
         #region Constructors
 
-        public XmlFormatExtensionAttribute ()
-        {
-        }
+        public XmlFormatExtensionAttribute() { }
 
-        public XmlFormatExtensionAttribute (string elementName, string ns, Type extensionPoint1)
-            : this (elementName, ns, new Type[1] {extensionPoint1})
-        {
-        }
+        public XmlFormatExtensionAttribute(string elementName, string ns, Type extensionPoint1)
+            : this(elementName, ns, new Type[1] { extensionPoint1 }) { }
 
-        public XmlFormatExtensionAttribute (string elementName, string ns, Type[] extensionPoints)
-            : this ()
+        public XmlFormatExtensionAttribute(string elementName, string ns, Type[] extensionPoints)
+            : this()
         {
             this.elementName = elementName;
             this.ns = ns;
             this.extensionPoints = extensionPoints;
         }
 
-        public XmlFormatExtensionAttribute (string elementName, string ns, Type extensionPoint1, Type extensionPoint2)
-            : this (elementName, ns, new Type[2] {extensionPoint1, extensionPoint2})
-        {
-        }
+        public XmlFormatExtensionAttribute(
+            string elementName,
+            string ns,
+            Type extensionPoint1,
+            Type extensionPoint2
+        )
+            : this(elementName, ns, new Type[2] { extensionPoint1, extensionPoint2 }) { }
 
-        public XmlFormatExtensionAttribute (string elementName, string ns, Type extensionPoint1, Type extensionPoint2, Type extensionPoint3)
-            : this (elementName, ns, new Type[3] {extensionPoint1, extensionPoint2, extensionPoint3})
-        {
-        }
+        public XmlFormatExtensionAttribute(
+            string elementName,
+            string ns,
+            Type extensionPoint1,
+            Type extensionPoint2,
+            Type extensionPoint3
+        )
+            : this(
+                elementName,
+                ns,
+                new Type[3] { extensionPoint1, extensionPoint2, extensionPoint3 }
+            ) { }
 
-        public XmlFormatExtensionAttribute (string elementName, string ns, Type extensionPoint1, Type extensionPoint2, Type extensionPoint3, Type extensionPoint4)
-            : this (elementName, ns, new Type[4] {extensionPoint1, extensionPoint2, extensionPoint3, extensionPoint4})
-        {
-        }
-        
+        public XmlFormatExtensionAttribute(
+            string elementName,
+            string ns,
+            Type extensionPoint1,
+            Type extensionPoint2,
+            Type extensionPoint3,
+            Type extensionPoint4
+        )
+            : this(
+                elementName,
+                ns,
+                new Type[4] { extensionPoint1, extensionPoint2, extensionPoint3, extensionPoint4 }
+            ) { }
+
         #endregion // Constructors
 
         #region Properties
 
-        public string ElementName {
+        public string ElementName
+        {
             get { return elementName; }
             set { elementName = value; }
         }
 
-        public Type[] ExtensionPoints {
+        public Type[] ExtensionPoints
+        {
             get { return extensionPoints; }
             set { extensionPoints = value; }
         }
 
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }

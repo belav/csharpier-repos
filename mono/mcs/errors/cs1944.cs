@@ -7,11 +7,12 @@ using System.Linq.Expressions;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        unsafe {
+        unsafe
+        {
             int*[] p = null;
-            Expression<Func<int>> e6 = () => (int)p [10];
+            Expression<Func<int>> e6 = () => (int)p[10];
         }
     }
 }

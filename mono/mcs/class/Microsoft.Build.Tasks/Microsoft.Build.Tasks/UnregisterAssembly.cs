@@ -29,48 +29,37 @@
 using System;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-    public class UnregisterAssembly : AppDomainIsolatedTaskExtension {
-    
-        ITaskItem[]    assemblies;
-        ITaskItem    assemblyListFile;
-        ITaskItem[]    typeLibFiles;
-    
-        public UnregisterAssembly ()
+namespace Microsoft.Build.Tasks
+{
+    public class UnregisterAssembly : AppDomainIsolatedTaskExtension
+    {
+        ITaskItem[] assemblies;
+        ITaskItem assemblyListFile;
+        ITaskItem[] typeLibFiles;
+
+        public UnregisterAssembly() { }
+
+        public override bool Execute()
         {
+            throw new NotImplementedException();
         }
 
-        public override bool Execute ()
+        public ITaskItem[] Assemblies
         {
-            throw new NotImplementedException ();
+            get { return assemblies; }
+            set { assemblies = value; }
         }
 
-        public ITaskItem[] Assemblies {
-            get {
-                return assemblies;
-            }
-            set {
-                assemblies = value;
-            }
+        public ITaskItem AssemblyListFile
+        {
+            get { return assemblyListFile; }
+            set { assemblyListFile = value; }
         }
 
-        public ITaskItem AssemblyListFile {
-            get {
-                return assemblyListFile;
-            }
-            set {
-                assemblyListFile = value;
-            }
-        }
-
-        public ITaskItem[] TypeLibFiles {
-            get {
-                return typeLibFiles;
-            }
-            set {
-                typeLibFiles = value;
-            }
+        public ITaskItem[] TypeLibFiles
+        {
+            get { return typeLibFiles; }
+            set { typeLibFiles = value; }
         }
     }
 }
-

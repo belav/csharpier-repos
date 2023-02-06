@@ -11,8 +11,8 @@ using System.Reflection;
 using System.Reflection.Emit;
 using NUnit.Framework;
 
-namespace MonoTests.System.Reflection {
-
+namespace MonoTests.System.Reflection
+{
     /// <summary>
     /// Summary description for AssemblyDelaySignAttributeTest.
     /// </summary>
@@ -21,71 +21,62 @@ namespace MonoTests.System.Reflection {
     {
 #if !MOBILE
         private AssemblyBuilder dynAssembly;
-        AssemblyName dynAsmName = new AssemblyName ();
+        AssemblyName dynAsmName = new AssemblyName();
         AssemblyDelaySignAttribute attr;
-        
-        public AssemblyDelaySignAttributeTest ()
+
+        public AssemblyDelaySignAttributeTest()
         {
             //create a dynamic assembly with the required attribute
             //and check for the validity
 
             dynAsmName.Name = "TestAssembly";
 
-            dynAssembly = Thread.GetDomain ().DefineDynamicAssembly (
-                dynAsmName,AssemblyBuilderAccess.Run
-                );
+            dynAssembly = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(dynAsmName, AssemblyBuilderAccess.Run);
 
             // Set the required Attribute of the assembly.
-            Type attribute = typeof (AssemblyDelaySignAttribute);
-            ConstructorInfo ctrInfo = attribute.GetConstructor (
-                new Type [] { typeof (bool) }
-                );
-            CustomAttributeBuilder attrBuilder =
-                new CustomAttributeBuilder (ctrInfo, new object [1] { false });
-            dynAssembly.SetCustomAttribute (attrBuilder);
-            object [] attributes = dynAssembly.GetCustomAttributes (true);
-            attr = attributes [0] as AssemblyDelaySignAttribute;
-        }
-        
-        [Test]
-        public void DelaySignTest ()
-        {
-            Assert.AreEqual (
-                attr.DelaySign,
-                false, "#1");
+            Type attribute = typeof(AssemblyDelaySignAttribute);
+            ConstructorInfo ctrInfo = attribute.GetConstructor(new Type[] { typeof(bool) });
+            CustomAttributeBuilder attrBuilder = new CustomAttributeBuilder(
+                ctrInfo,
+                new object[1] { false }
+            );
+            dynAssembly.SetCustomAttribute(attrBuilder);
+            object[] attributes = dynAssembly.GetCustomAttributes(true);
+            attr = attributes[0] as AssemblyDelaySignAttribute;
         }
 
         [Test]
-        public void TypeIdTest ()
+        public void DelaySignTest()
         {
-            Assert.AreEqual (
-                attr.TypeId,
-                typeof (AssemblyDelaySignAttribute)
-                , "#1");
+            Assert.AreEqual(attr.DelaySign, false, "#1");
         }
 
         [Test]
-        public void MatchTestForTrue ()
+        public void TypeIdTest()
         {
-            Assert.AreEqual (
-                attr.Match (attr),
-                true, "#1");
+            Assert.AreEqual(attr.TypeId, typeof(AssemblyDelaySignAttribute), "#1");
         }
+
         [Test]
-        public void MatchTestForFalse ()
+        public void MatchTestForTrue()
         {
-            Assert.AreEqual (
-                attr.Match (new AssemblyDelaySignAttribute (true)),
-                false, "#1");
+            Assert.AreEqual(attr.Match(attr), true, "#1");
+        }
+
+        [Test]
+        public void MatchTestForFalse()
+        {
+            Assert.AreEqual(attr.Match(new AssemblyDelaySignAttribute(true)), false, "#1");
         }
 #endif
 
         [Test]
-        public void CtorTest ()
+        public void CtorTest()
         {
-            var a = new AssemblyDelaySignAttribute (true);
-            Assert.AreEqual (true, a.DelaySign);
+            var a = new AssemblyDelaySignAttribute(true);
+            Assert.AreEqual(true, a.DelaySign);
         }
     }
 }
-

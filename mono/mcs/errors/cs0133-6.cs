@@ -3,7 +3,7 @@
 
 class X
 {
-    void Foo ()
+    void Foo()
     {
         const object o = "" ?? null;
     }

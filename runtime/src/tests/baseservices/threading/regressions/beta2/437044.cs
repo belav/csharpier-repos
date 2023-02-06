@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 
 class Test
-{    
+{
     static bool _fTestFailed = false;
     static bool _fTestDone = false;
     static ManualResetEvent _mre;
@@ -30,9 +30,7 @@ class Test
                 t.Dispose();
                 bDisposeSucceeded = true;
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
 
             if (bDisposeSucceeded)
             {
@@ -43,9 +41,7 @@ class Test
                         Console.Write("@");
                     }
                 }
-                catch (ObjectDisposedException)
-                {
-                }
+                catch (ObjectDisposedException) { }
             }
         }
         _fTestDone = true;
@@ -61,7 +57,6 @@ class Test
 
         Console.WriteLine("Test Failed");
         return 101;
-
     }
 
     static void callback(object state)
@@ -86,7 +81,7 @@ class Test
             Console.Write("#");
             AutoResetEvent are;
 
-            using(are = new AutoResetEvent(false))
+            using (are = new AutoResetEvent(false))
             {
                 if (are.WaitOne(0))
                 {
@@ -95,7 +90,7 @@ class Test
                 }
             }
 
-            using(are = new AutoResetEvent(false))
+            using (are = new AutoResetEvent(false))
             {
                 if (are.WaitOne(0))
                 {
@@ -104,7 +99,7 @@ class Test
                 }
             }
 
-            using(are = new AutoResetEvent(false))
+            using (are = new AutoResetEvent(false))
             {
                 if (are.WaitOne(0))
                 {
@@ -115,4 +110,3 @@ class Test
         }
     }
 }
-

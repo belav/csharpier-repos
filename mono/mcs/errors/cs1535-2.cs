@@ -3,7 +3,7 @@
 
 public class Test
 {
-    public static implicit operator string ()
+    public static implicit operator string()
     {
         return null;
     }

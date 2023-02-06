@@ -8,10 +8,12 @@ class C
     [Obsolete("ooo", true)]
     const int ob = 4;
 
-    public void Test (int arg)
+    public void Test(int arg)
     {
-        switch (arg) {
-            case ob: return;
+        switch (arg)
+        {
+            case ob:
+                return;
         }
     }
 }

@@ -22,10 +22,7 @@ public class ProblemResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -51,10 +48,7 @@ public class ProblemResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -73,20 +67,14 @@ public class ProblemResultTests
     public async Task ExecuteAsync_SetsTitleFromReasonPhrases_WhenNotInDefaults()
     {
         // Arrange
-        var details = new ProblemDetails()
-        {
-            Status = StatusCodes.Status418ImATeapot,
-        };
+        var details = new ProblemDetails() { Status = StatusCodes.Status418ImATeapot, };
 
         var result = new ProblemHttpResult(details);
         var stream = new MemoryStream();
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -105,20 +93,16 @@ public class ProblemResultTests
     public async Task ExecuteAsync_IncludeErrors_ForValidationProblemDetails()
     {
         // Arrange
-        var details = new HttpValidationProblemDetails(new Dictionary<string, string[]>
-        {
-            { "testError", new string[] { "message" } }
-        });
+        var details = new HttpValidationProblemDetails(
+            new Dictionary<string, string[]> { { "testError", new string[] { "message" } } }
+        );
 
         var result = new ProblemHttpResult(details);
         var stream = new MemoryStream();
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -141,10 +125,7 @@ public class ProblemResultTests
 
         var result = new ProblemHttpResult(details);
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -163,14 +144,19 @@ public class ProblemResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void ProblemResult_Implements_IStatusCodeHttpResult_Correctly()
     {
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(new ProblemHttpResult(new() { Status = StatusCodes.Status416RangeNotSatisfiable }));
+        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(
+            new ProblemHttpResult(new() { Status = StatusCodes.Status416RangeNotSatisfiable })
+        );
         Assert.Equal(StatusCodes.Status416RangeNotSatisfiable, result.StatusCode);
     }
 
@@ -197,11 +183,13 @@ public class ProblemResultTests
     [Fact]
     public void ProblemResult_Implements_IValueHttpResultOfT_Correctly()
     {
-        // Arrange 
+        // Arrange
         var value = new ProblemDetails();
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IValueHttpResult<ProblemDetails>>(new ProblemHttpResult(value));
+        var result = Assert.IsAssignableFrom<IValueHttpResult<ProblemDetails>>(
+            new ProblemHttpResult(value)
+        );
         Assert.IsType<ProblemDetails>(result.Value);
         Assert.Equal(value, result.Value);
     }

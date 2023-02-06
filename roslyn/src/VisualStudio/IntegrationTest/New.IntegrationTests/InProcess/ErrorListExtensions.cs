@@ -11,7 +11,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
     {
         public static __VSERRORCATEGORY GetCategory(this ITableEntry tableEntry)
         {
-            return tableEntry.GetValueOrDefault(StandardTableKeyNames.ErrorSeverity, (__VSERRORCATEGORY)(-1));
+            return tableEntry.GetValueOrDefault(
+                StandardTableKeyNames.ErrorSeverity,
+                (__VSERRORCATEGORY)(-1)
+            );
         }
 
         public static string GetBuildTool(this ITableEntry tableEntry)
@@ -59,7 +62,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             return tableEntry.GetValueOrDefault<string?>(StandardTableKeyNames.Text, null);
         }
 
-        private static T GetValueOrDefault<T>(this ITableEntry tableEntry, string keyName, T defaultValue)
+        private static T GetValueOrDefault<T>(
+            this ITableEntry tableEntry,
+            string keyName,
+            T defaultValue
+        )
         {
             if (!tableEntry.TryGetValue(keyName, out T value))
             {

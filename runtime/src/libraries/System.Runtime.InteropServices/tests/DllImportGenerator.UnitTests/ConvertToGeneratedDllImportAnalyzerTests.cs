@@ -17,51 +17,62 @@ namespace DllImportGenerator.UnitTests
     [ActiveIssue("https://github.com/dotnet/runtime/issues/60650", TestRuntimes.Mono)]
     public class ConvertToGeneratedDllImportAnalyzerTests
     {
-        public static IEnumerable<object[]> MarshallingRequiredTypes() => new[]
-        {
-            new object[] { typeof(bool) },
-            new object[] { typeof(char) },
-            new object[] { typeof(string) },
-            new object[] { typeof(int[]) },
-            new object[] { typeof(string[]) },
-            new object[] { typeof(ConsoleKeyInfo) }, // struct
-        };
+        public static IEnumerable<object[]> MarshallingRequiredTypes() =>
+            new[]
+            {
+                new object[] { typeof(bool) },
+                new object[] { typeof(char) },
+                new object[] { typeof(string) },
+                new object[] { typeof(int[]) },
+                new object[] { typeof(string[]) },
+                new object[] { typeof(ConsoleKeyInfo) }, // struct
+            };
 
-        public static IEnumerable<object[]> NoMarshallingRequiredTypes() => new[]
-        {
-            new object[] { typeof(byte) },
-            new object[] { typeof(int) },
-            new object[] { typeof(byte*) },
-            new object[] { typeof(int*) },
-            new object[] { typeof(bool*) },
-            new object[] { typeof(char*) },
-            new object[] { typeof(delegate* <void>) },
-            new object[] { typeof(IntPtr) },
-            new object[] { typeof(ConsoleKey) }, // enum
-        };
+        public static IEnumerable<object[]> NoMarshallingRequiredTypes() =>
+            new[]
+            {
+                new object[] { typeof(byte) },
+                new object[] { typeof(int) },
+                new object[] { typeof(byte*) },
+                new object[] { typeof(int*) },
+                new object[] { typeof(bool*) },
+                new object[] { typeof(char*) },
+                new object[] { typeof(delegate* <void>) },
+                new object[] { typeof(IntPtr) },
+                new object[] { typeof(ConsoleKey) }, // enum
+            };
 
-        public static IEnumerable<object[]> UnsupportedTypes() => new[]
-        {
-            new object[] { typeof(System.Runtime.InteropServices.CriticalHandle) },
-            new object[] { typeof(System.Runtime.InteropServices.HandleRef) },
-            new object[] { typeof(System.Text.StringBuilder) },
-        };
+        public static IEnumerable<object[]> UnsupportedTypes() =>
+            new[]
+            {
+                new object[] { typeof(System.Runtime.InteropServices.CriticalHandle) },
+                new object[] { typeof(System.Runtime.InteropServices.HandleRef) },
+                new object[] { typeof(System.Text.StringBuilder) },
+            };
 
         [ConditionalTheory]
         [MemberData(nameof(MarshallingRequiredTypes))]
         [MemberData(nameof(NoMarshallingRequiredTypes))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60909", typeof(PlatformDetection), nameof(PlatformDetection.IsArm64Process), nameof(PlatformDetection.IsWindows))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60909",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsArm64Process),
+            nameof(PlatformDetection.IsWindows)
+        )]
         public async Task TypeRequiresMarshalling_ReportsDiagnostic(Type type)
         {
             string source = DllImportWithType(type.FullName!);
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToGeneratedDllImport)
+                VerifyCS
+                    .Diagnostic(ConvertToGeneratedDllImport)
                     .WithLocation(0)
                     .WithArguments("Method_Parameter"),
-                VerifyCS.Diagnostic(ConvertToGeneratedDllImport)
+                VerifyCS
+                    .Diagnostic(ConvertToGeneratedDllImport)
                     .WithLocation(1)
-                    .WithArguments("Method_Return"));
+                    .WithArguments("Method_Return")
+            );
         }
 
         [ConditionalTheory]
@@ -70,7 +81,8 @@ namespace DllImportGenerator.UnitTests
         public async Task ByRef_ReportsDiagnostic(Type type)
         {
             string typeName = type.FullName!;
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 unsafe partial class Test
 {{
@@ -86,21 +98,26 @@ unsafe partial class Test
 ";
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToGeneratedDllImport)
+                VerifyCS
+                    .Diagnostic(ConvertToGeneratedDllImport)
                     .WithLocation(0)
                     .WithArguments("Method_In"),
-                VerifyCS.Diagnostic(ConvertToGeneratedDllImport)
+                VerifyCS
+                    .Diagnostic(ConvertToGeneratedDllImport)
                     .WithLocation(1)
                     .WithArguments("Method_Out"),
-                VerifyCS.Diagnostic(ConvertToGeneratedDllImport)
+                VerifyCS
+                    .Diagnostic(ConvertToGeneratedDllImport)
                     .WithLocation(2)
-                    .WithArguments("Method_Ref"));
+                    .WithArguments("Method_Ref")
+            );
         }
 
         [ConditionalFact]
         public async Task PreserveSigFalse_ReportsDiagnostic()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -113,18 +130,22 @@ partial class Test
 ";
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToGeneratedDllImport)
+                VerifyCS
+                    .Diagnostic(ConvertToGeneratedDllImport)
                     .WithLocation(0)
                     .WithArguments("Method1"),
-                VerifyCS.Diagnostic(ConvertToGeneratedDllImport)
+                VerifyCS
+                    .Diagnostic(ConvertToGeneratedDllImport)
                     .WithLocation(1)
-                    .WithArguments("Method2"));
+                    .WithArguments("Method2")
+            );
         }
 
         [ConditionalFact]
         public async Task SetLastErrorTrue_ReportsDiagnostic()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -137,12 +158,15 @@ partial class Test
 ";
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToGeneratedDllImport)
+                VerifyCS
+                    .Diagnostic(ConvertToGeneratedDllImport)
                     .WithLocation(0)
                     .WithArguments("Method1"),
-                VerifyCS.Diagnostic(ConvertToGeneratedDllImport)
+                VerifyCS
+                    .Diagnostic(ConvertToGeneratedDllImport)
                     .WithLocation(1)
-                    .WithArguments("Method2"));
+                    .WithArguments("Method2")
+            );
         }
 
         [ConditionalTheory]
@@ -156,7 +180,8 @@ partial class Test
         [ConditionalFact]
         public async Task GeneratedDllImport_NoDiagnostic()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -172,25 +197,25 @@ partial class Test
             // Only this test case needs the ancillary reference, so it creates/runs the test directly
             // instead of going through VerifyAnalyzerAsync
             (_, MetadataReference ancillary) = TestUtils.GetReferenceAssemblies();
-            var test = new VerifyCS.Test()
-            {
-                TestCode = source
-            };
-            test.SolutionTransforms.Add((solution, projectId) =>
-            {
-                Project project = solution.GetProject(projectId)!;
-                var refs = new List<MetadataReference>(project.MetadataReferences.Count + 1);
-                refs.AddRange(project.MetadataReferences);
-                refs.Add(ancillary);
-                return solution.WithProjectMetadataReferences(projectId, refs);
-            });
+            var test = new VerifyCS.Test() { TestCode = source };
+            test.SolutionTransforms.Add(
+                (solution, projectId) =>
+                {
+                    Project project = solution.GetProject(projectId)!;
+                    var refs = new List<MetadataReference>(project.MetadataReferences.Count + 1);
+                    refs.AddRange(project.MetadataReferences);
+                    refs.Add(ancillary);
+                    return solution.WithProjectMetadataReferences(projectId, refs);
+                }
+            );
             await test.RunAsync(default);
         }
 
         [ConditionalFact]
         public async Task NotDllImport_NoDiagnostic()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -201,7 +226,8 @@ partial class Test
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
-        private static string DllImportWithType(string typeName) => @$"
+        private static string DllImportWithType(string typeName) =>
+            @$"
 using System.Runtime.InteropServices;
 unsafe partial class Test
 {{

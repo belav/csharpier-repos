@@ -3,10 +3,7 @@
 extern alias global;
 using System;
 
-public class Test 
+public class Test
 {
-    static void Main ()
-    {
-    }
+    static void Main() { }
 }
-

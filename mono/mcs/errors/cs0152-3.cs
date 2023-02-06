@@ -3,14 +3,24 @@
 
 // https://bugzilla.novell.com/show_bug.cgi?id=363791
 
-class Test {
-  enum Foo { MUL, JL }
-  static Foo f;
-  public static void Main ()
-  {
-    switch (f) {
-    case Foo.MUL: break;
-    case Foo.MUL: break;
+class Test
+{
+    enum Foo
+    {
+        MUL,
+        JL
     }
-  }
+
+    static Foo f;
+
+    public static void Main()
+    {
+        switch (f)
+        {
+            case Foo.MUL:
+                break;
+            case Foo.MUL:
+                break;
+        }
+    }
 }

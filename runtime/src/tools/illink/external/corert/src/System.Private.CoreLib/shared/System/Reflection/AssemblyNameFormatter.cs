@@ -136,7 +136,12 @@ namespace System.Reflection
             ushort build = (ushort)version.Build;
             ushort revision = (ushort)version.Revision;
 
-            if (major == version.Major && minor == version.Minor && build == version.Build && revision == version.Revision)
+            if (
+                major == version.Major
+                && minor == version.Minor
+                && build == version.Build
+                && revision == version.Revision
+            )
                 return version;
 
             return new Version(major, minor, build, revision);

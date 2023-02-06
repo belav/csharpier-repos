@@ -2,29 +2,31 @@ using System;
 
 interface IFoo<T>
 {
-    T Call ();
+    T Call();
 }
 
 class C1
 {
-    public void Foo<T> (IFoo<T> t) where T : class
+    public void Foo<T>(IFoo<T> t)
+        where T : class
     {
-        t?.Call ();
-        var x = t?.Call ();
+        t?.Call();
+        var x = t?.Call();
     }
 
-    public void Foo2<T> (IFoo<T> t)
+    public void Foo2<T>(IFoo<T> t)
     {
-        t?.Call ();
-    }    
+        t?.Call();
+    }
 }
 
-class C2<T> where T : class
+class C2<T>
+    where T : class
 {
     C2<T> i;
     T field;
 
-    public void Foo ()
+    public void Foo()
     {
         var x = i?.field;
     }
@@ -32,24 +34,25 @@ class C2<T> where T : class
 
 class Program
 {
-    static void Test<T>(Func<T> func) where T : struct
+    static void Test<T>(Func<T> func)
+        where T : struct
     {
-        var r = func?.Invoke ();
+        var r = func?.Invoke();
     }
 
     static void Test2<T>(Func<T> func)
     {
-        func?.Invoke ();
+        func?.Invoke();
     }
 
     static void Main()
     {
-        new C1 ().Foo<Program> (null);
-        new C1 ().Foo2<Program> (null);
+        new C1().Foo<Program>(null);
+        new C1().Foo2<Program>(null);
 
-        new C2<string> ().Foo ();
+        new C2<string>().Foo();
 
-        Test (() => 1);
-        Test (() => 2);
+        Test(() => 1);
+        Test(() => 2);
     }
 }

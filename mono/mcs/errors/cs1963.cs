@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         dynamic d = 1;
         Expression<Func<int>> e = () => d + 1;

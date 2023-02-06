@@ -16,31 +16,50 @@ namespace System.Text.Json.Serialization.Converters
         where TDictionary : IDictionary<TKey, TValue>
         where TKey : notnull
     {
-        protected override void Add(TKey key, in TValue value, JsonSerializerOptions options, ref ReadStack state)
+        protected override void Add(
+            TKey key,
+            in TValue value,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        )
         {
             TDictionary collection = (TDictionary)state.Current.ReturnValue!;
             collection[key] = value;
             if (IsValueType)
             {
                 state.Current.ReturnValue = collection;
-            };
+            }
+            ;
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, scoped ref ReadStack state)
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state
+        )
         {
             base.CreateCollection(ref reader, ref state);
             TDictionary returnValue = (TDictionary)state.Current.ReturnValue!;
             if (returnValue.IsReadOnly)
             {
                 state.Current.ReturnValue = null; // clear out for more accurate JsonPath reporting.
-                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                    TypeToConvert,
+                    ref reader,
+                    ref state
+                );
             }
         }
 
-        internal override void ConfigureJsonTypeInfo(JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options)
+        internal override void ConfigureJsonTypeInfo(
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options
+        )
         {
             // Deserialize as Dictionary<TKey,TValue> for interface types that support it.
-            if (jsonTypeInfo.CreateObject is null && TypeToConvert.IsAssignableFrom(typeof(Dictionary<TKey, TValue>)))
+            if (
+                jsonTypeInfo.CreateObject is null
+                && TypeToConvert.IsAssignableFrom(typeof(Dictionary<TKey, TValue>))
+            )
             {
                 Debug.Assert(TypeToConvert.IsInterface);
                 jsonTypeInfo.CreateObject = () => new Dictionary<TKey, TValue>();

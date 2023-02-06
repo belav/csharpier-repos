@@ -20,7 +20,8 @@ public class TestVariant : IXunitSerializable
     public override string ToString()
     {
         // For debug and test explorer view
-        var description = $"Server: {Server}, TFM: {Tfm}, Type: {ApplicationType}, Arch: {Architecture}";
+        var description =
+            $"Server: {Server}, TFM: {Tfm}, Type: {ApplicationType}, Arch: {Architecture}";
         if (Server == ServerType.IISExpress || Server == ServerType.IIS)
         {
             description += $", Host: {HostingModel}";

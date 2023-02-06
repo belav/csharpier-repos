@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="CategoryAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -17,7 +18,8 @@ namespace System.ComponentModel {
     ///       visual designer.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    public class CategoryAttribute : Attribute {
+    public class CategoryAttribute : Attribute
+    {
         private static volatile CategoryAttribute appearance;
         private static volatile CategoryAttribute asynchronous;
         private static volatile CategoryAttribute behavior;
@@ -32,7 +34,7 @@ namespace System.ComponentModel {
         private static volatile CategoryAttribute windowStyle;
         private static volatile CategoryAttribute dragDrop;
         private static volatile CategoryAttribute defAttr;
-        
+
         private bool localized;
 
         /// <devdoc>
@@ -45,9 +47,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the action category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Action {
-            get {
-                if (action == null) {
+        public static CategoryAttribute Action
+        {
+            get
+            {
+                if (action == null)
+                {
                     action = new CategoryAttribute("Action");
                 }
                 return action;
@@ -57,9 +62,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the appearance category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Appearance {
-            get {
-                if (appearance == null) {
+        public static CategoryAttribute Appearance
+        {
+            get
+            {
+                if (appearance == null)
+                {
                     appearance = new CategoryAttribute("Appearance");
                 }
                 return appearance;
@@ -69,9 +77,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the asynchronous category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Asynchronous {
-            get {
-                if (asynchronous == null) {
+        public static CategoryAttribute Asynchronous
+        {
+            get
+            {
+                if (asynchronous == null)
+                {
                     asynchronous = new CategoryAttribute("Asynchronous");
                 }
                 return asynchronous;
@@ -81,9 +92,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the behavior category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Behavior {
-            get {
-                if (behavior == null) {
+        public static CategoryAttribute Behavior
+        {
+            get
+            {
+                if (behavior == null)
+                {
                     behavior = new CategoryAttribute("Behavior");
                 }
                 return behavior;
@@ -93,9 +107,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the data category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Data {
-            get {
-                if (data == null) {
+        public static CategoryAttribute Data
+        {
+            get
+            {
+                if (data == null)
+                {
                     data = new CategoryAttribute("Data");
                 }
                 return data;
@@ -105,21 +122,27 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the default category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Default {
-            get {
-                if (defAttr == null) {
+        public static CategoryAttribute Default
+        {
+            get
+            {
+                if (defAttr == null)
+                {
                     defAttr = new CategoryAttribute();
                 }
                 return defAttr;
             }
         }
-        
+
         /// <devdoc>
         ///    <para>Gets the design category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Design {
-            get {
-                if (design == null) {
+        public static CategoryAttribute Design
+        {
+            get
+            {
+                if (design == null)
+                {
                     design = new CategoryAttribute("Design");
                 }
                 return design;
@@ -129,9 +152,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the drag and drop category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute DragDrop {
-            get {
-                if (dragDrop == null) {
+        public static CategoryAttribute DragDrop
+        {
+            get
+            {
+                if (dragDrop == null)
+                {
                     dragDrop = new CategoryAttribute("DragDrop");
                 }
                 return dragDrop;
@@ -141,9 +167,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the focus category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Focus {
-            get {
-                if (focus == null) {
+        public static CategoryAttribute Focus
+        {
+            get
+            {
+                if (focus == null)
+                {
                     focus = new CategoryAttribute("Focus");
                 }
                 return focus;
@@ -153,9 +182,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the format category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Format {
-            get {
-                if (format == null) {
+        public static CategoryAttribute Format
+        {
+            get
+            {
+                if (format == null)
+                {
                     format = new CategoryAttribute("Format");
                 }
                 return format;
@@ -165,9 +197,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the keyboard category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Key {
-            get {
-                if (key == null) {
+        public static CategoryAttribute Key
+        {
+            get
+            {
+                if (key == null)
+                {
                     key = new CategoryAttribute("Key");
                 }
                 return key;
@@ -177,9 +212,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the layout category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Layout {
-            get {
-                if (layout == null) {
+        public static CategoryAttribute Layout
+        {
+            get
+            {
+                if (layout == null)
+                {
                     layout = new CategoryAttribute("Layout");
                 }
                 return layout;
@@ -189,9 +227,12 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Gets the mouse category attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute Mouse {
-            get {
-                if (mouse == null) {
+        public static CategoryAttribute Mouse
+        {
+            get
+            {
+                if (mouse == null)
+                {
                     mouse = new CategoryAttribute("Mouse");
                 }
                 return mouse;
@@ -199,12 +240,15 @@ namespace System.ComponentModel {
         }
 
         /// <devdoc>
-        ///    <para> Gets the window style category 
+        ///    <para> Gets the window style category
         ///       attribute.</para>
         /// </devdoc>
-        public static CategoryAttribute WindowStyle {
-            get {
-                if (windowStyle == null) {
+        public static CategoryAttribute WindowStyle
+        {
+            get
+            {
+                if (windowStyle == null)
+                {
                     windowStyle = new CategoryAttribute("WindowStyle");
                 }
                 return windowStyle;
@@ -212,31 +256,36 @@ namespace System.ComponentModel {
         }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/> 
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/>
         /// class with the default category.</para>
         /// </devdoc>
-        public CategoryAttribute() : this("Default") {
-        }
+        public CategoryAttribute()
+            : this("Default") { }
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/> class with
         ///    the specified category name.</para>
         /// </devdoc>
-        public CategoryAttribute(string category) {
+        public CategoryAttribute(string category)
+        {
             this.categoryValue = category;
             this.localized = false;
         }
 
         /// <devdoc>
-        ///    <para>Gets the name of the category for the property or event 
+        ///    <para>Gets the name of the category for the property or event
         ///       that this attribute is bound to.</para>
         /// </devdoc>
-        public string Category {
-            get {
-                if (!localized) {
+        public string Category
+        {
+            get
+            {
+                if (!localized)
+                {
                     localized = true;
                     string localizedValue = GetLocalizedString(categoryValue);
-                    if (localizedValue != null) {
+                    if (localizedValue != null)
+                    {
                         categoryValue = localizedValue;
                     }
                 }
@@ -250,12 +299,15 @@ namespace System.ComponentModel {
         /// </devdoc>
         /// <internalonly/>
         /// <internalonly/>
-        public override bool Equals(object obj){
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
 
-            if (obj is CategoryAttribute){
+            if (obj is CategoryAttribute)
+            {
                 return Category.Equals(((CategoryAttribute)obj).Category);
             }
             return false;
@@ -264,56 +316,59 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return Category.GetHashCode();
         }
 
         /// <devdoc>
         ///    <para>Looks up the localized name of a given category.</para>
         /// </devdoc>
-        protected virtual string GetLocalizedString(string value) {
+        protected virtual string GetLocalizedString(string value)
+        {
 #if !SILVERLIGHT
 #if MONO
-            switch (value) {
-            case "Action":
-                return SR.PropertyCategoryAction;
-            case "Appearance":
-                return SR.PropertyCategoryAppearance;
-            case "Behavior":
-                return SR.PropertyCategoryBehavior;
-            case "Data":
-                return SR.PropertyCategoryData;
-            case "DDE":
-                return SR.PropertyCategoryDDE;
-            case "Design":
-                return SR.PropertyCategoryDesign;
-            case "Focus":
-                return SR.PropertyCategoryFocus;
-            case "Font":
-                return SR.PropertyCategoryFont;
-            case "Key":
-                return SR.PropertyCategoryKey;
-            case "List":
-                return SR.PropertyCategoryList;
-            case "Layout":
-                return SR.PropertyCategoryLayout;
-            case "Mouse":
-                return SR.PropertyCategoryMouse;
-            case "Position":
-                return SR.PropertyCategoryPosition;
-            case "Text":
-                return SR.PropertyCategoryText;
-            case "Scale":
-                return SR.PropertyCategoryScale;
-            case "Config":
-                return SR.PropertyCategoryConfig;
+            switch (value)
+            {
+                case "Action":
+                    return SR.PropertyCategoryAction;
+                case "Appearance":
+                    return SR.PropertyCategoryAppearance;
+                case "Behavior":
+                    return SR.PropertyCategoryBehavior;
+                case "Data":
+                    return SR.PropertyCategoryData;
+                case "DDE":
+                    return SR.PropertyCategoryDDE;
+                case "Design":
+                    return SR.PropertyCategoryDesign;
+                case "Focus":
+                    return SR.PropertyCategoryFocus;
+                case "Font":
+                    return SR.PropertyCategoryFont;
+                case "Key":
+                    return SR.PropertyCategoryKey;
+                case "List":
+                    return SR.PropertyCategoryList;
+                case "Layout":
+                    return SR.PropertyCategoryLayout;
+                case "Mouse":
+                    return SR.PropertyCategoryMouse;
+                case "Position":
+                    return SR.PropertyCategoryPosition;
+                case "Text":
+                    return SR.PropertyCategoryText;
+                case "Scale":
+                    return SR.PropertyCategoryScale;
+                case "Config":
+                    return SR.PropertyCategoryConfig;
 #if !MOBILE
-            case "Default":
-                return SR.PropertyCategoryDefault;
-            case "DragDrop":
-                return SR.PropertyCategoryDragDrop;
-            case "WindowStyle":
-                return SR.PropertyCategoryWindowStyle;
+                case "Default":
+                    return SR.PropertyCategoryDefault;
+                case "DragDrop":
+                    return SR.PropertyCategoryDragDrop;
+                case "WindowStyle":
+                    return SR.PropertyCategoryWindowStyle;
 #endif
             }
             return value;
@@ -323,13 +378,14 @@ namespace System.ComponentModel {
 #else
             bool usedFallback;
             string localizedString = SR.GetString("PropertyCategory" + value, out usedFallback);
-            if (usedFallback) {
+            if (usedFallback)
+            {
                 return null;
             }
             return localizedString;
 #endif
         }
-        
+
 #if !SILVERLIGHT
         /// <devdoc>
         /// </devdoc>
@@ -337,10 +393,10 @@ namespace System.ComponentModel {
         /// </devdoc>
         /// <internalonly/>
         /// <internalonly/>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return Category.Equals(Default.Category);
         }
 #endif
     }
 }
-

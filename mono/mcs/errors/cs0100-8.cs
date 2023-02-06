@@ -3,5 +3,5 @@
 
 abstract class C
 {
-    public abstract int this [object obj, object obj] => 1;
+    public abstract int this[object obj, object obj] => 1;
 }

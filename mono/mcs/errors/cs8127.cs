@@ -3,7 +3,7 @@
 
 class C
 {
-    static (int a, int a) Test ()
+    static (int a, int a) Test()
     {
         return null;
     }

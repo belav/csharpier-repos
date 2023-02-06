@@ -22,17 +22,17 @@ namespace MonoTests.System.Xml
         XmlProcessingInstruction pi;
 
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            document = new XmlDocument ();
+            document = new XmlDocument();
         }
 
         [Test]
-        public void InnerAndOuterXml ()
+        public void InnerAndOuterXml()
         {
-            pi = document.CreateProcessingInstruction ("foo", "bar");
-            Assert.AreEqual (String.Empty, pi.InnerXml);
-            Assert.AreEqual ("<?foo bar?>", pi.OuterXml);
+            pi = document.CreateProcessingInstruction("foo", "bar");
+            Assert.AreEqual(String.Empty, pi.InnerXml);
+            Assert.AreEqual("<?foo bar?>", pi.OuterXml);
         }
     }
 }

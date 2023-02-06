@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,14 +29,14 @@
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace System.Runtime.InteropServices {
-
-    [InterfaceType (ComInterfaceType.InterfaceIsDual)]
-    [Guid ("b36b5c63-42ef-38bc-a07e-0b34c98f164a")]
-    [CLSCompliant (false)]
-    [ComVisible (true)]
-    public interface _Exception {
-
+namespace System.Runtime.InteropServices
+{
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [Guid("b36b5c63-42ef-38bc-a07e-0b34c98f164a")]
+    [CLSCompliant(false)]
+    [ComVisible(true)]
+    public interface _Exception
+    {
         string HelpLink { get; set; }
 
         Exception InnerException { get; }
@@ -49,17 +49,16 @@ namespace System.Runtime.InteropServices {
 
         MethodBase TargetSite { get; }
 
+        bool Equals(object obj);
 
-        bool Equals (object obj);
+        Exception GetBaseException();
 
-        Exception GetBaseException ();
+        int GetHashCode();
 
-        int GetHashCode ();
+        void GetObjectData(SerializationInfo info, StreamingContext context);
 
-        void GetObjectData (SerializationInfo info, StreamingContext context);
+        Type GetType();
 
-        Type GetType ();
-
-        string ToString ();
+        string ToString();
     }
 }

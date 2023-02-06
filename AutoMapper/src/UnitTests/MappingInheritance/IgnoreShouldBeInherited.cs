@@ -2,9 +2,7 @@ namespace AutoMapper.UnitTests.Bug;
 
 public class IgnoreShouldBeInheritedRegardlessOfMapOrder : AutoMapperSpecBase
 {
-    public class BaseDomain
-    {
-    }
+    public class BaseDomain { }
 
     public class SpecificDomain : BaseDomain
     {
@@ -16,13 +14,14 @@ public class IgnoreShouldBeInheritedRegardlessOfMapOrder : AutoMapperSpecBase
         public string SpecificProperty { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<SpecificDomain, Dto>();
-        cfg.CreateMap<BaseDomain, Dto>()
-            .ForMember(d => d.SpecificProperty, m => m.Ignore())
-            .Include<SpecificDomain, Dto>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<SpecificDomain, Dto>();
+            cfg.CreateMap<BaseDomain, Dto>()
+                .ForMember(d => d.SpecificProperty, m => m.Ignore())
+                .Include<SpecificDomain, Dto>();
+        });
 
     [Fact]
     public void Should_map_ok()
@@ -34,13 +33,11 @@ public class IgnoreShouldBeInheritedRegardlessOfMapOrder : AutoMapperSpecBase
 
 public class IgnoreShouldBeInherited : AutoMapperSpecBase
 {
-    public class BaseDomain
-    {            
-    }
+    public class BaseDomain { }
 
     public class SpecificDomain : BaseDomain
     {
-        public string SpecificProperty { get; set; }            
+        public string SpecificProperty { get; set; }
     }
 
     public class Dto
@@ -48,13 +45,14 @@ public class IgnoreShouldBeInherited : AutoMapperSpecBase
         public string SpecificProperty { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<BaseDomain, Dto>()
-            .ForMember(d => d.SpecificProperty, m => m.Ignore())
-            .Include<SpecificDomain, Dto>();
-        cfg.CreateMap<SpecificDomain, Dto>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<BaseDomain, Dto>()
+                .ForMember(d => d.SpecificProperty, m => m.Ignore())
+                .Include<SpecificDomain, Dto>();
+            cfg.CreateMap<SpecificDomain, Dto>();
+        });
 
     [Fact]
     public void Should_map_ok()
@@ -72,9 +70,7 @@ public class IgnoreShouldBeInheritedWithOpenGenerics : AutoMapperSpecBase
         public string Name { get; set; }
     }
 
-    public class ConcreteUserDto : BaseUserDto<string>
-    {
-    }
+    public class ConcreteUserDto : BaseUserDto<string> { }
 
     public abstract class BaseUserEntity<TIdType>
     {
@@ -82,24 +78,21 @@ public class IgnoreShouldBeInheritedWithOpenGenerics : AutoMapperSpecBase
         public string Name { get; set; }
     }
 
-    public class ConcreteUserEntity : BaseUserEntity<string>
-    {
-    }
+    public class ConcreteUserEntity : BaseUserEntity<string> { }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap(typeof(BaseUserDto<>), typeof(BaseUserEntity<>)).ForMember("Id", opt => opt.Ignore());
-        cfg.CreateMap(typeof(ConcreteUserDto), typeof(ConcreteUserEntity)).IncludeBase(typeof(BaseUserDto<string>), typeof(BaseUserEntity<string>));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap(typeof(BaseUserDto<>), typeof(BaseUserEntity<>))
+                .ForMember("Id", opt => opt.Ignore());
+            cfg.CreateMap(typeof(ConcreteUserDto), typeof(ConcreteUserEntity))
+                .IncludeBase(typeof(BaseUserDto<string>), typeof(BaseUserEntity<string>));
+        });
 
     [Fact]
     public void Should_map_ok()
     {
-        var user = new ConcreteUserDto
-        {
-            Id = "my-id",
-            Name = "my-User"
-        };
+        var user = new ConcreteUserDto { Id = "my-id", Name = "my-User" };
         var userEntity = Mapper.Map<ConcreteUserEntity>(user);
         userEntity.Id.ShouldBeNull();
         userEntity.Name.ShouldBe("my-User");

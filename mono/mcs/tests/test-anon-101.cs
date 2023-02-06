@@ -1,26 +1,26 @@
 using System;
 
-delegate void Foo ();
+delegate void Foo();
 
 class X
 {
-    public void Hello<U> (U u)
-    { }
+    public void Hello<U>(U u) { }
 
-    public void Test<T> (T t)
+    public void Test<T>(T t)
     {
         T u = t;
-        Hello (u);
-        Foo foo = delegate {
-            Hello (u);
+        Hello(u);
+        Foo foo = delegate
+        {
+            Hello(u);
         };
-        foo ();
-        Hello (u);
+        foo();
+        Hello(u);
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        X x = new X ();
-        x.Test (3);
+        X x = new X();
+        x.Test(3);
     }
 }

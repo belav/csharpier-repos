@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis
         RefReadOnly = 3,
 
         // NOTE: There is an additional value of this enum type - RefKindExtensions.StrictIn == RefKind.In + 1
-        //       It is used internally during lowering. 
+        //       It is used internally during lowering.
         //       Consider that when adding values or changing this enum in some other way.
     }
 
@@ -48,10 +48,14 @@ namespace Microsoft.CodeAnalysis
         {
             switch (kind)
             {
-                case RefKind.Out: return "out";
-                case RefKind.Ref: return "ref";
-                case RefKind.In: return "in";
-                default: throw ExceptionUtilities.UnexpectedValue(kind);
+                case RefKind.Out:
+                    return "out";
+                case RefKind.Ref:
+                    return "ref";
+                case RefKind.In:
+                    return "in";
+                default:
+                    throw ExceptionUtilities.UnexpectedValue(kind);
             }
         }
 
@@ -59,10 +63,14 @@ namespace Microsoft.CodeAnalysis
         {
             switch (kind)
             {
-                case RefKind.Out: return "out";
-                case RefKind.Ref: return "ref";
-                case RefKind.In: return "in";
-                default: throw ExceptionUtilities.UnexpectedValue(kind);
+                case RefKind.Out:
+                    return "out";
+                case RefKind.Ref:
+                    return "ref";
+                case RefKind.In:
+                    return "in";
+                default:
+                    throw ExceptionUtilities.UnexpectedValue(kind);
             }
         }
 
@@ -70,11 +78,16 @@ namespace Microsoft.CodeAnalysis
         {
             switch (kind)
             {
-                case RefKind.Out: return "out ";
-                case RefKind.Ref: return "ref ";
-                case RefKind.In: return "in ";
-                case RefKind.None: return string.Empty;
-                default: throw ExceptionUtilities.UnexpectedValue(kind);
+                case RefKind.Out:
+                    return "out ";
+                case RefKind.Ref:
+                    return "ref ";
+                case RefKind.In:
+                    return "in ";
+                case RefKind.None:
+                    return string.Empty;
+                default:
+                    throw ExceptionUtilities.UnexpectedValue(kind);
             }
         }
 

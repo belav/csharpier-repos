@@ -17,12 +17,20 @@ namespace System.Web.Razor.Generator
 
         public override void GenerateCode(Span target, CodeGeneratorContext context)
         {
-            if (!context.Host.DesignTimeMode && !String.IsNullOrEmpty(context.Host.GeneratedClassContext.LayoutPropertyName))
+            if (
+                !context.Host.DesignTimeMode
+                && !String.IsNullOrEmpty(context.Host.GeneratedClassContext.LayoutPropertyName)
+            )
             {
                 context.TargetMethod.Statements.Add(
                     new CodeAssignStatement(
-                        new CodePropertyReferenceExpression(null, context.Host.GeneratedClassContext.LayoutPropertyName),
-                        new CodePrimitiveExpression(LayoutPath)));
+                        new CodePropertyReferenceExpression(
+                            null,
+                            context.Host.GeneratedClassContext.LayoutPropertyName
+                        ),
+                        new CodePrimitiveExpression(LayoutPath)
+                    )
+                );
             }
         }
 
@@ -34,7 +42,8 @@ namespace System.Web.Razor.Generator
         public override bool Equals(object obj)
         {
             SetLayoutCodeGenerator other = obj as SetLayoutCodeGenerator;
-            return other != null && String.Equals(other.LayoutPath, LayoutPath, StringComparison.Ordinal);
+            return other != null
+                && String.Equals(other.LayoutPath, LayoutPath, StringComparison.Ordinal);
         }
 
         public override int GetHashCode()

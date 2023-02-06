@@ -1,7 +1,9 @@
-namespace Mono.Profiler.Aot {
-    public abstract class ProfileBase {
-
-        internal enum RecordType {
+namespace Mono.Profiler.Aot
+{
+    public abstract class ProfileBase
+    {
+        internal enum RecordType
+        {
             NONE = 0,
             IMAGE = 1,
             TYPE = 2,
@@ -9,7 +11,8 @@ namespace Mono.Profiler.Aot {
             METHOD = 4
         }
 
-        internal enum MonoTypeEnum {
+        internal enum MonoTypeEnum
+        {
             MONO_TYPE_CLASS = 0x12,
         }
 

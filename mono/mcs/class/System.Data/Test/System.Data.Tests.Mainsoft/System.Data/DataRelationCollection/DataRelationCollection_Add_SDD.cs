@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -113,7 +113,7 @@ namespace tests.system_data_dll.System_Data
             }
 
             Compare(strbuff,"LLLLLLNNNNNNNNNNNRRRRRRRRRRRRR");
-        } 
+        }
         catch(Exception ex)
         {
             exp = ex;
@@ -137,9 +137,11 @@ using GHTUtils.Base;
 
 namespace tests.system_data_dll.System_Data
 {
-    [TestFixture] public class DataRelationCollection_Add_SDD : GHTBase
+    [TestFixture]
+    public class DataRelationCollection_Add_SDD : GHTBase
     {
-        [Test] public void Main()
+        [Test]
+        public void Main()
         {
             DataRelationCollection_Add_SDD tc = new DataRelationCollection_Add_SDD();
             Exception exp = null;
@@ -148,7 +150,7 @@ namespace tests.system_data_dll.System_Data
                 tc.BeginTest("DataRelationCollection_Add_DD");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -156,7 +158,6 @@ namespace tests.system_data_dll.System_Data
             {
                 tc.EndTest(exp);
             }
-        
         }
 
         //Activate This Construntor to log All To Standard output
@@ -180,9 +181,9 @@ namespace tests.system_data_dll.System_Data
             try
             {
                 BeginCase("DataRelationCollection_Add_SDD");
-                DataRelationCollection_Add_SDD1(); 
-            } 
-            catch(Exception ex)
+                DataRelationCollection_Add_SDD1();
+            }
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -196,22 +197,23 @@ namespace tests.system_data_dll.System_Data
         private void DataRelationCollection_Add_SDD1()
         {
             DataSet ds = getDataSet();
-            ds.Relations.Add("rel1",ds.Tables[0].Columns["ParentId"],ds.Tables[1].Columns["ParentId"]);
+            ds.Relations.Add(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
 
-            Compare(ds.Relations.Count,1);
-        
-            Compare(ds.Tables[0].ChildRelations.Count,1); //When adding a relation,it's also added on the tables
-            Compare(ds.Tables[1].ParentRelations.Count,1);
+            Compare(ds.Relations.Count, 1);
 
-            Compare(ds.Tables[0].Constraints[0].GetType(),typeof(UniqueConstraint));
-            Compare(ds.Tables[1].Constraints[0].GetType(),typeof(ForeignKeyConstraint)); 
+            Compare(ds.Tables[0].ChildRelations.Count, 1); //When adding a relation,it's also added on the tables
+            Compare(ds.Tables[1].ParentRelations.Count, 1);
 
-            Compare(ds.Relations[0].RelationName,"rel1");
-            Compare(ds.Tables[0].ChildRelations[0].RelationName,"rel1");
-            Compare(ds.Tables[1].ParentRelations[0].RelationName,"rel1");
+            Compare(ds.Tables[0].Constraints[0].GetType(), typeof(UniqueConstraint));
+            Compare(ds.Tables[1].Constraints[0].GetType(), typeof(ForeignKeyConstraint));
 
-
-        
+            Compare(ds.Relations[0].RelationName, "rel1");
+            Compare(ds.Tables[0].ChildRelations[0].RelationName, "rel1");
+            Compare(ds.Tables[1].ParentRelations[0].RelationName, "rel1");
         }
 
         private DataSet getDataSet()

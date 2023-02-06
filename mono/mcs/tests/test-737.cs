@@ -10,7 +10,7 @@ public struct Breaks
         set { val = value; }
     }
 
-    public Breaks (double val)
+    public Breaks(double val)
     {
         this.val = val;
     }
@@ -18,9 +18,9 @@ public struct Breaks
 
 public class Tester
 {
-    public static int Main ()
+    public static int Main()
     {
-        Breaks b = new Breaks (3.0);
+        Breaks b = new Breaks(3.0);
         b[0, 0] += 3.0;
         if (b[0, 0] != 6.0)
             return 1;

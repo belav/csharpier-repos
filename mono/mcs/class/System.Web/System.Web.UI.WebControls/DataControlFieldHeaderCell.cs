@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,52 +34,56 @@ namespace System.Web.UI.WebControls
     public class DataControlFieldHeaderCell : DataControlFieldCell
     {
         TableHeaderScope scope;
-        
-        public DataControlFieldHeaderCell (DataControlField containingField): base (HtmlTextWriterTag.Th, containingField)
-        {
-        }
-        
-        internal DataControlFieldHeaderCell (DataControlField containerField, TableHeaderScope scope): this (containerField)
+
+        public DataControlFieldHeaderCell(DataControlField containingField)
+            : base(HtmlTextWriterTag.Th, containingField) { }
+
+        internal DataControlFieldHeaderCell(DataControlField containerField, TableHeaderScope scope)
+            : this(containerField)
         {
             this.scope = scope;
         }
-        
-        public virtual TableHeaderScope Scope {
-            get {
-                object ob = ViewState ["Scope"];
+
+        public virtual TableHeaderScope Scope
+        {
+            get
+            {
+                object ob = ViewState["Scope"];
                 if (ob != null)
-                    return (TableHeaderScope) ob;
+                    return (TableHeaderScope)ob;
                 else
                     return TableHeaderScope.NotSet;
             }
-            set { ViewState ["Scope"] = value; }
+            set { ViewState["Scope"] = value; }
         }
-        
-        public virtual string AbbreviatedText {
-            get {
-                object ob = ViewState ["AbbreviatedText"];
+
+        public virtual string AbbreviatedText
+        {
+            get
+            {
+                object ob = ViewState["AbbreviatedText"];
                 if (ob != null)
-                    return (string) ob;
+                    return (string)ob;
                 else
                     return String.Empty;
             }
-            set { ViewState ["AbbreviatedText"] = value;}
+            set { ViewState["AbbreviatedText"] = value; }
         }
-        
-        protected override void AddAttributesToRender (HtmlTextWriter writer)
+
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
         {
-            base.AddAttributesToRender (writer);
-            switch (scope) {
+            base.AddAttributesToRender(writer);
+            switch (scope)
+            {
                 case TableHeaderScope.Column:
-                    writer.AddAttribute (HtmlTextWriterAttribute.Scope, "col", false);
+                    writer.AddAttribute(HtmlTextWriterAttribute.Scope, "col", false);
                     break;
                 case TableHeaderScope.Row:
-                    writer.AddAttribute (HtmlTextWriterAttribute.Scope, "row", false);
+                    writer.AddAttribute(HtmlTextWriterAttribute.Scope, "row", false);
                     break;
             }
             if (AbbreviatedText.Length > 0)
-                writer.AddAttribute (HtmlTextWriterAttribute.Abbr, AbbreviatedText);
+                writer.AddAttribute(HtmlTextWriterAttribute.Abbr, AbbreviatedText);
         }
     }
 }
-

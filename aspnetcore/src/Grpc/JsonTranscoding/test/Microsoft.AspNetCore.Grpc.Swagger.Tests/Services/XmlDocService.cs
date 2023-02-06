@@ -21,12 +21,18 @@ public class XmlDocService : XmlDoc.XmlDocBase
         return base.BasicGet(request, context);
     }
 
-    public override Task<StringReply> BodyRootPost(StringRequestWithDetail request, ServerCallContext context)
+    public override Task<StringReply> BodyRootPost(
+        StringRequestWithDetail request,
+        ServerCallContext context
+    )
     {
         return base.BodyRootPost(request, context);
     }
 
-    public override Task<StringReply> BodyPathPost(StringRequestWithDetail request, ServerCallContext context)
+    public override Task<StringReply> BodyPathPost(
+        StringRequestWithDetail request,
+        ServerCallContext context
+    )
     {
         return base.BodyPathPost(request, context);
     }

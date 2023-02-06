@@ -6,10 +6,8 @@ using System.Security.Permissions;
 
 public class CustomSecurityAttribute : CodeAccessSecurityAttribute
 {
-    public CustomSecurityAttribute ()
-        : base (SecurityAction.Demand)
-    {
-    }
+    public CustomSecurityAttribute()
+        : base(SecurityAction.Demand) { }
 
     public override IPermission CreatePermission()
     {
@@ -20,7 +18,5 @@ public class CustomSecurityAttribute : CodeAccessSecurityAttribute
 [CustomSecurity]
 class X
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

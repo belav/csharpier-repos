@@ -30,26 +30,24 @@ namespace Mono.Btls
 {
     class MonoBtlsX509Exception : Exception
     {
-        public MonoBtlsX509Error ErrorCode {
-            get;
-            private set;
-        }
+        public MonoBtlsX509Error ErrorCode { get; private set; }
 
-        public string ErrorMessage {
-            get;
-            private set;
-        }
+        public string ErrorMessage { get; private set; }
 
-        public MonoBtlsX509Exception (MonoBtlsX509Error code, string message)
-            : base (message)
+        public MonoBtlsX509Exception(MonoBtlsX509Error code, string message)
+            : base(message)
         {
             ErrorCode = code;
             ErrorMessage = message;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return string.Format ("[MonoBtlsX509Exception: ErrorCode={0}, ErrorMessage={1}]", ErrorCode, ErrorMessage);
+            return string.Format(
+                "[MonoBtlsX509Exception: ErrorCode={0}, ErrorMessage={1}]",
+                ErrorCode,
+                ErrorMessage
+            );
         }
     }
 }

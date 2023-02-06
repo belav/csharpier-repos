@@ -36,9 +36,9 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-    [ComVisible (true)]
-    [ClassInterface (ClassInterfaceType.AutoDispatch)]
-    public class ThreadExceptionDialog: Form
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    public class ThreadExceptionDialog : Form
     {
         Exception e;
         bool details;
@@ -61,19 +61,20 @@ namespace System.Windows.Forms
             this.textBoxDetails = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
+            //
             // helpText
-            // 
+            //
             this.helpText.Location = new System.Drawing.Point(60, 8);
             this.helpText.Name = "helpText";
             this.helpText.Size = new System.Drawing.Size(356, 40);
             this.helpText.TabIndex = 0;
-            this.helpText.Text = "An unhandled exception has occurred in you application. If you click Ignore the a" +
-                "pplication will ignore this error and attempt to continue. If you click Abort, t" +
-                "he application will quit immediately.";
-            // 
+            this.helpText.Text =
+                "An unhandled exception has occurred in you application. If you click Ignore the a"
+                + "pplication will ignore this error and attempt to continue. If you click Abort, t"
+                + "he application will quit immediately.";
+            //
             // buttonAbort
-            // 
+            //
             this.buttonAbort.DialogResult = System.Windows.Forms.DialogResult.Abort;
             this.buttonAbort.Location = new System.Drawing.Point(332, 112);
             this.buttonAbort.Name = "buttonAbort";
@@ -81,34 +82,34 @@ namespace System.Windows.Forms
             this.buttonAbort.TabIndex = 4;
             this.buttonAbort.Text = "&Abort";
             this.buttonAbort.Click += new System.EventHandler(this.buttonAbort_Click);
-            // 
+            //
             // buttonIgnore
-            // 
+            //
             this.buttonIgnore.DialogResult = System.Windows.Forms.DialogResult.Ignore;
             this.buttonIgnore.Location = new System.Drawing.Point(236, 112);
             this.buttonIgnore.Name = "buttonIgnore";
             this.buttonIgnore.Size = new System.Drawing.Size(85, 23);
             this.buttonIgnore.TabIndex = 3;
             this.buttonIgnore.Text = "&Ignore";
-            // 
+            //
             // buttonDetails
-            // 
+            //
             this.buttonDetails.Location = new System.Drawing.Point(140, 112);
             this.buttonDetails.Name = "buttonDetails";
             this.buttonDetails.Size = new System.Drawing.Size(85, 23);
             this.buttonDetails.TabIndex = 2;
             this.buttonDetails.Text = "Show &Details";
             this.buttonDetails.Click += new System.EventHandler(this.buttonDetails_Click);
-            // 
+            //
             // labelException
-            // 
+            //
             this.labelException.Location = new System.Drawing.Point(60, 64);
             this.labelException.Name = "labelException";
             this.labelException.Size = new System.Drawing.Size(356, 32);
             this.labelException.TabIndex = 1;
-            // 
+            //
             // textBoxDetails
-            // 
+            //
             this.textBoxDetails.Location = new System.Drawing.Point(8, 168);
             this.textBoxDetails.Multiline = true;
             this.textBoxDetails.Name = "textBoxDetails";
@@ -119,17 +120,17 @@ namespace System.Windows.Forms
             this.textBoxDetails.TabStop = false;
             this.textBoxDetails.Text = "";
             this.textBoxDetails.WordWrap = false;
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.Location = new System.Drawing.Point(8, 148);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Exception details";
-            // 
+            //
             // ThreadExceptionDialog
-            // 
+            //
             this.AcceptButton = this.buttonIgnore;
             this.CancelButton = this.buttonAbort;
             this.ClientSize = new System.Drawing.Size(428, 374);
@@ -147,14 +148,14 @@ namespace System.Windows.Forms
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
-            this.Paint += new PaintEventHandler (PaintHandler);
+            this.Paint += new PaintEventHandler(PaintHandler);
             this.ResumeLayout(false);
         }
-    
-        public ThreadExceptionDialog (Exception t)
+
+        public ThreadExceptionDialog(Exception t)
         {
             this.e = t;
-            InitializeComponent ();
+            InitializeComponent();
 
             this.labelException.Text = t.Message;
             if (Form.ActiveForm != null)
@@ -162,36 +163,38 @@ namespace System.Windows.Forms
             else
                 this.Text = "Mono";
             this.buttonAbort.Enabled = Application.AllowQuit;
-            RefreshDetails ();
-            FillExceptionDetails ();
+            RefreshDetails();
+            FillExceptionDetails();
         }
 
         void buttonDetails_Click(object sender, System.EventArgs e)
         {
             details = !details;
-            RefreshDetails ();
+            RefreshDetails();
         }
 
-        void FillExceptionDetails ()
+        void FillExceptionDetails()
         {
-            StringBuilder sb = new StringBuilder ();
-            sb.Append (e.ToString ());
-            sb.Append (Environment.NewLine + Environment.NewLine);
-            sb.Append ("Loaded assemblies:" + Environment.NewLine + Environment.NewLine);
+            StringBuilder sb = new StringBuilder();
+            sb.Append(e.ToString());
+            sb.Append(Environment.NewLine + Environment.NewLine);
+            sb.Append("Loaded assemblies:" + Environment.NewLine + Environment.NewLine);
 
-            foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies ()) {
-                AssemblyName an = a.GetName ();
-                sb.AppendFormat ("Name:\t{0}" + Environment.NewLine, an.Name);
-                sb.AppendFormat ("Version:\t{0}" + Environment.NewLine, an.Version);
-                sb.AppendFormat ("Location:\t{0}" + Environment.NewLine, an.CodeBase);
-                sb.Append (Environment.NewLine);
+            foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                AssemblyName an = a.GetName();
+                sb.AppendFormat("Name:\t{0}" + Environment.NewLine, an.Name);
+                sb.AppendFormat("Version:\t{0}" + Environment.NewLine, an.Version);
+                sb.AppendFormat("Location:\t{0}" + Environment.NewLine, an.CodeBase);
+                sb.Append(Environment.NewLine);
             }
-            textBoxDetails.Text = sb.ToString ();
+            textBoxDetails.Text = sb.ToString();
         }
 
-        void RefreshDetails ()
+        void RefreshDetails()
         {
-            if (details) {
+            if (details)
+            {
                 buttonDetails.Text = "Hide &Details";
                 Height = 410;
                 label1.Visible = true;
@@ -206,26 +209,28 @@ namespace System.Windows.Forms
 
         void buttonAbort_Click(object sender, System.EventArgs e)
         {
-            Application.Exit ();
+            Application.Exit();
         }
 
-        void PaintHandler (object o, PaintEventArgs args)
+        void PaintHandler(object o, PaintEventArgs args)
         {
             Graphics g = args.Graphics;
-            g.DrawIcon (SystemIcons.Error, 15, 10);
+            g.DrawIcon(SystemIcons.Error, 15, 10);
         }
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public override bool AutoSize {
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public override bool AutoSize
+        {
             get { return base.AutoSize; }
             set { base.AutoSize = value; }
         }
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler AutoSizeChanged {
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler AutoSizeChanged
+        {
             add { base.AutoSizeChanged += value; }
             remove { base.AutoSizeChanged -= value; }
         }

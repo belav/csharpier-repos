@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -51,12 +51,12 @@ namespace Mono.Data.Tds.Protocol
         public string DefaultDomain;
         public string AttachDBFileName;
 
-        public TdsConnectionParameters ()
+        public TdsConnectionParameters()
         {
-            Reset ();
+            Reset();
         }
 
-        public void Reset ()
+        public void Reset()
         {
             ApplicationName = "Mono";
             Database = String.Empty;
@@ -68,7 +68,7 @@ namespace Mono.Data.Tds.Protocol
             PasswordSet = false;
             ProgName = "Mono";
             User = String.Empty;
-            DomainLogin = false; 
+            DomainLogin = false;
             DefaultDomain = String.Empty;
             AttachDBFileName = String.Empty;
         }

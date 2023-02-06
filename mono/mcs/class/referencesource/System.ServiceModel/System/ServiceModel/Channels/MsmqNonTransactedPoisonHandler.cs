@@ -12,8 +12,7 @@ namespace System.ServiceModel.Channels
             this.receiver = receiver;
         }
 
-        public void Open()
-        { }
+        public void Open() { }
 
         public bool CheckAndHandlePoisonMessage(MsmqMessageProperty messageProperty)
         {
@@ -25,7 +24,6 @@ namespace System.ServiceModel.Channels
             this.receiver.DropOrRejectReceivedMessage(messageProperty, false);
         }
 
-        public void Dispose()
-        { }
+        public void Dispose() { }
     }
 }

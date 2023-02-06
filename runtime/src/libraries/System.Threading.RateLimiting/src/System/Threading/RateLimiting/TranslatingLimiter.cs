@@ -13,7 +13,11 @@ namespace System.Threading.RateLimiting
 
         private int _disposed;
 
-        public TranslatingLimiter(PartitionedRateLimiter<TInner> inner, Func<TResource, TInner> keyAdapter, bool leaveOpen)
+        public TranslatingLimiter(
+            PartitionedRateLimiter<TInner> inner,
+            Func<TResource, TInner> keyAdapter,
+            bool leaveOpen
+        )
         {
             _innerRateLimiter = inner;
             _keyAdapter = keyAdapter;
@@ -34,7 +38,11 @@ namespace System.Threading.RateLimiting
             return _innerRateLimiter.AttemptAcquire(key, permitCount);
         }
 
-        protected override ValueTask<RateLimitLease> AcquireAsyncCore(TResource resource, int permitCount, CancellationToken cancellationToken)
+        protected override ValueTask<RateLimitLease> AcquireAsyncCore(
+            TResource resource,
+            int permitCount,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDispose();
             TInner key = _keyAdapter(resource);

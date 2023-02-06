@@ -33,105 +33,112 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing {
-
+namespace MonoTests.System.Drawing
+{
     [TestFixture]
-    [SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-    public class RegionDataTest {
-
+    [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+    public class RegionDataTest
+    {
         private Bitmap bitmap;
         private Graphics graphic;
         private GraphicsPath sp1;
         private GraphicsPath sp2;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            bitmap = new Bitmap (10, 10);
-            graphic = Graphics.FromImage (bitmap);
+            bitmap = new Bitmap(10, 10);
+            graphic = Graphics.FromImage(bitmap);
 
-            sp1 = new GraphicsPath ();
-            sp1.AddPolygon (new Point[4] { new Point (0, 0), new Point (3, 0), new Point (3, 3), new Point (0, 3) });
+            sp1 = new GraphicsPath();
+            sp1.AddPolygon(
+                new Point[4] { new Point(0, 0), new Point(3, 0), new Point(3, 3), new Point(0, 3) }
+            );
 
-            sp2 = new GraphicsPath ();
-            sp2.AddPolygon (new Point[4] { new Point (2, 2), new Point (5, 2), new Point (5, 5), new Point (2, 5) });
+            sp2 = new GraphicsPath();
+            sp2.AddPolygon(
+                new Point[4] { new Point(2, 2), new Point(5, 2), new Point(5, 5), new Point(2, 5) }
+            );
         }
 
         [Test]
-        public void RegionData_Null ()
+        public void RegionData_Null()
         {
-            RegionData data = new Region ().GetRegionData ();
+            RegionData data = new Region().GetRegionData();
             data.Data = null;
-            Assert.IsNull (data.Data, "Data");
-            Assert.Throws<NullReferenceException> (() => new Region (data));
+            Assert.IsNull(data.Data, "Data");
+            Assert.Throws<NullReferenceException>(() => new Region(data));
         }
 
         [Test]
-        public void RegionData_EmptyData ()
+        public void RegionData_EmptyData()
         {
-            RegionData data = new Region ().GetRegionData ();
+            RegionData data = new Region().GetRegionData();
             data.Data = new byte[0];
-            Assert.AreEqual (0, data.Data.Length, "Data");
-            try {
-                new Region (data);
+            Assert.AreEqual(0, data.Data.Length, "Data");
+            try
+            {
+                new Region(data);
             }
-            catch (ExternalException) {
+            catch (ExternalException)
+            {
                 // MS
             }
-            catch (ArgumentException) {
+            catch (ArgumentException)
+            {
                 // Mono
             }
         }
 
         [Test]
-        public void EmptyRegion ()
+        public void EmptyRegion()
         {
             // note: an empty region is (for libgdiplus) a rectangular based region
-            Region empty = new Region ();
-            RegionData data = empty.GetRegionData ();
-            Assert.IsNotNull (data.Data, "Data");
-            Region region = new Region (data);
+            Region empty = new Region();
+            RegionData data = empty.GetRegionData();
+            Assert.IsNotNull(data.Data, "Data");
+            Region region = new Region(data);
         }
 
         [Test]
-        public void PathRegion ()
+        public void PathRegion()
         {
-            GraphicsPath path = new GraphicsPath ();
-            path.AddCurve (new Point[2] { new Point (1, 1), new Point (2, 2) });
-            Region r = new Region (path);
-            RegionData data = r.GetRegionData ();
-            Assert.IsNotNull (data.Data, "Data");
-            Region region = new Region (data);
-            Assert.IsTrue (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
+            GraphicsPath path = new GraphicsPath();
+            path.AddCurve(new Point[2] { new Point(1, 1), new Point(2, 2) });
+            Region r = new Region(path);
+            RegionData data = r.GetRegionData();
+            Assert.IsNotNull(data.Data, "Data");
+            Region region = new Region(data);
+            Assert.IsTrue(r.GetBounds(graphic).Equals(region.GetBounds(graphic)), "Bounds");
         }
 
         [Test]
-        public void CombinedPathRegion ()
-        {
-            // note: seems identical to PathRegion but it test another code path inside libgdiplus
-            Region r = new Region (sp1);
-            r.Xor (sp2);
-            RegionData data = r.GetRegionData ();
-            Assert.IsNotNull (data.Data, "Data");
-            Region region = new Region (data);
-            Assert.IsTrue (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
-        }
-
-        [Test]
-        public void MultiCombinedPathRegion ()
+        public void CombinedPathRegion()
         {
             // note: seems identical to PathRegion but it test another code path inside libgdiplus
-            Region r1 = new Region (sp1);
-            r1.Xor (sp2);
-            Region r2 = new Region (sp2);
-            r2.Complement (sp1);
+            Region r = new Region(sp1);
+            r.Xor(sp2);
+            RegionData data = r.GetRegionData();
+            Assert.IsNotNull(data.Data, "Data");
+            Region region = new Region(data);
+            Assert.IsTrue(r.GetBounds(graphic).Equals(region.GetBounds(graphic)), "Bounds");
+        }
 
-            Region r = r1.Clone ();
-            r.Union (r2);
-            RegionData data = r.GetRegionData ();
-            Assert.IsNotNull (data.Data, "Data");
-            Region region = new Region (data);
-            Assert.IsTrue (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
+        [Test]
+        public void MultiCombinedPathRegion()
+        {
+            // note: seems identical to PathRegion but it test another code path inside libgdiplus
+            Region r1 = new Region(sp1);
+            r1.Xor(sp2);
+            Region r2 = new Region(sp2);
+            r2.Complement(sp1);
+
+            Region r = r1.Clone();
+            r.Union(r2);
+            RegionData data = r.GetRegionData();
+            Assert.IsNotNull(data.Data, "Data");
+            Region region = new Region(data);
+            Assert.IsTrue(r.GetBounds(graphic).Equals(region.GetBounds(graphic)), "Bounds");
         }
     }
 }

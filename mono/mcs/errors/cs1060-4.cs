@@ -24,7 +24,7 @@ struct S2
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         S2 s2;
         s2.x.s.c.v = 5;

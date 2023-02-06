@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,7 +38,7 @@ namespace MonoTests.System.Threading
     {
         class C
         {
-            public C ()
+            public C()
             {
                 ++Counter;
             }
@@ -47,48 +47,47 @@ namespace MonoTests.System.Threading
         }
 
         [Test]
-        public void EnsureInitialized_Simple ()
+        public void EnsureInitialized_Simple()
         {
             C c = null;
-            c = LazyInitializer.EnsureInitialized (ref c);
+            c = LazyInitializer.EnsureInitialized(ref c);
 
-            Assert.IsNotNull (c, "#1");
-            Assert.AreEqual (1, c.Counter, "#2");
+            Assert.IsNotNull(c, "#1");
+            Assert.AreEqual(1, c.Counter, "#2");
         }
 
         [Test]
-        public void EnsureInitialized_FactoryIsNull ()
+        public void EnsureInitialized_FactoryIsNull()
         {
             C c = null;
-            try {
-                LazyInitializer.EnsureInitialized (ref c, () => (C) null);
-                Assert.Fail ();
-            } catch (InvalidOperationException) {
+            try
+            {
+                LazyInitializer.EnsureInitialized(ref c, () => (C)null);
+                Assert.Fail();
             }
+            catch (InvalidOperationException) { }
         }
 
         [Test]
-        public void EnsureInitialized_NullLock ()
+        public void EnsureInitialized_NullLock()
         {
             C c = null;
             bool init = false;
             object sync_lock = null;
-            c = LazyInitializer.EnsureInitialized (ref c, ref init, ref sync_lock);
+            c = LazyInitializer.EnsureInitialized(ref c, ref init, ref sync_lock);
 
-            Assert.IsNotNull (c, "#1");
-            Assert.AreEqual (1, c.Counter, "#2");
-            Assert.IsTrue (init, "#3");
-            Assert.IsNotNull (sync_lock, "#4");
+            Assert.IsNotNull(c, "#1");
+            Assert.AreEqual(1, c.Counter, "#2");
+            Assert.IsTrue(init, "#3");
+            Assert.IsNotNull(sync_lock, "#4");
 
             var old_lock = sync_lock;
-            var d = LazyInitializer.EnsureInitialized (ref c, ref init, ref sync_lock);
+            var d = LazyInitializer.EnsureInitialized(ref c, ref init, ref sync_lock);
 
-            Assert.AreEqual (c, d, "#11");
-            Assert.AreEqual (1, c.Counter, "#12");
-            Assert.IsTrue (init, "#13");
-            Assert.AreEqual (old_lock, sync_lock, "#14");
+            Assert.AreEqual(c, d, "#11");
+            Assert.AreEqual(1, c.Counter, "#12");
+            Assert.IsTrue(init, "#13");
+            Assert.AreEqual(old_lock, sync_lock, "#14");
         }
     }
 }
-
-

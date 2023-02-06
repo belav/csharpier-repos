@@ -4,22 +4,22 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupLinkerDescriptorFile ("UsedNonRequiredTypeIsKeptWithSingleMethod.xml")]
-    [SetupLinkerArgument ("--disable-opt", "unreachablebodies")]
+    [SetupLinkerDescriptorFile("UsedNonRequiredTypeIsKeptWithSingleMethod.xml")]
+    [SetupLinkerArgument("--disable-opt", "unreachablebodies")]
     class UsedNonRequiredTypeIsKeptWithSingleMethod
     {
-        public static void Main ()
+        public static void Main()
         {
-            var t = typeof (Unused);
+            var t = typeof(Unused);
         }
 
         [Kept]
         class Unused
         {
             [Kept]
-            private void PreservedMethod ()
+            private void PreservedMethod()
             {
-                new SecondLevel (2);
+                new SecondLevel(2);
             }
         }
 
@@ -27,24 +27,20 @@ namespace Mono.Linker.Tests.Cases.LinkXml
         class SecondLevel
         {
             [Kept]
-            public SecondLevel (int arg)
-            {
-            }
+            public SecondLevel(int arg) { }
         }
 
         class ReallyUnused
         {
-            private void PreservedMethod ()
+            private void PreservedMethod()
             {
-                new SecondLevelUnused (2);
+                new SecondLevelUnused(2);
             }
         }
 
         class SecondLevelUnused
         {
-            public SecondLevelUnused (int arg)
-            {
-            }
+            public SecondLevelUnused(int arg) { }
         }
     }
 }

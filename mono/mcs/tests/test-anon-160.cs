@@ -5,42 +5,39 @@ namespace TestGenericsSubtypeMatching
 {
     public class Sender<T> : IDisposable
     {
-
-        public void DoSend<TMessage> (Action<T> action)
+        public void DoSend<TMessage>(Action<T> action)
         {
-            using (Sender<T> sub = new Sender<T> ())
+            using (Sender<T> sub = new Sender<T>())
             {
-                Send (t =>
+                Send(t =>
                 {
                     action(t);
-                    sub.ActionOnObject (t);
+                    sub.ActionOnObject(t);
                 });
             }
         }
-        
-        private static void Send (Action<T> action)
+
+        private static void Send(Action<T> action) { }
+
+        void ActionOnObject(object o)
         {
+            o.ToString();
         }
-        
-        void ActionOnObject (object o)
-        {
-            o.ToString ();
-        }
-    
+
         #region IDisposable implementation
-        public void Dispose ()
+        public void Dispose()
         {
-            Console.WriteLine ("Dispose!");
+            Console.WriteLine("Dispose!");
         }
-        
+
         #endregion
     }
-    
+
     class C
     {
-        public static int Main ()
+        public static int Main()
         {
-            new Sender<int> ().DoSend<bool> (l => Console.WriteLine (l));
+            new Sender<int>().DoSend<bool>(l => Console.WriteLine(l));
             return 0;
         }
     }

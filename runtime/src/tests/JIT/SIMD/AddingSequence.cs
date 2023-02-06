@@ -9,7 +9,7 @@ namespace VectorMathTests
     class Program
     {
         const float EPS = Single.Epsilon * 5;
-        
+
         static bool CheckEQ(float a, float b)
         {
             return Math.Abs(a - b) < 5 * EPS;
@@ -43,7 +43,8 @@ namespace VectorMathTests
 
         static int Main()
         {
-            Point a = new Point(0, 0), b = new Point(1, 0);
+            Point a = new Point(0, 0),
+                b = new Point(1, 0);
             Point c = a + b;
             Point d = c - b;
             Point e = d - a;

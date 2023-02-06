@@ -21,10 +21,9 @@ namespace Mono.Linker.Tests.Cases.Repro
     [ExpectedNoWarnings]
     public class Program
     {
-
-        public static void Main ()
+        public static void Main()
         {
-            Console.WriteLine ("HelloWorld");
+            Console.WriteLine("HelloWorld");
         }
     }
 }

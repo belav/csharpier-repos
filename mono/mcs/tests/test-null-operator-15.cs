@@ -8,9 +8,9 @@ class MM
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
         MM myobject = null;
-        (myobject?.myEnumerable?.Any ()).GetValueOrDefault (false);      
+        (myobject?.myEnumerable?.Any()).GetValueOrDefault(false);
     }
 }

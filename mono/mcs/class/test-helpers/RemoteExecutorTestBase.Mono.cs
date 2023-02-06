@@ -11,9 +11,12 @@ namespace System.Diagnostics
     public abstract partial class RemoteExecutorTestBase : FileCleanupTestBase
     {
         // protected static readonly string HostRunnerName = "mono";
-        protected static readonly string HostRunner = Process.GetCurrentProcess().MainModule.FileName;
+        protected static readonly string HostRunner = Process
+            .GetCurrentProcess()
+            .MainModule.FileName;
 
         // Should be ../lib/$(PROFILE)/tests/RemoteExecutorConsoleApp.exe
-        static readonly string ExtraParameter = "--debug " + Environment.GetEnvironmentVariable ("REMOTE_EXECUTOR");
+        static readonly string ExtraParameter =
+            "--debug " + Environment.GetEnvironmentVariable("REMOTE_EXECUTOR");
     }
 }

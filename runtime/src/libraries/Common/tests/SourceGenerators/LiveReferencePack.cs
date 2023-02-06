@@ -22,8 +22,11 @@ namespace SourceGenerators.Tests
         /// </remarks>
         public static ImmutableArray<MetadataReference> GetMetadataReferences()
         {
-            string testDirectory = Path.GetDirectoryName(typeof(LiveReferencePack).Assembly.Location)!;
-            return Directory.EnumerateFiles(Path.Combine(testDirectory, "live-ref-pack"))
+            string testDirectory = Path.GetDirectoryName(
+                typeof(LiveReferencePack).Assembly.Location
+            )!;
+            return Directory
+                .EnumerateFiles(Path.Combine(testDirectory, "live-ref-pack"))
                 .Select<string, MetadataReference>(f => MetadataReference.CreateFromFile(f))
                 .ToImmutableArray();
         }

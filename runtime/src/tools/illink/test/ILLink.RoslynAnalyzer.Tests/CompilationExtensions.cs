@@ -14,27 +14,40 @@ namespace ILLink.RoslynAnalyzer.Tests
 {
     public static class CompilationExtensions
     {
-        public static MetadataReference EmitToImageReference (
+        public static MetadataReference EmitToImageReference(
             this Compilation comp,
             EmitOptions? options = null,
             bool embedInteropTypes = false,
-            ImmutableArray<string> aliases = default) => EmitToPortableExecutableReference (comp, options, embedInteropTypes, aliases);
+            ImmutableArray<string> aliases = default
+        ) => EmitToPortableExecutableReference(comp, options, embedInteropTypes, aliases);
 
-        public static PortableExecutableReference EmitToPortableExecutableReference (
+        public static PortableExecutableReference EmitToPortableExecutableReference(
             this Compilation comp,
             EmitOptions? options = null,
             bool embedInteropTypes = false,
-            ImmutableArray<string> aliases = default)
+            ImmutableArray<string> aliases = default
+        )
         {
-            var image = comp.EmitToArray (options);
-            if (comp.Options.OutputKind == OutputKind.NetModule) {
-                return ModuleMetadata.CreateFromImage (image).GetReference (display: comp.MakeSourceModuleName ());
-            } else {
-                return AssemblyMetadata.CreateFromImage (image).GetReference (aliases: aliases, embedInteropTypes: embedInteropTypes, display: comp.MakeSourceAssemblySimpleName ());
+            var image = comp.EmitToArray(options);
+            if (comp.Options.OutputKind == OutputKind.NetModule)
+            {
+                return ModuleMetadata
+                    .CreateFromImage(image)
+                    .GetReference(display: comp.MakeSourceModuleName());
+            }
+            else
+            {
+                return AssemblyMetadata
+                    .CreateFromImage(image)
+                    .GetReference(
+                        aliases: aliases,
+                        embedInteropTypes: embedInteropTypes,
+                        display: comp.MakeSourceAssemblySimpleName()
+                    );
             }
         }
 
-        internal static ImmutableArray<byte> EmitToArray (
+        internal static ImmutableArray<byte> EmitToArray(
             this Compilation compilation,
             EmitOptions? options = null,
             Stream? pdbStream = null,
@@ -42,11 +55,12 @@ namespace ILLink.RoslynAnalyzer.Tests
             Stream? sourceLinkStream = null,
             IEnumerable<EmbeddedText>? embeddedTexts = null,
             IEnumerable<ResourceDescription>? manifestResources = null,
-            Stream? metadataPEStream = null)
+            Stream? metadataPEStream = null
+        )
         {
-            var peStream = new MemoryStream ();
+            var peStream = new MemoryStream();
 
-            var emitResult = compilation.Emit (
+            var emitResult = compilation.Emit(
                 peStream: peStream,
                 metadataPEStream: metadataPEStream,
                 pdbStream: pdbStream,
@@ -57,11 +71,16 @@ namespace ILLink.RoslynAnalyzer.Tests
                 debugEntryPoint: debugEntryPoint,
                 sourceLinkStream: sourceLinkStream,
                 embeddedTexts: embeddedTexts,
-                cancellationToken: default (CancellationToken));
+                cancellationToken: default(CancellationToken)
+            );
 
-            Assert.True (emitResult.Success, "Diagnostics:\r\n" + string.Join ("\r\n", emitResult.Diagnostics.Select (d => d.ToString ())));
+            Assert.True(
+                emitResult.Success,
+                "Diagnostics:\r\n"
+                    + string.Join("\r\n", emitResult.Diagnostics.Select(d => d.ToString()))
+            );
 
-            return peStream.ToImmutable ();
+            return peStream.ToImmutable();
         }
 
         /// <summary>
@@ -69,43 +88,49 @@ namespace ILLink.RoslynAnalyzer.Tests
         /// </summary>
         /// <param name="stream">The stream.</param>
         /// <returns>Read-only content of the stream.</returns>
-        private static ImmutableArray<byte> ToImmutable (this MemoryStream stream)
+        private static ImmutableArray<byte> ToImmutable(this MemoryStream stream)
         {
-            return ImmutableArray.Create<byte> (stream.ToArray ());
+            return ImmutableArray.Create<byte>(stream.ToArray());
         }
 
-        internal static string MakeSourceModuleName (this Compilation compilation)
+        internal static string MakeSourceModuleName(this Compilation compilation)
         {
             var UnspecifiedModuleAssemblyName = "?";
-            return compilation.Options.ModuleName ??
-                   (compilation.AssemblyName != null ? compilation.AssemblyName + compilation.Options.OutputKind.GetDefaultExtension () : UnspecifiedModuleAssemblyName);
+            return compilation.Options.ModuleName
+                ?? (
+                    compilation.AssemblyName != null
+                        ? compilation.AssemblyName
+                            + compilation.Options.OutputKind.GetDefaultExtension()
+                        : UnspecifiedModuleAssemblyName
+                );
         }
 
-        internal static string MakeSourceAssemblySimpleName (this Compilation compilation)
+        internal static string MakeSourceAssemblySimpleName(this Compilation compilation)
         {
             var UnspecifiedModuleAssemblyName = "?";
             return compilation.AssemblyName ?? UnspecifiedModuleAssemblyName;
         }
 
-        internal static string GetDefaultExtension (this OutputKind kind)
+        internal static string GetDefaultExtension(this OutputKind kind)
         {
-            switch (kind) {
-            case OutputKind.ConsoleApplication:
-            case OutputKind.WindowsApplication:
-            case OutputKind.WindowsRuntimeApplication:
-                return ".exe";
+            switch (kind)
+            {
+                case OutputKind.ConsoleApplication:
+                case OutputKind.WindowsApplication:
+                case OutputKind.WindowsRuntimeApplication:
+                    return ".exe";
 
-            case OutputKind.DynamicallyLinkedLibrary:
-                return ".dll";
+                case OutputKind.DynamicallyLinkedLibrary:
+                    return ".dll";
 
-            case OutputKind.NetModule:
-                return ".netmodule";
+                case OutputKind.NetModule:
+                    return ".netmodule";
 
-            case OutputKind.WindowsRuntimeMetadata:
-                return ".winmdobj";
+                case OutputKind.WindowsRuntimeMetadata:
+                    return ".winmdobj";
 
-            default:
-                return ".dll";
+                default:
+                    return ".dll";
             }
         }
     }

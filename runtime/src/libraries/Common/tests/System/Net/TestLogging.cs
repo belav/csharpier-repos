@@ -9,9 +9,7 @@ namespace System.Net.Test.Common
     {
         private static readonly TestLogging s_instance = new TestLogging();
 
-        private TestLogging()
-        {
-        }
+        private TestLogging() { }
 
         public static TestLogging GetInstance()
         {

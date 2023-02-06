@@ -28,7 +28,8 @@ public class ModelExplorer
     public ModelExplorer(
         IModelMetadataProvider metadataProvider,
         ModelMetadata metadata,
-        object model)
+        object model
+    )
     {
         if (metadataProvider == null)
         {
@@ -56,7 +57,8 @@ public class ModelExplorer
         IModelMetadataProvider metadataProvider,
         ModelExplorer container,
         ModelMetadata metadata,
-        Func<object, object> modelAccessor)
+        Func<object, object> modelAccessor
+    )
     {
         if (metadataProvider == null)
         {
@@ -90,7 +92,8 @@ public class ModelExplorer
         IModelMetadataProvider metadataProvider,
         ModelExplorer container,
         ModelMetadata metadata,
-        object model)
+        object model
+    )
     {
         if (metadataProvider == null)
         {
@@ -214,10 +217,13 @@ public class ModelExplorer
                     PropertyHelper propertyHelper = null;
                     for (var j = 0; j < propertyHelpers.Length; j++)
                     {
-                        if (string.Equals(
-                            propertyMetadata.PropertyName,
-                            propertyHelpers[j].Property.Name,
-                            StringComparison.Ordinal))
+                        if (
+                            string.Equals(
+                                propertyMetadata.PropertyName,
+                                propertyHelpers[j].Property.Name,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             propertyHelper = propertyHelpers[j];
                             break;
@@ -402,7 +408,10 @@ public class ModelExplorer
     /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see cref="Container"/>.
     /// </para>
     /// </remarks>
-    public ModelExplorer GetExplorerForExpression(Type modelType, Func<object, object> modelAccessor)
+    public ModelExplorer GetExplorerForExpression(
+        Type modelType,
+        Func<object, object> modelAccessor
+    )
     {
         if (modelType == null)
         {
@@ -430,7 +439,10 @@ public class ModelExplorer
     /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see cref="Container"/>.
     /// </para>
     /// </remarks>
-    public ModelExplorer GetExplorerForExpression(ModelMetadata metadata, Func<object, object> modelAccessor)
+    public ModelExplorer GetExplorerForExpression(
+        ModelMetadata metadata,
+        Func<object, object> modelAccessor
+    )
     {
         if (metadata == null)
         {
@@ -455,17 +467,25 @@ public class ModelExplorer
 
     private ModelExplorer CreateExplorerForProperty(
         ModelMetadata propertyMetadata,
-        PropertyHelper propertyHelper)
+        PropertyHelper propertyHelper
+    )
     {
         if (propertyHelper == null)
         {
-            return new ModelExplorer(_metadataProvider, this, propertyMetadata, modelAccessor: null);
+            return new ModelExplorer(
+                _metadataProvider,
+                this,
+                propertyMetadata,
+                modelAccessor: null
+            );
         }
 
-        var modelAccessor = new Func<object, object>((c) =>
-        {
-            return c == null ? null : propertyHelper.GetValue(c);
-        });
+        var modelAccessor = new Func<object, object>(
+            (c) =>
+            {
+                return c == null ? null : propertyHelper.GetValue(c);
+            }
+        );
 
         return new ModelExplorer(_metadataProvider, this, propertyMetadata, modelAccessor);
     }

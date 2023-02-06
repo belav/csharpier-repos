@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,8 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class X509ClientCertificateAuthenticationElement
-         : ConfigurationElement
+    public sealed partial class X509ClientCertificateAuthenticationElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
@@ -67,104 +66,148 @@ namespace System.ServiceModel.Configuration
         static ConfigurationProperty revocation_mode;
         static ConfigurationProperty trusted_store_location;
 
-        static X509ClientCertificateAuthenticationElement ()
+        static X509ClientCertificateAuthenticationElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            certificate_validation_mode = new ConfigurationProperty ("certificateValidationMode",
-                typeof (X509CertificateValidationMode), "ChainTrust", null/* FIXME: get converter for X509CertificateValidationMode*/, null,
-                ConfigurationPropertyOptions.None);
+            properties = new ConfigurationPropertyCollection();
+            certificate_validation_mode = new ConfigurationProperty(
+                "certificateValidationMode",
+                typeof(X509CertificateValidationMode),
+                "ChainTrust",
+                null /* FIXME: get converter for X509CertificateValidationMode*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            custom_certificate_validator_type = new ConfigurationProperty ("customCertificateValidatorType",
-                typeof (string), "", new StringConverter (), null,
-                ConfigurationPropertyOptions.None);
+            custom_certificate_validator_type = new ConfigurationProperty(
+                "customCertificateValidatorType",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            include_windows_groups = new ConfigurationProperty ("includeWindowsGroups",
-                typeof (bool), "true", new BooleanConverter (), null,
-                ConfigurationPropertyOptions.None);
+            include_windows_groups = new ConfigurationProperty(
+                "includeWindowsGroups",
+                typeof(bool),
+                "true",
+                new BooleanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            map_client_certificate_to_windows_account = new ConfigurationProperty ("mapClientCertificateToWindowsAccount",
-                typeof (bool), "false", new BooleanConverter (), null,
-                ConfigurationPropertyOptions.None);
+            map_client_certificate_to_windows_account = new ConfigurationProperty(
+                "mapClientCertificateToWindowsAccount",
+                typeof(bool),
+                "false",
+                new BooleanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            revocation_mode = new ConfigurationProperty ("revocationMode",
-                typeof (X509RevocationMode), "Online", null/* FIXME: get converter for X509RevocationMode*/, null,
-                ConfigurationPropertyOptions.None);
+            revocation_mode = new ConfigurationProperty(
+                "revocationMode",
+                typeof(X509RevocationMode),
+                "Online",
+                null /* FIXME: get converter for X509RevocationMode*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            trusted_store_location = new ConfigurationProperty ("trustedStoreLocation",
-                typeof (StoreLocation), "LocalMachine", null/* FIXME: get converter for StoreLocation*/, null,
-                ConfigurationPropertyOptions.None);
+            trusted_store_location = new ConfigurationProperty(
+                "trustedStoreLocation",
+                typeof(StoreLocation),
+                "LocalMachine",
+                null /* FIXME: get converter for StoreLocation*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (certificate_validation_mode);
-            properties.Add (custom_certificate_validator_type);
-            properties.Add (include_windows_groups);
-            properties.Add (map_client_certificate_to_windows_account);
-            properties.Add (revocation_mode);
-            properties.Add (trusted_store_location);
+            properties.Add(certificate_validation_mode);
+            properties.Add(custom_certificate_validator_type);
+            properties.Add(include_windows_groups);
+            properties.Add(map_client_certificate_to_windows_account);
+            properties.Add(revocation_mode);
+            properties.Add(trusted_store_location);
         }
 
-        public X509ClientCertificateAuthenticationElement ()
-        {
-        }
-
+        public X509ClientCertificateAuthenticationElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("certificateValidationMode",
-             DefaultValue = "ChainTrust",
-             Options = ConfigurationPropertyOptions.None)]
-        public X509CertificateValidationMode CertificateValidationMode {
-            get { return (X509CertificateValidationMode) base [certificate_validation_mode]; }
-            set { base [certificate_validation_mode] = value; }
+        [ConfigurationProperty(
+            "certificateValidationMode",
+            DefaultValue = "ChainTrust",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public X509CertificateValidationMode CertificateValidationMode
+        {
+            get { return (X509CertificateValidationMode)base[certificate_validation_mode]; }
+            set { base[certificate_validation_mode] = value; }
         }
 
-        [ConfigurationProperty ("customCertificateValidatorType",
-             DefaultValue = "",
-             Options = ConfigurationPropertyOptions.None)]
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string CustomCertificateValidatorType {
-            get { return (string) base [custom_certificate_validator_type]; }
-            set { base [custom_certificate_validator_type] = value; }
+        [ConfigurationProperty(
+            "customCertificateValidatorType",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string CustomCertificateValidatorType
+        {
+            get { return (string)base[custom_certificate_validator_type]; }
+            set { base[custom_certificate_validator_type] = value; }
         }
 
-        [ConfigurationProperty ("includeWindowsGroups",
+        [ConfigurationProperty(
+            "includeWindowsGroups",
             DefaultValue = true,
-             Options = ConfigurationPropertyOptions.None)]
-        public bool IncludeWindowsGroups {
-            get { return (bool) base [include_windows_groups]; }
-            set { base [include_windows_groups] = value; }
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public bool IncludeWindowsGroups
+        {
+            get { return (bool)base[include_windows_groups]; }
+            set { base[include_windows_groups] = value; }
         }
 
-        [ConfigurationProperty ("mapClientCertificateToWindowsAccount",
+        [ConfigurationProperty(
+            "mapClientCertificateToWindowsAccount",
             DefaultValue = false,
-             Options = ConfigurationPropertyOptions.None)]
-        public bool MapClientCertificateToWindowsAccount {
-            get { return (bool) base [map_client_certificate_to_windows_account]; }
-            set { base [map_client_certificate_to_windows_account] = value; }
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public bool MapClientCertificateToWindowsAccount
+        {
+            get { return (bool)base[map_client_certificate_to_windows_account]; }
+            set { base[map_client_certificate_to_windows_account] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        [ConfigurationProperty ("revocationMode",
-             DefaultValue = "Online",
-             Options = ConfigurationPropertyOptions.None)]
-        public X509RevocationMode RevocationMode {
-            get { return (X509RevocationMode) base [revocation_mode]; }
-            set { base [revocation_mode] = value; }
+        [ConfigurationProperty(
+            "revocationMode",
+            DefaultValue = "Online",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public X509RevocationMode RevocationMode
+        {
+            get { return (X509RevocationMode)base[revocation_mode]; }
+            set { base[revocation_mode] = value; }
         }
 
-        [ConfigurationProperty ("trustedStoreLocation",
-             DefaultValue = "LocalMachine",
-             Options = ConfigurationPropertyOptions.None)]
-        public StoreLocation TrustedStoreLocation {
-            get { return (StoreLocation) base [trusted_store_location]; }
-            set { base [trusted_store_location] = value; }
+        [ConfigurationProperty(
+            "trustedStoreLocation",
+            DefaultValue = "LocalMachine",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public StoreLocation TrustedStoreLocation
+        {
+            get { return (StoreLocation)base[trusted_store_location]; }
+            set { base[trusted_store_location] = value; }
         }
-
-
     }
-
 }

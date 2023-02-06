@@ -10,6 +10,6 @@ public sealed class BoundAttribute : System.Attribute
 
 class C
 {
-    [Bound (D = "Dude!")]
+    [Bound(D = "Dude!")]
     double d2;
 }

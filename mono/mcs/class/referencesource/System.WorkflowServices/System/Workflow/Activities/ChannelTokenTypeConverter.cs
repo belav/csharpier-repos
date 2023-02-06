@@ -32,7 +32,11 @@ namespace System.Workflow.Activities
             return (destinationType == typeof(string));
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             object convertedValue = null;
             string endpointName = value as String;
@@ -57,7 +61,12 @@ namespace System.Workflow.Activities
             return convertedValue;
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             object convertedValue = null;
             ChannelToken endpoint = value as ChannelToken;
@@ -68,11 +77,21 @@ namespace System.Workflow.Activities
             return convertedValue;
         }
 
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
         {
-            PropertyDescriptorCollection properties = base.GetProperties(context, value, attributes);
+            PropertyDescriptorCollection properties = base.GetProperties(
+                context,
+                value,
+                attributes
+            );
             ArrayList props = new ArrayList(properties);
-            return new PropertyDescriptorCollection((PropertyDescriptor[]) props.ToArray(typeof(PropertyDescriptor)));
+            return new PropertyDescriptorCollection(
+                (PropertyDescriptor[])props.ToArray(typeof(PropertyDescriptor))
+            );
         }
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
@@ -83,10 +102,13 @@ namespace System.Workflow.Activities
             {
                 foreach (Activity preceedingActivity in GetPreceedingActivities(activity))
                 {
-                    PropertyDescriptor endpointProperty = TypeDescriptor.GetProperties(preceedingActivity)["ChannelToken"] as PropertyDescriptor;
+                    PropertyDescriptor endpointProperty =
+                        TypeDescriptor.GetProperties(preceedingActivity)["ChannelToken"]
+                        as PropertyDescriptor;
                     if (endpointProperty != null)
                     {
-                        ChannelToken endpoint = endpointProperty.GetValue(preceedingActivity) as ChannelToken;
+                        ChannelToken endpoint =
+                            endpointProperty.GetValue(preceedingActivity) as ChannelToken;
                         if (endpoint != null && !values.Contains(endpoint))
                         {
                             values.Add(endpoint);
@@ -122,7 +144,11 @@ namespace System.Workflow.Activities
 
                     if (containedActivity is CompositeActivity)
                     {
-                        foreach (Activity nestedActivity in GetContainedActivities((CompositeActivity) containedActivity))
+                        foreach (
+                            Activity nestedActivity in GetContainedActivities(
+                                (CompositeActivity)containedActivity
+                            )
+                        )
                         {
                             if (nestedActivity.Enabled)
                             {
@@ -158,7 +184,11 @@ namespace System.Workflow.Activities
 
                             if (siblingActivity is CompositeActivity)
                             {
-                                foreach (Activity containedActivity in GetContainedActivities((CompositeActivity) siblingActivity))
+                                foreach (
+                                    Activity containedActivity in GetContainedActivities(
+                                        (CompositeActivity)siblingActivity
+                                    )
+                                )
                                 {
                                     yield return containedActivity;
                                 }

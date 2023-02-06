@@ -18,33 +18,43 @@ namespace DbLinq.Data.Linq.Mapping
 
             switch (member.MemberType)
             {
-                case MemberTypes.Property: {
+                case MemberTypes.Property:
+                {
                     MethodInfo method = ((PropertyInfo)member).GetSetMethod();
                     if (method != null)
                         return Delegate.CreateDelegate(delegateType, method);
-                    var ca = member.GetCustomAttributes(typeof(ColumnAttribute), true)[0] as ColumnAttribute;
-                    member = declaringType.GetField(ca.Storage,
-                        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                    var ca =
+                        member.GetCustomAttributes(typeof(ColumnAttribute), true)[0]
+                        as ColumnAttribute;
+                    member = declaringType.GetField(
+                        ca.Storage,
+                        BindingFlags.NonPublic
+                            | BindingFlags.Public
+                            | BindingFlags.Instance
+                            | BindingFlags.Static
+                    );
                     goto case MemberTypes.Field;
                 }
                 case MemberTypes.Field:
-                    {
-                        DynamicMethod m = new DynamicMethod("setter", 
-                            typeof(void), 
-                            new Type[] { declaringType, memberType },
-                            true);
-                        ILGenerator cg = m.GetILGenerator();
-                    
-                        // arg0.<field> = arg1
-                        cg.Emit(OpCodes.Ldarg_0);
-                        cg.Emit(OpCodes.Ldarg_1);
-                        cg.Emit(OpCodes.Stfld, (FieldInfo)member);
-                        cg.Emit(OpCodes.Ret);
-                    
-                        return m.CreateDelegate(delegateType);
-                    }
+                {
+                    DynamicMethod m = new DynamicMethod(
+                        "setter",
+                        typeof(void),
+                        new Type[] { declaringType, memberType },
+                        true
+                    );
+                    ILGenerator cg = m.GetILGenerator();
+
+                    // arg0.<field> = arg1
+                    cg.Emit(OpCodes.Ldarg_0);
+                    cg.Emit(OpCodes.Ldarg_1);
+                    cg.Emit(OpCodes.Stfld, (FieldInfo)member);
+                    cg.Emit(OpCodes.Ret);
+
+                    return m.CreateDelegate(delegateType);
+                }
                 case MemberTypes.Method:
-                     return Delegate.CreateDelegate(delegateType, (MethodInfo)member);
+                    return Delegate.CreateDelegate(delegateType, (MethodInfo)member);
                 default:
                     throw new InvalidOperationException();
             }
@@ -67,13 +77,21 @@ namespace DbLinq.Data.Linq.Mapping
                 default:
                     throw new InvalidOperationException();
             }
-            Type accessorType = typeof(LambdaMetaAccessor<,>).MakeGenericType(declaringType, memberType);
-            
-            ParameterExpression p = Expression.Parameter(declaringType, "e");
-            return (MetaAccessor)Activator.CreateInstance(accessorType, new object[]{ 
-                Expression.Lambda(Expression.MakeMemberAccess(p, member), p).Compile(),
-                MakeSetter(member, memberType, declaringType) }
+            Type accessorType = typeof(LambdaMetaAccessor<,>).MakeGenericType(
+                declaringType,
+                memberType
             );
+
+            ParameterExpression p = Expression.Parameter(declaringType, "e");
+            return (MetaAccessor)
+                Activator.CreateInstance(
+                    accessorType,
+                    new object[]
+                    {
+                        Expression.Lambda(Expression.MakeMemberAccess(p, member), p).Compile(),
+                        MakeSetter(member, memberType, declaringType)
+                    }
+                );
         }
     }
 

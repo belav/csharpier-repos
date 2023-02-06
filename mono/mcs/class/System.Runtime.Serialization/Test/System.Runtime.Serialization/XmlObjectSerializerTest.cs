@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -50,7 +50,10 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using NUnit.Framework;
 
-[assembly: ContractNamespace ("http://www.u2u.be/samples/wcf/2009", ClrNamespace = "U2U.DataContracts")] // bug #599889
+[assembly: ContractNamespace(
+    "http://www.u2u.be/samples/wcf/2009",
+    ClrNamespace = "U2U.DataContracts"
+)] // bug #599889
 
 namespace MonoTests.System.Runtime.Serialization
 {
@@ -59,9 +62,9 @@ namespace MonoTests.System.Runtime.Serialization
     {
         static readonly XmlWriterSettings settings;
 
-        static DataContractSerializerTest ()
+        static DataContractSerializerTest()
         {
-            settings = new XmlWriterSettings ();
+            settings = new XmlWriterSettings();
             settings.OmitXmlDeclaration = true;
         }
 
@@ -73,299 +76,374 @@ namespace MonoTests.System.Runtime.Serialization
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorTypeNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorTypeNull()
         {
-            new DataContractSerializer (null);
+            new DataContractSerializer(null);
         }
 
         [Test]
-        public void ConstructorKnownTypesNull ()
+        public void ConstructorKnownTypesNull()
         {
             // null knownTypes is allowed. Though the property is filled.
-            Assert.IsNotNull (new DataContractSerializer (typeof (Sample1), (IEnumerable<Type>)null).KnownTypes, "#1");
-            Assert.IsNotNull (new DataContractSerializer (typeof (Sample1), "Foo", String.Empty, null).KnownTypes, "#2");
-            Assert.IsNotNull (new DataContractSerializer (typeof (Sample1), new XmlDictionary ().Add ("Foo"), XmlDictionaryString.Empty, null).KnownTypes, "#3");
+            Assert.IsNotNull(
+                new DataContractSerializer(typeof(Sample1), (IEnumerable<Type>)null).KnownTypes,
+                "#1"
+            );
+            Assert.IsNotNull(
+                new DataContractSerializer(typeof(Sample1), "Foo", String.Empty, null).KnownTypes,
+                "#2"
+            );
+            Assert.IsNotNull(
+                new DataContractSerializer(
+                    typeof(Sample1),
+                    new XmlDictionary().Add("Foo"),
+                    XmlDictionaryString.Empty,
+                    null
+                ).KnownTypes,
+                "#3"
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNameNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorNameNull()
         {
-            new DataContractSerializer (typeof (Sample1), null, String.Empty);
+            new DataContractSerializer(typeof(Sample1), null, String.Empty);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNamespaceNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorNamespaceNull()
         {
-            new DataContractSerializer (typeof (Sample1), "foo", null);
+            new DataContractSerializer(typeof(Sample1), "foo", null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void ConstructorNegativeMaxObjects ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ConstructorNegativeMaxObjects()
         {
-            new DataContractSerializer (typeof (Sample1), null,
-                -1, false, false, null);
+            new DataContractSerializer(typeof(Sample1), null, -1, false, false, null);
         }
 
         [Test]
-        public void ConstructorMisc ()
+        public void ConstructorMisc()
         {
-            new DataContractSerializer (typeof (GlobalSample1));
+            new DataContractSerializer(typeof(GlobalSample1));
         }
 
         [Test]
-        public void WriteObjectContent ()
+        public void WriteObjectContent()
         {
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter xw = XmlWriter.Create (sw, settings)) {
-                DataContractSerializer ser =
-                    new DataContractSerializer (typeof (string));
-                xw.WriteStartElement ("my-element");
-                ser.WriteObjectContent (xw, "TEST STRING");
-                xw.WriteEndElement ();
+            StringWriter sw = new StringWriter();
+            using (XmlWriter xw = XmlWriter.Create(sw, settings))
+            {
+                DataContractSerializer ser = new DataContractSerializer(typeof(string));
+                xw.WriteStartElement("my-element");
+                ser.WriteObjectContent(xw, "TEST STRING");
+                xw.WriteEndElement();
             }
-            Assert.AreEqual ("<my-element>TEST STRING</my-element>",
-                sw.ToString ());
+            Assert.AreEqual("<my-element>TEST STRING</my-element>", sw.ToString());
         }
 
         [Test]
-        public void WriteObjectToStream ()
+        public void WriteObjectToStream()
         {
-            DataContractSerializer ser =
-                new DataContractSerializer (typeof (int));
-            MemoryStream sw = new MemoryStream ();
-            ser.WriteObject (sw, 1);
-            string expected = "<int xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">1</int>";
-            Assert.AreEqual (expected, Encoding.UTF8.GetString (sw.ToArray ()));
+            DataContractSerializer ser = new DataContractSerializer(typeof(int));
+            MemoryStream sw = new MemoryStream();
+            ser.WriteObject(sw, 1);
+            string expected =
+                "<int xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">1</int>";
+            Assert.AreEqual(expected, Encoding.UTF8.GetString(sw.ToArray()));
         }
 
         [Test]
-        public void ReadObjectFromStream ()
+        public void ReadObjectFromStream()
         {
-            DataContractSerializer ser =
-                new DataContractSerializer (typeof (int));
-            string expected = "<int xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">1</int>";
-            byte[] buf = Encoding.UTF8.GetBytes (expected);
-            MemoryStream sw = new MemoryStream (buf);
-            object res = ser.ReadObject (sw);
-            Assert.AreEqual (1, res);
+            DataContractSerializer ser = new DataContractSerializer(typeof(int));
+            string expected =
+                "<int xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">1</int>";
+            byte[] buf = Encoding.UTF8.GetBytes(expected);
+            MemoryStream sw = new MemoryStream(buf);
+            object res = ser.ReadObject(sw);
+            Assert.AreEqual(1, res);
         }
 
         // int
 
         [Test]
-        public void SerializeInt ()
+        public void SerializeInt()
         {
-            DataContractSerializer ser =
-                new DataContractSerializer (typeof (int));
-            SerializeInt (ser, "<int xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">1</int>");
+            DataContractSerializer ser = new DataContractSerializer(typeof(int));
+            SerializeInt(
+                ser,
+                "<int xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">1</int>"
+            );
         }
-
 
         [Test]
-        [Category ("NotWorking")]
-        public void NetSerializeInt ()
+        [Category("NotWorking")]
+        public void NetSerializeInt()
         {
-            NetDataContractSerializer ser =
-                new NetDataContractSerializer ();
+            NetDataContractSerializer ser = new NetDataContractSerializer();
             // z:Assembly="0" ???
-            SerializeInt (ser, String.Format ("<int z:Type=\"System.Int32\" z:Assembly=\"0\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\" xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">1</int>", typeof (int).Assembly.FullName));
+            SerializeInt(
+                ser,
+                String.Format(
+                    "<int z:Type=\"System.Int32\" z:Assembly=\"0\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\" xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">1</int>",
+                    typeof(int).Assembly.FullName
+                )
+            );
         }
 
-        void SerializeInt (XmlObjectSerializer ser, string expected)
+        void SerializeInt(XmlObjectSerializer ser, string expected)
         {
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, 1);
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, 1);
             }
-            Assert.AreEqual (expected, sw.ToString ());
+            Assert.AreEqual(expected, sw.ToString());
         }
 
         // pass typeof(DCEmpty), serialize int
 
         [Test]
-        public void SerializeIntForDCEmpty ()
+        public void SerializeIntForDCEmpty()
         {
-            DataContractSerializer ser =
-                new DataContractSerializer (typeof (DCEmpty));
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCEmpty));
             // tricky!
-            SerializeIntForDCEmpty (ser, "<DCEmpty xmlns:d1p1=\"http://www.w3.org/2001/XMLSchema\" i:type=\"d1p1:int\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\">1</DCEmpty>");
+            SerializeIntForDCEmpty(
+                ser,
+                "<DCEmpty xmlns:d1p1=\"http://www.w3.org/2001/XMLSchema\" i:type=\"d1p1:int\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\">1</DCEmpty>"
+            );
         }
 
-        void SerializeIntForDCEmpty (XmlObjectSerializer ser, string expected)
+        void SerializeIntForDCEmpty(XmlObjectSerializer ser, string expected)
         {
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, 1);
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, 1);
             }
-            XmlComparer.AssertAreEqual (expected, sw.ToString ());
+            XmlComparer.AssertAreEqual(expected, sw.ToString());
         }
 
         // DCEmpty
 
         [Test]
-        public void SerializeEmptyClass ()
+        public void SerializeEmptyClass()
         {
-            DataContractSerializer ser =
-                new DataContractSerializer (typeof (DCEmpty));
-            SerializeEmptyClass (ser, "<DCEmpty xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\" />");
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCEmpty));
+            SerializeEmptyClass(
+                ser,
+                "<DCEmpty xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\" />"
+            );
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void NetSerializeEmptyClass ()
+        [Category("NotWorking")]
+        public void NetSerializeEmptyClass()
         {
-            NetDataContractSerializer ser =
-                new NetDataContractSerializer ();
-            SerializeEmptyClass (ser, String.Format ("<DCEmpty xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" z:Id=\"1\" z:Type=\"MonoTests.System.Runtime.Serialization.DCEmpty\" z:Assembly=\"{0}\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\" />", this.GetType ().Assembly.FullName));
+            NetDataContractSerializer ser = new NetDataContractSerializer();
+            SerializeEmptyClass(
+                ser,
+                String.Format(
+                    "<DCEmpty xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" z:Id=\"1\" z:Type=\"MonoTests.System.Runtime.Serialization.DCEmpty\" z:Assembly=\"{0}\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\" />",
+                    this.GetType().Assembly.FullName
+                )
+            );
         }
 
-        void SerializeEmptyClass (XmlObjectSerializer ser, string expected)
+        void SerializeEmptyClass(XmlObjectSerializer ser, string expected)
         {
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new DCEmpty ());
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new DCEmpty());
             }
-            Assert.AreEqual (expected, sw.ToString ());
+            Assert.AreEqual(expected, sw.ToString());
         }
 
         // DCEmpty
 
         [Test]
-        public void SerializeEmptyNoNSClass ()
+        public void SerializeEmptyNoNSClass()
         {
-            var ser = new DataContractSerializer (typeof (DCEmptyNoNS));
-            SerializeEmptyNoNSClass (ser, "<DCEmptyNoNS xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" />");
+            var ser = new DataContractSerializer(typeof(DCEmptyNoNS));
+            SerializeEmptyNoNSClass(
+                ser,
+                "<DCEmptyNoNS xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" />"
+            );
         }
 
-        void SerializeEmptyNoNSClass (XmlObjectSerializer ser, string expected)
+        void SerializeEmptyNoNSClass(XmlObjectSerializer ser, string expected)
         {
-            var sw = new StringWriter ();
-            using (var w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new DCEmptyNoNS ());
+            var sw = new StringWriter();
+            using (var w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new DCEmptyNoNS());
             }
-            Assert.AreEqual (expected, sw.ToString ());
+            Assert.AreEqual(expected, sw.ToString());
         }
+
         // string (primitive)
 
         [Test]
-        public void SerializePrimitiveString ()
+        public void SerializePrimitiveString()
         {
-            XmlObjectSerializer ser =
-                new DataContractSerializer (typeof (string));
-            SerializePrimitiveString (ser, "<string xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">TEST</string>");
+            XmlObjectSerializer ser = new DataContractSerializer(typeof(string));
+            SerializePrimitiveString(
+                ser,
+                "<string xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">TEST</string>"
+            );
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void NetSerializePrimitiveString ()
+        [Category("NotWorking")]
+        public void NetSerializePrimitiveString()
         {
-            XmlObjectSerializer ser = new NetDataContractSerializer ();
-            SerializePrimitiveString (ser, "<string z:Type=\"System.String\" z:Assembly=\"0\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\" xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">TEST</string>");
+            XmlObjectSerializer ser = new NetDataContractSerializer();
+            SerializePrimitiveString(
+                ser,
+                "<string z:Type=\"System.String\" z:Assembly=\"0\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\" xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">TEST</string>"
+            );
         }
 
-        void SerializePrimitiveString (XmlObjectSerializer ser, string expected)
+        void SerializePrimitiveString(XmlObjectSerializer ser, string expected)
         {
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, "TEST");
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, "TEST");
             }
-            Assert.AreEqual (expected, sw.ToString ());
+            Assert.AreEqual(expected, sw.ToString());
         }
 
         // QName (primitive but ...)
 
         [Test]
-        [Ignore ("These tests would not make any sense right now since it's populated prefix is not testable.")]
-        public void SerializePrimitiveQName ()
+        [Ignore(
+            "These tests would not make any sense right now since it's populated prefix is not testable."
+        )]
+        public void SerializePrimitiveQName()
         {
-            XmlObjectSerializer ser =
-                new DataContractSerializer (typeof (XmlQualifiedName));
-            SerializePrimitiveQName (ser, "<z:QName xmlns:d7=\"urn:foo\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\">d7:foo</z:QName>");
+            XmlObjectSerializer ser = new DataContractSerializer(typeof(XmlQualifiedName));
+            SerializePrimitiveQName(
+                ser,
+                "<z:QName xmlns:d7=\"urn:foo\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\">d7:foo</z:QName>"
+            );
         }
 
         [Test]
-        [Ignore ("These tests would not make any sense right now since it's populated prefix is not testable.")]
-        public void NetSerializePrimitiveQName ()
+        [Ignore(
+            "These tests would not make any sense right now since it's populated prefix is not testable."
+        )]
+        public void NetSerializePrimitiveQName()
         {
-            XmlObjectSerializer ser = new NetDataContractSerializer ();
-            SerializePrimitiveQName (ser, "<z:QName z:Type=\"System.Xml.XmlQualifiedName\" z:Assembly=\"System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\" xmlns:d7=\"urn:foo\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\">d7:foo</z:QName>");
+            XmlObjectSerializer ser = new NetDataContractSerializer();
+            SerializePrimitiveQName(
+                ser,
+                "<z:QName z:Type=\"System.Xml.XmlQualifiedName\" z:Assembly=\"System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\" xmlns:d7=\"urn:foo\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\">d7:foo</z:QName>"
+            );
         }
 
-        void SerializePrimitiveQName (XmlObjectSerializer ser, string expected)
+        void SerializePrimitiveQName(XmlObjectSerializer ser, string expected)
         {
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new XmlQualifiedName ("foo", "urn:foo"));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new XmlQualifiedName("foo", "urn:foo"));
             }
-            Assert.AreEqual (expected, sw.ToString ());
+            Assert.AreEqual(expected, sw.ToString());
         }
 
         // DCSimple1
 
         [Test]
-        public void SerializeSimpleClass1 ()
+        public void SerializeSimpleClass1()
         {
-            DataContractSerializer ser =
-                new DataContractSerializer (typeof (DCSimple1));
-            SerializeSimpleClass1 (ser, "<DCSimple1 xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\"><Foo>TEST</Foo></DCSimple1>");
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCSimple1));
+            SerializeSimpleClass1(
+                ser,
+                "<DCSimple1 xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\"><Foo>TEST</Foo></DCSimple1>"
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (SerializationException))]
-        public void SerializeSimpleXml ()
+        [ExpectedException(typeof(SerializationException))]
+        public void SerializeSimpleXml()
         {
-            DataContractSerializer ser =
-                new DataContractSerializer (typeof (SimpleXml));
-            SerializeSimpleClass1 (ser, @"<simple i:type=""d1p1:DCSimple1"" xmlns:d1p1=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><d1p1:Foo>TEST</d1p1:Foo></simple>");
+            DataContractSerializer ser = new DataContractSerializer(typeof(SimpleXml));
+            SerializeSimpleClass1(
+                ser,
+                @"<simple i:type=""d1p1:DCSimple1"" xmlns:d1p1=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><d1p1:Foo>TEST</d1p1:Foo></simple>"
+            );
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void NetSerializeSimpleClass1 ()
+        [Category("NotWorking")]
+        public void NetSerializeSimpleClass1()
         {
-            NetDataContractSerializer ser =
-                new NetDataContractSerializer ();
-            SerializeSimpleClass1 (ser, String.Format ("<DCSimple1 xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" z:Id=\"1\" z:Type=\"MonoTests.System.Runtime.Serialization.DCSimple1\" z:Assembly=\"{0}\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\"><Foo z:Id=\"2\">TEST</Foo></DCSimple1>", this.GetType ().Assembly.FullName));
+            NetDataContractSerializer ser = new NetDataContractSerializer();
+            SerializeSimpleClass1(
+                ser,
+                String.Format(
+                    "<DCSimple1 xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" z:Id=\"1\" z:Type=\"MonoTests.System.Runtime.Serialization.DCSimple1\" z:Assembly=\"{0}\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\"><Foo z:Id=\"2\">TEST</Foo></DCSimple1>",
+                    this.GetType().Assembly.FullName
+                )
+            );
         }
 
-        void SerializeSimpleClass1 (XmlObjectSerializer ser, string expected)
+        void SerializeSimpleClass1(XmlObjectSerializer ser, string expected)
         {
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new DCSimple1 ());
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new DCSimple1());
             }
             Console.WriteLine(sw.ToString());
-            Assert.AreEqual (expected, sw.ToString ());
+            Assert.AreEqual(expected, sw.ToString());
         }
 
         // NonDC (behavior changed in 3.5/SP1; not it's not rejected)
 
         [Test]
-        public void SerializeNonDC ()
+        public void SerializeNonDC()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (NonDC));
-            var sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new NonDC ());
+            DataContractSerializer ser = new DataContractSerializer(typeof(NonDC));
+            var sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new NonDC());
             }
-            Assert.AreEqual ("<NonDC xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Whee>whee!</Whee></NonDC>".Replace ('\'', '"'), sw.ToString ());
+            Assert.AreEqual(
+                "<NonDC xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Whee>whee!</Whee></NonDC>".Replace(
+                    '\'',
+                    '"'
+                ),
+                sw.ToString()
+            );
         }
 
         // DCHasNonDC
 
         [Test]
-        public void SerializeDCHasNonDC ()
+        public void SerializeDCHasNonDC()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DCHasNonDC));
-            var sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new DCHasNonDC ());
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCHasNonDC));
+            var sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new DCHasNonDC());
             }
-            Assert.AreEqual ("<DCHasNonDC xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Hoge><Whee>whee!</Whee></Hoge></DCHasNonDC>".Replace ('\'', '"'), sw.ToString ());
+            Assert.AreEqual(
+                "<DCHasNonDC xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Hoge><Whee>whee!</Whee></Hoge></DCHasNonDC>".Replace(
+                    '\'',
+                    '"'
+                ),
+                sw.ToString()
+            );
         }
 
         // DCHasSerializable
@@ -373,115 +451,144 @@ namespace MonoTests.System.Runtime.Serialization
         [Test]
         // DCHasSerializable itself is DataContract and has a field
         // whose type is not contract but serializable.
-        public void SerializeSimpleSerializable1 ()
+        public void SerializeSimpleSerializable1()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DCHasSerializable));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new DCHasSerializable ());
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCHasSerializable));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new DCHasSerializable());
             }
-            Assert.AreEqual ("<DCHasSerializable xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\"><Ser><Doh>doh!</Doh></Ser></DCHasSerializable>", sw.ToString ());
+            Assert.AreEqual(
+                "<DCHasSerializable xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\"><Ser><Doh>doh!</Doh></Ser></DCHasSerializable>",
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeDCWithName ()
+        public void SerializeDCWithName()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DCWithName));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new DCWithName ());
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCWithName));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new DCWithName());
             }
-            Assert.AreEqual ("<Foo xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\"><FooMember>value</FooMember></Foo>", sw.ToString ());
+            Assert.AreEqual(
+                "<Foo xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\"><FooMember>value</FooMember></Foo>",
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeDCWithEmptyName1 ()
+        public void SerializeDCWithEmptyName1()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DCWithEmptyName));
-            StringWriter sw = new StringWriter ();
-            DCWithEmptyName dc = new DCWithEmptyName ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                try {
-                    ser.WriteObject (w, dc);
-                } catch (InvalidDataContractException) {
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCWithEmptyName));
+            StringWriter sw = new StringWriter();
+            DCWithEmptyName dc = new DCWithEmptyName();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                try
+                {
+                    ser.WriteObject(w, dc);
+                }
+                catch (InvalidDataContractException)
+                {
                     return;
                 }
             }
-            Assert.Fail ("Expected InvalidDataContractException");
+            Assert.Fail("Expected InvalidDataContractException");
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void SerializeDCWithEmptyName2 ()
+        [Category("NotWorking")]
+        public void SerializeDCWithEmptyName2()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DCWithName));
-            StringWriter sw = new StringWriter ();
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCWithName));
+            StringWriter sw = new StringWriter();
 
             /* DataContractAttribute.Name == "", not valid */
-            DCWithEmptyName dc = new DCWithEmptyName ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                try {
-                    ser.WriteObject (w, dc);
-                } catch (InvalidDataContractException) {
+            DCWithEmptyName dc = new DCWithEmptyName();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                try
+                {
+                    ser.WriteObject(w, dc);
+                }
+                catch (InvalidDataContractException)
+                {
                     return;
                 }
             }
-            Assert.Fail ("Expected InvalidDataContractException");
+            Assert.Fail("Expected InvalidDataContractException");
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void SerializeDCWithNullName ()
+        [Category("NotWorking")]
+        public void SerializeDCWithNullName()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DCWithNullName));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                try {
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCWithNullName));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                try
+                {
                     /* DataContractAttribute.Name == "", not valid */
-                    ser.WriteObject (w, new DCWithNullName ());
-                } catch (InvalidDataContractException) {
+                    ser.WriteObject(w, new DCWithNullName());
+                }
+                catch (InvalidDataContractException)
+                {
                     return;
                 }
             }
-            Assert.Fail ("Expected InvalidDataContractException");
+            Assert.Fail("Expected InvalidDataContractException");
         }
 
         [Test]
-        public void SerializeDCWithEmptyNamespace1 ()
+        public void SerializeDCWithEmptyNamespace1()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DCWithEmptyNamespace));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new DCWithEmptyNamespace ());
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCWithEmptyNamespace));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new DCWithEmptyNamespace());
             }
         }
 
         // Wrapper.DCWrapped
 
         [Test]
-        public void SerializeWrappedClass ()
+        public void SerializeWrappedClass()
         {
-            DataContractSerializer ser =
-                new DataContractSerializer (typeof (Wrapper.DCWrapped));
-            SerializeWrappedClass (ser, "<Wrapper.DCWrapped xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\" />");
+            DataContractSerializer ser = new DataContractSerializer(typeof(Wrapper.DCWrapped));
+            SerializeWrappedClass(
+                ser,
+                "<Wrapper.DCWrapped xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\" />"
+            );
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void NetSerializeWrappedClass ()
+        [Category("NotWorking")]
+        public void NetSerializeWrappedClass()
         {
-            NetDataContractSerializer ser =
-                new NetDataContractSerializer ();
-            SerializeWrappedClass (ser, String.Format ("<Wrapper.DCWrapped xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" z:Id=\"1\" z:Type=\"MonoTests.System.Runtime.Serialization.Wrapper+DCWrapped\" z:Assembly=\"{0}\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\" />", this.GetType ().Assembly.FullName));
+            NetDataContractSerializer ser = new NetDataContractSerializer();
+            SerializeWrappedClass(
+                ser,
+                String.Format(
+                    "<Wrapper.DCWrapped xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" z:Id=\"1\" z:Type=\"MonoTests.System.Runtime.Serialization.Wrapper+DCWrapped\" z:Assembly=\"{0}\" xmlns:z=\"http://schemas.microsoft.com/2003/10/Serialization/\" xmlns=\"http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization\" />",
+                    this.GetType().Assembly.FullName
+                )
+            );
         }
 
-        void SerializeWrappedClass (XmlObjectSerializer ser, string expected)
+        void SerializeWrappedClass(XmlObjectSerializer ser, string expected)
         {
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new Wrapper.DCWrapped ());
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new Wrapper.DCWrapped());
             }
-            Assert.AreEqual (expected, sw.ToString ());
+            Assert.AreEqual(expected, sw.ToString());
         }
 
         [Test]
@@ -490,779 +597,936 @@ namespace MonoTests.System.Runtime.Serialization
         [ExpectedException (typeof (InvalidDataContractException))]
         [Category ("NotWorking")]
         */
-        public void SerializeReadOnlyCollectionMember ()
+        public void SerializeReadOnlyCollectionMember()
         {
-            DataContractSerializer ser =
-                new DataContractSerializer (typeof (CollectionContainer));
+            DataContractSerializer ser = new DataContractSerializer(typeof(CollectionContainer));
 
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, null);
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, null);
             }
-            Assert.AreEqual ("<CollectionContainer i:nil='true' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization' />".Replace ('\'', '"'), sw.ToString (), "#1");
+            Assert.AreEqual(
+                "<CollectionContainer i:nil='true' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization' />".Replace(
+                    '\'',
+                    '"'
+                ),
+                sw.ToString(),
+                "#1"
+            );
 
-            sw = new StringWriter ();
-            var c = new CollectionContainer ();
-            c.Items.Add ("foo");
-            c.Items.Add ("bar");
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, c);
+            sw = new StringWriter();
+            var c = new CollectionContainer();
+            c.Items.Add("foo");
+            c.Items.Add("bar");
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, c);
             }
-            Assert.AreEqual ("<CollectionContainer xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Items xmlns:d2p1='http://schemas.microsoft.com/2003/10/Serialization/Arrays'><d2p1:string>foo</d2p1:string><d2p1:string>bar</d2p1:string></Items></CollectionContainer>".Replace ('\'', '"'), sw.ToString (), "#2");
+            Assert.AreEqual(
+                "<CollectionContainer xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Items xmlns:d2p1='http://schemas.microsoft.com/2003/10/Serialization/Arrays'><d2p1:string>foo</d2p1:string><d2p1:string>bar</d2p1:string></Items></CollectionContainer>".Replace(
+                    '\'',
+                    '"'
+                ),
+                sw.ToString(),
+                "#2"
+            );
         }
 
         // DataCollectionContainer : Items must have a setter.
         [Test]
         //[ExpectedException (typeof (InvalidDataContractException))]
-        public void SerializeReadOnlyDataCollectionMember ()
+        public void SerializeReadOnlyDataCollectionMember()
         {
-            DataContractSerializer ser =
-                new DataContractSerializer (typeof (DataCollectionContainer));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, null);
+            DataContractSerializer ser = new DataContractSerializer(
+                typeof(DataCollectionContainer)
+            );
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, null);
             }
-            Assert.AreEqual ("<DataCollectionContainer i:nil='true' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization' />".Replace ('\'', '"'), sw.ToString (), "#1");
+            Assert.AreEqual(
+                "<DataCollectionContainer i:nil='true' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization' />".Replace(
+                    '\'',
+                    '"'
+                ),
+                sw.ToString(),
+                "#1"
+            );
 
-            sw = new StringWriter ();
-            var c = new DataCollectionContainer ();
-            c.Items.Add ("foo");
-            c.Items.Add ("bar");
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, c);
+            sw = new StringWriter();
+            var c = new DataCollectionContainer();
+            c.Items.Add("foo");
+            c.Items.Add("bar");
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, c);
             }
-            // LAMESPEC: this is bogus behavior. .NET serializes 
-            // System.String as "string" without overriding its 
+            // LAMESPEC: this is bogus behavior. .NET serializes
+            // System.String as "string" without overriding its
             // element namespace, but then it must be regarded as
             // in parent's namespace. What if there already is an
             // element definition for "string" with the same
             // namespace?
-            Assert.AreEqual ("<DataCollectionContainer xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Items><string>foo</string><string>bar</string></Items></DataCollectionContainer>".Replace ('\'', '"'), sw.ToString (), "#2");
+            Assert.AreEqual(
+                "<DataCollectionContainer xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Items><string>foo</string><string>bar</string></Items></DataCollectionContainer>".Replace(
+                    '\'',
+                    '"'
+                ),
+                sw.ToString(),
+                "#2"
+            );
         }
 
         [Test]
-        public void SerializeGuid ()
+        public void SerializeGuid()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (Guid));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, Guid.Empty);
+            DataContractSerializer ser = new DataContractSerializer(typeof(Guid));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, Guid.Empty);
             }
-            Assert.AreEqual (
+            Assert.AreEqual(
                 "<guid xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">00000000-0000-0000-0000-000000000000</guid>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeEnum ()
+        public void SerializeEnum()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (Colors));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new Colors ());
+            DataContractSerializer ser = new DataContractSerializer(typeof(Colors));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new Colors());
             }
 
-            Assert.AreEqual (
+            Assert.AreEqual(
                 @"<Colors xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">Red</Colors>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeEnum2 ()
+        public void SerializeEnum2()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (Colors));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, 0);
+            DataContractSerializer ser = new DataContractSerializer(typeof(Colors));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, 0);
             }
 
-            XmlComparer.AssertAreEqual (
+            XmlComparer.AssertAreEqual(
                 @"<Colors xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:int"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">0</Colors>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeEnumWithDC ()
+        public void SerializeEnumWithDC()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (ColorsWithDC));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new ColorsWithDC ());
+            DataContractSerializer ser = new DataContractSerializer(typeof(ColorsWithDC));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new ColorsWithDC());
             }
 
-            Assert.AreEqual (
+            Assert.AreEqual(
                 @"<_ColorsWithDC xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">_Red</_ColorsWithDC>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeEnumWithNoDC ()
+        public void SerializeEnumWithNoDC()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (ColorsEnumMemberNoDC));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new ColorsEnumMemberNoDC ());
+            DataContractSerializer ser = new DataContractSerializer(typeof(ColorsEnumMemberNoDC));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new ColorsEnumMemberNoDC());
             }
 
-            Assert.AreEqual (
+            Assert.AreEqual(
                 @"<ColorsEnumMemberNoDC xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">Red</ColorsEnumMemberNoDC>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeEnumWithDC2 ()
+        public void SerializeEnumWithDC2()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (ColorsWithDC));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, 3);
+            DataContractSerializer ser = new DataContractSerializer(typeof(ColorsWithDC));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, 3);
             }
 
-            XmlComparer.AssertAreEqual (
+            XmlComparer.AssertAreEqual(
                 @"<_ColorsWithDC xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:int"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">3</_ColorsWithDC>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (SerializationException))]
-        public void SerializeEnumWithDCInvalid ()
+        [ExpectedException(typeof(SerializationException))]
+        public void SerializeEnumWithDCInvalid()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (ColorsWithDC));
-            StringWriter sw = new StringWriter ();
+            DataContractSerializer ser = new DataContractSerializer(typeof(ColorsWithDC));
+            StringWriter sw = new StringWriter();
             ColorsWithDC cdc = ColorsWithDC.Blue;
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, cdc);
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, cdc);
             }
         }
 
         [Test]
-        public void SerializeDCWithEnum ()
+        public void SerializeDCWithEnum()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DCWithEnum));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new DCWithEnum ());
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCWithEnum));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new DCWithEnum());
             }
- 
-            Assert.AreEqual (
+
+            Assert.AreEqual(
                 @"<DCWithEnum xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><_colors>Red</_colors></DCWithEnum>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeDCWithTwoEnums ()
+        public void SerializeDCWithTwoEnums()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DCWithTwoEnums));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                DCWithTwoEnums e = new DCWithTwoEnums ();
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCWithTwoEnums));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                DCWithTwoEnums e = new DCWithTwoEnums();
                 e.colors = Colors.Blue;
                 e.colors2 = Colors.Green;
-                ser.WriteObject (w, e);
+                ser.WriteObject(w, e);
             }
- 
-            Assert.AreEqual (
+
+            Assert.AreEqual(
                 @"<DCWithTwoEnums xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><colors>Blue</colors><colors2>Green</colors2></DCWithTwoEnums>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeNestingDC2 ()
+        public void SerializeNestingDC2()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (NestingDC2));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                NestingDC2 e = new NestingDC2 ();
-                e.Field = new NestedDC2 ("Something");
-                ser.WriteObject (w, e);
+            DataContractSerializer ser = new DataContractSerializer(typeof(NestingDC2));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                NestingDC2 e = new NestingDC2();
+                e.Field = new NestedDC2("Something");
+                ser.WriteObject(w, e);
             }
- 
-            Assert.AreEqual (
+
+            Assert.AreEqual(
                 @"<NestingDC2 xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""test2""><Field xmlns:d2p1=""test1""><d2p1:Name>Something</d2p1:Name></Field></NestingDC2>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeNestingDC ()
+        public void SerializeNestingDC()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (NestingDC));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                NestingDC e = new NestingDC ();
-                e.Field1 = new NestedDC ("test1");
-                e.Field2 = new NestedDC ("test2");
-                ser.WriteObject (w, e);
+            DataContractSerializer ser = new DataContractSerializer(typeof(NestingDC));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                NestingDC e = new NestingDC();
+                e.Field1 = new NestedDC("test1");
+                e.Field2 = new NestedDC("test2");
+                ser.WriteObject(w, e);
             }
- 
-            Assert.AreEqual (
+
+            Assert.AreEqual(
                 @"<NestingDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><Field1><Name>test1</Name></Field1><Field2><Name>test2</Name></Field2></NestingDC>",
-                sw.ToString ());
-            sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                NestingDC e = new NestingDC ();
-                ser.WriteObject (w, e);
+                sw.ToString()
+            );
+            sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                NestingDC e = new NestingDC();
+                ser.WriteObject(w, e);
             }
- 
-            Assert.AreEqual (
+
+            Assert.AreEqual(
                 @"<NestingDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><Field1 i:nil=""true"" /><Field2 i:nil=""true"" /></NestingDC>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeDerivedDC ()
+        public void SerializeDerivedDC()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DerivedDC));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                DerivedDC e = new DerivedDC ();
-                ser.WriteObject (w, e);
+            DataContractSerializer ser = new DataContractSerializer(typeof(DerivedDC));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                DerivedDC e = new DerivedDC();
+                ser.WriteObject(w, e);
             }
- 
-            Assert.AreEqual (
+
+            Assert.AreEqual(
                 @"<DerivedDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""Derived""><baseVal xmlns=""Base"">0</baseVal><derivedVal>0</derivedVal></DerivedDC>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializerDCArray ()
+        public void SerializerDCArray()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (DCWithEnum []));
-            StringWriter sw = new StringWriter ();
-            DCWithEnum [] arr = new DCWithEnum [2];
-            arr [0] = new DCWithEnum (); arr [0].colors = Colors.Red;
-            arr [1] = new DCWithEnum (); arr [1].colors = Colors.Green;
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, arr);
+            DataContractSerializer ser = new DataContractSerializer(typeof(DCWithEnum[]));
+            StringWriter sw = new StringWriter();
+            DCWithEnum[] arr = new DCWithEnum[2];
+            arr[0] = new DCWithEnum();
+            arr[0].colors = Colors.Red;
+            arr[1] = new DCWithEnum();
+            arr[1].colors = Colors.Green;
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, arr);
             }
 
-            XmlComparer.AssertAreEqual (
+            XmlComparer.AssertAreEqual(
                 @"<ArrayOfDCWithEnum xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><DCWithEnum><_colors>Red</_colors></DCWithEnum><DCWithEnum><_colors>Green</_colors></DCWithEnum></ArrayOfDCWithEnum>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializerDCArray2 ()
+        public void SerializerDCArray2()
         {
-            List<Type> known = new List<Type> ();
-            known.Add (typeof (DCWithEnum));
-            known.Add (typeof (DCSimple1));
-            DataContractSerializer ser = new DataContractSerializer (typeof (object []), known);
-            StringWriter sw = new StringWriter ();
-            object [] arr = new object [2];
-            arr [0] = new DCWithEnum (); ((DCWithEnum)arr [0]).colors = Colors.Red;
-            arr [1] = new DCSimple1 (); ((DCSimple1) arr [1]).Foo = "hello";
+            List<Type> known = new List<Type>();
+            known.Add(typeof(DCWithEnum));
+            known.Add(typeof(DCSimple1));
+            DataContractSerializer ser = new DataContractSerializer(typeof(object[]), known);
+            StringWriter sw = new StringWriter();
+            object[] arr = new object[2];
+            arr[0] = new DCWithEnum();
+            ((DCWithEnum)arr[0]).colors = Colors.Red;
+            arr[1] = new DCSimple1();
+            ((DCSimple1)arr[1]).Foo = "hello";
 
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, arr);
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, arr);
             }
 
-            XmlComparer.AssertAreEqual (
+            XmlComparer.AssertAreEqual(
                 @"<ArrayOfanyType xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><anyType xmlns:d2p1=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"" i:type=""d2p1:DCWithEnum""><d2p1:_colors>Red</d2p1:_colors></anyType><anyType xmlns:d2p1=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"" i:type=""d2p1:DCSimple1""><d2p1:Foo>hello</d2p1:Foo></anyType></ArrayOfanyType>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializerDCArray3 ()
+        public void SerializerDCArray3()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (int []));
-            StringWriter sw = new StringWriter ();
-            int [] arr = new int [2];
-            arr [0] = 1; arr [1] = 2;
+            DataContractSerializer ser = new DataContractSerializer(typeof(int[]));
+            StringWriter sw = new StringWriter();
+            int[] arr = new int[2];
+            arr[0] = 1;
+            arr[1] = 2;
 
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, arr);
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, arr);
             }
 
-            XmlComparer.AssertAreEqual (
+            XmlComparer.AssertAreEqual(
                 @"<ArrayOfint xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><int>1</int><int>2</int></ArrayOfint>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeNonDCArray ()
+        public void SerializeNonDCArray()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (SerializeNonDCArrayType));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter xw = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (xw, new SerializeNonDCArrayType ());
+            DataContractSerializer ser = new DataContractSerializer(
+                typeof(SerializeNonDCArrayType)
+            );
+            StringWriter sw = new StringWriter();
+            using (XmlWriter xw = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(xw, new SerializeNonDCArrayType());
             }
-            Assert.AreEqual (@"<SerializeNonDCArrayType xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><IPAddresses /></SerializeNonDCArrayType>",
-                sw.ToString ());
+            Assert.AreEqual(
+                @"<SerializeNonDCArrayType xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><IPAddresses /></SerializeNonDCArrayType>",
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeNonDCArrayItems ()
+        public void SerializeNonDCArrayItems()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (SerializeNonDCArrayType));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter xw = XmlWriter.Create (sw, settings)) {
-                SerializeNonDCArrayType obj = new SerializeNonDCArrayType ();
-                obj.IPAddresses = new NonDCItem [] {new NonDCItem () { Data = new int [] {1, 2, 3, 4} } };
-                ser.WriteObject (xw, obj);
+            DataContractSerializer ser = new DataContractSerializer(
+                typeof(SerializeNonDCArrayType)
+            );
+            StringWriter sw = new StringWriter();
+            using (XmlWriter xw = XmlWriter.Create(sw, settings))
+            {
+                SerializeNonDCArrayType obj = new SerializeNonDCArrayType();
+                obj.IPAddresses = new NonDCItem[]
+                {
+                    new NonDCItem() { Data = new int[] { 1, 2, 3, 4 } }
+                };
+                ser.WriteObject(xw, obj);
             }
 
-            XmlDocument doc = new XmlDocument ();
-            doc.LoadXml (sw.ToString ());
-            XmlNamespaceManager nsmgr = new XmlNamespaceManager (doc.NameTable);
-            nsmgr.AddNamespace ("s", "http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization");
-            nsmgr.AddNamespace ("n", "http://schemas.datacontract.org/2004/07/System.Net");
-            nsmgr.AddNamespace ("a", "http://schemas.microsoft.com/2003/10/Serialization/Arrays");
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(sw.ToString());
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace(
+                "s",
+                "http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"
+            );
+            nsmgr.AddNamespace("n", "http://schemas.datacontract.org/2004/07/System.Net");
+            nsmgr.AddNamespace("a", "http://schemas.microsoft.com/2003/10/Serialization/Arrays");
 
-            Assert.AreEqual (1, doc.SelectNodes ("/s:SerializeNonDCArrayType/s:IPAddresses/s:NonDCItem", nsmgr).Count, "#1");
-            XmlElement el = doc.SelectSingleNode ("/s:SerializeNonDCArrayType/s:IPAddresses/s:NonDCItem/s:Data", nsmgr) as XmlElement;
-            Assert.IsNotNull (el, "#3");
-            Assert.AreEqual (4, el.SelectNodes ("a:int", nsmgr).Count, "#4");
+            Assert.AreEqual(
+                1,
+                doc.SelectNodes(
+                    "/s:SerializeNonDCArrayType/s:IPAddresses/s:NonDCItem",
+                    nsmgr
+                ).Count,
+                "#1"
+            );
+            XmlElement el =
+                doc.SelectSingleNode(
+                    "/s:SerializeNonDCArrayType/s:IPAddresses/s:NonDCItem/s:Data",
+                    nsmgr
+                ) as XmlElement;
+            Assert.IsNotNull(el, "#3");
+            Assert.AreEqual(4, el.SelectNodes("a:int", nsmgr).Count, "#4");
         }
 
         [Test]
-        public void SerializeArrayOfAnyTypeGuid ()
+        public void SerializeArrayOfAnyTypeGuid()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof(object[]));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new object[] { Guid.Empty });
+            DataContractSerializer ser = new DataContractSerializer(typeof(object[]));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new object[] { Guid.Empty });
             }
 
-            XmlComparer.AssertAreEqual (
+            XmlComparer.AssertAreEqual(
                 "<ArrayOfanyType xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"><anyType xmlns:d2p1=\"http://schemas.microsoft.com/2003/10/Serialization/\" i:type=\"d2p1:guid\">00000000-0000-0000-0000-000000000000</anyType></ArrayOfanyType>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void SerializeArrayOfAnyTypeChar ()
+        public void SerializeArrayOfAnyTypeChar()
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof(object[]));
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new object[] { new char () });
+            DataContractSerializer ser = new DataContractSerializer(typeof(object[]));
+            StringWriter sw = new StringWriter();
+            using (XmlWriter w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new object[] { new char() });
             }
 
-            XmlComparer.AssertAreEqual (
+            XmlComparer.AssertAreEqual(
                 "<ArrayOfanyType xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"><anyType xmlns:d2p1=\"http://schemas.microsoft.com/2003/10/Serialization/\" i:type=\"d2p1:char\">0</anyType></ArrayOfanyType>",
-                sw.ToString ());
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void DeserializeEnum ()
+        public void DeserializeEnum()
         {
-            Colors c = Deserialize<Colors> (
-                @"<Colors xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">Red</Colors>");
+            Colors c = Deserialize<Colors>(
+                @"<Colors xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">Red</Colors>"
+            );
 
-            Assert.AreEqual (Colors.Red, c, "#de2");
+            Assert.AreEqual(Colors.Red, c, "#de2");
         }
 
         [Test]
-        public void DeserializeEnum2 ()
+        public void DeserializeEnum2()
         {
-            Colors c = Deserialize<Colors> (
+            Colors c = Deserialize<Colors>(
                 @"<Colors xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:int"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">1</Colors>",
-                typeof (int));
+                typeof(int)
+            );
 
-            Assert.AreEqual (Colors.Green, c, "#de4");
+            Assert.AreEqual(Colors.Green, c, "#de4");
         }
-        
+
         [Test]
-        [ExpectedException (typeof (SerializationException))]
-        public void DeserializeEnumInvalid1 ()
+        [ExpectedException(typeof(SerializationException))]
+        public void DeserializeEnumInvalid1()
         {
-            Deserialize<Colors> (
-                @"<Colors xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""></Colors>");
+            Deserialize<Colors>(
+                @"<Colors xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""></Colors>"
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (SerializationException))]
-        public void DeserializeEnumInvalid2 ()
+        [ExpectedException(typeof(SerializationException))]
+        public void DeserializeEnumInvalid2()
         {
-            Deserialize<Colors> (
-                @"<Colors xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""/>");
+            Deserialize<Colors>(
+                @"<Colors xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""/>"
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (SerializationException))]
-        public void DeserializeEnumInvalid3 ()
+        [ExpectedException(typeof(SerializationException))]
+        public void DeserializeEnumInvalid3()
         {
             //"red" instead of "Red"
-            Deserialize<Colors> (
-                @"<Colors xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">red</Colors>");
+            Deserialize<Colors>(
+                @"<Colors xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">red</Colors>"
+            );
         }
 
         [Test]
-        public void DeserializeEnumFlags ()
+        public void DeserializeEnumFlags()
         {
-            Deserialize<Colors2> (
-                @"<Colors2 xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""/>");
+            Deserialize<Colors2>(
+                @"<Colors2 xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""/>"
+            );
         }
 
         [Test]
-        public void DeserializeEnumWithDC ()
+        public void DeserializeEnumWithDC()
         {
-            ColorsWithDC cdc = Deserialize<ColorsWithDC> (
-                @"<_ColorsWithDC xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">_Red</_ColorsWithDC>");
-            
-            Assert.AreEqual (ColorsWithDC.Red, cdc, "#de6");
+            ColorsWithDC cdc = Deserialize<ColorsWithDC>(
+                @"<_ColorsWithDC xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">_Red</_ColorsWithDC>"
+            );
+
+            Assert.AreEqual(ColorsWithDC.Red, cdc, "#de6");
         }
 
         [Test]
-        [ExpectedException (typeof (SerializationException))]
-        public void DeserializeEnumWithDCInvalid ()
+        [ExpectedException(typeof(SerializationException))]
+        public void DeserializeEnumWithDCInvalid()
         {
-            Deserialize<ColorsWithDC> (
-                @"<_ColorsWithDC xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">NonExistant</_ColorsWithDC>");
+            Deserialize<ColorsWithDC>(
+                @"<_ColorsWithDC xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">NonExistant</_ColorsWithDC>"
+            );
         }
 
         [Test]
-        public void DeserializeDCWithEnum ()
+        public void DeserializeDCWithEnum()
         {
-            DCWithEnum dc = Deserialize<DCWithEnum> (
-                @"<DCWithEnum xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><_colors>Red</_colors></DCWithEnum>");
+            DCWithEnum dc = Deserialize<DCWithEnum>(
+                @"<DCWithEnum xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><_colors>Red</_colors></DCWithEnum>"
+            );
 
-            Assert.AreEqual (Colors.Red, dc.colors, "#de8");
+            Assert.AreEqual(Colors.Red, dc.colors, "#de8");
         }
 
         [Test]
-        public void DeserializeNestingDC ()
+        public void DeserializeNestingDC()
         {
-            NestingDC dc = Deserialize<NestingDC> (
-                @"<NestingDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><Field1><Name>test1</Name></Field1><Field2><Name>test2</Name></Field2></NestingDC>");
+            NestingDC dc = Deserialize<NestingDC>(
+                @"<NestingDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><Field1><Name>test1</Name></Field1><Field2><Name>test2</Name></Field2></NestingDC>"
+            );
 
-            Assert.IsNotNull (dc.Field1, "#N1: Field1 should not be null.");
-            Assert.IsNotNull (dc.Field2, "#N2: Field2 should not be null.");
-            Assert.AreEqual ("test1", dc.Field1.Name, "#1");
-            Assert.AreEqual ("test2", dc.Field2.Name, "#2");
+            Assert.IsNotNull(dc.Field1, "#N1: Field1 should not be null.");
+            Assert.IsNotNull(dc.Field2, "#N2: Field2 should not be null.");
+            Assert.AreEqual("test1", dc.Field1.Name, "#1");
+            Assert.AreEqual("test2", dc.Field2.Name, "#2");
         }
 
         [Test]
-        public void DeserializeNestingDC2 ()
+        public void DeserializeNestingDC2()
         {
-            NestingDC2 dc = Deserialize<NestingDC2> (
-                @"<NestingDC2 xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""test2""><Field xmlns:d2p1=""test1""><d2p1:Name>Something</d2p1:Name></Field></NestingDC2>");
+            NestingDC2 dc = Deserialize<NestingDC2>(
+                @"<NestingDC2 xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""test2""><Field xmlns:d2p1=""test1""><d2p1:Name>Something</d2p1:Name></Field></NestingDC2>"
+            );
 
-            Assert.IsNotNull (dc.Field, "#N1: Field should not be null.");
-            Assert.AreEqual ("Something", dc.Field.Name, "#N2");
+            Assert.IsNotNull(dc.Field, "#N1: Field should not be null.");
+            Assert.AreEqual("Something", dc.Field.Name, "#N2");
         }
 
         [Test]
-        public void DeserializeDerivedDC ()
+        public void DeserializeDerivedDC()
         {
-            DerivedDC dc = Deserialize<DerivedDC> (
-                @"<DerivedDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""Derived""><baseVal xmlns=""Base"">1</baseVal><derivedVal>2</derivedVal></DerivedDC>");
+            DerivedDC dc = Deserialize<DerivedDC>(
+                @"<DerivedDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""Derived""><baseVal xmlns=""Base"">1</baseVal><derivedVal>2</derivedVal></DerivedDC>"
+            );
 
-            Assert.AreEqual (1, dc.baseVal, "#N1");
-            Assert.AreEqual (2, dc.derivedVal, "#N2");
+            Assert.AreEqual(1, dc.baseVal, "#N1");
+            Assert.AreEqual(2, dc.derivedVal, "#N2");
         }
 
         [Test]
-        public void DeserializeTwice ()
+        public void DeserializeTwice()
         {
-            string xml = 
+            string xml =
                 @"<any><_ColorsWithDC xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">_Red</_ColorsWithDC> <_ColorsWithDC xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">_Red</_ColorsWithDC></any>";
-            DataContractSerializer ser = new DataContractSerializer (typeof (ColorsWithDC));
-            XmlReader xr = XmlReader.Create (new StringReader (xml), new XmlReaderSettings ());
-            xr.ReadStartElement ();
-            object o = ser.ReadObject (xr);
-            Assert.AreEqual (typeof (ColorsWithDC), o.GetType (), "#de5");
-            ColorsWithDC cdc = (ColorsWithDC) o;
-            Assert.AreEqual (ColorsWithDC.Red, o, "#de6");
+            DataContractSerializer ser = new DataContractSerializer(typeof(ColorsWithDC));
+            XmlReader xr = XmlReader.Create(new StringReader(xml), new XmlReaderSettings());
+            xr.ReadStartElement();
+            object o = ser.ReadObject(xr);
+            Assert.AreEqual(typeof(ColorsWithDC), o.GetType(), "#de5");
+            ColorsWithDC cdc = (ColorsWithDC)o;
+            Assert.AreEqual(ColorsWithDC.Red, o, "#de6");
 
-            o = ser.ReadObject (xr);
-            Assert.AreEqual (typeof (ColorsWithDC), o.GetType (), "#de5");
-            cdc = (ColorsWithDC) o;
-            Assert.AreEqual (ColorsWithDC.Red, o, "#de6");
-            Assert.AreEqual (XmlNodeType.EndElement, xr.NodeType, "#de6");
-            Assert.AreEqual ("any", xr.LocalName, "#de6");
-            xr.ReadEndElement ();
-        }
-
-
-        [Test]
-        public void DeserializeEmptyNestingDC ()
-        {
-            NestingDC dc = Deserialize<NestingDC> (
-                @"<NestingDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""></NestingDC>");
-
-            Assert.IsNotNull (dc, "#A0: The object should not be null.");
-            Assert.IsNull (dc.Field1, "#A1: Field1 should be null.");
-            Assert.IsNull (dc.Field2, "#A2: Field2 should be null.");
-
-            dc = Deserialize<NestingDC> (
-                @"<NestingDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""/>");
-
-            Assert.IsNotNull (dc, "#B0: The object should not be null.");
-            Assert.IsNull (dc.Field1, "#B1: Field1 should be null.");
-            Assert.IsNull (dc.Field2, "#B2: Field2 should be null.");
-
-            dc = Deserialize<NestingDC> (
-                @"<NestingDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><Field1 i:nil=""true"" /><Field2 i:nil=""true"" /></NestingDC>");
-
-            Assert.IsNotNull (dc, "#B0: The object should not be null.");
-            Assert.IsNull (dc.Field1, "#B1: Field1 should be null.");
-            Assert.IsNull (dc.Field2, "#B2: Field2 should be null.");
+            o = ser.ReadObject(xr);
+            Assert.AreEqual(typeof(ColorsWithDC), o.GetType(), "#de5");
+            cdc = (ColorsWithDC)o;
+            Assert.AreEqual(ColorsWithDC.Red, o, "#de6");
+            Assert.AreEqual(XmlNodeType.EndElement, xr.NodeType, "#de6");
+            Assert.AreEqual("any", xr.LocalName, "#de6");
+            xr.ReadEndElement();
         }
 
         [Test]
-        [ExpectedException (typeof (SerializationException))]
-        public void DeserializeEmptyDCWithTwoEnums ()
+        public void DeserializeEmptyNestingDC()
         {
-            Deserialize<DCWithTwoEnums> (
-                @"<DCWithTwoEnums xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><colors i:nil=""true""/><colors2 i:nil=""true""/></DCWithTwoEnums>");
+            NestingDC dc = Deserialize<NestingDC>(
+                @"<NestingDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""></NestingDC>"
+            );
+
+            Assert.IsNotNull(dc, "#A0: The object should not be null.");
+            Assert.IsNull(dc.Field1, "#A1: Field1 should be null.");
+            Assert.IsNull(dc.Field2, "#A2: Field2 should be null.");
+
+            dc = Deserialize<NestingDC>(
+                @"<NestingDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""/>"
+            );
+
+            Assert.IsNotNull(dc, "#B0: The object should not be null.");
+            Assert.IsNull(dc.Field1, "#B1: Field1 should be null.");
+            Assert.IsNull(dc.Field2, "#B2: Field2 should be null.");
+
+            dc = Deserialize<NestingDC>(
+                @"<NestingDC xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><Field1 i:nil=""true"" /><Field2 i:nil=""true"" /></NestingDC>"
+            );
+
+            Assert.IsNotNull(dc, "#B0: The object should not be null.");
+            Assert.IsNull(dc.Field1, "#B1: Field1 should be null.");
+            Assert.IsNull(dc.Field2, "#B2: Field2 should be null.");
         }
 
         [Test]
-        public void DeserializeDCWithNullableEnum ()
+        [ExpectedException(typeof(SerializationException))]
+        public void DeserializeEmptyDCWithTwoEnums()
         {
-            DCWithNullableEnum dc = Deserialize<DCWithNullableEnum> (
-                @"<DCWithNullableEnum xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><colors i:nil=""true""/></DCWithNullableEnum>");
-
-            Assert.IsNull (dc.colors, "#B1: Field should be null.");
+            Deserialize<DCWithTwoEnums>(
+                @"<DCWithTwoEnums xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><colors i:nil=""true""/><colors2 i:nil=""true""/></DCWithTwoEnums>"
+            );
         }
 
         [Test]
-        public void DeserializeDCWithTwoEnums ()
+        public void DeserializeDCWithNullableEnum()
         {
-            DCWithTwoEnums dc = Deserialize<DCWithTwoEnums> (
-                @"<DCWithTwoEnums xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><colors>Blue</colors><colors2>Green</colors2></DCWithTwoEnums>");
+            DCWithNullableEnum dc = Deserialize<DCWithNullableEnum>(
+                @"<DCWithNullableEnum xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><colors i:nil=""true""/></DCWithNullableEnum>"
+            );
 
-            Assert.AreEqual (Colors.Blue, dc.colors, "#0");
-            Assert.AreEqual (Colors.Green, dc.colors2, "#1");
+            Assert.IsNull(dc.colors, "#B1: Field should be null.");
         }
 
         [Test]
-        public void DeserializerDCArray ()
+        public void DeserializeDCWithTwoEnums()
         {
-            DCWithEnum [] dcArray = Deserialize<DCWithEnum []> (
-                @"<ArrayOfDCWithEnum xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><DCWithEnum><_colors>Red</_colors></DCWithEnum><DCWithEnum><_colors>Green</_colors></DCWithEnum></ArrayOfDCWithEnum>");
+            DCWithTwoEnums dc = Deserialize<DCWithTwoEnums>(
+                @"<DCWithTwoEnums xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><colors>Blue</colors><colors2>Green</colors2></DCWithTwoEnums>"
+            );
 
-            Assert.AreEqual (2, dcArray.Length, "#N1");
-            Assert.AreEqual (Colors.Red, dcArray [0].colors, "#N2");
-            Assert.AreEqual (Colors.Green, dcArray [1].colors, "#N3");
+            Assert.AreEqual(Colors.Blue, dc.colors, "#0");
+            Assert.AreEqual(Colors.Green, dc.colors2, "#1");
         }
 
         [Test]
-        public void DeserializerDCArray2 ()
+        public void DeserializerDCArray()
         {
-            string xml = 
+            DCWithEnum[] dcArray = Deserialize<DCWithEnum[]>(
+                @"<ArrayOfDCWithEnum xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><DCWithEnum><_colors>Red</_colors></DCWithEnum><DCWithEnum><_colors>Green</_colors></DCWithEnum></ArrayOfDCWithEnum>"
+            );
+
+            Assert.AreEqual(2, dcArray.Length, "#N1");
+            Assert.AreEqual(Colors.Red, dcArray[0].colors, "#N2");
+            Assert.AreEqual(Colors.Green, dcArray[1].colors, "#N3");
+        }
+
+        [Test]
+        public void DeserializerDCArray2()
+        {
+            string xml =
                 @"<ArrayOfanyType xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><anyType xmlns:d2p1=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"" i:type=""d2p1:DCWithEnum""><d2p1:_colors>Red</d2p1:_colors></anyType><anyType xmlns:d2p1=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"" i:type=""d2p1:DCSimple1""><d2p1:Foo>hello</d2p1:Foo></anyType></ArrayOfanyType>";
 
-            List<Type> known = new List<Type> ();
-            known.Add (typeof (DCWithEnum));
-            known.Add (typeof (DCSimple1));
-            DataContractSerializer ser = new DataContractSerializer (typeof (object []), known);
-            XmlReader xr = XmlReader.Create (new StringReader (xml));
+            List<Type> known = new List<Type>();
+            known.Add(typeof(DCWithEnum));
+            known.Add(typeof(DCSimple1));
+            DataContractSerializer ser = new DataContractSerializer(typeof(object[]), known);
+            XmlReader xr = XmlReader.Create(new StringReader(xml));
 
-            object [] dc = (object []) ser.ReadObject (xr);
-            Assert.AreEqual (2, dc.Length, "#N1");
-            Assert.AreEqual (typeof (DCWithEnum), dc [0].GetType (), "#N2");
-            DCWithEnum dc0 = (DCWithEnum) dc [0];
-            Assert.AreEqual (Colors.Red, dc0.colors, "#N3");
-            Assert.AreEqual (typeof (DCSimple1), dc [1].GetType (), "#N4");
-            DCSimple1 dc1 = (DCSimple1) dc [1];
-            Assert.AreEqual ("hello", dc1.Foo, "#N4");
+            object[] dc = (object[])ser.ReadObject(xr);
+            Assert.AreEqual(2, dc.Length, "#N1");
+            Assert.AreEqual(typeof(DCWithEnum), dc[0].GetType(), "#N2");
+            DCWithEnum dc0 = (DCWithEnum)dc[0];
+            Assert.AreEqual(Colors.Red, dc0.colors, "#N3");
+            Assert.AreEqual(typeof(DCSimple1), dc[1].GetType(), "#N4");
+            DCSimple1 dc1 = (DCSimple1)dc[1];
+            Assert.AreEqual("hello", dc1.Foo, "#N4");
         }
 
         [Test]
-        public void DeserializerDCArray3 ()
+        public void DeserializerDCArray3()
         {
-            int [] intArray = Deserialize<int []> (
-                @"<ArrayOfint xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><int>1</int><int>2</int></ArrayOfint>");
+            int[] intArray = Deserialize<int[]>(
+                @"<ArrayOfint xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><int>1</int><int>2</int></ArrayOfint>"
+            );
 
-            Assert.AreEqual (2, intArray.Length, "#N0");
-            Assert.AreEqual (1, intArray [0], "#N1");
-            Assert.AreEqual (2, intArray [1], "#N2");
+            Assert.AreEqual(2, intArray.Length, "#N0");
+            Assert.AreEqual(1, intArray[0], "#N1");
+            Assert.AreEqual(2, intArray[1], "#N2");
         }
 
         [Test]
-        public void ReadObjectNoVerifyObjectName ()
+        public void ReadObjectNoVerifyObjectName()
         {
-            string xml = @"<any><Member1 xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization1"">bar1</Member1><Member1 xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization2"">bar2</Member1><Member1 xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">bar</Member1></any>";
-            VerifyObjectNameTestData res = (VerifyObjectNameTestData)new DataContractSerializer (typeof (VerifyObjectNameTestData))
-                .ReadObject (XmlReader.Create (new StringReader (xml)), false);
-            Assert.AreEqual ("bar", res.GetMember());
+            string xml =
+                @"<any><Member1 xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization1"">bar1</Member1><Member1 xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization2"">bar2</Member1><Member1 xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization"">bar</Member1></any>";
+            VerifyObjectNameTestData res = (VerifyObjectNameTestData)
+                new DataContractSerializer(typeof(VerifyObjectNameTestData)).ReadObject(
+                    XmlReader.Create(new StringReader(xml)),
+                    false
+                );
+            Assert.AreEqual("bar", res.GetMember());
         }
 
         [Test]
-        public void ReadObjectVerifyObjectName ()
+        public void ReadObjectVerifyObjectName()
         {
-            string xml = @"<VerifyObjectNameTestData xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><Member1>bar</Member1></VerifyObjectNameTestData>";
-            VerifyObjectNameTestData res = (VerifyObjectNameTestData)new DataContractSerializer (typeof (VerifyObjectNameTestData))
-                .ReadObject (XmlReader.Create (new StringReader (xml)));
-            Assert.AreEqual ("bar", res.GetMember());
+            string xml =
+                @"<VerifyObjectNameTestData xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><Member1>bar</Member1></VerifyObjectNameTestData>";
+            VerifyObjectNameTestData res = (VerifyObjectNameTestData)
+                new DataContractSerializer(typeof(VerifyObjectNameTestData)).ReadObject(
+                    XmlReader.Create(new StringReader(xml))
+                );
+            Assert.AreEqual("bar", res.GetMember());
         }
 
         [Test]
-        [ExpectedException (typeof (SerializationException))]
-        public void ReadObjectWrongNamespace ()
+        [ExpectedException(typeof(SerializationException))]
+        public void ReadObjectWrongNamespace()
         {
-            string xml = @"<VerifyObjectNameTestData xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization2""><Member1>bar</Member1></VerifyObjectNameTestData>";
-            new DataContractSerializer (typeof (VerifyObjectNameTestData))
-                .ReadObject (XmlReader.Create (new StringReader (xml)));
+            string xml =
+                @"<VerifyObjectNameTestData xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization2""><Member1>bar</Member1></VerifyObjectNameTestData>";
+            new DataContractSerializer(typeof(VerifyObjectNameTestData)).ReadObject(
+                XmlReader.Create(new StringReader(xml))
+            );
         }
 
         [Test]
-        public void ReferenceSerialization ()
+        public void ReferenceSerialization()
         {
-            var dc = new DataContractSerializer (typeof (ReferenceWrapper));
-            var t = new ReferenceType ();
-            StringWriter sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw)) {
-                xw.WriteStartElement ("z", "root", "http://schemas.microsoft.com/2003/10/Serialization/");
-                dc.WriteObject (xw, new ReferenceWrapper () {T = t, T2 = t});
-                xw.WriteEndElement ();
+            var dc = new DataContractSerializer(typeof(ReferenceWrapper));
+            var t = new ReferenceType();
+            StringWriter sw = new StringWriter();
+            using (var xw = XmlWriter.Create(sw))
+            {
+                xw.WriteStartElement(
+                    "z",
+                    "root",
+                    "http://schemas.microsoft.com/2003/10/Serialization/"
+                );
+                dc.WriteObject(xw, new ReferenceWrapper() { T = t, T2 = t });
+                xw.WriteEndElement();
             }
-            string xml = @"<?xml version='1.0' encoding='utf-16'?><z:root xmlns:z='http://schemas.microsoft.com/2003/10/Serialization/'><ReferenceWrapper xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><T z:Id='i1'><F>x</F></T><T2 z:Ref='i1' /></ReferenceWrapper></z:root>";
-            Assert.AreEqual (xml.Replace ('\'', '"'), sw.ToString (), "#1");
+            string xml =
+                @"<?xml version='1.0' encoding='utf-16'?><z:root xmlns:z='http://schemas.microsoft.com/2003/10/Serialization/'><ReferenceWrapper xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><T z:Id='i1'><F>x</F></T><T2 z:Ref='i1' /></ReferenceWrapper></z:root>";
+            Assert.AreEqual(xml.Replace('\'', '"'), sw.ToString(), "#1");
 
             ReferenceWrapper w;
-            using (XmlReader r = XmlReader.Create (new StringReader (xml)))
-    {
-                r.ReadStartElement ();
-                w = (ReferenceWrapper) dc.ReadObject (r);
-                r.ReadEndElement ();
+            using (XmlReader r = XmlReader.Create(new StringReader(xml)))
+            {
+                r.ReadStartElement();
+                w = (ReferenceWrapper)dc.ReadObject(r);
+                r.ReadEndElement();
             }
-            Assert.AreEqual (w.T, w.T2, "#2");
+            Assert.AreEqual(w.T, w.T2, "#2");
         }
 
         [Test]
-        public void GenericSerialization ()
+        public void GenericSerialization()
         {
-            var sw = new StringWriter ();
-            var ser  = new DataContractSerializer (typeof (Foo<string,int,int>));
-            using (var xw = XmlWriter.Create (sw))
-                ser.WriteObject (xw, new Foo<string,int,int> () {Field = "f"
-            });
-            var s = sw.ToString ();
+            var sw = new StringWriter();
+            var ser = new DataContractSerializer(typeof(Foo<string, int, int>));
+            using (var xw = XmlWriter.Create(sw))
+                ser.WriteObject(xw, new Foo<string, int, int>() { Field = "f" });
+            var s = sw.ToString();
 
-            var ret = (Foo<string,int,int>) ser.ReadObject (XmlReader.Create (new StringReader (s)));
-            Assert.AreEqual ("f", ret.Field);
+            var ret = (Foo<string, int, int>)ser.ReadObject(XmlReader.Create(new StringReader(s)));
+            Assert.AreEqual("f", ret.Field);
         }
 
         [Test]
-        public void GenericCollectionSerialization ()
+        public void GenericCollectionSerialization()
         {
-            var l = new MyList ();
-            l.Add ("foo");
-            l.Add ("bar");
-            var ds = new DataContractSerializer (typeof (MyList));
-            var sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw))
-                ds.WriteObject (xw, l);
-            l = (MyList) ds.ReadObject (XmlReader.Create (new StringReader (sw.ToString ())));
-            Assert.AreEqual (2, l.Count);
+            var l = new MyList();
+            l.Add("foo");
+            l.Add("bar");
+            var ds = new DataContractSerializer(typeof(MyList));
+            var sw = new StringWriter();
+            using (var xw = XmlWriter.Create(sw))
+                ds.WriteObject(xw, l);
+            l = (MyList)ds.ReadObject(XmlReader.Create(new StringReader(sw.ToString())));
+            Assert.AreEqual(2, l.Count);
         }
 
         [Test]
-        public void GenericListOfKeyValuePairSerialization ()
+        public void GenericListOfKeyValuePairSerialization()
         {
-            string xml = @"<?xml version='1.0' encoding='utf-16'?><ArrayOfKeyValuePairOfstringstring xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/System.Collections.Generic'><KeyValuePairOfstringstring><key>foo</key><value>bar</value></KeyValuePairOfstringstring></ArrayOfKeyValuePairOfstringstring>".Replace ('\'', '"');
+            string xml =
+                @"<?xml version='1.0' encoding='utf-16'?><ArrayOfKeyValuePairOfstringstring xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/System.Collections.Generic'><KeyValuePairOfstringstring><key>foo</key><value>bar</value></KeyValuePairOfstringstring></ArrayOfKeyValuePairOfstringstring>".Replace(
+                    '\'',
+                    '"'
+                );
 
-            var ds = new DataContractSerializer (typeof (List<KeyValuePair<string,string>>));
-            var d = new List<KeyValuePair<string,string>> ();
-            d.Add (new KeyValuePair<string,string> ("foo", "bar"));
-            var sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw))
-                    ds.WriteObject (xw, d);
-            Assert.AreEqual (xml, sw.ToString (), "#1");
-            d = (List<KeyValuePair<string,string>>) ds.ReadObject (XmlReader.Create (new StringReader (xml)));
-            Assert.AreEqual (1, d.Count, "#2");
-            Assert.AreEqual ("bar", d [0].Value, "#3");
+            var ds = new DataContractSerializer(typeof(List<KeyValuePair<string, string>>));
+            var d = new List<KeyValuePair<string, string>>();
+            d.Add(new KeyValuePair<string, string>("foo", "bar"));
+            var sw = new StringWriter();
+            using (var xw = XmlWriter.Create(sw))
+                ds.WriteObject(xw, d);
+            Assert.AreEqual(xml, sw.ToString(), "#1");
+            d =
+                (List<KeyValuePair<string, string>>)
+                    ds.ReadObject(XmlReader.Create(new StringReader(xml)));
+            Assert.AreEqual(1, d.Count, "#2");
+            Assert.AreEqual("bar", d[0].Value, "#3");
         }
 
         [Test]
-        public void GenericListOfDictionaryEntrySerialization ()
+        public void GenericListOfDictionaryEntrySerialization()
         {
-            string xml = @"<?xml version='1.0' encoding='utf-16'?><ArrayOfDictionaryEntry xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/System.Collections'><DictionaryEntry><_key xmlns:d3p1='http://www.w3.org/2001/XMLSchema' i:type='d3p1:string'>foo</_key><_value xmlns:d3p1='http://www.w3.org/2001/XMLSchema' i:type='d3p1:string'>bar</_value></DictionaryEntry></ArrayOfDictionaryEntry>".Replace ('\'', '"');
+            string xml =
+                @"<?xml version='1.0' encoding='utf-16'?><ArrayOfDictionaryEntry xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/System.Collections'><DictionaryEntry><_key xmlns:d3p1='http://www.w3.org/2001/XMLSchema' i:type='d3p1:string'>foo</_key><_value xmlns:d3p1='http://www.w3.org/2001/XMLSchema' i:type='d3p1:string'>bar</_value></DictionaryEntry></ArrayOfDictionaryEntry>".Replace(
+                    '\'',
+                    '"'
+                );
 
-            var ds = new DataContractSerializer (typeof (List<DictionaryEntry>));
-            var d = new List<DictionaryEntry> ();
-            d.Add (new DictionaryEntry ("foo", "bar"));
-            var sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw))
-                ds.WriteObject (xw, d);
-            Assert.AreEqual (xml, sw.ToString (), "#1");
-            Assert.IsTrue (sw.ToString ().IndexOf ("i:type") >= 0);
-            d = (List<DictionaryEntry>) ds.ReadObject (XmlReader.Create (new StringReader (xml)));
-            Assert.AreEqual (1, d.Count, "#2");
-            Assert.AreEqual ("bar", d [0].Value, "#3");
+            var ds = new DataContractSerializer(typeof(List<DictionaryEntry>));
+            var d = new List<DictionaryEntry>();
+            d.Add(new DictionaryEntry("foo", "bar"));
+            var sw = new StringWriter();
+            using (var xw = XmlWriter.Create(sw))
+                ds.WriteObject(xw, d);
+            Assert.AreEqual(xml, sw.ToString(), "#1");
+            Assert.IsTrue(sw.ToString().IndexOf("i:type") >= 0);
+            d = (List<DictionaryEntry>)ds.ReadObject(XmlReader.Create(new StringReader(xml)));
+            Assert.AreEqual(1, d.Count, "#2");
+            Assert.AreEqual("bar", d[0].Value, "#3");
         }
 
         [Test]
-        public void GenericDictionarySerialization ()
+        public void GenericDictionarySerialization()
         {
-            string xml = @"<?xml version='1.0' encoding='utf-16'?><ArrayOfKeyValueOfstringstring xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.microsoft.com/2003/10/Serialization/Arrays'><KeyValueOfstringstring><Key>foo</Key><Value>bar</Value></KeyValueOfstringstring></ArrayOfKeyValueOfstringstring>".Replace ('\'', '"');
+            string xml =
+                @"<?xml version='1.0' encoding='utf-16'?><ArrayOfKeyValueOfstringstring xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.microsoft.com/2003/10/Serialization/Arrays'><KeyValueOfstringstring><Key>foo</Key><Value>bar</Value></KeyValueOfstringstring></ArrayOfKeyValueOfstringstring>".Replace(
+                    '\'',
+                    '"'
+                );
 
-            var ds = new DataContractSerializer (typeof (Dictionary<string,string>));
-            var d = new Dictionary<string,string> ();
-            d ["foo"] = "bar";
-            var sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw))
-                    ds.WriteObject (xw, d);
-            Assert.AreEqual (xml, sw.ToString (), "#1");
-            d = (Dictionary<string,string>) ds.ReadObject (XmlReader.Create (new StringReader (xml)));
-            Assert.AreEqual (1, d.Count, "#2");
-            Assert.AreEqual ("bar", d ["foo"], "#3");
+            var ds = new DataContractSerializer(typeof(Dictionary<string, string>));
+            var d = new Dictionary<string, string>();
+            d["foo"] = "bar";
+            var sw = new StringWriter();
+            using (var xw = XmlWriter.Create(sw))
+                ds.WriteObject(xw, d);
+            Assert.AreEqual(xml, sw.ToString(), "#1");
+            d = (Dictionary<string, string>)ds.ReadObject(XmlReader.Create(new StringReader(xml)));
+            Assert.AreEqual(1, d.Count, "#2");
+            Assert.AreEqual("bar", d["foo"], "#3");
         }
 
         [Test]
-        public void HashtableSerialization ()
+        public void HashtableSerialization()
         {
-            string xml = @"<?xml version='1.0' encoding='utf-16'?><ArrayOfKeyValueOfanyTypeanyType xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.microsoft.com/2003/10/Serialization/Arrays'><KeyValueOfanyTypeanyType><Key xmlns:d3p1='http://www.w3.org/2001/XMLSchema' i:type='d3p1:string'>foo</Key><Value xmlns:d3p1='http://www.w3.org/2001/XMLSchema' i:type='d3p1:string'>bar</Value></KeyValueOfanyTypeanyType></ArrayOfKeyValueOfanyTypeanyType>".Replace ('\'', '"');
+            string xml =
+                @"<?xml version='1.0' encoding='utf-16'?><ArrayOfKeyValueOfanyTypeanyType xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.microsoft.com/2003/10/Serialization/Arrays'><KeyValueOfanyTypeanyType><Key xmlns:d3p1='http://www.w3.org/2001/XMLSchema' i:type='d3p1:string'>foo</Key><Value xmlns:d3p1='http://www.w3.org/2001/XMLSchema' i:type='d3p1:string'>bar</Value></KeyValueOfanyTypeanyType></ArrayOfKeyValueOfanyTypeanyType>".Replace(
+                    '\'',
+                    '"'
+                );
 
-            var ds = new DataContractSerializer (typeof (Hashtable));
-            var d = new Hashtable ();
-            d ["foo"] = "bar";
-            var sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw))
-                    ds.WriteObject (xw, d);
-            Assert.AreEqual (xml, sw.ToString (), "#1");
-            d = (Hashtable) ds.ReadObject (XmlReader.Create (new StringReader (xml)));
-            Assert.AreEqual (1, d.Count, "#2");
-            Assert.AreEqual ("bar", d ["foo"], "#3");
+            var ds = new DataContractSerializer(typeof(Hashtable));
+            var d = new Hashtable();
+            d["foo"] = "bar";
+            var sw = new StringWriter();
+            using (var xw = XmlWriter.Create(sw))
+                ds.WriteObject(xw, d);
+            Assert.AreEqual(xml, sw.ToString(), "#1");
+            d = (Hashtable)ds.ReadObject(XmlReader.Create(new StringReader(xml)));
+            Assert.AreEqual(1, d.Count, "#2");
+            Assert.AreEqual("bar", d["foo"], "#3");
         }
 
         [Test]
-        public void CollectionContarctDictionarySerialization ()
+        public void CollectionContarctDictionarySerialization()
         {
-            string xml = @"<?xml version='1.0' encoding='utf-16'?><NAME xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='urn:foo'><ITEM><KEY>foo</KEY><VALUE>bar</VALUE></ITEM></NAME>".Replace ('\'', '"');
+            string xml =
+                @"<?xml version='1.0' encoding='utf-16'?><NAME xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='urn:foo'><ITEM><KEY>foo</KEY><VALUE>bar</VALUE></ITEM></NAME>".Replace(
+                    '\'',
+                    '"'
+                );
 
-            var ds = new DataContractSerializer (typeof (MyDictionary<string,string>));
-            var d = new MyDictionary<string,string> ();
-            d ["foo"] = "bar";
-            var sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw))
-                    ds.WriteObject (xw, d);
-            Assert.AreEqual (xml, sw.ToString (), "#1");
-            d = (MyDictionary<string,string>) ds.ReadObject (XmlReader.Create (new StringReader (xml)));
-            Assert.AreEqual (1, d.Count, "#2");
-            Assert.AreEqual ("bar", d ["foo"], "#3");
+            var ds = new DataContractSerializer(typeof(MyDictionary<string, string>));
+            var d = new MyDictionary<string, string>();
+            d["foo"] = "bar";
+            var sw = new StringWriter();
+            using (var xw = XmlWriter.Create(sw))
+                ds.WriteObject(xw, d);
+            Assert.AreEqual(xml, sw.ToString(), "#1");
+            d =
+                (MyDictionary<string, string>)
+                    ds.ReadObject(XmlReader.Create(new StringReader(xml)));
+            Assert.AreEqual(1, d.Count, "#2");
+            Assert.AreEqual("bar", d["foo"], "#3");
         }
 
         [Test]
-        public void SerializeInterfaceCollection ()
+        public void SerializeInterfaceCollection()
         {
-            var ser = new DataContractSerializer (typeof (InterfaceCollectionType));
-            var sw = new StringWriter ();
-            var obj = new InterfaceCollectionType ();
-            using (var xw = XmlWriter.Create (sw))
-                ser.WriteObject (xw, obj);
-            using (var xr = XmlReader.Create (new StringReader (sw.ToString ()))) {
-                obj = (InterfaceCollectionType) ser.ReadObject (xr);
-                Assert.IsNull (obj.Array, "#1");
+            var ser = new DataContractSerializer(typeof(InterfaceCollectionType));
+            var sw = new StringWriter();
+            var obj = new InterfaceCollectionType();
+            using (var xw = XmlWriter.Create(sw))
+                ser.WriteObject(xw, obj);
+            using (var xr = XmlReader.Create(new StringReader(sw.ToString())))
+            {
+                obj = (InterfaceCollectionType)ser.ReadObject(xr);
+                Assert.IsNull(obj.Array, "#1");
             }
 
-            sw = new StringWriter ();
-            obj.Array = new List<int> ();
-            obj.Array.Add (5);
-            using (var xw = XmlWriter.Create (sw))
-                ser.WriteObject (xw, obj);
-            using (var xr = XmlReader.Create (new StringReader (sw.ToString ()))) {
-                obj = (InterfaceCollectionType) ser.ReadObject (xr);
-                Assert.AreEqual (5, obj.Array [0], "#2");
+            sw = new StringWriter();
+            obj.Array = new List<int>();
+            obj.Array.Add(5);
+            using (var xw = XmlWriter.Create(sw))
+                ser.WriteObject(xw, obj);
+            using (var xr = XmlReader.Create(new StringReader(sw.ToString())))
+            {
+                obj = (InterfaceCollectionType)ser.ReadObject(xr);
+                Assert.AreEqual(5, obj.Array[0], "#2");
             }
         }
 
         [Test]
-        public void EmptyChildren ()
+        public void EmptyChildren()
         {
-                string xml = @"
+            string xml =
+                @"
 <DummyPlaylist xmlns='http://example.com/schemas/asx'>
         <Entries>
                 <DummyEntry>
@@ -1272,18 +1536,20 @@ namespace MonoTests.System.Runtime.Serialization
         </Entries>
 </DummyPlaylist>
 ";
-            var reader = XmlReader.Create (new StringReader (xml));
-            DummyPlaylist playlist = (DummyPlaylist) new DataContractSerializer (typeof (DummyPlaylist)).ReadObject (reader);
-            Assert.AreEqual (1, playlist.entries.Count, "#1");
-            Assert.IsTrue (playlist.entries [0] is DummyEntry, "#2");
-            Assert.IsNotNull (playlist.entries [0].Href, "#3");
+            var reader = XmlReader.Create(new StringReader(xml));
+            DummyPlaylist playlist = (DummyPlaylist)
+                new DataContractSerializer(typeof(DummyPlaylist)).ReadObject(reader);
+            Assert.AreEqual(1, playlist.entries.Count, "#1");
+            Assert.IsTrue(playlist.entries[0] is DummyEntry, "#2");
+            Assert.IsNotNull(playlist.entries[0].Href, "#3");
         }
 
         [Test]
-        public void BaseKnownTypeAttributes ()
+        public void BaseKnownTypeAttributes()
         {
             // bug #524088
-            string xml = @"
+            string xml =
+                @"
 <DummyPlaylist xmlns='http://example.com/schemas/asx'>
   <Entries>
     <DummyEntry>
@@ -1292,369 +1558,473 @@ namespace MonoTests.System.Runtime.Serialization
   </Entries>
 </DummyPlaylist>";
 
-            using (XmlReader reader = XmlReader.Create (new StringReader (xml))) {
-                DummyPlaylist playlist = new DataContractSerializer(typeof(DummyPlaylist)).ReadObject(reader) as DummyPlaylist;
-                Assert.IsNotNull (playlist);
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                DummyPlaylist playlist =
+                    new DataContractSerializer(typeof(DummyPlaylist)).ReadObject(reader)
+                    as DummyPlaylist;
+                Assert.IsNotNull(playlist);
             }
         }
 
         [Test]
-        public void Bug524083 ()
+        public void Bug524083()
         {
-            string xml = @"
+            string xml =
+                @"
 <AsxEntryInfo xmlns='http://example.com/schemas/asx'>
     <AdvertPrompt/>
 </AsxEntryInfo>";
-                        
-            using (XmlReader reader = XmlReader.Create (new StringReader (xml)))
-                new DataContractSerializer(typeof (AsxEntryInfo)).ReadObject (reader);
-        }
-        
-        [Test]
-        public void Bug539563 ()
-        {
-            new DataContractSerializer (typeof (NestedContractType));
+
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+                new DataContractSerializer(typeof(AsxEntryInfo)).ReadObject(reader);
         }
 
         [Test]
-        public void Bug560155 ()
+        public void Bug539563()
         {
-            var g = Guid.NewGuid ();
-            Person p1 = new Person ("UserName", g);
-            Assert.AreEqual ("name=UserName,id=" + g, p1.ToString (), "#1");
-            MemoryStream memStream = new MemoryStream ();
-            DataContractSerializer ser =  new DataContractSerializer (typeof (Person));
-
-            ser.WriteObject (memStream, p1);
-            memStream.Seek (0, SeekOrigin.Begin);
-            Person p2 = (Person) ser.ReadObject (memStream);
-            Assert.AreEqual ("name=UserName,id=" + g, p2.ToString (), "#1");
+            new DataContractSerializer(typeof(NestedContractType));
         }
 
-        private T Deserialize<T> (string xml)
+        [Test]
+        public void Bug560155()
         {
-            return Deserialize<T> (xml, typeof (T));
+            var g = Guid.NewGuid();
+            Person p1 = new Person("UserName", g);
+            Assert.AreEqual("name=UserName,id=" + g, p1.ToString(), "#1");
+            MemoryStream memStream = new MemoryStream();
+            DataContractSerializer ser = new DataContractSerializer(typeof(Person));
+
+            ser.WriteObject(memStream, p1);
+            memStream.Seek(0, SeekOrigin.Begin);
+            Person p2 = (Person)ser.ReadObject(memStream);
+            Assert.AreEqual("name=UserName,id=" + g, p2.ToString(), "#1");
         }
 
-        private T Deserialize<T> (string xml, Type runtimeType)
+        private T Deserialize<T>(string xml)
         {
-            DataContractSerializer ser = new DataContractSerializer (typeof (T));
-            XmlReader xr = XmlReader.Create (new StringReader (xml), new XmlReaderSettings ());
-            object o = ser.ReadObject (xr);
-            Assert.AreEqual (runtimeType, o.GetType (), "#DS0");
+            return Deserialize<T>(xml, typeof(T));
+        }
+
+        private T Deserialize<T>(string xml, Type runtimeType)
+        {
+            DataContractSerializer ser = new DataContractSerializer(typeof(T));
+            XmlReader xr = XmlReader.Create(new StringReader(xml), new XmlReaderSettings());
+            object o = ser.ReadObject(xr);
+            Assert.AreEqual(runtimeType, o.GetType(), "#DS0");
             return (T)o;
         }
 
-        public Dictionary<string, object> GenericDictionary (Dictionary<string, object> settings)
+        public Dictionary<string, object> GenericDictionary(Dictionary<string, object> settings)
         {
-            using (MemoryStream ms = new MemoryStream ()) {
-                DataContractSerializer save = new DataContractSerializer (settings.GetType ());
-                save.WriteObject (ms, settings);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                DataContractSerializer save = new DataContractSerializer(settings.GetType());
+                save.WriteObject(ms, settings);
 
                 ms.Position = 0;
 
-                DataContractSerializer load = new DataContractSerializer (typeof (Dictionary<string, object>));
-                return (Dictionary<string, object>) load.ReadObject (ms);
+                DataContractSerializer load = new DataContractSerializer(
+                    typeof(Dictionary<string, object>)
+                );
+                return (Dictionary<string, object>)load.ReadObject(ms);
             }
         }
 
         [Test]
-        public void GenericDictionaryEmpty ()
+        public void GenericDictionaryEmpty()
         {
-            Dictionary<string, object> in_settings = new Dictionary<string, object> ();
-            Dictionary<string, object> out_settings = GenericDictionary (in_settings);
-            out_settings.Clear ();
+            Dictionary<string, object> in_settings = new Dictionary<string, object>();
+            Dictionary<string, object> out_settings = GenericDictionary(in_settings);
+            out_settings.Clear();
         }
 
         [Test]
-        public void GenericDictionaryOneElement ()
+        public void GenericDictionaryOneElement()
         {
-            Dictionary<string, object> in_settings = new Dictionary<string, object> ();
-            in_settings.Add ("one", "ONE");
-            Dictionary<string, object> out_settings = GenericDictionary (in_settings);
-            Assert.AreEqual ("ONE", out_settings ["one"], "out");
-            out_settings.Clear ();
+            Dictionary<string, object> in_settings = new Dictionary<string, object>();
+            in_settings.Add("one", "ONE");
+            Dictionary<string, object> out_settings = GenericDictionary(in_settings);
+            Assert.AreEqual("ONE", out_settings["one"], "out");
+            out_settings.Clear();
         }
 
         [Test]
-        public void IgnoreDataMember ()
+        public void IgnoreDataMember()
         {
-            var ser = new DataContractSerializer (typeof (MemberIgnored));
-            var sw = new StringWriter ();
-            using (var w = XmlWriter.Create (sw, settings)) {
-                ser.WriteObject (w, new MemberIgnored ());
+            var ser = new DataContractSerializer(typeof(MemberIgnored));
+            var sw = new StringWriter();
+            using (var w = XmlWriter.Create(sw, settings))
+            {
+                ser.WriteObject(w, new MemberIgnored());
             }
-            Assert.AreEqual (@"<MemberIgnored xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><body><Bar>bar</Bar></body></MemberIgnored>", sw.ToString (), "#1");
+            Assert.AreEqual(
+                @"<MemberIgnored xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization""><body><Bar>bar</Bar></body></MemberIgnored>",
+                sw.ToString(),
+                "#1"
+            );
         }
 
         [Test]
-        public void DeserializeEmptyArray ()
+        public void DeserializeEmptyArray()
         {
-            var ds = new DataContractSerializer (typeof (string []));
-            var sw = new StringWriter ();
-            var xw = XmlWriter.Create (sw);
-            ds.WriteObject (xw, new string [] {});
-            xw.Close ();
-            Console.WriteLine (sw.ToString ());
-            var sr = new StringReader (sw.ToString ());
-            var xr = XmlReader.Create (sr);
-            var ret = ds.ReadObject (xr);
-            Assert.AreEqual (typeof (string []), ret.GetType (), "#1");
+            var ds = new DataContractSerializer(typeof(string[]));
+            var sw = new StringWriter();
+            var xw = XmlWriter.Create(sw);
+            ds.WriteObject(xw, new string[] { });
+            xw.Close();
+            Console.WriteLine(sw.ToString());
+            var sr = new StringReader(sw.ToString());
+            var xr = XmlReader.Create(sr);
+            var ret = ds.ReadObject(xr);
+            Assert.AreEqual(typeof(string[]), ret.GetType(), "#1");
         }
-        
+
         [Test]
-        public void ContractNamespaceAttribute ()
+        public void ContractNamespaceAttribute()
         {
-            var ds = new DataContractSerializer (typeof (U2U.DataContracts.Person));
-            string xml = "<?xml version='1.0' encoding='utf-16'?><Person xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://www.u2u.be/samples/wcf/2009'><Name>Rupert</Name><Occupation><Description>Monkey</Description></Occupation></Person>";
-            var person = new U2U.DataContracts.Person () {
+            var ds = new DataContractSerializer(typeof(U2U.DataContracts.Person));
+            string xml =
+                "<?xml version='1.0' encoding='utf-16'?><Person xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://www.u2u.be/samples/wcf/2009'><Name>Rupert</Name><Occupation><Description>Monkey</Description></Occupation></Person>";
+            var person = new U2U.DataContracts.Person()
+            {
                 Name = "Rupert",
-                Occupation = new U2U.DataContracts.Job () { Description = "Monkey" }
-                };
-            var sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw))
-                ds.WriteObject (xw, person);
-            Assert.AreEqual (xml, sw.ToString ().Replace ('"', '\''), "#1");
+                Occupation = new U2U.DataContracts.Job() { Description = "Monkey" }
+            };
+            var sw = new StringWriter();
+            using (var xw = XmlWriter.Create(sw))
+                ds.WriteObject(xw, person);
+            Assert.AreEqual(xml, sw.ToString().Replace('"', '\''), "#1");
         }
 
         [Test]
-        public void Bug610036 ()
+        public void Bug610036()
         {
-            var ms = new MemoryStream ();
-            Type [] knownTypes = new Type [] { typeof (ParentClass), typeof (Foo), typeof (Bar) };
+            var ms = new MemoryStream();
+            Type[] knownTypes = new Type[] { typeof(ParentClass), typeof(Foo), typeof(Bar) };
 
-                    var ds = new DataContractSerializer (typeof (Root), "Root", "Company.Foo", knownTypes, 1000, false, true, null);
+            var ds = new DataContractSerializer(
+                typeof(Root),
+                "Root",
+                "Company.Foo",
+                knownTypes,
+                1000,
+                false,
+                true,
+                null
+            );
 
-            var root = new Root ("root");
-            var bar1 = new Bar ("bar1");
-            var bar2 = new Bar ("bar2");
-            var bar3 = new Bar ("bar3");
-            
-            var foo1 = new Foo ("foo1");
-            var foo2 = new Foo ("foo2");
-            
-            foo1.FDict.Add (bar1);
-            foo1.FDict.Add (bar2);
-            
-            foo2.FDict.Add (bar1);
-            foo2.FDict.Add (bar3);
-            
-            root.FDict.Add (foo1);
-            root.FDict.Add (foo2);
+            var root = new Root("root");
+            var bar1 = new Bar("bar1");
+            var bar2 = new Bar("bar2");
+            var bar3 = new Bar("bar3");
 
-            ds.WriteObject (ms, root);
-            string result = Encoding.UTF8.GetString (ms.ToArray ());
+            var foo1 = new Foo("foo1");
+            var foo2 = new Foo("foo2");
+
+            foo1.FDict.Add(bar1);
+            foo1.FDict.Add(bar2);
+
+            foo2.FDict.Add(bar1);
+            foo2.FDict.Add(bar3);
+
+            root.FDict.Add(foo1);
+            root.FDict.Add(foo2);
+
+            ds.WriteObject(ms, root);
+            string result = Encoding.UTF8.GetString(ms.ToArray());
             ms.Position = 0;
 
-            root = (Root) ds.ReadObject (ms);
+            root = (Root)ds.ReadObject(ms);
 
-            Assert.AreEqual (2, root.FDict.Count, "#1");
-            int idx = result.IndexOf ("foo1");
-            Assert.IsTrue (idx >= 0, "#2");
+            Assert.AreEqual(2, root.FDict.Count, "#1");
+            int idx = result.IndexOf("foo1");
+            Assert.IsTrue(idx >= 0, "#2");
             // since "foo1" is stored as z:Ref for string, it must not occur twice.
-            int idx2 = result.IndexOf ("foo1", idx + 1);
-            Assert.IsTrue (idx2 < 0, "idx2 should not occur at " + idx2);
+            int idx2 = result.IndexOf("foo1", idx + 1);
+            Assert.IsTrue(idx2 < 0, "idx2 should not occur at " + idx2);
         }
 
         [Test]
-        public void AncestralReference ()
+        public void AncestralReference()
         {
             // Reference to Parent comes inside the Parent itself.
             // In this case, adding reference after complete deserialization won't work (but it should).
-            var ms = new MemoryStream ();
-            Type [] knownTypes = new Type [] { typeof (ParentClass), typeof (Foo), typeof (Bar) };
+            var ms = new MemoryStream();
+            Type[] knownTypes = new Type[] { typeof(ParentClass), typeof(Foo), typeof(Bar) };
 
-                    var ds = new DataContractSerializer (typeof (Parent));
+            var ds = new DataContractSerializer(typeof(Parent));
 
-            var org = new Parent ();
-            ds.WriteObject (ms, org);
-            string result = Encoding.UTF8.GetString (ms.ToArray ());
+            var org = new Parent();
+            ds.WriteObject(ms, org);
+            string result = Encoding.UTF8.GetString(ms.ToArray());
             ms.Position = 0;
 
-            var parent = (Parent) ds.ReadObject (ms);
+            var parent = (Parent)ds.ReadObject(ms);
 
-            Assert.IsNotNull (parent.Child, "#1");
-            Assert.AreEqual (parent, parent.Child.Parent, "#2");
+            Assert.IsNotNull(parent.Child, "#1");
+            Assert.AreEqual(parent, parent.Child.Parent, "#2");
         }
 
 #if !MOBILE
         [Test]
-        public void IXmlSerializableCallConstructor ()
+        public void IXmlSerializableCallConstructor()
         {
-            IXmlSerializableCallConstructor  (false);
-            IXmlSerializableCallConstructor (true);
-        }
-        
-        void IXmlSerializableCallConstructor (bool binary)
-        {
-            Stream s = IXmlSerializableCallConstructorSerialize (binary);
-            var a = new byte [s.Length];
-            s.Position = 0;
-            s.Read (a, 0, a.Length);
-            s.Position = 0;
-            IXmlSerializableCallConstructorDeserialize (s, binary);
+            IXmlSerializableCallConstructor(false);
+            IXmlSerializableCallConstructor(true);
         }
 
-        public Stream IXmlSerializableCallConstructorSerialize (bool binary)
+        void IXmlSerializableCallConstructor(bool binary)
         {
-            var ds = new DataSet ("ds");
-            var dt = new DataTable ("dt");
-            ds.Tables.Add (dt);
-            dt.Columns.Add ("n", typeof (int));
-            dt.Columns.Add ("s", typeof (string));
-            
-            dt.Rows.Add (5, "five");
-            dt.Rows.Add (10, "ten");
-            
-            ds.AcceptChanges ();
-            
-            var s = new MemoryStream ();
-            
-            var w = binary ? XmlDictionaryWriter.CreateBinaryWriter (s) : XmlDictionaryWriter.CreateTextWriter (s);
-            
-            var x = new DataContractSerializer (typeof (DataSet));
-            x.WriteObject (w, ds);
-            w.Flush ();
-    
+            Stream s = IXmlSerializableCallConstructorSerialize(binary);
+            var a = new byte[s.Length];
+            s.Position = 0;
+            s.Read(a, 0, a.Length);
+            s.Position = 0;
+            IXmlSerializableCallConstructorDeserialize(s, binary);
+        }
+
+        public Stream IXmlSerializableCallConstructorSerialize(bool binary)
+        {
+            var ds = new DataSet("ds");
+            var dt = new DataTable("dt");
+            ds.Tables.Add(dt);
+            dt.Columns.Add("n", typeof(int));
+            dt.Columns.Add("s", typeof(string));
+
+            dt.Rows.Add(5, "five");
+            dt.Rows.Add(10, "ten");
+
+            ds.AcceptChanges();
+
+            var s = new MemoryStream();
+
+            var w = binary
+                ? XmlDictionaryWriter.CreateBinaryWriter(s)
+                : XmlDictionaryWriter.CreateTextWriter(s);
+
+            var x = new DataContractSerializer(typeof(DataSet));
+            x.WriteObject(w, ds);
+            w.Flush();
+
             return s;
         }
-        
-        public void IXmlSerializableCallConstructorDeserialize (Stream s, bool binary)
+
+        public void IXmlSerializableCallConstructorDeserialize(Stream s, bool binary)
         {
-            var r = binary ? XmlDictionaryReader.CreateBinaryReader (s, XmlDictionaryReaderQuotas.Max)
-                : XmlDictionaryReader.CreateTextReader (s, XmlDictionaryReaderQuotas.Max);
-            
-            var x = new DataContractSerializer (typeof (DataSet));
-            
-            var ds = (DataSet) x.ReadObject (r);
+            var r = binary
+                ? XmlDictionaryReader.CreateBinaryReader(s, XmlDictionaryReaderQuotas.Max)
+                : XmlDictionaryReader.CreateTextReader(s, XmlDictionaryReaderQuotas.Max);
+
+            var x = new DataContractSerializer(typeof(DataSet));
+
+            var ds = (DataSet)x.ReadObject(r);
         }
 #endif
 
         [Test]
-        [ExpectedException (typeof (InvalidDataContractException))] // BaseConstraintType1 is neither DataContract nor Serializable.
-        public void BaseConstraint1 ()
+        [ExpectedException(typeof(InvalidDataContractException))] // BaseConstraintType1 is neither DataContract nor Serializable.
+        public void BaseConstraint1()
         {
-            new DataContractSerializer (typeof (BaseConstraintType3)).WriteObject (XmlWriter.Create (TextWriter.Null), new BaseConstraintType3 ());
+            new DataContractSerializer(typeof(BaseConstraintType3)).WriteObject(
+                XmlWriter.Create(TextWriter.Null),
+                new BaseConstraintType3()
+            );
         }
 
         [Test]
-        public void BaseConstraint2 ()
+        public void BaseConstraint2()
         {
-            new DataContractSerializer (typeof (BaseConstraintType4)).WriteObject (XmlWriter.Create (TextWriter.Null), new BaseConstraintType4 ());
+            new DataContractSerializer(typeof(BaseConstraintType4)).WriteObject(
+                XmlWriter.Create(TextWriter.Null),
+                new BaseConstraintType4()
+            );
         }
 
         [Test] // bug #652331
-        public void MembersNamespacesInBaseType ()
+        public void MembersNamespacesInBaseType()
         {
             string xml1 = @"<Currency>JPY</Currency><Description i:nil=""true"" />";
-            string xml2 = @"<Currency xmlns=""http://schemas.datacontract.org/2004/07/SLProto5"">JPY</Currency><Description i:nil=""true"" xmlns=""http://schemas.datacontract.org/2004/07/SLProto5"" />";
-            Assert.AreEqual ("JPY", MembersNamespacesInBaseType_Part<SLProto5.CashAmount> (new SLProto5.CashAmount () { Currency = "JPY" }, xml1, "#1").Currency, "r#1");
-            Assert.AreEqual ("JPY", MembersNamespacesInBaseType_Part<SLProto5_Different.CashAmount> (new SLProto5_Different.CashAmount () { Currency = "JPY" }, xml2, "#2").Currency, "r#2");
-            Assert.AreEqual ("JPY", MembersNamespacesInBaseType_Part<SLProto5.CashAmountDC> (new SLProto5.CashAmountDC () { Currency = "JPY" }, xml1, "#3").Currency, "r#3");
-            Assert.AreEqual ("JPY", MembersNamespacesInBaseType_Part<SLProto5_Different.CashAmountDC> (new SLProto5_Different.CashAmountDC () { Currency = "JPY" }, xml2, "#4").Currency, "r#4");
+            string xml2 =
+                @"<Currency xmlns=""http://schemas.datacontract.org/2004/07/SLProto5"">JPY</Currency><Description i:nil=""true"" xmlns=""http://schemas.datacontract.org/2004/07/SLProto5"" />";
+            Assert.AreEqual(
+                "JPY",
+                MembersNamespacesInBaseType_Part<SLProto5.CashAmount>(
+                    new SLProto5.CashAmount() { Currency = "JPY" },
+                    xml1,
+                    "#1"
+                ).Currency,
+                "r#1"
+            );
+            Assert.AreEqual(
+                "JPY",
+                MembersNamespacesInBaseType_Part<SLProto5_Different.CashAmount>(
+                    new SLProto5_Different.CashAmount() { Currency = "JPY" },
+                    xml2,
+                    "#2"
+                ).Currency,
+                "r#2"
+            );
+            Assert.AreEqual(
+                "JPY",
+                MembersNamespacesInBaseType_Part<SLProto5.CashAmountDC>(
+                    new SLProto5.CashAmountDC() { Currency = "JPY" },
+                    xml1,
+                    "#3"
+                ).Currency,
+                "r#3"
+            );
+            Assert.AreEqual(
+                "JPY",
+                MembersNamespacesInBaseType_Part<SLProto5_Different.CashAmountDC>(
+                    new SLProto5_Different.CashAmountDC() { Currency = "JPY" },
+                    xml2,
+                    "#4"
+                ).Currency,
+                "r#4"
+            );
         }
 
-        T MembersNamespacesInBaseType_Part<T> (T instance, string expectedPart, string assert)
+        T MembersNamespacesInBaseType_Part<T>(T instance, string expectedPart, string assert)
         {
-            var ds = new DataContractSerializer (typeof (T));
-            var sw = new StringWriter ();
-            using (var w = XmlWriter.Create (sw))
-                ds.WriteObject (w, instance);
-            Assert.IsTrue (sw.ToString ().IndexOf (expectedPart) > 0, assert);
-            return (T) ds.ReadObject (XmlReader.Create (new StringReader (sw.ToString ())));
+            var ds = new DataContractSerializer(typeof(T));
+            var sw = new StringWriter();
+            using (var w = XmlWriter.Create(sw))
+                ds.WriteObject(w, instance);
+            Assert.IsTrue(sw.ToString().IndexOf(expectedPart) > 0, assert);
+            return (T)ds.ReadObject(XmlReader.Create(new StringReader(sw.ToString())));
         }
 
         [Test]
-        public void DateTimeOffsetSerialization ()
+        public void DateTimeOffsetSerialization()
         {
-            var ds = new DataContractSerializer (typeof (DateTimeOffset));
-            var sw = new StringWriter ();
-            string xml = "<DateTimeOffset xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/System'><DateTime>2011-03-01T02:05:06.078Z</DateTime><OffsetMinutes>120</OffsetMinutes></DateTimeOffset>".Replace ('\'', '"');
-                        
-            var v = new DateTimeOffset (new DateTime (2011, 3, 1, 4, 5, 6, 78), TimeSpan.FromMinutes (120));
-            using (var xw = XmlWriter.Create (sw, settings)) {
-                ds.WriteObject (xw, v);
+            var ds = new DataContractSerializer(typeof(DateTimeOffset));
+            var sw = new StringWriter();
+            string xml =
+                "<DateTimeOffset xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/System'><DateTime>2011-03-01T02:05:06.078Z</DateTime><OffsetMinutes>120</OffsetMinutes></DateTimeOffset>".Replace(
+                    '\'',
+                    '"'
+                );
+
+            var v = new DateTimeOffset(
+                new DateTime(2011, 3, 1, 4, 5, 6, 78),
+                TimeSpan.FromMinutes(120)
+            );
+            using (var xw = XmlWriter.Create(sw, settings))
+            {
+                ds.WriteObject(xw, v);
             }
-            Assert.AreEqual (xml, sw.ToString (), "#1");
-            Assert.AreEqual (v, ds.ReadObject (XmlReader.Create (new StringReader (sw.ToString ()))), "#2");
-        }
-        
-        [Test]
-        public void DateTimeOffsetNullableSerialization ()
-        {
-            var ds = new DataContractSerializer (typeof (DateTimeOffset?));
-            var sw = new StringWriter ();
-            string xml = "<DateTimeOffset xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/System\"><DateTime>2012-05-04T00:34:00Z</DateTime><OffsetMinutes>120</OffsetMinutes></DateTimeOffset>";
-            
-            var v = new DateTimeOffset (new DateTime (2012, 05, 04, 02, 34, 0), TimeSpan.FromMinutes (120));
-            using (var xw = XmlWriter.Create (sw, settings)) {
-                ds.WriteObject (xw, v);
-            }
-            Assert.AreEqual (xml, sw.ToString (), "#1");
-            Assert.AreEqual (v, ds.ReadObject (XmlReader.Create (new StringReader (sw.ToString ()))), "#2");
+            Assert.AreEqual(xml, sw.ToString(), "#1");
+            Assert.AreEqual(
+                v,
+                ds.ReadObject(XmlReader.Create(new StringReader(sw.ToString()))),
+                "#2"
+            );
         }
 
         [Test]
-        public void XmlDocumentSupport ()
+        public void DateTimeOffsetNullableSerialization()
         {
-            var xml = "<XmlDocumentContract xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='urn:foo'><Content><Root xmlns=''>Hello, world!</Root></Content><Nodes><child1 xmlns='' /><child2 xmlns='' /></Nodes></XmlDocumentContract>".Replace ('\'', '"');
+            var ds = new DataContractSerializer(typeof(DateTimeOffset?));
+            var sw = new StringWriter();
+            string xml =
+                "<DateTimeOffset xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/System\"><DateTime>2012-05-04T00:34:00Z</DateTime><OffsetMinutes>120</OffsetMinutes></DateTimeOffset>";
+
+            var v = new DateTimeOffset(
+                new DateTime(2012, 05, 04, 02, 34, 0),
+                TimeSpan.FromMinutes(120)
+            );
+            using (var xw = XmlWriter.Create(sw, settings))
+            {
+                ds.WriteObject(xw, v);
+            }
+            Assert.AreEqual(xml, sw.ToString(), "#1");
+            Assert.AreEqual(
+                v,
+                ds.ReadObject(XmlReader.Create(new StringReader(sw.ToString()))),
+                "#2"
+            );
+        }
+
+        [Test]
+        public void XmlDocumentSupport()
+        {
+            var xml =
+                "<XmlDocumentContract xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='urn:foo'><Content><Root xmlns=''>Hello, world!</Root></Content><Nodes><child1 xmlns='' /><child2 xmlns='' /></Nodes></XmlDocumentContract>".Replace(
+                    '\'',
+                    '"'
+                );
             var xml2 = "<Root>Hello, world!</Root>";
-            var obj = new XmlDocumentContract ();
-            var doc = new XmlDocument ();
-            doc.LoadXml (xml2);
+            var obj = new XmlDocumentContract();
+            var doc = new XmlDocument();
+            doc.LoadXml(xml2);
             obj.Content = doc.DocumentElement;
-            doc = new XmlDocument ();
-            doc.LoadXml ("<root><child1/><child2/></root>");
-            var l = new List<XmlNode> ();
+            doc = new XmlDocument();
+            doc.LoadXml("<root><child1/><child2/></root>");
+            var l = new List<XmlNode>();
             foreach (XmlNode node in doc.DocumentElement.ChildNodes)
-                l.Add (node);
-            obj.Nodes = l.ToArray ();
-            var serializer = new DataContractSerializer (typeof (XmlDocumentContract))
-            ;
-            var sb = new StringBuilder ();
-            using (var writer = new StringWriter (sb))
-                serializer.WriteObject (new XmlTextWriter (writer), obj);
-            Assert.AreEqual (xml, sb.ToString (), "#1");
-            using (var reader = new StringReader (sb.ToString ()))
-                obj = serializer.ReadObject (new XmlTextReader (reader)) as XmlDocumentContract;
-            Assert.AreEqual ("Hello, world!", obj.Content != null ? obj.Content.InnerText : String.Empty, "#2");
-            Assert.AreEqual (2, obj.Nodes != null ? obj.Nodes.Length : -1, "#3");
+                l.Add(node);
+            obj.Nodes = l.ToArray();
+            var serializer = new DataContractSerializer(typeof(XmlDocumentContract));
+            var sb = new StringBuilder();
+            using (var writer = new StringWriter(sb))
+                serializer.WriteObject(new XmlTextWriter(writer), obj);
+            Assert.AreEqual(xml, sb.ToString(), "#1");
+            using (var reader = new StringReader(sb.ToString()))
+                obj = serializer.ReadObject(new XmlTextReader(reader)) as XmlDocumentContract;
+            Assert.AreEqual(
+                "Hello, world!",
+                obj.Content != null ? obj.Content.InnerText : String.Empty,
+                "#2"
+            );
+            Assert.AreEqual(2, obj.Nodes != null ? obj.Nodes.Length : -1, "#3");
         }
 
         [Test]
-        public void ArrayAsEnumerableAsRoot ()
+        public void ArrayAsEnumerableAsRoot()
         {
-            var ds = new DataContractSerializer (typeof (IEnumerable<Guid>));
-            var sw = new StringWriter ();
-            using (var xw = XmlWriter.Create (sw, settings))
-                ds.WriteObject (xw, new Guid [] {Guid.Empty});
-            string xml = "<ArrayOfguid xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.microsoft.com/2003/10/Serialization/Arrays'><guid>00000000-0000-0000-0000-000000000000</guid></ArrayOfguid>".Replace ('\'', '"');
-            Assert.AreEqual (xml, sw.ToString (), "#1");
+            var ds = new DataContractSerializer(typeof(IEnumerable<Guid>));
+            var sw = new StringWriter();
+            using (var xw = XmlWriter.Create(sw, settings))
+                ds.WriteObject(xw, new Guid[] { Guid.Empty });
+            string xml =
+                "<ArrayOfguid xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.microsoft.com/2003/10/Serialization/Arrays'><guid>00000000-0000-0000-0000-000000000000</guid></ArrayOfguid>".Replace(
+                    '\'',
+                    '"'
+                );
+            Assert.AreEqual(xml, sw.ToString(), "#1");
         }
-        
+
         // bug #7957
         [Test]
-        public void DeserializeEmptyDictionary ()
+        public void DeserializeEmptyDictionary()
         {
-            string whatItGets = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+            string whatItGets =
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 + "<MyData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://sickhead.com/types/Example\">"
-                    + "<Data xmlns:b=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"/>"
-                    + "<FirstId>b8a7eb6f-f593-4668-8178-07be9f7266d1</FirstId>"
-                    + "<SecondId>ID-GOES-HERE</SecondId>"
-                    + "</MyData>";
-            var serializer = new DataContractSerializer (typeof (MyData));
-            using (var stream = new MemoryStream (Encoding.UTF8.GetBytes (whatItGets.Replace ("ID-GOES-HERE", Guid.NewGuid ().ToString ()))))
+                + "<Data xmlns:b=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"/>"
+                + "<FirstId>b8a7eb6f-f593-4668-8178-07be9f7266d1</FirstId>"
+                + "<SecondId>ID-GOES-HERE</SecondId>"
+                + "</MyData>";
+            var serializer = new DataContractSerializer(typeof(MyData));
+            using (
+                var stream = new MemoryStream(
+                    Encoding.UTF8.GetBytes(
+                        whatItGets.Replace("ID-GOES-HERE", Guid.NewGuid().ToString())
+                    )
+                )
+            )
             {
-                var data = serializer.ReadObject (stream);
+                var data = serializer.ReadObject(stream);
             }
         }
     }
-    
+
     [DataContract]
     public class MemberIgnored
     {
         [DataMember]
-        MemberIgnoredBody body = new MemberIgnoredBody ();
+        MemberIgnoredBody body = new MemberIgnoredBody();
     }
 
     public class MemberIgnoredBody
@@ -1665,93 +2035,117 @@ namespace MonoTests.System.Runtime.Serialization
         public string Bar = "bar";
     }
 
-    public enum Colors {
-        Red, Green, Blue
+    public enum Colors
+    {
+        Red,
+        Green,
+        Blue
     }
 
     [Flags]
-    public enum Colors2 {
-        Red, Green, Blue
-    }
-
-    [DataContract (Name = "_ColorsWithDC")]
-    public enum ColorsWithDC {
-
-        [EnumMember (Value = "_Red")]
-        Red, 
-        [EnumMember]
-        Green, 
+    public enum Colors2
+    {
+        Red,
+        Green,
         Blue
     }
 
+    [DataContract(Name = "_ColorsWithDC")]
+    public enum ColorsWithDC
+    {
+        [EnumMember(Value = "_Red")]
+        Red,
 
-    public enum ColorsEnumMemberNoDC {
-        [EnumMember (Value = "_Red")]
-        Red, 
         [EnumMember]
-        Green, 
+        Green,
         Blue
     }
 
-     [DataContract]
-    public class DCWithEnum {
-        [DataMember (Name = "_colors")]
+    public enum ColorsEnumMemberNoDC
+    {
+        [EnumMember(Value = "_Red")]
+        Red,
+
+        [EnumMember]
+        Green,
+        Blue
+    }
+
+    [DataContract]
+    public class DCWithEnum
+    {
+        [DataMember(Name = "_colors")]
         public Colors colors;
     }
 
-     [DataContract]
-    public class DCWithTwoEnums {
+    [DataContract]
+    public class DCWithTwoEnums
+    {
         [DataMember]
         public Colors colors;
+
         [DataMember]
         public Colors colors2;
     }
 
-     [DataContract]
-    public class DCWithNullableEnum {
+    [DataContract]
+    public class DCWithNullableEnum
+    {
         [DataMember]
         public Colors? colors;
     }
 
-
-    [DataContract (Namespace = "Base")]
-    public class BaseDC {
+    [DataContract(Namespace = "Base")]
+    public class BaseDC
+    {
         [DataMember]
         public int baseVal;
     }
 
-    [DataContract (Namespace = "Derived")]
-    public class DerivedDC : BaseDC {
+    [DataContract(Namespace = "Derived")]
+    public class DerivedDC : BaseDC
+    {
         [DataMember]
         public int derivedVal;
     }
 
-     [DataContract]
-    public class NestedDC {
-        public NestedDC (string name) { this.Name = name; }
+    [DataContract]
+    public class NestedDC
+    {
+        public NestedDC(string name)
+        {
+            this.Name = name;
+        }
 
         [DataMember]
         public string Name;
     }
 
-     [DataContract]
-    public class NestingDC {
+    [DataContract]
+    public class NestingDC
+    {
         [DataMember]
         public NestedDC Field1;
+
         [DataMember]
         public NestedDC Field2;
     }
 
-     [DataContract (Namespace = "test1")]
-    public class NestedDC2 {
-        public NestedDC2 (string name) { this.Name = name; }
+    [DataContract(Namespace = "test1")]
+    public class NestedDC2
+    {
+        public NestedDC2(string name)
+        {
+            this.Name = name;
+        }
 
         [DataMember]
         public string Name;
     }
 
-     [DataContract (Namespace = "test2")]
-    public class NestingDC2 {
+    [DataContract(Namespace = "test2")]
+    public class NestingDC2
+    {
         [DataMember]
         public NestedDC2 Field;
     }
@@ -1763,10 +2157,8 @@ namespace MonoTests.System.Runtime.Serialization
         public string Foo = "TEST";
     }
 
-    [DataContract (Namespace = "")]
-    public class DCEmptyNoNS
-    {
-    }
+    [DataContract(Namespace = "")]
+    public class DCEmptyNoNS { }
 
     [DataContract]
     public class DCSimple1
@@ -1779,7 +2171,7 @@ namespace MonoTests.System.Runtime.Serialization
     public class DCHasNonDC
     {
         [DataMember]
-        public NonDC Hoge= new NonDC ();
+        public NonDC Hoge = new NonDC();
     }
 
     public class NonDC
@@ -1791,35 +2183,30 @@ namespace MonoTests.System.Runtime.Serialization
     public class DCHasSerializable
     {
         [DataMember]
-        public SimpleSer1 Ser = new SimpleSer1 ();
+        public SimpleSer1 Ser = new SimpleSer1();
     }
 
-    [DataContract (Name = "Foo")]
+    [DataContract(Name = "Foo")]
     public class DCWithName
     {
-        [DataMember (Name = "FooMember")]
+        [DataMember(Name = "FooMember")]
         public string DMWithName = "value";
     }
 
-    [DataContract (Name = "")]
-    public class DCWithEmptyName
-    {
-    }
+    [DataContract(Name = "")]
+    public class DCWithEmptyName { }
 
-    [DataContract (Name = null)]
-    public class DCWithNullName
-    {
-    }
+    [DataContract(Name = null)]
+    public class DCWithNullName { }
 
-    [DataContract (Namespace = "")]
-    public class DCWithEmptyNamespace
-    {
-    }
+    [DataContract(Namespace = "")]
+    public class DCWithEmptyNamespace { }
 
     [Serializable]
     public class SimpleSer1
     {
         public string Doh = "doh!";
+
         [NonSerialized]
         public string Bah = "bah!";
     }
@@ -1827,34 +2214,32 @@ namespace MonoTests.System.Runtime.Serialization
     public class Wrapper
     {
         [DataContract]
-        public class DCWrapped
-        {
-        }
+        public class DCWrapped { }
     }
 
     [DataContract]
     public class CollectionContainer
     {
-        Collection<string> items = new Collection<string> ();
+        Collection<string> items = new Collection<string>();
 
         [DataMember]
-        public Collection<string> Items {
+        public Collection<string> Items
+        {
             get { return items; }
         }
     }
 
     [CollectionDataContract]
-    public class DataCollection<T> : Collection<T>
-    {
-    }
+    public class DataCollection<T> : Collection<T> { }
 
     [DataContract]
     public class DataCollectionContainer
     {
-        DataCollection<string> items = new DataCollection<string> ();
+        DataCollection<string> items = new DataCollection<string>();
 
         [DataMember]
-        public DataCollection<string> Items {
+        public DataCollection<string> Items
+        {
             get { return items; }
         }
     }
@@ -1863,12 +2248,12 @@ namespace MonoTests.System.Runtime.Serialization
     class SerializeNonDCArrayType
     {
         [DataMember]
-        public NonDCItem [] IPAddresses = new NonDCItem [0];
+        public NonDCItem[] IPAddresses = new NonDCItem[0];
     }
 
     public class NonDCItem
     {
-        public int [] Data { get; set; }
+        public int[] Data { get; set; }
     }
 
     [DataContract]
@@ -1877,38 +2262,36 @@ namespace MonoTests.System.Runtime.Serialization
         [DataMember]
         string Member1 = "foo";
 
-        public string GetMember() { return Member1; }
+        public string GetMember()
+        {
+            return Member1;
+        }
     }
 
     [XmlRoot(ElementName = "simple", Namespace = "")]
-    public class SimpleXml : IXmlSerializable 
+    public class SimpleXml : IXmlSerializable
     {
-        void IXmlSerializable.ReadXml (XmlReader reader)
-        {
-        }
+        void IXmlSerializable.ReadXml(XmlReader reader) { }
 
-        void IXmlSerializable.WriteXml (XmlWriter writer)
-        {
-        }
+        void IXmlSerializable.WriteXml(XmlWriter writer) { }
 
-        XmlSchema IXmlSerializable.GetSchema ()
+        XmlSchema IXmlSerializable.GetSchema()
         {
             return null;
         }
-
     }
 
     [DataContract]
     public class ReferenceWrapper
     {
-            [DataMember (Order = 1)]
-            public ReferenceType T;
+        [DataMember(Order = 1)]
+        public ReferenceType T;
 
-            [DataMember (Order = 2)]
-            public ReferenceType T2;
+        [DataMember(Order = 2)]
+        public ReferenceType T2;
     }
 
-    [DataContract (IsReference = true)]
+    [DataContract(IsReference = true)]
     public class ReferenceType
     {
         [DataMember]
@@ -1917,21 +2300,71 @@ namespace MonoTests.System.Runtime.Serialization
 
     public class MyList : IList<string>
     {
-        List<string> l = new List<string> ();
-        public void Clear () { l.Clear (); }
-        public void Add(string s) { l.Add (s);}
-        public void Insert(int idx, string s) { l.Insert(idx,s);}
-        public bool Contains(string s) { return l.Contains(s); }
-        public IEnumerator<string> GetEnumerator () { return l.GetEnumerator (); }
-        IEnumerator IEnumerable.GetEnumerator () { return l.GetEnumerator (); }
-        public bool Remove(string s) { return l.Remove(s); }
-        public void RemoveAt(int i) { l.RemoveAt (i);}
-        public void CopyTo (string [] arr, int index) { l.CopyTo (arr, index);}
-        public int IndexOf (string s) { return l.IndexOf (s); }
-    
-        public int Count { get { return l.Count; } }
-        public bool IsReadOnly { get { return ((IList<string>) l).IsReadOnly; } }
-        public string this [int index] { get { return l [index]; } set { l [index] = value; } }
+        List<string> l = new List<string>();
+
+        public void Clear()
+        {
+            l.Clear();
+        }
+
+        public void Add(string s)
+        {
+            l.Add(s);
+        }
+
+        public void Insert(int idx, string s)
+        {
+            l.Insert(idx, s);
+        }
+
+        public bool Contains(string s)
+        {
+            return l.Contains(s);
+        }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            return l.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return l.GetEnumerator();
+        }
+
+        public bool Remove(string s)
+        {
+            return l.Remove(s);
+        }
+
+        public void RemoveAt(int i)
+        {
+            l.RemoveAt(i);
+        }
+
+        public void CopyTo(string[] arr, int index)
+        {
+            l.CopyTo(arr, index);
+        }
+
+        public int IndexOf(string s)
+        {
+            return l.IndexOf(s);
+        }
+
+        public int Count
+        {
+            get { return l.Count; }
+        }
+        public bool IsReadOnly
+        {
+            get { return ((IList<string>)l).IsReadOnly; }
+        }
+        public string this[int index]
+        {
+            get { return l[index]; }
+            set { l[index] = value; }
+        }
     }
 
     [DataContract]
@@ -1946,44 +2379,40 @@ namespace MonoTests.System.Runtime.Serialization
     {
         [DataMember]
         public NestedContractType Nested;
+
         [DataMember]
         public string X = "x";
     }
 
     class BaseConstraintType1 // non-serializable
-    {
-    }
-    
-    [Serializable]
-    class BaseConstraintType2
-    {
-    }
-    
-    [DataContract]
-    class BaseConstraintType3 : BaseConstraintType1
-    {
-    }
-    
-    [DataContract]
-    class BaseConstraintType4 : BaseConstraintType2
-    {
-    }
+    { }
 
-    [DataContract (Namespace = "urn:foo")]
+    [Serializable]
+    class BaseConstraintType2 { }
+
+    [DataContract]
+    class BaseConstraintType3 : BaseConstraintType1 { }
+
+    [DataContract]
+    class BaseConstraintType4 : BaseConstraintType2 { }
+
+    [DataContract(Namespace = "urn:foo")]
     public class XmlDocumentContract
     {
-        [DataMember (Name = "Content")]
+        [DataMember(Name = "Content")]
         private XmlElement content;
 
-        public XmlElement Content {
+        public XmlElement Content
+        {
             get { return content; }
             set { content = value; }
         }
 
-        [DataMember (Name = "Nodes")]
-        private XmlNode [] nodes;
+        [DataMember(Name = "Nodes")]
+        private XmlNode[] nodes;
 
-        public XmlNode [] Nodes {
+        public XmlNode[] Nodes
+        {
             get { return nodes; }
             set { nodes = value; }
         }
@@ -1991,56 +2420,60 @@ namespace MonoTests.System.Runtime.Serialization
 }
 
 [DataContract]
-class GlobalSample1
-{
-}
+class GlobalSample1 { }
 
 [DataContract]
-class Foo<X,Y,Z>
+class Foo<X, Y, Z>
 {
     [DataMember]
     public X Field;
 }
 
-[CollectionDataContract (Name = "NAME", Namespace = "urn:foo", ItemName = "ITEM", KeyName = "KEY", ValueName = "VALUE")]
-public class MyDictionary<K,V> : Dictionary<K,V>
-{
-}
+[CollectionDataContract(
+    Name = "NAME",
+    Namespace = "urn:foo",
+    ItemName = "ITEM",
+    KeyName = "KEY",
+    ValueName = "VALUE"
+)]
+public class MyDictionary<K, V> : Dictionary<K, V> { }
 
 // bug #524086
-[DataContract(Namespace="http://example.com/schemas/asx")]
+[DataContract(Namespace = "http://example.com/schemas/asx")]
 public class DummyEntry
 {
     [DataMember]
     public DummyEntryInfo EntryInfo { get; set; }
+
     [DataMember]
     public string Href { get; set; }
 }
 
-[DataContract(Namespace="http://example.com/schemas/asx"),
-KnownType(typeof(PartDummyEntryInfo))]
-public abstract class DummyEntryInfo
-{
-}
+[DataContract(Namespace = "http://example.com/schemas/asx"), KnownType(typeof(PartDummyEntryInfo))]
+public abstract class DummyEntryInfo { }
 
-[DataContract(Namespace="http://example.com/schemas/asx")]
+[DataContract(Namespace = "http://example.com/schemas/asx")]
 public class DummyPlaylist
 {
-    public IList<DummyEntry> entries = new List<DummyEntry> ();
+    public IList<DummyEntry> entries = new List<DummyEntry>();
 
     [DataMember]
-    public IList<DummyEntry> Entries { get { return entries; } set {entries = value;} }
+    public IList<DummyEntry> Entries
+    {
+        get { return entries; }
+        set { entries = value; }
+    }
 }
 
-[DataContract(Namespace="http://example.com/schemas/asx")]
+[DataContract(Namespace = "http://example.com/schemas/asx")]
 public class PartDummyEntryInfo : DummyEntryInfo
 {
-    public PartDummyEntryInfo() {}
+    public PartDummyEntryInfo() { }
 }
 
 // bug #524088
 
-[DataContract(Namespace="http://example.com/schemas/asx")]
+[DataContract(Namespace = "http://example.com/schemas/asx")]
 public class AsxEntryInfo
 {
     [DataMember]
@@ -2054,10 +2487,11 @@ public class Person
 {
     [DataMember]
     readonly public string name;
+
     [DataMember]
     readonly public Guid Id = Guid.Empty;
 
-    public Person (string nameIn, Guid idIn)
+    public Person(string nameIn, Guid idIn)
     {
         name = nameIn;
         Id = idIn;
@@ -2065,7 +2499,7 @@ public class Person
 
     public override string ToString()
     {
-        return string.Format ("name={0},id={1}", name, Id);
+        return string.Format("name={0},id={1}", name, Id);
     }
 }
 
@@ -2092,85 +2526,79 @@ namespace U2U.DataContracts
 
 #region bug #610036
 //parent class with a name property
-[DataContract (Namespace = "Company.Foo")]
+[DataContract(Namespace = "Company.Foo")]
 public abstract class ParentClass
 {
-    
     //constructor
-    public ParentClass (string name)
+    public ParentClass(string name)
     {
         Name = name;
     }
-    
+
     //the name
     [DataMember]
-    public string Name{ get; set; }
-
+    public string Name { get; set; }
 }
 
 //root object
-[DataContract (Namespace = "Company.Foo")]
+[DataContract(Namespace = "Company.Foo")]
 public class Root : ParentClass
 {
     //dict
     [DataMember]
-    public Dict<Foo> FDict;    
-    
+    public Dict<Foo> FDict;
+
     //constructor
-    public Root (string name)
-        : base (name)
+    public Root(string name)
+        : base(name)
     {
-        FDict = new Dict<Foo> ();
+        FDict = new Dict<Foo>();
     }
 }
 
-
 //subclass
-[DataContract (Namespace = "Company.Foo")]
+[DataContract(Namespace = "Company.Foo")]
 public class Foo : ParentClass
 {
     //here is one dict
     [DataMember]
     public Dict<Bar> FDict;
-    
+
     //constructor
-    public Foo (string name) 
-        : base (name)
+    public Foo(string name)
+        : base(name)
     {
-        FDict = new Dict<Bar> ();
+        FDict = new Dict<Bar>();
     }
-    
 }
 
 //another sublass
-[DataContract (Namespace = "Company.Foo")]
+[DataContract(Namespace = "Company.Foo")]
 public class Bar : ParentClass
 {
     //constructor
-    public Bar (string name)
-        : base (name)
-    {
-    }
-    
-}
-//the custom dictionary
-[CollectionDataContract (ItemName = "DictItem", Namespace = "Company.Foo")]
-public class Dict<T> : Dictionary<string, T> where T : ParentClass
-{
-    public void Add (T item)
-    {
-        Add (item.Name, item);
-    }
-    
+    public Bar(string name)
+        : base(name) { }
 }
 
-[DataContract (IsReference = true)]
+//the custom dictionary
+[CollectionDataContract(ItemName = "DictItem", Namespace = "Company.Foo")]
+public class Dict<T> : Dictionary<string, T>
+    where T : ParentClass
+{
+    public void Add(T item)
+    {
+        Add(item.Name, item);
+    }
+}
+
+[DataContract(IsReference = true)]
 public class Parent
 {
     //constructor
-    public Parent ()
+    public Parent()
     {
-        Child = new Child (this);
+        Child = new Child(this);
     }
 
     [DataMember]
@@ -2180,29 +2608,23 @@ public class Parent
 [DataContract]
 public class Child
 {
-    public Child ()
-    {
-    }
-    
-    public Child (Parent parent)
+    public Child() { }
+
+    public Child(Parent parent)
     {
         this.Parent = parent;
     }
-    
+
     [DataMember]
     public Parent Parent;
 }
 
 namespace SLProto5
 {
-    public class CashAmount : Amount
-    {
-    }
+    public class CashAmount : Amount { }
 
     [DataContract]
-    public class CashAmountDC : AmountDC
-    {
-    }
+    public class CashAmountDC : AmountDC { }
 
     public class Amount
     {
@@ -2215,6 +2637,7 @@ namespace SLProto5
     {
         [DataMember]
         public string Currency { get; set; }
+
         [DataMember]
         public string Description { get; set; }
     }
@@ -2222,14 +2645,10 @@ namespace SLProto5
 
 namespace SLProto5_Different
 {
-    public class CashAmount : SLProto5.Amount
-    {
-    }
+    public class CashAmount : SLProto5.Amount { }
 
     [DataContract]
-    public class CashAmountDC : SLProto5.AmountDC
-    {
-    }
+    public class CashAmountDC : SLProto5.AmountDC { }
 }
 
 // bug #7957
@@ -2238,7 +2657,7 @@ public class MyData
 {
     public MyData()
     {
-        Data = new Dictionary<int, byte[]> ();
+        Data = new Dictionary<int, byte[]>();
     }
 
     [DataMember]

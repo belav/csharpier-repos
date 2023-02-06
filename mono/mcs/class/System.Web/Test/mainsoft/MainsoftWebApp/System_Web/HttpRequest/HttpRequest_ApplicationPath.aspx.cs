@@ -41,10 +41,9 @@ using GHTWebControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-    public class HttpRequest_ApplicationPath
-        : GHTBaseWeb 
+    public class HttpRequest_ApplicationPath : GHTBaseWeb
     {
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
@@ -59,13 +58,17 @@ namespace GHTTests.System_Web_dll.System_Web
             {
                 // ProjectData.SetProjectError(exception2);
                 Exception exception1 = exception2;
-                this.GHTSubTestAddResult("unxpected " + exception1.GetType().Name + " exception was caught-" + exception1.Message);
+                this.GHTSubTestAddResult(
+                    "unxpected "
+                        + exception1.GetType().Name
+                        + " exception was caught-"
+                        + exception1.Message
+                );
                 // ProjectData.ClearProjectError();
             }
             this.GHTSubTestEnd();
             this.GHTTestEnd();
         }
-
 
         #region Web Form Designer generated code
         override protected void OnInit(EventArgs e)
@@ -76,16 +79,15 @@ namespace GHTTests.System_Web_dll.System_Web
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
-        {    
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
-
     }
 }

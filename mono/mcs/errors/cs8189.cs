@@ -3,15 +3,15 @@
 
 class C
 {
-    delegate ref int D ();
+    delegate ref int D();
 
-    static int M ()
+    static int M()
     {
         return 1;
     }
 
-    static void Main ()
+    static void Main()
     {
-        D d = new D (M);
+        D d = new D(M);
     }
 }

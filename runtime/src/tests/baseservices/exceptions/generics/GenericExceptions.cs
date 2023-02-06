@@ -5,9 +5,7 @@ using System;
 using System.Globalization;
 using System.IO;
 
-class MyException : Exception
-{
-}
+class MyException : Exception { }
 
 public class Help
 {
@@ -17,9 +15,9 @@ public class Help
     public static Object s_object = new object();
 }
 
-public class A<T> where T : Exception
+public class A<T>
+    where T : Exception
 {
-
     public void InstanceFunctionWithFewArgs()
     {
         try
@@ -33,7 +31,7 @@ public class A<T> where T : Exception
 
             Console.WriteLine("Caught matching " + match.GetType());
         }
-        catch(Exception mismatch)
+        catch (Exception mismatch)
         {
             if (Help.s_matchingException)
                 throw new Exception("Should have been caught above", mismatch);
@@ -55,7 +53,7 @@ public class A<T> where T : Exception
 
             Console.WriteLine("Caught matching " + match.GetType());
         }
-        catch(Exception mismatch)
+        catch (Exception mismatch)
         {
             if (Help.s_matchingException)
                 throw new Exception("Should have been caught above", mismatch);
@@ -77,13 +75,14 @@ public class A<T> where T : Exception
 
             Console.WriteLine("Caught matching " + match.GetType());
         }
-        catch(Exception mismatch)
+        catch (Exception mismatch)
         {
             if (Help.s_matchingException)
                 throw new Exception("Should have been caught above", mismatch);
 
             Console.WriteLine("Expected mismatch " + mismatch.GetType());
-        }    }
+        }
+    }
 
     public static void StaticFunctionWithManyArgs(int i, int j, int k, object o)
     {
@@ -98,7 +97,7 @@ public class A<T> where T : Exception
 
             Console.WriteLine("Caught matching " + match.GetType());
         }
-        catch(Exception mismatch)
+        catch (Exception mismatch)
         {
             if (Help.s_matchingException)
                 throw new Exception("Should have been caught above", mismatch);
@@ -107,7 +106,8 @@ public class A<T> where T : Exception
         }
     }
 
-    public static void GenericFunctionWithFewArgs<X>() where X : Exception
+    public static void GenericFunctionWithFewArgs<X>()
+        where X : Exception
     {
         try
         {
@@ -120,7 +120,7 @@ public class A<T> where T : Exception
 
             Console.WriteLine("Caught matching " + match.GetType());
         }
-        catch(Exception mismatch)
+        catch (Exception mismatch)
         {
             if (Help.s_matchingException)
                 throw new Exception("Should have been caught above", mismatch);
@@ -129,7 +129,8 @@ public class A<T> where T : Exception
         }
     }
 
-    public static void GenericFunctionWithManyArgs<X>(int i, int j, int k, object o) where X : Exception
+    public static void GenericFunctionWithManyArgs<X>(int i, int j, int k, object o)
+        where X : Exception
     {
         try
         {
@@ -142,7 +143,7 @@ public class A<T> where T : Exception
 
             Console.WriteLine("Caught matching " + match.GetType());
         }
-        catch(Exception mismatch)
+        catch (Exception mismatch)
         {
             if (Help.s_matchingException)
                 throw new Exception("Should have been caught above", mismatch);
@@ -152,9 +153,9 @@ public class A<T> where T : Exception
     }
 }
 
-public struct Struct<T> where T : Exception
+public struct Struct<T>
+    where T : Exception
 {
-
     public void StructInstanceFunctionWithFewArgs()
     {
         try
@@ -168,7 +169,7 @@ public struct Struct<T> where T : Exception
 
             Console.WriteLine("Caught matching " + match.GetType());
         }
-        catch(Exception mismatch)
+        catch (Exception mismatch)
         {
             if (Help.s_matchingException)
                 throw new Exception("Should have been caught above", mismatch);
@@ -190,7 +191,7 @@ public struct Struct<T> where T : Exception
 
             Console.WriteLine("Caught matching " + match.GetType());
         }
-        catch(Exception mismatch)
+        catch (Exception mismatch)
         {
             if (Help.s_matchingException)
                 throw new Exception("Should have been caught above", mismatch);
@@ -298,36 +299,35 @@ public class GenericExceptions
         (new Struct<MyException>()).StructInstanceFunctionWithManyArgs(1, 2, 3, Help.s_object);
     }
 
-        [System.Runtime.CompilerServices.MethodImpl(
-          System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     public static int Main()
     {
         try
         {
-        Console.WriteLine("This test checks that we can catch generic exceptions.");
-        Console.WriteLine("All exceptions should be handled by the test itself");
+            Console.WriteLine("This test checks that we can catch generic exceptions.");
+            Console.WriteLine("All exceptions should be handled by the test itself");
 
-        InstanceFunctionWithFewArgs();
-        InstanceFunctionWithManyArgs();
+            InstanceFunctionWithFewArgs();
+            InstanceFunctionWithManyArgs();
 
-        StaticFunctionWithFewArgs();
-        StaticFunctionWithManyArgs();
+            StaticFunctionWithFewArgs();
+            StaticFunctionWithManyArgs();
 
-        GenericFunctionWithFewArgs();
-        GenericFunctionWithManyArgs();
+            GenericFunctionWithFewArgs();
+            GenericFunctionWithManyArgs();
 
-        StructInstanceFunctionWithFewArgs();
-        StructInstanceFunctionWithManyArgs();
-
+            StructInstanceFunctionWithFewArgs();
+            StructInstanceFunctionWithManyArgs();
         }
-        catch(Exception)
+        catch (Exception)
         {
-        Console.WriteLine("Test Failed");
-        return -1;
+            Console.WriteLine("Test Failed");
+            return -1;
         }
 
         Console.WriteLine("Test Passed");
         return 100;
     }
-
 }

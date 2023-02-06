@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,8 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Windows {
-    public struct LocalValueEntry {
+namespace System.Windows
+{
+    public struct LocalValueEntry
+    {
         private DependencyProperty property;
         private object value;
 
@@ -36,33 +38,35 @@ namespace System.Windows {
             this.property = property;
             this.value = value;
         }
-        
-        public DependencyProperty Property {
+
+        public DependencyProperty Property
+        {
             get { return property; }
         }
 
-        public object Value {
+        public object Value
+        {
             get { return value; }
         }
 
-        public static bool operator != (LocalValueEntry obj1, LocalValueEntry obj2)
+        public static bool operator !=(LocalValueEntry obj1, LocalValueEntry obj2)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static bool operator == (LocalValueEntry obj1, LocalValueEntry obj2)
+        public static bool operator ==(LocalValueEntry obj1, LocalValueEntry obj2)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

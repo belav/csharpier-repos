@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,7 +30,7 @@
 
 using System.IO;
 
-namespace System.Web.Compilation 
+namespace System.Web.Compilation
 {
     class AppResourceFileInfo
     {
@@ -39,10 +39,12 @@ namespace System.Web.Compilation
         public readonly FileInfo Info;
         public readonly AppResourceFileKind Kind;
         public bool Seen;
-        
-        public AppResourceFileInfo (FileInfo info, AppResourceFileKind kind)
+
+        public AppResourceFileInfo(FileInfo info, AppResourceFileKind kind)
         {
-            this.Embeddable = (kind == AppResourceFileKind.Resource || kind == AppResourceFileKind.Binary);
+            this.Embeddable = (
+                kind == AppResourceFileKind.Resource || kind == AppResourceFileKind.Binary
+            );
             this.Compilable = (kind == AppResourceFileKind.ResX);
             this.Info = info;
             this.Kind = kind;

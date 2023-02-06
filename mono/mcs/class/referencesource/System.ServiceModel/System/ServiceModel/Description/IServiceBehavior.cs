@@ -14,7 +14,15 @@ namespace System.ServiceModel.Description
     public interface IServiceBehavior
     {
         void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase);
-        void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters);
-        void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase);
+        void AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters
+        );
+        void ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        );
     }
 }

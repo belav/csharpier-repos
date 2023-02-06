@@ -13,7 +13,9 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 /// which requires at least one instance of the specified claim type, and, if allowed values are specified,
 /// the claim value must be any of the allowed values.
 /// </summary>
-public class ClaimsAuthorizationRequirement : AuthorizationHandler<ClaimsAuthorizationRequirement>, IAuthorizationRequirement
+public class ClaimsAuthorizationRequirement
+    : AuthorizationHandler<ClaimsAuthorizationRequirement>,
+        IAuthorizationRequirement
 {
     private readonly bool _emptyAllowedValues;
 
@@ -50,7 +52,10 @@ public class ClaimsAuthorizationRequirement : AuthorizationHandler<ClaimsAuthori
     /// </summary>
     /// <param name="context">The authorization context.</param>
     /// <param name="requirement">The requirement to evaluate.</param>
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ClaimsAuthorizationRequirement requirement)
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        ClaimsAuthorizationRequirement requirement
+    )
     {
         if (context.User != null)
         {
@@ -59,7 +64,13 @@ public class ClaimsAuthorizationRequirement : AuthorizationHandler<ClaimsAuthori
             {
                 foreach (var claim in context.User.Claims)
                 {
-                    if (string.Equals(claim.Type, requirement.ClaimType, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            claim.Type,
+                            requirement.ClaimType,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         found = true;
                         break;
@@ -70,8 +81,14 @@ public class ClaimsAuthorizationRequirement : AuthorizationHandler<ClaimsAuthori
             {
                 foreach (var claim in context.User.Claims)
                 {
-                    if (string.Equals(claim.Type, requirement.ClaimType, StringComparison.OrdinalIgnoreCase)
-                        && requirement.AllowedValues!.Contains(claim.Value, StringComparer.Ordinal))
+                    if (
+                        string.Equals(
+                            claim.Type,
+                            requirement.ClaimType,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        && requirement.AllowedValues!.Contains(claim.Value, StringComparer.Ordinal)
+                    )
                     {
                         found = true;
                         break;
@@ -89,9 +106,10 @@ public class ClaimsAuthorizationRequirement : AuthorizationHandler<ClaimsAuthori
     /// <inheritdoc />
     public override string ToString()
     {
-        var value = (_emptyAllowedValues)
-            ? string.Empty
-            : $" and Claim.Value is one of the following values: ({string.Join("|", AllowedValues!)})";
+        var value =
+            (_emptyAllowedValues)
+                ? string.Empty
+                : $" and Claim.Value is one of the following values: ({string.Join("|", AllowedValues!)})";
 
         return $"{nameof(ClaimsAuthorizationRequirement)}:Claim.Type={ClaimType}{value}";
     }

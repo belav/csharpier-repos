@@ -12,10 +12,14 @@ internal static class ImplementsDirective
         DirectiveKind.SingleLine,
         builder =>
         {
-            builder.AddTypeToken(ComponentResources.ImplementsDirective_TypeToken_Name, ComponentResources.ImplementsDirective_TypeToken_Description);
+            builder.AddTypeToken(
+                ComponentResources.ImplementsDirective_TypeToken_Name,
+                ComponentResources.ImplementsDirective_TypeToken_Description
+            );
             builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
             builder.Description = ComponentResources.ImplementsDirective_Description;
-        });
+        }
+    );
 
     public static void Register(RazorProjectEngineBuilder builder)
     {
@@ -24,7 +28,12 @@ internal static class ImplementsDirective
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.AddDirective(Directive, FileKinds.Legacy, FileKinds.Component, FileKinds.ComponentImport);
+        builder.AddDirective(
+            Directive,
+            FileKinds.Legacy,
+            FileKinds.Component,
+            FileKinds.ComponentImport
+        );
         builder.Features.Add(new ImplementsDirectivePass());
     }
 }

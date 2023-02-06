@@ -1,52 +1,62 @@
 using System;
 
-class X {
+class X
+{
     static int i;
     static int j;
-    
-    static void m ()
+
+    static void m()
     {
         i = 0;
         j = 0;
-        
-        try {
-            throw new ArgumentException ("Blah");
-        } catch (ArgumentException){
+
+        try
+        {
+            throw new ArgumentException("Blah");
+        }
+        catch (ArgumentException)
+        {
             i = 1;
-        } catch (Exception){
+        }
+        catch (Exception)
+        {
             i = 2;
-        } finally {
+        }
+        finally
+        {
             j = 1;
         }
     }
 
-    static int ret (int a)
+    static int ret(int a)
     {
-        try {
+        try
+        {
             if (a == 1)
-                throw new Exception ();
-            
+                throw new Exception();
+
             return 1;
-        } catch {
+        }
+        catch
+        {
             return 2;
         }
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
-        m ();
+        m();
         if (i != 1)
             return 1;
         if (j != 1)
             return 2;
 
-        if (ret (1) != 2)
+        if (ret(1) != 2)
             return 3;
 
-        if (ret (10) != 1)
+        if (ret(10) != 1)
             return 4;
-        
+
         return 0;
     }
 }
-

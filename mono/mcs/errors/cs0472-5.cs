@@ -4,7 +4,7 @@
 
 class C
 {
-    public static bool Test (byte value)
+    public static bool Test(byte value)
     {
         if (value == null)
             return false;

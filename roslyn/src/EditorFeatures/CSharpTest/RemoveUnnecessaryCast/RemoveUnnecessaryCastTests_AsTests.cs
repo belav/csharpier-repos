@@ -18,21 +18,25 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
-    public partial class RemoveUnnecessaryCastTests_AsTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class RemoveUnnecessaryCastTests_AsTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnnecessaryCastTests_AsTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpRemoveUnnecessaryCastDiagnosticAnalyzer(), new CSharpRemoveUnnecessaryCastCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpRemoveUnnecessaryCastDiagnosticAnalyzer(),
+                new CSharpRemoveUnnecessaryCastCodeFixProvider()
+            );
 
         [Fact, WorkItem(545979, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545979")]
         public async Task DontRemoveCastToErrorType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -41,14 +45,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545146, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545146")]
         public async Task ParenthesizeToKeepParseTheSame2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
  
 class C
@@ -59,8 +64,7 @@ class C
         ([|a as Action|])();
     }
 }",
-
-            @"
+                @"
 using System;
  
 class C
@@ -70,27 +74,29 @@ class C
         Action a = Console.WriteLine;
         a();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545138, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545138")]
         public async Task DontRemoveTypeParameterCastToObject()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class С
+                @"class С
 {
     void Goo<T>(T obj)
 {
     int x = (int)([|obj as object|]);
 }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545139, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545139")]
         public async Task DontRemoveCastInIsTest()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class С
 {
@@ -100,14 +106,15 @@ class С
     };
     Console.WriteLine([|a as object|] is int[]);
 }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545142, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545142")]
         public async Task DontRemoveCastNeedForUserDefinedOperator()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class A
+                @"class A
 {
     public static implicit operator A(string x)
     {
@@ -121,20 +128,22 @@ class Program
     {
         A x = [|null as string|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545143, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545143")]
         public async Task DontRemovePointerCast1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"unsafe class C
+                @"unsafe class C
 {
     static unsafe void Main()
     {
         var x = (int)([|null as int*|]);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545144, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545144")]
@@ -144,7 +153,7 @@ class Program
             // op_Equality operator overload being used over reference equality.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -154,14 +163,15 @@ class Program
         Action b = Console.WriteLine;
         Console.WriteLine(a == ([|b as object|]));
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545145, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545145")]
         public async Task DontRemoveCastToAnonymousMethodWhenOnLeftOfAsCast()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -172,14 +182,15 @@ class C
 
         as Action;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545157, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545157")]
         public async Task DontRemoveIdentityCastWhichAffectsOverloadResolution1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -195,14 +206,15 @@ class Program
     static void Goo(Func<string, object> x)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545158, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545158")]
         public async Task DontRemoveIdentityCastWhichAffectsOverloadResolution2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -219,14 +231,15 @@ class Program
     static void Goo(int x)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545158, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545158")]
         public async Task DontRemoveIdentityCastWhichAffectsOverloadResolution3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -244,27 +257,29 @@ class Program
     static void Goo(int x)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545747, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545747")]
         public async Task DontRemoveCastWhichChangesTypeOfInferredLocal()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void Main()
     {
         var x = [|"""" as object|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545159, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545159")]
         public async Task DontRemoveNeededCastToIListOfObject()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -281,35 +296,40 @@ class C
         var y = (IList<Action<object>>)([|x as IList<object>|]);
         Console.WriteLine(y.Count);
     }
-}");
+}"
+            );
         }
 
-        [Fact, WorkItem(545287, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545287"), WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            Fact,
+            WorkItem(545287, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545287"),
+            WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         public async Task RemoveUnneededCastInParameterDefaultValue()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     static void M1(string i1 = [|null as string|])
     {
     }
 }",
-
-@"
+                @"
 class Program
 {
     static void M1(string i1 = null)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545289, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545289")]
         public async Task RemoveUnneededCastInReturnStatement()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     static string M2()
@@ -317,22 +337,22 @@ class Program
         return [|"""" as string|];
     }
 }",
-
-@"
+                @"
 class Program
 {
     static string M2()
     {
         return """";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545288, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
         public async Task RemoveUnneededCastInLambda1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -341,8 +361,7 @@ class Program
         Func<string> f1 = () => [|"""" as string|];
     }
 }",
-
-@"
+                @"
 using System;
 class Program
 {
@@ -350,14 +369,15 @@ class Program
     {
         Func<string> f1 = () => """";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545288, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
         public async Task RemoveUnneededCastInLambda2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -366,8 +386,7 @@ class Program
         Func<string> f1 = () => { return [|"""" as string|]; };
     }
 }",
-
-@"
+                @"
 using System;
 class Program
 {
@@ -375,14 +394,15 @@ class Program
     {
         Func<string> f1 = () => { return """"; };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545288, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
         public async Task RemoveUnneededCastInLambda3()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -391,8 +411,7 @@ class Program
         Func<string> f1 = _ => { return [|"""" as string|]; };
     }
 }",
-
-@"
+                @"
 using System;
 class Program
 {
@@ -400,14 +419,15 @@ class Program
     {
         Func<string> f1 = _ => { return """"; };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545288, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
         public async Task RemoveUnneededCastInLambda4()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 class Program
 {
@@ -416,8 +436,7 @@ class Program
         Func<string> f1 = _ => [|"""" as string|];
     }
 }",
-
-@"
+                @"
 using System;
 class Program
 {
@@ -425,14 +444,15 @@ class Program
     {
         Func<string> f1 = _ => """";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545291, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
         public async Task RemoveUnneededCastInConditionalExpression1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Test
 {
     public static void Main()
@@ -442,8 +462,7 @@ class Test
         string f1 = (b == 5) ? [|""a"" as string|] : ""b"" as string;
     }
 }",
-
-@"
+                @"
 class Test
 {
     public static void Main()
@@ -452,14 +471,15 @@ class Test
 
         string f1 = (b == 5) ? ""a"" : ""b"" as string;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545291, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
         public async Task RemoveUnneededCastInConditionalExpression2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Test
 {
     public static void Main()
@@ -469,8 +489,7 @@ class Test
         string f1 = (b == 5) ? ""a"" as string : [|""b"" as string|];
     }
 }",
-
-@"
+                @"
 class Test
 {
     public static void Main()
@@ -479,28 +498,30 @@ class Test
 
         string f1 = (b == 5) ? ""a"" as string : ""b"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545291, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
         public async Task DontRemoveNeededCastInConditionalExpression()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Test
+                @"class Test
 {
     public static void Main()
     {
         int b = 5;
         var f1 = (b == 5) ? """" : [|"""" as object|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545459, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545459")]
         public async Task DoNotRemoveIllegalAsCastInsideADelegateConstructor()
         {
             await TestMissingAsync(
-            @"
+                @"
 using System;
 class Test
 {
@@ -512,14 +533,15 @@ class Test
     }
 
     public static void M1(int i) { }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545422, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545422")]
         public async Task RemoveUnneededCastInsideCaseLabel()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Test
 {
     static void Main()
@@ -531,8 +553,7 @@ class Test
         }
     }
 }",
-
-@"
+                @"
 class Test
 {
     static void Main()
@@ -543,7 +564,8 @@ class Test
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545595, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545595")]
@@ -551,7 +573,7 @@ class Test
         public async Task RemoveUnneededCastInCollectionInitializer()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System.Collections.Generic;
 
 class Program
@@ -561,8 +583,7 @@ class Program
         var z = new List<string> { [|"""" as string|] };
     }
 }",
-
-@"
+                @"
 using System.Collections.Generic;
 
 class Program
@@ -571,7 +592,8 @@ class Program
     {
         var z = new List<string> { """" };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(529787, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529787")]
@@ -579,7 +601,7 @@ class Program
         public async Task DontRemoveNecessaryCastWhichInCollectionInitializer1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class X : List<int>
@@ -598,7 +620,8 @@ class X : List<int>
     {
         var z = new X { [|"""" as object|] };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(529787, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529787")]
@@ -606,7 +629,7 @@ class X : List<int>
         public async Task DontRemoveNecessaryCastWhichInCollectionInitializer2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class X : List<int>
@@ -625,14 +648,15 @@ class X : List<int>
     {
         X z = new X { [|"""" as object|] };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545607, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545607")]
         public async Task RemoveUnneededCastInArrayInitializer()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class X
 {
     static void Goo()
@@ -641,8 +665,7 @@ class X
         var s = new object[] { [|x as object|] };
     }
 }",
-
-@"
+                @"
 class X
 {
     static void Goo()
@@ -650,14 +673,15 @@ class X
         string x = "";
         var s = new object[] { x };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545608, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545608")]
         public async Task DontRemoveNecessaryCastWithImplicitUserDefinedConversion()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class X
+                @"class X
 {
     static void Goo()
     {
@@ -669,7 +693,8 @@ class X
     {
         return "";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545941, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545941")]
@@ -680,7 +705,7 @@ class X
             // Exception.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class E
 {
@@ -693,7 +718,8 @@ class E
     {
         throw [|new E() as Exception|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545981, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545981")]
@@ -704,7 +730,7 @@ class E
             // Exception.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -713,14 +739,15 @@ class C
         object ex = new Exception();
         throw [|ex as Exception|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545941, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545941")]
         public async Task RemoveUnnecessaryCastInThrow()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class E
@@ -731,8 +758,7 @@ class E
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 class E
@@ -742,40 +768,43 @@ class E
         throw new Exception();
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545945, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545945")]
         public async Task DontRemoveNecessaryDowncast()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void Goo(object y)
     {
         var x = [|y as string|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545606, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545606")]
         public async Task DontRemoveNecessaryCastFromNullToTypeParameter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class X
+                @"class X
 {
     static void Goo<T, S>() where T : class, S
     {
         S y = [|null as T|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545744, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545744")]
         public async Task DontRemoveNecessaryCastInImplicitlyTypedArray()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class X
+                @"class X
 {
     static void Goo()
     {
@@ -783,14 +812,15 @@ class E
         var s = new[] { [|x as object|] };
         s[0] = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545750, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545750")]
         public async Task RemoveUnnecessaryCastToBaseType()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class X
 {
     static void Main()
@@ -803,8 +833,7 @@ class X
         return "";
     }
 }",
-
-@"
+                @"
 class X
 {
     static void Main()
@@ -816,14 +845,15 @@ class X
     {
         return "";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545855, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545855")]
         public async Task DoRemoveIllegalAsCastOnLambda()
         {
             await TestMissingInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -846,14 +876,15 @@ static class Program
         return true;
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(529816, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529816")]
         public async Task RemoveUnnecessaryCastInQueryExpression()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class A
@@ -865,8 +896,7 @@ class A
         Console.WriteLine(from y in new A() select [|"""" as string|]);
     }
 }",
-
-@"
+                @"
 using System;
 
 class A
@@ -877,14 +907,15 @@ class A
     {
         Console.WriteLine(from y in new A() select """");
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(529816, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529816")]
         public async Task DontRemoveNecessaryCastInQueryExpression()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class A
 {
@@ -903,14 +934,15 @@ class A
         Console.WriteLine(from y in new A()
                           select [|"""" as object|]);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(529831, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529831")]
         public async Task DontRemoveNecessaryCastFromTypeParameterToInterface()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 interface IIncrementable
 {
@@ -956,14 +988,15 @@ static class Program
         Console.WriteLine(x.Value);
         Console.WriteLine(y.Value);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(529831, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529831")]
         public async Task RemoveUnnecessaryCastFromTypeParameterToInterface()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 interface IIncrementable
@@ -1003,7 +1036,7 @@ static class Program
     }
 }
 ",
- @"
+                @"
 using System;
 
 interface IIncrementable
@@ -1042,14 +1075,15 @@ static class Program
         Console.WriteLine(y.Value);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545877, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545877")]
         public async Task DontCrashOnIncompleteMethodDeclaration()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class A
 {
@@ -1063,7 +1097,7 @@ class A
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class A
 {
@@ -1076,14 +1110,15 @@ class A
     static void Goo<T, S>(T x, )
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(529791, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529791")]
         public async Task RemoveUnnecessaryCastToNullable1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class X
 {
     static void Goo()
@@ -1093,8 +1128,7 @@ class X
     }
 }
 ",
-
-            @"
+                @"
 class X
 {
     static void Goo()
@@ -1103,14 +1137,15 @@ class X
         object y = null;
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545850, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545850")]
         public async Task RemoveSurroundingParentheses()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class Program
 {
     static void Main()
@@ -1120,8 +1155,7 @@ class Program
     }
 }
 ",
-
-            @"
+                @"
 class Program
 {
     static void Main()
@@ -1130,14 +1164,15 @@ class Program
         x.ToString();
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(529846, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529846")]
         public async Task DontRemoveNecessaryCastFromTypeParameterToObject()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void Goo<T>(T x, object y)
     {
@@ -1145,14 +1180,15 @@ class Program
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545858, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545858")]
         public async Task DontRemoveNecessaryCastFromDelegateTypeToMulticastDelegate()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1162,14 +1198,15 @@ class C
         Action y = Console.WriteLine;
         Console.WriteLine(([|x as MulticastDelegate|]) == y);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(529842, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529842")]
         public async Task DontRemoveNecessaryCastInTernaryExpression()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class X
 {
@@ -1184,35 +1221,44 @@ class X
         X x = new X();
         Console.WriteLine(b ? [|null as string|] : x);
     }
-}");
+}"
+            );
         }
 
-        [Fact, WorkItem(545882, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545882"), WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            Fact,
+            WorkItem(545882, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545882"),
+            WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         public async Task RemoveCastInConstructorInitializer1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     C(string x) { }
     C() : this([|"""" as string|]) { }
 }
 ",
-
-@"
+                @"
 class C
 {
     C(string x) { }
     C() : this("""") { }
 }
-");
+"
+            );
         }
 
-        [Fact, WorkItem(545958, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545958"), WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            Fact,
+            WorkItem(545958, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545958"),
+            WorkItem(880752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         public async Task RemoveCastInConstructorInitializer2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System.Collections;
 
 class C
@@ -1222,8 +1268,7 @@ class C
     C() : this([|"""" as IEnumerable|]) { }
 }
 ",
-
-@"
+                @"
 using System.Collections;
 
 class C
@@ -1232,14 +1277,15 @@ class C
     C(object x) { }
     C() : this("""") { }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545957, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545957")]
         public async Task DontRemoveCastInConstructorInitializer3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     C(string x)
     {
@@ -1248,14 +1294,15 @@ class C
     C() : this([|"""" as object|])
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545842, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545842")]
         public async Task RemoveCastToNullableInArithmeticExpression()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 static class C
 {
     static void Main()
@@ -1266,8 +1313,7 @@ static class C
     }
 }
 ",
-
-@"
+                @"
 static class C
 {
     static void Main()
@@ -1277,14 +1323,15 @@ static class C
         long? z = x + y;
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545942, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545942")]
         public async Task DoNotRemoveCastFromStringTypeToObjectInReferenceEquality()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1293,7 +1340,8 @@ class Program
         object x = """";
         Console.WriteLine(x == ([|"""" as object|]));
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545962, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545962")]
@@ -1302,7 +1350,7 @@ class Program
             // Note: The cast below can't be removed because its expression doesn't bind.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1310,7 +1358,8 @@ class Program
     {
         ([|x as IDisposable|]).Dispose();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545944, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545944")]
@@ -1320,10 +1369,11 @@ class Program
             // which is illegal.
 
             await TestMissingInRegularAndScriptAsync(
-@"unsafe class C
+                @"unsafe class C
 {
     int x = *([|null as int*|]);
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545978, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545978")]
@@ -1333,40 +1383,53 @@ class Program
             // void*, which is illegal.
 
             await TestMissingInRegularAndScriptAsync(
-@"unsafe class C
+                @"unsafe class C
 {
     static void Main()
     {
         void* p = null;
         int x = *([|p as int*|]);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(26640, "https://github.com/dotnet/roslyn/issues/26640")]
         public async Task DontRemoveCastToByteFromIntInConditionalExpression_CSharp8()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     object M1(bool b)
     {
         return [|b ? (1 as byte?) : (0 as byte?)|];
     }
-}", new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+}",
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp8
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem(26640, "https://github.com/dotnet/roslyn/issues/26640")]
         public async Task DontRemoveCastToByteFromIntInConditionalExpression_CSharp9()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     object M1(bool b)
     {
         return [|b ? (1 as byte?) : (0 as byte?)|];
     }
-}", new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9)));
+}",
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp9
+                    )
+                )
+            );
         }
 
         #region Interface Casts
@@ -1377,7 +1440,7 @@ class Program
             // Note: The cast below can't be removed because X is not sealed.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class X : IDisposable
 {
@@ -1399,14 +1462,15 @@ class Y : X, IDisposable
     {
         Console.WriteLine(""Y.Dispose"");
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545890, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
         public async Task DoRemoveCastToInterfaceForSealedType1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 interface I
@@ -1427,7 +1491,7 @@ sealed class C : I
     }
 }
 ",
-@"
+                @"
 using System;
 
 interface I
@@ -1447,14 +1511,15 @@ sealed class C : I
         new C().Goo();
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545890, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
         public async Task DoRemoveCastToInterfaceForSealedType2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 interface I
@@ -1478,7 +1543,7 @@ sealed class C : I
     }
 }
 ",
-@"
+                @"
 using System;
 
 interface I
@@ -1501,14 +1566,15 @@ sealed class C : I
         Console.WriteLine(new C().Goo);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545890, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
         public async Task DoNotRemoveCastToInterfaceForSealedType3()
         {
             await TestMissingAsync(
-@"
+                @"
 using System;
 
 interface I
@@ -1533,7 +1599,8 @@ sealed class C : I
         Console.WriteLine(([|Instance as I|]).Goo);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545890, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
@@ -1543,7 +1610,7 @@ sealed class C : I
             // because the unspecified optional parameter default values differ.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -1561,14 +1628,15 @@ sealed class C : I
     {
         ([|new C() as I|]).Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545890, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
         public async Task DoRemoveCastToInterfaceForSealedTypeWhenDefaultValuesAreDifferentButParameterIsPassed()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 interface I
@@ -1589,7 +1657,7 @@ sealed class C : I
     }
 }
 ",
-@"
+                @"
 using System;
 
 interface I
@@ -1609,7 +1677,8 @@ sealed class C : I
         new C().Goo(2);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545888, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
@@ -1620,7 +1689,7 @@ sealed class C : I
             // appear at different positions in the member signatures.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -1638,14 +1707,15 @@ sealed class C : I
     {
         ([|new C() as I|]).Goo(x: 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545888, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
         public async Task DoNotRemoveCastToInterfaceForSealedType7()
         {
             await TestMissingAsync(
-@"
+                @"
 using System;
 
 interface I
@@ -1668,7 +1738,8 @@ sealed class C : I
         Console.WriteLine(([|new C() as I|])[x: 1]);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545888, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
@@ -1679,7 +1750,7 @@ sealed class C : I
             // appear at different positions in the member signatures.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -1700,7 +1771,8 @@ sealed class C : I
     {
         Console.WriteLine(([|new C() as I|])[x: 1]);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545883, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545883")]
@@ -1711,7 +1783,7 @@ sealed class C : I
             // implement IDisposable.Dispose().
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.IO;
 
 sealed class C : MemoryStream
@@ -1726,7 +1798,8 @@ sealed class C : MemoryStream
     {
         Console.WriteLine(""new Dispose()"");
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545887, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545887")]
@@ -1736,7 +1809,7 @@ sealed class C : MemoryStream
             // unboxing would change program behavior.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 interface IIncrementable
 {
@@ -1760,7 +1833,8 @@ struct S : IIncrementable
         ([|s as IIncrementable|]).Increment();
         Console.WriteLine(s.Value);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545834, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545834")]
@@ -1770,7 +1844,7 @@ struct S : IIncrementable
             // a fresh copy of the struct from the GetEnumerator() method.
 
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1788,8 +1862,7 @@ class Program
     }
 }
 ",
-
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1806,7 +1879,8 @@ class Program
         return x.GetEnumerator();
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(544655, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544655")]
@@ -1816,7 +1890,7 @@ class Program
             // sealed.
 
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class C
@@ -1828,8 +1902,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 class C
@@ -1840,7 +1913,8 @@ class C
         var c = a.Clone();
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545926, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545926")]
@@ -1850,7 +1924,7 @@ class C
             // sealed.
 
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class C
@@ -1862,8 +1936,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 class C
@@ -1874,7 +1947,8 @@ class C
         var c = a.Clone(); 
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(529897, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529897")]
@@ -1884,7 +1958,7 @@ class C
             // sealed.
 
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 using System;
 
 class Program
@@ -1896,8 +1970,7 @@ class Program
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 class Program
@@ -1908,7 +1981,8 @@ class Program
         var y = e.GetTypeCode();
     }
 }
-");
+"
+            );
         }
 
         #endregion
@@ -1919,7 +1993,7 @@ class Program
         public async Task DontRemoveCastToObjectInParamArrayArg1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1932,14 +2006,15 @@ class C
     {
         Console.WriteLine(x.Length);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task DontRemoveCastToIntArrayInParamArrayArg2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1952,14 +2027,15 @@ class C
     {
         Console.WriteLine(x.Length);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task DontRemoveCastToObjectArrayInParamArrayArg3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1972,14 +2048,15 @@ class C
     {
         Console.WriteLine(x.Length);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task RemoveCastToObjectArrayInParamArrayArg1()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -1990,8 +2067,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -2001,14 +2077,15 @@ class C
         Goo(null);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task RemoveCastToStringArrayInParamArrayArg2()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -2019,8 +2096,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -2030,14 +2106,15 @@ class C
         Goo(null);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task RemoveCastToIntArrayInParamArrayArg3()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class C
 {
     static void Goo(params int[] x) { }
@@ -2048,8 +2125,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     static void Goo(params int[] x) { }
@@ -2059,14 +2135,15 @@ class C
         Goo(null);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task RemoveCastToObjectArrayInParamArrayArg4()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -2077,8 +2154,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -2088,14 +2164,15 @@ class C
         Goo(null, null);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(529911, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task RemoveCastToObjectInParamArrayArg5()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -2106,8 +2183,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 class C
 {
     static void Goo(params object[] x) { }
@@ -2117,7 +2193,8 @@ class C
         Goo(null, null);
     }
 }
-");
+"
+            );
         }
 
         [Fact]
@@ -2145,7 +2222,8 @@ class C
 
     static void Goo(params object[] x) { }
 }
-");
+"
+            );
         }
 
         #endregion
@@ -2159,7 +2237,7 @@ class C
             // in the foreach statement.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System.Collections;
+                @"using System.Collections;
 
 class Program
 {
@@ -2170,7 +2248,8 @@ class Program
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545961, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -2180,7 +2259,7 @@ class Program
             // in the foreach statement.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Program
 {
@@ -2191,7 +2270,8 @@ class Program
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545961, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -2202,7 +2282,7 @@ class Program
             // method.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System.Collections;
+                @"using System.Collections;
 
 class D
 {
@@ -2226,7 +2306,8 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545961, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -2236,7 +2317,7 @@ class C
             // C.GetEnumerator() being called rather than D.GetEnumerator().
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class D
@@ -2267,7 +2348,8 @@ class C
             Console.WriteLine(x);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545961, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -2277,7 +2359,7 @@ class C
             // type of 'x'.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2292,7 +2374,8 @@ class Program
             y = 1;
         }
     }
-}");
+}"
+            );
         }
 
         #endregion
@@ -2304,7 +2387,7 @@ class Program
             // of Goo and its override have different default values.
 
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 abstract class Y
 {
@@ -2322,7 +2405,8 @@ class X : Y
     {
         Console.WriteLine(x);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545925, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545925")]
@@ -2332,7 +2416,7 @@ class X : Y
             // of Goo and its override have the same default values.
 
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 abstract class Y
@@ -2353,8 +2437,7 @@ class X : Y
     }
 }
 ",
-
-@"
+                @"
 using System;
 
 abstract class Y
@@ -2374,7 +2457,8 @@ class X : Y
         Console.WriteLine(x);
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(529916, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529916")]
@@ -2384,7 +2468,7 @@ class X : Y
             // the same method group.
 
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 static class Program
@@ -2397,8 +2481,7 @@ static class Program
     static void Goo(this string x) { }
 }
 ",
-
-@"
+                @"
 using System;
 
 static class Program
@@ -2410,14 +2493,15 @@ static class Program
 
     static void Goo(this string x) { }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(609497, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/609497")]
         public async Task Bugfix_609497()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -2432,7 +2516,8 @@ class Program
         Task task = Task.FromResult(0);
         Console.WriteLine(await ([|task as dynamic|]));
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(624252, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624252")]
@@ -2440,7 +2525,7 @@ class Program
         public async Task DontRemoveCastIfArgumentIsRestricted_TypedReference()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2457,14 +2542,15 @@ class Program
     static void dd(object obj, TypedReference d)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(627107, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DontRemoveCastOnArgumentsWithOtherDynamicArguments()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2489,14 +2575,15 @@ class C<T>
     {
         return true;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(627107, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DontRemoveCastOnArgumentsWithOtherDynamicArguments_Bracketed()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C<T>
+                @"class C<T>
 {
     int this[int x, T s, string d = ""abc""]
     {
@@ -2526,70 +2613,75 @@ class C<T>
     {
         var y = this[x: xx, s: """", d: [|"""" as object|]];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(627107, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DontRemoveCastOnArgumentsWithDynamicReceiverOpt()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static bool Goo(dynamic d)
     {
         d([|"""" as object|]);
         return true;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(627107, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DontRemoveCastOnArgumentsWithDynamicReceiverOpt_1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static bool Goo(dynamic d)
     {
         d.goo([|"""" as object|]);
         return true;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(627107, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DontRemoveCastOnArgumentsWithDynamicReceiverOpt_2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static bool Goo(dynamic d)
     {
         d.goo.bar.goo([|"""" as object|]);
         return true;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(627107, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DontRemoveCastOnArgumentsWithDynamicReceiverOpt_3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static bool Goo(dynamic d)
     {
         d.goo().bar().goo([|"""" as object|]);
         return true;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(627107, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
         public async Task DontRemoveCastOnArgumentsWithOtherDynamicArguments_1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2614,14 +2706,15 @@ class C<T>
     {
         return true;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(529846, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529846")]
         public async Task DontUnnecessaryCastFromTypeParameterToObject()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void Goo<T>(T x, object y)
     {
@@ -2629,14 +2722,15 @@ class C<T>
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(640136, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/640136")]
         public async Task RemoveUnnecessaryCastAndParseCorrect()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 using System.Threading.Tasks;
  
@@ -2648,8 +2742,7 @@ class C
     }
 }
 ",
-
-@"
+                @"
 using System;
 using System.Threading.Tasks;
  
@@ -2660,14 +2753,15 @@ class C
         (x.Result)();
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(626026, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/626026")]
         public async Task DontRemoveCastIfUserDefinedExplicitCast()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2686,14 +2780,15 @@ public class A
 
 public struct B
 {
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(770187, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/770187")]
         public async Task DontRemoveNecessaryCastInSwitchExpression()
         {
             await TestMissingInRegularAndScriptAsync(
-@"namespace ConsoleApplication23
+                @"namespace ConsoleApplication23
 {
     class Program
     {
@@ -2715,7 +2810,8 @@ public struct B
         B,
         C
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(2761, "https://github.com/dotnet/roslyn/issues/2761")]
@@ -2723,7 +2819,7 @@ public struct B
         public async Task DontRemoveCastFromBaseToDerivedWithExplicitReference()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2739,14 +2835,15 @@ class C
 
 class D : C
 {
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(3254, "https://github.com/dotnet/roslyn/issues/3254")]
         public async Task DontRemoveCastToTypeParameterWithExceptionConstraint()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2757,14 +2854,15 @@ class Program
             throw [|Activator.CreateInstance(typeof(TException), messageOnFalseCondition) as TException|];
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(3254, "https://github.com/dotnet/roslyn/issues/3254")]
         public async Task DontRemoveCastToTypeParameterWithExceptionSubTypeConstraint()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2775,48 +2873,50 @@ class Program
             throw [|Activator.CreateInstance(typeof(TException), messageOnFalseCondition) as TException|];
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(8111, "https://github.com/dotnet/roslyn/issues/8111")]
         public async Task DontRemoveCastThatChangesShapeOfAnonymousTypeObject()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(object o)
     {
         object thing = new { shouldBeAString = [|o as string|] };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(8111, "https://github.com/dotnet/roslyn/issues/8111")]
         public async Task RemoveCastThatDoesntChangeShapeOfAnonymousTypeObject()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string o)
     {
         object thing = new { shouldBeAString = [|o as string|] };
     }
 }",
-
-@"class Program
+                @"class Program
 {
     static void Main(string o)
     {
         object thing = new { shouldBeAString = o };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(18978, "https://github.com/dotnet/roslyn/issues/18978")]
         public async Task DontRemoveCastOnCallToMethodWithParamsArgs()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class Program
 {
     public static void Main(string[] args)
@@ -2829,14 +2929,15 @@ class Program
     {
         Console.WriteLine(goo.Length);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task DoRemoveCastOnCallToMethodWithIncorrectParamsArgs()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class Program
 {
     public static void Main(string[] args)
@@ -2849,7 +2950,7 @@ class Program
         Console.WriteLine(wrongDefined.Length);
     }
 }",
-@"
+                @"
 class Program
 {
     public static void Main(string[] args)
@@ -2861,14 +2962,15 @@ class Program
     {
         Console.WriteLine(wrongDefined.Length);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task DoNotRemoveCastOnCallToMethodWithCorrectParamsArgs()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class Program
 {
     public static void Main(string[] args)
@@ -2880,14 +2982,15 @@ class Program
     {
         Console.WriteLine(wrongDefined.Length);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(18978, "https://github.com/dotnet/roslyn/issues/18978")]
         public async Task RemoveCastOnCallToMethodWithParamsArgsIfImplicitConversionExists()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class Program
 {
     public static void Main(string[] args)
@@ -2901,7 +3004,7 @@ class Program
         System.Console.WriteLine(goo.Length);
     }
 }",
-@"
+                @"
 class Program
 {
     public static void Main(string[] args)
@@ -2914,14 +3017,15 @@ class Program
     {
         System.Console.WriteLine(goo.Length);
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20630, "https://github.com/dotnet/roslyn/issues/20630")]
         public async Task DontRemoveCastOnCallToAttributeWithParamsArgs()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 using System.Reflection;
 
@@ -2940,7 +3044,8 @@ static class Program
   static void Main()
   {
   }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(29264, "https://github.com/dotnet/roslyn/issues/29264")]
@@ -2976,14 +3081,15 @@ static class Program
             [""""] = null,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20630, "https://github.com/dotnet/roslyn/issues/20630")]
         public async Task DontRemoveCastOnCallToAttributeWithParamsArgsAndProperty()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -2996,14 +3102,15 @@ sealed class MarkAttribute : Attribute
 [Mark([|null as string|], Prop = 1)] 
 static class Program
 {
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20630, "https://github.com/dotnet/roslyn/issues/20630")]
         public async Task DontRemoveCastOnCallToAttributeWithParamsArgsPropertyAndOtherArg()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -3016,14 +3123,15 @@ sealed class MarkAttribute : Attribute
 [Mark(true, [|null as string|], Prop = 1)] 
 static class Program
 {
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20630, "https://github.com/dotnet/roslyn/issues/20630")]
         public async Task DontRemoveCastOnCallToAttributeWithParamsArgsNamedArgsAndProperty()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -3036,14 +3144,15 @@ sealed class MarkAttribute : Attribute
 [Mark(arr: [|null as string|], otherArg: true, Prop = 1)]
 static class Program
 {
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20630, "https://github.com/dotnet/roslyn/issues/20630")]
         public async Task DoRemoveCastOnCallToAttributeWithInvalidParamsArgs()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -3057,7 +3166,7 @@ sealed class MarkAttribute : Attribute
 static class Program
 {
 }",
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -3070,14 +3179,15 @@ sealed class MarkAttribute : Attribute
 [Mark(true, null, Prop = 1)]
 static class Program
 {
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20630, "https://github.com/dotnet/roslyn/issues/20630")]
         public async Task DoNotRemoveCastOfNullToParamsArg()
         {
             await TestMissingAsync(
-@"
+                @"
 using System;
 using System.Reflection;
 
@@ -3094,14 +3204,15 @@ class MarkAttribute : Attribute
 [Mark([|(string)|]null)]
 static class Program
 {
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20630, "https://github.com/dotnet/roslyn/issues/20630")]
         public async Task RemoveCastOnCallToAttributeWithParamsArgsWithImplicitCast()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -3115,7 +3226,7 @@ sealed class MarkAttribute : Attribute
 static class Program
 {
 }",
-@"
+                @"
 using System;
 sealed class MarkAttribute : Attribute
 {
@@ -3128,14 +3239,18 @@ sealed class MarkAttribute : Attribute
 [Mark(arr: new[] { ""Hello"", ""World"" }, otherArg: true, Prop = 1)]
 static class Program
 {
-}");
+}"
+            );
         }
 
-        [Fact, WorkItem(25456, "https://github.com/dotnet/roslyn/issues/25456#issuecomment-373549735")]
+        [
+            Fact,
+            WorkItem(25456, "https://github.com/dotnet/roslyn/issues/25456#issuecomment-373549735")
+        ]
         public async Task DontIntroduceDefaultLiteralInSwitchCase()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -3146,14 +3261,16 @@ class C
                 break;
         }
     }
-}", parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1)));
+}",
+                parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1))
+            );
         }
 
         [Fact]
         public async Task DontIntroduceDefaultLiteralInSwitchCase_CastInsideParentheses()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -3164,14 +3281,16 @@ class C
                 break;
         }
     }
-}", parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1)));
+}",
+                parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1))
+            );
         }
 
         [Fact]
         public async Task DontIntroduceDefaultLiteralInSwitchCase_DefaultInsideParentheses()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -3182,7 +3301,9 @@ class C
                 break;
         }
     }
-}", parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1)));
+}",
+                parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1))
+            );
         }
 
         [Fact, WorkItem(27239, "https://github.com/dotnet/roslyn/issues/27239")]
@@ -3199,13 +3320,15 @@ class C
         object o = null;
         TypedReference r2 = [|o as TypedReference|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28412, "https://github.com/dotnet/roslyn/issues/28412")]
         public async Task DontOfferToRemoveCastWhenAccessingHiddenProperty()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 using System.Collections.Generic;
 class Fruit
 {
@@ -3222,7 +3345,8 @@ class Tester
         var a = new Apple();
         ([|a as Fruit|]).Properties[""Color""] = ""Red"";
     }
-}");
+}"
+            );
         }
     }
 }

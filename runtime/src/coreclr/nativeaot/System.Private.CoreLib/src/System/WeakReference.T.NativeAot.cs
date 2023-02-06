@@ -16,12 +16,15 @@ namespace System
         internal volatile IntPtr m_handle;
         private bool m_trackResurrection;
 
-
         //Creates a new WeakReference that keeps track of target.
         //
         private void Create(T target, bool trackResurrection)
         {
-            m_handle = (IntPtr)GCHandle.Alloc(target, trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak);
+            m_handle = (IntPtr)
+                GCHandle.Alloc(
+                    target,
+                    trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak
+                );
             m_trackResurrection = trackResurrection;
 
             if (target != null)
@@ -123,7 +126,10 @@ namespace System
             IntPtr old_handle = m_handle;
             if (old_handle != default(IntPtr))
             {
-                if (old_handle == Interlocked.CompareExchange(ref m_handle, default(IntPtr), old_handle))
+                if (
+                    old_handle
+                    == Interlocked.CompareExchange(ref m_handle, default(IntPtr), old_handle)
+                )
                     ((GCHandle)old_handle).Free();
             }
         }

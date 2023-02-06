@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -86,27 +86,27 @@ namespace Castle.Components.DictionaryAdapter
 
         bool ICollection<T>.IsReadOnly
         {
-            get { return ((ICollection<T>) list).IsReadOnly; }
+            get { return ((ICollection<T>)list).IsReadOnly; }
         }
 
         bool IList.IsReadOnly
         {
-            get { return ((IList) list).IsReadOnly; }
+            get { return ((IList)list).IsReadOnly; }
         }
 
         bool IList.IsFixedSize
         {
-            get { return ((IList) list).IsFixedSize; }
+            get { return ((IList)list).IsFixedSize; }
         }
 
         bool ICollection.IsSynchronized
         {
-            get { return ((ICollection) list).IsSynchronized; }
+            get { return ((ICollection)list).IsSynchronized; }
         }
 
         object ICollection.SyncRoot
         {
-            get { return ((ICollection) list).SyncRoot; }
+            get { return ((ICollection)list).SyncRoot; }
         }
 
         public bool AllowNew
@@ -135,7 +135,7 @@ namespace Castle.Components.DictionaryAdapter
 
         bool SCM.IRaiseItemChangedEvents.RaisesItemChangedEvents
         {
-            get { return ((SCM.IRaiseItemChangedEvents) list).RaisesItemChangedEvents; }
+            get { return ((SCM.IRaiseItemChangedEvents)list).RaisesItemChangedEvents; }
         }
 
         bool IBindingList<T>.SupportsChangeNotification
@@ -183,7 +183,10 @@ namespace Castle.Components.DictionaryAdapter
             AsBindingList.RemoveIndex(property);
         }
 
-        void IBindingList<T>.ApplySort(SCM.PropertyDescriptor property, SCM.ListSortDirection direction)
+        void IBindingList<T>.ApplySort(
+            SCM.PropertyDescriptor property,
+            SCM.ListSortDirection direction
+        )
         {
             AsBindingList.ApplySort(property, direction);
         }
@@ -195,13 +198,13 @@ namespace Castle.Components.DictionaryAdapter
 
         public event SCM.AddingNewEventHandler AddingNew
         {
-            add    { list.AddingNew += value; }
+            add { list.AddingNew += value; }
             remove { list.AddingNew -= value; }
         }
 
         public event SCM.ListChangedEventHandler ListChanged
         {
-            add    { list.ListChanged += value; }
+            add { list.ListChanged += value; }
             remove { list.ListChanged -= value; }
         }
 
@@ -213,8 +216,8 @@ namespace Castle.Components.DictionaryAdapter
 
         object IList.this[int index]
         {
-            get { return ((IList) list)[index]; }
-            set { ((IList) list)[index] = value; }
+            get { return ((IList)list)[index]; }
+            set { ((IList)list)[index] = value; }
         }
 
         public bool Contains(T item)
@@ -224,7 +227,7 @@ namespace Castle.Components.DictionaryAdapter
 
         bool IList.Contains(object value)
         {
-            return ((IList) list).Contains(value);
+            return ((IList)list).Contains(value);
         }
 
         public int IndexOf(T item)
@@ -234,7 +237,7 @@ namespace Castle.Components.DictionaryAdapter
 
         int IList.IndexOf(object value)
         {
-            return ((IList) list).IndexOf(value);
+            return ((IList)list).IndexOf(value);
         }
 
         public void CopyTo(T[] array, int index)
@@ -244,7 +247,7 @@ namespace Castle.Components.DictionaryAdapter
 
         void ICollection.CopyTo(Array array, int index)
         {
-            ((IList) list).CopyTo(array, index);
+            ((IList)list).CopyTo(array, index);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -279,7 +282,7 @@ namespace Castle.Components.DictionaryAdapter
 
         int IList.Add(object item)
         {
-            return ((IList) list).Add(item);
+            return ((IList)list).Add(item);
         }
 
         public void Insert(int index, T item)
@@ -289,7 +292,7 @@ namespace Castle.Components.DictionaryAdapter
 
         void IList.Insert(int index, object item)
         {
-            ((IList) list).Insert(index, item);
+            ((IList)list).Insert(index, item);
         }
 
         public void RemoveAt(int index)
@@ -304,7 +307,7 @@ namespace Castle.Components.DictionaryAdapter
 
         void IList.Remove(object item)
         {
-            ((IList) list).Remove(item);
+            ((IList)list).Remove(item);
         }
 
         public void Clear()

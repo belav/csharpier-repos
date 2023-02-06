@@ -20,14 +20,20 @@ public class PropertyParameterBindingFactory : IPropertyParameterBindingFactory
     public virtual ParameterBinding? FindParameter(
         IEntityType entityType,
         Type parameterType,
-        string parameterName)
+        string parameterName
+    )
     {
         var candidateNames = GetCandidatePropertyNames(parameterName);
 
-        return entityType.GetProperties().Where(
-                p => p.ClrType == parameterType
-                    && candidateNames.Any(c => c.Equals(p.Name, StringComparison.Ordinal)))
-            .Select(p => new PropertyParameterBinding(p)).FirstOrDefault();
+        return entityType
+            .GetProperties()
+            .Where(
+                p =>
+                    p.ClrType == parameterType
+                    && candidateNames.Any(c => c.Equals(p.Name, StringComparison.Ordinal))
+            )
+            .Select(p => new PropertyParameterBinding(p))
+            .FirstOrDefault();
     }
 
     private static IList<string> GetCandidatePropertyNames(string parameterName)

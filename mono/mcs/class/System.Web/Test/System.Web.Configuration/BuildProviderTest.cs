@@ -1,5 +1,5 @@
 //
-// BuildProviderTest.cs 
+// BuildProviderTest.cs
 //    - unit tests for System.Web.Configuration.BuildProvider
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,54 +36,54 @@ using System.Web.Configuration;
 using System.Web;
 using System.Web.Security;
 
-namespace MonoTests.System.Web.Configuration {
-
+namespace MonoTests.System.Web.Configuration
+{
     [TestFixture]
-    public class BuildProviderTest  {
-
+    public class BuildProviderTest
+    {
         [Test]
-        public void EqualsAndHashCode ()
+        public void EqualsAndHashCode()
         {
-            BuildProvider b1, b2;
+            BuildProvider b1,
+                b2;
 
-            b1 = new BuildProvider (".hi", "System.Bye");
-            b2 = new BuildProvider (".hi", "System.Bye");
+            b1 = new BuildProvider(".hi", "System.Bye");
+            b2 = new BuildProvider(".hi", "System.Bye");
 
-            Assert.IsTrue (b1.Equals (b2), "A1");
-            Assert.AreEqual (b1.GetHashCode (), b2.GetHashCode (), "A2");
+            Assert.IsTrue(b1.Equals(b2), "A1");
+            Assert.AreEqual(b1.GetHashCode(), b2.GetHashCode(), "A2");
         }
 
         [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void ctor_validationFailure1 ()
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void ctor_validationFailure1()
         {
-            BuildProvider b = new BuildProvider ("", "hi");
+            BuildProvider b = new BuildProvider("", "hi");
         }
 
         [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void ctor_validationFailure2 ()
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void ctor_validationFailure2()
         {
-            BuildProvider b = new BuildProvider ("hi", "");
+            BuildProvider b = new BuildProvider("hi", "");
         }
-        
+
         [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void Extension_validationFailure ()
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void Extension_validationFailure()
         {
-            BuildProvider b = new BuildProvider ("hi", "bye");
+            BuildProvider b = new BuildProvider("hi", "bye");
 
             b.Extension = "";
         }
 
         [Test]
-        [ExpectedException (typeof (ConfigurationErrorsException))]
-        public void Type_validationFailure ()
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void Type_validationFailure()
         {
-            BuildProvider b = new BuildProvider ("hi", "bye");
+            BuildProvider b = new BuildProvider("hi", "bye");
 
             b.Type = "";
         }
     }
 }
-

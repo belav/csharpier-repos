@@ -40,44 +40,42 @@ namespace MonoTests.System.ServiceProcess
 
         public partial class ServiceFoo : ServiceBase
         {
-            public ServiceFoo ()
+            public ServiceFoo()
             {
-                InitializeComponent ();
+                InitializeComponent();
             }
 
-            protected override void OnStart (string[] args)
-            {
-            }
+            protected override void OnStart(string[] args) { }
 
-            protected override void OnStop ()
+            protected override void OnStop()
             {
                 ExitCode = SOME_ERROR_CODE;
             }
 
-            public void StartHook ()
+            public void StartHook()
             {
-                OnStart (new string [] { });
+                OnStart(new string[] { });
             }
         }
 
         [Test]
-        public void StopCallsOnStop ()
+        public void StopCallsOnStop()
         {
-            var s = new ServiceFoo ();
-            Assert.AreEqual (0, s.ExitCode);
-            s.Stop ();
-            Assert.AreEqual (SOME_ERROR_CODE, s.ExitCode);
+            var s = new ServiceFoo();
+            Assert.AreEqual(0, s.ExitCode);
+            s.Stop();
+            Assert.AreEqual(SOME_ERROR_CODE, s.ExitCode);
         }
 
         [Test]
-        public void ExitCodeIsNotResetByBaseClassServiceBaseBetweenRuns ()
+        public void ExitCodeIsNotResetByBaseClassServiceBaseBetweenRuns()
         {
-            var s = new ServiceFoo ();
-            Assert.AreEqual (0, s.ExitCode);
-            s.Stop ();
-            Assert.AreEqual (SOME_ERROR_CODE, s.ExitCode);
-            s.StartHook ();
-            Assert.AreEqual (SOME_ERROR_CODE, s.ExitCode);
+            var s = new ServiceFoo();
+            Assert.AreEqual(0, s.ExitCode);
+            s.Stop();
+            Assert.AreEqual(SOME_ERROR_CODE, s.ExitCode);
+            s.StartHook();
+            Assert.AreEqual(SOME_ERROR_CODE, s.ExitCode);
         }
 
         partial class ServiceFoo
@@ -116,4 +114,3 @@ namespace MonoTests.System.ServiceProcess
         }
     }
 }
-

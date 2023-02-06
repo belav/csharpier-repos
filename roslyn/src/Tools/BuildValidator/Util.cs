@@ -40,9 +40,11 @@ namespace BuildValidator
 
         internal static bool IsReadyToRunImage(PEReader peReader)
         {
-            if (peReader.PEHeaders is null ||
-                peReader.PEHeaders.PEHeader is null ||
-                peReader.PEHeaders.CorHeader is null)
+            if (
+                peReader.PEHeaders is null
+                || peReader.PEHeaders.PEHeader is null
+                || peReader.PEHeaders.CorHeader is null
+            )
             {
                 return false;
             }

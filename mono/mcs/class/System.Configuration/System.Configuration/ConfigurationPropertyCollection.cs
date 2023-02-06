@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,76 +34,80 @@ namespace System.Configuration
 {
     public class ConfigurationPropertyCollection : ICollection, IEnumerable
     {
-        List <ConfigurationProperty> collection;
+        List<ConfigurationProperty> collection;
 
-        public ConfigurationPropertyCollection ()
+        public ConfigurationPropertyCollection()
         {
-            collection = new List <ConfigurationProperty> ();
+            collection = new List<ConfigurationProperty>();
         }
 
-        public int Count {
+        public int Count
+        {
             get { return collection.Count; }
         }
 
-        public ConfigurationProperty this [string name] {
-            get {
+        public ConfigurationProperty this[string name]
+        {
+            get
+            {
                 foreach (ConfigurationProperty cp in collection)
                     if (cp.Name == name)
-                            return cp;
+                        return cp;
 
                 return null;
             }
         }
 
-        public bool IsSynchronized {
-            get {  return false; }
+        public bool IsSynchronized
+        {
+            get { return false; }
         }
 
-        public object SyncRoot {
+        public object SyncRoot
+        {
             get { return collection; }
         }
 
-        public void Add (ConfigurationProperty property)
+        public void Add(ConfigurationProperty property)
         {
             if (property == null)
-                throw new ArgumentNullException ("property");
-            collection.Add (property);
+                throw new ArgumentNullException("property");
+            collection.Add(property);
         }
 
-        public bool Contains (string name)
+        public bool Contains(string name)
         {
-            ConfigurationProperty property = this [name];
+            ConfigurationProperty property = this[name];
 
             if (property == null)
                 return false;
-            
-            return collection.Contains (property);
+
+            return collection.Contains(property);
         }
 
-        public void CopyTo (ConfigurationProperty [] array, int index)
+        public void CopyTo(ConfigurationProperty[] array, int index)
         {
-            collection.CopyTo (array, index);
+            collection.CopyTo(array, index);
         }
 
-        void ICollection.CopyTo (Array array, int index)
+        void ICollection.CopyTo(Array array, int index)
         {
-            ((ICollection) collection).CopyTo (array, index);
+            ((ICollection)collection).CopyTo(array, index);
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return collection.GetEnumerator ();
+            return collection.GetEnumerator();
         }
 
-        public bool Remove (string name)
+        public bool Remove(string name)
         {
-            return collection.Remove (this [name]);
+            return collection.Remove(this[name]);
         }
-        
-        public void Clear ()
+
+        public void Clear()
         {
-            collection.Clear ();
+            collection.Clear();
         }
     }
 }
-

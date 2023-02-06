@@ -1,25 +1,25 @@
 //
 // fixed
 //
-class X {
-
-    static void A (ref int a)
+class X
+{
+    static void A(ref int a)
     {
         a++;
     }
 
     // Int32&
-    static void B (ref int a)
+    static void B(ref int a)
     {
         // Int32&&
-        A (ref a);
+        A(ref a);
     }
 
-    public static int Main ()
+    public static int Main()
     {
         int a = 10;
 
-        B (ref a);
+        B(ref a);
 
         if (a == 11)
             return 0;

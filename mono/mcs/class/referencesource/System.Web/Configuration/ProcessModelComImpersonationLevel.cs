@@ -4,9 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
-    public enum ProcessModelComImpersonationLevel {
+namespace System.Web.Configuration
+{
+    public enum ProcessModelComImpersonationLevel
+    {
         Default = 0,
         Anonymous = 1,
         Delegate = 2,

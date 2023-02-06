@@ -9,13 +9,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
 /// <summary>
 /// </summary>
-/// <remarks>This is not actually stateless, but we need to be sure it doesn't re-construct each time it is retrieved 
+/// <remarks>This is not actually stateless, but we need to be sure it doesn't re-construct each time it is retrieved
 /// and the only state will be wiped out on Server startup</remarks>
 internal class ClientCapabilitiesManager : IClientCapabilitiesManager
 {
-    public ClientCapabilitiesManager()
-    {
-    }
+    public ClientCapabilitiesManager() { }
 
     private ClientCapabilities? _clientCapabilities;
 
@@ -23,7 +21,9 @@ internal class ClientCapabilitiesManager : IClientCapabilitiesManager
     {
         if (_clientCapabilities is null)
         {
-            throw new InvalidOperationException($"Tried to get required {nameof(ClientCapabilities)} before it was set");
+            throw new InvalidOperationException(
+                $"Tried to get required {nameof(ClientCapabilities)} before it was set"
+            );
         }
 
         return _clientCapabilities;

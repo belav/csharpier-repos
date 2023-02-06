@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,59 +33,75 @@ namespace System.Xaml
         XamlNodeQueue source;
         XamlNodeLineInfo node;
 
-        public XamlNodeQueueReader (XamlNodeQueue source)
+        public XamlNodeQueueReader(XamlNodeQueue source)
         {
             this.source = source;
-            node = default (XamlNodeLineInfo);
+            node = default(XamlNodeLineInfo);
         }
 
-        public override bool IsEof {
+        public override bool IsEof
+        {
             get { return node.Node.NodeType == XamlNodeType.None; }
         }
-        
-        public override XamlMember Member {
+
+        public override XamlMember Member
+        {
             get { return NodeType != XamlNodeType.StartMember ? null : node.Node.Member.Member; }
         }
 
-        public override NamespaceDeclaration Namespace {
-            get { return NodeType != XamlNodeType.NamespaceDeclaration ? null : (NamespaceDeclaration) node.Node.Value; }
+        public override NamespaceDeclaration Namespace
+        {
+            get
+            {
+                return NodeType != XamlNodeType.NamespaceDeclaration
+                    ? null
+                    : (NamespaceDeclaration)node.Node.Value;
+            }
         }
 
-        public override XamlNodeType NodeType {
+        public override XamlNodeType NodeType
+        {
             get { return node.Node.NodeType; }
         }
 
-        public override XamlSchemaContext SchemaContext {
+        public override XamlSchemaContext SchemaContext
+        {
             get { return source.SchemaContext; }
         }
 
-        public override XamlType Type {
+        public override XamlType Type
+        {
             get { return NodeType != XamlNodeType.StartObject ? null : node.Node.Object.Type; }
         }
 
-        public override object Value {
+        public override object Value
+        {
             get { return NodeType != XamlNodeType.Value ? null : node.Node.Value; }
         }
 
-        public override bool Read ()
+        public override bool Read()
         {
-            if (source.IsEmpty) {
-                node = default (XamlNodeLineInfo);
+            if (source.IsEmpty)
+            {
+                node = default(XamlNodeLineInfo);
                 return false;
             }
-            node = source.Dequeue ();
+            node = source.Dequeue();
             return true;
         }
 
-        public bool HasLineInfo {
+        public bool HasLineInfo
+        {
             get { return node.LineNumber > 0; }
         }
-        
-        public int LineNumber {
+
+        public int LineNumber
+        {
             get { return node.LineNumber; }
         }
 
-        public int LinePosition {
+        public int LinePosition
+        {
             get { return node.LinePosition; }
         }
     }

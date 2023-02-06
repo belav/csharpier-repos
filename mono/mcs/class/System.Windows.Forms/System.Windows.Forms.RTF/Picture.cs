@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,10 +28,10 @@ using System;
 using System.IO;
 using System.Drawing;
 
-namespace System.Windows.Forms.RTF {
-
-    internal class Picture {
-
+namespace System.Windows.Forms.RTF
+{
+    internal class Picture
+    {
         private Minor image_type;
         private Image image;
         private MemoryStream data;
@@ -40,104 +40,107 @@ namespace System.Windows.Forms.RTF {
 
         private readonly static float dpix;
 
-        static Picture ()
+        static Picture()
         {
-            dpix = TextRenderer.GetDpi ().Width;
+            dpix = TextRenderer.GetDpi().Width;
         }
 
-        public Picture ()
-        {
-            
-        }
+        public Picture() { }
 
-        public Minor ImageType {
+        public Minor ImageType
+        {
             get { return image_type; }
             set { image_type = value; }
         }
 
-        public MemoryStream Data {
-            get {
+        public MemoryStream Data
+        {
+            get
+            {
                 if (data == null)
-                    data = new MemoryStream ();
+                    data = new MemoryStream();
                 return data;
             }
         }
 
-        public float Width {
-            get {
+        public float Width
+        {
+            get
+            {
                 float w = width;
-                if (w < 0) {
+                if (w < 0)
+                {
                     if (image == null)
-                        image = ToImage ();
+                        image = ToImage();
                     w = image.Width;
                 }
                 return w;
-                
             }
         }
 
-        public float Height {
-            get {
+        public float Height
+        {
+            get
+            {
                 float h = height;
-                if (h < 0) {
+                if (h < 0)
+                {
                     if (image == null)
-                        image = ToImage ();
+                        image = ToImage();
                     h = image.Height;
                 }
                 return h;
             }
         }
 
-        public SizeF Size {
-            get {    
-                return new SizeF (Width, Height);
-            }
+        public SizeF Size
+        {
+            get { return new SizeF(Width, Height); }
         }
 
-        public void SetWidthFromTwips (int twips)
+        public void SetWidthFromTwips(int twips)
         {
-            width = (int) (((float) twips / 1440.0F) * dpix + 0.5F);
+            width = (int)(((float)twips / 1440.0F) * dpix + 0.5F);
         }
 
-        public void SetHeightFromTwips (int twips)
+        public void SetHeightFromTwips(int twips)
         {
-            height = (int) (((float) twips / 1440.0F) * dpix + 0.5F);
+            height = (int)(((float)twips / 1440.0F) * dpix + 0.5F);
         }
 
         //
         // Makes sure that we got enough information to actually use the image
         //
-        public bool IsValid ()
+        public bool IsValid()
         {
-            if  (data == null)
+            if (data == null)
                 return false;
-            switch (image_type) {
-            case Minor.PngBlip:
-            case Minor.JpegBlip:
-            case Minor.WinMetafile:
-            case Minor.EnhancedMetafile:
-                break;
-            default:
-                return false;
+            switch (image_type)
+            {
+                case Minor.PngBlip:
+                case Minor.JpegBlip:
+                case Minor.WinMetafile:
+                case Minor.EnhancedMetafile:
+                    break;
+                default:
+                    return false;
             }
 
             return true;
         }
 
-        public void DrawImage (Graphics dc, float x, float y, bool selected)
+        public void DrawImage(Graphics dc, float x, float y, bool selected)
         {
             if (image == null)
-                image = ToImage ();
-            dc.DrawImage (image, x, y, Width, Height);
+                image = ToImage();
+            dc.DrawImage(image, x, y, Width, Height);
         }
 
-        public Image ToImage ()
+        public Image ToImage()
         {
             // Reset the data stream position to the beginning
             data.Position = 0;
-            return Image.FromStream (data);
+            return Image.FromStream(data);
         }
     }
-
 }
-

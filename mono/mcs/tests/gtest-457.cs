@@ -2,15 +2,12 @@ using System;
 
 class Program
 {
-    class C
-    {
-    }
+    class C { }
 
-    void Foo<T> () where T : C
-    {
-    }
+    void Foo<T>()
+        where T : C { }
 
-    public static int Main ()
+    public static int Main()
     {
         return 0;
     }

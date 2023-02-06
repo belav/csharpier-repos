@@ -16,21 +16,25 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.SemanticClassificationCache
 {
-    [ExportWorkspaceService(typeof(ISemanticClassificationCacheService), ServiceLayer.Editor), Shared]
+    [
+        ExportWorkspaceService(typeof(ISemanticClassificationCacheService), ServiceLayer.Editor),
+        Shared
+    ]
     internal class SemanticClassificationCacheService : ISemanticClassificationCacheService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SemanticClassificationCacheService()
-        {
-        }
+        public SemanticClassificationCacheService() { }
 
         public async Task<ImmutableArray<ClassifiedSpan>> GetCachedSemanticClassificationsAsync(
             Document document,
             TextSpan textSpan,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var client = await RemoteHostClient.TryGetClientAsync(document.Project.Solution.Workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(document.Project.Solution.Workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
                 // We don't do anything if we fail to get the external process.  That's the case when something has gone
@@ -39,14 +43,28 @@ namespace Microsoft.CodeAnalysis.SemanticClassificationCache
                 return default;
             }
 
-            var (documentKey, checksum) = await SemanticClassificationCacheUtilities.GetDocumentKeyAndChecksumAsync(
-                document, cancellationToken).ConfigureAwait(false);
+            var (documentKey, checksum) = await SemanticClassificationCacheUtilities
+                .GetDocumentKeyAndChecksumAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             var database = document.Project.Solution.Options.GetPersistentStorageDatabase();
 
-            var classifiedSpans = await client.TryInvokeAsync<IRemoteSemanticClassificationCacheService, SerializableClassifiedSpans?>(
-                (service, cancellationToken) => service.GetCachedSemanticClassificationsAsync(documentKey, textSpan, checksum, database, cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+            var classifiedSpans = await client
+                .TryInvokeAsync<
+                    IRemoteSemanticClassificationCacheService,
+                    SerializableClassifiedSpans?
+                >(
+                    (service, cancellationToken) =>
+                        service.GetCachedSemanticClassificationsAsync(
+                            documentKey,
+                            textSpan,
+                            checksum,
+                            database,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (!classifiedSpans.HasValue || classifiedSpans.Value == null)
                 return default;

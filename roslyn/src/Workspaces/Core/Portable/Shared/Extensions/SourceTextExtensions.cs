@@ -16,7 +16,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class SourceTextExtensions
     {
-        public static void GetLineAndOffset(this SourceText text, int position, out int lineNumber, out int offset)
+        public static void GetLineAndOffset(
+            this SourceText text,
+            int position,
+            out int lineNumber,
+            out int offset
+        )
         {
             var line = text.Lines.GetLineFromPosition(position);
 
@@ -36,13 +41,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             out int startLineNumber,
             out int startOffset,
             out int endLineNumber,
-            out int endOffset)
+            out int endOffset
+        )
         {
             text.GetLineAndOffset(textSpan.Start, out startLineNumber, out startOffset);
             text.GetLineAndOffset(textSpan.End, out endLineNumber, out endOffset);
         }
 
-        public static TextChangeRange GetEncompassingTextChangeRange(this SourceText newText, SourceText oldText)
+        public static TextChangeRange GetEncompassingTextChangeRange(
+            this SourceText newText,
+            SourceText oldText
+        )
         {
             var ranges = newText.GetChangeRanges(oldText);
             if (ranges.Count == 0)
@@ -59,7 +68,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return TextChangeRange.Collapse(ranges);
         }
 
-        public static int IndexOf(this SourceText text, string value, int startIndex, bool caseSensitive)
+        public static int IndexOf(
+            this SourceText text,
+            string value,
+            int startIndex,
+            bool caseSensitive
+        )
         {
             var length = text.Length - value.Length;
             var normalized = caseSensitive ? value : CaseInsensitiveComparison.ToLower(value);
@@ -90,12 +104,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return -1;
         }
 
-        public static int LastIndexOf(this SourceText text, string value, int startIndex, bool caseSensitive)
+        public static int LastIndexOf(
+            this SourceText text,
+            string value,
+            int startIndex,
+            bool caseSensitive
+        )
         {
             var normalized = caseSensitive ? value : CaseInsensitiveComparison.ToLower(value);
-            startIndex = startIndex + normalized.Length > text.Length
-                ? text.Length - normalized.Length
-                : startIndex;
+            startIndex =
+                startIndex + normalized.Length > text.Length
+                    ? text.Length - normalized.Length
+                    : startIndex;
 
             for (var i = startIndex; i >= 0; i--)
             {
@@ -123,8 +143,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return -1;
         }
 
-        private static bool Match(char normalizedLeft, char right, bool caseSensitive)
-            => caseSensitive ? normalizedLeft == right : normalizedLeft == CaseInsensitiveComparison.ToLower(right);
+        private static bool Match(char normalizedLeft, char right, bool caseSensitive) =>
+            caseSensitive
+                ? normalizedLeft == right
+                : normalizedLeft == CaseInsensitiveComparison.ToLower(right);
 
         public static bool ContentEquals(this SourceText text, int position, string value)
         {
@@ -160,7 +182,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         // 32KB. comes from SourceText char buffer size and less than large object size
         internal const int SourceTextLengthThreshold = 32 * 1024 / sizeof(char);
 
-        public static void WriteTo(this SourceText sourceText, ObjectWriter writer, CancellationToken cancellationToken)
+        public static void WriteTo(
+            this SourceText sourceText,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        )
         {
             // Source length
             var length = sourceText.Length;
@@ -178,7 +204,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        private static void WriteChunksTo(SourceText sourceText, ObjectWriter writer, int length, CancellationToken cancellationToken)
+        private static void WriteChunksTo(
+            SourceText sourceText,
+            ObjectWriter writer,
+            int length,
+            CancellationToken cancellationToken
+        )
         {
             // chunk size
             var buffer = SharedPools.CharArray.Allocate();
@@ -223,11 +254,22 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        public static SourceText ReadFrom(ITextFactoryService textService, ObjectReader reader, Encoding? encoding, SourceHashAlgorithm checksumAlgorithm, CancellationToken cancellationToken)
+        public static SourceText ReadFrom(
+            ITextFactoryService textService,
+            ObjectReader reader,
+            Encoding? encoding,
+            SourceHashAlgorithm checksumAlgorithm,
+            CancellationToken cancellationToken
+        )
         {
             using var textReader = ObjectReaderTextReader.Create(reader);
 
-            return textService.CreateText(textReader, encoding, checksumAlgorithm, cancellationToken);
+            return textService.CreateText(
+                textReader,
+                encoding,
+                checksumAlgorithm,
+                cancellationToken
+            );
         }
 
         private class ObjectReaderTextReader : TextReaderWithLength
@@ -353,6 +395,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             private int GetIndexFromPosition(int position) => position / _chunkSize;
+
             private int GetColumnFromPosition(int position) => position % _chunkSize;
         }
     }

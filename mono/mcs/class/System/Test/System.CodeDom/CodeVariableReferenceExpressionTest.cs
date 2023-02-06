@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,36 +39,36 @@ namespace MonoTests.System.CodeDom
     public class CodeVariableReferenceExpressionTest
     {
         [Test]
-        public void Constructor0 ()
+        public void Constructor0()
         {
-            CodeVariableReferenceExpression cvre = new CodeVariableReferenceExpression ();
+            CodeVariableReferenceExpression cvre = new CodeVariableReferenceExpression();
 
-            Assert.IsNotNull (cvre.VariableName, "#1");
-            Assert.AreEqual (string.Empty, cvre.VariableName, "#2");
+            Assert.IsNotNull(cvre.VariableName, "#1");
+            Assert.AreEqual(string.Empty, cvre.VariableName, "#2");
 
             cvre.VariableName = null;
-            Assert.IsNotNull (cvre.VariableName, "#3");
-            Assert.AreEqual (string.Empty, cvre.VariableName, "#4");
+            Assert.IsNotNull(cvre.VariableName, "#3");
+            Assert.AreEqual(string.Empty, cvre.VariableName, "#4");
 
             string variableName = "mono";
             cvre.VariableName = variableName;
-            Assert.AreSame (variableName, cvre.VariableName, "#5");
+            Assert.AreSame(variableName, cvre.VariableName, "#5");
         }
 
         [Test]
-        public void Constructor1 () {
+        public void Constructor1()
+        {
             string variableName = "mono";
 
-            CodeVariableReferenceExpression cvre = new CodeVariableReferenceExpression (
-                variableName);
-            Assert.IsNotNull (cvre.VariableName, "#1");
-            Assert.AreSame (variableName, cvre.VariableName, "#2");
+            CodeVariableReferenceExpression cvre = new CodeVariableReferenceExpression(
+                variableName
+            );
+            Assert.IsNotNull(cvre.VariableName, "#1");
+            Assert.AreSame(variableName, cvre.VariableName, "#2");
 
-            cvre = new CodeVariableReferenceExpression (
-                (string) null);
-            Assert.IsNotNull (cvre.VariableName, "#3");
-            Assert.AreEqual (string.Empty, cvre.VariableName, "#4");
+            cvre = new CodeVariableReferenceExpression((string)null);
+            Assert.IsNotNull(cvre.VariableName, "#3");
+            Assert.AreEqual(string.Empty, cvre.VariableName, "#4");
         }
     }
 }
-

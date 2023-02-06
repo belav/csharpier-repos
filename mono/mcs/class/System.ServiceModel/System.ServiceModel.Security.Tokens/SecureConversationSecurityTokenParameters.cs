@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,22 +45,22 @@ namespace System.ServiceModel.Security.Tokens
 #endif
         static readonly BindingContext dummy_context;
 
-        static SecureConversationSecurityTokenParameters ()
+        static SecureConversationSecurityTokenParameters()
         {
 #if !MOBILE && !XAMMAC_4_5
-            ChannelProtectionRequirements r =
-                new ChannelProtectionRequirements ();
+            ChannelProtectionRequirements r = new ChannelProtectionRequirements();
             r.IncomingSignatureParts.ChannelParts.IsBodyIncluded = true;
             r.OutgoingSignatureParts.ChannelParts.IsBodyIncluded = true;
             r.IncomingEncryptionParts.ChannelParts.IsBodyIncluded = true;
             r.OutgoingEncryptionParts.ChannelParts.IsBodyIncluded = true;
-            r.MakeReadOnly ();
+            r.MakeReadOnly();
             default_channel_protection_requirements = r;
 #endif
 
-            dummy_context = new BindingContext (
-                new CustomBinding (),
-                new BindingParameterCollection ());
+            dummy_context = new BindingContext(
+                new CustomBinding(),
+                new BindingParameterCollection()
+            );
         }
 
         SecurityBindingElement element;
@@ -69,121 +69,155 @@ namespace System.ServiceModel.Security.Tokens
 #endif
         bool cancellable;
 
-        public SecureConversationSecurityTokenParameters ()
-            : this ((SecurityBindingElement) null)
-        {
-        }
+        public SecureConversationSecurityTokenParameters()
+            : this((SecurityBindingElement)null) { }
 
-        public SecureConversationSecurityTokenParameters (
-            SecurityBindingElement bootstrapSecurityBindingElement)
-            : this (bootstrapSecurityBindingElement, true)
-        {
-        }
+        public SecureConversationSecurityTokenParameters(
+            SecurityBindingElement bootstrapSecurityBindingElement
+        )
+            : this(bootstrapSecurityBindingElement, true) { }
 
-        public SecureConversationSecurityTokenParameters (
+        public SecureConversationSecurityTokenParameters(
             SecurityBindingElement bootstrapSecurityBindingElement,
-            bool requireCancellation)
-            : this (bootstrapSecurityBindingElement, requireCancellation, null)
-        {
-        }
+            bool requireCancellation
+        )
+            : this(bootstrapSecurityBindingElement, requireCancellation, null) { }
 
 #if !MOBILE && !XAMMAC_4_5
-        public SecureConversationSecurityTokenParameters (
+        public SecureConversationSecurityTokenParameters(
             SecurityBindingElement bootstrapSecurityBindingElement,
             bool requireCancellation,
-            ChannelProtectionRequirements bootstrapProtectionRequirements)
+            ChannelProtectionRequirements bootstrapProtectionRequirements
+        )
         {
             this.element = bootstrapSecurityBindingElement;
             this.cancellable = requireCancellation;
             if (bootstrapProtectionRequirements == null)
-                this.requirements = new ChannelProtectionRequirements (default_channel_protection_requirements);
+                this.requirements = new ChannelProtectionRequirements(
+                    default_channel_protection_requirements
+                );
             else
-                this.requirements = new ChannelProtectionRequirements (bootstrapProtectionRequirements);
+                this.requirements = new ChannelProtectionRequirements(
+                    bootstrapProtectionRequirements
+                );
         }
 #else
-        internal SecureConversationSecurityTokenParameters (
+        internal SecureConversationSecurityTokenParameters(
             SecurityBindingElement element,
             bool requireCancellation,
-            object dummy)
+            object dummy
+        )
         {
             this.element = element;
             this.cancellable = requireCancellation;
         }
 #endif
 
-        protected SecureConversationSecurityTokenParameters (SecureConversationSecurityTokenParameters other)
-            : base (other)
+        protected SecureConversationSecurityTokenParameters(
+            SecureConversationSecurityTokenParameters other
+        )
+            : base(other)
         {
-            this.element = (SecurityBindingElement) other.element.Clone ();
+            this.element = (SecurityBindingElement)other.element.Clone();
             this.cancellable = other.cancellable;
 #if !MOBILE && !XAMMAC_4_5
-            this.requirements = new ChannelProtectionRequirements (default_channel_protection_requirements);
+            this.requirements = new ChannelProtectionRequirements(
+                default_channel_protection_requirements
+            );
 #endif
         }
 
-        public bool RequireCancellation {
+        public bool RequireCancellation
+        {
             get { return cancellable; }
             set { cancellable = value; }
         }
 
-        public SecurityBindingElement BootstrapSecurityBindingElement {
+        public SecurityBindingElement BootstrapSecurityBindingElement
+        {
             get { return element; }
             set { element = value; }
         }
 
 #if !MOBILE && !XAMMAC_4_5
-        public ChannelProtectionRequirements BootstrapProtectionRequirements {
+        public ChannelProtectionRequirements BootstrapProtectionRequirements
+        {
             get { return requirements; }
         }
 #endif
 
         // SecurityTokenParameters
 
-        protected override bool HasAsymmetricKey {
+        protected override bool HasAsymmetricKey
+        {
             get { return false; }
         }
 
-        protected override bool SupportsClientAuthentication {
-            get { return element.GetProperty<ISecurityCapabilities> (dummy_context).SupportsClientAuthentication; }
-        }
-
-        protected override bool SupportsClientWindowsIdentity {
-            get { return element.GetProperty<ISecurityCapabilities> (dummy_context).SupportsClientWindowsIdentity; }
-        }
-
-        protected override bool SupportsServerAuthentication {
-            get { return element.GetProperty<ISecurityCapabilities> (dummy_context).SupportsServerAuthentication; }
-        }
-
-        protected override SecurityTokenParameters CloneCore ()
+        protected override bool SupportsClientAuthentication
         {
-            return new SecureConversationSecurityTokenParameters (this);
+            get
+            {
+                return element
+                    .GetProperty<ISecurityCapabilities>(dummy_context)
+                    .SupportsClientAuthentication;
+            }
+        }
+
+        protected override bool SupportsClientWindowsIdentity
+        {
+            get
+            {
+                return element
+                    .GetProperty<ISecurityCapabilities>(dummy_context)
+                    .SupportsClientWindowsIdentity;
+            }
+        }
+
+        protected override bool SupportsServerAuthentication
+        {
+            get
+            {
+                return element
+                    .GetProperty<ISecurityCapabilities>(dummy_context)
+                    .SupportsServerAuthentication;
+            }
+        }
+
+        protected override SecurityTokenParameters CloneCore()
+        {
+            return new SecureConversationSecurityTokenParameters(this);
         }
 
 #if !MOBILE && !XAMMAC_4_5
         [MonoTODO]
-        protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause (
-            SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+        protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        protected internal override void InitializeSecurityTokenRequirement (SecurityTokenRequirement requirement)
+        protected internal override void InitializeSecurityTokenRequirement(
+            SecurityTokenRequirement requirement
+        )
         {
             // .NET somehow causes NRE. dunno why.
             requirement.TokenType = ServiceModelSecurityTokenTypes.SecureConversation;
             requirement.RequireCryptographicToken = true;
-            requirement.Properties [ReqType.SupportSecurityContextCancellationProperty] = RequireCancellation;
-            requirement.Properties [ReqType.SecureConversationSecurityBindingElementProperty] =
+            requirement.Properties[ReqType.SupportSecurityContextCancellationProperty] =
+                RequireCancellation;
+            requirement.Properties[ReqType.SecureConversationSecurityBindingElementProperty] =
                 BootstrapSecurityBindingElement;
-            requirement.Properties [ReqType.IssuedSecurityTokenParametersProperty] = this.Clone ();
+            requirement.Properties[ReqType.IssuedSecurityTokenParametersProperty] = this.Clone();
             requirement.KeyType = SecurityKeyType.SymmetricKey;
         }
 #endif
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return base.ToString ();
+            return base.ToString();
         }
     }
 }

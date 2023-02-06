@@ -23,7 +23,8 @@ internal class MockCSharpSyntaxTree : CSharpSyntaxTree
         CSharpSyntaxNode? root = null,
         SourceText? source = null,
         CSharpParseOptions? options = null,
-        string? filePath = null)
+        string? filePath = null
+    )
     {
         _root = (root != null) ? CloneNodeAsRoot(root) : null;
         _sourceText = source ?? SourceText.From("", Encoding.UTF8, SourceHashAlgorithm.Sha256);
@@ -31,8 +32,7 @@ internal class MockCSharpSyntaxTree : CSharpSyntaxTree
         FilePath = filePath ?? string.Empty;
     }
 
-    public override SourceText GetText(CancellationToken cancellationToken)
-        => _sourceText;
+    public override SourceText GetText(CancellationToken cancellationToken) => _sourceText;
 
     public override bool TryGetText(out SourceText text)
     {
@@ -40,14 +40,12 @@ internal class MockCSharpSyntaxTree : CSharpSyntaxTree
         return true;
     }
 
-    public override Encoding? Encoding
-        => _sourceText.Encoding;
+    public override Encoding? Encoding => _sourceText.Encoding;
 
-    public override int Length
-        => _sourceText.Length;
+    public override int Length => _sourceText.Length;
 
-    public override CSharpSyntaxNode GetRoot(CancellationToken cancellationToken)
-        => _root ?? throw new NotImplementedException();
+    public override CSharpSyntaxNode GetRoot(CancellationToken cancellationToken) =>
+        _root ?? throw new NotImplementedException();
 
     public override bool TryGetRoot([NotNullWhen(true)] out CSharpSyntaxNode? root)
     {
@@ -55,15 +53,19 @@ internal class MockCSharpSyntaxTree : CSharpSyntaxTree
         return root != null;
     }
 
-    public override SyntaxTree WithRootAndOptions(SyntaxNode root, ParseOptions options)
-        => new MockCSharpSyntaxTree((CSharpSyntaxNode)root, _sourceText, (CSharpParseOptions)options, FilePath);
+    public override SyntaxTree WithRootAndOptions(SyntaxNode root, ParseOptions options) =>
+        new MockCSharpSyntaxTree(
+            (CSharpSyntaxNode)root,
+            _sourceText,
+            (CSharpParseOptions)options,
+            FilePath
+        );
 
-    public override SyntaxTree WithFilePath(string path)
-        => new MockCSharpSyntaxTree(_root, _sourceText, Options, FilePath);
+    public override SyntaxTree WithFilePath(string path) =>
+        new MockCSharpSyntaxTree(_root, _sourceText, Options, FilePath);
 
-    public override bool HasCompilationUnitRoot
-        => _root != null;
+    public override bool HasCompilationUnitRoot => _root != null;
 
-    public override SyntaxReference GetReference(SyntaxNode node)
-        => new SimpleSyntaxReference(node);
+    public override SyntaxReference GetReference(SyntaxNode node) =>
+        new SimpleSyntaxReference(node);
 }

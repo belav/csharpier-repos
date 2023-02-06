@@ -3,6 +3,6 @@
 
 public class C
 {
-    [System.Runtime.CompilerServices.FixedBuffer (typeof (int), 1)]
+    [System.Runtime.CompilerServices.FixedBuffer(typeof(int), 1)]
     public int i;
 }

@@ -5,17 +5,13 @@ using System;
 
 class AAttribute : Attribute
 {
-    public AAttribute (dynamic X)
-    {
-    }
+    public AAttribute(dynamic X) { }
 }
 
-[A (Test.B)]
+[A(Test.B)]
 class Test
 {
     public static dynamic B;
 
-    static void Main ()
-    {
-    }
+    static void Main() { }
 }

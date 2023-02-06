@@ -17,12 +17,10 @@ class Caller
         get { return x; }
     }
 
-    public void Foo ()
+    public void Foo()
     {
-        var v = Item.Field.ToString ();
+        var v = Item.Field.ToString();
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

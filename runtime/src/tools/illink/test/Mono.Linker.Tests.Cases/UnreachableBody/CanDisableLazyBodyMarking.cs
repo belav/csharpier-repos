@@ -3,33 +3,31 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBody
 {
-    [SetupLinkerArgument ("--disable-opt", "unreachablebodies")]
+    [SetupLinkerArgument("--disable-opt", "unreachablebodies")]
     public class CanDisableLazyBodyMarking
     {
-        public static void Main ()
+        public static void Main()
         {
-            UsedToMarkMethod (null);
+            UsedToMarkMethod(null);
         }
 
         [Kept]
-        static void UsedToMarkMethod (Foo f)
+        static void UsedToMarkMethod(Foo f)
         {
-            f.Method ();
+            f.Method();
         }
 
         [Kept]
         class Foo
         {
             [Kept]
-            public void Method ()
+            public void Method()
             {
-                UsedByMethod ();
+                UsedByMethod();
             }
 
             [Kept]
-            void UsedByMethod ()
-            {
-            }
+            void UsedByMethod() { }
         }
     }
 }

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,74 +42,73 @@ namespace MonoTests.System.Xaml
     public class ValueSerializerContextTest
     {
         public static IServiceProvider Provider;
-        public static IValueSerializerContext Context {
-            get { return (IValueSerializerContext) Provider; }
+        public static IValueSerializerContext Context
+        {
+            get { return (IValueSerializerContext)Provider; }
             set { Provider = value; }
         }
 
         [SetUp]
-        public void Setup ()
-        {
-        }
+        public void Setup() { }
 
         [Test]
-        [Category ("NotWorking")]
-        public void GetService ()
+        [Category("NotWorking")]
+        public void GetService()
         {
-            var obj = new TestValueSerialized ();
-            var xr = new XamlObjectReader (obj);
+            var obj = new TestValueSerialized();
+            var xr = new XamlObjectReader(obj);
             while (!xr.IsEof)
-                xr.Read ();
-            Assert.IsNotNull (Context, "premise#1");
-            GetServiceCoreReader ();
+                xr.Read();
+            Assert.IsNotNull(Context, "premise#1");
+            GetServiceCoreReader();
 
             Context = null;
-            var ctx = new XamlSchemaContext ();
-            var xw = new XamlObjectWriter (ctx);
-            var xt = ctx.GetXamlType (obj.GetType ());
-            xw.WriteStartObject (xt);
-            xw.WriteStartMember (XamlLanguage.Initialization);
-            xw.WriteValue ("v");
-            xw.WriteEndMember ();
-            xw.Close ();
-            Assert.IsNotNull (Provider, "premise#2"); // cannot get Context, it does not give IValueSerializerContext in the test.
-            GetServiceCoreWriter ();
+            var ctx = new XamlSchemaContext();
+            var xw = new XamlObjectWriter(ctx);
+            var xt = ctx.GetXamlType(obj.GetType());
+            xw.WriteStartObject(xt);
+            xw.WriteStartMember(XamlLanguage.Initialization);
+            xw.WriteValue("v");
+            xw.WriteEndMember();
+            xw.Close();
+            Assert.IsNotNull(Provider, "premise#2"); // cannot get Context, it does not give IValueSerializerContext in the test.
+            GetServiceCoreWriter();
         }
-        
-        void GetServiceCoreReader ()
+
+        void GetServiceCoreReader()
         {
             //Assert.IsNull (Provider.GetService (typeof (IXamlNameResolver)), "#1");
-            Assert.IsNotNull (Provider.GetService (typeof (IXamlNameProvider)), "#2");
+            Assert.IsNotNull(Provider.GetService(typeof(IXamlNameProvider)), "#2");
             //Assert.IsNull (Provider.GetService (typeof (IXamlNamespaceResolver)), "#3");
-            Assert.IsNotNull (Provider.GetService (typeof (INamespacePrefixLookup)), "#4");
+            Assert.IsNotNull(Provider.GetService(typeof(INamespacePrefixLookup)), "#4");
             //Assert.IsNull (Provider.GetService (typeof (IXamlTypeResolver)), "#5");
-            Assert.IsNotNull (Provider.GetService (typeof (IXamlSchemaContextProvider)), "#6");
+            Assert.IsNotNull(Provider.GetService(typeof(IXamlSchemaContextProvider)), "#6");
             //Assert.IsNull (Provider.GetService (typeof (IAmbientProvider)), "#7");
             //Assert.IsNull (Provider.GetService (typeof (IAttachedPropertyStore)), "#8");
             //Assert.IsNull (Provider.GetService (typeof (IDestinationTypeProvider)), "#9");
             //Assert.IsNull (Provider.GetService (typeof (IXamlObjectWriterFactory)), "#10");
         }
-        
-        void GetServiceCoreWriter ()
+
+        void GetServiceCoreWriter()
         {
-            Assert.IsNotNull (Provider.GetService (typeof (IXamlNameResolver)), "#1");
+            Assert.IsNotNull(Provider.GetService(typeof(IXamlNameResolver)), "#1");
             //Assert.IsNull (Provider.GetService (typeof (IXamlNameProvider)), "#2");
-            Assert.IsNotNull (Provider.GetService (typeof (IXamlNamespaceResolver)), "#3");
+            Assert.IsNotNull(Provider.GetService(typeof(IXamlNamespaceResolver)), "#3");
             //Assert.IsNull (Provider.GetService (typeof (INamespacePrefixLookup)), "#4");
-            Assert.IsNotNull (Provider.GetService (typeof (IXamlTypeResolver)), "#5");
-            Assert.IsNotNull (Provider.GetService (typeof (IXamlSchemaContextProvider)), "#6");
-            Assert.IsNotNull (Provider.GetService (typeof (IAmbientProvider)), "#7");
+            Assert.IsNotNull(Provider.GetService(typeof(IXamlTypeResolver)), "#5");
+            Assert.IsNotNull(Provider.GetService(typeof(IXamlSchemaContextProvider)), "#6");
+            Assert.IsNotNull(Provider.GetService(typeof(IAmbientProvider)), "#7");
             //Assert.IsNull (Provider.GetService (typeof (IAttachedPropertyStore)), "#8");
-            Assert.IsNotNull (Provider.GetService (typeof (IDestinationTypeProvider)), "#9");
+            Assert.IsNotNull(Provider.GetService(typeof(IDestinationTypeProvider)), "#9");
             //Assert.IsNull (Provider.GetService (typeof (IXamlObjectWriterFactory)), "#10"); -> call to this method causes some internal exception. Smells like a .NET bug.
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void NameResolver ()
+        [Category("NotWorking")]
+        public void NameResolver()
         {
-            var nr = (IXamlNameResolver) Provider.GetService (typeof (IXamlNameResolver));
-            Assert.IsNull (nr.Resolve ("random"), "nr#1");
+            var nr = (IXamlNameResolver)Provider.GetService(typeof(IXamlNameResolver));
+            Assert.IsNull(nr.Resolve("random"), "nr#1");
             //var ft = nr.GetFixupToken (new string [] {"random"}); -> causes internal error.
             //var ft = nr.GetFixupToken (new string [] {"random"}, true); -> causes internal error
             //var ft = nr.GetFixupToken (new string [0], false);

@@ -13,6 +13,11 @@ namespace Microsoft.CodeAnalysis.Editor.Peek
 {
     public interface IPeekableItemFactory
     {
-        Task<IEnumerable<IPeekableItem>> GetPeekableItemsAsync(ISymbol symbol, Project project, IPeekResultFactory peekResultFactory, CancellationToken cancellationToken);
+        Task<IEnumerable<IPeekableItem>> GetPeekableItemsAsync(
+            ISymbol symbol,
+            Project project,
+            IPeekResultFactory peekResultFactory,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -32,18 +32,12 @@ namespace System.ServiceModel.Security
 
         public ISspiNegotiation SspiNegotiation
         {
-            get
-            {
-                return this.sspiNegotiation;
-            }
+            get { return this.sspiNegotiation; }
         }
 
         internal HashAlgorithm NegotiationDigest
         {
-            get
-            {
-                return this.negotiationDigest;
-            }
+            get { return this.negotiationDigest; }
         }
 
         public override void Dispose()

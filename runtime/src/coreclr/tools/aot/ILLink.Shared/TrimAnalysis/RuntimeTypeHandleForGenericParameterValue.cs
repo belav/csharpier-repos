@@ -16,10 +16,11 @@ namespace ILLink.Shared.TrimAnalysis
     {
         public readonly GenericParameterProxy GenericParameter;
 
-        public RuntimeTypeHandleForGenericParameterValue (GenericParameterProxy genericParameter) => GenericParameter = genericParameter;
+        public RuntimeTypeHandleForGenericParameterValue(GenericParameterProxy genericParameter) =>
+            GenericParameter = genericParameter;
 
-        public override SingleValue DeepCopy () => this; // This value is immutable
+        public override SingleValue DeepCopy() => this; // This value is immutable
 
-        public override string ToString () => this.ValueToString (GenericParameter);
+        public override string ToString() => this.ValueToString(GenericParameter);
     }
 }

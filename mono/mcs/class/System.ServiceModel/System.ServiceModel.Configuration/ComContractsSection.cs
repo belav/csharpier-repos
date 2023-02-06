@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,42 +55,45 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class ComContractsSection
-         : ConfigurationSection
+    public sealed partial class ComContractsSection : ConfigurationSection
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty com_contracts;
 
-        static ComContractsSection ()
+        static ComContractsSection()
         {
-            properties = new ConfigurationPropertyCollection ();
-            com_contracts = new ConfigurationProperty ("",
-                typeof (ComContractElementCollection), null, null/* FIXME: get converter for ComContractElementCollection*/, null,
-                ConfigurationPropertyOptions.IsDefaultCollection);
+            properties = new ConfigurationPropertyCollection();
+            com_contracts = new ConfigurationProperty(
+                "",
+                typeof(ComContractElementCollection),
+                null,
+                null /* FIXME: get converter for ComContractElementCollection*/
+                ,
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-            properties.Add (com_contracts);
+            properties.Add(com_contracts);
         }
 
-        public ComContractsSection ()
-        {
-        }
-
+        public ComContractsSection() { }
 
         // Properties
 
-        [ConfigurationProperty ("",
-             Options = ConfigurationPropertyOptions.IsDefaultCollection,
-            IsDefaultCollection = true)]
-        public ComContractElementCollection ComContracts {
-            get { return (ComContractElementCollection) base [com_contracts]; }
+        [ConfigurationProperty(
+            "",
+            Options = ConfigurationPropertyOptions.IsDefaultCollection,
+            IsDefaultCollection = true
+        )]
+        public ComContractElementCollection ComContracts
+        {
+            get { return (ComContractElementCollection)base[com_contracts]; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
-
     }
-
 }

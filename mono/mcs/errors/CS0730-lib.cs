@@ -1,6 +1,4 @@
 public class C
 {
-    public class CC
-    {
-    }
+    public class CC { }
 }

@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,50 +31,56 @@ using System.Xml;
 
 namespace System.Configuration
 {
-    [ConfigurationCollection (typeof (KeyValueConfigurationElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public class KeyValueConfigurationCollection: ConfigurationElementCollection
+    [ConfigurationCollection(
+        typeof(KeyValueConfigurationElement),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public class KeyValueConfigurationCollection : ConfigurationElementCollection
     {
-        public void Add (KeyValueConfigurationElement keyValue)
+        public void Add(KeyValueConfigurationElement keyValue)
         {
-            keyValue.Init ();
-            BaseAdd (keyValue);
+            keyValue.Init();
+            BaseAdd(keyValue);
         }
-        
-        public void Add (string key, string value)
+
+        public void Add(string key, string value)
         {
-            Add (new KeyValueConfigurationElement (key, value));
+            Add(new KeyValueConfigurationElement(key, value));
         }
-        
-        public void Clear ()
+
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
-        
-        public void Remove (string key)
+
+        public void Remove(string key)
         {
-            BaseRemove (key);
+            BaseRemove(key);
         }
-        
-        public string[] AllKeys {
-            get {
-                string[] keys = new string [Count];
-                int n=0;
+
+        public string[] AllKeys
+        {
+            get
+            {
+                string[] keys = new string[Count];
+                int n = 0;
                 foreach (KeyValueConfigurationElement kv in this)
-                    keys [n++] = kv.Key;
+                    keys[n++] = kv.Key;
                 return keys;
             }
         }
-        
-        public new KeyValueConfigurationElement this [string key] {
-            get { return (KeyValueConfigurationElement) BaseGet (key); }
-        }
-        
-        protected override ConfigurationElement CreateNewElement ()
+
+        public new KeyValueConfigurationElement this[string key]
         {
-            return new KeyValueConfigurationElement ();
+            get { return (KeyValueConfigurationElement)BaseGet(key); }
         }
-        
-        protected override object GetElementKey (ConfigurationElement element)
+
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new KeyValueConfigurationElement();
+        }
+
+        protected override object GetElementKey(ConfigurationElement element)
         {
             //            if (BaseIndexOf (element) == -1)
             //                return "";
@@ -83,18 +89,20 @@ namespace System.Configuration
         }
 
         ConfigurationPropertyCollection properties;
-        protected internal override ConfigurationPropertyCollection Properties {
-            get {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
                 if (properties == null)
-                    properties = new ConfigurationPropertyCollection ();
+                    properties = new ConfigurationPropertyCollection();
 
                 return properties;
             }
         }
-        
-        protected override bool ThrowOnDuplicate {
+
+        protected override bool ThrowOnDuplicate
+        {
             get { return false; }
         }
     }
 }
-

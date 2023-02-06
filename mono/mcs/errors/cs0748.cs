@@ -4,10 +4,10 @@
 
 public class C
 {
-    delegate void E ();
-    
-    public static void Main ()
+    delegate void E();
+
+    public static void Main()
     {
-        e = (ref int E, v) => {};
+        e = (ref int E, v) => { };
     }
 }

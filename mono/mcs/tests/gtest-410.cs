@@ -8,9 +8,10 @@ class Program
 {
     public static void Main()
     {
-        unsafe {
+        unsafe
+        {
             int* a = (int*)null;
-            ulong* o = default (ulong*);
+            ulong* o = default(ulong*);
         }
     }
 }

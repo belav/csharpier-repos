@@ -26,57 +26,60 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System.Collections;
 
     using Mono.Cecil.Metadata;
 
-    internal abstract class MemberReference : IMemberReference {
-
+    internal abstract class MemberReference : IMemberReference
+    {
         string m_name;
         TypeReference m_decType;
         MetadataToken m_token;
         IDictionary m_annotations;
 
-        public virtual string Name {
+        public virtual string Name
+        {
             get { return m_name; }
             set { m_name = value; }
         }
 
-        public virtual TypeReference DeclaringType {
+        public virtual TypeReference DeclaringType
+        {
             get { return m_decType; }
             set { m_decType = value; }
         }
 
-        public MetadataToken MetadataToken {
+        public MetadataToken MetadataToken
+        {
             get { return m_token; }
             set { m_token = value; }
         }
 
-        IDictionary IAnnotationProvider.Annotations {
-            get {
+        IDictionary IAnnotationProvider.Annotations
+        {
+            get
+            {
                 if (m_annotations == null)
-                    m_annotations = new Hashtable ();
+                    m_annotations = new Hashtable();
                 return m_annotations;
             }
         }
 
-        public MemberReference (string name)
+        public MemberReference(string name)
         {
             m_name = name;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             if (m_decType == null)
                 return m_name;
 
-            return string.Concat (m_decType.FullName, "::", m_name);
+            return string.Concat(m_decType.FullName, "::", m_name);
         }
 
-        public virtual void Accept (IReflectionVisitor visitor)
-        {
-        }
+        public virtual void Accept(IReflectionVisitor visitor) { }
     }
 }

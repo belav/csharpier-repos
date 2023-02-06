@@ -23,9 +23,13 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
         public string? ConfirmationMessage { get; }
 
-        public ChangeSignatureCodeActionOperation(Solution changedSolution, string? confirmationMessage)
+        public ChangeSignatureCodeActionOperation(
+            Solution changedSolution,
+            string? confirmationMessage
+        )
         {
-            ChangedSolution = changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
+            ChangedSolution =
+                changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
             ConfirmationMessage = confirmationMessage;
         }
 
@@ -35,23 +39,46 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         /// Show the confirmation message, if available, before attempting to apply the changes.
         /// </summary>
         internal sealed override Task<bool> TryApplyAsync(
-            Workspace workspace, Solution originalSolution, IProgressTracker progressTracker, CancellationToken cancellationToken)
+            Workspace workspace,
+            Solution originalSolution,
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
-            return ApplyWorker(workspace, originalSolution, progressTracker, cancellationToken) ? SpecializedTasks.True : SpecializedTasks.False;
+            return ApplyWorker(workspace, originalSolution, progressTracker, cancellationToken)
+                ? SpecializedTasks.True
+                : SpecializedTasks.False;
         }
 
-        private bool ApplyWorker(Workspace workspace, Solution originalSolution, IProgressTracker progressTracker, CancellationToken cancellationToken)
+        private bool ApplyWorker(
+            Workspace workspace,
+            Solution originalSolution,
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             if (ConfirmationMessage != null)
             {
-                var notificationService = workspace.Services.GetRequiredService<INotificationService>();
-                if (!notificationService.ConfirmMessageBox(ConfirmationMessage, severity: NotificationSeverity.Warning))
+                var notificationService =
+                    workspace.Services.GetRequiredService<INotificationService>();
+                if (
+                    !notificationService.ConfirmMessageBox(
+                        ConfirmationMessage,
+                        severity: NotificationSeverity.Warning
+                    )
+                )
                 {
                     return false;
                 }
             }
 
-            return ApplyChangesOperation.ApplyOrMergeChanges(workspace, originalSolution, ChangedSolution, progressTracker, cancellationToken);
+            return ApplyChangesOperation.ApplyOrMergeChanges(
+                workspace,
+                originalSolution,
+                ChangedSolution,
+                progressTracker,
+                cancellationToken
+            );
         }
     }
 }

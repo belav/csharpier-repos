@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,19 +36,19 @@ namespace System.ServiceModel.Description
 {
     public class ServiceContractGenerationContext
     {
-        public ServiceContractGenerationContext (
+        public ServiceContractGenerationContext(
             ServiceContractGenerator serviceContractGenerator,
             ContractDescription contract,
-            CodeTypeDeclaration contractType)
-            : this (serviceContractGenerator, contract, contractType, null)
-        {
-        }
+            CodeTypeDeclaration contractType
+        )
+            : this(serviceContractGenerator, contract, contractType, null) { }
 
-        public ServiceContractGenerationContext (
+        public ServiceContractGenerationContext(
             ServiceContractGenerator serviceContractGenerator,
             ContractDescription contract,
             CodeTypeDeclaration contractType,
-            CodeTypeDeclaration duplexCallbackType)
+            CodeTypeDeclaration duplexCallbackType
+        )
         {
             generator = serviceContractGenerator;
             this.contract = contract;
@@ -60,26 +60,31 @@ namespace System.ServiceModel.Description
         ContractDescription contract;
         CodeTypeDeclaration contract_type;
         CodeTypeDeclaration duplex_callback_type;
-        Collection<OperationContractGenerationContext> operations
-            = new Collection<OperationContractGenerationContext> ();
+        Collection<OperationContractGenerationContext> operations =
+            new Collection<OperationContractGenerationContext>();
 
-        public ServiceContractGenerator ServiceContractGenerator {
+        public ServiceContractGenerator ServiceContractGenerator
+        {
             get { return generator; }
         }
 
-        public ContractDescription Contract {
+        public ContractDescription Contract
+        {
             get { return contract; }
         }
 
-        public CodeTypeDeclaration ContractType {
+        public CodeTypeDeclaration ContractType
+        {
             get { return contract_type; }
         }
 
-        public CodeTypeDeclaration DuplexCallbackType {
+        public CodeTypeDeclaration DuplexCallbackType
+        {
             get { return duplex_callback_type; }
         }
 
-        public Collection<OperationContractGenerationContext> Operations {
+        public Collection<OperationContractGenerationContext> Operations
+        {
             get { return operations; }
         }
     }

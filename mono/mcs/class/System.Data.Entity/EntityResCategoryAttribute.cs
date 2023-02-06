@@ -4,9 +4,7 @@ namespace System.Data
 {
     sealed class EntityResCategoryAttribute : CategoryAttribute
     {
-        public EntityResCategoryAttribute (string category)
-            : base (category)
-        {
-        }
+        public EntityResCategoryAttribute(string category)
+            : base(category) { }
     }
 }

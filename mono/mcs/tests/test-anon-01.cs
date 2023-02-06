@@ -1,15 +1,16 @@
-delegate void S ();
+delegate void S();
 
-class X {
-
+class X
+{
     //
     // DO NOT ADD ANYTHING ELSE TO THIS TEST
     //
-    public static int Main ()
+    public static int Main()
     {
         int a;
 
-        S b = delegate {
+        S b = delegate
+        {
             a = 2;
         };
 

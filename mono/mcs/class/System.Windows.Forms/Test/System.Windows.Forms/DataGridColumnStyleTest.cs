@@ -37,29 +37,61 @@ namespace MonoTests.System.Windows.Forms
 {
     class StylePoker : DataGridColumnStyle
     {
-        public StylePoker ()
+        public StylePoker() { }
+
+        public StylePoker(PropertyDescriptor p)
+            : base(p) { }
+
+        public void DoCheckValidDataSource(CurrencyManager value)
         {
+            CheckValidDataSource(value);
         }
 
-        public StylePoker (PropertyDescriptor p) : base (p)
+        protected override void Abort(int rowNum) { }
+
+        protected override bool Commit(CurrencyManager dataSource, int rowNum)
         {
+            return false;
         }
 
-        public void DoCheckValidDataSource (CurrencyManager value)
+        protected override void Edit(
+            CurrencyManager source,
+            int rowNum,
+            Rectangle bounds,
+            bool readOnly,
+            string instantText,
+            bool cellIsVisible
+        ) { }
+
+        protected override int GetMinimumHeight()
         {
-            CheckValidDataSource (value);
+            return 0;
         }
 
-        protected override void Abort (int rowNum) { }
-        protected override bool Commit (CurrencyManager dataSource, int rowNum) { return false; }
-        protected override void Edit (CurrencyManager source, int rowNum, Rectangle bounds, bool readOnly,   string instantText,  bool cellIsVisible) { } 
-        protected override int GetMinimumHeight () { return 0; }
+        protected override int GetPreferredHeight(Graphics g, object value)
+        {
+            return 0;
+        }
 
-        protected override int GetPreferredHeight (Graphics g, object value) { return 0; }
+        protected override Size GetPreferredSize(Graphics g, object value)
+        {
+            return Size.Empty;
+        }
 
-        protected override Size GetPreferredSize (Graphics g,  object value) { return Size.Empty; }
-        protected override void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum) { }
-        protected override void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum, bool alignToRight) { }
+        protected override void Paint(
+            Graphics g,
+            Rectangle bounds,
+            CurrencyManager source,
+            int rowNum
+        ) { }
+
+        protected override void Paint(
+            Graphics g,
+            Rectangle bounds,
+            CurrencyManager source,
+            int rowNum,
+            bool alignToRight
+        ) { }
     }
 
     [TestFixture]
@@ -68,108 +100,115 @@ namespace MonoTests.System.Windows.Forms
         //private bool eventhandled;
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void CheckValidDataSource_nullSource ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CheckValidDataSource_nullSource()
         {
-            StylePoker p = new StylePoker ();
-            p.DoCheckValidDataSource (null);
+            StylePoker p = new StylePoker();
+            p.DoCheckValidDataSource(null);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void CheckValidDataSource_emptyMappingName ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CheckValidDataSource_emptyMappingName()
         {
-            StylePoker p = new StylePoker ();
+            StylePoker p = new StylePoker();
             string[] arr = new string[] { "hi", "bye" };
-            BindingContext bc = new BindingContext ();
+            BindingContext bc = new BindingContext();
 
-            p.DoCheckValidDataSource ((CurrencyManager)bc[arr]);
+            p.DoCheckValidDataSource((CurrencyManager)bc[arr]);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void CheckValidDataSource_invalidMappingName ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CheckValidDataSource_invalidMappingName()
         {
-            StylePoker p = new StylePoker ();
+            StylePoker p = new StylePoker();
             string[] arr = new string[] { "hi", "bye" };
-            BindingContext bc = new BindingContext ();
+            BindingContext bc = new BindingContext();
 
             p.MappingName = "foo";
 
-            p.DoCheckValidDataSource ((CurrencyManager)bc[arr]);
+            p.DoCheckValidDataSource((CurrencyManager)bc[arr]);
         }
 
-        class ReadOnlyPropertyTest {
-            public int ROProp {
+        class ReadOnlyPropertyTest
+        {
+            public int ROProp
+            {
                 get { return 5; }
             }
-            public int RWProp {
+            public int RWProp
+            {
                 get { return 5; }
                 set { }
             }
         }
 
         [Test]
-        public void TestReadOnly ()
+        public void TestReadOnly()
         {
-            StylePoker p = new StylePoker ();
+            StylePoker p = new StylePoker();
 
-            Assert.IsFalse (p.ReadOnly, "1");
+            Assert.IsFalse(p.ReadOnly, "1");
             p.ReadOnly = true;
-            Assert.IsTrue (p.ReadOnly, "2");
+            Assert.IsTrue(p.ReadOnly, "2");
 
             p.ReadOnly = false;
 
             DataGridTableStyle ts = new DataGridTableStyle();
-            ts.GridColumnStyles.Add (p);
+            ts.GridColumnStyles.Add(p);
 
             ts.ReadOnly = true;
-            Assert.IsFalse (p.ReadOnly, "3");
+            Assert.IsFalse(p.ReadOnly, "3");
         }
 
         [Test]
-        public void TestReadOnly_PropertyDescriptorSet ()
+        public void TestReadOnly_PropertyDescriptorSet()
         {
             /* check the effect the PropertyDescriptor setter has on the property */
-            PropertyDescriptor ro_prop = TypeDescriptor.GetProperties(typeof (ReadOnlyPropertyTest))["ROProp"];
-            PropertyDescriptor rw_prop = TypeDescriptor.GetProperties(typeof (ReadOnlyPropertyTest))["RWProp"];
+            PropertyDescriptor ro_prop = TypeDescriptor.GetProperties(typeof(ReadOnlyPropertyTest))[
+                "ROProp"
+            ];
+            PropertyDescriptor rw_prop = TypeDescriptor.GetProperties(typeof(ReadOnlyPropertyTest))[
+                "RWProp"
+            ];
             StylePoker p;
 
             /* non-user set, readonly property */
-            p = new StylePoker ();
-            Assert.IsFalse (p.ReadOnly, "a1");
+            p = new StylePoker();
+            Assert.IsFalse(p.ReadOnly, "a1");
             p.PropertyDescriptor = ro_prop;
-            Assert.IsFalse (p.ReadOnly, "a2");
+            Assert.IsFalse(p.ReadOnly, "a2");
 
             /* non-user set, non-readonly property */
-            p = new StylePoker ();
-            Assert.IsFalse (p.ReadOnly, "b1");
+            p = new StylePoker();
+            Assert.IsFalse(p.ReadOnly, "b1");
             p.PropertyDescriptor = rw_prop;
-            Assert.IsFalse (p.ReadOnly, "b2");
+            Assert.IsFalse(p.ReadOnly, "b2");
 
             /* user set to false, readonly property */
-            p = new StylePoker ();
+            p = new StylePoker();
             p.ReadOnly = false;
             p.PropertyDescriptor = ro_prop;
-            Assert.IsFalse (p.ReadOnly, "c1");
+            Assert.IsFalse(p.ReadOnly, "c1");
 
             /* user set to false, non-readonly property */
-            p = new StylePoker ();
+            p = new StylePoker();
             p.ReadOnly = false;
             p.PropertyDescriptor = rw_prop;
-            Assert.IsFalse (p.ReadOnly, "d1");
+            Assert.IsFalse(p.ReadOnly, "d1");
 
             /* user set to true, readonly property */
-            p = new StylePoker ();
+            p = new StylePoker();
             p.ReadOnly = true;
             p.PropertyDescriptor = ro_prop;
-            Assert.IsTrue (p.ReadOnly, "e1");
+            Assert.IsTrue(p.ReadOnly, "e1");
 
             /* user set to true, non-readonly property */
-            p = new StylePoker ();
+            p = new StylePoker();
             p.ReadOnly = true;
             p.PropertyDescriptor = rw_prop;
-            Assert.IsTrue (p.ReadOnly, "f1");
+            Assert.IsTrue(p.ReadOnly, "f1");
         }
     }
 }

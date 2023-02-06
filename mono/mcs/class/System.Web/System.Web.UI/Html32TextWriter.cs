@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,57 +37,66 @@ using System.Web.Util;
 namespace System.Web.UI
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public class Html32TextWriter : HtmlTextWriter
     {
         bool div_table_substitution;
         bool bold;
         bool italic;
 
-        public Html32TextWriter (TextWriter writer) : base (writer)
-        {
-        }
+        public Html32TextWriter(TextWriter writer)
+            : base(writer) { }
 
-        public Html32TextWriter (TextWriter writer, string tabString) : base (writer, tabString)
-        {
-        }
+        public Html32TextWriter(TextWriter writer, string tabString)
+            : base(writer, tabString) { }
 
-        [MonoTODO ("no effect on html generation")]
-        public bool ShouldPerformDivTableSubstitution {
+        [MonoTODO("no effect on html generation")]
+        public bool ShouldPerformDivTableSubstitution
+        {
             get { return div_table_substitution; }
             set { div_table_substitution = value; }
         }
 
-        [MonoTODO ("no effect on html generation")]
-        public bool SupportsBold {
+        [MonoTODO("no effect on html generation")]
+        public bool SupportsBold
+        {
             get { return bold; }
             set { bold = value; }
         }
 
-        [MonoTODO ("no effect on html generation")]
-        public bool SupportsItalic {
+        [MonoTODO("no effect on html generation")]
+        public bool SupportsItalic
+        {
             get { return italic; }
             set { italic = value; }
         }
 
-        public override void RenderBeginTag (HtmlTextWriterTag tagKey)
+        public override void RenderBeginTag(HtmlTextWriterTag tagKey)
         {
-                        base.RenderBeginTag (tagKey);
+            base.RenderBeginTag(tagKey);
         }
 
-        public override void RenderEndTag ()
+        public override void RenderEndTag()
         {
-                        base.RenderEndTag ();
+            base.RenderEndTag();
         }
 
-        protected override string GetTagName (HtmlTextWriterTag tagKey)
+        protected override string GetTagName(HtmlTextWriterTag tagKey)
         {
-            if (tagKey == HtmlTextWriterTag.Unknown ||
-                !Enum.IsDefined (typeof (HtmlTextWriterTag), tagKey))
+            if (
+                tagKey == HtmlTextWriterTag.Unknown
+                || !Enum.IsDefined(typeof(HtmlTextWriterTag), tagKey)
+            )
                 return String.Empty;
 
-            return tagKey.ToString ().ToLower (Helpers.InvariantCulture);
+            return tagKey.ToString().ToLower(Helpers.InvariantCulture);
             /* The code below is here just in case we need to split things up
             switch (tagkey) {
             case HtmlTextWriterTag.Unknown:
@@ -290,42 +299,44 @@ namespace System.Web.UI
             */
         }
 
-        protected override bool OnStyleAttributeRender (string name, string value, HtmlTextWriterStyle key)
+        protected override bool OnStyleAttributeRender(
+            string name,
+            string value,
+            HtmlTextWriterStyle key
+        )
         {
-                        return base.OnStyleAttributeRender (name, value, key);
+            return base.OnStyleAttributeRender(name, value, key);
         }
 
-        protected override bool OnTagRender (string name, HtmlTextWriterTag key)
+        protected override bool OnTagRender(string name, HtmlTextWriterTag key)
         {
-                        return base.OnTagRender (name, key);
+            return base.OnTagRender(name, key);
         }
 
-        protected override string RenderAfterContent ()
+        protected override string RenderAfterContent()
         {
-                        return base.RenderAfterContent ();
+            return base.RenderAfterContent();
         }
 
-        protected override string RenderAfterTag ()
+        protected override string RenderAfterTag()
         {
-                        return base.RenderAfterTag ();
+            return base.RenderAfterTag();
         }
 
-        protected override string RenderBeforeContent ()
+        protected override string RenderBeforeContent()
         {
-                        return base.RenderBeforeContent ();
+            return base.RenderBeforeContent();
         }
 
-        protected override string RenderBeforeTag ()
+        protected override string RenderBeforeTag()
         {
-                        return base.RenderBeforeTag ();
+            return base.RenderBeforeTag();
         }
 
         [MonoTODO("Not implemented, always returns null")]
-        protected Stack FontStack {
-            get {
-                return null;
-            }
+        protected Stack FontStack
+        {
+            get { return null; }
         }
     }
 }
-

@@ -9,13 +9,14 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
     internal abstract class RQParameter
     {
         public readonly RQType Type;
+
         public RQParameter(RQType type)
         {
             Type = type;
         }
 
-        public SimpleTreeNode ToSimpleTree()
-            => new SimpleGroupNode(RQNameStrings.Param, CreateSimpleTreeForType());
+        public SimpleTreeNode ToSimpleTree() =>
+            new SimpleGroupNode(RQNameStrings.Param, CreateSimpleTreeForType());
 
         public abstract SimpleTreeNode CreateSimpleTreeForType();
     }

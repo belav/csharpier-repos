@@ -23,112 +23,118 @@ namespace MonoTests.System.Reflection.Emit
         TypeBuilder tb;
         ILGenerator il_gen;
 
-        void DefineBasicMethod ()
+        void DefineBasicMethod()
         {
-            MethodBuilder mb = tb.DefineMethod("F",
-                MethodAttributes.Public, typeof(string), null);
-            il_gen = mb.GetILGenerator ();
+            MethodBuilder mb = tb.DefineMethod("F", MethodAttributes.Public, typeof(string), null);
+            il_gen = mb.GetILGenerator();
         }
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            AssemblyName assemblyName = new AssemblyName ();
+            AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = "MonoTests.System.Reflection.Emit.ILGeneratorTest";
 
-            AssemblyBuilder assembly = Thread.GetDomain ().DefineDynamicAssembly (
-                assemblyName, AssemblyBuilderAccess.Run);
+            AssemblyBuilder assembly = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 
-            modulebuilder = assembly.DefineDynamicModule ("module1");
-            tb = modulebuilder.DefineType ("T", TypeAttributes.Public);
+            modulebuilder = assembly.DefineDynamicModule("module1");
+            tb = modulebuilder.DefineType("T", TypeAttributes.Public);
         }
 
         [Test]
-        public void DeclareLocal_LocalType_Null ()
+        public void DeclareLocal_LocalType_Null()
         {
-            DefineBasicMethod ();
+            DefineBasicMethod();
 
-            try {
-                il_gen.DeclareLocal (null);
-                Assert.Fail ("#A1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#A2");
-                Assert.IsNull (ex.InnerException, "#A3");
-                Assert.IsNotNull (ex.Message, "#A4");
-                Assert.IsNotNull (ex.ParamName, "#A5");
-                Assert.AreEqual ("localType", ex.ParamName, "#A");
+            try
+            {
+                il_gen.DeclareLocal(null);
+                Assert.Fail("#A1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#A2");
+                Assert.IsNull(ex.InnerException, "#A3");
+                Assert.IsNotNull(ex.Message, "#A4");
+                Assert.IsNotNull(ex.ParamName, "#A5");
+                Assert.AreEqual("localType", ex.ParamName, "#A");
             }
 
-            try {
-                il_gen.DeclareLocal (null, false);
-                Assert.Fail ("#B1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#B2");
-                Assert.IsNull (ex.InnerException, "#B3");
-                Assert.IsNotNull (ex.Message, "#B4");
-                Assert.IsNotNull (ex.ParamName, "#B5");
-                Assert.AreEqual ("localType", ex.ParamName, "#B6");
+            try
+            {
+                il_gen.DeclareLocal(null, false);
+                Assert.Fail("#B1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#B2");
+                Assert.IsNull(ex.InnerException, "#B3");
+                Assert.IsNotNull(ex.Message, "#B4");
+                Assert.IsNotNull(ex.ParamName, "#B5");
+                Assert.AreEqual("localType", ex.ParamName, "#B6");
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void DefineFilterBodyWithTypeNotNull ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void DefineFilterBodyWithTypeNotNull()
         {
-            DefineBasicMethod ();
-            il_gen.BeginExceptionBlock ();
-            il_gen.EmitWriteLine ("in try");
-            il_gen.BeginExceptFilterBlock ();
-            il_gen.EmitWriteLine ("in filter head");
-            il_gen.BeginCatchBlock (typeof (Exception));
-            il_gen.EmitWriteLine ("in filter body");
-            il_gen.EndExceptionBlock ();
+            DefineBasicMethod();
+            il_gen.BeginExceptionBlock();
+            il_gen.EmitWriteLine("in try");
+            il_gen.BeginExceptFilterBlock();
+            il_gen.EmitWriteLine("in filter head");
+            il_gen.BeginCatchBlock(typeof(Exception));
+            il_gen.EmitWriteLine("in filter body");
+            il_gen.EndExceptionBlock();
         }
 
         [Test] // bug #81431
-        public void FilterAndCatchBlock ()
+        public void FilterAndCatchBlock()
         {
-            DefineBasicMethod ();
+            DefineBasicMethod();
             ILGenerator il = il_gen;
-            il.BeginExceptionBlock ();
-            il.BeginExceptFilterBlock ();
-            il.BeginCatchBlock (null);
-            il.BeginCatchBlock (typeof (SystemException));
+            il.BeginExceptionBlock();
+            il.BeginExceptFilterBlock();
+            il.BeginCatchBlock(null);
+            il.BeginCatchBlock(typeof(SystemException));
         }
-        
+
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void InvalidFilterBlock1 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void InvalidFilterBlock1()
         {
-            DefineBasicMethod ();
+            DefineBasicMethod();
             ILGenerator il = il_gen;
-            il.BeginExceptionBlock ();
-            il.BeginExceptFilterBlock ();
-            il.EndExceptionBlock ();
+            il.BeginExceptionBlock();
+            il.BeginExceptFilterBlock();
+            il.EndExceptionBlock();
         }
-        
+
         [Test]
-        public void ValidFilterBlock1 ()
+        public void ValidFilterBlock1()
         {
-            DefineBasicMethod ();
+            DefineBasicMethod();
             ILGenerator il = il_gen;
-            il.BeginExceptionBlock ();
-            il.BeginExceptFilterBlock ();
-            il.BeginFaultBlock ();
-            il.EndExceptionBlock ();
+            il.BeginExceptionBlock();
+            il.BeginExceptFilterBlock();
+            il.BeginFaultBlock();
+            il.EndExceptionBlock();
         }
-        
+
         [Test]
-        public void ValidFilterBlock2 ()
+        public void ValidFilterBlock2()
         {
-            DefineBasicMethod ();
+            DefineBasicMethod();
             ILGenerator il = il_gen;
-            il.BeginExceptionBlock ();
-            il.BeginExceptFilterBlock ();
-            il.BeginFinallyBlock ();
-            il.EndExceptionBlock ();
+            il.BeginExceptionBlock();
+            il.BeginExceptFilterBlock();
+            il.BeginFinallyBlock();
+            il.EndExceptionBlock();
         }
-        
+
         /// <summary>
         /// Try to emit something like that:
         ///
@@ -157,315 +163,370 @@ namespace MonoTests.System.Reflection.Emit
         /// It should return true if the handler has been executed
         /// Otherwise, the exception should not be catched
         /// </summary>
-        void DefineTestFilterMethod ()
+        void DefineTestFilterMethod()
         {
-            MethodBuilder mb = tb.DefineMethod("TestFilter",
-                MethodAttributes.Public | MethodAttributes.Static, typeof(bool), new Type [] { typeof (bool) });
+            MethodBuilder mb = tb.DefineMethod(
+                "TestFilter",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(bool),
+                new Type[] { typeof(bool) }
+            );
 
-            ConstructorInfo exCtor = typeof (Exception).GetConstructor (new Type [0]);
+            ConstructorInfo exCtor = typeof(Exception).GetConstructor(new Type[0]);
 
-            il_gen = mb.GetILGenerator ();
-            il_gen.DeclareLocal (typeof (bool));
-            Label quit = il_gen.DefineLabel ();
-            il_gen.BeginExceptionBlock ();
-            il_gen.Emit (OpCodes.Newobj, exCtor);
-            il_gen.Emit (OpCodes.Throw);
-            il_gen.BeginExceptFilterBlock ();
-            il_gen.Emit (OpCodes.Pop);
-            il_gen.Emit (OpCodes.Ldarg_0);
-            il_gen.BeginCatchBlock (null);
-            il_gen.Emit (OpCodes.Ldc_I4_1);
-            il_gen.Emit (OpCodes.Stloc_0);
-            il_gen.Emit (OpCodes.Leave, quit);
-            il_gen.EndExceptionBlock ();
-            il_gen.Emit (OpCodes.Ldc_I4_0);
-            il_gen.Emit (OpCodes.Stloc_0);
-            il_gen.MarkLabel (quit);
-            il_gen.Emit (OpCodes.Ldloc_0);
-            il_gen.Emit (OpCodes.Ret);
+            il_gen = mb.GetILGenerator();
+            il_gen.DeclareLocal(typeof(bool));
+            Label quit = il_gen.DefineLabel();
+            il_gen.BeginExceptionBlock();
+            il_gen.Emit(OpCodes.Newobj, exCtor);
+            il_gen.Emit(OpCodes.Throw);
+            il_gen.BeginExceptFilterBlock();
+            il_gen.Emit(OpCodes.Pop);
+            il_gen.Emit(OpCodes.Ldarg_0);
+            il_gen.BeginCatchBlock(null);
+            il_gen.Emit(OpCodes.Ldc_I4_1);
+            il_gen.Emit(OpCodes.Stloc_0);
+            il_gen.Emit(OpCodes.Leave, quit);
+            il_gen.EndExceptionBlock();
+            il_gen.Emit(OpCodes.Ldc_I4_0);
+            il_gen.Emit(OpCodes.Stloc_0);
+            il_gen.MarkLabel(quit);
+            il_gen.Emit(OpCodes.Ldloc_0);
+            il_gen.Emit(OpCodes.Ret);
         }
 
         [Test] // Emit (OpCode, ConstructorInfo)
-        [Category ("NotDotNet")] // MS bug: https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=304610
-        public void Emit3_Constructor_Null ()
+        [Category("NotDotNet")] // MS bug: https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=304610
+        public void Emit3_Constructor_Null()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.Emit (OpCodes.Newobj, (ConstructorInfo) null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
+            DefineBasicMethod();
+            try
+            {
+                il_gen.Emit(OpCodes.Newobj, (ConstructorInfo)null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsNotNull(ex.ParamName, "#5");
             }
         }
 
         [Test] // Emit (OpCode, ConstructorInfo)
-        [Category ("NotWorking")] // MS bug: https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=304610
-        public void Emit3_Constructor_Null_MS ()
+        [Category("NotWorking")] // MS bug: https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=304610
+        public void Emit3_Constructor_Null_MS()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.Emit (OpCodes.Newobj, (ConstructorInfo) null);
-                Assert.Fail ("#1");
-            } catch (NullReferenceException) {
+            DefineBasicMethod();
+            try
+            {
+                il_gen.Emit(OpCodes.Newobj, (ConstructorInfo)null);
+                Assert.Fail("#1");
             }
+            catch (NullReferenceException) { }
         }
 
         [Test] // Emit (OpCode, FieldInfo)
-        public void Emit5_Field_Null ()
+        public void Emit5_Field_Null()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.Emit (OpCodes.Ldsfld, (FieldInfo) null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
+            DefineBasicMethod();
+            try
+            {
+                il_gen.Emit(OpCodes.Ldsfld, (FieldInfo)null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsNotNull(ex.ParamName, "#5");
             }
         }
 
         [Test] // Emit (OpCode, Label [])
-        [Category ("NotDotNet")] // MS bug: https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=304610
-        public void Emit10_Labels_Null ()
+        [Category("NotDotNet")] // MS bug: https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=304610
+        public void Emit10_Labels_Null()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.Emit (OpCodes.Switch, (Label []) null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
-                Assert.AreEqual ("labels", ex.ParamName, "#6");
+            DefineBasicMethod();
+            try
+            {
+                il_gen.Emit(OpCodes.Switch, (Label[])null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsNotNull(ex.ParamName, "#5");
+                Assert.AreEqual("labels", ex.ParamName, "#6");
             }
         }
 
         [Test]
-        [Category ("NotWorking")] // MS bug: https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=304610
-        public void Emit10_Labels_Null_MS ()
+        [Category("NotWorking")] // MS bug: https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=304610
+        public void Emit10_Labels_Null_MS()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.Emit (OpCodes.Switch, (Label []) null);
-                Assert.Fail ("#1");
-            } catch (NullReferenceException) {
+            DefineBasicMethod();
+            try
+            {
+                il_gen.Emit(OpCodes.Switch, (Label[])null);
+                Assert.Fail("#1");
             }
+            catch (NullReferenceException) { }
         }
 
         [Test] // Emit (OpCode, LocalBuilder)
-        public void Emit11_Local_Null ()
+        public void Emit11_Local_Null()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.Emit (OpCodes.Switch, (LocalBuilder) null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
-                Assert.AreEqual ("local", ex.ParamName, "#6");
+            DefineBasicMethod();
+            try
+            {
+                il_gen.Emit(OpCodes.Switch, (LocalBuilder)null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsNotNull(ex.ParamName, "#5");
+                Assert.AreEqual("local", ex.ParamName, "#6");
             }
         }
 
         [Test] // Emit (OpCode, MethodInfo)
-        public void Emit12_Method_Null ()
+        public void Emit12_Method_Null()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.Emit (OpCodes.Switch, (MethodInfo) null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
-                Assert.AreEqual ("meth", ex.ParamName, "#6");
+            DefineBasicMethod();
+            try
+            {
+                il_gen.Emit(OpCodes.Switch, (MethodInfo)null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsNotNull(ex.ParamName, "#5");
+                Assert.AreEqual("meth", ex.ParamName, "#6");
             }
         }
 
         [Test] // Emit (OpCode, SignatureHelper)
-        public void Emit14_Signature_Null ()
+        public void Emit14_Signature_Null()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.Emit (OpCodes.Switch, (SignatureHelper) null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
+            DefineBasicMethod();
+            try
+            {
+                il_gen.Emit(OpCodes.Switch, (SignatureHelper)null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsNotNull(ex.ParamName, "#5");
             }
         }
 
         [Test] // Emit (OpCode, String)
-        public void Emit16_String_Null ()
+        public void Emit16_String_Null()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.Emit (OpCodes.Switch, (String) null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
+            DefineBasicMethod();
+            try
+            {
+                il_gen.Emit(OpCodes.Switch, (String)null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
             }
         }
 
         [Test] // Emit (OpCode, Type)
-        public void Emit16_Type_Null ()
+        public void Emit16_Type_Null()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.Emit (OpCodes.Switch, (Type) null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
+            DefineBasicMethod();
+            try
+            {
+                il_gen.Emit(OpCodes.Switch, (Type)null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsNotNull(ex.ParamName, "#5");
             }
         }
 
         [Test]
-        public void EmitCall_MethodInfo_Null ()
+        public void EmitCall_MethodInfo_Null()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.EmitCall (OpCodes.Call, (MethodInfo) null, null);
-                Assert.Fail ("#1");
-            } catch (ArgumentNullException ex) {
-                Assert.AreEqual (typeof (ArgumentNullException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
-                Assert.AreEqual ("methodInfo", ex.ParamName, "#6");
+            DefineBasicMethod();
+            try
+            {
+                il_gen.EmitCall(OpCodes.Call, (MethodInfo)null, null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentNullException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsNotNull(ex.ParamName, "#5");
+                Assert.AreEqual("methodInfo", ex.ParamName, "#6");
             }
         }
 
         [Test]
-        public void TestFilterEmittingWithHandlerExecution ()
+        public void TestFilterEmittingWithHandlerExecution()
         {
-            DefineTestFilterMethod ();
-            Type dynt = tb.CreateType ();
-            
-            MethodInfo tf = dynt.GetMethod ("TestFilter");
-            Assert.IsTrue ((bool) tf.Invoke (null, new object [] { true }));
+            DefineTestFilterMethod();
+            Type dynt = tb.CreateType();
+
+            MethodInfo tf = dynt.GetMethod("TestFilter");
+            Assert.IsTrue((bool)tf.Invoke(null, new object[] { true }));
         }
 
-        delegate void FooFoo ();
+        delegate void FooFoo();
 
-        static void Foo ()
-        {
-        }
+        static void Foo() { }
 
         [Test]
-        public void TestEmitCalliWithNullReturnType ()
+        public void TestEmitCalliWithNullReturnType()
         {
-            MethodBuilder mb = tb.DefineMethod ("F",
-                MethodAttributes.Public | MethodAttributes.Static, null, new Type [] { typeof (IntPtr) });
-            mb.SetImplementationFlags (MethodImplAttributes.NoInlining);
-            il_gen = mb.GetILGenerator ();
-            il_gen.Emit (OpCodes.Ldarg_0);
-            il_gen.EmitCalli (OpCodes.Calli, CallingConvention.StdCall, null, Type.EmptyTypes);
-            il_gen.Emit (OpCodes.Ret);
-    
-            Type dynt = tb.CreateType ();
-            dynt.GetMethod ("F", BindingFlags.Public | BindingFlags.Static).Invoke (
-                null, new object [] { Marshal.GetFunctionPointerForDelegate (new FooFoo (Foo)) });
+            MethodBuilder mb = tb.DefineMethod(
+                "F",
+                MethodAttributes.Public | MethodAttributes.Static,
+                null,
+                new Type[] { typeof(IntPtr) }
+            );
+            mb.SetImplementationFlags(MethodImplAttributes.NoInlining);
+            il_gen = mb.GetILGenerator();
+            il_gen.Emit(OpCodes.Ldarg_0);
+            il_gen.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, null, Type.EmptyTypes);
+            il_gen.Emit(OpCodes.Ret);
+
+            Type dynt = tb.CreateType();
+            dynt.GetMethod("F", BindingFlags.Public | BindingFlags.Static)
+                .Invoke(
+                    null,
+                    new object[] { Marshal.GetFunctionPointerForDelegate(new FooFoo(Foo)) }
+                );
         }
 
         //Test for #509131
         [Test]
-        public void TestEmitCallIgnoresOptionalArgsForNonVarargMethod ()
+        public void TestEmitCallIgnoresOptionalArgsForNonVarargMethod()
         {
-            DefineBasicMethod ();
-            try {
-                il_gen.EmitCall (OpCodes.Call, typeof (object).GetMethod ("GetHashCode"), new Type[] { typeof (string) });
-            } catch (InvalidOperationException ex) {
-                Assert.Fail ("#1");
+            DefineBasicMethod();
+            try
+            {
+                il_gen.EmitCall(
+                    OpCodes.Call,
+                    typeof(object).GetMethod("GetHashCode"),
+                    new Type[] { typeof(string) }
+                );
+            }
+            catch (InvalidOperationException ex)
+            {
+                Assert.Fail("#1");
             }
         }
 
         [Test]
-        [ExpectedException (typeof (Exception))]
-        public void TestFilterEmittingWithoutHandlerExecution ()
+        [ExpectedException(typeof(Exception))]
+        public void TestFilterEmittingWithoutHandlerExecution()
         {
-            DefineTestFilterMethod ();
-            Type dynt = tb.CreateType ();
-            
-            MethodInfo tf = dynt.GetMethod ("TestFilter");
-            try {
-                tf.Invoke (null, new object [] { false });
-            } catch (TargetInvocationException tie) {
+            DefineTestFilterMethod();
+            Type dynt = tb.CreateType();
+
+            MethodInfo tf = dynt.GetMethod("TestFilter");
+            try
+            {
+                tf.Invoke(null, new object[] { false });
+            }
+            catch (TargetInvocationException tie)
+            {
                 throw tie.InnerException;
             }
         }
 
         [Test]
-        public void TestEmitLocalInfoWithNopOpCode ()
+        public void TestEmitLocalInfoWithNopOpCode()
         {
-            var method_builder = tb.DefineMethod ("linop", MethodAttributes.Public | MethodAttributes.Static, typeof (bool), Type.EmptyTypes);
-            il_gen = method_builder.GetILGenerator ();
+            var method_builder = tb.DefineMethod(
+                "linop",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(bool),
+                Type.EmptyTypes
+            );
+            il_gen = method_builder.GetILGenerator();
 
-            var local = il_gen.DeclareLocal (typeof (int));
-            il_gen.Emit (OpCodes.Nop, local);
-            il_gen.Emit (OpCodes.Ldc_I4_1);
-            il_gen.Emit (OpCodes.Ret);
+            var local = il_gen.DeclareLocal(typeof(int));
+            il_gen.Emit(OpCodes.Nop, local);
+            il_gen.Emit(OpCodes.Ldc_I4_1);
+            il_gen.Emit(OpCodes.Ret);
 
-            var type = tb.CreateType ();
-            var method = type.GetMethod ("linop");
+            var type = tb.CreateType();
+            var method = type.GetMethod("linop");
 
-            Assert.IsNotNull (method);
-            Assert.IsTrue ((bool) method.Invoke (null, new object [0]));
+            Assert.IsNotNull(method);
+            Assert.IsTrue((bool)method.Invoke(null, new object[0]));
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void LdObjByRef () {
-            DefineBasicMethod ();
+        [ExpectedException(typeof(ArgumentException))]
+        public void LdObjByRef()
+        {
+            DefineBasicMethod();
             ILGenerator ig = il_gen;
 
-            ig.Emit (OpCodes.Ldtoken, typeof (int).MakeByRefType ());
+            ig.Emit(OpCodes.Ldtoken, typeof(int).MakeByRefType());
         }
 
-
-
         [Test] //bug #649017
-        public void GtdEncodingAsOpenInstance () {
-            AssemblyName asmname = new AssemblyName ();
+        public void GtdEncodingAsOpenInstance()
+        {
+            AssemblyName asmname = new AssemblyName();
             asmname.Name = "test";
-            AssemblyBuilder asmbuild = Thread.GetDomain ().DefineDynamicAssembly (asmname, AssemblyBuilderAccess.RunAndSave);
-            ModuleBuilder modbuild = asmbuild.DefineDynamicModule ("modulename", "test.exe");
-    
-            TypeBuilder myType = modbuild.DefineType ("Sample", TypeAttributes.Public);
-    
+            AssemblyBuilder asmbuild = Thread
+                .GetDomain()
+                .DefineDynamicAssembly(asmname, AssemblyBuilderAccess.RunAndSave);
+            ModuleBuilder modbuild = asmbuild.DefineDynamicModule("modulename", "test.exe");
+
+            TypeBuilder myType = modbuild.DefineType("Sample", TypeAttributes.Public);
+
             string[] typeParamNames = { "TFirst" };
-            myType.DefineGenericParameters (typeParamNames);
-    
-            var nested = myType.DefineNestedType ("nested");
-            nested.DefineGenericParameters (typeParamNames);
-    
-            var m = myType.DefineMethod ("test", MethodAttributes.Public);
-            m.SetParameters (myType);
-    
-            var ilgen = m.GetILGenerator ();
-            ilgen.Emit (OpCodes.Castclass, nested);
-            ilgen.Emit (OpCodes.Castclass, typeof (List<>));
-            ilgen.Emit (OpCodes.Ldtoken, nested);
-            ilgen.Emit (OpCodes.Ldtoken, typeof (List<>));
-    
-            var baked = myType.CreateType ();
-            nested.CreateType ();
-    
-            var method = baked.GetMethod ("test");
-            var body = method.GetMethodBody ();
+            myType.DefineGenericParameters(typeParamNames);
+
+            var nested = myType.DefineNestedType("nested");
+            nested.DefineGenericParameters(typeParamNames);
+
+            var m = myType.DefineMethod("test", MethodAttributes.Public);
+            m.SetParameters(myType);
+
+            var ilgen = m.GetILGenerator();
+            ilgen.Emit(OpCodes.Castclass, nested);
+            ilgen.Emit(OpCodes.Castclass, typeof(List<>));
+            ilgen.Emit(OpCodes.Ldtoken, nested);
+            ilgen.Emit(OpCodes.Ldtoken, typeof(List<>));
+
+            var baked = myType.CreateType();
+            nested.CreateType();
+
+            var method = baked.GetMethod("test");
+            var body = method.GetMethodBody();
             /*
             The resulting IL is:
             [ 0] 0x74 token:uint
@@ -473,111 +534,113 @@ namespace MonoTests.System.Reflection.Emit
             [10] 0xd0 token:uint
             [10] 0xd0 token:uint
             The first two tokens must be to typespecs and the last two to typeref/typedef*/
-            var il = body.GetILAsByteArray ();
-        
-            Assert.AreEqual (20, il.Length, "#1");
-            Assert.AreEqual (0x1B, il [4]); //typespec
-            Assert.AreEqual (0x1B, il [9]); //typespec
-            Assert.AreEqual (0x02, il [14]); //typedef
-            Assert.AreEqual (0x01, il [19]); //typeref
+            var il = body.GetILAsByteArray();
+
+            Assert.AreEqual(20, il.Length, "#1");
+            Assert.AreEqual(0x1B, il[4]); //typespec
+            Assert.AreEqual(0x1B, il[9]); //typespec
+            Assert.AreEqual(0x02, il[14]); //typedef
+            Assert.AreEqual(0x01, il[19]); //typeref
         }
 
         [Test]
-        public void MethodRefTokenSame () {
+        public void MethodRefTokenSame()
+        {
             // Get the same non-virtual method from a base and a derived type so
             // that the MemberInfo:DeclaredType differs but the tokens are the same.
             //
             // Regression test for bugzilla #59364
 
-            DefineBasicMethod ();
+            DefineBasicMethod();
 
-            var m1 = typeof (object).GetMethod ("GetType");
-            var m2 = typeof (string).GetMethod ("GetType");
+            var m1 = typeof(object).GetMethod("GetType");
+            var m2 = typeof(string).GetMethod("GetType");
 
-            var value_getter = typeof (RuntimeMethodHandle).GetProperty ("Value").GetMethod;
+            var value_getter = typeof(RuntimeMethodHandle).GetProperty("Value").GetMethod;
 
             var il = il_gen;
 
-            var loc = il.DeclareLocal (typeof (RuntimeMethodHandle));
+            var loc = il.DeclareLocal(typeof(RuntimeMethodHandle));
 
             // return ((int)(RuntimeMethodHandle (m1).Value == RuntimeMethodHandle (m2).Value)).ToString ()
-            il.Emit (OpCodes.Ldtoken, m1);
-            il.Emit (OpCodes.Stloc, loc);
-            il.Emit (OpCodes.Ldloca, loc);
-            il.Emit (OpCodes.Call, value_getter);
-            il.Emit (OpCodes.Ldtoken, m2);
-            il.Emit (OpCodes.Stloc, loc);
-            il.Emit (OpCodes.Ldloca, loc);
-            il.Emit (OpCodes.Call, value_getter);
-            il.Emit (OpCodes.Ceq);
-            il.Emit (OpCodes.Box, typeof (Int32));
-            il.Emit (OpCodes.Callvirt, typeof (object).GetMethod ("ToString"));
-            il.Emit (OpCodes.Ret);
+            il.Emit(OpCodes.Ldtoken, m1);
+            il.Emit(OpCodes.Stloc, loc);
+            il.Emit(OpCodes.Ldloca, loc);
+            il.Emit(OpCodes.Call, value_getter);
+            il.Emit(OpCodes.Ldtoken, m2);
+            il.Emit(OpCodes.Stloc, loc);
+            il.Emit(OpCodes.Ldloca, loc);
+            il.Emit(OpCodes.Call, value_getter);
+            il.Emit(OpCodes.Ceq);
+            il.Emit(OpCodes.Box, typeof(Int32));
+            il.Emit(OpCodes.Callvirt, typeof(object).GetMethod("ToString"));
+            il.Emit(OpCodes.Ret);
 
-            var baked = tb.CreateType ();
+            var baked = tb.CreateType();
 
-            var x = Activator.CreateInstance (baked);
-            var m = baked.GetMethod ("F");
+            var x = Activator.CreateInstance(baked);
+            var m = baked.GetMethod("F");
 
-            var s = m.Invoke (x, null);
+            var s = m.Invoke(x, null);
 
-            Assert.AreEqual ("1", s);
-            
+            Assert.AreEqual("1", s);
         }
 
-        public class Base<T> {
+        public class Base<T>
+        {
             public int x;
 
-            public void M () { }
+            public void M() { }
         }
 
-        public class Derived : Base<string> {
-        }
+        public class Derived : Base<string> { }
 
         [Test]
-        public void FieldRefTokenSame () {
-            DefineBasicMethod ();
+        public void FieldRefTokenSame()
+        {
+            DefineBasicMethod();
 
             // Get the same field from a base and a derived type so hat
             // the MemberInfo:DeclaredType differs but the tokens are the same.
             //
             // Regression test for bugzilla #59364
 
-            var f1 = typeof (Base<string>).GetField ("x");
-            var f2 = typeof (Derived).GetField ("x");
+            var f1 = typeof(Base<string>).GetField("x");
+            var f2 = typeof(Derived).GetField("x");
 
-            var value_getter = typeof (RuntimeFieldHandle).GetProperty("Value").GetMethod;
+            var value_getter = typeof(RuntimeFieldHandle).GetProperty("Value").GetMethod;
 
             var il = il_gen;
 
-            var loc = il.DeclareLocal (typeof (RuntimeFieldHandle));
+            var loc = il.DeclareLocal(typeof(RuntimeFieldHandle));
 
-            il.Emit (OpCodes.Ldtoken, f1);
-            il.Emit (OpCodes.Stloc, loc);
-            il.Emit (OpCodes.Ldloca, loc);
-            il.Emit (OpCodes.Call, value_getter);
-            il.Emit (OpCodes.Ldtoken, f2);
-            il.Emit (OpCodes.Stloc, loc);
-            il.Emit (OpCodes.Ldloca, loc);
-            il.Emit (OpCodes.Call, value_getter);
-            il.Emit (OpCodes.Ceq);
-            il.Emit (OpCodes.Box, typeof (Int32));
-            il.Emit (OpCodes.Callvirt, typeof (object).GetMethod ("ToString"));
-            il.Emit (OpCodes.Ret);
+            il.Emit(OpCodes.Ldtoken, f1);
+            il.Emit(OpCodes.Stloc, loc);
+            il.Emit(OpCodes.Ldloca, loc);
+            il.Emit(OpCodes.Call, value_getter);
+            il.Emit(OpCodes.Ldtoken, f2);
+            il.Emit(OpCodes.Stloc, loc);
+            il.Emit(OpCodes.Ldloca, loc);
+            il.Emit(OpCodes.Call, value_getter);
+            il.Emit(OpCodes.Ceq);
+            il.Emit(OpCodes.Box, typeof(Int32));
+            il.Emit(OpCodes.Callvirt, typeof(object).GetMethod("ToString"));
+            il.Emit(OpCodes.Ret);
 
-            var baked = tb.CreateType ();
+            var baked = tb.CreateType();
 
-            var x = Activator.CreateInstance (baked);
-            var m = baked.GetMethod ("F");
+            var x = Activator.CreateInstance(baked);
+            var m = baked.GetMethod("F");
 
-            var s = m.Invoke (x, null);
+            var s = m.Invoke(x, null);
 
-            Assert.AreEqual ("1", s);
+            Assert.AreEqual("1", s);
         }
 
         [Test]
-        public void MethodSpecTokenSame () {
-            DefineBasicMethod ();
+        public void MethodSpecTokenSame()
+        {
+            DefineBasicMethod();
             // Get the same method from a base generic instance and
             // a type derived from it so that the
             // MemberInfo:DeclaredType differs but the tokens are
@@ -585,31 +648,30 @@ namespace MonoTests.System.Reflection.Emit
             //
             // Regression test for bugzilla #60233
 
-            var m1 = typeof (Base<string>).GetMethod ("M");
-            var m2 = typeof (Derived).GetMethod ("M");
+            var m1 = typeof(Base<string>).GetMethod("M");
+            var m2 = typeof(Derived).GetMethod("M");
 
             var il = il_gen;
 
-            var loc = il.DeclareLocal (typeof (Derived));
+            var loc = il.DeclareLocal(typeof(Derived));
 
-            il.Emit (OpCodes.Newobj, typeof (Derived).GetConstructor(new Type[]{}));
-            il.Emit (OpCodes.Stloc, loc);
-            il.Emit (OpCodes.Ldloc, loc);
-            il.Emit (OpCodes.Call, m1);
-            il.Emit (OpCodes.Ldloc, loc);
-            il.Emit (OpCodes.Call, m2);
-            il.Emit (OpCodes.Ldstr, "1");
-            il.Emit (OpCodes.Ret);
+            il.Emit(OpCodes.Newobj, typeof(Derived).GetConstructor(new Type[] { }));
+            il.Emit(OpCodes.Stloc, loc);
+            il.Emit(OpCodes.Ldloc, loc);
+            il.Emit(OpCodes.Call, m1);
+            il.Emit(OpCodes.Ldloc, loc);
+            il.Emit(OpCodes.Call, m2);
+            il.Emit(OpCodes.Ldstr, "1");
+            il.Emit(OpCodes.Ret);
 
-            var baked = tb.CreateType ();
+            var baked = tb.CreateType();
 
-            var x = Activator.CreateInstance (baked);
-            var m = baked.GetMethod ("F");
+            var x = Activator.CreateInstance(baked);
+            var m = baked.GetMethod("F");
 
-            var s = m.Invoke (x, null);
+            var s = m.Invoke(x, null);
 
-            Assert.AreEqual ("1", s);
-
+            Assert.AreEqual("1", s);
         }
     }
 }

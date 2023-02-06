@@ -24,10 +24,10 @@ namespace MonoTests.System.IO.Packaging
         }
 
         [Test]
-        public void TestFileMode ()
+        public void TestFileMode()
         {
-            Uri uri =new Uri("/somepart.xml", UriKind.Relative);
-            FileMode[] modes =  { FileMode.Open, FileMode.OpenOrCreate, FileMode.Create };
+            Uri uri = new Uri("/somepart.xml", UriKind.Relative);
+            FileMode[] modes = { FileMode.Open, FileMode.OpenOrCreate, FileMode.Create };
             using (Package package = Package.Open(path))
             {
                 PackagePart part;
@@ -48,7 +48,13 @@ namespace MonoTests.System.IO.Packaging
         public void TestFileMode2()
         {
             Uri uri = new Uri("/somepart.xml", UriKind.Relative);
-            FileMode[] modes = { FileMode.Create, FileMode.CreateNew, FileMode.Truncate, FileMode.Append };
+            FileMode[] modes =
+            {
+                FileMode.Create,
+                FileMode.CreateNew,
+                FileMode.Truncate,
+                FileMode.Append
+            };
             FileMode[] otherModes = { FileMode.Open, FileMode.OpenOrCreate };
 
             using (Package package = Package.Open(path))
@@ -59,7 +65,9 @@ namespace MonoTests.System.IO.Packaging
                     try
                     {
                         part.GetStream(mode, FileAccess.Read);
-                        throw new Exception (string.Format ("Should not be able to open with: {0}", mode));
+                        throw new Exception(
+                            string.Format("Should not be able to open with: {0}", mode)
+                        );
                     }
                     catch (IOException)
                     {
@@ -82,7 +90,10 @@ namespace MonoTests.System.IO.Packaging
         {
             using (Package package = Package.Open(path))
             {
-                PackagePart part = package.CreatePart(new Uri("/somepart.xml", UriKind.Relative), "application/xml");
+                PackagePart part = package.CreatePart(
+                    new Uri("/somepart.xml", UriKind.Relative),
+                    "application/xml"
+                );
                 // CreateNew is not supported
                 part.GetStream(FileMode.CreateNew, FileAccess.Write);
             }
@@ -94,7 +105,10 @@ namespace MonoTests.System.IO.Packaging
         {
             using (Package package = Package.Open(path))
             {
-                PackagePart part = package.CreatePart(new Uri("/somepart.xml", UriKind.Relative), "application/xml");
+                PackagePart part = package.CreatePart(
+                    new Uri("/somepart.xml", UriKind.Relative),
+                    "application/xml"
+                );
                 // CreateNew is not supported
                 part.GetStream(FileMode.Truncate, FileAccess.Write);
             }
@@ -106,7 +120,10 @@ namespace MonoTests.System.IO.Packaging
         {
             using (Package package = Package.Open(path))
             {
-                PackagePart part = package.CreatePart(new Uri("/somepart.xml", UriKind.Relative), "application/xml");
+                PackagePart part = package.CreatePart(
+                    new Uri("/somepart.xml", UriKind.Relative),
+                    "application/xml"
+                );
                 // CreateNew is not supported
                 part.GetStream(FileMode.Append, FileAccess.Write);
             }
@@ -117,7 +134,10 @@ namespace MonoTests.System.IO.Packaging
         {
             using (Package package = Package.Open(path))
             {
-                PackagePart part = package.CreatePart(new Uri("/Uri.xml", UriKind.Relative), "content/type");
+                PackagePart part = package.CreatePart(
+                    new Uri("/Uri.xml", UriKind.Relative),
+                    "content/type"
+                );
                 Stream s = part.GetStream(FileMode.OpenOrCreate, FileAccess.Write);
                 StreamWriter sw = new StreamWriter(s);
                 sw.Write("<test>aaaaaaa</test>");

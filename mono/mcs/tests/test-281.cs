@@ -20,7 +20,7 @@ namespace Test
 
     public class Test1
     {
-        public static int World ()
+        public static int World()
         {
             return Hello.World;
         }
@@ -33,7 +33,7 @@ namespace Test
 
     public class Test2
     {
-        public static int World ()
+        public static int World()
         {
             return Hello.World;
         }
@@ -42,11 +42,11 @@ namespace Test
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        if (Test.Test1.World () != 8)
+        if (Test.Test1.World() != 8)
             return 1;
-        if (Test.Test2.World () != 9)
+        if (Test.Test2.World() != 9)
             return 2;
         return 0;
     }

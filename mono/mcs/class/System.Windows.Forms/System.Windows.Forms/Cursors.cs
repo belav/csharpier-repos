@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,48 +26,52 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms {
-    public sealed class Cursors {
+namespace System.Windows.Forms
+{
+    public sealed class Cursors
+    {
         #region Local Variables
-        internal static Cursor    app_starting;
-        internal static Cursor    arrow;
-        internal static Cursor    cross;
-        internal static Cursor    def;
-        internal static Cursor    hand;
-        internal static Cursor    help;
-        internal static Cursor    hsplit;
-        internal static Cursor    ibeam;
-        internal static Cursor    no;
-        internal static Cursor    no_move_2d;
-        internal static Cursor    no_move_horiz;
-        internal static Cursor    no_move_vert;
-        internal static Cursor    pan_east;
-        internal static Cursor    pan_ne;
-        internal static Cursor    pan_north;
-        internal static Cursor    pan_nw;
-        internal static Cursor    pan_se;
-        internal static Cursor    pan_south;
-        internal static Cursor    pan_sw;
-        internal static Cursor    pan_west;
-        internal static Cursor    size_all;
-        internal static Cursor    size_nesw;
-        internal static Cursor    size_ns;
-        internal static Cursor    size_nwse;
-        internal static Cursor    size_we;
-        internal static Cursor    up_arrow;
-        internal static Cursor    vsplit;
-        internal static Cursor    wait_cursor;
+        internal static Cursor app_starting;
+        internal static Cursor arrow;
+        internal static Cursor cross;
+        internal static Cursor def;
+        internal static Cursor hand;
+        internal static Cursor help;
+        internal static Cursor hsplit;
+        internal static Cursor ibeam;
+        internal static Cursor no;
+        internal static Cursor no_move_2d;
+        internal static Cursor no_move_horiz;
+        internal static Cursor no_move_vert;
+        internal static Cursor pan_east;
+        internal static Cursor pan_ne;
+        internal static Cursor pan_north;
+        internal static Cursor pan_nw;
+        internal static Cursor pan_se;
+        internal static Cursor pan_south;
+        internal static Cursor pan_sw;
+        internal static Cursor pan_west;
+        internal static Cursor size_all;
+        internal static Cursor size_nesw;
+        internal static Cursor size_ns;
+        internal static Cursor size_nwse;
+        internal static Cursor size_we;
+        internal static Cursor up_arrow;
+        internal static Cursor vsplit;
+        internal static Cursor wait_cursor;
         #endregion    // Local Variables
 
         #region Constructors
-        private Cursors() {
-        }
+        private Cursors() { }
         #endregion    // Constructors
 
         #region Public Static Properties
-        public static Cursor AppStarting {
-            get {
-                if (app_starting == null) {
+        public static Cursor AppStarting
+        {
+            get
+            {
+                if (app_starting == null)
+                {
                     app_starting = new Cursor(StdCursor.AppStarting);
                     app_starting.name = "AppStarting";
                 }
@@ -75,9 +79,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor Arrow {
-            get {
-                if (arrow == null) {
+        public static Cursor Arrow
+        {
+            get
+            {
+                if (arrow == null)
+                {
                     arrow = new Cursor(StdCursor.Arrow);
                     arrow.name = "Arrow";
                 }
@@ -85,9 +92,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor Cross {
-            get {
-                if (cross == null) {
+        public static Cursor Cross
+        {
+            get
+            {
+                if (cross == null)
+                {
                     cross = new Cursor(StdCursor.Cross);
                     cross.name = "Cross";
                 }
@@ -95,9 +105,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor Default {
-            get {
-                if (def == null) {
+        public static Cursor Default
+        {
+            get
+            {
+                if (def == null)
+                {
                     def = new Cursor(StdCursor.Default);
                     def.name = "Default";
                 }
@@ -105,9 +118,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor Hand {
-            get {
-                if (hand == null) {
+        public static Cursor Hand
+        {
+            get
+            {
+                if (hand == null)
+                {
                     hand = new Cursor(StdCursor.Hand);
                     hand.name = "Hand";
                 }
@@ -115,9 +131,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor Help {
-            get {
-                if (help == null) {
+        public static Cursor Help
+        {
+            get
+            {
+                if (help == null)
+                {
                     help = new Cursor(StdCursor.Help);
                     help.name = "Help";
                 }
@@ -125,9 +144,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor HSplit {
-            get {
-                if (hsplit == null) {
+        public static Cursor HSplit
+        {
+            get
+            {
+                if (hsplit == null)
+                {
                     hsplit = new Cursor(typeof(Splitter), "SplitterNS.cur");
                     hsplit.name = "HSplit";
                 }
@@ -135,9 +157,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor IBeam {
-            get {
-                if (ibeam == null) {
+        public static Cursor IBeam
+        {
+            get
+            {
+                if (ibeam == null)
+                {
                     ibeam = new Cursor(StdCursor.IBeam);
                     ibeam.name = "IBeam";
                 }
@@ -145,9 +170,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor No {
-            get {
-                if (no == null) {
+        public static Cursor No
+        {
+            get
+            {
+                if (no == null)
+                {
                     no = new Cursor(StdCursor.No);
                     no.name = "No";
                 }
@@ -155,9 +183,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor NoMove2D {
-            get {
-                if (no_move_2d == null) {
+        public static Cursor NoMove2D
+        {
+            get
+            {
+                if (no_move_2d == null)
+                {
                     no_move_2d = new Cursor(StdCursor.NoMove2D);
                     no_move_2d.name = "NoMove2D";
                 }
@@ -165,9 +196,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor NoMoveHoriz {
-            get {
-                if (no_move_horiz == null) {
+        public static Cursor NoMoveHoriz
+        {
+            get
+            {
+                if (no_move_horiz == null)
+                {
                     no_move_horiz = new Cursor(StdCursor.NoMoveHoriz);
                     no_move_horiz.name = "NoMoveHoriz";
                 }
@@ -175,9 +209,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor NoMoveVert {
-            get {
-                if (no_move_vert == null) {
+        public static Cursor NoMoveVert
+        {
+            get
+            {
+                if (no_move_vert == null)
+                {
                     no_move_vert = new Cursor(StdCursor.NoMoveVert);
                     no_move_vert.name = "NoMoveVert";
                 }
@@ -185,9 +222,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor PanEast {
-            get {
-                if (pan_east == null) {
+        public static Cursor PanEast
+        {
+            get
+            {
+                if (pan_east == null)
+                {
                     pan_east = new Cursor(StdCursor.PanEast);
                     pan_east.name = "PanEast";
                 }
@@ -195,12 +235,12 @@ namespace System.Windows.Forms {
             }
         }
 
-
-
-
-        public static Cursor PanNE {
-            get {
-                if (pan_ne == null) {
+        public static Cursor PanNE
+        {
+            get
+            {
+                if (pan_ne == null)
+                {
                     pan_ne = new Cursor(StdCursor.PanNE);
                     pan_ne.name = "PanNE";
                 }
@@ -208,10 +248,12 @@ namespace System.Windows.Forms {
             }
         }
 
-
-        public static Cursor PanNorth {
-            get {
-                if (pan_north == null) {
+        public static Cursor PanNorth
+        {
+            get
+            {
+                if (pan_north == null)
+                {
                     pan_north = new Cursor(StdCursor.PanNorth);
                     pan_north.name = "PanNorth";
                 }
@@ -219,9 +261,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor PanNW {
-            get {
-                if (pan_nw == null) {
+        public static Cursor PanNW
+        {
+            get
+            {
+                if (pan_nw == null)
+                {
                     pan_nw = new Cursor(StdCursor.PanNW);
                     pan_nw.name = "PanNW";
                 }
@@ -229,9 +274,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor PanSE {
-            get {
-                if (pan_se == null) {
+        public static Cursor PanSE
+        {
+            get
+            {
+                if (pan_se == null)
+                {
                     pan_se = new Cursor(StdCursor.PanSE);
                     pan_se.name = "PanSE";
                 }
@@ -239,9 +287,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor PanSouth {
-            get {
-                if (pan_south == null) {
+        public static Cursor PanSouth
+        {
+            get
+            {
+                if (pan_south == null)
+                {
                     pan_south = new Cursor(StdCursor.PanSouth);
                     pan_south.name = "PanSouth";
                 }
@@ -249,9 +300,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor PanSW {
-            get {
-                if (pan_sw == null) {
+        public static Cursor PanSW
+        {
+            get
+            {
+                if (pan_sw == null)
+                {
                     pan_sw = new Cursor(StdCursor.PanSW);
                     pan_sw.name = "PanSW";
                 }
@@ -259,9 +313,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor PanWest {
-            get {
-                if (pan_west == null) {
+        public static Cursor PanWest
+        {
+            get
+            {
+                if (pan_west == null)
+                {
                     pan_west = new Cursor(StdCursor.PanWest);
                     pan_west.name = "PanWest";
                 }
@@ -269,9 +326,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor SizeAll {
-            get {
-                if (size_all == null) {
+        public static Cursor SizeAll
+        {
+            get
+            {
+                if (size_all == null)
+                {
                     size_all = new Cursor(StdCursor.SizeAll);
                     size_all.name = "SizeAll";
                 }
@@ -279,13 +339,19 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor SizeNESW {
-            get {
-                if (size_nesw == null) {
-                    if (XplatUI.RunningOnUnix) {
+        public static Cursor SizeNESW
+        {
+            get
+            {
+                if (size_nesw == null)
+                {
+                    if (XplatUI.RunningOnUnix)
+                    {
                         size_nesw = new Cursor(typeof(Cursor), "NESW.cur");
                         size_nesw.name = "SizeNESW";
-                    } else {
+                    }
+                    else
+                    {
                         size_nesw = new Cursor(StdCursor.SizeNESW);
                         size_nesw.name = "SizeNESW";
                     }
@@ -294,9 +360,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor SizeNS {
-            get {
-                if (size_ns == null) {
+        public static Cursor SizeNS
+        {
+            get
+            {
+                if (size_ns == null)
+                {
                     size_ns = new Cursor(StdCursor.SizeNS);
                     size_ns.name = "SizeNS";
                 }
@@ -304,13 +373,19 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor SizeNWSE {
-            get {
-                if (size_nwse == null) {
-                    if (XplatUI.RunningOnUnix) {
+        public static Cursor SizeNWSE
+        {
+            get
+            {
+                if (size_nwse == null)
+                {
+                    if (XplatUI.RunningOnUnix)
+                    {
                         size_nwse = new Cursor(typeof(Cursor), "NWSE.cur");
                         size_nwse.name = "SizeNWSE";
-                    } else {
+                    }
+                    else
+                    {
                         size_nwse = new Cursor(StdCursor.SizeNWSE);
                         size_nwse.name = "SizeNWSE";
                     }
@@ -319,9 +394,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor SizeWE {
-            get {
-                if (size_we == null) {
+        public static Cursor SizeWE
+        {
+            get
+            {
+                if (size_we == null)
+                {
                     size_we = new Cursor(StdCursor.SizeWE);
                     size_we.name = "SizeWE";
                 }
@@ -329,9 +407,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor UpArrow {
-            get {
-                if (up_arrow == null) {
+        public static Cursor UpArrow
+        {
+            get
+            {
+                if (up_arrow == null)
+                {
                     up_arrow = new Cursor(StdCursor.UpArrow);
                     up_arrow.name = "UpArrow";
                 }
@@ -339,9 +420,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor VSplit {
-            get {
-                if (vsplit == null) {
+        public static Cursor VSplit
+        {
+            get
+            {
+                if (vsplit == null)
+                {
                     vsplit = new Cursor(typeof(Cursor), "SplitterWE.cur");
                     vsplit.name = "VSplit";
                 }
@@ -349,9 +433,12 @@ namespace System.Windows.Forms {
             }
         }
 
-        public static Cursor WaitCursor {
-            get {
-                if (wait_cursor == null) {
+        public static Cursor WaitCursor
+        {
+            get
+            {
+                if (wait_cursor == null)
+                {
                     wait_cursor = new Cursor(StdCursor.WaitCursor);
                     wait_cursor.name = "WaitCursor";
                 }

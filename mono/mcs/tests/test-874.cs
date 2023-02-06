@@ -2,17 +2,17 @@ using System;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         int a;
         goto X;
-    A:
-        Console.WriteLine (a);
+        A:
+        Console.WriteLine(a);
         goto Y;
-    X:
+        X:
         a = 1;
         goto A;
-    Y:
+        Y:
         return;
     }
 }

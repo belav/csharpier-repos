@@ -2,16 +2,17 @@
 // Line: 11
 
 using System.Runtime.CompilerServices;
-class A {
-    [IndexerName ("Blah")]
-    int this [int a] {
-    get { return 1; }
+
+class A
+{
+    [IndexerName("Blah")]
+    int this[int a]
+    {
+        get { return 1; }
     }
-    
-    int this [string b] {
-    get { return 2; }
+
+    int this[string b]
+    {
+        get { return 2; }
     }
 }
-
-
-

@@ -16,12 +16,13 @@ public class Program
         var redis = ConnectionMultiplexer.Connect("localhost:6379");
 
         // Configure
-        using (var services = new ServiceCollection()
-            .AddLogging(o => o.AddConsole().SetMinimumLevel(LogLevel.Debug))
-            .AddDataProtection()
-            .PersistKeysToStackExchangeRedis(redis, "DataProtection-Keys")
-            .Services
-            .BuildServiceProvider())
+        using (
+            var services = new ServiceCollection()
+                .AddLogging(o => o.AddConsole().SetMinimumLevel(LogLevel.Debug))
+                .AddDataProtection()
+                .PersistKeysToStackExchangeRedis(redis, "DataProtection-Keys")
+                .Services.BuildServiceProvider()
+        )
         {
             // Run a sample payload
             var protector = services.GetDataProtector("sample-purpose");

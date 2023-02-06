@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI
 {
-    public class Control_ClientID
-        : GHTControlBase
+    public class Control_ClientID : GHTControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,18 +46,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
@@ -72,7 +71,6 @@ namespace GHTTests.System_Web_dll.System_Web_UI
 
         private void Test(Type ctrlType)
         {
-
             //ClientId - server generated.
             //Because the id is random, then it cannot be compared between two servers,
             //There for I only test that a value is automatically set, and does
@@ -101,7 +99,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI
 
             //ClientId - Id property set to String.empty
             //As in previous subtest, the ClientID is a random number, and cannot be compared,
-            //There for I only test that the value is not string.empty, 
+            //There for I only test that the value is not string.empty,
             //and does not add the control to the subtest.
             try
             {
@@ -126,7 +124,6 @@ namespace GHTTests.System_Web_dll.System_Web_UI
             }
             this.GHTSubTestEnd();
 
-
             //ClientId - overriden by Id property:
             try
             {
@@ -141,7 +138,6 @@ namespace GHTTests.System_Web_dll.System_Web_UI
                 // ProjectData.ClearProjectError();
             }
             this.GHTSubTestEnd();
-
         }
     }
 }

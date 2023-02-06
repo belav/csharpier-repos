@@ -4,9 +4,9 @@
 using System;
 
 [Obsolete("Do not use it", true)]
-interface I {
-}
+interface I { }
 
-class B {
+class B
+{
     I i;
 }

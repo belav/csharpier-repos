@@ -27,7 +27,10 @@ namespace BasicEventSourceTests
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/21295", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/21295",
+            TargetFrameworkMonikers.NetFramework
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/25035")]
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
         public void Test_Write_T_In_Manifest_Serialization_WithEtwListener()
@@ -45,23 +48,34 @@ namespace BasicEventSourceTests
             }
         }
 
-        static partial void Test_Write_T_AddEtwTests(Listener listener, List<SubTest> tests, EventSource logger)
+        static partial void Test_Write_T_AddEtwTests(
+            Listener listener,
+            List<SubTest> tests,
+            EventSource logger
+        )
         {
             if (listener is EtwListener)
             {
-                tests.Add(new SubTest("Write/Basic/WriteOfTWithEmbeddedNullString",
-                    delegate
-                    {
-                        string nullString = null;
-                        logger.Write("EmbeddedNullStringEvent", new { a = "Hello" + '\0' + "World!", b = nullString });
-                    },
-                    delegate (Event evt)
-                    {
-                        Assert.Equal(logger.Name, evt.ProviderName);
-                        Assert.Equal("EmbeddedNullStringEvent", evt.EventName);
-                        Assert.Equal("Hello", evt.PayloadValue(0, "a"));
-                        Assert.Equal("", evt.PayloadValue(1, "b"));
-                    }));
+                tests.Add(
+                    new SubTest(
+                        "Write/Basic/WriteOfTWithEmbeddedNullString",
+                        delegate
+                        {
+                            string nullString = null;
+                            logger.Write(
+                                "EmbeddedNullStringEvent",
+                                new { a = "Hello" + '\0' + "World!", b = nullString }
+                            );
+                        },
+                        delegate(Event evt)
+                        {
+                            Assert.Equal(logger.Name, evt.ProviderName);
+                            Assert.Equal("EmbeddedNullStringEvent", evt.EventName);
+                            Assert.Equal("Hello", evt.PayloadValue(0, "a"));
+                            Assert.Equal("", evt.PayloadValue(1, "b"));
+                        }
+                    )
+                );
             }
         }
     }

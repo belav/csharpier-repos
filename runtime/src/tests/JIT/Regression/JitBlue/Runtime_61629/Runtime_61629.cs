@@ -6,8 +6,7 @@ using System.Runtime.CompilerServices;
 
 public class Runtime_61629
 {
-    public static int Main() => 
-        Test(100, 200.0) + Test(Math.PI, Math.PI) - 72;
+    public static int Main() => Test(100, 200.0) + Test(Math.PI, Math.PI) - 72;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test(double a, double b)

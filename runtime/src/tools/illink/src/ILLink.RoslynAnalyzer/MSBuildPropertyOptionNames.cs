@@ -5,9 +5,11 @@ namespace ILLink.RoslynAnalyzer
 {
     public static class MSBuildPropertyOptionNames
     {
-        public const string EnableSingleFileAnalyzer = nameof (EnableSingleFileAnalyzer);
-        public const string IncludeAllContentForSelfExtract = nameof (IncludeAllContentForSelfExtract);
-        public const string EnableTrimAnalyzer = nameof (EnableTrimAnalyzer);
-        public const string EnableAotAnalyzer = nameof (EnableAotAnalyzer);
+        public const string EnableSingleFileAnalyzer = nameof(EnableSingleFileAnalyzer);
+        public const string IncludeAllContentForSelfExtract = nameof(
+            IncludeAllContentForSelfExtract
+        );
+        public const string EnableTrimAnalyzer = nameof(EnableTrimAnalyzer);
+        public const string EnableAotAnalyzer = nameof(EnableAotAnalyzer);
     }
 }

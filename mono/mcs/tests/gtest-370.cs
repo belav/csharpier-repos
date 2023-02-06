@@ -6,19 +6,15 @@ namespace N2
         {
             private class B<T>
             {
-                public class C<T>
-                {
-                }
-            
+                public class C<T> { }
+
                 internal C<T> foo;
             }
         }
     }
-    
+
     class C
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }

@@ -4,9 +4,9 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
         object o = null;
-        string s = o?.ToString ();
+        string s = o?.ToString();
     }
 }

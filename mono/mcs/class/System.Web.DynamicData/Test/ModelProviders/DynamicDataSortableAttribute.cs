@@ -6,12 +6,12 @@ using System.Web.DynamicData.ModelProviders;
 
 namespace MonoTests.ModelProviders
 {
-    [AttributeUsage (AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     class DynamicDataSortableAttribute : Attribute
     {
         public bool Sortable { get; private set; }
 
-        public DynamicDataSortableAttribute (bool sortable)
+        public DynamicDataSortableAttribute(bool sortable)
         {
             Sortable = sortable;
         }

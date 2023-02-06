@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,50 +38,42 @@ namespace System.DirectoryServices.Protocols
     [Serializable]
     public class LdapException : DirectoryException, ISerializable
     {
-        public LdapException ()
-            : this ("LDAP error")
-        {
-        }
+        public LdapException()
+            : this("LDAP error") { }
 
-        public LdapException (int errorCode)
-            : this ()
+        public LdapException(int errorCode)
+            : this()
         {
             ErrorCode = errorCode;
-            PartialResults = new PartialResultsCollection ();
+            PartialResults = new PartialResultsCollection();
         }
 
-        public LdapException (string message)
-            : this (message, null)
-        {
-        }
+        public LdapException(string message)
+            : this(message, null) { }
 
-        public LdapException (int errorCode, string message)
-            : this (errorCode, message, (Exception) null)
-        {
-        }
+        public LdapException(int errorCode, string message)
+            : this(errorCode, message, (Exception)null) { }
 
-        public LdapException (string message, Exception inner)
-            : this (0, message, inner)
-        {
-        }
+        public LdapException(string message, Exception inner)
+            : this(0, message, inner) { }
 
-        public LdapException (int errorCode, string message, Exception inner)
-            : base (message, inner)
+        public LdapException(int errorCode, string message, Exception inner)
+            : base(message, inner)
         {
             ErrorCode = errorCode;
-            PartialResults = new PartialResultsCollection ();
+            PartialResults = new PartialResultsCollection();
         }
 
-        public LdapException (int errorCode, string message, string serverErrorMessage)
-            : this (errorCode, message, (Exception) null)
+        public LdapException(int errorCode, string message, string serverErrorMessage)
+            : this(errorCode, message, (Exception)null)
         {
             ServerErrorMessage = serverErrorMessage;
         }
 
         [MonoTODO]
-        protected LdapException (SerializationInfo info, StreamingContext context)
+        protected LdapException(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         public int ErrorCode { get; private set; }
@@ -89,10 +81,13 @@ namespace System.DirectoryServices.Protocols
         public string ServerErrorMessage { get; private set; }
 
         [MonoTODO]
-        [SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

@@ -5,12 +5,12 @@ using System;
 
 class Program
 {
-    public static void Main ()
+    public static void Main()
     {
         object a;
         string s = null;
 
         var res = s ?? (a = null);
-        Console.WriteLine (a);
+        Console.WriteLine(a);
     }
 }

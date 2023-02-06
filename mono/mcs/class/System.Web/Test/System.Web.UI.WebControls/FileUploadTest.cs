@@ -38,78 +38,87 @@ namespace MonoTests.System.Web.UI.WebControls
     {
         class PokerFileUpload : FileUpload
         {
-            public void DoRender (HtmlTextWriter writer)
+            public void DoRender(HtmlTextWriter writer)
             {
-                base.Render (writer);
+                base.Render(writer);
             }
         }
 
         [Test]
-        public void RenderWithoutPageTest ()
+        public void RenderWithoutPageTest()
         {
-            PokerFileUpload fu = new PokerFileUpload ();
-            using (StringWriter sw = new StringWriter ()) {
-                using (HtmlTextWriter htw = new HtmlTextWriter (sw)) {
-                    fu.DoRender (htw);
+            PokerFileUpload fu = new PokerFileUpload();
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    fu.DoRender(htw);
                 }
-                sw.Close ();
-                string res = sw.ToString ();
-                Assert.AreEqual ("<input type=\"file\" />", res);
+                sw.Close();
+                string res = sw.ToString();
+                Assert.AreEqual("<input type=\"file\" />", res);
             }
         }
 
         [Test]
-        public void RenderWithPageTest ()
+        public void RenderWithPageTest()
         {
-            PokerFileUpload fu = new PokerFileUpload ();
-            fu.Page = new Page ();
-            fu.Page.Controls.Add (fu);
-            
-            using (StringWriter sw = new StringWriter ()) {
-                using (HtmlTextWriter htw = new HtmlTextWriter (sw)) {
-                    fu.DoRender (htw);
+            PokerFileUpload fu = new PokerFileUpload();
+            fu.Page = new Page();
+            fu.Page.Controls.Add(fu);
+
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    fu.DoRender(htw);
                 }
-                sw.Close ();
+                sw.Close();
             }
         }
 
         [Test]
-        public void RenderControlTest ()
+        public void RenderControlTest()
         {
-            FileUpload fu = new FileUpload ();
-            fu.Page = new Page ();
+            FileUpload fu = new FileUpload();
+            fu.Page = new Page();
             string res;
-            using (StringWriter sw = new StringWriter ()) {
-                using (HtmlTextWriter htw = new HtmlTextWriter (sw)) {
-                    fu.RenderControl (htw);
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    fu.RenderControl(htw);
                 }
-                sw.Close ();
-                res = sw.ToString ();
+                sw.Close();
+                res = sw.ToString();
             }
-            Assert.AreEqual ("<input type=\"file\" />", res);
+            Assert.AreEqual("<input type=\"file\" />", res);
         }
+
         [Test]
-        public void RenderBeginTagTest ()
+        public void RenderBeginTagTest()
         {
-            FileUpload fu = new FileUpload ();
-            fu.Page = new Page ();
+            FileUpload fu = new FileUpload();
+            fu.Page = new Page();
             string res;
-            using (StringWriter sw = new StringWriter ()) {
-                using (HtmlTextWriter htw = new HtmlTextWriter (sw)) {
-                    fu.RenderBeginTag (htw);
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    fu.RenderBeginTag(htw);
                 }
-                sw.Close ();
-                res = sw.ToString ();
+                sw.Close();
+                res = sw.ToString();
             }
-            Assert.AreEqual ("<input type=\"file\" />", res);
+            Assert.AreEqual("<input type=\"file\" />", res);
         }
+
         [Test]
-        public void FileContentTest ()
+        public void FileContentTest()
         {
-            FileUpload fu = new FileUpload ();
+            FileUpload fu = new FileUpload();
             Stream s = fu.FileContent;
-            Assert.AreSame (s, Stream.Null);
+            Assert.AreSame(s, Stream.Null);
         }
-
     }
 }

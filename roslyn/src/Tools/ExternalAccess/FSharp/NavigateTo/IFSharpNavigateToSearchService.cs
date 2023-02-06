@@ -14,7 +14,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.NavigateTo
 
         bool CanFilter { get; }
 
-        Task<ImmutableArray<FSharpNavigateToSearchResult>> SearchProjectAsync(Project project, ImmutableArray<Document> priorityDocuments, string searchPattern, IImmutableSet<string> kinds, CancellationToken cancellationToken);
-        Task<ImmutableArray<FSharpNavigateToSearchResult>> SearchDocumentAsync(Document document, string searchPattern, IImmutableSet<string> kinds, CancellationToken cancellationToken);
+        Task<ImmutableArray<FSharpNavigateToSearchResult>> SearchProjectAsync(
+            Project project,
+            ImmutableArray<Document> priorityDocuments,
+            string searchPattern,
+            IImmutableSet<string> kinds,
+            CancellationToken cancellationToken
+        );
+        Task<ImmutableArray<FSharpNavigateToSearchResult>> SearchDocumentAsync(
+            Document document,
+            string searchPattern,
+            IImmutableSet<string> kinds,
+            CancellationToken cancellationToken
+        );
     }
 }

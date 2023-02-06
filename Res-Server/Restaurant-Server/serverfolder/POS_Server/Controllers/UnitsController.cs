@@ -18,14 +18,15 @@ namespace POS_Server.Controllers
     {
         CountriesController coctrlr = new CountriesController();
         List<long> unitsIds = new List<long>();
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             Boolean canDelete = false;
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -34,25 +35,31 @@ var strP = TokenManager.GetPrincipal(token);
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var unitsList = (from u in entity.units
-                                     join b in entity.units
-                                      on new { UnitModel = u.smallestId } equals new { UnitModel = (long?)b.unitId } into lj
-                                     from x in lj.DefaultIfEmpty()
-                                     select new UnitModel()
-                                     {
-                                         unitId = u.unitId,
-                                         name = u.name,
-                                         isSmallest = u.isSmallest,
-                                         smallestUnit = x.name,
-                                        parentid = u.parentid,
-                                         smallestId = u.smallestId,
-                                         notes = u.notes,
-                                         createDate = u.createDate,
-                                         createUserId = u.createUserId,
-                                         updateDate = u.updateDate,
-                                         updateUserId = u.updateUserId,
-                                         isActive = u.isActive,
-                                     }).ToList();
+                    var unitsList = (
+                        from u in entity.units
+                        join b in entity.units
+                            on new { UnitModel = u.smallestId } equals new
+                            {
+                                UnitModel = (long?)b.unitId
+                            }
+                            into lj
+                        from x in lj.DefaultIfEmpty()
+                        select new UnitModel()
+                        {
+                            unitId = u.unitId,
+                            name = u.name,
+                            isSmallest = u.isSmallest,
+                            smallestUnit = x.name,
+                            parentid = u.parentid,
+                            smallestId = u.smallestId,
+                            notes = u.notes,
+                            createDate = u.createDate,
+                            createUserId = u.createUserId,
+                            updateDate = u.updateDate,
+                            updateUserId = u.updateUserId,
+                            isActive = u.isActive,
+                        }
+                    ).ToList();
 
                     if (unitsList.Count > 0)
                     {
@@ -62,11 +69,28 @@ var strP = TokenManager.GetPrincipal(token);
                             if (unitsList[i].isActive == 1)
                             {
                                 long unitId = (long)unitsList[i].unitId;
-                                var itemsL = entity.items.Where(x => x.minUnitId == unitId).Select(b => new { b.itemId }).ToList();
-                                var itemsMatL = entity.itemsMaterials.Where(x => x.unitId == unitId).Select(x => new { x.itemMatId }).FirstOrDefault();
-                                var itemsUnitL = entity.itemsUnits.Where(x => x.unitId == unitId).Select(x => new { x.itemUnitId }).FirstOrDefault();
-                                var unitsL = entity.units.Where(x => x.parentid == unitId).Select(x => new { x.unitId }).FirstOrDefault();
-                                if ((itemsL.Count == 0) && (itemsMatL is null) && (itemsUnitL is null) && (unitsL is null))
+                                var itemsL = entity.items
+                                    .Where(x => x.minUnitId == unitId)
+                                    .Select(b => new { b.itemId })
+                                    .ToList();
+                                var itemsMatL = entity.itemsMaterials
+                                    .Where(x => x.unitId == unitId)
+                                    .Select(x => new { x.itemMatId })
+                                    .FirstOrDefault();
+                                var itemsUnitL = entity.itemsUnits
+                                    .Where(x => x.unitId == unitId)
+                                    .Select(x => new { x.itemUnitId })
+                                    .FirstOrDefault();
+                                var unitsL = entity.units
+                                    .Where(x => x.parentid == unitId)
+                                    .Select(x => new { x.unitId })
+                                    .FirstOrDefault();
+                                if (
+                                    (itemsL.Count == 0)
+                                    && (itemsMatL is null)
+                                    && (itemsUnitL is null)
+                                    && (unitsL is null)
+                                )
                                     canDelete = true;
                             }
 
@@ -76,9 +100,7 @@ var strP = TokenManager.GetPrincipal(token);
                     return TokenManager.GenerateToken(unitsList);
                 }
             }
-         }
-
-
+        }
 
         [HttpPost]
         [Route("GetU")]
@@ -95,41 +117,36 @@ var strP = TokenManager.GetPrincipal(token);
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var unitsList = (from u in entity.units
+                    var unitsList = (
+                        from u in entity.units
 
-                                     select new
-                                     {
-                                         unitId = u.unitId,
-                                         name = u.name,
-                                         isSmallest = u.isSmallest,
+                        select new
+                        {
+                            unitId = u.unitId,
+                            name = u.name,
+                            isSmallest = u.isSmallest,
+                            parentid = u.parentid,
+                            smallestId = u.smallestId,
+                            notes = u.notes,
+                            createDate = u.createDate,
+                            createUserId = u.createUserId,
+                            updateDate = u.updateDate,
+                            updateUserId = u.updateUserId,
+                            isActive = u.isActive,
+                        }
+                    ).ToList();
 
-                                         parentid = u.parentid,
-                                         smallestId = u.smallestId,
-                                         notes = u.notes,
-                                         createDate = u.createDate,
-                                         createUserId = u.createUserId,
-                                         updateDate = u.updateDate,
-                                         updateUserId = u.updateUserId,
-                                         isActive = u.isActive,
-
-
-                                     }).ToList();
-
-             
                     return TokenManager.GenerateToken(unitsList);
                 }
-
             }
-
         }
-
 
         [HttpPost]
         [Route("getSmallUnits")]
         public string getSmallUnits(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -144,7 +161,8 @@ var strP = TokenManager.GetPrincipal(token);
                     if (c.Type == "itemId")
                     {
                         itemId = long.Parse(c.Value);
-                    } else if (c.Type == "unitId")
+                    }
+                    else if (c.Type == "unitId")
                     {
                         unitId = long.Parse(c.Value);
                     }
@@ -153,46 +171,51 @@ var strP = TokenManager.GetPrincipal(token);
                 {
                     // get all sub categories of categoryId
                     List<itemsUnits> unitsList = entity.itemsUnits
-                     .ToList().Where(x => x.itemId == itemId)
-                      .Select(p => new itemsUnits
-                      {
-                          unitId = p.unitId,
-                          //name = p.name,
-                          subUnitId = p.subUnitId,
-                      })
-                     .ToList();
+                        .ToList()
+                        .Where(x => x.itemId == itemId)
+                        .Select(
+                            p =>
+                                new itemsUnits
+                                {
+                                    unitId = p.unitId,
+                                    //name = p.name,
+                                    subUnitId = p.subUnitId,
+                                }
+                        )
+                        .ToList();
 
                     unitsIds = new List<long>();
 
                     var result = Recursive(unitsList, unitId);
 
-                    var units = (from u in entity.units
-                                 select new UnitModel()
-                                 {
-                                     unitId = u.unitId,
-                                     name = u.name,
-                                     isSmallest = u.isSmallest,
-                                     parentid = u.parentid,
-                                     smallestId = u.smallestId,
-                                     notes = u.notes,
-                                     createDate = u.createDate,
-                                     createUserId = u.createUserId,
-                                     updateDate = u.updateDate,
-                                     updateUserId = u.updateUserId,
-                                     isActive = u.isActive,
-
-                                 }).Where(p => !unitsIds.Contains((long)p.unitId)).ToList();
+                    var units = (
+                        from u in entity.units
+                        select new UnitModel()
+                        {
+                            unitId = u.unitId,
+                            name = u.name,
+                            isSmallest = u.isSmallest,
+                            parentid = u.parentid,
+                            smallestId = u.smallestId,
+                            notes = u.notes,
+                            createDate = u.createDate,
+                            createUserId = u.createUserId,
+                            updateDate = u.updateDate,
+                            updateUserId = u.updateUserId,
+                            isActive = u.isActive,
+                        }
+                    ).Where(p => !unitsIds.Contains((long)p.unitId)).ToList();
                     return TokenManager.GenerateToken(units);
                 }
             }
         }
-         
+
         [HttpPost]
         [Route("GetActive")]
         public string GetActive(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -203,19 +226,23 @@ var strP = TokenManager.GetPrincipal(token);
                 {
                     var unitsList = entity.units
                         .Where(u => u.isActive == 1)
-                        .Select(u => new {
-                            u.createDate,
-                            u.createUserId,
-                            u.isSmallest,
-                            u.name,
-                            u.parentid,
-                            u.smallestId,
-                            u.unitId,
-                            u.updateDate,
-                            u.updateUserId,
-                            u.notes,
-                        })
-                    .ToList();
+                        .Select(
+                            u =>
+                                new
+                                {
+                                    u.createDate,
+                                    u.createUserId,
+                                    u.isSmallest,
+                                    u.name,
+                                    u.parentid,
+                                    u.smallestId,
+                                    u.unitId,
+                                    u.updateDate,
+                                    u.updateUserId,
+                                    u.notes,
+                                }
+                        )
+                        .ToList();
                     return TokenManager.GenerateToken(unitsList);
                 }
             }
@@ -226,8 +253,8 @@ var strP = TokenManager.GetPrincipal(token);
         [Route("GetUnitByID")]
         public string GetUnitByID(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -242,39 +269,42 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         unitId = long.Parse(c.Value);
                     }
-                   
                 }
 
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var unit = entity.units
-                   .Where(u => u.unitId == unitId)
-                   .Select(u => new {
-                       u.createDate,
-                       u.createUserId,
-                       u.isSmallest,
-                       u.name,
-                       u.parentid,
-                       u.smallestId,
-                       u.unitId,
-                       u.updateDate,
-                       u.updateUserId,
-                       u.notes,
-                   })
-                   .FirstOrDefault();
+                        .Where(u => u.unitId == unitId)
+                        .Select(
+                            u =>
+                                new
+                                {
+                                    u.createDate,
+                                    u.createUserId,
+                                    u.isSmallest,
+                                    u.name,
+                                    u.parentid,
+                                    u.smallestId,
+                                    u.unitId,
+                                    u.updateDate,
+                                    u.updateUserId,
+                                    u.notes,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(unit);
                 }
             }
-         }
+        }
 
         // add or update unit
         [HttpPost]
         [Route("Save")]
         public string Save(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -290,7 +320,10 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         unitObject = c.Value.Replace("\\", string.Empty);
                         unitObject = unitObject.Trim('"');
-                        Object = JsonConvert.DeserializeObject<units>(unitObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        Object = JsonConvert.DeserializeObject<units>(
+                            unitObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -303,8 +336,8 @@ var strP = TokenManager.GetPrincipal(token);
                         var unitEntity = entity.Set<units>();
                         if (Object.unitId == 0)
                         {
-                            Object.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            Object.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             Object.updateUserId = Object.createUserId;
 
                             unitEntity.Add(Object);
@@ -315,23 +348,23 @@ var strP = TokenManager.GetPrincipal(token);
                         }
                         else
                         {
-                            tmpUnit = entity.units.Where(p => p.unitId == Object.unitId).FirstOrDefault();
+                            tmpUnit = entity.units
+                                .Where(p => p.unitId == Object.unitId)
+                                .FirstOrDefault();
                             tmpUnit.name = Object.name;
                             tmpUnit.notes = Object.notes;
                             tmpUnit.isSmallest = Object.isSmallest;
                             tmpUnit.smallestId = Object.smallestId;
-                            tmpUnit.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpUnit.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpUnit.updateUserId = Object.updateUserId;
                             tmpUnit.parentid = Object.parentid;
                             tmpUnit.isActive = Object.isActive;
                             entity.SaveChanges();
                             message = tmpUnit.unitId.ToString();
                             return TokenManager.GenerateToken(message);
-
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
@@ -344,9 +377,9 @@ var strP = TokenManager.GetPrincipal(token);
         [Route("Delete")]
         public string Delete(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -378,7 +411,6 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             units unitDelete = entity.units.Find(unitId);
                             entity.units.Remove(unitDelete);
                             message = entity.SaveChanges().ToString();
@@ -399,7 +431,7 @@ var strP = TokenManager.GetPrincipal(token);
                         {
                             units unitDelete = entity.units.Find(unitId);
                             unitDelete.isActive = 0;
-                            unitDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            unitDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             unitDelete.updateUserId = userId;
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
@@ -412,8 +444,7 @@ var strP = TokenManager.GetPrincipal(token);
                     }
                 }
             }
-         }
-
+        }
 
         public IEnumerable<itemsUnits> Recursive(List<itemsUnits> unitsList, long smallLevelid)
         {

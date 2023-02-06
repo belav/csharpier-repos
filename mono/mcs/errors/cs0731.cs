@@ -4,8 +4,8 @@
 
 class Test
 {
-    static void Main ()
+    static void Main()
     {
-        new A ();
+        new A();
     }
 }

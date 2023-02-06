@@ -2,7 +2,7 @@ namespace Mono.Profiler.Aot
 {
     public sealed class ProfileData
     {
-        public ProfileData (ModuleRecord[] modules, TypeRecord[] types, MethodRecord[] methods)
+        public ProfileData(ModuleRecord[] modules, TypeRecord[] types, MethodRecord[] methods)
         {
             this.Modules = modules;
             this.Types = types;

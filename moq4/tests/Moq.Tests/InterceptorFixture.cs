@@ -51,7 +51,12 @@ namespace Moq.Tests
 
         private static object CreateProxy(Type type, IInterceptor interceptor)
         {
-            return ProxyFactory.Instance.CreateProxy(type, interceptor, Type.EmptyTypes, new object[0]);
+            return ProxyFactory.Instance.CreateProxy(
+                type,
+                interceptor,
+                Type.EmptyTypes,
+                new object[0]
+            );
         }
 
         private sealed class Echo : IInterceptor

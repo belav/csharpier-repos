@@ -2,12 +2,12 @@
 // Line: 4
 // Compiler options: -warnaserror -warn:4
 
-class X {
+class X
+{
     string s;
 
-    string Value {
-        get {
-            return s;
-        }
+    string Value
+    {
+        get { return s; }
     }
 }

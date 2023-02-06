@@ -18,47 +18,65 @@ namespace I18N.CJK
     {
         // Magic number used by Windows for the Gb2312 code page.
         private const int GB2312_CODE_PAGE = 936;
-        
-        // Constructor.
-        public CP936() : base(GB2312_CODE_PAGE) {
-        }
 
-        internal override DbcsConvert GetConvert ()
+        // Constructor.
+        public CP936()
+            : base(GB2312_CODE_PAGE) { }
+
+        internal override DbcsConvert GetConvert()
         {
             return DbcsConvert.Gb2312;
         }
 
 #if !DISABLE_UNSAFE
         // Get the bytes that result from encoding a character buffer.
-        public unsafe override int GetByteCountImpl (char* chars, int count)
+        public unsafe override int GetByteCountImpl(char* chars, int count)
         {
             return GetBytesImpl(chars, count, null, 0);
         }
 
         // Get the bytes that result from encoding a character buffer.
-        public unsafe override int GetBytesImpl (char* chars, int charCount, byte* bytes, int byteCount)
+        public unsafe override int GetBytesImpl(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount
+        )
         {
-            DbcsConvert gb2312 = GetConvert ();
+            DbcsConvert gb2312 = GetConvert();
             int charIndex = 0;
             int byteIndex = 0;
             int end = charCount;
             EncoderFallbackBuffer buffer = null;
 
             int origIndex = byteIndex;
-            for (int i = charIndex; i < end; i++, charCount--) {
+            for (int i = charIndex; i < end; i++, charCount--)
+            {
                 char c = chars[i];
-                if (c <= 0x80 || c == 0xFF) { // ASCII
+                if (c <= 0x80 || c == 0xFF)
+                { // ASCII
                     int offset = byteIndex++;
-                    if (bytes != null) bytes[offset] = (byte)c;
+                    if (bytes != null)
+                        bytes[offset] = (byte)c;
                     continue;
                 }
                 byte b1 = gb2312.u2n[((int)c) * 2 + 1];
                 byte b2 = gb2312.u2n[((int)c) * 2];
-                if (b1 == 0 && b2 == 0) {
-                    HandleFallback (ref buffer, chars,
-                        ref i, ref charCount,
-                        bytes, ref byteIndex, ref byteCount, null);
-                } else {
+                if (b1 == 0 && b2 == 0)
+                {
+                    HandleFallback(
+                        ref buffer,
+                        chars,
+                        ref i,
+                        ref charCount,
+                        bytes,
+                        ref byteIndex,
+                        ref byteCount,
+                        null
+                    );
+                }
+                else
+                {
                     if (bytes != null)
                     {
                         bytes[byteIndex++] = b1;
@@ -73,7 +91,13 @@ namespace I18N.CJK
             return byteIndex - origIndex;
         }
 #else
-        protected int GetBytesInternal(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        protected int GetBytesInternal(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             int origIndex = byteIndex;
             int end = charIndex + charCount;
@@ -87,15 +111,24 @@ namespace I18N.CJK
                 if (c <= 0x80 || c == 0xFF)
                 { // ASCII
                     int offset = byteIndex++;
-                    if (bytes != null) bytes[offset] = (byte)c;
+                    if (bytes != null)
+                        bytes[offset] = (byte)c;
                     continue;
                 }
                 byte b1 = gb2312.u2n[((int)c) * 2 + 1];
                 byte b2 = gb2312.u2n[((int)c) * 2];
                 if (b1 == 0 && b2 == 0)
                 {
-                    HandleFallback (ref buffer, chars, ref i, ref charCount,
-                        bytes, ref byteIndex, ref byteCount, null);
+                    HandleFallback(
+                        ref buffer,
+                        chars,
+                        ref i,
+                        ref charCount,
+                        bytes,
+                        ref byteIndex,
+                        ref byteCount,
+                        null
+                    );
                 }
                 else
                 {
@@ -120,77 +153,88 @@ namespace I18N.CJK
         }
 
         // Get the bytes that result from encoding a character buffer.
-        public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        public override int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             return GetBytesInternal(chars, charIndex, charCount, bytes, byteIndex);
         }
 #endif
+
         // Get the characters that result from decoding a byte buffer.
-        public override int GetCharCount (byte [] bytes, int index, int count)
+        public override int GetCharCount(byte[] bytes, int index, int count)
         {
-            return GetDecoder ().GetCharCount (bytes, index, count);
+            return GetDecoder().GetCharCount(bytes, index, count);
         }
 
         // Get the characters that result from decoding a byte buffer.
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount,
-                         char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
-            return GetDecoder ().GetChars (
-                bytes, byteIndex, byteCount, chars, charIndex);
+            return GetDecoder().GetChars(bytes, byteIndex, byteCount, chars, charIndex);
         }
-        
+
         // Get a decoder that handles a rolling Gb2312 state.
         public override Decoder GetDecoder()
         {
-            return new CP936Decoder(GetConvert ());
+            return new CP936Decoder(GetConvert());
         }
-        
+
         // Get the mail body name for this encoding.
         public override String BodyName
         {
-            get { return("gb2312"); }
+            get { return ("gb2312"); }
         }
-        
+
         // Get the human-readable name for this encoding.
         public override String EncodingName
         {
-            get { return("Chinese Simplified (GB2312)"); }
+            get { return ("Chinese Simplified (GB2312)"); }
         }
-        
+
         // Get the mail agent header name for this encoding.
         public override String HeaderName
         {
-            get { return("gb2312"); }
+            get { return ("gb2312"); }
         }
-        
+
         // Determine if this encoding can be displayed in a Web browser.
         public override bool IsBrowserDisplay
         {
-            get { return(true); }
+            get { return (true); }
         }
-        
+
         // Determine if this encoding can be saved from a Web browser.
         public override bool IsBrowserSave
         {
-            get { return(true); }
+            get { return (true); }
         }
-        
+
         // Determine if this encoding can be displayed in a mail/news agent.
         public override bool IsMailNewsDisplay
         {
-            get { return(true); }
+            get { return (true); }
         }
-        
+
         // Determine if this encoding can be saved from a mail/news agent.
         public override bool IsMailNewsSave
         {
-            get { return(true); }
+            get { return (true); }
         }
-        
+
         // Get the IANA-preferred Web name for this encoding.
         public override String WebName
         {
-            get { return("gb2312"); }
+            get { return ("gb2312"); }
         }
     }
 
@@ -198,34 +242,37 @@ namespace I18N.CJK
     sealed class CP936Decoder : DbcsEncoding.DbcsDecoder
     {
         // Constructor.
-        public CP936Decoder (DbcsConvert convert)
-            : base (convert)
-        {
-        }
+        public CP936Decoder(DbcsConvert convert)
+            : base(convert) { }
 
-        int last_byte_count, last_byte_bytes;
+        int last_byte_count,
+            last_byte_bytes;
 
         // Get the characters that result from decoding a byte buffer.
-        public override int GetCharCount (byte [] bytes, int index, int count)
+        public override int GetCharCount(byte[] bytes, int index, int count)
         {
-            return GetCharCount (bytes, index, count, false);
+            return GetCharCount(bytes, index, count, false);
         }
 
-        public override
-        int GetCharCount (byte [] bytes, int index, int count, bool refresh)
+        public override int GetCharCount(byte[] bytes, int index, int count, bool refresh)
         {
-            CheckRange (bytes, index, count);
+            CheckRange(bytes, index, count);
 
             int lastByte = last_byte_count;
             last_byte_count = 0;
             int length = 0;
-            while (count-- > 0) {
-                int b = bytes [index++];
-                if (lastByte == 0) {
-                    if (b <= 0x80 || b == 0xFF) { // ASCII
+            while (count-- > 0)
+            {
+                int b = bytes[index++];
+                if (lastByte == 0)
+                {
+                    if (b <= 0x80 || b == 0xFF)
+                    { // ASCII
                         length++;
                         continue;
-                    } else {
+                    }
+                    else
+                    {
                         lastByte = b;
                         continue;
                     }
@@ -234,8 +281,10 @@ namespace I18N.CJK
                 lastByte = 0;
             }
 
-            if (lastByte != 0) {
-                if (refresh) {
+            if (lastByte != 0)
+            {
+                if (refresh)
+                {
                     length++;
                     last_byte_count = 0;
                 }
@@ -246,37 +295,56 @@ namespace I18N.CJK
             return length;
         }
 
-        public override int GetChars (byte[] bytes, int byteIndex, int byteCount,
-                         char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
-            return GetChars (bytes, byteIndex, byteCount, chars, charIndex, false);
+            return GetChars(bytes, byteIndex, byteCount, chars, charIndex, false);
         }
 
-        public override
-        int GetChars (byte [] bytes, int byteIndex, int byteCount,
-                  char [] chars, int charIndex, bool refresh)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex,
+            bool refresh
+        )
         {
-            CheckRange (bytes, byteIndex, byteCount, chars, charIndex);
+            CheckRange(bytes, byteIndex, byteCount, chars, charIndex);
 
             int origIndex = charIndex;
             int lastByte = last_byte_bytes;
             last_byte_bytes = 0;
-            while (byteCount-- > 0) {
+            while (byteCount-- > 0)
+            {
                 int b = bytes[byteIndex++];
-                if (lastByte == 0) {
-                    if (b <= 0x80 || b == 0xFF) { // ASCII
+                if (lastByte == 0)
+                {
+                    if (b <= 0x80 || b == 0xFF)
+                    { // ASCII
                         chars[charIndex++] = (char)b;
                         continue;
-                    } else if (b < 0x81 || b >= 0xFF) {
+                    }
+                    else if (b < 0x81 || b >= 0xFF)
+                    {
                         continue;
-                    } else {
+                    }
+                    else
+                    {
                         lastByte = b;
                         continue;
                     }
                 }
                 int ord = ((lastByte - 0x81) * 191 + b - 0x40) * 2;
-                char c1 = ord < 0 || ord >= convert.n2u.Length ?
-                    '\0' : (char) (convert.n2u[ord] + convert.n2u[ord + 1] * 256);
+                char c1 =
+                    ord < 0 || ord >= convert.n2u.Length
+                        ? '\0'
+                        : (char)(convert.n2u[ord] + convert.n2u[ord + 1] * 256);
                 if (c1 == 0)
                     chars[charIndex++] = '?';
                 else
@@ -284,10 +352,12 @@ namespace I18N.CJK
                 lastByte = 0;
             }
 
-            if (lastByte != 0) {
-                if (refresh) {
+            if (lastByte != 0)
+            {
+                if (refresh)
+                {
                     // FIXME: handle fallback
-                    chars [charIndex++] = '?';
+                    chars[charIndex++] = '?';
                     last_byte_bytes = 0;
                 }
                 else
@@ -297,10 +367,11 @@ namespace I18N.CJK
             return charIndex - origIndex;
         }
     }
-    
+
     [Serializable]
     internal class ENCgb2312 : CP936
     {
-        public ENCgb2312(): base () {}
+        public ENCgb2312()
+            : base() { }
     }
 }

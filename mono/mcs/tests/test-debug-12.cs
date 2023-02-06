@@ -3,7 +3,5 @@ using System.Diagnostics;
 class C
 {
     [DebuggerHidden]
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

@@ -26,16 +26,21 @@ namespace System.ServiceModel.Activation
         // Double-checked locking pattern requires volatile for read/write synchronization
         volatile IHttpHandler handler;
         object locker = new object();
+
         [Fx.Tag.Cache(
-                typeof(ServiceDeploymentInfo),
-                Fx.Tag.CacheAttrition.None,
-                Scope = "instance of declaring class",
-                SizeLimit = "unbounded",
-                Timeout = "infinite"
-                )]
+            typeof(ServiceDeploymentInfo),
+            Fx.Tag.CacheAttrition.None,
+            Scope = "instance of declaring class",
+            SizeLimit = "unbounded",
+            Timeout = "infinite"
+        )]
         static Hashtable routeServiceTable = new Hashtable(StringComparer.CurrentCultureIgnoreCase);
 
-        public ServiceRouteHandler(string baseAddress, ServiceHostFactoryBase serviceHostFactory, Type webServiceType)
+        public ServiceRouteHandler(
+            string baseAddress,
+            ServiceHostFactoryBase serviceHostFactory,
+            Type webServiceType
+        )
         {
             this.baseAddress = string.Format(CultureInfo.CurrentCulture, "~/{0}", baseAddress);
             if (webServiceType == null)
@@ -48,14 +53,17 @@ namespace System.ServiceModel.Activation
             }
             string serviceType = webServiceType.AssemblyQualifiedName;
 
-            AddServiceInfo(this.baseAddress, new ServiceDeploymentInfo(this.baseAddress, serviceHostFactory, serviceType));
+            AddServiceInfo(
+                this.baseAddress,
+                new ServiceDeploymentInfo(this.baseAddress, serviceHostFactory, serviceType)
+            );
         }
 
         public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
             // we create httphandler only we the request map to the corresponding route.
-            // we thus do not need to check whether the baseAddress has been added  
-            // even though Asp.Net allows duplicated routes but it picks the first match 
+            // we thus do not need to check whether the baseAddress has been added
+            // even though Asp.Net allows duplicated routes but it picks the first match
             if (handler == null)
             {
                 // use local lock to prevent multiple httphanders from being created
@@ -63,7 +71,9 @@ namespace System.ServiceModel.Activation
                 {
                     if (handler == null)
                     {
-                        IHttpHandler tempHandler = new AspNetRouteServiceHttpHandler(this.baseAddress);
+                        IHttpHandler tempHandler = new AspNetRouteServiceHttpHandler(
+                            this.baseAddress
+                        );
                         MarkRouteAsActive(this.baseAddress);
                         handler = tempHandler;
                     }
@@ -74,7 +84,10 @@ namespace System.ServiceModel.Activation
 
         static void AddServiceInfo(string virtualPath, ServiceDeploymentInfo serviceInfo)
         {
-            Fx.Assert(!string.IsNullOrEmpty(virtualPath), "virtualPath should not be empty or null");
+            Fx.Assert(
+                !string.IsNullOrEmpty(virtualPath),
+                "virtualPath should not be empty or null"
+            );
             Fx.Assert(serviceInfo != null, "serviceInfo should not be null");
             // We cannot support dulicated route routes even Asp.Net route allows it
             try
@@ -83,7 +96,10 @@ namespace System.ServiceModel.Activation
             }
             catch (ArgumentException)
             {
-                throw FxTrace.Exception.Argument("virtualPath", SR.Hosting_RouteHasAlreadyBeenAdded(virtualPath));
+                throw FxTrace.Exception.Argument(
+                    "virtualPath",
+                    SR.Hosting_RouteHasAlreadyBeenAdded(virtualPath)
+                );
             }
         }
 
@@ -97,29 +113,33 @@ namespace System.ServiceModel.Activation
             bool isRouteService = false;
             if (!string.IsNullOrEmpty(virtualPath))
             {
-                ServiceDeploymentInfo serviceInfo = (ServiceDeploymentInfo)routeServiceTable[virtualPath];
+                ServiceDeploymentInfo serviceInfo = (ServiceDeploymentInfo)
+                    routeServiceTable[virtualPath];
                 if (serviceInfo != null)
                 {
                     isRouteService = serviceInfo.MessageHandledByRoute;
                 }
             }
             return isRouteService;
-        }       
+        }
 
         // A route in routetable does not always mean the route will be picked
         // we update IsRouteService only when Asp.Net picks this route
         public static void MarkRouteAsActive(string normalizedVirtualPath)
         {
-            ServiceDeploymentInfo serviceInfo = (ServiceDeploymentInfo)routeServiceTable[normalizedVirtualPath];
+            ServiceDeploymentInfo serviceInfo = (ServiceDeploymentInfo)
+                routeServiceTable[normalizedVirtualPath];
             if (serviceInfo != null)
             {
                 serviceInfo.MessageHandledByRoute = true;
             }
         }
+
         // a route should be marked as inactive in the case that CBA should be used
         public static void MarkARouteAsInactive(string normalizedVirtualPath)
         {
-            ServiceDeploymentInfo serviceInfo = (ServiceDeploymentInfo)routeServiceTable[normalizedVirtualPath];
+            ServiceDeploymentInfo serviceInfo = (ServiceDeploymentInfo)
+                routeServiceTable[normalizedVirtualPath];
             if (serviceInfo != null)
             {
                 serviceInfo.MessageHandledByRoute = false;

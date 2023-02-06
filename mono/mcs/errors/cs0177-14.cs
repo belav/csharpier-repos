@@ -3,19 +3,18 @@
 
 public class A
 {
-    public bool GetValue (out int val)
+    public bool GetValue(out int val)
     {
         val = 0;
         return true;
     }
 
-    public void ReallyGetValue (out int val)
+    public void ReallyGetValue(out int val)
     {
-        if (AlwaysReturnTrue () || GetValue (out val)) {
-        }
+        if (AlwaysReturnTrue() || GetValue(out val)) { }
     }
 
-    public bool AlwaysReturnTrue ()
+    public bool AlwaysReturnTrue()
     {
         return true;
     }

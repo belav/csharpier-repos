@@ -11,14 +11,22 @@ class T1
     {
         try
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
+            Configuration config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
             ConnectionStringsSection sect = config.ConnectionStrings;
             ConnectionStringSettingsCollection connectionstrings = sect.ConnectionStrings;
 
-            connectionstrings.Add (new ConnectionStringSettings ("fromtest", "connectionstringhere"));
+            connectionstrings.Add(new ConnectionStringSettings("fromtest", "connectionstringhere"));
 
-            foreach (ConnectionStringSettings cs in connectionstrings) {
-                Console.WriteLine ("connectionstring[{0}] = `{1}',`{2}'", cs.Name, cs.ProviderName, cs.ConnectionString);
+            foreach (ConnectionStringSettings cs in connectionstrings)
+            {
+                Console.WriteLine(
+                    "connectionstring[{0}] = `{1}',`{2}'",
+                    cs.Name,
+                    cs.ProviderName,
+                    cs.ConnectionString
+                );
             }
         }
         catch (Exception e)

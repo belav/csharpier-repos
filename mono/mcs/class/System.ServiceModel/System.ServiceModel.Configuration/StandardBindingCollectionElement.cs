@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,8 +56,8 @@ using SysConfig = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-    public class StandardBindingCollectionElement<TStandardBinding,TBindingConfiguration>
-         : BindingCollectionElement
+    public class StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>
+        : BindingCollectionElement
         where TStandardBinding : Binding
         where TBindingConfiguration : StandardBindingElement, new()
     {
@@ -65,59 +65,78 @@ namespace System.ServiceModel.Configuration
 
         // Properties
 
-        [ConfigurationProperty ("",
-             Options = ConfigurationPropertyOptions.IsDefaultCollection,
-            IsDefaultCollection = true)]
-        public StandardBindingElementCollection<TBindingConfiguration> Bindings {
-            get { return (StandardBindingElementCollection<TBindingConfiguration>) this [String.Empty]; }
-        }
-
-        public override ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings {
-            get {
-                List<IBindingConfigurationElement> list = new List<IBindingConfigurationElement> ();
-                StandardBindingElementCollection<TBindingConfiguration> bindings = Bindings;
-                for (int i = 0; i < bindings.Count; i++)
-                    list.Add (bindings [i]);
-                return new ReadOnlyCollection<IBindingConfigurationElement> (list);
+        [ConfigurationProperty(
+            "",
+            Options = ConfigurationPropertyOptions.IsDefaultCollection,
+            IsDefaultCollection = true
+        )]
+        public StandardBindingElementCollection<TBindingConfiguration> Bindings
+        {
+            get
+            {
+                return (StandardBindingElementCollection<TBindingConfiguration>)this[String.Empty];
             }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = new ConfigurationPropertyCollection ();
-                    _properties.Add (new ConfigurationProperty (String.Empty, typeof (StandardBindingElementCollection<TBindingConfiguration>), null, null, null, ConfigurationPropertyOptions.IsDefaultCollection));
+        public override ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings
+        {
+            get
+            {
+                List<IBindingConfigurationElement> list = new List<IBindingConfigurationElement>();
+                StandardBindingElementCollection<TBindingConfiguration> bindings = Bindings;
+                for (int i = 0; i < bindings.Count; i++)
+                    list.Add(bindings[i]);
+                return new ReadOnlyCollection<IBindingConfigurationElement>(list);
+            }
+        }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
+                    _properties = new ConfigurationPropertyCollection();
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            String.Empty,
+                            typeof(StandardBindingElementCollection<TBindingConfiguration>),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.IsDefaultCollection
+                        )
+                    );
                 }
                 return _properties;
             }
         }
 
-        public override Type BindingType {
-            get { return typeof (TStandardBinding); }
+        public override Type BindingType
+        {
+            get { return typeof(TStandardBinding); }
         }
 
-
-        public override bool ContainsKey (string name)
+        public override bool ContainsKey(string name)
         {
-            return Bindings.ContainsKey (name);
+            return Bindings.ContainsKey(name);
         }
 
-        protected internal override Binding GetDefault ()
+        protected internal override Binding GetDefault()
         {
-            return (Binding) Activator.CreateInstance (BindingType, new object [0]);
+            return (Binding)Activator.CreateInstance(BindingType, new object[0]);
         }
 
-        protected internal override bool TryAdd (string name, Binding binding, SysConfig config)
+        protected internal override bool TryAdd(string name, Binding binding, SysConfig config)
         {
-            if (!binding.GetType ().Equals (typeof (TStandardBinding)))
+            if (!binding.GetType().Equals(typeof(TStandardBinding)))
                 return false;
 
-            var element = new TBindingConfiguration ();
+            var element = new TBindingConfiguration();
             element.Name = name;
-            element.InitializeFrom (binding);
-            Bindings.Add (element);
+            element.InitializeFrom(binding);
+            Bindings.Add(element);
             return true;
         }
     }
-
 }

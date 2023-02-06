@@ -20,9 +20,7 @@ namespace System.Security.Cryptography
         private const int HmacSizeBytes = HmacSizeBits / 8;
 
         public HMACSHA256()
-            : this(RandomNumberGenerator.GetBytes(BlockSize))
-        {
-        }
+            : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
 
         public HMACSHA256(byte[] key)
         {
@@ -43,10 +41,7 @@ namespace System.Security.Cryptography
 
         public override byte[] Key
         {
-            get
-            {
-                return base.Key;
-            }
+            get { return base.Key; }
             set
             {
                 if (value is null)
@@ -65,8 +60,7 @@ namespace System.Security.Cryptography
         protected override void HashCore(ReadOnlySpan<byte> source) =>
             _hMacCommon.AppendHashData(source);
 
-        protected override byte[] HashFinal() =>
-            _hMacCommon.FinalizeHashAndReset();
+        protected override byte[] HashFinal() => _hMacCommon.FinalizeHashAndReset();
 
         protected override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
             _hMacCommon.TryFinalizeHashAndReset(destination, out bytesWritten);
@@ -119,7 +113,11 @@ namespace System.Security.Cryptography
         /// The buffer in <paramref name="destination"/> is too small to hold the calculated hash
         /// size. The SHA256 algorithm always produces a 256-bit HMAC, or 32 bytes.
         /// </exception>
-        public static int HashData(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination)
+        public static int HashData(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination
+        )
         {
             if (!TryHashData(key, source, destination, out int bytesWritten))
             {
@@ -142,7 +140,12 @@ namespace System.Security.Cryptography
         /// <see langword="false"/> if <paramref name="destination"/> is too small to hold the
         /// calculated hash, <see langword="true"/> otherwise.
         /// </returns>
-        public static bool TryHashData(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public static bool TryHashData(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length < HmacSizeBytes)
             {
@@ -150,7 +153,12 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.MacData(HashAlgorithmNames.SHA256, key, source, destination);
+            bytesWritten = HashProviderDispenser.OneShotHashProvider.MacData(
+                HashAlgorithmNames.SHA256,
+                key,
+                source,
+                destination
+            );
             Debug.Assert(bytesWritten == HmacSizeBytes);
 
             return true;

@@ -43,7 +43,6 @@ using NUnit.Framework;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 {
-
     #region Types
     public class XmlJsonReader : JsonReader
     {
@@ -140,10 +139,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                         switch (_valueType)
                         {
                             case JTokenType.Integer:
-                                SetToken(JsonToken.Integer, Convert.ToInt64(_reader.Value, CultureInfo.InvariantCulture));
+                                SetToken(
+                                    JsonToken.Integer,
+                                    Convert.ToInt64(_reader.Value, CultureInfo.InvariantCulture)
+                                );
                                 break;
                             case JTokenType.Float:
-                                SetToken(JsonToken.Float, Convert.ToDouble(_reader.Value, CultureInfo.InvariantCulture));
+                                SetToken(
+                                    JsonToken.Float,
+                                    Convert.ToDouble(_reader.Value, CultureInfo.InvariantCulture)
+                                );
                                 break;
                             case JTokenType.String:
                             case JTokenType.Uri:
@@ -152,10 +157,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                                 SetToken(JsonToken.String, _reader.Value);
                                 break;
                             case JTokenType.Boolean:
-                                SetToken(JsonToken.Boolean, Convert.ToBoolean(_reader.Value, CultureInfo.InvariantCulture));
+                                SetToken(
+                                    JsonToken.Boolean,
+                                    Convert.ToBoolean(_reader.Value, CultureInfo.InvariantCulture)
+                                );
                                 break;
                             case JTokenType.Date:
-                                SetToken(JsonToken.Date, Convert.ToDateTime(_reader.Value, CultureInfo.InvariantCulture));
+                                SetToken(
+                                    JsonToken.Date,
+                                    Convert.ToDateTime(_reader.Value, CultureInfo.InvariantCulture)
+                                );
                                 break;
                             case JTokenType.Bytes:
                                 SetToken(JsonToken.Bytes, Convert.FromBase64String(_reader.Value));
@@ -280,7 +291,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
         public void Example()
         {
             #region Usage
-            string xml = @"<Root type=""Object"">
+            string xml =
+                @"<Root type=""Object"">
               <Null type=""Null"" />
               <String type=""String"">This is a string!</String>
               <Char type=""String"">!</Char>
@@ -310,7 +322,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 
             StringReader sr = new StringReader(xml);
 
-            using (XmlReader xmlReader = XmlReader.Create(sr, new XmlReaderSettings { IgnoreWhitespace = true }))
+            using (
+                XmlReader xmlReader = XmlReader.Create(
+                    sr,
+                    new XmlReaderSettings { IgnoreWhitespace = true }
+                )
+            )
             using (XmlJsonReader reader = new XmlJsonReader(xmlReader))
             {
                 JObject o = JObject.Load(reader);
@@ -340,7 +357,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
             }
             #endregion
 
-            using (XmlReader xmlReader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings { IgnoreWhitespace = true }))
+            using (
+                XmlReader xmlReader = XmlReader.Create(
+                    new StringReader(xml),
+                    new XmlReaderSettings { IgnoreWhitespace = true }
+                )
+            )
             using (XmlJsonReader reader = new XmlJsonReader(xmlReader))
             {
                 Assert.IsTrue(reader.Read());

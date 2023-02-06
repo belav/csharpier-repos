@@ -1,57 +1,74 @@
 using System;
 
-class t {
-
-    void a ()
+class t
+{
+    void a()
     {
         int b;
-        
-        try {
+
+        try
+        {
             b = 1;
-        } catch {
+        }
+        catch
+        {
             b = 2;
         }
     }
 
-    void b ()
+    void b()
     {
         int a;
 
-        try {
+        try
+        {
             a = 1;
-        } catch (Exception) {
+        }
+        catch (Exception)
+        {
             a = 2;
         }
     }
 
-    void c ()
+    void c()
     {
         int a;
 
-        try {
+        try
+        {
             a = 2;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             a = 0x3;
-        } catch {
+        }
+        catch
+        {
             a = 0x1;
         }
     }
 
-    void d ()
+    void d()
     {
         int a;
 
-        try {
+        try
+        {
             a = 2;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             a = 0x3;
-        } catch {
+        }
+        catch
+        {
             a = 0x1;
-        } finally {
+        }
+        finally
+        {
             a = 111;
         }
     }
-    
-    public static void Main () {}
+
+    public static void Main() { }
 }
-            

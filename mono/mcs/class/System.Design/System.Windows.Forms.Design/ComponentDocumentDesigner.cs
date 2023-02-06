@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,14 +36,17 @@ using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
-    public class ComponentDocumentDesigner : ComponentDesigner, IRootDesigner, IToolboxUser, ITypeDescriptorFilterService, IOleDragClient
+    public class ComponentDocumentDesigner
+        : ComponentDesigner,
+            IRootDesigner,
+            IToolboxUser,
+            ITypeDescriptorFilterService,
+            IOleDragClient
     {
         #region Public Instance Constructors
 
         [MonoTODO]
-        public ComponentDocumentDesigner ()
-        {
-        }
+        public ComponentDocumentDesigner() { }
 
         #endregion Public Instance Constructors
 
@@ -60,24 +63,24 @@ namespace System.Windows.Forms.Design
         }
 
         [MonoTODO]
-        object IRootDesigner.GetView (ViewTechnology technology)
+        object IRootDesigner.GetView(ViewTechnology technology)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion Implementation of IRootDesigner
 
         #region Implementation of IToolboxUser
 
-        bool IToolboxUser.GetToolSupported (ToolboxItem tool)
+        bool IToolboxUser.GetToolSupported(ToolboxItem tool)
         {
             return true;
         }
 
         [MonoTODO]
-        void IToolboxUser.ToolPicked (ToolboxItem tool)
+        void IToolboxUser.ToolPicked(ToolboxItem tool)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion Implementation of IToolboxUser
@@ -85,21 +88,27 @@ namespace System.Windows.Forms.Design
         #region Implementation of ITypeDescriptorFilterService
 
         [MonoTODO]
-        bool ITypeDescriptorFilterService.FilterAttributes (IComponent component, IDictionary attributes)
+        bool ITypeDescriptorFilterService.FilterAttributes(
+            IComponent component,
+            IDictionary attributes
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        bool ITypeDescriptorFilterService.FilterEvents (IComponent component, IDictionary events)
+        bool ITypeDescriptorFilterService.FilterEvents(IComponent component, IDictionary events)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        bool ITypeDescriptorFilterService.FilterProperties (IComponent component, IDictionary properties)
+        bool ITypeDescriptorFilterService.FilterProperties(
+            IComponent component,
+            IDictionary properties
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion Implementation of ITypeDescriptorFilterService
@@ -107,33 +116,30 @@ namespace System.Windows.Forms.Design
         #region Implementation of IOleDragClient
 
         [MonoTODO]
-        bool IOleDragClient.AddComponent (IComponent component, string name, bool firstAdd)
+        bool IOleDragClient.AddComponent(IComponent component, string name, bool firstAdd)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         bool IOleDragClient.CanModifyComponents
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         [MonoTODO]
-        Control IOleDragClient.GetControlForComponent (object component)
+        Control IOleDragClient.GetControlForComponent(object component)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        Control IOleDragClient.GetDesignerControl ()
+        Control IOleDragClient.GetDesignerControl()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        bool IOleDragClient.IsDropOk (IComponent component)
+        bool IOleDragClient.IsDropOk(IComponent component)
         {
             return true;
         }
@@ -141,10 +147,7 @@ namespace System.Windows.Forms.Design
         [MonoTODO]
         IComponent IOleDragClient.Component
         {
-            get
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         #endregion Implementation of IOleDragClient
@@ -154,50 +157,35 @@ namespace System.Windows.Forms.Design
         [MonoTODO]
         public Control Control
         {
-            get
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public bool TrayAutoArrange
         {
-            get
-            {
-                throw new NotImplementedException ();
-            }
-            set
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
         public bool TrayLargeIcon
         {
-            get
-            {
-                throw new NotImplementedException ();
-            }
-            set
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         #endregion Public Instance Properties
 
         [MonoTODO]
-        public override void Initialize (IComponent component)
+        public override void Initialize(IComponent component)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected virtual bool GetToolSupported (ToolboxItem tool)
+        protected virtual bool GetToolSupported(ToolboxItem tool)
         {
             return true;
         }
@@ -205,9 +193,9 @@ namespace System.Windows.Forms.Design
         #region Override implementation of ComponentDesigner
 
         [MonoTODO]
-        protected override void PreFilterProperties (IDictionary properties)
+        protected override void PreFilterProperties(IDictionary properties)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         #endregion Override implementation of ComponentDesigner

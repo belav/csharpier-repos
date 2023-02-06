@@ -17,10 +17,10 @@ namespace MonoTests.System.Runtime.DurableInstancing
     public class InstanceValueTest
     {
         [Test]
-        public void DeletedValue ()
+        public void DeletedValue()
         {
-            Assert.AreEqual (InstanceValue.DeletedValue, InstanceValue.DeletedValue.Value, "#1"); // eek!
-            Assert.AreEqual (InstanceValueOptions.None, InstanceValue.DeletedValue.Options, "#2");
+            Assert.AreEqual(InstanceValue.DeletedValue, InstanceValue.DeletedValue.Value, "#1"); // eek!
+            Assert.AreEqual(InstanceValueOptions.None, InstanceValue.DeletedValue.Options, "#2");
         }
     }
 }

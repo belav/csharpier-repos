@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,65 +39,74 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Evaluation
 {
-    [DebuggerDisplay ("{ItemType}={EvaluatedInclude} [{UnevaluatedInclude}] #DirectMetadata={DirectMetadataCount}")]
+    [DebuggerDisplay(
+        "{ItemType}={EvaluatedInclude} [{UnevaluatedInclude}] #DirectMetadata={DirectMetadataCount}"
+    )]
     public class ProjectItem
     {
-        internal ProjectItem (Project project, ProjectItemElement xml, string evaluatedInclude)
+        internal ProjectItem(Project project, ProjectItemElement xml, string evaluatedInclude)
         {
             this.project = project;
             this.xml = xml;
-            if (project.ItemDefinitions.ContainsKey (ItemType))
-                foreach (var md in project.ItemDefinitions [ItemType].Metadata)
-                    metadata.Add (md);
+            if (project.ItemDefinitions.ContainsKey(ItemType))
+                foreach (var md in project.ItemDefinitions[ItemType].Metadata)
+                    metadata.Add(md);
             foreach (var md in xml.Metadata)
-                metadata.Add (new ProjectMetadata (project, ItemType, metadata, m => metadata.Remove (m), md));
+                metadata.Add(
+                    new ProjectMetadata(project, ItemType, metadata, m => metadata.Remove(m), md)
+                );
             this.evaluated_include = evaluatedInclude;
-            is_imported = project.ProjectCollection.OngoingImports.Any ();            
+            is_imported = project.ProjectCollection.OngoingImports.Any();
         }
-        
+
         readonly Project project;
         readonly ProjectItemElement xml;
-        readonly List<ProjectMetadata> metadata = new List<ProjectMetadata> ();
+        readonly List<ProjectMetadata> metadata = new List<ProjectMetadata>();
         readonly bool is_imported;
         readonly string evaluated_include;
-        
+
         internal string RecursiveDir { get; set; }
 
-        public ProjectMetadata GetMetadata (string name)
+        public ProjectMetadata GetMetadata(string name)
         {
-            return metadata.FirstOrDefault (m => m.Name == name);
+            return metadata.FirstOrDefault(m => m.Name == name);
         }
 
-        public string GetMetadataValue (string name)
+        public string GetMetadataValue(string name)
         {
             if (name == null)
-                throw new ArgumentNullException ("name");
-            var wk = ProjectCollection.GetWellKnownMetadata (name, EvaluatedInclude, project.GetFullPath, RecursiveDir);
+                throw new ArgumentNullException("name");
+            var wk = ProjectCollection.GetWellKnownMetadata(
+                name,
+                EvaluatedInclude,
+                project.GetFullPath,
+                RecursiveDir
+            );
             if (wk != null)
                 return wk;
-            var m = GetMetadata (name);
+            var m = GetMetadata(name);
             return m != null ? m.EvaluatedValue : string.Empty;
         }
 
-        public bool HasMetadata (string name)
+        public bool HasMetadata(string name)
         {
-            return GetMetadata (name) != null;
+            return GetMetadata(name) != null;
         }
 
-        public bool RemoveMetadata (string name)
+        public bool RemoveMetadata(string name)
         {
-            var m = GetMetadata (name);
+            var m = GetMetadata(name);
             if (m == null)
                 return false;
-            return metadata.Remove (m);
+            return metadata.Remove(m);
         }
 
-        public void Rename (string name)
+        public void Rename(string name)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public ProjectMetadata SetMetadataValue (string name, string unevaluatedValue)
+        public ProjectMetadata SetMetadataValue(string name, string unevaluatedValue)
         {
             // This has to do several tasks:
             // - it cannot directly change Xml.Metadata because the ProjectItemElement might be shared
@@ -105,53 +114,70 @@ namespace Microsoft.Build.Evaluation
             // - hence it has to create another ProjectItemElement instance and add it to the project
             //   XML construction, with specific Include value that is assigned to this instance, and
             //   metadata values that are assigned to this instance.
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public IEnumerable<ProjectMetadata> DirectMetadata {
-            get {
-                var list = new List<ProjectMetadata> ();
+        public IEnumerable<ProjectMetadata> DirectMetadata
+        {
+            get
+            {
+                var list = new List<ProjectMetadata>();
                 foreach (var xm in xml.Metadata)
-                    yield return new ProjectMetadata (project, ItemType, list, p => list.Remove (p), xm);
+                    yield return new ProjectMetadata(
+                        project,
+                        ItemType,
+                        list,
+                        p => list.Remove(p),
+                        xm
+                    );
             }
         }
 
-        public int DirectMetadataCount {
+        public int DirectMetadataCount
+        {
             get { return xml.Metadata.Count; }
         }
 
-        public string EvaluatedInclude {
+        public string EvaluatedInclude
+        {
             get { return evaluated_include; }
         }
 
-        public bool IsImported {
+        public bool IsImported
+        {
             get { return is_imported; }
         }
 
-        public string ItemType {
+        public string ItemType
+        {
             get { return Xml.ItemType; }
             set { Xml.ItemType = value; }
         }
 
-        public ICollection<ProjectMetadata> Metadata {
+        public ICollection<ProjectMetadata> Metadata
+        {
             get { return metadata; }
         }
 
-        public int MetadataCount {
+        public int MetadataCount
+        {
             get { return metadata.Count; }
         }
 
-        public Project Project {
+        public Project Project
+        {
             get { return project; }
         }
 
-        public string UnevaluatedInclude {
+        public string UnevaluatedInclude
+        {
             get { return Xml.Include; }
             set { Xml.Include = value; }
         }
 
-        public ProjectItemElement Xml {
+        public ProjectItemElement Xml
+        {
             get { return xml; }
-        }        
+        }
     }
 }

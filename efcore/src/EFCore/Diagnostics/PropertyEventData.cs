@@ -21,7 +21,8 @@ public class PropertyEventData : EventData
     public PropertyEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
-        IReadOnlyProperty property)
+        IReadOnlyProperty property
+    )
         : base(eventDefinition, messageGenerator)
     {
         Property = property;

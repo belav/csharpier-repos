@@ -9,7 +9,7 @@ namespace System.Web.WebPages.Deployment
     internal sealed class BuildManagerWrapper : IBuildManager
     {
         /// <summary>
-        /// Reads a special cached file from %WindDir%\Microsoft.NET\Framework\vx.x\ASP.NET Temporary Files\&lt;x&gt;\&lt;y&gt;\UserCache that is 
+        /// Reads a special cached file from %WindDir%\Microsoft.NET\Framework\vx.x\ASP.NET Temporary Files\&lt;x&gt;\&lt;y&gt;\UserCache that is
         /// available across AppDomain recycles.
         /// </summary>
         public Stream ReadCachedFile(string path)
@@ -18,7 +18,7 @@ namespace System.Web.WebPages.Deployment
         }
 
         /// <summary>
-        /// Creates or opens a special cached file that is created under  %WindDir%\Microsoft.NET\Framework\vx.x\ASP.NET Temporary Files\&lt;x&gt;\&lt;y&gt;\UserCache that is 
+        /// Creates or opens a special cached file that is created under  %WindDir%\Microsoft.NET\Framework\vx.x\ASP.NET Temporary Files\&lt;x&gt;\&lt;y&gt;\UserCache that is
         /// available across AppDomain recycles.
         /// </summary>
         public Stream CreateCachedFile(string path)

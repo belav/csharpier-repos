@@ -3,38 +3,34 @@
 //
 using System;
 
-class X {
+class X
+{
     int val;
-    
-    public virtual int prop {
-        get {
-            return val;
-        }
 
-        set {
-            val = value;
-        }
+    public virtual int prop
+    {
+        get { return val; }
+        set { val = value; }
     }
 
-    public int AAA {
-        set { } 
+    public int AAA
+    {
+        set { }
     }
 }
 
-class Y : X {
+class Y : X
+{
     int val2 = 1;
-    
-    public override int prop {
-        get {
-            return val2;
-        }
 
-        set {
-            val2 = value;
-        }
+    public override int prop
+    {
+        get { return val2; }
+        set { val2 = value; }
     }
-    
-    int A () {
+
+    int A()
+    {
         if (base.prop != 0)
             return 3;
         base.prop = 10;
@@ -45,12 +41,10 @@ class Y : X {
         return 0;
     }
 
-
-    public static int Main ()
+    public static int Main()
     {
-        Y y = new Y ();
+        Y y = new Y();
 
-        return y.A ();
+        return y.A();
     }
-    
 }

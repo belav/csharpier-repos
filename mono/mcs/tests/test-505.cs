@@ -1,19 +1,26 @@
-class T {
+class T
+{
     public static int i;
-    static int f ()
+
+    static int f()
     {
-        try {
-        } finally {
-            throw new System.Exception ("...");
+        try { }
+        finally
+        {
+            throw new System.Exception("...");
         }
     }
-    public static void Main ()
+
+    public static void Main()
     {
-        try {
-            i = f ();
-        } catch {
+        try
+        {
+            i = f();
+        }
+        catch
+        {
             return;
         }
-        throw new System.Exception ("error");
+        throw new System.Exception("error");
     }
 }

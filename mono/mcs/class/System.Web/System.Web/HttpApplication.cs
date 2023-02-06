@@ -1,5 +1,5 @@
 //
-// System.Web.HttpApplication.cs 
+// System.Web.HttpApplication.cs
 //
 // Author:
 //    Miguel de Icaza (miguel@novell.com)
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,12 +29,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 // The Application Processing Pipeline.
-// 
+//
 //     The Http application pipeline implemented in this file is a
 //     beautiful thing.  The application pipeline invokes a number of
 //     hooks at various stages of the processing of a request.  These
 //     hooks can be either synchronous or can be asynchronous.
-//     
+//
 //     The pipeline must ensure that every step is completed before
 //     moving to the next step.  A trivial thing for synchronous
 //     hooks, but asynchronous hooks introduce an extra layer of
@@ -54,7 +54,7 @@
 //     variables.  These are used in the case that an async hook
 //     completes synchronously as its important to not yield in that
 //     case or we would hang.
-//    
+//
 //     Many of Mono modules used to be declared async, but they would
 //     actually be completely synchronous, this might resurface in the
 //     future with other modules.
@@ -83,27 +83,35 @@ using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.Util;
 
-    
 namespace System.Web
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
     [ToolboxItem(false)]
     public class HttpApplication : IHttpAsyncHandler, IHttpHandler, IComponent, IDisposable
     {
-        static readonly object disposedEvent = new object ();
-        static readonly object errorEvent = new object ();
-        
+        static readonly object disposedEvent = new object();
+        static readonly object errorEvent = new object();
+
         // we do this static rather than per HttpApplication because
         // mono's perfcounters use the counter instance parameter for
         // the process to access shared memory.
-        internal static PerformanceCounter requests_total_counter = new PerformanceCounter ("ASP.NET", "Requests Total");
-        
-        internal static readonly string [] BinDirs = {"Bin", "bin"};
+        internal static PerformanceCounter requests_total_counter = new PerformanceCounter(
+            "ASP.NET",
+            "Requests Total"
+        );
+
+        internal static readonly string[] BinDirs = { "Bin", "bin" };
         object this_lock = new object();
-        
+
         HttpContext context;
         HttpSessionState session;
         ISite isite;
@@ -124,7 +132,7 @@ namespace System.Web
         //
         bool autoCulture;
         bool autoUICulture;
-        
+
         //
         // Whether the pipeline should be stopped
         //
@@ -134,7 +142,7 @@ namespace System.Web
         // See https://bugzilla.novell.com/show_bug.cgi?id=381971
         //
         bool in_application_start;
-        
+
         //
         // The Pipeline
         //
@@ -150,8 +158,8 @@ namespace System.Web
         AsyncInvoker current_ai;
 
         EventHandlerList events;
-        EventHandlerList nonApplicationEvents = new EventHandlerList ();
-        
+        EventHandlerList nonApplicationEvents = new EventHandlerList();
+
         // Culture and IPrincipal
         CultureInfo app_culture;
         CultureInfo appui_culture;
@@ -160,12 +168,12 @@ namespace System.Web
         IPrincipal prev_user;
 
         static string binDirectory;
-        
+
         static volatile Exception initialization_exception;
         bool removeConfigurationFromCache;
         bool fullInitComplete = false;
-        
-        static DynamicModuleManager dynamicModuleManeger = new DynamicModuleManager ();
+
+        static DynamicModuleManager dynamicModuleManeger = new DynamicModuleManager();
 
         //
         // These are used to detect the case where the EndXXX method is invoked
@@ -175,22 +183,24 @@ namespace System.Web
         bool must_yield;
         bool in_begin;
 
-        public virtual event EventHandler Disposed {
-            add { nonApplicationEvents.AddHandler (disposedEvent, value); }
-            remove { nonApplicationEvents.RemoveHandler (disposedEvent, value); }
-        }
-        
-        public virtual event EventHandler Error {
-            add { nonApplicationEvents.AddHandler (errorEvent, value); }
-            remove { nonApplicationEvents.RemoveHandler (errorEvent, value); }
+        public virtual event EventHandler Disposed
+        {
+            add { nonApplicationEvents.AddHandler(disposedEvent, value); }
+            remove { nonApplicationEvents.RemoveHandler(disposedEvent, value); }
         }
 
-        public HttpApplication ()
+        public virtual event EventHandler Error
         {
-            done = new ManualResetEvent (false);
+            add { nonApplicationEvents.AddHandler(errorEvent, value); }
+            remove { nonApplicationEvents.RemoveHandler(errorEvent, value); }
         }
-        
-        internal void InitOnce (bool full_init)
+
+        public HttpApplication()
+        {
+            done = new ManualResetEvent(false);
+        }
+
+        internal void InitOnce(bool full_init)
         {
             if (initialization_exception != null)
                 return;
@@ -198,7 +208,8 @@ namespace System.Web
             if (modcoll != null)
                 return;
 
-            lock (this_lock) {
+            lock (this_lock)
+            {
                 if (initialization_exception != null)
                     return;
 
@@ -206,128 +217,169 @@ namespace System.Web
                     return;
 
                 bool mustNullContext = context == null;
-                try {
+                try
+                {
                     HttpModulesSection modules;
-                    modules = (HttpModulesSection) WebConfigurationManager.GetWebApplicationSection ("system.web/httpModules");
+                    modules = (HttpModulesSection)
+                        WebConfigurationManager.GetWebApplicationSection("system.web/httpModules");
                     HttpContext saved = HttpContext.Current;
-                    HttpContext.Current = new HttpContext (new System.Web.Hosting.SimpleWorkerRequest (String.Empty, String.Empty, new StringWriter()));
+                    HttpContext.Current = new HttpContext(
+                        new System.Web.Hosting.SimpleWorkerRequest(
+                            String.Empty,
+                            String.Empty,
+                            new StringWriter()
+                        )
+                    );
                     if (context == null)
                         context = HttpContext.Current;
-                    HttpModuleCollection coll = modules.LoadModules (this);
+                    HttpModuleCollection coll = modules.LoadModules(this);
 
-                    HttpModuleCollection dynMods = CreateDynamicModules ();
+                    HttpModuleCollection dynMods = CreateDynamicModules();
 
-                    for (int i = 0; i < dynMods.Count; i++) {
-                        coll.AddModule (dynMods.GetKey (i), dynMods.Get (i));
+                    for (int i = 0; i < dynMods.Count; i++)
+                    {
+                        coll.AddModule(dynMods.GetKey(i), dynMods.Get(i));
                     }
 
-                    Interlocked.CompareExchange (ref modcoll, coll, null);
+                    Interlocked.CompareExchange(ref modcoll, coll, null);
                     HttpContext.Current = saved;
 
-                    if (full_init) {
-                        HttpApplicationFactory.AttachEvents (this);
-                        Init ();
+                    if (full_init)
+                    {
+                        HttpApplicationFactory.AttachEvents(this);
+                        Init();
                         fullInitComplete = true;
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     initialization_exception = e;
-                    Console.Error.WriteLine("Exception while initOnce: "+e.ToString());
+                    Console.Error.WriteLine("Exception while initOnce: " + e.ToString());
                     // Once initialization_exception != null, we always respond with this exception
                     // You have to restart the HttpApplication to "unlock" it
                     Console.Error.WriteLine("Please restart your app to unlock it");
-                } finally {
+                }
+                finally
+                {
                     if (mustNullContext)
                         context = null;
                 }
             }
         }
 
-        internal bool InApplicationStart {
+        internal bool InApplicationStart
+        {
             get { return in_application_start; }
             set { in_application_start = value; }
         }
-        
-        internal string AssemblyLocation {
-            get {
+
+        internal string AssemblyLocation
+        {
+            get
+            {
                 if (assemblyLocation == null)
-                    assemblyLocation = GetType ().Assembly.Location;
+                    assemblyLocation = GetType().Assembly.Location;
                 return assemblyLocation;
             }
         }
 
-        internal static Exception InitializationException {
+        internal static Exception InitializationException
+        {
             get { return initialization_exception; }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public HttpApplicationState Application {
-            get {
-                return HttpApplicationFactory.ApplicationState;
-            }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpApplicationState Application
+        {
+            get { return HttpApplicationFactory.ApplicationState; }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public HttpContext Context {
-            get {
-                return context;
-            }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpContext Context
+        {
+            get { return context; }
         }
-                     
-        protected EventHandlerList Events {
-            get {
+
+        protected EventHandlerList Events
+        {
+            get
+            {
                 if (events == null)
-                    events = new EventHandlerList ();
+                    events = new EventHandlerList();
 
                 return events;
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public HttpModuleCollection Modules {
-            [AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.High)]
-            get {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpModuleCollection Modules
+        {
+            [AspNetHostingPermission(
+                SecurityAction.Demand,
+                Level = AspNetHostingPermissionLevel.High
+            )]
+            get
+            {
                 if (modcoll == null)
-                    modcoll = new HttpModuleCollection ();
-                
+                    modcoll = new HttpModuleCollection();
+
                 return modcoll;
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public HttpRequest Request {
-            get {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpRequest Request
+        {
+            get
+            {
                 if (context == null)
-                    throw HttpException.NewWithCode (Locale.GetText ("No context is available."), WebEventCodes.RuntimeErrorRequestAbort);
+                    throw HttpException.NewWithCode(
+                        Locale.GetText("No context is available."),
+                        WebEventCodes.RuntimeErrorRequestAbort
+                    );
 
                 if (false == HttpApplicationFactory.ContextAvailable)
-                    throw HttpException.NewWithCode (Locale.GetText ("Request is not available in this context."), WebEventCodes.RuntimeErrorRequestAbort);
+                    throw HttpException.NewWithCode(
+                        Locale.GetText("Request is not available in this context."),
+                        WebEventCodes.RuntimeErrorRequestAbort
+                    );
 
                 return context.Request;
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public HttpResponse Response {
-            get {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpResponse Response
+        {
+            get
+            {
                 if (context == null)
-                    throw HttpException.NewWithCode (Locale.GetText ("No context is available."), WebEventCodes.RuntimeErrorRequestAbort);
+                    throw HttpException.NewWithCode(
+                        Locale.GetText("No context is available."),
+                        WebEventCodes.RuntimeErrorRequestAbort
+                    );
 
                 if (false == HttpApplicationFactory.ContextAvailable)
-                    throw HttpException.NewWithCode (Locale.GetText ("Response is not available in this context."), WebEventCodes.RuntimeErrorRequestAbort);
+                    throw HttpException.NewWithCode(
+                        Locale.GetText("Response is not available in this context."),
+                        WebEventCodes.RuntimeErrorRequestAbort
+                    );
 
                 return context.Response;
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public HttpServerUtility Server {
-            get {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpServerUtility Server
+        {
+            get
+            {
                 if (context != null)
                     return context.Server;
 
@@ -335,685 +387,825 @@ namespace System.Web
                 // This is so we can get the Server and call a few methods
                 // which are not context sensitive, see HttpServerUtilityTest
                 //
-                return new HttpServerUtility ((HttpContext) null);
+                return new HttpServerUtility((HttpContext)null);
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public HttpSessionState Session {
-            get {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpSessionState Session
+        {
+            get
+            {
                 // Only used for Session_End
                 if (session != null)
                     return session;
 
                 if (context == null)
-                    throw HttpException.NewWithCode (Locale.GetText ("No context is available."), WebEventCodes.RuntimeErrorRequestAbort);
+                    throw HttpException.NewWithCode(
+                        Locale.GetText("No context is available."),
+                        WebEventCodes.RuntimeErrorRequestAbort
+                    );
 
                 HttpSessionState ret = context.Session;
                 if (ret == null)
-                    throw HttpException.NewWithCode (Locale.GetText ("Session state is not available in the context."), WebEventCodes.RuntimeErrorRequestAbort);
-                
+                    throw HttpException.NewWithCode(
+                        Locale.GetText("Session state is not available in the context."),
+                        WebEventCodes.RuntimeErrorRequestAbort
+                    );
+
                 return ret;
             }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public ISite Site {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public ISite Site
+        {
             get { return isite; }
-
             set { isite = value; }
         }
 
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        public IPrincipal User {
-            get {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IPrincipal User
+        {
+            get
+            {
                 if (context == null)
-                    throw new HttpException (Locale.GetText ("No context is available."));
+                    throw new HttpException(Locale.GetText("No context is available."));
                 if (context.User == null)
-                    throw new HttpException (Locale.GetText ("No currently authenticated user."));
-                
+                    throw new HttpException(Locale.GetText("No currently authenticated user."));
+
                 return context.User;
             }
         }
-        
-        static object PreSendRequestHeadersEvent = new object ();
+
+        static object PreSendRequestHeadersEvent = new object();
         public event EventHandler PreSendRequestHeaders
         {
-            add { AddEventHandler (PreSendRequestHeadersEvent, value); }
-            remove { RemoveEventHandler (PreSendRequestHeadersEvent, value); }
-        }
-        
-        internal void TriggerPreSendRequestHeaders ()
-        {
-            EventHandler handler = Events [PreSendRequestHeadersEvent] as EventHandler;
-            if (handler != null)
-                handler (this, EventArgs.Empty);
+            add { AddEventHandler(PreSendRequestHeadersEvent, value); }
+            remove { RemoveEventHandler(PreSendRequestHeadersEvent, value); }
         }
 
-        static object PreSendRequestContentEvent = new object ();
+        internal void TriggerPreSendRequestHeaders()
+        {
+            EventHandler handler = Events[PreSendRequestHeadersEvent] as EventHandler;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        static object PreSendRequestContentEvent = new object();
         public event EventHandler PreSendRequestContent
         {
-            add { AddEventHandler (PreSendRequestContentEvent, value); }
-            remove { RemoveEventHandler (PreSendRequestContentEvent, value); }
-        }
-        
-        internal void TriggerPreSendRequestContent ()
-        {
-            EventHandler handler = Events [PreSendRequestContentEvent] as EventHandler;
-            if (handler != null)
-                handler (this, EventArgs.Empty);
+            add { AddEventHandler(PreSendRequestContentEvent, value); }
+            remove { RemoveEventHandler(PreSendRequestContentEvent, value); }
         }
 
-        static object AcquireRequestStateEvent = new object ();
+        internal void TriggerPreSendRequestContent()
+        {
+            EventHandler handler = Events[PreSendRequestContentEvent] as EventHandler;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        static object AcquireRequestStateEvent = new object();
         public event EventHandler AcquireRequestState
         {
-            add { AddEventHandler (AcquireRequestStateEvent, value); }
-            remove { RemoveEventHandler (AcquireRequestStateEvent, value); }
-        }
-        
-        public void AddOnAcquireRequestStateAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (bh, eh, this);
-            AcquireRequestState += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(AcquireRequestStateEvent, value); }
+            remove { RemoveEventHandler(AcquireRequestStateEvent, value); }
         }
 
-        static object AuthenticateRequestEvent = new object ();
+        public void AddOnAcquireRequestStateAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AsyncInvoker invoker = new AsyncInvoker(bh, eh, this);
+            AcquireRequestState += new EventHandler(invoker.Invoke);
+        }
+
+        static object AuthenticateRequestEvent = new object();
         public event EventHandler AuthenticateRequest
         {
-            add { AddEventHandler (AuthenticateRequestEvent, value); }
-            remove { RemoveEventHandler (AuthenticateRequestEvent, value); }
-        }
-        
-        public void AddOnAuthenticateRequestAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (bh, eh, this);
-            AuthenticateRequest += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(AuthenticateRequestEvent, value); }
+            remove { RemoveEventHandler(AuthenticateRequestEvent, value); }
         }
 
-        static object AuthorizeRequestEvent = new object ();
+        public void AddOnAuthenticateRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AsyncInvoker invoker = new AsyncInvoker(bh, eh, this);
+            AuthenticateRequest += new EventHandler(invoker.Invoke);
+        }
+
+        static object AuthorizeRequestEvent = new object();
         public event EventHandler AuthorizeRequest
         {
-            add { AddEventHandler (AuthorizeRequestEvent, value); }
-            remove { RemoveEventHandler (AuthorizeRequestEvent, value); }
-        }
-        
-        public void AddOnAuthorizeRequestAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (bh, eh, this);
-            AuthorizeRequest += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(AuthorizeRequestEvent, value); }
+            remove { RemoveEventHandler(AuthorizeRequestEvent, value); }
         }
 
-        static object BeginRequestEvent = new object ();
-        public event EventHandler BeginRequest        
+        public void AddOnAuthorizeRequestAsync(BeginEventHandler bh, EndEventHandler eh)
         {
-            add {
+            AsyncInvoker invoker = new AsyncInvoker(bh, eh, this);
+            AuthorizeRequest += new EventHandler(invoker.Invoke);
+        }
+
+        static object BeginRequestEvent = new object();
+        public event EventHandler BeginRequest
+        {
+            add
+            {
                 // See https://bugzilla.novell.com/show_bug.cgi?id=381971
                 if (InApplicationStart)
                     return;
-                AddEventHandler (BeginRequestEvent, value);
+                AddEventHandler(BeginRequestEvent, value);
             }
-            remove {
+            remove
+            {
                 if (InApplicationStart)
                     return;
-                RemoveEventHandler (BeginRequestEvent, value);
+                RemoveEventHandler(BeginRequestEvent, value);
             }
         }
-        
-        public void AddOnBeginRequestAsync (BeginEventHandler bh, EndEventHandler eh)
+
+        public void AddOnBeginRequestAsync(BeginEventHandler bh, EndEventHandler eh)
         {
-            AsyncInvoker invoker = new AsyncInvoker (bh, eh, this);
-            BeginRequest += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(bh, eh, this);
+            BeginRequest += new EventHandler(invoker.Invoke);
         }
 
-        static object EndRequestEvent = new object ();
+        static object EndRequestEvent = new object();
         public event EventHandler EndRequest
         {
-            add {
+            add
+            {
                 // See https://bugzilla.novell.com/show_bug.cgi?id=381971
                 if (InApplicationStart)
                     return;
-                AddEventHandler (EndRequestEvent, value);
+                AddEventHandler(EndRequestEvent, value);
             }
-            remove {
+            remove
+            {
                 if (InApplicationStart)
                     return;
-                RemoveEventHandler (EndRequestEvent, value);
+                RemoveEventHandler(EndRequestEvent, value);
             }
         }
-        
-        public void AddOnEndRequestAsync (BeginEventHandler bh, EndEventHandler eh)
+
+        public void AddOnEndRequestAsync(BeginEventHandler bh, EndEventHandler eh)
         {
-            AsyncInvoker invoker = new AsyncInvoker (bh, eh, this);
-            EndRequest += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(bh, eh, this);
+            EndRequest += new EventHandler(invoker.Invoke);
         }
 
-        static object PostRequestHandlerExecuteEvent = new object ();
+        static object PostRequestHandlerExecuteEvent = new object();
         public event EventHandler PostRequestHandlerExecute
         {
-            add { AddEventHandler (PostRequestHandlerExecuteEvent, value); }
-            remove { RemoveEventHandler (PostRequestHandlerExecuteEvent, value); }
-        }
-        
-        public void AddOnPostRequestHandlerExecuteAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (bh, eh, this);
-            PostRequestHandlerExecute += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(PostRequestHandlerExecuteEvent, value); }
+            remove { RemoveEventHandler(PostRequestHandlerExecuteEvent, value); }
         }
 
-        static object PreRequestHandlerExecuteEvent = new object ();
+        public void AddOnPostRequestHandlerExecuteAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AsyncInvoker invoker = new AsyncInvoker(bh, eh, this);
+            PostRequestHandlerExecute += new EventHandler(invoker.Invoke);
+        }
+
+        static object PreRequestHandlerExecuteEvent = new object();
         public event EventHandler PreRequestHandlerExecute
         {
-            add { AddEventHandler (PreRequestHandlerExecuteEvent, value); }
-            remove { RemoveEventHandler (PreRequestHandlerExecuteEvent, value); }
-        }
-        
-        public void AddOnPreRequestHandlerExecuteAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (bh, eh, this);
-            PreRequestHandlerExecute += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(PreRequestHandlerExecuteEvent, value); }
+            remove { RemoveEventHandler(PreRequestHandlerExecuteEvent, value); }
         }
 
-        static object ReleaseRequestStateEvent = new object ();
+        public void AddOnPreRequestHandlerExecuteAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AsyncInvoker invoker = new AsyncInvoker(bh, eh, this);
+            PreRequestHandlerExecute += new EventHandler(invoker.Invoke);
+        }
+
+        static object ReleaseRequestStateEvent = new object();
         public event EventHandler ReleaseRequestState
         {
-            add { AddEventHandler (ReleaseRequestStateEvent, value); }
-            remove { RemoveEventHandler (ReleaseRequestStateEvent, value); }
-        }
-        
-        public void AddOnReleaseRequestStateAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (bh, eh, this);
-            ReleaseRequestState += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(ReleaseRequestStateEvent, value); }
+            remove { RemoveEventHandler(ReleaseRequestStateEvent, value); }
         }
 
-        static object ResolveRequestCacheEvent = new object ();
+        public void AddOnReleaseRequestStateAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AsyncInvoker invoker = new AsyncInvoker(bh, eh, this);
+            ReleaseRequestState += new EventHandler(invoker.Invoke);
+        }
+
+        static object ResolveRequestCacheEvent = new object();
         public event EventHandler ResolveRequestCache
         {
-            add { AddEventHandler (ResolveRequestCacheEvent, value); }
-            remove { RemoveEventHandler (ResolveRequestCacheEvent, value); }
-        }
-        
-        public void AddOnResolveRequestCacheAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (bh, eh, this);
-            ResolveRequestCache += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(ResolveRequestCacheEvent, value); }
+            remove { RemoveEventHandler(ResolveRequestCacheEvent, value); }
         }
 
-        static object UpdateRequestCacheEvent = new object ();
+        public void AddOnResolveRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AsyncInvoker invoker = new AsyncInvoker(bh, eh, this);
+            ResolveRequestCache += new EventHandler(invoker.Invoke);
+        }
+
+        static object UpdateRequestCacheEvent = new object();
         public event EventHandler UpdateRequestCache
         {
-            add { AddEventHandler (UpdateRequestCacheEvent, value); }
-            remove { RemoveEventHandler (UpdateRequestCacheEvent, value); }
-        }
-        
-        public void AddOnUpdateRequestCacheAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (bh, eh, this);
-            UpdateRequestCache += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(UpdateRequestCacheEvent, value); }
+            remove { RemoveEventHandler(UpdateRequestCacheEvent, value); }
         }
 
-        static object PostAuthenticateRequestEvent = new object ();
+        public void AddOnUpdateRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AsyncInvoker invoker = new AsyncInvoker(bh, eh, this);
+            UpdateRequestCache += new EventHandler(invoker.Invoke);
+        }
+
+        static object PostAuthenticateRequestEvent = new object();
         public event EventHandler PostAuthenticateRequest
         {
-            add { AddEventHandler (PostAuthenticateRequestEvent, value); }
-            remove { RemoveEventHandler (PostAuthenticateRequestEvent, value); }
-        }
-        
-        public void AddOnPostAuthenticateRequestAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AddOnPostAuthenticateRequestAsync (bh, eh, null);
-        }
-            
-        public void AddOnPostAuthenticateRequestAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            PostAuthenticateRequest += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(PostAuthenticateRequestEvent, value); }
+            remove { RemoveEventHandler(PostAuthenticateRequestEvent, value); }
         }
 
-        static object PostAuthorizeRequestEvent = new object ();
+        public void AddOnPostAuthenticateRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AddOnPostAuthenticateRequestAsync(bh, eh, null);
+        }
+
+        public void AddOnPostAuthenticateRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
+        {
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            PostAuthenticateRequest += new EventHandler(invoker.Invoke);
+        }
+
+        static object PostAuthorizeRequestEvent = new object();
         public event EventHandler PostAuthorizeRequest
         {
-            add { AddEventHandler (PostAuthorizeRequestEvent, value); }
-            remove { RemoveEventHandler (PostAuthorizeRequestEvent, value); }
+            add { AddEventHandler(PostAuthorizeRequestEvent, value); }
+            remove { RemoveEventHandler(PostAuthorizeRequestEvent, value); }
         }
-        
-        public void AddOnPostAuthorizeRequestAsync (BeginEventHandler bh, EndEventHandler eh)
+
+        public void AddOnPostAuthorizeRequestAsync(BeginEventHandler bh, EndEventHandler eh)
         {
-            AddOnPostAuthorizeRequestAsync (bh, eh, null);
+            AddOnPostAuthorizeRequestAsync(bh, eh, null);
         }
-        
-        public void AddOnPostAuthorizeRequestAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+
+        public void AddOnPostAuthorizeRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            PostAuthorizeRequest += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            PostAuthorizeRequest += new EventHandler(invoker.Invoke);
         }
-        
-        static object PostResolveRequestCacheEvent = new object ();
+
+        static object PostResolveRequestCacheEvent = new object();
         public event EventHandler PostResolveRequestCache
         {
-            add { AddEventHandler (PostResolveRequestCacheEvent, value); }
-            remove { RemoveEventHandler (PostResolveRequestCacheEvent, value); }
-        }
-        
-        public void AddOnPostResolveRequestCacheAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AddOnPostResolveRequestCacheAsync (bh, eh, null);
-        }
-        
-        public void AddOnPostResolveRequestCacheAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            PostResolveRequestCache += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(PostResolveRequestCacheEvent, value); }
+            remove { RemoveEventHandler(PostResolveRequestCacheEvent, value); }
         }
 
-        static object PostMapRequestHandlerEvent = new object ();
+        public void AddOnPostResolveRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AddOnPostResolveRequestCacheAsync(bh, eh, null);
+        }
+
+        public void AddOnPostResolveRequestCacheAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
+        {
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            PostResolveRequestCache += new EventHandler(invoker.Invoke);
+        }
+
+        static object PostMapRequestHandlerEvent = new object();
         public event EventHandler PostMapRequestHandler
         {
-            add { AddEventHandler (PostMapRequestHandlerEvent, value); }
-            remove { RemoveEventHandler (PostMapRequestHandlerEvent, value); }
-        }
-        
-        public void AddOnPostMapRequestHandlerAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AddOnPostMapRequestHandlerAsync (bh, eh, null);
-        }
-        
-        public void AddOnPostMapRequestHandlerAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            PostMapRequestHandler += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(PostMapRequestHandlerEvent, value); }
+            remove { RemoveEventHandler(PostMapRequestHandlerEvent, value); }
         }
 
-        static object PostAcquireRequestStateEvent = new object ();
+        public void AddOnPostMapRequestHandlerAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AddOnPostMapRequestHandlerAsync(bh, eh, null);
+        }
+
+        public void AddOnPostMapRequestHandlerAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
+        {
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            PostMapRequestHandler += new EventHandler(invoker.Invoke);
+        }
+
+        static object PostAcquireRequestStateEvent = new object();
         public event EventHandler PostAcquireRequestState
         {
-            add { AddEventHandler (PostAcquireRequestStateEvent, value); }
-            remove { RemoveEventHandler (PostAcquireRequestStateEvent, value); }
-        }
-        
-        public void AddOnPostAcquireRequestStateAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AddOnPostAcquireRequestStateAsync (bh, eh, null);
-        }
-        
-        public void AddOnPostAcquireRequestStateAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            PostAcquireRequestState += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(PostAcquireRequestStateEvent, value); }
+            remove { RemoveEventHandler(PostAcquireRequestStateEvent, value); }
         }
 
-        static object PostReleaseRequestStateEvent = new object ();
+        public void AddOnPostAcquireRequestStateAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AddOnPostAcquireRequestStateAsync(bh, eh, null);
+        }
+
+        public void AddOnPostAcquireRequestStateAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
+        {
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            PostAcquireRequestState += new EventHandler(invoker.Invoke);
+        }
+
+        static object PostReleaseRequestStateEvent = new object();
         public event EventHandler PostReleaseRequestState
         {
-            add { AddEventHandler (PostReleaseRequestStateEvent, value); }
-            remove { RemoveEventHandler (PostReleaseRequestStateEvent, value); }
-        }
-        
-        public void AddOnPostReleaseRequestStateAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AddOnPostReleaseRequestStateAsync (bh, eh, null);
-        }
-        
-        public void AddOnPostReleaseRequestStateAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            PostReleaseRequestState += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(PostReleaseRequestStateEvent, value); }
+            remove { RemoveEventHandler(PostReleaseRequestStateEvent, value); }
         }
 
-        static object PostUpdateRequestCacheEvent = new object ();
+        public void AddOnPostReleaseRequestStateAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AddOnPostReleaseRequestStateAsync(bh, eh, null);
+        }
+
+        public void AddOnPostReleaseRequestStateAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
+        {
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            PostReleaseRequestState += new EventHandler(invoker.Invoke);
+        }
+
+        static object PostUpdateRequestCacheEvent = new object();
         public event EventHandler PostUpdateRequestCache
         {
-            add { AddEventHandler (PostUpdateRequestCacheEvent, value); }
-            remove { RemoveEventHandler (PostUpdateRequestCacheEvent, value); }
+            add { AddEventHandler(PostUpdateRequestCacheEvent, value); }
+            remove { RemoveEventHandler(PostUpdateRequestCacheEvent, value); }
         }
-        
-        public void AddOnPostUpdateRequestCacheAsync (BeginEventHandler bh, EndEventHandler eh)
+
+        public void AddOnPostUpdateRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh)
         {
-            AddOnPostUpdateRequestCacheAsync (bh, eh, null);
+            AddOnPostUpdateRequestCacheAsync(bh, eh, null);
         }
-        
-        public void AddOnPostUpdateRequestCacheAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+
+        public void AddOnPostUpdateRequestCacheAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            PostUpdateRequestCache += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            PostUpdateRequestCache += new EventHandler(invoker.Invoke);
         }
 
         //
         // The new overloads that take a data parameter
         //
-        public void AddOnAcquireRequestStateAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnAcquireRequestStateAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            AcquireRequestState += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            AcquireRequestState += new EventHandler(invoker.Invoke);
         }
 
-        public void AddOnAuthenticateRequestAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnAuthenticateRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            AuthenticateRequest += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            AuthenticateRequest += new EventHandler(invoker.Invoke);
         }
 
-        public void AddOnAuthorizeRequestAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnAuthorizeRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            AuthorizeRequest += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            AuthorizeRequest += new EventHandler(invoker.Invoke);
         }
 
-        public void AddOnBeginRequestAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnBeginRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            BeginRequest += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            BeginRequest += new EventHandler(invoker.Invoke);
         }
 
-        public void AddOnEndRequestAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnEndRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            EndRequest += new EventHandler (invoker.Invoke);
-        }
-        
-            public void AddOnPostRequestHandlerExecuteAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            PostRequestHandlerExecute += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            EndRequest += new EventHandler(invoker.Invoke);
         }
 
-            public void AddOnPreRequestHandlerExecuteAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnPostRequestHandlerExecuteAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            PreRequestHandlerExecute += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            PostRequestHandlerExecute += new EventHandler(invoker.Invoke);
         }
 
-        public void AddOnReleaseRequestStateAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnPreRequestHandlerExecuteAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            ReleaseRequestState += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            PreRequestHandlerExecute += new EventHandler(invoker.Invoke);
         }
 
-        public void AddOnResolveRequestCacheAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnReleaseRequestStateAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            ResolveRequestCache += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            ReleaseRequestState += new EventHandler(invoker.Invoke);
         }
 
-        public void AddOnUpdateRequestCacheAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnResolveRequestCacheAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            UpdateRequestCache += new EventHandler (invoker.Invoke);
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            ResolveRequestCache += new EventHandler(invoker.Invoke);
+        }
+
+        public void AddOnUpdateRequestCacheAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
+        {
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            UpdateRequestCache += new EventHandler(invoker.Invoke);
         }
 
         // Added in 2.0 SP1
         // They are for use with the IIS7 integrated mode, but have been added for
         // compatibility
-        static object LogRequestEvent = new object ();
+        static object LogRequestEvent = new object();
         public event EventHandler LogRequest
         {
-            add { AddEventHandler (LogRequestEvent, value); }
-            remove { RemoveEventHandler (LogRequestEvent, value); }
-        }
-        
-        public void AddOnLogRequestAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AddOnLogRequestAsync (bh, eh, null);
-        }
-        
-        public void AddOnLogRequestAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
-        {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            LogRequest += new EventHandler (invoker.Invoke);
+            add { AddEventHandler(LogRequestEvent, value); }
+            remove { RemoveEventHandler(LogRequestEvent, value); }
         }
 
-        static object MapRequestHandlerEvent = new object ();
+        public void AddOnLogRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            AddOnLogRequestAsync(bh, eh, null);
+        }
+
+        public void AddOnLogRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
+        {
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            LogRequest += new EventHandler(invoker.Invoke);
+        }
+
+        static object MapRequestHandlerEvent = new object();
         public event EventHandler MapRequestHandler
         {
-            add { AddEventHandler (MapRequestHandlerEvent, value); }
-            remove { RemoveEventHandler (MapRequestHandlerEvent, value); }
-        }
-        
-        public void AddOnMapRequestHandlerAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AddOnMapRequestHandlerAsync (bh, eh, null);
+            add { AddEventHandler(MapRequestHandlerEvent, value); }
+            remove { RemoveEventHandler(MapRequestHandlerEvent, value); }
         }
 
-        public void AddOnMapRequestHandlerAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnMapRequestHandlerAsync(BeginEventHandler bh, EndEventHandler eh)
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            MapRequestHandler += new EventHandler (invoker.Invoke);
+            AddOnMapRequestHandlerAsync(bh, eh, null);
         }
 
-        static object PostLogRequestEvent = new object ();
+        public void AddOnMapRequestHandlerAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
+        {
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            MapRequestHandler += new EventHandler(invoker.Invoke);
+        }
+
+        static object PostLogRequestEvent = new object();
         public event EventHandler PostLogRequest
         {
-            add { AddEventHandler (PostLogRequestEvent, value); }
-            remove { RemoveEventHandler (PostLogRequestEvent, value); }
-        }
-        
-        public void AddOnPostLogRequestAsync (BeginEventHandler bh, EndEventHandler eh)
-        {
-            AddOnPostLogRequestAsync (bh, eh, null);
+            add { AddEventHandler(PostLogRequestEvent, value); }
+            remove { RemoveEventHandler(PostLogRequestEvent, value); }
         }
 
-        public void AddOnPostLogRequestAsync (BeginEventHandler beginHandler, EndEventHandler endHandler, object state)
+        public void AddOnPostLogRequestAsync(BeginEventHandler bh, EndEventHandler eh)
         {
-            AsyncInvoker invoker = new AsyncInvoker (beginHandler, endHandler, this, state);
-            PostLogRequest += new EventHandler (invoker.Invoke);
+            AddOnPostLogRequestAsync(bh, eh, null);
         }
-        
+
+        public void AddOnPostLogRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state
+        )
+        {
+            AsyncInvoker invoker = new AsyncInvoker(beginHandler, endHandler, this, state);
+            PostLogRequest += new EventHandler(invoker.Invoke);
+        }
+
         internal event EventHandler DefaultAuthentication;
 
-        void AddEventHandler (object key, EventHandler handler)
+        void AddEventHandler(object key, EventHandler handler)
         {
             if (fullInitComplete)
                 return;
 
-            Events.AddHandler (key, handler);
+            Events.AddHandler(key, handler);
         }
 
-        void RemoveEventHandler (object key, EventHandler handler)
+        void RemoveEventHandler(object key, EventHandler handler)
         {
             if (fullInitComplete)
                 return;
 
-            Events.RemoveHandler (key, handler);
+            Events.RemoveHandler(key, handler);
         }
-        
+
         //
         // Bypass all the event on the Http pipeline and go directly to EndRequest
         //
-        public void CompleteRequest ()
+        public void CompleteRequest()
         {
             stop_processing = true;
         }
 
-        internal bool RequestCompleted {
+        internal bool RequestCompleted
+        {
             set { stop_processing = value; }
         }
 
-        internal void DisposeInternal ()
+        internal void DisposeInternal()
         {
-            Dispose ();
-            HttpModuleCollection coll = new HttpModuleCollection ();
-            Interlocked.Exchange (ref modcoll, coll);
-            if (coll != null) {
-                for (int i = coll.Count - 1; i >= 0; i--) {
-                    coll.Get (i).Dispose ();
+            Dispose();
+            HttpModuleCollection coll = new HttpModuleCollection();
+            Interlocked.Exchange(ref modcoll, coll);
+            if (coll != null)
+            {
+                for (int i = coll.Count - 1; i >= 0; i--)
+                {
+                    coll.Get(i).Dispose();
                 }
                 coll = null;
             }
 
-            EventHandler eh = nonApplicationEvents [disposedEvent] as EventHandler;
+            EventHandler eh = nonApplicationEvents[disposedEvent] as EventHandler;
             if (eh != null)
-                eh (this, EventArgs.Empty);
-            
-            done.Close ();
+                eh(this, EventArgs.Empty);
+
+            done.Close();
             done = null;
         }
-        
-        public virtual void Dispose ()
-        {
-        }
 
-        public virtual string GetOutputCacheProviderName (HttpContext context)
+        public virtual void Dispose() { }
+
+        public virtual string GetOutputCacheProviderName(HttpContext context)
         {
             // LAMESPEC: doesn't throw ProviderException if context is null
             return OutputCache.DefaultProviderName;
         }
-        
-        public virtual string GetVaryByCustomString (HttpContext context, string custom)
+
+        public virtual string GetVaryByCustomString(HttpContext context, string custom)
         {
             if (custom == null) // Sigh
-                throw new NullReferenceException ();
+                throw new NullReferenceException();
 
-            if (0 == String.Compare (custom, "browser", true, Helpers.InvariantCulture))
+            if (0 == String.Compare(custom, "browser", true, Helpers.InvariantCulture))
                 return context.Request.Browser.Type;
 
             return null;
         }
 
-        bool ShouldHandleException (Exception e)
+        bool ShouldHandleException(Exception e)
         {
             if (e is ParseException)
                 return false;
 
             return true;
         }
-        
+
         //
         // If we catch an error, queue this error
         //
-        internal void ProcessError (Exception e)
+        internal void ProcessError(Exception e)
         {
             bool first = context.Error == null;
-            context.AddError (e);
-            if (first && ShouldHandleException (e)) {
-                EventHandler eh = nonApplicationEvents [errorEvent] as EventHandler;
-                if (eh != null){
-                    try {
-                        eh (this, EventArgs.Empty);
+            context.AddError(e);
+            if (first && ShouldHandleException(e))
+            {
+                EventHandler eh = nonApplicationEvents[errorEvent] as EventHandler;
+                if (eh != null)
+                {
+                    try
+                    {
+                        eh(this, EventArgs.Empty);
                         if (stop_processing)
-                            context.ClearError ();
-                    } catch (ThreadAbortException taex){
-                        context.ClearError ();
+                            context.ClearError();
+                    }
+                    catch (ThreadAbortException taex)
+                    {
+                        context.ClearError();
                         if (FlagEnd.Value == taex.ExceptionState || HttpRuntime.DomainUnloading)
                             // This happens on Redirect(), End() and
                             // when unloading the AppDomain
-                            Thread.ResetAbort ();
+                            Thread.ResetAbort();
                         else
                             // This happens on Thread.Abort()
-                            context.AddError (taex);
-                    } catch (Exception ee){
-                        context.AddError (ee);
+                            context.AddError(taex);
+                    }
+                    catch (Exception ee)
+                    {
+                        context.AddError(ee);
                     }
                 }
             }
             stop_processing = true;
 
-            // we want to remove configuration from the cache in case of 
+            // we want to remove configuration from the cache in case of
             // invalid resource not exists to prevent DOS attack.
             HttpException httpEx = e as HttpException;
-            if (httpEx != null && httpEx.GetHttpCode () == 404) {
+            if (httpEx != null && httpEx.GetHttpCode() == 404)
+            {
                 removeConfigurationFromCache = true;
             }
         }
-        
+
         //
         // Ticks the clock: next step on the pipeline.
         //
-        internal void Tick ()
+        internal void Tick()
         {
-            try {
-                if (pipeline.MoveNext ()){
+            try
+            {
+                if (pipeline.MoveNext())
+                {
                     if ((bool)pipeline.Current)
-                        PipelineDone ();
+                        PipelineDone();
                 }
-            } catch (ThreadAbortException taex) {
+            }
+            catch (ThreadAbortException taex)
+            {
                 object obj = taex.ExceptionState;
-                Thread.ResetAbort ();
+                Thread.ResetAbort();
                 if (obj is StepTimeout)
-                    ProcessError (HttpException.NewWithCode ("The request timed out.", WebEventCodes.RequestTransactionAbort));
-                else {
-                    context.ClearError ();
+                    ProcessError(
+                        HttpException.NewWithCode(
+                            "The request timed out.",
+                            WebEventCodes.RequestTransactionAbort
+                        )
+                    );
+                else
+                {
+                    context.ClearError();
                     if (FlagEnd.Value != obj && !HttpRuntime.DomainUnloading)
-                        context.AddError (taex);
+                        context.AddError(taex);
                 }
-                
+
                 stop_processing = true;
-                PipelineDone ();
-            } catch (Exception e) {
+                PipelineDone();
+            }
+            catch (Exception e)
+            {
                 ThreadAbortException inner = e.InnerException as ThreadAbortException;
-                if (inner != null && FlagEnd.Value == inner.ExceptionState && !HttpRuntime.DomainUnloading) {
-                    context.ClearError ();
-                    Thread.ResetAbort ();
-                } else {
-                    ProcessError (e);
+                if (
+                    inner != null
+                    && FlagEnd.Value == inner.ExceptionState
+                    && !HttpRuntime.DomainUnloading
+                )
+                {
+                    context.ClearError();
+                    Thread.ResetAbort();
+                }
+                else
+                {
+                    ProcessError(e);
                 }
                 stop_processing = true;
-                PipelineDone ();
+                PipelineDone();
             }
         }
 
-        void Resume ()
+        void Resume()
         {
             if (in_begin)
                 must_yield = false;
             else
-                Tick ();
+                Tick();
         }
-        
+
         //
         // Invoked when our async callback called from RunHooks completes,
         // we restart the pipeline here.
         //
-        void async_callback_completed_cb (IAsyncResult ar)
+        void async_callback_completed_cb(IAsyncResult ar)
         {
-            if (current_ai.end != null){
-                try {
-                    current_ai.end (ar);
-                } catch (Exception e) {
-                    ProcessError (e);
+            if (current_ai.end != null)
+            {
+                try
+                {
+                    current_ai.end(ar);
+                }
+                catch (Exception e)
+                {
+                    ProcessError(e);
                 }
             }
 
-            Resume ();
+            Resume();
         }
 
-        void async_handler_complete_cb (IAsyncResult ar)
+        void async_handler_complete_cb(IAsyncResult ar)
         {
-            IHttpAsyncHandler async_handler = ar != null ? ar.AsyncState as IHttpAsyncHandler : null;
+            IHttpAsyncHandler async_handler =
+                ar != null ? ar.AsyncState as IHttpAsyncHandler : null;
 
-            try {
+            try
+            {
                 if (async_handler != null)
-                    async_handler.EndProcessRequest (ar);
-            } catch (Exception e){
-                ProcessError (e);
+                    async_handler.EndProcessRequest(ar);
             }
-            
-            Resume ();
+            catch (Exception e)
+            {
+                ProcessError(e);
+            }
+
+            Resume();
         }
-        
+
         //
         // This enumerator yields whether processing must be stopped:
         //    true:  processing of the pipeline must be stopped
         //    false: processing of the pipeline must not be stopped
         //
-        IEnumerable RunHooks (Delegate list)
+        IEnumerable RunHooks(Delegate list)
         {
-            Delegate [] delegates = list.GetInvocationList ();
+            Delegate[] delegates = list.GetInvocationList();
 
-            foreach (EventHandler d in delegates){
-                if (d.Target != null && (d.Target is AsyncInvoker)){
-                    current_ai = (AsyncInvoker) d.Target;
+            foreach (EventHandler d in delegates)
+            {
+                if (d.Target != null && (d.Target is AsyncInvoker))
+                {
+                    current_ai = (AsyncInvoker)d.Target;
 
-                    try {
+                    try
+                    {
                         must_yield = true;
                         in_begin = true;
-                        context.BeginTimeoutPossible ();
-                        current_ai.begin (this, EventArgs.Empty, async_callback_completed_cb, current_ai.data);
-                    } finally {
+                        context.BeginTimeoutPossible();
+                        current_ai.begin(
+                            this,
+                            EventArgs.Empty,
+                            async_callback_completed_cb,
+                            current_ai.data
+                        );
+                    }
+                    finally
+                    {
                         in_begin = false;
-                        context.EndTimeoutPossible ();
+                        context.EndTimeoutPossible();
                     }
 
                     //
@@ -1024,12 +1216,17 @@ namespace System.Web
                         yield return stop_processing;
                     else if (stop_processing)
                         yield return true;
-                } else {
-                    try {
-                        context.BeginTimeoutPossible ();
-                        d (this, EventArgs.Empty);
-                    } finally {
-                        context.EndTimeoutPossible ();
+                }
+                else
+                {
+                    try
+                    {
+                        context.BeginTimeoutPossible();
+                        d(this, EventArgs.Empty);
+                    }
+                    finally
+                    {
+                        context.EndTimeoutPossible();
                     }
                     if (stop_processing)
                         yield return true;
@@ -1037,444 +1234,525 @@ namespace System.Web
             }
         }
 
-        static void FinalErrorWrite (HttpResponse response, string error)
+        static void FinalErrorWrite(HttpResponse response, string error)
         {
-            try {
-                response.Write (error);
-                response.Flush (true);
-            } catch {
-                response.Close ();
+            try
+            {
+                response.Write(error);
+                response.Flush(true);
+            }
+            catch
+            {
+                response.Close();
             }
         }
 
-        void OutputPage ()
+        void OutputPage()
         {
-            if (context.Error == null){
-                try {
-                    context.Response.Flush (true);
-                } catch (Exception e){
-                    context.AddError (e);
+            if (context.Error == null)
+            {
+                try
+                {
+                    context.Response.Flush(true);
+                }
+                catch (Exception e)
+                {
+                    context.AddError(e);
                 }
             }
 
             Exception error = context.Error;
-            if (error != null){
+            if (error != null)
+            {
                 HttpResponse response = context.Response;
 
-                if (!response.HeadersSent){
-                    response.ClearHeaders ();
-                    response.ClearContent ();
+                if (!response.HeadersSent)
+                {
+                    response.ClearHeaders();
+                    response.ClearContent();
 
-                    if (error is HttpException){
-                        response.StatusCode = ((HttpException)error).GetHttpCode ();
-                    } else {
-                        error = HttpException.NewWithCode (String.Empty, error, WebEventCodes.WebErrorOtherError);
+                    if (error is HttpException)
+                    {
+                        response.StatusCode = ((HttpException)error).GetHttpCode();
+                    }
+                    else
+                    {
+                        error = HttpException.NewWithCode(
+                            String.Empty,
+                            error,
+                            WebEventCodes.WebErrorOtherError
+                        );
                         response.StatusCode = 500;
                     }
-                    HttpException httpEx = (HttpException) error;
-                    if (!RedirectCustomError (ref httpEx))
-                        FinalErrorWrite (response, httpEx.GetHtmlErrorMessage ());
+                    HttpException httpEx = (HttpException)error;
+                    if (!RedirectCustomError(ref httpEx))
+                        FinalErrorWrite(response, httpEx.GetHtmlErrorMessage());
                     else
-                        response.Flush (true);
-                } else {
+                        response.Flush(true);
+                }
+                else
+                {
                     if (!(error is HttpException))
-                        error = HttpException.NewWithCode (String.Empty, error, WebEventCodes.WebErrorOtherError);
-                    FinalErrorWrite (response, ((HttpException) error).GetHtmlErrorMessage ());
+                        error = HttpException.NewWithCode(
+                            String.Empty,
+                            error,
+                            WebEventCodes.WebErrorOtherError
+                        );
+                    FinalErrorWrite(response, ((HttpException)error).GetHtmlErrorMessage());
                 }
             }
-            
         }
-        
+
         //
         // Invoked at the end of the pipeline execution
         //
-        void PipelineDone ()
+        void PipelineDone()
         {
-            try {
-                EventHandler handler = Events [EndRequestEvent] as EventHandler;
+            try
+            {
+                EventHandler handler = Events[EndRequestEvent] as EventHandler;
                 if (handler != null)
-                    handler (this, EventArgs.Empty);
-            } catch (Exception e){
-                ProcessError (e);
+                    handler(this, EventArgs.Empty);
+            }
+            catch (Exception e)
+            {
+                ProcessError(e);
             }
 
-            try {
-                OutputPage ();
-            } catch (ThreadAbortException taex) {
-                ProcessError (taex);
-                Thread.ResetAbort ();
-            } catch (Exception e) {
-                Console.WriteLine ("Internal error: OutputPage threw an exception " + e);
-            } finally {
+            try
+            {
+                OutputPage();
+            }
+            catch (ThreadAbortException taex)
+            {
+                ProcessError(taex);
+                Thread.ResetAbort();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Internal error: OutputPage threw an exception " + e);
+            }
+            finally
+            {
                 context.WorkerRequest.EndOfRequest();
-                if (factory != null && context.Handler != null){
-                    factory.ReleaseHandler (context.Handler);
+                if (factory != null && context.Handler != null)
+                {
+                    factory.ReleaseHandler(context.Handler);
                     context.Handler = null;
                     factory = null;
                 }
-                context.PopHandler ();
+                context.PopHandler();
 
                 // context = null; -> moved to PostDone
                 pipeline = null;
                 current_ai = null;
             }
-            PostDone ();
+            PostDone();
 
             if (begin_iar != null)
-                begin_iar.Complete ();
+                begin_iar.Complete();
             else
-                done.Set ();
+                done.Set();
 
-            requests_total_counter.Increment ();
+            requests_total_counter.Increment();
         }
 
-        class Tim {
+        class Tim
+        {
             string name;
             DateTime start;
 
-            public Tim () {
-            }
+            public Tim() { }
 
-            public Tim (string name) {
+            public Tim(string name)
+            {
                 this.name = name;
             }
 
-            public string Name {
+            public string Name
+            {
                 get { return name; }
                 set { name = value; }
             }
 
-            public void Start () {
+            public void Start()
+            {
                 start = DateTime.UtcNow;
             }
 
-            public void Stop () {
-                Console.WriteLine ("{0}: {1}ms", name, (DateTime.UtcNow - start).TotalMilliseconds);
+            public void Stop()
+            {
+                Console.WriteLine("{0}: {1}ms", name, (DateTime.UtcNow - start).TotalMilliseconds);
             }
         }
 
         Tim tim;
-        [Conditional ("PIPELINE_TIMER")]
-        void StartTimer (string name)
+
+        [Conditional("PIPELINE_TIMER")]
+        void StartTimer(string name)
         {
             if (tim == null)
-                tim = new Tim ();
+                tim = new Tim();
             tim.Name = name;
-            tim.Start ();
+            tim.Start();
         }
 
-        [Conditional ("PIPELINE_TIMER")]
-        void StopTimer ()
+        [Conditional("PIPELINE_TIMER")]
+        void StopTimer()
         {
-            tim.Stop ();
+            tim.Stop();
         }
 
         //
         // Events fired as described in `Http Runtime Support, HttpModules,
         // Handling Public Events'
         //
-        IEnumerator Pipeline ()
+        IEnumerator Pipeline()
         {
             Delegate eventHandler;
             if (stop_processing)
                 yield return true;
             HttpRequest req = context.Request;
             if (req != null)
-                req.Validate ();
+                req.Validate();
             context.MapRequestHandlerDone = false;
-            StartTimer ("BeginRequest");
-            eventHandler = Events [BeginRequestEvent];
-            if (eventHandler != null) {
-                foreach (bool stop in RunHooks (eventHandler))
+            StartTimer("BeginRequest");
+            eventHandler = Events[BeginRequestEvent];
+            if (eventHandler != null)
+            {
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
             }
-            StopTimer ();
-            
-            StartTimer ("AuthenticateRequest");
-            eventHandler = Events [AuthenticateRequestEvent];
-            if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
-                    yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("DefaultAuthentication");
+            StartTimer("AuthenticateRequest");
+            eventHandler = Events[AuthenticateRequestEvent];
+            if (eventHandler != null)
+                foreach (bool stop in RunHooks(eventHandler))
+                    yield return stop;
+            StopTimer();
+
+            StartTimer("DefaultAuthentication");
             if (DefaultAuthentication != null)
-                foreach (bool stop in RunHooks (DefaultAuthentication))
+                foreach (bool stop in RunHooks(DefaultAuthentication))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("PostAuthenticateRequest");
-            eventHandler = Events [PostAuthenticateRequestEvent];
+            StartTimer("PostAuthenticateRequest");
+            eventHandler = Events[PostAuthenticateRequestEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("AuthorizeRequest");
-            eventHandler = Events [AuthorizeRequestEvent];
+            StartTimer("AuthorizeRequest");
+            eventHandler = Events[AuthorizeRequestEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("PostAuthorizeRequest");
-            eventHandler = Events [PostAuthorizeRequestEvent];
+            StartTimer("PostAuthorizeRequest");
+            eventHandler = Events[PostAuthorizeRequestEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("ResolveRequestCache");
-            eventHandler = Events [ResolveRequestCacheEvent];
+            StartTimer("ResolveRequestCache");
+            eventHandler = Events[ResolveRequestCacheEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("PostResolveRequestCache");
-            eventHandler = Events [PostResolveRequestCacheEvent];
+            StartTimer("PostResolveRequestCache");
+            eventHandler = Events[PostResolveRequestCacheEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("MapRequestHandler");
+            StartTimer("MapRequestHandler");
             // As per http://msdn2.microsoft.com/en-us/library/bb470252(VS.90).aspx
-            eventHandler = Events [MapRequestHandlerEvent];
+            eventHandler = Events[MapRequestHandlerEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
             context.MapRequestHandlerDone = true;
-            
-            StartTimer ("GetHandler");
+
+            StartTimer("GetHandler");
             // Obtain the handler for the request.
             IHttpHandler handler = null;
-            try {
-                handler = GetHandler (context, context.Request.CurrentExecutionFilePath);
+            try
+            {
+                handler = GetHandler(context, context.Request.CurrentExecutionFilePath);
                 context.Handler = handler;
-                context.PushHandler (handler);
-            } catch (FileNotFoundException fnf){
+                context.PushHandler(handler);
+            }
+            catch (FileNotFoundException fnf)
+            {
                 if (context.Request.IsLocal)
-                    ProcessError (HttpException.NewWithCode (404,
-                                         String.Format ("File not found {0}", fnf.FileName),
-                                         fnf,
-                                         context.Request.FilePath,
-                                         WebEventCodes.RuntimeErrorRequestAbort));
+                    ProcessError(
+                        HttpException.NewWithCode(
+                            404,
+                            String.Format("File not found {0}", fnf.FileName),
+                            fnf,
+                            context.Request.FilePath,
+                            WebEventCodes.RuntimeErrorRequestAbort
+                        )
+                    );
                 else
-                    ProcessError (HttpException.NewWithCode (404,
-                                         "File not found: " + Path.GetFileName (fnf.FileName),
-                                         context.Request.FilePath,
-                                         WebEventCodes.RuntimeErrorRequestAbort));
-            } catch (DirectoryNotFoundException dnf){
+                    ProcessError(
+                        HttpException.NewWithCode(
+                            404,
+                            "File not found: " + Path.GetFileName(fnf.FileName),
+                            context.Request.FilePath,
+                            WebEventCodes.RuntimeErrorRequestAbort
+                        )
+                    );
+            }
+            catch (DirectoryNotFoundException dnf)
+            {
                 if (!context.Request.IsLocal)
                     dnf = null; // Do not "leak" real path information
-                ProcessError (HttpException.NewWithCode (404, "Directory not found", dnf, WebEventCodes.RuntimeErrorRequestAbort));
-            } catch (Exception e) {
-                ProcessError (e);
+                ProcessError(
+                    HttpException.NewWithCode(
+                        404,
+                        "Directory not found",
+                        dnf,
+                        WebEventCodes.RuntimeErrorRequestAbort
+                    )
+                );
+            }
+            catch (Exception e)
+            {
+                ProcessError(e);
             }
 
-            StopTimer ();
+            StopTimer();
             if (stop_processing)
                 yield return true;
 
-            StartTimer ("PostMapRequestHandler");
-            eventHandler = Events [PostMapRequestHandlerEvent];
+            StartTimer("PostMapRequestHandler");
+            eventHandler = Events[PostMapRequestHandlerEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("AcquireRequestState");
-            eventHandler = Events [AcquireRequestStateEvent];
-            if (eventHandler != null){
-                foreach (bool stop in RunHooks (eventHandler))
+            StartTimer("AcquireRequestState");
+            eventHandler = Events[AcquireRequestStateEvent];
+            if (eventHandler != null)
+            {
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
             }
-            StopTimer ();
-            
-            StartTimer ("PostAcquireRequestState");
-            eventHandler = Events [PostAcquireRequestStateEvent];
-            if (eventHandler != null){
-                foreach (bool stop in RunHooks (eventHandler))
+            StopTimer();
+
+            StartTimer("PostAcquireRequestState");
+            eventHandler = Events[PostAcquireRequestStateEvent];
+            if (eventHandler != null)
+            {
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
             }
-            StopTimer ();
-            
+            StopTimer();
+
             //
             // From this point on, we need to ensure that we call
             // ReleaseRequestState, so the code below jumps to
             // `release:' to guarantee it rather than yielding.
             //
-            StartTimer ("PreRequestHandlerExecute");
-            eventHandler = Events [PreRequestHandlerExecuteEvent];
+            StartTimer("PreRequestHandlerExecute");
+            eventHandler = Events[PreRequestHandlerExecuteEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     if (stop)
                         goto release;
-            StopTimer ();
-            
-                
-            
+            StopTimer();
+
             IHttpHandler ctxHandler = context.Handler;
-            if (ctxHandler != null && handler != ctxHandler) {
-                context.PopHandler ();
+            if (ctxHandler != null && handler != ctxHandler)
+            {
+                context.PopHandler();
                 handler = ctxHandler;
-                context.PushHandler (handler);
+                context.PushHandler(handler);
             }
 
-            StartTimer ("ProcessRequest");
-            try {
-                context.BeginTimeoutPossible ();
-                if (handler != null){
+            StartTimer("ProcessRequest");
+            try
+            {
+                context.BeginTimeoutPossible();
+                if (handler != null)
+                {
                     IHttpAsyncHandler async_handler = handler as IHttpAsyncHandler;
-                    
-                    if (async_handler != null){
+
+                    if (async_handler != null)
+                    {
                         must_yield = true;
                         in_begin = true;
-                        async_handler.BeginProcessRequest (context, async_handler_complete_cb, handler);
-                    } else {
-                        must_yield = false;
-                        handler.ProcessRequest (context);
+                        async_handler.BeginProcessRequest(
+                            context,
+                            async_handler_complete_cb,
+                            handler
+                        );
                     }
-                } else
-                    throw new InvalidOperationException ("No handler for the current request.");
+                    else
+                    {
+                        must_yield = false;
+                        handler.ProcessRequest(context);
+                    }
+                }
+                else
+                    throw new InvalidOperationException("No handler for the current request.");
                 if (context.Error != null)
                     throw new TargetInvocationException(context.Error);
-            } finally {
-                in_begin = false;
-                context.EndTimeoutPossible ();
             }
-            StopTimer ();
+            finally
+            {
+                in_begin = false;
+                context.EndTimeoutPossible();
+            }
+            StopTimer();
             if (must_yield)
                 yield return stop_processing;
             else if (stop_processing)
                 goto release;
-            
+
             // These are executed after the application has returned
-            
-            StartTimer ("PostRequestHandlerExecute");
-            eventHandler = Events [PostRequestHandlerExecuteEvent];
+
+            StartTimer("PostRequestHandlerExecute");
+            eventHandler = Events[PostRequestHandlerExecuteEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     if (stop)
                         goto release;
-            StopTimer ();
-            
-        release:
-            StartTimer ("ReleaseRequestState");
-            eventHandler = Events [ReleaseRequestStateEvent];
-            if (eventHandler != null){
+            StopTimer();
+
+            release:
+            StartTimer("ReleaseRequestState");
+            eventHandler = Events[ReleaseRequestStateEvent];
+            if (eventHandler != null)
+            {
 #pragma warning disable 219
-                foreach (bool stop in RunHooks (eventHandler)) {
+                foreach (bool stop in RunHooks(eventHandler))
+                {
                     //
                     // Ignore the stop signal while release the state
                     //
-                    
                 }
 #pragma warning restore 219
             }
-            StopTimer ();
-            
+            StopTimer();
+
             if (stop_processing)
                 yield return true;
 
-            StartTimer ("PostReleaseRequestState");
-            eventHandler = Events [PostReleaseRequestStateEvent];
+            StartTimer("PostReleaseRequestState");
+            eventHandler = Events[PostReleaseRequestStateEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("Filter");
+            StartTimer("Filter");
             if (context.Error == null)
-                context.Response.DoFilter (true);
-            StopTimer ();
+                context.Response.DoFilter(true);
+            StopTimer();
 
-            StartTimer ("UpdateRequestCache");
-            eventHandler = Events [UpdateRequestCacheEvent];
+            StartTimer("UpdateRequestCache");
+            eventHandler = Events[UpdateRequestCacheEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("PostUpdateRequestCache");
-            eventHandler = Events [PostUpdateRequestCacheEvent];
+            StartTimer("PostUpdateRequestCache");
+            eventHandler = Events[PostUpdateRequestCacheEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("LogRequest");
-            eventHandler = Events [LogRequestEvent];
+            StartTimer("LogRequest");
+            eventHandler = Events[LogRequestEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("PostLogRequest");
-            eventHandler = Events [PostLogRequestEvent];
+            StartTimer("PostLogRequest");
+            eventHandler = Events[PostLogRequestEvent];
             if (eventHandler != null)
-                foreach (bool stop in RunHooks (eventHandler))
+                foreach (bool stop in RunHooks(eventHandler))
                     yield return stop;
-            StopTimer ();
+            StopTimer();
 
-            StartTimer ("PipelineDone");
-            PipelineDone ();
-            StopTimer ();
+            StartTimer("PipelineDone");
+            PipelineDone();
+            StopTimer();
         }
 
-
-        internal CultureInfo GetThreadCulture (HttpRequest request, CultureInfo culture, bool isAuto)
+        internal CultureInfo GetThreadCulture(HttpRequest request, CultureInfo culture, bool isAuto)
         {
             if (!isAuto)
                 return culture;
             CultureInfo ret = null;
             string[] languages = request.UserLanguages;
-            try {
+            try
+            {
                 if (languages != null && languages.Length > 0)
-                    ret = CultureInfo.CreateSpecificCulture (languages[0]);
-            } catch {
+                    ret = CultureInfo.CreateSpecificCulture(languages[0]);
             }
-            
+            catch { }
+
             if (ret == null)
                 ret = culture;
-            
+
             return ret;
         }
 
-
-        void PreStart ()
+        void PreStart()
         {
             GlobalizationSection cfg;
-            cfg = (GlobalizationSection) WebConfigurationManager.GetSection ("system.web/globalization");
-            app_culture = cfg.GetCulture ();
+            cfg = (GlobalizationSection)
+                WebConfigurationManager.GetSection("system.web/globalization");
+            app_culture = cfg.GetCulture();
             autoCulture = cfg.IsAutoCulture;
-            appui_culture = cfg.GetUICulture ();
+            appui_culture = cfg.GetUICulture();
             autoUICulture = cfg.IsAutoUICulture;
-            context.StartTimeoutTimer ();
+            context.StartTimeoutTimer();
             Thread th = Thread.CurrentThread;
-            if (app_culture != null) {
+            if (app_culture != null)
+            {
                 prev_app_culture = th.CurrentCulture;
-                CultureInfo new_app_culture = GetThreadCulture (Request, app_culture, autoCulture);
-                if (!new_app_culture.Equals (Helpers.InvariantCulture))
+                CultureInfo new_app_culture = GetThreadCulture(Request, app_culture, autoCulture);
+                if (!new_app_culture.Equals(Helpers.InvariantCulture))
                     th.CurrentCulture = new_app_culture;
             }
 
-            if (appui_culture != null) {
+            if (appui_culture != null)
+            {
                 prev_appui_culture = th.CurrentUICulture;
-                CultureInfo new_app_culture = GetThreadCulture (Request, appui_culture, autoUICulture);
-                if (!new_app_culture.Equals (Helpers.InvariantCulture))
+                CultureInfo new_app_culture = GetThreadCulture(
+                    Request,
+                    appui_culture,
+                    autoUICulture
+                );
+                if (!new_app_culture.Equals(Helpers.InvariantCulture))
                     th.CurrentUICulture = new_app_culture;
             }
 
             prev_user = Thread.CurrentPrincipal;
         }
 
-        void PostDone ()
+        void PostDone()
         {
-            if (removeConfigurationFromCache) {
-                WebConfigurationManager.RemoveConfigurationFromCache (context);
+            if (removeConfigurationFromCache)
+            {
+                WebConfigurationManager.RemoveConfigurationFromCache(context);
                 removeConfigurationFromCache = false;
             }
 
@@ -1488,115 +1766,127 @@ namespace System.Web
 
             if (context == null)
                 context = HttpContext.Current;
-            context.StopTimeoutTimer ();
-            context.Request.ReleaseResources ();
-            context.Response.ReleaseResources ();
+            context.StopTimeoutTimer();
+            context.Request.ReleaseResources();
+            context.Response.ReleaseResources();
             context = null;
             session = null;
             HttpContext.Current = null;
         }
 
-        void Start (object x)
+        void Start(object x)
         {
-            var cultures = x as CultureInfo [];
-            if (cultures != null && cultures.Length == 2) {
+            var cultures = x as CultureInfo[];
+            if (cultures != null && cultures.Length == 2)
+            {
                 Thread ct = Thread.CurrentThread;
-                ct.CurrentCulture = cultures [0];
-                ct.CurrentUICulture = cultures [1];
+                ct.CurrentCulture = cultures[0];
+                ct.CurrentUICulture = cultures[1];
             }
 
-            InitOnce (true);
-            if (initialization_exception != null) {
+            InitOnce(true);
+            if (initialization_exception != null)
+            {
                 Exception e = initialization_exception;
-                HttpException exc = HttpException.NewWithCode (String.Empty, e, WebEventCodes.RuntimeErrorRequestAbort);
+                HttpException exc = HttpException.NewWithCode(
+                    String.Empty,
+                    e,
+                    WebEventCodes.RuntimeErrorRequestAbort
+                );
                 context.Response.StatusCode = 500;
-                FinalErrorWrite (context.Response, exc.GetHtmlErrorMessage ());
-                PipelineDone ();
+                FinalErrorWrite(context.Response, exc.GetHtmlErrorMessage());
+                PipelineDone();
                 return;
             }
 
             HttpContext.Current = Context;
-            PreStart ();
-            pipeline = Pipeline ();
-            Tick ();
+            PreStart();
+            pipeline = Pipeline();
+            Tick();
         }
 
         const string HANDLER_CACHE = "@@HttpHandlerCache@@";
 
-        internal static Hashtable GetHandlerCache ()
+        internal static Hashtable GetHandlerCache()
         {
             Cache cache = HttpRuntime.InternalCache;
-            Hashtable ret = cache [HANDLER_CACHE] as Hashtable;
+            Hashtable ret = cache[HANDLER_CACHE] as Hashtable;
 
-            if (ret == null) {
-                ret = new Hashtable ();
-                cache.Insert (HANDLER_CACHE, ret);
+            if (ret == null)
+            {
+                ret = new Hashtable();
+                cache.Insert(HANDLER_CACHE, ret);
             }
 
             return ret;
         }
-        
-        internal static void ClearHandlerCache ()
+
+        internal static void ClearHandlerCache()
         {
-            Hashtable cache = GetHandlerCache ();
-            cache.Clear ();
+            Hashtable cache = GetHandlerCache();
+            cache.Clear();
         }
-        
-        object LocateHandler (HttpRequest req, string verb, string url)
+
+        object LocateHandler(HttpRequest req, string verb, string url)
         {
-            Hashtable cache = GetHandlerCache ();
-            string id = String.Concat (verb, url);
-            object ret = cache [id];
+            Hashtable cache = GetHandlerCache();
+            string id = String.Concat(verb, url);
+            object ret = cache[id];
 
             if (ret != null)
                 return ret;
 
             bool allowCache;
-            HttpHandlersSection httpHandlersSection = WebConfigurationManager.GetSection ("system.web/httpHandlers", req.Path, req.Context) as HttpHandlersSection;
-            ret = httpHandlersSection.LocateHandler (verb, url, out allowCache);
+            HttpHandlersSection httpHandlersSection =
+                WebConfigurationManager.GetSection("system.web/httpHandlers", req.Path, req.Context)
+                as HttpHandlersSection;
+            ret = httpHandlersSection.LocateHandler(verb, url, out allowCache);
 
             IHttpHandler handler = ret as IHttpHandler;
             if (allowCache && handler != null && handler.IsReusable)
-                cache [id] = ret;
-            
+                cache[id] = ret;
+
             return ret;
         }
 
-        internal IHttpHandler GetHandler (HttpContext context, string url)
+        internal IHttpHandler GetHandler(HttpContext context, string url)
         {
-            return GetHandler (context, url, false);
+            return GetHandler(context, url, false);
         }
-        
+
         // Used by HttpServerUtility.Execute
-        internal IHttpHandler GetHandler (HttpContext context, string url, bool ignoreContextHandler)
+        internal IHttpHandler GetHandler(HttpContext context, string url, bool ignoreContextHandler)
         {
             if (!ignoreContextHandler && context.Handler != null)
                 return context.Handler;
-            
+
             HttpRequest request = context.Request;
             string verb = request.RequestType;
-            
+
             IHttpHandler handler = null;
-            object o = LocateHandler (request, verb, url);
-            
+            object o = LocateHandler(request, verb, url);
+
             factory = o as IHttpHandlerFactory;
-            if (factory == null) {
-                handler = (IHttpHandler) o;
-            } else {
-                handler = factory.GetHandler (context, verb, url, request.MapPath (url));
+            if (factory == null)
+            {
+                handler = (IHttpHandler)o;
+            }
+            else
+            {
+                handler = factory.GetHandler(context, verb, url, request.MapPath(url));
             }
 
             return handler;
         }
-        
-        void IHttpHandler.ProcessRequest (HttpContext context)
+
+        void IHttpHandler.ProcessRequest(HttpContext context)
         {
             begin_iar = null;
             this.context = context;
-            done.Reset ();
+            done.Reset();
 
-            Start (null);
-            done.WaitOne ();
+            Start(null);
+            done.WaitOne();
         }
 
         //
@@ -1604,154 +1894,182 @@ namespace System.Web
         // as the context is required to be set at that point (the user
         // might call methods that require it on that hook).
         //
-        internal void SetContext (HttpContext context)
+        internal void SetContext(HttpContext context)
         {
             this.context = context;
         }
 
-        internal void SetSession (HttpSessionState session)
+        internal void SetSession(HttpSessionState session)
         {
             this.session = session;
         }
 
-        IAsyncResult IHttpAsyncHandler.BeginProcessRequest (HttpContext context, AsyncCallback cb, object extraData)
+        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(
+            HttpContext context,
+            AsyncCallback cb,
+            object extraData
+        )
         {
             this.context = context;
-            done.Reset ();
-            
-            begin_iar = new AsyncRequestState (done, cb, extraData);
+            done.Reset();
 
-            CultureInfo[] cultures = new CultureInfo [2];
-            cultures [0] = Thread.CurrentThread.CurrentCulture;
-            cultures [1] = Thread.CurrentThread.CurrentUICulture;
-            
+            begin_iar = new AsyncRequestState(done, cb, extraData);
+
+            CultureInfo[] cultures = new CultureInfo[2];
+            cultures[0] = Thread.CurrentThread.CurrentCulture;
+            cultures[1] = Thread.CurrentThread.CurrentUICulture;
+
             if (Thread.CurrentThread.IsThreadPoolThread)
-                Start (null);
+                Start(null);
             else
-                ThreadPool.QueueUserWorkItem (x => {
-                    try {
-                        Start (x);
-                    } catch (Exception e) {
-                        Console.Error.WriteLine (e);
+                ThreadPool.QueueUserWorkItem(x =>
+                {
+                    try
+                    {
+                        Start(x);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.Error.WriteLine(e);
                     }
                 });
-            
+
             return begin_iar;
         }
 
-        void IHttpAsyncHandler.EndProcessRequest (IAsyncResult result)
+        void IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
         {
             if (!result.IsCompleted)
-                result.AsyncWaitHandle.WaitOne ();
+                result.AsyncWaitHandle.WaitOne();
             begin_iar = null;
         }
 
-        public virtual void Init ()
+        public virtual void Init() { }
+
+        bool IHttpHandler.IsReusable
         {
+            get { return true; }
         }
 
-        bool IHttpHandler.IsReusable {
-            get {
-                return true;
-            }
-        }
-
-        public static void RegisterModule (Type moduleType) 
+        public static void RegisterModule(Type moduleType)
         {
-            HttpRuntimeSection config = (HttpRuntimeSection)WebConfigurationManager.GetSection ("system.web/httpRuntime");
+            HttpRuntimeSection config = (HttpRuntimeSection)
+                WebConfigurationManager.GetSection("system.web/httpRuntime");
 
             if (!config.AllowDynamicModuleRegistration)
-                throw new InvalidOperationException ("The Application has requested to register a dynamic Module, but dynamic module registration is disabled in web.config.");
+                throw new InvalidOperationException(
+                    "The Application has requested to register a dynamic Module, but dynamic module registration is disabled in web.config."
+                );
 
-            dynamicModuleManeger.Add (moduleType);
+            dynamicModuleManeger.Add(moduleType);
         }
 
-
-        HttpModuleCollection CreateDynamicModules () 
+        HttpModuleCollection CreateDynamicModules()
         {
-            HttpModuleCollection modules = new HttpModuleCollection ();
+            HttpModuleCollection modules = new HttpModuleCollection();
 
-            foreach (var module in dynamicModuleManeger.LockAndGetModules ()) {
-                IHttpModule httpModule = CreateModuleInstance (module.Type);
-                httpModule.Init (this);
-                modules.AddModule (module.Name, httpModule);
+            foreach (var module in dynamicModuleManeger.LockAndGetModules())
+            {
+                IHttpModule httpModule = CreateModuleInstance(module.Type);
+                httpModule.Init(this);
+                modules.AddModule(module.Name, httpModule);
             }
             return modules;
         }
 
-        IHttpModule CreateModuleInstance (Type type)
+        IHttpModule CreateModuleInstance(Type type)
         {
-            return (IHttpModule) Activator.CreateInstance (type,
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.CreateInstance,
+            return (IHttpModule)
+                Activator.CreateInstance(
+                    type,
+                    BindingFlags.Instance
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Public
+                        | BindingFlags.CreateInstance,
                     null,
                     null,
-                    null);
+                    null
+                );
         }
 
 #region internals
-        internal void ClearError ()
+        internal void ClearError()
         {
-            context.ClearError ();
+            context.ClearError();
         }
 
-        bool RedirectErrorPage (string error_page)
+        bool RedirectErrorPage(string error_page)
         {
-            if (context.Request.QueryString ["aspxerrorpath"] != null)
+            if (context.Request.QueryString["aspxerrorpath"] != null)
                 return false;
 
-            Response.Redirect (error_page + "?aspxerrorpath=" + Request.Path, false);
+            Response.Redirect(error_page + "?aspxerrorpath=" + Request.Path, false);
             return true;
         }
-                            
-        bool RedirectCustomError (ref HttpException httpEx)
+
+        bool RedirectCustomError(ref HttpException httpEx)
         {
-            try {
+            try
+            {
                 if (!context.IsCustomErrorEnabledUnsafe)
                     return false;
-            
-                CustomErrorsSection config = (CustomErrorsSection)WebConfigurationManager.GetSection ("system.web/customErrors");            
-                if (config == null) {
+
+                CustomErrorsSection config = (CustomErrorsSection)
+                    WebConfigurationManager.GetSection("system.web/customErrors");
+                if (config == null)
+                {
                     if (context.ErrorPage != null)
-                        return RedirectErrorPage (context.ErrorPage);
-                
+                        return RedirectErrorPage(context.ErrorPage);
+
                     return false;
                 }
-            
-                CustomError err = config.Errors [context.Response.StatusCode.ToString()];
+
+                CustomError err = config.Errors[context.Response.StatusCode.ToString()];
                 string redirect = err == null ? null : err.Redirect;
-                if (redirect == null) {
+                if (redirect == null)
+                {
                     redirect = context.ErrorPage;
                     if (redirect == null)
                         redirect = config.DefaultRedirect;
                 }
-            
+
                 if (redirect == null)
                     return false;
 
-                if (config.RedirectMode == CustomErrorsRedirectMode.ResponseRewrite) {
-                    context.Server.Execute (redirect);
+                if (config.RedirectMode == CustomErrorsRedirectMode.ResponseRewrite)
+                {
+                    context.Server.Execute(redirect);
                     return true;
                 }
-                
-                return RedirectErrorPage (redirect);
+
+                return RedirectErrorPage(redirect);
             }
-            catch (Exception ex) {
-                httpEx = HttpException.NewWithCode (500, String.Empty, ex, WebEventCodes.WebErrorOtherError);
+            catch (Exception ex)
+            {
+                httpEx = HttpException.NewWithCode(
+                    500,
+                    String.Empty,
+                    ex,
+                    WebEventCodes.WebErrorOtherError
+                );
                 return false;
             }
         }
-#endregion        
+#endregion
         internal static string BinDirectory
         {
-            get {
-                if (binDirectory == null) {
+            get
+            {
+                if (binDirectory == null)
+                {
                     AppDomainSetup setup = AppDomain.CurrentDomain.SetupInformation;
                     string baseDir = setup.ApplicationBase;
                     string bindir;
-                    
-                    foreach (string dir in BinDirs) {
-                        bindir = Path.Combine (baseDir, dir);
-                        if (!Directory.Exists (bindir))
+
+                    foreach (string dir in BinDirs)
+                    {
+                        bindir = Path.Combine(baseDir, dir);
+                        if (!Directory.Exists(bindir))
                             continue;
                         binDirectory = bindir;
                         break;
@@ -1764,103 +2082,126 @@ namespace System.Web
 
         internal static string[] BinDirectoryAssemblies
         {
-            get {
+            get
+            {
                 ArrayList binDlls = null;
                 string[] dlls;
-                
+
                 string bindir = BinDirectory;
-                if (bindir != null) {
-                    binDlls = new ArrayList ();
-                    dlls = Directory.GetFiles (bindir, "*.dll");
-                    binDlls.AddRange (dlls);
+                if (bindir != null)
+                {
+                    binDlls = new ArrayList();
+                    dlls = Directory.GetFiles(bindir, "*.dll");
+                    binDlls.AddRange(dlls);
                 }
 
                 if (binDlls == null)
-                    return new string[] {};
-                
-                return (string[]) binDlls.ToArray (typeof (string));
+                    return new string[] { };
+
+                return (string[])binDlls.ToArray(typeof(string));
             }
         }
-                    
-        internal static Type LoadType (string typeName)
+
+        internal static Type LoadType(string typeName)
         {
-            return LoadType (typeName, false);
+            return LoadType(typeName, false);
         }
-        
-        internal static Type LoadType (string typeName, bool throwOnMissing)
+
+        internal static Type LoadType(string typeName, bool throwOnMissing)
         {
-            Type type = Type.GetType (typeName);
+            Type type = Type.GetType(typeName);
             if (type != null)
                 return type;
 
-            Assembly [] assemblies = AppDomain.CurrentDomain.GetAssemblies ();
-            foreach (Assembly ass in assemblies) {
-                type = ass.GetType (typeName, false);
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (Assembly ass in assemblies)
+            {
+                type = ass.GetType(typeName, false);
                 if (type != null)
                     return type;
             }
 
             IList tla = System.Web.Compilation.BuildManager.TopLevelAssemblies;
-            if (tla != null && tla.Count > 0) {
-                foreach (Assembly asm in tla) {
+            if (tla != null && tla.Count > 0)
+            {
+                foreach (Assembly asm in tla)
+                {
                     if (asm == null)
                         continue;
-                    type = asm.GetType (typeName, false);
+                    type = asm.GetType(typeName, false);
                     if (type != null)
                         return type;
                 }
             }
 
             Exception loadException = null;
-            try {
+            try
+            {
                 type = null;
-                type = LoadTypeFromBin (typeName);
-            } catch (Exception ex) {
+                type = LoadTypeFromBin(typeName);
+            }
+            catch (Exception ex)
+            {
                 loadException = ex;
             }
-            
+
             if (type != null)
                 return type;
             if (throwOnMissing)
-                throw new TypeLoadException (String.Format ("Type '{0}' cannot be found", typeName), loadException);
-            
+                throw new TypeLoadException(
+                    String.Format("Type '{0}' cannot be found", typeName),
+                    loadException
+                );
+
             return null;
         }
 
-        internal static Type LoadType <TBaseType> (string typeName, bool throwOnMissing)
+        internal static Type LoadType<TBaseType>(string typeName, bool throwOnMissing)
         {
-            Type ret = LoadType (typeName, throwOnMissing);
+            Type ret = LoadType(typeName, throwOnMissing);
 
-            if (typeof (TBaseType).IsAssignableFrom (ret))
+            if (typeof(TBaseType).IsAssignableFrom(ret))
                 return ret;
 
             if (throwOnMissing)
-                throw new TypeLoadException (String.Format ("Type '{0}' found but it doesn't derive from base type '{1}'.", typeName, typeof (TBaseType)));
+                throw new TypeLoadException(
+                    String.Format(
+                        "Type '{0}' found but it doesn't derive from base type '{1}'.",
+                        typeName,
+                        typeof(TBaseType)
+                    )
+                );
 
             return null;
         }
-        
-        internal static Type LoadTypeFromBin (string typeName)
+
+        internal static Type LoadTypeFromBin(string typeName)
         {
             Type type = null;
-            
-            foreach (string s in BinDirectoryAssemblies) {
+
+            foreach (string s in BinDirectoryAssemblies)
+            {
                 Assembly binA = null;
-                
-                try {
-                    binA = Assembly.LoadFrom (s);
-                } catch (FileLoadException) {
-                    // ignore
-                    continue;
-                } catch (BadImageFormatException) {
+
+                try
+                {
+                    binA = Assembly.LoadFrom(s);
+                }
+                catch (FileLoadException)
+                {
                     // ignore
                     continue;
                 }
-                
-                type = binA.GetType (typeName, false);
+                catch (BadImageFormatException)
+                {
+                    // ignore
+                    continue;
+                }
+
+                type = binA.GetType(typeName, false);
                 if (type == null)
                     continue;
-                
+
                 return type;
             }
 
@@ -1870,105 +2211,115 @@ namespace System.Web
 
     //
     // Based on Fritz' Onion's AsyncRequestState class for asynchronous IHttpAsyncHandlers
-    // 
-    class AsyncRequestState : IAsyncResult {
+    //
+    class AsyncRequestState : IAsyncResult
+    {
         AsyncCallback cb;
         object cb_data;
         bool completed;
         ManualResetEvent complete_event = null;
-        
-        internal AsyncRequestState (ManualResetEvent complete_event, AsyncCallback cb, object cb_data)
+
+        internal AsyncRequestState(
+            ManualResetEvent complete_event,
+            AsyncCallback cb,
+            object cb_data
+        )
         {
             this.cb = cb;
             this.cb_data = cb_data;
             this.complete_event = complete_event;
         }
 
-        internal void Complete ()
+        internal void Complete()
         {
             completed = true;
-            try {
+            try
+            {
                 //
                 // TODO: if this throws an error, we have no way of reporting it
                 // Not really too bad, since the only failure might be
-                // `HttpRuntime.request_processed'.   
+                // `HttpRuntime.request_processed'.
                 //
                 if (cb != null)
-                    cb (this);
-            } catch {
+                    cb(this);
             }
-            
-            complete_event.Set ();
+            catch { }
+
+            complete_event.Set();
         }
 
-        public object AsyncState {
-            get {
-                return cb_data;
-            }
+        public object AsyncState
+        {
+            get { return cb_data; }
         }
 
-        public bool CompletedSynchronously {
-            get {
-                return false;
-            }
+        public bool CompletedSynchronously
+        {
+            get { return false; }
         }
 
-        public bool IsCompleted {
-            get {
-                return completed;
-            }
+        public bool IsCompleted
+        {
+            get { return completed; }
         }
 
-        public WaitHandle AsyncWaitHandle {
-            get {
-                return complete_event;
-            }
+        public WaitHandle AsyncWaitHandle
+        {
+            get { return complete_event; }
         }
     }
 
 #region Helper classes
-    
+
     //
     // A wrapper to keep track of begin/end pairs
     //
-    class AsyncInvoker {
+    class AsyncInvoker
+    {
         public BeginEventHandler begin;
         public EndEventHandler end;
         public object data;
         HttpApplication app;
         AsyncCallback callback;
-        
-        public AsyncInvoker (BeginEventHandler bh, EndEventHandler eh, HttpApplication a, object d)
+
+        public AsyncInvoker(BeginEventHandler bh, EndEventHandler eh, HttpApplication a, object d)
         {
             begin = bh;
             end = eh;
             data = d;
             app = a;
-            callback = new AsyncCallback (doAsyncCallback);
+            callback = new AsyncCallback(doAsyncCallback);
         }
 
-        public AsyncInvoker (BeginEventHandler bh, EndEventHandler eh, HttpApplication app) : this(bh, eh, app, null) { }
-        
-        public void Invoke (object sender, EventArgs e)
+        public AsyncInvoker(BeginEventHandler bh, EndEventHandler eh, HttpApplication app)
+            : this(bh, eh, app, null) { }
+
+        public void Invoke(object sender, EventArgs e)
         {
             IAsyncResult res;
-            res = begin (app, e, callback, data);
+            res = begin(app, e, callback, data);
         }
 
-        void doAsyncCallback (IAsyncResult res)
+        void doAsyncCallback(IAsyncResult res)
         {
-            ThreadPool.QueueUserWorkItem ((object ores) => {
-                IAsyncResult tres = (IAsyncResult) ores;
-                try {
-                    end (tres);
-                } catch (Exception ee) {
-                    // I tried using ProcessError(), but we only come here frome an Invokation in PipelineDone().
-                    // Using ProcessError, I still get a blank screen, this way, we at least log the error to console...
-                    Console.Error.WriteLine (ee.ToString ());
-                }
-            }, res);
+            ThreadPool.QueueUserWorkItem(
+                (object ores) =>
+                {
+                    IAsyncResult tres = (IAsyncResult)ores;
+                    try
+                    {
+                        end(tres);
+                    }
+                    catch (Exception ee)
+                    {
+                        // I tried using ProcessError(), but we only come here frome an Invokation in PipelineDone().
+                        // Using ProcessError, I still get a blank screen, this way, we at least log the error to console...
+                        Console.Error.WriteLine(ee.ToString());
+                    }
+                },
+                res
+            );
         }
     }
 #endregion
 }
-

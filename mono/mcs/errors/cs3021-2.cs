@@ -4,7 +4,5 @@
 
 using System;
 
-[CLSCompliant (false)]
-public partial interface I
-{
-}
+[CLSCompliant(false)]
+public partial interface I { }

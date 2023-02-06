@@ -4,13 +4,9 @@ namespace ParamMismatch
 {
     public class TestCase
     {
-        public static void Main()
-        {
-        }
-        
-        public TestCase()
-        {
-        }
+        public static void Main() { }
+
+        public TestCase() { }
 
         public event EventHandler Culprit
         {
@@ -18,14 +14,12 @@ namespace ParamMismatch
             {
                 // even when this contained something, compiling would fail
             }
-
             remove
             {
                 // even when this contained something, compiling would fail
             }
         }
-        ~TestCase()
-        {
-        }
+
+        ~TestCase() { }
     }
 }

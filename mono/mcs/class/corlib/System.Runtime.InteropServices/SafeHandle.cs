@@ -60,13 +60,14 @@ using System.Threading;
 
 namespace System.Runtime.InteropServices
 {
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public abstract partial class SafeHandle
     {
         const int RefCount_Mask = 0x7ffffffc;
         const int RefCount_One = 0x4;
 
-        enum State {
+        enum State
+        {
             Closed = 0x00000001,
             Disposed = 0x00000002,
         }
@@ -77,19 +78,24 @@ namespace System.Runtime.InteropServices
          * An example is calling a syscall and getting back ERROR_INVALID_HANDLE.
          * This method will normally leak handles!
          */
-        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-        public void SetHandleAsInvalid ()
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        public void SetHandleAsInvalid()
         {
-            try {}
-            finally {
-                int old_state, new_state;
+            try { }
+            finally
+            {
+                int old_state,
+                    new_state;
 
-                do {
+                do
+                {
                     old_state = _state;
-                    new_state = old_state | (int) State.Closed;
-                } while (Interlocked.CompareExchange (ref _state, new_state, old_state) != old_state);
+                    new_state = old_state | (int)State.Closed;
+                } while (
+                    Interlocked.CompareExchange(ref _state, new_state, old_state) != old_state
+                );
 
-                GC.SuppressFinalize (this);
+                GC.SuppressFinalize(this);
             }
         }
 
@@ -108,24 +114,29 @@ namespace System.Runtime.InteropServices
          * when the handle has already been (or is in the process of being)
          * released.
          */
-        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.MayFail)]
-        public void DangerousAddRef (ref bool success)
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+        public void DangerousAddRef(ref bool success)
         {
-            try {}
-            finally {
+            try { }
+            finally
+            {
                 if (!_fullyInitialized)
-                    throw new InvalidOperationException ();
+                    throw new InvalidOperationException();
 
-                int old_state, new_state;
+                int old_state,
+                    new_state;
 
-                do {
+                do
+                {
                     old_state = _state;
 
-                    if ((old_state & (int) State.Closed) != 0)
-                        throw new ObjectDisposedException (null, "Safe handle has been closed");
+                    if ((old_state & (int)State.Closed) != 0)
+                        throw new ObjectDisposedException(null, "Safe handle has been closed");
 
                     new_state = old_state + RefCount_One;
-                } while (Interlocked.CompareExchange (ref _state, new_state, old_state) != old_state);
+                } while (
+                    Interlocked.CompareExchange(ref _state, new_state, old_state) != old_state
+                );
 
                 success = true;
             }
@@ -142,42 +153,45 @@ namespace System.Runtime.InteropServices
          * correctness problem -- so don't ever expose Dangerous* calls out to
          * untrusted code.
          */
-        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.Success)]
-        public void DangerousRelease ()
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        public void DangerousRelease()
         {
-            DangerousReleaseInternal (false);
+            DangerousReleaseInternal(false);
         }
 
-        void InternalDispose ()
+        void InternalDispose()
         {
             if (!_fullyInitialized)
-                throw new InvalidOperationException ();
+                throw new InvalidOperationException();
 
-            DangerousReleaseInternal (true);
-            GC.SuppressFinalize (this);
+            DangerousReleaseInternal(true);
+            GC.SuppressFinalize(this);
         }
 
-        void InternalFinalize ()
+        void InternalFinalize()
         {
             if (_fullyInitialized)
-                DangerousReleaseInternal (true);
+                DangerousReleaseInternal(true);
         }
 
-        void DangerousReleaseInternal (bool dispose)
+        void DangerousReleaseInternal(bool dispose)
         {
-            try {}
-            finally {
+            try { }
+            finally
+            {
                 if (!_fullyInitialized)
-                    throw new InvalidOperationException ();
+                    throw new InvalidOperationException();
 
-                int old_state, new_state;
+                int old_state,
+                    new_state;
 
                 /* See AddRef above for the design of the synchronization here. Basically we
                  * will try to decrement the current ref count and, if that would take us to
                  * zero refs, set the closed state on the handle as well. */
                 bool perform_release = false;
 
-                do {
+                do
+                {
                     old_state = _state;
 
                     /* If this is a Dispose operation we have additional requirements (to
@@ -186,7 +200,8 @@ namespace System.Runtime.InteropServices
                      * state and, in the case of successful state update, leave the disposed
                      * bit set. Silently do nothing if Dispose has already been called
                      * (because we advertise that as a semantic of Dispose). */
-                    if (dispose && (old_state & (int) State.Disposed) != 0) {
+                    if (dispose && (old_state & (int)State.Disposed) != 0)
+                    {
                         /* we cannot use `return` in a finally block, so we have to ensure
                          * that we are not releasing the handle */
                         perform_release = false;
@@ -198,11 +213,11 @@ namespace System.Runtime.InteropServices
                      * hitting zero though -- that can happen if SetHandleAsInvalid is
                      * used). */
                     if ((old_state & RefCount_Mask) == 0)
-                        throw new ObjectDisposedException (null, "Safe handle has been closed");
+                        throw new ObjectDisposedException(null, "Safe handle has been closed");
 
                     if ((old_state & RefCount_Mask) != RefCount_One)
                         perform_release = false;
-                    else if ((old_state & (int) State.Closed) != 0)
+                    else if ((old_state & (int)State.Closed) != 0)
                         perform_release = false;
                     else if (!_ownsHandle)
                         perform_release = false;
@@ -218,13 +233,15 @@ namespace System.Runtime.InteropServices
                     // the state moves to closed.
                     new_state = old_state - RefCount_One;
                     if ((old_state & RefCount_Mask) == RefCount_One)
-                        new_state |= (int) State.Closed;
+                        new_state |= (int)State.Closed;
                     if (dispose)
-                        new_state |= (int) State.Disposed;
-                } while (Interlocked.CompareExchange (ref _state, new_state, old_state) != old_state);
+                        new_state |= (int)State.Disposed;
+                } while (
+                    Interlocked.CompareExchange(ref _state, new_state, old_state) != old_state
+                );
 
                 if (perform_release)
-                    ReleaseHandle ();
+                    ReleaseHandle();
             }
         }
     }

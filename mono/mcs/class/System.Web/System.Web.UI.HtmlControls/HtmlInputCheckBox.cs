@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,41 +30,53 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Security.Permissions;
 
-namespace System.Web.UI.HtmlControls 
+namespace System.Web.UI.HtmlControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [DefaultEvent ("ServerChange")]
+    [DefaultEvent("ServerChange")]
     [SupportsEventValidation]
     public class HtmlInputCheckBox : HtmlInputControl, IPostBackDataHandler
     {
-        static readonly object EventServerChange = new object ();
-        
-        public HtmlInputCheckBox () : base ("checkbox")
-        {
-        }
+        static readonly object EventServerChange = new object();
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        public HtmlInputCheckBox()
+            : base("checkbox") { }
+
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Misc")]
-        [TypeConverter (typeof(MinimizableAttributeTypeConverter))]
-        public bool Checked {
-            get {
+        [TypeConverter(typeof(MinimizableAttributeTypeConverter))]
+        public bool Checked
+        {
+            get
+            {
                 string check = Attributes["checked"];
 
-                if (check == null) {
+                if (check == null)
+                {
                     return (false);
                 }
 
                 return (true);
             }
-            set {
-                if (value == false) {
-                    Attributes.Remove ("checked");
-                } else {
+            set
+            {
+                if (value == false)
+                {
+                    Attributes.Remove("checked");
+                }
+                else
+                {
                     Attributes["checked"] = "checked";
                 }
             }
@@ -72,78 +84,79 @@ namespace System.Web.UI.HtmlControls
 
         [WebSysDescription("")]
         [WebCategory("Action")]
-        public event EventHandler ServerChange {
-            add {
-                Events.AddHandler (EventServerChange, value);
-            }
-            remove {
-                Events.RemoveHandler (EventServerChange, value);
-            }
+        public event EventHandler ServerChange
+        {
+            add { Events.AddHandler(EventServerChange, value); }
+            remove { Events.RemoveHandler(EventServerChange, value); }
         }
 
-        protected override void RenderAttributes (HtmlTextWriter writer)
+        protected override void RenderAttributes(HtmlTextWriter writer)
         {
             Page page = Page;
             if (page != null)
-                page.ClientScript.RegisterForEventValidation (UniqueID);
-            base.RenderAttributes (writer);
+                page.ClientScript.RegisterForEventValidation(UniqueID);
+            base.RenderAttributes(writer);
         }
 
-        protected internal override void OnPreRender (EventArgs e)
+        protected internal override void OnPreRender(EventArgs e)
         {
-            base.OnPreRender (e);
+            base.OnPreRender(e);
 
             Page page = Page;
-            if (page != null && !Disabled) {
-                page.RegisterRequiresPostBack (this);
-                page.RegisterEnabledControl (this);
+            if (page != null && !Disabled)
+            {
+                page.RegisterRequiresPostBack(this);
+                page.RegisterEnabledControl(this);
             }
         }
 
-        protected virtual void OnServerChange (EventArgs e)
+        protected virtual void OnServerChange(EventArgs e)
         {
             EventHandler handler = (EventHandler)Events[EventServerChange];
 
             if (handler != null)
-                handler (this, e);
+                handler(this, e);
         }
 
-        bool LoadPostDataInternal (string postDataKey, NameValueCollection postCollection)
+        bool LoadPostDataInternal(string postDataKey, NameValueCollection postCollection)
         {
             string postedValue = postCollection[postDataKey];
-            bool postedBool = ((postedValue != null) &&
-                       (postedValue.Length > 0));
+            bool postedBool = ((postedValue != null) && (postedValue.Length > 0));
 
-            if (Checked != postedBool) {
+            if (Checked != postedBool)
+            {
                 Checked = postedBool;
                 return (true);
             }
-            
+
             return (false);
         }
 
-        void RaisePostDataChangedEventInternal ()
+        void RaisePostDataChangedEventInternal()
         {
-            OnServerChange (EventArgs.Empty);
+            OnServerChange(EventArgs.Empty);
         }
 
-        protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
         {
-            return LoadPostDataInternal (postDataKey, postCollection);
+            return LoadPostDataInternal(postDataKey, postCollection);
         }
 
-        protected virtual void RaisePostDataChangedEvent ()
+        protected virtual void RaisePostDataChangedEvent()
         {
-            ValidateEvent (UniqueID, String.Empty);
-            RaisePostDataChangedEventInternal ();
-        }
-        
-        bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
-        {
-            return LoadPostData (postDataKey, postCollection);
+            ValidateEvent(UniqueID, String.Empty);
+            RaisePostDataChangedEventInternal();
         }
 
-        void IPostBackDataHandler.RaisePostDataChangedEvent ()
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
+        {
+            return LoadPostData(postDataKey, postCollection);
+        }
+
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
         {
             RaisePostDataChangedEvent();
         }

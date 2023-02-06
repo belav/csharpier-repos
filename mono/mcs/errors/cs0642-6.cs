@@ -4,10 +4,10 @@
 
 public class C
 {
-    public void Test ()
+    public void Test()
     {
-        lock (this);
-            { }
+        lock (this)
+            ;
+        { }
     }
 }
-

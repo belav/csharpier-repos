@@ -1,6 +1,9 @@
 class C : B
 {
-    public override int Foo { set {} }
+    public override int Foo
+    {
+        set { }
+    }
 }
 
 abstract class B
@@ -10,10 +13,13 @@ abstract class B
 
 public class Test
 {
-    static int Foo { set {} }
-
-    public static void Main ()
+    static int Foo
     {
-        var c = new C () { Foo = 1 };
+        set { }
+    }
+
+    public static void Main()
+    {
+        var c = new C() { Foo = 1 };
     }
 }

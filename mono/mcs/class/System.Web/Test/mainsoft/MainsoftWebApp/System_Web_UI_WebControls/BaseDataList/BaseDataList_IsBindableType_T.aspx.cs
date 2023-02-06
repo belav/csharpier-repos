@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class BaseDataList_IsBindableType_T
-        : GHTDataListBase
+    public class BaseDataList_IsBindableType_T : GHTDataListBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,35 +46,38 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private Type [] marrBindaleType = {typeof(System.Boolean), 
-                                              typeof(System.Byte), 
-                                              typeof(System.Int16),
-                                              typeof(System.UInt16),
-                                              typeof(System.Int32), 
-                                              typeof(System.UInt32),
-                                              typeof(System.Int64), 
-                                              typeof(System.UInt64), 
-                                              typeof(System.Char), 
-                                              typeof(System.Double), 
-                                              typeof(System.Single), 
-                                              typeof(System.DateTime), 
-                                              typeof(System.Decimal), 
-                                              typeof(System.SByte), 
-                                              typeof(MyPrivateClass), 
-                                              typeof(System.String)};
+        private Type[] marrBindaleType =
+        {
+            typeof(System.Boolean),
+            typeof(System.Byte),
+            typeof(System.Int16),
+            typeof(System.UInt16),
+            typeof(System.Int32),
+            typeof(System.UInt32),
+            typeof(System.Int64),
+            typeof(System.UInt64),
+            typeof(System.Char),
+            typeof(System.Double),
+            typeof(System.Single),
+            typeof(System.DateTime),
+            typeof(System.Decimal),
+            typeof(System.SByte),
+            typeof(MyPrivateClass),
+            typeof(System.String)
+        };
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
             HtmlForm frm = (HtmlForm)FindControl("form1");
@@ -83,8 +85,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             Test(typeof(System.Web.UI.WebControls.DataGrid));
             Test(typeof(System.Web.UI.WebControls.DataList));
             GHTTestEnd();
-
         }
+
         private void Test(Type CtlType)
         {
             Type type1;
@@ -97,7 +99,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 {
                     type1 = typeArray1[num1];
                     flag1 = BaseDataList.IsBindableType(type1);
-                    this.GHTSubTestAddResult(type1.ToString() + " is bindable = " + flag1.ToString());
+                    this.GHTSubTestAddResult(
+                        type1.ToString() + " is bindable = " + flag1.ToString()
+                    );
                 }
             }
             catch (Exception exception4)
@@ -124,9 +128,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 return;
             }
         }
- 
-        private class MyPrivateClass
-        {
-        }
+
+        private class MyPrivateClass { }
     }
 }

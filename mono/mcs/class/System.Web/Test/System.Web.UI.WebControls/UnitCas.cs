@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,34 +36,39 @@ using System.Web.UI.WebControls;
 
 using MonoTests.System.Web.UI.WebControls;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
-
+namespace MonoCasTests.System.Web.UI.WebControls
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class UnitCas : AspNetHostingNone {
+    [Category("CAS")]
+    public class UnitCas : AspNetHostingNone
+    {
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            UnitTest unit = new UnitTest ();
-            unit.UnitConstructors ();
-            unit.ParseCultures ();
-            unit.UnitEquality ();
-            unit.UnitImplicit ();
-            unit.Unit_IFormatProviderToString ();
+            UnitTest unit = new UnitTest();
+            unit.UnitConstructors();
+            unit.ParseCultures();
+            unit.UnitEquality();
+            unit.UnitImplicit();
+            unit.Unit_IFormatProviderToString();
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (int) });
-            Assert.IsNotNull (ci, ".ctor(int)");
-            return ci.Invoke (new object[1] { 0 });
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(int) });
+            Assert.IsNotNull(ci, ".ctor(int)");
+            return ci.Invoke(new object[1] { 0 });
         }
 
-        public override Type Type {
-            get { return typeof (Unit); }
+        public override Type Type
+        {
+            get { return typeof(Unit); }
         }
     }
 }

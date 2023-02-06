@@ -26,28 +26,28 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
-    sealed class CopyImageVisitor : BaseImageVisitor {
-
+namespace Mono.Cecil.Binary
+{
+    sealed class CopyImageVisitor : BaseImageVisitor
+    {
         Image m_newImage;
         Image m_originalImage;
 
-        public CopyImageVisitor (Image originalImage)
+        public CopyImageVisitor(Image originalImage)
         {
             m_originalImage = originalImage;
         }
 
-        public override void VisitImage (Image img)
+        public override void VisitImage(Image img)
         {
             m_newImage = img;
             if (m_originalImage.DebugHeader != null)
-                m_newImage.AddDebugHeader ();
+                m_newImage.AddDebugHeader();
 
             m_newImage.CLIHeader.Flags = m_originalImage.CLIHeader.Flags;
         }
 
-        public override void VisitDebugHeader (DebugHeader dbgHeader)
+        public override void VisitDebugHeader(DebugHeader dbgHeader)
         {
             DebugHeader old = m_originalImage.DebugHeader;
             dbgHeader.Age = old.Age;
@@ -58,7 +58,7 @@ namespace Mono.Cecil.Binary {
             dbgHeader.Type = old.Type;
         }
 
-        public override void VisitSectionCollection (SectionCollection sections)
+        public override void VisitSectionCollection(SectionCollection sections)
         {
             Section old = null;
             foreach (Section s in m_originalImage.Sections)
@@ -68,49 +68,51 @@ namespace Mono.Cecil.Binary {
             if (old == null)
                 return;
 
-            Section rsrc = new Section ();
+            Section rsrc = new Section();
             rsrc.Characteristics = old.Characteristics;
             rsrc.Name = old.Name;
 
-            sections.Add (rsrc);
+            sections.Add(rsrc);
         }
 
-        public override void TerminateImage (Image img)
+        public override void TerminateImage(Image img)
         {
             if (m_originalImage.ResourceDirectoryRoot == null)
                 return;
 
-            m_newImage.ResourceDirectoryRoot = CloneResourceDirectoryTable (m_originalImage.ResourceDirectoryRoot);
+            m_newImage.ResourceDirectoryRoot = CloneResourceDirectoryTable(
+                m_originalImage.ResourceDirectoryRoot
+            );
         }
 
-        ResourceDirectoryTable CloneResourceDirectoryTable (ResourceDirectoryTable old)
+        ResourceDirectoryTable CloneResourceDirectoryTable(ResourceDirectoryTable old)
         {
-            ResourceDirectoryTable rdt = new ResourceDirectoryTable ();
+            ResourceDirectoryTable rdt = new ResourceDirectoryTable();
             foreach (ResourceDirectoryEntry oldEntry in old.Entries)
-                rdt.Entries.Add (CloneResourceDirectoryEntry (oldEntry));
+                rdt.Entries.Add(CloneResourceDirectoryEntry(oldEntry));
 
             return rdt;
         }
 
-        ResourceDirectoryEntry CloneResourceDirectoryEntry (ResourceDirectoryEntry old)
+        ResourceDirectoryEntry CloneResourceDirectoryEntry(ResourceDirectoryEntry old)
         {
             ResourceDirectoryEntry rde;
             if (old.IdentifiedByName)
                 rde = new ResourceDirectoryEntry(old.Name);
             else
-                rde = new ResourceDirectoryEntry (old.ID);
+                rde = new ResourceDirectoryEntry(old.ID);
 
             if (old.Child is ResourceDirectoryTable)
-                rde.Child = CloneResourceDirectoryTable (old.Child as ResourceDirectoryTable);
+                rde.Child = CloneResourceDirectoryTable(old.Child as ResourceDirectoryTable);
             else
-                rde.Child = CloneResourceDataEntry (old.Child as ResourceDataEntry);
+                rde.Child = CloneResourceDataEntry(old.Child as ResourceDataEntry);
 
             return rde;
         }
 
-        ResourceDataEntry CloneResourceDataEntry (ResourceDataEntry old)
+        ResourceDataEntry CloneResourceDataEntry(ResourceDataEntry old)
         {
-            ResourceDataEntry rde = new ResourceDataEntry ();
+            ResourceDataEntry rde = new ResourceDataEntry();
             rde.Size = old.Size;
             rde.Codepage = old.Codepage;
             rde.ResourceData = old.ResourceData;

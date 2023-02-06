@@ -3,18 +3,30 @@ namespace System.Workflow.ComponentModel.Design
     using System;
     using System.ComponentModel.Design;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowMenuCommands : StandardCommands
     {
         //Debugger commmands in \\cpvsbuild\drops\whidbey\pd6\raw\current\sources\debugger\vsdebug\resource\VSDbgCmdBase.ctc
 
-        public static readonly Guid WorkflowCommandSetId = new Guid("9aeb9524-82c6-40b9-9285-8d85d3dbd4c4");
-        public static readonly Guid DebugCommandSetId = new Guid("C9DD4A59-47FB-11d2-83E7-00C04F9902C1");
-        public static readonly Guid DebugWorkflowGroupId = new Guid("{e186451b-2313-42bd-84b9-815f1c923aef}");
+        public static readonly Guid WorkflowCommandSetId = new Guid(
+            "9aeb9524-82c6-40b9-9285-8d85d3dbd4c4"
+        );
+        public static readonly Guid DebugCommandSetId = new Guid(
+            "C9DD4A59-47FB-11d2-83E7-00C04F9902C1"
+        );
+        public static readonly Guid DebugWorkflowGroupId = new Guid(
+            "{e186451b-2313-42bd-84b9-815f1c923aef}"
+        );
 
         //standard vs command set ids
-        internal static readonly Guid StandardCommandSet97Id = new Guid("{5efc7975-14bc-11cf-9b2b-00aa00573819}");
-        internal static readonly Guid StandardCommandSet2kId = new Guid("{1496A755-94DE-11D0-8C3F-00C04FC2AAE2}");
+        internal static readonly Guid StandardCommandSet97Id = new Guid(
+            "{5efc7975-14bc-11cf-9b2b-00aa00573819}"
+        );
+        internal static readonly Guid StandardCommandSet2kId = new Guid(
+            "{1496A755-94DE-11D0-8C3F-00C04FC2AAE2}"
+        );
 
         //toolbar
         public const int WorkflowToolBar = 0x050C;
@@ -40,16 +52,15 @@ namespace System.Workflow.ComponentModel.Design
         private const int cmdidBreakpointAction = 0x00000146;
         private const int cmdidShowExecutionState = 0x00001002;
 
-
         //standard print command ids
-        private const int cmdidPrint = 0x001b;  //27
-        private const int cmdidPageSetup = 0x00e3;  //227
-        private const int cmdidPrintPreview = 0x00e4;  //228
+        private const int cmdidPrint = 0x001b; //27
+        private const int cmdidPageSetup = 0x00e3; //227
+        private const int cmdidPrintPreview = 0x00e4; //228
 
         //Properties command id
         private const int cmdidProperties = 0x1001;
 
-        // zoom 
+        // zoom
         private const int cmdidWOEZoom400 = 0x3100;
         private const int cmdidWOEZoom300 = 0x3101;
         private const int cmdidWOEZoom200 = 0x3102;
@@ -104,9 +115,7 @@ namespace System.Workflow.ComponentModel.Design
         private const int mnuidDesignerActions = 0x0509;
         private const int mnuidPan = 0x050B;
 
-        public WorkflowMenuCommands()
-        {
-        }
+        public WorkflowMenuCommands() { }
 
         //verbids
         public static readonly int VerbGroupGeneral = StandardCommands.VerbFirst.ID;
@@ -119,83 +128,224 @@ namespace System.Workflow.ComponentModel.Design
 
         //Menuids
         public static readonly Guid MenuGuid = WorkflowCommandSetId;
-        public static readonly CommandID SelectionMenu = new CommandID(WorkflowCommandSetId, mnuidSelection);
-        public static readonly CommandID DesignerActionsMenu = new CommandID(WorkflowCommandSetId, mnuidDesignerActions);
+        public static readonly CommandID SelectionMenu = new CommandID(
+            WorkflowCommandSetId,
+            mnuidSelection
+        );
+        public static readonly CommandID DesignerActionsMenu = new CommandID(
+            WorkflowCommandSetId,
+            mnuidDesignerActions
+        );
 
         //debug
-        public static readonly CommandID InsertBreakpointMenu = new CommandID(StandardCommandSet97Id, cmdidInsertBreakpoint);
-        public static readonly CommandID EnableBreakpointMenu = new CommandID(StandardCommandSet97Id, cmdidEnableBreakpoint);
-        public static readonly CommandID ToggleBreakpointMenu = new CommandID(StandardCommandSet97Id, cmdidToggleBreakpoint);
-        public static readonly CommandID ClearBreakpointsMenu = new CommandID(StandardCommandSet97Id, cmdidClearBreakpoints);
-        public static readonly CommandID ShowNextStatementMenu = new CommandID(StandardCommandSet97Id, cmdidShowNextStatement);
-        public static readonly CommandID RunToCursorMenu = new CommandID(StandardCommandSet97Id, cmdidRunToCursor);
-        public static readonly CommandID SetNextStatementMenu = new CommandID(StandardCommandSet97Id, cmdidSetNextStatement);
-        public static readonly CommandID GotoDisassemblyMenu = new CommandID(DebugCommandSetId, cmdidGoToDisassembly);
-        public static readonly CommandID NewFileTracePointMenu = new CommandID(DebugCommandSetId, cmdidNewFileTracepoint);
-        public static readonly CommandID NewDataBreakpointMenu = new CommandID(DebugCommandSetId, cmdidNewDataBreakpoint);
+        public static readonly CommandID InsertBreakpointMenu = new CommandID(
+            StandardCommandSet97Id,
+            cmdidInsertBreakpoint
+        );
+        public static readonly CommandID EnableBreakpointMenu = new CommandID(
+            StandardCommandSet97Id,
+            cmdidEnableBreakpoint
+        );
+        public static readonly CommandID ToggleBreakpointMenu = new CommandID(
+            StandardCommandSet97Id,
+            cmdidToggleBreakpoint
+        );
+        public static readonly CommandID ClearBreakpointsMenu = new CommandID(
+            StandardCommandSet97Id,
+            cmdidClearBreakpoints
+        );
+        public static readonly CommandID ShowNextStatementMenu = new CommandID(
+            StandardCommandSet97Id,
+            cmdidShowNextStatement
+        );
+        public static readonly CommandID RunToCursorMenu = new CommandID(
+            StandardCommandSet97Id,
+            cmdidRunToCursor
+        );
+        public static readonly CommandID SetNextStatementMenu = new CommandID(
+            StandardCommandSet97Id,
+            cmdidSetNextStatement
+        );
+        public static readonly CommandID GotoDisassemblyMenu = new CommandID(
+            DebugCommandSetId,
+            cmdidGoToDisassembly
+        );
+        public static readonly CommandID NewFileTracePointMenu = new CommandID(
+            DebugCommandSetId,
+            cmdidNewFileTracepoint
+        );
+        public static readonly CommandID NewDataBreakpointMenu = new CommandID(
+            DebugCommandSetId,
+            cmdidNewDataBreakpoint
+        );
 
-        public static readonly CommandID InsertTracePointMenu = new CommandID(DebugCommandSetId, cmdidInsertTracepoint);
-        public static readonly CommandID BreakpointLocationMenu = new CommandID(DebugCommandSetId, cmdidBreakpointLocation);
-        public static readonly CommandID BreakpointConditionMenu = new CommandID(DebugCommandSetId, cmdidBreakpointCondition);
-        public static readonly CommandID BreakpointHitCountMenu = new CommandID(DebugCommandSetId, cmdidBreakpointHitCount);
-        public static readonly CommandID BreakpointConstraintsMenu = new CommandID(DebugCommandSetId, cmdidBreakpointConstraints);
-        public static readonly CommandID BreakpointActionMenu = new CommandID(DebugCommandSetId, cmdidBreakpointAction);
-        public static readonly CommandID ExecutionStateMenu = new CommandID(WorkflowCommandSetId, cmdidShowExecutionState);
+        public static readonly CommandID InsertTracePointMenu = new CommandID(
+            DebugCommandSetId,
+            cmdidInsertTracepoint
+        );
+        public static readonly CommandID BreakpointLocationMenu = new CommandID(
+            DebugCommandSetId,
+            cmdidBreakpointLocation
+        );
+        public static readonly CommandID BreakpointConditionMenu = new CommandID(
+            DebugCommandSetId,
+            cmdidBreakpointCondition
+        );
+        public static readonly CommandID BreakpointHitCountMenu = new CommandID(
+            DebugCommandSetId,
+            cmdidBreakpointHitCount
+        );
+        public static readonly CommandID BreakpointConstraintsMenu = new CommandID(
+            DebugCommandSetId,
+            cmdidBreakpointConstraints
+        );
+        public static readonly CommandID BreakpointActionMenu = new CommandID(
+            DebugCommandSetId,
+            cmdidBreakpointAction
+        );
+        public static readonly CommandID ExecutionStateMenu = new CommandID(
+            WorkflowCommandSetId,
+            cmdidShowExecutionState
+        );
 
-        public static readonly CommandID DebugStepInstanceMenu = new CommandID(WorkflowCommandSetId, cmdidDebugWorkflowSteppingInstance);
-        public static readonly CommandID DebugStepBranchMenu = new CommandID(WorkflowCommandSetId, cmdidDebugWorkflowSteppingBranch);
+        public static readonly CommandID DebugStepInstanceMenu = new CommandID(
+            WorkflowCommandSetId,
+            cmdidDebugWorkflowSteppingInstance
+        );
+        public static readonly CommandID DebugStepBranchMenu = new CommandID(
+            WorkflowCommandSetId,
+            cmdidDebugWorkflowSteppingBranch
+        );
 
-        //print 
+        //print
         public static readonly CommandID Print = new CommandID(StandardCommandSet97Id, cmdidPrint);
-        public static readonly CommandID PageSetup = new CommandID(StandardCommandSet97Id, cmdidPageSetup);
-        public static readonly CommandID PrintPreview = new CommandID(StandardCommandSet97Id, cmdidPrintPreview);
+        public static readonly CommandID PageSetup = new CommandID(
+            StandardCommandSet97Id,
+            cmdidPageSetup
+        );
+        public static readonly CommandID PrintPreview = new CommandID(
+            StandardCommandSet97Id,
+            cmdidPrintPreview
+        );
 
-        public static readonly CommandID PageUp = new CommandID(StandardCommandSet2kId, cmdidPageUp);
-        public static readonly CommandID PageDown = new CommandID(StandardCommandSet2kId, cmdidPageDn);
+        public static readonly CommandID PageUp = new CommandID(
+            StandardCommandSet2kId,
+            cmdidPageUp
+        );
+        public static readonly CommandID PageDown = new CommandID(
+            StandardCommandSet2kId,
+            cmdidPageDn
+        );
 
         //Properties
-        public static readonly CommandID DesignerProperties = new CommandID(WorkflowCommandSetId, cmdidProperties);
+        public static readonly CommandID DesignerProperties = new CommandID(
+            WorkflowCommandSetId,
+            cmdidProperties
+        );
 
         // zoom menu
         public static readonly CommandID ZoomMenu = new CommandID(WorkflowCommandSetId, mnuidZoom);
-        public static readonly CommandID PageLayoutMenu = new CommandID(WorkflowCommandSetId, mnuidPageLayout);
+        public static readonly CommandID PageLayoutMenu = new CommandID(
+            WorkflowCommandSetId,
+            mnuidPageLayout
+        );
         public static readonly CommandID PanMenu = new CommandID(WorkflowCommandSetId, mnuidPan);
 
         // zoom commands
-        public static readonly CommandID Zoom400Mode = new CommandID(WorkflowCommandSetId, cmdidWOEZoom400);
-        public static readonly CommandID Zoom300Mode = new CommandID(WorkflowCommandSetId, cmdidWOEZoom300);
-        public static readonly CommandID Zoom200Mode = new CommandID(WorkflowCommandSetId, cmdidWOEZoom200);
-        public static readonly CommandID Zoom150Mode = new CommandID(WorkflowCommandSetId, cmdidWOEZoom150);
-        public static readonly CommandID Zoom100Mode = new CommandID(WorkflowCommandSetId, cmdidWOEZoom100);
-        public static readonly CommandID Zoom75Mode = new CommandID(WorkflowCommandSetId, cmdidWOEZoom75);
-        public static readonly CommandID Zoom50Mode = new CommandID(WorkflowCommandSetId, cmdidWOEZoom50);
-        public static readonly CommandID ShowAll = new CommandID(WorkflowCommandSetId, cmdidWOEShowAll);
+        public static readonly CommandID Zoom400Mode = new CommandID(
+            WorkflowCommandSetId,
+            cmdidWOEZoom400
+        );
+        public static readonly CommandID Zoom300Mode = new CommandID(
+            WorkflowCommandSetId,
+            cmdidWOEZoom300
+        );
+        public static readonly CommandID Zoom200Mode = new CommandID(
+            WorkflowCommandSetId,
+            cmdidWOEZoom200
+        );
+        public static readonly CommandID Zoom150Mode = new CommandID(
+            WorkflowCommandSetId,
+            cmdidWOEZoom150
+        );
+        public static readonly CommandID Zoom100Mode = new CommandID(
+            WorkflowCommandSetId,
+            cmdidWOEZoom100
+        );
+        public static readonly CommandID Zoom75Mode = new CommandID(
+            WorkflowCommandSetId,
+            cmdidWOEZoom75
+        );
+        public static readonly CommandID Zoom50Mode = new CommandID(
+            WorkflowCommandSetId,
+            cmdidWOEZoom50
+        );
+        public static readonly CommandID ShowAll = new CommandID(
+            WorkflowCommandSetId,
+            cmdidWOEShowAll
+        );
 
         // page layout
-        public static readonly CommandID DefaultPage = new CommandID(WorkflowCommandSetId, cmdidDefaultPage);
-        public static readonly CommandID PrintPreviewPage = new CommandID(WorkflowCommandSetId, cmdidPrintPreviewPage);
+        public static readonly CommandID DefaultPage = new CommandID(
+            WorkflowCommandSetId,
+            cmdidDefaultPage
+        );
+        public static readonly CommandID PrintPreviewPage = new CommandID(
+            WorkflowCommandSetId,
+            cmdidPrintPreviewPage
+        );
 
         //Common commands
         public static readonly CommandID Expand = new CommandID(WorkflowCommandSetId, cmdidExpand);
-        public static readonly CommandID Collapse = new CommandID(WorkflowCommandSetId, cmdidCollapse);
-        public static readonly CommandID Disable = new CommandID(WorkflowCommandSetId, cmdidDisable);
+        public static readonly CommandID Collapse = new CommandID(
+            WorkflowCommandSetId,
+            cmdidCollapse
+        );
+        public static readonly CommandID Disable = new CommandID(
+            WorkflowCommandSetId,
+            cmdidDisable
+        );
         public static readonly CommandID Enable = new CommandID(WorkflowCommandSetId, cmdidEnable);
 
-        public static readonly CommandID ChangeTheme = new CommandID(WorkflowCommandSetId, cmdidChangeTheme);
-        public static readonly CommandID CreateTheme = new CommandID(WorkflowCommandSetId, cmdidCreateTheme);
+        public static readonly CommandID ChangeTheme = new CommandID(
+            WorkflowCommandSetId,
+            cmdidChangeTheme
+        );
+        public static readonly CommandID CreateTheme = new CommandID(
+            WorkflowCommandSetId,
+            cmdidCreateTheme
+        );
 
         // zoom In/Out and panning
         public static readonly CommandID ZoomIn = new CommandID(WorkflowCommandSetId, cmdidZoomIn);
-        public static readonly CommandID ZoomOut = new CommandID(WorkflowCommandSetId, cmdidZoomOut);
+        public static readonly CommandID ZoomOut = new CommandID(
+            WorkflowCommandSetId,
+            cmdidZoomOut
+        );
         public static readonly CommandID Pan = new CommandID(WorkflowCommandSetId, cmdidPan);
-        public static readonly CommandID DefaultFilter = new CommandID(WorkflowCommandSetId, cmdidDefaultFilter);
+        public static readonly CommandID DefaultFilter = new CommandID(
+            WorkflowCommandSetId,
+            cmdidDefaultFilter
+        );
 
         //zoom level combo
-        public static readonly CommandID ZoomLevelCombo = new CommandID(WorkflowCommandSetId, cmdidZoomLevelCombo);
-        public static readonly CommandID ZoomLevelListHandler = new CommandID(WorkflowCommandSetId, cmdidZoomLevelListHandler);
+        public static readonly CommandID ZoomLevelCombo = new CommandID(
+            WorkflowCommandSetId,
+            cmdidZoomLevelCombo
+        );
+        public static readonly CommandID ZoomLevelListHandler = new CommandID(
+            WorkflowCommandSetId,
+            cmdidZoomLevelListHandler
+        );
 
         //Save workflow commands
-        public static readonly CommandID SaveAsImage = new CommandID(WorkflowCommandSetId, cmdidSaveWorkflowAsImage);
-        public static readonly CommandID CopyToClipboard = new CommandID(WorkflowCommandSetId, cmdidCopyWorkflowToClipboard);
+        public static readonly CommandID SaveAsImage = new CommandID(
+            WorkflowCommandSetId,
+            cmdidSaveWorkflowAsImage
+        );
+        public static readonly CommandID CopyToClipboard = new CommandID(
+            WorkflowCommandSetId,
+            cmdidCopyWorkflowToClipboard
+        );
     }
 }

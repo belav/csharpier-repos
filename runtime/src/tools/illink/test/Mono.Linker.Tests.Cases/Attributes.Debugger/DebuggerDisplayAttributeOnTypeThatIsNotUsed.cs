@@ -5,21 +5,18 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.Attributes.Debugger
 {
 #if NETCOREAPP
-    [SetupLinkAttributesFile ("DebuggerAttributesRemoved.xml")]
+    [SetupLinkAttributesFile("DebuggerAttributesRemoved.xml")]
 #else
-    [SetupLinkerTrimMode ("link")]
-    [SetupLinkerKeepDebugMembers ("false")]
-
+    [SetupLinkerTrimMode("link")]
+    [SetupLinkerKeepDebugMembers("false")]
     // Can be removed once this bug is fixed https://bugzilla.xamarin.com/show_bug.cgi?id=58168
-    [SkipPeVerify (SkipPeVerifyForToolchian.Pedump)]
+    [SkipPeVerify(SkipPeVerifyForToolchian.Pedump)]
 #endif
     public class DebuggerDisplayAttributeOnTypeThatIsNotUsed
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
-        [DebuggerDisplay ("{Property}")]
+        [DebuggerDisplay("{Property}")]
         class Foo
         {
             public int Property { get; set; }

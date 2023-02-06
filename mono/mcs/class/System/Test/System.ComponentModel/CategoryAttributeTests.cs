@@ -28,11 +28,11 @@ using System;
 using CM = System.ComponentModel;
 using NUnit.Framework;
 
-namespace MonoTests.System.ComponentModel {
-
+namespace MonoTests.System.ComponentModel
+{
     [TestFixture]
-    public class CategoryAttributeTest {
-
+    public class CategoryAttributeTest
+    {
         [Test]
         public void CategoryNamesTest()
         {
@@ -59,10 +59,10 @@ namespace MonoTests.System.ComponentModel {
         }
 
         [Test]
-        public void CustomCategory ()
+        public void CustomCategory()
         {
-            var ca = new CM.CategoryAttribute ("Foo Category");
-            Assert.AreEqual ("Foo Category", ca.Category);
+            var ca = new CM.CategoryAttribute("Foo Category");
+            Assert.AreEqual("Foo Category", ca.Category);
         }
     }
 }

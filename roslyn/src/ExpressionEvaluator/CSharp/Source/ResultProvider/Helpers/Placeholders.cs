@@ -20,8 +20,10 @@ namespace Microsoft.CodeAnalysis
 // This needs to be re-defined here to avoid ambiguity, because we allow this project to target .NET 4.0 on machines without 2.0 installed.
 namespace System.Runtime.CompilerServices
 {
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-    internal class ExtensionAttribute : Attribute
-    {
-    }
+    [AttributeUsage(
+        AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method,
+        AllowMultiple = false,
+        Inherited = false
+    )]
+    internal class ExtensionAttribute : Attribute { }
 }

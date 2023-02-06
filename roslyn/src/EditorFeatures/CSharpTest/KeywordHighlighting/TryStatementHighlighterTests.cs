@@ -15,14 +15,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class TryStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(TryStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(TryStatementHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -39,14 +38,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample1_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -63,14 +63,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample1_3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -87,14 +88,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample1_4()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -111,14 +113,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExceptionFilter1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -135,14 +138,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExceptionFilter2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -159,14 +163,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExceptionFilter3()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -183,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         {
         }
     }
-}");
+}"
+            );
         }
     }
 }

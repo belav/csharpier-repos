@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.HttpBrowserCapabilities
 //
 // Authors:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -58,6 +58,7 @@ namespace System.Web.Configuration
         const int HaveCanRenderSetvarZeroWithMultiSelectionList = 16;
         const int HaveCanSendMail = 17;
         const int HaveCDF = 18; // 6;
+
         //const int HaveClrVersion = 19; // 7;
         const int HaveCookies = 20; // 8;
         const int HaveCrawler = 21; // 9;
@@ -154,7 +155,7 @@ namespace System.Web.Configuration
         const int HaveWin32 = 112; // 24;
         const int LastHaveFlag = 113;
 
-        BitArray flags = new BitArray (LastHaveFlag);
+        BitArray flags = new BitArray(LastHaveFlag);
         bool activeXControls;
         bool aol;
         bool backgroundSounds;
@@ -179,60 +180,75 @@ namespace System.Web.Configuration
         Version w3CDomVersion;
         bool win16;
         bool win32;
-        Version [] clrVersions;
+        Version[] clrVersions;
         internal string useragent;
 
-        public bool ActiveXControls {
-            get {
-                if (!Get (HaveActiveXControls)) {
-                    activeXControls = ReadBoolean ("activexcontrols");
-                    Set (HaveActiveXControls);
+        public bool ActiveXControls
+        {
+            get
+            {
+                if (!Get(HaveActiveXControls))
+                {
+                    activeXControls = ReadBoolean("activexcontrols");
+                    Set(HaveActiveXControls);
                 }
 
                 return activeXControls;
             }
         }
 
-        public bool AOL {
-            get {
-                if (!Get (HaveAOL)) {
-                    aol = ReadBoolean ("aol");
-                    Set (HaveAOL);
+        public bool AOL
+        {
+            get
+            {
+                if (!Get(HaveAOL))
+                {
+                    aol = ReadBoolean("aol");
+                    Set(HaveAOL);
                 }
 
                 return aol;
             }
         }
 
-        public bool BackgroundSounds {
-            get {
-                if (!Get (HaveBackGroundSounds)) {
-                    backgroundSounds = ReadBoolean ("backgroundsounds");
-                    Set (HaveBackGroundSounds);
+        public bool BackgroundSounds
+        {
+            get
+            {
+                if (!Get(HaveBackGroundSounds))
+                {
+                    backgroundSounds = ReadBoolean("backgroundsounds");
+                    Set(HaveBackGroundSounds);
                 }
 
                 return backgroundSounds;
             }
         }
 
-        public bool Beta {
-            get {
-                if (!Get (HaveBeta)) {
-                    beta = ReadBoolean ("beta");
-                    Set (HaveBeta);
+        public bool Beta
+        {
+            get
+            {
+                if (!Get(HaveBeta))
+                {
+                    beta = ReadBoolean("beta");
+                    Set(HaveBeta);
                 }
 
                 return beta;
             }
         }
 
-        public string Browser {
-            get {
-                if (!Get (HaveBrowser)) {
-                    browser = this ["browser"];
+        public string Browser
+        {
+            get
+            {
+                if (!Get(HaveBrowser))
+                {
+                    browser = this["browser"];
                     if (browser == null || browser.Length == 0)
                         browser = "Unknown";
-                    Set (HaveBrowser);
+                    Set(HaveBrowser);
                 }
 
                 return browser;
@@ -240,389 +256,478 @@ namespace System.Web.Configuration
         }
 
         ArrayList browsers = null;
-        public ArrayList Browsers {
-            get {
-                if (!Get (HaveBrowsers)) {
-                    browsers = ReadArrayList ("browsers");
-                    Set (HaveBrowsers);
+        public ArrayList Browsers
+        {
+            get
+            {
+                if (!Get(HaveBrowsers))
+                {
+                    browsers = ReadArrayList("browsers");
+                    Set(HaveBrowsers);
                 }
 
                 return browsers;
             }
         }
 
-        public bool IsBrowser (string browserName) 
+        public bool IsBrowser(string browserName)
         {
-            foreach (string browser in Browsers) {
-                if (0 == String.Compare (browser, "Unknown", StringComparison.OrdinalIgnoreCase)) {
+            foreach (string browser in Browsers)
+            {
+                if (0 == String.Compare(browser, "Unknown", StringComparison.OrdinalIgnoreCase))
+                {
                     continue;
                 }
-                if (0 == String.Compare (browserName, browser, StringComparison.OrdinalIgnoreCase)) {
+                if (0 == String.Compare(browserName, browser, StringComparison.OrdinalIgnoreCase))
+                {
                     return true;
                 }
             }
             return false;
         }
 
-        public bool CDF {
-            get {
-                if (!Get (HaveCDF)) {
-                    cdf = ReadBoolean ("cdf");
-                    Set (HaveCDF);
+        public bool CDF
+        {
+            get
+            {
+                if (!Get(HaveCDF))
+                {
+                    cdf = ReadBoolean("cdf");
+                    Set(HaveCDF);
                 }
 
                 return cdf;
             }
         }
 
-        public Version ClrVersion {
-            get {
+        public Version ClrVersion
+        {
+            get
+            {
                 if (clrVersion == null)
-                    InternalGetClrVersions ();
+                    InternalGetClrVersions();
 
                 return clrVersion;
             }
         }
 
-        public bool Cookies {
-            get {
-                if (!Get (HaveCookies)) {
-                    cookies = ReadBoolean ("cookies");
-                    Set (HaveCookies);
+        public bool Cookies
+        {
+            get
+            {
+                if (!Get(HaveCookies))
+                {
+                    cookies = ReadBoolean("cookies");
+                    Set(HaveCookies);
                 }
 
                 return cookies;
             }
         }
 
-        public bool Crawler {
-            get {
-                if (!Get (HaveCrawler)) {
-                    crawler = ReadBoolean ("crawler");
-                    Set (HaveCrawler);
+        public bool Crawler
+        {
+            get
+            {
+                if (!Get(HaveCrawler))
+                {
+                    crawler = ReadBoolean("crawler");
+                    Set(HaveCrawler);
                 }
 
                 return crawler;
             }
         }
 
-        public Version EcmaScriptVersion {
-            get {
-                if (!Get (HaveEcmaScriptVersion)) {
-                    ecmaScriptVersion = ReadVersion ("ecmascriptversion");
-                    Set (HaveEcmaScriptVersion);
+        public Version EcmaScriptVersion
+        {
+            get
+            {
+                if (!Get(HaveEcmaScriptVersion))
+                {
+                    ecmaScriptVersion = ReadVersion("ecmascriptversion");
+                    Set(HaveEcmaScriptVersion);
                 }
 
                 return ecmaScriptVersion;
             }
         }
 
-        public bool Frames {
-            get {
-                if (!Get (HaveFrames)) {
-                    frames = ReadBoolean ("frames");
-                    Set (HaveFrames);
+        public bool Frames
+        {
+            get
+            {
+                if (!Get(HaveFrames))
+                {
+                    frames = ReadBoolean("frames");
+                    Set(HaveFrames);
                 }
 
                 return frames;
             }
         }
 
-        public bool JavaApplets {
-            get {
-                if (!Get (HaveJavaApplets)) {
-                    javaApplets = ReadBoolean ("javaapplets");
-                    Set (HaveJavaApplets);
+        public bool JavaApplets
+        {
+            get
+            {
+                if (!Get(HaveJavaApplets))
+                {
+                    javaApplets = ReadBoolean("javaapplets");
+                    Set(HaveJavaApplets);
                 }
 
                 return javaApplets;
             }
         }
 
-
-        [Obsolete ("The recommended alternative is the EcmaScriptVersion property. A Major version value greater than or equal to 1 implies JavaScript support. http://go.microsoft.com/fwlink/?linkid=14202")]
-        public bool JavaScript {
-            get {
-                if (!Get (HaveJavaScript)) {
-                    javaScript = ReadBoolean ("javascript");
-                    Set (HaveJavaScript);
+        [Obsolete(
+            "The recommended alternative is the EcmaScriptVersion property. A Major version value greater than or equal to 1 implies JavaScript support. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        public bool JavaScript
+        {
+            get
+            {
+                if (!Get(HaveJavaScript))
+                {
+                    javaScript = ReadBoolean("javascript");
+                    Set(HaveJavaScript);
                 }
 
                 return javaScript;
             }
         }
 
-        public int MajorVersion {
-            get {
-                if (!Get (HaveMajorVersion)) {
+        public int MajorVersion
+        {
+            get
+            {
+                if (!Get(HaveMajorVersion))
+                {
                     // Try with MS.NET's property name.
                     // See: https://bugzilla.xamarin.com/show_bug.cgi?id=4108
                     if (this["majorversion"] != null)
-                        majorVersion = ReadInt32 ("majorversion");
-                    else 
-                        majorVersion = ReadInt32 ("majorver");
-                    Set (HaveMajorVersion);
+                        majorVersion = ReadInt32("majorversion");
+                    else
+                        majorVersion = ReadInt32("majorver");
+                    Set(HaveMajorVersion);
                 }
 
                 return majorVersion;
             }
         }
 
-        public double MinorVersion {
-            get {
-                if (!Get (HaveMinorVersion)) {
+        public double MinorVersion
+        {
+            get
+            {
+                if (!Get(HaveMinorVersion))
+                {
                     // Try with MS.NET's property name.
                     // See: https://bugzilla.xamarin.com/show_bug.cgi?id=4108
                     if (this["minorversion"] != null)
-                        minorVersion = ReadDouble ("minorversion");
+                        minorVersion = ReadDouble("minorversion");
                     else
-                        minorVersion = ReadDouble ("minorver");
-                    Set (HaveMinorVersion);
+                        minorVersion = ReadDouble("minorver");
+                    Set(HaveMinorVersion);
                 }
 
                 return minorVersion;
             }
         }
 
-        public Version MSDomVersion {
-            get {
-                if (!Get (HaveMSDomVersion)) {
-                    msDomVersion = ReadVersion ("msdomversion");
-                    Set (HaveMSDomVersion);
+        public Version MSDomVersion
+        {
+            get
+            {
+                if (!Get(HaveMSDomVersion))
+                {
+                    msDomVersion = ReadVersion("msdomversion");
+                    Set(HaveMSDomVersion);
                 }
 
                 return msDomVersion;
             }
         }
 
-        public string Platform {
-            get {
-                if (!Get (HavePlatform)) {
-                    platform = ReadString ("platform");
-                    Set (HavePlatform);
+        public string Platform
+        {
+            get
+            {
+                if (!Get(HavePlatform))
+                {
+                    platform = ReadString("platform");
+                    Set(HavePlatform);
                 }
 
                 return platform;
             }
         }
 
-        public bool Tables {
-            get {
-                if (!Get (HaveTables)) {
-                    tables = ReadBoolean ("tables");
-                    Set (HaveTables);
+        public bool Tables
+        {
+            get
+            {
+                if (!Get(HaveTables))
+                {
+                    tables = ReadBoolean("tables");
+                    Set(HaveTables);
                 }
 
                 return tables;
             }
         }
 
-        public Type TagWriter {
-            get {
-                if (!Get (HaveTagWriter)) {
-                    tagWriter = GetTagWriter ();
-                    Set (HaveTagWriter);
+        public Type TagWriter
+        {
+            get
+            {
+                if (!Get(HaveTagWriter))
+                {
+                    tagWriter = GetTagWriter();
+                    Set(HaveTagWriter);
                 }
                 return tagWriter;
             }
         }
-        
-        internal virtual Type GetTagWriter ()
+
+        internal virtual Type GetTagWriter()
         {
-                return typeof (HtmlTextWriter);            
+            return typeof(HtmlTextWriter);
         }
 
-        public string Type {
-            get {
-                return Browser + MajorVersion;
-            }
+        public string Type
+        {
+            get { return Browser + MajorVersion; }
         }
 
-        public bool VBScript {
-            get {
-                if (!Get (HaveVBScript)) {
-                    vbscript = ReadBoolean ("vbscript");
-                    Set (HaveVBScript);
+        public bool VBScript
+        {
+            get
+            {
+                if (!Get(HaveVBScript))
+                {
+                    vbscript = ReadBoolean("vbscript");
+                    Set(HaveVBScript);
                 }
 
                 return vbscript;
             }
         }
 
-        public string Version {
-            get {
-                if (!Get (HaveVersion)) {
-                    version = ReadString ("version");
-                    Set (HaveVersion);
+        public string Version
+        {
+            get
+            {
+                if (!Get(HaveVersion))
+                {
+                    version = ReadString("version");
+                    Set(HaveVersion);
                 }
 
                 return version;
             }
         }
 
-        public Version W3CDomVersion {
-            get {
-                if (!Get (HaveW3CDomVersion)) {
-                    w3CDomVersion = ReadVersion ("w3cdomversion");
-                    Set (HaveW3CDomVersion);
+        public Version W3CDomVersion
+        {
+            get
+            {
+                if (!Get(HaveW3CDomVersion))
+                {
+                    w3CDomVersion = ReadVersion("w3cdomversion");
+                    Set(HaveW3CDomVersion);
                 }
 
                 return w3CDomVersion;
             }
         }
 
-        public bool Win16 {
-            get {
-                if (!Get (HaveWin16)) {
-                    win16 = ReadBoolean ("win16");
-                    Set (HaveWin16);
+        public bool Win16
+        {
+            get
+            {
+                if (!Get(HaveWin16))
+                {
+                    win16 = ReadBoolean("win16");
+                    Set(HaveWin16);
                 }
 
                 return win16;
             }
         }
 
-        public bool Win32 {
-            get {
+        public bool Win32
+        {
+            get
+            {
                 // This is the list of different windows platforms that browscap.ini has.
                 // Win16 Win2000 Win2003 Win32 Win95 Win98 WinME WinNT WinVI WinXP
-                if (!Get (HaveWin32)) {
+                if (!Get(HaveWin32))
+                {
                     string platform = Platform;
-                    win32 = (platform != "Win16" && platform.StartsWith ("Win"));
-                    Set (HaveWin32);
+                    win32 = (platform != "Win16" && platform.StartsWith("Win"));
+                    Set(HaveWin32);
                 }
                 return win32;
             }
         }
 
-        public Version [] GetClrVersions ()
+        public Version[] GetClrVersions()
         {
             if (clrVersions == null)
-                InternalGetClrVersions ();
+                InternalGetClrVersions();
 
             return clrVersions;
         }
 
-        void InternalGetClrVersions ()
+        void InternalGetClrVersions()
         {
-            char [] anychars = new char [] { ';', ')' };
+            char[] anychars = new char[] { ';', ')' };
             string s = useragent;
             ArrayList list = null;
             int idx;
-            while ((s != null) && (idx = s.IndexOf (".NET CLR ")) != -1) {
-                int end = s.IndexOfAny (anychars, idx + 9);
+            while ((s != null) && (idx = s.IndexOf(".NET CLR ")) != -1)
+            {
+                int end = s.IndexOfAny(anychars, idx + 9);
                 if (end == -1)
                     break;
 
-                string ver = s.Substring (idx + 9, end - idx - 9);
+                string ver = s.Substring(idx + 9, end - idx - 9);
                 Version v = null;
-                try {
-                    v = new Version (ver);
+                try
+                {
+                    v = new Version(ver);
                     if (clrVersion == null || v > clrVersion)
                         clrVersion = v;
 
                     if (list == null)
-                        list = new ArrayList (4);
+                        list = new ArrayList(4);
 
-                    list.Add (v);
-                } catch { }
-                s = s.Substring (idx + 9);
+                    list.Add(v);
+                }
+                catch { }
+                s = s.Substring(idx + 9);
             }
-            
-            if (list == null || list.Count == 0) {
-                clrVersion = new Version ();
+
+            if (list == null || list.Count == 0)
+            {
+                clrVersion = new Version();
                 clrVersions = null;
-            } else {
-                list.Sort ();
-                clrVersions = (Version []) list.ToArray (typeof (Version));
+            }
+            else
+            {
+                list.Sort();
+                clrVersions = (Version[])list.ToArray(typeof(Version));
             }
         }
 
-        bool ReadBoolean (string key)
+        bool ReadBoolean(string key)
         {
-            string v = this [key];
-            if (v == null) {
-                throw CreateCapabilityNotFoundException (key);
+            string v = this[key];
+            if (v == null)
+            {
+                throw CreateCapabilityNotFoundException(key);
             }
 
-            return (String.Compare (v, "True", true, Helpers.InvariantCulture) == 0);
+            return (String.Compare(v, "True", true, Helpers.InvariantCulture) == 0);
         }
 
-        int ReadInt32 (string key)
+        int ReadInt32(string key)
         {
-            string v = this [key];
-            if (v == null) {
-                throw CreateCapabilityNotFoundException (key);
+            string v = this[key];
+            if (v == null)
+            {
+                throw CreateCapabilityNotFoundException(key);
             }
 
-            try {
-                return Int32.Parse (v);
-            } catch {
-                throw CreateCapabilityNotFoundException (key);
+            try
+            {
+                return Int32.Parse(v);
             }
-        }
-
-        double ReadDouble (string key)
-        {
-            string v = this [key];
-            if (v == null) {
-                throw CreateCapabilityNotFoundException (key);
-            }
-
-            try {
-                return Double.Parse (v);
-            } catch {
-                throw CreateCapabilityNotFoundException (key);
+            catch
+            {
+                throw CreateCapabilityNotFoundException(key);
             }
         }
 
-        string ReadString (string key) 
+        double ReadDouble(string key)
         {
-            string v = this [key];
-            if (v == null) {
-                throw CreateCapabilityNotFoundException (key);
+            string v = this[key];
+            if (v == null)
+            {
+                throw CreateCapabilityNotFoundException(key);
+            }
+
+            try
+            {
+                return Double.Parse(v);
+            }
+            catch
+            {
+                throw CreateCapabilityNotFoundException(key);
+            }
+        }
+
+        string ReadString(string key)
+        {
+            string v = this[key];
+            if (v == null)
+            {
+                throw CreateCapabilityNotFoundException(key);
             }
 
             return v;
         }
 
-        Version ReadVersion (string key) 
+        Version ReadVersion(string key)
         {
-            string v = this [key];
-            if (v == null) {
-                throw CreateCapabilityNotFoundException (key);
+            string v = this[key];
+            if (v == null)
+            {
+                throw CreateCapabilityNotFoundException(key);
             }
 
-            try {
-                return new Version (v);
+            try
+            {
+                return new Version(v);
             }
-            catch {
-                throw CreateCapabilityNotFoundException (key);
+            catch
+            {
+                throw CreateCapabilityNotFoundException(key);
             }
         }
 
-        ArrayList ReadArrayList (string key) 
+        ArrayList ReadArrayList(string key)
         {
-            ArrayList v = (ArrayList)this.capabilities [key];
-            if (v == null) {
-                throw CreateCapabilityNotFoundException (key);
+            ArrayList v = (ArrayList)this.capabilities[key];
+            if (v == null)
+            {
+                throw CreateCapabilityNotFoundException(key);
             }
 
             return v;
         }
 
-        Exception CreateCapabilityNotFoundException (string key) {
-            return new ArgumentNullException (String.Format ("browscaps.ini does not contain a definition for capability {0} for userAgent {1}", key, Browser));
+        Exception CreateCapabilityNotFoundException(string key)
+        {
+            return new ArgumentNullException(
+                String.Format(
+                    "browscaps.ini does not contain a definition for capability {0} for userAgent {1}",
+                    key,
+                    Browser
+                )
+            );
         }
 
-        bool Get (int idx)
+        bool Get(int idx)
         {
-            return flags.Get (idx);
+            return flags.Get(idx);
         }
 
-        void Set (int idx)
+        void Set(int idx)
         {
-            flags.Set (idx, true);
+            flags.Set(idx, true);
         }
     }
 }

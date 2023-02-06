@@ -5,10 +5,11 @@ using System;
 
 class MainClass
 {
-    public static void Main (string[] args)
+    public static void Main(string[] args)
     {
-        foreach (object at in args) {
-            Console.WriteLine ("Tipo attributo: " + at.GetType);
+        foreach (object at in args)
+        {
+            Console.WriteLine("Tipo attributo: " + at.GetType);
         }
     }
 }

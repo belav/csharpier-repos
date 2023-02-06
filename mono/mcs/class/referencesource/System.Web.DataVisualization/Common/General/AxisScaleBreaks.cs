@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -13,7 +13,7 @@
 //
 //  Purpose:    Automatic scale breaks feature related classes.
 //
-//    Reviewed:    
+//    Reviewed:
 //
 //===================================================================
 
@@ -32,19 +32,19 @@ using System.Globalization;
 
 #if Microsoft_CONTROL
 
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
-    using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
 
 #else
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.DataVisualization.Charting;
-    using System.Web.UI.DataVisualization.Charting.Data;
-    using System.Web.UI.DataVisualization.Charting.ChartTypes;
-    using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 
 #endregion
@@ -53,7 +53,6 @@ using System.Globalization;
 namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
     #region Enumerations
@@ -104,7 +103,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Do not start the axis segment scale from zero.
         /// </summary>
         No
-
     };
 
     #endregion // Enumerations
@@ -113,12 +111,18 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <b>AxisScaleBreakStyle</b> class represents the settings that control the scale break.
     /// </summary>
     [
-    SRDescription("DescriptionAttributeAxisScaleBreakStyle_AxisScaleBreakStyle"),
-    DefaultProperty("Enabled"),
+        SRDescription("DescriptionAttributeAxisScaleBreakStyle_AxisScaleBreakStyle"),
+        DefaultProperty("Enabled"),
     ]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class AxisScaleBreakStyle
     {
@@ -130,7 +134,7 @@ namespace System.Web.UI.DataVisualization.Charting
         // True if scale breaks are enabled
         private bool _enabled = false;
 
-        // AxisName of the break line 
+        // AxisName of the break line
         private BreakLineStyle _breakLineStyle = BreakLineStyle.Ragged;
 
         // Spacing between scale segments created by scale breaks
@@ -145,7 +149,7 @@ namespace System.Web.UI.DataVisualization.Charting
         // Break line style
         private ChartDashStyle _breakLineDashStyle = ChartDashStyle.Solid;
 
-        // Minimum segment size in axis length percentage 
+        // Minimum segment size in axis length percentage
         private double _minSegmentSize = 10.0;
 
         // Number of segments the axis is devided into to perform statistical analysis
@@ -167,9 +171,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// AxisScaleBreakStyle constructor.
         /// </summary>
-        public AxisScaleBreakStyle()
-        {
-        }
+        public AxisScaleBreakStyle() { }
 
         /// <summary>
         /// AxisScaleBreakStyle constructor.
@@ -185,7 +187,7 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Properties
 
         /// <summary>
-        /// Gets or sets a flag which indicates whether one of the axis segments should start its scale from zero 
+        /// Gets or sets a flag which indicates whether one of the axis segments should start its scale from zero
         /// when scale break is used.
         /// </summary>
         /// <remarks>
@@ -193,16 +195,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// if zero value should be included in the scale.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue(StartFromZero.Auto),
-        SRDescription("DescriptionAttributeAxisScaleBreakStyle_StartFromZero"),
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue(StartFromZero.Auto),
+            SRDescription("DescriptionAttributeAxisScaleBreakStyle_StartFromZero"),
         ]
         public StartFromZero StartFromZero
         {
-            get
-            {
-                return this._startFromZero;
-            }
+            get { return this._startFromZero; }
             set
             {
                 this._startFromZero = value;
@@ -214,21 +213,23 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Maximum number of scale breaks that can be used.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue(2),
-        SRDescription("DescriptionAttributeAxisScaleBreakStyle_MaxNumberOfBreaks"),
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue(2),
+            SRDescription("DescriptionAttributeAxisScaleBreakStyle_MaxNumberOfBreaks"),
         ]
         public int MaxNumberOfBreaks
         {
-            get
-            {
-                return this._maximumNumberOfBreaks;
-            }
+            get { return this._maximumNumberOfBreaks; }
             set
             {
-                if(value < 1 || value > 5)
+                if (value < 1 || value > 5)
                 {
-                    throw (new ArgumentOutOfRangeException("value", SR.ExceptionAxisScaleBreaksNumberInvalid));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionAxisScaleBreaksNumberInvalid
+                        )
+                    );
                 }
                 this._maximumNumberOfBreaks = value;
                 this.Invalidate();
@@ -236,25 +237,27 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Minimum axis scale region size, in percentage of the total axis length, 
+        /// Minimum axis scale region size, in percentage of the total axis length,
         /// that can be collapsed with the scale break.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue(25),
-        SRDescription("DescriptionAttributeAxisScaleBreakStyle_CollapsibleSpaceThreshold"),
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue(25),
+            SRDescription("DescriptionAttributeAxisScaleBreakStyle_CollapsibleSpaceThreshold"),
         ]
         public int CollapsibleSpaceThreshold
         {
-            get
-            {
-                return this._minimumNumberOfEmptySegments;
-            }
+            get { return this._minimumNumberOfEmptySegments; }
             set
             {
-                if(value < 10 || value > 90)
+                if (value < 10 || value > 90)
                 {
-                    throw (new ArgumentOutOfRangeException("value", SR.ExceptionAxisScaleBreaksCollapsibleSpaceInvalid));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionAxisScaleBreaksCollapsibleSpaceInvalid
+                        )
+                    );
                 }
                 this._minimumNumberOfEmptySegments = value;
                 this.Invalidate();
@@ -265,17 +268,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets a flag which determines if axis automatic scale breaks are enabled.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue(false),
-        SRDescription("DescriptionAttributeAxisScaleBreakStyle_Enabled"),
-        ParenthesizePropertyNameAttribute(true),
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue(false),
+            SRDescription("DescriptionAttributeAxisScaleBreakStyle_Enabled"),
+            ParenthesizePropertyNameAttribute(true),
         ]
         public bool Enabled
         {
-            get
-            {
-                return this._enabled;
-            }
+            get { return this._enabled; }
             set
             {
                 this._enabled = value;
@@ -287,16 +287,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the style of the scale break line.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(BreakLineStyle.Ragged),
-        SRDescription("DescriptionAttributeAxisScaleBreakStyle_BreakLineType"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(BreakLineStyle.Ragged),
+            SRDescription("DescriptionAttributeAxisScaleBreakStyle_BreakLineType"),
         ]
         public BreakLineStyle BreakLineStyle
         {
-            get
-            {
-                return this._breakLineStyle;
-            }
+            get { return this._breakLineStyle; }
             set
             {
                 this._breakLineStyle = value;
@@ -308,21 +305,23 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the spacing of the scale break.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue(1.5),
-        SRDescription("DescriptionAttributeAxisScaleBreakStyle_Spacing"),
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue(1.5),
+            SRDescription("DescriptionAttributeAxisScaleBreakStyle_Spacing"),
         ]
         public double Spacing
         {
-            get
-            {
-                return this._segmentSpacing;
-            }
+            get { return this._segmentSpacing; }
             set
             {
-                if(value < 0.0 || value > 10)
+                if (value < 0.0 || value > 10)
                 {
-                    throw (new ArgumentOutOfRangeException("value", SR.ExceptionAxisScaleBreaksSpacingInvalid));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionAxisScaleBreaksSpacingInvalid
+                        )
+                    );
                 }
                 this._segmentSpacing = value;
                 this.Invalidate();
@@ -333,18 +332,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the color of the scale break line.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(typeof(Color), "Black"),
-        SRDescription("DescriptionAttributeLineColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(typeof(Color), "Black"),
+            SRDescription("DescriptionAttributeLineColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
         public Color LineColor
         {
-            get
-            {
-                return this._breakLineColor;
-            }
+            get { return this._breakLineColor; }
             set
             {
                 this._breakLineColor = value;
@@ -356,21 +352,23 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the width of the scale break line.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(1),
-        SRDescription("DescriptionAttributeLineWidth"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(1),
+            SRDescription("DescriptionAttributeLineWidth"),
         ]
         public int LineWidth
         {
-            get
-            {
-                return this._breakLineWidth;
-            }
+            get { return this._breakLineWidth; }
             set
             {
-                if(value < 1.0 || value > 10)
+                if (value < 1.0 || value > 10)
                 {
-                    throw (new ArgumentOutOfRangeException("value", SR.ExceptionAxisScaleBreaksLineWidthInvalid));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionAxisScaleBreaksLineWidthInvalid
+                        )
+                    );
                 }
                 this._breakLineWidth = value;
                 this.Invalidate();
@@ -381,16 +379,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the line style of the scale break line.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(ChartDashStyle.Solid),
-        SRDescription("DescriptionAttributeLineDashStyle"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(ChartDashStyle.Solid),
+            SRDescription("DescriptionAttributeLineDashStyle"),
         ]
         public ChartDashStyle LineDashStyle
         {
-            get
-            {
-                return this._breakLineDashStyle;
-            }
+            get { return this._breakLineDashStyle; }
             set
             {
                 this._breakLineDashStyle = value;
@@ -409,8 +404,7 @@ namespace System.Web.UI.DataVisualization.Charting
         internal bool IsEnabled()
         {
             // Axis scale breaks must be enabled AND supported by the axis.
-            if(this.Enabled && 
-                this.CanUseAxisScaleBreaks())
+            if (this.Enabled && this.CanUseAxisScaleBreaks())
             {
                 return true;
             }
@@ -424,59 +418,63 @@ namespace System.Web.UI.DataVisualization.Charting
         internal bool CanUseAxisScaleBreaks()
         {
             // Check input parameters
-            if(this.axis == null || this.axis.ChartArea == null || this.axis.ChartArea.Common.Chart == null)
+            if (
+                this.axis == null
+                || this.axis.ChartArea == null
+                || this.axis.ChartArea.Common.Chart == null
+            )
             {
                 return false;
             }
 
             // No scale breaks in 3D charts
-            if(this.axis.ChartArea.Area3DStyle.Enable3D)
+            if (this.axis.ChartArea.Area3DStyle.Enable3D)
             {
                 return false;
             }
 
             // Axis scale break can only be applied to the Y and Y 2 axis
-            if(this.axis.axisType == AxisName.X || this.axis.axisType == AxisName.X2)
+            if (this.axis.axisType == AxisName.X || this.axis.axisType == AxisName.X2)
             {
                 return false;
             }
-    
+
             // No scale breaks for logarithmic axis
-            if(this.axis.IsLogarithmic)
+            if (this.axis.IsLogarithmic)
             {
                 return false;
             }
 
             // No scale breaks if axis zooming is enabled
-            if(this.axis.ScaleView.IsZoomed)
+            if (this.axis.ScaleView.IsZoomed)
             {
                 return false;
             }
 
             // Check series associated with this axis
             ArrayList axisSeries = AxisScaleBreakStyle.GetAxisSeries(this.axis);
-            foreach(Series series in axisSeries)
+            foreach (Series series in axisSeries)
             {
-
                 // Some special chart type are not supported
-                if(series.ChartType == SeriesChartType.Renko || 
-                    series.ChartType == SeriesChartType.PointAndFigure)
+                if (
+                    series.ChartType == SeriesChartType.Renko
+                    || series.ChartType == SeriesChartType.PointAndFigure
+                )
                 {
                     return false;
                 }
 
-
                 // Get chart type interface
-                IChartType chartType = this.axis.ChartArea.Common.ChartTypeRegistry.GetChartType(series.ChartTypeName);
-                if(chartType == null)
+                IChartType chartType = this.axis.ChartArea.Common.ChartTypeRegistry.GetChartType(
+                    series.ChartTypeName
+                );
+                if (chartType == null)
                 {
                     return false;
                 }
 
                 // Circular and stacked chart types can not use scale breaks
-                if(chartType.CircularChartArea || 
-                    chartType.Stacked || 
-                    !chartType.RequireAxes)
+                if (chartType.CircularChartArea || chartType.Stacked || !chartType.RequireAxes)
                 {
                     return false;
                 }
@@ -493,18 +491,21 @@ namespace System.Web.UI.DataVisualization.Charting
         static internal ArrayList GetAxisSeries(Axis axis)
         {
             ArrayList seriesList = new ArrayList();
-            if(axis != null && axis.ChartArea != null && axis.ChartArea.Common.Chart != null)
+            if (axis != null && axis.ChartArea != null && axis.ChartArea.Common.Chart != null)
             {
                 // Iterate through series in the chart
-                foreach(Series series in axis.ChartArea.Common.Chart.Series)
+                foreach (Series series in axis.ChartArea.Common.Chart.Series)
                 {
                     // Series should be on the same chart area and visible
-                    if(series.ChartArea == axis.ChartArea.Name &&
-                        series.Enabled)
+                    if (series.ChartArea == axis.ChartArea.Name && series.Enabled)
                     {
                         // Check primary/secondary axis
-                        if( (axis.axisType == AxisName.Y && series.YAxisType == AxisType.Secondary) || 
-                            (axis.axisType == AxisName.Y2 && series.YAxisType == AxisType.Primary))
+                        if (
+                            (axis.axisType == AxisName.Y && series.YAxisType == AxisType.Secondary)
+                            || (
+                                axis.axisType == AxisName.Y2 && series.YAxisType == AxisType.Primary
+                            )
+                        )
                         {
                             continue;
                         }
@@ -516,13 +517,13 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             return seriesList;
         }
-    
+
         /// <summary>
         /// Invalidate chart control.
         /// </summary>
         private void Invalidate()
         {
-            if(this.axis != null)
+            if (this.axis != null)
             {
                 this.axis.Invalidate();
             }
@@ -542,20 +543,22 @@ namespace System.Web.UI.DataVisualization.Charting
             axisSegments.Clear();
 
             // Check if scale breaks are enabled
-            if(this.IsEnabled())
+            if (this.IsEnabled())
             {
                 // Fill collection of segments
                 this.FillAxisSegmentCollection(axisSegments);
 
                 // Check if more than 1 segments were defined
-                if(axisSegments.Count >= 1)
+                if (axisSegments.Count >= 1)
                 {
                     // Get index of segment which scale should start from zero
-                    int startFromZeroSegmentIndex = this.GetStartScaleFromZeroSegmentIndex(axisSegments);
+                    int startFromZeroSegmentIndex = this.GetStartScaleFromZeroSegmentIndex(
+                        axisSegments
+                    );
 
                     // Calculate segment interaval and round the scale
                     int index = 0;
-                    foreach(AxisScaleSegment axisScaleSegment in axisSegments)
+                    foreach (AxisScaleSegment axisScaleSegment in axisSegments)
                     {
                         // Check if segment scale should start from zero
                         bool startFromZero = (index == startFromZeroSegmentIndex) ? true : false;
@@ -563,9 +566,15 @@ namespace System.Web.UI.DataVisualization.Charting
                         // Calculate interval and round scale
                         double minimum = axisScaleSegment.ScaleMinimum;
                         double maximum = axisScaleSegment.ScaleMaximum;
-                        axisScaleSegment.Interval = this.axis.EstimateNumberAxis( 
-                            ref minimum, ref maximum, startFromZero, this.axis.prefferedNumberofIntervals, true, true);
-                        axisScaleSegment.ScaleMinimum = minimum; 
+                        axisScaleSegment.Interval = this.axis.EstimateNumberAxis(
+                            ref minimum,
+                            ref maximum,
+                            startFromZero,
+                            this.axis.prefferedNumberofIntervals,
+                            true,
+                            true
+                        );
+                        axisScaleSegment.ScaleMinimum = minimum;
                         axisScaleSegment.ScaleMaximum = maximum;
 
                         // Make sure new scale break value range do not exceed axis current scale
@@ -582,7 +591,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         ++index;
                     }
 
-                    // Defined axis scale segments cannot overlap. 
+                    // Defined axis scale segments cannot overlap.
                     // Check for overlapping and join segments or readjust min/max.
                     bool adjustPosition = false;
                     AxisScaleSegment prevSegment = axisSegments[0];
@@ -625,29 +634,34 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>Index axis segment or -1.</returns>
         private int GetStartScaleFromZeroSegmentIndex(AxisScaleSegmentCollection axisSegments)
         {
-            if (this.StartFromZero == StartFromZero.Auto ||
-                this.StartFromZero == StartFromZero.Yes)
+            if (this.StartFromZero == StartFromZero.Auto || this.StartFromZero == StartFromZero.Yes)
             {
                 int index = 0;
-                foreach(AxisScaleSegment axisScaleSegment in axisSegments)
+                foreach (AxisScaleSegment axisScaleSegment in axisSegments)
                 {
                     // Check if zero value is already part of the scale
-                    if(axisScaleSegment.ScaleMinimum < 0.0 && axisScaleSegment.ScaleMaximum > 0.0)
+                    if (axisScaleSegment.ScaleMinimum < 0.0 && axisScaleSegment.ScaleMaximum > 0.0)
                     {
                         return -1;
                     }
 
                     // As soon as we get first segment with positive minimum value or
                     // we reached last segment adjust scale to start from zero.
-                    if(axisScaleSegment.ScaleMinimum > 0.0 ||
-                        index == (axisSegments.Count - 1) )
+                    if (axisScaleSegment.ScaleMinimum > 0.0 || index == (axisSegments.Count - 1))
                     {
                         // Check if setting minimum scale to zero will make the
-                        // data points in the segment hard to read. This may hapen 
-                        // when the distance from zero to current minimum is 
+                        // data points in the segment hard to read. This may hapen
+                        // when the distance from zero to current minimum is
                         // significantly larger than current scale size.
-                        if (this.StartFromZero == StartFromZero.Auto &&
-                            axisScaleSegment.ScaleMinimum > 2.0 * (axisScaleSegment.ScaleMaximum - axisScaleSegment.ScaleMinimum) )
+                        if (
+                            this.StartFromZero == StartFromZero.Auto
+                            && axisScaleSegment.ScaleMinimum
+                                > 2.0
+                                    * (
+                                        axisScaleSegment.ScaleMaximum
+                                        - axisScaleSegment.ScaleMinimum
+                                    )
+                        )
                         {
                             return -1;
                         }
@@ -670,9 +684,9 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             // Calculate total number of points
             int totalPointNumber = 0;
-            foreach(AxisScaleSegment axisScaleSegment in axisSegments)
+            foreach (AxisScaleSegment axisScaleSegment in axisSegments)
             {
-                if(axisScaleSegment.Tag is int)
+                if (axisScaleSegment.Tag is int)
                 {
                     totalPointNumber += (int)axisScaleSegment.Tag;
                 }
@@ -683,17 +697,20 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // Set segment position
             double currentPosition = 0.0;
-            for(int index = 0; index < axisSegments.Count; index++)
+            for (int index = 0; index < axisSegments.Count; index++)
             {
                 axisSegments[index].Position = (currentPosition > 100.0) ? 100.0 : currentPosition;
-                axisSegments[index].Size = Math.Round(((int)axisSegments[index].Tag) / (totalPointNumber / 100.0),5);
-                if(axisSegments[index].Size < minSize)
+                axisSegments[index].Size = Math.Round(
+                    ((int)axisSegments[index].Tag) / (totalPointNumber / 100.0),
+                    5
+                );
+                if (axisSegments[index].Size < minSize)
                 {
                     axisSegments[index].Size = minSize;
                 }
-                
+
                 // Set spacing for all segments except the last one
-                if(index < (axisSegments.Count - 1) )
+                if (index < (axisSegments.Count - 1))
                 {
                     axisSegments[index].Spacing = this._segmentSpacing;
                 }
@@ -710,37 +727,36 @@ namespace System.Web.UI.DataVisualization.Charting
                 totalHeight = 0.0;
                 double maxSize = double.MinValue;
                 int maxSizeIndex = -1;
-                for(int index = 0; index < axisSegments.Count; index++)
+                for (int index = 0; index < axisSegments.Count; index++)
                 {
                     totalHeight += axisSegments[index].Size;
-                    if(axisSegments[index].Size > maxSize)
+                    if (axisSegments[index].Size > maxSize)
                     {
                         maxSize = axisSegments[index].Size;
                         maxSizeIndex = index;
                     }
                 }
 
-                // If height is too large find largest segment 
-                if(totalHeight > 100.0)
+                // If height is too large find largest segment
+                if (totalHeight > 100.0)
                 {
                     // Adjust segment size
                     axisSegments[maxSizeIndex].Size -= totalHeight - 100.0;
-                    if(axisSegments[maxSizeIndex].Size < minSize)
+                    if (axisSegments[maxSizeIndex].Size < minSize)
                     {
                         axisSegments[maxSizeIndex].Size = minSize;
                     }
 
                     // Adjust position of the next segment
-                    double curentPosition = axisSegments[maxSizeIndex].Position + axisSegments[maxSizeIndex].Size;
-                    for(int index = maxSizeIndex + 1; index < axisSegments.Count; index++)
+                    double curentPosition =
+                        axisSegments[maxSizeIndex].Position + axisSegments[maxSizeIndex].Size;
+                    for (int index = maxSizeIndex + 1; index < axisSegments.Count; index++)
                     {
                         axisSegments[index].Position = curentPosition;
                         curentPosition += axisSegments[index].Size;
                     }
                 }
-
-            } while(totalHeight > 100.0);
-
+            } while (totalHeight > 100.0);
         }
 
         /// <summary>
@@ -759,12 +775,13 @@ namespace System.Web.UI.DataVisualization.Charting
             double[] segmentMaxValue = null;
             double[] segmentMinValue = null;
             int[] segmentPointNumber = GetSeriesDataStatistics(
-                this._totalNumberOfSegments, 
-                out minYValue, 
-                out maxYValue, 
-                out segmentSize, 
-                out segmentMaxValue, 
-                out segmentMinValue);
+                this._totalNumberOfSegments,
+                out minYValue,
+                out maxYValue,
+                out segmentSize,
+                out segmentMaxValue,
+                out segmentMinValue
+            );
             if (segmentPointNumber == null)
             {
                 return;
@@ -774,12 +791,13 @@ namespace System.Web.UI.DataVisualization.Charting
             double minimum = minYValue;
             double maximum = maxYValue;
             this.axis.EstimateNumberAxis(
-                ref minimum, 
-                ref maximum, 
-                this.axis.IsStartedFromZero, 
-                this.axis.prefferedNumberofIntervals, 
-                true, 
-                true);
+                ref minimum,
+                ref maximum,
+                this.axis.IsStartedFromZero,
+                this.axis.prefferedNumberofIntervals,
+                true,
+                true
+            );
 
             // Make sure max/min Y values are not the same
             if (maxYValue == minYValue)
@@ -791,40 +809,55 @@ namespace System.Web.UI.DataVisualization.Charting
             double dataRangePercent = (maxYValue - minYValue) / ((maximum - minimum) / 100.0);
 
             // Get sequences of empty segments
-            ArrayList    emptySequences = new ArrayList();
+            ArrayList emptySequences = new ArrayList();
             bool doneFlag = false;
-            while(!doneFlag)
+            while (!doneFlag)
             {
                 doneFlag = true;
 
                 // Get longest sequence of segments with no points
-                int startSegment = 0; 
+                int startSegment = 0;
                 int numberOfSegments = 0;
                 this.GetLargestSequenseOfSegmentsWithNoPoints(
-                    segmentPointNumber, 
-                    out startSegment, 
-                    out numberOfSegments);
+                    segmentPointNumber,
+                    out startSegment,
+                    out numberOfSegments
+                );
 
                 // Adjust minimum empty segments  number depending on current segments
-                int minEmptySegments = (int)(this._minimumNumberOfEmptySegments * (100.0 / dataRangePercent));
-                if(axisSegments.Count > 0 && numberOfSegments > 0)
+                int minEmptySegments = (int)(
+                    this._minimumNumberOfEmptySegments * (100.0 / dataRangePercent)
+                );
+                if (axisSegments.Count > 0 && numberOfSegments > 0)
                 {
                     // Find the segment which contain newly found empty segments sequence
-                    foreach(AxisScaleSegment axisScaleSegment in axisSegments)
+                    foreach (AxisScaleSegment axisScaleSegment in axisSegments)
                     {
-                        if(startSegment > 0 && (startSegment + numberOfSegments) <= segmentMaxValue.Length - 1)
+                        if (
+                            startSegment > 0
+                            && (startSegment + numberOfSegments) <= segmentMaxValue.Length - 1
+                        )
                         {
-                            if(segmentMaxValue[startSegment - 1] >= axisScaleSegment.ScaleMinimum &&
-                                segmentMinValue[startSegment + numberOfSegments] <= axisScaleSegment.ScaleMaximum)
+                            if (
+                                segmentMaxValue[startSegment - 1] >= axisScaleSegment.ScaleMinimum
+                                && segmentMinValue[startSegment + numberOfSegments]
+                                    <= axisScaleSegment.ScaleMaximum
+                            )
                             {
                                 // Get percentage of segment scale that is empty and suggested for collapsing
-                                double segmentScaleRange = axisScaleSegment.ScaleMaximum - axisScaleSegment.ScaleMinimum;
-                                double emptySpaceRange = segmentMinValue[startSegment + numberOfSegments] - segmentMaxValue[startSegment - 1];
-                                double emptySpacePercent = emptySpaceRange / (segmentScaleRange / 100.0);
+                                double segmentScaleRange =
+                                    axisScaleSegment.ScaleMaximum - axisScaleSegment.ScaleMinimum;
+                                double emptySpaceRange =
+                                    segmentMinValue[startSegment + numberOfSegments]
+                                    - segmentMaxValue[startSegment - 1];
+                                double emptySpacePercent =
+                                    emptySpaceRange / (segmentScaleRange / 100.0);
                                 emptySpacePercent = emptySpacePercent / 100 * axisScaleSegment.Size;
 
-                                if(emptySpacePercent > minEmptySegments &&
-                                    numberOfSegments > this._minSegmentSize)
+                                if (
+                                    emptySpacePercent > minEmptySegments
+                                    && numberOfSegments > this._minSegmentSize
+                                )
                                 {
                                     minEmptySegments = numberOfSegments;
                                 }
@@ -834,7 +867,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Check if found sequence is long enough
-                if(numberOfSegments >= minEmptySegments)
+                if (numberOfSegments >= minEmptySegments)
                 {
                     doneFlag = false;
 
@@ -844,7 +877,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
                     // Check if there are any emty segments sequence found
                     axisSegments.Clear();
-                    if(emptySequences.Count > 0)
+                    if (emptySequences.Count > 0)
                     {
                         double segmentFrom = double.NaN;
                         double segmentTo = double.NaN;
@@ -852,21 +885,23 @@ namespace System.Web.UI.DataVisualization.Charting
                         // Based on the segments that need to be excluded create axis segments that
                         // will present on the axis scale.
                         int numberOfPoints = 0;
-                        for(int index = 0; index < segmentPointNumber.Length; index++)
+                        for (int index = 0; index < segmentPointNumber.Length; index++)
                         {
                             // Check if current segment is excluded
                             bool excludedSegment = this.IsExcludedSegment(emptySequences, index);
 
                             // If not excluded segment - update from/to range if they were set
-                            if(!excludedSegment && 
-                                !double.IsNaN(segmentMinValue[index]) &&
-                                !double.IsNaN(segmentMaxValue[index]))
+                            if (
+                                !excludedSegment
+                                && !double.IsNaN(segmentMinValue[index])
+                                && !double.IsNaN(segmentMaxValue[index])
+                            )
                             {
                                 // Calculate total number of points
                                 numberOfPoints += segmentPointNumber[index];
 
                                 // Set From/To of the visible segment
-                                if(double.IsNaN(segmentFrom))
+                                if (double.IsNaN(segmentFrom))
                                 {
                                     segmentFrom = segmentMinValue[index];
                                     segmentTo = segmentMaxValue[index];
@@ -878,11 +913,13 @@ namespace System.Web.UI.DataVisualization.Charting
                             }
 
                             // If excluded or last segment - add current visible segment range
-                            if(!double.IsNaN(segmentFrom) && 
-                                (excludedSegment || index == (segmentPointNumber.Length - 1) ))
+                            if (
+                                !double.IsNaN(segmentFrom)
+                                && (excludedSegment || index == (segmentPointNumber.Length - 1))
+                            )
                             {
                                 // Make sure To and From do not match
-                                if(segmentTo == segmentFrom)
+                                if (segmentTo == segmentFrom)
                                 {
                                     segmentFrom -= segmentSize;
                                     segmentTo += segmentSize;
@@ -908,12 +945,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Make sure we do not exceed specified number of breaks
-                if( (axisSegments.Count - 1) >= this._maximumNumberOfBreaks)
+                if ((axisSegments.Count - 1) >= this._maximumNumberOfBreaks)
                 {
                     doneFlag = true;
                 }
             }
-
         }
 
         /// <summary>
@@ -924,10 +960,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>True if segment with specified index is marked as excluded.</returns>
         private bool IsExcludedSegment(ArrayList excludedSegments, int segmentIndex)
         {
-            for(int index = 0; index < excludedSegments.Count; index += 2)
+            for (int index = 0; index < excludedSegments.Count; index += 2)
             {
-                if(segmentIndex >= (int)excludedSegments[index] && 
-                    segmentIndex < (int)excludedSegments[index] + (int)excludedSegments[index + 1])
+                if (
+                    segmentIndex >= (int)excludedSegments[index]
+                    && segmentIndex
+                        < (int)excludedSegments[index] + (int)excludedSegments[index + 1]
+                )
                 {
                     return true;
                 }
@@ -946,12 +985,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="segmentMinValue">Array of segment scale minimum values.</param>
         /// <returns></returns>
         internal int[] GetSeriesDataStatistics(
-            int segmentCount, 
-            out double minYValue, 
-            out double maxYValue, 
+            int segmentCount,
+            out double minYValue,
+            out double maxYValue,
             out double segmentSize,
             out double[] segmentMaxValue,
-            out double[] segmentMinValue)
+            out double[] segmentMinValue
+        )
         {
             // Get all series associated with the axis
             ArrayList axisSeries = AxisScaleBreakStyle.GetAxisSeries(this.axis);
@@ -960,13 +1000,13 @@ namespace System.Web.UI.DataVisualization.Charting
             minYValue = 0.0;
             maxYValue = 0.0;
             axis.Common.DataManager.GetMinMaxYValue(axisSeries, out minYValue, out maxYValue);
-            
+
             int numberOfPoints = 0;
             foreach (Series series in axisSeries)
             {
                 numberOfPoints = Math.Max(numberOfPoints, series.Points.Count);
             }
-            
+
             if (axisSeries.Count == 0 || numberOfPoints == 0)
             {
                 segmentSize = 0.0;
@@ -981,39 +1021,44 @@ namespace System.Web.UI.DataVisualization.Charting
             int[] segmentPointNumber = new int[segmentCount];
             segmentMaxValue = new double[segmentCount];
             segmentMinValue = new double[segmentCount];
-            for(int index = 0; index < segmentCount; index++)
+            for (int index = 0; index < segmentCount; index++)
             {
                 segmentMaxValue[index] = double.NaN;
                 segmentMinValue[index] = double.NaN;
             }
-            foreach(Series series in axisSeries)
+            foreach (Series series in axisSeries)
             {
                 // Get number of Y values to process
                 int maxYValueCount = 1;
-                IChartType chartType = this.axis.ChartArea.Common.ChartTypeRegistry.GetChartType(series.ChartTypeName);
-                if(chartType != null)
+                IChartType chartType = this.axis.ChartArea.Common.ChartTypeRegistry.GetChartType(
+                    series.ChartTypeName
+                );
+                if (chartType != null)
                 {
-                    if(chartType.ExtraYValuesConnectedToYAxis && chartType.YValuesPerPoint > 1)
+                    if (chartType.ExtraYValuesConnectedToYAxis && chartType.YValuesPerPoint > 1)
                     {
                         maxYValueCount = chartType.YValuesPerPoint;
                     }
                 }
 
                 // Iterate throug all data points
-                foreach(DataPoint dataPoint in series.Points)
+                foreach (DataPoint dataPoint in series.Points)
                 {
-                    if(!dataPoint.IsEmpty)
+                    if (!dataPoint.IsEmpty)
                     {
                         // Iterate through all yValues
-                        for(int yValueIndex = 0; yValueIndex < maxYValueCount; yValueIndex++)
+                        for (int yValueIndex = 0; yValueIndex < maxYValueCount; yValueIndex++)
                         {
                             // Calculate index of the scale segment
-                            int segmentIndex = (int)Math.Floor((dataPoint.YValues[yValueIndex] - minYValue) / segmentSize);
-                            if(segmentIndex < 0)
+                            int segmentIndex = (int)
+                                Math.Floor(
+                                    (dataPoint.YValues[yValueIndex] - minYValue) / segmentSize
+                                );
+                            if (segmentIndex < 0)
                             {
                                 segmentIndex = 0;
                             }
-                            if(segmentIndex > segmentCount - 1)
+                            if (segmentIndex > segmentCount - 1)
                             {
                                 segmentIndex = segmentCount - 1;
                             }
@@ -1022,15 +1067,21 @@ namespace System.Web.UI.DataVisualization.Charting
                             ++segmentPointNumber[segmentIndex];
 
                             // Store Min/Max values for the segment
-                            if(segmentPointNumber[segmentIndex] == 1)
+                            if (segmentPointNumber[segmentIndex] == 1)
                             {
                                 segmentMaxValue[segmentIndex] = dataPoint.YValues[yValueIndex];
                                 segmentMinValue[segmentIndex] = dataPoint.YValues[yValueIndex];
                             }
                             else
                             {
-                                segmentMaxValue[segmentIndex] = Math.Max(segmentMaxValue[segmentIndex], dataPoint.YValues[yValueIndex]);
-                                segmentMinValue[segmentIndex] = Math.Min(segmentMinValue[segmentIndex], dataPoint.YValues[yValueIndex]);
+                                segmentMaxValue[segmentIndex] = Math.Max(
+                                    segmentMaxValue[segmentIndex],
+                                    dataPoint.YValues[yValueIndex]
+                                );
+                                segmentMinValue[segmentIndex] = Math.Min(
+                                    segmentMinValue[segmentIndex],
+                                    dataPoint.YValues[yValueIndex]
+                                );
                             }
                         }
                     }
@@ -1048,21 +1099,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="numberOfSegments">Returns largest empty segment sequence length.</param>
         /// <returns>True if long empty segment sequence was found.</returns>
         internal bool GetLargestSequenseOfSegmentsWithNoPoints(
-            int[] segmentPointNumber, 
-            out int startSegment, 
-            out int numberOfSegments)
+            int[] segmentPointNumber,
+            out int startSegment,
+            out int numberOfSegments
+        )
         {
             // Find the longest sequence of empty segments
             startSegment = -1;
             numberOfSegments = 0;
             int currentSegmentStart = -1;
             int currentNumberOfSegments = -1;
-            for(int index = 0; index < segmentPointNumber.Length; index++)
+            for (int index = 0; index < segmentPointNumber.Length; index++)
             {
                 // Check for the segment with no points
-                if(segmentPointNumber[index] == 0)
+                if (segmentPointNumber[index] == 0)
                 {
-                    if(currentSegmentStart == -1)
+                    if (currentSegmentStart == -1)
                     {
                         currentSegmentStart = index;
                         currentNumberOfSegments = 1;
@@ -1072,12 +1124,14 @@ namespace System.Web.UI.DataVisualization.Charting
                         ++currentNumberOfSegments;
                     }
                 }
-                
+
                 // Check if longest sequence found
-                if(currentNumberOfSegments > 0 && 
-                    (segmentPointNumber[index] != 0 || index == segmentPointNumber.Length - 1))
+                if (
+                    currentNumberOfSegments > 0
+                    && (segmentPointNumber[index] != 0 || index == segmentPointNumber.Length - 1)
+                )
                 {
-                    if(currentNumberOfSegments > numberOfSegments)
+                    if (currentNumberOfSegments > numberOfSegments)
                     {
                         startSegment = currentSegmentStart;
                         numberOfSegments = currentNumberOfSegments;
@@ -1088,9 +1142,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Store value of "-1" in found sequence
-            if(numberOfSegments != 0)
+            if (numberOfSegments != 0)
             {
-                for(int index = startSegment; index < (startSegment + numberOfSegments); index++)
+                for (int index = startSegment; index < (startSegment + numberOfSegments); index++)
                 {
                     segmentPointNumber[index] = -1;
                 }
@@ -1104,5 +1158,3 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion // Series StatisticFormula Methods
     }
 }
-
-

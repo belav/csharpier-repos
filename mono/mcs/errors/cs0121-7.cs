@@ -3,16 +3,12 @@
 
 public class D
 {
-    static void Test (string a = "s")
-    {
-    }
+    static void Test(string a = "s") { }
 
-    static void Test (int i = 9, string a = "b")
-    {
-    }
+    static void Test(int i = 9, string a = "b") { }
 
-    public static void Main ()
+    public static void Main()
     {
-        Test ();
+        Test();
     }
 }

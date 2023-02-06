@@ -1,6 +1,6 @@
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
         int foo = 4;
         string s = $@"{foo}";

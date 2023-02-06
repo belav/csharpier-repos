@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,147 +35,165 @@ using System.Web.Util;
 namespace System.Web.UI.HtmlControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [DefaultEvent ("ServerChange")]
-    [ValidationProperty ("Value")]
+    [DefaultEvent("ServerChange")]
+    [ValidationProperty("Value")]
     [SupportsEventValidation]
-    public class HtmlTextArea : HtmlContainerControl, IPostBackDataHandler 
+    public class HtmlTextArea : HtmlContainerControl, IPostBackDataHandler
     {
-        static readonly object serverChangeEvent = new object ();
+        static readonly object serverChangeEvent = new object();
 
-        public HtmlTextArea ()
-            : base ("textarea")
-        {
-        }
+        public HtmlTextArea()
+            : base("textarea") { }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Appearance")]
-        public int Cols {
-            get {
-                string s = Attributes ["cols"];
-                return (s == null) ? -1 : Convert.ToInt32 (s);
+        public int Cols
+        {
+            get
+            {
+                string s = Attributes["cols"];
+                return (s == null) ? -1 : Convert.ToInt32(s);
             }
-            set {
+            set
+            {
                 if (value == -1)
-                    Attributes.Remove ("cols");
+                    Attributes.Remove("cols");
                 else
-                    Attributes ["cols"] = value.ToString (Helpers.InvariantCulture);
+                    Attributes["cols"] = value.ToString(Helpers.InvariantCulture);
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Behavior")]
-        public virtual string Name {
+        public virtual string Name
+        {
             get { return UniqueID; }
             set { ; }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Appearance")]
-        public int Rows {
-            get {
-                string s = Attributes ["rows"];
-                return (s == null) ? -1 : Convert.ToInt32 (s);
+        public int Rows
+        {
+            get
+            {
+                string s = Attributes["rows"];
+                return (s == null) ? -1 : Convert.ToInt32(s);
             }
-            set {
+            set
+            {
                 if (value == -1)
-                    Attributes.Remove ("rows");
+                    Attributes.Remove("rows");
                 else
-                    Attributes ["rows"] = value.ToString (Helpers.InvariantCulture);
+                    Attributes["rows"] = value.ToString(Helpers.InvariantCulture);
             }
         }
 
-        [DefaultValue ("")]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [WebSysDescription("")]
         [WebCategory("Appearance")]
-        public string Value {
+        public string Value
+        {
             get { return InnerText; }
             set { InnerText = value; }
         }
 
-
-        protected override void AddParsedSubObject (object obj)
+        protected override void AddParsedSubObject(object obj)
         {
-            if (!((obj is LiteralControl) || (obj is DataBoundLiteralControl))) {
-                throw new HttpException (Locale.GetText ("Wrong type."));
+            if (!((obj is LiteralControl) || (obj is DataBoundLiteralControl)))
+            {
+                throw new HttpException(Locale.GetText("Wrong type."));
             }
-            base.AddParsedSubObject (obj);
+            base.AddParsedSubObject(obj);
         }
 
-        protected internal override void OnPreRender (EventArgs e)
+        protected internal override void OnPreRender(EventArgs e)
         {
-            base.OnPreRender (e);
+            base.OnPreRender(e);
 
             Page page = Page;
-            if (page != null && !Disabled) {
-                page.RegisterRequiresPostBack (this);
-                page.RegisterEnabledControl (this);
+            if (page != null && !Disabled)
+            {
+                page.RegisterRequiresPostBack(this);
+                page.RegisterEnabledControl(this);
             }
         }
 
-        protected virtual void OnServerChange (EventArgs e)
+        protected virtual void OnServerChange(EventArgs e)
         {
-            EventHandler serverChange = (EventHandler) Events [serverChangeEvent];
+            EventHandler serverChange = (EventHandler)Events[serverChangeEvent];
             if (serverChange != null)
-                serverChange (this, e);
+                serverChange(this, e);
         }
 
-        protected override void RenderAttributes (HtmlTextWriter writer)
+        protected override void RenderAttributes(HtmlTextWriter writer)
         {
             Page page = Page;
             if (page != null)
-                page.ClientScript.RegisterForEventValidation (UniqueID);
-            
-            if (Attributes ["name"] == null)
-                writer.WriteAttribute ("name", Name);
-            base.RenderAttributes (writer);
+                page.ClientScript.RegisterForEventValidation(UniqueID);
+
+            if (Attributes["name"] == null)
+                writer.WriteAttribute("name", Name);
+            base.RenderAttributes(writer);
         }
 
-        protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
         {
-            return DefaultLoadPostData (postDataKey, postCollection);
+            return DefaultLoadPostData(postDataKey, postCollection);
         }
 
-        protected virtual void RaisePostDataChangedEvent ()
+        protected virtual void RaisePostDataChangedEvent()
         {
-            ValidateEvent (UniqueID, String.Empty);
-            OnServerChange (EventArgs.Empty);
+            ValidateEvent(UniqueID, String.Empty);
+            OnServerChange(EventArgs.Empty);
         }
 
-        internal bool DefaultLoadPostData (string postDataKey, NameValueCollection postCollection)
+        internal bool DefaultLoadPostData(string postDataKey, NameValueCollection postCollection)
         {
-            string s = postCollection [postDataKey];
-            if ((s != null) && (s != Value)) {
+            string s = postCollection[postDataKey];
+            if ((s != null) && (s != Value))
+            {
                 Value = s;
                 return true;
             }
             return false;
         }
 
-        bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
         {
-            return LoadPostData (postDataKey, postCollection);
+            return LoadPostData(postDataKey, postCollection);
         }
 
-        void IPostBackDataHandler.RaisePostDataChangedEvent ()
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
         {
-            RaisePostDataChangedEvent ();
+            RaisePostDataChangedEvent();
         }
 
         [WebSysDescription("")]
         [WebCategory("Action")]
-        public event EventHandler ServerChange {
-            add { Events.AddHandler (serverChangeEvent, value); }
-            remove { Events.RemoveHandler (serverChangeEvent, value); }
+        public event EventHandler ServerChange
+        {
+            add { Events.AddHandler(serverChangeEvent, value); }
+            remove { Events.RemoveHandler(serverChangeEvent, value); }
         }
     }
 }

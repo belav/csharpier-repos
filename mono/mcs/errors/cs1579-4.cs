@@ -6,11 +6,11 @@ using System.Collections;
 
 public class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo f = new Foo ();
+        Foo f = new Foo();
         foreach (object o in f)
-            Console.WriteLine (o);
+            Console.WriteLine(o);
     }
 }
 

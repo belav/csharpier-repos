@@ -11,15 +11,13 @@
 using System;
 using System.Threading;
 
-
 public class Test_repro237932
 {
     public static int Main()
     {
         C1<System.OverflowException> cOverflow = new C1<System.OverflowException>();
         C1<System.InvalidCastException> cCast = new C1<System.InvalidCastException>();
-    
-        
+
         if (C1<System.OverflowException>.x == 1 && C1<System.InvalidCastException>.x == 1)
         {
             Console.WriteLine("PASS");
@@ -30,7 +28,6 @@ public class Test_repro237932
             Console.WriteLine("FAIL: Expected ThreadStatic field of both objects to be 1");
             return 101;
         }
-
     }
 }
 
@@ -41,7 +38,7 @@ public class C1<T>
 
     public C1()
     {
-        x +=1;
+        x += 1;
         Console.WriteLine(x);
     }
 }

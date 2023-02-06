@@ -7,17 +7,17 @@ class C
     {
         A
     }
-    
+
     enum E2 : sbyte
     {
         A
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
         E1 b = E1.A;
         E2 d = E2.A;
-        
+
         bool brr = b == d;
     }
 }

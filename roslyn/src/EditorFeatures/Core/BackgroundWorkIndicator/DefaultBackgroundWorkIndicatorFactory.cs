@@ -25,16 +25,28 @@ internal class DefaultBackgroundWorkIndicatorFactory : IBackgroundWorkIndicatorF
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public DefaultBackgroundWorkIndicatorFactory(
-        IUIThreadOperationExecutor uiThreadOperationExecutor)
+        IUIThreadOperationExecutor uiThreadOperationExecutor
+    )
     {
         _uiThreadOperationExecutor = uiThreadOperationExecutor;
     }
 
     public IBackgroundWorkIndicatorContext Create(
-        ITextView textView, SnapshotSpan applicableToSpan, string description, bool cancelOnEdit = true, bool cancelOnFocusLost = true)
+        ITextView textView,
+        SnapshotSpan applicableToSpan,
+        string description,
+        bool cancelOnEdit = true,
+        bool cancelOnFocusLost = true
+    )
     {
-        return new DefaultBackgroundWorkIndicatorContext(_uiThreadOperationExecutor.BeginExecute(
-            description, description, allowCancellation: true, showProgress: true));
+        return new DefaultBackgroundWorkIndicatorContext(
+            _uiThreadOperationExecutor.BeginExecute(
+                description,
+                description,
+                allowCancellation: true,
+                showProgress: true
+            )
+        );
     }
 
     private class DefaultBackgroundWorkIndicatorContext : IBackgroundWorkIndicatorContext
@@ -49,28 +61,21 @@ internal class DefaultBackgroundWorkIndicatorFactory : IBackgroundWorkIndicatorF
         public bool CancelOnEdit { get; set; }
         public bool CancelOnFocusLost { get; set; }
 
-        public IUIThreadOperationScope AddScope(bool allowCancellation, string description)
-            => _context.AddScope(allowCancellation, description);
+        public IUIThreadOperationScope AddScope(bool allowCancellation, string description) =>
+            _context.AddScope(allowCancellation, description);
 
-        public void TakeOwnership()
-            => _context.TakeOwnership();
+        public void TakeOwnership() => _context.TakeOwnership();
 
-        public CancellationToken UserCancellationToken
-            => _context.UserCancellationToken;
+        public CancellationToken UserCancellationToken => _context.UserCancellationToken;
 
-        public bool AllowCancellation
-            => _context.AllowCancellation;
+        public bool AllowCancellation => _context.AllowCancellation;
 
-        public string Description
-            => _context.Description;
+        public string Description => _context.Description;
 
-        public IEnumerable<IUIThreadOperationScope> Scopes
-            => _context.Scopes;
+        public IEnumerable<IUIThreadOperationScope> Scopes => _context.Scopes;
 
-        public PropertyCollection Properties
-            => _context.Properties;
+        public PropertyCollection Properties => _context.Properties;
 
-        public void Dispose()
-            => _context.Dispose();
+        public void Dispose() => _context.Dispose();
     }
 }

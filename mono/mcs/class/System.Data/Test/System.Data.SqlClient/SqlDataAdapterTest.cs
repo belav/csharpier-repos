@@ -42,490 +42,506 @@ namespace MonoTests.System.Data.SqlClient
     {
         [Test] // SqlDataAdapter ()
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Constructor1 ()
+        public void Constructor1()
         {
-            SqlDataAdapter da = new SqlDataAdapter ();
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#1");
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#2");
-            Assert.IsNull (da.Container, "#3");
-            Assert.IsFalse (da.ContinueUpdateOnError, "#4");
-            Assert.IsNull (da.DeleteCommand, "#5");
-            Assert.AreEqual (LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
-            Assert.IsNull (da.InsertCommand, "#7");
-            Assert.AreEqual (MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
-            Assert.AreEqual (MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
-            Assert.IsFalse (da.ReturnProviderSpecificTypes, "#10");
-            Assert.IsNull (da.SelectCommand, "#11");
-            Assert.IsNull (da.Site, "#12");
-            Assert.IsNotNull (da.TableMappings, "#13");
-            Assert.AreEqual (0, da.TableMappings.Count, "#14");
-            Assert.AreEqual (1, da.UpdateBatchSize, "#15");
-            Assert.IsNull (da.UpdateCommand, "#16");
+            SqlDataAdapter da = new SqlDataAdapter();
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#2");
+            Assert.IsNull(da.Container, "#3");
+            Assert.IsFalse(da.ContinueUpdateOnError, "#4");
+            Assert.IsNull(da.DeleteCommand, "#5");
+            Assert.AreEqual(LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
+            Assert.IsNull(da.InsertCommand, "#7");
+            Assert.AreEqual(MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
+            Assert.AreEqual(MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
+            Assert.IsFalse(da.ReturnProviderSpecificTypes, "#10");
+            Assert.IsNull(da.SelectCommand, "#11");
+            Assert.IsNull(da.Site, "#12");
+            Assert.IsNotNull(da.TableMappings, "#13");
+            Assert.AreEqual(0, da.TableMappings.Count, "#14");
+            Assert.AreEqual(1, da.UpdateBatchSize, "#15");
+            Assert.IsNull(da.UpdateCommand, "#16");
         }
 
         [Test] // SqlDataAdapter (SqlCommand)
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Constructor2 ()
+        public void Constructor2()
         {
-            SqlCommand cmd = new SqlCommand ();
-            SqlDataAdapter da = new SqlDataAdapter (cmd);
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#1");
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#2");
-            Assert.IsNull (da.Container, "#3");
-            Assert.IsFalse (da.ContinueUpdateOnError, "#4");
-            Assert.IsNull (da.DeleteCommand, "#5");
-            Assert.AreEqual (LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
-            Assert.IsNull (da.InsertCommand, "#7");
-            Assert.AreEqual (MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
-            Assert.AreEqual (MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
-            Assert.IsFalse (da.ReturnProviderSpecificTypes, "#10");
-            Assert.IsNotNull (da.SelectCommand, "#11");
-            Assert.AreSame (cmd, da.SelectCommand, "#12");
-            Assert.IsNull (da.Site, "#13");
-            Assert.IsNotNull (da.TableMappings, "#14");
-            Assert.AreEqual (0, da.TableMappings.Count, "#15");
-            Assert.AreEqual (1, da.UpdateBatchSize, "#16");
-            Assert.IsNull (da.UpdateCommand, "#17");
+            SqlCommand cmd = new SqlCommand();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#2");
+            Assert.IsNull(da.Container, "#3");
+            Assert.IsFalse(da.ContinueUpdateOnError, "#4");
+            Assert.IsNull(da.DeleteCommand, "#5");
+            Assert.AreEqual(LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
+            Assert.IsNull(da.InsertCommand, "#7");
+            Assert.AreEqual(MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
+            Assert.AreEqual(MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
+            Assert.IsFalse(da.ReturnProviderSpecificTypes, "#10");
+            Assert.IsNotNull(da.SelectCommand, "#11");
+            Assert.AreSame(cmd, da.SelectCommand, "#12");
+            Assert.IsNull(da.Site, "#13");
+            Assert.IsNotNull(da.TableMappings, "#14");
+            Assert.AreEqual(0, da.TableMappings.Count, "#15");
+            Assert.AreEqual(1, da.UpdateBatchSize, "#16");
+            Assert.IsNull(da.UpdateCommand, "#17");
         }
 
         [Test] // SqlDataAdapter (SqlCommand)
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Constructor2_SelectCommand_Null ()
+        public void Constructor2_SelectCommand_Null()
         {
-            SqlDataAdapter da = new SqlDataAdapter ((SqlCommand) null);
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#1");
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#2");
-            Assert.IsNull (da.Container, "#3");
-            Assert.IsFalse (da.ContinueUpdateOnError, "#4");
-            Assert.IsNull (da.DeleteCommand, "#5");
-            Assert.AreEqual (LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
-            Assert.IsNull (da.InsertCommand, "#7");
-            Assert.AreEqual (MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
-            Assert.AreEqual (MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
-            Assert.IsFalse (da.ReturnProviderSpecificTypes, "#10");
-            Assert.IsNull (da.SelectCommand, "#11");
-            Assert.IsNull (da.Site, "#12");
-            Assert.IsNotNull (da.TableMappings, "#13");
-            Assert.AreEqual (0, da.TableMappings.Count, "#14");
-            Assert.AreEqual (1, da.UpdateBatchSize, "#15");
-            Assert.IsNull (da.UpdateCommand, "#16");
+            SqlDataAdapter da = new SqlDataAdapter((SqlCommand)null);
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#2");
+            Assert.IsNull(da.Container, "#3");
+            Assert.IsFalse(da.ContinueUpdateOnError, "#4");
+            Assert.IsNull(da.DeleteCommand, "#5");
+            Assert.AreEqual(LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
+            Assert.IsNull(da.InsertCommand, "#7");
+            Assert.AreEqual(MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
+            Assert.AreEqual(MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
+            Assert.IsFalse(da.ReturnProviderSpecificTypes, "#10");
+            Assert.IsNull(da.SelectCommand, "#11");
+            Assert.IsNull(da.Site, "#12");
+            Assert.IsNotNull(da.TableMappings, "#13");
+            Assert.AreEqual(0, da.TableMappings.Count, "#14");
+            Assert.AreEqual(1, da.UpdateBatchSize, "#15");
+            Assert.IsNull(da.UpdateCommand, "#16");
         }
 
         [Test] // SqlDataAdapter (string, SqlConnection)
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Constructor3 ()
+        public void Constructor3()
         {
             string selectCommandText = "SELECT * FROM Authors";
-            SqlConnection selectConnection = new SqlConnection ();
+            SqlConnection selectConnection = new SqlConnection();
 
-            SqlDataAdapter da = new SqlDataAdapter (selectCommandText,
-                selectConnection);
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#1");
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#2");
-            Assert.IsNull (da.Container, "#3");
-            Assert.IsFalse (da.ContinueUpdateOnError, "#4");
-            Assert.IsNull (da.DeleteCommand, "#5");
-            Assert.AreEqual (LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
-            Assert.IsNull (da.InsertCommand, "#7");
-            Assert.AreEqual (MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
-            Assert.AreEqual (MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
-            Assert.IsFalse (da.ReturnProviderSpecificTypes, "#10");
-            Assert.IsNotNull (da.SelectCommand, "#11");
-            Assert.AreSame (selectCommandText, da.SelectCommand.CommandText, "#12");
-            Assert.AreSame (selectConnection, da.SelectCommand.Connection, "#13");
-            Assert.IsNull (da.Site, "#14");
-            Assert.IsNotNull (da.TableMappings, "#15");
-            Assert.AreEqual (0, da.TableMappings.Count, "#16");
-            Assert.AreEqual (1, da.UpdateBatchSize, "#17");
-            Assert.IsNull (da.UpdateCommand, "#18");
+            SqlDataAdapter da = new SqlDataAdapter(selectCommandText, selectConnection);
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#2");
+            Assert.IsNull(da.Container, "#3");
+            Assert.IsFalse(da.ContinueUpdateOnError, "#4");
+            Assert.IsNull(da.DeleteCommand, "#5");
+            Assert.AreEqual(LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
+            Assert.IsNull(da.InsertCommand, "#7");
+            Assert.AreEqual(MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
+            Assert.AreEqual(MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
+            Assert.IsFalse(da.ReturnProviderSpecificTypes, "#10");
+            Assert.IsNotNull(da.SelectCommand, "#11");
+            Assert.AreSame(selectCommandText, da.SelectCommand.CommandText, "#12");
+            Assert.AreSame(selectConnection, da.SelectCommand.Connection, "#13");
+            Assert.IsNull(da.Site, "#14");
+            Assert.IsNotNull(da.TableMappings, "#15");
+            Assert.AreEqual(0, da.TableMappings.Count, "#16");
+            Assert.AreEqual(1, da.UpdateBatchSize, "#17");
+            Assert.IsNull(da.UpdateCommand, "#18");
         }
 
         [Test] // SqlDataAdapter (string, SqlConnection)
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Constructor3_SelectCommandText_Null ()
+        public void Constructor3_SelectCommandText_Null()
         {
-            SqlConnection selectConnection = new SqlConnection ();
+            SqlConnection selectConnection = new SqlConnection();
 
-            SqlDataAdapter da = new SqlDataAdapter ((string) null,
-                selectConnection);
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#1");
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#2");
-            Assert.IsNull (da.Container, "#3");
-            Assert.IsFalse (da.ContinueUpdateOnError, "#4");
-            Assert.IsNull (da.DeleteCommand, "#5");
-            Assert.AreEqual (LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
-            Assert.IsNull (da.InsertCommand, "#7");
-            Assert.AreEqual (MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
-            Assert.AreEqual (MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
-            Assert.IsFalse (da.ReturnProviderSpecificTypes, "#10");
-            Assert.IsNotNull (da.SelectCommand, "#11");
-            Assert.IsNotNull (da.SelectCommand.CommandText, "#12");
-            Assert.AreEqual (string.Empty, da.SelectCommand.CommandText, "#13");
-            Assert.AreSame (selectConnection, da.SelectCommand.Connection, "#14");
-            Assert.IsNull (da.Site, "#15");
-            Assert.IsNotNull (da.TableMappings, "#16");
-            Assert.AreEqual (0, da.TableMappings.Count, "#17");
-            Assert.AreEqual (1, da.UpdateBatchSize, "#18");
-            Assert.IsNull (da.UpdateCommand, "#19");
+            SqlDataAdapter da = new SqlDataAdapter((string)null, selectConnection);
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#2");
+            Assert.IsNull(da.Container, "#3");
+            Assert.IsFalse(da.ContinueUpdateOnError, "#4");
+            Assert.IsNull(da.DeleteCommand, "#5");
+            Assert.AreEqual(LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
+            Assert.IsNull(da.InsertCommand, "#7");
+            Assert.AreEqual(MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
+            Assert.AreEqual(MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
+            Assert.IsFalse(da.ReturnProviderSpecificTypes, "#10");
+            Assert.IsNotNull(da.SelectCommand, "#11");
+            Assert.IsNotNull(da.SelectCommand.CommandText, "#12");
+            Assert.AreEqual(string.Empty, da.SelectCommand.CommandText, "#13");
+            Assert.AreSame(selectConnection, da.SelectCommand.Connection, "#14");
+            Assert.IsNull(da.Site, "#15");
+            Assert.IsNotNull(da.TableMappings, "#16");
+            Assert.AreEqual(0, da.TableMappings.Count, "#17");
+            Assert.AreEqual(1, da.UpdateBatchSize, "#18");
+            Assert.IsNull(da.UpdateCommand, "#19");
         }
 
         [Test] // SqlDataAdapter (string, SqlConnection)
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Constructor3_SelectConnection_Null ()
+        public void Constructor3_SelectConnection_Null()
         {
             string selectCommandText = "SELECT * FROM Authors";
 
-            SqlDataAdapter da = new SqlDataAdapter (selectCommandText,
-                (SqlConnection) null);
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#1");
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#2");
-            Assert.IsNull (da.Container, "#3");
-            Assert.IsFalse (da.ContinueUpdateOnError, "#4");
-            Assert.IsNull (da.DeleteCommand, "#5");
-            Assert.AreEqual (LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
-            Assert.IsNull (da.InsertCommand, "#7");
-            Assert.AreEqual (MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
-            Assert.AreEqual (MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
-            Assert.IsFalse (da.ReturnProviderSpecificTypes, "#10");
-            Assert.IsNotNull (da.SelectCommand, "#11");
-            Assert.AreSame (selectCommandText, da.SelectCommand.CommandText, "#12");
-            Assert.IsNull (da.SelectCommand.Connection, "#13");
-            Assert.IsNull (da.Site, "#14");
-            Assert.IsNotNull (da.TableMappings, "#15");
-            Assert.AreEqual (0, da.TableMappings.Count, "#16");
-            Assert.AreEqual (1, da.UpdateBatchSize, "#17");
-            Assert.IsNull (da.UpdateCommand, "#18");
+            SqlDataAdapter da = new SqlDataAdapter(selectCommandText, (SqlConnection)null);
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#2");
+            Assert.IsNull(da.Container, "#3");
+            Assert.IsFalse(da.ContinueUpdateOnError, "#4");
+            Assert.IsNull(da.DeleteCommand, "#5");
+            Assert.AreEqual(LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
+            Assert.IsNull(da.InsertCommand, "#7");
+            Assert.AreEqual(MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
+            Assert.AreEqual(MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
+            Assert.IsFalse(da.ReturnProviderSpecificTypes, "#10");
+            Assert.IsNotNull(da.SelectCommand, "#11");
+            Assert.AreSame(selectCommandText, da.SelectCommand.CommandText, "#12");
+            Assert.IsNull(da.SelectCommand.Connection, "#13");
+            Assert.IsNull(da.Site, "#14");
+            Assert.IsNotNull(da.TableMappings, "#15");
+            Assert.AreEqual(0, da.TableMappings.Count, "#16");
+            Assert.AreEqual(1, da.UpdateBatchSize, "#17");
+            Assert.IsNull(da.UpdateCommand, "#18");
         }
 
         [Test] // SqlDataAdapter (string, string)]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Constructor4 ()
+        public void Constructor4()
         {
             string selectCommandText = "SELECT * FROM Authors";
             string selectConnectionString = "server=SQLSRV;database=Mono";
 
-            SqlDataAdapter da = new SqlDataAdapter (selectCommandText,
-                selectConnectionString);
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#1");
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#2");
-            Assert.IsNull (da.Container, "#3");
-            Assert.IsFalse (da.ContinueUpdateOnError, "#4");
-            Assert.IsNull (da.DeleteCommand, "#5");
-            Assert.AreEqual (LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
-            Assert.IsNull (da.InsertCommand, "#7");
-            Assert.AreEqual (MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
-            Assert.AreEqual (MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
-            Assert.IsFalse (da.ReturnProviderSpecificTypes, "#10");
-            Assert.IsNotNull (da.SelectCommand, "#11");
-            Assert.AreSame (selectCommandText, da.SelectCommand.CommandText, "#12");
-            Assert.IsNotNull (da.SelectCommand.Connection, "#13");
-            Assert.AreEqual (selectConnectionString, da.SelectCommand.Connection.ConnectionString, "#14");
-            Assert.IsNull (da.Site, "#15");
-            Assert.IsNotNull (da.TableMappings, "#16");
-            Assert.AreEqual (0, da.TableMappings.Count, "#17");
-            Assert.AreEqual (1, da.UpdateBatchSize, "#18");
-            Assert.IsNull (da.UpdateCommand, "#19");
+            SqlDataAdapter da = new SqlDataAdapter(selectCommandText, selectConnectionString);
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#2");
+            Assert.IsNull(da.Container, "#3");
+            Assert.IsFalse(da.ContinueUpdateOnError, "#4");
+            Assert.IsNull(da.DeleteCommand, "#5");
+            Assert.AreEqual(LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
+            Assert.IsNull(da.InsertCommand, "#7");
+            Assert.AreEqual(MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
+            Assert.AreEqual(MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
+            Assert.IsFalse(da.ReturnProviderSpecificTypes, "#10");
+            Assert.IsNotNull(da.SelectCommand, "#11");
+            Assert.AreSame(selectCommandText, da.SelectCommand.CommandText, "#12");
+            Assert.IsNotNull(da.SelectCommand.Connection, "#13");
+            Assert.AreEqual(
+                selectConnectionString,
+                da.SelectCommand.Connection.ConnectionString,
+                "#14"
+            );
+            Assert.IsNull(da.Site, "#15");
+            Assert.IsNotNull(da.TableMappings, "#16");
+            Assert.AreEqual(0, da.TableMappings.Count, "#17");
+            Assert.AreEqual(1, da.UpdateBatchSize, "#18");
+            Assert.IsNull(da.UpdateCommand, "#19");
         }
 
         [Test] // SqlDataAdapter (string, string)]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Constructor4_SelectCommandText_Null ()
+        public void Constructor4_SelectCommandText_Null()
         {
             string selectConnectionString = "server=SQLSRV;database=Mono";
 
-            SqlDataAdapter da = new SqlDataAdapter ((string) null,
-                selectConnectionString);
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#1");
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#2");
-            Assert.IsNull (da.Container, "#3");
-            Assert.IsFalse (da.ContinueUpdateOnError, "#4");
-            Assert.IsNull (da.DeleteCommand, "#5");
-            Assert.AreEqual (LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
-            Assert.IsNull (da.InsertCommand, "#7");
-            Assert.AreEqual (MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
-            Assert.AreEqual (MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
-            Assert.IsFalse (da.ReturnProviderSpecificTypes, "#10");
-            Assert.IsNotNull (da.SelectCommand, "#11");
-            Assert.IsNotNull (da.SelectCommand.CommandText, "#12");
-            Assert.AreEqual (string.Empty, da.SelectCommand.CommandText, "#13");
-            Assert.IsNotNull (da.SelectCommand.Connection, "#14");
-            Assert.AreEqual (selectConnectionString, da.SelectCommand.Connection.ConnectionString, "#15");
-            Assert.IsNull (da.Site, "#16");
-            Assert.IsNotNull (da.TableMappings, "#17");
-            Assert.AreEqual (0, da.TableMappings.Count, "#18");
-            Assert.AreEqual (1, da.UpdateBatchSize, "#19");
-            Assert.IsNull (da.UpdateCommand, "#20");
+            SqlDataAdapter da = new SqlDataAdapter((string)null, selectConnectionString);
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#2");
+            Assert.IsNull(da.Container, "#3");
+            Assert.IsFalse(da.ContinueUpdateOnError, "#4");
+            Assert.IsNull(da.DeleteCommand, "#5");
+            Assert.AreEqual(LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
+            Assert.IsNull(da.InsertCommand, "#7");
+            Assert.AreEqual(MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
+            Assert.AreEqual(MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
+            Assert.IsFalse(da.ReturnProviderSpecificTypes, "#10");
+            Assert.IsNotNull(da.SelectCommand, "#11");
+            Assert.IsNotNull(da.SelectCommand.CommandText, "#12");
+            Assert.AreEqual(string.Empty, da.SelectCommand.CommandText, "#13");
+            Assert.IsNotNull(da.SelectCommand.Connection, "#14");
+            Assert.AreEqual(
+                selectConnectionString,
+                da.SelectCommand.Connection.ConnectionString,
+                "#15"
+            );
+            Assert.IsNull(da.Site, "#16");
+            Assert.IsNotNull(da.TableMappings, "#17");
+            Assert.AreEqual(0, da.TableMappings.Count, "#18");
+            Assert.AreEqual(1, da.UpdateBatchSize, "#19");
+            Assert.IsNull(da.UpdateCommand, "#20");
         }
 
         [Test] // SqlDataAdapter (string, string)]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Constructor4_SelectConnectionString_Null ()
+        public void Constructor4_SelectConnectionString_Null()
         {
             string selectCommandText = "SELECT * FROM Authors";
 
-            SqlDataAdapter da = new SqlDataAdapter (selectCommandText,
-                (string) null);
-            Assert.IsTrue (da.AcceptChangesDuringFill, "#1");
-            Assert.IsTrue (da.AcceptChangesDuringUpdate, "#2");
-            Assert.IsNull (da.Container, "#3");
-            Assert.IsFalse (da.ContinueUpdateOnError, "#4");
-            Assert.IsNull (da.DeleteCommand, "#5");
-            Assert.AreEqual (LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
-            Assert.IsNull (da.InsertCommand, "#7");
-            Assert.AreEqual (MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
-            Assert.AreEqual (MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
-            Assert.IsFalse (da.ReturnProviderSpecificTypes, "#10");
-            Assert.IsNotNull (da.SelectCommand, "#11");
-            Assert.AreSame (selectCommandText, da.SelectCommand.CommandText, "#12");
-            Assert.IsNotNull (da.SelectCommand.Connection, "#14");
-            Assert.AreEqual (string.Empty, da.SelectCommand.Connection.ConnectionString, "#15");
-            Assert.IsNull (da.Site, "#16");
-            Assert.IsNotNull (da.TableMappings, "#17");
-            Assert.AreEqual (0, da.TableMappings.Count, "#18");
-            Assert.AreEqual (1, da.UpdateBatchSize, "#19");
-            Assert.IsNull (da.UpdateCommand, "#20");
+            SqlDataAdapter da = new SqlDataAdapter(selectCommandText, (string)null);
+            Assert.IsTrue(da.AcceptChangesDuringFill, "#1");
+            Assert.IsTrue(da.AcceptChangesDuringUpdate, "#2");
+            Assert.IsNull(da.Container, "#3");
+            Assert.IsFalse(da.ContinueUpdateOnError, "#4");
+            Assert.IsNull(da.DeleteCommand, "#5");
+            Assert.AreEqual(LoadOption.OverwriteChanges, da.FillLoadOption, "#6");
+            Assert.IsNull(da.InsertCommand, "#7");
+            Assert.AreEqual(MissingMappingAction.Passthrough, da.MissingMappingAction, "#8");
+            Assert.AreEqual(MissingSchemaAction.Add, da.MissingSchemaAction, "#9");
+            Assert.IsFalse(da.ReturnProviderSpecificTypes, "#10");
+            Assert.IsNotNull(da.SelectCommand, "#11");
+            Assert.AreSame(selectCommandText, da.SelectCommand.CommandText, "#12");
+            Assert.IsNotNull(da.SelectCommand.Connection, "#14");
+            Assert.AreEqual(string.Empty, da.SelectCommand.Connection.ConnectionString, "#15");
+            Assert.IsNull(da.Site, "#16");
+            Assert.IsNotNull(da.TableMappings, "#17");
+            Assert.AreEqual(0, da.TableMappings.Count, "#18");
+            Assert.AreEqual(1, da.UpdateBatchSize, "#19");
+            Assert.IsNull(da.UpdateCommand, "#20");
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void DeleteCommand ()
+        public void DeleteCommand()
         {
-            SqlDataAdapter da = new SqlDataAdapter ();
-            SqlCommand cmd1 = new SqlCommand ();
-            SqlCommand cmd2 = new SqlCommand ();
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommand cmd1 = new SqlCommand();
+            SqlCommand cmd2 = new SqlCommand();
 
             da.DeleteCommand = cmd1;
-            Assert.AreSame (cmd1, da.DeleteCommand, "#1");
+            Assert.AreSame(cmd1, da.DeleteCommand, "#1");
             da.DeleteCommand = cmd2;
-            Assert.AreSame (cmd2, da.DeleteCommand, "#2");
+            Assert.AreSame(cmd2, da.DeleteCommand, "#2");
             da.DeleteCommand = null;
-            Assert.IsNull (da.DeleteCommand, "#3");
+            Assert.IsNull(da.DeleteCommand, "#3");
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void Dispose ()
+        public void Dispose()
         {
-            SqlDataAdapter da = new SqlDataAdapter ();
-            da.DeleteCommand = new SqlCommand ();
-            da.InsertCommand = new SqlCommand ();
-            da.SelectCommand = new SqlCommand ();
-            da.UpdateCommand = new SqlCommand ();
-            da.Dispose ();
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.DeleteCommand = new SqlCommand();
+            da.InsertCommand = new SqlCommand();
+            da.SelectCommand = new SqlCommand();
+            da.UpdateCommand = new SqlCommand();
+            da.Dispose();
 
-            Assert.IsNull (da.DeleteCommand, "#1");
-            Assert.IsNull (da.InsertCommand, "#2");
-            Assert.IsNull (da.SelectCommand, "#3");
-            Assert.IsNotNull (da.TableMappings, "#4");
-            Assert.AreEqual (0, da.TableMappings.Count, "#5");
-            Assert.IsNull (da.UpdateCommand, "#6");
+            Assert.IsNull(da.DeleteCommand, "#1");
+            Assert.IsNull(da.InsertCommand, "#2");
+            Assert.IsNull(da.SelectCommand, "#3");
+            Assert.IsNotNull(da.TableMappings, "#4");
+            Assert.AreEqual(0, da.TableMappings.Count, "#5");
+            Assert.IsNull(da.UpdateCommand, "#6");
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void InsertCommand ()
+        public void InsertCommand()
         {
-            SqlDataAdapter da = new SqlDataAdapter ();
-            SqlCommand cmd1 = new SqlCommand ();
-            SqlCommand cmd2 = new SqlCommand ();
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommand cmd1 = new SqlCommand();
+            SqlCommand cmd2 = new SqlCommand();
 
             da.InsertCommand = cmd1;
-            Assert.AreSame (cmd1, da.InsertCommand, "#1");
+            Assert.AreSame(cmd1, da.InsertCommand, "#1");
             da.InsertCommand = cmd2;
-            Assert.AreSame (cmd2, da.InsertCommand, "#2");
+            Assert.AreSame(cmd2, da.InsertCommand, "#2");
             da.InsertCommand = null;
-            Assert.IsNull (da.InsertCommand, "#3");
+            Assert.IsNull(da.InsertCommand, "#3");
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void SelectCommand ()
+        public void SelectCommand()
         {
-            SqlDataAdapter da = new SqlDataAdapter ();
-            SqlCommand cmd1 = new SqlCommand ();
-            SqlCommand cmd2 = new SqlCommand ();
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommand cmd1 = new SqlCommand();
+            SqlCommand cmd2 = new SqlCommand();
 
             da.SelectCommand = cmd1;
-            Assert.AreSame (cmd1, da.SelectCommand, "#1");
+            Assert.AreSame(cmd1, da.SelectCommand, "#1");
             da.SelectCommand = cmd2;
-            Assert.AreSame (cmd2, da.SelectCommand, "#2");
+            Assert.AreSame(cmd2, da.SelectCommand, "#2");
             da.SelectCommand = null;
-            Assert.IsNull (da.SelectCommand, "#3");
+            Assert.IsNull(da.SelectCommand, "#3");
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void UpdateBatchSize ()
+        public void UpdateBatchSize()
         {
-            SqlDataAdapter da = new SqlDataAdapter ();
+            SqlDataAdapter da = new SqlDataAdapter();
             da.UpdateBatchSize = 0;
-            Assert.AreEqual (0, da.UpdateBatchSize, "#1");
+            Assert.AreEqual(0, da.UpdateBatchSize, "#1");
             da.UpdateBatchSize = int.MaxValue;
-            Assert.AreEqual (int.MaxValue, da.UpdateBatchSize, "#2");
+            Assert.AreEqual(int.MaxValue, da.UpdateBatchSize, "#2");
             da.UpdateBatchSize = 1;
-            Assert.AreEqual (1, da.UpdateBatchSize, "#3");
+            Assert.AreEqual(1, da.UpdateBatchSize, "#3");
         }
-        
+
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void UpdateBatchSize_Negative ()
+        public void UpdateBatchSize_Negative()
         {
-            SqlDataAdapter da = new SqlDataAdapter ();
-            try {
+            SqlDataAdapter da = new SqlDataAdapter();
+            try
+            {
                 da.UpdateBatchSize = -1;
-                Assert.Fail ("#1");
-            } catch (ArgumentOutOfRangeException ex) {
-                Assert.AreEqual (typeof (ArgumentOutOfRangeException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
-                Assert.IsNotNull (ex.ParamName, "#5");
-                Assert.AreEqual ("UpdateBatchSize", ex.ParamName, "#6");
+                Assert.Fail("#1");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Assert.AreEqual(typeof(ArgumentOutOfRangeException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
+                Assert.IsNotNull(ex.ParamName, "#5");
+                Assert.AreEqual("UpdateBatchSize", ex.ParamName, "#6");
             }
         }
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
-        [ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        public void UpdateCommand ()
+        public void UpdateCommand()
         {
-            SqlDataAdapter da = new SqlDataAdapter ();
-            SqlCommand cmd1 = new SqlCommand ();
-            SqlCommand cmd2 = new SqlCommand ();
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommand cmd1 = new SqlCommand();
+            SqlCommand cmd2 = new SqlCommand();
 
             da.UpdateCommand = cmd1;
-            Assert.AreSame (cmd1, da.UpdateCommand, "#1");
+            Assert.AreSame(cmd1, da.UpdateCommand, "#1");
             da.UpdateCommand = cmd2;
-            Assert.AreSame (cmd2, da.UpdateCommand, "#2");
+            Assert.AreSame(cmd2, da.UpdateCommand, "#2");
             da.UpdateCommand = null;
-            Assert.IsNull (da.UpdateCommand, "#3");
+            Assert.IsNull(da.UpdateCommand, "#3");
         }
 
 #if !MOBILE
         [Test]
-        public void DeleteCommand_IDbDataAdapter ()
+        public void DeleteCommand_IDbDataAdapter()
         {
-            IDbDataAdapter da = new SqlDataAdapter ();
-            SqlCommand cmd1 = new SqlCommand ();
-            SqlCommand cmd2 = new SqlCommand ();
-            
+            IDbDataAdapter da = new SqlDataAdapter();
+            SqlCommand cmd1 = new SqlCommand();
+            SqlCommand cmd2 = new SqlCommand();
+
             da.DeleteCommand = cmd1;
-            Assert.AreSame (cmd1, da.DeleteCommand, "#A1");
+            Assert.AreSame(cmd1, da.DeleteCommand, "#A1");
             da.DeleteCommand = cmd2;
-            Assert.AreSame (cmd2, da.DeleteCommand, "#A2");
+            Assert.AreSame(cmd2, da.DeleteCommand, "#A2");
             da.DeleteCommand = null;
-            Assert.IsNull (da.DeleteCommand, "#A3");
-            
-            try {
-                da.DeleteCommand = new OdbcCommand ();
-                Assert.Fail ("#B1");
-            } catch (InvalidCastException ex) {
-                Assert.AreEqual (typeof (InvalidCastException), ex.GetType (), "#B2");
-                Assert.IsNull (ex.InnerException, "#B3");
-                Assert.IsNotNull (ex.Message, "#B4");
+            Assert.IsNull(da.DeleteCommand, "#A3");
+
+            try
+            {
+                da.DeleteCommand = new OdbcCommand();
+                Assert.Fail("#B1");
+            }
+            catch (InvalidCastException ex)
+            {
+                Assert.AreEqual(typeof(InvalidCastException), ex.GetType(), "#B2");
+                Assert.IsNull(ex.InnerException, "#B3");
+                Assert.IsNotNull(ex.Message, "#B4");
             }
         }
 
-        
         [Test]
-        public void InsertCommand_IDbDataAdapter ()
+        public void InsertCommand_IDbDataAdapter()
         {
-            IDbDataAdapter da = new SqlDataAdapter ();
-            SqlCommand cmd1 = new SqlCommand ();
-            SqlCommand cmd2 = new SqlCommand ();
-            
+            IDbDataAdapter da = new SqlDataAdapter();
+            SqlCommand cmd1 = new SqlCommand();
+            SqlCommand cmd2 = new SqlCommand();
+
             da.InsertCommand = cmd1;
-            Assert.AreSame (cmd1, da.InsertCommand, "#A1");
+            Assert.AreSame(cmd1, da.InsertCommand, "#A1");
             da.InsertCommand = cmd2;
-            Assert.AreSame (cmd2, da.InsertCommand, "#A2");
+            Assert.AreSame(cmd2, da.InsertCommand, "#A2");
             da.InsertCommand = null;
-            Assert.IsNull (da.InsertCommand, "#A3");
-            
-            try {
-                da.InsertCommand = new OdbcCommand ();
-                Assert.Fail ("#B1");
-            } catch (InvalidCastException ex) {
-                Assert.AreEqual (typeof (InvalidCastException), ex.GetType (), "#B2");
-                Assert.IsNull (ex.InnerException, "#B3");
-                Assert.IsNotNull (ex.Message, "#B4");
+            Assert.IsNull(da.InsertCommand, "#A3");
+
+            try
+            {
+                da.InsertCommand = new OdbcCommand();
+                Assert.Fail("#B1");
+            }
+            catch (InvalidCastException ex)
+            {
+                Assert.AreEqual(typeof(InvalidCastException), ex.GetType(), "#B2");
+                Assert.IsNull(ex.InnerException, "#B3");
+                Assert.IsNotNull(ex.Message, "#B4");
             }
         }
 
         [Test]
-        public void SelectCommand_IDbDataAdapter ()
+        public void SelectCommand_IDbDataAdapter()
         {
-            IDbDataAdapter da = new SqlDataAdapter ();
-            SqlCommand cmd1 = new SqlCommand ();
-            SqlCommand cmd2 = new SqlCommand ();
-            
+            IDbDataAdapter da = new SqlDataAdapter();
+            SqlCommand cmd1 = new SqlCommand();
+            SqlCommand cmd2 = new SqlCommand();
+
             da.SelectCommand = cmd1;
-            Assert.AreSame (cmd1, da.SelectCommand, "#A1");
+            Assert.AreSame(cmd1, da.SelectCommand, "#A1");
             da.SelectCommand = cmd2;
-            Assert.AreSame (cmd2, da.SelectCommand, "#A2");
+            Assert.AreSame(cmd2, da.SelectCommand, "#A2");
             da.SelectCommand = null;
-            Assert.IsNull (da.SelectCommand, "#A3");
-            
-            try {
-                da.SelectCommand = new OdbcCommand ();
-                Assert.Fail ("#B1");
-            } catch (InvalidCastException ex) {
-                Assert.AreEqual (typeof (InvalidCastException), ex.GetType (), "#B2");
-                Assert.IsNull (ex.InnerException, "#B3");
-                Assert.IsNotNull (ex.Message, "#B4");
+            Assert.IsNull(da.SelectCommand, "#A3");
+
+            try
+            {
+                da.SelectCommand = new OdbcCommand();
+                Assert.Fail("#B1");
+            }
+            catch (InvalidCastException ex)
+            {
+                Assert.AreEqual(typeof(InvalidCastException), ex.GetType(), "#B2");
+                Assert.IsNull(ex.InnerException, "#B3");
+                Assert.IsNotNull(ex.Message, "#B4");
             }
         }
 
         [Test]
-        public void UpdateCommand_IDbDataAdapter ()
+        public void UpdateCommand_IDbDataAdapter()
         {
-            IDbDataAdapter da = new SqlDataAdapter ();
-            SqlCommand cmd1 = new SqlCommand ();
-            SqlCommand cmd2 = new SqlCommand ();
+            IDbDataAdapter da = new SqlDataAdapter();
+            SqlCommand cmd1 = new SqlCommand();
+            SqlCommand cmd2 = new SqlCommand();
 
             da.UpdateCommand = cmd1;
-            Assert.AreSame (cmd1, da.UpdateCommand, "#A1");
+            Assert.AreSame(cmd1, da.UpdateCommand, "#A1");
             da.UpdateCommand = cmd2;
-            Assert.AreSame (cmd2, da.UpdateCommand, "#A2");
+            Assert.AreSame(cmd2, da.UpdateCommand, "#A2");
             da.UpdateCommand = null;
-            Assert.IsNull (da.UpdateCommand, "#A3");
+            Assert.IsNull(da.UpdateCommand, "#A3");
 
-            try {
-                da.UpdateCommand = new OdbcCommand ();
-                Assert.Fail ("#B1");
-            } catch (InvalidCastException ex) {
-                Assert.AreEqual (typeof (InvalidCastException), ex.GetType (), "#B2");
-                Assert.IsNull (ex.InnerException, "#B3");
-                Assert.IsNotNull (ex.Message, "#B4");
+            try
+            {
+                da.UpdateCommand = new OdbcCommand();
+                Assert.Fail("#B1");
+            }
+            catch (InvalidCastException ex)
+            {
+                Assert.AreEqual(typeof(InvalidCastException), ex.GetType(), "#B2");
+                Assert.IsNull(ex.InnerException, "#B3");
+                Assert.IsNotNull(ex.Message, "#B4");
             }
         }
 #endif

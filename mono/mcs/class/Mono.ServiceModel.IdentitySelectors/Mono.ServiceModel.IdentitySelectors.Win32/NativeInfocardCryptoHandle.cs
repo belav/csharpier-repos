@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,7 +35,7 @@ namespace Mono.ServiceModel.IdentitySelectors.Win32
 {
     // see http://msdn2.microsoft.com/en-us/library/aa702727.aspx
 
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     class NativeInfocardCryptoHandle
     {
         // This field order must be fixed for win32 API interop:
@@ -43,43 +43,52 @@ namespace Mono.ServiceModel.IdentitySelectors.Win32
         long expiration;
         IntPtr parameters;
 
-        public long Expiration {
+        public long Expiration
+        {
             get { return expiration; }
         }
 
-        public AsymmetricSecurityKey GetAsymmetricKey ()
+        public AsymmetricSecurityKey GetAsymmetricKey()
         {
-            switch (handle_type) {
-            case NativeInfocardHandleType.Asymmetric:
-                NativeAsymmetricCryptoParameters a = (NativeAsymmetricCryptoParameters) Marshal.PtrToStructure (parameters, typeof (NativeAsymmetricCryptoParameters));
-                return new AsymmetricProofTokenSecurityKey (a, this);
+            switch (handle_type)
+            {
+                case NativeInfocardHandleType.Asymmetric:
+                    NativeAsymmetricCryptoParameters a = (NativeAsymmetricCryptoParameters)
+                        Marshal.PtrToStructure(
+                            parameters,
+                            typeof(NativeAsymmetricCryptoParameters)
+                        );
+                    return new AsymmetricProofTokenSecurityKey(a, this);
             }
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 
-    [StructLayout (LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     struct NativeAsymmetricCryptoParameters
     {
         int key_size;
         string encalg;
         string sigalg;
 
-        public int KeySize {
+        public int KeySize
+        {
             get { return key_size; }
         }
 
-        public string EncryptionAlgorithm {
+        public string EncryptionAlgorithm
+        {
             get { return encalg; }
         }
 
-        public string SignatureAlgorithm {
+        public string SignatureAlgorithm
+        {
             get { return sigalg; }
         }
     }
 
 #pragma warning disable 169
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     struct NativeSymmetricCryptoParameters
     {
         int key_size;
@@ -87,7 +96,7 @@ namespace Mono.ServiceModel.IdentitySelectors.Win32
         int feedback_size;
     }
 
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     struct NativeTransformCryptoParameters
     {
         int input_block_size;
@@ -96,7 +105,7 @@ namespace Mono.ServiceModel.IdentitySelectors.Win32
         bool reusable;
     }
 
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     struct NativeHashCryptoParameters
     {
         int hash_size;

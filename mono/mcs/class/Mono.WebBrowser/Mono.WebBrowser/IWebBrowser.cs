@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,7 +38,7 @@ namespace Mono.WebBrowser
         /// Initialize a browser instance.
         /// </summary>
         /// <param name="handle">
-        /// A <see cref="IntPtr"/> to the native window handle of the widget 
+        /// A <see cref="IntPtr"/> to the native window handle of the widget
         /// where the browser engine will draw
         /// </param>
         /// <param name="width">
@@ -50,25 +50,25 @@ namespace Mono.WebBrowser
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        bool Load (IntPtr handle, int width, int height);
-        void Shutdown ();
-        void FocusIn (FocusOption focus);
-        void FocusOut ();
-        void Activate ();
-        void Deactivate ();
-        void Resize (int width, int height);
+        bool Load(IntPtr handle, int width, int height);
+        void Shutdown();
+        void FocusIn(FocusOption focus);
+        void FocusOut();
+        void Activate();
+        void Deactivate();
+        void Resize(int width, int height);
 
-        void Render (byte[] data);
-        void Render (string html);
-        void Render (string html, string uri, string contentType);
+        void Render(byte[] data);
+        void Render(string html);
+        void Render(string html, string uri, string contentType);
 
-        void ExecuteScript (string script);
-            
+        void ExecuteScript(string script);
+
         bool Initialized { get; }
         IWindow Window { get; }
         IDocument Document { get; }
-        bool Offline {get; set;}
-        
+        bool Offline { get; set; }
+
         /// <value>
         /// Object exposing navigation methods like Go, Back, etc.
         /// </value>
@@ -86,19 +86,19 @@ namespace Mono.WebBrowser
         event NodeEventHandler MouseUp;
         event EventHandler Focus;
         event CreateNewWindowEventHandler CreateNewWindow;
-        
+
         event AlertEventHandler Alert;
-        
+
         event LoadStartedEventHandler LoadStarted;
         event LoadCommitedEventHandler LoadCommited;
         event ProgressChangedEventHandler ProgressChanged;
         event LoadFinishedEventHandler LoadFinished;
-                
+
         event StatusChangedEventHandler StatusChanged;
         event SecurityChangedEventHandler SecurityChanged;
-        
+
         event ContextMenuEventHandler ContextMenuShown;
-        
+
         event NavigationRequestedEventHandler NavigationRequested;
     }
 
@@ -156,22 +156,24 @@ namespace Mono.WebBrowser
         Winforms = 1,
         Gtk = 2
     }
-    
-    public enum SecurityLevel {
-        Insecure= 1,
+
+    public enum SecurityLevel
+    {
+        Insecure = 1,
         Mixed = 2,
         Secure = 3
     }
 
 #region Window Events
-    public delegate bool CreateNewWindowEventHandler (object sender, CreateNewWindowEventArgs e);
+    public delegate bool CreateNewWindowEventHandler(object sender, CreateNewWindowEventArgs e);
+
     public class CreateNewWindowEventArgs : EventArgs
     {
         private bool isModal;
 
         #region Public Constructors
-        public CreateNewWindowEventArgs (bool isModal)
-            : base ()
+        public CreateNewWindowEventArgs(bool isModal)
+            : base()
         {
             this.isModal = isModal;
         }
@@ -187,21 +189,22 @@ namespace Mono.WebBrowser
 #endregion
 
 #region Script events
-    
-    public delegate void AlertEventHandler (object sender, AlertEventArgs e);
+
+    public delegate void AlertEventHandler(object sender, AlertEventArgs e);
+
     public class AlertEventArgs : EventArgs
     {
         private DialogType type;
         private string title;
         private string text;
         private string text2;
-        
+
         private string username;
         private string password;
-        private string checkMsg; 
+        private string checkMsg;
         private bool checkState;
         private DialogButtonFlags dialogButtons;
-        
+
         private StringCollection buttons;
         private StringCollection options;
 
@@ -213,28 +216,29 @@ namespace Mono.WebBrowser
         /// </summary>
         /// <param name="title"></param>
         /// <param name="text"></param>
-        public AlertEventArgs ()
-            : base ()
-        {
-        }
-
+        public AlertEventArgs()
+            : base() { }
 
 #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public DialogType Type {
+        public DialogType Type
+        {
             get { return this.type; }
             set { this.type = value; }
         }
-        public string Title {
+        public string Title
+        {
             get { return this.title; }
             set { this.title = value; }
         }
-        public string Text {
+        public string Text
+        {
             get { return this.text; }
             set { this.text = value; }
         }
-        public string Text2 {
+        public string Text2
+        {
             get { return this.text2; }
             set { this.text2 = value; }
         }
@@ -243,55 +247,67 @@ namespace Mono.WebBrowser
             get { return this.checkMsg; }
             set { this.checkMsg = value; }
         }
-        public bool CheckState {
+        public bool CheckState
+        {
             get { return this.checkState; }
             set { this.checkState = value; }
         }
-        public DialogButtonFlags DialogButtons {
+        public DialogButtonFlags DialogButtons
+        {
             get { return this.dialogButtons; }
             set { this.dialogButtons = value; }
         }
-        public StringCollection Buttons {
+        public StringCollection Buttons
+        {
             get { return buttons; }
             set { buttons = value; }
         }
-        public StringCollection Options {
+        public StringCollection Options
+        {
             get { return options; }
             set { options = value; }
         }
 
-        public string Username {
+        public string Username
+        {
             get { return username; }
             set { username = value; }
         }
 
-        public string Password {
+        public string Password
+        {
             get { return password; }
             set { password = value; }
         }
 
-        public bool BoolReturn {
-            get { 
+        public bool BoolReturn
+        {
+            get
+            {
                 if (returnValue is bool)
-                    return (bool) returnValue;
+                    return (bool)returnValue;
                 return false;
             }
             set { returnValue = value; }
         }
 
-        public int IntReturn {
-            get { 
+        public int IntReturn
+        {
+            get
+            {
                 if (returnValue is int)
-                    return (int) returnValue;
+                    return (int)returnValue;
                 return -1;
             }
             set { returnValue = value; }
         }
 
-        public string StringReturn {
-            get { 
+        public string StringReturn
+        {
+            get
+            {
                 if (returnValue is string)
-                    return (string) returnValue;
+                    return (string)returnValue;
                 return String.Empty;
             }
             set { returnValue = value; }
@@ -302,128 +318,165 @@ namespace Mono.WebBrowser
 #endregion
 
 #region Loading events
-    
-    public delegate void StatusChangedEventHandler (object sender, StatusChangedEventArgs e);
+
+    public delegate void StatusChangedEventHandler(object sender, StatusChangedEventArgs e);
+
     public class StatusChangedEventArgs : EventArgs
     {
         private string message;
-        public string Message {
+        public string Message
+        {
             get { return message; }
             set { message = value; }
         }
 
         private int status;
-        public int Status {
+        public int Status
+        {
             get { return status; }
             set { status = value; }
         }
 
-        public StatusChangedEventArgs (string message, int status)
+        public StatusChangedEventArgs(string message, int status)
         {
             this.message = message;
             this.status = status;
         }
     }
 
-    public delegate void ProgressChangedEventHandler (object sender, ProgressChangedEventArgs e);
-    public class ProgressChangedEventArgs : EventArgs 
+    public delegate void ProgressChangedEventHandler(object sender, ProgressChangedEventArgs e);
+
+    public class ProgressChangedEventArgs : EventArgs
     {
         private int progress;
-        public int Progress {
+        public int Progress
+        {
             get { return progress; }
         }
         private int maxProgress;
-        public int MaxProgress {
+        public int MaxProgress
+        {
             get { return maxProgress; }
         }
-        
-        public ProgressChangedEventArgs (int progress, int maxProgress) {
+
+        public ProgressChangedEventArgs(int progress, int maxProgress)
+        {
             this.progress = progress;
             this.maxProgress = maxProgress;
         }
     }
-    
-    public delegate void LoadStartedEventHandler (object sender, LoadStartedEventArgs e);
-    public class LoadStartedEventArgs : System.ComponentModel.CancelEventArgs {
+
+    public delegate void LoadStartedEventHandler(object sender, LoadStartedEventArgs e);
+
+    public class LoadStartedEventArgs : System.ComponentModel.CancelEventArgs
+    {
         private string uri;
-        public string Uri {
-            get {return uri;}
+        public string Uri
+        {
+            get { return uri; }
         }
         private string frameName;
-        public string FrameName {
-            get {return frameName;}
+        public string FrameName
+        {
+            get { return frameName; }
         }
-        public LoadStartedEventArgs (string uri, string frameName) {
+
+        public LoadStartedEventArgs(string uri, string frameName)
+        {
             this.uri = uri;
             this.frameName = frameName;
         }
     }
-    public delegate void LoadCommitedEventHandler (object sender, LoadCommitedEventArgs e);
-    public class LoadCommitedEventArgs : EventArgs {
+
+    public delegate void LoadCommitedEventHandler(object sender, LoadCommitedEventArgs e);
+
+    public class LoadCommitedEventArgs : EventArgs
+    {
         private string uri;
-        public string Uri {
-            get {return uri;}
+        public string Uri
+        {
+            get { return uri; }
         }
-        public LoadCommitedEventArgs (string uri) {
+
+        public LoadCommitedEventArgs(string uri)
+        {
             this.uri = uri;
         }
     }
 
-    public delegate void LoadFinishedEventHandler (object sender, LoadFinishedEventArgs e);
-    public class LoadFinishedEventArgs : EventArgs {
+    public delegate void LoadFinishedEventHandler(object sender, LoadFinishedEventArgs e);
+
+    public class LoadFinishedEventArgs : EventArgs
+    {
         private string uri;
-        public string Uri {
-            get {return uri;}
+        public string Uri
+        {
+            get { return uri; }
         }
-        public LoadFinishedEventArgs (string uri) {
+
+        public LoadFinishedEventArgs(string uri)
+        {
             this.uri = uri;
         }
     }
-    
-    public delegate void SecurityChangedEventHandler (object sender, SecurityChangedEventArgs e);
+
+    public delegate void SecurityChangedEventHandler(object sender, SecurityChangedEventArgs e);
+
     public class SecurityChangedEventArgs : EventArgs
     {
         private SecurityLevel state;
-        public SecurityLevel State {
+        public SecurityLevel State
+        {
             get { return state; }
             set { state = value; }
         }
 
-        public SecurityChangedEventArgs (SecurityLevel state)
+        public SecurityChangedEventArgs(SecurityLevel state)
         {
             this.state = state;
         }
     }
-    
-    public delegate void ContextMenuEventHandler (object sender, ContextMenuEventArgs e);
+
+    public delegate void ContextMenuEventHandler(object sender, ContextMenuEventArgs e);
+
     public class ContextMenuEventArgs : EventArgs
     {
         private int x;
         private int y;
 
-        public int X {
+        public int X
+        {
             get { return x; }
         }
-        public int Y {
+        public int Y
+        {
             get { return y; }
         }
 
-        public ContextMenuEventArgs (int x, int y)
+        public ContextMenuEventArgs(int x, int y)
         {
             this.x = x;
             this.y = y;
         }
-    }    
-    
-    public delegate void NavigationRequestedEventHandler (object sender, NavigationRequestedEventArgs e);
-    public class NavigationRequestedEventArgs : System.ComponentModel.CancelEventArgs {
+    }
+
+    public delegate void NavigationRequestedEventHandler(
+        object sender,
+        NavigationRequestedEventArgs e
+    );
+
+    public class NavigationRequestedEventArgs : System.ComponentModel.CancelEventArgs
+    {
         private string uri;
-        public string Uri {
-            get {return uri;}
+        public string Uri
+        {
+            get { return uri; }
         }
-        public NavigationRequestedEventArgs (string uri) {
+
+        public NavigationRequestedEventArgs(string uri)
+        {
             this.uri = uri;
         }
-    }    
+    }
 #endregion
 }

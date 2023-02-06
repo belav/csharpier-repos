@@ -5,7 +5,7 @@ using System;
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         Func<long> a = new long?().GetValueOrDefault;
     }

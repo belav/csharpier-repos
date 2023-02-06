@@ -6,10 +6,10 @@ namespace Mono.Linker.Tests.Cases.BCLFeatures
 {
     public class SerializationCtors
     {
-        public static void Main ()
+        public static void Main()
         {
-            new C (2);
-            new CustomSerialization ();
+            new C(2);
+            new CustomSerialization();
         }
     }
 
@@ -17,50 +17,34 @@ namespace Mono.Linker.Tests.Cases.BCLFeatures
     [Serializable]
     class C
     {
-        public C ()
-        {
-        }
+        public C() { }
 
         [Kept]
-        public C (int i)
-        {
-        }
+        public C(int i) { }
 
-        protected C (SerializationInfo info, StreamingContext context)
-        {
-        }
+        protected C(SerializationInfo info, StreamingContext context) { }
     }
 
     [Kept]
     class CustomSerialization
     {
         [Kept]
-        public CustomSerialization ()
-        {
-        }
+        public CustomSerialization() { }
 
         [OnSerializing]
-        [KeptAttributeAttribute (typeof (OnSerializingAttribute))]
-        internal void OnSerializingMethod (StreamingContext context)
-        {
-        }
+        [KeptAttributeAttribute(typeof(OnSerializingAttribute))]
+        internal void OnSerializingMethod(StreamingContext context) { }
 
         [OnSerialized]
-        [KeptAttributeAttribute (typeof (OnSerializedAttribute))]
-        internal void OnSerializedMethod (StreamingContext context)
-        {
-        }
+        [KeptAttributeAttribute(typeof(OnSerializedAttribute))]
+        internal void OnSerializedMethod(StreamingContext context) { }
 
         [OnDeserializing]
-        [KeptAttributeAttribute (typeof (OnDeserializingAttribute))]
-        internal void OnDeserializingMethod (StreamingContext context)
-        {
-        }
+        [KeptAttributeAttribute(typeof(OnDeserializingAttribute))]
+        internal void OnDeserializingMethod(StreamingContext context) { }
 
         [OnDeserialized]
-        [KeptAttributeAttribute (typeof (OnDeserializedAttribute))]
-        internal void OnDeserializedMethod (StreamingContext context)
-        {
-        }
+        [KeptAttributeAttribute(typeof(OnDeserializedAttribute))]
+        internal void OnDeserializedMethod(StreamingContext context) { }
     }
 }

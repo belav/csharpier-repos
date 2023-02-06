@@ -34,42 +34,45 @@ namespace Mono.Tools.LocaleBuilder
 {
     public class Entry
     {
-        public static readonly Mapping General = new Mapping ();
-        public static readonly Mapping Patterns  = new Mapping ();
-        public static readonly Mapping DateTimeStrings  = new Mapping ();
+        public static readonly Mapping General = new Mapping();
+        public static readonly Mapping Patterns = new Mapping();
+        public static readonly Mapping DateTimeStrings = new Mapping();
 
         public class Mapping
         {
             // maps strings to indexes
-            Dictionary<string, int> hash = new Dictionary<string, int> ();
-            List<string> string_order = new List<string> ();
+            Dictionary<string, int> hash = new Dictionary<string, int>();
+            List<string> string_order = new List<string>();
+
             // idx 0 is reserved to indicate null
             int curpos = 1;
 
             // serialize the strings in Hashtable.
-            public string GetStrings ()
+            public string GetStrings()
             {
-                Console.WriteLine ("Total string data size: {0}", curpos);
+                Console.WriteLine("Total string data size: {0}", curpos);
                 if (curpos > UInt16.MaxValue)
-                    throw new Exception ("need to increase idx size in culture-info.h");
-                StringBuilder ret = new StringBuilder ();
+                    throw new Exception("need to increase idx size in culture-info.h");
+                StringBuilder ret = new StringBuilder();
                 // the null entry
-                ret.Append ("\t\"\\0\"\n");
-                foreach (string s in string_order) {
-                    ret.Append ("\t\"");
-                    ret.Append (s);
-                    ret.Append ("\\0\"\n");
+                ret.Append("\t\"\\0\"\n");
+                foreach (string s in string_order)
+                {
+                    ret.Append("\t\"");
+                    ret.Append(s);
+                    ret.Append("\\0\"\n");
                 }
-                return ret.ToString ();
+                return ret.ToString();
             }
 
-            public int AddString (string s, int size)
+            public int AddString(string s, int size)
             {
-                if (!hash.ContainsKey (s)) {
+                if (!hash.ContainsKey(s))
+                {
                     int ret;
-                    string_order.Add (s);
+                    string_order.Add(s);
                     ret = curpos;
-                    hash.Add (s, curpos);
+                    hash.Add(s, curpos);
                     curpos += size + 1; // null terminator
                     return ret;
                 }
@@ -78,55 +81,59 @@ namespace Mono.Tools.LocaleBuilder
             }
         }
 
-        protected static StringBuilder AppendNames (StringBuilder builder, IList<string> names)
+        protected static StringBuilder AppendNames(StringBuilder builder, IList<string> names)
         {
-            builder.Append ('{');
-            for (int i = 0; i < names.Count; i++) {
+            builder.Append('{');
+            for (int i = 0; i < names.Count; i++)
+            {
                 if (i > 0)
-                    builder.Append (", ");
+                    builder.Append(", ");
 
-                builder.Append (Encode (DateTimeStrings, names[i]));
+                builder.Append(Encode(DateTimeStrings, names[i]));
             }
-            builder.Append ("}");
+            builder.Append("}");
 
             return builder;
         }
 
-
-        public static string EncodeStringIdx (string str)
+        public static string EncodeStringIdx(string str)
         {
-            return Encode (General, str);
+            return Encode(General, str);
         }
 
-        protected static string EncodePatternStringIdx (string str)
+        protected static string EncodePatternStringIdx(string str)
         {
-            return Encode (Patterns, str);
+            return Encode(Patterns, str);
         }
 
-        static string Encode (Mapping mapping, string str)
+        static string Encode(Mapping mapping, string str)
         {
             if (str == null)
                 return "0";
 
-            StringBuilder ret = new StringBuilder ();
-            byte[] ba = new UTF8Encoding ().GetBytes (str);
+            StringBuilder ret = new StringBuilder();
+            byte[] ba = new UTF8Encoding().GetBytes(str);
             bool in_hex = false;
-            foreach (byte b in ba) {
-                if (b > 127 || (in_hex && is_hex (b))) {
-                    ret.AppendFormat ("\\x{0:x}", b);
+            foreach (byte b in ba)
+            {
+                if (b > 127 || (in_hex && is_hex(b)))
+                {
+                    ret.AppendFormat("\\x{0:x}", b);
                     in_hex = true;
-                } else {
+                }
+                else
+                {
                     if (b == '\\')
-                        ret.Append ('\\');
-                    ret.Append ((char) b);
+                        ret.Append('\\');
+                    ret.Append((char)b);
                     in_hex = false;
                 }
             }
-            int res = mapping.AddString (ret.ToString (), ba.Length);
-            return res.ToString ();
+            int res = mapping.AddString(ret.ToString(), ba.Length);
+            return res.ToString();
         }
 
-        static bool is_hex (int e)
+        static bool is_hex(int e)
         {
             return (e >= '0' && e <= '9') || (e >= 'A' && e <= 'F') || (e >= 'a' && e <= 'f');
         }

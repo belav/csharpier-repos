@@ -27,87 +27,67 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         internal new Function ParentElement
         {
-            get
-            {
-                return base.ParentElement as Function;
-            }
+            get { return base.ParentElement as Function; }
         }
 
         internal SchemaType Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         }
 
         internal virtual TypeUsage TypeUsage
         {
-            get
-            {
-                return _typeUsageBuilder.TypeUsage;
-            }
+            get { return _typeUsageBuilder.TypeUsage; }
         }
 
         internal TypeUsageBuilder TypeUsageBuilder
         {
-            get
-            {
-                return _typeUsageBuilder;
-            }
+            get { return _typeUsageBuilder; }
         }
 
         internal bool HasUserDefinedFacets
         {
-            get
-            {
-                return _typeUsageBuilder.HasUserDefinedFacets;
-            }
+            get { return _typeUsageBuilder.HasUserDefinedFacets; }
         }
 
         internal string UnresolvedType
         {
-            get
-            {
-                return _unresolvedType;
-            }
-            set
-            {
-                _unresolvedType = value;
-            }
+            get { return _unresolvedType; }
+            set { _unresolvedType = value; }
         }
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         internal FacetEnabledSchemaElement(Function parentElement)
-            : base(parentElement)
-        {
-
-        }
+            : base(parentElement) { }
 
         internal FacetEnabledSchemaElement(SchemaElement parentElement)
-            : base(parentElement)
-        {
-
-        }
+            : base(parentElement) { }
 
         internal override void ResolveTopLevelNames()
         {
             base.ResolveTopLevelNames();
-            
+
             Debug.Assert(this.Type == null, "This must be resolved exactly once");
 
             if (Schema.ResolveTypeName(this, UnresolvedType, out _type))
             {
-                if (Schema.DataModel == SchemaDataModelOption.ProviderManifestModel && _typeUsageBuilder.HasUserDefinedFacets)
+                if (
+                    Schema.DataModel == SchemaDataModelOption.ProviderManifestModel
+                    && _typeUsageBuilder.HasUserDefinedFacets
+                )
                 {
-                    bool isInProviderManifest = Schema.DataModel == SchemaDataModelOption.ProviderManifestModel;
-                    _typeUsageBuilder.ValidateAndSetTypeUsage((ScalarType)_type, !isInProviderManifest);
+                    bool isInProviderManifest =
+                        Schema.DataModel == SchemaDataModelOption.ProviderManifestModel;
+                    _typeUsageBuilder.ValidateAndSetTypeUsage(
+                        (ScalarType)_type,
+                        !isInProviderManifest
+                    );
                 }
             }
         }
@@ -137,6 +117,5 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             return false;
         }
-
     }
 }

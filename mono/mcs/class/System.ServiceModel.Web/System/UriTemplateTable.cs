@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,82 +36,90 @@ namespace System
 {
     public class UriTemplateTable
     {
-        public UriTemplateTable ()
-        {
-        }
+        public UriTemplateTable() { }
 
-        public UriTemplateTable (Uri baseAddress)
+        public UriTemplateTable(Uri baseAddress)
         {
             BaseAddress = baseAddress;
-            key_value_pairs = new List<Pair> ();
+            key_value_pairs = new List<Pair>();
         }
 
-        public UriTemplateTable (IEnumerable<Pair> keyValuePairs)
+        public UriTemplateTable(IEnumerable<Pair> keyValuePairs)
         {
             key_value_pairs = keyValuePairs as IList<Pair>;
             if (key_value_pairs == null)
-                key_value_pairs = new List<Pair> (keyValuePairs);
+                key_value_pairs = new List<Pair>(keyValuePairs);
         }
 
-        public UriTemplateTable (Uri baseAddress, IEnumerable<Pair> keyValuePairs)
-            : this (keyValuePairs)
+        public UriTemplateTable(Uri baseAddress, IEnumerable<Pair> keyValuePairs)
+            : this(keyValuePairs)
         {
             BaseAddress = baseAddress;
         }
 
-        void CheckReadOnly ()
+        void CheckReadOnly()
         {
             if (is_readonly)
-                throw new InvalidOperationException ("This UriTemplateTable is read-only");
+                throw new InvalidOperationException("This UriTemplateTable is read-only");
         }
 
         bool is_readonly;
         Uri base_address;
         IList<Pair> key_value_pairs;
 
-        public Uri BaseAddress {
+        public Uri BaseAddress
+        {
             get { return base_address; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 base_address = value;
             }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return is_readonly; }
         }
 
-        public IList<Pair> KeyValuePairs {
+        public IList<Pair> KeyValuePairs
+        {
             get { return key_value_pairs; }
         }
 
         [MonoTODO]
-        public void MakeReadOnly (bool allowDuplicateEquivalentUriTemplates)
+        public void MakeReadOnly(bool allowDuplicateEquivalentUriTemplates)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public Collection<UriTemplateMatch> Match (Uri uri)
+        public Collection<UriTemplateMatch> Match(Uri uri)
         {
             if (key_value_pairs.Count == 0)
-                throw new InvalidOperationException ("At least one UriTemplate must exist in the UriTemplateTable.");
-            var c = new Collection<UriTemplateMatch> ();
+                throw new InvalidOperationException(
+                    "At least one UriTemplate must exist in the UriTemplateTable."
+                );
+            var c = new Collection<UriTemplateMatch>();
             UriTemplateMatch ret = null;
-            foreach (Pair p in key_value_pairs) {
-                ret = p.Key.Match (base_address, uri);
+            foreach (Pair p in key_value_pairs)
+            {
+                ret = p.Key.Match(base_address, uri);
                 if (ret != null)
-                    c.Add (ret);
+                    c.Add(ret);
             }
             return c;
         }
 
-        public UriTemplateMatch MatchSingle (Uri uri)
+        public UriTemplateMatch MatchSingle(Uri uri)
         {
             if (key_value_pairs.Count == 0)
-                throw new InvalidOperationException ("At least one UriTemplate must exist in the UriTemplateTable.");
+                throw new InvalidOperationException(
+                    "At least one UriTemplate must exist in the UriTemplateTable."
+                );
             UriTemplateMatch ret = null;
-            foreach (Pair p in key_value_pairs) {
-                ret = p.Key.Match (base_address, uri);
+            foreach (Pair p in key_value_pairs)
+            {
+                ret = p.Key.Match(base_address, uri);
                 if (ret != null)
                     return ret;
             }

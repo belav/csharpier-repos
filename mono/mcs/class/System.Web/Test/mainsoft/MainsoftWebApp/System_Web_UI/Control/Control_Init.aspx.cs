@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI
 {
-    public class Control_Init
-        : GHTBaseWeb 
+    public class Control_Init : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,20 +46,20 @@ namespace GHTTests.System_Web_dll.System_Web_UI
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
         private void Page_Load(object sender, EventArgs e)
         {
-            HtmlForm form1 = (HtmlForm) this.FindControl("form1");
+            HtmlForm form1 = (HtmlForm)this.FindControl("form1");
             this.GHTTestBegin(form1);
             this.GHTSubTestBegin("New Inherits TextBox");
             try
@@ -80,13 +79,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI
             this.GHTSubTestEnd();
             this.GHTTestEnd();
         }
- 
+
         public class MyTextBox1 : TextBox
         {
-            public MyTextBox1()
-            {
-            }
-
+            public MyTextBox1() { }
         }
     }
 }

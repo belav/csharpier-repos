@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,39 +29,39 @@ using NUnit.Framework;
 using System;
 using System.Web.UI;
 
-namespace MonoTests.System.Web.UI {
-
+namespace MonoTests.System.Web.UI
+{
     [TestFixture]
     public class DataBindingHandlerAttributeTest
     {
         DataBindingHandlerAttribute attr;
         DataBindingHandlerAttribute empty;
-        Type t = typeof (object);
+        Type t = typeof(object);
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            attr = new DataBindingHandlerAttribute (t);
+            attr = new DataBindingHandlerAttribute(t);
             empty = DataBindingHandlerAttribute.Default;
         }
 
         [Test]
-        public void TestHandlerTypeName ()
+        public void TestHandlerTypeName()
         {
-            Assert.AreEqual (attr.HandlerTypeName, t.AssemblyQualifiedName, "#01");
+            Assert.AreEqual(attr.HandlerTypeName, t.AssemblyQualifiedName, "#01");
         }
 
         [Test]
-        public void TestDefaultHandlerTypeName ()
+        public void TestDefaultHandlerTypeName()
         {
-            Assert.AreEqual (String.Empty, empty.HandlerTypeName, "#01");
+            Assert.AreEqual(String.Empty, empty.HandlerTypeName, "#01");
         }
 
         [Test]
-        public void TestDefaultConstructor ()
+        public void TestDefaultConstructor()
         {
-            DataBindingHandlerAttribute at = new DataBindingHandlerAttribute ();
-            Assert.AreEqual (String.Empty, at.HandlerTypeName, "#01");
+            DataBindingHandlerAttribute at = new DataBindingHandlerAttribute();
+            Assert.AreEqual(String.Empty, at.HandlerTypeName, "#01");
         }
     }
 }

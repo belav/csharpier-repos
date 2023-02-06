@@ -7,23 +7,21 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
 {
     public class DynamicDependencyField
     {
-        public static void Main ()
+        public static void Main()
         {
-            var b = new B ();
+            var b = new B();
             b.field = 3;
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class B
         {
             [Kept]
-            [DynamicDependency ("ExtraMethod1")]
+            [DynamicDependency("ExtraMethod1")]
             public int field;
 
             [Kept]
-            static void ExtraMethod1 ()
-            {
-            }
+            static void ExtraMethod1() { }
         }
     }
 }

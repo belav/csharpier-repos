@@ -28,9 +28,11 @@ namespace System.Tests
 
         public static TSelf PopCount(TSelf value) => TSelf.PopCount(value);
 
-        public static TSelf RotateLeft(TSelf value, int rotateAmount) => TSelf.RotateLeft(value, rotateAmount);
+        public static TSelf RotateLeft(TSelf value, int rotateAmount) =>
+            TSelf.RotateLeft(value, rotateAmount);
 
-        public static TSelf RotateRight(TSelf value, int rotateAmount) => TSelf.RotateRight(value, rotateAmount);
+        public static TSelf RotateRight(TSelf value, int rotateAmount) =>
+            TSelf.RotateRight(value, rotateAmount);
 
         public static TSelf TrailingZeroCount(TSelf value) => TSelf.TrailingZeroCount(value);
     }
@@ -73,7 +75,7 @@ namespace System.Tests
     [RequiresPreviewFeatures]
     public static class DecrementOperatorsHelper<TSelf>
         where TSelf : IDecrementOperators<TSelf>
-{
+    {
         public static TSelf op_Decrement(TSelf value) => --value;
     }
 
@@ -140,7 +142,8 @@ namespace System.Tests
 
         public static TSelf Abs(TSelf value) => TSelf.Abs(value);
 
-        public static TSelf Clamp(TSelf value, TSelf min, TSelf max) => TSelf.Clamp(value, min, max);
+        public static TSelf Clamp(TSelf value, TSelf min, TSelf max) =>
+            TSelf.Clamp(value, min, max);
 
         public static TSelf Create<TOther>(TOther value)
             where TOther : INumber<TOther> => TSelf.Create<TOther>(value);
@@ -151,7 +154,8 @@ namespace System.Tests
         public static TSelf CreateTruncating<TOther>(TOther value)
             where TOther : INumber<TOther> => TSelf.CreateTruncating<TOther>(value);
 
-        public static (TSelf Quotient, TSelf Remainder) DivRem(TSelf left, TSelf right) => TSelf.DivRem(left, right);
+        public static (TSelf Quotient, TSelf Remainder) DivRem(TSelf left, TSelf right) =>
+            TSelf.DivRem(left, right);
 
         public static TSelf Max(TSelf x, TSelf y) => TSelf.Max(x, y);
 
@@ -159,24 +163,45 @@ namespace System.Tests
 
         public static TSelf Parse(string s, IFormatProvider provider) => TSelf.Parse(s, provider);
 
-        public static TSelf Parse(string s, NumberStyles style, IFormatProvider provider) => TSelf.Parse(s, style, provider);
+        public static TSelf Parse(string s, NumberStyles style, IFormatProvider provider) =>
+            TSelf.Parse(s, style, provider);
 
-        public static TSelf Parse(ReadOnlySpan<char> s, IFormatProvider provider) => TSelf.Parse(s, provider);
+        public static TSelf Parse(ReadOnlySpan<char> s, IFormatProvider provider) =>
+            TSelf.Parse(s, provider);
 
-        public static TSelf Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider provider) => TSelf.Parse(s, style, provider);
+        public static TSelf Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider provider
+        ) => TSelf.Parse(s, style, provider);
 
         public static TSelf Sign(TSelf value) => TSelf.Sign(value);
 
         public static bool TryCreate<TOther>(TOther value, out TSelf result)
             where TOther : INumber<TOther> => TSelf.TryCreate<TOther>(value, out result);
 
-        public static bool TryParse(string s, IFormatProvider provider, out TSelf result) => TSelf.TryParse(s, provider, out result);
+        public static bool TryParse(string s, IFormatProvider provider, out TSelf result) =>
+            TSelf.TryParse(s, provider, out result);
 
-        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out TSelf result) => TSelf.TryParse(s, style, provider, out result);
+        public static bool TryParse(
+            string s,
+            NumberStyles style,
+            IFormatProvider provider,
+            out TSelf result
+        ) => TSelf.TryParse(s, style, provider, out result);
 
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider provider, out TSelf result) => TSelf.TryParse(s, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider provider,
+            out TSelf result
+        ) => TSelf.TryParse(s, provider, out result);
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider provider, out TSelf result) => TSelf.TryParse(s, style, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider provider,
+            out TSelf result
+        ) => TSelf.TryParse(s, style, provider, out result);
     }
 
     [RequiresPreviewFeatures]
@@ -185,7 +210,8 @@ namespace System.Tests
     {
         public static TSelf Parse(string s, IFormatProvider provider) => TSelf.Parse(s, provider);
 
-        public static bool TryParse(string s, IFormatProvider provider, out TSelf result) => TSelf.TryParse(s, provider, out result);
+        public static bool TryParse(string s, IFormatProvider provider, out TSelf result) =>
+            TSelf.TryParse(s, provider, out result);
     }
 
     [RequiresPreviewFeatures]
@@ -208,9 +234,14 @@ namespace System.Tests
     public static class SpanParseableHelper<TSelf>
         where TSelf : ISpanParseable<TSelf>
     {
-        public static TSelf Parse(ReadOnlySpan<char> s, IFormatProvider provider) => TSelf.Parse(s, provider);
+        public static TSelf Parse(ReadOnlySpan<char> s, IFormatProvider provider) =>
+            TSelf.Parse(s, provider);
 
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider provider, out TSelf result) => TSelf.TryParse(s, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider provider,
+            out TSelf result
+        ) => TSelf.TryParse(s, provider, out result);
     }
 
     [RequiresPreviewFeatures]

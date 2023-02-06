@@ -5,21 +5,17 @@ namespace Test
 {
     public class OrderBySpecification
     {
-        public OrderBySpecification (Expression<Func<object, object>> predicate)
-        {
-        }
+        public OrderBySpecification(Expression<Func<object, object>> predicate) { }
     }
 
     public class RateOrderById : OrderBySpecification
     {
-        public RateOrderById ()
-            : base (x => x)
-        {
-        }
+        public RateOrderById()
+            : base(x => x) { }
 
-        public static int Main ()
+        public static int Main()
         {
-            new RateOrderById ();
+            new RateOrderById();
             return 0;
         }
     }

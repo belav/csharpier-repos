@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -47,67 +47,83 @@ namespace System.Web
         bool disposing;
         Exception initialException;
         PerformanceCounter requestsQueuedCounter;
-        
-        public QueueManager ()
+
+        public QueueManager()
         {
             Exception ex = null;
-            
-            try {
+
+            try
+            {
                 HttpRuntimeSection config = HttpRuntime.Section;
-                if (config != null) {
+                if (config != null)
+                {
                     minFree = config.MinFreeThreads;
                     minLocalFree = config.MinLocalRequestFreeThreads;
                     queueLimit = config.AppRequestQueueLimit;
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 ex = e;
             }
 
-            try {
-                queue = new Queue (queueLimit);
-            } catch (Exception e) {
-                if (ex == null) {
+            try
+            {
+                queue = new Queue(queueLimit);
+            }
+            catch (Exception e)
+            {
+                if (ex == null)
+                {
                     initialException = e;
-                } else {
-                    StringBuilder sb = new StringBuilder ("Several exceptions occurred:\n");
-                    sb.AppendFormat ("--- Exception Q1:\n{0}\n", ex.ToString ());
-                    sb.AppendFormat ("--- Exception Q2:\n{0}\n", e.ToString ());
-                    initialException = new Exception (sb.ToString ());
+                }
+                else
+                {
+                    StringBuilder sb = new StringBuilder("Several exceptions occurred:\n");
+                    sb.AppendFormat("--- Exception Q1:\n{0}\n", ex.ToString());
+                    sb.AppendFormat("--- Exception Q2:\n{0}\n", e.ToString());
+                    initialException = new Exception(sb.ToString());
                 }
             }
 
             if (initialException == null && ex != null)
                 initialException = ex;
 
-            requestsQueuedCounter = new PerformanceCounter ("ASP.NET", "Requests Queued");
+            requestsQueuedCounter = new PerformanceCounter("ASP.NET", "Requests Queued");
             requestsQueuedCounter.RawValue = 0;
         }
 
-        public bool HasException {
+        public bool HasException
+        {
             get { return initialException != null; }
         }
 
-        public Exception InitialException {
+        public Exception InitialException
+        {
             get { return initialException; }
         }
-        
-        bool CanExecuteRequest (HttpWorkerRequest req)
+
+        bool CanExecuteRequest(HttpWorkerRequest req)
         {
             if (disposing)
                 return false;
-                
-            int threads, cports;
-            ThreadPool.GetAvailableThreads (out threads, out cports);
-            bool local = (req != null && req.GetLocalAddress () == "127.0.0.1");
+
+            int threads,
+                cports;
+            ThreadPool.GetAvailableThreads(out threads, out cports);
+            bool local = (req != null && req.GetLocalAddress() == "127.0.0.1");
             return (threads > minFree) || (local && threads > minLocalFree);
         }
 
-        public HttpWorkerRequest GetNextRequest (HttpWorkerRequest req)
+        public HttpWorkerRequest GetNextRequest(HttpWorkerRequest req)
         {
-            if (!CanExecuteRequest (req)) {
-                if (!disposing && req != null) {
-                    lock (queue) {
-                        Queue (req);
+            if (!CanExecuteRequest(req))
+            {
+                if (!disposing && req != null)
+                {
+                    lock (queue)
+                    {
+                        Queue(req);
                     }
                 }
 
@@ -115,53 +131,58 @@ namespace System.Web
             }
 
             HttpWorkerRequest result;
-            lock (queue) {
-                result = Dequeue ();
-                if (result != null) {
+            lock (queue)
+            {
+                result = Dequeue();
+                if (result != null)
+                {
                     if (req != null)
-                        Queue (req);
-                } else {
+                        Queue(req);
+                }
+                else
+                {
                     result = req;
                 }
             }
 
             return result;
         }
-        
-        void Queue (HttpWorkerRequest wr)
+
+        void Queue(HttpWorkerRequest wr)
         {
-            if (queue.Count < queueLimit) {
-                queue.Enqueue (wr);
-                requestsQueuedCounter.Increment ();
+            if (queue.Count < queueLimit)
+            {
+                queue.Enqueue(wr);
+                requestsQueuedCounter.Increment();
                 return;
             }
 
-            HttpRuntime.FinishUnavailable (wr);
+            HttpRuntime.FinishUnavailable(wr);
         }
 
-        HttpWorkerRequest Dequeue ()
+        HttpWorkerRequest Dequeue()
         {
-            if (queue.Count > 0) {
-                HttpWorkerRequest request = (HttpWorkerRequest) queue.Dequeue ();
-                requestsQueuedCounter.Decrement ();
+            if (queue.Count > 0)
+            {
+                HttpWorkerRequest request = (HttpWorkerRequest)queue.Dequeue();
+                requestsQueuedCounter.Decrement();
                 return request;
             }
 
             return null;
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
             if (disposing)
                 return;
 
             disposing = true;
             HttpWorkerRequest wr;
-            while ((wr = GetNextRequest (null)) != null)
-                HttpRuntime.FinishUnavailable (wr);
+            while ((wr = GetNextRequest(null)) != null)
+                HttpRuntime.FinishUnavailable(wr);
 
             queue = null;
         }
     }
 }
-

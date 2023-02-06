@@ -20,7 +20,12 @@ namespace ILCompiler.Dataflow
         public MessageOrigin Origin { init; get; }
         internal Origin MemberWithRequirements { init; get; }
 
-        internal TrimAnalysisAssignmentPattern(MultiValue source, MultiValue target, MessageOrigin origin, Origin memberWithRequirements)
+        internal TrimAnalysisAssignmentPattern(
+            MultiValue source,
+            MultiValue target,
+            MessageOrigin origin,
+            Origin memberWithRequirements
+        )
         {
             Source = source.Clone();
             Target = target.Clone();
@@ -28,7 +33,10 @@ namespace ILCompiler.Dataflow
             MemberWithRequirements = memberWithRequirements;
         }
 
-        public TrimAnalysisAssignmentPattern Merge(ValueSetLattice<SingleValue> lattice, TrimAnalysisAssignmentPattern other)
+        public TrimAnalysisAssignmentPattern Merge(
+            ValueSetLattice<SingleValue> lattice,
+            TrimAnalysisAssignmentPattern other
+        )
         {
             Debug.Assert(Origin == other.Origin);
 
@@ -36,17 +44,28 @@ namespace ILCompiler.Dataflow
                 lattice.Meet(Source, other.Source),
                 lattice.Meet(Target, other.Target),
                 Origin,
-                MemberWithRequirements);
+                MemberWithRequirements
+            );
         }
 
         public void MarkAndProduceDiagnostics(ReflectionMarker reflectionMarker, Logger logger)
         {
             var diagnosticContext = new DiagnosticContext(
                 Origin,
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresUnreferencedCodeAttribute),
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresDynamicCodeAttribute),
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresAssemblyFilesAttribute),
-                logger);
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresUnreferencedCodeAttribute
+                ),
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresDynamicCodeAttribute
+                ),
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresAssemblyFilesAttribute
+                ),
+                logger
+            );
 
             foreach (var sourceValue in Source)
             {
@@ -56,17 +75,36 @@ namespace ILCompiler.Dataflow
                     {
                         // Once this is removed, please also cleanup ReflectionMethodBodyScanner.HandleStoreValueWithDynamicallyAccessedMembers
                         // which has to special case FieldValue right now, should not be needed after removal of this
-                        ReflectionMethodBodyScanner.CheckAndReportRequires(diagnosticContext, fieldValue.Field, DiagnosticUtilities.RequiresUnreferencedCodeAttribute);
-                        ReflectionMethodBodyScanner.CheckAndReportRequires(diagnosticContext, fieldValue.Field, DiagnosticUtilities.RequiresDynamicCodeAttribute);
+                        ReflectionMethodBodyScanner.CheckAndReportRequires(
+                            diagnosticContext,
+                            fieldValue.Field,
+                            DiagnosticUtilities.RequiresUnreferencedCodeAttribute
+                        );
+                        ReflectionMethodBodyScanner.CheckAndReportRequires(
+                            diagnosticContext,
+                            fieldValue.Field,
+                            DiagnosticUtilities.RequiresDynamicCodeAttribute
+                        );
                         // ?? Should this be enabled (was not so far)
                         //ReflectionMethodBodyScanner.CheckAndReportRequires(diagnosticContext, fieldValue.Field, DiagnosticUtilities.RequiresAssemblyFilesAttribute);
                     }
 
-                    if (targetValue is not ValueWithDynamicallyAccessedMembers targetWithDynamicallyAccessedMembers)
+                    if (
+                        targetValue
+                        is not ValueWithDynamicallyAccessedMembers targetWithDynamicallyAccessedMembers
+                    )
                         throw new NotImplementedException();
 
-                    var requireDynamicallyAccessedMembersAction = new RequireDynamicallyAccessedMembersAction(reflectionMarker, diagnosticContext, MemberWithRequirements);
-                    requireDynamicallyAccessedMembersAction.Invoke(sourceValue, targetWithDynamicallyAccessedMembers);
+                    var requireDynamicallyAccessedMembersAction =
+                        new RequireDynamicallyAccessedMembersAction(
+                            reflectionMarker,
+                            diagnosticContext,
+                            MemberWithRequirements
+                        );
+                    requireDynamicallyAccessedMembersAction.Invoke(
+                        sourceValue,
+                        targetWithDynamicallyAccessedMembers
+                    );
                 }
             }
         }

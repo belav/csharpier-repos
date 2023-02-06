@@ -11,7 +11,8 @@ namespace Testing
     /// </summary>
     public class Test
     {
-        public string PublicProperty {
+        public string PublicProperty
+        {
             get { return null; }
         }
     }

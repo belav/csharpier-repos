@@ -3,16 +3,16 @@
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
         dynamic target = 3;
-        var x = new Test (target, out var y);
+        var x = new Test(target, out var y);
     }
 }
 
 class Test
 {
-    public Test (int x, out int y)
+    public Test(int x, out int y)
     {
         y = 0;
     }

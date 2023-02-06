@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,31 +42,35 @@ namespace System.ServiceModel.Security.Tokens
         SecurityContextSecurityTokenResolver sc_res;
         WsscAuthenticatorCommunicationObject comm;
 
-        public SecureConversationSecurityTokenAuthenticator (
+        public SecureConversationSecurityTokenAuthenticator(
             SecurityTokenRequirement r,
             SecurityContextSecurityTokenAuthenticator scAuth,
-            SecurityContextSecurityTokenResolver scResolver)
+            SecurityContextSecurityTokenResolver scResolver
+        )
         {
             this.req = r;
             this.sc_auth = scAuth;
             this.sc_res = scResolver;
-            comm = new WsscAuthenticatorCommunicationObject ();
+            comm = new WsscAuthenticatorCommunicationObject();
         }
 
-        public override AuthenticatorCommunicationObject Communication {
+        public override AuthenticatorCommunicationObject Communication
+        {
             get { return comm; }
         }
 
         [MonoTODO]
-        protected override bool CanValidateTokenCore (SecurityToken token)
+        protected override bool CanValidateTokenCore(SecurityToken token)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore (SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 
@@ -74,59 +78,68 @@ namespace System.ServiceModel.Security.Tokens
     {
         WSTrustSecurityTokenServiceProxy proxy;
 
-        protected internal override TimeSpan DefaultCloseTimeout {
-            get { throw new NotImplementedException (); }
-        }
-
-        protected internal override TimeSpan DefaultOpenTimeout {
-            get { throw new NotImplementedException (); }
-        }
-
-        public override Message ProcessNegotiation (Message request, TimeSpan timeout)
+        protected internal override TimeSpan DefaultCloseTimeout
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        protected override void OnAbort ()
+        protected internal override TimeSpan DefaultOpenTimeout
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        protected override void OnOpen (TimeSpan timeout)
+        public override Message ProcessNegotiation(Message request, TimeSpan timeout)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnAbort()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnOpen(TimeSpan timeout)
         {
             if (State == CommunicationState.Opened)
-                throw new InvalidOperationException ("Already opened.");
+                throw new InvalidOperationException("Already opened.");
 
-            EnsureProperties ();
+            EnsureProperties();
 
-            proxy = new WSTrustSecurityTokenServiceProxy (
-                IssuerBinding, IssuerAddress);
+            proxy = new WSTrustSecurityTokenServiceProxy(IssuerBinding, IssuerAddress);
         }
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnClose (TimeSpan timeout)
+        protected override void OnClose(TimeSpan timeout)
         {
             if (proxy != null)
-                proxy.Close ();
+                proxy.Close();
         }
 
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndClose (IAsyncResult result)
+        protected override void OnEndClose(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

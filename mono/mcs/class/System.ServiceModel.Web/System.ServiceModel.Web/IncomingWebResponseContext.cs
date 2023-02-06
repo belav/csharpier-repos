@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,48 +36,59 @@ namespace System.ServiceModel.Web
     {
         OperationContext ctx;
 
-        HttpResponseMessageProperty hp {
-            get {
+        HttpResponseMessageProperty hp
+        {
+            get
+            {
                 if (ctx.IncomingMessageProperties != null)
-                    return (HttpResponseMessageProperty) ctx.IncomingMessageProperties [HttpResponseMessageProperty.Name];
+                    return (HttpResponseMessageProperty)
+                        ctx.IncomingMessageProperties[HttpResponseMessageProperty.Name];
                 else
-                    return new HttpResponseMessageProperty ();
+                    return new HttpResponseMessageProperty();
             }
         }
 
-        internal IncomingWebResponseContext (OperationContext context)
+        internal IncomingWebResponseContext(OperationContext context)
         {
             ctx = context;
         }
 
-        public long ContentLength {
-            get {
-                string s = hp.Headers ["Content-Length"];
-                return s != null ? long.Parse (s, CultureInfo.InvariantCulture) : 0;
+        public long ContentLength
+        {
+            get
+            {
+                string s = hp.Headers["Content-Length"];
+                return s != null ? long.Parse(s, CultureInfo.InvariantCulture) : 0;
             }
         }
 
-        public string ContentType {
-            get { return hp.Headers ["Content-Type"]; }
+        public string ContentType
+        {
+            get { return hp.Headers["Content-Type"]; }
         }
 
-        public string ETag {
-            get { return hp.Headers ["ETag"]; }
+        public string ETag
+        {
+            get { return hp.Headers["ETag"]; }
         }
 
-        public WebHeaderCollection Headers {
+        public WebHeaderCollection Headers
+        {
             get { return hp.Headers; }
         }
 
-        public string Location {
-            get { return hp.Headers ["Location"]; }
+        public string Location
+        {
+            get { return hp.Headers["Location"]; }
         }
 
-        public HttpStatusCode StatusCode {
+        public HttpStatusCode StatusCode
+        {
             get { return hp.StatusCode; }
         }
 
-        public string StatusDescription {
+        public string StatusDescription
+        {
             get { return hp.StatusDescription; }
         }
     }

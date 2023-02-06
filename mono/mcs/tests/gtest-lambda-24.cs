@@ -2,7 +2,7 @@ using System;
 
 static class E
 {
-    public static string Test<T> (this C c, T s, Func<T> f)
+    public static string Test<T>(this C c, T s, Func<T> f)
     {
         return "s";
     }
@@ -10,21 +10,21 @@ static class E
 
 public class C
 {
-    int Test<T> (T b, Func<bool> f)
+    int Test<T>(T b, Func<bool> f)
     {
         return 1;
     }
 
-    static string Foo<T> (T t, Action<T> a)
+    static string Foo<T>(T t, Action<T> a)
     {
-        a (t);
+        a(t);
         return "f";
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        var c = new C ();
-        Action<string> f = l => Foo ("v", l2 => c.Test ("a", () => ""));
-        f ("-");
+        var c = new C();
+        Action<string> f = l => Foo("v", l2 => c.Test("a", () => ""));
+        f("-");
     }
 }

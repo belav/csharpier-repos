@@ -40,21 +40,25 @@ namespace Newtonsoft.Json.Utilities
         private readonly string _duplicateSecondErrorMessage;
 
         public BidirectionalDictionary()
-            : this(EqualityComparer<TFirst>.Default, EqualityComparer<TSecond>.Default)
-        {
-        }
+            : this(EqualityComparer<TFirst>.Default, EqualityComparer<TSecond>.Default) { }
 
-        public BidirectionalDictionary(IEqualityComparer<TFirst> firstEqualityComparer, IEqualityComparer<TSecond> secondEqualityComparer)
+        public BidirectionalDictionary(
+            IEqualityComparer<TFirst> firstEqualityComparer,
+            IEqualityComparer<TSecond> secondEqualityComparer
+        )
             : this(
                 firstEqualityComparer,
                 secondEqualityComparer,
                 "Duplicate item already exists for '{0}'.",
-                "Duplicate item already exists for '{0}'.")
-        {
-        }
+                "Duplicate item already exists for '{0}'."
+            ) { }
 
-        public BidirectionalDictionary(IEqualityComparer<TFirst> firstEqualityComparer, IEqualityComparer<TSecond> secondEqualityComparer,
-            string duplicateFirstErrorMessage, string duplicateSecondErrorMessage)
+        public BidirectionalDictionary(
+            IEqualityComparer<TFirst> firstEqualityComparer,
+            IEqualityComparer<TSecond> secondEqualityComparer,
+            string duplicateFirstErrorMessage,
+            string duplicateSecondErrorMessage
+        )
         {
             _firstToSecond = new Dictionary<TFirst, TSecond>(firstEqualityComparer);
             _secondToFirst = new Dictionary<TSecond, TFirst>(secondEqualityComparer);
@@ -68,7 +72,9 @@ namespace Newtonsoft.Json.Utilities
             {
                 if (!existingSecond!.Equals(second))
                 {
-                    throw new ArgumentException(_duplicateFirstErrorMessage.FormatWith(CultureInfo.InvariantCulture, first));
+                    throw new ArgumentException(
+                        _duplicateFirstErrorMessage.FormatWith(CultureInfo.InvariantCulture, first)
+                    );
                 }
             }
 
@@ -76,7 +82,12 @@ namespace Newtonsoft.Json.Utilities
             {
                 if (!existingFirst!.Equals(first))
                 {
-                    throw new ArgumentException(_duplicateSecondErrorMessage.FormatWith(CultureInfo.InvariantCulture, second));
+                    throw new ArgumentException(
+                        _duplicateSecondErrorMessage.FormatWith(
+                            CultureInfo.InvariantCulture,
+                            second
+                        )
+                    );
                 }
             }
 

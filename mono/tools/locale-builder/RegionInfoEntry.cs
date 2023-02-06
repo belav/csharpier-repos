@@ -32,29 +32,27 @@ namespace Mono.Tools.LocaleBuilder
         public string CurrencyNativeName;
         public bool IsMetric = true;
 
-        public void AppendTableRow (StringBuilder builder)
+        public void AppendTableRow(StringBuilder builder)
         {
-            builder.Append ("\t{ ");
-            builder.Append (GeoId).Append (',');
-            builder.Append (EncodeStringIdx (TwoLetterISORegionName)).Append (',');
-            builder.Append (EncodeStringIdx (ThreeLetterISORegionName)).Append (',');
-            builder.Append (EncodeStringIdx (ThreeLetterWindowsRegionName)).Append (',');
-            builder.Append (EncodeStringIdx (EnglishName)).Append (',');
-            builder.Append (EncodeStringIdx (NativeName)).Append (',');
-            builder.Append (EncodeStringIdx (CurrencySymbol)).Append (',');
-            builder.Append (EncodeStringIdx (ISOCurrencySymbol)).Append (',');
-            builder.Append (EncodeStringIdx (CurrencyEnglishName)).Append (',');
-            builder.Append (EncodeStringIdx (CurrencyNativeName));
-            builder.Append ('}');
+            builder.Append("\t{ ");
+            builder.Append(GeoId).Append(',');
+            builder.Append(EncodeStringIdx(TwoLetterISORegionName)).Append(',');
+            builder.Append(EncodeStringIdx(ThreeLetterISORegionName)).Append(',');
+            builder.Append(EncodeStringIdx(ThreeLetterWindowsRegionName)).Append(',');
+            builder.Append(EncodeStringIdx(EnglishName)).Append(',');
+            builder.Append(EncodeStringIdx(NativeName)).Append(',');
+            builder.Append(EncodeStringIdx(CurrencySymbol)).Append(',');
+            builder.Append(EncodeStringIdx(ISOCurrencySymbol)).Append(',');
+            builder.Append(EncodeStringIdx(CurrencyEnglishName)).Append(',');
+            builder.Append(EncodeStringIdx(CurrencyNativeName));
+            builder.Append('}');
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            StringBuilder builder = new StringBuilder ();
-            AppendTableRow (builder);
-            return builder.ToString ();
+            StringBuilder builder = new StringBuilder();
+            AppendTableRow(builder);
+            return builder.ToString();
         }
     }
 }
-
-

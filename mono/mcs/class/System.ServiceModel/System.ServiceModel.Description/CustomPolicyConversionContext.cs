@@ -29,61 +29,68 @@ using System.Xml;
 using System.ServiceModel.Channels;
 using WS = System.Web.Services.Description;
 
-namespace System.ServiceModel.Description {
-
-    internal class CustomPolicyConversionContext : PolicyConversionContext {
+namespace System.ServiceModel.Description
+{
+    internal class CustomPolicyConversionContext : PolicyConversionContext
+    {
         WS.Binding binding;
         PolicyAssertionCollection assertions;
         BindingElementCollection binding_elements;
 
-        internal WS.Binding WsdlBinding {
+        internal WS.Binding WsdlBinding
+        {
             get { return binding; }
         }
 
         #region implemented abstract members of PolicyConversionContext
 
-        public override PolicyAssertionCollection GetBindingAssertions ()
+        public override PolicyAssertionCollection GetBindingAssertions()
         {
             return assertions;
         }
 
-        public override PolicyAssertionCollection GetFaultBindingAssertions (FaultDescription fault)
+        public override PolicyAssertionCollection GetFaultBindingAssertions(FaultDescription fault)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override PolicyAssertionCollection GetMessageBindingAssertions (MessageDescription message)
+        public override PolicyAssertionCollection GetMessageBindingAssertions(
+            MessageDescription message
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override PolicyAssertionCollection GetOperationBindingAssertions (OperationDescription operation)
+        public override PolicyAssertionCollection GetOperationBindingAssertions(
+            OperationDescription operation
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override BindingElementCollection BindingElements {
+        public override BindingElementCollection BindingElements
+        {
             get { return binding_elements; }
         }
 
         #endregion
 
-        public CustomPolicyConversionContext (WS.Binding binding, ServiceEndpoint endpoint)
-            : base (endpoint)
+        public CustomPolicyConversionContext(WS.Binding binding, ServiceEndpoint endpoint)
+            : base(endpoint)
         {
             this.binding = binding;
-            assertions = new PolicyAssertionCollection ();
+            assertions = new PolicyAssertionCollection();
             binding_elements = ((CustomBinding)endpoint.Binding).Elements;
         }
 
-        public CustomPolicyConversionContext (ServiceEndpoint endpoint)
-            : base (endpoint)
+        public CustomPolicyConversionContext(ServiceEndpoint endpoint)
+            : base(endpoint)
         {
-            assertions = new PolicyAssertionCollection ();
-            binding_elements = endpoint.Binding.CreateBindingElements ();
+            assertions = new PolicyAssertionCollection();
+            binding_elements = endpoint.Binding.CreateBindingElements();
         }
 
-        public void AddPolicyAssertion (XmlElement element)
+        public void AddPolicyAssertion(XmlElement element)
         {
             /*
              * http://www.w3.org/Submission/WS-Policy/#Policy_Assertion:
@@ -92,42 +99,50 @@ namespace System.ServiceModel.Description {
              *   <wsp:ExactlyOne>
              *     ( <wsp:All> ( <Assertion …> … </Assertion> )* </wsp:All> )*
              *   </wsp:ExactlyOne>
-             * </wsp:Policy> 
-             * 
+             * </wsp:Policy>
+             *
              */
 
-            var exactlyOne = element.SelectSingleNode ("*") as XmlElement;
-            if (exactlyOne == null) {
+            var exactlyOne = element.SelectSingleNode("*") as XmlElement;
+            if (exactlyOne == null)
+            {
                 // OOPS
                 return;
             }
 
-            if (!exactlyOne.NamespaceURI.Equals (Constants.WspNamespace) ||
-                !exactlyOne.LocalName.Equals ("ExactlyOne")) {
+            if (
+                !exactlyOne.NamespaceURI.Equals(Constants.WspNamespace)
+                || !exactlyOne.LocalName.Equals("ExactlyOne")
+            )
+            {
                 // FIXME: What to do with this ... ?
                 return;
             }
 
-            foreach (var node in exactlyOne.ChildNodes) {
+            foreach (var node in exactlyOne.ChildNodes)
+            {
                 var child = node as XmlElement;
                 if (child == null)
                     continue;
 
-                if (!child.NamespaceURI.Equals (Constants.WspNamespace) ||
-                    !child.LocalName.Equals ("All")) {
+                if (
+                    !child.NamespaceURI.Equals(Constants.WspNamespace)
+                    || !child.LocalName.Equals("All")
+                )
+                {
                     // FIXME: Can assertions go here ... ?
                     continue;
                 }
 
-                foreach (var node2 in child.ChildNodes) {
+                foreach (var node2 in child.ChildNodes)
+                {
                     var assertion = node2 as XmlElement;
                     if (assertion == null)
                         continue;
 
-                    assertions.Add (assertion);
+                    assertions.Add(assertion);
                 }
             }
         }
     }
 }
-

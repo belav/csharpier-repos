@@ -5,7 +5,7 @@ enum E
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
         E e = 1 - 2 + 1;
     }

@@ -31,45 +31,49 @@ using System.IO;
 using System.Text;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-    public class CreateVisualBasicManifestResourceName : CreateManifestResourceName {
+namespace Microsoft.Build.Tasks
+{
+    public class CreateVisualBasicManifestResourceName : CreateManifestResourceName
+    {
+        public CreateVisualBasicManifestResourceName() { }
 
-        public CreateVisualBasicManifestResourceName ()
+        protected override string CreateManifestName(
+            string fileName,
+            string linkFileName,
+            string rootNamespace,
+            string dependentUponFileName,
+            Stream binaryStream
+        )
         {
-        }
-
-        protected override string CreateManifestName (string fileName,
-                                  string linkFileName,
-                                  string rootNamespace,
-                                  string dependentUponFileName,
-                                  Stream binaryStream)
-        {
-            string filename_to_use = String.IsNullOrEmpty (linkFileName) ? fileName : linkFileName;
-            if (String.IsNullOrEmpty (dependentUponFileName) || binaryStream == null)
-                return GetResourceIdFromFileName
-                    (Path.GetFileName (filename_to_use), rootNamespace);
+            string filename_to_use = String.IsNullOrEmpty(linkFileName) ? fileName : linkFileName;
+            if (String.IsNullOrEmpty(dependentUponFileName) || binaryStream == null)
+                return GetResourceIdFromFileName(Path.GetFileName(filename_to_use), rootNamespace);
 
             string ns = null;
             string classname = null;
 
-            using (StreamReader rdr = new StreamReader (binaryStream)) {
-                while (true) {
-                    string tok = GetNextToken (rdr);
+            using (StreamReader rdr = new StreamReader(binaryStream))
+            {
+                while (true)
+                {
+                    string tok = GetNextToken(rdr);
                     if (tok == null)
                         break;
 
-                    if (String.Compare (tok, "namespace", true) == 0) {
-                        string t = GetNextToken (rdr);
+                    if (String.Compare(tok, "namespace", true) == 0)
+                    {
+                        string t = GetNextToken(rdr);
                         /* 'namespace' can be a attribute param also, */
-                        if (t == ":" && GetNextToken (rdr) == "=")
+                        if (t == ":" && GetNextToken(rdr) == "=")
                             continue;
                         ns = t;
                     }
 
-                    if (String.Compare (tok, "class", true) == 0) {
-                        string t = GetNextToken (rdr);
+                    if (String.Compare(tok, "class", true) == 0)
+                    {
+                        string t = GetNextToken(rdr);
                         /* 'class' can be a attribute param also, */
-                        if (t == ":" && GetNextToken (rdr) == "=")
+                        if (t == ":" && GetNextToken(rdr) == "=")
                             continue;
                         classname = t;
                         break;
@@ -77,10 +81,19 @@ namespace Microsoft.Build.Tasks {
                 }
 
                 if (classname == null)
-                    return GetResourceIdFromFileName (filename_to_use, rootNamespace);
+                    return GetResourceIdFromFileName(filename_to_use, rootNamespace);
 
-                string culture, extn, only_filename;
-                if (AssignCulture.TrySplitResourceName (filename_to_use, out only_filename, out culture, out extn))
+                string culture,
+                    extn,
+                    only_filename;
+                if (
+                    AssignCulture.TrySplitResourceName(
+                        filename_to_use,
+                        out only_filename,
+                        out culture,
+                        out extn
+                    )
+                )
                     extn = "." + culture;
                 else
                     extn = String.Empty;
@@ -91,16 +104,20 @@ namespace Microsoft.Build.Tasks {
                 else
                     rname = ns + '.' + classname + extn;
 
-                if (String.IsNullOrEmpty (rootNamespace))
+                if (String.IsNullOrEmpty(rootNamespace))
                     return rname;
                 else
                     return rootNamespace + "." + rname;
             }
         }
 
-        protected override bool    IsSourceFile (string fileName)
+        protected override bool IsSourceFile(string fileName)
         {
-            return string.Equals (Path.GetExtension (fileName), ".vb", StringComparison.OrdinalIgnoreCase);
+            return string.Equals(
+                Path.GetExtension(fileName),
+                ".vb",
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         /* Special parser for VB.NET files
@@ -108,70 +125,81 @@ namespace Microsoft.Build.Tasks {
          * skips comments,
          * skips strings "foo"
          */
-        string GetNextToken (StreamReader sr)
+        string GetNextToken(StreamReader sr)
         {
-            StringBuilder sb = new StringBuilder ();
+            StringBuilder sb = new StringBuilder();
 
-            while (true) {
-                int c = sr.Peek ();
+            while (true)
+            {
+                int c = sr.Peek();
                 if (c == -1)
                     return null;
 
-                if (c == '\r' || c == '\n') {
-                    sr.ReadLine ();
+                if (c == '\r' || c == '\n')
+                {
+                    sr.ReadLine();
                     if (sb.Length > 0)
                         break;
 
                     continue;
                 }
 
-                if (c == '\'') {
+                if (c == '\'')
+                {
                     /* comment */
-                    sr.ReadLine ();
+                    sr.ReadLine();
                     if (sb.Length > 0)
-                        return sb.ToString ();
+                        return sb.ToString();
 
                     continue;
                 }
 
-                if (c == '"') {
+                if (c == '"')
+                {
                     /* String */
-                    sr.Read ();
-                    while (true) {
-                        int n = sr.Peek ();
+                    sr.Read();
+                    while (true)
+                    {
+                        int n = sr.Peek();
                         if (n == '\r' || n == '\n' || n == -1)
-                            throw new Exception ("String literal not closed");
+                            throw new Exception("String literal not closed");
 
-                        if (n == '"') {
-                            if (sb.Length > 0) {
-                                sr.Read ();
-                                return sb.ToString ();
+                        if (n == '"')
+                        {
+                            if (sb.Length > 0)
+                            {
+                                sr.Read();
+                                return sb.ToString();
                             }
 
                             break;
                         }
-                        sr.Read ();
+                        sr.Read();
                     }
-                } else {
-                    if (Char.IsLetterOrDigit ((char) c) || c == '_' || c == '.') {
-                        sb.Append ((char) c);
-                    } else {
+                }
+                else
+                {
+                    if (Char.IsLetterOrDigit((char)c) || c == '_' || c == '.')
+                    {
+                        sb.Append((char)c);
+                    }
+                    else
+                    {
                         if (sb.Length > 0)
                             break;
 
-                        if (c != ' ' && c != '\t') {
-                            sr.Read ();
-                            return ((char) c).ToString ();
+                        if (c != ' ' && c != '\t')
+                        {
+                            sr.Read();
+                            return ((char)c).ToString();
                         }
                     }
                 }
 
-                sr.Read ();
+                sr.Read();
             }
 
-            return sb.ToString ();
+            return sb.ToString();
         }
-
     }
 }
-

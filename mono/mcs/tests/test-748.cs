@@ -6,30 +6,26 @@ using RealTest;
 
 class M
 {
-    Foo Test ()
+    Foo Test()
     {
-        return new RealTest.Foo ();
+        return new RealTest.Foo();
     }
-    
-    public static void Main ()
-    {
-    }
+
+    public static void Main() { }
 }
 
 namespace Test.Local
 {
     class M
     {
-        Foo Test ()
+        Foo Test()
         {
-            return new RealTest.Foo ();
+            return new RealTest.Foo();
         }
     }
 }
 
 namespace RealTest
 {
-    class Foo
-    {
-    }
+    class Foo { }
 }

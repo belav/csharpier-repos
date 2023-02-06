@@ -1,22 +1,22 @@
 public class Test
 {
-    delegate void D ();
+    delegate void D();
     static D d;
-    
-    static public void TestFunc ()
+
+    static public void TestFunc()
     {
         return;
-        
+
         string testStr;
 
-        d += delegate ()
+        d += delegate()
         {
             testStr = "sss";
         };
-   }
+    }
 
-    public static void Main (string[] args)
+    public static void Main(string[] args)
     {
-        TestFunc ();
+        TestFunc();
     }
 }

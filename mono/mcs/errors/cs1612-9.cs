@@ -13,9 +13,9 @@ struct S
 
 public class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        var r = new R ();
+        var r = new R();
         r.Size.Height = 3;
     }
 }

@@ -12,81 +12,114 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.DataFlow
 {
     [SkipKeptItemsValidation]
-    [SetupLinkAttributesFile ("XmlAnnotations.xml")]
-    [ExpectedWarning ("IL2031", "Attribute type 'System.DoesNotExistAttribute' could not be found", FileName = "XmlAnnotations.xml")]
-    [LogDoesNotContain ("IL2067: Mono.Linker.Tests.Cases.DataFlow.XmlAnnotations.ReadFromInstanceField():*", true)]
+    [SetupLinkAttributesFile("XmlAnnotations.xml")]
+    [ExpectedWarning(
+        "IL2031",
+        "Attribute type 'System.DoesNotExistAttribute' could not be found",
+        FileName = "XmlAnnotations.xml"
+    )]
+    [LogDoesNotContain(
+        "IL2067: Mono.Linker.Tests.Cases.DataFlow.XmlAnnotations.ReadFromInstanceField():*",
+        true
+    )]
     [ExpectedNoWarnings]
     class XmlAnnotations
     {
-        public static void Main ()
+        public static void Main()
         {
-            var instance = new XmlAnnotations ();
+            var instance = new XmlAnnotations();
 
-            instance.ReadFromInstanceField ();
-            instance.TwoAnnotatedParameters (typeof (TestType), typeof (TestType));
-            instance.SpacesBetweenParametersWrongArgument (typeof (TestType), true);
-            instance.GenericMethod<String> ("nonUsed", typeof (TestType));
-            instance.ReturnConstructorsFailure (null);
-            instance.ReadFromInstanceProperty ();
+            instance.ReadFromInstanceField();
+            instance.TwoAnnotatedParameters(typeof(TestType), typeof(TestType));
+            instance.SpacesBetweenParametersWrongArgument(typeof(TestType), true);
+            instance.GenericMethod<String>("nonUsed", typeof(TestType));
+            instance.ReturnConstructorsFailure(null);
+            instance.ReadFromInstanceProperty();
 
-            var nestedinstance = new NestedType ();
+            var nestedinstance = new NestedType();
 
-            nestedinstance.ReadFromInstanceField ();
+            nestedinstance.ReadFromInstanceField();
         }
 
         Type _typeWithPublicParameterlessConstructor;
 
         Type PropertyWithPublicParameterlessConstructor { get; set; }
 
-        [ExpectedWarning ("IL2077", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-        [ExpectedWarning ("IL2077", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresNonPublicConstructors))]
-        private void ReadFromInstanceField ()
+        [ExpectedWarning(
+            "IL2077",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresPublicConstructors)
+        )]
+        [ExpectedWarning(
+            "IL2077",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresNonPublicConstructors)
+        )]
+        private void ReadFromInstanceField()
         {
-            _typeWithPublicParameterlessConstructor.RequiresPublicParameterlessConstructor ();
-            _typeWithPublicParameterlessConstructor.RequiresPublicConstructors ();
-            _typeWithPublicParameterlessConstructor.RequiresNonPublicConstructors ();
+            _typeWithPublicParameterlessConstructor.RequiresPublicParameterlessConstructor();
+            _typeWithPublicParameterlessConstructor.RequiresPublicConstructors();
+            _typeWithPublicParameterlessConstructor.RequiresNonPublicConstructors();
         }
 
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-        private void TwoAnnotatedParameters (
-            Type type,
-            Type type2)
+        [ExpectedWarning(
+            "IL2067",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresPublicConstructors)
+        )]
+        private void TwoAnnotatedParameters(Type type, Type type2)
         {
-            type.RequiresPublicParameterlessConstructor ();
-            type2.RequiresPublicParameterlessConstructor ();
-            type.RequiresPublicConstructors ();
-            type2.RequiresPublicConstructors ();
+            type.RequiresPublicParameterlessConstructor();
+            type2.RequiresPublicParameterlessConstructor();
+            type.RequiresPublicConstructors();
+            type2.RequiresPublicConstructors();
         }
 
-        [ExpectedWarning ("IL2067", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicParameterlessConstructor))]
-        private void SpacesBetweenParametersWrongArgument (
-            Type type,
-            bool nonused)
+        [ExpectedWarning(
+            "IL2067",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresPublicParameterlessConstructor)
+        )]
+        private void SpacesBetweenParametersWrongArgument(Type type, bool nonused)
         {
-            type.RequiresPublicParameterlessConstructor ();
+            type.RequiresPublicParameterlessConstructor();
         }
 
-        private void GenericMethod<T> (
-            T input,
-            Type type)
+        private void GenericMethod<T>(T input, Type type)
         {
-            type.RequiresPublicParameterlessConstructor ();
+            type.RequiresPublicParameterlessConstructor();
         }
 
-        [ExpectedWarning ("IL2068", nameof (XmlAnnotations) + "." + nameof (ReturnConstructorsFailure))]
-        private Type ReturnConstructorsFailure (
-            Type publicParameterlessConstructorType)
+        [ExpectedWarning(
+            "IL2068",
+            nameof(XmlAnnotations) + "." + nameof(ReturnConstructorsFailure)
+        )]
+        private Type ReturnConstructorsFailure(Type publicParameterlessConstructorType)
         {
             return publicParameterlessConstructorType;
         }
 
-        [ExpectedWarning ("IL2072", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-        [ExpectedWarning ("IL2072", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresNonPublicConstructors))]
-        private void ReadFromInstanceProperty ()
+        [ExpectedWarning(
+            "IL2072",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresPublicConstructors)
+        )]
+        [ExpectedWarning(
+            "IL2072",
+            nameof(DataFlowTypeExtensions)
+                + "."
+                + nameof(DataFlowTypeExtensions.RequiresNonPublicConstructors)
+        )]
+        private void ReadFromInstanceProperty()
         {
-            PropertyWithPublicParameterlessConstructor.RequiresPublicParameterlessConstructor ();
-            PropertyWithPublicParameterlessConstructor.RequiresPublicConstructors ();
-            PropertyWithPublicParameterlessConstructor.RequiresNonPublicConstructors ();
+            PropertyWithPublicParameterlessConstructor.RequiresPublicParameterlessConstructor();
+            PropertyWithPublicParameterlessConstructor.RequiresPublicConstructors();
+            PropertyWithPublicParameterlessConstructor.RequiresNonPublicConstructors();
         }
 
         class TestType { }
@@ -95,13 +128,23 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         {
             Type _typeWithPublicParameterlessConstructor;
 
-            [ExpectedWarning ("IL2077", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresPublicConstructors))]
-            [ExpectedWarning ("IL2077", nameof (DataFlowTypeExtensions) + "." + nameof (DataFlowTypeExtensions.RequiresNonPublicConstructors))]
-            public void ReadFromInstanceField ()
+            [ExpectedWarning(
+                "IL2077",
+                nameof(DataFlowTypeExtensions)
+                    + "."
+                    + nameof(DataFlowTypeExtensions.RequiresPublicConstructors)
+            )]
+            [ExpectedWarning(
+                "IL2077",
+                nameof(DataFlowTypeExtensions)
+                    + "."
+                    + nameof(DataFlowTypeExtensions.RequiresNonPublicConstructors)
+            )]
+            public void ReadFromInstanceField()
             {
-                _typeWithPublicParameterlessConstructor.RequiresPublicParameterlessConstructor ();
-                _typeWithPublicParameterlessConstructor.RequiresPublicConstructors ();
-                _typeWithPublicParameterlessConstructor.RequiresNonPublicConstructors ();
+                _typeWithPublicParameterlessConstructor.RequiresPublicParameterlessConstructor();
+                _typeWithPublicParameterlessConstructor.RequiresPublicConstructors();
+                _typeWithPublicParameterlessConstructor.RequiresNonPublicConstructors();
             }
         }
     }

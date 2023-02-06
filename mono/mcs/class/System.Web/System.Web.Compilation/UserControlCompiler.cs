@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,61 +37,74 @@ namespace System.Web.Compilation
     {
         UserControlParser parser;
 
-        public UserControlCompiler (UserControlParser parser)
-            : base (parser)
+        public UserControlCompiler(UserControlParser parser)
+            : base(parser)
         {
             this.parser = parser;
         }
 
-        public static Type CompileUserControlType (UserControlParser parser)
+        public static Type CompileUserControlType(UserControlParser parser)
         {
-            UserControlCompiler pc = new UserControlCompiler (parser);
-            return pc.GetCompiledType ();
+            UserControlCompiler pc = new UserControlCompiler(parser);
+            return pc.GetCompiledType();
         }
 
-        protected override void AddClassAttributes ()
+        protected override void AddClassAttributes()
         {
             if (parser.OutputCache)
-                AddOutputCacheAttribute ();
+                AddOutputCacheAttribute();
         }
 
-        protected internal override void CreateMethods ()
+        protected internal override void CreateMethods()
         {
-            base.CreateMethods ();
-            CreateProfileProperty ();
+            base.CreateMethods();
+            CreateProfileProperty();
         }
-        
-        void AddOutputCacheAttribute ()
+
+        void AddOutputCacheAttribute()
         {
             CodeAttributeDeclaration cad;
-            cad = new CodeAttributeDeclaration ("System.Web.UI.PartialCachingAttribute");
+            cad = new CodeAttributeDeclaration("System.Web.UI.PartialCachingAttribute");
             CodeAttributeArgumentCollection arguments = cad.Arguments;
-            
-            AddPrimitiveArgument (arguments, parser.OutputCacheDuration);
-            AddPrimitiveArgument (arguments, parser.OutputCacheVaryByParam);
-            AddPrimitiveArgument (arguments, parser.OutputCacheVaryByControls);
-            AddPrimitiveArgument (arguments, parser.OutputCacheVaryByCustom);
-            AddPrimitiveArgument (arguments, parser.OutputCacheSqlDependency);
-            AddPrimitiveArgument (arguments, parser.OutputCacheShared);
-            arguments.Add (new CodeAttributeArgument ("ProviderName", new CodePrimitiveExpression (parser.ProviderName)));
-            mainClass.CustomAttributes.Add (cad);
+
+            AddPrimitiveArgument(arguments, parser.OutputCacheDuration);
+            AddPrimitiveArgument(arguments, parser.OutputCacheVaryByParam);
+            AddPrimitiveArgument(arguments, parser.OutputCacheVaryByControls);
+            AddPrimitiveArgument(arguments, parser.OutputCacheVaryByCustom);
+            AddPrimitiveArgument(arguments, parser.OutputCacheSqlDependency);
+            AddPrimitiveArgument(arguments, parser.OutputCacheShared);
+            arguments.Add(
+                new CodeAttributeArgument(
+                    "ProviderName",
+                    new CodePrimitiveExpression(parser.ProviderName)
+                )
+            );
+            mainClass.CustomAttributes.Add(cad);
         }
 
-        void AddPrimitiveArgument (CodeAttributeArgumentCollection arguments, object obj)
+        void AddPrimitiveArgument(CodeAttributeArgumentCollection arguments, object obj)
         {
-            arguments.Add (new CodeAttributeArgument (new CodePrimitiveExpression (obj)));
+            arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(obj)));
         }
 
-        protected override void AddStatementsToInitMethodTop (ControlBuilder builder, CodeMemberMethod method)
+        protected override void AddStatementsToInitMethodTop(
+            ControlBuilder builder,
+            CodeMemberMethod method
+        )
         {
-            base.AddStatementsToInitMethodTop (builder, method);
-            if (parser.MasterPageFile != null) {
+            base.AddStatementsToInitMethodTop(builder, method);
+            if (parser.MasterPageFile != null)
+            {
                 CodeExpression prop;
-                prop = new CodePropertyReferenceExpression (new CodeArgumentReferenceExpression("__ctrl"), "MasterPageFile");
-                CodeExpression ct = new CodePrimitiveExpression (parser.MasterPageFile);
-                method.Statements.Add (AddLinePragma (new CodeAssignStatement (prop, ct), parser.DirectiveLocation));
+                prop = new CodePropertyReferenceExpression(
+                    new CodeArgumentReferenceExpression("__ctrl"),
+                    "MasterPageFile"
+                );
+                CodeExpression ct = new CodePrimitiveExpression(parser.MasterPageFile);
+                method.Statements.Add(
+                    AddLinePragma(new CodeAssignStatement(prop, ct), parser.DirectiveLocation)
+                );
             }
         }
     }
 }
-

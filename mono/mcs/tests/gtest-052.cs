@@ -2,27 +2,26 @@
 using System;
 
 public class Foo<T>
-    where T : new ()
+    where T : new()
 {
-    public T Create ()
+    public T Create()
     {
-        return new T ();
+        return new T();
     }
 }
 
 class X
 {
-    public X ()
-    { }
+    public X() { }
 
-    void Hello ()
+    void Hello()
     {
-        Console.WriteLine ("Hello World");
+        Console.WriteLine("Hello World");
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Foo<X> foo = new Foo<X> ();
-        foo.Create ().Hello ();
+        Foo<X> foo = new Foo<X>();
+        foo.Create().Hello();
     }
 }

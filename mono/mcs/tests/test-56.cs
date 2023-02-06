@@ -1,20 +1,21 @@
 //
-// Stress test properties and the various modes of 
+// Stress test properties and the various modes of
 // declarations (virtual, overrides, abstract, new)
 //
 using System;
 
-interface I {
-    int P {
-        get; set;
-    }
+interface I
+{
+    int P { get; set; }
 }
 
-abstract class A : I {
+abstract class A : I
+{
     public int p;
     public int q;
-    
-    public int P {
+
+    public int P
+    {
         get { return p; }
         set { p = value; }
     }
@@ -22,10 +23,15 @@ abstract class A : I {
     public abstract int Q { get; set; }
 
     public int r;
-    public virtual int R { get { return r; } set { r = value; } }
+    public virtual int R
+    {
+        get { return r; }
+        set { r = value; }
+    }
 }
 
-class B : A {
+class B : A
+{
     public int bp;
 
     public new int P
@@ -34,32 +40,39 @@ class B : A {
         set { bp = value; }
     }
 
-    public override int Q {
+    public override int Q
+    {
         get { return q; }
         set { q = value; }
     }
 }
 
-class C : A {
-    public override int Q {
+class C : A
+{
+    public override int Q
+    {
         get { return q; }
         set { q = value; }
     }
 
     public int rr;
-    public override int R { get { return rr; } set { rr = value; } }
+    public override int R
+    {
+        get { return rr; }
+        set { rr = value; }
+    }
 }
 
-class M {
-
-    public static int Main ()
+class M
+{
+    public static int Main()
     {
-        B b = new B ();
+        B b = new B();
 
         b.P = 1;
         b.R = 10;
         b.Q = 20;
-                 
+
         if (b.P != 1)
             return 1;
         if (b.bp != 1)
@@ -75,7 +88,7 @@ class M {
         if (b.q != 20)
             return 6;
 
-        C c = new C ();
+        C c = new C();
 
         c.R = 10;
         c.Q = 20;
@@ -89,8 +102,7 @@ class M {
         if (c.p != 30)
             return 10;
 
-        Console.WriteLine ("Test passes");
+        Console.WriteLine("Test passes");
         return 0;
     }
 }
-    

@@ -3,14 +3,14 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
 {
-    [SetupCSharpCompilerToUse ("csc")]
-    [SetupCompileArgument ("/langversion:7.3")]
-    [SetupLinkerArgument ("--used-attrs-only", "true")]
+    [SetupCSharpCompilerToUse("csc")]
+    [SetupCompileArgument("/langversion:7.3")]
+    [SetupLinkerArgument("--used-attrs-only", "true")]
     public class MethodWithUnmanagedConstraint
     {
-        public static void Main ()
+        public static void Main()
         {
-            Method<int> ();
+            Method<int>();
         }
 
         /// <summary>
@@ -20,8 +20,7 @@ namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
         /// </summary>
         /// <typeparam name="T"></typeparam>
         [Kept]
-        static void Method<T> () where T : unmanaged
-        {
-        }
+        static void Method<T>()
+            where T : unmanaged { }
     }
 }

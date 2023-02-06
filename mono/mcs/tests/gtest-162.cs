@@ -8,12 +8,15 @@ public class Generic<T>
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        Type t = typeof (Generic<bool>);
-        MemberInfo[] mi = t.FindMembers (MemberTypes.NestedType,
-                         BindingFlags.Static | BindingFlags.Public |
-                         BindingFlags.DeclaredOnly, null, null);
+        Type t = typeof(Generic<bool>);
+        MemberInfo[] mi = t.FindMembers(
+            MemberTypes.NestedType,
+            BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly,
+            null,
+            null
+        );
 
         return mi.Length - 1;
     }

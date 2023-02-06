@@ -29,25 +29,42 @@ namespace Microsoft.CodeAnalysis.FindUsages
             private readonly IFindUsagesContext _context;
             private readonly DefinitionItem _definition;
 
-            public IStreamingProgressTracker ProgressTracker
-                => _context.ProgressTracker;
+            public IStreamingProgressTracker ProgressTracker => _context.ProgressTracker;
 
             public FindLiteralsProgressAdapter(
-                IFindUsagesContext context, DefinitionItem definition)
+                IFindUsagesContext context,
+                DefinitionItem definition
+            )
             {
                 _context = context;
                 _definition = definition;
             }
 
-            public async ValueTask OnReferenceFoundAsync(Document document, TextSpan span, CancellationToken cancellationToken)
+            public async ValueTask OnReferenceFoundAsync(
+                Document document,
+                TextSpan span,
+                CancellationToken cancellationToken
+            )
             {
-                var options = await _context.GetOptionsAsync(document.Project.Language, cancellationToken).ConfigureAwait(false);
+                var options = await _context
+                    .GetOptionsAsync(document.Project.Language, cancellationToken)
+                    .ConfigureAwait(false);
 
-                var documentSpan = await ClassifiedSpansAndHighlightSpanFactory.GetClassifiedDocumentSpanAsync(
-                    document, span, options.ClassificationOptions, cancellationToken).ConfigureAwait(false);
+                var documentSpan = await ClassifiedSpansAndHighlightSpanFactory
+                    .GetClassifiedDocumentSpanAsync(
+                        document,
+                        span,
+                        options.ClassificationOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                await _context.OnReferenceFoundAsync(
-                    new SourceReferenceItem(_definition, documentSpan, SymbolUsageInfo.None), cancellationToken).ConfigureAwait(false);
+                await _context
+                    .OnReferenceFoundAsync(
+                        new SourceReferenceItem(_definition, documentSpan, SymbolUsageInfo.None),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -66,7 +83,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
             /// reference it finds to the symbol.  However, we only want to create and pass along
             /// a single instance of <see cref="INavigableItem" /> for that definition no matter
             /// how many times we see it.
-            /// 
+            ///
             /// This dictionary allows us to make that mapping once and then keep it around for
             /// all future callbacks.
             /// </summary>
@@ -74,11 +91,13 @@ namespace Microsoft.CodeAnalysis.FindUsages
 
             private readonly SemaphoreSlim _gate = new(initialCount: 1);
 
-            public IStreamingProgressTracker ProgressTracker
-                => _context.ProgressTracker;
+            public IStreamingProgressTracker ProgressTracker => _context.ProgressTracker;
 
             public FindReferencesProgressAdapter(
-                Solution solution, IFindUsagesContext context, FindReferencesSearchOptions options)
+                Solution solution,
+                IFindUsagesContext context,
+                FindReferencesSearchOptions options
+            )
             {
                 _solution = solution;
                 _context = context;
@@ -88,27 +107,42 @@ namespace Microsoft.CodeAnalysis.FindUsages
             // Do nothing functions.  The streaming far service doesn't care about
             // any of these.
             public ValueTask OnStartedAsync(CancellationToken cancellationToken) => default;
+
             public ValueTask OnCompletedAsync(CancellationToken cancellationToken) => default;
-            public ValueTask OnFindInDocumentStartedAsync(Document document, CancellationToken cancellationToken) => default;
-            public ValueTask OnFindInDocumentCompletedAsync(Document document, CancellationToken cancellationToken) => default;
+
+            public ValueTask OnFindInDocumentStartedAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => default;
+
+            public ValueTask OnFindInDocumentCompletedAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => default;
 
             // More complicated forwarding functions.  These need to map from the symbols
-            // used by the FAR engine to the INavigableItems used by the streaming FAR 
+            // used by the FAR engine to the INavigableItems used by the streaming FAR
             // feature.
 
-            private async ValueTask<DefinitionItem> GetDefinitionItemAsync(SymbolGroup group, CancellationToken cancellationToken)
+            private async ValueTask<DefinitionItem> GetDefinitionItemAsync(
+                SymbolGroup group,
+                CancellationToken cancellationToken
+            )
             {
                 using (await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
                 {
                     if (!_definitionToItem.TryGetValue(group, out var definitionItem))
                     {
-                        definitionItem = await group.ToClassifiedDefinitionItemAsync(
-                            _context,
-                            _solution,
-                            _options,
-                            isPrimary: _definitionToItem.Count == 0,
-                            includeHiddenLocations: false,
-                            cancellationToken).ConfigureAwait(false);
+                        definitionItem = await group
+                            .ToClassifiedDefinitionItemAsync(
+                                _context,
+                                _solution,
+                                _options,
+                                isPrimary: _definitionToItem.Count == 0,
+                                includeHiddenLocations: false,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                         _definitionToItem[group] = definitionItem;
                     }
@@ -117,23 +151,40 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 }
             }
 
-            public async ValueTask OnDefinitionFoundAsync(SymbolGroup group, CancellationToken cancellationToken)
+            public async ValueTask OnDefinitionFoundAsync(
+                SymbolGroup group,
+                CancellationToken cancellationToken
+            )
             {
-                var definitionItem = await GetDefinitionItemAsync(group, cancellationToken).ConfigureAwait(false);
-                await _context.OnDefinitionFoundAsync(definitionItem, cancellationToken).ConfigureAwait(false);
+                var definitionItem = await GetDefinitionItemAsync(group, cancellationToken)
+                    .ConfigureAwait(false);
+                await _context
+                    .OnDefinitionFoundAsync(definitionItem, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            public async ValueTask OnReferenceFoundAsync(SymbolGroup group, ISymbol definition, ReferenceLocation location, CancellationToken cancellationToken)
+            public async ValueTask OnReferenceFoundAsync(
+                SymbolGroup group,
+                ISymbol definition,
+                ReferenceLocation location,
+                CancellationToken cancellationToken
+            )
             {
-                var definitionItem = await GetDefinitionItemAsync(group, cancellationToken).ConfigureAwait(false);
-                var referenceItem = await location.TryCreateSourceReferenceItemAsync(
-                    _context,
-                    definitionItem,
-                    includeHiddenLocations: false,
-                    cancellationToken).ConfigureAwait(false);
+                var definitionItem = await GetDefinitionItemAsync(group, cancellationToken)
+                    .ConfigureAwait(false);
+                var referenceItem = await location
+                    .TryCreateSourceReferenceItemAsync(
+                        _context,
+                        definitionItem,
+                        includeHiddenLocations: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (referenceItem != null)
-                    await _context.OnReferenceFoundAsync(referenceItem, cancellationToken).ConfigureAwait(false);
+                    await _context
+                        .OnReferenceFoundAsync(referenceItem, cancellationToken)
+                        .ConfigureAwait(false);
             }
         }
     }

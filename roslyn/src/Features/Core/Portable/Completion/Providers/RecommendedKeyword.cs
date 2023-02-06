@@ -13,17 +13,35 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
     {
         public Glyph Glyph { get; }
         public string Keyword { get; }
-        public Func<CancellationToken, ImmutableArray<SymbolDisplayPart>> DescriptionFactory { get; }
+        public Func<
+            CancellationToken,
+            ImmutableArray<SymbolDisplayPart>
+        > DescriptionFactory { get; }
         public bool IsIntrinsic { get; }
         public bool ShouldFormatOnCommit { get; }
         public int MatchPriority { get; }
 
-        public RecommendedKeyword(string keyword, string toolTip = "", Glyph glyph = Glyph.Keyword, bool isIntrinsic = false, bool shouldFormatOnCommit = false, int? matchPriority = null)
-            : this(keyword, glyph, _ => CreateDisplayParts(keyword, toolTip), isIntrinsic, shouldFormatOnCommit, matchPriority)
-        {
-        }
+        public RecommendedKeyword(
+            string keyword,
+            string toolTip = "",
+            Glyph glyph = Glyph.Keyword,
+            bool isIntrinsic = false,
+            bool shouldFormatOnCommit = false,
+            int? matchPriority = null
+        )
+            : this(
+                keyword,
+                glyph,
+                _ => CreateDisplayParts(keyword, toolTip),
+                isIntrinsic,
+                shouldFormatOnCommit,
+                matchPriority
+            ) { }
 
-        internal static ImmutableArray<SymbolDisplayPart> CreateDisplayParts(string keyword, string toolTip)
+        internal static ImmutableArray<SymbolDisplayPart> CreateDisplayParts(
+            string keyword,
+            string toolTip
+        )
         {
             var textContentBuilder = new System.Collections.Generic.List<SymbolDisplayPart>();
             textContentBuilder.AddText(string.Format(FeaturesResources._0_Keyword, keyword));
@@ -39,11 +57,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         public RecommendedKeyword(
             string keyword,
-             Glyph glyph,
-              Func<CancellationToken, ImmutableArray<SymbolDisplayPart>> descriptionFactory,
-              bool isIntrinsic = false,
-              bool shouldFormatOnCommit = false,
-              int? matchPriority = null)
+            Glyph glyph,
+            Func<CancellationToken, ImmutableArray<SymbolDisplayPart>> descriptionFactory,
+            bool isIntrinsic = false,
+            bool shouldFormatOnCommit = false,
+            int? matchPriority = null
+        )
         {
             Keyword = keyword;
             Glyph = glyph;

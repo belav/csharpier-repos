@@ -1,16 +1,16 @@
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         return;
     }
-    
-    int Foo2 ()
+
+    int Foo2()
     {
         return 7;
     }
-    
-    int Foo3 ()
+
+    int Foo3()
     {
         {
             {

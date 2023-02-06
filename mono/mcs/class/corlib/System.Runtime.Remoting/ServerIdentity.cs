@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -51,7 +51,8 @@ namespace System.Runtime.Remoting
         protected Context _context;
         protected Lease _lease;
 
-        public ServerIdentity (string objectUri, Context context, Type objectType): base (objectUri)
+        public ServerIdentity(string objectUri, Context context, Type objectType)
+            : base(objectUri)
         {
             _objectType = objectType;
             _context = context;
@@ -62,18 +63,20 @@ namespace System.Runtime.Remoting
             get { return _objectType; }
         }
 
-        public void StartTrackingLifetime (ILease lease)
+        public void StartTrackingLifetime(ILease lease)
         {
-            // Adds this identity to the LeaseManager. 
+            // Adds this identity to the LeaseManager.
             // _serverObject must be set.
 
-            if (lease != null && lease.CurrentState == LeaseState.Null) lease = null;
+            if (lease != null && lease.CurrentState == LeaseState.Null)
+                lease = null;
 
-            if (lease != null) 
+            if (lease != null)
             {
-                if (! (lease is Lease)) lease = new Lease();  // This seems to be MS behavior
-                _lease = (Lease) lease;
-                LifetimeServices.TrackLifetime (this);
+                if (!(lease is Lease))
+                    lease = new Lease(); // This seems to be MS behavior
+                _lease = (Lease)lease;
+                LifetimeServices.TrackLifetime(this);
             }
         }
 
@@ -82,7 +85,7 @@ namespace System.Runtime.Remoting
             DisposeServerObject();
         }
 
-        public override ObjRef CreateObjRef (Type requestedType)
+        public override ObjRef CreateObjRef(Type requestedType)
         {
             if (_objRef != null)
             {
@@ -91,35 +94,36 @@ namespace System.Runtime.Remoting
                 return _objRef;
             }
 
-            if (requestedType == null) requestedType = _objectType;
-            _objRef = new ObjRef ();
+            if (requestedType == null)
+                requestedType = _objectType;
+            _objRef = new ObjRef();
             _objRef.TypeInfo = new TypeInfo(requestedType);
             _objRef.URI = _objectUri;
 
             if (_envoySink != null && !(_envoySink is EnvoyTerminatorSink))
-                _objRef.EnvoyInfo = new EnvoyInfo (_envoySink);
+                _objRef.EnvoyInfo = new EnvoyInfo(_envoySink);
 
             return _objRef;
         }
 
-        public void AttachServerObject (MarshalByRefObject serverObject, Context context)
+        public void AttachServerObject(MarshalByRefObject serverObject, Context context)
         {
             DisposeServerObject();
 
             _context = context;
             _serverObject = serverObject;
-            
-            if (RemotingServices.IsTransparentProxy (serverObject))
+
+            if (RemotingServices.IsTransparentProxy(serverObject))
             {
-                RealProxy rp = RemotingServices.GetRealProxy (serverObject);
+                RealProxy rp = RemotingServices.GetRealProxy(serverObject);
                 if (rp.ObjectIdentity == null)
                     rp.ObjectIdentity = this;
             }
             else
             {
                 if (_objectType.IsContextful)
-                    _envoySink = context.CreateEnvoySink (serverObject);
-    
+                    _envoySink = context.CreateEnvoySink(serverObject);
+
                 _serverObject.ObjectIdentity = this;
             }
         }
@@ -135,20 +139,24 @@ namespace System.Runtime.Remoting
             set { _context = value; }
         }
 
-        public abstract IMessage SyncObjectProcessMessage (IMessage msg);
-        public abstract IMessageCtrl AsyncObjectProcessMessage (IMessage msg, IMessageSink replySink);
+        public abstract IMessage SyncObjectProcessMessage(IMessage msg);
+        public abstract IMessageCtrl AsyncObjectProcessMessage(
+            IMessage msg,
+            IMessageSink replySink
+        );
 
         protected void DisposeServerObject()
         {
             // Detach identity from server object to avoid problems if the
             // object is marshalled again.
-            
-            if (_serverObject != null) {
+
+            if (_serverObject != null)
+            {
                 MarshalByRefObject obj = _serverObject;
                 _serverObject.ObjectIdentity = null;
                 _serverObject = null;
                 _serverSink = null;
-                TrackingServices.NotifyDisconnectedObject (obj);
+                TrackingServices.NotifyDisconnectedObject(obj);
             }
         }
     }
@@ -156,22 +164,21 @@ namespace System.Runtime.Remoting
     internal class ClientActivatedIdentity : ServerIdentity
     {
         MarshalByRefObject _targetThis;
-        
-        public ClientActivatedIdentity (string objectUri, Type objectType): base (objectUri, null, objectType)
-        {
-        }
-    
-        public MarshalByRefObject GetServerObject ()
+
+        public ClientActivatedIdentity(string objectUri, Type objectType)
+            : base(objectUri, null, objectType) { }
+
+        public MarshalByRefObject GetServerObject()
         {
             return _serverObject;
         }
 
-        public MarshalByRefObject GetClientProxy ()
+        public MarshalByRefObject GetClientProxy()
         {
             return _targetThis;
         }
-        
-        public void SetClientProxy (MarshalByRefObject obj)
+
+        public void SetClientProxy(MarshalByRefObject obj)
         {
             _targetThis = obj;
         }
@@ -179,89 +186,105 @@ namespace System.Runtime.Remoting
         public override void OnLifetimeExpired()
         {
             base.OnLifetimeExpired();
-            RemotingServices.DisposeIdentity (this);
+            RemotingServices.DisposeIdentity(this);
         }
 
-        public override IMessage SyncObjectProcessMessage (IMessage msg)
+        public override IMessage SyncObjectProcessMessage(IMessage msg)
         {
-            if (_serverSink == null) {
+            if (_serverSink == null)
+            {
                 bool useProxy = _targetThis != null;
-                _serverSink = _context.CreateServerObjectSinkChain ((useProxy ? _targetThis : _serverObject), useProxy);
+                _serverSink = _context.CreateServerObjectSinkChain(
+                    (useProxy ? _targetThis : _serverObject),
+                    useProxy
+                );
             }
-            return _serverSink.SyncProcessMessage (msg);
+            return _serverSink.SyncProcessMessage(msg);
         }
 
-        public override IMessageCtrl AsyncObjectProcessMessage (IMessage msg, IMessageSink replySink)
+        public override IMessageCtrl AsyncObjectProcessMessage(IMessage msg, IMessageSink replySink)
         {
-            if (_serverSink == null) {
+            if (_serverSink == null)
+            {
                 bool useProxy = _targetThis != null;
-                _serverSink = _context.CreateServerObjectSinkChain ((useProxy ? _targetThis : _serverObject), useProxy);
+                _serverSink = _context.CreateServerObjectSinkChain(
+                    (useProxy ? _targetThis : _serverObject),
+                    useProxy
+                );
             }
-            return _serverSink.AsyncProcessMessage (msg, replySink);
-        }    
+            return _serverSink.AsyncProcessMessage(msg, replySink);
+        }
     }
 
     internal class SingletonIdentity : ServerIdentity
     {
-        public SingletonIdentity (string objectUri, Context context, Type objectType): base (objectUri, context, objectType)
-        {
-        }
+        public SingletonIdentity(string objectUri, Context context, Type objectType)
+            : base(objectUri, context, objectType) { }
 
-        public MarshalByRefObject GetServerObject ()
+        public MarshalByRefObject GetServerObject()
         {
-            if (_serverObject != null) return _serverObject;
+            if (_serverObject != null)
+                return _serverObject;
 
-            lock (this) 
+            lock (this)
             {
-                if (_serverObject == null) {
-                    MarshalByRefObject server = (MarshalByRefObject) Activator.CreateInstance (_objectType, true);
-                    AttachServerObject (server, Context.DefaultContext);
-                    StartTrackingLifetime ((ILease)server.InitializeLifetimeService ());
+                if (_serverObject == null)
+                {
+                    MarshalByRefObject server = (MarshalByRefObject)
+                        Activator.CreateInstance(_objectType, true);
+                    AttachServerObject(server, Context.DefaultContext);
+                    StartTrackingLifetime((ILease)server.InitializeLifetimeService());
                 }
             }
             return _serverObject;
         }
 
-        public override IMessage SyncObjectProcessMessage (IMessage msg)
+        public override IMessage SyncObjectProcessMessage(IMessage msg)
         {
-            MarshalByRefObject obj = GetServerObject ();
-            if (_serverSink == null) _serverSink = _context.CreateServerObjectSinkChain (obj, false);
-            return _serverSink.SyncProcessMessage (msg);
+            MarshalByRefObject obj = GetServerObject();
+            if (_serverSink == null)
+                _serverSink = _context.CreateServerObjectSinkChain(obj, false);
+            return _serverSink.SyncProcessMessage(msg);
         }
 
-        public override IMessageCtrl AsyncObjectProcessMessage (IMessage msg, IMessageSink replySink)
+        public override IMessageCtrl AsyncObjectProcessMessage(IMessage msg, IMessageSink replySink)
         {
-            MarshalByRefObject obj = GetServerObject ();
-            if (_serverSink == null) _serverSink = _context.CreateServerObjectSinkChain (obj, false);
-            return _serverSink.AsyncProcessMessage (msg, replySink);
-        }    
+            MarshalByRefObject obj = GetServerObject();
+            if (_serverSink == null)
+                _serverSink = _context.CreateServerObjectSinkChain(obj, false);
+            return _serverSink.AsyncProcessMessage(msg, replySink);
+        }
     }
 
     internal class SingleCallIdentity : ServerIdentity
     {
-        public SingleCallIdentity (string objectUri, Context context, Type objectType): base (objectUri, context, objectType)
-        {
-        }
+        public SingleCallIdentity(string objectUri, Context context, Type objectType)
+            : base(objectUri, context, objectType) { }
 
-        public override IMessage SyncObjectProcessMessage (IMessage msg)
+        public override IMessage SyncObjectProcessMessage(IMessage msg)
         {
             // SingleCallIdentity creates and disposes an instance in each call
 
-            MarshalByRefObject obj = (MarshalByRefObject)Activator.CreateInstance (_objectType, true);
-            if (obj.ObjectIdentity == null) obj.ObjectIdentity = this;
-            IMessageSink serverSink = _context.CreateServerObjectSinkChain (obj, false);
-            IMessage result = serverSink.SyncProcessMessage (msg);
-            if (obj is IDisposable) ((IDisposable)obj).Dispose();
+            MarshalByRefObject obj = (MarshalByRefObject)
+                Activator.CreateInstance(_objectType, true);
+            if (obj.ObjectIdentity == null)
+                obj.ObjectIdentity = this;
+            IMessageSink serverSink = _context.CreateServerObjectSinkChain(obj, false);
+            IMessage result = serverSink.SyncProcessMessage(msg);
+            if (obj is IDisposable)
+                ((IDisposable)obj).Dispose();
             return result;
         }
 
-        public override IMessageCtrl AsyncObjectProcessMessage (IMessage msg, IMessageSink replySink)
+        public override IMessageCtrl AsyncObjectProcessMessage(IMessage msg, IMessageSink replySink)
         {
-            MarshalByRefObject obj = (MarshalByRefObject)Activator.CreateInstance (_objectType, true);
-            IMessageSink serverSink = _context.CreateServerObjectSinkChain (obj, false);
-            if (obj is IDisposable) replySink = new DisposerReplySink(replySink, ((IDisposable)obj));
-            return serverSink.AsyncProcessMessage (msg, replySink);
-        }    
+            MarshalByRefObject obj = (MarshalByRefObject)
+                Activator.CreateInstance(_objectType, true);
+            IMessageSink serverSink = _context.CreateServerObjectSinkChain(obj, false);
+            if (obj is IDisposable)
+                replySink = new DisposerReplySink(replySink, ((IDisposable)obj));
+            return serverSink.AsyncProcessMessage(msg, replySink);
+        }
     }
 
     internal class DisposerReplySink : IMessageSink
@@ -269,19 +292,19 @@ namespace System.Runtime.Remoting
         IMessageSink _next;
         IDisposable _disposable;
 
-        public DisposerReplySink (IMessageSink next, IDisposable disposable)
+        public DisposerReplySink(IMessageSink next, IDisposable disposable)
         {
             _next = next;
             _disposable = disposable;
         }
 
-        public IMessage SyncProcessMessage (IMessage msg)
+        public IMessage SyncProcessMessage(IMessage msg)
         {
             _disposable.Dispose();
-            return _next.SyncProcessMessage (msg);
+            return _next.SyncProcessMessage(msg);
         }
 
-        public IMessageCtrl AsyncProcessMessage (IMessage msg, IMessageSink replySink)
+        public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
         {
             throw new NotSupportedException();
         }

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // <copyright file="FileSystemEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 
-namespace System.IO {
-
+namespace System.IO
+{
     using System.Diagnostics;
     using System;
 

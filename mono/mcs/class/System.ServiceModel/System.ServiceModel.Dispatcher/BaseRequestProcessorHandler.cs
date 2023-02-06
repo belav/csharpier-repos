@@ -4,16 +4,17 @@ using System.Text;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace System.ServiceModel.Dispatcher 
-{    
-    internal abstract class BaseRequestProcessorHandler 
+namespace System.ServiceModel.Dispatcher
+{
+    internal abstract class BaseRequestProcessorHandler
     {
-        BaseRequestProcessorHandler next;        
+        BaseRequestProcessorHandler next;
 
-        public virtual void ProcessRequestChain (MessageProcessingContext mrc)
+        public virtual void ProcessRequestChain(MessageProcessingContext mrc)
         {
-            if (!ProcessRequest (mrc) && next != null ) {                
-                next.ProcessRequestChain (mrc);
+            if (!ProcessRequest(mrc) && next != null)
+            {
+                next.ProcessRequestChain(mrc);
             }
         }
 
@@ -23,6 +24,6 @@ namespace System.ServiceModel.Dispatcher
             set { next = value; }
         }
 
-        protected abstract bool ProcessRequest (MessageProcessingContext mrc);
+        protected abstract bool ProcessRequest(MessageProcessingContext mrc);
     }
 }

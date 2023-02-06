@@ -30,44 +30,44 @@ namespace System.Security.Cryptography
 {
     public sealed class ECDsaOpenSsl : ECDsa
     {
-        public ECDsaOpenSsl ()
+        public ECDsaOpenSsl()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public ECDsaOpenSsl (int keySize)
+        public ECDsaOpenSsl(int keySize)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         public ECDsaOpenSsl(IntPtr handle)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public ECDsaOpenSsl (ECCurve curve)
+        public ECDsaOpenSsl(ECCurve curve)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public ECDsaOpenSsl (SafeEvpPKeyHandle pkeyHandle)
+        public ECDsaOpenSsl(SafeEvpPKeyHandle pkeyHandle)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override byte[] SignHash (byte[] hash)
+        public override byte[] SignHash(byte[] hash)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool VerifyHash (byte[] hash, byte[] signature)
+        public override bool VerifyHash(byte[] hash, byte[] signature)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public SafeEvpPKeyHandle DuplicateKeyHandle ()
+        public SafeEvpPKeyHandle DuplicateKeyHandle()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

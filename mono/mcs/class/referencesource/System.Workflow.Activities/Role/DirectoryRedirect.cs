@@ -17,9 +17,7 @@ namespace System.Workflow.Activities
         private bool m_recursive;
 
         public DirectoryRedirect(String getPropertyName, String searchPropertyName)
-            : this(getPropertyName, searchPropertyName, false)
-        {
-        }
+            : this(getPropertyName, searchPropertyName, false) { }
 
         public DirectoryRedirect(String getPropertyName, String searchPropertyName, bool recursive)
         {
@@ -33,7 +31,11 @@ namespace System.Workflow.Activities
             this.m_recursive = recursive;
         }
 
-        public void GetResult(DirectoryEntry rootEntry, DirectoryEntry currentEntry, List<DirectoryEntry> response)
+        public void GetResult(
+            DirectoryEntry rootEntry,
+            DirectoryEntry currentEntry,
+            List<DirectoryEntry> response
+        )
         {
             if (rootEntry == null)
                 throw new ArgumentNullException("rootEntry");
@@ -77,7 +79,10 @@ namespace System.Workflow.Activities
             }
         }
 
-        private DirectorySearcher CreateSearcher(DirectoryEntry rootEntry, DirectoryEntry currentEntry)
+        private DirectorySearcher CreateSearcher(
+            DirectoryEntry rootEntry,
+            DirectoryEntry currentEntry
+        )
         {
             DirectorySearcher searcher = new DirectorySearcher(rootEntry);
 

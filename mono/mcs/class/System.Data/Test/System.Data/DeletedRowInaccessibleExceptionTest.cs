@@ -35,50 +35,61 @@ using MonoTests.System.Data.Utils;
 
 namespace MonoTests.System.Data
 {
-    [TestFixture] public class DeletedRowInaccessibleExceptionTest
+    [TestFixture]
+    public class DeletedRowInaccessibleExceptionTest
     {
-        [Test] public void Generate()
+        [Test]
+        public void Generate()
         {
             DataTable dtParent;
-            dtParent= DataProvider.CreateParentDataTable(); 
+            dtParent = DataProvider.CreateParentDataTable();
 
             DataRow dr = dtParent.Rows[0];
             dr.Delete();
 
             // DeletedRowInaccessible Exception (BeginEdit)
-            try 
+            try
             {
                 dr.BeginEdit();
                 Assert.Fail("DRIE1: BeginEdit failed to raise DeletedRowInaccessibleException.");
             }
-            catch (DeletedRowInaccessibleException) {}
-            catch (AssertionException) { throw; }
+            catch (DeletedRowInaccessibleException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("DRIE2: Indexer wrong exception type. Got: " + exc);
             }
 
             // DeletedRowInaccessible Exception (Item)
-            try 
+            try
             {
                 string s = dr[0].ToString();
                 Assert.Fail("DRIE3: Indexer failed to raise DeletedRowInaccessibleException.");
             }
-            catch (DeletedRowInaccessibleException) {}
-            catch (AssertionException) { throw; }
+            catch (DeletedRowInaccessibleException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("DRIE4: Indexer wrong exception type. Got: " + exc);
             }
 
             // DeletedRowInaccessible Exception (ItemArray)
-            try 
+            try
             {
                 object[] o = dr.ItemArray;
                 Assert.Fail("DRIE5: Indexer failed to raise DeletedRowInaccessibleException.");
             }
-            catch (DeletedRowInaccessibleException) {}
-            catch (AssertionException) { throw; }
+            catch (DeletedRowInaccessibleException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("DRIE6: Indexer wrong exception type. Got: " + exc);

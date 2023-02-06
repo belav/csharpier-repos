@@ -2,18 +2,18 @@ using System.Threading.Tasks;
 
 class C
 {
-    public async Task SynchronousCall (int arg)
+    public async Task SynchronousCall(int arg)
     {
-        AnotherTask (arg);
+        AnotherTask(arg);
     }
-    
-    Task AnotherTask (int arg)
+
+    Task AnotherTask(int arg)
     {
-        return Task.FromResult (arg);
+        return Task.FromResult(arg);
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        new C ().SynchronousCall (1);
+        new C().SynchronousCall(1);
     }
 }

@@ -68,15 +68,15 @@ namespace Moq
     ///     Assert.False(order.IsFilled);
     ///   </code>
     /// </example>
-    public partial class Mock<T> : Mock, IMock<T> where T : class
+    public partial class Mock<T> : Mock, IMock<T>
+        where T : class
     {
         private static Type[] inheritedInterfaces;
         private static int serialNumberCounter;
 
         static Mock()
         {
-            inheritedInterfaces =
-                typeof(T)
+            inheritedInterfaces = typeof(T)
                 .GetInterfaces()
                 .Where(i => ProxyFactory.Instance.IsTypeVisible(i) && !i.IsImport)
                 .ToArray();
@@ -105,11 +105,11 @@ namespace Moq
         /// </summary>
         internal Mock(bool skipInitialize)
         {
-            // HACK: this is quick hackish. 
-            // In order to avoid having an IMock<T> I relevant members 
+            // HACK: this is quick hackish.
+            // In order to avoid having an IMock<T> I relevant members
             // virtual so that As<TInterface> overrides them (i.e. Interceptor).
-            // The skipInitialize parameter is not used at all, and it's 
-            // just to differentiate this ctor that should do nothing 
+            // The skipInitialize parameter is not used at all, and it's
+            // just to differentiate this ctor that should do nothing
             // from the regular ones which initializes the proxy, etc.
         }
 
@@ -122,9 +122,7 @@ namespace Moq
         ///   </code>
         /// </example>
         public Mock()
-            : this(MockBehavior.Default)
-        {
-        }
+            : this(MockBehavior.Default) { }
 
         /// <summary>
         ///   Initializes an instance of the mock with <see cref="MockBehavior.Default"/> behavior
@@ -141,9 +139,7 @@ namespace Moq
         ///   </code>
         /// </example>
         public Mock(params object[] args)
-            : this(MockBehavior.Default, args)
-        {
-        }
+            : this(MockBehavior.Default, args) { }
 
         /// <summary>
         ///   Initializes an instance of the mock with the specified <see cref="MockBehavior"/> behavior.
@@ -155,9 +151,7 @@ namespace Moq
         ///   </code>
         /// </example>
         public Mock(MockBehavior behavior)
-            : this(behavior, new object[0])
-        {
-        }
+            : this(behavior, new object[0]) { }
 
         /// <summary>
         ///   Initializes an instance of the mock with a specific <see cref="MockBehavior"/> behavior
@@ -202,16 +196,21 @@ namespace Moq
         /// <code>var mock = new Mock&lt;MyProvider&gt;(() => new MyProvider(someArgument, 25), MockBehavior.Loose);</code>
         /// </example>
         public Mock(Expression<Func<T>> newExpression, MockBehavior behavior = MockBehavior.Default)
-            : this(behavior, Expressions.Visitors.ConstructorCallVisitor.ExtractArgumentValues(newExpression))
-        {
-        }
+            : this(
+                behavior,
+                Expressions.Visitors.ConstructorCallVisitor.ExtractArgumentValues(newExpression)
+            ) { }
 
         private static string CreateUniqueDefaultMockName()
         {
             var serialNumber = Interlocked.Increment(ref serialNumberCounter);
 
             var name = new StringBuilder();
-            name.Append("Mock<").AppendNameOf(typeof(T)).Append(':').Append(serialNumber).Append('>');
+            name.Append("Mock<")
+                .AppendNameOf(typeof(T))
+                .Append(':')
+                .Append(serialNumber)
+                .Append('>');
             return name.ToString();
         }
 
@@ -245,7 +244,9 @@ namespace Moq
             {
                 if (value && this.MockedType.IsDelegateType())
                 {
-                    throw new NotSupportedException(Resources.CallBaseCannotBeUsedWithDelegateMocks);
+                    throw new NotSupportedException(
+                        Resources.CallBaseCannotBeUsedWithDelegateMocks
+                    );
                 }
 
                 this.callBase = value;
@@ -254,7 +255,8 @@ namespace Moq
 
         internal override object[] ConstructorArguments => this.constructorArguments;
 
-        internal override Dictionary<Type, object> ConfiguredDefaultValues => this.configuredDefaultValues;
+        internal override Dictionary<Type, object> ConfiguredDefaultValues =>
+            this.configuredDefaultValues;
 
         /// <summary>
         /// Gets or sets the <see cref="DefaultValueProvider"/> instance that will be used
@@ -263,7 +265,8 @@ namespace Moq
         public override DefaultValueProvider DefaultValueProvider
         {
             get => this.defaultValueProvider;
-            set => this.defaultValueProvider = value ?? throw new ArgumentNullException(nameof(value));
+            set =>
+                this.defaultValueProvider = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         internal override EventHandlerCollection EventHandlers => this.eventHandlers;
@@ -307,11 +310,13 @@ namespace Moq
             interfaces[0] = typeof(IMocked<T>);
             this.AdditionalInterfaces.CopyTo(0, interfaces, 1, additionalInterfaceCount);
 
-            this.instance = (T)ProxyFactory.Instance.CreateProxy(
-                typeof(T),
-                this,
-                interfaces,
-                this.constructorArguments);
+            this.instance = (T)
+                ProxyFactory.Instance.CreateProxy(
+                    typeof(T),
+                    this,
+                    interfaces,
+                    this.constructorArguments
+                );
         }
 
         /// <summary>
@@ -469,7 +474,9 @@ namespace Moq
         ///         .Returns(true);
         ///   </code>
         /// </example>
-        public ISetupGetter<T, TProperty> SetupGet<TProperty>(Expression<Func<T, TProperty>> expression)
+        public ISetupGetter<T, TProperty> SetupGet<TProperty>(
+            Expression<Func<T, TProperty>> expression
+        )
         {
             var setup = Mock.SetupGet(this, expression, null);
             return new NonVoidSetupPhrase<T, TProperty>(setup);
@@ -495,7 +502,10 @@ namespace Moq
         public ISetupSetter<T, TProperty> SetupSet<TProperty>(Action<T> setterExpression)
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
 
             var setup = Mock.SetupSet(this, expression, condition: null);
             return new SetterSetupPhrase<T, TProperty>(setup);
@@ -517,7 +527,10 @@ namespace Moq
         public ISetup<T> SetupSet(Action<T> setterExpression)
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
 
             var setup = Mock.SetupSet(this, expression, condition: null);
             return new VoidSetupPhrase<T>(setup);
@@ -540,7 +553,10 @@ namespace Moq
         {
             Guard.NotNull(addExpression, nameof(addExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
 
             var setup = Mock.SetupAdd(this, expression, condition: null);
             return new VoidSetupPhrase<T>(setup);
@@ -563,7 +579,10 @@ namespace Moq
         {
             Guard.NotNull(removeExpression, nameof(removeExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
 
             var setup = Mock.SetupRemove(this, expression, condition: null);
             return new VoidSetupPhrase<T>(setup);
@@ -627,7 +646,10 @@ namespace Moq
         ///     Assert.Equal(6, v.Value);
         ///   </code>
         /// </example>
-        public Mock<T> SetupProperty<TProperty>(Expression<Func<T, TProperty>> property, TProperty initialValue)
+        public Mock<T> SetupProperty<TProperty>(
+            Expression<Func<T, TProperty>> property,
+            TProperty initialValue
+        )
         {
             Mock.SetupProperty(this, property, initialValue);
             return this;
@@ -653,7 +675,9 @@ namespace Moq
         /// <summary>
         /// Return a sequence of values, once per call.
         /// </summary>
-        public ISetupSequentialResult<TResult> SetupSequence<TResult>(Expression<Func<T, TResult>> expression)
+        public ISetupSequentialResult<TResult> SetupSequence<TResult>(
+            Expression<Func<T, TResult>> expression
+        )
         {
             var setup = Mock.SetupSequence(this, expression);
             return new SetupSequencePhrase<TResult>(setup);
@@ -878,7 +902,11 @@ namespace Moq
         /// <exception cref="MockException">
         ///   The invocation was not called the number times specified by <paramref name="times"/>.
         /// </exception>
-        public void Verify<TResult>(Expression<Func<T, TResult>> expression, Times times, string failMessage)
+        public void Verify<TResult>(
+            Expression<Func<T, TResult>> expression,
+            Times times,
+            string failMessage
+        )
         {
             Mock.Verify(this, expression, times, failMessage);
         }
@@ -935,7 +963,10 @@ namespace Moq
         /// <exception cref="MockException">
         ///   The invocation was not called the number times specified by <paramref name="times"/>.
         /// </exception>
-        public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression, Func<Times> times)
+        public void VerifyGet<TProperty>(
+            Expression<Func<T, TProperty>> expression,
+            Func<Times> times
+        )
         {
             VerifyGet(this, expression, times(), null);
         }
@@ -949,7 +980,10 @@ namespace Moq
         ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's return type.
         /// </typeparam>
         /// <exception cref="MockException">The invocation was not performed on the mock.</exception>
-        public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression, string failMessage)
+        public void VerifyGet<TProperty>(
+            Expression<Func<T, TProperty>> expression,
+            string failMessage
+        )
         {
             Mock.VerifyGet(this, expression, Times.AtLeastOnce(), failMessage);
         }
@@ -966,7 +1000,11 @@ namespace Moq
         /// <exception cref="MockException">
         ///   The invocation was not called the number times specified by <paramref name="times"/>.
         /// </exception>
-        public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression, Times times, string failMessage)
+        public void VerifyGet<TProperty>(
+            Expression<Func<T, TProperty>> expression,
+            Times times,
+            string failMessage
+        )
         {
             Mock.VerifyGet(this, expression, times, failMessage);
         }
@@ -983,7 +1021,11 @@ namespace Moq
         /// <exception cref="MockException">
         ///   The invocation was not called the number times specified by <paramref name="times"/>.
         /// </exception>
-        public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression, Func<Times> times, string failMessage)
+        public void VerifyGet<TProperty>(
+            Expression<Func<T, TProperty>> expression,
+            Func<Times> times,
+            string failMessage
+        )
         {
             VerifyGet(this, expression, times(), failMessage);
         }
@@ -1009,7 +1051,10 @@ namespace Moq
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifySet(this, expression, Times.AtLeastOnce(), null);
         }
 
@@ -1025,7 +1070,10 @@ namespace Moq
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifySet(this, expression, times, null);
         }
 
@@ -1041,7 +1089,10 @@ namespace Moq
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifySet(this, expression, times(), null);
         }
 
@@ -1068,7 +1119,10 @@ namespace Moq
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifySet(this, expression, Times.AtLeastOnce(), failMessage);
         }
 
@@ -1085,7 +1139,10 @@ namespace Moq
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifySet(this, expression, times, failMessage);
         }
 
@@ -1102,8 +1159,11 @@ namespace Moq
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
-            Mock.VerifySet(this, expression , times(), failMessage);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifySet(this, expression, times(), failMessage);
         }
 
         /// <summary>
@@ -1127,7 +1187,10 @@ namespace Moq
         {
             Guard.NotNull(addExpression, nameof(addExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyAdd(this, expression, Times.AtLeastOnce(), null);
         }
 
@@ -1143,7 +1206,10 @@ namespace Moq
         {
             Guard.NotNull(addExpression, nameof(addExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyAdd(this, expression, times, null);
         }
 
@@ -1159,7 +1225,10 @@ namespace Moq
         {
             Guard.NotNull(addExpression, nameof(addExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyAdd(this, expression, times(), null);
         }
 
@@ -1173,7 +1242,10 @@ namespace Moq
         {
             Guard.NotNull(addExpression, nameof(addExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyAdd(this, expression, Times.AtLeastOnce(), failMessage);
         }
 
@@ -1190,7 +1262,10 @@ namespace Moq
         {
             Guard.NotNull(addExpression, nameof(addExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyAdd(this, expression, times, failMessage);
         }
 
@@ -1207,7 +1282,10 @@ namespace Moq
         {
             Guard.NotNull(addExpression, nameof(addExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyAdd(this, expression, times(), failMessage);
         }
 
@@ -1232,7 +1310,10 @@ namespace Moq
         {
             Guard.NotNull(removeExpression, nameof(removeExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyRemove(this, expression, Times.AtLeastOnce(), null);
         }
 
@@ -1248,7 +1329,10 @@ namespace Moq
         {
             Guard.NotNull(removeExpression, nameof(removeExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyRemove(this, expression, times, null);
         }
 
@@ -1264,7 +1348,10 @@ namespace Moq
         {
             Guard.NotNull(removeExpression, nameof(removeExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyRemove(this, expression, times(), null);
         }
 
@@ -1278,7 +1365,10 @@ namespace Moq
         {
             Guard.NotNull(removeExpression, nameof(removeExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyRemove(this, expression, Times.AtLeastOnce(), failMessage);
         }
 
@@ -1295,7 +1385,10 @@ namespace Moq
         {
             Guard.NotNull(removeExpression, nameof(removeExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyRemove(this, expression, times, failMessage);
         }
 
@@ -1312,7 +1405,10 @@ namespace Moq
         {
             Guard.NotNull(removeExpression, nameof(removeExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
             Mock.VerifyRemove(this, expression, times(), failMessage);
         }
 

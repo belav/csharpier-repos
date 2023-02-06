@@ -8,13 +8,19 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
-[Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
-internal sealed class AzureADB2COpenIdConnectOptionsConfiguration : IConfigureNamedOptions<OpenIdConnectOptions>
+[Obsolete(
+    "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+)]
+internal sealed class AzureADB2COpenIdConnectOptionsConfiguration
+    : IConfigureNamedOptions<OpenIdConnectOptions>
 {
     private readonly IOptions<AzureADB2CSchemeOptions> _schemeOptions;
     private readonly IOptionsMonitor<AzureADB2COptions> _azureADB2COptions;
 
-    public AzureADB2COpenIdConnectOptionsConfiguration(IOptions<AzureADB2CSchemeOptions> schemeOptions, IOptionsMonitor<AzureADB2COptions> azureADB2COptions)
+    public AzureADB2COpenIdConnectOptionsConfiguration(
+        IOptions<AzureADB2CSchemeOptions> schemeOptions,
+        IOptionsMonitor<AzureADB2COptions> azureADB2COptions
+    )
     {
         _schemeOptions = schemeOptions;
         _azureADB2COptions = azureADB2COptions;
@@ -33,12 +39,19 @@ internal sealed class AzureADB2COpenIdConnectOptionsConfiguration : IConfigureNa
         options.ClientSecret = azureADB2COptions.ClientSecret;
         options.Authority = BuildAuthority(azureADB2COptions);
         options.CallbackPath = azureADB2COptions.CallbackPath ?? options.CallbackPath;
-        options.SignedOutCallbackPath = azureADB2COptions.SignedOutCallbackPath ?? options.SignedOutCallbackPath;
+        options.SignedOutCallbackPath =
+            azureADB2COptions.SignedOutCallbackPath ?? options.SignedOutCallbackPath;
         options.SignInScheme = azureADB2COptions.CookieSchemeName;
         options.UseTokenLifetime = true;
-        options.TokenValidationParameters = new TokenValidationParameters { NameClaimType = "name" };
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            NameClaimType = "name"
+        };
 
-        var handlers = new AzureADB2COpenIDConnectEventHandlers(azureADB2CScheme, azureADB2COptions);
+        var handlers = new AzureADB2COpenIDConnectEventHandlers(
+            azureADB2CScheme,
+            azureADB2COptions
+        );
         options.Events = new OpenIdConnectEvents
         {
             OnRedirectToIdentityProvider = handlers.OnRedirectToIdentityProvider,
@@ -69,7 +82,5 @@ internal sealed class AzureADB2COpenIdConnectOptionsConfiguration : IConfigureNa
         return null;
     }
 
-    public void Configure(OpenIdConnectOptions options)
-    {
-    }
+    public void Configure(OpenIdConnectOptions options) { }
 }

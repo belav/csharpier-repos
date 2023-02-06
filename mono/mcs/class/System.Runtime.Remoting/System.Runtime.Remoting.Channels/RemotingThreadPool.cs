@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,129 +42,153 @@ namespace System.Runtime.Remoting.Channels
 
         int freeThreads;
         int poolUsers;
-        Queue workItems = new Queue ();
-        AutoResetEvent threadDone = new AutoResetEvent (false);
-        ArrayList runningThreads = new ArrayList ();
-         
+        Queue workItems = new Queue();
+        AutoResetEvent threadDone = new AutoResetEvent(false);
+        ArrayList runningThreads = new ArrayList();
+
         bool stopped = false;
-        
-        static object globalLock = new object ();
+
+        static object globalLock = new object();
         static RemotingThreadPool sharedPool;
-        
-        public static RemotingThreadPool GetSharedPool ()
+
+        public static RemotingThreadPool GetSharedPool()
         {
-            lock (globalLock) {
+            lock (globalLock)
+            {
                 if (sharedPool == null)
-                    sharedPool = new RemotingThreadPool ();
+                    sharedPool = new RemotingThreadPool();
                 sharedPool.poolUsers++;
             }
             return sharedPool;
         }
-        
-        public void Free ()
+
+        public void Free()
         {
-            lock (globalLock) {
+            lock (globalLock)
+            {
                 if (--poolUsers > 0)
                     return;
-                
-                lock (workItems) {
+
+                lock (workItems)
+                {
                     stopped = true;
-                    threadDone.Set ();
-                    workItems.Clear ();
+                    threadDone.Set();
+                    workItems.Clear();
                     foreach (Thread t in runningThreads)
-                        t.Abort ();
-                    runningThreads.Clear ();
+                        t.Abort();
+                    runningThreads.Clear();
                 }
                 if (this == sharedPool)
                     sharedPool = null;
             }
         }
-        
-        public bool RunThread (ThreadStart threadStart)
+
+        public bool RunThread(ThreadStart threadStart)
         {
-            lock (workItems) {
+            lock (workItems)
+            {
                 if (stopped)
-                    throw new RemotingException ("Server channel stopped.");
-                    
-                if (freeThreads > 0) {
+                    throw new RemotingException("Server channel stopped.");
+
+                if (freeThreads > 0)
+                {
                     freeThreads--;
-                    workItems.Enqueue (threadStart);
-                    Monitor.Pulse (workItems);
+                    workItems.Enqueue(threadStart);
+                    Monitor.Pulse(workItems);
                     return true;
-                } else if (runningThreads.Count < MinThreads) {
-                    workItems.Enqueue (threadStart);
-                    StartPoolThread ();
+                }
+                else if (runningThreads.Count < MinThreads)
+                {
+                    workItems.Enqueue(threadStart);
+                    StartPoolThread();
                     return true;
                 }
             }
-            
+
             // Try again some ms later, and if there are still no free threads,
             // then create a new one
 
-            threadDone.WaitOne (PoolGrowDelay, false);
-            
-            lock (workItems) {
+            threadDone.WaitOne(PoolGrowDelay, false);
+
+            lock (workItems)
+            {
                 if (stopped)
-                    throw new RemotingException ("Server channel stopped.");
-                
-                if (freeThreads > 0) {
+                    throw new RemotingException("Server channel stopped.");
+
+                if (freeThreads > 0)
+                {
                     freeThreads--;
-                    workItems.Enqueue (threadStart);
-                    Monitor.Pulse (workItems);
-                } else {
+                    workItems.Enqueue(threadStart);
+                    Monitor.Pulse(workItems);
+                }
+                else
+                {
                     if (runningThreads.Count >= ThreadLimit)
                         return false;
-                    workItems.Enqueue (threadStart);
-                    StartPoolThread ();
+                    workItems.Enqueue(threadStart);
+                    StartPoolThread();
                 }
             }
             return true;
         }
-        
-        void StartPoolThread ()
+
+        void StartPoolThread()
         {
-            Thread thread = new Thread (new ThreadStart (PoolThread));
-            runningThreads.Add (thread);
+            Thread thread = new Thread(new ThreadStart(PoolThread));
+            runningThreads.Add(thread);
             thread.IsBackground = true;
-            thread.Start ();
+            thread.Start();
         }
-        
-        void PoolThread ()
+
+        void PoolThread()
         {
-            while (true) {
+            while (true)
+            {
                 ThreadStart work = null;
-                do {
-                    lock (workItems) {
+                do
+                {
+                    lock (workItems)
+                    {
                         if (workItems.Count > 0)
-                            work = (ThreadStart) workItems.Dequeue ();
-                        else {
-                            freeThreads ++;
-                            threadDone.Set ();
-                            if (!Monitor.Wait (workItems, ThreadWaitTime)) {
+                            work = (ThreadStart)workItems.Dequeue();
+                        else
+                        {
+                            freeThreads++;
+                            threadDone.Set();
+                            if (!Monitor.Wait(workItems, ThreadWaitTime))
+                            {
                                 // Maybe it timed out when the work was being queued.
-                                if (workItems.Count > 0) {
-                                    work = (ThreadStart) workItems.Dequeue ();
-                                } else {
-                                    freeThreads --;
-                                    if (freeThreads == 0) threadDone.Reset ();
-                                    runningThreads.Remove (Thread.CurrentThread);
+                                if (workItems.Count > 0)
+                                {
+                                    work = (ThreadStart)workItems.Dequeue();
+                                }
+                                else
+                                {
+                                    freeThreads--;
+                                    if (freeThreads == 0)
+                                        threadDone.Reset();
+                                    runningThreads.Remove(Thread.CurrentThread);
                                     return;
                                 }
                             }
                         }
                     }
                 } while (work == null);
-                try {
-                    work ();
+                try
+                {
+                    work();
                 }
                 catch (Exception ex)
                 {
 #if DEBUG
-                    Console.WriteLine("The exception was caught during RemotingThreadPool.PoolThread - work: {0}, {1}", ex.GetType(), ex.Message);
+                    Console.WriteLine(
+                        "The exception was caught during RemotingThreadPool.PoolThread - work: {0}, {1}",
+                        ex.GetType(),
+                        ex.Message
+                    );
 #endif
                 }
             }
         }
     }
 }
-

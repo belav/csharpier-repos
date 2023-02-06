@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,105 +37,120 @@ namespace System.IdentityModel.Tokens
     public class SamlAttribute
     {
         bool is_readonly;
-        string name, ns;
+        string name,
+            ns;
         List<string> attribute_values;
 
-        public SamlAttribute ()
+        public SamlAttribute()
         {
-            attribute_values = new List<string> ();
+            attribute_values = new List<string>();
         }
 
-        public SamlAttribute (Claim claim)
+        public SamlAttribute(Claim claim)
         {
             if (claim == null)
-                throw new ArgumentNullException ("claim");
+                throw new ArgumentNullException("claim");
             if (claim.ClaimType == null)
-                throw new ArgumentException ("Claim type is null.");
-            int idx = claim.ClaimType.LastIndexOf ('/');
+                throw new ArgumentException("Claim type is null.");
+            int idx = claim.ClaimType.LastIndexOf('/');
             if (idx <= 0 || idx == claim.ClaimType.Length - 1)
-                throw new ArgumentException ("Claim type does not contain '/' or it is at improper position.");
-            name = claim.ClaimType.Substring (idx + 1);
-            ns = claim.ClaimType.Substring (0, idx);
+                throw new ArgumentException(
+                    "Claim type does not contain '/' or it is at improper position."
+                );
+            name = claim.ClaimType.Substring(idx + 1);
+            ns = claim.ClaimType.Substring(0, idx);
 
             if (claim.Resource != null && !(claim.Resource is string))
-                throw new ArgumentException ("Claim resource is not a string.");
+                throw new ArgumentException("Claim resource is not a string.");
 
-            attribute_values = new List<string> ();
-            attribute_values.Add ((string) claim.Resource);
+            attribute_values = new List<string>();
+            attribute_values.Add((string)claim.Resource);
 
             if (claim.Right != Rights.PossessProperty)
-                throw new ArgumentException ("Claim right is not PossessProperty");
+                throw new ArgumentException("Claim right is not PossessProperty");
         }
 
-        public SamlAttribute (string attributeNamespace,
+        public SamlAttribute(
+            string attributeNamespace,
             string attributeName,
-            IEnumerable<string> attributeValues)
+            IEnumerable<string> attributeValues
+        )
         {
             ns = attributeNamespace;
             name = attributeName;
-            attribute_values = new List<string> (attributeValues);
+            attribute_values = new List<string>(attributeValues);
         }
 
-        public IList<string> AttributeValues {
+        public IList<string> AttributeValues
+        {
             get { return attribute_values; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 name = value;
             }
         }
 
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 ns = value;
             }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return is_readonly; }
         }
 
-        private void CheckReadOnly ()
+        private void CheckReadOnly()
         {
             if (is_readonly)
-                throw new InvalidOperationException ("This SAML assertion is read-only.");
+                throw new InvalidOperationException("This SAML assertion is read-only.");
         }
 
-        public void MakeReadOnly ()
+        public void MakeReadOnly()
         {
             is_readonly = true;
         }
 
         [MonoTODO]
-        public virtual void ReadXml (XmlDictionaryReader reader,
+        public virtual void ReadXml(
+            XmlDictionaryReader reader,
             SamlSerializer samlSerializer,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public virtual void WriteXml (XmlDictionaryWriter writer,
+        public virtual void WriteXml(
+            XmlDictionaryWriter writer,
             SamlSerializer samlSerializer,
-            SecurityTokenSerializer keyInfoSerializer)
+            SecurityTokenSerializer keyInfoSerializer
+        )
         {
-            writer.WriteStartElement ("saml", "Attribute", SamlConstants.Namespace);
-            writer.WriteAttributeString ("AttributeName", Name);
-            writer.WriteAttributeString ("AttributeNamespace", Namespace);
+            writer.WriteStartElement("saml", "Attribute", SamlConstants.Namespace);
+            writer.WriteAttributeString("AttributeName", Name);
+            writer.WriteAttributeString("AttributeNamespace", Namespace);
             foreach (string s in AttributeValues)
-                writer.WriteElementString ("saml", "AttributeValue", SamlConstants.Namespace, s);
-            writer.WriteEndElement ();
+                writer.WriteElementString("saml", "AttributeValue", SamlConstants.Namespace, s);
+            writer.WriteEndElement();
         }
 
         [MonoTODO]
-        public virtual ReadOnlyCollection<Claim> ExtractClaims ()
+        public virtual ReadOnlyCollection<Claim> ExtractClaims()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

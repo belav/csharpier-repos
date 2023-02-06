@@ -13,7 +13,7 @@ class Foo : IFoo
     {
         Console.WriteLine("Bar");
     }
-    
+
     public IList<T> Bar<T>()
     {
         Console.WriteLine("Bar<T>");
@@ -30,5 +30,3 @@ class BugReport
         f.Bar<int>();
     }
 }
-
-

@@ -17,13 +17,13 @@ using System.Security;
 using System.Security.Permissions;
 using System.Threading;
 
-namespace MonoCasTests.System.Net {
-
+namespace MonoCasTests.System.Net
+{
     [TestFixture]
-    [Category ("CAS")]
-    [Category ("NotWorking")] // compiler (CSC) issue (on Windows)
-    public class DnsCas {
-
+    [Category("CAS")]
+    [Category("NotWorking")] // compiler (CSC) issue (on Windows)
+    public class DnsCas
+    {
         private const string site = "www.example.com";
         private const int timeout = 30000;
 
@@ -32,465 +32,474 @@ namespace MonoCasTests.System.Net {
         private string hostname;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            reset = new ManualResetEvent (false);
-            hostname = Dns.GetHostName ();
-            var ip = Dns.Resolve (site).AddressList[0];
+            reset = new ManualResetEvent(false);
+            hostname = Dns.GetHostName();
+            var ip = Dns.Resolve(site).AddressList[0];
         }
 
         [TestFixtureTearDown]
-        public void FixtureTearDown ()
+        public void FixtureTearDown()
         {
-            reset.Close ();
+            reset.Close();
         }
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             if (!SecurityManager.SecurityEnabled)
-                Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
         }
 
         // test Demand by denying it's caller from the required permission
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_BeginGetHostName ()
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_BeginGetHostName()
         {
-            Dns.BeginGetHostByName (null, null, null);
+            Dns.BeginGetHostByName(null, null, null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Deny_EndGetHostByName ()
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Deny_EndGetHostByName()
         {
-            Dns.EndGetHostByName (null);
+            Dns.EndGetHostByName(null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_BeginResolve ()
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_BeginResolve()
         {
-            Dns.BeginResolve (null, null, null);
+            Dns.BeginResolve(null, null, null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Deny_EndResolve ()
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Deny_EndResolve()
         {
-            Dns.EndResolve (null);
+            Dns.EndResolve(null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_GetHostByAddress_IPAddress ()
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_GetHostByAddress_IPAddress()
         {
-            Dns.GetHostByAddress ((IPAddress)null);
+            Dns.GetHostByAddress((IPAddress)null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_GetHostByAddress_String ()
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_GetHostByAddress_String()
         {
-            Dns.GetHostByAddress ((string)null);
+            Dns.GetHostByAddress((string)null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_GetHostByName ()
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_GetHostByName()
         {
-            Dns.GetHostByName (site);
+            Dns.GetHostByName(site);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
         // so it's not a declarative attribute on the method as the
         // null check is done before throwing the SecurityException
-        public void Deny_GetHostByName_Null ()
+        public void Deny_GetHostByName_Null()
         {
-            Dns.GetHostByName (null);
+            Dns.GetHostByName(null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_GetHostByName_HostName ()
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_GetHostByName_HostName()
         {
-            // ... so my first guess is that you can only query 
+            // ... so my first guess is that you can only query
             // yourself without having unrestricted DnsPermission
-            Assert.IsNotNull (Dns.GetHostByName (hostname));
+            Assert.IsNotNull(Dns.GetHostByName(hostname));
             // but that's wrong :-(
         }
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_GetHostName ()
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_GetHostName()
         {
-            Dns.GetHostName ();
+            Dns.GetHostName();
         }
 
         [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_Resolve ()
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_Resolve()
         {
-            Dns.Resolve (null);
+            Dns.Resolve(null);
         }
 
         // TODO: New 2.0 methods aren't yet implemented in Mono
-/*
-        [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_BeginGetHostAddresses ()
-        {
-            Dns.BeginGetHostAddresses (null, null, null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Deny_EndGetHostAddresses ()
-        {
-            Dns.EndGetHostAddresses (null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_BeginGetHostEntry_IPAddress ()
-        {
-            Dns.BeginGetHostEntry ((IPAddress)null, null, null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_BeginGetHostEntry_String ()
-        {
-            Dns.BeginGetHostEntry ((string)null, null, null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Deny_EndGetHostEntry ()
-        {
-            Dns.EndGetHostEntry (null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_GetHostEntry_IPAddress ()
-        {
-            Dns.GetHostEntry ((IPAddress)null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_GetHostEntry_String ()
-        {
-            Dns.GetHostEntry ((string)null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (SecurityException))]
-        public void Deny_GetHostAddresses ()
-        {
-            Dns.GetHostAddresses (null);
-        }
-*/
+        /*
+                [Test]
+                [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
+                [ExpectedException (typeof (SecurityException))]
+                public void Deny_BeginGetHostAddresses ()
+                {
+                    Dns.BeginGetHostAddresses (null, null, null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
+                [ExpectedException (typeof (ArgumentNullException))]
+                public void Deny_EndGetHostAddresses ()
+                {
+                    Dns.EndGetHostAddresses (null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
+                [ExpectedException (typeof (SecurityException))]
+                public void Deny_BeginGetHostEntry_IPAddress ()
+                {
+                    Dns.BeginGetHostEntry ((IPAddress)null, null, null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
+                [ExpectedException (typeof (SecurityException))]
+                public void Deny_BeginGetHostEntry_String ()
+                {
+                    Dns.BeginGetHostEntry ((string)null, null, null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
+                [ExpectedException (typeof (ArgumentNullException))]
+                public void Deny_EndGetHostEntry ()
+                {
+                    Dns.EndGetHostEntry (null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
+                [ExpectedException (typeof (SecurityException))]
+                public void Deny_GetHostEntry_IPAddress ()
+                {
+                    Dns.GetHostEntry ((IPAddress)null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
+                [ExpectedException (typeof (SecurityException))]
+                public void Deny_GetHostEntry_String ()
+                {
+                    Dns.GetHostEntry ((string)null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
+                [ExpectedException (typeof (SecurityException))]
+                public void Deny_GetHostAddresses ()
+                {
+                    Dns.GetHostAddresses (null);
+                }
+        */
 
         // ensure that only DnsPermission is required to call the methods
 
         [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_BeginGetHostName ()
+        [DnsPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PermitOnly_BeginGetHostName()
         {
-            Dns.BeginGetHostByName (null, null, null);
+            Dns.BeginGetHostByName(null, null, null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_BeginResolve ()
+        [DnsPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PermitOnly_BeginResolve()
         {
-            Dns.BeginResolve (null, null, null);
+            Dns.BeginResolve(null, null, null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_GetHostByAddress_IPAddress ()
+        [DnsPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PermitOnly_GetHostByAddress_IPAddress()
         {
-            Dns.GetHostByAddress ((IPAddress)null);
+            Dns.GetHostByAddress((IPAddress)null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_GetHostByAddress_String ()
+        [DnsPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PermitOnly_GetHostByAddress_String()
         {
-            Dns.GetHostByAddress ((string)null);
+            Dns.GetHostByAddress((string)null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_GetHostByName ()
+        [DnsPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PermitOnly_GetHostByName()
         {
-            Dns.GetHostByName (null);
+            Dns.GetHostByName(null);
         }
 
         [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        public void PermitOnly_GetHostName ()
+        [DnsPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void PermitOnly_GetHostName()
         {
-            Assert.IsNotNull (Dns.GetHostName ());
+            Assert.IsNotNull(Dns.GetHostName());
         }
 
         [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_Resolve ()
+        [DnsPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PermitOnly_Resolve()
         {
-            Dns.Resolve (null);
+            Dns.Resolve(null);
         }
 
         // TODO: New 2.0 methods aren't yet implemented in Mono
-/*
-        [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_BeginGetHostAddresses ()
-        {
-            Dns.BeginGetHostAddresses (null, null, null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_EndGetHostAddresses ()
-        {
-            Dns.EndGetHostAddresses (null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_BeginGetHostEntry_IPAddress ()
-        {
-            Dns.BeginGetHostEntry ((IPAddress)null, null, null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_BeginGetHostEntry_String ()
-        {
-            Dns.BeginGetHostEntry ((string)null, null, null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_EndGetHostEntry ()
-        {
-            Dns.EndGetHostEntry (null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_GetHostEntry_IPAddress ()
-        {
-            Dns.GetHostEntry ((IPAddress)null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_GetHostEntry_String ()
-        {
-            Dns.GetHostEntry ((string)null);
-        }
-
-        [Test]
-        [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void PermitOnly_GetHostAddresses ()
-        {
-            Dns.GetHostAddresses (null);
-        }
-*/
+        /*
+                [Test]
+                [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+                [ExpectedException (typeof (ArgumentNullException))]
+                public void PermitOnly_BeginGetHostAddresses ()
+                {
+                    Dns.BeginGetHostAddresses (null, null, null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+                [ExpectedException (typeof (ArgumentNullException))]
+                public void PermitOnly_EndGetHostAddresses ()
+                {
+                    Dns.EndGetHostAddresses (null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+                [ExpectedException (typeof (ArgumentNullException))]
+                public void PermitOnly_BeginGetHostEntry_IPAddress ()
+                {
+                    Dns.BeginGetHostEntry ((IPAddress)null, null, null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+                [ExpectedException (typeof (ArgumentNullException))]
+                public void PermitOnly_BeginGetHostEntry_String ()
+                {
+                    Dns.BeginGetHostEntry ((string)null, null, null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+                [ExpectedException (typeof (ArgumentNullException))]
+                public void PermitOnly_EndGetHostEntry ()
+                {
+                    Dns.EndGetHostEntry (null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+                [ExpectedException (typeof (ArgumentNullException))]
+                public void PermitOnly_GetHostEntry_IPAddress ()
+                {
+                    Dns.GetHostEntry ((IPAddress)null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+                [ExpectedException (typeof (ArgumentNullException))]
+                public void PermitOnly_GetHostEntry_String ()
+                {
+                    Dns.GetHostEntry ((string)null);
+                }
+        
+                [Test]
+                [DnsPermission (SecurityAction.PermitOnly, Unrestricted = true)]
+                [ExpectedException (typeof (ArgumentNullException))]
+                public void PermitOnly_GetHostAddresses ()
+                {
+                    Dns.GetHostAddresses (null);
+                }
+        */
 
         // async tests (for stack propagation)
 
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        private void GetHostByNameCallback (IAsyncResult ar)
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        private void GetHostByNameCallback(IAsyncResult ar)
         {
-            Dns.EndGetHostByName (ar);
-            try {
+            Dns.EndGetHostByName(ar);
+            try
+            {
                 // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("USERNAME"));
                 message = "Expected a SecurityException";
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 message = null;
-                reset.Set ();
+                reset.Set();
             }
             catch (Exception e)
             {
-                message = e.ToString ();
+                message = e.ToString();
             }
         }
 
         [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncGetHostByName ()
+        [EnvironmentPermission(SecurityAction.Deny, Read = "USERNAME")]
+        public void AsyncGetHostByName()
         {
             message = "AsyncGetHostByName";
-            reset.Reset ();
-            IAsyncResult r = Dns.BeginGetHostByName (site, new AsyncCallback (GetHostByNameCallback), null);
-            Assert.IsNotNull (r, "IAsyncResult");
+            reset.Reset();
+            IAsyncResult r = Dns.BeginGetHostByName(
+                site,
+                new AsyncCallback(GetHostByNameCallback),
+                null
+            );
+            Assert.IsNotNull(r, "IAsyncResult");
             // note for some reason r.AsyncWaitHandle.Wait won't work as expected
             // if (!r.AsyncWaitHandle.WaitOne (timeout, true))
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
+            if (!reset.WaitOne(timeout, true))
+                Assert.Ignore("Timeout");
+            Assert.IsNull(message, message);
         }
 
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        private void ResolveCallback (IAsyncResult ar)
+        [DnsPermission(SecurityAction.Deny, Unrestricted = true)]
+        private void ResolveCallback(IAsyncResult ar)
         {
-            Dns.EndResolve (ar);
-            try {
+            Dns.EndResolve(ar);
+            try
+            {
                 // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("USERNAME"));
                 message = "Expected a SecurityException";
             }
-            catch (SecurityException) {
+            catch (SecurityException)
+            {
                 message = null;
-                reset.Set ();
+                reset.Set();
             }
-            catch (Exception e) {
-                message = e.ToString ();
+            catch (Exception e)
+            {
+                message = e.ToString();
             }
         }
 
         [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncResolve ()
+        [EnvironmentPermission(SecurityAction.Deny, Read = "USERNAME")]
+        public void AsyncResolve()
         {
             message = "AsyncResolve";
-            reset.Reset ();
-            IAsyncResult r = Dns.BeginResolve (site, new AsyncCallback (ResolveCallback), null);
-            Assert.IsNotNull (r, "IAsyncResult");
+            reset.Reset();
+            IAsyncResult r = Dns.BeginResolve(site, new AsyncCallback(ResolveCallback), null);
+            Assert.IsNotNull(r, "IAsyncResult");
             // note for some reason r.AsyncWaitHandle.Wait won't work as expected
             // if (!r.AsyncWaitHandle.WaitOne (timeout, true))
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
+            if (!reset.WaitOne(timeout, true))
+                Assert.Ignore("Timeout");
+            Assert.IsNull(message, message);
         }
 
         // TODO: New 2.0 methods aren't yet implemented in Mono
-/*
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        private void GetHostEntryCallback (IAsyncResult ar)
-        {
-            Dns.EndGetHostEntry (ar);
-            try {
-                // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
-                message = "Expected a SecurityException";
-            }
-            catch (SecurityException) {
-                message = null;
-                reset.Set ();
-            }
-            catch (Exception e) {
-                message = e.ToString ();
-            }
-        }
-
-        [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        [Ignore ("fails when EndGetHostEntry is called")]
-        public void AsyncGetHostEntry_IPAddress ()
-        {
-            message = "AsyncGetHostEntry_IPAddress";
-            reset.Reset ();
-            IAsyncResult r = Dns.BeginGetHostEntry (ip, new AsyncCallback (GetHostEntryCallback), null);
-            Assert.IsNotNull (r, "IAsyncResult");
-            // note for some reason r.AsyncWaitHandle.Wait won't work as expected
-            // if (!r.AsyncWaitHandle.WaitOne (timeout, true))
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
-        }
-
-        [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncGetHostEntry_String ()
-        {
-            message = "AsyncGetHostEntry_String";
-            reset.Reset ();
-            IAsyncResult r = Dns.BeginGetHostEntry (site, new AsyncCallback (GetHostEntryCallback), null);
-            Assert.IsNotNull (r, "IAsyncResult");
-            // note for some reason r.AsyncWaitHandle.Wait won't work as expected
-            // if (!r.AsyncWaitHandle.WaitOne (timeout, true))
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
-        }
-
-        [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
-        private void GetHostAddressesCallback (IAsyncResult ar)
-        {
-            Dns.EndGetHostEntry (ar);
-            try {
-                // can we do something bad here ?
-                Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
-                message = "Expected a SecurityException";
-            }
-            catch (SecurityException) {
-                message = null;
-                reset.Set ();
-            }
-            catch (Exception e) {
-                message = e.ToString ();
-            }
-        }
-
-        [Test]
-        [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-        public void AsyncGetHostAddresses ()
-        {
-            message = "AsyncGetHostAddresses";
-            reset.Reset ();
-            IAsyncResult r = Dns.BeginGetHostAddresses (site, new AsyncCallback (GetHostAddressesCallback), null);
-            Assert.IsNotNull (r, "IAsyncResult");
-            // note for some reason r.AsyncWaitHandle.Wait won't work as expected
-            // if (!r.AsyncWaitHandle.WaitOne (timeout, true))
-            if (!reset.WaitOne (timeout, true))
-                Assert.Ignore ("Timeout");
-            Assert.IsNull (message, message);
-        }
-*/
+        /*
+                [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
+                private void GetHostEntryCallback (IAsyncResult ar)
+                {
+                    Dns.EndGetHostEntry (ar);
+                    try {
+                        // can we do something bad here ?
+                        Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+                        message = "Expected a SecurityException";
+                    }
+                    catch (SecurityException) {
+                        message = null;
+                        reset.Set ();
+                    }
+                    catch (Exception e) {
+                        message = e.ToString ();
+                    }
+                }
+        
+                [Test]
+                [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
+                [Ignore ("fails when EndGetHostEntry is called")]
+                public void AsyncGetHostEntry_IPAddress ()
+                {
+                    message = "AsyncGetHostEntry_IPAddress";
+                    reset.Reset ();
+                    IAsyncResult r = Dns.BeginGetHostEntry (ip, new AsyncCallback (GetHostEntryCallback), null);
+                    Assert.IsNotNull (r, "IAsyncResult");
+                    // note for some reason r.AsyncWaitHandle.Wait won't work as expected
+                    // if (!r.AsyncWaitHandle.WaitOne (timeout, true))
+                    if (!reset.WaitOne (timeout, true))
+                        Assert.Ignore ("Timeout");
+                    Assert.IsNull (message, message);
+                }
+        
+                [Test]
+                [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
+                public void AsyncGetHostEntry_String ()
+                {
+                    message = "AsyncGetHostEntry_String";
+                    reset.Reset ();
+                    IAsyncResult r = Dns.BeginGetHostEntry (site, new AsyncCallback (GetHostEntryCallback), null);
+                    Assert.IsNotNull (r, "IAsyncResult");
+                    // note for some reason r.AsyncWaitHandle.Wait won't work as expected
+                    // if (!r.AsyncWaitHandle.WaitOne (timeout, true))
+                    if (!reset.WaitOne (timeout, true))
+                        Assert.Ignore ("Timeout");
+                    Assert.IsNull (message, message);
+                }
+        
+                [DnsPermission (SecurityAction.Deny, Unrestricted = true)]
+                private void GetHostAddressesCallback (IAsyncResult ar)
+                {
+                    Dns.EndGetHostEntry (ar);
+                    try {
+                        // can we do something bad here ?
+                        Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
+                        message = "Expected a SecurityException";
+                    }
+                    catch (SecurityException) {
+                        message = null;
+                        reset.Set ();
+                    }
+                    catch (Exception e) {
+                        message = e.ToString ();
+                    }
+                }
+        
+                [Test]
+                [EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
+                public void AsyncGetHostAddresses ()
+                {
+                    message = "AsyncGetHostAddresses";
+                    reset.Reset ();
+                    IAsyncResult r = Dns.BeginGetHostAddresses (site, new AsyncCallback (GetHostAddressesCallback), null);
+                    Assert.IsNotNull (r, "IAsyncResult");
+                    // note for some reason r.AsyncWaitHandle.Wait won't work as expected
+                    // if (!r.AsyncWaitHandle.WaitOne (timeout, true))
+                    if (!reset.WaitOne (timeout, true))
+                        Assert.Ignore ("Timeout");
+                    Assert.IsNull (message, message);
+                }
+        */
     }
 }
 

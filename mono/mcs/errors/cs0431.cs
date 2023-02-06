@@ -3,13 +3,15 @@
 
 using foo = A;
 
-class A {
+class A
+{
     public class B { }
 }
 
-class X {
-    static void Main ()
+class X
+{
+    static void Main()
     {
-        foo::B b = new A.B ();
+        foo::B b = new A.B();
     }
 }

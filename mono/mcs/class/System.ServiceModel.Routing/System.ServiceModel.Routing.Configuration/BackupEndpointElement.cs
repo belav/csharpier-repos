@@ -12,10 +12,15 @@ namespace System.ServiceModel.Routing.Configuration
 {
     public class BackupEndpointElement : ConfigurationElement
     {
-        [ConfigurationProperty ("endpointName", DefaultValue = null, Options = ConfigurationPropertyOptions.IsRequired)]
-        public string EndpointName {
-            get { return (string) base ["endpointName"]; }
-            set { base ["endpointName"] = value; }
+        [ConfigurationProperty(
+            "endpointName",
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string EndpointName
+        {
+            get { return (string)base["endpointName"]; }
+            set { base["endpointName"] = value; }
         }
     }
 }

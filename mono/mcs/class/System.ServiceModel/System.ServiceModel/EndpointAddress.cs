@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,15 +45,21 @@ namespace System.ServiceModel
 {
     public class EndpointAddress
     {
-        static readonly Uri w3c_anonymous = new Uri (Constants.WsaAnonymousUri);
-        static readonly Uri anonymous_role = new Uri ("http://schemas.microsoft.com/2005/12/ServiceModel/Addressing/Anonymous");
-        static readonly Uri none_role = new Uri ("http://schemas.microsoft.com/2005/12/ServiceModel/Addressing/None");
+        static readonly Uri w3c_anonymous = new Uri(Constants.WsaAnonymousUri);
+        static readonly Uri anonymous_role = new Uri(
+            "http://schemas.microsoft.com/2005/12/ServiceModel/Addressing/Anonymous"
+        );
+        static readonly Uri none_role = new Uri(
+            "http://schemas.microsoft.com/2005/12/ServiceModel/Addressing/None"
+        );
 
-        public static Uri AnonymousUri {
+        public static Uri AnonymousUri
+        {
             get { return anonymous_role; }
         }
 
-        public static Uri NoneUri {
+        public static Uri NoneUri
+        {
             get { return none_role; }
         }
 
@@ -65,30 +71,34 @@ namespace System.ServiceModel
 
         static XmlSchema schema;
 
-        public EndpointAddress (string uri)
-            : this (new Uri (uri), new AddressHeader [0])
-        {
-        }
+        public EndpointAddress(string uri)
+            : this(new Uri(uri), new AddressHeader[0]) { }
 
-        public EndpointAddress (Uri uri, params AddressHeader [] addressHeaders)
-            : this (uri, null, new AddressHeaderCollection (addressHeaders), null, null) {}
+        public EndpointAddress(Uri uri, params AddressHeader[] addressHeaders)
+            : this(uri, null, new AddressHeaderCollection(addressHeaders), null, null) { }
 
-        public EndpointAddress (Uri uri, EndpointIdentity identity, params AddressHeader [] addressHeaders)
-            : this (uri, identity, new AddressHeaderCollection (addressHeaders), null, null) {}
+        public EndpointAddress(
+            Uri uri,
+            EndpointIdentity identity,
+            params AddressHeader[] addressHeaders
+        )
+            : this(uri, identity, new AddressHeaderCollection(addressHeaders), null, null) { }
 
-        public EndpointAddress (Uri uri, EndpointIdentity identity, AddressHeaderCollection headers)
-            : this (uri, identity, headers, null, null) {}
+        public EndpointAddress(Uri uri, EndpointIdentity identity, AddressHeaderCollection headers)
+            : this(uri, identity, headers, null, null) { }
 
-        public EndpointAddress (
-            Uri uri, EndpointIdentity identity,
+        public EndpointAddress(
+            Uri uri,
+            EndpointIdentity identity,
             AddressHeaderCollection headers,
             XmlDictionaryReader metadataReader,
-            XmlDictionaryReader extensionReader)
-        {    
+            XmlDictionaryReader extensionReader
+        )
+        {
             if (uri == null)
-                throw new ArgumentNullException ("uri");
+                throw new ArgumentNullException("uri");
             if (!uri.IsAbsoluteUri)
-                throw new ArgumentException ("The argument uri must be absolute");
+                throw new ArgumentException("The argument uri must be absolute");
             this.address = uri;
             this.identity = identity;
             this.headers = headers;
@@ -96,33 +106,41 @@ namespace System.ServiceModel
             extension_reader = extensionReader;
         }
 
-        public bool IsAnonymous {
-            get { return address.Equals (anonymous_role); }
+        public bool IsAnonymous
+        {
+            get { return address.Equals(anonymous_role); }
         }
 
-        public bool IsNone {
-            get { return address.Equals (none_role); }
+        public bool IsNone
+        {
+            get { return address.Equals(none_role); }
         }
 
-        public AddressHeaderCollection Headers {
+        public AddressHeaderCollection Headers
+        {
             get { return headers; }
         }
 
-        public EndpointIdentity Identity {
+        public EndpointIdentity Identity
+        {
             get { return identity; }
         }
 
-        public Uri Uri {
+        public Uri Uri
+        {
             get { return address; }
         }
 
 #if !MOBILE
-        internal static XmlSchema Schema {
-            get {
-                if (schema == null) {
-                    Assembly a = Assembly.GetCallingAssembly ();
-                    Stream s = a.GetManifestResourceStream ("WS-Addressing.schema");
-                    schema = XmlSchema.Read (s, null);
+        internal static XmlSchema Schema
+        {
+            get
+            {
+                if (schema == null)
+                {
+                    Assembly a = Assembly.GetCallingAssembly();
+                    Stream s = a.GetManifestResourceStream("WS-Addressing.schema");
+                    schema = XmlSchema.Read(s, null);
                 }
 
                 return schema;
@@ -131,23 +149,28 @@ namespace System.ServiceModel
 #endif
 
         [MonoTODO]
-        public void ApplyTo (Message message)
+        public void ApplyTo(Message message)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             EndpointAddress other = obj as EndpointAddress;
-            if (other == null || 
-                other.Uri == null || !other.Uri.Equals (this.Uri) ||
-                other.Headers.Count != this.Headers.Count)
+            if (
+                other == null
+                || other.Uri == null
+                || !other.Uri.Equals(this.Uri)
+                || other.Headers.Count != this.Headers.Count
+            )
                 return false;
 
-            foreach (AddressHeader h in this.Headers) {
+            foreach (AddressHeader h in this.Headers)
+            {
                 bool match = false;
                 foreach (AddressHeader o in other.Headers)
-                    if (h.Equals (o)) {
+                    if (h.Equals(o))
+                    {
                         match = true;
                         break;
                     }
@@ -158,159 +181,194 @@ namespace System.ServiceModel
             return true;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return address.GetHashCode ();
+            return address.GetHashCode();
         }
 
-        public XmlDictionaryReader GetReaderAtExtensions ()
+        public XmlDictionaryReader GetReaderAtExtensions()
         {
             return extension_reader;
         }
 
-        public XmlDictionaryReader GetReaderAtMetadata ()
+        public XmlDictionaryReader GetReaderAtMetadata()
         {
             return metadata_reader;
         }
 
-        public static bool operator == (EndpointAddress address1, EndpointAddress address2)
+        public static bool operator ==(EndpointAddress address1, EndpointAddress address2)
         {
-            if ((object) address1 == null)
-                return (object) address2 == null;
-            if ((object) address2 == null)
+            if ((object)address1 == null)
+                return (object)address2 == null;
+            if ((object)address2 == null)
                 return false;
-            return address1.Equals (address2);
+            return address1.Equals(address2);
         }
 
-        public static bool operator != (EndpointAddress address1, EndpointAddress address2)
+        public static bool operator !=(EndpointAddress address1, EndpointAddress address2)
         {
-            return ! (address1 == address2);
+            return !(address1 == address2);
         }
 
-//#if !MOBILE
-        public static EndpointAddress ReadFrom (
-            XmlDictionaryReader reader)
+        //#if !MOBILE
+        public static EndpointAddress ReadFrom(XmlDictionaryReader reader)
         {
             if (reader == null)
-                throw new ArgumentNullException ("reader");
+                throw new ArgumentNullException("reader");
 
-            return ReadFromInternal (null, reader, null, null, null, null);
+            return ReadFromInternal(null, reader, null, null, null, null);
         }
 
-        public static EndpointAddress ReadFrom (
+        public static EndpointAddress ReadFrom(
             AddressingVersion addressingVersion,
-            XmlDictionaryReader reader)
+            XmlDictionaryReader reader
+        )
         {
-            return ReadFrom (addressingVersion, (XmlReader) reader);
+            return ReadFrom(addressingVersion, (XmlReader)reader);
         }
 
-        public static EndpointAddress ReadFrom (
+        public static EndpointAddress ReadFrom(
             AddressingVersion addressingVersion,
-            XmlReader reader)
+            XmlReader reader
+        )
         {
             if (addressingVersion == null)
-                throw new ArgumentNullException ("addressingVersion");
+                throw new ArgumentNullException("addressingVersion");
             if (reader == null)
-                throw new ArgumentNullException ("reader");
+                throw new ArgumentNullException("reader");
 
-            return ReadFromInternal (addressingVersion, reader, null, null, null, null);
+            return ReadFromInternal(addressingVersion, reader, null, null, null, null);
         }
 
-        public static EndpointAddress ReadFrom (
+        public static EndpointAddress ReadFrom(
             XmlDictionaryReader reader,
             XmlDictionaryString localName,
-            XmlDictionaryString ns)
+            XmlDictionaryString ns
+        )
         {
-            return ReadFrom (AddressingVersion.WSAddressing10,
-                     reader, localName, ns);
+            return ReadFrom(AddressingVersion.WSAddressing10, reader, localName, ns);
         }
 
-        public static EndpointAddress ReadFrom (
+        public static EndpointAddress ReadFrom(
             AddressingVersion addressingVersion,
             XmlDictionaryReader reader,
             XmlDictionaryString localName,
-            XmlDictionaryString ns)
+            XmlDictionaryString ns
+        )
         {
             // Empty localName and ns will be rejected by ReadStartElement() by feeding empty strings.
-            return ReadFromInternal (addressingVersion, reader, null, null, localName ?? XmlDictionaryString.Empty, ns ?? XmlDictionaryString.Empty);
+            return ReadFromInternal(
+                addressingVersion,
+                reader,
+                null,
+                null,
+                localName ?? XmlDictionaryString.Empty,
+                ns ?? XmlDictionaryString.Empty
+            );
         }
 
-        public static EndpointAddress ReadFrom (
+        public static EndpointAddress ReadFrom(
             AddressingVersion addressingVersion,
-            XmlReader reader, string localName, string ns)
+            XmlReader reader,
+            string localName,
+            string ns
+        )
         {
             // Empty localName and ns will be rejected by ReadStartElement() by feeding empty strings.
-            return ReadFromInternal (addressingVersion, reader, localName ?? String.Empty, ns ?? String.Empty, null, null);
+            return ReadFromInternal(
+                addressingVersion,
+                reader,
+                localName ?? String.Empty,
+                ns ?? String.Empty,
+                null,
+                null
+            );
         }
 
-        private static EndpointAddress ReadFromInternal (
+        private static EndpointAddress ReadFromInternal(
             AddressingVersion addressingVersion,
-            XmlReader reader, string localName, string ns,
+            XmlReader reader,
+            string localName,
+            string ns,
             XmlDictionaryString dictLocalName,
-            XmlDictionaryString dictNS)
+            XmlDictionaryString dictNS
+        )
         {
-            reader.MoveToContent ();
-            if (reader.NodeType != XmlNodeType.Element ||
-                reader.IsEmptyElement)
-                throw new ArgumentException ("Cannot detect appropriate WS-Addressing Address element.");
+            reader.MoveToContent();
+            if (reader.NodeType != XmlNodeType.Element || reader.IsEmptyElement)
+                throw new ArgumentException(
+                    "Cannot detect appropriate WS-Addressing Address element."
+                );
 
             if (localName != null)
-                reader.ReadStartElement (localName, ns);
+                reader.ReadStartElement(localName, ns);
             else if (dictLocalName != null)
-                ((XmlDictionaryReader) reader).ReadStartElement (dictLocalName, dictNS);
+                ((XmlDictionaryReader)reader).ReadStartElement(dictLocalName, dictNS);
             else
-                reader.ReadStartElement ();
-            reader.MoveToContent ();
+                reader.ReadStartElement();
+            reader.MoveToContent();
 
-            if (addressingVersion == null) {
+            if (addressingVersion == null)
+            {
                 if (reader.NamespaceURI == AddressingVersion.WSAddressing10.Namespace)
                     addressingVersion = AddressingVersion.WSAddressing10;
-                else
-                if (reader.NamespaceURI == AddressingVersion.WSAddressingAugust2004.Namespace)
+                else if (reader.NamespaceURI == AddressingVersion.WSAddressingAugust2004.Namespace)
                     addressingVersion = AddressingVersion.WSAddressingAugust2004;
                 else
-                    throw new ArgumentException ("Cannot detect appropriate WS-Addressing version.");
+                    throw new ArgumentException("Cannot detect appropriate WS-Addressing version.");
             }
 
-            EndpointAddress ea = ReadContents (addressingVersion, reader);
+            EndpointAddress ea = ReadContents(addressingVersion, reader);
 
-            reader.MoveToContent ();
-            reader.ReadEndElement ();
+            reader.MoveToContent();
+            reader.ReadEndElement();
             return ea;
         }
-        
-        private static EndpointAddress ReadContents (
-            AddressingVersion addressingVersion, XmlReader reader)
+
+        private static EndpointAddress ReadContents(
+            AddressingVersion addressingVersion,
+            XmlReader reader
+        )
         {
             Uri uri = null;
             EndpointIdentity identity = null;
-            reader.MoveToContent ();
-            if (reader.LocalName == "Address" && 
-                reader.NamespaceURI == addressingVersion.Namespace &&
-                reader.NodeType == XmlNodeType.Element &&
-                !reader.IsEmptyElement)
-                uri = new Uri (reader.ReadElementContentAsString ());
+            reader.MoveToContent();
+            if (
+                reader.LocalName == "Address"
+                && reader.NamespaceURI == addressingVersion.Namespace
+                && reader.NodeType == XmlNodeType.Element
+                && !reader.IsEmptyElement
+            )
+                uri = new Uri(reader.ReadElementContentAsString());
             else
-                throw new XmlException (String.Format (
-                    "Expecting 'Address' from namespace '{0}', but found '{1}' from namespace '{2}'",
-                    addressingVersion.Namespace, reader.LocalName, reader.NamespaceURI));
+                throw new XmlException(
+                    String.Format(
+                        "Expecting 'Address' from namespace '{0}', but found '{1}' from namespace '{2}'",
+                        addressingVersion.Namespace,
+                        reader.LocalName,
+                        reader.NamespaceURI
+                    )
+                );
 
-            reader.MoveToContent ();
+            reader.MoveToContent();
 #if !MOBILE
             MetadataSet metadata = null;
-            if (reader.LocalName == "Metadata" &&
-                reader.NamespaceURI == addressingVersion.Namespace &&
-                !reader.IsEmptyElement) {
-                reader.Read ();
-                metadata = (MetadataSet) new XmlSerializer (typeof (MetadataSet)).Deserialize (reader);
-                reader.MoveToContent ();
-                reader.ReadEndElement ();
+            if (
+                reader.LocalName == "Metadata"
+                && reader.NamespaceURI == addressingVersion.Namespace
+                && !reader.IsEmptyElement
+            )
+            {
+                reader.Read();
+                metadata = (MetadataSet)new XmlSerializer(typeof(MetadataSet)).Deserialize(reader);
+                reader.MoveToContent();
+                reader.ReadEndElement();
             }
-            reader.MoveToContent ();
-            if (reader.LocalName == "Identity" &&
-                reader.NamespaceURI == Constants.WsaIdentityUri) {
+            reader.MoveToContent();
+            if (reader.LocalName == "Identity" && reader.NamespaceURI == Constants.WsaIdentityUri)
+            {
                 // FIXME: implement
-                reader.Skip ();
+                reader.Skip();
             }
 #endif
 
@@ -318,109 +376,111 @@ namespace System.ServiceModel
                 uri = anonymous_role;
 
 #if MOBILE
-            return new EndpointAddress (uri, identity);
+            return new EndpointAddress(uri, identity);
 #else
             if (metadata == null)
-                return new EndpointAddress (uri, identity);
-            return new EndpointAddress (uri, identity,
-                AddressHeader.CreateAddressHeader (metadata));
+                return new EndpointAddress(uri, identity);
+            return new EndpointAddress(uri, identity, AddressHeader.CreateAddressHeader(metadata));
 #endif
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return address.ToString (); 
+            return address.ToString();
         }
 
-        public void WriteContentsTo (
-            AddressingVersion addressingVersion,
-            XmlDictionaryWriter writer)
+        public void WriteContentsTo(AddressingVersion addressingVersion, XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw new ArgumentNullException ("writer");
+                throw new ArgumentNullException("writer");
 #if MOBILE
-            if (addressingVersion == AddressingVersion.None) {
-                writer.WriteString (Uri.AbsoluteUri);
-            } else {
-                writer.WriteStartElement ("Address", addressingVersion.Namespace);
-                writer.WriteString (Uri.AbsoluteUri);
-                writer.WriteEndElement ();
+            if (addressingVersion == AddressingVersion.None)
+            {
+                writer.WriteString(Uri.AbsoluteUri);
+            }
+            else
+            {
+                writer.WriteStartElement("Address", addressingVersion.Namespace);
+                writer.WriteString(Uri.AbsoluteUri);
+                writer.WriteEndElement();
             }
 #else
             if (addressingVersion == AddressingVersion.None)
-                writer.WriteString (Uri.AbsoluteUri);
-            else {
-                writer.WriteStartElement ("Address", addressingVersion.Namespace);
-                writer.WriteString (Uri.AbsoluteUri);
-                writer.WriteEndElement ();
+                writer.WriteString(Uri.AbsoluteUri);
+            else
+            {
+                writer.WriteStartElement("Address", addressingVersion.Namespace);
+                writer.WriteString(Uri.AbsoluteUri);
+                writer.WriteEndElement();
 
                 if (Identity == null)
                     return;
 
                 if (Headers != null)
                     foreach (AddressHeader ah in Headers)
-                        ah.WriteAddressHeader (writer);
+                        ah.WriteAddressHeader(writer);
 
-                writer.WriteStartElement ("Identity", Constants.WsaIdentityUri);
+                writer.WriteStartElement("Identity", Constants.WsaIdentityUri);
 
-                X509CertificateEndpointIdentity x509 =
-                    Identity as X509CertificateEndpointIdentity;
-                if (x509 != null) {
-                    KeyInfo ki = new KeyInfo ();
-                    KeyInfoX509Data x = new KeyInfoX509Data ();
+                X509CertificateEndpointIdentity x509 = Identity as X509CertificateEndpointIdentity;
+                if (x509 != null)
+                {
+                    KeyInfo ki = new KeyInfo();
+                    KeyInfoX509Data x = new KeyInfoX509Data();
                     foreach (X509Certificate2 cert in x509.Certificates)
-                        x.AddCertificate (cert);
-                    ki.AddClause (x);
-                    ki.GetXml ().WriteTo (writer);
-                } else {
-                    DataContractSerializer ds = new DataContractSerializer (Identity.IdentityClaim.GetType ());
-                    ds.WriteObject (writer, Identity.IdentityClaim);
+                        x.AddCertificate(cert);
+                    ki.AddClause(x);
+                    ki.GetXml().WriteTo(writer);
                 }
-                writer.WriteEndElement ();
+                else
+                {
+                    DataContractSerializer ds = new DataContractSerializer(
+                        Identity.IdentityClaim.GetType()
+                    );
+                    ds.WriteObject(writer, Identity.IdentityClaim);
+                }
+                writer.WriteEndElement();
             }
 #endif
         }
 
-        public void WriteContentsTo (
-            AddressingVersion addressingVersion,
-            XmlWriter writer)
+        public void WriteContentsTo(AddressingVersion addressingVersion, XmlWriter writer)
         {
-            WriteContentsTo (addressingVersion,
-                XmlDictionaryWriter.CreateDictionaryWriter (writer));
+            WriteContentsTo(addressingVersion, XmlDictionaryWriter.CreateDictionaryWriter(writer));
         }
 
-        public void WriteTo (
-            AddressingVersion addressingVersion,
-            XmlDictionaryWriter writer)
+        public void WriteTo(AddressingVersion addressingVersion, XmlDictionaryWriter writer)
         {
-            WriteTo (addressingVersion, writer, "EndpointReference", addressingVersion.Namespace);
+            WriteTo(addressingVersion, writer, "EndpointReference", addressingVersion.Namespace);
         }
 
-        public void WriteTo (
-            AddressingVersion addressingVersion, XmlWriter writer)
+        public void WriteTo(AddressingVersion addressingVersion, XmlWriter writer)
         {
-            WriteTo (addressingVersion,
-                XmlDictionaryWriter.CreateDictionaryWriter (writer));
+            WriteTo(addressingVersion, XmlDictionaryWriter.CreateDictionaryWriter(writer));
         }
 
-        public void WriteTo (
+        public void WriteTo(
             AddressingVersion addressingVersion,
             XmlDictionaryWriter writer,
             XmlDictionaryString localName,
-            XmlDictionaryString ns)
+            XmlDictionaryString ns
+        )
         {
-            writer.WriteStartElement (localName, ns);
-            WriteContentsTo (addressingVersion, writer);
-            writer.WriteEndElement ();
+            writer.WriteStartElement(localName, ns);
+            WriteContentsTo(addressingVersion, writer);
+            writer.WriteEndElement();
         }
 
-        public void WriteTo (
+        public void WriteTo(
             AddressingVersion addressingVersion,
-            XmlWriter writer, string localName, string ns)
+            XmlWriter writer,
+            string localName,
+            string ns
+        )
         {
-            writer.WriteStartElement (localName, ns);
-            WriteContentsTo (addressingVersion, writer);
-            writer.WriteEndElement ();
+            writer.WriteStartElement(localName, ns);
+            WriteContentsTo(addressingVersion, writer);
+            writer.WriteEndElement();
         }
     }
 }

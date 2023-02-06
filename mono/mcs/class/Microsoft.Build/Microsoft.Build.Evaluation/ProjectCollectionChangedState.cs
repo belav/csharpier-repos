@@ -16,4 +16,3 @@ namespace Microsoft.Build.Evaluation
         Toolsets
     }
 }
-

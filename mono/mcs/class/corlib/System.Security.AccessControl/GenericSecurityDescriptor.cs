@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,15 +31,16 @@ using System.Globalization;
 using System.Security.Principal;
 using System.Text;
 
-namespace System.Security.AccessControl {
-    public abstract class GenericSecurityDescriptor {
+namespace System.Security.AccessControl
+{
+    public abstract class GenericSecurityDescriptor
+    {
+        protected GenericSecurityDescriptor() { }
 
-        protected GenericSecurityDescriptor ()
+        public int BinaryLength
         {
-        }
-
-        public int BinaryLength {
-            get {
+            get
+            {
                 int len = 0x14;
                 if (Owner != null)
                     len += Owner.BinaryLength;
@@ -59,153 +60,173 @@ namespace System.Security.AccessControl {
 
         public abstract SecurityIdentifier Owner { get; set; }
 
-        public static byte Revision {
+        public static byte Revision
+        {
             get { return 1; }
         }
 
-        internal virtual GenericAcl InternalDacl {
+        internal virtual GenericAcl InternalDacl
+        {
             get { return null; }
         }
 
-        internal virtual GenericAcl InternalSacl {
+        internal virtual GenericAcl InternalSacl
+        {
             get { return null; }
         }
 
-        internal virtual byte InternalReservedField {
+        internal virtual byte InternalReservedField
+        {
             get { return 0; }
         }
 
-        public void GetBinaryForm (byte[] binaryForm, int offset)
+        public void GetBinaryForm(byte[] binaryForm, int offset)
         {
             if (null == binaryForm)
-                throw new ArgumentNullException ("binaryForm");
+                throw new ArgumentNullException("binaryForm");
 
             int binaryLength = BinaryLength;
             if (offset < 0 || offset > binaryForm.Length - binaryLength)
-                throw new ArgumentOutOfRangeException ("offset");
-            
+                throw new ArgumentOutOfRangeException("offset");
+
             ControlFlags controlFlags = ControlFlags;
-            if (DaclIsUnmodifiedAefa) { controlFlags &= ~ControlFlags.DiscretionaryAclPresent; }
+            if (DaclIsUnmodifiedAefa)
+            {
+                controlFlags &= ~ControlFlags.DiscretionaryAclPresent;
+            }
             binaryForm[offset + 0x00] = Revision;
             binaryForm[offset + 0x01] = InternalReservedField;
-            WriteUShort ((ushort)controlFlags, binaryForm,
-                         offset + 0x02);
-            
+            WriteUShort((ushort)controlFlags, binaryForm, offset + 0x02);
+
             // Skip 'offset' fields (will fill later)
             int pos = 0x14;
-            
-            if (Owner != null) {
-                WriteInt (pos, binaryForm, offset + 0x04);
-                Owner.GetBinaryForm (binaryForm, offset + pos);
+
+            if (Owner != null)
+            {
+                WriteInt(pos, binaryForm, offset + 0x04);
+                Owner.GetBinaryForm(binaryForm, offset + pos);
                 pos += Owner.BinaryLength;
-            } else {
-                WriteInt (0, binaryForm, offset + 0x04);
             }
-            
-            if (Group != null) {
-                WriteInt (pos, binaryForm, offset + 0x08);
-                Group.GetBinaryForm (binaryForm, offset + pos);
+            else
+            {
+                WriteInt(0, binaryForm, offset + 0x04);
+            }
+
+            if (Group != null)
+            {
+                WriteInt(pos, binaryForm, offset + 0x08);
+                Group.GetBinaryForm(binaryForm, offset + pos);
                 pos += Group.BinaryLength;
-            } else {
-                WriteInt (0, binaryForm, offset + 0x08);
             }
-            
+            else
+            {
+                WriteInt(0, binaryForm, offset + 0x08);
+            }
+
             GenericAcl sysAcl = InternalSacl;
-            if (SaclPresent) {
-                WriteInt (pos, binaryForm, offset + 0x0C);
-                sysAcl.GetBinaryForm (binaryForm, offset + pos);
+            if (SaclPresent)
+            {
+                WriteInt(pos, binaryForm, offset + 0x0C);
+                sysAcl.GetBinaryForm(binaryForm, offset + pos);
                 pos += InternalSacl.BinaryLength;
-            } else {
-                WriteInt (0, binaryForm, offset + 0x0C);
             }
-            
+            else
+            {
+                WriteInt(0, binaryForm, offset + 0x0C);
+            }
+
             GenericAcl discAcl = InternalDacl;
-            if (DaclPresent && !DaclIsUnmodifiedAefa) {
-                WriteInt (pos, binaryForm, offset + 0x10);
-                discAcl.GetBinaryForm (binaryForm, offset + pos);
+            if (DaclPresent && !DaclIsUnmodifiedAefa)
+            {
+                WriteInt(pos, binaryForm, offset + 0x10);
+                discAcl.GetBinaryForm(binaryForm, offset + pos);
                 pos += InternalDacl.BinaryLength;
-            } else {
-                WriteInt (0, binaryForm, offset + 0x10);
+            }
+            else
+            {
+                WriteInt(0, binaryForm, offset + 0x10);
             }
         }
 
-        public string GetSddlForm (AccessControlSections includeSections)
+        public string GetSddlForm(AccessControlSections includeSections)
         {
-            StringBuilder result = new StringBuilder ();
-            
-            if ((includeSections & AccessControlSections.Owner) != 0
-                && Owner != null) {
-                result.AppendFormat (
-                    CultureInfo.InvariantCulture,
-                    "O:{0}", Owner.GetSddlForm ());
+            StringBuilder result = new StringBuilder();
+
+            if ((includeSections & AccessControlSections.Owner) != 0 && Owner != null)
+            {
+                result.AppendFormat(CultureInfo.InvariantCulture, "O:{0}", Owner.GetSddlForm());
             }
-            
-            if ((includeSections & AccessControlSections.Group) != 0
-                && Group != null) {
-                result.AppendFormat (
-                    CultureInfo.InvariantCulture,
-                    "G:{0}", Group.GetSddlForm ());
+
+            if ((includeSections & AccessControlSections.Group) != 0 && Group != null)
+            {
+                result.AppendFormat(CultureInfo.InvariantCulture, "G:{0}", Group.GetSddlForm());
             }
-            
-            if ((includeSections & AccessControlSections.Access) != 0
-                && DaclPresent && !DaclIsUnmodifiedAefa) {
-                result.AppendFormat (
+
+            if (
+                (includeSections & AccessControlSections.Access) != 0
+                && DaclPresent
+                && !DaclIsUnmodifiedAefa
+            )
+            {
+                result.AppendFormat(
                     CultureInfo.InvariantCulture,
                     "D:{0}",
-                    InternalDacl.GetSddlForm (ControlFlags,
-                                                  true));
+                    InternalDacl.GetSddlForm(ControlFlags, true)
+                );
             }
-            
-            if ((includeSections & AccessControlSections.Audit) != 0
-                && SaclPresent) {
-                result.AppendFormat (
+
+            if ((includeSections & AccessControlSections.Audit) != 0 && SaclPresent)
+            {
+                result.AppendFormat(
                     CultureInfo.InvariantCulture,
                     "S:{0}",
-                    InternalSacl.GetSddlForm (ControlFlags,
-                                                  false));
+                    InternalSacl.GetSddlForm(ControlFlags, false)
+                );
             }
-            
-            return result.ToString ();
+
+            return result.ToString();
         }
 
-        public static bool IsSddlConversionSupported ()
+        public static bool IsSddlConversionSupported()
         {
             return true;
         }
-        
+
         // See CommonSecurityDescriptor constructor regarding this persistence detail.
-        internal virtual bool DaclIsUnmodifiedAefa {
+        internal virtual bool DaclIsUnmodifiedAefa
+        {
             get { return false; }
         }
-        
-        bool DaclPresent {
-            get {
+
+        bool DaclPresent
+        {
+            get
+            {
                 return InternalDacl != null
                     && (ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0;
             }
         }
-        
-        bool SaclPresent {
-            get {
-                return InternalSacl != null
-                    && (ControlFlags & ControlFlags.SystemAclPresent) != 0;
+
+        bool SaclPresent
+        {
+            get
+            {
+                return InternalSacl != null && (ControlFlags & ControlFlags.SystemAclPresent) != 0;
             }
         }
-                
-        void WriteUShort (ushort val, byte[] buffer, int offset)
+
+        void WriteUShort(ushort val, byte[] buffer, int offset)
         {
             buffer[offset] = (byte)val;
             buffer[offset + 1] = (byte)(val >> 8);
         }
 
-        void WriteInt (int val, byte[] buffer, int offset)
+        void WriteInt(int val, byte[] buffer, int offset)
         {
             buffer[offset] = (byte)val;
             buffer[offset + 1] = (byte)(val >> 8);
             buffer[offset + 2] = (byte)(val >> 16);
             buffer[offset + 3] = (byte)(val >> 24);
         }
-        
     }
 }
-

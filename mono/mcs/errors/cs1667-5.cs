@@ -4,7 +4,8 @@
 
 using System;
 
-public interface X {
-  [method:CLSCompliant (false)]
-  event EventHandler XEvent;
+public interface X
+{
+    [method: CLSCompliant(false)]
+    event EventHandler XEvent;
 }

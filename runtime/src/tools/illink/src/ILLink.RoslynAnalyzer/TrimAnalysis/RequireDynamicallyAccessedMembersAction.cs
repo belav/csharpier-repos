@@ -13,15 +13,20 @@ namespace ILLink.Shared.TrimAnalysis
 #pragma warning disable CA1822 // Mark members as static - the other partial implementations might need to be instance methods
 #pragma warning disable IDE0060 // Unused parameters - should be removed once methods are actually implemented
 
-        public RequireDynamicallyAccessedMembersAction (
+        public RequireDynamicallyAccessedMembersAction(
             DiagnosticContext diagnosticContext,
-            ReflectionAccessAnalyzer reflectionAccessAnalyzer)
+            ReflectionAccessAnalyzer reflectionAccessAnalyzer
+        )
         {
             _diagnosticContext = diagnosticContext;
             _reflectionAccessAnalyzer = reflectionAccessAnalyzer;
         }
 
-        public partial bool TryResolveTypeNameAndMark (string typeName, bool needsAssemblyName, out TypeProxy type)
+        public partial bool TryResolveTypeNameAndMark(
+            string typeName,
+            bool needsAssemblyName,
+            out TypeProxy type
+        )
         {
             // TODO: Implement type name resolution to type symbol
 
@@ -33,7 +38,14 @@ namespace ILLink.Shared.TrimAnalysis
             return false;
         }
 
-        private partial void MarkTypeForDynamicallyAccessedMembers (in TypeProxy type, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes) =>
-            _reflectionAccessAnalyzer.GetReflectionAccessDiagnostics (_diagnosticContext, type.Type, dynamicallyAccessedMemberTypes);
+        private partial void MarkTypeForDynamicallyAccessedMembers(
+            in TypeProxy type,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        ) =>
+            _reflectionAccessAnalyzer.GetReflectionAccessDiagnostics(
+                _diagnosticContext,
+                type.Type,
+                dynamicallyAccessedMemberTypes
+            );
     }
 }

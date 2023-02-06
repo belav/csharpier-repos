@@ -3,12 +3,13 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (true)]
 
-public class CLSClass {
-        public long this [ulong index] {
-                get {
-                        return 2;
-                }
-        }
+[assembly: CLSCompliant(true)]
+
+public class CLSClass
+{
+    public long this[ulong index]
+    {
+        get { return 2; }
+    }
 }

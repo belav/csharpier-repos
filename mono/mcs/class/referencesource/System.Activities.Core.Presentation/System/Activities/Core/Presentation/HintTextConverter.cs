@@ -12,7 +12,12 @@ namespace System.Activities.Core.Presentation
     [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses")]
     internal sealed class HintTextConverter : IMultiValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(
+            object[] values,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture
+        )
         {
             // values represented in XAML
             //   values[0] = ModelItem.XXX
@@ -28,7 +33,12 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+        public object[] ConvertBack(
+            object value,
+            Type[] targetTypes,
+            object parameter,
+            System.Globalization.CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotImplementedException());
         }

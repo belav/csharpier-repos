@@ -7,25 +7,31 @@ namespace MonoTests.System.Net.NetworkInformation
     [TestFixture]
     public class PhysicalAddressTest
     {
-        [Test] 
+        [Test]
         public void CreateNormal()
         {
             // Normal case, creation of physical address
-            PhysicalAddress phys = new PhysicalAddress(new byte [] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 });
+            PhysicalAddress phys = new PhysicalAddress(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }
+            );
         }
 
         [Test]
         public void CreateWithLarger()
         {
             // MS.NET 2.0 Allows Physical Address to be created if array larger than normal
-            PhysicalAddress phys = new PhysicalAddress(new byte [] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 });
+            PhysicalAddress phys = new PhysicalAddress(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }
+            );
         }
 
         [Test]
         public void CreateWithSmaller()
         {
             // MS.NET 2.0 Allows Physical Address to be created if array smaller than normal
-            PhysicalAddress phys = new PhysicalAddress(new byte [] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 });
+            PhysicalAddress phys = new PhysicalAddress(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }
+            );
         }
 
         [Test]
@@ -90,8 +96,12 @@ namespace MonoTests.System.Net.NetworkInformation
         [Test]
         public void GetHashCodeEqual()
         {
-            PhysicalAddress phys1 = new PhysicalAddress(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 });
-            PhysicalAddress phys2 = new PhysicalAddress(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 });
+            PhysicalAddress phys1 = new PhysicalAddress(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }
+            );
+            PhysicalAddress phys2 = new PhysicalAddress(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }
+            );
 
             Assert.AreEqual(phys1.GetHashCode(), phys2.GetHashCode());
         }
@@ -99,8 +109,12 @@ namespace MonoTests.System.Net.NetworkInformation
         [Test]
         public void GetHashCodeNotEqual()
         {
-            PhysicalAddress phys1 = new PhysicalAddress(new byte[] { 0x06, 0x05, 0x04, 0x03, 0x02, 0x01 });
-            PhysicalAddress phys2 = new PhysicalAddress(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 });
+            PhysicalAddress phys1 = new PhysicalAddress(
+                new byte[] { 0x06, 0x05, 0x04, 0x03, 0x02, 0x01 }
+            );
+            PhysicalAddress phys2 = new PhysicalAddress(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }
+            );
 
             Assert.IsFalse(phys1.GetHashCode().Equals(phys2.GetHashCode()));
         }
@@ -108,15 +122,21 @@ namespace MonoTests.System.Net.NetworkInformation
         [Test]
         public void ToStringTest()
         {
-            PhysicalAddress phys1 = new PhysicalAddress(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 });
+            PhysicalAddress phys1 = new PhysicalAddress(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }
+            );
             Assert.AreEqual("010203040506", phys1.ToString());
         }
 
         [Test]
         public void EqualsNormal()
         {
-            PhysicalAddress phys1 = new PhysicalAddress(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 });
-            PhysicalAddress phys2 = new PhysicalAddress(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 });
+            PhysicalAddress phys1 = new PhysicalAddress(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }
+            );
+            PhysicalAddress phys2 = new PhysicalAddress(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }
+            );
 
             Assert.IsTrue(phys1.Equals(phys2));
         }
@@ -124,11 +144,14 @@ namespace MonoTests.System.Net.NetworkInformation
         [Test]
         public void EqualsNot()
         {
-            PhysicalAddress phys1 = new PhysicalAddress(new byte[] { 0x06, 0x5, 0x04, 0x03, 0x02, 0x01 });
-            PhysicalAddress phys2 = new PhysicalAddress(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 });
+            PhysicalAddress phys1 = new PhysicalAddress(
+                new byte[] { 0x06, 0x5, 0x04, 0x03, 0x02, 0x01 }
+            );
+            PhysicalAddress phys2 = new PhysicalAddress(
+                new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 }
+            );
 
             Assert.IsTrue(!phys1.Equals(phys2));
         }
     }
 }
-

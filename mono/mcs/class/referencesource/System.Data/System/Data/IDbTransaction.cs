@@ -6,18 +6,16 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data{
+namespace System.Data
+{
     using System;
 
-    public interface IDbTransaction : IDisposable {
-
+    public interface IDbTransaction : IDisposable
+    {
         IDbConnection Connection { // MDAC 66655
-            get;
-        }
+            get; }
 
-        IsolationLevel IsolationLevel {
-            get;
-        }
+        IsolationLevel IsolationLevel { get; }
 
         void Commit();
 
@@ -25,5 +23,4 @@ namespace System.Data{
 
         void Rollback();
     }
-}    
-
+}

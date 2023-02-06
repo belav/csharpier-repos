@@ -4,9 +4,9 @@ using System.Linq;
 
 public class TestQueryableOrderBy
 {
-    public static void Main ()
+    public static void Main()
     {
-        Test ();
+        Test();
     }
 
     class Pet
@@ -15,14 +15,16 @@ public class TestQueryableOrderBy
         public int Age { get; set; }
     }
 
-    static void Test ()
+    static void Test()
     {
-        Pet[] pets = { new Pet { Name="Barley", Age=8 },
-                       new Pet { Name="Boots", Age=4 },
-                       new Pet { Name="Whiskers", Age=1 }
+        Pet[] pets =
+        {
+            new Pet { Name = "Barley", Age = 8 },
+            new Pet { Name = "Boots", Age = 4 },
+            new Pet { Name = "Whiskers", Age = 1 }
         };
 
-        var query = pets.AsQueryable ().OrderByDescending (pet => pet.Age);
+        var query = pets.AsQueryable().OrderByDescending(pet => pet.Age);
 
         foreach (Pet pet in query)
             Console.WriteLine("{0} - {1}", pet.Name, pet.Age);

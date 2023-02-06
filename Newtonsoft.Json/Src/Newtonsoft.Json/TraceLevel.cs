@@ -1,4 +1,3 @@
-
 #if !HAVE_TRACE_WRITER
 using Newtonsoft.Json.Serialization;
 

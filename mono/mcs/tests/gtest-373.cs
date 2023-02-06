@@ -4,11 +4,11 @@ namespace MonoBug
 {
     class MainClass
     {
-        public static void Main ()
+        public static void Main()
         {
-            GenericType<bool> g = new GenericType<bool> (true);
+            GenericType<bool> g = new GenericType<bool>(true);
             if (g)
-                Console.WriteLine ("true");
+                Console.WriteLine("true");
         }
     }
 
@@ -16,12 +16,12 @@ namespace MonoBug
     {
         private T value;
 
-        public GenericType (T value)
+        public GenericType(T value)
         {
             this.value = value;
         }
 
-        public static implicit operator T (GenericType<T> o)
+        public static implicit operator T(GenericType<T> o)
         {
             return o.value;
         }

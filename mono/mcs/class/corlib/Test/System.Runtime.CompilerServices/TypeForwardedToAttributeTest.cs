@@ -33,19 +33,18 @@ using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using NUnit.Framework;
 
-namespace MonoTests.System.Runtime.CompilerServices {
-
+namespace MonoTests.System.Runtime.CompilerServices
+{
     public class TypeForwardedToAttributeTest
     {
         [Test]
-        public void CtorTest ()
+        public void CtorTest()
         {
-            var a = new TypeForwardedToAttribute (typeof(Math));
-            Assert.AreEqual (typeof(Math), a.Destination);
+            var a = new TypeForwardedToAttribute(typeof(Math));
+            Assert.AreEqual(typeof(Math), a.Destination);
 
-            a = new TypeForwardedToAttribute (null);
-            Assert.AreEqual (null, a.Destination);
+            a = new TypeForwardedToAttribute(null);
+            Assert.AreEqual(null, a.Destination);
         }
     }
 }
-

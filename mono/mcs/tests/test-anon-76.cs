@@ -1,36 +1,37 @@
 using System;
 
-delegate object FactoryDelegate ();
+delegate object FactoryDelegate();
 
 public class C
 {
     FactoryDelegate var;
     int counter;
 
-    FactoryDelegate this [string s]
+    FactoryDelegate this[string s]
     {
         set { var = value; }
         get { return var; }
     }
 
-    public void X ()
+    public void X()
     {
-        this ["ABC"] = delegate () {
+        this["ABC"] = delegate()
+        {
             ++counter;
-            Console.WriteLine ("A");
+            Console.WriteLine("A");
             return "Return";
         };
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        C o = new C ();
-        o.X ();
+        C o = new C();
+        o.X();
 
-        Console.WriteLine ("B");
-        Console.WriteLine (o ["ABC"] ());
-        
-                Console.WriteLine (o.counter);
+        Console.WriteLine("B");
+        Console.WriteLine(o["ABC"]());
+
+        Console.WriteLine(o.counter);
         if (o.counter != 1)
             return 1;
 

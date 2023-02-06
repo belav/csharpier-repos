@@ -21,83 +21,90 @@ namespace MonoTests.System.Security.AccessControl
 
         class WillWorkSecurity : ObjectSecurity<WillWorkRights>
         {
-            public WillWorkSecurity ()
-                : base (false, ResourceType.Unknown)
-            {
-
-            }
+            public WillWorkSecurity()
+                : base(false, ResourceType.Unknown) { }
         }
 
-        struct WillFailRights
-        {
-
-        }
+        struct WillFailRights { }
 
         class WillFailSecurity : ObjectSecurity<WillFailRights>
         {
-            public WillFailSecurity ()
-                : base (false, ResourceType.Unknown)
-            {
-
-            }
+            public WillFailSecurity()
+                : base(false, ResourceType.Unknown) { }
         }
 
         [Test]
-        public void TypesAreCorrect ()
+        public void TypesAreCorrect()
         {
-            WillWorkSecurity security = new WillWorkSecurity ();
-            Assert.AreEqual (security.AccessRightType, typeof (WillWorkRights));
-            Assert.AreEqual (security.AccessRuleType, typeof (AccessRule<WillWorkRights>));
-            Assert.AreEqual (security.AuditRuleType, typeof (AuditRule<WillWorkRights>));
+            WillWorkSecurity security = new WillWorkSecurity();
+            Assert.AreEqual(security.AccessRightType, typeof(WillWorkRights));
+            Assert.AreEqual(security.AccessRuleType, typeof(AccessRule<WillWorkRights>));
+            Assert.AreEqual(security.AuditRuleType, typeof(AuditRule<WillWorkRights>));
         }
 
         [Test]
-        public void WillWorkOKUsingAccessFactory ()
+        public void WillWorkOKUsingAccessFactory()
         {
-            WillWorkSecurity security = new WillWorkSecurity ();
-            SecurityIdentifier id = new SecurityIdentifier (WellKnownSidType.WorldSid, null);
-            AccessRule<WillWorkRights> rule = (AccessRule<WillWorkRights>)
-                security.AccessRuleFactory (id, 1, false,
-                    InheritanceFlags.None, PropagationFlags.None,
-                    AccessControlType.Allow);
-            Assert.AreEqual (rule.AccessControlType, AccessControlType.Allow);
-            Assert.AreEqual (rule.IdentityReference, id);
-            Assert.AreEqual (rule.InheritanceFlags, InheritanceFlags.None);
-            Assert.AreEqual (rule.PropagationFlags, PropagationFlags.None);
-            Assert.AreEqual (rule.Rights, WillWorkRights.Value);
+            WillWorkSecurity security = new WillWorkSecurity();
+            SecurityIdentifier id = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+            AccessRule<WillWorkRights> rule =
+                (AccessRule<WillWorkRights>)
+                    security.AccessRuleFactory(
+                        id,
+                        1,
+                        false,
+                        InheritanceFlags.None,
+                        PropagationFlags.None,
+                        AccessControlType.Allow
+                    );
+            Assert.AreEqual(rule.AccessControlType, AccessControlType.Allow);
+            Assert.AreEqual(rule.IdentityReference, id);
+            Assert.AreEqual(rule.InheritanceFlags, InheritanceFlags.None);
+            Assert.AreEqual(rule.PropagationFlags, PropagationFlags.None);
+            Assert.AreEqual(rule.Rights, WillWorkRights.Value);
         }
 
         [Test]
         public void WillWorkOKUsingConstructor()
         {
-            SecurityIdentifier id = new SecurityIdentifier (WellKnownSidType.WorldSid, null);
-            AccessRule<WillWorkRights> rule = new AccessRule<WillWorkRights> (id, WillWorkRights.Value,
-                                              AccessControlType.Allow);
-            Assert.AreEqual (rule.AccessControlType, AccessControlType.Allow);
-            Assert.AreEqual (rule.IdentityReference, id);
-            Assert.AreEqual (rule.Rights, WillWorkRights.Value);
+            SecurityIdentifier id = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+            AccessRule<WillWorkRights> rule = new AccessRule<WillWorkRights>(
+                id,
+                WillWorkRights.Value,
+                AccessControlType.Allow
+            );
+            Assert.AreEqual(rule.AccessControlType, AccessControlType.Allow);
+            Assert.AreEqual(rule.IdentityReference, id);
+            Assert.AreEqual(rule.Rights, WillWorkRights.Value);
         }
 
-        [Test, ExpectedException (typeof (InvalidCastException))]
+        [Test, ExpectedException(typeof(InvalidCastException))]
         public void WillFailFailsUsingFactoryOnGetter()
         {
-            WillFailSecurity security = new WillFailSecurity ();
-            SecurityIdentifier id = new SecurityIdentifier (WellKnownSidType.WorldSid, null);
-            AccessRule<WillFailRights> rule = (AccessRule<WillFailRights>)
-                security.AccessRuleFactory (id, 1, false,
-                    InheritanceFlags.None, PropagationFlags.None,
-                    AccessControlType.Allow);
+            WillFailSecurity security = new WillFailSecurity();
+            SecurityIdentifier id = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+            AccessRule<WillFailRights> rule =
+                (AccessRule<WillFailRights>)
+                    security.AccessRuleFactory(
+                        id,
+                        1,
+                        false,
+                        InheritanceFlags.None,
+                        PropagationFlags.None,
+                        AccessControlType.Allow
+                    );
             WillFailRights rights = rule.Rights;
         }
 
-        [Test, ExpectedException (typeof (InvalidCastException))]
+        [Test, ExpectedException(typeof(InvalidCastException))]
         public void WillFailFailsUsingConstructor()
         {
-            SecurityIdentifier id = new SecurityIdentifier (WellKnownSidType.WorldSid, null);
-            AccessRule<WillFailRights> rule = new AccessRule<WillFailRights> (id, new WillFailRights(),
-                                              AccessControlType.Allow);
+            SecurityIdentifier id = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+            AccessRule<WillFailRights> rule = new AccessRule<WillFailRights>(
+                id,
+                new WillFailRights(),
+                AccessControlType.Allow
+            );
         }
     }
 }
-
-

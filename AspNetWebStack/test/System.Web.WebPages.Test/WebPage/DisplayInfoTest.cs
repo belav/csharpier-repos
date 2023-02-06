@@ -12,8 +12,14 @@ namespace System.Web.WebPages.Test
         public void GuardClauses()
         {
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => new DisplayInfo(filePath: null, displayMode: new Mock<IDisplayMode>().Object), "filePath");
-            Assert.ThrowsArgumentNull(() => new DisplayInfo("testPath", displayMode: null), "displayMode");
+            Assert.ThrowsArgumentNull(
+                () => new DisplayInfo(filePath: null, displayMode: new Mock<IDisplayMode>().Object),
+                "filePath"
+            );
+            Assert.ThrowsArgumentNull(
+                () => new DisplayInfo("testPath", displayMode: null),
+                "displayMode"
+            );
         }
 
         [Fact]
@@ -35,7 +41,10 @@ namespace System.Web.WebPages.Test
         public void ConstructorSetsEmptyFilePath()
         {
             // Act & Assert
-            Assert.Equal(String.Empty, new DisplayInfo(String.Empty, new Mock<IDisplayMode>().Object).FilePath);
+            Assert.Equal(
+                String.Empty,
+                new DisplayInfo(String.Empty, new Mock<IDisplayMode>().Object).FilePath
+            );
         }
     }
 }

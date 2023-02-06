@@ -35,4 +35,3 @@ namespace Microsoft.CodeAnalysis.Operations
         ForEach = 0x4
     }
 }
-

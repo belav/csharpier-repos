@@ -17,12 +17,19 @@ public static class InjectDirective
         builder =>
         {
             builder
-                .AddTypeToken(Resources.InjectDirective_TypeToken_Name, Resources.InjectDirective_TypeToken_Description)
-                .AddMemberToken(Resources.InjectDirective_MemberToken_Name, Resources.InjectDirective_MemberToken_Description);
+                .AddTypeToken(
+                    Resources.InjectDirective_TypeToken_Name,
+                    Resources.InjectDirective_TypeToken_Description
+                )
+                .AddMemberToken(
+                    Resources.InjectDirective_MemberToken_Name,
+                    Resources.InjectDirective_MemberToken_Description
+                );
 
             builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
             builder.Description = Resources.InjectDirective_Description;
-        });
+        }
+    );
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
@@ -42,7 +49,10 @@ public static class InjectDirective
         // Runs after the @model and @namespace directives
         public override int Order => 10;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             var visitor = new Visitor();
             visitor.Visit(documentNode);
@@ -84,7 +94,8 @@ public static class InjectDirective
     {
         public ClassDeclarationIntermediateNode Class { get; private set; }
 
-        public IList<DirectiveIntermediateNode> Directives { get; } = new List<DirectiveIntermediateNode>();
+        public IList<DirectiveIntermediateNode> Directives { get; } =
+            new List<DirectiveIntermediateNode>();
 
         public override void VisitClassDeclaration(ClassDeclarationIntermediateNode node)
         {

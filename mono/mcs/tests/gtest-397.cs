@@ -4,17 +4,17 @@ struct Foo
 {
     public int Value;
 
-    public Foo (int value)
+    public Foo(int value)
     {
         this.Value = value;
     }
 
-    public static Foo operator - (Foo? f)
+    public static Foo operator -(Foo? f)
     {
         if (f.HasValue)
-            return new Foo (-f.Value.Value);
+            return new Foo(-f.Value.Value);
 
-        return new Foo (42);
+        return new Foo(42);
     }
 }
 
@@ -22,15 +22,15 @@ struct Bar
 {
     public int Value;
 
-    public Bar (int value)
+    public Bar(int value)
     {
         this.Value = value;
     }
 
-    public static Bar? operator - (Bar? b)
+    public static Bar? operator -(Bar? b)
     {
         if (b.HasValue)
-            return new Bar (-b.Value.Value);
+            return new Bar(-b.Value.Value);
 
         return b;
     }
@@ -38,42 +38,41 @@ struct Bar
 
 class Test
 {
-
-    static Foo NegateFoo (Foo f)
+    static Foo NegateFoo(Foo f)
     {
         return -f;
     }
 
-    static Foo NegateFooNullable (Foo? f)
+    static Foo NegateFooNullable(Foo? f)
     {
         return -f;
     }
 
-    static Bar? NegateBarNullable (Bar? b)
+    static Bar? NegateBarNullable(Bar? b)
     {
         return -b;
     }
 
-    static Bar? NegateBar (Bar b)
+    static Bar? NegateBar(Bar b)
     {
         return -b;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        if (NegateFooNullable (null).Value != 42)
+        if (NegateFooNullable(null).Value != 42)
             return 1;
 
-        if (NegateFoo (new Foo (2)).Value != -2)
+        if (NegateFoo(new Foo(2)).Value != -2)
             return 2;
 
-        if (NegateBarNullable (null) != null)
+        if (NegateBarNullable(null) != null)
             return 3;
 
-        if (NegateBar (new Bar (2)).Value.Value != -2)
+        if (NegateBar(new Bar(2)).Value.Value != -2)
             return 4;
 
-        Console.WriteLine ("OK");
+        Console.WriteLine("OK");
         return 0;
     }
 }

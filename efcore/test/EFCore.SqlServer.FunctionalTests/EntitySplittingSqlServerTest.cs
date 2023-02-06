@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore;
 public class EntitySplittingSqlServerTest : EntitySplittingTestBase
 {
     public EntitySplittingSqlServerTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+        : base(testOutputHelper) { }
 
     [ConditionalFact]
     public virtual async Task Can_roundtrip_with_triggers()
@@ -18,15 +16,16 @@ public class EntitySplittingSqlServerTest : EntitySplittingTestBase
             {
                 OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<MeterReading>(
-                    ob =>
-                    {
-                        ob.SplitToTable(
-                            "MeterReadingDetails", t =>
-                            {
-                                t.HasTrigger("MeterReadingsDetails_Trigger");
-                            });
-                    });
+                modelBuilder.Entity<MeterReading>(ob =>
+                {
+                    ob.SplitToTable(
+                        "MeterReadingDetails",
+                        t =>
+                        {
+                            t.HasTrigger("MeterReadingsDetails_Trigger");
+                        }
+                    );
+                });
             },
             sensitiveLogEnabled: false,
             seed: c =>
@@ -39,12 +38,18 @@ FOR INSERT, UPDATE, DELETE AS
 BEGIN
     IF @@ROWCOUNT = 0
         return
-END");
-            });
+END"
+                );
+            }
+        );
 
         await using (var context = CreateContext())
         {
-            var meterReading = new MeterReading { ReadingStatus = MeterReadingStatus.NotAccesible, CurrentRead = "100" };
+            var meterReading = new MeterReading
+            {
+                ReadingStatus = MeterReadingStatus.NotAccesible,
+                CurrentRead = "100"
+            };
 
             await context.AddAsync(meterReading);
 
@@ -69,7 +74,7 @@ END");
         await base.Can_roundtrip();
 
         AssertSql(
-"""
+            """
 @p0='2' (Nullable = true)
 
 SET IMPLICIT_TRANSACTIONS OFF;
@@ -79,7 +84,7 @@ OUTPUT INSERTED.[Id]
 VALUES (@p0);
 """,
             //
-"""
+            """
 @p1='1'
 @p2='100' (Size = 4000)
 @p3=NULL (Size = 4000)
@@ -90,13 +95,13 @@ INSERT INTO [MeterReadingDetails] ([Id], [CurrentRead], [PreviousRead])
 VALUES (@p1, @p2, @p3);
 """,
             //
-"""
+            """
 SELECT TOP(2) [m].[Id], [m0].[CurrentRead], [m0].[PreviousRead], [m].[ReadingStatus]
 FROM [MeterReadings] AS [m]
 INNER JOIN [MeterReadingDetails] AS [m0] ON [m].[Id] = [m0].[Id]
-""");
+"""
+        );
     }
 
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 }

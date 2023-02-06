@@ -35,29 +35,31 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_TabIndex
-        : GHTWebControlBase
+    public class WebControl_TabIndex : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) {
+        override protected void OnInit(EventArgs e)
+        {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
             //
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) {
-            HtmlForm form1 = (HtmlForm) (HtmlForm)this.FindControl("Form1");
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm form1 = (HtmlForm)(HtmlForm)this.FindControl("Form1");
             this.GHTTestBegin(form1);
             int num1 = 11;
             Type[] typeArray1 = this.TypesToTest;
@@ -114,9 +116,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             try
             {
                 this.GHTSubTestBegin(ctrlType, "Controls with consecutive numbers");
-                this.TestedControl.TabIndex = (short) (conseqIndex + 1);
+                this.TestedControl.TabIndex = (short)(conseqIndex + 1);
                 this.GHTActiveSubtestControlClone(ctrlType, true);
-                this.TestedControl.TabIndex = (short) conseqIndex;
+                this.TestedControl.TabIndex = (short)conseqIndex;
             }
             catch (Exception exception8)
             {
@@ -131,6 +133,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
     }
 }

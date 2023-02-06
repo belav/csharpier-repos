@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,65 +35,75 @@ namespace System.Windows.Forms
         private Mono.WebBrowser.IWebBrowser webHost;
         private Mono.WebBrowser.DOM.IHistory history;
 
-        internal HtmlHistory (Mono.WebBrowser.IWebBrowser webHost, 
-                              Mono.WebBrowser.DOM.IHistory history)
+        internal HtmlHistory(
+            Mono.WebBrowser.IWebBrowser webHost,
+            Mono.WebBrowser.DOM.IHistory history
+        )
         {
             this.webHost = webHost;
             this.history = history;
         }
-        
+
         #region IDisposable Members
 
-        private void Dispose (bool disposing)
+        private void Dispose(bool disposing)
         {
-            if (!disposed) {
+            if (!disposed)
+            {
                 disposed = true;
             }
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion
 
         #region Properties
-        public int Length {
+        public int Length
+        {
             get { return webHost.Navigation.HistoryCount; }
         }
 
-        [MonoTODO ("Not supported, will throw NotSupportedException")]
-        public object DomHistory {
-            get { throw new NotSupportedException ("Retrieving a reference to an mshtml interface is not supported. Sorry."); } 
+        [MonoTODO("Not supported, will throw NotSupportedException")]
+        public object DomHistory
+        {
+            get
+            {
+                throw new NotSupportedException(
+                    "Retrieving a reference to an mshtml interface is not supported. Sorry."
+                );
+            }
         }
         #endregion
 
 
-        public void Back (int numberBack)
+        public void Back(int numberBack)
         {
-            history.Back (numberBack);
-        }
-        
-        public void Forward (int numberForward)
-        {
-            history.Forward (numberForward);
-        }
-        
-        public void Go (int relativePosition)
-        {
-            history.GoToIndex (relativePosition);
+            history.Back(numberBack);
         }
 
-        public void Go (string urlString)
+        public void Forward(int numberForward)
         {
-            history.GoToUrl (urlString);
+            history.Forward(numberForward);
         }
 
-        public void Go (Uri url)
+        public void Go(int relativePosition)
         {
-            history.GoToUrl (url.ToString ());
+            history.GoToIndex(relativePosition);
+        }
+
+        public void Go(string urlString)
+        {
+            history.GoToUrl(urlString);
+        }
+
+        public void Go(Uri url)
+        {
+            history.GoToUrl(url.ToString());
         }
     }
 }

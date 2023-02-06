@@ -18,18 +18,19 @@ namespace POS_Server.Controllers
     {
         CountriesController coctrlr = new CountriesController();
         CountriesController cc = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("GetAll")]
-      public string   GetAll(string token)
+        public string GetAll(string token)
         {
             // public ResponseVM GetPurinv(string token)
 
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -56,108 +57,97 @@ namespace POS_Server.Controllers
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
-
-                        var list = (from S in entity.printers
-                                    select new
-                                    {
-
-                                        S.printerId,
-                                        S.name,
-                                        S.printFor,
-                                        S.createDate,
-                                        S.updateDate,
-                                        S.createUserId,
-                                        S.updateUserId,
-
-
-
-                                    }).ToList();
+                        var list = (
+                            from S in entity.printers
+                            select new
+                            {
+                                S.printerId,
+                                S.name,
+                                S.printFor,
+                                S.createDate,
+                                S.updateDate,
+                                S.createUserId,
+                                S.updateUserId,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(list);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
 
+            //
+            //
+            //            string token = "";
 
 
-//           
-//            
-//            string token = "";
+            //            if (headers.Contains("APIKey"))
+            //            {
+            //                token = headers.GetValues("APIKey").First();
+            //            }
+            //            Validation validation = new Validation();
+            //            bool valid = validation.CheckApiKey(token);
 
+            //            if (valid) // APIKey is valid
+            //            {
+            //                using (incposdbEntities entity = new incposdbEntities())
+            //                {
+            //                    var List = (from S in entity.printers
+            //                                select new
+            //                                {
 
-//            if (headers.Contains("APIKey"))
-//            {
-//                token = headers.GetValues("APIKey").First();
-//            }
-//            Validation validation = new Validation();
-//            bool valid = validation.CheckApiKey(token);
-
-//            if (valid) // APIKey is valid
-//            {
-//                using (incposdbEntities entity = new incposdbEntities())
-//                {
-//                    var List = (from S in entity.printers
-//                                select new
-//                                {
-
-//                                    S.printerId,
-//                                    S.name,
-//                                    S.printFor,
-//                                    S.createDate,
-//                                    S.updateDate,
-//                                    S.createUserId,
-//                                    S.updateUserId,
-
-
-
-//                                }).ToList();
-//                    /*
-//public int printerId { get; set; }
-//        public string name { get; set; }
-//        public string printFor { get; set; }
-//        public Nullable<System.DateTime> createDate { get; set; }
-//        public Nullable<System.DateTime> updateDate { get; set; }
-//        public Nullable<long> createUserId { get; set; }
-//        public Nullable<long> updateUserId { get; set; }
-
-
-//                    */
+            //                                    S.printerId,
+            //                                    S.name,
+            //                                    S.printFor,
+            //                                    S.createDate,
+            //                                    S.updateDate,
+            //                                    S.createUserId,
+            //                                    S.updateUserId,
 
 
 
-//                    if (List == null)
-//                        return NotFound();
-//                    else
-//                        return Ok(List);
-//                }
-//            }
-//            //else
-//            return NotFound();
+            //                                }).ToList();
+            //                    /*
+            //public int printerId { get; set; }
+            //        public string name { get; set; }
+            //        public string printFor { get; set; }
+            //        public Nullable<System.DateTime> createDate { get; set; }
+            //        public Nullable<System.DateTime> updateDate { get; set; }
+            //        public Nullable<long> createUserId { get; set; }
+            //        public Nullable<long> updateUserId { get; set; }
+
+
+            //                    */
+
+
+
+            //                    if (List == null)
+            //                        return NotFound();
+            //                    else
+            //                        return Ok(List);
+            //                }
+            //            }
+            //            //else
+            //            return NotFound();
         }
 
         // GET api/<controller>
         [HttpPost]
         [Route("GetByID")]
-      public string   GetByID(string token)
+        public string GetByID(string token)
         {
             // public ResponseVM GetPurinv(string token)int printerId
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -175,43 +165,37 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-
                     var item = entity.printers
-                   .Where(u => u.printerId == printerId)
-                   .Select(S => new
-                   {
-                       S.printerId,
-                       S.name,
-                       S.printFor,
-                       S.createDate,
-                       S.updateDate,
-                       S.createUserId,
-                       S.updateUserId,
-
-
-                   })
-                           .FirstOrDefault();
+                        .Where(u => u.printerId == printerId)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.printerId,
+                                    S.name,
+                                    S.printFor,
+                                    S.createDate,
+                                    S.updateDate,
+                                    S.createUserId,
+                                    S.updateUserId,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(item);
                 }
             }
-
-
         }
 
         // add or update location
         [HttpPost]
         [Route("Save")]
-      public string   Save(string token)
+        public string Save(string token)
         {
-
-
             //string Object
             string message = "";
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -227,14 +211,15 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<printers>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<printers>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
                     printers tmpObject;
                     if (newObject.updateUserId == 0 || newObject.updateUserId == null)
                     {
@@ -254,10 +239,9 @@ namespace POS_Server.Controllers
                             var locationEntity = entity.Set<printers>();
                             if (newObject.printerId == 0)
                             {
-                                newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 newObject.updateUserId = newObject.createUserId;
-
 
                                 locationEntity.Add(newObject);
                                 entity.SaveChanges();
@@ -265,9 +249,11 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                tmpObject = entity.printers.Where(p => p.printerId == newObject.printerId).FirstOrDefault();
+                                tmpObject = entity.printers
+                                    .Where(p => p.printerId == newObject.printerId)
+                                    .FirstOrDefault();
 
-                                tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 tmpObject.updateUserId = newObject.updateUserId;
 
                                 tmpObject.name = newObject.name;
@@ -276,9 +262,6 @@ namespace POS_Server.Controllers
 
                                 tmpObject.printFor = newObject.printFor;
 
-
-
-
                                 entity.SaveChanges();
 
                                 message = tmpObject.printerId.ToString();
@@ -286,34 +269,26 @@ namespace POS_Server.Controllers
                             //  entity.SaveChanges();
                         }
                         return TokenManager.GenerateToken(message);
-
                     }
                     catch
                     {
                         message = "0";
-                      return TokenManager.GenerateToken(message);
+                        return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
-              return TokenManager.GenerateToken(message);
-
+                return TokenManager.GenerateToken(message);
             }
-
-         
         }
 
         [HttpPost]
         [Route("Delete")]
-            public string   Delete(string token)
-        {//int printerId
+        public string Delete(string token)
+        { //int printerId
             string message = "";
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -322,7 +297,6 @@ namespace POS_Server.Controllers
             {
                 long printerId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -330,7 +304,6 @@ namespace POS_Server.Controllers
                     {
                         printerId = long.Parse(c.Value);
                     }
-
                 }
 
                 try
@@ -341,8 +314,6 @@ namespace POS_Server.Controllers
 
                         entity.printers.Remove(objectDelete);
                         message = entity.SaveChanges().ToString();
-
-                   
                     }
                     return TokenManager.GenerateToken(message);
                 }
@@ -350,10 +321,7 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
-
 
             //var re = Request;
             //
@@ -395,7 +363,7 @@ namespace POS_Server.Controllers
         public long Save(printers newObject)
         {
             //string Object
-           long message = 0;
+            long message = 0;
             if (newObject != null)
             {
                 printers tmpObject;
@@ -426,7 +394,9 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.printers.Where(p => p.printerId == newObject.printerId).FirstOrDefault();
+                            tmpObject = entity.printers
+                                .Where(p => p.printerId == newObject.printerId)
+                                .FirstOrDefault();
 
                             tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpObject.updateUserId = newObject.updateUserId;
@@ -451,8 +421,5 @@ namespace POS_Server.Controllers
                 return 0;
             }
         }
-
-
-
     }
 }

@@ -13,88 +13,89 @@ using System.Security.Cryptography;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography {
-
+namespace MonoTests.System.Security.Cryptography
+{
     [TestFixture]
-    public class RNGCryptoServiceProviderTest {
-
+    public class RNGCryptoServiceProviderTest
+    {
         private RNGCryptoServiceProvider _algo;
-        
+
         [SetUp]
-        public void SetUp () 
+        public void SetUp()
         {
-            _algo = new RNGCryptoServiceProvider ();
+            _algo = new RNGCryptoServiceProvider();
         }
 
         [Test]
-        public void ConstructorByteArray () 
+        public void ConstructorByteArray()
         {
-            byte[] array = new byte [16];
-            byte[] seed = (byte[]) array.Clone ();
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider (seed);
-            Assert.AreEqual (BitConverter.ToString (array), BitConverter.ToString (seed), "Seed");
+            byte[] array = new byte[16];
+            byte[] seed = (byte[])array.Clone();
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider(seed);
+            Assert.AreEqual(BitConverter.ToString(array), BitConverter.ToString(seed), "Seed");
         }
 
         [Test]
-        public void ConstructorByteArray_Null () 
+        public void ConstructorByteArray_Null()
         {
             byte[] array = null;
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider (array);
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider(array);
         }
 
         [Test]
-        public void ConstructorCsp_Null () 
+        public void ConstructorCsp_Null()
         {
             CspParameters csp = null;
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider (csp);
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider(csp);
         }
 
         [Test]
-        public void ConstructorString () 
+        public void ConstructorString()
         {
             string s = "Mono seed";
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider (s);
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider(s);
         }
 
         [Test]
-        public void ConstructorString_Null () 
+        public void ConstructorString_Null()
         {
             string s = null;
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider (s);
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider(s);
         }
 
         [Test]
-        public void GetBytes () 
+        public void GetBytes()
         {
-            byte[] random = new byte [25];
+            byte[] random = new byte[25];
             // The C code doesn't throw an exception yet.
-            _algo.GetBytes (random);
+            _algo.GetBytes(random);
         }
 
         [Test]
-        public void GetNonZeroBytes () 
+        public void GetNonZeroBytes()
         {
-            byte[] random = new byte [25];
+            byte[] random = new byte[25];
             // This one we can check...
-            _algo.GetNonZeroBytes (random);
-            
-            foreach (Byte rnd_byte in random) {
+            _algo.GetNonZeroBytes(random);
+
+            foreach (Byte rnd_byte in random)
+            {
                 Assert.IsTrue(rnd_byte != 0);
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void GetBytesNull () 
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetBytesNull()
         {
-            _algo.GetBytes (null);
+            _algo.GetBytes(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void GetNonZeroBytesNull () 
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetNonZeroBytesNull()
         {
-            _algo.GetNonZeroBytes (null);
+            _algo.GetNonZeroBytes(null);
         }
     }
 }

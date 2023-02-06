@@ -24,8 +24,7 @@ public abstract class RelationalTypeMapperTestBase
         return builder.Model.FindEntityType(typeof(TEntity));
     }
 
-    protected IModel CreateModel()
-        => CreateEntityType<MyType>().Model.FinalizeModel();
+    protected IModel CreateModel() => CreateEntityType<MyType>().Model.FinalizeModel();
 
     protected RelationalTypeMapping GetTypeMapping(
         Type propertyType,
@@ -37,12 +36,12 @@ public abstract class RelationalTypeMapperTestBase
         bool? unicode = null,
         bool? fixedLength = null,
         string storeTypeName = null,
-        bool useConfiguration = false)
+        bool useConfiguration = false
+    )
     {
         if (useConfiguration)
         {
-            var model = CreateModelBuilder(
-                c =>
+            var model = CreateModelBuilder(c =>
                 {
                     var scalarBuilder = c.DefaultTypeMapping(propertyType);
 
@@ -82,7 +81,8 @@ public abstract class RelationalTypeMapperTestBase
                     {
                         scalarBuilder.HasColumnType(storeTypeName);
                     }
-                }).FinalizeModel();
+                })
+                .FinalizeModel();
 
             return CreateRelationalTypeMappingSource().GetMapping(propertyType, model);
         }
@@ -134,11 +134,14 @@ public abstract class RelationalTypeMapperTestBase
             }
 
             var model = modelBuilder.Model.FinalizeModel();
-            return CreateRelationalTypeMappingSource().GetMapping(model.FindEntityType(typeof(MyType)).FindProperty(property.Name));
+            return CreateRelationalTypeMappingSource()
+                .GetMapping(model.FindEntityType(typeof(MyType)).FindProperty(property.Name));
         }
     }
 
-    protected abstract ModelBuilder CreateModelBuilder(Action<ModelConfigurationBuilder> configureConventions = null);
+    protected abstract ModelBuilder CreateModelBuilder(
+        Action<ModelConfigurationBuilder> configureConventions = null
+    );
     protected abstract IRelationalTypeMappingSource CreateRelationalTypeMappingSource();
 
     protected class MyType

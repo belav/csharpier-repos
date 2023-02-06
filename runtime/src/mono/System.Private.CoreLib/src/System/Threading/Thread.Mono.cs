@@ -19,9 +19,11 @@ namespace System.Threading
 #pragma warning disable 169, 414, 649
         #region Sync with metadata/object-internals.h
         private int lock_thread_id;
+
         // stores a thread handle
         private IntPtr handle;
         private IntPtr native_handle; // used only on Win32
+
         /* accessed only from unmanaged code */
         private IntPtr name;
         private int name_free; // bool
@@ -29,6 +31,7 @@ namespace System.Threading
         private ThreadState state;
         private object? abort_exc;
         private int abort_state_handle;
+
         /* thread_id is only accessed from unmanaged code */
         internal long thread_id;
         private IntPtr debugger_thread; // FIXME switch to bool as soon as CI testing with corlib version bump works
@@ -37,6 +40,7 @@ namespace System.Threading
         private int interruption_requested;
         private IntPtr longlived;
         internal bool threadpool_thread;
+
         /* These are used from managed code */
         internal byte apartment_state;
         internal int managed_id;
@@ -89,7 +93,8 @@ namespace System.Threading
             get
             {
                 ThreadState state = GetState(this);
-                return (state & (ThreadState.Unstarted | ThreadState.Stopped | ThreadState.Aborted)) == 0;
+                return (state & (ThreadState.Unstarted | ThreadState.Stopped | ThreadState.Aborted))
+                    == 0;
             }
         }
 
@@ -122,10 +127,7 @@ namespace System.Threading
                 ValidateThreadState();
                 return threadpool_thread;
             }
-            internal set
-            {
-                threadpool_thread = value;
-            }
+            internal set { threadpool_thread = value; }
         }
 
         public int ManagedThreadId => managed_id;
@@ -147,7 +149,11 @@ namespace System.Threading
 
                 WaitSubsystem.ThreadWaitInfo AllocateWaitInfo()
                 {
-                    Interlocked.CompareExchange(ref _waitInfo, new WaitSubsystem.ThreadWaitInfo(this), null!);
+                    Interlocked.CompareExchange(
+                        ref _waitInfo,
+                        new WaitSubsystem.ThreadWaitInfo(this),
+                        null!
+                    );
                     return _waitInfo;
                 }
             }
@@ -236,11 +242,12 @@ namespace System.Threading
         }
 
         // Called from the runtime
-        internal static void ThrowThreadStartException(Exception ex) => throw new ThreadStartException(ex);
+        internal static void ThrowThreadStartException(Exception ex) =>
+            throw new ThreadStartException(ex);
 
         private void StartCore()
         {
-             StartInternal(this, _startHelper?._maxStackSize ?? 0);
+            StartInternal(this, _startHelper?._maxStackSize ?? 0);
         }
 
         [DynamicDependency(nameof(StartCallback))]
@@ -261,17 +268,17 @@ namespace System.Threading
 
         private static bool SetApartmentStateUnchecked(ApartmentState state, bool throwOnError)
         {
-             if (state != ApartmentState.Unknown)
-             {
+            if (state != ApartmentState.Unknown)
+            {
                 if (throwOnError)
                 {
                     throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
                 }
 
                 return false;
-             }
+            }
 
-             return true;
+            return true;
         }
 
         private ThreadState ValidateThreadState()
@@ -351,9 +358,7 @@ namespace System.Threading
         private static extern bool YieldInternal();
 
         [Intrinsic]
-        private static void SpinWait_nop()
-        {
-        }
+        private static void SpinWait_nop() { }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern bool JoinInternal(Thread thread, int millisecondsTimeout);
