@@ -249,24 +249,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        document1,
-                        document2,
-                        document3
-                    }
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        fixedDocument1,
-                        fixedDocument2,
-                        fixedDocument3
-                    }
-                }
+                TestState = { Sources = { document1, document2, document3 } },
+                FixedState = { Sources = { fixedDocument1, fixedDocument2, fixedDocument3 } }
             }.RunAsync();
         }
 

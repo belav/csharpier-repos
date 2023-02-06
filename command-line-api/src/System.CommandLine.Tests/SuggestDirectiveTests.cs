@@ -183,7 +183,9 @@ namespace System.CommandLine.Tests
                     new Option<bool>("--option2"),
                     new Argument<string>()
                 }
-            ).UseSuggestDirective().Build();
+            )
+                .UseSuggestDirective()
+                .Build();
 
             var console = new TestConsole();
 

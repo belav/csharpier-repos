@@ -277,12 +277,7 @@ namespace System.ComponentModel.Composition
 
             var importer = new ImporterWriteOnlyExportCollection();
 
-            List<int> values = new List<int>()
-            {
-                21,
-                32,
-                43
-            };
+            List<int> values = new List<int>() { 21, 32, 43 };
 
             batch.AddPart(importer);
             values.ForEach(v => batch.AddExportedValue("Value", v));
@@ -314,12 +309,7 @@ namespace System.ComponentModel.Composition
 
             var importer = new ImporterWriteOnlyIEnumerableOfT();
 
-            List<int> values = new List<int>()
-            {
-                21,
-                32,
-                43
-            };
+            List<int> values = new List<int>() { 21, 32, 43 };
 
             batch.AddPart(importer);
             values.ForEach(v => batch.AddExportedValue("Value", v));
@@ -348,12 +338,7 @@ namespace System.ComponentModel.Composition
 
             var importer = new ImporterWriteOnlyArray();
 
-            List<int> values = new List<int>()
-            {
-                21,
-                32,
-                43
-            };
+            List<int> values = new List<int>() { 21, 32, 43 };
 
             batch.AddPart(importer);
             values.ForEach(v => batch.AddExportedValue("Value", v));

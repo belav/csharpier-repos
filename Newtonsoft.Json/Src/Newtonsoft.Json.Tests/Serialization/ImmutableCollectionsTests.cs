@@ -49,12 +49,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeList()
         {
             ImmutableList<string> l = ImmutableList.CreateRange(
-                new List<string>
-                {
-                    "One",
-                    "II",
-                    "3"
-                }
+                new List<string> { "One", "II", "3" }
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
@@ -113,12 +108,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeArray()
         {
             ImmutableArray<string> l = ImmutableArray.CreateRange(
-                new List<string>
-                {
-                    "One",
-                    "II",
-                    "3"
-                }
+                new List<string> { "One", "II", "3" }
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
@@ -166,12 +156,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeQueue()
         {
             ImmutableQueue<string> l = ImmutableQueue.CreateRange(
-                new List<string>
-                {
-                    "One",
-                    "II",
-                    "3"
-                }
+                new List<string> { "One", "II", "3" }
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
@@ -229,12 +214,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeStack()
         {
             ImmutableStack<string> l = ImmutableStack.CreateRange(
-                new List<string>
-                {
-                    "One",
-                    "II",
-                    "3"
-                }
+                new List<string> { "One", "II", "3" }
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
@@ -292,12 +272,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeHashSet()
         {
             ImmutableHashSet<string> l = ImmutableHashSet.CreateRange(
-                new List<string>
-                {
-                    "One",
-                    "II",
-                    "3"
-                }
+                new List<string> { "One", "II", "3" }
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
@@ -355,12 +330,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeSortedSet()
         {
             ImmutableSortedSet<string> l = ImmutableSortedSet.CreateRange(
-                new List<string>
-                {
-                    "One",
-                    "II",
-                    "3"
-                }
+                new List<string> { "One", "II", "3" }
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);

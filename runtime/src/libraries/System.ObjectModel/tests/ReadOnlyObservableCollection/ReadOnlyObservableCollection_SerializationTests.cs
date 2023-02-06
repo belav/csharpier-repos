@@ -25,14 +25,7 @@ namespace System.Collections.ObjectModel.Tests
             };
             yield return new object[]
             {
-                new ReadOnlyObservableCollection<int>(
-                    new ObservableCollection<int>()
-                    {
-                        1,
-                        2,
-                        3
-                    }
-                )
+                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1, 2, 3 })
             };
         }
 

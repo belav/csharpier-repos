@@ -651,29 +651,14 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             new[] { "1", null },
             c =>
             {
-                c.Collection = new List<string>
-                {
-                    "3",
-                    "2",
-                    "1"
-                };
+                c.Collection = new List<string> { "3", "2", "1" };
             },
-            new List<string>
-            {
-                "3",
-                "2",
-                "1"
-            }
+            new List<string> { "3", "2", "1" }
         );
 
         // See #25343
         await Can_add_update_delete_with_collection(
-            new List<EntityType>
-            {
-                EntityType.Base,
-                EntityType.Derived,
-                EntityType.Derived
-            },
+            new List<EntityType> { EntityType.Base, EntityType.Derived, EntityType.Derived },
             c =>
             {
                 c.Collection.Clear();

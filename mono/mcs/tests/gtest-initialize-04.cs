@@ -3,12 +3,7 @@ using System.Collections.Generic;
 
 public class C
 {
-    static readonly List<int> values = new List<int>
-    {
-        1,
-        2,
-        3
-    };
+    static readonly List<int> values = new List<int> { 1, 2, 3 };
 
     public static int Main()
     {

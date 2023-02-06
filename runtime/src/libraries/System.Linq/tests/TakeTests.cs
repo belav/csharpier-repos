@@ -1660,53 +1660,25 @@ namespace System.Linq.Tests
         [Fact]
         public void MutableSource()
         {
-            var source1 = new List<int>()
-            {
-                0,
-                1,
-                2,
-                3,
-                4
-            };
+            var source1 = new List<int>() { 0, 1, 2, 3, 4 };
             var query1 = source1.Take(3);
             source1.RemoveAt(0);
             source1.InsertRange(2, new[] { -1, -2 });
             Assert.Equal(new[] { 1, 2, -1 }, query1);
 
-            var source2 = new List<int>()
-            {
-                0,
-                1,
-                2,
-                3,
-                4
-            };
+            var source2 = new List<int>() { 0, 1, 2, 3, 4 };
             var query2 = source2.Take(0..3);
             source2.RemoveAt(0);
             source2.InsertRange(2, new[] { -1, -2 });
             Assert.Equal(new[] { 1, 2, -1 }, query2);
 
-            var source3 = new List<int>()
-            {
-                0,
-                1,
-                2,
-                3,
-                4
-            };
+            var source3 = new List<int>() { 0, 1, 2, 3, 4 };
             var query3 = source3.Take(^6..3);
             source3.RemoveAt(0);
             source3.InsertRange(2, new[] { -1, -2 });
             Assert.Equal(new[] { 1, 2, -1 }, query3);
 
-            var source4 = new List<int>()
-            {
-                0,
-                1,
-                2,
-                3,
-                4
-            };
+            var source4 = new List<int>() { 0, 1, 2, 3, 4 };
             var query4 = source4.Take(^6..^3);
             source4.RemoveAt(0);
             source4.InsertRange(2, new[] { -1, -2 });
@@ -1716,53 +1688,25 @@ namespace System.Linq.Tests
         [Fact]
         public void MutableSourceNotList()
         {
-            var source1 = new List<int>()
-            {
-                0,
-                1,
-                2,
-                3,
-                4
-            };
+            var source1 = new List<int>() { 0, 1, 2, 3, 4 };
             var query1 = ForceNotCollection(source1).Select(i => i).Take(3);
             source1.RemoveAt(0);
             source1.InsertRange(2, new[] { -1, -2 });
             Assert.Equal(new[] { 1, 2, -1 }, query1);
 
-            var source2 = new List<int>()
-            {
-                0,
-                1,
-                2,
-                3,
-                4
-            };
+            var source2 = new List<int>() { 0, 1, 2, 3, 4 };
             var query2 = ForceNotCollection(source2).Select(i => i).Take(0..3);
             source2.RemoveAt(0);
             source2.InsertRange(2, new[] { -1, -2 });
             Assert.Equal(new[] { 1, 2, -1 }, query2);
 
-            var source3 = new List<int>()
-            {
-                0,
-                1,
-                2,
-                3,
-                4
-            };
+            var source3 = new List<int>() { 0, 1, 2, 3, 4 };
             var query3 = ForceNotCollection(source3).Select(i => i).Take(^6..3);
             source3.RemoveAt(0);
             source3.InsertRange(2, new[] { -1, -2 });
             Assert.Equal(new[] { 1, 2, -1 }, query3);
 
-            var source4 = new List<int>()
-            {
-                0,
-                1,
-                2,
-                3,
-                4
-            };
+            var source4 = new List<int>() { 0, 1, 2, 3, 4 };
             var query4 = ForceNotCollection(source4).Select(i => i).Take(^6..^3);
             source4.RemoveAt(0);
             source4.InsertRange(2, new[] { -1, -2 });

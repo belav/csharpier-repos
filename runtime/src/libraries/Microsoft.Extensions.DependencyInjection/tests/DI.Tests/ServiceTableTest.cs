@@ -31,12 +31,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         }
 
         public static TheoryData Constructor_WithInstance_ThrowsIfServiceTypeIsOpenGenericData =>
-            new TheoryData<object>
-            {
-                new List<int>(),
-                "Hello world",
-                new object()
-            };
+            new TheoryData<object> { new List<int>(), "Hello world", new object() };
 
         [Theory]
         [MemberData(nameof(Constructor_WithInstance_ThrowsIfServiceTypeIsOpenGenericData))]

@@ -1107,14 +1107,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             TypeNameProperty typeNameProperty = new TypeNameProperty
             {
                 Name = "Name!",
-                Value = new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
+                Value = new List<int> { 1, 2, 3, 4, 5 }
             };
 
             string json = JsonConvert.SerializeObject(typeNameProperty, Formatting.Indented);
@@ -2543,36 +2536,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             var input = new List<Stack<string>>();
 
-            input.Add(
-                new Stack<string>(
-                    new List<string>
-                    {
-                        "One",
-                        "Two",
-                        "Three"
-                    }
-                )
-            );
-            input.Add(
-                new Stack<string>(
-                    new List<string>
-                    {
-                        "Four",
-                        "Five",
-                        "Six"
-                    }
-                )
-            );
-            input.Add(
-                new Stack<string>(
-                    new List<string>
-                    {
-                        "Seven",
-                        "Eight",
-                        "Nine"
-                    }
-                )
-            );
+            input.Add(new Stack<string>(new List<string> { "One", "Two", "Three" }));
+            input.Add(new Stack<string>(new List<string> { "Four", "Five", "Six" }));
+            input.Add(new Stack<string>(new List<string> { "Seven", "Eight", "Nine" }));
 
             string serialized = JsonConvert.SerializeObject(
                 input,

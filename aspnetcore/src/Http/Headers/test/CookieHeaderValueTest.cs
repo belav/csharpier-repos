@@ -28,15 +28,7 @@ public class CookieHeaderValueTest
 
     public static TheoryData<string> InvalidCookieHeaderDataSet
     {
-        get
-        {
-            return new TheoryData<string>
-            {
-                "=value",
-                "name=value;",
-                "name=value,",
-            };
-        }
+        get { return new TheoryData<string> { "=value", "name=value;", "name=value,", }; }
     }
 
     public static TheoryData<string> InvalidCookieNames

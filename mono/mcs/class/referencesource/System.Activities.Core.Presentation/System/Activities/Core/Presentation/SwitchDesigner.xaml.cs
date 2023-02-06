@@ -118,12 +118,7 @@ namespace System.Activities.Core.Presentation
             {
                 if (defaultTypes == null)
                 {
-                    defaultTypes = new List<Type>
-                    {
-                        typeof(bool),
-                        typeof(int),
-                        typeof(string),
-                    };
+                    defaultTypes = new List<Type> { typeof(bool), typeof(int), typeof(string), };
                 }
                 return defaultTypes;
             }

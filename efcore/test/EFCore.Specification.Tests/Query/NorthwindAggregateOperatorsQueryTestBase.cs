@@ -1802,12 +1802,7 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_any_equals_operator(bool async)
     {
-        var ids = new List<string>
-        {
-            "ABCDE",
-            "ALFKI",
-            "ANATR"
-        };
+        var ids = new List<string> { "ABCDE", "ALFKI", "ANATR" };
 
         return AssertQuery(
             async,
@@ -1833,12 +1828,7 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_any_equals_static(bool async)
     {
-        var ids = new List<string>
-        {
-            "ABCDE",
-            "ALFKI",
-            "ANATR"
-        };
+        var ids = new List<string> { "ABCDE", "ALFKI", "ANATR" };
 
         return AssertQuery(
             async,
@@ -1876,12 +1866,7 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_all_not_equals_operator(bool async)
     {
-        var ids = new List<string>
-        {
-            "ABCDE",
-            "ALFKI",
-            "ANATR"
-        };
+        var ids = new List<string> { "ABCDE", "ALFKI", "ANATR" };
 
         return AssertQuery(
             async,
@@ -1899,12 +1884,9 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                 ss.Set<Customer>()
                     .Where(
                         c =>
-                            new List<string>
-                            {
-                                "ABCDE",
-                                "ALFKI",
-                                "ANATR"
-                            }.All(li => !li.Equals(c.CustomerID))
+                            new List<string> { "ABCDE", "ALFKI", "ANATR" }.All(
+                                li => !li.Equals(c.CustomerID)
+                            )
                     ),
             entryCount: 89
         );
@@ -1913,12 +1895,7 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_all_not_equals_static(bool async)
     {
-        var ids = new List<string>
-        {
-            "ABCDE",
-            "ALFKI",
-            "ANATR"
-        };
+        var ids = new List<string> { "ABCDE", "ALFKI", "ANATR" };
 
         return AssertQuery(
             async,
@@ -1931,12 +1908,7 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_subquery_where_all(bool async)
     {
-        var ids = new List<string>
-        {
-            "ABCDE",
-            "ALFKI",
-            "ANATR"
-        };
+        var ids = new List<string> { "ABCDE", "ALFKI", "ANATR" };
 
         await AssertQuery(
             async,

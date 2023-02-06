@@ -179,12 +179,7 @@ namespace System.Collections.Concurrent.Tests
         public static void TestDebuggerAttributes()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(new BlockingCollection<int>());
-            BlockingCollection<int> col = new BlockingCollection<int>
-            {
-                1,
-                2,
-                3
-            };
+            BlockingCollection<int> col = new BlockingCollection<int> { 1, 2, 3 };
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 col
             );

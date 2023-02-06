@@ -952,12 +952,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeCustomReadOnlyCollection()
         {
-            IList<int> l = new List<int>
-            {
-                1,
-                2,
-                3
-            };
+            IList<int> l = new List<int> { 1, 2, 3 };
 
             CustomReadOnlyCollection<int> list = new CustomReadOnlyCollection<int>(l);
 
@@ -2299,13 +2294,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void ReadOnlyIntegerList()
         {
             ReadOnlyIntegerList l = new ReadOnlyIntegerList(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    int.MaxValue
-                }
+                new List<int> { 1, 2, 3, int.MaxValue }
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);

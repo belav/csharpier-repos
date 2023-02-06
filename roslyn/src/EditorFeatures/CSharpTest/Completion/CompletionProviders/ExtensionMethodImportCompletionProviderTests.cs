@@ -70,12 +70,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         {
             get
             {
-                var predefinedTypes = new List<string>()
-                {
-                    "string",
-                    "String",
-                    "System.String"
-                };
+                var predefinedTypes = new List<string>() { "string", "String", "System.String" };
                 var arraySuffixes = new[] { "", "[]", "[,]" };
 
                 foreach (var type1 in predefinedTypes)

@@ -3100,12 +3100,7 @@ namespace Moq.Tests.Regressions
 
             public Issue897()
             {
-                this.data = new List<int>
-                {
-                    1,
-                    2,
-                    3
-                };
+                this.data = new List<int> { 1, 2, 3 };
             }
 
             [Fact]

@@ -590,12 +590,7 @@ public class CSharpRuntimeModelCodeGenerator : ICompiledModelCodeGenerator
         using (mainBuilder.Indent())
         {
             const string entityTypeVariable = "runtimeEntityType";
-            var variables = new HashSet<string>
-            {
-                "model",
-                "baseEntityType",
-                entityTypeVariable
-            };
+            var variables = new HashSet<string> { "model", "baseEntityType", entityTypeVariable };
 
             var parameters = new CSharpRuntimeAnnotationCodeGeneratorParameters(
                 entityTypeVariable,

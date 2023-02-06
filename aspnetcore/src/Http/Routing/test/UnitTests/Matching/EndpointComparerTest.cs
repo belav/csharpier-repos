@@ -244,12 +244,7 @@ public class RouteEndpointComparerTest
         var endpoint2 = CreateEndpoint("/i", order: 0);
         var endpoint3 = CreateEndpoint("/\u0131", order: 0); // Turkish lowercase i
 
-        var list = new List<RouteEndpoint>()
-        {
-            endpoint1,
-            endpoint2,
-            endpoint3
-        };
+        var list = new List<RouteEndpoint>() { endpoint1, endpoint2, endpoint3 };
 
         var comparer = CreateComparer();
 

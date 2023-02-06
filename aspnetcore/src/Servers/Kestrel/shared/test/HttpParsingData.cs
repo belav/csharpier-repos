@@ -430,14 +430,7 @@ public class HttpParsingData
     public static IEnumerable<string> QueryStringWithNullCharData => new[] { "/?\0=a", "/?a=\0", };
 
     public static TheoryData<string> UnrecognizedHttpVersionData =>
-        new TheoryData<string>
-        {
-            "http/1.0",
-            "http/1.1",
-            "HTTP/1.2",
-            "HTTP/3.0",
-            "8charact",
-        };
+        new TheoryData<string> { "http/1.0", "http/1.1", "HTTP/1.2", "HTTP/3.0", "8charact", };
 
     public static IEnumerable<object[]> RequestHeaderInvalidDataLineFeedTerminator =>
         new[]

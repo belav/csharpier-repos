@@ -427,12 +427,7 @@ public abstract class CompositeKeysData : ISetSource
         };
 
         l1s[0].OneToMany_Required1.Add(l2s[10]);
-        l1s[0].OneToMany_Required_Self1 = new List<CompositeOne>
-        {
-            l1s[0],
-            l1s[1],
-            l1s[11]
-        };
+        l1s[0].OneToMany_Required_Self1 = new List<CompositeOne> { l1s[0], l1s[1], l1s[11] };
         l1s[1].OneToMany_Required_Self1 = new List<CompositeOne> { l1s[2], l1s[12] };
         l1s[2].OneToMany_Required_Self1 = new List<CompositeOne> { l1s[3] };
         l1s[3].OneToMany_Required_Self1 = new List<CompositeOne> { l1s[4] };
@@ -482,12 +477,7 @@ public abstract class CompositeKeysData : ISetSource
             l3s[9]
         };
 
-        l2s[0].OneToMany_Required_Self2 = new List<CompositeTwo>
-        {
-            l2s[0],
-            l2s[1],
-            l2s[10]
-        };
+        l2s[0].OneToMany_Required_Self2 = new List<CompositeTwo> { l2s[0], l2s[1], l2s[10] };
         l2s[1].OneToMany_Required_Self2 = new List<CompositeTwo> { l2s[2] };
         l2s[2].OneToMany_Required_Self2 = new List<CompositeTwo> { l2s[3] };
         l2s[3].OneToMany_Required_Self2 = new List<CompositeTwo> { l2s[4] };
@@ -834,12 +824,7 @@ public abstract class CompositeKeysData : ISetSource
         l2s[6].OneToOne_Optional_FK2 = l3s[2];
         l2s[8].OneToOne_Optional_FK2 = l3s[0];
 
-        l2s[0].OneToMany_Optional2 = new List<CompositeThree>
-        {
-            l3s[1],
-            l3s[5],
-            l3s[9]
-        };
+        l2s[0].OneToMany_Optional2 = new List<CompositeThree> { l3s[1], l3s[5], l3s[9] };
         l2s[1].OneToMany_Optional2 = new List<CompositeThree> { l3s[3], l3s[7] };
 
         l2s[1].OneToMany_Optional_Self2 = new List<CompositeTwo> { l2s[0] };

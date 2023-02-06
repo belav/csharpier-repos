@@ -2061,13 +2061,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
             order5.Details = new List<OrderDetail>();
             ownedPerson4.Orders = new List<Order> { order5 };
 
-            return new List<OwnedPerson>
-            {
-                ownedPerson1,
-                ownedPerson2,
-                ownedPerson3,
-                ownedPerson4
-            };
+            return new List<OwnedPerson> { ownedPerson1, ownedPerson2, ownedPerson3, ownedPerson4 };
         }
 
         private static IReadOnlyList<Fink> CreateFinks() => new List<Fink> { new() { Id = 1 } };

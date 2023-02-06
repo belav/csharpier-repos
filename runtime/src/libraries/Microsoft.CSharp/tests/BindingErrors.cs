@@ -577,12 +577,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             // Indexers' accessors can be accessed directly. This is against the C# rules, which only allow
             // direct access of indexer accessors when they are not the default member as C# has no other
             // way to express such access, but being stricter would be a breaking change.
-            List<int> list = new List<int>
-            {
-                1,
-                2,
-                3
-            };
+            List<int> list = new List<int> { 1, 2, 3 };
             dynamic d = list;
             d.set_Item(2, 4);
             dynamic e = d.get_Item(2);

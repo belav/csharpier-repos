@@ -60,15 +60,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void CreateWithMultiValue()
         {
-            JConstructor constructor = new JConstructor(
-                "Test",
-                new List<int>
-                {
-                    1,
-                    2,
-                    3
-                }
-            );
+            JConstructor constructor = new JConstructor("Test", new List<int> { 1, 2, 3 });
             Assert.AreEqual("Test", constructor.Name);
             Assert.AreEqual(3, constructor.Children().Count());
             Assert.AreEqual(1, (int)constructor.Children().ElementAt(0));

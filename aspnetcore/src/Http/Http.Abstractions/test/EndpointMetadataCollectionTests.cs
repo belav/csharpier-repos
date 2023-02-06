@@ -11,14 +11,7 @@ public class EndpointMetadataCollectionTests
     public void Constructor_Enumeration_ContainsValues()
     {
         // Arrange & Act
-        var metadata = new EndpointMetadataCollection(
-            new List<object>
-            {
-                1,
-                2,
-                3,
-            }
-        );
+        var metadata = new EndpointMetadataCollection(new List<object> { 1, 2, 3, });
 
         // Assert
         Assert.Equal(3, metadata.Count);

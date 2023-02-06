@@ -1565,12 +1565,7 @@ public class RelationalScaffoldingModelFactoryTest
             {
                 Table = Table,
                 Name = "IX_unspecified",
-                Columns =
-                {
-                    table.Columns[0],
-                    table.Columns[1],
-                    table.Columns[2]
-                }
+                Columns = { table.Columns[0], table.Columns[1], table.Columns[2] }
             }
         );
 
@@ -1579,18 +1574,8 @@ public class RelationalScaffoldingModelFactoryTest
             {
                 Table = Table,
                 Name = "IX_all_ascending",
-                Columns =
-                {
-                    table.Columns[0],
-                    table.Columns[1],
-                    table.Columns[2]
-                },
-                IsDescending =
-                {
-                    false,
-                    false,
-                    false
-                }
+                Columns = { table.Columns[0], table.Columns[1], table.Columns[2] },
+                IsDescending = { false, false, false }
             }
         );
 
@@ -1599,18 +1584,8 @@ public class RelationalScaffoldingModelFactoryTest
             {
                 Table = Table,
                 Name = "IX_all_descending",
-                Columns =
-                {
-                    table.Columns[0],
-                    table.Columns[1],
-                    table.Columns[2]
-                },
-                IsDescending =
-                {
-                    true,
-                    true,
-                    true
-                }
+                Columns = { table.Columns[0], table.Columns[1], table.Columns[2] },
+                IsDescending = { true, true, true }
             }
         );
 
@@ -1619,18 +1594,8 @@ public class RelationalScaffoldingModelFactoryTest
             {
                 Table = Table,
                 Name = "IX_mixed",
-                Columns =
-                {
-                    table.Columns[0],
-                    table.Columns[1],
-                    table.Columns[2]
-                },
-                IsDescending =
-                {
-                    false,
-                    true,
-                    false
-                }
+                Columns = { table.Columns[0], table.Columns[1], table.Columns[2] },
+                IsDescending = { false, true, false }
             }
         );
 

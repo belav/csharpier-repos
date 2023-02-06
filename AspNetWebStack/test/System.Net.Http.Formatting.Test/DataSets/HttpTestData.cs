@@ -473,13 +473,7 @@ namespace System.Net.Http.Formatting.DataSets
             get
             {
                 return new RefTypeTestData<string>(
-                    () =>
-                        new List<string>()
-                        {
-                            "1",
-                            "XMLHttpRequest",
-                            "\"quoted-string\""
-                        }
+                    () => new List<string>() { "1", "XMLHttpRequest", "\"quoted-string\"" }
                 );
             }
         }

@@ -25,13 +25,7 @@ namespace AutoMapper.UnitTests.Mappers
             {
                 var source = new Source
                 {
-                    Values = new List<int>
-                    {
-                        1,
-                        2,
-                        3,
-                        4,
-                    }
+                    Values = new List<int> { 1, 2, 3, 4, }
                 };
 
                 var dest = Mapper.Map<Destination>(source);
@@ -63,15 +57,7 @@ namespace AutoMapper.UnitTests.Mappers
             {
                 var source = new Source
                 {
-                    Values = new ReadOnlyCollection<int>(
-                        new List<int>
-                        {
-                            1,
-                            2,
-                            3,
-                            4,
-                        }
-                    )
+                    Values = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3, 4, })
                 };
 
                 var dest = Mapper.Map<Destination>(source);
@@ -103,13 +89,7 @@ namespace AutoMapper.UnitTests.Mappers
             {
                 var source = new Source
                 {
-                    Values = new List<int>
-                    {
-                        1,
-                        2,
-                        3,
-                        4,
-                    }
+                    Values = new List<int> { 1, 2, 3, 4, }
                 };
 
                 var dest = Mapper.Map<Destination>(source);
@@ -127,18 +107,8 @@ namespace AutoMapper.UnitTests.Mappers
             {
                 _sourceAsEnumerable = new SourceAsEnumerable()
                 {
-                    ValueInt = new List<int>()
-                    {
-                        1,
-                        2,
-                        3
-                    },
-                    ValueString = new List<string>()
-                    {
-                        "a",
-                        "b",
-                        "c"
-                    },
+                    ValueInt = new List<int>() { 1, 2, 3 },
+                    ValueString = new List<string>() { "a", "b", "c" },
                     ValueIUser = new List<IUser>() { new UserSource("z", 21) },
                     ValueUser = new List<UserSource>()
                     {

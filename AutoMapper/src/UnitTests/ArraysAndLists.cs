@@ -343,15 +343,7 @@ public class When_mapping_to_an_existing_HashSet_typed_as_IEnumerable : AutoMapp
 
     public class Destination
     {
-        public IEnumerable<int> IntCollection { get; set; } =
-            new HashSet<int>
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+        public IEnumerable<int> IntCollection { get; set; } = new HashSet<int> { 1, 2, 3, 4, 5 };
         public string Unmapped { get; }
     }
 
@@ -433,13 +425,7 @@ public class When_mapping_to_a_concrete_non_generic_ienumerable : AutoMapperSpec
             new Source
             {
                 Values = new[] { 1, 2, 3, 4 },
-                Values2 = new List<int>
-                {
-                    9,
-                    8,
-                    7,
-                    6
-                }
+                Values2 = new List<int> { 9, 8, 7, 6 }
             }
         );
     }
@@ -493,13 +479,7 @@ public class When_mapping_to_a_concrete_generic_ienumerable : AutoMapperSpecBase
             new Source
             {
                 Values = new[] { 1, 2, 3, 4 },
-                Values2 = new List<int>
-                {
-                    9,
-                    8,
-                    7,
-                    6
-                }
+                Values2 = new List<int> { 9, 8, 7, 6 }
             }
         );
     }
@@ -552,13 +532,7 @@ public class When_mapping_to_a_getter_only_ienumerable : AutoMapperSpecBase
             new Source
             {
                 Values = new[] { 1, 2, 3, 4 },
-                Values2 = new List<int>
-                {
-                    9,
-                    8,
-                    7,
-                    6
-                }
+                Values2 = new List<int> { 9, 8, 7, 6 }
             }
         );
 
@@ -597,13 +571,7 @@ public class When_mapping_to_a_getter_only_existing_ienumerable : AutoMapperSpec
             new Source
             {
                 Values = new[] { 1, 2, 3, 4 },
-                Values2 = new List<int>
-                {
-                    9,
-                    8,
-                    7,
-                    6
-                }
+                Values2 = new List<int> { 9, 8, 7, 6 }
             },
             _destination
         );
@@ -644,13 +612,7 @@ public class When_mapping_to_a_concrete_non_generic_icollection : AutoMapperSpec
             new Source
             {
                 Values = new[] { 1, 2, 3, 4 },
-                Values2 = new List<int>
-                {
-                    9,
-                    8,
-                    7,
-                    6
-                }
+                Values2 = new List<int> { 9, 8, 7, 6 }
             }
         );
     }
@@ -817,13 +779,7 @@ public class When_mapping_to_a_custom_list_with_the_same_type : AutoMapperSpecBa
     {
         _source = new Source
         {
-            Values = new ValueCollection
-            {
-                1,
-                2,
-                3,
-                4
-            }
+            Values = new ValueCollection { 1, 2, 3, 4 }
         };
         _destination = Mapper.Map<Source, Destination>(_source);
     }

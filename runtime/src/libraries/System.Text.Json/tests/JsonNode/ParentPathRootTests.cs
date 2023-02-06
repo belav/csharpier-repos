@@ -29,24 +29,14 @@ namespace System.Text.Json.Node.Tests
 
             node = new JsonObject
             {
-                ["Child"] = new JsonArray
-                {
-                    1,
-                    2,
-                    3
-                }
+                ["Child"] = new JsonArray { 1, 2, 3 }
             };
             Assert.Equal("$.Child[1]", node["Child"][1].GetPath());
             Assert.Same(node, node["Child"][1].Root);
 
             node = new JsonObject
             {
-                ["Child"] = new JsonArray
-                {
-                    1,
-                    2,
-                    3
-                }
+                ["Child"] = new JsonArray { 1, 2, 3 }
             };
             Assert.Equal("$.Child[2]", node["Child"][2].GetPath());
             Assert.Same(node, node["Child"][2].Root);

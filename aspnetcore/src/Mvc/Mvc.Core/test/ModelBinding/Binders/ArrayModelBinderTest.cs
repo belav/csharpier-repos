@@ -182,15 +182,7 @@ public class ArrayModelBinderTest
 
     public static TheoryData<int[]> ArrayModelData
     {
-        get
-        {
-            return new TheoryData<int[]>
-            {
-                new int[0],
-                new[] { 357 },
-                new[] { 357, 357 },
-            };
-        }
+        get { return new TheoryData<int[]> { new int[0], new[] { 357 }, new[] { 357, 357 }, }; }
     }
 
     // Here "fails silently" means the call does not update the array but also does not throw or set an error.

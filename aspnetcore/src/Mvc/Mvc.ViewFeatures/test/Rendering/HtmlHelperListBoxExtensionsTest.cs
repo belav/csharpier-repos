@@ -98,12 +98,7 @@ public class HtmlHelperListBoxExtensionsTest
             new ViewDataDictionary<TestModel>(metadataProvider)
         );
         helper.ViewContext.ClientValidationEnabled = false;
-        helper.ViewData["Property2"] = new List<string>
-        {
-            "1",
-            "2",
-            "5"
-        };
+        helper.ViewData["Property2"] = new List<string> { "1", "2", "5" };
 
         // Act
         var listBoxResult = helper.ListBox(
@@ -168,12 +163,7 @@ public class HtmlHelperListBoxExtensionsTest
         helper.ViewContext.ClientValidationEnabled = false;
         helper.ViewData.Model = new TestModel
         {
-            Property3 = new List<string>
-            {
-                "0",
-                "4",
-                "5"
-            }
+            Property3 = new List<string> { "0", "4", "5" }
         };
 
         // Act

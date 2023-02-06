@@ -306,12 +306,7 @@ namespace XLinqTests
                 {
                     null,
                     new object[] { null, null },
-                    new List<object>
-                    {
-                        null,
-                        null,
-                        null
-                    }
+                    new List<object> { null, null, null }
                 }
             };
             foreach (object paras in nulls)

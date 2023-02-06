@@ -80,23 +80,11 @@ namespace PageParserDefaultTypeProperties
             },
             {
                 2,
-                new List<Type>
-                {
-                    typeof(string),
-                    typeof(string),
-                    typeof(string),
-                    typeof(string)
-                }
+                new List<Type> { typeof(string), typeof(string), typeof(string), typeof(string) }
             },
             {
                 3,
-                new List<Type>
-                {
-                    null,
-                    null,
-                    null,
-                    null
-                }
+                new List<Type> { null, null, null, null }
             }
         };
 

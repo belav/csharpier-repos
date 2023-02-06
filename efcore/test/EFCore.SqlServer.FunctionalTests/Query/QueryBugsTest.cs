@@ -2388,12 +2388,7 @@ ORDER BY [m].[Id]
             var em = new Movie9202
             {
                 Title = "Ex Machina",
-                Cast = new List<Actor9202>
-                {
-                    av,
-                    oi,
-                    dg
-                },
+                Cast = new List<Actor9202> { av, oi, dg },
                 Details = new Details9202 { Info = "Best movie ever made" }
             };
 
@@ -6078,12 +6073,7 @@ CROSS JOIN (
             AddRange(
                 new Blog10447
                 {
-                    Posts = new List<Post10447>
-                    {
-                        new(),
-                        new(),
-                        new()
-                    }
+                    Posts = new List<Post10447> { new(), new(), new() }
                 },
                 new Blog10447
                 {

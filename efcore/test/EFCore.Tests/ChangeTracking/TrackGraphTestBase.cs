@@ -178,12 +178,7 @@ public abstract class TrackGraphTestBase
         using var context = new EarlyLearningCenter(GetType().Name);
         var category = new NullbileCategory
         {
-            Products = new List<NullbileProduct>
-            {
-                new(),
-                new(),
-                new()
-            }
+            Products = new List<NullbileProduct> { new(), new(), new() }
         };
 
         if (setKeys)

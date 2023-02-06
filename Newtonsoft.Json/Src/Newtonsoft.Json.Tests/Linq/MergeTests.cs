@@ -94,16 +94,7 @@ Parameter name: content",
                 new string[] { "3", "4" },
                 new JsonMergeSettings { MergeArrayHandling = MergeArrayHandling.Concat }
             );
-            Assert.AreEqual(
-                new JArray
-                {
-                    "1",
-                    "2",
-                    "3",
-                    "4"
-                },
-                a
-            );
+            Assert.AreEqual(new JArray { "1", "2", "3", "4" }, a);
         }
 
         [Test]
@@ -114,16 +105,7 @@ Parameter name: content",
                 new string[] { "2", "3", "4" },
                 new JsonMergeSettings { MergeArrayHandling = MergeArrayHandling.Union }
             );
-            Assert.AreEqual(
-                new JArray
-                {
-                    "1",
-                    "2",
-                    "3",
-                    "4"
-                },
-                a
-            );
+            Assert.AreEqual(new JArray { "1", "2", "3", "4" }, a);
         }
 
         [Test]

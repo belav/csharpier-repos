@@ -201,14 +201,7 @@ namespace System.Security.Claims
             var baseId2 = new GenericIdentity("generic_name2", "baseId2");
             var baseId3 = new GenericIdentity("generic_name3", "baseId3");
 
-            var cp = new ClaimsPrincipal(
-                new List<ClaimsIdentity>
-                {
-                    baseId1,
-                    baseId2,
-                    baseId3
-                }
-            );
+            var cp = new ClaimsPrincipal(new List<ClaimsIdentity> { baseId1, baseId2, baseId3 });
             Assert.NotNull(cp.Identities);
             Assert.Equal(3, cp.Identities.Count());
 

@@ -116,13 +116,7 @@ namespace System.Web.Http.ModelBinding
         public void RawValueToObjectArray_RawValueIsEnumerable_ReturnsInputAsArray()
         {
             // Assert
-            List<int> original = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            };
+            List<int> original = new List<int> { 1, 2, 3, 4 };
 
             // Act
             object[] retVal = ModelBindingHelper.RawValueToObjectArray(original);

@@ -33,12 +33,7 @@ public class DynamicObjectAdapterTest
         // Arrange
         var adapter = new DynamicObjectAdapter();
         dynamic target = new DynamicTestObject();
-        target.List = new List<int>()
-        {
-            1,
-            2,
-            3
-        };
+        target.List = new List<int>() { 1, 2, 3 };
         var value = new List<string>() { "stringValue1", "stringValue2" };
         var segment = "List";
         var resolver = new DefaultContractResolver();
@@ -305,12 +300,7 @@ public class DynamicObjectAdapterTest
     {
         var adapter = new DynamicObjectAdapter();
         dynamic target = new DynamicTestObject();
-        var value = new List<object>()
-        {
-            "Joana",
-            2,
-            new Customer("Joana", 25)
-        };
+        var value = new List<object>() { "Joana", 2, new Customer("Joana", 25) };
         target.NewProperty = value;
         var segment = "NewProperty";
         var resolver = new DefaultContractResolver();

@@ -406,14 +406,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsAList_ReturnsExpectedValues()
         {
-            List<int> source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            List<int> source = new List<int> { 1, 2, 3, 4, 5 };
             Func<int, int> selector = i => i + 1;
 
             IEnumerable<int> query = source.Select(selector);
@@ -433,14 +426,7 @@ namespace System.Linq.Tests
         public void Select_SourceIsIReadOnlyCollection_ReturnsExpectedValues()
         {
             IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
+                new List<int> { 1, 2, 3, 4, 5 }
             );
             Func<int, int> selector = i => i + 1;
 
@@ -460,16 +446,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsICollection_ReturnsExpectedValues()
         {
-            ICollection<int> source = new LinkedList<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
-            );
+            ICollection<int> source = new LinkedList<int>(new List<int> { 1, 2, 3, 4, 5 });
             Func<int, int> selector = i => i + 1;
 
             IEnumerable<int> query = source.Select(selector);
@@ -602,14 +579,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SelectSelect_SourceIsAList_ReturnsExpectedValues()
         {
-            List<int> source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            List<int> source = new List<int> { 1, 2, 3, 4, 5 };
             Func<int, int> selector = i => i + 1;
 
             IEnumerable<int> query = source.Select(selector).Select(selector);
@@ -629,14 +599,7 @@ namespace System.Linq.Tests
         public void SelectSelect_SourceIsIReadOnlyCollection_ReturnsExpectedValues()
         {
             IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
+                new List<int> { 1, 2, 3, 4, 5 }
             );
             Func<int, int> selector = i => i + 1;
 
@@ -656,16 +619,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SelectSelect_SourceIsICollection_ReturnsExpectedValues()
         {
-            ICollection<int> source = new LinkedList<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
-            );
+            ICollection<int> source = new LinkedList<int>(new List<int> { 1, 2, 3, 4, 5 });
             Func<int, int> selector = i => i + 1;
 
             IEnumerable<int> query = source.Select(selector).Select(selector);
@@ -870,14 +824,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceListGetsModifiedDuringIteration_ExceptionIsPropagated()
         {
-            List<int> source = new List<int>()
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            List<int> source = new List<int>() { 1, 2, 3, 4, 5 };
             Func<int, int> selector = i => i + 1;
 
             var result = source.Select(selector);
@@ -989,26 +936,14 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsAList_Count()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            };
+            var source = new List<int> { 1, 2, 3, 4 };
             Assert.Equal(source.Count, source.Select(i => i * 2).Count());
         }
 
         [Fact]
         public void Select_SourceIsAnIList_Count()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.AsReadOnly();
+            var source = new List<int> { 1, 2, 3, 4 }.AsReadOnly();
             Assert.Equal(source.Count, source.Select(i => i * 2).Count());
         }
 
@@ -1027,13 +962,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsList_Skip()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.Select(i => i * 2);
             Assert.Equal(new[] { 6, 8 }, source.Skip(2));
             Assert.Equal(new[] { 6, 8 }, source.Skip(2).Skip(-1));
             Assert.Equal(new[] { 6, 8 }, source.Skip(1).Skip(1));
@@ -1045,13 +974,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsIList_Skip()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.AsReadOnly().Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.AsReadOnly().Select(i => i * 2);
             Assert.Equal(new[] { 6, 8 }, source.Skip(2));
             Assert.Equal(new[] { 6, 8 }, source.Skip(2).Skip(-1));
             Assert.Equal(new[] { 6, 8 }, source.Skip(1).Skip(1));
@@ -1078,13 +1001,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsList_Take()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.Select(i => i * 2);
             Assert.Equal(new[] { 2, 4 }, source.Take(2));
             Assert.Equal(new[] { 2, 4 }, source.Take(3).Take(2));
             Assert.Empty(source.Take(-1));
@@ -1099,13 +1016,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsIList_Take()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.AsReadOnly().Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.AsReadOnly().Select(i => i * 2);
             Assert.Equal(new[] { 2, 4 }, source.Take(2));
             Assert.Equal(new[] { 2, 4 }, source.Take(3).Take(2));
             Assert.Empty(source.Take(-1));
@@ -1146,13 +1057,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsList_ElementAt()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.Select(i => i * 2);
             for (int i = 0; i != 4; ++i)
                 Assert.Equal(i * 2 + 2, source.ElementAt(i));
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -1178,13 +1083,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsIList_ElementAt()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.AsReadOnly().Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.AsReadOnly().Select(i => i * 2);
             for (int i = 0; i != 4; ++i)
                 Assert.Equal(i * 2 + 2, source.ElementAt(i));
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -1224,13 +1123,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsList_ElementAtOrDefault()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.Select(i => i * 2);
             for (int i = 0; i != 4; ++i)
                 Assert.Equal(i * 2 + 2, source.ElementAtOrDefault(i));
             Assert.Equal(0, source.ElementAtOrDefault(-1));
@@ -1244,13 +1137,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsIList_ElementAtOrDefault()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.AsReadOnly().Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.AsReadOnly().Select(i => i * 2);
             for (int i = 0; i != 4; ++i)
                 Assert.Equal(i * 2 + 2, source.ElementAtOrDefault(i));
             Assert.Equal(0, source.ElementAtOrDefault(-1));
@@ -1283,13 +1170,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsList_First()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.Select(i => i * 2);
             Assert.Equal(2, source.First());
             Assert.Equal(2, source.FirstOrDefault());
 
@@ -1308,13 +1189,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsIList_First()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.AsReadOnly().Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.AsReadOnly().Select(i => i * 2);
             Assert.Equal(2, source.First());
             Assert.Equal(2, source.FirstOrDefault());
 
@@ -1350,13 +1225,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsList_Last()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.Select(i => i * 2);
             Assert.Equal(8, source.Last());
             Assert.Equal(8, source.LastOrDefault());
 
@@ -1373,13 +1242,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsIList_Last()
         {
-            var source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            }.AsReadOnly().Select(i => i * 2);
+            var source = new List<int> { 1, 2, 3, 4 }.AsReadOnly().Select(i => i * 2);
             Assert.Equal(8, source.Last());
             Assert.Equal(8, source.LastOrDefault());
 
@@ -1418,100 +1281,46 @@ namespace System.Linq.Tests
         [Fact]
         public void Select_SourceIsListSkipTakeCount()
         {
-            Assert.Equal(3, new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Take(3).Count());
-            Assert.Equal(4, new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Take(9).Count());
-            Assert.Equal(2, new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Skip(2).Count());
-            Assert.Equal(0, new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Skip(8).Count());
+            Assert.Equal(3, new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Take(3).Count());
+            Assert.Equal(4, new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Take(9).Count());
+            Assert.Equal(2, new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Skip(2).Count());
+            Assert.Equal(0, new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Skip(8).Count());
         }
 
         [Fact]
         public void Select_SourceIsListSkipTakeToArray()
         {
-            Assert.Equal(new[] { 2, 4, 6 }, new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Take(3).ToArray());
-            Assert.Equal(new[] { 2, 4, 6, 8 }, new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Take(9).ToArray());
-            Assert.Equal(new[] { 6, 8 }, new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Skip(2).ToArray());
-            Assert.Empty(new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Skip(8).ToArray());
+            Assert.Equal(
+                new[] { 2, 4, 6 },
+                new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Take(3).ToArray()
+            );
+            Assert.Equal(
+                new[] { 2, 4, 6, 8 },
+                new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Take(9).ToArray()
+            );
+            Assert.Equal(
+                new[] { 6, 8 },
+                new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Skip(2).ToArray()
+            );
+            Assert.Empty(new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Skip(8).ToArray());
         }
 
         [Fact]
         public void Select_SourceIsListSkipTakeToList()
         {
-            Assert.Equal(new[] { 2, 4, 6 }, new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Take(3).ToList());
-            Assert.Equal(new[] { 2, 4, 6, 8 }, new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Take(9).ToList());
-            Assert.Equal(new[] { 6, 8 }, new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Skip(2).ToList());
-            Assert.Empty(new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                }.Select(i => i * 2).Skip(8).ToList());
+            Assert.Equal(
+                new[] { 2, 4, 6 },
+                new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Take(3).ToList()
+            );
+            Assert.Equal(
+                new[] { 2, 4, 6, 8 },
+                new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Take(9).ToList()
+            );
+            Assert.Equal(
+                new[] { 6, 8 },
+                new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Skip(2).ToList()
+            );
+            Assert.Empty(new List<int> { 1, 2, 3, 4 }.Select(i => i * 2).Skip(8).ToList());
         }
 
         [Theory]

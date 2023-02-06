@@ -42,13 +42,7 @@ namespace System.Dynamic.Tests
         [Fact]
         public void ListIndexing()
         {
-            List<int> list = new List<int>
-            {
-                0,
-                1,
-                2,
-                3
-            };
+            List<int> list = new List<int> { 0, 1, 2, 3 };
             dynamic d = list;
             for (int i = 0; i != 4; ++i)
             {
@@ -121,13 +115,7 @@ namespace System.Dynamic.Tests
         {
             dynamic d = new[] { 0, 1, 2, 3 };
             Assert.Throws<IndexOutOfRangeException>(() => d[9] = 8);
-            d = new List<int>
-            {
-                0,
-                1,
-                2,
-                3
-            };
+            d = new List<int> { 0, 1, 2, 3 };
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => d[9] = 8);
         }
 

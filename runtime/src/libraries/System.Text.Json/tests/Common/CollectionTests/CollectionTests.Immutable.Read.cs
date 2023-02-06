@@ -329,13 +329,7 @@ namespace System.Text.Json.Serialization.Tests
             IImmutableSet<IImmutableSet<int>> result = await Serializer.DeserializeWrapper<
                 IImmutableSet<IImmutableSet<int>>
             >(@"[[1,2],[3,4]]");
-            List<int> expected = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            };
+            List<int> expected = new List<int> { 1, 2, 3, 4 };
 
             foreach (IImmutableSet<int> l in result)
             {
@@ -354,13 +348,7 @@ namespace System.Text.Json.Serialization.Tests
             IImmutableSet<int[]> result = await Serializer.DeserializeWrapper<IImmutableSet<int[]>>(
                 @"[[1,2],[3,4]]"
             );
-            List<int> expected = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            };
+            List<int> expected = new List<int> { 1, 2, 3, 4 };
 
             foreach (int[] arr in result)
             {
@@ -379,13 +367,7 @@ namespace System.Text.Json.Serialization.Tests
             IImmutableSet<int>[] result = await Serializer.DeserializeWrapper<IImmutableSet<int>[]>(
                 @"[[1,2],[3,4]]"
             );
-            List<int> expected = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            };
+            List<int> expected = new List<int> { 1, 2, 3, 4 };
 
             foreach (IImmutableSet<int> l in result)
             {
@@ -433,13 +415,7 @@ namespace System.Text.Json.Serialization.Tests
             ImmutableHashSet<ImmutableHashSet<int>> result = await Serializer.DeserializeWrapper<
                 ImmutableHashSet<ImmutableHashSet<int>>
             >(@"[[1,2],[3,4]]");
-            List<int> expected = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            };
+            List<int> expected = new List<int> { 1, 2, 3, 4 };
 
             foreach (ImmutableHashSet<int> l in result)
             {
@@ -458,13 +434,7 @@ namespace System.Text.Json.Serialization.Tests
             ImmutableHashSet<int[]> result = await Serializer.DeserializeWrapper<
                 ImmutableHashSet<int[]>
             >(@"[[1,2],[3,4]]");
-            List<int> expected = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            };
+            List<int> expected = new List<int> { 1, 2, 3, 4 };
 
             foreach (int[] arr in result)
             {
@@ -482,13 +452,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             ImmutableHashSet<int>[] result =
                 await Serializer.DeserializeWrapper<ImmutableHashSet<int>[]>(@"[[1,2],[3,4]]");
-            List<int> expected = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            };
+            List<int> expected = new List<int> { 1, 2, 3, 4 };
 
             foreach (ImmutableHashSet<int> l in result)
             {

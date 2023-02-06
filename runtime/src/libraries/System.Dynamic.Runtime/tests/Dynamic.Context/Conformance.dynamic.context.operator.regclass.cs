@@ -1227,12 +1227,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             dynamic dy1 = new MyClass() { Field = 3 };
             dynamic dy2 = new MyClass() { Field = 3 };
             double[] ds = null;
-            List<MyClass> list = new List<MyClass>()
-            {
-                dy1++,
-                ++dy2,
-                ds
-            };
+            List<MyClass> list = new List<MyClass>() { dy1++, ++dy2, ds };
             if (list.Count == 3 && list[0].Field == 3 && list[1].Field == 4 && list[2].Field == 4)
                 return 0;
             return 1;
@@ -1876,13 +1871,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
         public static int MainMethod()
         {
-            List<float> list = new List<float>()
-            {
-                float.Epsilon,
-                1.2f,
-                1.33f,
-                float.NaN
-            };
+            List<float> list = new List<float>() { float.Epsilon, 1.2f, 1.33f, float.NaN };
             dynamic dy = new MyClass();
             var result = list.Where(p => p == (float)dy)
                 .Select(p => new { A = (MyStruct[])dy, B = (int?)dy })

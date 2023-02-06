@@ -168,26 +168,8 @@ class Example4
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        code1,
-                        code2,
-                        code3,
-                        code4,
-                    },
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        fixedCode1,
-                        fixedCode2,
-                        fixedCode3,
-                        fixedCode4,
-                    },
-                },
+                TestState = { Sources = { code1, code2, code3, code4, }, },
+                FixedState = { Sources = { fixedCode1, fixedCode2, fixedCode3, fixedCode4, }, },
                 SolutionTransforms = { s_enableNullableInFixedSolution },
             }.RunAsync();
         }
@@ -260,24 +242,8 @@ class Example3
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        code1,
-                        code2,
-                        code3,
-                    },
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        fixedCode1,
-                        fixedCode2,
-                        fixedCode3,
-                    },
-                },
+                TestState = { Sources = { code1, code2, code3, }, },
+                FixedState = { Sources = { fixedCode1, fixedCode2, fixedCode3, }, },
                 SolutionTransforms = { s_enableNullableInFixedSolution },
             }.RunAsync();
         }
@@ -378,27 +344,10 @@ class Example5
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        code1,
-                        code2,
-                        code3,
-                        code4,
-                        code5,
-                    },
-                },
+                TestState = { Sources = { code1, code2, code3, code4, code5, }, },
                 FixedState =
                 {
-                    Sources =
-                    {
-                        fixedCode1,
-                        fixedCode2,
-                        fixedCode3,
-                        fixedCode4,
-                        fixedCode5,
-                    },
+                    Sources = { fixedCode1, fixedCode2, fixedCode3, fixedCode4, fixedCode5, },
                 },
                 SolutionTransforms = { s_enableNullableInFixedSolution },
             }.RunAsync();
@@ -485,26 +434,8 @@ class Example4
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        code1,
-                        code2,
-                        code3,
-                        code4,
-                    },
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        fixedCode1,
-                        fixedCode2,
-                        fixedCode3,
-                        fixedCode4,
-                    },
-                },
+                TestState = { Sources = { code1, code2, code3, code4, }, },
+                FixedState = { Sources = { fixedCode1, fixedCode2, fixedCode3, fixedCode4, }, },
                 SolutionTransforms = { s_enableNullableInFixedSolution },
             }.RunAsync();
         }
@@ -565,23 +496,11 @@ class Example
             {
                 TestState =
                 {
-                    Sources =
-                    {
-                        code1,
-                        generatedCode1,
-                        generatedCode2,
-                        generatedCode3,
-                    },
+                    Sources = { code1, generatedCode1, generatedCode2, generatedCode3, },
                 },
                 FixedState =
                 {
-                    Sources =
-                    {
-                        fixedCode1,
-                        generatedCode1,
-                        generatedCode2,
-                        generatedCode3,
-                    },
+                    Sources = { fixedCode1, generatedCode1, generatedCode2, generatedCode3, },
                     ExpectedDiagnostics =
                     {
                         // /0/Test3.cs(7,10): error CS8618: Non-nullable field 'value' must contain a non-null value when exiting constructor. Consider declaring the field as nullable.
@@ -764,26 +683,8 @@ class Example4
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        code1,
-                        code2,
-                        code3,
-                        code4,
-                    },
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        fixedCode1,
-                        fixedCode2,
-                        fixedCode3,
-                        fixedCode4,
-                    },
-                },
+                TestState = { Sources = { code1, code2, code3, code4, }, },
+                FixedState = { Sources = { fixedCode1, fixedCode2, fixedCode3, fixedCode4, }, },
                 SolutionTransforms = { s_enableNullableInFixedSolutionFromRestoreKeyword },
             }.RunAsync();
         }
@@ -881,26 +782,8 @@ class Example4
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        code1,
-                        code2,
-                        code3,
-                        code4,
-                    },
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        fixedCode1,
-                        fixedCode2,
-                        fixedCode3,
-                        fixedCode4,
-                    },
-                },
+                TestState = { Sources = { code1, code2, code3, code4, }, },
+                FixedState = { Sources = { fixedCode1, fixedCode2, fixedCode3, fixedCode4, }, },
                 SolutionTransforms = { s_enableNullableInFixedSolutionFromDisableKeyword },
             }.RunAsync();
         }

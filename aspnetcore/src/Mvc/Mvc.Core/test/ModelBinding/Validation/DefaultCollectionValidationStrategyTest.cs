@@ -11,12 +11,7 @@ public class DefaultCollectionValidationStrategyTest
     public void EnumerateElements()
     {
         // Arrange
-        var model = new List<int>()
-        {
-            2,
-            3,
-            5
-        };
+        var model = new List<int>() { 2, 3, 5 };
 
         var metadata = TestModelMetadataProvider
             .CreateDefaultProvider()

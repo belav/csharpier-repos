@@ -189,12 +189,7 @@ namespace System.CommandLine.Tests
             var optionB = new Option<string>(prefix + "b");
             var optionC = new Option<string>(prefix + "c");
 
-            var rootCommand = new RootCommand
-            {
-                optionA,
-                optionB,
-                optionC
-            };
+            var rootCommand = new RootCommand { optionA, optionB, optionC };
 
             var result = rootCommand.Parse(prefix + "c value-for-c " + prefix + "a value-for-a");
 

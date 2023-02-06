@@ -850,15 +850,7 @@ public class F1Context : PoolableDbContext
         var bridgestone = new Sponsor { Id = 3, Name = "Bridgestone" };
         var fia = new Sponsor { Id = 4, Name = "FIA" };
 
-        foreach (
-            var sponsor in new List<Sponsor>
-            {
-                shell,
-                vodafone,
-                bridgestone,
-                fia
-            }
-        )
+        foreach (var sponsor in new List<Sponsor> { shell, vodafone, bridgestone, fia })
         {
             context.Sponsors.Add(sponsor);
         }

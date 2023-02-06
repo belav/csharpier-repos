@@ -15,14 +15,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExpressionVisitor
 {
     private static readonly HashSet<string> DateTimeDataTypes =
-        new()
-        {
-            "time",
-            "date",
-            "datetime",
-            "datetime2",
-            "datetimeoffset"
-        };
+        new() { "time", "date", "datetime", "datetime2", "datetimeoffset" };
 
     private static readonly HashSet<Type> DateTimeClrTypes =
         new()

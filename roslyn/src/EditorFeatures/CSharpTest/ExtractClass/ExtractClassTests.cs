@@ -188,15 +188,7 @@ partial class Test
             await new Test
             {
                 TestState = { Sources = { input1, input2, } },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        expected1,
-                        expected2,
-                        expected3,
-                    }
-                },
+                FixedState = { Sources = { expected1, expected2, expected3, } },
                 FileName = "Test2.cs",
                 DialogSelection = MakeSelection("Method", "Method2")
             }.RunAsync();

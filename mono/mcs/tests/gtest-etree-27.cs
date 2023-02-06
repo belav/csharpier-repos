@@ -30,16 +30,7 @@ public class Node
 
         e.Compile()();
 
-        e = () =>
-            new Node()
-            {
-                Values =
-                {
-                    1,
-                    2,
-                    3
-                }
-            };
+        e = () => new Node() { Values = { 1, 2, 3 } };
         mie = (MemberInitExpression)e.Body;
         if (mie.Bindings[0].BindingType != MemberBindingType.ListBinding)
             return 2;
@@ -60,18 +51,7 @@ public class Node
 
         e.Compile()();
 
-        e = () =>
-            new Node()
-            {
-                Parent = { Name = "Parent" },
-                Values =
-                {
-                    4,
-                    5,
-                    7,
-                    8
-                }
-            };
+        e = () => new Node() { Parent = { Name = "Parent" }, Values = { 4, 5, 7, 8 } };
         mie = (MemberInitExpression)e.Body;
         if (mie.Bindings[0].BindingType != MemberBindingType.MemberBinding)
             return 5;

@@ -49,12 +49,7 @@ namespace System.Activities.Expressions
             metadata.Bind(this.Result, resultArgument);
 
             metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument>
-                {
-                    arrayArgument,
-                    indexArgument,
-                    resultArgument
-                }
+                new Collection<RuntimeArgument> { arrayArgument, indexArgument, resultArgument }
             );
         }
 

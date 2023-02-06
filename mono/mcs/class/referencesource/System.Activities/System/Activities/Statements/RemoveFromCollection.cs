@@ -54,12 +54,7 @@ namespace System.Activities.Statements
             metadata.Bind(this.Result, resultArgument);
 
             metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument>
-                {
-                    collectionArgument,
-                    itemArgument,
-                    resultArgument
-                }
+                new Collection<RuntimeArgument> { collectionArgument, itemArgument, resultArgument }
             );
         }
 

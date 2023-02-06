@@ -4743,14 +4743,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             yield return new object[]
             {
-                new List<int>()
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                },
+                new List<int>() { 1, 2, 3, 4, 5 },
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(
@@ -10242,14 +10235,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             yield return new object[] { "test" };
             yield return new object[]
             {
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
+                new List<int> { 1, 2, 3, 4, 5 }
             };
             yield return new object[]
             {

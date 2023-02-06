@@ -311,14 +311,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_List_ReturnsExpectedValues_True()
         {
-            List<int> source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            List<int> source = new List<int> { 1, 2, 3, 4, 5 };
             Func<int, bool> truePredicate = (value) => true;
 
             IEnumerable<int> result = source.Where(truePredicate);
@@ -333,14 +326,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_List_ReturnsExpectedValues_False()
         {
-            List<int> source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            List<int> source = new List<int> { 1, 2, 3, 4, 5 };
             Func<int, bool> falsePredicate = (value) => false;
 
             IEnumerable<int> result = source.Where(falsePredicate);
@@ -351,14 +337,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_List_ReturnsExpectedValues_Complex()
         {
-            List<int> source = new List<int>
-            {
-                2,
-                1,
-                3,
-                5,
-                4
-            };
+            List<int> source = new List<int> { 2, 1, 3, 5, 4 };
             Func<int, int, bool> complexPredicate = (value, index) =>
             {
                 return (value == index);
@@ -375,14 +354,7 @@ namespace System.Linq.Tests
         public void Where_IReadOnlyCollection_ReturnsExpectedValues_True()
         {
             IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
+                new List<int> { 1, 2, 3, 4, 5 }
             );
             Func<int, bool> truePredicate = (value) => true;
 
@@ -399,14 +371,7 @@ namespace System.Linq.Tests
         public void Where_IReadOnlyCollection_ReturnsExpectedValues_False()
         {
             IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
+                new List<int> { 1, 2, 3, 4, 5 }
             );
             Func<int, bool> falsePredicate = (value) => false;
 
@@ -419,14 +384,7 @@ namespace System.Linq.Tests
         public void Where_IReadOnlyCollection_ReturnsExpectedValues_Complex()
         {
             IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
-                new List<int>
-                {
-                    2,
-                    1,
-                    3,
-                    5,
-                    4
-                }
+                new List<int> { 2, 1, 3, 5, 4 }
             );
             Func<int, int, bool> complexPredicate = (value, index) =>
             {
@@ -443,16 +401,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_ICollection_ReturnsExpectedValues_True()
         {
-            ICollection<int> source = new LinkedList<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
-            );
+            ICollection<int> source = new LinkedList<int>(new List<int> { 1, 2, 3, 4, 5 });
             Func<int, bool> truePredicate = (value) => true;
 
             IEnumerable<int> result = source.Where(truePredicate);
@@ -467,16 +416,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_ICollection_ReturnsExpectedValues_False()
         {
-            ICollection<int> source = new LinkedList<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
-            );
+            ICollection<int> source = new LinkedList<int>(new List<int> { 1, 2, 3, 4, 5 });
             Func<int, bool> falsePredicate = (value) => false;
 
             IEnumerable<int> result = source.Where(falsePredicate);
@@ -487,16 +427,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_ICollection_ReturnsExpectedValues_Complex()
         {
-            ICollection<int> source = new LinkedList<int>(
-                new List<int>
-                {
-                    2,
-                    1,
-                    3,
-                    5,
-                    4
-                }
-            );
+            ICollection<int> source = new LinkedList<int>(new List<int> { 2, 1, 3, 5, 4 });
             Func<int, int, bool> complexPredicate = (value, index) =>
             {
                 return (value == index);
@@ -538,16 +469,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_IEnumerable_ReturnsExpectedValues_Complex()
         {
-            IEnumerable<int> source = new LinkedList<int>(
-                new List<int>
-                {
-                    2,
-                    1,
-                    3,
-                    5,
-                    4
-                }
-            );
+            IEnumerable<int> source = new LinkedList<int>(new List<int> { 2, 1, 3, 5, 4 });
             Func<int, int, bool> complexPredicate = (value, index) =>
             {
                 return (value == index);
@@ -663,14 +585,7 @@ namespace System.Linq.Tests
         [Fact]
         public void WhereWhere_List_ReturnsExpectedValues()
         {
-            List<int> source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            List<int> source = new List<int> { 1, 2, 3, 4, 5 };
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
 
             IEnumerable<int> result = source.Where(evenPredicate).Where(evenPredicate);
@@ -684,14 +599,7 @@ namespace System.Linq.Tests
         public void WhereWhere_IReadOnlyCollection_ReturnsExpectedValues()
         {
             IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
+                new List<int> { 1, 2, 3, 4, 5 }
             );
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
 
@@ -705,16 +613,7 @@ namespace System.Linq.Tests
         [Fact]
         public void WhereWhere_ICollection_ReturnsExpectedValues()
         {
-            ICollection<int> source = new LinkedList<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
-            );
+            ICollection<int> source = new LinkedList<int>(new List<int> { 1, 2, 3, 4, 5 });
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
 
             IEnumerable<int> result = source.Where(evenPredicate).Where(evenPredicate);
@@ -771,14 +670,7 @@ namespace System.Linq.Tests
         [Fact]
         public void WhereSelect_List_ReturnsExpectedValues()
         {
-            List<int> source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            List<int> source = new List<int> { 1, 2, 3, 4, 5 };
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
@@ -792,14 +684,7 @@ namespace System.Linq.Tests
         [Fact]
         public void WhereSelectSelect_List_ReturnsExpectedValues()
         {
-            List<int> source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            List<int> source = new List<int> { 1, 2, 3, 4, 5 };
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
@@ -817,14 +702,7 @@ namespace System.Linq.Tests
         public void WhereSelect_IReadOnlyCollection_ReturnsExpectedValues()
         {
             IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
+                new List<int> { 1, 2, 3, 4, 5 }
             );
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
@@ -840,14 +718,7 @@ namespace System.Linq.Tests
         public void WhereSelectSelect_IReadOnlyCollection_ReturnsExpectedValues()
         {
             IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
+                new List<int> { 1, 2, 3, 4, 5 }
             );
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
@@ -865,16 +736,7 @@ namespace System.Linq.Tests
         [Fact]
         public void WhereSelect_ICollection_ReturnsExpectedValues()
         {
-            ICollection<int> source = new LinkedList<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
-            );
+            ICollection<int> source = new LinkedList<int>(new List<int> { 1, 2, 3, 4, 5 });
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
@@ -888,16 +750,7 @@ namespace System.Linq.Tests
         [Fact]
         public void WhereSelectSelect_ICollection_ReturnsExpectedValues()
         {
-            ICollection<int> source = new LinkedList<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
-            );
+            ICollection<int> source = new LinkedList<int>(new List<int> { 1, 2, 3, 4, 5 });
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
@@ -960,14 +813,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SelectWhere_List_ReturnsExpectedValues()
         {
-            List<int> source = new List<int>
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            List<int> source = new List<int> { 1, 2, 3, 4, 5 };
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
@@ -983,14 +829,7 @@ namespace System.Linq.Tests
         public void SelectWhere_IReadOnlyCollection_ReturnsExpectedValues()
         {
             IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
+                new List<int> { 1, 2, 3, 4, 5 }
             );
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
@@ -1006,16 +845,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SelectWhere_ICollection_ReturnsExpectedValues()
         {
-            ICollection<int> source = new LinkedList<int>(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
-            );
+            ICollection<int> source = new LinkedList<int>(new List<int> { 1, 2, 3, 4, 5 });
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
@@ -1143,14 +973,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_SourceThrowsOnConcurrentModification()
         {
-            List<int> source = new List<int>()
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            List<int> source = new List<int>() { 1, 2, 3, 4, 5 };
             Func<int, bool> truePredicate = (value) => true;
 
             var enumerator = source.Where(truePredicate).GetEnumerator();

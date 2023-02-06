@@ -93,13 +93,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
         public static int MainMethod()
         {
-            var list = new List<string>()
-            {
-                null,
-                "b",
-                null,
-                "a"
-            };
+            var list = new List<string>() { null, "b", null, "a" };
             var mc = new MemberClass<string>();
             mc.Property_Dynamic = "a";
             dynamic dy = mc;

@@ -352,70 +352,30 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             var set = new SegmentedHashSet<SegmentedHashSet<T>>()
             {
-                new SegmentedHashSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                },
-                new SegmentedHashSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                }
+                new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
             };
 
             var noComparerSet = new SegmentedHashSet<SegmentedHashSet<T>>()
             {
-                new SegmentedHashSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                },
-                new SegmentedHashSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                }
+                new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
             };
 
             var comparerSet1 = new SegmentedHashSet<SegmentedHashSet<T>>(
                 SegmentedHashSet<T>.CreateSetComparer()
             )
             {
-                new SegmentedHashSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                },
-                new SegmentedHashSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                }
+                new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
             };
 
             var comparerSet2 = new SegmentedHashSet<SegmentedHashSet<T>>(
                 SegmentedHashSet<T>.CreateSetComparer()
             )
             {
-                new SegmentedHashSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                },
-                new SegmentedHashSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                }
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] },
+                new SegmentedHashSet<T> { objects[0], objects[1], objects[2] }
             };
 
             Assert.False(noComparerSet.SetEquals(set));
@@ -438,52 +398,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             var set = new SegmentedHashSet<SegmentedHashSet<T>>()
             {
-                new SegmentedHashSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                },
-                new SegmentedHashSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                }
+                new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
             };
 
             var noComparerSet = new SegmentedHashSet<SegmentedHashSet<T>>()
             {
-                new SegmentedHashSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                },
-                new SegmentedHashSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                }
+                new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
             };
 
             var comparerSet = new SegmentedHashSet<SegmentedHashSet<T>>(
                 SegmentedHashSet<T>.CreateSetComparer()
             )
             {
-                new SegmentedHashSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                },
-                new SegmentedHashSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                }
+                new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
             };
 
             Assert.False(noComparerSet.SequenceEqual(set));

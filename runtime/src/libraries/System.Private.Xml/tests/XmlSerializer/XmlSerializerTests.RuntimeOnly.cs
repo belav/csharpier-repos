@@ -1500,13 +1500,7 @@ public static partial class XmlSerializerTests
                 Namespace = "http://www.microsoft.com",
             }
         );
-        var expected = new List<string>()
-        {
-            "Madison",
-            "Rochester",
-            null,
-            "Arlington"
-        };
+        var expected = new List<string>() { "Madison", "Rochester", null, "Arlington" };
         var actual = SerializeAndDeserialize(
             expected,
             @"<?xml version=""1.0"" encoding=""utf-8""?><Places xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns=""http://www.microsoft.com""><string>Madison</string><string>Rochester</string><string xsi:nil=""true"" /><string>Arlington</string></Places>",
@@ -3009,12 +3003,7 @@ public static partial class XmlSerializerTests
     public static void XmlMembersMapping_IntList()
     {
         string memberName = "IntArray";
-        List<int> requestBodyValue = new List<int>
-        {
-            1,
-            2,
-            3
-        };
+        List<int> requestBodyValue = new List<int> { 1, 2, 3 };
         var requestBodyActual = RoundTripWithXmlMembersMapping<List<int>>(
             requestBodyValue,
             memberName,

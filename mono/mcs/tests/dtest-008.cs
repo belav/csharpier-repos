@@ -19,12 +19,7 @@ public class Test
 {
     bool ForEachTest()
     {
-        dynamic d = new List<int>
-        {
-            5,
-            10,
-            7
-        };
+        dynamic d = new List<int> { 5, 10, 7 };
         dynamic res = 9;
         foreach (var v in d)
         {

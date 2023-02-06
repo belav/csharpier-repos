@@ -385,10 +385,5 @@ public class KestrelServerLimitsTests
         new TheoryData<TimeSpan> { TimeSpan.FromTicks(1), TimeSpan.MaxValue, };
 
     public static TheoryData<TimeSpan> TimeoutInvalidData =>
-        new TheoryData<TimeSpan>
-        {
-            TimeSpan.MinValue,
-            TimeSpan.FromTicks(-1),
-            TimeSpan.Zero
-        };
+        new TheoryData<TimeSpan> { TimeSpan.MinValue, TimeSpan.FromTicks(-1), TimeSpan.Zero };
 }

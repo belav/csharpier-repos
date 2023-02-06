@@ -517,12 +517,7 @@ namespace System.CommandLine.Tests
                     "two",
                     result => result.Tokens.Select(t => t.Value).Select(int.Parse).ToArray()
                 );
-                var command = new RootCommand
-                {
-                    argument1,
-                    argument2,
-                    new Option<int>("-o")
-                };
+                var command = new RootCommand { argument1, argument2, new Option<int>("-o") };
 
                 var parseResult = command.Parse(commandLine);
 
@@ -735,12 +730,7 @@ namespace System.CommandLine.Tests
                     Arity = ArgumentArity.ZeroOrMore
                 };
 
-                var command = new RootCommand
-                {
-                    first,
-                    second,
-                    third
-                };
+                var command = new RootCommand { first, second, third };
 
                 var result = command.Parse("1 2 3");
 

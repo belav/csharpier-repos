@@ -492,12 +492,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 Span.FromBounds(0, newBuffer.CurrentSnapshot.Length)
             ).CreateTrackingSpan(SpanTrackingMode.EdgeExclusive);
             var changedBuffer = _projectionBufferFactoryService.CreatePreviewProjectionBuffer(
-                sourceSpans: new List<object>
-                {
-                    firstLine,
-                    "\r\n",
-                    span
-                },
+                sourceSpans: new List<object> { firstLine, "\r\n", span },
                 registryService: _contentTypeRegistryService
             );
 
@@ -614,12 +609,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 Span.FromBounds(0, oldBuffer.CurrentSnapshot.Length)
             ).CreateTrackingSpan(SpanTrackingMode.EdgeExclusive);
             var originalBuffer = _projectionBufferFactoryService.CreatePreviewProjectionBuffer(
-                sourceSpans: new List<object>
-                {
-                    firstLine,
-                    "\r\n",
-                    span
-                },
+                sourceSpans: new List<object> { firstLine, "\r\n", span },
                 registryService: _contentTypeRegistryService
             );
 

@@ -437,14 +437,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
 
         public static int MainMethod(string[] args)
         {
-            dynamic list = new List<int>()
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            dynamic list = new List<int>() { 1, 2, 3, 4, 5 };
             int i = 1;
             foreach (dynamic item in list)
             {
@@ -480,16 +473,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
         public static int MainMethod(string[] args)
         {
             int i = 1;
-            foreach (
-                dynamic item in new List<int>()
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
-            )
+            foreach (dynamic item in new List<int>() { 1, 2, 3, 4, 5 })
             {
                 if ((int)item != i)
                     return 1;
@@ -523,16 +507,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
         public static int MainMethod(string[] args)
         {
             int i = 1;
-            foreach (
-                dynamic item in new List<dynamic>()
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                }
-            )
+            foreach (dynamic item in new List<dynamic>() { 1, 2, 3, 4, 5 })
             {
                 if ((int)item != i)
                     return 1;

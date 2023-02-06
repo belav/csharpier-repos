@@ -394,12 +394,7 @@ public class DictionaryAdapterTest
         // Arrange
         var key = "Name";
         var dictionary = new Dictionary<string, List<object>>();
-        var value = new List<object>()
-        {
-            "James",
-            2,
-            new Customer("James", 25)
-        };
+        var value = new List<object>() { "James", 2, new Customer("James", 25) };
         dictionary[key] = value;
         var dictionaryAdapter = new DictionaryAdapter<string, List<object>>();
         var resolver = new DefaultContractResolver();

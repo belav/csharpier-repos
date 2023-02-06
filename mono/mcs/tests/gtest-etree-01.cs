@@ -1703,14 +1703,7 @@ class Tester
     void ListInitTest()
     {
         Expression<Func<List<object>>> e1 = () =>
-            new List<object>
-            {
-                "Hello",
-                "",
-                null,
-                "World",
-                5
-            };
+            new List<object> { "Hello", "", null, "World", 5 };
         AssertNodeType(e1, ExpressionType.ListInit);
         var re1 = e1.Compile().Invoke();
         Assert(null, re1[2]);

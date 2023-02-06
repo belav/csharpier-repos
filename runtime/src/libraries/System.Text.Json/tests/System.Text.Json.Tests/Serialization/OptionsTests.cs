@@ -1467,17 +1467,7 @@ namespace System.Text.Json.Serialization.Tests
                 new { Value = 42, String = "str" },
                 """{"Value":42,"String":"str"}"""
             );
-            yield return WrapArgs(
-                new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                },
-                """[1,2,3,4,5]"""
-            );
+            yield return WrapArgs(new List<int> { 1, 2, 3, 4, 5 }, """[1,2,3,4,5]""");
             yield return WrapArgs(new Dictionary<string, int> { ["key"] = 42 }, """{"key":42}""");
 
             static object[] WrapArgs<T>(T value, string json) => new object[] { value, json };

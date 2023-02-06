@@ -26,12 +26,7 @@ namespace System.Configuration
             ConfigurationPropertyOptions.IsRequired
         );
         private static readonly ConfigurationPropertyCollection s_properties =
-            new ConfigurationPropertyCollection()
-            {
-                s_propName,
-                s_propSerializeAs,
-                s_propValue
-            };
+            new ConfigurationPropertyCollection() { s_propName, s_propSerializeAs, s_propValue };
 
         public SettingElement() { }
 

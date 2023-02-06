@@ -936,21 +936,11 @@ public class DefaultObjectValidatorTests
                 { new int[] { 1, 2, 3 }, typeof(int[]) },
                 { new string[] { "Foo", "Bar", "Baz" }, typeof(string[]) },
                 {
-                    new List<string>
-                    {
-                        "Foo",
-                        "Bar",
-                        "Baz"
-                    },
+                    new List<string> { "Foo", "Bar", "Baz" },
                     typeof(IList<string>)
                 },
                 {
-                    new HashSet<string>
-                    {
-                        "Foo",
-                        "Bar",
-                        "Baz"
-                    },
+                    new HashSet<string> { "Foo", "Bar", "Baz" },
                     typeof(string[])
                 },
                 {
@@ -1751,13 +1741,7 @@ public class DefaultObjectValidatorTests
     {
         [InvalidItems]
         public List<string> Items { get; set; } =
-            new List<string>
-            {
-                "Joe",
-                "Fred",
-                "Joe",
-                "Herman"
-            };
+            new List<string> { "Joe", "Fred", "Joe", "Herman" };
     }
 
     // Custom validation attribute that returns multiple entries in ValidationResult.MemberNames. An example

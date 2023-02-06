@@ -149,12 +149,7 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper html = MakeHtmlHelper<List<string>>(
-                new List<string>
-                {
-                    "foo",
-                    "bar",
-                    "baz"
-                }
+                new List<string> { "foo", "bar", "baz" }
             );
             html.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = null;
 
@@ -214,12 +209,7 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper html = MakeHtmlHelper<List<object>>(
-                new List<object>
-                {
-                    1,
-                    2.3,
-                    "Hello World"
-                }
+                new List<object> { 1, 2.3, "Hello World" }
             );
             html.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = null;
 
@@ -242,14 +232,7 @@ namespace System.Web.Mvc.Html.Test
         public void CollectionTemplateNullItemInCollectionOfNullableValueTypesDoesNotDiscardNullable()
         {
             // Arrange
-            HtmlHelper html = MakeHtmlHelper<List<int?>>(
-                new List<int?>
-                {
-                    1,
-                    null,
-                    2
-                }
-            );
+            HtmlHelper html = MakeHtmlHelper<List<int?>>(new List<int?> { 1, null, 2 });
             html.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = null;
 
             // Act

@@ -1549,12 +1549,6 @@ public class ComplexObjectModelBinderTest
         public IDictionary<int, string> SettableDictionary { get; set; } =
             new Dictionary<int, string> { { 0, "zero" }, { 25, "twenty-five" }, };
 
-        public IList<int> SettableList { get; set; } =
-            new List<int>
-            {
-                3,
-                9,
-                0
-            };
+        public IList<int> SettableList { get; set; } = new List<int> { 3, 9, 0 };
     }
 }

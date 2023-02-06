@@ -384,12 +384,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
         {
             dynamic t1 = new Test() { Field = 10 };
             dynamic t2 = new Test() { Field = 11 };
-            List<int> list = new List<int>()
-            {
-                t1.Field,
-                t2.Field,
-                (t1 + t2).Field
-            };
+            List<int> list = new List<int>() { t1.Field, t2.Field, (t1 + t2).Field };
             var d = list.Where(p => p == (t1 + t2).Field).ToArray();
             dynamic t3 = new Test() { Field = 10 };
             int p2 = 20;

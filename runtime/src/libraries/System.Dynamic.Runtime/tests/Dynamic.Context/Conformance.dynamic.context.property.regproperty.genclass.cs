@@ -248,13 +248,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
         public static int MainMethod()
         {
-            var list = new List<string>()
-            {
-                null,
-                "b",
-                null,
-                "a"
-            };
+            var list = new List<string>() { null, "b", null, "a" };
             MemberClass<string> mc = new MemberClass<string>();
             mc.myT = "a";
             dynamic dy = mc;
@@ -464,16 +458,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
         public static int MainMethod()
         {
-            List<int> list = new List<int>()
-            {
-                0,
-                4,
-                1,
-                6,
-                4,
-                4,
-                5
-            };
+            List<int> list = new List<int>() { 0, 4, 1, 6, 4, 4, 5 };
             string s = "test";
             var mc = new MemberClass<int>();
             mc.Property_T = 4;

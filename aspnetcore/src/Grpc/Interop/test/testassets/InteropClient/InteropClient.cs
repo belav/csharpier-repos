@@ -329,13 +329,9 @@ public class InteropClient : IDisposable
     {
         Console.WriteLine("running client_streaming");
 
-        var bodySizes = new List<int>
-        {
-            27182,
-            8,
-            1828,
-            45904
-        }.Select((size) => new StreamingInputCallRequest { Payload = CreateZerosPayload(size) });
+        var bodySizes = new List<int> { 27182, 8, 1828, 45904 }.Select(
+            (size) => new StreamingInputCallRequest { Payload = CreateZerosPayload(size) }
+        );
 
         using (var call = client.StreamingInputCall())
         {
@@ -351,13 +347,7 @@ public class InteropClient : IDisposable
     {
         Console.WriteLine("running server_streaming");
 
-        var bodySizes = new List<int>
-        {
-            31415,
-            9,
-            2653,
-            58979
-        };
+        var bodySizes = new List<int> { 31415, 9, 2653, 58979 };
 
         var request = new StreamingOutputCallRequest
         {

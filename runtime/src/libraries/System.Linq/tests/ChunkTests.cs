@@ -143,18 +143,7 @@ namespace System.Linq.Tests
         [Fact]
         public void RemovingFromSourceBeforeIterating()
         {
-            var list = new List<int>
-            {
-                9999,
-                0,
-                888,
-                -1,
-                66,
-                -777,
-                1,
-                2,
-                -12345
-            };
+            var list = new List<int> { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 };
             IEnumerable<int[]> chunks = list.Chunk(3);
             list.Remove(66);
 
@@ -167,18 +156,7 @@ namespace System.Linq.Tests
         [Fact]
         public void AddingToSourceBeforeIterating()
         {
-            var list = new List<int>
-            {
-                9999,
-                0,
-                888,
-                -1,
-                66,
-                -777,
-                1,
-                2,
-                -12345
-            };
+            var list = new List<int> { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 };
             IEnumerable<int[]> chunks = list.Chunk(3);
             list.Add(10);
 

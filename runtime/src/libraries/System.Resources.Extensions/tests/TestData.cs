@@ -55,15 +55,7 @@ namespace System.Resources.Extensions.Tests
                 ["enum_bin"] = DayOfWeek.Friday,
                 ["point_bin"] = new Point(4, 8),
                 ["array_int_bin"] = new int[] { 1, 2, 3, 4, 5, 6 },
-                ["list_int_bin"] = new List<int>()
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6
-                },
+                ["list_int_bin"] = new List<int>() { 1, 2, 3, 4, 5, 6 },
                 ["stack_Point_bin"] = new Stack<Point>(new[] { new Point(4, 8), new Point(2, 5) }),
                 ["dict_string_string_bin"] = new Dictionary<string, string>()
                 {

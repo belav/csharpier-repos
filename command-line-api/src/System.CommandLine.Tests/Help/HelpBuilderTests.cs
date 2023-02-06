@@ -834,13 +834,7 @@ namespace System.CommandLine.Tests.Help
             {
                 new Argument<List<int>>(
                     "filter-size",
-                    defaultValueFactory: () =>
-                        new List<int>()
-                        {
-                            0,
-                            2,
-                            4
-                        }
+                    defaultValueFactory: () => new List<int>() { 0, 2, 4 }
                 )
             };
 
@@ -1203,13 +1197,7 @@ namespace System.CommandLine.Tests.Help
             {
                 new Option<List<int>>(
                     "--filter-size",
-                    defaultValueFactory: () =>
-                        new List<int>
-                        {
-                            0,
-                            2,
-                            4
-                        }
+                    defaultValueFactory: () => new List<int> { 0, 2, 4 }
                 )
                 {
                     }

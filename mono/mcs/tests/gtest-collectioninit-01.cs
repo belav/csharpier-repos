@@ -39,12 +39,7 @@ public class Test
 
     public static int Main()
     {
-        ArrayList collection = new ArrayList
-        {
-            "Foo",
-            null,
-            1
-        };
+        ArrayList collection = new ArrayList { "Foo", null, 1 };
         if (collection.Count != 3)
             return 1;
 
@@ -79,23 +74,8 @@ public class Test
         if ((int)a[0].Numbers[1] != 10)
             return 6;
 
-        new List<int>
-        {
-            1,
-            2,
-            3,
-            4
-        };
-        TestList(
-            new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            },
-            4
-        );
+        new List<int> { 1, 2, 3, 4 };
+        TestList(new List<int> { 1, 2, 3, 4 }, 4);
 
         new List<int> { };
 

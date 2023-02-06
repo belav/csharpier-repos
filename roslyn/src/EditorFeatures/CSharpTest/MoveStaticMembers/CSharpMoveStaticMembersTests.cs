@@ -1742,14 +1742,11 @@ public class Class2
                 TestState = { Sources = { initialMarkup1, initialMarkup2 } },
                 FixedState =
                 {
-                    Sources =
-                    {
-                        expectedResult1,
-                        expectedResult3,
-                        (newFileName, expectedResult2)
-                    }
+                    Sources = { expectedResult1, expectedResult3, (newFileName, expectedResult2) }
                 }
-            }.RunAsync().ConfigureAwait(false);
+            }
+                .RunAsync()
+                .ConfigureAwait(false);
         }
 
         [Fact]

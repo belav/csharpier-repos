@@ -474,12 +474,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 var c = Create<IFoo>();
                 c.Value = "c";
 
-                var list = new List<IFoo>
-                {
-                    a,
-                    b,
-                    c
-                };
+                var list = new List<IFoo> { a, b, c };
 
                 foreach (var x in list)
                 {

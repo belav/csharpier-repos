@@ -46,12 +46,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
 
         protected Threshold(int size)
         {
-            Values = new List<T>(size)
-            {
-                MinusInfinity,
-                Zero,
-                PlusInfinity
-            };
+            Values = new List<T>(size) { MinusInfinity, Zero, PlusInfinity };
             NextFree = 3;
         }
 

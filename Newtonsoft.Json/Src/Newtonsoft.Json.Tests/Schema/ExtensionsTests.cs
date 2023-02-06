@@ -215,14 +215,7 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void GenerateSchemaAndSerializeFromTypeTests()
         {
-            GenerateSchemaAndSerializeFromType(
-                new List<string>
-                {
-                    "1",
-                    "Two",
-                    "III"
-                }
-            );
+            GenerateSchemaAndSerializeFromType(new List<string> { "1", "Two", "III" });
             GenerateSchemaAndSerializeFromType(new List<int> { 1 });
             GenerateSchemaAndSerializeFromType(new Version("1.2.3.4"));
             GenerateSchemaAndSerializeFromType(new Store());

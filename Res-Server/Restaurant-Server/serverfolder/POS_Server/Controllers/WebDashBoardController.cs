@@ -71,12 +71,7 @@ namespace POS_Server.Controllers
 
                         #region sales count - dining hall - self-service - takeaway
                         searchPredicate = PredicateBuilder.New<invoices>();
-                        var invType = new List<string>()
-                        {
-                            "s",
-                            "ts",
-                            "ss"
-                        };
+                        var invType = new List<string>() { "s", "ts", "ss" };
                         searchPredicate = searchPredicate.And(
                             x => x.isActive == true && invType.Contains(x.invType)
                         );

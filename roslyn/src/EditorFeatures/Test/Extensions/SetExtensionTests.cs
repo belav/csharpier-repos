@@ -17,12 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         [Fact]
         public void TestAddAll()
         {
-            var set = new HashSet<string>()
-            {
-                "a",
-                "b",
-                "c"
-            };
+            var set = new HashSet<string>() { "a", "b", "c" };
             Assert.False(set.AddAll(new[] { "b", "c" }));
             Assert.True(set.AddAll(new[] { "c", "d" }));
             Assert.True(set.AddAll(new[] { "e", "f" }));

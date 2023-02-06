@@ -11,12 +11,7 @@ public class ExplicitIndexCollectionValidationStrategyTest
     public void EnumerateElements_List()
     {
         // Arrange
-        var model = new List<int>()
-        {
-            2,
-            3,
-            5
-        };
+        var model = new List<int>() { 2, 3, 5 };
 
         var metadata = TestModelMetadataProvider
             .CreateDefaultProvider()
@@ -141,12 +136,7 @@ public class ExplicitIndexCollectionValidationStrategyTest
     public void EnumerateElements_RunOutOfIndices()
     {
         // Arrange
-        var model = new List<int>()
-        {
-            2,
-            3,
-            5
-        };
+        var model = new List<int>() { 2, 3, 5 };
 
         var metadata = TestModelMetadataProvider
             .CreateDefaultProvider()

@@ -26,12 +26,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string subFilePath = subdir + @"\" + fileName;
             string dotted = subdir + @"\" + ".x.dll";
 
-            var fs = new HashSet<string>
-            {
-                filePath,
-                subFilePath,
-                dotted
-            };
+            var fs = new HashSet<string> { filePath, subFilePath, dotted };
 
             var resolver = new VirtualizedRelativePathResolver(
                 existingFullPaths: fs,

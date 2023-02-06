@@ -22,14 +22,7 @@ class C
     public static int Main()
     {
         // It also tests constant boxing
-        Expression<Func<ArrayList>> e1 = () =>
-            new ArrayList
-            {
-                null,
-                "Hello",
-                "World",
-                5
-            };
+        Expression<Func<ArrayList>> e1 = () => new ArrayList { null, "Hello", "World", 5 };
         AssertNodeType(e1, ExpressionType.ListInit);
         /* Verification exception on .NET */
         var re1 = e1.Compile().Invoke();

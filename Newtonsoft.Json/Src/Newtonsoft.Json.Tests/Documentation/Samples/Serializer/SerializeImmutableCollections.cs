@@ -52,12 +52,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             #region Usage
             ImmutableList<string> l = ImmutableList.CreateRange(
-                new List<string>
-                {
-                    "One",
-                    "II",
-                    "3"
-                }
+                new List<string> { "One", "II", "3" }
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);

@@ -49,12 +49,7 @@ public class AutoMapperBugTest
         var engine = config.CreateMapper();
         var one = new One
         {
-            Stuff = new List<string>
-            {
-                "hi",
-                "",
-                "mom"
-            }
+            Stuff = new List<string> { "hi", "", "mom" }
         };
 
         var two = engine.Map<One, Two>(one);

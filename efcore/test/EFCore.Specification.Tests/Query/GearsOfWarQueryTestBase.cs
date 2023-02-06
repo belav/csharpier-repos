@@ -2058,12 +2058,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
         bool async
     )
     {
-        var cities = new List<string>
-        {
-            "Unknown",
-            "Jacinto's location",
-            "Ephyra's location"
-        };
+        var cities = new List<string> { "Unknown", "Jacinto's location", "Ephyra's location" };
 
         return AssertQuery(
             async,
@@ -2481,15 +2476,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<CogTag>()
                     .Where(t => t.Note != "K.I.A.")
                     .OrderBy(t => t.Note)
-                    .Select(
-                        t =>
-                            new List<int>
-                            {
-                                t.Gear.SquadId,
-                                t.Gear.SquadId + 1,
-                                42
-                            }
-                    ),
+                    .Select(t => new List<int> { t.Gear.SquadId, t.Gear.SquadId + 1, 42 }),
             assertOrder: true
         );
 

@@ -2224,14 +2224,7 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_AliasedPropertyTest()
     {
-        var inputList = new List<string>
-        {
-            "item0",
-            "item1",
-            "item2",
-            "item3",
-            "item4"
-        };
+        var inputList = new List<string> { "item0", "item1", "item2", "item3", "item4" };
         var value = new AliasedTestType { Aliased = inputList };
         var actual = SerializeAndDeserialize(
             value,

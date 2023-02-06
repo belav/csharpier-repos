@@ -322,12 +322,7 @@ where TValue : class
         builder.Add(
             new MethodDeclarationIntermediateNode()
             {
-                Modifiers =
-                {
-                    "internal",
-                    "virtual",
-                    "async",
-                },
+                Modifiers = { "internal", "virtual", "async", },
                 MethodName = "TestMethod",
                 Parameters =
                 {

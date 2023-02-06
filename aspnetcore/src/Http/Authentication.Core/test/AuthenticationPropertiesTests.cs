@@ -53,12 +53,7 @@ public class AuthenticationPropertiesTests
         var parameters = new Dictionary<string, object?>
         {
             ["number"] = 1234,
-            ["list"] = new List<string>
-            {
-                "a",
-                "b",
-                "c"
-            },
+            ["list"] = new List<string> { "a", "b", "c" },
         };
         var props = new AuthenticationProperties(items, parameters);
         Assert.Same(items, props.Items);

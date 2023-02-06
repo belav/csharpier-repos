@@ -976,14 +976,7 @@ public abstract class ComplexNavigationsData : ISetSource
         l1s[7].OneToOne_Optional_FK1 = l2s[2];
         l1s[9].OneToOne_Optional_FK1 = l2s[0];
 
-        l1s[0].OneToMany_Optional1 = new List<Level2>
-        {
-            l2s[1],
-            l2s[3],
-            l2s[5],
-            l2s[7],
-            l2s[9]
-        };
+        l1s[0].OneToMany_Optional1 = new List<Level2> { l2s[1], l2s[3], l2s[5], l2s[7], l2s[9] };
 
         l1s[1].OneToMany_Optional_Self1 = new List<Level1> { l1s[0] };
         l1s[3].OneToMany_Optional_Self1 = new List<Level1> { l1s[2] };
@@ -1009,12 +1002,7 @@ public abstract class ComplexNavigationsData : ISetSource
         l2s[6].OneToOne_Optional_FK2 = l3s[2];
         l2s[8].OneToOne_Optional_FK2 = l3s[0];
 
-        l2s[0].OneToMany_Optional2 = new List<Level3>
-        {
-            l3s[1],
-            l3s[5],
-            l3s[9]
-        };
+        l2s[0].OneToMany_Optional2 = new List<Level3> { l3s[1], l3s[5], l3s[9] };
         l2s[1].OneToMany_Optional2 = new List<Level3> { l3s[3], l3s[7] };
 
         l2s[1].OneToMany_Optional_Self2 = new List<Level2> { l2s[0] };
@@ -1041,14 +1029,7 @@ public abstract class ComplexNavigationsData : ISetSource
         l3s[7].OneToOne_Optional_FK3 = l4s[2];
         l3s[9].OneToOne_Optional_FK3 = l4s[0];
 
-        l3s[0].OneToMany_Optional3 = new List<Level4>
-        {
-            l4s[1],
-            l4s[3],
-            l4s[5],
-            l4s[7],
-            l4s[9]
-        };
+        l3s[0].OneToMany_Optional3 = new List<Level4> { l4s[1], l4s[3], l4s[5], l4s[7], l4s[9] };
 
         l3s[1].OneToMany_Optional_Self3 = new List<Level3> { l3s[0] };
         l3s[3].OneToMany_Optional_Self3 = new List<Level3> { l3s[2] };

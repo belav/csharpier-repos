@@ -710,15 +710,7 @@ public class RouteTest
         // Arrange
         var route = CreateRoute("{controller}/{action}");
         var context = CreateVirtualPathContext(
-            new
-            {
-                color = new List<string>
-                {
-                    "red",
-                    "green",
-                    "blue"
-                }
-            },
+            new { color = new List<string> { "red", "green", "blue" } },
             new { controller = "Home", action = "Index" }
         );
 
@@ -737,15 +729,7 @@ public class RouteTest
         // Arrange
         var route = CreateRoute("{controller}/{action}");
         var context = CreateVirtualPathContext(
-            new
-            {
-                items = new List<int>
-                {
-                    10,
-                    20,
-                    30
-                }
-            },
+            new { items = new List<int> { 10, 20, 30 } },
             new { controller = "Home", action = "Index" }
         );
 
@@ -786,12 +770,7 @@ public class RouteTest
             new
             {
                 page = 1,
-                color = new List<string>
-                {
-                    "red",
-                    "green",
-                    "blue"
-                },
+                color = new List<string> { "red", "green", "blue" },
                 message = "textfortest"
             },
             new { controller = "Home", action = "Index" }

@@ -23,13 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
         [Fact]
         public void DebuggerProxy_FrameworkTypes_ArrayList()
         {
-            var obj = new ArrayList
-            {
-                1,
-                2,
-                true,
-                "goo"
-            };
+            var obj = new ArrayList { 1, 2, true, "goo" };
             var str = s_formatter.FormatObject(obj, SingleLineOptions);
 
             Assert.Equal("ArrayList(4) { 1, 2, true, \"goo\" }", str);

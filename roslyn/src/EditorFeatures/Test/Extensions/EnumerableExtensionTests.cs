@@ -84,12 +84,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         public void TestSequenceEqualWithFunction()
         {
             static bool equality(int a, int b) => a == b;
-            var seq = new List<int>()
-            {
-                1,
-                2,
-                3
-            };
+            var seq = new List<int>() { 1, 2, 3 };
 
             // same object reference
             Assert.True(seq.SequenceEqual(seq, equality));

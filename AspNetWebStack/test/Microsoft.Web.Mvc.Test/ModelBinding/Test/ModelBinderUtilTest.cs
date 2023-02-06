@@ -115,13 +115,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void RawValueToObjectArray_RawValueIsEnumerable_ReturnsInputAsArray()
         {
             // Assert
-            List<int> original = new List<int>
-            {
-                1,
-                2,
-                3,
-                4
-            };
+            List<int> original = new List<int> { 1, 2, 3, 4 };
 
             // Act
             object[] retVal = ModelBinderUtil.RawValueToObjectArray(original);

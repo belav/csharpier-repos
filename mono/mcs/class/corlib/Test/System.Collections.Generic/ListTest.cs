@@ -748,14 +748,7 @@ namespace MonoTests.System.Collections.Generic
             i = _list1.FindIndex(FindMultipleOfTwelve);
             Assert.AreEqual(-1, i);
 
-            var a = new List<int>()
-            {
-                2,
-                2,
-                2,
-                3,
-                2
-            };
+            var a = new List<int>() { 2, 2, 2, 3, 2 };
             Assert.AreEqual(2, a.FindIndex(2, 2, l => true));
         }
 
@@ -1332,12 +1325,7 @@ namespace MonoTests.System.Collections.Generic
         [Test, ExpectedException(typeof(InvalidOperationException))] // #699182
         public void VersionCheck_Indexer()
         {
-            var list = new List<int>()
-            {
-                0,
-                2,
-                3
-            };
+            var list = new List<int>() { 0, 2, 3 };
             var enumerator = list.GetEnumerator();
 
             list[0] = 1;

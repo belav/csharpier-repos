@@ -927,27 +927,9 @@ namespace System.Linq.Expressions.Tests
                 new List<int>(),
                 new List<int>() { 1 },
                 new List<int>() { 1, 2 },
-                new List<int>()
-                {
-                    1,
-                    2,
-                    3
-                },
-                new List<int>()
-                {
-                    1,
-                    2,
-                    3,
-                    4
-                },
-                new List<int>()
-                {
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                },
+                new List<int>() { 1, 2, 3 },
+                new List<int>() { 1, 2, 3, 4 },
+                new List<int>() { 1, 2, 3, 4, 5 },
                 Enumerable.Empty<int>(),
                 Enumerable.Range(1, 1),
                 Enumerable.Range(1, 2),

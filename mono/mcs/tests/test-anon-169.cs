@@ -7,14 +7,7 @@ static class Test
     {
         var fs = new List<Func<int>>();
 
-        foreach (
-            int i in new List<int>()
-            {
-                1,
-                2,
-                3
-            }
-        )
+        foreach (int i in new List<int>() { 1, 2, 3 })
         {
             fs.Add(() => i);
         }

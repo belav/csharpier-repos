@@ -85,14 +85,7 @@ namespace System.Linq.Tests
         [Fact]
         public void List_ChangesAfterSkipLast_ChangesReflectedInResults()
         {
-            var list = new List<int>()
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            var list = new List<int>() { 1, 2, 3, 4, 5 };
 
             IEnumerable<int> e = list.SkipLast(2);
 
@@ -105,14 +98,7 @@ namespace System.Linq.Tests
         [Fact]
         public void List_Skip_ChangesAfterSkipLast_ChangesReflectedInResults()
         {
-            var list = new List<int>()
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            };
+            var list = new List<int>() { 1, 2, 3, 4, 5 };
 
             IEnumerable<int> e = list.Skip(1).SkipLast(2);
 

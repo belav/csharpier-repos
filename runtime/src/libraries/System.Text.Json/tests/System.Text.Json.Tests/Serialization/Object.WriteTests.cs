@@ -99,12 +99,7 @@ namespace System.Text.Json.Serialization.Tests
             );
 
             var list = new CollectionWithoutPublicParameterlessCtor(
-                new List<object>
-                {
-                    1,
-                    "foo",
-                    false
-                }
+                new List<object> { 1, "foo", false }
             );
             Assert.Equal("[1,\"foo\",false]", JsonSerializer.Serialize(list));
 

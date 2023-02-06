@@ -48,12 +48,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 
             public UserViewModel()
             {
-                Offices = new List<string>
-                {
-                    "Auckland",
-                    "Wellington",
-                    "Christchurch"
-                };
+                Offices = new List<string> { "Auckland", "Wellington", "Christchurch" };
             }
         }
         #endregion

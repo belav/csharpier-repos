@@ -88,12 +88,7 @@ namespace Newtonsoft.Json.Tests.Schema
             {
                 {
                     "HasValue",
-                    new List<string>()
-                    {
-                        "first",
-                        "second",
-                        null
-                    }
+                    new List<string>() { "first", "second", null }
                 },
                 { "NoValue", null }
             };

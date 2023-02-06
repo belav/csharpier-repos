@@ -956,21 +956,11 @@ public class MediaTypeHeaderValueTest
             },
             {
                 "application/vdn.github.v3+json",
-                new List<StringSegment>()
-                {
-                    "vdn",
-                    "github",
-                    "v3"
-                }
+                new List<StringSegment>() { "vdn", "github", "v3" }
             },
             {
                 "application/vdn.github.+json",
-                new List<StringSegment>()
-                {
-                    "vdn",
-                    "github",
-                    ""
-                }
+                new List<StringSegment>() { "vdn", "github", "" }
             },
         };
 

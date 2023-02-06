@@ -14,12 +14,7 @@ namespace System.Collections.Tests
             out HashSet<(string, int)> items
         )
         {
-            items = new HashSet<(string, int)>
-            {
-                ("one", 1),
-                ("two", 2),
-                ("three", 3)
-            };
+            items = new HashSet<(string, int)> { ("one", 1), ("two", 2), ("three", 3) };
             var queue = new PriorityQueue<string, int>(items);
 
             return queue;

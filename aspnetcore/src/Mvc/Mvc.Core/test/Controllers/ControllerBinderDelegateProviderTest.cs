@@ -687,12 +687,7 @@ public class ControllerBinderDelegateProviderTest
         var controller = new TestController();
         var arguments = new Dictionary<string, object>(StringComparer.Ordinal);
 
-        var expected = new List<string>
-        {
-            "Hello",
-            "World",
-            "!!"
-        };
+        var expected = new List<string> { "Hello", "World", "!!" };
         var factory = GetModelBinderFactory(expected);
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var parameterBinder = GetParameterBinder(modelMetadataProvider, factory);

@@ -15,12 +15,7 @@ namespace Microsoft.Web.Mvc.Test
         {
             // Arrange
             int[] from = null;
-            List<int> to = new List<int>
-            {
-                1,
-                2,
-                3
-            };
+            List<int> to = new List<int> { 1, 2, 3 };
 
             // Act
             ModelCopier.CopyCollection(from, to);
@@ -33,12 +28,7 @@ namespace Microsoft.Web.Mvc.Test
         public void CopyCollection_ToIsImmutable_DoesNothing()
         {
             // Arrange
-            List<int> from = new List<int>
-            {
-                1,
-                2,
-                3
-            };
+            List<int> from = new List<int> { 1, 2, 3 };
             ICollection<int> to = new ReadOnlyCollection<int>(new[] { 4, 5, 6 });
 
             // Act
@@ -53,18 +43,8 @@ namespace Microsoft.Web.Mvc.Test
         public void CopyCollection_ToIsMmutable_ClearsAndCopies()
         {
             // Arrange
-            List<int> from = new List<int>
-            {
-                1,
-                2,
-                3
-            };
-            ICollection<int> to = new List<int>
-            {
-                4,
-                5,
-                6
-            };
+            List<int> from = new List<int> { 1, 2, 3 };
+            ICollection<int> to = new List<int> { 4, 5, 6 };
 
             // Act
             ModelCopier.CopyCollection(from, to);
@@ -78,12 +58,7 @@ namespace Microsoft.Web.Mvc.Test
         public void CopyCollection_ToIsNull_DoesNothing()
         {
             // Arrange
-            List<int> from = new List<int>
-            {
-                1,
-                2,
-                3
-            };
+            List<int> from = new List<int> { 1, 2, 3 };
             List<int> to = null;
 
             // Act

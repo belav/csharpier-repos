@@ -116,12 +116,7 @@ public class AcceptHeaderParserTest
 
         // Act
         var parsed = AcceptHeaderParser.ParseAcceptHeader(
-            new List<string>
-            {
-                "application/json",
-                "",
-                "application/xml;q=0.8"
-            }
+            new List<string> { "application/json", "", "application/xml;q=0.8" }
         );
 
         // Assert

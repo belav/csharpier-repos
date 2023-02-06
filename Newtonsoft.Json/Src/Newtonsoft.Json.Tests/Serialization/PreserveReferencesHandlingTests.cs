@@ -916,13 +916,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             EmployeeReference e1 = new EmployeeReference { Name = "e1" };
             EmployeeReference e2 = new EmployeeReference { Name = "e2" };
 
-            List<EmployeeReference> employees = new List<EmployeeReference>
-            {
-                e1,
-                e2,
-                e1,
-                e2
-            };
+            List<EmployeeReference> employees = new List<EmployeeReference> { e1, e2, e1, e2 };
 
             string json = JsonConvert.SerializeObject(employees, Formatting.Indented);
 

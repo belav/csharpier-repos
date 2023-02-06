@@ -1404,24 +1404,8 @@ namespace System.Collections.Tests
         [Fact]
         public static void TrueForAll_ListSizeCanBeChanged()
         {
-            List<int> list = new List<int>()
-            {
-                1,
-                2,
-                3
-            };
-            List<int> expectedList = new List<int>
-            {
-                1,
-                2,
-                3,
-                2,
-                3,
-                4,
-                3,
-                4,
-                4
-            };
+            List<int> list = new List<int>() { 1, 2, 3 };
+            List<int> expectedList = new List<int> { 1, 2, 3, 2, 3, 4, 3, 4, 4 };
 
             bool result = list.TrueForAll(i =>
             {

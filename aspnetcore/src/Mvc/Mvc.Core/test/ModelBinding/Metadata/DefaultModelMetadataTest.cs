@@ -526,68 +526,20 @@ public class DefaultModelMetadataTest
             return new TheoryData<IEnumerable<string>, IEnumerable<string>>
             {
                 {
-                    new List<string>
-                    {
-                        "Property1",
-                        "Property2",
-                        "Property3",
-                        "Property4",
-                    },
-                    new List<string>
-                    {
-                        "Property1",
-                        "Property2",
-                        "Property3",
-                        "Property4",
-                    }
+                    new List<string> { "Property1", "Property2", "Property3", "Property4", },
+                    new List<string> { "Property1", "Property2", "Property3", "Property4", }
                 },
                 {
-                    new List<string>
-                    {
-                        "Property4",
-                        "Property3",
-                        "Property2",
-                        "Property1",
-                    },
-                    new List<string>
-                    {
-                        "Property4",
-                        "Property3",
-                        "Property2",
-                        "Property1",
-                    }
+                    new List<string> { "Property4", "Property3", "Property2", "Property1", },
+                    new List<string> { "Property4", "Property3", "Property2", "Property1", }
                 },
                 {
-                    new List<string>
-                    {
-                        "Delta",
-                        "Bravo",
-                        "Charlie",
-                        "Alpha",
-                    },
-                    new List<string>
-                    {
-                        "Delta",
-                        "Bravo",
-                        "Charlie",
-                        "Alpha",
-                    }
+                    new List<string> { "Delta", "Bravo", "Charlie", "Alpha", },
+                    new List<string> { "Delta", "Bravo", "Charlie", "Alpha", }
                 },
                 {
-                    new List<string>
-                    {
-                        "John",
-                        "Jonathan",
-                        "Jon",
-                        "Joan",
-                    },
-                    new List<string>
-                    {
-                        "John",
-                        "Jonathan",
-                        "Jon",
-                        "Joan",
-                    }
+                    new List<string> { "John", "Jonathan", "Jon", "Joan", },
+                    new List<string> { "John", "Jonathan", "Jon", "Joan", }
                 },
             };
         }
@@ -658,13 +610,7 @@ public class DefaultModelMetadataTest
                         new KeyValuePair<string, int>("Property3", 23),
                         new KeyValuePair<string, int>("Property4", 23),
                     },
-                    new List<string>
-                    {
-                        "Property1",
-                        "Property2",
-                        "Property3",
-                        "Property4",
-                    }
+                    new List<string> { "Property1", "Property2", "Property3", "Property4", }
                 },
                 // Same order if already ordered using Order.
                 {
@@ -675,13 +621,7 @@ public class DefaultModelMetadataTest
                         new KeyValuePair<string, int>("Property2", 25),
                         new KeyValuePair<string, int>("Property1", 26),
                     },
-                    new List<string>
-                    {
-                        "Property4",
-                        "Property3",
-                        "Property2",
-                        "Property1",
-                    }
+                    new List<string> { "Property4", "Property3", "Property2", "Property1", }
                 },
                 // Rest of the orderings get updated within ModelMetadata.
                 {
@@ -692,13 +632,7 @@ public class DefaultModelMetadataTest
                         new KeyValuePair<string, int>("Property3", 24),
                         new KeyValuePair<string, int>("Property4", 23),
                     },
-                    new List<string>
-                    {
-                        "Property4",
-                        "Property3",
-                        "Property2",
-                        "Property1",
-                    }
+                    new List<string> { "Property4", "Property3", "Property2", "Property1", }
                 },
                 {
                     new List<KeyValuePair<string, int>>
@@ -708,13 +642,7 @@ public class DefaultModelMetadataTest
                         new KeyValuePair<string, int>("Charlie", 23),
                         new KeyValuePair<string, int>("Delta", 25),
                     },
-                    new List<string>
-                    {
-                        "Charlie",
-                        "Bravo",
-                        "Delta",
-                        "Alpha",
-                    }
+                    new List<string> { "Charlie", "Bravo", "Delta", "Alpha", }
                 },
                 // Jonathan and Jon will not be reordered.
                 {
@@ -725,13 +653,7 @@ public class DefaultModelMetadataTest
                         new KeyValuePair<string, int>("Jon", 0),
                         new KeyValuePair<string, int>("John", -1),
                     },
-                    new List<string>
-                    {
-                        "John",
-                        "Jonathan",
-                        "Jon",
-                        "Joan",
-                    }
+                    new List<string> { "John", "Jonathan", "Jon", "Joan", }
                 },
             };
         }

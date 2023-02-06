@@ -1098,14 +1098,7 @@ public class DbParameterCollectionExtensionsTest
     [ConditionalFact]
     public void Short_generic_lists_are_not_truncated()
     {
-        var array = new List<int>
-        {
-            1,
-            2,
-            3,
-            4,
-            5
-        };
+        var array = new List<int> { 1, 2, 3, 4, 5 };
 
         Assert.Equal(
             "@param={ '1', '2', '3', '4', '5' } (DbType = Object)",
@@ -1126,19 +1119,7 @@ public class DbParameterCollectionExtensionsTest
     [ConditionalFact]
     public void Long_generic_lists_are_truncated()
     {
-        var array = new List<int>
-        {
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10
-        };
+        var array = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
         Assert.Equal(
             "@param={ '1', '2', '3', '4', '5', ... } (DbType = Object)",

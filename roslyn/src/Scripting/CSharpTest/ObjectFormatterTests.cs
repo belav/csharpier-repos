@@ -697,12 +697,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
         [Fact]
         public void DebuggerProxy_FrameworkTypes_List()
         {
-            var obj = new List<object>
-            {
-                1,
-                2,
-                'c'
-            };
+            var obj = new List<object> { 1, 2, 'c' };
 
             var str = s_formatter.FormatObject(obj, SingleLineOptions);
             Assert.Equal("List<object>(3) { 1, 2, 'c' }", str);

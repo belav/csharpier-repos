@@ -905,16 +905,7 @@ namespace System.Dynamic.Runtime.Tests
         [Fact]
         public static void CalledFrom_AnonymousType_InsideQueryExpression()
         {
-            List<int> list = new List<int>()
-            {
-                0,
-                4,
-                1,
-                6,
-                4,
-                4,
-                5
-            };
+            List<int> list = new List<int>() { 0, 4, 1, 6, 4, 4, 5 };
             string s = "test";
             dynamic mc = new MemberClass();
             var result = list.Where(p => p == (int)mc.Method_ReturnInt(ref s))

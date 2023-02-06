@@ -245,14 +245,7 @@ namespace MonoTests.System.Security.Claims
             var baseId2 = new GenericIdentity("generic_name2", "baseId2");
             var baseId3 = new GenericIdentity("generic_name3", "baseId3");
 
-            var p = new ClaimsPrincipal(
-                new List<ClaimsIdentity>
-                {
-                    baseId1,
-                    baseId2,
-                    baseId3
-                }
-            );
+            var p = new ClaimsPrincipal(new List<ClaimsIdentity> { baseId1, baseId2, baseId3 });
             Assert.IsNotNull(p.Identities, "#1");
             Assert.AreEqual(3, p.Identities.Count(), "#2");
 

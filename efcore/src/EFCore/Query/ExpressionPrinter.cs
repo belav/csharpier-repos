@@ -23,12 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public class ExpressionPrinter : ExpressionVisitor
 {
     private static readonly List<string> SimpleMethods =
-        new()
-        {
-            "get_Item",
-            "TryReadValue",
-            "ReferenceEquals"
-        };
+        new() { "get_Item", "TryReadValue", "ReferenceEquals" };
 
     private readonly IndentedStringBuilder _stringBuilder;
     private readonly Dictionary<ParameterExpression, string?> _parametersInScope;

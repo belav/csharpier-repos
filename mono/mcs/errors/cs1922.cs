@@ -13,14 +13,6 @@ public class Test
 {
     static void Main()
     {
-        var c = new Data
-        {
-            Value =
-            {
-                0,
-                1,
-                2
-            }
-        };
+        var c = new Data { Value = { 0, 1, 2 } };
     }
 }

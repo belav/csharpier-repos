@@ -2070,14 +2070,7 @@ namespace System.Web.Mvc.Test
         public void UpdateCollectionCreatesDefaultEntriesForInvalidElements()
         {
             // Arrange
-            List<int> model = new List<int>()
-            {
-                4,
-                5,
-                6,
-                7,
-                8
-            };
+            List<int> model = new List<int>() { 4, 5, 6, 7, 8 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
@@ -2135,14 +2128,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ControllerContext controllerContext = new Mock<ControllerContext>().Object;
 
-            List<int> model = new List<int>()
-            {
-                4,
-                5,
-                6,
-                7,
-                8
-            };
+            List<int> model = new List<int>() { 4, 5, 6, 7, 8 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
@@ -2181,14 +2167,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ControllerContext controllerContext = new Mock<ControllerContext>().Object;
 
-            List<int> model = new List<int>()
-            {
-                4,
-                5,
-                6,
-                7,
-                8
-            };
+            List<int> model = new List<int>() { 4, 5, 6, 7, 8 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(

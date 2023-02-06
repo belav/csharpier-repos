@@ -120,15 +120,7 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void BlittableElementColllectionMarshalledToNativeAsExpected()
         {
-            var list = new List<int>
-            {
-                1,
-                5,
-                79,
-                165,
-                32,
-                3
-            };
+            var list = new List<int> { 1, 5, 79, 165, 32, 3 };
             Assert.Equal(list.Sum(), NativeExportsNE.Collections.Sum(list, list.Count));
         }
 
@@ -141,30 +133,14 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void BlittableElementColllectionInParameter()
         {
-            var list = new List<int>
-            {
-                1,
-                5,
-                79,
-                165,
-                32,
-                3
-            };
+            var list = new List<int> { 1, 5, 79, 165, 32, 3 };
             Assert.Equal(list.Sum(), NativeExportsNE.Collections.SumInArray(list, list.Count));
         }
 
         [Fact]
         public void BlittableElementCollectionRefParameter()
         {
-            var list = new List<int>
-            {
-                1,
-                5,
-                79,
-                165,
-                32,
-                3
-            };
+            var list = new List<int> { 1, 5, 79, 165, 32, 3 };
             var newList = list;
             NativeExportsNE.Collections.Duplicate(ref newList, list.Count);
             Assert.Equal((IEnumerable<int>)list, newList);

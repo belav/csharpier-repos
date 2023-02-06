@@ -802,13 +802,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
         public static int MainMethod()
         {
-            var list = new List<string>()
-            {
-                null,
-                "b",
-                null,
-                "a"
-            };
+            var list = new List<string>() { null, "b", null, "a" };
             dynamic mc = new MemberClass();
             string a = "a";
             dynamic da = a;

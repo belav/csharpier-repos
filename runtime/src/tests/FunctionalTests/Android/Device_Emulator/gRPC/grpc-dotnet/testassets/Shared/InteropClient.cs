@@ -213,13 +213,7 @@ namespace Grpc.Shared.TestAssets
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
-            var bodySizes = new List<int>
-            {
-                27182,
-                8,
-                1828,
-                45904
-            }.Select(
+            var bodySizes = new List<int> { 27182, 8, 1828, 45904 }.Select(
                 (size) => new StreamingInputCallRequest { Payload = CreateZerosPayload(size) }
             );
 
@@ -239,13 +233,7 @@ namespace Grpc.Shared.TestAssets
         {
             var client = CreateClient<TestService.TestServiceClient>(channel);
 
-            var bodySizes = new List<int>
-            {
-                31415,
-                9,
-                2653,
-                58979
-            };
+            var bodySizes = new List<int> { 31415, 9, 2653, 58979 };
 
             var request = new StreamingOutputCallRequest
             {

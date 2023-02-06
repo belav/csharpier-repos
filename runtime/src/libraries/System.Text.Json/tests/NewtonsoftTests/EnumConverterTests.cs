@@ -197,12 +197,7 @@ namespace System.Text.Json.Tests
             Assert.Equal(Foo.FooBar | Foo.SerializeAsBaz, foos[4]);
             Assert.Equal((Foo)int.MaxValue, foos[5]);
 
-            List<Bar> lbar = new List<Bar>()
-            {
-                Bar.FooBar,
-                Bar.Bat,
-                Bar.SerializeAsBaz
-            };
+            List<Bar> lbar = new List<Bar>() { Bar.FooBar, Bar.Bat, Bar.SerializeAsBaz };
 
             string json2 = JsonSerializer.Serialize(
                 lbar,

@@ -151,56 +151,28 @@ namespace System.Text.Json.Serialization.Tests
             json = await Serializer.SerializeWrapper<object>(array);
             Assert.Equal(ExpectedJson, json);
 
-            List<object> list = new List<object>
-            {
-                1,
-                true,
-                address,
-                null,
-                "foo"
-            };
+            List<object> list = new List<object> { 1, true, address, null, "foo" };
             json = await Serializer.SerializeWrapper(list);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(list);
             Assert.Equal(ExpectedJson, json);
 
-            IEnumerable ienumerable = new List<object>
-            {
-                1,
-                true,
-                address,
-                null,
-                "foo"
-            };
+            IEnumerable ienumerable = new List<object> { 1, true, address, null, "foo" };
             json = await Serializer.SerializeWrapper(ienumerable);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(ienumerable);
             Assert.Equal(ExpectedJson, json);
 
-            IList ilist = new List<object>
-            {
-                1,
-                true,
-                address,
-                null,
-                "foo"
-            };
+            IList ilist = new List<object> { 1, true, address, null, "foo" };
             json = await Serializer.SerializeWrapper(ilist);
             Assert.Equal(ExpectedJson, json);
 
             json = await Serializer.SerializeWrapper<object>(ilist);
             Assert.Equal(ExpectedJson, json);
 
-            ICollection icollection = new List<object>
-            {
-                1,
-                true,
-                address,
-                null,
-                "foo"
-            };
+            ICollection icollection = new List<object> { 1, true, address, null, "foo" };
             json = await Serializer.SerializeWrapper(icollection);
             Assert.Equal(ExpectedJson, json);
 
@@ -221,14 +193,7 @@ namespace System.Text.Json.Serialization.Tests
             json = await Serializer.SerializeWrapper<object>(genericIEnumerable);
             Assert.Equal(ExpectedJson, json);
 
-            IList<object> genericIList = new List<object>
-            {
-                1,
-                true,
-                address,
-                null,
-                "foo"
-            };
+            IList<object> genericIList = new List<object> { 1, true, address, null, "foo" };
             json = await Serializer.SerializeWrapper(genericIList);
             Assert.Equal(ExpectedJson, json);
 
@@ -277,14 +242,7 @@ namespace System.Text.Json.Serialization.Tests
             json = await Serializer.SerializeWrapper<object>(genericIReadonlyList);
             Assert.Equal(ExpectedJson, json);
 
-            ISet<object> iset = new HashSet<object>
-            {
-                1,
-                true,
-                address,
-                null,
-                "foo"
-            };
+            ISet<object> iset = new HashSet<object> { 1, true, address, null, "foo" };
             json = await Serializer.SerializeWrapper(iset);
             Assert.Equal(ExpectedJson, json);
 
@@ -292,14 +250,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ExpectedJson, json);
 
             Stack<object> stack = new Stack<object>(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(stack);
             Assert.Equal(ReversedExpectedJson, json);
@@ -308,14 +259,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ReversedExpectedJson, json);
 
             Queue<object> queue = new Queue<object>(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(queue);
             Assert.Equal(ExpectedJson, json);
@@ -324,14 +268,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ExpectedJson, json);
 
             HashSet<object> hashset = new HashSet<object>(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(hashset);
             Assert.Equal(ExpectedJson, json);
@@ -340,14 +277,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ExpectedJson, json);
 
             LinkedList<object> linkedlist = new LinkedList<object>(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(linkedlist);
             Assert.Equal(ExpectedJson, json);
@@ -356,14 +286,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ExpectedJson, json);
 
             ImmutableArray<object> immutablearray = ImmutableArray.CreateRange(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(immutablearray);
             Assert.Equal(ExpectedJson, json);
@@ -372,14 +295,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ExpectedJson, json);
 
             IImmutableList<object> iimmutablelist = ImmutableList.CreateRange(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(iimmutablelist);
             Assert.Equal(ExpectedJson, json);
@@ -388,14 +304,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ExpectedJson, json);
 
             IImmutableStack<object> iimmutablestack = ImmutableStack.CreateRange(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(iimmutablestack);
             Assert.Equal(ReversedExpectedJson, json);
@@ -404,14 +313,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ReversedExpectedJson, json);
 
             IImmutableQueue<object> iimmutablequeue = ImmutableQueue.CreateRange(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(iimmutablequeue);
             Assert.Equal(ExpectedJson, json);
@@ -420,14 +322,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ExpectedJson, json);
 
             IImmutableSet<object> iimmutableset = ImmutableHashSet.CreateRange(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(iimmutableset);
             foreach (string obj in expectedObjects)
@@ -442,14 +337,7 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             ImmutableHashSet<object> immutablehashset = ImmutableHashSet.CreateRange(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(immutablehashset);
             foreach (string obj in expectedObjects)
@@ -464,14 +352,7 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             ImmutableList<object> immutablelist = ImmutableList.CreateRange(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(immutablelist);
             Assert.Equal(ExpectedJson, json);
@@ -480,14 +361,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ExpectedJson, json);
 
             ImmutableStack<object> immutablestack = ImmutableStack.CreateRange(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(immutablestack);
             Assert.Equal(ReversedExpectedJson, json);
@@ -496,14 +370,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(ReversedExpectedJson, json);
 
             ImmutableQueue<object> immutablequeue = ImmutableQueue.CreateRange(
-                new List<object>
-                {
-                    1,
-                    true,
-                    address,
-                    null,
-                    "foo"
-                }
+                new List<object> { 1, true, address, null, "foo" }
             );
             json = await Serializer.SerializeWrapper(immutablequeue);
             Assert.Equal(ExpectedJson, json);

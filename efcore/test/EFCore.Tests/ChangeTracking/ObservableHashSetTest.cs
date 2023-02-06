@@ -261,13 +261,7 @@ public class ObservableHashSetTest
     [ConditionalFact]
     public void Can_intersect_with()
     {
-        var hashSet = new ObservableHashSet<string>
-        {
-            "Brendan",
-            "Carmack",
-            "Nate",
-            "Palmer"
-        };
+        var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
         var countChanging = 0;
         var countChanged = 0;
         var collectionChanged = 0;
@@ -305,13 +299,7 @@ public class ObservableHashSetTest
     [ConditionalFact]
     public void Can_except_with()
     {
-        var hashSet = new ObservableHashSet<string>
-        {
-            "Brendan",
-            "Carmack",
-            "Nate",
-            "Palmer"
-        };
+        var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
         var countChanging = 0;
         var countChanged = 0;
         var collectionChanged = 0;
@@ -349,13 +337,7 @@ public class ObservableHashSetTest
     [ConditionalFact]
     public void Can_symmetrical_except_with()
     {
-        var hashSet = new ObservableHashSet<string>
-        {
-            "Brendan",
-            "Carmack",
-            "Nate",
-            "Palmer"
-        };
+        var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
         var countChanging = 0;
         var countChanged = 0;
         var collectionChanged = 0;
@@ -481,13 +463,7 @@ public class ObservableHashSetTest
     [ConditionalFact]
     public void Can_remove_with_predicate()
     {
-        var hashSet = new ObservableHashSet<string>
-        {
-            "Brendan",
-            "Carmack",
-            "Nate",
-            "Palmer"
-        };
+        var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
         var countChanging = 0;
         var countChanged = 0;
         var collectionChanged = 0;

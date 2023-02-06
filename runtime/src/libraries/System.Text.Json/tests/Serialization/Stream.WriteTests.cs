@@ -633,12 +633,7 @@ namespace System.Text.Json.Serialization.Tests
                         Width = i + 2,
                         FeaturedImage = new FeaturedImage(),
                         PreviewImage = new PreviewImage(),
-                        KeyWords = new List<string>
-                        {
-                            "surface",
-                            "pro",
-                            "laptop"
-                        },
+                        KeyWords = new List<string> { "surface", "pro", "laptop" },
                         RelatedImages = new List<Image>(),
                         RelatedVideo = new Uri("http://dotnet.test/link/entries/entry/2"),
                         GuaranteeStartsAt = new DateTime(),

@@ -66,12 +66,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using (var context = CreateContext())
         {
             Assert.Equal(
-                new List<int>
-                {
-                    -77,
-                    1,
-                    2,
-                },
+                new List<int> { -77, 1, 2, },
                 context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
             );
         }
@@ -116,12 +111,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using (var context = CreateContext())
         {
             Assert.Equal(
-                new List<int>
-                {
-                    -77,
-                    1,
-                    2,
-                },
+                new List<int> { -77, 1, 2, },
                 context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
             );
         }
@@ -577,21 +567,11 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             }
 
             Assert.Equal(
-                new List<int>
-                {
-                    1,
-                    2,
-                    77
-                },
+                new List<int> { 1, 2, 77 },
                 context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
             );
             Assert.Equal(
-                new List<int>
-                {
-                    100,
-                    200,
-                    300
-                },
+                new List<int> { 100, 200, 300 },
                 context.Set<TransactionOrder>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
             );
         }
@@ -633,12 +613,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
             );
             Assert.Equal(
-                new List<int>
-                {
-                    100,
-                    200,
-                    300
-                },
+                new List<int> { 100, 200, 300 },
                 context.Set<TransactionOrder>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
             );
         }
@@ -707,12 +682,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using (var context = CreateContext())
         {
             Assert.Equal(
-                new List<int>
-                {
-                    1,
-                    2,
-                    77
-                },
+                new List<int> { 1, 2, 77 },
                 context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
             );
         }

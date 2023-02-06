@@ -406,66 +406,26 @@ namespace System.Collections.Tests
 
             var set = new HashSet<SortedSet<T>>()
             {
-                new SortedSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                },
-                new SortedSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                }
+                new SortedSet<T> { objects[0], objects[1], objects[2] },
+                new SortedSet<T> { objects[3], objects[4], objects[5] }
             };
 
             var noComparerSet = new HashSet<SortedSet<T>>()
             {
-                new SortedSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                },
-                new SortedSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                }
+                new SortedSet<T> { objects[0], objects[1], objects[2] },
+                new SortedSet<T> { objects[3], objects[4], objects[5] }
             };
 
             var comparerSet1 = new HashSet<SortedSet<T>>(SortedSet<T>.CreateSetComparer())
             {
-                new SortedSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                },
-                new SortedSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                }
+                new SortedSet<T> { objects[0], objects[1], objects[2] },
+                new SortedSet<T> { objects[3], objects[4], objects[5] }
             };
 
             var comparerSet2 = new HashSet<SortedSet<T>>(SortedSet<T>.CreateSetComparer())
             {
-                new SortedSet<T>
-                {
-                    objects[3],
-                    objects[4],
-                    objects[5]
-                },
-                new SortedSet<T>
-                {
-                    objects[0],
-                    objects[1],
-                    objects[2]
-                }
+                new SortedSet<T> { objects[3], objects[4], objects[5] },
+                new SortedSet<T> { objects[0], objects[1], objects[2] }
             };
 
             Assert.False(noComparerSet.SetEquals(set));
