@@ -100,7 +100,16 @@ namespace System.Collections.Tests
 
         private static IEnumerable<object[]> GenerateCollections(bool includeEmptyCollections)
         {
-            var sizes = new List<int> { 65, 64, 5, 4, 3, 2, 1 };
+            var sizes = new List<int>
+            {
+                65,
+                64,
+                5,
+                4,
+                3,
+                2,
+                1
+            };
 
             if (includeEmptyCollections)
                 sizes.Add(0);

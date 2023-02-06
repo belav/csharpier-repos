@@ -585,7 +585,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
             {
                 FirstName = "Customer",
                 LastName = "One",
-                Orders = new List<Order> { order11, order12, order13 },
+                Orders = new List<Order>
+                {
+                    order11,
+                    order12,
+                    order13
+                },
                 Addresses = new List<Address> { address11, address12 }
             };
 
@@ -609,7 +614,12 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
             {
                 FirstName = "Customer",
                 LastName = "Four",
-                Addresses = new List<Address> { address41, address42, address43 }
+                Addresses = new List<Address>
+                {
+                    address41,
+                    address42,
+                    address43
+                }
             };
 
             ((UDFSqlContext)context).Products.AddRange(

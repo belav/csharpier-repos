@@ -175,7 +175,12 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteWrappingBraceResetsCorrectly()
         {
-            List<int> list = new List<int> { 10, 20, 30 };
+            List<int> list = new List<int>
+            {
+                10,
+                20,
+                30
+            };
             ImmutableArray<int> immutableArr = list.ToImmutableArray();
 
             var root = new ClassWithListAndImmutableArray

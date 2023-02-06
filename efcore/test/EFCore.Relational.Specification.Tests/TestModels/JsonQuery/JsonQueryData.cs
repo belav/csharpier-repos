@@ -305,7 +305,12 @@ public class JsonQueryData : ISetSource
         var entity2 = new JsonEntityBasicForCollection { Id = 2, Name = "EntityCollection2" };
         var entity3 = new JsonEntityBasicForCollection { Id = 3, Name = "EntityCollection3" };
 
-        return new List<JsonEntityBasicForCollection> { entity1, entity2, entity3 };
+        return new List<JsonEntityBasicForCollection>
+        {
+            entity1,
+            entity2,
+            entity3
+        };
     }
 
     public static void WireUp(
@@ -459,7 +464,12 @@ public class JsonQueryData : ISetSource
             }
         };
 
-        return new List<JsonEntitySingleOwned> { e1, e2, e3 };
+        return new List<JsonEntitySingleOwned>
+        {
+            e1,
+            e2,
+            e3
+        };
     }
 
     public static IReadOnlyList<JsonEntityInheritanceBase> CreateJsonEntitiesInheritance()

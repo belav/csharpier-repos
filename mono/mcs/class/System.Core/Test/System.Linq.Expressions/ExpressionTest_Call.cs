@@ -442,7 +442,10 @@ namespace MonoTests.System.Linq.Expressions
                 )
                 .Compile();
 
-            int[,] data = { { 1 } };
+            int[,] data =
+            {
+                { 1 }
+            };
 
             Assert.AreEqual(3, lambda(data));
             Assert.AreEqual(2, data[0, 0]);

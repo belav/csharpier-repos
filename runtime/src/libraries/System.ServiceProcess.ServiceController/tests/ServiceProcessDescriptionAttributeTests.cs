@@ -8,7 +8,12 @@ namespace System.ServiceProcess.Tests
     public class ServiceProcessDescriptionAttributeTests
     {
         public static TheoryData<string> Ctor_Data =>
-            new TheoryData<string> { { string.Empty }, { null }, { "hello" } };
+            new TheoryData<string>
+            {
+                { string.Empty },
+                { null },
+                { "hello" }
+            };
 
         [Theory, MemberData(nameof(Ctor_Data))]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]

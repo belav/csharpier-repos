@@ -211,7 +211,17 @@ public class UnaryServerCallHandlerTests : LoggedTest
         ) =>
         {
             request = r;
-            return Task.FromResult(new HelloReply { Values = { "One", "Two", "" } });
+            return Task.FromResult(
+                new HelloReply
+                {
+                    Values =
+                    {
+                        "One",
+                        "Two",
+                        ""
+                    }
+                }
+            );
         };
 
         var unaryServerCallHandler = CreateCallHandler(
@@ -354,7 +364,12 @@ public class UnaryServerCallHandlerTests : LoggedTest
         var unaryServerCallHandler = CreateCallHandler(invoker, descriptorInfo);
         var httpContext = TestHelpers.CreateHttpContext();
 
-        var sdf = new RepeatedField<string> { "One", "Two", "Three" };
+        var sdf = new RepeatedField<string>
+        {
+            "One",
+            "Two",
+            "Three"
+        };
 
         var sw = new StringWriter();
         JsonFormatter.Default.WriteValue(sw, sdf);

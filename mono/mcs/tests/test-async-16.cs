@@ -56,7 +56,15 @@ class Tester : Base
         int total = 0;
         foreach (
             var e in await Task.Factory
-                .StartNew(() => new List<int>() { 1, 2, 3 })
+                .StartNew(
+                    () =>
+                        new List<int>()
+                        {
+                            1,
+                            2,
+                            3
+                        }
+                )
                 .ConfigureAwait(false)
         )
         {
@@ -71,7 +79,15 @@ class Tester : Base
         int total = 0;
         foreach (
             var e in await Task.Factory
-                .StartNew(() => new List<int>() { 1, 2, 3 })
+                .StartNew(
+                    () =>
+                        new List<int>()
+                        {
+                            1,
+                            2,
+                            3
+                        }
+                )
                 .ConfigureAwait(false)
         )
         {

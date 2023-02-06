@@ -155,7 +155,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             var builder = ImmutableSegmentedDictionary
                 .Create<string, int>()
-                .AddRange(new Dictionary<string, int> { { "a", 1 }, { "b", 2 }, { "c", 3 } })
+                .AddRange(
+                    new Dictionary<string, int>
+                    {
+                        { "a", 1 },
+                        { "b", 2 },
+                        { "c", 3 }
+                    }
+                )
                 .ToBuilder();
             Assert.Equal(3, builder.Count);
             builder.RemoveRange(new[] { "a", "b" });

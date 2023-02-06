@@ -64,7 +64,11 @@ namespace System.ComponentModel.Tests
         public static void CanConvertFrom_WithContext_NullableConverter()
         {
             CanConvertFrom_WithContext(
-                new object[2, 2] { { typeof(int), true }, { typeof(string), true } },
+                new object[2, 2]
+                {
+                    { typeof(int), true },
+                    { typeof(string), true }
+                },
                 NullableConverterTests.s_intNullableConverter
             );
         }

@@ -4743,7 +4743,14 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             yield return new object[]
             {
-                new List<int>() { 1, 2, 3, 4, 5 },
+                new List<int>()
+                {
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                },
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(
@@ -6139,7 +6146,12 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     19
                 },
                 JaggedArray = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6, 7 } },
-                MultiDimensionalArray = new int[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } },
+                MultiDimensionalArray = new int[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 },
+                    { 5, 6 }
+                },
                 TreeArray = new Tree<int>[]
                 {
                     new Tree<int>(1, new Tree<int>(2, null, null), new Tree<int>(3, null, null))
@@ -8030,7 +8042,12 @@ namespace System.Runtime.Serialization.Formatters.Tests
             {
                 new object[]
                 {
-                    new int[,] { { 1, 2, 3, 4, 5 }, { 6, 7, 8, 9, 10 }, { 11, 12, 13, 14, 15 } }
+                    new int[,]
+                    {
+                        { 1, 2, 3, 4, 5 },
+                        { 6, 7, 8, 9, 10 },
+                        { 11, 12, 13, 14, 15 }
+                    }
                 },
                 new TypeSerializableValue[]
                 {
@@ -8050,7 +8067,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 {
                     new int[,,]
                     {
-                        { { 1, 2, 3, 4, 5 }, { 6, 7, 8, 9, 10 }, { 11, 12, 13, 14, 15 } }
+                        {
+                            { 1, 2, 3, 4, 5 },
+                            { 6, 7, 8, 9, 10 },
+                            { 11, 12, 13, 14, 15 }
+                        }
                     }
                 },
                 new TypeSerializableValue[]
@@ -8067,7 +8088,17 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             yield return new object[]
             {
-                new object[] { new int[,,,] { { { { 1 } } } } },
+                new object[]
+                {
+                    new int[,,,]
+                    {
+                        {
+                            {
+                                { 1 }
+                            }
+                        }
+                    }
+                },
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(
@@ -10211,7 +10242,14 @@ namespace System.Runtime.Serialization.Formatters.Tests
             yield return new object[] { "test" };
             yield return new object[]
             {
-                new List<int> { 1, 2, 3, 4, 5 }
+                new List<int>
+                {
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                }
             };
             yield return new object[]
             {

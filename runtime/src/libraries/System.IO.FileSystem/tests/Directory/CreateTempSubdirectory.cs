@@ -12,7 +12,14 @@ namespace System.IO.Tests
         {
             get
             {
-                var result = new TheoryData<string>() { null, "", "myDir", "my.Dir", "H\u00EBllo" };
+                var result = new TheoryData<string>()
+                {
+                    null,
+                    "",
+                    "myDir",
+                    "my.Dir",
+                    "H\u00EBllo"
+                };
                 if (!OperatingSystem.IsWindows())
                 {
                     // ensure we can use backslashes on Unix since that isn't a directory separator
@@ -108,7 +115,12 @@ namespace System.IO.Tests
         {
             get
             {
-                var result = new TheoryData<string>() { "/", "myDir/", "my/Dir" };
+                var result = new TheoryData<string>()
+                {
+                    "/",
+                    "myDir/",
+                    "my/Dir"
+                };
                 if (OperatingSystem.IsWindows())
                 {
                     result.Add(@"\");

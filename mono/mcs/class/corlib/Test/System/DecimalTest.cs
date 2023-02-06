@@ -1117,7 +1117,10 @@ namespace MonoTests.System
         [Test]
         public void TestRoundFailures()
         {
-            decimal[,] dtab = { { 1.2345m, 3, 1.234m } };
+            decimal[,] dtab =
+            {
+                { 1.2345m, 3, 1.234m }
+            };
 
             decimal d;
 

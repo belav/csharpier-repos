@@ -28,7 +28,12 @@ class Program
 
     private static int Main()
     {
-        Foo<IFrobber>.FrobAll(new Frobber[,] { { new Frobber() } });
+        Foo<IFrobber>.FrobAll(
+            new Frobber[,]
+            {
+                { new Frobber() }
+            }
+        );
         return 100;
     }
 }

@@ -50,11 +50,21 @@ namespace System.Collections.ObjectModel.Tests
             new object[] { new string[] { "one", "two", "three" } },
             new object[]
             {
-                new List<string> { "one", "two", "three" }
+                new List<string>
+                {
+                    "one",
+                    "two",
+                    "three"
+                }
             },
             new object[]
             {
-                new Collection<string> { "one", "two", "three" }
+                new Collection<string>
+                {
+                    "one",
+                    "two",
+                    "three"
+                }
             },
             new object[] { Enumerable.Range(1, 3).Select(i => i.ToString()) },
             new object[] { CreateIteratorCollection() }
@@ -197,7 +207,12 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void ListConstructorTest()
         {
-            List<string> collection = new List<string> { "one", "two", "three" };
+            List<string> collection = new List<string>
+            {
+                "one",
+                "two",
+                "three"
+            };
             var actual = new ObservableCollection<string>(collection);
             Assert.Equal(collection, actual);
         }
@@ -205,7 +220,12 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void ListConstructorTest_MakesCopy()
         {
-            List<string> collection = new List<string> { "one", "two", "three" };
+            List<string> collection = new List<string>
+            {
+                "one",
+                "two",
+                "three"
+            };
             var oc = new ObservableCollectionSubclass<string>(collection);
             Assert.NotNull(oc.InnerList);
             Assert.NotSame(collection, oc.InnerList);

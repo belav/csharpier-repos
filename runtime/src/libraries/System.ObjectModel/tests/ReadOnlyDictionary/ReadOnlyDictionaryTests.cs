@@ -316,7 +316,12 @@ namespace System.Collections.ObjectModel.Tests
         public static void DebuggerAttributeTests()
         {
             ReadOnlyDictionary<int, int> dict = new ReadOnlyDictionary<int, int>(
-                new Dictionary<int, int> { { 1, 2 }, { 2, 4 }, { 3, 6 } }
+                new Dictionary<int, int>
+                {
+                    { 1, 2 },
+                    { 2, 4 },
+                    { 3, 6 }
+                }
             );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(dict);
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(

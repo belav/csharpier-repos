@@ -212,7 +212,12 @@ namespace System.Activities.Statements
                     Argument2 = validationContext,
                     Handler = new Sequence
                     {
-                        Variables = { assertFlag, elements, index },
+                        Variables =
+                        {
+                            assertFlag,
+                            elements,
+                            index
+                        },
                         Activities =
                         {
                             new Assign<IEnumerable<Activity>>
@@ -732,7 +737,12 @@ namespace System.Activities.Statements
             metadata.Bind(this.Result, resultArgument);
 
             metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument> { indexArgument, elementsArgument, resultArgument }
+                new Collection<RuntimeArgument>
+                {
+                    indexArgument,
+                    elementsArgument,
+                    resultArgument
+                }
             );
         }
 

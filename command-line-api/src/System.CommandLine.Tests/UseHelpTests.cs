@@ -203,7 +203,12 @@ namespace System.CommandLine.Tests
             var option = new Option<int>("-x", "The default option description");
             var argument = new Argument<int>("int-value", "The default argument description");
 
-            var rootCommand = new RootCommand { subcommand, option, argument };
+            var rootCommand = new RootCommand
+            {
+                subcommand,
+                option,
+                argument
+            };
 
             var parser = new CommandLineBuilder(rootCommand)
                 .UseHelp(ctx =>

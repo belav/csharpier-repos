@@ -28,7 +28,13 @@ public class TemporalComplexNavigationsQuerySqlServerFixture
 
         ChangesDate = new DateTime(2010, 1, 1);
 
-        var tableNames = new List<string> { "LevelOne", "LevelTwo", "LevelThree", "LevelFour" };
+        var tableNames = new List<string>
+        {
+            "LevelOne",
+            "LevelTwo",
+            "LevelThree",
+            "LevelFour"
+        };
 
         // clean up intermittent history since in the Seed method we do fixup in multiple stages
         foreach (var tableName in tableNames)

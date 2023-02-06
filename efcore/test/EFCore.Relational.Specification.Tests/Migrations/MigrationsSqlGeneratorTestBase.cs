@@ -315,7 +315,10 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 Columns = new[] { "First Name" },
-                Values = new object[,] { { "John" } }
+                Values = new object[,]
+                {
+                    { "John" }
+                }
             }
         );
 
@@ -327,7 +330,10 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 Columns = new[] { "First Name", "Last Name" },
-                Values = new object[,] { { "John", "Snow" } }
+                Values = new object[,]
+                {
+                    { "John", "Snow" }
+                }
             }
         );
 
@@ -339,7 +345,11 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 Columns = new[] { "First Name" },
-                Values = new object[,] { { "John" }, { "Daenerys" } }
+                Values = new object[,]
+                {
+                    { "John" },
+                    { "Daenerys" }
+                }
             }
         );
 
@@ -356,7 +366,10 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Table = "People",
                                 Schema = "dbo",
                                 Columns = new[] { "First Name" },
-                                Values = new object[,] { { "John" } }
+                                Values = new object[,]
+                                {
+                                    { "John" }
+                                }
                             }
                         )
                 )
@@ -377,7 +390,10 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Schema = "dbo",
                                 Columns = new[] { "First Name" },
                                 ColumnTypes = new[] { "char[]" },
-                                Values = new object[,] { { null } }
+                                Values = new object[,]
+                                {
+                                    { null }
+                                }
                             }
                         )
                 )
@@ -397,7 +413,10 @@ public abstract class MigrationsSqlGeneratorTestBase
                             {
                                 Table = "People",
                                 Columns = new[] { "First Name", "Last Name" },
-                                Values = new object[,] { { "John" } }
+                                Values = new object[,]
+                                {
+                                    { "John" }
+                                }
                             }
                         )
                 )
@@ -417,7 +436,10 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Table = "People",
                                 Columns = new[] { "First Name" },
                                 ColumnTypes = new[] { "string", "string" },
-                                Values = new object[,] { { "John" } }
+                                Values = new object[,]
+                                {
+                                    { "John" }
+                                }
                             }
                         )
                 )
@@ -438,7 +460,10 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Table = "People",
                                 Schema = "dbo1",
                                 Columns = new[] { "First Name" },
-                                Values = new object[,] { { "John" } }
+                                Values = new object[,]
+                                {
+                                    { "John" }
+                                }
                             }
                         )
                 )
@@ -458,7 +483,10 @@ public abstract class MigrationsSqlGeneratorTestBase
                             {
                                 Table = "People",
                                 Columns = new[] { "Name" },
-                                Values = new object[,] { { "John" } }
+                                Values = new object[,]
+                                {
+                                    { "John" }
+                                }
                             }
                         )
                 )
@@ -511,7 +539,10 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "Last Name" },
-                KeyValues = new object[,] { { "Snow" } }
+                KeyValues = new object[,]
+                {
+                    { "Snow" }
+                }
             }
         );
 
@@ -523,7 +554,10 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "John", "Snow" } }
+                KeyValues = new object[,]
+                {
+                    { "John", "Snow" }
+                }
             }
         );
 
@@ -539,7 +573,10 @@ public abstract class MigrationsSqlGeneratorTestBase
                             {
                                 Table = "People",
                                 KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "John" } }
+                                KeyValues = new object[,]
+                                {
+                                    { "John" }
+                                }
                             }
                         )
                 )
@@ -559,7 +596,10 @@ public abstract class MigrationsSqlGeneratorTestBase
                             {
                                 Table = "People",
                                 KeyColumns = new[] { "First Name", "Last Name" },
-                                KeyValues = new object[,] { { "John" } }
+                                KeyValues = new object[,]
+                                {
+                                    { "John" }
+                                }
                             }
                         )
                 )
@@ -579,7 +619,10 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Table = "People",
                                 KeyColumns = new[] { "First Name" },
                                 KeyColumnTypes = new[] { "string", "string" },
-                                KeyValues = new object[,] { { "John" } }
+                                KeyValues = new object[,]
+                                {
+                                    { "John" }
+                                }
                             }
                         )
                 )
@@ -594,7 +637,11 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Hodor" }, { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor" },
+                    { "Daenerys" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
@@ -612,9 +659,17 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Hodor", null }, { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor", null },
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Stark" }, { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Stark" },
+                    { "Targaryen" }
+                }
             }
         );
 
@@ -626,7 +681,11 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Hodor", null }, { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor", null },
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
@@ -644,9 +703,15 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             }
         );
 
@@ -658,9 +723,15 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Targaryen" }
+                }
             }
         );
 
@@ -672,9 +743,17 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Hodor" }, { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor" },
+                    { "Daenerys" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Stark" }, { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Stark" },
+                    { "Targaryen" }
+                }
             }
         );
 
@@ -686,9 +765,15 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Targaryen" }
+                }
             }
         );
 
@@ -700,9 +785,15 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             }
         );
 
@@ -714,9 +805,15 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             }
         );
 
@@ -732,9 +829,15 @@ public abstract class MigrationsSqlGeneratorTestBase
                             {
                                 Table = "People",
                                 KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
+                                KeyValues = new object[,]
+                                {
+                                    { "Daenerys" }
+                                },
                                 Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
+                                Values = new object[,]
+                                {
+                                    { "Targaryen" }
+                                }
                             }
                         )
                 )
@@ -755,9 +858,16 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Table = "People",
                                 KeyColumns = new[] { "First Name" },
                                 KeyColumnTypes = new[] { "string" },
-                                KeyValues = new object[,] { { "Daenerys" }, { "John" } },
+                                KeyValues = new object[,]
+                                {
+                                    { "Daenerys" },
+                                    { "John" }
+                                },
                                 Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
+                                Values = new object[,]
+                                {
+                                    { "Targaryen" }
+                                }
                             }
                         )
                 )
@@ -777,9 +887,15 @@ public abstract class MigrationsSqlGeneratorTestBase
                             {
                                 Table = "People",
                                 KeyColumns = new[] { "First Name", "Last Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
+                                KeyValues = new object[,]
+                                {
+                                    { "Daenerys" }
+                                },
                                 Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
+                                Values = new object[,]
+                                {
+                                    { "Targaryen" }
+                                }
                             }
                         )
                 )
@@ -799,9 +915,15 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Table = "People",
                                 KeyColumns = new[] { "First Name" },
                                 KeyColumnTypes = new[] { "string", "string" },
-                                KeyValues = new object[,] { { "Daenerys" } },
+                                KeyValues = new object[,]
+                                {
+                                    { "Daenerys" }
+                                },
                                 Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
+                                Values = new object[,]
+                                {
+                                    { "Targaryen" }
+                                }
                             }
                         )
                 )
@@ -821,9 +943,15 @@ public abstract class MigrationsSqlGeneratorTestBase
                             {
                                 Table = "People",
                                 KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
+                                KeyValues = new object[,]
+                                {
+                                    { "Daenerys" }
+                                },
                                 Columns = new[] { "House Allegiance", "Culture" },
-                                Values = new object[,] { { "Targaryen" } }
+                                Values = new object[,]
+                                {
+                                    { "Targaryen" }
+                                }
                             }
                         )
                 )
@@ -842,10 +970,16 @@ public abstract class MigrationsSqlGeneratorTestBase
                             {
                                 Table = "People",
                                 KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
+                                KeyValues = new object[,]
+                                {
+                                    { "Daenerys" }
+                                },
                                 Columns = new[] { "House Allegiance" },
                                 ColumnTypes = new[] { "string", "string" },
-                                Values = new object[,] { { "Targaryen" } }
+                                Values = new object[,]
+                                {
+                                    { "Targaryen" }
+                                }
                             }
                         )
                 )

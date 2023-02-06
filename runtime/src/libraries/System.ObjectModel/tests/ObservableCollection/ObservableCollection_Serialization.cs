@@ -16,7 +16,14 @@ namespace System.Collections.ObjectModel.Tests
             yield return new object[] { new ObservableCollection<int>() { 42 } };
             yield return new object[]
             {
-                new ObservableCollection<int>() { 1, 5, 3, 4, 2 }
+                new ObservableCollection<int>()
+                {
+                    1,
+                    5,
+                    3,
+                    4,
+                    2
+                }
             };
         }
 

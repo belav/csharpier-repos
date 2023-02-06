@@ -15,18 +15,78 @@ public struct VT
 
 public class CL
 {
-    public sbyte[,] sbyte2darr = { { 0, 1 }, { 0, 0 } };
-    public sbyte[,,] sbyte3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    public sbyte[,] sbyte2darr_b = { { 0, 49 }, { 0, 0 } };
-    public sbyte[,,] sbyte3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public sbyte[,] sbyte2darr =
+    {
+        { 0, 1 },
+        { 0, 0 }
+    };
+    public sbyte[,,] sbyte3darr =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    public sbyte[,] sbyte2darr_b =
+    {
+        { 0, 49 },
+        { 0, 0 }
+    };
+    public sbyte[,,] sbyte3darr_b =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 49 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
 }
 
 public class sbyteMDArrTest
 {
-    static sbyte[,] sbyte2darr = { { 0, 1 }, { 0, 0 } };
-    static sbyte[,,] sbyte3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    static sbyte[,] sbyte2darr_b = { { 0, 49 }, { 0, 0 } };
-    static sbyte[,,] sbyte3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static sbyte[,] sbyte2darr =
+    {
+        { 0, 1 },
+        { 0, 0 }
+    };
+    static sbyte[,,] sbyte3darr =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    static sbyte[,] sbyte2darr_b =
+    {
+        { 0, 49 },
+        { 0, 0 }
+    };
+    static sbyte[,,] sbyte3darr_b =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 49 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
 
     static sbyte[][,] ja1 = new sbyte[2][,];
     static sbyte[][,,] ja2 = new sbyte[2][,,];
@@ -39,17 +99,77 @@ public class sbyteMDArrTest
         bool pass = true;
 
         VT vt1;
-        vt1.sbyte2darr = new sbyte[,] { { 0, 1 }, { 0, 0 } };
-        vt1.sbyte3darr = new sbyte[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        vt1.sbyte2darr_b = new sbyte[,] { { 0, 49 }, { 0, 0 } };
-        vt1.sbyte3darr_b = new sbyte[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        vt1.sbyte2darr = new sbyte[,]
+        {
+            { 0, 1 },
+            { 0, 0 }
+        };
+        vt1.sbyte3darr = new sbyte[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        vt1.sbyte2darr_b = new sbyte[,]
+        {
+            { 0, 49 },
+            { 0, 0 }
+        };
+        vt1.sbyte3darr_b = new sbyte[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 49 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new sbyte[,] { { 0, 1 }, { 0, 0 } };
-        ja2[1] = new sbyte[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        ja1_b[0] = new sbyte[,] { { 0, 49 }, { 0, 0 } };
-        ja2_b[1] = new sbyte[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        ja1[0] = new sbyte[,]
+        {
+            { 0, 1 },
+            { 0, 0 }
+        };
+        ja2[1] = new sbyte[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        ja1_b[0] = new sbyte[,]
+        {
+            { 0, 49 },
+            { 0, 0 }
+        };
+        ja2_b[1] = new sbyte[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 49 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
 
         sbyte result = 1;
 

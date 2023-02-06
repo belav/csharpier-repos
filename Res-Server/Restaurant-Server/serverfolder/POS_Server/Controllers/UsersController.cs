@@ -1553,7 +1553,14 @@ namespace POS_Server.Controllers
                     #endregion
 
                     #region default system info
-                    List<char> charsToRemove = new List<char>() { '@', '_', ',', '.', '-' };
+                    List<char> charsToRemove = new List<char>()
+                    {
+                        '@',
+                        '_',
+                        ',',
+                        '.',
+                        '-'
+                    };
                     //company name
                     set = settingsCls.Where(s => s.name == "com_name").FirstOrDefault();
                     settingId = set.settingId;

@@ -86,7 +86,13 @@ namespace System.Collections.Tests
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(new ArrayList());
             DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                new ArrayList() { "a", 1, "b", 2 }
+                new ArrayList()
+                {
+                    "a",
+                    1,
+                    "b",
+                    2
+                }
             );
 
             bool threwNull = false;
@@ -1558,7 +1564,19 @@ namespace System.Collections.Tests
         [Fact]
         public static void GetRange_OnAnotherRange_YieldsProperSubset()
         {
-            var list = new ArrayList() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            var list = new ArrayList()
+            {
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            };
 
             ArrayList range1 = list.GetRange(2, 6);
             Assert.Equal(6, range1.Count);

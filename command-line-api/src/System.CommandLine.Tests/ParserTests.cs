@@ -194,7 +194,12 @@ namespace System.CommandLine.Tests
             var optionB = new Option<bool>("-b");
             var optionC = new Option<bool>("-c");
 
-            var command = new RootCommand { optionA, optionB, optionC };
+            var command = new RootCommand
+            {
+                optionA,
+                optionB,
+                optionC
+            };
 
             var result = command.Parse("-a -bc");
 
@@ -208,7 +213,12 @@ namespace System.CommandLine.Tests
             var optionB = new Option<string>("-b") { Arity = ArgumentArity.ZeroOrOne };
             var optionC = new Option<string>("-c") { Arity = ArgumentArity.ExactlyOne };
 
-            var command = new RootCommand { optionA, optionB, optionC };
+            var command = new RootCommand
+            {
+                optionA,
+                optionB,
+                optionC
+            };
 
             var result = command.Parse("-abcvalue");
             result.HasOption(optionA).Should().BeTrue();
@@ -224,7 +234,12 @@ namespace System.CommandLine.Tests
             var optionB = new Option<string>("-b") { Arity = ArgumentArity.ZeroOrOne };
             var optionC = new Option<string>("-c") { Arity = ArgumentArity.ExactlyOne };
 
-            var command = new RootCommand { optionA, optionB, optionC };
+            var command = new RootCommand
+            {
+                optionA,
+                optionB,
+                optionC
+            };
 
             var result = command.Parse("-abc=value");
             result.HasOption(optionA).Should().BeTrue();
@@ -240,7 +255,12 @@ namespace System.CommandLine.Tests
             var optionB = new Option<string>("-b") { Arity = ArgumentArity.ZeroOrOne };
             var optionC = new Option<string>("-c") { Arity = ArgumentArity.ExactlyOne };
 
-            var command = new RootCommand { optionA, optionB, optionC };
+            var command = new RootCommand
+            {
+                optionA,
+                optionB,
+                optionC
+            };
 
             var result = command.Parse("-abc:value");
             result.HasOption(optionA).Should().BeTrue();
@@ -256,7 +276,12 @@ namespace System.CommandLine.Tests
             var optionB = new Option<string>("-b") { Arity = ArgumentArity.ZeroOrOne };
             var optionC = new Option<string>("-c") { Arity = ArgumentArity.ExactlyOne };
 
-            var command = new RootCommand { optionA, optionB, optionC };
+            var command = new RootCommand
+            {
+                optionA,
+                optionB,
+                optionC
+            };
 
             var result = command.Parse("-abvcalue");
             result.HasOption(optionA).Should().BeTrue();
@@ -895,7 +920,12 @@ namespace System.CommandLine.Tests
             var optionB = new Option<bool>("-b");
             var optionC = new Option<bool>("-c");
 
-            var command = new RootCommand { optionA, optionB, optionC };
+            var command = new RootCommand
+            {
+                optionA,
+                optionB,
+                optionC
+            };
 
             var result = command.Parse("-a -bc");
 

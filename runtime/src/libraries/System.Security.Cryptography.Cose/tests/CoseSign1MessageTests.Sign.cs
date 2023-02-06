@@ -30,7 +30,12 @@ namespace System.Security.Cryptography.Cose.Tests
     public class CoseSign1MessageTests_Sign_ECDsa : CoseSign1MessageTests_Sign<ECDsa>
     {
         internal override List<CoseAlgorithm> CoseAlgorithms =>
-            new() { CoseAlgorithm.ES256, CoseAlgorithm.ES384, CoseAlgorithm.ES512 };
+            new()
+            {
+                CoseAlgorithm.ES256,
+                CoseAlgorithm.ES384,
+                CoseAlgorithm.ES512
+            };
 
         internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload) =>
             CoseMessage.DecodeSign1(cborPayload);
@@ -53,7 +58,12 @@ namespace System.Security.Cryptography.Cose.Tests
     public class CoseSign1MessageTests_Sign_RSA : CoseSign1MessageTests_Sign<RSA>
     {
         internal override List<CoseAlgorithm> CoseAlgorithms =>
-            new() { CoseAlgorithm.PS256, CoseAlgorithm.PS384, CoseAlgorithm.PS512 };
+            new()
+            {
+                CoseAlgorithm.PS256,
+                CoseAlgorithm.PS384,
+                CoseAlgorithm.PS512
+            };
 
         internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload) =>
             CoseMessage.DecodeSign1(cborPayload);

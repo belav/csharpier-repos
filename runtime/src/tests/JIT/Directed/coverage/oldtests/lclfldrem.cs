@@ -282,48 +282,188 @@ internal class lclfldrem
         vt1.nHldr_vt_op2 = new numHolder(5);
 
         int[] i_arr1d_op1 = { 0, 9 };
-        int[,] i_arr2d_op1 = { { 0, 9 }, { 1, 1 } };
-        int[,,] i_arr3d_op1 = { { { 0, 9 }, { 1, 1 } } };
+        int[,] i_arr2d_op1 =
+        {
+            { 0, 9 },
+            { 1, 1 }
+        };
+        int[,,] i_arr3d_op1 =
+        {
+            {
+                { 0, 9 },
+                { 1, 1 }
+            }
+        };
         uint[] ui_arr1d_op1 = { 0, 9 };
-        uint[,] ui_arr2d_op1 = { { 0, 9 }, { 1, 1 } };
-        uint[,,] ui_arr3d_op1 = { { { 0, 9 }, { 1, 1 } } };
+        uint[,] ui_arr2d_op1 =
+        {
+            { 0, 9 },
+            { 1, 1 }
+        };
+        uint[,,] ui_arr3d_op1 =
+        {
+            {
+                { 0, 9 },
+                { 1, 1 }
+            }
+        };
         long[] l_arr1d_op1 = { 0, 9 };
-        long[,] l_arr2d_op1 = { { 0, 9 }, { 1, 1 } };
-        long[,,] l_arr3d_op1 = { { { 0, 9 }, { 1, 1 } } };
+        long[,] l_arr2d_op1 =
+        {
+            { 0, 9 },
+            { 1, 1 }
+        };
+        long[,,] l_arr3d_op1 =
+        {
+            {
+                { 0, 9 },
+                { 1, 1 }
+            }
+        };
         ulong[] ul_arr1d_op1 = { 0, 9 };
-        ulong[,] ul_arr2d_op1 = { { 0, 9 }, { 1, 1 } };
-        ulong[,,] ul_arr3d_op1 = { { { 0, 9 }, { 1, 1 } } };
+        ulong[,] ul_arr2d_op1 =
+        {
+            { 0, 9 },
+            { 1, 1 }
+        };
+        ulong[,,] ul_arr3d_op1 =
+        {
+            {
+                { 0, 9 },
+                { 1, 1 }
+            }
+        };
         float[] f_arr1d_op1 = { 0, 9 };
-        float[,] f_arr2d_op1 = { { 0, 9 }, { 1, 1 } };
-        float[,,] f_arr3d_op1 = { { { 0, 9 }, { 1, 1 } } };
+        float[,] f_arr2d_op1 =
+        {
+            { 0, 9 },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_op1 =
+        {
+            {
+                { 0, 9 },
+                { 1, 1 }
+            }
+        };
         double[] d_arr1d_op1 = { 0, 9 };
-        double[,] d_arr2d_op1 = { { 0, 9 }, { 1, 1 } };
-        double[,,] d_arr3d_op1 = { { { 0, 9 }, { 1, 1 } } };
+        double[,] d_arr2d_op1 =
+        {
+            { 0, 9 },
+            { 1, 1 }
+        };
+        double[,,] d_arr3d_op1 =
+        {
+            {
+                { 0, 9 },
+                { 1, 1 }
+            }
+        };
         decimal[] m_arr1d_op1 = { 0, 9 };
-        decimal[,] m_arr2d_op1 = { { 0, 9 }, { 1, 1 } };
-        decimal[,,] m_arr3d_op1 = { { { 0, 9 }, { 1, 1 } } };
+        decimal[,] m_arr2d_op1 =
+        {
+            { 0, 9 },
+            { 1, 1 }
+        };
+        decimal[,,] m_arr3d_op1 =
+        {
+            {
+                { 0, 9 },
+                { 1, 1 }
+            }
+        };
 
         int[] i_arr1d_op2 = { 5, 0, 1 };
-        int[,] i_arr2d_op2 = { { 0, 5 }, { 1, 1 } };
-        int[,,] i_arr3d_op2 = { { { 0, 5 }, { 1, 1 } } };
+        int[,] i_arr2d_op2 =
+        {
+            { 0, 5 },
+            { 1, 1 }
+        };
+        int[,,] i_arr3d_op2 =
+        {
+            {
+                { 0, 5 },
+                { 1, 1 }
+            }
+        };
         uint[] ui_arr1d_op2 = { 5, 0, 1 };
-        uint[,] ui_arr2d_op2 = { { 0, 5 }, { 1, 1 } };
-        uint[,,] ui_arr3d_op2 = { { { 0, 5 }, { 1, 1 } } };
+        uint[,] ui_arr2d_op2 =
+        {
+            { 0, 5 },
+            { 1, 1 }
+        };
+        uint[,,] ui_arr3d_op2 =
+        {
+            {
+                { 0, 5 },
+                { 1, 1 }
+            }
+        };
         long[] l_arr1d_op2 = { 5, 0, 1 };
-        long[,] l_arr2d_op2 = { { 0, 5 }, { 1, 1 } };
-        long[,,] l_arr3d_op2 = { { { 0, 5 }, { 1, 1 } } };
+        long[,] l_arr2d_op2 =
+        {
+            { 0, 5 },
+            { 1, 1 }
+        };
+        long[,,] l_arr3d_op2 =
+        {
+            {
+                { 0, 5 },
+                { 1, 1 }
+            }
+        };
         ulong[] ul_arr1d_op2 = { 5, 0, 1 };
-        ulong[,] ul_arr2d_op2 = { { 0, 5 }, { 1, 1 } };
-        ulong[,,] ul_arr3d_op2 = { { { 0, 5 }, { 1, 1 } } };
+        ulong[,] ul_arr2d_op2 =
+        {
+            { 0, 5 },
+            { 1, 1 }
+        };
+        ulong[,,] ul_arr3d_op2 =
+        {
+            {
+                { 0, 5 },
+                { 1, 1 }
+            }
+        };
         float[] f_arr1d_op2 = { 5, 0, 1 };
-        float[,] f_arr2d_op2 = { { 0, 5 }, { 1, 1 } };
-        float[,,] f_arr3d_op2 = { { { 0, 5 }, { 1, 1 } } };
+        float[,] f_arr2d_op2 =
+        {
+            { 0, 5 },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_op2 =
+        {
+            {
+                { 0, 5 },
+                { 1, 1 }
+            }
+        };
         double[] d_arr1d_op2 = { 5, 0, 1 };
-        double[,] d_arr2d_op2 = { { 0, 5 }, { 1, 1 } };
-        double[,,] d_arr3d_op2 = { { { 0, 5 }, { 1, 1 } } };
+        double[,] d_arr2d_op2 =
+        {
+            { 0, 5 },
+            { 1, 1 }
+        };
+        double[,,] d_arr3d_op2 =
+        {
+            {
+                { 0, 5 },
+                { 1, 1 }
+            }
+        };
         decimal[] m_arr1d_op2 = { 5, 0, 1 };
-        decimal[,] m_arr2d_op2 = { { 0, 5 }, { 1, 1 } };
-        decimal[,,] m_arr3d_op2 = { { { 0, 5 }, { 1, 1 } } };
+        decimal[,] m_arr2d_op2 =
+        {
+            { 0, 5 },
+            { 1, 1 }
+        };
+        decimal[,,] m_arr3d_op2 =
+        {
+            {
+                { 0, 5 },
+                { 1, 1 }
+            }
+        };
         numHolder[] nHldr_arr1d_op2 = { new numHolder(5), new numHolder(0), new numHolder(1) };
         numHolder[,] nHldr_arr2d_op2 =
         {
@@ -332,10 +472,17 @@ internal class lclfldrem
         };
         numHolder[,,] nHldr_arr3d_op2 =
         {
-            { { new numHolder(0), new numHolder(5) }, { new numHolder(1), new numHolder(1) } }
+            {
+                { new numHolder(0), new numHolder(5) },
+                { new numHolder(1), new numHolder(1) }
+            }
         };
 
-        int[,] index = { { 0, 0 }, { 1, 1 } };
+        int[,] index =
+        {
+            { 0, 0 },
+            { 1, 1 }
+        };
 
         {
             int i_l_op1 = 9;

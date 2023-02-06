@@ -5,7 +5,12 @@ namespace Test
     public class Test
     {
         private static int[] array = { 0, 1, 2, 3 };
-        private static int[,] bar = { { 0, 1 }, { 4, 5 }, { 10, 20 } };
+        private static int[,] bar =
+        {
+            { 0, 1 },
+            { 4, 5 },
+            { 10, 20 }
+        };
 
         public static int Main()
         {
@@ -38,7 +43,13 @@ namespace Test
 
             num++;
 
-            short[,] j = new short[4, 2] { { 0, 1 }, { 2, 3 }, { 4, 5 }, { 6, 7 } };
+            short[,] j = new short[4, 2]
+            {
+                { 0, 1 },
+                { 2, 3 },
+                { 4, 5 },
+                { 6, 7 }
+            };
             if (j[1, 1] != 3)
                 return num;
 

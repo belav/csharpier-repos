@@ -391,7 +391,21 @@ namespace Test_unsafe_5
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_61(&loc_x.m_b - 1, new long[,,] { { { 0 } }, { { 0 } } }, 2) != 100)
+            if (
+                test_61(
+                    &loc_x.m_b - 1,
+                    new long[,,]
+                    {
+                        {
+                            { 0 }
+                        },
+                        {
+                            { 0 }
+                        }
+                    },
+                    2
+                ) != 100
+            )
             {
                 Console.WriteLine("test_61() failed.");
                 return 161;
@@ -439,7 +453,22 @@ namespace Test_unsafe_5
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_103(&loc_x.m_b - 1, new long[,,] { { { 0 } }, { { 0 } } }, 2, 2) != 100)
+            if (
+                test_103(
+                    &loc_x.m_b - 1,
+                    new long[,,]
+                    {
+                        {
+                            { 0 }
+                        },
+                        {
+                            { 0 }
+                        }
+                    },
+                    2,
+                    2
+                ) != 100
+            )
             {
                 Console.WriteLine("test_103() failed.");
                 return 203;
@@ -502,7 +531,16 @@ namespace Test_unsafe_5
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_166(new AA[,] { { new AA(), new AA() }, { new AA(), loc_x } }, 2) != 100)
+            if (
+                test_166(
+                    new AA[,]
+                    {
+                        { new AA(), new AA() },
+                        { new AA(), loc_x }
+                    },
+                    2
+                ) != 100
+            )
             {
                 Console.WriteLine("test_166() failed.");
                 return 266;
@@ -579,7 +617,17 @@ namespace Test_unsafe_5
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_243(new B[,] { { new B(), new B() }, { new B(), loc_x.m_b } }, 1, 1) != 100)
+            if (
+                test_243(
+                    new B[,]
+                    {
+                        { new B(), new B() },
+                        { new B(), loc_x.m_b }
+                    },
+                    1,
+                    1
+                ) != 100
+            )
             {
                 Console.WriteLine("test_243() failed.");
                 return 343;
@@ -670,7 +718,21 @@ namespace Test_unsafe_5
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_334(&loc_x.m_b - 1, new long[,,] { { { 0 } }, { { 0 } } }, 2) != 100)
+            if (
+                test_334(
+                    &loc_x.m_b - 1,
+                    new long[,,]
+                    {
+                        {
+                            { 0 }
+                        },
+                        {
+                            { 0 }
+                        }
+                    },
+                    2
+                ) != 100
+            )
             {
                 Console.WriteLine("test_334() failed.");
                 return 434;
@@ -718,7 +780,22 @@ namespace Test_unsafe_5
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_376(&loc_x.m_b - 1, new long[,,] { { { 0 } }, { { 0 } } }, 2, 2) != 100)
+            if (
+                test_376(
+                    &loc_x.m_b - 1,
+                    new long[,,]
+                    {
+                        {
+                            { 0 }
+                        },
+                        {
+                            { 0 }
+                        }
+                    },
+                    2,
+                    2
+                ) != 100
+            )
             {
                 Console.WriteLine("test_376() failed.");
                 return 476;

@@ -11,7 +11,10 @@ class Test
 
     public static int Main()
     {
-        int[,] s = new int[,] { { 1, 2, 3 } };
+        int[,] s = new int[,]
+        {
+            { 1, 2, 3 }
+        };
         foreach (int i in Create(s))
             Console.WriteLine(i);
 

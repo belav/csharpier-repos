@@ -72,7 +72,13 @@ namespace System.Security.Cryptography.Encoding.Tests
             var item3 = new Oid(Sha1Oid, Sha1Name);
             var item4 = new Oid(null, null);
 
-            var c = new OidCollection { item1, item2, item3, item4 };
+            var c = new OidCollection
+            {
+                item1,
+                item2,
+                item3,
+                item4
+            };
 
             Oid[] a = Enumerable.Range(0, 10).Select(i => new Oid(null, null)).ToArray();
             Oid[] destination = (Oid[])(a.Clone());
@@ -129,7 +135,13 @@ namespace System.Security.Cryptography.Encoding.Tests
             var item3 = new Oid(Sha1Oid, Sha1Name);
             var item4 = new Oid(null, null);
 
-            var c = new OidCollection { item1, item2, item3, item4 };
+            var c = new OidCollection
+            {
+                item1,
+                item2,
+                item3,
+                item4
+            };
 
             Assert.Throws<ArgumentNullException>(() => copyTo(c, null, 0));
             Assert.Throws<ArgumentNullException>(() => copyTo(c, null, -1));
@@ -179,7 +191,12 @@ namespace System.Security.Cryptography.Encoding.Tests
             var item2 = new Oid(Sha256Oid, Sha256Name);
             var item3 = new Oid(Sha1Oid, Sha1Name);
 
-            var c = new OidCollection { item1, item2, item3 };
+            var c = new OidCollection
+            {
+                item1,
+                item2,
+                item3
+            };
 
             TEnumerator e = getEnumerator(c);
 

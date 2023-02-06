@@ -895,7 +895,12 @@ Parameter name: namingStrategyType",
             Assert.AreEqual(Foo.FooBar | Foo.SerializeAsBaz, foos[4]);
             Assert.AreEqual((Foo)int.MaxValue, foos[5]);
 
-            List<Bar> lbar = new List<Bar>() { Bar.FooBar, Bar.Bat, Bar.SerializeAsBaz };
+            List<Bar> lbar = new List<Bar>()
+            {
+                Bar.FooBar,
+                Bar.Bat,
+                Bar.SerializeAsBaz
+            };
 
 #pragma warning disable CS0618 // Type or member is obsolete
             string json2 = JsonConvert.SerializeObject(

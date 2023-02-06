@@ -486,7 +486,14 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new TypeNameHandlingTests.TypeNameProperty
                 {
                     Name = "Name!",
-                    Value = new List<int> { 1, 2, 3, 4, 5 }
+                    Value = new List<int>
+                    {
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    }
                 };
 
             string json = JsonConvert.SerializeObject(typeNameProperty, Formatting.Indented);

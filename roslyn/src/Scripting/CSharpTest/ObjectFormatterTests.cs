@@ -464,8 +464,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
 
             int[,,] a = new int[2, 3, 4]
             {
-                { { 000, 001, 002, 003 }, { 010, 011, 012, 013 }, { 020, 021, 022, 023 }, },
-                { { 100, 101, 102, 103 }, { 110, 111, 112, 113 }, { 120, 121, 122, 123 }, }
+                {
+                    { 000, 001, 002, 003 },
+                    { 010, 011, 012, 013 },
+                    { 020, 021, 022, 023 },
+                },
+                {
+                    { 100, 101, 102, 103 },
+                    { 110, 111, 112, 113 },
+                    { 120, 121, 122, 123 },
+                }
             };
 
             str = s_formatter.FormatObject(a, SingleLineOptions);
@@ -689,7 +697,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
         [Fact]
         public void DebuggerProxy_FrameworkTypes_List()
         {
-            var obj = new List<object> { 1, 2, 'c' };
+            var obj = new List<object>
+            {
+                1,
+                2,
+                'c'
+            };
 
             var str = s_formatter.FormatObject(obj, SingleLineOptions);
             Assert.Equal("List<object>(3) { 1, 2, 'c' }", str);

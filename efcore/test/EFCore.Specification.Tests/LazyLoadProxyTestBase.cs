@@ -4103,7 +4103,12 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
             context.Add(
                 new Entity
                 {
-                    BaseNoses = new List<Nose> { nose1, nose2, nose3 }
+                    BaseNoses = new List<Nose>
+                    {
+                        nose1,
+                        nose2,
+                        nose3
+                    }
                 }
             );
 

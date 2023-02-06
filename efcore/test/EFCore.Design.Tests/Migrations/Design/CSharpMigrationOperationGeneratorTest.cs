@@ -2830,7 +2830,10 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 Columns = new[] { "Geometry" },
-                Values = new object[,] { { _point1 } }
+                Values = new object[,]
+                {
+                    { _point1 }
+                }
             },
             "mb.InsertData("
                 + _eol
@@ -2856,7 +2859,10 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 Columns = new[] { "Tags" },
-                Values = new object[,] { { new string[0] } }
+                Values = new object[,]
+                {
+                    { new string[0] }
+                }
             },
             "mb.InsertData("
                 + _eol
@@ -2882,7 +2888,10 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 Columns = new[] { "First Name", "Last Name", "Geometry" },
-                Values = new object[,] { { "John", null, new string[0] } }
+                Values = new object[,]
+                {
+                    { "John", null, new string[0] }
+                }
             },
             "mb.InsertData("
                 + _eol
@@ -2909,7 +2918,10 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 Columns = new[] { "First Name", "Last Name", "Geometry" },
-                Values = new object[,] { { "John", "Snow", _polygon1 } }
+                Values = new object[,]
+                {
+                    { "John", "Snow", _polygon1 }
+                }
             },
             "mb.InsertData("
                 + _eol
@@ -2936,7 +2948,11 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 Columns = new[] { "Geometries" },
-                Values = new object[,] { { _lineString1 }, { _multiPoint } }
+                Values = new object[,]
+                {
+                    { _lineString1 },
+                    { _multiPoint }
+                }
             },
             "mb.InsertData("
                 + _eol
@@ -3125,7 +3141,10 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 KeyColumns = new[] { "Last Name" },
-                KeyValues = new object[,] { { "Snow" } }
+                KeyValues = new object[,]
+                {
+                    { "Snow" }
+                }
             },
             "mb.DeleteData("
                 + _eol
@@ -3151,7 +3170,10 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "John", "Snow" } }
+                KeyValues = new object[,]
+                {
+                    { "John", "Snow" }
+                }
             },
             "mb.DeleteData("
                 + _eol
@@ -3224,7 +3246,11 @@ public class CSharpMigrationOperationGeneratorTest
                 Schema = "dbo",
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Hodor" }, { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor" },
+                    { "Daenerys" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
@@ -3283,9 +3309,17 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Hodor", null }, { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor", null },
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Stark" }, { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Stark" },
+                    { "Targaryen" }
+                }
             },
             "mb.UpdateData("
                 + _eol
@@ -3335,7 +3369,11 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Hodor", null }, { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor", null },
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
@@ -3392,9 +3430,15 @@ public class CSharpMigrationOperationGeneratorTest
                 Schema = "dbo",
                 Table = "People",
                 KeyColumns = new[] { "Full Name" },
-                KeyValues = new object[,] { { "Daenerys Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys Targaryen" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             },
             "mb.UpdateData("
                 + _eol
@@ -3431,9 +3475,15 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Targaryen" }
+                }
             },
             "mb.UpdateData("
                 + _eol
@@ -3467,9 +3517,17 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name" },
-                KeyValues = new object[,] { { "Hodor" }, { "Daenerys" } },
+                KeyValues = new object[,]
+                {
+                    { "Hodor" },
+                    { "Daenerys" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Stark" }, { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Stark" },
+                    { "Targaryen" }
+                }
             },
             "mb.UpdateData("
                 + _eol
@@ -3519,9 +3577,15 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "House Allegiance" },
-                Values = new object[,] { { "Targaryen" } }
+                Values = new object[,]
+                {
+                    { "Targaryen" }
+                }
             },
             "mb.UpdateData("
                 + _eol
@@ -3555,9 +3619,15 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 KeyColumns = new[] { "First Name", "Last Name" },
-                KeyValues = new object[,] { { "Daenerys", "Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys", "Targaryen" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             },
             "mb.UpdateData("
                 + _eol
@@ -3591,9 +3661,15 @@ public class CSharpMigrationOperationGeneratorTest
             {
                 Table = "People",
                 KeyColumns = new[] { "Full Name" },
-                KeyValues = new object[,] { { "Daenerys Targaryen" } },
+                KeyValues = new object[,]
+                {
+                    { "Daenerys Targaryen" }
+                },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
-                Values = new object[,] { { "Dragonstone", "Targaryen", "Valyrian" } }
+                Values = new object[,]
+                {
+                    { "Dragonstone", "Targaryen", "Valyrian" }
+                }
             },
             "mb.UpdateData("
                 + _eol
@@ -3628,7 +3704,12 @@ public class CSharpMigrationOperationGeneratorTest
                 Schema = "dbo",
                 Table = "TestLineBreaks",
                 KeyColumns = new[] { "Id" },
-                KeyValues = new object[,] { { 0 }, { 1 }, { 2 }, },
+                KeyValues = new object[,]
+                {
+                    { 0 },
+                    { 1 },
+                    { 2 },
+                },
                 Columns = new[] { "Description" },
                 Values = new object[,]
                 {

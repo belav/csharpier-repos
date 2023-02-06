@@ -4,7 +4,11 @@ class Test
 {
     public static int Main()
     {
-        decimal[,] tab = new decimal[2, 2] { { 3, 4 }, { 5, 6 } };
+        decimal[,] tab = new decimal[2, 2]
+        {
+            { 3, 4 },
+            { 5, 6 }
+        };
         bool b1 = false;
         decimal d;
 

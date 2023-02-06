@@ -132,7 +132,11 @@ namespace MonoTests.System.Linq.Expressions
         [Test]
         public void Rank2Struct()
         {
-            int[,] array = { { 42 }, { 42 } };
+            int[,] array =
+            {
+                { 42 },
+                { 42 }
+            };
             Expression[] indexes = { Expression.Constant(1), Expression.Constant(0) };
 
             MethodCallExpression expr = Expression.ArrayIndex(Expression.Constant(array), indexes);
@@ -144,7 +148,11 @@ namespace MonoTests.System.Linq.Expressions
         [Test]
         public void Rank2UserDefinedClass()
         {
-            NoOpClass[,] array = { { new NoOpClass() }, { new NoOpClass() } };
+            NoOpClass[,] array =
+            {
+                { new NoOpClass() },
+                { new NoOpClass() }
+            };
             Expression[] indexes = { Expression.Constant(1), Expression.Constant(0) };
 
             MethodCallExpression expr = Expression.ArrayIndex(Expression.Constant(array), indexes);

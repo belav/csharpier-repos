@@ -19,7 +19,11 @@ namespace System.ComponentModel.Tests
         public static void CanConvertFrom_WithContext_TypeListConverter()
         {
             CanConvertFrom_WithContext(
-                new object[2, 2] { { typeof(string), true }, { typeof(int), false } },
+                new object[2, 2]
+                {
+                    { typeof(string), true },
+                    { typeof(int), false }
+                },
                 TypeListConverterTests.s_converter
             );
         }
@@ -28,7 +32,10 @@ namespace System.ComponentModel.Tests
         public static void ConvertFrom_WithContext_TypeListConverter()
         {
             ConvertFrom_WithContext(
-                new object[1, 3] { { "System.Int32", typeof(int), null } },
+                new object[1, 3]
+                {
+                    { "System.Int32", typeof(int), null }
+                },
                 TypeListConverterTests.s_converter
             );
         }

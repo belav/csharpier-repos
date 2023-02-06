@@ -19,10 +19,20 @@ namespace System.Collections.Generic
                     "test",
                     new string[] { "A", "B", "C" },
                     8,
-                    new List<int> { 1, 2, 3 },
+                    new List<int>
+                    {
+                        1,
+                        2,
+                        3
+                    },
                     1D,
                     (IEnumerable<double>)
-                        new List<double> { 1D, 2D, 3D },
+                        new List<double>
+                        {
+                            1D,
+                            2D,
+                            3D
+                        },
                     new Uri("http://some.host"),
                     Guid.NewGuid(),
                     HttpStatusCode.NotImplemented,

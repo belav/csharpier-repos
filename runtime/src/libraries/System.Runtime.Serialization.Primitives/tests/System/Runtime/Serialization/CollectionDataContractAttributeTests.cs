@@ -36,7 +36,12 @@ namespace System.Runtime.Serialization.Tests
         }
 
         public static TheoryData<string> StringValue_TestData =>
-            new TheoryData<string>() { { null }, { "" }, { "value" } };
+            new TheoryData<string>()
+            {
+                { null },
+                { "" },
+                { "value" }
+            };
 
         [Theory]
         [MemberData(nameof(StringValue_TestData))]

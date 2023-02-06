@@ -13,7 +13,11 @@ class Test
 
     static void Foo()
     {
-        string[,] s = new string[,] { { "a", "b" }, { "c", "d" } };
+        string[,] s = new string[,]
+        {
+            { "a", "b" },
+            { "c", "d" }
+        };
         foreach (string c in s)
             Console.WriteLine(c[0]);
     }

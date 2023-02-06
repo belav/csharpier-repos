@@ -132,9 +132,21 @@ namespace Castle.DynamicProxy.Tests
                 new LogInvocationInterceptor()
             );
             proxy.Do(new[] { 1, 2, 3 });
-            proxy.Do2(new[,] { { 1, 2 }, { 3, 4 } });
+            proxy.Do2(
+                new[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 }
+                }
+            );
             proxy.Do3(new[] { "a", "b", "c" });
-            proxy.Do4(new[,] { { "a", "b" }, { "c", "d" } });
+            proxy.Do4(
+                new[,]
+                {
+                    { "a", "b" },
+                    { "c", "d" }
+                }
+            );
         }
 
         [Test]

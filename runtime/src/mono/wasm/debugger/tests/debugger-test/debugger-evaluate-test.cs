@@ -690,7 +690,13 @@ namespace DebuggerTests
 
             public void run()
             {
-                numArray2D = new int[,] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } };
+                numArray2D = new int[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 },
+                    { 5, 6 },
+                    { 7, 8 }
+                };
                 textArray2D = new string[3, 2]
                 {
                     { "one", "two" },
@@ -699,8 +705,14 @@ namespace DebuggerTests
                 };
                 numArray3D = new int[,,]
                 {
-                    { { 1, 2, 3 }, { 4, 5, 6 } },
-                    { { 7, 8, 9 }, { 10, 11, 12 } }
+                    {
+                        { 1, 2, 3 },
+                        { 4, 5, 6 }
+                    },
+                    {
+                        { 7, 8, 9 },
+                        { 10, 11, 12 }
+                    }
                 };
                 idx0 = 0;
                 idx1 = 1;

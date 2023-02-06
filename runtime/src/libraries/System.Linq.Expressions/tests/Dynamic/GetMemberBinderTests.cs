@@ -58,7 +58,13 @@ namespace System.Dynamic.Tests
         [Fact]
         public void InvokeGenericClassInstanceProperty()
         {
-            dynamic d = new List<int> { 1, 2, 3, 4 };
+            dynamic d = new List<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
             Assert.Equal(4, d.Count);
         }
 

@@ -365,7 +365,12 @@ namespace Newtonsoft.Json.Tests
                 JsonConvert.DefaultSettings = () =>
                     new JsonSerializerSettings { Formatting = Formatting.Indented };
 
-                IList<int> l = new List<int> { 1, 2, 3 };
+                IList<int> l = new List<int>
+                {
+                    1,
+                    2,
+                    3
+                };
 
                 StringWriter sw = new StringWriter();
                 JsonSerializer serializer = JsonSerializer.CreateDefault();
@@ -412,7 +417,12 @@ namespace Newtonsoft.Json.Tests
                 JsonConvert.DefaultSettings = () =>
                     new JsonSerializerSettings { Formatting = Formatting.Indented };
 
-                IList<int> l = new List<int> { 1, 2, 3 };
+                IList<int> l = new List<int>
+                {
+                    1,
+                    2,
+                    3
+                };
 
                 StringWriter sw = new StringWriter();
                 JsonSerializer serializer = JsonSerializer.CreateDefault(

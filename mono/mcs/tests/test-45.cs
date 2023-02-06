@@ -4,7 +4,12 @@ public class Blah
 {
     private static int[] array = { 0, 1, 2, 3 };
 
-    private static int[,] bar = { { 0, 1 }, { 4, 5 }, { 10, 20 } };
+    private static int[,] bar =
+    {
+        { 0, 1 },
+        { 4, 5 },
+        { 10, 20 }
+    };
 
     static string[] names = { "Miguel", "Paolo", "Dietmar", "Dick", "Ravi" };
 
@@ -12,20 +17,38 @@ public class Blah
     {
         int[] i = new int[4] { 0, 1, 2, 3 };
 
-        short[,] j = new short[4, 2] { { 0, 1 }, { 2, 3 }, { 4, 5 }, { 6, 7 } };
+        short[,] j = new short[4, 2]
+        {
+            { 0, 1 },
+            { 2, 3 },
+            { 4, 5 },
+            { 6, 7 }
+        };
 
         ushort[] a = { 4, 5, 6, 7 };
 
         long[,,] m = new long[2, 3, 2]
         {
-            { { 0, 1 }, { 2, 3 }, { 4, 5 } },
-            { { 6, 7 }, { 8, 9 }, { 10, 11 } }
+            {
+                { 0, 1 },
+                { 2, 3 },
+                { 4, 5 }
+            },
+            {
+                { 6, 7 },
+                { 8, 9 },
+                { 10, 11 }
+            }
         };
 
         int foo = 1;
         int[] k = new int[] { foo, foo + 1, foo + 4 };
 
-        int[,] boo = new int[,] { { foo, foo + 10 }, { foo + 3, foo + 10 } };
+        int[,] boo = new int[,]
+        {
+            { foo, foo + 10 },
+            { foo + 3, foo + 10 }
+        };
 
         float[] f_array = new float[] { 1.23F, 4.5F, 6.24F };
 

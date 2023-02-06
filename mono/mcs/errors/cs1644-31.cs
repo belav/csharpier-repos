@@ -8,6 +8,11 @@ class A
 {
     void Foo()
     {
-        object o = new List<int> { 1, 2, 3 };
+        object o = new List<int>
+        {
+            1,
+            2,
+            3
+        };
     }
 }

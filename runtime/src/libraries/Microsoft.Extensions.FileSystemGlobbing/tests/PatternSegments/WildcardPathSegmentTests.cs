@@ -17,7 +17,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
         public void DefaultConstructor(StringComparison comparisonType)
         {
             var paramBegin = "begin";
-            var paramContains = new List<string> { "1", "2", "three" };
+            var paramContains = new List<string>
+            {
+                "1",
+                "2",
+                "three"
+            };
             var paramEnd = "end";
 
             var segment = new WildcardPathSegment(
@@ -42,7 +47,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
         )
         {
             var paramBegin = "begin";
-            var paramContains = new List<string> { "1", "2", "three" };
+            var paramContains = new List<string>
+            {
+                "1",
+                "2",
+                "three"
+            };
             var paramEnd = "end";
 
             AssertExtensions.ThrowsContains<InvalidOperationException>(

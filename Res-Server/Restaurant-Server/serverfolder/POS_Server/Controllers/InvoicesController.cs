@@ -23,8 +23,22 @@ namespace POS_Server.Controllers
     {
         CountriesController coctrlr = new CountriesController();
         ItemsTransferController itc = new ItemsTransferController();
-        List<string> salesType = new List<string>() { "ssd", "ss", "tsd", "ts", "sd", "s" };
-        List<string> purchaseType = new List<string>() { "pd", "p", "pbd", "pb" };
+        List<string> salesType = new List<string>()
+        {
+            "ssd",
+            "ss",
+            "tsd",
+            "ts",
+            "sd",
+            "s"
+        };
+        List<string> purchaseType = new List<string>()
+        {
+            "pd",
+            "p",
+            "pbd",
+            "pb"
+        };
         List<string> spendingOrderType = new List<string>() { "sr", "srd" };
 
         [HttpPost]

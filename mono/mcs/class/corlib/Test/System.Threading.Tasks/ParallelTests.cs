@@ -165,7 +165,14 @@ namespace MonoTests.System.Threading.Tasks
         [Category("MultiThreaded")]
         public void ParallelForEachTestCaseWithIndex()
         {
-            var list = new List<int> { 0, 1, 2, 3, 4 };
+            var list = new List<int>
+            {
+                0,
+                1,
+                2,
+                3,
+                4
+            };
 
             Parallel.ForEach(
                 list,

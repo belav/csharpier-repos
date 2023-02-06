@@ -16,7 +16,14 @@ namespace System.Linq.Tests
         [Fact]
         public void ToList_AlwaysCreateACopy()
         {
-            List<int> sourceList = new List<int>() { 1, 2, 3, 4, 5 };
+            List<int> sourceList = new List<int>()
+            {
+                1,
+                2,
+                3,
+                4,
+                5
+            };
             List<int> resultList = sourceList.ToList();
 
             Assert.NotSame(sourceList, resultList);

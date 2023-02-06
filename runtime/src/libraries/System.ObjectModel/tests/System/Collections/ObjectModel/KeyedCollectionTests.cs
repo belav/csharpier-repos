@@ -98,7 +98,12 @@ namespace System.Collections.ObjectModel.Tests
             collection.InsertItem(1, 2);
             Assert.Equal(new int[] { 1, 2, 3 }, collection.Items.Cast<int>());
             Assert.Equal(
-                new Dictionary<string, int> { { "2", 1 }, { "4", 2 }, { "6", 3 } },
+                new Dictionary<string, int>
+                {
+                    { "2", 1 },
+                    { "4", 2 },
+                    { "6", 3 }
+                },
                 collection.Dictionary
             );
             Assert.Equal(1, collection["2"]);
@@ -137,7 +142,13 @@ namespace System.Collections.ObjectModel.Tests
             collection.InsertItem(3, 4);
             Assert.Equal(new int[] { 1, 2, 3, 4 }, collection.Items.Cast<int>());
             Assert.Equal(
-                new Dictionary<string, int> { { "2", 1 }, { "4", 2 }, { "6", 3 }, { "8", 4 } },
+                new Dictionary<string, int>
+                {
+                    { "2", 1 },
+                    { "4", 2 },
+                    { "6", 3 },
+                    { "8", 4 }
+                },
                 collection.Dictionary
             );
             Assert.Equal(1, collection["2"]);
@@ -508,7 +519,13 @@ namespace System.Collections.ObjectModel.Tests
             Assert.True(collection.Remove("2"));
             Assert.Equal(new int[] { 1, 3, 4 }, collection.Items.Cast<int>());
             Assert.Equal(
-                new Dictionary<string, int> { { "1", 1 }, { "2", 2 }, { "3", 3 }, { "4", 4 } },
+                new Dictionary<string, int>
+                {
+                    { "1", 1 },
+                    { "2", 2 },
+                    { "3", 3 },
+                    { "4", 4 }
+                },
                 collection.Dictionary
             );
 
@@ -516,7 +533,12 @@ namespace System.Collections.ObjectModel.Tests
             Assert.True(collection.Remove("1"));
             Assert.Equal(new int[] { 3, 4 }, collection.Items.Cast<int>());
             Assert.Equal(
-                new Dictionary<string, int> { { "2", 2 }, { "3", 3 }, { "4", 4 } },
+                new Dictionary<string, int>
+                {
+                    { "2", 2 },
+                    { "3", 3 },
+                    { "4", 4 }
+                },
                 collection.Dictionary
             );
         }
@@ -651,7 +673,13 @@ namespace System.Collections.ObjectModel.Tests
             collection.RemoveItem(1);
             Assert.Equal(new int[] { 1, 3, 4 }, collection.Items.Cast<int>());
             Assert.Equal(
-                new Dictionary<string, int> { { "1", 1 }, { "2", 2 }, { "3", 3 }, { "4", 4 } },
+                new Dictionary<string, int>
+                {
+                    { "1", 1 },
+                    { "2", 2 },
+                    { "3", 3 },
+                    { "4", 4 }
+                },
                 collection.Dictionary
             );
 
@@ -659,7 +687,12 @@ namespace System.Collections.ObjectModel.Tests
             collection.RemoveItem(0);
             Assert.Equal(new int[] { 3, 4 }, collection.Items.Cast<int>());
             Assert.Equal(
-                new Dictionary<string, int> { { "2", 2 }, { "3", 3 }, { "4", 4 } },
+                new Dictionary<string, int>
+                {
+                    { "2", 2 },
+                    { "3", 3 },
+                    { "4", 4 }
+                },
                 collection.Dictionary
             );
         }
@@ -918,7 +951,12 @@ namespace System.Collections.ObjectModel.Tests
             collection.ChangeItemKey(2, "6");
             Assert.Equal(new int[] { 1, 2 }, collection.Items.Cast<int>());
             Assert.Equal(
-                new Dictionary<string, int> { { "1", 1 }, { "2", 2 }, { "6", 2 } },
+                new Dictionary<string, int>
+                {
+                    { "1", 1 },
+                    { "2", 2 },
+                    { "6", 2 }
+                },
                 collection.Dictionary
             );
 
@@ -926,7 +964,12 @@ namespace System.Collections.ObjectModel.Tests
             collection.ChangeItemKey(1, "5");
             Assert.Equal(new int[] { 1, 2 }, collection.Items.Cast<int>());
             Assert.Equal(
-                new Dictionary<string, int> { { "5", 1 }, { "2", 2 }, { "6", 2 } },
+                new Dictionary<string, int>
+                {
+                    { "5", 1 },
+                    { "2", 2 },
+                    { "6", 2 }
+                },
                 collection.Dictionary
             );
         }
@@ -945,7 +988,12 @@ namespace System.Collections.ObjectModel.Tests
 
             collection.ChangeItemKey(2, "10");
             Assert.Equal(
-                new Dictionary<string, int> { { "2", 1 }, { "10", 2 }, { "6", 3 } },
+                new Dictionary<string, int>
+                {
+                    { "2", 1 },
+                    { "10", 2 },
+                    { "6", 3 }
+                },
                 collection.Dictionary
             );
         }
@@ -1041,7 +1089,12 @@ namespace System.Collections.ObjectModel.Tests
             // Without dictionary.
             collection.ChangeItemKey(2, "10");
             Assert.Equal(
-                new Dictionary<string, int> { { "2", 1 }, { "10", 2 }, { "6", 3 } },
+                new Dictionary<string, int>
+                {
+                    { "2", 1 },
+                    { "10", 2 },
+                    { "6", 3 }
+                },
                 collection.Dictionary
             );
 
@@ -1053,7 +1106,13 @@ namespace System.Collections.ObjectModel.Tests
                 () => collection.ChangeItemKey(2, newKey)
             );
             Assert.Equal(
-                new Dictionary<string, int> { { "2", 1 }, { "10", 2 }, { "6", 3 }, { "8", 4 } },
+                new Dictionary<string, int>
+                {
+                    { "2", 1 },
+                    { "10", 2 },
+                    { "6", 3 },
+                    { "8", 4 }
+                },
                 collection.Dictionary
             );
         }

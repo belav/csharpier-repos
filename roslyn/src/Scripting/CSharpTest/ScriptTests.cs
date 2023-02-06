@@ -714,7 +714,15 @@ if (true)
 }"
             );
             result = await script.EvaluateAsync();
-            Assert.Equal(new List<int> { 1, 2, 3 }, result);
+            Assert.Equal(
+                new List<int>
+                {
+                    1,
+                    2,
+                    3
+                },
+                result
+            );
         }
 
         [Fact]

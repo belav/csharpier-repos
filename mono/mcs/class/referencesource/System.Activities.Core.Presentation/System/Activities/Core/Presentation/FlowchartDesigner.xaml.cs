@@ -2569,7 +2569,15 @@ namespace System.Activities.Core.Presentation
                 }
             }
             else if (
-                (new List<Key> { Key.Left, Key.Right, Key.Up, Key.Down }).Contains(e.Key)
+                (
+                    new List<Key>
+                    {
+                        Key.Left,
+                        Key.Right,
+                        Key.Up,
+                        Key.Down
+                    }
+                ).Contains(e.Key)
                 && currentSelection.SelectedObjects.All<ModelItem>(
                     (p) =>
                     {

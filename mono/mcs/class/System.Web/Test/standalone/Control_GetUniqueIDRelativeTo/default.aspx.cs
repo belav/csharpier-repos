@@ -9,7 +9,12 @@ public partial class _default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        var list = new List<string> { "One", "Two", "Three" };
+        var list = new List<string>
+        {
+            "One",
+            "Two",
+            "Three"
+        };
 
         try
         {
@@ -118,7 +123,12 @@ public partial class _default : System.Web.UI.Page
         log.InnerText += sb.ToString();
 
         int listStart = index * 3;
-        var list = new List<int> { listStart, listStart + 1, listStart + 2 };
+        var list = new List<int>
+        {
+            listStart,
+            listStart + 1,
+            listStart + 2
+        };
         Repeater innerRepeater = args.Item.FindControl("innerRepeater1") as Repeater;
         innerRepeater.DataSource = list;
         innerRepeater.DataBind();

@@ -167,7 +167,12 @@ public class GearsOfWarData : ISetSource
         };
 
     public static IReadOnlyList<SquadMission> CreateSquadMissions() =>
-        new List<SquadMission> { new(), new(), new() };
+        new List<SquadMission>
+        {
+            new(),
+            new(),
+            new()
+        };
 
     public static IReadOnlyList<City> CreateCities()
     {
@@ -189,7 +194,13 @@ public class GearsOfWarData : ISetSource
 
         var unknown = new City { Location = "Unknown", Name = "Unknown" };
 
-        var cities = new List<City> { jacinto, ephyra, hanover, unknown };
+        var cities = new List<City>
+        {
+            jacinto,
+            ephyra,
+            hanover,
+            unknown
+        };
         return cities;
     }
 
@@ -475,7 +486,13 @@ public class GearsOfWarData : ISetSource
         squads[0].Missions = new List<SquadMission> { squadMissions[0], squadMissions[1] };
         squads[1].Missions = new List<SquadMission> { squadMissions[2] };
 
-        squads[0].Members = new List<Gear> { gears[0], gears[1], gears[3], gears[4] };
+        squads[0].Members = new List<Gear>
+        {
+            gears[0],
+            gears[1],
+            gears[3],
+            gears[4]
+        };
         squads[1].Members = new List<Gear> { gears[2] };
 
         weapons[1].SynergyWith = weapons[0];
@@ -520,7 +537,12 @@ public class GearsOfWarData : ISetSource
         gears[4].Squad = squads[0];
         gears[4].Tag = tags[4];
         gears[4].Weapons = new List<Weapon> { weapons[0], weapons[1] };
-        ((Officer)gears[4]).Reports = new List<Gear> { gears[0], gears[1], gears[3] };
+        ((Officer)gears[4]).Reports = new List<Gear>
+        {
+            gears[0],
+            gears[1],
+            gears[3]
+        };
 
         cities[0].BornGears = new List<Gear> { gears[4] };
         cities[1].BornGears = new List<Gear> { gears[0] };

@@ -353,7 +353,13 @@ public class Tests
 
     public static int test_0_multidimentional_arrays()
     {
-        var structToMarshal = new TwoDimensionalArrayStruct(new[,] { { 1, 2, 3 }, { 4, 5, 6 } });
+        var structToMarshal = new TwoDimensionalArrayStruct(
+            new[,]
+            {
+                { 1, 2, 3 },
+                { 4, 5, 6 }
+            }
+        );
         var ptr = Marshal.AllocHGlobal(Marshal.SizeOf(structToMarshal));
         Marshal.StructureToPtr(structToMarshal, ptr, false);
         unsafe

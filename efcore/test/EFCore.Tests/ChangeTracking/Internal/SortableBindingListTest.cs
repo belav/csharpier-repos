@@ -9,11 +9,35 @@ public class SortableBindingListTest
 {
     private void SortTest(string property, ListSortDirection direction)
     {
-        var list = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
+        var list = new List<ListElement>
+        {
+            3,
+            1,
+            4,
+            1,
+            5,
+            9
+        };
         var sortedList =
             direction == ListSortDirection.Ascending
-                ? new List<ListElement> { 1, 1, 3, 4, 5, 9 }
-                : new List<ListElement> { 9, 5, 4, 3, 1, 1 };
+                ? new List<ListElement>
+                {
+                    1,
+                    1,
+                    3,
+                    4,
+                    5,
+                    9
+                }
+                : new List<ListElement>
+                {
+                    9,
+                    5,
+                    4,
+                    3,
+                    1,
+                    1
+                };
 
         var bindingList = new SortableBindingList<ListElement>(list);
 
@@ -49,8 +73,24 @@ public class SortableBindingListTest
     [ConditionalFact]
     public void SortableBindingList_does_not_sort_for_non_XNode_that_does_not_implement_IComparable()
     {
-        var list = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
-        var unsortedList = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
+        var list = new List<ListElement>
+        {
+            3,
+            1,
+            4,
+            1,
+            5,
+            9
+        };
+        var unsortedList = new List<ListElement>
+        {
+            3,
+            1,
+            4,
+            1,
+            5,
+            9
+        };
         var bindingList = new SortableBindingList<ListElement>(list);
 
         ((IBindingList)bindingList).ApplySort(
@@ -64,8 +104,24 @@ public class SortableBindingListTest
     [ConditionalFact]
     public void SortableBindingList_does_not_sort_for_byte_arrays()
     {
-        var list = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
-        var unsortedList = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
+        var list = new List<ListElement>
+        {
+            3,
+            1,
+            4,
+            1,
+            5,
+            9
+        };
+        var unsortedList = new List<ListElement>
+        {
+            3,
+            1,
+            4,
+            1,
+            5,
+            9
+        };
         var bindingList = new SortableBindingList<ListElement>(list);
 
         ((IBindingList)bindingList).ApplySort(
@@ -105,8 +161,18 @@ public class SortableBindingListTest
     [ConditionalFact]
     public void SortableBindingList_can_sort_when_list_is_of_derived_type()
     {
-        var list = new List<DerivedListElement> { new(3), new(1), new(4) };
-        var sortedList = new List<DerivedListElement> { new(1), new(3), new(4) };
+        var list = new List<DerivedListElement>
+        {
+            new(3),
+            new(1),
+            new(4)
+        };
+        var sortedList = new List<DerivedListElement>
+        {
+            new(1),
+            new(3),
+            new(4)
+        };
 
         var bindingList = new SortableBindingList<DerivedListElement>(list);
 

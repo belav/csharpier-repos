@@ -60,7 +60,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
                 { 3, 3 }
             }.MakeCache();
 
-            var expected = new OrderedTestDictionary<int, int>(3) { { 3, 3 }, { 2, 2 }, { 1, 1 } };
+            var expected = new OrderedTestDictionary<int, int>(3)
+            {
+                { 3, 3 },
+                { 2, 2 },
+                { 1, 1 }
+            };
 
             Assert.True(clc.TestingEnumerable.SequenceEqual(expected));
         }
@@ -76,7 +81,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             }.MakeCache();
             clc[3] = 0;
 
-            var expected = new OrderedTestDictionary<int, int>(3) { { 3, 0 }, { 2, 2 }, { 1, 1 } };
+            var expected = new OrderedTestDictionary<int, int>(3)
+            {
+                { 3, 0 },
+                { 2, 2 },
+                { 1, 1 }
+            };
 
             Assert.True(clc.TestingEnumerable.SequenceEqual(expected));
         }
@@ -92,7 +102,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             }.MakeCache();
             clc[4] = 4;
 
-            var expected = new OrderedTestDictionary<int, int>(3) { { 4, 4 }, { 3, 3 }, { 2, 2 } };
+            var expected = new OrderedTestDictionary<int, int>(3)
+            {
+                { 4, 4 },
+                { 3, 3 },
+                { 2, 2 }
+            };
 
             Assert.Equal(expected, clc.TestingEnumerable);
         }
@@ -109,7 +124,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             int oneVal = clc[1];
             clc[4] = 4;
 
-            var expected = new OrderedTestDictionary<int, int>(3) { { 4, 4 }, { 1, 1 }, { 3, 3 }, };
+            var expected = new OrderedTestDictionary<int, int>(3)
+            {
+                { 4, 4 },
+                { 1, 1 },
+                { 3, 3 },
+            };
 
             Assert.Equal(expected, clc.TestingEnumerable);
         }

@@ -449,7 +449,13 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> ListInitExpressionProxy()
         {
-            Expression<Func<List<int>>> exp = () => new List<int> { 1, 2, 3 };
+            Expression<Func<List<int>>> exp = () =>
+                new List<int>
+                {
+                    1,
+                    2,
+                    3
+                };
             yield return new object[] { exp.Body };
         }
 

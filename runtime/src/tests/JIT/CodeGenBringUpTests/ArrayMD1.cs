@@ -13,7 +13,11 @@ public class BringUpTest_ArrayMD1
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static int ArrayMD1()
     {
-        int[,] a = { { 1, 2 }, { 3, 4 } };
+        int[,] a =
+        {
+            { 1, 2 },
+            { 3, 4 }
+        };
         return a[0, 1];
     }
 

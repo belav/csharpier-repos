@@ -16,7 +16,12 @@ namespace AutoMapper.UnitTests.Bug
                         cfg.CreateMap<int, Entity>().ConvertUsing<IntToEntityConverter>();
                     });
 
-                    var guids = new List<int?>() { 1, 2, null };
+                    var guids = new List<int?>()
+                    {
+                        1,
+                        2,
+                        null
+                    };
 
                     var result = config.CreateMapper().Map<List<Entity>>(guids);
 

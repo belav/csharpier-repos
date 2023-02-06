@@ -359,7 +359,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             static void TestArrayWithInitializerOneElementStaticType()
             {
-                Type[,] arr = new Type[,] { { typeof(TestType) } };
+                Type[,] arr = new Type[,]
+                {
+                    { typeof(TestType) }
+                };
                 arr[0, 0].RequiresAll();
                 arr[0, 1].RequiresPublicMethods(); // Should warn - unknown value at this index
             }
@@ -379,7 +382,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
             )
             {
-                Type[,] arr = new Type[,] { { type } };
+                Type[,] arr = new Type[,]
+                {
+                    { type }
+                };
                 arr[0, 0].RequiresAll();
                 arr[0, 1].RequiresPublicMethods(); // Should warn - unknown value at this index
             }
@@ -450,7 +456,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     TProperties
             >([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type typeAll)
             {
-                Type[,] arr = new Type[,] { { typeof(TestType), typeof(TProperties), typeAll } };
+                Type[,] arr = new Type[,]
+                {
+                    { typeof(TestType), typeof(TProperties), typeAll }
+                };
                 arr[0, 0].RequiresAll();
                 arr[0, 1].RequiresPublicProperties();
                 arr[0, 1].RequiresPublicFields(); // Should warn
@@ -608,7 +617,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     TProperties
             >([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type typeAll)
             {
-                Type[,] arr = new Type[,] { { typeof(TestType), null, null } };
+                Type[,] arr = new Type[,]
+                {
+                    { typeof(TestType), null, null }
+                };
                 arr[0, 1] = typeof(TProperties);
                 arr[0, 2] = typeAll;
                 arr[0, 0].RequiresAll();
@@ -625,7 +637,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             static void TestGetElementAtUnknownIndex(int i = 0)
             {
-                Type[,] arr = new Type[,] { { typeof(TestType) } };
+                Type[,] arr = new Type[,]
+                {
+                    { typeof(TestType) }
+                };
                 arr[0, i].RequiresPublicFields();
             }
 
@@ -642,7 +657,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             static void TestArrayResetStoreUnknownIndex(int i = 0)
             {
-                Type[,] arr = new Type[,] { { typeof(TestType) } };
+                Type[,] arr = new Type[,]
+                {
+                    { typeof(TestType) }
+                };
                 arr[0, 0].RequiresPublicProperties();
 
                 arr[0, i] = typeof(TestType); // Unknown index - we reset array to all unknowns
@@ -670,7 +688,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             static void TestArrayResetGetElementOnByRefArray(int i = 0)
             {
-                Type[,] arr = new Type[,] { { typeof(TestType) } };
+                Type[,] arr = new Type[,]
+                {
+                    { typeof(TestType) }
+                };
                 arr[0, 0].RequiresPublicProperties();
 
                 TakesTypeByRef(ref arr[0, 0]); // No reset - known index
@@ -695,7 +716,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             static void TestArrayResetAfterCall()
             {
-                Type[,] arr = new Type[,] { { typeof(TestType) } };
+                Type[,] arr = new Type[,]
+                {
+                    { typeof(TestType) }
+                };
                 arr[0, 0].RequiresPublicProperties();
 
                 // Calling a method and passing the array will reset the array after the call
@@ -721,7 +745,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             static void TestArrayResetAfterAssignment()
             {
-                Type[,] arr = new Type[,] { { typeof(TestType) } };
+                Type[,] arr = new Type[,]
+                {
+                    { typeof(TestType) }
+                };
                 arr[0, 0].RequiresPublicProperties();
 
                 // Assigning the array out of the method means that others can modify it - for non-method-calls it's not very likely to cause problems
@@ -739,7 +766,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             static void TestAddressOfElement()
             {
-                Type[,] arr = new Type[,] { { typeof(TestType) } };
+                Type[,] arr = new Type[,]
+                {
+                    { typeof(TestType) }
+                };
                 ref Type t = ref arr[0, 0];
                 t.RequiresPublicMethods();
             }

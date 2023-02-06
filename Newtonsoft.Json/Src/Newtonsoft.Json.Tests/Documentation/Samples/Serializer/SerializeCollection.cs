@@ -44,7 +44,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            List<string> videogames = new List<string> { "Starcraft", "Halo", "Legend of Zelda" };
+            List<string> videogames = new List<string>
+            {
+                "Starcraft",
+                "Halo",
+                "Legend of Zelda"
+            };
 
             string json = JsonConvert.SerializeObject(videogames);
 

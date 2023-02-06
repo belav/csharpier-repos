@@ -775,7 +775,14 @@ namespace System.Formats.Tar.Tests
 
         private static List<string> GetPrefixes()
         {
-            List<string> prefixes = new() { "", "/a/", "./", "../" };
+            List<string> prefixes =
+                new()
+                {
+                    "",
+                    "/a/",
+                    "./",
+                    "../"
+                };
 
             if (OperatingSystem.IsWindows())
                 prefixes.Add("C:/");

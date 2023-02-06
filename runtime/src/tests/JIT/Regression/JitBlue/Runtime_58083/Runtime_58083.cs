@@ -54,9 +54,15 @@ class C3
 public class Program
 {
     internal static bool[][][] s_9 = new bool[][][] { new bool[][] { new bool[] { true } } };
-    internal static C1[,] s_12 = new C1[,] { { new C1(new C0(), true) } };
+    internal static C1[,] s_12 = new C1[,]
+    {
+        { new C1(new C0(), true) }
+    };
     internal static S0 s_17 = new S0(new C0());
-    internal static C1[,][] s_21 = new C1[,][] { { new C1[] { new C1(new C0(), false) } } };
+    internal static C1[,][] s_21 = new C1[,][]
+    {
+        { new C1[] { new C1(new C0(), false) } }
+    };
     internal static short s_32;
     internal static C1 s_34 = new C1(new C0(), false);
     internal static C2 s_35 = new C2();

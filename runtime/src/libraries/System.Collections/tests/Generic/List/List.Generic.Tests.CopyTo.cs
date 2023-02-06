@@ -23,7 +23,12 @@ namespace System.Collections.Tests
                 () => CollectionExtensions.CopyTo(null, new Span<int>(new int[1]))
             );
 
-            var list = new List<int>() { 1, 2, 3 };
+            var list = new List<int>()
+            {
+                1,
+                2,
+                3
+            };
             Assert.Throws<ArgumentException>(
                 () => CollectionExtensions.CopyTo(list, (Span<int>)new int[2])
             );
@@ -39,12 +44,22 @@ namespace System.Collections.Tests
             destination = Span<int>.Empty;
             list.CopyTo(destination);
 
-            list = new List<int>() { 1, 2, 3 };
+            list = new List<int>()
+            {
+                1,
+                2,
+                3
+            };
             destination = new int[3];
             list.CopyTo(destination);
             Assert.Equal(new[] { 1, 2, 3 }, destination.ToArray());
 
-            list = new List<int>() { 1, 2, 3 };
+            list = new List<int>()
+            {
+                1,
+                2,
+                3
+            };
             destination = new int[4];
             list.CopyTo(destination);
             Assert.Equal(new[] { 1, 2, 3, 0 }, destination.ToArray());

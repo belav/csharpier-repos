@@ -220,7 +220,13 @@ Five;",
         {
             TestLinkedFileSet(
                 @"A",
-                new List<string> { @"A", @"B", @"C", @"", },
+                new List<string>
+                {
+                    @"A",
+                    @"B",
+                    @"C",
+                    @"",
+                },
                 @"
 /* "
                     + string.Format(

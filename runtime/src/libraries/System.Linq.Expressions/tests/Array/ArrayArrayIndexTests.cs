@@ -4061,7 +4061,13 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ArrayIndexNullIndices()
         {
-            Expression array = Expression.Constant(new[,] { { 1, 2 }, { 2, 1 } });
+            Expression array = Expression.Constant(
+                new[,]
+                {
+                    { 1, 2 },
+                    { 2, 1 }
+                }
+            );
             AssertExtensions.Throws<ArgumentNullException>(
                 "indexes",
                 () => Expression.ArrayIndex(array, default(Expression[]))
@@ -4075,7 +4081,13 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ArrayIndexWrongRank()
         {
-            Expression array = Expression.Constant(new[,] { { 1, 2 }, { 2, 1 } });
+            Expression array = Expression.Constant(
+                new[,]
+                {
+                    { 1, 2 },
+                    { 2, 1 }
+                }
+            );
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.ArrayIndex(array, new[] { Expression.Constant(2) })
@@ -4095,7 +4107,13 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ArrayIndexWrongType()
         {
-            Expression array = Expression.Constant(new[,] { { 1, 2 }, { 2, 1 } });
+            Expression array = Expression.Constant(
+                new[,]
+                {
+                    { 1, 2 },
+                    { 2, 1 }
+                }
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "indexes[0]",
                 () => Expression.ArrayIndex(array, Expression.Constant(2L), Expression.Constant(1))
@@ -4119,7 +4137,13 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void UnreadableIndex()
         {
-            Expression array = Expression.Constant(new[,] { { 1, 2 }, { 2, 1 } });
+            Expression array = Expression.Constant(
+                new[,]
+                {
+                    { 1, 2 },
+                    { 2, 1 }
+                }
+            );
             Expression index = Expression.Property(
                 null,
                 typeof(Unreadable<int>),

@@ -779,7 +779,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
         {
             // ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclass.genclass017.genclass017
 
-            List<string> list = new List<string>() { "0", "4", null, "6", "4", "4", null };
+            List<string> list = new List<string>()
+            {
+                "0",
+                "4",
+                null,
+                "6",
+                "4",
+                "4",
+                null
+            };
 
             dynamic dy = new MemberClassWithAnotherTypeConstraint<string, string>();
             dynamic dy2 = new MemberClassWithNewConstraint<Test>();

@@ -6,7 +6,13 @@ class C
 
     public static int Main()
     {
-        Assert(new object[,] { { 1, 2 }, { "x", "z" } });
+        Assert(
+            new object[,]
+            {
+                { 1, 2 },
+                { "x", "z" }
+            }
+        );
         Assert(new object(), "a");
 
         return 0;

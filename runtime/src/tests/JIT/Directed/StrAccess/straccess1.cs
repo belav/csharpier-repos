@@ -31,7 +31,10 @@ internal class CL
 internal class StrAccess1
 {
     public static String str1 = "test string";
-    public static String[,] str2darr = { { "test string" } };
+    public static String[,] str2darr =
+    {
+        { "test string" }
+    };
     public static char sb0,
         sb1,
         sb2,

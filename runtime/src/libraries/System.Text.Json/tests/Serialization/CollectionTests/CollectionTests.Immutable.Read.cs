@@ -327,7 +327,13 @@ namespace System.Text.Json.Serialization.Tests
             IImmutableSet<IImmutableSet<int>> result = JsonSerializer.Deserialize<
                 IImmutableSet<IImmutableSet<int>>
             >(Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]"));
-            List<int> expected = new List<int> { 1, 2, 3, 4 };
+            List<int> expected = new List<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
 
             foreach (IImmutableSet<int> l in result)
             {
@@ -346,7 +352,13 @@ namespace System.Text.Json.Serialization.Tests
             IImmutableSet<int[]> result = JsonSerializer.Deserialize<IImmutableSet<int[]>>(
                 Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]")
             );
-            List<int> expected = new List<int> { 1, 2, 3, 4 };
+            List<int> expected = new List<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
 
             foreach (int[] arr in result)
             {
@@ -365,7 +377,13 @@ namespace System.Text.Json.Serialization.Tests
             IImmutableSet<int>[] result = JsonSerializer.Deserialize<IImmutableSet<int>[]>(
                 Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]")
             );
-            List<int> expected = new List<int> { 1, 2, 3, 4 };
+            List<int> expected = new List<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
 
             foreach (IImmutableSet<int> l in result)
             {
@@ -410,7 +428,13 @@ namespace System.Text.Json.Serialization.Tests
             ImmutableHashSet<ImmutableHashSet<int>> result = JsonSerializer.Deserialize<
                 ImmutableHashSet<ImmutableHashSet<int>>
             >(Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]"));
-            List<int> expected = new List<int> { 1, 2, 3, 4 };
+            List<int> expected = new List<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
 
             foreach (ImmutableHashSet<int> l in result)
             {
@@ -429,7 +453,13 @@ namespace System.Text.Json.Serialization.Tests
             ImmutableHashSet<int[]> result = JsonSerializer.Deserialize<ImmutableHashSet<int[]>>(
                 Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]")
             );
-            List<int> expected = new List<int> { 1, 2, 3, 4 };
+            List<int> expected = new List<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
 
             foreach (int[] arr in result)
             {
@@ -448,7 +478,13 @@ namespace System.Text.Json.Serialization.Tests
             ImmutableHashSet<int>[] result = JsonSerializer.Deserialize<ImmutableHashSet<int>[]>(
                 Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]")
             );
-            List<int> expected = new List<int> { 1, 2, 3, 4 };
+            List<int> expected = new List<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
 
             foreach (ImmutableHashSet<int> l in result)
             {

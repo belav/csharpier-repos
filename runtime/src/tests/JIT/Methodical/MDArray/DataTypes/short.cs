@@ -15,18 +15,78 @@ public struct VT
 
 public class CL
 {
-    public short[,] short2darr = { { 0, 1 }, { 0, 0 } };
-    public short[,,] short3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    public short[,] short2darr_b = { { 0, 49 }, { 0, 0 } };
-    public short[,,] short3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public short[,] short2darr =
+    {
+        { 0, 1 },
+        { 0, 0 }
+    };
+    public short[,,] short3darr =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    public short[,] short2darr_b =
+    {
+        { 0, 49 },
+        { 0, 0 }
+    };
+    public short[,,] short3darr_b =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 49 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
 }
 
 public class shortMDArrTest
 {
-    static short[,] short2darr = { { 0, 1 }, { 0, 0 } };
-    static short[,,] short3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    static short[,] short2darr_b = { { 0, 49 }, { 0, 0 } };
-    static short[,,] short3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static short[,] short2darr =
+    {
+        { 0, 1 },
+        { 0, 0 }
+    };
+    static short[,,] short3darr =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    static short[,] short2darr_b =
+    {
+        { 0, 49 },
+        { 0, 0 }
+    };
+    static short[,,] short3darr_b =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 49 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
 
     static short[][,] ja1 = new short[2][,];
     static short[][,,] ja2 = new short[2][,,];
@@ -39,17 +99,77 @@ public class shortMDArrTest
         bool pass = true;
 
         VT vt1;
-        vt1.short2darr = new short[,] { { 0, 1 }, { 0, 0 } };
-        vt1.short3darr = new short[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        vt1.short2darr_b = new short[,] { { 0, 49 }, { 0, 0 } };
-        vt1.short3darr_b = new short[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        vt1.short2darr = new short[,]
+        {
+            { 0, 1 },
+            { 0, 0 }
+        };
+        vt1.short3darr = new short[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        vt1.short2darr_b = new short[,]
+        {
+            { 0, 49 },
+            { 0, 0 }
+        };
+        vt1.short3darr_b = new short[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 49 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new short[,] { { 0, 1 }, { 0, 0 } };
-        ja2[1] = new short[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        ja1_b[0] = new short[,] { { 0, 49 }, { 0, 0 } };
-        ja2_b[1] = new short[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        ja1[0] = new short[,]
+        {
+            { 0, 1 },
+            { 0, 0 }
+        };
+        ja2[1] = new short[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        ja1_b[0] = new short[,]
+        {
+            { 0, 49 },
+            { 0, 0 }
+        };
+        ja2_b[1] = new short[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 49 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
 
         short result = 1;
 

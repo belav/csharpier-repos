@@ -26,7 +26,10 @@ public class Runtime_61037
 
     public static long M1()
     {
-        var vr1 = new C0[,] { { new C0() } };
+        var vr1 = new C0[,]
+        {
+            { new C0() }
+        };
         return 0;
     }
 }

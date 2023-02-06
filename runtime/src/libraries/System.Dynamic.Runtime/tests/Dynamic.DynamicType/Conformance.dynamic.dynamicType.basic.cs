@@ -779,7 +779,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
             if (arr[d1][d1 + (short)2] == 3)
                 success++;
             tests++;
-            arr = new int[2, 2] { { 1, 2 }, { 3, 4 } };
+            arr = new int[2, 2]
+            {
+                { 1, 2 },
+                { 3, 4 }
+            };
             if (arr[d1 + 0L, d1] == 1)
                 success++;
             return tests - success; //should be 0 in case of success
@@ -840,7 +844,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.array
             if (arr[d1][d1 + (byte)2] == 3)
                 success++;
             tests++;
-            arr = new int[2, 2] { { 1, 2 }, { 3, 4 } };
+            arr = new int[2, 2]
+            {
+                { 1, 2 },
+                { 3, 4 }
+            };
             if (arr[d1 + 0, d1] == 1)
                 success++;
             return tests - success; //should be 0 in case of success
@@ -1808,7 +1816,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
 
         public static int MainMethod(string[] args)
         {
-            List<dynamic> myList = new List<dynamic>() { 1, 2, "Fooo", long.MaxValue };
+            List<dynamic> myList = new List<dynamic>()
+            {
+                1,
+                2,
+                "Fooo",
+                long.MaxValue
+            };
             if (myList.Count != 4)
                 return 1;
             if ((int)myList[0] != 1)
@@ -2017,7 +2031,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
 
         public static int MainMethod()
         {
-            dynamic a = new A { S = { Length = 10 }, X = { 1, 2, 3 } };
+            dynamic a = new A
+            {
+                S = { Length = 10 },
+                X =
+                {
+                    1,
+                    2,
+                    3
+                }
+            };
             return 0;
         }
 
@@ -2051,7 +2074,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
             //array initializer
             dynamic d = 3;
             int rez = 0;
-            Collect c = new Collect() { 1, 3L, "goo", d };
+            Collect c = new Collect()
+            {
+                1,
+                3L,
+                "goo",
+                d
+            };
             if (Collect.Status != 8)
                 return 1;
             return 0;
@@ -4755,7 +4784,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query
         public static int MainMethod(string[] args)
         {
             dynamic d = 3;
-            var list = new List<int> { 1, 2, 3 };
+            var list = new List<int>
+            {
+                1,
+                2,
+                3
+            };
             var x = from c in list where c == (int)d select c;
             if (x.Count() != 1)
                 return 1;
@@ -4795,7 +4829,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query
         public static int MainMethod(string[] args)
         {
             dynamic d = new myClass();
-            var list = new List<int> { 1, 2, 3 };
+            var list = new List<int>
+            {
+                1,
+                2,
+                3
+            };
             var x = (from c in list where c == 2 select d.Transform(c)).SingleOrDefault();
             if ((int)x != 3)
                 return 1;
@@ -4835,7 +4874,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.query
         public static int MainMethod(string[] args)
         {
             dynamic d = new myClass();
-            var list = new List<int> { 1, 2, 3 };
+            var list = new List<int>
+            {
+                1,
+                2,
+                3
+            };
             var x = (
                 from c in list
                 where c == 2

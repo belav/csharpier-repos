@@ -42,7 +42,13 @@ public class TemporalFiltersInheritanceQuerySqlServerFixture
         );
         context.SaveChanges();
 
-        var tableNames = new List<string> { "Animals", "Plants", "Countries", "Drinks" };
+        var tableNames = new List<string>
+        {
+            "Animals",
+            "Plants",
+            "Countries",
+            "Drinks"
+        };
 
         foreach (var tableName in tableNames)
         {

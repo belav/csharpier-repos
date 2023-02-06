@@ -77,10 +77,14 @@ namespace System.CommandLine.Tests.Invocation
             var aOption = new Option<bool>("a");
             var beenOption = new Option<bool>("been");
             var parser = new CommandLineBuilder(
-                new RootCommand { fromCommand, seenCommand, aOption, beenOption }
-            )
-                .UseTypoCorrections()
-                .Build();
+                new RootCommand
+                {
+                    fromCommand,
+                    seenCommand,
+                    aOption,
+                    beenOption
+                }
+            ).UseTypoCorrections().Build();
 
             var result = parser.Parse("een");
 
@@ -102,10 +106,13 @@ namespace System.CommandLine.Tests.Invocation
             var beenCommand = new Command("been");
 
             var parser = new CommandLineBuilder(
-                new RootCommand { fromCommand, seenCommand, beenCommand }
-            )
-                .UseTypoCorrections()
-                .Build();
+                new RootCommand
+                {
+                    fromCommand,
+                    seenCommand,
+                    beenCommand
+                }
+            ).UseTypoCorrections().Build();
 
             var result = parser.Parse("een");
 
@@ -142,10 +149,13 @@ namespace System.CommandLine.Tests.Invocation
             var beenOption = new Option<string>("been");
 
             var parser = new CommandLineBuilder(
-                new RootCommand { fromOption, seenOption, beenOption }
-            )
-                .UseTypoCorrections()
-                .Build();
+                new RootCommand
+                {
+                    fromOption,
+                    seenOption,
+                    beenOption
+                }
+            ).UseTypoCorrections().Build();
             var result = parser.Parse("een");
 
             await result.InvokeAsync(_console);

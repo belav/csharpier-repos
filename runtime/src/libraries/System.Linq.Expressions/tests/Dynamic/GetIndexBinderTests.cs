@@ -38,7 +38,13 @@ namespace System.Dynamic.Tests
         [Fact]
         public void ListIndexing()
         {
-            dynamic d = new List<int> { 0, 1, 2, 3 };
+            dynamic d = new List<int>
+            {
+                0,
+                1,
+                2,
+                3
+            };
             for (int i = 0; i != 4; ++i)
             {
                 Assert.Equal(i, d[i]);
@@ -48,7 +54,13 @@ namespace System.Dynamic.Tests
         [Fact]
         public void MultiDimensionalIndexing()
         {
-            dynamic d = new[,] { { 0, 1, 2, 3 }, { 1, 2, 3, 4 }, { 2, 3, 4, 5 }, { 3, 4, 5, 6 } };
+            dynamic d = new[,]
+            {
+                { 0, 1, 2, 3 },
+                { 1, 2, 3, 4 },
+                { 2, 3, 4, 5 },
+                { 3, 4, 5, 6 }
+            };
             for (int i = 0; i != 4; ++i)
             {
                 for (int j = 0; j != 4; ++j)
@@ -68,7 +80,13 @@ namespace System.Dynamic.Tests
         [Fact]
         public void TooFewIndices()
         {
-            dynamic d = new[,] { { 0, 1, 2, 3 }, { 1, 2, 3, 4 }, { 2, 3, 4, 5 }, { 3, 4, 5, 6 } };
+            dynamic d = new[,]
+            {
+                { 0, 1, 2, 3 },
+                { 1, 2, 3, 4 },
+                { 2, 3, 4, 5 },
+                { 3, 4, 5, 6 }
+            };
             Assert.Throws<RuntimeBinderException>(() => d[2]);
         }
 
@@ -84,7 +102,13 @@ namespace System.Dynamic.Tests
         {
             dynamic d = new[] { 0, 1, 2, 3 };
             Assert.Throws<IndexOutOfRangeException>(() => d[9]);
-            d = new List<int> { 0, 1, 2, 3 };
+            d = new List<int>
+            {
+                0,
+                1,
+                2,
+                3
+            };
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => d[9]);
         }
 

@@ -73,7 +73,15 @@ public class ListAdapterTest
         Assert.Null(message);
         Assert.True(addStatus);
         Assert.Equal(3, targetObject.Count);
-        Assert.Equal(new List<string>() { "James", "Mike", "Rob" }, targetObject);
+        Assert.Equal(
+            new List<string>()
+            {
+                "James",
+                "Mike",
+                "Rob"
+            },
+            targetObject
+        );
     }
 
     [Theory]
@@ -128,7 +136,12 @@ public class ListAdapterTest
                 },
                 {
                     new List<int>() { 5, 10 },
-                    new List<int>() { 5, 10, 20 }
+                    new List<int>()
+                    {
+                        5,
+                        10,
+                        20
+                    }
                 }
             };
         }
@@ -173,7 +186,15 @@ public class ListAdapterTest
         Assert.True(addStatus);
         Assert.True(string.IsNullOrEmpty(message), "Expected no error message");
         Assert.Equal(3, targetObject.Count);
-        Assert.Equal(new List<string>() { "James", "Mike", null }, targetObject);
+        Assert.Equal(
+            new List<string>()
+            {
+                "James",
+                "Mike",
+                null
+            },
+            targetObject
+        );
     }
 
     [Fact]
@@ -228,19 +249,34 @@ public class ListAdapterTest
                     new List<string>() { "a", "b" },
                     "c",
                     "-",
-                    new List<string>() { "a", "b", "c" }
+                    new List<string>()
+                    {
+                        "a",
+                        "b",
+                        "c"
+                    }
                 },
                 {
                     new List<string>() { "a", "b" },
                     "c",
                     "0",
-                    new List<string>() { "c", "a", "b" }
+                    new List<string>()
+                    {
+                        "c",
+                        "a",
+                        "b"
+                    }
                 },
                 {
                     new List<string>() { "a", "b" },
                     "c",
                     "1",
-                    new List<string>() { "a", "c", "b" }
+                    new List<string>()
+                    {
+                        "a",
+                        "c",
+                        "b"
+                    }
                 }
             };
         }
@@ -294,19 +330,34 @@ public class ListAdapterTest
                     new List<SimpleObject>() { sDto1, sDto2 },
                     sDto3,
                     "-",
-                    new List<SimpleObject>() { sDto1, sDto2, sDto3 }
+                    new List<SimpleObject>()
+                    {
+                        sDto1,
+                        sDto2,
+                        sDto3
+                    }
                 },
                 {
                     new List<SimpleObject>() { sDto1, sDto2 },
                     sDto3,
                     "0",
-                    new List<SimpleObject>() { sDto3, sDto1, sDto2 }
+                    new List<SimpleObject>()
+                    {
+                        sDto3,
+                        sDto1,
+                        sDto2
+                    }
                 },
                 {
                     new List<SimpleObject>() { sDto1, sDto2 },
                     sDto3,
                     "1",
-                    new List<SimpleObject>() { sDto1, sDto3, sDto2 }
+                    new List<SimpleObject>()
+                    {
+                        sDto1,
+                        sDto3,
+                        sDto2
+                    }
                 }
             };
         }

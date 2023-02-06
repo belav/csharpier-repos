@@ -42,7 +42,11 @@ namespace System.Tests
             Assert.Throws<IndexOutOfRangeException>(() => iList[-1] = 0); // Index < 0
             Assert.Throws<IndexOutOfRangeException>(() => iList[iList.Count] = 0); // Index >= list.Count
 
-            iList = new int[,] { { 1 }, { 2 } };
+            iList = new int[,]
+            {
+                { 1 },
+                { 2 }
+            };
             AssertExtensions.Throws<ArgumentException>(null, () => iList[0]); // Array is multidimensional
             AssertExtensions.Throws<ArgumentException>(null, () => iList[0] = 0); // Array is multidimensional
         }
@@ -85,7 +89,11 @@ namespace System.Tests
             Array array = new int[] { 1, 2, 3 };
             VerifyArray(array, typeof(int), new int[] { 3 }, new int[1]);
 
-            array = new int[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+            array = new int[,]
+            {
+                { 1, 2, 3 },
+                { 4, 5, 6 }
+            };
             VerifyArray(array, typeof(int), new int[] { 2, 3 }, new int[2]);
 
             array = new int[2, 3, 4];
@@ -102,8 +110,26 @@ namespace System.Tests
             // Initializations of this form are handled specially on Desktop and in .NET Native by UTC.
             var array = new int[,,,]
             {
-                { { { 1, 2, 3 }, { 1, 2, 3 } }, { { 1, 2, 3 }, { 1, 2, 3 } } },
-                { { { 1, 2, 3 }, { 1, 2, 3 } }, { { 1, 2, 3 }, { 1, 2, 3 } } }
+                {
+                    {
+                        { 1, 2, 3 },
+                        { 1, 2, 3 }
+                    },
+                    {
+                        { 1, 2, 3 },
+                        { 1, 2, 3 }
+                    }
+                },
+                {
+                    {
+                        { 1, 2, 3 },
+                        { 1, 2, 3 }
+                    },
+                    {
+                        { 1, 2, 3 },
+                        { 1, 2, 3 }
+                    }
+                }
             };
             Assert.NotNull(array);
             Assert.Equal(1, array.GetValue(0, 0, 0, 0));
@@ -705,7 +731,11 @@ namespace System.Tests
         [Fact]
         public static void GetValue_RankTwoInt_SetValue()
         {
-            int[,] array = new int[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+            int[,] array = new int[,]
+            {
+                { 1, 2, 3 },
+                { 4, 5, 6 }
+            };
             Assert.Equal(1, array.GetValue(0, 0));
             Assert.Equal(6, array.GetValue(1, 2));
             array.SetValue(42, 1, 2);
@@ -715,7 +745,11 @@ namespace System.Tests
         [Fact]
         public static void GetValue_RankTwoLong_SetValue()
         {
-            int[,] array = new int[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+            int[,] array = new int[,]
+            {
+                { 1, 2, 3 },
+                { 4, 5, 6 }
+            };
             Assert.Equal(1, array.GetValue((long)0, 0));
             Assert.Equal(6, array.GetValue((long)1, 2));
             array.SetValue(42, (long)1, 2);
@@ -1549,7 +1583,11 @@ namespace System.Tests
             }
 
             // int[,] -> int[,]
-            int[,] intRank2Array = new int[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+            int[,] intRank2Array = new int[,]
+            {
+                { 1, 2, 3 },
+                { 4, 5, 6 }
+            };
             yield return new object[] { intRank2Array, 0, new int[2, 3], 0, 6, intRank2Array };
             yield return new object[]
             {
@@ -1558,7 +1596,12 @@ namespace System.Tests
                 new int[3, 2],
                 0,
                 6,
-                new int[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } }
+                new int[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 },
+                    { 5, 6 }
+                }
             };
             yield return new object[]
             {
@@ -1567,11 +1610,19 @@ namespace System.Tests
                 new int[2, 3],
                 2,
                 3,
-                new int[,] { { 0, 0, 2 }, { 3, 4, 0 } }
+                new int[,]
+                {
+                    { 0, 0, 2 },
+                    { 3, 4, 0 }
+                }
             };
 
             // object[,] -> object[,]
-            object[,] objectRank2Array = new object[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+            object[,] objectRank2Array = new object[,]
+            {
+                { 1, 2, 3 },
+                { 4, 5, 6 }
+            };
             yield return new object[]
             {
                 objectRank2Array,
@@ -1588,7 +1639,12 @@ namespace System.Tests
                 new object[3, 2],
                 0,
                 6,
-                new object[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } }
+                new object[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 },
+                    { 5, 6 }
+                }
             };
             yield return new object[]
             {
@@ -1597,7 +1653,11 @@ namespace System.Tests
                 new object[2, 3],
                 2,
                 3,
-                new object[,] { { null, null, 2 }, { 3, 4, null } }
+                new object[,]
+                {
+                    { null, null, 2 },
+                    { 3, 4, null }
+                }
             };
         }
 
@@ -2827,7 +2887,11 @@ namespace System.Tests
         public static IEnumerable<object[]> Copy_Array_UnreliableConversion_CanPerform_TestData()
         {
             // int[,] -> long[,]
-            int[,] intRank2Array = new int[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+            int[,] intRank2Array = new int[,]
+            {
+                { 1, 2, 3 },
+                { 4, 5, 6 }
+            };
             yield return new object[]
             {
                 intRank2Array,
@@ -2835,7 +2899,11 @@ namespace System.Tests
                 new long[2, 3],
                 0,
                 6,
-                new long[,] { { 1, 2, 3 }, { 4, 5, 6 } }
+                new long[,]
+                {
+                    { 1, 2, 3 },
+                    { 4, 5, 6 }
+                }
             };
 
             // int[,] -> object[,]
@@ -2847,7 +2915,12 @@ namespace System.Tests
                 new object[3, 2],
                 0,
                 6,
-                new object[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } }
+                new object[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 },
+                    { 5, 6 }
+                }
             };
             yield return new object[]
             {
@@ -2856,11 +2929,19 @@ namespace System.Tests
                 new object[2, 3],
                 2,
                 3,
-                new object[,] { { null, null, 2 }, { 3, 4, null } }
+                new object[,]
+                {
+                    { null, null, 2 },
+                    { 3, 4, null }
+                }
             };
 
             // object[,] -> int[,]
-            object[,] objectRank2Array = new object[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+            object[,] objectRank2Array = new object[,]
+            {
+                { 1, 2, 3 },
+                { 4, 5, 6 }
+            };
             yield return new object[] { objectRank2Array, 0, new int[2, 3], 0, 6, intRank2Array };
             yield return new object[]
             {
@@ -2869,7 +2950,12 @@ namespace System.Tests
                 new int[3, 2],
                 0,
                 6,
-                new int[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } }
+                new int[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 },
+                    { 5, 6 }
+                }
             };
             yield return new object[]
             {
@@ -2878,7 +2964,11 @@ namespace System.Tests
                 new int[2, 3],
                 2,
                 3,
-                new int[,] { { 0, 0, 2 }, { 3, 4, 0 } }
+                new int[,]
+                {
+                    { 0, 0, 2 },
+                    { 3, 4, 0 }
+                }
             };
         }
 
@@ -4487,7 +4577,14 @@ namespace System.Tests
         {
             yield return new object[] { new int[0] };
             yield return new object[] { new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 } };
-            yield return new object[] { new int[,] { { 1, 2 }, { 2, 4 } } };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 1, 2 },
+                    { 2, 4 }
+                }
+            };
 
             yield return new object[] { new char[] { '7', '8', '9' } };
 

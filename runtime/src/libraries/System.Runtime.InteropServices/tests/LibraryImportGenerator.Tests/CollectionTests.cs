@@ -330,7 +330,15 @@ namespace LibraryImportGenerator.IntegrationTests
         [Fact]
         public void BlittableElementColllection_ByValue()
         {
-            var list = new List<int> { 1, 5, 79, 165, 32, 3 };
+            var list = new List<int>
+            {
+                1,
+                5,
+                79,
+                165,
+                32,
+                3
+            };
             Assert.Equal(list.Sum(), NativeExportsNE.Collections.Stateless.Sum(list, list.Count));
             Assert.Equal(
                 list.Sum(),
@@ -342,7 +350,15 @@ namespace LibraryImportGenerator.IntegrationTests
         [Fact]
         public void BlittableElementColllection_WithPinning()
         {
-            var data = new List<int> { 1, 5, 79, 165, 32, 3 };
+            var data = new List<int>
+            {
+                1,
+                5,
+                79,
+                165,
+                32,
+                3
+            };
             var list = data.Select(i => new BlittableIntWrapper { i = i }).ToList();
             NativeExportsNE.Collections.Stateless.DoubleValues(list, list.Count);
             Assert.Equal(data.Select(i => i * 2), list.Select(wrapper => wrapper.i));
@@ -358,7 +374,15 @@ namespace LibraryImportGenerator.IntegrationTests
         [Fact]
         public void BlittableElementColllection_In()
         {
-            var list = new List<int> { 1, 5, 79, 165, 32, 3 };
+            var list = new List<int>
+            {
+                1,
+                5,
+                79,
+                165,
+                32,
+                3
+            };
             Assert.Equal(
                 list.Sum(),
                 NativeExportsNE.Collections.Stateless.SumInArray(list, list.Count)
@@ -372,7 +396,15 @@ namespace LibraryImportGenerator.IntegrationTests
         [Fact]
         public void BlittableElementCollection_Ref()
         {
-            var original = new List<int> { 1, 5, 79, 165, 32, 3 };
+            var original = new List<int>
+            {
+                1,
+                5,
+                79,
+                165,
+                32,
+                3
+            };
 
             {
                 List<int> list = original;

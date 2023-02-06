@@ -4,7 +4,11 @@ using System.Collections;
 public class X
 {
     string[] ABC = { "A", "B", "C" };
-    string[,] EFGH = { { "E", "F" }, { "G", "H" } };
+    string[,] EFGH =
+    {
+        { "E", "F" },
+        { "G", "H" }
+    };
 
     delegate string Foo();
     delegate void Bar(string s);

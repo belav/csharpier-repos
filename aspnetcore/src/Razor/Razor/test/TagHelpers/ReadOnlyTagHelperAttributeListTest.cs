@@ -96,7 +96,15 @@ public class ReadOnlyTagHelperAttributeListTest
 
     public static TheoryData IntIndexerThrowData
     {
-        get { return new TheoryData<int> { 2, -1, 20 }; }
+        get
+        {
+            return new TheoryData<int>
+            {
+                2,
+                -1,
+                20
+            };
+        }
     }
 
     [Theory]

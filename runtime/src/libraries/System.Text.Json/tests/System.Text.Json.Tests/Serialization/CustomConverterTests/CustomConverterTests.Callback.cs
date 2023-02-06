@@ -178,7 +178,10 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         InvalidProperty = new ChildPocoWithNoConverterAndInvalidProperty()
                         {
-                            NotSupported = new int[,] { { 1, 2 } }
+                            NotSupported = new int[,]
+                            {
+                                { 1, 2 }
+                            }
                         }
                     }
                 }

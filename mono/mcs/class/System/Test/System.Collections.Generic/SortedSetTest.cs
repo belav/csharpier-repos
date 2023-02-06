@@ -90,7 +90,13 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void Clear()
         {
-            var set = new SortedSet<int> { 2, 3, 4, 5 };
+            var set = new SortedSet<int>
+            {
+                2,
+                3,
+                4,
+                5
+            };
             Assert.AreEqual(4, set.Count);
             set.Clear();
             Assert.AreEqual(0, set.Count);
@@ -99,7 +105,13 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void Contains()
         {
-            var set = new SortedSet<int> { 2, 3, 4, 5 };
+            var set = new SortedSet<int>
+            {
+                2,
+                3,
+                4,
+                5
+            };
             Assert.IsTrue(set.Contains(4));
             Assert.IsFalse(set.Contains(7));
         }
@@ -107,14 +119,30 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void GetEnumerator()
         {
-            var set = new SortedSet<int> { 5, 3, 1, 2, 6, 4 };
+            var set = new SortedSet<int>
+            {
+                5,
+                3,
+                1,
+                2,
+                6,
+                4
+            };
             Assert.IsTrue(set.SequenceEqual(new[] { 1, 2, 3, 4, 5, 6 }));
         }
 
         [Test]
         public void Reverse()
         {
-            var set = new SortedSet<int> { 5, 3, 1, 2, 6, 4 };
+            var set = new SortedSet<int>
+            {
+                5,
+                3,
+                1,
+                2,
+                6,
+                4
+            };
             var reversed = set.Reverse();
             Assert.IsTrue(reversed.SequenceEqual(new[] { 6, 5, 4, 3, 2, 1 }));
         }
@@ -122,7 +150,15 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ReverseView()
         {
-            var set = new SortedSet<int> { 1, 2, 3, 4, 5, 6 };
+            var set = new SortedSet<int>
+            {
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            };
             var subset = set.GetViewBetween(3, 5);
             Assert.AreEqual(3, subset.Count, "#1");
             Assert.AreEqual(3, subset.Reverse().Count(), "#2");
@@ -131,7 +167,15 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void RemoveWhere()
         {
-            var set = new SortedSet<int> { 1, 2, 3, 4, 5, 6 };
+            var set = new SortedSet<int>
+            {
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            };
             Assert.AreEqual(3, set.RemoveWhere(i => i % 2 == 0));
             Assert.AreEqual(3, set.Count);
             Assert.IsTrue(set.SequenceEqual(new[] { 1, 3, 5 }));
@@ -140,14 +184,26 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void Max()
         {
-            var set = new SortedSet<int> { 1, 3, 12, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                12,
+                9
+            };
             Assert.AreEqual(12, set.Max);
         }
 
         [Test]
         public void Min()
         {
-            var set = new SortedSet<int> { 2, 3, 1, 9 };
+            var set = new SortedSet<int>
+            {
+                2,
+                3,
+                1,
+                9
+            };
             Assert.AreEqual(1, set.Min);
         }
 
@@ -155,14 +211,29 @@ namespace MonoTests.System.Collections.Generic
         [ExpectedException(typeof(ArgumentException))]
         public void GetViewBetweenLowerBiggerThanUpper()
         {
-            var set = new SortedSet<int> { 1, 2, 3, 4, 5, 6 };
+            var set = new SortedSet<int>
+            {
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            };
             set.GetViewBetween(4, 2);
         }
 
         [Test]
         public void GetView()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(3, 7);
 
             Assert.IsTrue(view.SequenceEqual(new[] { 3, 5, 7 }));
@@ -171,7 +242,13 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewAdd()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7
+            };
             var view = set.GetViewBetween(3, 5);
 
             Assert.IsTrue(view.Add(4));
@@ -185,7 +262,13 @@ namespace MonoTests.System.Collections.Generic
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ViewAddOutOfRange()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7
+            };
             var view = set.GetViewBetween(3, 5);
 
             view.Add(7);
@@ -194,7 +277,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewContains()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(3, 7);
 
             Assert.IsFalse(view.Contains(4));
@@ -205,7 +295,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewRemove()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(3, 7);
 
             Assert.IsTrue(view.Remove(3));
@@ -218,7 +315,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewClear()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(3, 7);
 
             view.Clear();
@@ -231,7 +335,14 @@ namespace MonoTests.System.Collections.Generic
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ViewGetViewLowerOutOfRange()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(3, 7);
             view.GetViewBetween(2, 5);
         }
@@ -240,7 +351,14 @@ namespace MonoTests.System.Collections.Generic
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ViewGetViewUpperOutOfRange()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(3, 7);
             view.GetViewBetween(5, 9);
         }
@@ -248,7 +366,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewGetView()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(3, 7);
             view = view.GetViewBetween(4, 6);
 
@@ -272,15 +397,39 @@ namespace MonoTests.System.Collections.Generic
         public void EmptySubView()
         {
             EmptySubView(new SortedSet<int>());
-            EmptySubView(new SortedSet<int> { 1, 3, 5, 7, 9 });
+            EmptySubView(
+                new SortedSet<int>
+                {
+                    1,
+                    3,
+                    5,
+                    7,
+                    9
+                }
+            );
             EmptySubView(new SortedSet<int> { -40, 40 });
-            EmptySubView(new SortedSet<int> { -40, -10, 10, 40 });
+            EmptySubView(
+                new SortedSet<int>
+                {
+                    -40,
+                    -10,
+                    10,
+                    40
+                }
+            );
         }
 
         [Test]
         public void ViewMin()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
 
             var view = set.GetViewBetween(4, 8);
             Assert.AreEqual(5, view.Min);
@@ -295,7 +444,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewMax()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
 
             var view = set.GetViewBetween(4, 8);
             Assert.AreEqual(7, view.Max);
@@ -310,7 +466,17 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewCount()
         {
-            var set = new SortedSet<int> { 1, 3, 4, 5, 6, 7, 8, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+            };
             var view = set.GetViewBetween(4, 8);
 
             Assert.AreEqual(5, view.Count);
@@ -334,7 +500,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void IntersectWith()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             set.IntersectWith(new[] { 5, 7, 3, 7, 11, 7, 5, 2 });
             Assert.IsTrue(set.SequenceEqual(new[] { 3, 5, 7 }));
         }
@@ -342,7 +515,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewIntersectWith()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(4, 8);
             view.IntersectWith(new[] { 1, 5, 9 });
             Assert.IsTrue(view.SequenceEqual(new[] { 5 }));
@@ -362,7 +542,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void UnionWith()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             set.UnionWith(new[] { 5, 7, 3, 7, 11, 7, 5, 2 });
             Assert.IsTrue(set.SequenceEqual(new[] { 1, 2, 3, 5, 7, 9, 11 }));
         }
@@ -370,7 +557,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewUnionWith()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(4, 8);
             view.UnionWith(new[] { 4, 5, 6, 6, 4 });
             Assert.IsTrue(view.SequenceEqual(new[] { 4, 5, 6, 7 }));
@@ -380,7 +574,14 @@ namespace MonoTests.System.Collections.Generic
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ViewUnionWith_oor()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(4, 8);
             view.UnionWith(new[] { 1 });
         }
@@ -395,7 +596,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ExceptWith()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             set.ExceptWith(new[] { 5, 7, 3, 7, 11, 7, 5, 2 });
             Assert.IsTrue(set.SequenceEqual(new[] { 1, 9 }));
         }
@@ -411,7 +619,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewExceptWith()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(4, 8);
             view.ExceptWith(new[] { 4, 5, 6, 6, 4 });
             Assert.IsTrue(view.SequenceEqual(new[] { 7 }));
@@ -431,7 +646,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void SymmetricExceptWith()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             set.SymmetricExceptWith(new[] { 5, 7, 3, 7, 11, 7, 5, 2 });
             Assert.IsTrue(set.SequenceEqual(new[] { 1, 2, 9, 11 }));
         }
@@ -447,7 +669,14 @@ namespace MonoTests.System.Collections.Generic
         [Test]
         public void ViewSymmetricExceptWith()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(4, 8);
             view.SymmetricExceptWith(new[] { 4, 5, 6, 6, 4 });
             Assert.IsTrue(view.SequenceEqual(new[] { 4, 6, 7 }));
@@ -457,7 +686,14 @@ namespace MonoTests.System.Collections.Generic
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ViewSymmetricExceptWith_oor()
         {
-            var set = new SortedSet<int> { 1, 3, 5, 7, 9 };
+            var set = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
             var view = set.GetViewBetween(4, 8);
             view.SymmetricExceptWith(new[] { 2 });
         }
@@ -515,11 +751,47 @@ namespace MonoTests.System.Collections.Generic
             var one = new SortedSet<int> { 1 };
             var two = new SortedSet<int> { 2 };
             var bit = new SortedSet<int> { 0, 1 };
-            var trit = new SortedSet<int> { 0, 1, 2 };
-            var odds = new SortedSet<int> { 1, 3, 5, 7, 9 };
-            var evens = new SortedSet<int> { 2, 4, 6, 8 };
-            var digits = new SortedSet<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            var squares = new SortedSet<int> { 0, 1, 4, 9 };
+            var trit = new SortedSet<int>
+            {
+                0,
+                1,
+                2
+            };
+            var odds = new SortedSet<int>
+            {
+                1,
+                3,
+                5,
+                7,
+                9
+            };
+            var evens = new SortedSet<int>
+            {
+                2,
+                4,
+                6,
+                8
+            };
+            var digits = new SortedSet<int>
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+            };
+            var squares = new SortedSet<int>
+            {
+                0,
+                1,
+                4,
+                9
+            };
 
             var non_prime_odd_digit = odds.GetViewBetween(8, 42);
             var non_trit = digits.GetViewBetween(3, 42);

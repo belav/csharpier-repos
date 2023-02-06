@@ -311,7 +311,12 @@ namespace System.Text.Json.Serialization.Tests
                 { "KeyNumber", 1000 },
                 { "KeyBool", true }
             };
-            obj["KeyList"] = new List<int>() { 1, 2, 3 };
+            obj["KeyList"] = new List<int>()
+            {
+                1,
+                2,
+                3
+            };
 
             var json = JsonSerializer.Serialize(
                 obj,
@@ -378,7 +383,12 @@ namespace System.Text.Json.Serialization.Tests
                 Name = "text",
                 Number = 1000,
                 isValid = true,
-                Values = new List<int>() { 1, 2, 3 }
+                Values = new List<int>()
+                {
+                    1,
+                    2,
+                    3
+                }
             };
         }
 

@@ -1341,7 +1341,12 @@ public static partial class DataContractSerializerTests
         TypeWithEnumerableMembers x = new TypeWithEnumerableMembers
         {
             F1 = new MyEnumerable('a', 45),
-            F2 = new List<string> { "a", "b", "c" }.OrderBy(x => x),
+            F2 = new List<string>
+            {
+                "a",
+                "b",
+                "c"
+            }.OrderBy(x => x),
             P1 = new MyEnumerable("x", "y"),
             P2 = Enumerable.Empty<int>()
         };
@@ -3407,7 +3412,12 @@ public static partial class DataContractSerializerTests
     public static void DCS_CollectionInterfaceGetOnlyCollection()
     {
         var obj = new TypeWithCollectionInterfaceGetOnlyCollection(
-            new List<string>() { "item1", "item2", "item3" }
+            new List<string>()
+            {
+                "item1",
+                "item2",
+                "item3"
+            }
         );
         var deserializedObj = DataContractSerializerHelper.SerializeAndDeserialize(
             obj,
@@ -3423,7 +3433,12 @@ public static partial class DataContractSerializerTests
         Assert.Throws<InvalidDataContractException>(() =>
         {
             var obj = new TypeWithEnumerableInterfaceGetOnlyCollection(
-                new List<string>() { "item1", "item2", "item3" }
+                new List<string>()
+                {
+                    "item1",
+                    "item2",
+                    "item3"
+                }
             );
             DataContractSerializerHelper.SerializeAndDeserialize(
                 obj,
@@ -3854,7 +3869,12 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_GenericICollectionOfBoolean()
     {
-        var value = new TypeImplementsGenericICollection<bool>() { true, false, true };
+        var value = new TypeImplementsGenericICollection<bool>()
+        {
+            true,
+            false,
+            true
+        };
         var deserialized = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
             @"<ArrayOfboolean xmlns=""http://schemas.microsoft.com/2003/10/Serialization/Arrays"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><boolean>true</boolean><boolean>false</boolean><boolean>true</boolean></ArrayOfboolean>"
@@ -3918,7 +3938,12 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_GenericICollectionOfSingle()
     {
-        var value = new TypeImplementsGenericICollection<float>() { 1.23f, 4.56f, 7.89f };
+        var value = new TypeImplementsGenericICollection<float>()
+        {
+            1.23f,
+            4.56f,
+            7.89f
+        };
         var deserialized = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
             @"<ArrayOffloat xmlns=""http://schemas.microsoft.com/2003/10/Serialization/Arrays"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><float>1.23</float><float>4.56</float><float>7.89</float></ArrayOffloat>"
@@ -3930,7 +3955,12 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_GenericICollectionOfDouble()
     {
-        var value = new TypeImplementsGenericICollection<double>() { 1.23, 4.56, 7.89 };
+        var value = new TypeImplementsGenericICollection<double>()
+        {
+            1.23,
+            4.56,
+            7.89
+        };
         var deserialized = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
             @"<ArrayOfdouble xmlns=""http://schemas.microsoft.com/2003/10/Serialization/Arrays"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><double>1.23</double><double>4.56</double><double>7.89</double></ArrayOfdouble>"
@@ -7229,7 +7259,12 @@ public static partial class DataContractSerializerTests
             new DateTime(2013, 1, 2, 3, 4, 5, 6).AddMinutes(offsetMinutes)
         );
         var value = new TypeWithCollectionAndDateTimeOffset(
-            new List<int>() { 1, 2, 3 },
+            new List<int>()
+            {
+                1,
+                2,
+                3
+            },
             dateTimeOffset
         );
 

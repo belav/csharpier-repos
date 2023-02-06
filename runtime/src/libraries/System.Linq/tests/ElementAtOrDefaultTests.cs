@@ -157,7 +157,14 @@ namespace System.Linq.Tests
         [Fact]
         public void MutableSource()
         {
-            var source = new List<int>() { 0, 1, 2, 3, 4 };
+            var source = new List<int>()
+            {
+                0,
+                1,
+                2,
+                3,
+                4
+            };
             Assert.Equal(2, source.ElementAtOrDefault(2));
             Assert.Equal(2, source.ElementAtOrDefault(new Index(2)));
             Assert.Equal(2, source.ElementAtOrDefault(^3));
@@ -172,7 +179,14 @@ namespace System.Linq.Tests
         [Fact]
         public void MutableSourceNotList()
         {
-            var source = new List<int>() { 0, 1, 2, 3, 4 };
+            var source = new List<int>()
+            {
+                0,
+                1,
+                2,
+                3,
+                4
+            };
             var query1 = Repeat(_ => ForceNotCollection(source).Select(i => i), 3);
             Assert.Equal(2, query1[0].ElementAtOrDefault(2));
             Assert.Equal(2, query1[1].ElementAtOrDefault(new Index(2)));

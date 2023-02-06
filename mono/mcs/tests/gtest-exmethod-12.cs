@@ -6,7 +6,12 @@ class Program
     public static void Main(string[] args)
     {
         var chat = new ChatClient();
-        var lines = new StringCollection() { "a", "b", "c" };
+        var lines = new StringCollection()
+        {
+            "a",
+            "b",
+            "c"
+        };
         chat.Say("test", lines);
     }
 }

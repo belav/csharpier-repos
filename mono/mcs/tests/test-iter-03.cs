@@ -33,7 +33,15 @@ class X
             return 1;
 
         total = 0;
-        foreach (int i in GetMulti(new int[,] { { 10, 20 }, { 30, 40 } }))
+        foreach (
+            int i in GetMulti(
+                new int[,]
+                {
+                    { 10, 20 },
+                    { 30, 40 }
+                }
+            )
+        )
         {
             Console.WriteLine("Got: " + i);
             total += i;

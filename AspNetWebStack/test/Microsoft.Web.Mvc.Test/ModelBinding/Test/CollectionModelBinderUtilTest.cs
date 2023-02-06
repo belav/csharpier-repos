@@ -40,7 +40,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void CreateOrReplaceCollection_OriginalModelMutable_UpdatesOriginalInstance()
         {
             // Arrange
-            List<int> originalInstance = new List<int> { 10, 20, 30 };
+            List<int> originalInstance = new List<int>
+            {
+                10,
+                20,
+                30
+            };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(

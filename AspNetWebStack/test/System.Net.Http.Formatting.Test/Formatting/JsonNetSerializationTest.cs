@@ -88,7 +88,12 @@ namespace System.Net.Http.Formatting
                     },
                     // Collections
                     {
-                        new List<int> { 1, 2, 3 },
+                        new List<int>
+                        {
+                            1,
+                            2,
+                            3
+                        },
                         "[1,2,3]"
                     },
                     {
@@ -104,7 +109,12 @@ namespace System.Net.Http.Formatting
                         "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
                     },
                     {
-                        new MyList<int> { 1, 2, 3 },
+                        new MyList<int>
+                        {
+                            1,
+                            2,
+                            3
+                        },
                         "[1,2,3]"
                     },
                     {

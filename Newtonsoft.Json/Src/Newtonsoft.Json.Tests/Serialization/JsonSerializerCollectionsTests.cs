@@ -952,7 +952,12 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeCustomReadOnlyCollection()
         {
-            IList<int> l = new List<int> { 1, 2, 3 };
+            IList<int> l = new List<int>
+            {
+                1,
+                2,
+                3
+            };
 
             CustomReadOnlyCollection<int> list = new CustomReadOnlyCollection<int>(l);
 
@@ -1427,7 +1432,13 @@ namespace Newtonsoft.Json.Tests.Serialization
             Array2D aa = new Array2D();
             aa.Before = "Before!";
             aa.After = "After!";
-            aa.Coordinates = new[,] { { 1, 1 }, { 1, 2 }, { 2, 1 }, { 2, 2 } };
+            aa.Coordinates = new[,]
+            {
+                { 1, 1 },
+                { 1, 2 },
+                { 2, 1 },
+                { 2, 2 }
+            };
 
             string json = JsonConvert.SerializeObject(aa);
 
@@ -1445,10 +1456,22 @@ namespace Newtonsoft.Json.Tests.Serialization
             aa.After = "After!";
             aa.Coordinates = new[,,]
             {
-                { { 1, 1, 1 }, { 1, 1, 2 } },
-                { { 1, 2, 1 }, { 1, 2, 2 } },
-                { { 2, 1, 1 }, { 2, 1, 2 } },
-                { { 2, 2, 1 }, { 2, 2, 2 } }
+                {
+                    { 1, 1, 1 },
+                    { 1, 1, 2 }
+                },
+                {
+                    { 1, 2, 1 },
+                    { 1, 2, 2 }
+                },
+                {
+                    { 2, 1, 1 },
+                    { 2, 1, 2 }
+                },
+                {
+                    { 2, 2, 1 },
+                    { 2, 2, 2 }
+                }
             };
 
             string json = JsonConvert.SerializeObject(aa);
@@ -1467,10 +1490,22 @@ namespace Newtonsoft.Json.Tests.Serialization
             aa.After = "After!";
             aa.Coordinates = new[,,]
             {
-                { { 1, 1, 1 }, { 1, 1, 2 } },
-                { { 1, 2, 1 }, { 1, 2, 2 } },
-                { { 2, 1, 1 }, { 2, 1, 2 } },
-                { { 2, 2, 1 }, { 2, 2, 2 } }
+                {
+                    { 1, 1, 1 },
+                    { 1, 1, 2 }
+                },
+                {
+                    { 1, 2, 1 },
+                    { 1, 2, 2 }
+                },
+                {
+                    { 2, 1, 1 },
+                    { 2, 1, 2 }
+                },
+                {
+                    { 2, 2, 1 },
+                    { 2, 2, 2 }
+                }
             };
 
             string json = JsonConvert.SerializeObject(aa, Formatting.Indented);
@@ -1798,7 +1833,11 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeReferenceTracked3DArray()
         {
             Event1 e1 = new Event1 { EventName = "EventName!" };
-            Event1[,] array1 = new[,] { { e1, e1 }, { e1, e1 } };
+            Event1[,] array1 = new[,]
+            {
+                { e1, e1 },
+                { e1, e1 }
+            };
             IList<Event1[,]> values1 = new List<Event1[,]> { array1, array1 };
 
             string json = JsonConvert.SerializeObject(
@@ -1851,7 +1890,11 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeTypeName3DArray()
         {
             Event1 e1 = new Event1 { EventName = "EventName!" };
-            Event1[,] array1 = new[,] { { e1, e1 }, { e1, e1 } };
+            Event1[,] array1 = new[,]
+            {
+                { e1, e1 },
+                { e1, e1 }
+            };
             IList<Event1[,]> values1 = new List<Event1[,]> { array1, array1 };
 
             string json = JsonConvert.SerializeObject(
@@ -2256,7 +2299,13 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void ReadOnlyIntegerList()
         {
             ReadOnlyIntegerList l = new ReadOnlyIntegerList(
-                new List<int> { 1, 2, 3, int.MaxValue }
+                new List<int>
+                {
+                    1,
+                    2,
+                    3,
+                    int.MaxValue
+                }
             );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);

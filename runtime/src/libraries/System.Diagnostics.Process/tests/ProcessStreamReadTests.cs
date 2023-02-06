@@ -330,7 +330,12 @@ namespace System.Diagnostics.Tests
                     {
                         try
                         {
-                            List<int> expectedValue123 = new List<int>() { 1, 2, 3 };
+                            List<int> expectedValue123 = new List<int>()
+                            {
+                                1,
+                                2,
+                                3
+                            };
                             foreach (int value in dataReceived.GetConsumingEnumerable(cts.Token))
                             {
                                 expectedValue123.Remove(value);
@@ -363,7 +368,12 @@ namespace System.Diagnostics.Tests
                     {
                         try
                         {
-                            List<int> expectedValue789 = new List<int>() { 7, 8, 9 };
+                            List<int> expectedValue789 = new List<int>()
+                            {
+                                7,
+                                8,
+                                9
+                            };
                             foreach (int value in dataReceived.GetConsumingEnumerable(cts.Token))
                             {
                                 expectedValue789.Remove(value);

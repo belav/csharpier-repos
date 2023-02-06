@@ -723,7 +723,12 @@ namespace A.B {
             Assert.Equal(0, comp.ExternalReferences.Length);
 
             // Overload with Hashset
-            var hs = new HashSet<MetadataReference> { ref1, ref2, ref3 };
+            var hs = new HashSet<MetadataReference>
+            {
+                ref1,
+                ref2,
+                ref3
+            };
             var compCollection = CSharpCompilation.Create(
                 "Compilation",
                 references: hs,
@@ -739,7 +744,12 @@ namespace A.B {
             Assert.Equal(0, compCollection.ExternalReferences.Length);
 
             // Overload with Collection
-            var col = new Collection<MetadataReference> { ref1, ref2, ref3 };
+            var col = new Collection<MetadataReference>
+            {
+                ref1,
+                ref2,
+                ref3
+            };
             compCollection = CSharpCompilation.Create("Compilation", references: col, options: opt);
             compCollection = compCollection.AddReferences(col).RemoveReferences(ref1, ref2, ref3);
             Assert.Equal(0, compCollection.ExternalReferences.Length);
@@ -1158,7 +1168,12 @@ class D
             SyntaxTree t6 = SyntaxFactory.ParseSyntaxTree("Import System;");
 
             // Overload with Hashset
-            var hs = new HashSet<SyntaxTree> { t4, t5, t6 };
+            var hs = new HashSet<SyntaxTree>
+            {
+                t4,
+                t5,
+                t6
+            };
             var compCollection = CSharpCompilation.Create("Compilation", syntaxTrees: hs);
             compCollection = compCollection.RemoveSyntaxTrees(hs);
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
@@ -1166,7 +1181,12 @@ class D
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
 
             // Overload with Collection
-            var col = new Collection<SyntaxTree> { t4, t5, t6 };
+            var col = new Collection<SyntaxTree>
+            {
+                t4,
+                t5,
+                t6
+            };
             compCollection = CSharpCompilation.Create("Compilation", syntaxTrees: col);
             compCollection = compCollection.RemoveSyntaxTrees(t4, t5, t6);
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
@@ -1833,7 +1853,13 @@ var a = new C2();
             Assert.Equal(MetadataImageKind.Assembly, comp.ExternalReferences[0].Properties.Kind);
             Assert.Equal(ref1, comp.ExternalReferences[0]);
 
-            var listRef = new List<MetadataReference> { ref1, ref2, ref3, ref4 };
+            var listRef = new List<MetadataReference>
+            {
+                ref1,
+                ref2,
+                ref3,
+                ref4
+            };
             // Chained operation count > 3
             // ReplaceReference throws if the reference to be replaced is not found.
             comp = comp.AddReferences(listRef)

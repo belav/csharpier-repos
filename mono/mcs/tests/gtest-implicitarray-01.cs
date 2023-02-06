@@ -15,7 +15,11 @@ public class Test
         var a1 = new[] { null, "a", default(string) };
         var a2 = new[] { 0, 1.0, 2 };
         var a3 = new[] { new Test(), null };
-        var a4 = new[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+        var a4 = new[,]
+        {
+            { 1, 2, 3 },
+            { 4, 5, 6 }
+        };
         var a5 = new[] { default(object) };
         var a6 = new[] { new[] { 1, 2, 3 }, new[] { 4, 5, 6 } };
 

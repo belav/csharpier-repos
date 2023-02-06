@@ -317,7 +317,12 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap
             objReturn = Serialize(new long[] { 1, 2, 3, 4 });
             objTest = new object[] { 1, null, ":-)", 1234567890 };
             objReturn = Serialize(objTest);
-            objTest = new int[,] { { 0, 1 }, { 2, 3 }, { 123, 4 } };
+            objTest = new int[,]
+            {
+                { 0, 1 },
+                { 2, 3 },
+                { 123, 4 }
+            };
             objReturn = Serialize(objTest);
             CheckArray(objTest, objReturn);
             objTest = new string[] { };

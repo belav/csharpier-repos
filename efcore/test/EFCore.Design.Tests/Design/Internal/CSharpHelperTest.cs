@@ -228,7 +228,11 @@ public class CSharpHelperTest
     [ConditionalFact]
     public void Literal_works_when_MultidimensionalArray()
     {
-        var value = new object[,] { { 'A', 1 }, { 'B', 2 } };
+        var value = new object[,]
+        {
+            { 'A', 1 },
+            { 'B', 2 }
+        };
 
         var result = new CSharpHelper(TypeMappingSource).Literal(value);
 

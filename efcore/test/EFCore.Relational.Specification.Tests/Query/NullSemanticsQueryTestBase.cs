@@ -1930,7 +1930,12 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
                     .Select(e => e.Id)
         );
 
-        var ids2 = new List<int?> { 1, 2, null };
+        var ids2 = new List<int?>
+        {
+            1,
+            2,
+            null
+        };
         await AssertQueryScalar(
             async,
             ss =>
@@ -1964,14 +1969,30 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
             async,
             ss =>
                 ss.Set<NullSemanticsEntity1>()
-                    .Where(e => new List<int?> { 1, 2, null }.Contains(e.NullableIntA))
+                    .Where(
+                        e =>
+                            new List<int?>
+                            {
+                                1,
+                                2,
+                                null
+                            }.Contains(e.NullableIntA)
+                    )
                     .Select(e => e.Id)
         );
         await AssertQueryScalar(
             async,
             ss =>
                 ss.Set<NullSemanticsEntity1>()
-                    .Where(e => !new List<int?> { 1, 2, null }.Contains(e.NullableIntA))
+                    .Where(
+                        e =>
+                            !new List<int?>
+                            {
+                                1,
+                                2,
+                                null
+                            }.Contains(e.NullableIntA)
+                    )
                     .Select(e => e.Id)
         );
     }
@@ -2046,7 +2067,12 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Null_semantics_contains_non_nullable_argument(bool async)
     {
-        var ids = new List<int?> { 1, 2, null };
+        var ids = new List<int?>
+        {
+            1,
+            2,
+            null
+        };
         await AssertQueryScalar(
             async,
             ss => ss.Set<NullSemanticsEntity1>().Where(e => ids.Contains(e.IntA)).Select(e => e.Id)

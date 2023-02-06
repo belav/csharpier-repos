@@ -383,7 +383,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
             }
             ;
             D x = new D();
-            dynamic[,] dynamicr3 = { { x, x }, { x, x }, { x, x } };
+            dynamic[,] dynamicr3 =
+            {
+                { x, x },
+                { x, x },
+                { x, x }
+            };
             if (dynamicr3.Length != 6)
             {
                 return -1;

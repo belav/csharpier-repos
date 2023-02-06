@@ -93,7 +93,13 @@ namespace DebuggerTests
             var b = new WithProxy();
             var bs = new WithProxyStruct();
             var c = new DebuggerDisplayMethodTest();
-            List<int> myList = new List<int> { 1, 2, 3, 4 };
+            List<int> myList = new List<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
             var listToTestToList = System.Linq.Enumerable.Range(1, 11);
 
             Dictionary<string, string> openWith = new Dictionary<string, string>();

@@ -335,7 +335,12 @@ namespace System.Text.Json.Serialization.Tests
             TestClassWithLists originalObj = new TestClassWithLists()
             {
                 ListProperty1 = new List<int> { 2, 3 },
-                ListProperty2 = new List<int> { 4, 5, 6 },
+                ListProperty2 = new List<int>
+                {
+                    4,
+                    5,
+                    6
+                },
             };
 
             string json = JsonSerializer.Serialize(originalObj, options);
@@ -494,7 +499,15 @@ namespace System.Text.Json.Serialization.Tests
                 json,
                 options
             );
-            Assert.Equal(new List<int> { 99, 2, 3 }, deserialized.ListProperty1);
+            Assert.Equal(
+                new List<int>
+                {
+                    99,
+                    2,
+                    3
+                },
+                deserialized.ListProperty1
+            );
             Assert.Equal(new List<int> { 99 }, deserialized.ListProperty2);
 
             json = @"{}";

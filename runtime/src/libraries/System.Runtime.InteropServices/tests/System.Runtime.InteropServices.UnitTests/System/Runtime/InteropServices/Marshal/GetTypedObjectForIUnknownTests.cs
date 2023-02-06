@@ -63,8 +63,22 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new int[][] { new int[] { 10 } }, typeof(object) };
             yield return new object[] { new int[][] { new int[] { 10 } }, typeof(Array) };
 
-            yield return new object[] { new int[,] { { 10 } }, typeof(object) };
-            yield return new object[] { new int[,] { { 10 } }, typeof(Array) };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 }
+                },
+                typeof(object)
+            };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 }
+                },
+                typeof(Array)
+            };
 
             yield return new object[] { new KeyValuePair<string, int>("key", 10), typeof(object) };
             yield return new object[]
@@ -215,7 +229,13 @@ namespace System.Runtime.InteropServices.Tests
         {
             yield return new object[] { new int[] { 10 } };
             yield return new object[] { new int[][] { new int[] { 10 } } };
-            yield return new object[] { new int[,] { { 10 } } };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 }
+                }
+            };
         }
 
         [ConditionalTheory(

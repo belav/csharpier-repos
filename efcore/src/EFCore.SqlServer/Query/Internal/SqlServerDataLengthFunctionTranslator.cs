@@ -14,7 +14,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 public class SqlServerDataLengthFunctionTranslator : IMethodCallTranslator
 {
     private static readonly List<string> LongReturningTypes =
-        new() { "nvarchar(max)", "varchar(max)", "varbinary(max)" };
+        new()
+        {
+            "nvarchar(max)",
+            "varchar(max)",
+            "varbinary(max)"
+        };
 
     private static readonly HashSet<MethodInfo> MethodInfoDataLengthMapping =
         new()

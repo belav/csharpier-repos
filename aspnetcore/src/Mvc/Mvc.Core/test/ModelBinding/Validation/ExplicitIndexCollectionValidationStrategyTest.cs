@@ -11,7 +11,12 @@ public class ExplicitIndexCollectionValidationStrategyTest
     public void EnumerateElements_List()
     {
         // Arrange
-        var model = new List<int>() { 2, 3, 5 };
+        var model = new List<int>()
+        {
+            2,
+            3,
+            5
+        };
 
         var metadata = TestModelMetadataProvider
             .CreateDefaultProvider()
@@ -51,7 +56,12 @@ public class ExplicitIndexCollectionValidationStrategyTest
     public void EnumerateElements_Dictionary()
     {
         // Arrange
-        var model = new Dictionary<int, string>() { { 2, "two" }, { 3, "three" }, { 5, "five" }, };
+        var model = new Dictionary<int, string>()
+        {
+            { 2, "two" },
+            { 3, "three" },
+            { 5, "five" },
+        };
 
         var metadata = TestModelMetadataProvider
             .CreateDefaultProvider()
@@ -131,7 +141,12 @@ public class ExplicitIndexCollectionValidationStrategyTest
     public void EnumerateElements_RunOutOfIndices()
     {
         // Arrange
-        var model = new List<int>() { 2, 3, 5 };
+        var model = new List<int>()
+        {
+            2,
+            3,
+            5
+        };
 
         var metadata = TestModelMetadataProvider
             .CreateDefaultProvider()

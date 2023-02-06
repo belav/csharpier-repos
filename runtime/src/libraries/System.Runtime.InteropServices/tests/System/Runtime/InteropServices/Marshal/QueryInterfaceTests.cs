@@ -53,7 +53,14 @@ namespace System.Runtime.InteropServices.Tests
 
             yield return new object[] { new int[] { 10 }, IID_IUNKNOWN };
             yield return new object[] { new int[][] { new int[] { 10 } }, IID_IUNKNOWN };
-            yield return new object[] { new int[,] { { 10 } }, IID_IUNKNOWN };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 }
+                },
+                IID_IUNKNOWN
+            };
 
             MethodInfo method = typeof(GetObjectForIUnknownTests).GetMethod(
                 nameof(NonGenericMethod),
@@ -99,7 +106,14 @@ namespace System.Runtime.InteropServices.Tests
 
             yield return new object[] { new int[] { 10 }, IID_IDISPATCH };
             yield return new object[] { new int[][] { new int[] { 10 } }, IID_IDISPATCH };
-            yield return new object[] { new int[,] { { 10 } }, IID_IDISPATCH };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 }
+                },
+                IID_IDISPATCH
+            };
 
             yield return new object[] { new GenericClass<string>(), IID_IDISPATCH };
             yield return new object[] { new Dictionary<string, int>(), IID_IDISPATCH };

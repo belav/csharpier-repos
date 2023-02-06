@@ -118,32 +118,116 @@ public class i8rem
         vt1.m_vt_op2 = 4;
 
         long[] l_arr1d_op1 = { 0, 7 };
-        long[,] l_arr2d_op1 = { { 0, 7 }, { 1, 1 } };
-        long[,,] l_arr3d_op1 = { { { 0, 7 }, { 1, 1 } } };
+        long[,] l_arr2d_op1 =
+        {
+            { 0, 7 },
+            { 1, 1 }
+        };
+        long[,,] l_arr3d_op1 =
+        {
+            {
+                { 0, 7 },
+                { 1, 1 }
+            }
+        };
 
         int[] i_arr1d_op2 = { 4, 0, 1 };
-        int[,] i_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        int[,,] i_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        int[,] i_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        int[,,] i_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         uint[] ui_arr1d_op2 = { 4, 0, 1 };
-        uint[,] ui_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        uint[,,] ui_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        uint[,] ui_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        uint[,,] ui_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         long[] l_arr1d_op2 = { 4, 0, 1 };
-        long[,] l_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        long[,,] l_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        long[,] l_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        long[,,] l_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         ulong[] ul_arr1d_op2 = { 4, 0, 1 };
-        ulong[,] ul_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        ulong[,,] ul_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        ulong[,] ul_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        ulong[,,] ul_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         float[] f_arr1d_op2 = { 4, 0, 1 };
-        float[,] f_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        float[,,] f_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        float[,] f_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         double[] d_arr1d_op2 = { 4, 0, 1 };
-        double[,] d_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        double[,,] d_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        double[,] d_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        double[,,] d_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         decimal[] m_arr1d_op2 = { 4, 0, 1 };
-        decimal[,] m_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        decimal[,,] m_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        decimal[,] m_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        decimal[,,] m_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
 
-        int[,] index = { { 0, 0 }, { 1, 1 } };
+        int[,] index =
+        {
+            { 0, 0 },
+            { 1, 1 }
+        };
 
         {
             long l_l_op1 = 7;

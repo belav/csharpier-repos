@@ -186,7 +186,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                 subject,
                 publicKey,
                 TimeSpan.FromSeconds(1),
-                new X509ExtensionCollection() { s_eeConstraints, s_eeKeyUsage, s_ocspResponderEku },
+                new X509ExtensionCollection()
+                {
+                    s_eeConstraints,
+                    s_eeKeyUsage,
+                    s_ocspResponderEku
+                },
                 ocspResponder: true
             );
         }

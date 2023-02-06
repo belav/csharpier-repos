@@ -17,22 +17,112 @@ public struct VT
 
 public class CL
 {
-    public long[,] long2darr = { { 0, -1 }, { 0, 0 } };
-    public long[,,] long3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-    public long[,] long2darr_b = { { 0, 1 }, { 0, 0 } };
-    public long[,,] long3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    public long[,] long2darr_c = { { 0, 49 }, { 0, 0 } };
-    public long[,,] long3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public long[,] long2darr =
+    {
+        { 0, -1 },
+        { 0, 0 }
+    };
+    public long[,,] long3darr =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, -1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    public long[,] long2darr_b =
+    {
+        { 0, 1 },
+        { 0, 0 }
+    };
+    public long[,,] long3darr_b =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    public long[,] long2darr_c =
+    {
+        { 0, 49 },
+        { 0, 0 }
+    };
+    public long[,,] long3darr_c =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 49 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
 }
 
 public class longMDArrTest
 {
-    static long[,] long2darr = { { 0, -1 }, { 0, 0 } };
-    static long[,,] long3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-    static long[,] long2darr_b = { { 0, 1 }, { 0, 0 } };
-    static long[,,] long3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    static long[,] long2darr_c = { { 0, 49 }, { 0, 0 } };
-    static long[,,] long3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static long[,] long2darr =
+    {
+        { 0, -1 },
+        { 0, 0 }
+    };
+    static long[,,] long3darr =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, -1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    static long[,] long2darr_b =
+    {
+        { 0, 1 },
+        { 0, 0 }
+    };
+    static long[,,] long3darr_b =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    static long[,] long2darr_c =
+    {
+        { 0, 49 },
+        { 0, 0 }
+    };
+    static long[,,] long3darr_c =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 49 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
 
     static long[][,] ja1 = new long[2][,];
     static long[][,,] ja2 = new long[2][,,];
@@ -47,21 +137,111 @@ public class longMDArrTest
         bool pass = true;
 
         VT vt1;
-        vt1.long2darr = new long[,] { { 0, -1 }, { 0, 0 } };
-        vt1.long3darr = new long[,,] { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-        vt1.long2darr_b = new long[,] { { 0, 1 }, { 0, 0 } };
-        vt1.long3darr_b = new long[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        vt1.long2darr_c = new long[,] { { 0, 49 }, { 0, 0 } };
-        vt1.long3darr_c = new long[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        vt1.long2darr = new long[,]
+        {
+            { 0, -1 },
+            { 0, 0 }
+        };
+        vt1.long3darr = new long[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, -1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        vt1.long2darr_b = new long[,]
+        {
+            { 0, 1 },
+            { 0, 0 }
+        };
+        vt1.long3darr_b = new long[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        vt1.long2darr_c = new long[,]
+        {
+            { 0, 49 },
+            { 0, 0 }
+        };
+        vt1.long3darr_c = new long[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 49 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new long[,] { { 0, -1 }, { 0, 0 } };
-        ja2[1] = new long[,,] { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-        ja1_b[0] = new long[,] { { 0, 1 }, { 0, 0 } };
-        ja2_b[1] = new long[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        ja1_c[0] = new long[,] { { 0, 49 }, { 0, 0 } };
-        ja2_c[1] = new long[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        ja1[0] = new long[,]
+        {
+            { 0, -1 },
+            { 0, 0 }
+        };
+        ja2[1] = new long[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, -1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        ja1_b[0] = new long[,]
+        {
+            { 0, 1 },
+            { 0, 0 }
+        };
+        ja2_b[1] = new long[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        ja1_c[0] = new long[,]
+        {
+            { 0, 49 },
+            { 0, 0 }
+        };
+        ja2_c[1] = new long[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 49 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
 
         long result = -1;
 

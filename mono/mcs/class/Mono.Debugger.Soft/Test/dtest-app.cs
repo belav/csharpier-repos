@@ -1474,7 +1474,11 @@ public class Tests : TestsBase, ITest2
         o2(
             new string[] { "BAR", "BAZ" },
             new int[] { 42, 43 },
-            new int[,] { { 1, 2 }, { 3, 4 } },
+            new int[,]
+            {
+                { 1, 2 },
+                { 3, 4 }
+            },
             (int[,])Array.CreateInstance(typeof(int), new int[] { 2, 2 }, new int[] { 1, 3 }),
             new int[] { 0 }
         );
@@ -1772,7 +1776,11 @@ public class Tests : TestsBase, ITest2
             ti2(
                 new string[] { "BAR", "BAZ" },
                 new int[] { 42, 43 },
-                new int[,] { { 1, 2 }, { 3, 4 } },
+                new int[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 }
+                },
                 ref val,
                 (int*)IntPtr.Zero,
                 5,

@@ -113,7 +113,12 @@ namespace System.Text.Json.Serialization.Tests
                 new UnsupportedDerivedTypesWrapper_IEnumerable
                 {
                     IEnumerableWrapper = new StringIEnumerableWrapper(
-                        new List<string> { "1", "2", "3" }
+                        new List<string>
+                        {
+                            "1",
+                            "2",
+                            "3"
+                        }
                     ),
                 };
 

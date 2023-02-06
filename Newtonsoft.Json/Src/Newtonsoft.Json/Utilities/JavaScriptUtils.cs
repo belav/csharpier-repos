@@ -89,7 +89,15 @@ namespace Newtonsoft.Json.Utilities
 
         static JavaScriptUtils()
         {
-            IList<char> escapeChars = new List<char> { '\n', '\r', '\t', '\\', '\f', '\b', };
+            IList<char> escapeChars = new List<char>
+            {
+                '\n',
+                '\r',
+                '\t',
+                '\\',
+                '\f',
+                '\b',
+            };
             for (int i = 0; i < ' '; i++)
             {
                 escapeChars.Add((char)i);

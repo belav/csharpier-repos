@@ -18,9 +18,17 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
             yield return new object[]
             {
-                new int[,] { { 1, 2 }, { 3, 4 } },
+                new int[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 }
+                },
                 new int[2, 2],
-                new int[,] { { 1, 2 }, { 3, 4 } }
+                new int[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 }
+                }
             };
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)

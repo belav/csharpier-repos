@@ -3134,7 +3134,12 @@ namespace System.Collections.Immutable.Tests
                 yield return new object[]
                 {
                     new[] { 1, 2, 3 },
-                    new List<int> { 1, 2, 3 },
+                    new List<int>
+                    {
+                        1,
+                        2,
+                        3
+                    },
                     comparer,
                     false
                 };
@@ -3508,7 +3513,12 @@ namespace System.Collections.Immutable.Tests
                             new object[]
                             {
                                 new[] { 1, 2, 3 },
-                                new List<int> { 1, 2, 3 },
+                                new List<int>
+                                {
+                                    1,
+                                    2,
+                                    3
+                                },
                                 comparer
                             }
                         }

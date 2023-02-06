@@ -77,7 +77,12 @@ namespace System.Web.Http.ValueProviders
         public void ConvertTo_PopulatesArray_WhenListNeedsToBeConvertedToArray()
         {
             // Arrange
-            List<string> values = new List<string> { "-1", "0", "1" };
+            List<string> values = new List<string>
+            {
+                "-1",
+                "0",
+                "1"
+            };
             var valueProviderResult = new ValueProviderResult(
                 values,
                 values.ToString(),

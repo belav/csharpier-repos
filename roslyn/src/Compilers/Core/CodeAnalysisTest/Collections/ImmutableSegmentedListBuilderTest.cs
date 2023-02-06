@@ -197,7 +197,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void RemoveAllBugTest()
         {
             var builder = ImmutableSegmentedList.CreateBuilder<int>();
-            var elemsToRemove = new HashSet<int>() { 0, 1, 2, 3, 4, 5 };
+            var elemsToRemove = new HashSet<int>()
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            };
             // NOTE: this uses Add instead of AddRange because AddRange doesn't exhibit the same issue due to a different order of tree building.
             // Don't change it without testing with the bug repro from https://github.com/dotnet/runtime/issues/22093.
             foreach (var elem in new[] { 0, 1, 2, 3, 4, 5, 6 })

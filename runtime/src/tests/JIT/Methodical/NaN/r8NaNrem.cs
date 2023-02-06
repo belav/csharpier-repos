@@ -95,30 +95,94 @@ public class r8NaNrem
         vt1.d_vt_test3_op2 = 2.1234567890987654321;
 
         double[] d_arr1d_test1_op1 = { 0, 0.0F };
-        double[,] d_arr2d_test1_op1 = { { 0, 0.0F }, { 1, 1 } };
-        double[,,] d_arr3d_test1_op1 = { { { 0, 0.0F }, { 1, 1 } } };
+        double[,] d_arr2d_test1_op1 =
+        {
+            { 0, 0.0F },
+            { 1, 1 }
+        };
+        double[,,] d_arr3d_test1_op1 =
+        {
+            {
+                { 0, 0.0F },
+                { 1, 1 }
+            }
+        };
 
         double[] d_arr1d_test1_op2 = { Double.NaN, 0, 1 };
-        double[,] d_arr2d_test1_op2 = { { 0, Double.NaN }, { 1, 1 } };
-        double[,,] d_arr3d_test1_op2 = { { { 0, Double.NaN }, { 1, 1 } } };
+        double[,] d_arr2d_test1_op2 =
+        {
+            { 0, Double.NaN },
+            { 1, 1 }
+        };
+        double[,,] d_arr3d_test1_op2 =
+        {
+            {
+                { 0, Double.NaN },
+                { 1, 1 }
+            }
+        };
 
         float[] d_arr1d_test2_op1 = { 0, 0.0F };
-        float[,] d_arr2d_test2_op1 = { { 0, 0.0F }, { 1, 1 } };
-        float[,,] d_arr3d_test2_op1 = { { { 0, 0.0F }, { 1, 1 } } };
+        float[,] d_arr2d_test2_op1 =
+        {
+            { 0, 0.0F },
+            { 1, 1 }
+        };
+        float[,,] d_arr3d_test2_op1 =
+        {
+            {
+                { 0, 0.0F },
+                { 1, 1 }
+            }
+        };
 
         float[] d_arr1d_test2_op2 = { 0.0F, 0, 1 };
-        float[,] d_arr2d_test2_op2 = { { 0, 0.0F }, { 1, 1 } };
-        float[,,] d_arr3d_test2_op2 = { { { 0, 0.0F }, { 1, 1 } } };
+        float[,] d_arr2d_test2_op2 =
+        {
+            { 0, 0.0F },
+            { 1, 1 }
+        };
+        float[,,] d_arr3d_test2_op2 =
+        {
+            {
+                { 0, 0.0F },
+                { 1, 1 }
+            }
+        };
 
         double[] d_arr1d_test3_op1 = { 0, Double.NegativeInfinity };
-        double[,] d_arr2d_test3_op1 = { { 0, Double.NegativeInfinity }, { 1, 1 } };
-        double[,,] d_arr3d_test3_op1 = { { { 0, Double.NegativeInfinity }, { 1, 1 } } };
+        double[,] d_arr2d_test3_op1 =
+        {
+            { 0, Double.NegativeInfinity },
+            { 1, 1 }
+        };
+        double[,,] d_arr3d_test3_op1 =
+        {
+            {
+                { 0, Double.NegativeInfinity },
+                { 1, 1 }
+            }
+        };
 
         double[] d_arr1d_test3_op2 = { 2.1234567890987654321, 0, 1 };
-        double[,] d_arr2d_test3_op2 = { { 0, 2.1234567890987654321 }, { 1, 1 } };
-        double[,,] d_arr3d_test3_op2 = { { { 0, 2.1234567890987654321 }, { 1, 1 } } };
+        double[,] d_arr2d_test3_op2 =
+        {
+            { 0, 2.1234567890987654321 },
+            { 1, 1 }
+        };
+        double[,,] d_arr3d_test3_op2 =
+        {
+            {
+                { 0, 2.1234567890987654321 },
+                { 1, 1 }
+            }
+        };
 
-        int[,] index = { { 0, 0 }, { 1, 1 } };
+        int[,] index =
+        {
+            { 0, 0 },
+            { 1, 1 }
+        };
 
         {
             double d_l_test1_op1 = 0.0F;

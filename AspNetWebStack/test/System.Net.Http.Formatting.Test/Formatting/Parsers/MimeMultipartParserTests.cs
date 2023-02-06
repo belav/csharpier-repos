@@ -40,7 +40,15 @@ namespace System.Net.Http.Formatting.Parsers
 
         public static TheoryDataSet<string> SingleShortBodies
         {
-            get { return new TheoryDataSet<string> { "", "A", "AA", }; }
+            get
+            {
+                return new TheoryDataSet<string>
+                {
+                    "",
+                    "A",
+                    "AA",
+                };
+            }
         }
 
         public static TheoryDataSet<string[]> MultipleShortBodies

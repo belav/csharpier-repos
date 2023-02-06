@@ -109,6 +109,7 @@ namespace System.Deployment.Internal.Isolation.Manifest
         CMS_MANIFEST_FLAG_USEMANIFESTFORTRUST = 8,
     }
 #endif
+
     internal enum CMS_USAGE_PATTERN
     {
         CMS_USAGE_PATTERN_SCOPE_APPLICATION = 1,

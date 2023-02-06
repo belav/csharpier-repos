@@ -41,7 +41,12 @@ namespace System.Web.Http.Internal
         public void CreateOrReplaceCollection_OriginalModelMutable_UpdatesOriginalInstance()
         {
             // Arrange
-            List<int> originalInstance = new List<int> { 10, 20, 30 };
+            List<int> originalInstance = new List<int>
+            {
+                10,
+                20,
+                30
+            };
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(

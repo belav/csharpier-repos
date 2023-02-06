@@ -371,7 +371,12 @@ namespace T2
 }
 ";
 
-            List<string> expected_in_lookupNames = new List<string> { "T1", "T2", "Test" };
+            List<string> expected_in_lookupNames = new List<string>
+            {
+                "T1",
+                "T2",
+                "Test"
+            };
 
             List<string> expected_in_lookupSymbols = new List<string>
             {
@@ -754,7 +759,12 @@ class B : A
           int num=10;
        } 
 ";
-            List<string> expected_in_lookupNames = new List<string> { "Main", "start", "num" };
+            List<string> expected_in_lookupNames = new List<string>
+            {
+                "Main",
+                "start",
+                "num"
+            };
 
             List<string> expected_in_lookupSymbols = new List<string>
             {
@@ -847,7 +857,12 @@ class MyClass
     }
 }
 ";
-            List<string> expected_in_lookupNames = new List<string> { "j", "k", "lambdaParam" };
+            List<string> expected_in_lookupNames = new List<string>
+            {
+                "j",
+                "k",
+                "lambdaParam"
+            };
 
             List<string> expected_in_lookupSymbols = new List<string>
             {

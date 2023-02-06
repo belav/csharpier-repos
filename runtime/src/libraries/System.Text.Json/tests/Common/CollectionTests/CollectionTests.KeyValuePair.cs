@@ -236,7 +236,12 @@ namespace System.Text.Json.Serialization.Tests
         {
             KeyValuePair<string, List<int>> input = new KeyValuePair<string, List<int>>(
                 "Key",
-                new List<int> { 1, 2, 3 }
+                new List<int>
+                {
+                    1,
+                    2,
+                    3
+                }
             );
 
             string json = await Serializer.SerializeWrapper(input);

@@ -310,7 +310,11 @@ namespace System.Data.Tests
                 yield return new object[] { nonZeroBoundArray, 10 };
             }
 
-            Array multidimensionalArray = new int[,] { { 1, 2 }, { 3, 4 } };
+            Array multidimensionalArray = new int[,]
+            {
+                { 1, 2 },
+                { 3, 4 }
+            };
             yield return new object[]
             {
                 multidimensionalArray,

@@ -80,7 +80,15 @@ public class ViewBufferTextWriterTest
     {
         // Arrange
         var newLine = Environment.NewLine;
-        var expected = new List<object> { "False", newLine, "1.1", newLine, "3", newLine };
+        var expected = new List<object>
+        {
+            "False",
+            newLine,
+            "1.1",
+            newLine,
+            "3",
+            newLine
+        };
         var buffer = new ViewBuffer(new TestViewBufferScope(), "some-name", pageSize: 4);
         var writer = new ViewBufferTextWriter(buffer, Encoding.UTF8);
 
@@ -99,7 +107,15 @@ public class ViewBufferTextWriterTest
     {
         // Arrange
         var newLine = Environment.NewLine;
-        var expected = new List<object> { "False", newLine, "1.1", newLine, "3", newLine };
+        var expected = new List<object>
+        {
+            "False",
+            newLine,
+            "1.1",
+            newLine,
+            "3",
+            newLine
+        };
         var inner = new Mock<TextWriter>();
         var buffer = new ViewBuffer(new TestViewBufferScope(), "some-name", pageSize: 4);
         var writer = new ViewBufferTextWriter(

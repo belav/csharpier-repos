@@ -55,7 +55,12 @@ public class AcceptedAtActionResultTests
 
     public static TheoryData<object, int> RouteValuesData()
     {
-        return new TheoryData<object, int>() { { null, -1 }, { "value", 1 }, { new object(), 0 } };
+        return new TheoryData<object, int>()
+        {
+            { null, -1 },
+            { "value", 1 },
+            { new object(), 0 }
+        };
     }
 
     [Theory]
@@ -83,7 +88,15 @@ public class AcceptedAtActionResultTests
 
     public static TheoryData<object> ValuesData
     {
-        get { return new TheoryData<object> { null, "Test string", new object(), }; }
+        get
+        {
+            return new TheoryData<object>
+            {
+                null,
+                "Test string",
+                new object(),
+            };
+        }
     }
 
     [Theory]

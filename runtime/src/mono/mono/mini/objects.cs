@@ -1237,7 +1237,10 @@ class Tests
 
     public static int test_1_store_decimal()
     {
-        decimal[,] a = { { 1 } };
+        decimal[,] a =
+        {
+            { 1 }
+        };
 
         if (a[0, 0] != 1m)
             return 0;

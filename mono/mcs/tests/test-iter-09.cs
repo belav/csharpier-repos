@@ -6,7 +6,11 @@ public class Tester
     string[] ABC = { "A", "B", "C" };
 
     // D
-    string[,] EFGH = { { "E", "F" }, { "G", "H" } };
+    string[,] EFGH =
+    {
+        { "E", "F" },
+        { "G", "H" }
+    };
 
     // I
     ArrayList al = new ArrayList();

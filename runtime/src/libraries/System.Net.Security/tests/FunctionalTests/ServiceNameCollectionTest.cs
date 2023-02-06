@@ -91,7 +91,13 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
             new object[]
             {
                 new[] { "first", "second" },
-                new List<string> { "first", "second", "first", "SECOND" }
+                new List<string>
+                {
+                    "first",
+                    "second",
+                    "first",
+                    "SECOND"
+                }
             },
         };
 
@@ -337,7 +343,13 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
             new object[]
             {
                 new[] { "first", "second", "third", "forth" },
-                new List<string> { "third", "forth", "THIRD", "forth" }
+                new List<string>
+                {
+                    "third",
+                    "forth",
+                    "THIRD",
+                    "forth"
+                }
             },
         };
 

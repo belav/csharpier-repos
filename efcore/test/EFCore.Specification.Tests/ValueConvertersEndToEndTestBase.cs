@@ -105,20 +105,68 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                 typeof(List<int>),
                 new object?[]
                 {
-                    new List<int> { 47, 48, 47, 46 },
-                    new List<int> { 57, 58, 57, 56 },
-                    new List<int> { 67, 68, 67, 66 },
-                    new List<int> { 77, 78, 77, 76 },
+                    new List<int>
+                    {
+                        47,
+                        48,
+                        47,
+                        46
+                    },
+                    new List<int>
+                    {
+                        57,
+                        58,
+                        57,
+                        56
+                    },
+                    new List<int>
+                    {
+                        67,
+                        68,
+                        67,
+                        66
+                    },
+                    new List<int>
+                    {
+                        77,
+                        78,
+                        77,
+                        76
+                    },
                 }
             },
             {
                 typeof(IEnumerable<int>),
                 new object?[]
                 {
-                    new List<int> { 47, 48, 47, 46 },
-                    new List<int> { 57, 58, 57, 56 },
-                    new List<int> { 67, 68, 67, 66 },
-                    new List<int> { 77, 78, 77, 76 },
+                    new List<int>
+                    {
+                        47,
+                        48,
+                        47,
+                        46
+                    },
+                    new List<int>
+                    {
+                        57,
+                        58,
+                        57,
+                        56
+                    },
+                    new List<int>
+                    {
+                        67,
+                        68,
+                        67,
+                        66
+                    },
+                    new List<int>
+                    {
+                        77,
+                        78,
+                        77,
+                        76
+                    },
                 }
             },
         };

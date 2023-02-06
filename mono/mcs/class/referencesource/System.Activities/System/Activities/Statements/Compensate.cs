@@ -113,7 +113,12 @@ namespace System.Activities.Statements
                     Argument2 = validationContext,
                     Handler = new Sequence
                     {
-                        Variables = { assertFlag, elements, index },
+                        Variables =
+                        {
+                            assertFlag,
+                            elements,
+                            index
+                        },
                         Activities =
                         {
                             new If

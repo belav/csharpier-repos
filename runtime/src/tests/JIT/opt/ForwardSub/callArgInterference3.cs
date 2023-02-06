@@ -47,7 +47,10 @@ public class ForwardSubCallArgInterference3
     public static uint[] s_5;
     public static byte s_6;
     public static S0[] s_10;
-    public static S0[,] s_20 = new S0[,] { { new S0() } };
+    public static S0[,] s_20 = new S0[,]
+    {
+        { new S0() }
+    };
 
     public static int Main()
     {

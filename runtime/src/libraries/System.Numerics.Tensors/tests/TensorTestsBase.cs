@@ -150,7 +150,13 @@ namespace System.Numerics.Tensors.Tests
                 yield return new object[]
                 {
                     ctor.CreateFromArray<int>(
-                        new[,] { { 3, 6, 9 }, { 5, 10, 15 }, { 7, 14, 21 }, { 11, 22, 33 } }
+                        new[,]
+                        {
+                            { 3, 6, 9 },
+                            { 5, 10, 15 },
+                            { 7, 14, 21 },
+                            { 11, 22, 33 }
+                        }
                     )
                 };
             }

@@ -938,7 +938,16 @@ namespace System.CommandLine.Tests
                 {
                     new Argument<DayOfWeek?>
                     {
-                        Suggestions = { "mon", "tues", "wed", "thur", "fri", "sat", "sun" }
+                        Suggestions =
+                        {
+                            "mon",
+                            "tues",
+                            "wed",
+                            "thur",
+                            "fri",
+                            "sat",
+                            "sun"
+                        }
                     }
                 };
 

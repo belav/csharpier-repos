@@ -203,7 +203,13 @@ public class HeaderModelBinderIntegrationTest
     private class ListContainer2
     {
         [FromHeader(Name = "Header")]
-        public List<string> ListProperty { get; } = new List<string> { "One", "Two", "Three" };
+        public List<string> ListProperty { get; } =
+            new List<string>
+            {
+                "One",
+                "Two",
+                "Three"
+            };
     }
 
     [Fact]

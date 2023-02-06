@@ -18,7 +18,12 @@ public class ListIntegrationTest
         {
             SimpleObject = new SimpleObject()
             {
-                IntegerList = new List<int>() { 1, 2, 3 }
+                IntegerList = new List<int>()
+                {
+                    1,
+                    2,
+                    3
+                }
             }
         };
 
@@ -37,7 +42,12 @@ public class ListIntegrationTest
         {
             SimpleObject = new SimpleObject()
             {
-                IntegerList = new List<int>() { 1, 2, 3 }
+                IntegerList = new List<int>()
+                {
+                    1,
+                    2,
+                    3
+                }
             }
         };
 
@@ -63,7 +73,12 @@ public class ListIntegrationTest
         {
             SimpleObject = new SimpleObject()
             {
-                IntegerIList = new List<int>() { 1, 2, 3 }
+                IntegerIList = new List<int>()
+                {
+                    1,
+                    2,
+                    3
+                }
             }
         };
 
@@ -74,7 +89,16 @@ public class ListIntegrationTest
         patchDocument.ApplyTo(targetObject);
 
         // Assert
-        Assert.Equal(new List<int>() { 4, 1, 2, 3 }, targetObject.SimpleObject.IntegerIList);
+        Assert.Equal(
+            new List<int>()
+            {
+                4,
+                1,
+                2,
+                3
+            },
+            targetObject.SimpleObject.IntegerIList
+        );
     }
 
     [Fact]
@@ -108,7 +132,12 @@ public class ListIntegrationTest
         {
             SimpleObject = new SimpleObject()
             {
-                IntegerList = new List<int>() { 1, 2, 3 }
+                IntegerList = new List<int>()
+                {
+                    1,
+                    2,
+                    3
+                }
             }
         };
 
@@ -119,7 +148,16 @@ public class ListIntegrationTest
         patchDocument.ApplyTo(targetObject);
 
         // Assert
-        Assert.Equal(new List<int>() { 1, 2, 3, 4 }, targetObject.SimpleObject.IntegerList);
+        Assert.Equal(
+            new List<int>()
+            {
+                1,
+                2,
+                3,
+                4
+            },
+            targetObject.SimpleObject.IntegerList
+        );
     }
 
     [Fact]
@@ -128,7 +166,12 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObject()
         {
-            IntegerList = new List<int>() { 1, 2, 3 }
+            IntegerList = new List<int>()
+            {
+                1,
+                2,
+                3
+            }
         };
 
         var patchDocument = new JsonPatchDocument();
@@ -149,7 +192,12 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObject()
         {
-            IntegerList = new List<int>() { 1, 2, 3 }
+            IntegerList = new List<int>()
+            {
+                1,
+                2,
+                3
+            }
         };
 
         var patchDocument = new JsonPatchDocument();
@@ -176,7 +224,12 @@ public class ListIntegrationTest
         {
             SimpleObject = new SimpleObject()
             {
-                IntegerList = new List<int>() { 1, 2, 3 }
+                IntegerList = new List<int>()
+                {
+                    1,
+                    2,
+                    3
+                }
             }
         };
 
@@ -196,17 +249,38 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObject()
         {
-            IntegerList = new List<int>() { 1, 2, 3 }
+            IntegerList = new List<int>()
+            {
+                1,
+                2,
+                3
+            }
         };
 
         var patchDocument = new JsonPatchDocument();
-        patchDocument.Replace("IntegerList", new Collection<int>() { 4, 5, 6 });
+        patchDocument.Replace(
+            "IntegerList",
+            new Collection<int>()
+            {
+                4,
+                5,
+                6
+            }
+        );
 
         // Act
         patchDocument.ApplyTo(targetObject);
 
         // Assert
-        Assert.Equal(new List<int>() { 4, 5, 6 }, targetObject.IntegerList);
+        Assert.Equal(
+            new List<int>()
+            {
+                4,
+                5,
+                6
+            },
+            targetObject.IntegerList
+        );
     }
 
     [Fact]
@@ -217,7 +291,12 @@ public class ListIntegrationTest
         {
             SimpleObject = new SimpleObject()
             {
-                IntegerList = new List<int>() { 1, 2, 3 }
+                IntegerList = new List<int>()
+                {
+                    1,
+                    2,
+                    3
+                }
             }
         };
 
@@ -228,7 +307,15 @@ public class ListIntegrationTest
         patchDocument.ApplyTo(targetObject);
 
         // Assert
-        Assert.Equal(new List<int>() { 1, 2, 5 }, targetObject.SimpleObject.IntegerList);
+        Assert.Equal(
+            new List<int>()
+            {
+                1,
+                2,
+                5
+            },
+            targetObject.SimpleObject.IntegerList
+        );
     }
 
     [Fact]
@@ -239,7 +326,12 @@ public class ListIntegrationTest
         {
             SimpleObject = new SimpleObject()
             {
-                IntegerList = new List<int>() { 1, 2, 3 }
+                IntegerList = new List<int>()
+                {
+                    1,
+                    2,
+                    3
+                }
             }
         };
 
@@ -265,7 +357,12 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObject()
         {
-            IntegerList = new List<int>() { 1, 2, 3 }
+            IntegerList = new List<int>()
+            {
+                1,
+                2,
+                3
+            }
         };
 
         var patchDocument = new JsonPatchDocument();
@@ -275,7 +372,16 @@ public class ListIntegrationTest
         patchDocument.ApplyTo(targetObject);
 
         // Assert
-        Assert.Equal(new List<int>() { 1, 2, 3, 1 }, targetObject.IntegerList);
+        Assert.Equal(
+            new List<int>()
+            {
+                1,
+                2,
+                3,
+                1
+            },
+            targetObject.IntegerList
+        );
     }
 
     [Fact]
@@ -284,7 +390,12 @@ public class ListIntegrationTest
         // Arrange
         var targetObject = new SimpleObject()
         {
-            IntegerList = new List<int>() { 1, 2, 3 }
+            IntegerList = new List<int>()
+            {
+                1,
+                2,
+                3
+            }
         };
 
         var patchDocument = new JsonPatchDocument();
@@ -304,7 +415,12 @@ public class ListIntegrationTest
         var targetObject = new SimpleObject()
         {
             IntegerValue = 5,
-            IntegerList = new List<int>() { 1, 2, 3 }
+            IntegerList = new List<int>()
+            {
+                1,
+                2,
+                3
+            }
         };
 
         var patchDocument = new JsonPatchDocument();
@@ -315,7 +431,16 @@ public class ListIntegrationTest
 
         // Assert
         Assert.Equal(0, targetObject.IntegerValue);
-        Assert.Equal(new List<int>() { 1, 2, 3, 5 }, targetObject.IntegerList);
+        Assert.Equal(
+            new List<int>()
+            {
+                1,
+                2,
+                3,
+                5
+            },
+            targetObject.IntegerList
+        );
     }
 
     [Fact]
@@ -343,7 +468,12 @@ public class ListIntegrationTest
 
         // Assert
         Assert.Equal(
-            new List<SimpleObject>() { simpleObject2, simpleObject1, simpleObject3 },
+            new List<SimpleObject>()
+            {
+                simpleObject2,
+                simpleObject1,
+                simpleObject3
+            },
             targetObject.SimpleObjectList
         );
         Assert.Equal(2, targetObject.SimpleObjectList[0].IntegerValue);
@@ -360,7 +490,12 @@ public class ListIntegrationTest
         {
             SimpleObject = new SimpleObject()
             {
-                IntegerList = new List<int>() { 1, 2, 3 }
+                IntegerList = new List<int>()
+                {
+                    1,
+                    2,
+                    3
+                }
             }
         };
 

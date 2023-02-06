@@ -30,7 +30,15 @@ namespace System.Net.Http
 #if !NETCOREAPP // .NET Core does not enforce path validity in many APIs.
         public static TheoryDataSet<string> NotSupportedFilePaths
         {
-            get { return new TheoryDataSet<string> { "cc:\\a\\b", "123:\\a\\b", "c d:\\a\\b", }; }
+            get
+            {
+                return new TheoryDataSet<string>
+                {
+                    "cc:\\a\\b",
+                    "123:\\a\\b",
+                    "c d:\\a\\b",
+                };
+            }
         }
 #endif
 

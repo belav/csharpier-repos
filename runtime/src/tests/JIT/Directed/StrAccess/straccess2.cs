@@ -31,15 +31,26 @@ internal class CL
         b5,
         b6;
     public static int i = 10;
-    public int[,] idx2darr = { { 5, 6 } };
+    public int[,] idx2darr =
+    {
+        { 5, 6 }
+    };
 }
 
 internal unsafe class StrAccess2
 {
     public static String str1 = "test string";
     public static int idx1 = 2;
-    public static String[,] str2darr = { { "test string" } };
-    public static int[,,] idx3darr = { { { 8 } } };
+    public static String[,] str2darr =
+    {
+        { "test string" }
+    };
+    public static int[,,] idx3darr =
+    {
+        {
+            { 8 }
+        }
+    };
     public static char sb0,
         sb1,
         sb2,

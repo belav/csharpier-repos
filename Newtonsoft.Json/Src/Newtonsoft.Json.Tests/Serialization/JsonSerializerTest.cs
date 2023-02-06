@@ -3374,8 +3374,18 @@ keyword such as type of business.""
                 { "two", 2 },
                 { "three", 3 }
             };
-            o.IListProperty = new List<int> { 1, 2, 3 };
-            o.IEnumerableProperty = new List<int> { 4, 5, 6 };
+            o.IListProperty = new List<int>
+            {
+                1,
+                2,
+                3
+            };
+            o.IEnumerableProperty = new List<int>
+            {
+                4,
+                5,
+                6
+            };
 
             string json = JsonConvert.SerializeObject(o, Formatting.Indented);
 
@@ -5644,7 +5654,12 @@ Path '', line 1, position 1."
         public void SerializeHashSet()
         {
             string jsonText = JsonConvert.SerializeObject(
-                new HashSet<string>() { "One", "2", "III" },
+                new HashSet<string>()
+                {
+                    "One",
+                    "2",
+                    "III"
+                },
                 Formatting.Indented
             );
 
@@ -6090,7 +6105,12 @@ Path '', line 1, position 1."
         {
             EnumerableClass c = new EnumerableClass
             {
-                Enumerable = new List<string> { "One", "Two", "Three" }
+                Enumerable = new List<string>
+                {
+                    "One",
+                    "Two",
+                    "Three"
+                }
             };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
@@ -8141,7 +8161,12 @@ This is just junk, though.";
         public void SerializeFloatingPointHandling()
         {
             string json;
-            IList<double> d = new List<double> { 1.1, double.NaN, double.PositiveInfinity };
+            IList<double> d = new List<double>
+            {
+                1.1,
+                double.NaN,
+                double.PositiveInfinity
+            };
 
             json = JsonConvert.SerializeObject(d);
             // [1.1,"NaN","Infinity"]

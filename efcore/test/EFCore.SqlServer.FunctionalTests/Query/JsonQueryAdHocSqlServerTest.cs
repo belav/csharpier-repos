@@ -51,7 +51,12 @@ VALUES(3, N'{{ ""NonNullableScalar"" : 30 }}', N'[{{ ""NonNullableScalar"" : 100
             Reference = new MyJsonEntityArrayOfPrimitives
             {
                 IntArray = new int[] { 1, 2, 3 },
-                ListOfString = new List<string> { "Foo", "Bar", "Baz" }
+                ListOfString = new List<string>
+                {
+                    "Foo",
+                    "Bar",
+                    "Baz"
+                }
             },
             Collection = new List<MyJsonEntityArrayOfPrimitives>
             {
@@ -74,7 +79,12 @@ VALUES(3, N'{{ ""NonNullableScalar"" : 30 }}', N'[{{ ""NonNullableScalar"" : 100
             Reference = new MyJsonEntityArrayOfPrimitives
             {
                 IntArray = new int[] { 10, 20, 30 },
-                ListOfString = new List<string> { "A", "B", "C" }
+                ListOfString = new List<string>
+                {
+                    "A",
+                    "B",
+                    "C"
+                }
             },
             Collection = new List<MyJsonEntityArrayOfPrimitives>
             {

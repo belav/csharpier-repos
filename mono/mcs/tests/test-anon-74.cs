@@ -12,7 +12,11 @@ static class Foo
         Baz(
             delegate()
             {
-                return new string[,] { { "aa" }, { "bb" } };
+                return new string[,]
+                {
+                    { "aa" },
+                    { "bb" }
+                };
             }
         );
     }

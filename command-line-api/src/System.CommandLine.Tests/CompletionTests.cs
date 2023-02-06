@@ -825,7 +825,16 @@ namespace System.CommandLine.Tests
             {
                 new Argument<DayOfWeek>
                 {
-                    CompletionSources = { "mon", "tues", "wed", "thur", "fri", "sat", "sun" }
+                    CompletionSources =
+                    {
+                        "mon",
+                        "tues",
+                        "wed",
+                        "thur",
+                        "fri",
+                        "sat",
+                        "sun"
+                    }
                 }
             };
 

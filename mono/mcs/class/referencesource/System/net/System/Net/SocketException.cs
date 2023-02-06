@@ -47,6 +47,7 @@ namespace System.Net.Sockets
             );
         }
 #endif
+
         internal SocketException(EndPoint endPoint)
             : base(Marshal.GetLastWin32Error())
         {

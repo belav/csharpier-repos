@@ -1857,7 +1857,14 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual(2, dgv.SelectedRows[0].Index, "1-7");
                 Assert.AreEqual(3, dgv.SelectedRows[1].Index, "1-8");
                 Assert.AreEqual(1, dgv.SelectedRows[2].Index, "1-9");
-                expectedSelections.Add(new List<int> { 2, 3, 1 });
+                expectedSelections.Add(
+                    new List<int>
+                    {
+                        2,
+                        3,
+                        1
+                    }
+                );
 
                 // Unselect a row.
                 dgv.Rows[2].Selected = false;
@@ -2007,7 +2014,14 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual(2, dgv.SelectedColumns[0].Index, "1-7");
                 Assert.AreEqual(3, dgv.SelectedColumns[1].Index, "1-8");
                 Assert.AreEqual(1, dgv.SelectedColumns[2].Index, "1-9");
-                expectedSelections.Add(new List<int> { 2, 3, 1 });
+                expectedSelections.Add(
+                    new List<int>
+                    {
+                        2,
+                        3,
+                        1
+                    }
+                );
 
                 // Unselect a column.
                 dgv.Columns[2].Selected = false;
@@ -2069,7 +2083,14 @@ namespace MonoTests.System.Windows.Forms
                 Assert.AreEqual(2, dgv.SelectedColumns[0].Index, "2-7");
                 Assert.AreEqual(3, dgv.SelectedColumns[1].Index, "2-8");
                 Assert.AreEqual(1, dgv.SelectedColumns[2].Index, "2-9");
-                expectedSelections.Add(new List<int> { 2, 3, 1 });
+                expectedSelections.Add(
+                    new List<int>
+                    {
+                        2,
+                        3,
+                        1
+                    }
+                );
 
                 // Unselect another column.
                 dgv.Columns[2].Selected = false;

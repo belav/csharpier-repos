@@ -65,7 +65,10 @@ public class Bla
             return false;
 
         a = 0;
-        object[,] o_a2 = new string[,] { { "X" } };
+        object[,] o_a2 = new string[,]
+        {
+            { "X" }
+        };
         o_a2[a++, 0] += "Z";
         if ((string)o_a2[0, 0] != "XZ")
             return false;
@@ -75,7 +78,10 @@ public class Bla
 
     static bool Test_Decimal()
     {
-        decimal[,] da = new decimal[,] { { 5, 6 } };
+        decimal[,] da = new decimal[,]
+        {
+            { 5, 6 }
+        };
         da[0, 0] = 6.7m;
         da[0, 0] += 1.2m;
 

@@ -3802,7 +3802,13 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ArrayIndexWrongRank()
         {
-            Expression array = Expression.Constant(new[,] { { 1, 2 }, { 2, 1 } });
+            Expression array = Expression.Constant(
+                new[,]
+                {
+                    { 1, 2 },
+                    { 2, 1 }
+                }
+            );
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => Expression.ArrayIndex(array, Expression.Constant(2))
@@ -3920,7 +3926,26 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void HighRankArrayIndex(bool useInterpreter)
         {
-            string[,,,,,,,,,] arrayObj = { { { { { { { { { { "hugz" } } } } } } } } } };
+            string[,,,,,,,,,] arrayObj =
+            {
+                {
+                    {
+                        {
+                            {
+                                {
+                                    {
+                                        {
+                                            {
+                                                { "hugz" }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
             ConstantExpression array = Expression.Constant(arrayObj);
             Func<string> func = Expression
                 .Lambda<Func<string>>(

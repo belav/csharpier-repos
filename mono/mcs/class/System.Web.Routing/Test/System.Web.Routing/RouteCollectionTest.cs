@@ -502,7 +502,12 @@ namespace MonoTests.System.Web.Routing
 
             var vp = c.GetVirtualPath(
                 new RequestContext(hc, rd),
-                new RouteValueDictionary { { "year", 2007 }, { "month", 1 }, { "day", 12 }, }
+                new RouteValueDictionary
+                {
+                    { "year", 2007 },
+                    { "month", 1 },
+                    { "day", 12 },
+                }
             );
             Assert.IsNotNull(vp, "#2");
             Assert.AreEqual("/reports/2007/1/12", vp.VirtualPath, "#2-1");
@@ -553,7 +558,12 @@ namespace MonoTests.System.Web.Routing
 
             var vp = c.GetVirtualPath(
                 new RequestContext(hc, rd),
-                new RouteValueDictionary { { "year", 2007 }, { "month", 1 }, { "day", 12 }, }
+                new RouteValueDictionary
+                {
+                    { "year", 2007 },
+                    { "month", 1 },
+                    { "day", 12 },
+                }
             );
             Assert.IsNotNull(vp, "#2");
             Assert.AreEqual("/myapp/reports/2007/1/12", vp.VirtualPath, "#2-1");

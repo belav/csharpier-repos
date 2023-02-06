@@ -33,10 +33,20 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         public static TheoryData<string> InvalidStringData =>
-            new TheoryData<string>() { { "" }, { "23&" }, { "abc" }, };
+            new TheoryData<string>()
+            {
+                { "" },
+                { "23&" },
+                { "abc" },
+            };
 
         public static TheoryData<object> InvalidObjectData =>
-            new TheoryData<object>() { { DateTime.Now }, { 'c' }, { Guid.Empty } };
+            new TheoryData<object>()
+            {
+                { DateTime.Now },
+                { 'c' },
+                { Guid.Empty }
+            };
 
         [Theory]
         [MemberData(nameof(BoolStringData))]

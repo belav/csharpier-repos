@@ -109,7 +109,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void MultiDimensionalArray()
         {
             var rootExpr = "new int[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } }";
-            var value = CreateDkmClrValue(new int[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } });
+            var value = CreateDkmClrValue(
+                new int[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 },
+                    { 5, 6 }
+                }
+            );
             var evalResult = FormatResult(rootExpr, value);
             Verify(
                 evalResult,

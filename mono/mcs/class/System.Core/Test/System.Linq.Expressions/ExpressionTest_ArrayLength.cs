@@ -74,7 +74,11 @@ namespace MonoTests.System.Linq.Expressions
         [ExpectedException(typeof(ArgumentException))]
         public void Rank2String()
         {
-            string[,] array = { { }, { } };
+            string[,] array =
+            {
+                { },
+                { }
+            };
 
             Expression.ArrayLength(Expression.Constant(array));
         }

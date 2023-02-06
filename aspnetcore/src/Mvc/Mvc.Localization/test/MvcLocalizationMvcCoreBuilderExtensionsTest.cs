@@ -33,7 +33,13 @@ public class MvcLocalizationMvcCoreBuilderExtensionsTest
             format: LanguageViewLocationExpanderFormat.SubFolder
         );
 
-        return new TheoryData<IMvcCoreBuilder>() { builder1, builder2, builder3, builder4 };
+        return new TheoryData<IMvcCoreBuilder>()
+        {
+            builder1,
+            builder2,
+            builder3,
+            builder4
+        };
     }
 
     [Theory]

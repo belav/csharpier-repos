@@ -230,14 +230,27 @@ namespace Microsoft.TestCommon
         /// All expected permutations of an empty string.
         /// </summary>
         public static readonly TestData<string> NonNullEmptyStrings = new RefTypeTestData<string>(
-            () => new List<string>() { String.Empty, " ", "\t\r\n" }
+            () =>
+                new List<string>()
+                {
+                    String.Empty,
+                    " ",
+                    "\t\r\n"
+                }
         );
 
         /// <summary>
         /// All expected permutations of an empty string.
         /// </summary>
         public static readonly TestData<string> EmptyStrings = new RefTypeTestData<string>(
-            () => new List<string>() { null, String.Empty, " ", "\t\r\n" }
+            () =>
+                new List<string>()
+                {
+                    null,
+                    String.Empty,
+                    " ",
+                    "\t\r\n"
+                }
         );
 
         /// <summary>

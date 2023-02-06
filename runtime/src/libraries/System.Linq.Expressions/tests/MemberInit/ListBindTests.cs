@@ -349,7 +349,16 @@ namespace System.Linq.Expressions.Tests
         public void InitializeVoidAdd(bool useInterperter)
         {
             Expression<Func<ListWrapper<int>>> listInit = () =>
-                new ListWrapper<int> { ListProperty = { 1, 4, 9, 16 } };
+                new ListWrapper<int>
+                {
+                    ListProperty =
+                    {
+                        1,
+                        4,
+                        9,
+                        16
+                    }
+                };
             Func<ListWrapper<int>> func = listInit.Compile(useInterperter);
             Assert.Equal(new[] { 1, 4, 9, 16 }, func().ListProperty);
         }
@@ -358,7 +367,16 @@ namespace System.Linq.Expressions.Tests
         public void InitializeNonVoidAdd(bool useInterpreter)
         {
             Expression<Func<ListWrapper<int>>> hashInit = () =>
-                new ListWrapper<int> { HashSetField = { 1, 4, 9, 16 } };
+                new ListWrapper<int>
+                {
+                    HashSetField =
+                    {
+                        1,
+                        4,
+                        9,
+                        16
+                    }
+                };
             Func<ListWrapper<int>> func = hashInit.Compile(useInterpreter);
             Assert.Equal(new[] { 1, 4, 9, 16 }, func().HashSetField.OrderBy(i => i));
         }

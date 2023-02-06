@@ -102,7 +102,12 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             MemberDeclarationSyntax member
         )
         {
-            var list = new List<string> { "/// <summary>", "/// ", "/// </summary>" };
+            var list = new List<string>
+            {
+                "/// <summary>",
+                "/// ",
+                "/// </summary>"
+            };
 
             var typeParameterList = member.GetTypeParameterList();
             if (typeParameterList != null)

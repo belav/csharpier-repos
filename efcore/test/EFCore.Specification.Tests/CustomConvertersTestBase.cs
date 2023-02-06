@@ -1495,7 +1495,12 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                     new CollectionScalar
                     {
                         Id = 1,
-                        Tags = new List<string> { "A", "B", "C" }
+                        Tags = new List<string>
+                        {
+                            "A",
+                            "B",
+                            "C"
+                        }
                     }
                 );
             });

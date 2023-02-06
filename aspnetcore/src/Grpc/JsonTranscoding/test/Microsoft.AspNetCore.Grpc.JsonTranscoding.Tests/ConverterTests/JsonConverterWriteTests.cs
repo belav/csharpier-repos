@@ -47,7 +47,12 @@ public class JsonConverterWriteTests
         var helloRequest = new HelloRequest
         {
             Name = "test",
-            RepeatedStrings = { "One", "Two", "Three" }
+            RepeatedStrings =
+            {
+                "One",
+                "Two",
+                "Three"
+            }
         };
 
         AssertWrittenJson(helloRequest);
@@ -397,7 +402,12 @@ public class JsonConverterWriteTests
     {
         var value = new ListValue
         {
-            Values = { Value.ForBool(true), Value.ForString("value1"), Value.ForString("value2") }
+            Values =
+            {
+                Value.ForBool(true),
+                Value.ForString("value1"),
+                Value.ForString("value2")
+            }
         };
 
         AssertWrittenJson(value);

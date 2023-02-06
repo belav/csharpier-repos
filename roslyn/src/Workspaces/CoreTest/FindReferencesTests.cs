@@ -343,7 +343,12 @@ class B : C, A
             var result = (await SymbolFinder.FindReferencesAsync(boo, solution)).ToList();
             Assert.Equal(2, result.Count); // 2 symbols found
 
-            var expectedMatchedLines = new HashSet<int> { 3, 13, 14 };
+            var expectedMatchedLines = new HashSet<int>
+            {
+                3,
+                13,
+                14
+            };
             result.ForEach((reference) => Verify(reference, expectedMatchedLines));
 
             Assert.Empty(expectedMatchedLines);
@@ -354,7 +359,12 @@ class B : C, A
             result = (await SymbolFinder.FindReferencesAsync(boo, solution)).ToList();
             Assert.Equal(2, result.Count); // 2 symbols found
 
-            expectedMatchedLines = new HashSet<int> { 3, 13, 14 };
+            expectedMatchedLines = new HashSet<int>
+            {
+                3,
+                13,
+                14
+            };
             result.ForEach((reference) => Verify(reference, expectedMatchedLines));
 
             Assert.Empty(expectedMatchedLines);

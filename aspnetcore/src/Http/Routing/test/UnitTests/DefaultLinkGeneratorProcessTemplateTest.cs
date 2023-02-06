@@ -174,7 +174,15 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             httpContext: httpContext,
             endpoint: endpoint,
             values: new RouteValueDictionary(
-                new { color = new List<string> { "red", "green", "blue" } }
+                new
+                {
+                    color = new List<string>
+                    {
+                        "red",
+                        "green",
+                        "blue"
+                    }
+                }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
@@ -201,7 +209,17 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var success = linkGenerator.TryProcessTemplate(
             httpContext: httpContext,
             endpoint: endpoint,
-            values: new RouteValueDictionary(new { items = new List<int> { 10, 20, 30 } }),
+            values: new RouteValueDictionary(
+                new
+                {
+                    items = new List<int>
+                    {
+                        10,
+                        20,
+                        30
+                    }
+                }
+            ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
             result: out var result
@@ -257,7 +275,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 new
                 {
                     page = 1,
-                    color = new List<string> { "red", "green", "blue" },
+                    color = new List<string>
+                    {
+                        "red",
+                        "green",
+                        "blue"
+                    },
                     message = "textfortest"
                 }
             ),

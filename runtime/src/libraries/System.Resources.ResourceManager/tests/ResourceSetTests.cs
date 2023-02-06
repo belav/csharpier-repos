@@ -60,7 +60,14 @@ namespace System.Resources.Tests
         public void Enumerate()
         {
             var set = GetSet(StaticResources.WithData);
-            var keys = new List<string> { "String", "Int", "Float", "Bytes", "ByteStream" };
+            var keys = new List<string>
+            {
+                "String",
+                "Int",
+                "Float",
+                "Bytes",
+                "ByteStream"
+            };
             var enumerator = set.GetEnumerator();
             var idx = 0;
             while (enumerator.MoveNext())
@@ -161,7 +168,12 @@ namespace System.Resources.Tests
         {
             var rs = new ResourceSet(new SimpleResourceReader());
 
-            var expected = new HashSet<object>() { 1, "String", "Int32" };
+            var expected = new HashSet<object>()
+            {
+                1,
+                "String",
+                "Int32"
+            };
 
             foreach (DictionaryEntry entry in rs)
             {

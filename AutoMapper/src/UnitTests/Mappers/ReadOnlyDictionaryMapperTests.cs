@@ -21,7 +21,13 @@ public class When_mapping_to_interface_readonly_dictionary : AutoMapperSpecBase
     [Fact]
     public void Should_map_readonly_values()
     {
-        var values = new Dictionary<int, int> { { 1, 1 }, { 2, 2 }, { 3, 3 }, { 4, 4 }, };
+        var values = new Dictionary<int, int>
+        {
+            { 1, 1 },
+            { 2, 2 },
+            { 3, 3 },
+            { 4, 4 },
+        };
         var source = new Source { Values = values };
 
         var dest = Mapper.Map<Destination>(source);
@@ -51,7 +57,13 @@ public class When_mapping_to_concrete_readonly_dictionary : AutoMapperSpecBase
     [Fact]
     public void Should_map_readonly_values()
     {
-        var values = new Dictionary<int, int> { { 1, 1 }, { 2, 2 }, { 3, 3 }, { 4, 4 }, };
+        var values = new Dictionary<int, int>
+        {
+            { 1, 1 },
+            { 2, 2 },
+            { 3, 3 },
+            { 4, 4 },
+        };
         var source = new Source { Values = new ReadOnlyDictionary<int, int>(values) };
 
         var dest = Mapper.Map<Destination>(source);

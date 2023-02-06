@@ -9,7 +9,12 @@ public class ShortFormDictionaryValidationStrategyTest
     public void EnumerateElements()
     {
         // Arrange
-        var model = new Dictionary<int, string>() { { 2, "two" }, { 3, "three" }, { 5, "five" }, };
+        var model = new Dictionary<int, string>()
+        {
+            { 2, "two" },
+            { 3, "three" },
+            { 5, "five" },
+        };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var metadata = metadataProvider.GetMetadataForType(typeof(List<int>));
@@ -55,7 +60,12 @@ public class ShortFormDictionaryValidationStrategyTest
     public void EnumerateElements_RunOutOfIndices()
     {
         // Arrange
-        var model = new Dictionary<int, string>() { { 2, "two" }, { 3, "three" }, { 5, "five" }, };
+        var model = new Dictionary<int, string>()
+        {
+            { 2, "two" },
+            { 3, "three" },
+            { 5, "five" },
+        };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var metadata = metadataProvider.GetMetadataForType(typeof(List<int>));

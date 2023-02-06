@@ -961,7 +961,11 @@ namespace MonoTests.System
         [Test]
         public void TestGetEnumeratorMultipleDimension()
         {
-            String[,] s1 = { { "this", "is" }, { "a", "test" } };
+            String[,] s1 =
+            {
+                { "this", "is" },
+                { "a", "test" }
+            };
             IEnumerator en = s1.GetEnumerator();
             Assert.IsNotNull(en, "#AA01");
 
@@ -3504,7 +3508,11 @@ namespace MonoTests.System
         [ExpectedException(typeof(RankException))]
         public void MoreSort5()
         {
-            char[,] arr = new char[,] { { 'a' }, { 'b' } };
+            char[,] arr = new char[,]
+            {
+                { 'a' },
+                { 'b' }
+            };
             Array.Sort(arr, 0, 1);
         }
 
@@ -3588,7 +3596,11 @@ namespace MonoTests.System
         [Test]
         public void ClearMultidimentionalArray()
         {
-            byte[,] matrix = new byte[2, 2] { { 1, 1 }, { 2, 2 } };
+            byte[,] matrix = new byte[2, 2]
+            {
+                { 1, 1 },
+                { 2, 2 }
+            };
             Array.Clear(matrix, 0, 2);
             Assert.AreEqual(0, matrix[0, 0], "0,0");
             Assert.AreEqual(0, matrix[0, 1], "0,1");
@@ -3600,7 +3612,11 @@ namespace MonoTests.System
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void ClearOutsideMultidimentionalArray()
         {
-            byte[,] matrix = new byte[2, 2] { { 1, 1 }, { 2, 2 } };
+            byte[,] matrix = new byte[2, 2]
+            {
+                { 1, 1 },
+                { 2, 2 }
+            };
             Array.Clear(matrix, 0, 5);
         }
 
@@ -4288,8 +4304,16 @@ namespace MonoTests.System
         [ExpectedException(typeof(ArgumentException))]
         public void CompareToWithMultiDimArray1()
         {
-            IStructuralComparable a = new int[2, 2] { { 10, 10 }, { 10, 10 } };
-            IStructuralComparable b = new int[2, 2] { { 10, 10 }, { 10, 10 } };
+            IStructuralComparable a = new int[2, 2]
+            {
+                { 10, 10 },
+                { 10, 10 }
+            };
+            IStructuralComparable b = new int[2, 2]
+            {
+                { 10, 10 },
+                { 10, 10 }
+            };
             a.CompareTo(b, Comparer<object>.Default);
         }
 
@@ -4298,7 +4322,11 @@ namespace MonoTests.System
         public void CompareToWithMultiDimArray2()
         {
             IStructuralComparable a = new int[2] { 10, 10 };
-            IStructuralComparable b = new int[2, 2] { { 10, 10 }, { 10, 10 } };
+            IStructuralComparable b = new int[2, 2]
+            {
+                { 10, 10 },
+                { 10, 10 }
+            };
             a.CompareTo(b, Comparer<object>.Default);
         }
 
@@ -4307,7 +4335,11 @@ namespace MonoTests.System
         public void CompareToWithMultiDimArray3()
         {
             IStructuralComparable a = new int[4] { 10, 10, 10, 10 };
-            IStructuralComparable b = new int[2, 2] { { 10, 10 }, { 10, 10 } };
+            IStructuralComparable b = new int[2, 2]
+            {
+                { 10, 10 },
+                { 10, 10 }
+            };
             a.CompareTo(b, Comparer<object>.Default);
         }
 

@@ -884,7 +884,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var cert2 = new X509Certificate2(TestData.ComplexNameInfoCert))
             using (var cert3 = new X509Certificate2(TestData.CertWithPolicies))
             {
-                var collection = new X509Certificate2Collection { cert1, cert2, cert3, };
+                var collection = new X509Certificate2Collection
+                {
+                    cert1,
+                    cert2,
+                    cert3,
+                };
 
                 byte[] exported = collection.Export(X509ContentType.Pkcs12);
 
@@ -1322,7 +1327,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 // Add c1Clone back
                 // End state: { c1, c2 } => { c2, c1Clone }
                 cc = new X509Certificate2Collection(array);
-                collection = new X509Certificate2Collection { c1Clone, c1, c2, };
+                collection = new X509Certificate2Collection
+                {
+                    c1Clone,
+                    c1,
+                    c2,
+                };
                 AssertExtensions.Throws<ArgumentException>(null, () => cc.RemoveRange(collection));
                 Assert.Equal(2, cc.Count);
                 Assert.Same(c2, cc[0]);

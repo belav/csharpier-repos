@@ -666,7 +666,10 @@ public class CSharpMigrationsGeneratorTest
                 {
                     Table = "T1",
                     Columns = new[] { "Id", "C2", "C3" },
-                    Values = new object[,] { { 1, null, -1 } }
+                    Values = new object[,]
+                    {
+                        { 1, null, -1 }
+                    }
                 }
             },
             Array.Empty<MigrationOperation>()
@@ -1154,7 +1157,11 @@ namespace MyNamespace
                 {
                     Table = "MyTable",
                     Columns = new[] { "Id", "MyColumn" },
-                    Values = new object[,] { { 1, null }, { 2, RegexOptions.Multiline } }
+                    Values = new object[,]
+                    {
+                        { 1, null },
+                        { 2, RegexOptions.Multiline }
+                    }
                 }
             },
             Array.Empty<MigrationOperation>()
@@ -1177,9 +1184,15 @@ namespace MyNamespace
                 {
                     Table = "MyTable",
                     KeyColumns = new[] { "Id" },
-                    KeyValues = new object[,] { { 1 } },
+                    KeyValues = new object[,]
+                    {
+                        { 1 }
+                    },
                     Columns = new[] { "MyColumn" },
-                    Values = new object[,] { { RegexOptions.Multiline } }
+                    Values = new object[,]
+                    {
+                        { RegexOptions.Multiline }
+                    }
                 }
             },
             Array.Empty<MigrationOperation>()
@@ -1202,9 +1215,15 @@ namespace MyNamespace
                 {
                     Table = "MyTable",
                     KeyColumns = new[] { "Id" },
-                    KeyValues = new object[,] { { RegexOptions.Multiline } },
+                    KeyValues = new object[,]
+                    {
+                        { RegexOptions.Multiline }
+                    },
                     Columns = new[] { "MyColumn" },
-                    Values = new object[,] { { 1 } }
+                    Values = new object[,]
+                    {
+                        { 1 }
+                    }
                 }
             },
             Array.Empty<MigrationOperation>()
@@ -1227,7 +1246,10 @@ namespace MyNamespace
                 {
                     Table = "MyTable",
                     KeyColumns = new[] { "Id" },
-                    KeyValues = new object[,] { { RegexOptions.Multiline } }
+                    KeyValues = new object[,]
+                    {
+                        { RegexOptions.Multiline }
+                    }
                 }
             },
             Array.Empty<MigrationOperation>()
@@ -1250,7 +1272,11 @@ namespace MyNamespace
                 {
                     Table = "MyTable",
                     KeyColumns = new[] { "Id" },
-                    KeyValues = new object[,] { { 1, 2 }, { 3, 4 } }
+                    KeyValues = new object[,]
+                    {
+                        { 1, 2 },
+                        { 3, 4 }
+                    }
                 }
             },
             Array.Empty<MigrationOperation>()
@@ -1273,7 +1299,10 @@ namespace MyNamespace
                 {
                     Table = "MyTable",
                     KeyColumns = new[] { "Id" },
-                    KeyValues = new object[,] { { 1, 2 } }
+                    KeyValues = new object[,]
+                    {
+                        { 1, 2 }
+                    }
                 }
             },
             Array.Empty<MigrationOperation>()

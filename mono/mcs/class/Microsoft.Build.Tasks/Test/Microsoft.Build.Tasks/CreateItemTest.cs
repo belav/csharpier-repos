@@ -104,7 +104,12 @@ namespace MonoTests.Microsoft.Build.Tasks
             };
             CheckBuildItem(include[0], "NewItem", additional_metadata, "2", "A");
 
-            additional_metadata = new string[,] { { "a", "1" }, { "b", "2" }, { "Sub", "fooC" } };
+            additional_metadata = new string[,]
+            {
+                { "a", "1" },
+                { "b", "2" },
+                { "Sub", "fooC" }
+            };
             CheckBuildItem(include[1], "NewItem", additional_metadata, "4", "B");
         }
 

@@ -442,7 +442,10 @@ namespace MonoTests.Microsoft.Build.Tasks
             BuildItemGroup include = project.GetEvaluatedItemsByName("GroupC");
             Assert.AreEqual(4, include.Count, "A2");
 
-            string[,] additional_metadata = new string[,] { { "Identity", "PreExistingValue" } };
+            string[,] additional_metadata = new string[,]
+            {
+                { "Identity", "PreExistingValue" }
+            };
             CreateItemTest.CheckBuildItem(
                 include[0],
                 "GroupC",
@@ -451,7 +454,10 @@ namespace MonoTests.Microsoft.Build.Tasks
                 "A3"
             );
 
-            additional_metadata = new string[,] { { "Identity", "file1.txt" } };
+            additional_metadata = new string[,]
+            {
+                { "Identity", "file1.txt" }
+            };
             CreateItemTest.CheckBuildItem(
                 include[1],
                 "GroupC",
@@ -460,7 +466,10 @@ namespace MonoTests.Microsoft.Build.Tasks
                 "A4"
             );
 
-            additional_metadata = new string[,] { { "Identity", "file3.txt" } };
+            additional_metadata = new string[,]
+            {
+                { "Identity", "file3.txt" }
+            };
             CreateItemTest.CheckBuildItem(
                 include[2],
                 "GroupC",
@@ -563,13 +572,22 @@ namespace MonoTests.Microsoft.Build.Tasks
             BuildItemGroup include = project.GetEvaluatedItemsByName("Final");
             Assert.AreEqual(3, include.Count, "A2");
 
-            string[,] additional_metadata = new string[,] { { "Identity", "orange" } };
+            string[,] additional_metadata = new string[,]
+            {
+                { "Identity", "orange" }
+            };
             CreateItemTest.CheckBuildItem(include[0], "Final", additional_metadata, "orange", "A3");
 
-            additional_metadata = new string[,] { { "Identity", "pear" } };
+            additional_metadata = new string[,]
+            {
+                { "Identity", "pear" }
+            };
             CreateItemTest.CheckBuildItem(include[1], "Final", additional_metadata, "pear", "A4");
 
-            additional_metadata = new string[,] { { "Identity", "apricot" } };
+            additional_metadata = new string[,]
+            {
+                { "Identity", "apricot" }
+            };
             CreateItemTest.CheckBuildItem(
                 include[2],
                 "Final",

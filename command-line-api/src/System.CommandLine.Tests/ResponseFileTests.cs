@@ -265,7 +265,12 @@ namespace System.CommandLine.Tests
             var option2 = new Option<int>("--two");
             var option3 = new Option<int>("--three");
 
-            var command = new RootCommand { option1, option2, option3 };
+            var command = new RootCommand
+            {
+                option1,
+                option2,
+                option3
+            };
 
             var result = command.Parse($"@{file1}");
 

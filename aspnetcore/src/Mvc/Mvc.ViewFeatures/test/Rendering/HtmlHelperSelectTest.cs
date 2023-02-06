@@ -912,7 +912,15 @@ public class HtmlHelperSelectTest
     public void DropDownListFor_WithIndexerExpression_GeneratesExpectedValue()
     {
         // Arrange
-        var model = new ModelContainingList { Property1 = { "0", "1", "2" } };
+        var model = new ModelContainingList
+        {
+            Property1 =
+            {
+                "0",
+                "1",
+                "2"
+            }
+        };
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
         var selectList = SomeDisabledOneSelectedSelectList;
         var savedSelected = selectList.Select(item => item.Selected).ToList();

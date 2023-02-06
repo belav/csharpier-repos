@@ -32,7 +32,12 @@ public class Test
 
         public Library()
         {
-            Books = new List<string> { "Tale of Two Cities", "Catcher in the Rye", "Great Gatsby" };
+            Books = new List<string>
+            {
+                "Tale of Two Cities",
+                "Catcher in the Rye",
+                "Great Gatsby"
+            };
         }
     }
 
@@ -71,7 +76,12 @@ public class Test
         )
             return 2;
 
-        List<string> list = new List<string>(3) { "Foo", "Bar", "Baz" };
+        List<string> list = new List<string>(3)
+        {
+            "Foo",
+            "Bar",
+            "Baz"
+        };
         if (list[0] != "Foo" || list[1] != "Bar" || list[2] != "Baz")
             return 3;
 

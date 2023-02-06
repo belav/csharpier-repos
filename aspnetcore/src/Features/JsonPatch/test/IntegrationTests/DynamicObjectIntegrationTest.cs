@@ -185,7 +185,12 @@ public class DynamicObjectIntegrationTest
         dynamicTestObject.SimpleObject = new SimpleObject()
         {
             IntegerValue = 5,
-            IntegerList = new List<int>() { 1, 2, 3 }
+            IntegerList = new List<int>()
+            {
+                1,
+                2,
+                3
+            }
         };
 
         var newObject = new SimpleObject() { DoubleValue = 1 };
@@ -223,7 +228,12 @@ public class DynamicObjectIntegrationTest
         dynamic dynamicTestObject = new DynamicTestObject();
         dynamicTestObject.Nested = new SimpleObject()
         {
-            IntegerList = new List<int>() { 1, 2, 3 }
+            IntegerList = new List<int>()
+            {
+                1,
+                2,
+                3
+            }
         };
 
         var patchDocument = new JsonPatchDocument();

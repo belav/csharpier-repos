@@ -2763,7 +2763,12 @@ namespace MonoTests.System
         [Test]
         public void GetGenericMethodDefinitionOverInflatedMethodOnGTD()
         {
-            var s = new List<int>() { 1, 2, 3 }.ConvertAll(i => i.ToString());
+            var s = new List<int>()
+            {
+                1,
+                2,
+                3
+            }.ConvertAll(i => i.ToString());
             Assert.AreEqual(3, s.Count);
             var l = typeof(List<>);
             var m = l.GetMethod("ConvertAll");

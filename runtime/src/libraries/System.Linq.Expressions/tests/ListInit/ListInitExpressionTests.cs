@@ -341,7 +341,15 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public void InitializeVoidAdd(bool useInterpreter)
         {
-            Expression<Func<List<int>>> listInit = () => new List<int> { 1, 2, 4, 16, 42 };
+            Expression<Func<List<int>>> listInit = () =>
+                new List<int>
+                {
+                    1,
+                    2,
+                    4,
+                    16,
+                    42
+                };
             Func<List<int>> func = listInit.Compile(useInterpreter);
             Assert.Equal(new[] { 1, 2, 4, 16, 42 }, func());
         }
@@ -350,7 +358,15 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public void InitializeNonVoidAdd(bool useInterpreter)
         {
-            Expression<Func<HashSet<int>>> hashInit = () => new HashSet<int> { 1, 2, 4, 16, 42 };
+            Expression<Func<HashSet<int>>> hashInit = () =>
+                new HashSet<int>
+                {
+                    1,
+                    2,
+                    4,
+                    16,
+                    42
+                };
             Func<HashSet<int>> func = hashInit.Compile(useInterpreter);
             Assert.Equal(new[] { 1, 2, 4, 16, 42 }, func().OrderBy(i => i));
         }
@@ -360,9 +376,19 @@ namespace System.Linq.Expressions.Tests
         public void InitializeTwoParameterAdd(bool useInterpreter)
         {
             Expression<Func<Dictionary<string, int>>> dictInit = () =>
-                new Dictionary<string, int> { { "a", 1 }, { "b", 2 }, { "c", 3 } };
+                new Dictionary<string, int>
+                {
+                    { "a", 1 },
+                    { "b", 2 },
+                    { "c", 3 }
+                };
             Func<Dictionary<string, int>> func = dictInit.Compile(useInterpreter);
-            var expected = new Dictionary<string, int> { { "a", 1 }, { "b", 2 }, { "c", 3 } };
+            var expected = new Dictionary<string, int>
+            {
+                { "a", 1 },
+                { "b", 2 },
+                { "c", 3 }
+            };
             Assert.Equal(expected.OrderBy(kvp => kvp.Key), func().OrderBy(kvp => kvp.Key));
         }
 

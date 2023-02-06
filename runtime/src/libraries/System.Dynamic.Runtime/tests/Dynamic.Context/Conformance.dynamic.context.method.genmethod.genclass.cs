@@ -506,7 +506,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<string>();
-            List<string> list = new List<string>() { null, string.Empty, "Test" };
+            List<string> list = new List<string>()
+            {
+                null,
+                string.Empty,
+                "Test"
+            };
             List<string> list2 = new List<string>();
             foreach (
                 dynamic s in (IEnumerable)
@@ -553,7 +558,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<string>();
-            var list1 = new List<int>() { 0, 1, 2 };
+            var list1 = new List<int>()
+            {
+                0,
+                1,
+                2
+            };
             var list2 = new List<int>();
             foreach (int s in list1)
             {
@@ -1743,7 +1753,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<string>();
-            List<string> list = new List<string>() { null, string.Empty, "Test" };
+            List<string> list = new List<string>()
+            {
+                null,
+                string.Empty,
+                "Test"
+            };
             List<string> list2 = new List<string>();
             foreach (string s in mc.Method_ReturnsDynamic(null, 0, list, mc))
             {

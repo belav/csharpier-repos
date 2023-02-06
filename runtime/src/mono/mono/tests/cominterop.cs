@@ -946,7 +946,11 @@ public class Tests
                 if ((int)array.GetValue(0) != 0)
                     return 74;
 
-                array = new object[,] { { 11, 12, 13, 14 }, { 21, 22, 23, 24 } };
+                array = new object[,]
+                {
+                    { 11, 12, 13, 14 },
+                    { 21, 22, 23, 24 }
+                };
                 if (mono_test_marshal_safearray_in_byval_2dim_vt_i4(array) != 0)
                     return 75;
                 if ((int)array.GetValue(new int[] { 0, 0 }) != 11)
@@ -954,8 +958,14 @@ public class Tests
 
                 array = new object[,,]
                 {
-                    { { "111", "112", "113" }, { "121", "122", "123" } },
-                    { { "211", "212", "213" }, { "221", "222", "223" } }
+                    {
+                        { "111", "112", "113" },
+                        { "121", "122", "123" }
+                    },
+                    {
+                        { "211", "212", "213" },
+                        { "221", "222", "223" }
+                    }
                 };
                 if (mono_test_marshal_safearray_in_byval_3dim_vt_bstr(array) != 0)
                     return 77;
@@ -964,8 +974,14 @@ public class Tests
 
                 array = new object[,,]
                 {
-                    { { "111", "112", "113" }, { "121", "122", "123" } },
-                    { { "211", "212", "213" }, { "221", "222", "223" } }
+                    {
+                        { "111", "112", "113" },
+                        { "121", "122", "123" }
+                    },
+                    {
+                        { "211", "212", "213" },
+                        { "221", "222", "223" }
+                    }
                 };
                 if (
                     (mono_test_marshal_safearray_in_byref_3dim_vt_bstr(ref array) != 0)
@@ -993,8 +1009,14 @@ public class Tests
 
                 array = new object[,,]
                 {
-                    { { "111", "112", "113" }, { "121", "122", "123" } },
-                    { { "211", "212", "213" }, { "221", "222", "223" } }
+                    {
+                        { "111", "112", "113" },
+                        { "121", "122", "123" }
+                    },
+                    {
+                        { "211", "212", "213" },
+                        { "221", "222", "223" }
+                    }
                 };
                 if (
                     (mono_test_marshal_safearray_in_out_byref_3dim_vt_bstr(ref array) != 0)
@@ -1036,8 +1058,14 @@ public class Tests
 
                 array = new object[,,]
                 {
-                    { { "111", "112", "113" }, { "121", "122", "123" } },
-                    { { "211", "212", "213" }, { "221", "222", "223" } }
+                    {
+                        { "111", "112", "113" },
+                        { "121", "122", "123" }
+                    },
+                    {
+                        { "211", "212", "213" },
+                        { "221", "222", "223" }
+                    }
                 };
                 if (
                     (mono_test_marshal_safearray_in_out_byval_3dim_vt_bstr(array) != 0)
@@ -1057,7 +1085,11 @@ public class Tests
                 /* Multiple safearray parameters with various types and options */
 
                 Array array1 = new object[] { 1 };
-                Array array2 = new object[,] { { 11, 12, 13, 14 }, { 21, 22, 23, 24 } };
+                Array array2 = new object[,]
+                {
+                    { 11, 12, 13, 14 },
+                    { 21, 22, 23, 24 }
+                };
                 Array array3 = new object[]
                 {
                     0,
@@ -1076,8 +1108,14 @@ public class Tests
                 };
                 Array array4 = new object[,,]
                 {
-                    { { "111", "112", "113" }, { "121", "122", "123" } },
-                    { { "211", "212", "213" }, { "221", "222", "223" } }
+                    {
+                        { "111", "112", "113" },
+                        { "121", "122", "123" }
+                    },
+                    {
+                        { "211", "212", "213" },
+                        { "221", "222", "223" }
+                    }
                 };
                 if (
                     (mono_test_marshal_safearray_mixed(array1, out array2, array3, ref array4) != 0)

@@ -1204,17 +1204,36 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         Assert.Equal(
-            new List<string> { "Id", "GarciaId", "Monkey", "Nonkey", "Garcia" },
+            new List<string>
+            {
+                "Id",
+                "GarciaId",
+                "Monkey",
+                "Nonkey",
+                "Garcia"
+            },
             context.Attach(new Chunky()).Members.Select(e => e.Metadata.Name).ToList()
         );
 
         Assert.Equal(
-            new List<string> { "Id", "Garcia", "Baked", "Monkeys" },
+            new List<string>
+            {
+                "Id",
+                "Garcia",
+                "Baked",
+                "Monkeys"
+            },
             context.Attach(new Cherry()).Members.Select(e => e.Metadata.Name).ToList()
         );
 
         Assert.Equal(
-            new List<string> { "Id", "Baked", "GarciaId", "Garcia" },
+            new List<string>
+            {
+                "Id",
+                "Baked",
+                "GarciaId",
+                "Garcia"
+            },
             context.Attach(new Half()).Members.Select(e => e.Metadata.Name).ToList()
         );
     }
@@ -1224,7 +1243,13 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         Assert.Equal(
-            new List<string> { "Id", "GarciaId", "Monkey", "Nonkey" },
+            new List<string>
+            {
+                "Id",
+                "GarciaId",
+                "Monkey",
+                "Nonkey"
+            },
             context.Attach(new Chunky()).Properties.Select(e => e.Metadata.Name).ToList()
         );
 
@@ -1234,7 +1259,12 @@ public class EntityEntryTest
         );
 
         Assert.Equal(
-            new List<string> { "Id", "Baked", "GarciaId" },
+            new List<string>
+            {
+                "Id",
+                "Baked",
+                "GarciaId"
+            },
             context.Attach(new Half()).Properties.Select(e => e.Metadata.Name).ToList()
         );
     }

@@ -269,26 +269,66 @@ namespace System.Text.Json.Node.Tests
                 {
                     new JsonArray
                     {
-                        new JsonArray { 0, 0, 0 },
-                        new JsonArray { 0, 0, 1 }
+                        new JsonArray
+                        {
+                            0,
+                            0,
+                            0
+                        },
+                        new JsonArray
+                        {
+                            0,
+                            0,
+                            1
+                        }
                     },
                     new JsonArray
                     {
-                        new JsonArray { 0, 1, 0 },
-                        new JsonArray { 0, 1, 1 }
+                        new JsonArray
+                        {
+                            0,
+                            1,
+                            0
+                        },
+                        new JsonArray
+                        {
+                            0,
+                            1,
+                            1
+                        }
                     }
                 },
                 new JsonArray
                 {
                     new JsonArray
                     {
-                        new JsonArray { 1, 0, 0 },
-                        new JsonArray { 1, 0, 1 }
+                        new JsonArray
+                        {
+                            1,
+                            0,
+                            0
+                        },
+                        new JsonArray
+                        {
+                            1,
+                            0,
+                            1
+                        }
                     },
                     new JsonArray
                     {
-                        new JsonArray { 1, 1, 0 },
-                        new JsonArray { 1, 1, 1 }
+                        new JsonArray
+                        {
+                            1,
+                            1,
+                            0
+                        },
+                        new JsonArray
+                        {
+                            1,
+                            1,
+                            1
+                        }
                     }
                 },
             };
@@ -348,7 +388,12 @@ namespace System.Text.Json.Node.Tests
                 },
                 {
                     "bugs",
-                    new JsonArray { "bug 123", "bug 4566", "bug 821" }
+                    new JsonArray
+                    {
+                        "bug 123",
+                        "bug 4566",
+                        "bug 821"
+                    }
                 },
                 {
                     "tests",
@@ -396,7 +441,15 @@ namespace System.Text.Json.Node.Tests
         [Fact]
         public static void HeterogeneousArray()
         {
-            var mixedTypesArray = new JsonArray { 1, "value", true, null, 2.3, new JsonObject() };
+            var mixedTypesArray = new JsonArray
+            {
+                1,
+                "value",
+                true,
+                null,
+                2.3,
+                new JsonObject()
+            };
 
             Assert.Equal(1, mixedTypesArray[0].GetValue<int>());
             Assert.Equal("value", mixedTypesArray[1].GetValue<string>());
@@ -422,12 +475,22 @@ namespace System.Text.Json.Node.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new JsonArray()[1]);
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                var jArray = new JsonArray { 1, 2, 3 };
+                var jArray = new JsonArray
+                {
+                    1,
+                    2,
+                    3
+                };
                 jArray.Insert(4, 17);
             });
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                var jArray = new JsonArray { 1, 2, 3 };
+                var jArray = new JsonArray
+                {
+                    1,
+                    2,
+                    3
+                };
                 jArray.Insert(-1, 17);
             });
         }

@@ -83,7 +83,14 @@ public class C : B
 
         Test(() =>
         {
-            object o = new List<object> { "Hello", "", null, "World", 5 };
+            object o = new List<object>
+            {
+                "Hello",
+                "",
+                null,
+                "World",
+                5
+            };
         });
 
         Test(() =>

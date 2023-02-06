@@ -1954,7 +1954,11 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ArrayTypeArrayNotAllowedIfNotSZArray()
         {
-            Array arr = new[,] { { 1, 2, 3 }, { 1, 2, 2 } };
+            Array arr = new[,]
+            {
+                { 1, 2, 3 },
+                { 1, 2, 2 }
+            };
             AssertExtensions.Throws<ArgumentException>(
                 "array",
                 () => Expression.ArrayLength(Expression.Constant(arr))

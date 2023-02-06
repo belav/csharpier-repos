@@ -15,18 +15,78 @@ public struct VT
 
 public class CL
 {
-    public uint[,] uint2darr = { { 0, 1 }, { 0, 0 } };
-    public uint[,,] uint3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    public uint[,] uint2darr_b = { { 0, 49 }, { 0, 0 } };
-    public uint[,,] uint3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public uint[,] uint2darr =
+    {
+        { 0, 1 },
+        { 0, 0 }
+    };
+    public uint[,,] uint3darr =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    public uint[,] uint2darr_b =
+    {
+        { 0, 49 },
+        { 0, 0 }
+    };
+    public uint[,,] uint3darr_b =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 49 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
 }
 
 public class uintMDArrTest
 {
-    static uint[,] uint2darr = { { 0, 1 }, { 0, 0 } };
-    static uint[,,] uint3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    static uint[,] uint2darr_b = { { 0, 49 }, { 0, 0 } };
-    static uint[,,] uint3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static uint[,] uint2darr =
+    {
+        { 0, 1 },
+        { 0, 0 }
+    };
+    static uint[,,] uint3darr =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    static uint[,] uint2darr_b =
+    {
+        { 0, 49 },
+        { 0, 0 }
+    };
+    static uint[,,] uint3darr_b =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 49 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
 
     static uint[][,] ja1 = new uint[2][,];
     static uint[][,,] ja2 = new uint[2][,,];
@@ -39,17 +99,77 @@ public class uintMDArrTest
         bool pass = true;
 
         VT vt1;
-        vt1.uint2darr = new uint[,] { { 0, 1 }, { 0, 0 } };
-        vt1.uint3darr = new uint[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        vt1.uint2darr_b = new uint[,] { { 0, 49 }, { 0, 0 } };
-        vt1.uint3darr_b = new uint[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        vt1.uint2darr = new uint[,]
+        {
+            { 0, 1 },
+            { 0, 0 }
+        };
+        vt1.uint3darr = new uint[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        vt1.uint2darr_b = new uint[,]
+        {
+            { 0, 49 },
+            { 0, 0 }
+        };
+        vt1.uint3darr_b = new uint[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 49 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new uint[,] { { 0, 1 }, { 0, 0 } };
-        ja2[1] = new uint[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        ja1_b[0] = new uint[,] { { 0, 49 }, { 0, 0 } };
-        ja2_b[1] = new uint[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        ja1[0] = new uint[,]
+        {
+            { 0, 1 },
+            { 0, 0 }
+        };
+        ja2[1] = new uint[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        ja1_b[0] = new uint[,]
+        {
+            { 0, 49 },
+            { 0, 0 }
+        };
+        ja2_b[1] = new uint[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 49 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
 
         uint result = 1;
 

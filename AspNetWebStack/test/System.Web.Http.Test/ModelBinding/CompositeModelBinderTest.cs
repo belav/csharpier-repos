@@ -100,7 +100,14 @@ namespace System.Web.Http.ModelBinding
             );
 
             bool validationCalled = false;
-            List<int> expectedModel = new List<int> { 1, 2, 3, 4, 5 };
+            List<int> expectedModel = new List<int>
+            {
+                1,
+                2,
+                3,
+                4,
+                5
+            };
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {

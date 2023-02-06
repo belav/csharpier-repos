@@ -15,18 +15,78 @@ public struct VT
 
 public class CL
 {
-    public float[,] float2darr = { { 0, -1 }, { 0, 0 } };
-    public float[,,] float3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-    public float[,] float2darr_b = { { 0, 1 }, { 0, 0 } };
-    public float[,,] float3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public float[,] float2darr =
+    {
+        { 0, -1 },
+        { 0, 0 }
+    };
+    public float[,,] float3darr =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, -1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    public float[,] float2darr_b =
+    {
+        { 0, 1 },
+        { 0, 0 }
+    };
+    public float[,,] float3darr_b =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
 }
 
 public class floatMDArrTest
 {
-    static float[,] float2darr = { { 0, -1 }, { 0, 0 } };
-    static float[,,] float3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-    static float[,] float2darr_b = { { 0, 1 }, { 0, 0 } };
-    static float[,,] float3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static float[,] float2darr =
+    {
+        { 0, -1 },
+        { 0, 0 }
+    };
+    static float[,,] float3darr =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, -1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
+    static float[,] float2darr_b =
+    {
+        { 0, 1 },
+        { 0, 0 }
+    };
+    static float[,,] float3darr_b =
+    {
+        {
+            { 0, 0 }
+        },
+        {
+            { 0, 1 }
+        },
+        {
+            { 0, 0 }
+        }
+    };
 
     static float[][,] ja1 = new float[2][,];
     static float[][,,] ja2 = new float[2][,,];
@@ -39,17 +99,77 @@ public class floatMDArrTest
         bool pass = true;
 
         VT vt1;
-        vt1.float2darr = new float[,] { { 0, -1 }, { 0, 0 } };
-        vt1.float3darr = new float[,,] { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-        vt1.float2darr_b = new float[,] { { 0, 1 }, { 0, 0 } };
-        vt1.float3darr_b = new float[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+        vt1.float2darr = new float[,]
+        {
+            { 0, -1 },
+            { 0, 0 }
+        };
+        vt1.float3darr = new float[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, -1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        vt1.float2darr_b = new float[,]
+        {
+            { 0, 1 },
+            { 0, 0 }
+        };
+        vt1.float3darr_b = new float[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new float[,] { { 0, -1 }, { 0, 0 } };
-        ja2[1] = new float[,,] { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-        ja1_b[0] = new float[,] { { 0, 1 }, { 0, 0 } };
-        ja2_b[1] = new float[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+        ja1[0] = new float[,]
+        {
+            { 0, -1 },
+            { 0, 0 }
+        };
+        ja2[1] = new float[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, -1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
+        ja1_b[0] = new float[,]
+        {
+            { 0, 1 },
+            { 0, 0 }
+        };
+        ja2_b[1] = new float[,,]
+        {
+            {
+                { 0, 0 }
+            },
+            {
+                { 0, 1 }
+            },
+            {
+                { 0, 0 }
+            }
+        };
 
         float result = -1;
 

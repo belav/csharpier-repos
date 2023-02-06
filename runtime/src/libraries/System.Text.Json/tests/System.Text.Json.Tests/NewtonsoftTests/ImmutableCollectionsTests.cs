@@ -43,7 +43,12 @@ namespace System.Text.Json.Tests
         public void SerializeList()
         {
             ImmutableList<string> data = ImmutableList.CreateRange(
-                new List<string> { "One", "II", "3" }
+                new List<string>
+                {
+                    "One",
+                    "II",
+                    "3"
+                }
             );
 
             string json = JsonSerializer.Serialize(data);
@@ -94,7 +99,12 @@ namespace System.Text.Json.Tests
         public void SerializeArray()
         {
             ImmutableArray<string> data = ImmutableArray.CreateRange(
-                new List<string> { "One", "II", "3" }
+                new List<string>
+                {
+                    "One",
+                    "II",
+                    "3"
+                }
             );
 
             string json = JsonSerializer.Serialize(data, s_indentedOption);
@@ -142,7 +152,12 @@ namespace System.Text.Json.Tests
         public void SerializeQueue()
         {
             ImmutableQueue<string> data = ImmutableQueue.CreateRange(
-                new List<string> { "One", "II", "3" }
+                new List<string>
+                {
+                    "One",
+                    "II",
+                    "3"
+                }
             );
 
             string json = JsonSerializer.Serialize(data);
@@ -197,7 +212,12 @@ namespace System.Text.Json.Tests
         public void SerializeStack()
         {
             ImmutableStack<string> data = ImmutableStack.CreateRange(
-                new List<string> { "One", "II", "3" }
+                new List<string>
+                {
+                    "One",
+                    "II",
+                    "3"
+                }
             );
 
             string json = JsonSerializer.Serialize(data);
@@ -252,7 +272,12 @@ namespace System.Text.Json.Tests
         public void SerializeHashSet()
         {
             ImmutableHashSet<string> data = ImmutableHashSet.CreateRange(
-                new List<string> { "One", "II", "3" }
+                new List<string>
+                {
+                    "One",
+                    "II",
+                    "3"
+                }
             );
 
             string json = JsonSerializer.Serialize(data, s_indentedOption);
@@ -308,7 +333,12 @@ namespace System.Text.Json.Tests
         public void SerializeSortedSet()
         {
             ImmutableSortedSet<string> data = ImmutableSortedSet.CreateRange(
-                new List<string> { "One", "II", "3" }
+                new List<string>
+                {
+                    "One",
+                    "II",
+                    "3"
+                }
             );
 
             string json = JsonSerializer.Serialize(data);
@@ -342,7 +372,12 @@ namespace System.Text.Json.Tests
         public void SerializeDictionary()
         {
             ImmutableDictionary<int, string> data = ImmutableDictionary.CreateRange(
-                new Dictionary<int, string> { { 1, "One" }, { 2, "II" }, { 3, "3" } }
+                new Dictionary<int, string>
+                {
+                    { 1, "One" },
+                    { 2, "II" },
+                    { 3, "3" }
+                }
             );
 
             string json = JsonSerializer.Serialize(data, s_indentedOption);
@@ -404,7 +439,12 @@ namespace System.Text.Json.Tests
         public void SerializeSortedDictionary()
         {
             ImmutableSortedDictionary<int, string> data = ImmutableSortedDictionary.CreateRange(
-                new SortedDictionary<int, string> { { 1, "One" }, { 2, "II" }, { 3, "3" } }
+                new SortedDictionary<int, string>
+                {
+                    { 1, "One" },
+                    { 2, "II" },
+                    { 3, "3" }
+                }
             );
 
             string json = JsonSerializer.Serialize(data, s_indentedOption);

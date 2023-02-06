@@ -1793,9 +1793,19 @@ namespace System.Text.Json.Serialization.Tests
                 );
 
                 yield return new TestData(
-                    Value: new DerivedCollection { 1, 2, 3 },
+                    Value: new DerivedCollection
+                    {
+                        1,
+                        2,
+                        3
+                    },
                     ExpectedJson: @"{ ""$type"" : ""derivedCollection"", ""$values"" : [1,2,3]}",
-                    ExpectedRoundtripValue: new DerivedCollection { 1, 2, 3 }
+                    ExpectedRoundtripValue: new DerivedCollection
+                    {
+                        1,
+                        2,
+                        3
+                    }
                 );
 
                 yield return new TestData(

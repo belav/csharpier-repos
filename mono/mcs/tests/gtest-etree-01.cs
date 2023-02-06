@@ -622,7 +622,19 @@ class Tester
         Expression<Func<object[,], int, int, object>> e3 = (object[,] a, int i, int j) => a[i, j];
         AssertNodeType(e3, ExpressionType.Call);
 
-        Assert("z", e3.Compile().Invoke(new object[,] { { 1, 2 }, { "x", "z" } }, 1, 1));
+        Assert(
+            "z",
+            e3.Compile()
+                .Invoke(
+                    new object[,]
+                    {
+                        { 1, 2 },
+                        { "x", "z" }
+                    },
+                    1,
+                    1
+                )
+        );
     }
 
     void ArrayIndexTest_4()
@@ -1691,7 +1703,14 @@ class Tester
     void ListInitTest()
     {
         Expression<Func<List<object>>> e1 = () =>
-            new List<object> { "Hello", "", null, "World", 5 };
+            new List<object>
+            {
+                "Hello",
+                "",
+                null,
+                "World",
+                5
+            };
         AssertNodeType(e1, ExpressionType.ListInit);
         var re1 = e1.Compile().Invoke();
         Assert(null, re1[2]);

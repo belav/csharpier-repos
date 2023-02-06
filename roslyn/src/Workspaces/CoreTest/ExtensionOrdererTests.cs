@@ -23,7 +23,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var d = CreateExtension(name: "d", before: new[] { "e" });
             var e = CreateExtension(name: "e");
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { d, b, a, c, e };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                d,
+                b,
+                a,
+                c,
+                e
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException if cycle is detected.
             ExtensionOrderer.TestAccessor.CheckForCycles(extensions);
@@ -40,7 +47,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var d = CreateExtension(name: "d", after: new[] { "e" });
             var e = CreateExtension(name: "e");
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { d, b, a, c, e };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                d,
+                b,
+                a,
+                c,
+                e
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException if cycle is detected.
             ExtensionOrderer.TestAccessor.CheckForCycles(extensions);
@@ -69,7 +83,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
             var e = CreateExtension(name: "e", after: new[] { "d", "c", "b", "a" });
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { d, b, a, c, e };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                d,
+                b,
+                a,
+                c,
+                e
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException if cycle is detected.
             ExtensionOrderer.TestAccessor.CheckForCycles(extensions);
@@ -86,7 +107,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var d = CreateExtension(name: "d", before: new[] { "e" });
             var e = CreateExtension(name: "e", before: new[] { "a" });
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                a,
+                b,
+                c,
+                d,
+                e
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(
@@ -105,7 +133,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var d = CreateExtension(name: "d", after: new[] { "e" });
             var e = CreateExtension(name: "e", after: new[] { "a" });
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                a,
+                b,
+                c,
+                d,
+                e
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(
@@ -122,7 +157,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var b = CreateExtension(name: "b", before: new[] { "a" }, after: new[] { "a" });
             var c = CreateExtension(name: "c");
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                a,
+                b,
+                c
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(
@@ -139,7 +179,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var b = CreateExtension(name: "b", before: new[] { "b" }, after: new[] { "b" });
             var c = CreateExtension(name: "c");
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                a,
+                b,
+                c
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(
@@ -160,7 +205,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var f = CreateExtension(name: "f", before: new[] { "g" });
             var g = CreateExtension(name: "g");
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e, f, g };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                a,
+                b,
+                c,
+                d,
+                e,
+                f,
+                g
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(
@@ -181,7 +235,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var f = CreateExtension(name: "f", before: new[] { "g" });
             var g = CreateExtension(name: "g");
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e, f, g };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                a,
+                b,
+                c,
+                d,
+                e,
+                f,
+                g
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(
@@ -201,7 +264,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var e = CreateExtension(name: "e", before: new[] { "f" });
             var f = CreateExtension(name: "f", before: new[] { "d" });
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e, f };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                a,
+                b,
+                c,
+                d,
+                e,
+                f
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(
@@ -221,7 +292,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var e = CreateExtension(name: "e", before: new[] { "f" });
             var f = CreateExtension(name: "f", before: new[] { "a" });
 
-            var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e, f };
+            var extensions = new List<Lazy<Extension, OrderableMetadata>>()
+            {
+                a,
+                b,
+                c,
+                d,
+                e,
+                f
+            };
 
             // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
             Assert.Throws<ArgumentException>(

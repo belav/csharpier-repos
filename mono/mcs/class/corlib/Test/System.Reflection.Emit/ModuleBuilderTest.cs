@@ -400,7 +400,11 @@ namespace MonoTests.System.Reflection.Emit
 
             var t = tb.CreateType();
             Assert.IsNotNull(t);
-            var a = new int[,] { { 5, 7 }, { 11, 19 } };
+            var a = new int[,]
+            {
+                { 5, 7 },
+                { 11, 19 }
+            };
             var mi = t.GetMethod("TestMeth");
             Assert.IsNotNull(t);
             var o = mi.Invoke(null, new object[] { a });

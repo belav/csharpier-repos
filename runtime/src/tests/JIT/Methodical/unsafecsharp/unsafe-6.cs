@@ -380,7 +380,17 @@ namespace Test_unsafe_6
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_48(new B[,] { { new B(), new B() }, { new B(), loc_x.m_b } }, 1, 1) != 100)
+            if (
+                test_48(
+                    new B[,]
+                    {
+                        { new B(), new B() },
+                        { new B(), loc_x.m_b }
+                    },
+                    1,
+                    1
+                ) != 100
+            )
             {
                 Console.WriteLine("test_48() failed.");
                 return 148;
@@ -471,7 +481,21 @@ namespace Test_unsafe_6
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_139(&loc_x.m_b - 1, new long[,,] { { { 0 } }, { { 0 } } }, 2) != 100)
+            if (
+                test_139(
+                    &loc_x.m_b - 1,
+                    new long[,,]
+                    {
+                        {
+                            { 0 }
+                        },
+                        {
+                            { 0 }
+                        }
+                    },
+                    2
+                ) != 100
+            )
             {
                 Console.WriteLine("test_139() failed.");
                 return 239;
@@ -519,7 +543,22 @@ namespace Test_unsafe_6
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_181(&loc_x.m_b - 1, new long[,,] { { { 0 } }, { { 0 } } }, 2, 2) != 100)
+            if (
+                test_181(
+                    &loc_x.m_b - 1,
+                    new long[,,]
+                    {
+                        {
+                            { 0 }
+                        },
+                        {
+                            { 0 }
+                        }
+                    },
+                    2,
+                    2
+                ) != 100
+            )
             {
                 Console.WriteLine("test_181() failed.");
                 return 281;
@@ -582,7 +621,16 @@ namespace Test_unsafe_6
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_244(new AA[,] { { new AA(), new AA() }, { new AA(), loc_x } }, 2) != 100)
+            if (
+                test_244(
+                    new AA[,]
+                    {
+                        { new AA(), new AA() },
+                        { new AA(), loc_x }
+                    },
+                    2
+                ) != 100
+            )
             {
                 Console.WriteLine("test_244() failed.");
                 return 344;
@@ -659,7 +707,17 @@ namespace Test_unsafe_6
             }
             AA.init_all(0);
             loc_x = new AA(0, 100);
-            if (test_321(new B[,] { { new B(), new B() }, { new B(), loc_x.m_b } }, 1, 1) != 100)
+            if (
+                test_321(
+                    new B[,]
+                    {
+                        { new B(), new B() },
+                        { new B(), loc_x.m_b }
+                    },
+                    1,
+                    1
+                ) != 100
+            )
             {
                 Console.WriteLine("test_321() failed.");
                 return 421;

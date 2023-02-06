@@ -19,7 +19,11 @@ namespace System.ComponentModel.Tests
         public static void CanConvertFrom_WithContext_EnumConverter()
         {
             CanConvertFrom_WithContext(
-                new object[2, 2] { { typeof(string), true }, { typeof(Enum[]), true } },
+                new object[2, 2]
+                {
+                    { typeof(string), true },
+                    { typeof(Enum[]), true }
+                },
                 new EnumConverter(typeof(Enum))
             );
         }
@@ -80,7 +84,10 @@ namespace System.ComponentModel.Tests
         public static void ConvertTo_WithContext_EnumConverter()
         {
             ConvertTo_WithContext(
-                new object[1, 3] { { SomeEnum.Add, "Add", null } },
+                new object[1, 3]
+                {
+                    { SomeEnum.Add, "Add", null }
+                },
                 EnumConverterTests.s_someEnumConverter
             );
 

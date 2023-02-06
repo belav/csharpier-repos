@@ -565,7 +565,19 @@ undefined
             JArray a = JArray.Parse(json);
             List<int> list = a.Values<int>().ToList();
 
-            List<int> expected = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            List<int> expected = new List<int>()
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+            };
 
             CollectionAssert.AreEqual(expected, list);
         }
@@ -1243,7 +1255,16 @@ keyword such as type of business.""
             Assert.AreEqual("James Newton-King", (string)o["channel"]["title"]);
             Assert.AreEqual(2, o["channel"]["item"].Children().Count());
 
-            JArray a = JArray.FromObject(new List<int>() { 0, 1, 2, 3, 4 });
+            JArray a = JArray.FromObject(
+                new List<int>()
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                }
+            );
             CustomAssert.IsInstanceOfType(typeof(JArray), a);
             Assert.AreEqual(5, a.Count());
         }
@@ -1315,7 +1336,16 @@ keyword such as type of business.""
             Assert.AreEqual("James Newton-King", (string)o["channel"]["title"]);
             Assert.AreEqual(2, o["channel"]["item"].Children().Count());
 
-            JArray a = JArray.FromObject(new List<int>() { 0, 1, 2, 3, 4 });
+            JArray a = JArray.FromObject(
+                new List<int>()
+                {
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                }
+            );
             CustomAssert.IsInstanceOfType(typeof(JArray), a);
             Assert.AreEqual(5, a.Count());
         }

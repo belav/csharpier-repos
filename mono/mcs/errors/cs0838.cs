@@ -8,6 +8,11 @@ class C
 {
     void Foo()
     {
-        Expression<Func<char[,]>> e = () => new char[,] { { 'x', 'y' }, { 'a', 'b' } };
+        Expression<Func<char[,]>> e = () =>
+            new char[,]
+            {
+                { 'x', 'y' },
+                { 'a', 'b' }
+            };
     }
 }

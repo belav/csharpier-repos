@@ -40,7 +40,19 @@ public class NonPublicEnumeratorCurrent : AutoMapperSpecBase
         new(
             c =>
                 c.CreateMap<Source, Destination>()
-                    .ForMember(d => d.Value, o => o.MapFrom(_ => new MyJObject { 1, 2, 3 }))
+                    .ForMember(
+                        d => d.Value,
+                        o =>
+                            o.MapFrom(
+                                _ =>
+                                    new MyJObject
+                                    {
+                                        1,
+                                        2,
+                                        3
+                                    }
+                            )
+                    )
         );
 
     [Fact]

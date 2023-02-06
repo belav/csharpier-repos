@@ -278,7 +278,10 @@ class Test
         if (t10()[2][2] != null)
             return 10;
 
-        var array = new short[,] { { 10, 20 } };
+        var array = new short[,]
+        {
+            { 10, 20 }
+        };
         var t10a = ArrayMultiMutate(array);
         if (t10a() != array[0, 0].GetHashCode())
             return 100;

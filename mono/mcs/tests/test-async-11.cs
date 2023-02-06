@@ -104,7 +104,11 @@ class C
         var s = new S[] { new S() };
         s[0].value = 6;
 
-        var s2 = new S[,] { { new S() }, { new S() } };
+        var s2 = new S[,]
+        {
+            { new S() },
+            { new S() }
+        };
         s2[0, 0].value = 3;
 
         TestCall3(

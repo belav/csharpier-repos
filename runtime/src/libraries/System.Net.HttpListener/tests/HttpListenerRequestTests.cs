@@ -619,7 +619,12 @@ namespace System.Net.Tests
             yield return new object[]
             {
                 "?&&",
-                new NameValueCollection() { { null, "" }, { null, "" }, { null, "" } }
+                new NameValueCollection()
+                {
+                    { null, "" },
+                    { null, "" },
+                    { null, "" }
+                }
             };
         }
 

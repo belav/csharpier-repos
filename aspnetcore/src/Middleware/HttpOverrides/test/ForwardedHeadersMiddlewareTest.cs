@@ -892,7 +892,15 @@ public class ForwardedHeadersMiddlewareTests
         get
         {
             // ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
-            return new TheoryData<string>() { "z", "Z", "1", "y+", "1-", "a.", };
+            return new TheoryData<string>()
+            {
+                "z",
+                "Z",
+                "1",
+                "y+",
+                "1-",
+                "a.",
+            };
         }
     }
 

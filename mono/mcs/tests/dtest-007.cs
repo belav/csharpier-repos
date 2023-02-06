@@ -113,7 +113,11 @@ class Tester
         dynamic d = new[] { 5, 8, 2 };
         Assert(8, d[1], "#1");
 
-        d = new int[,] { { 1, 2 }, { 3, 4 } };
+        d = new int[,]
+        {
+            { 1, 2 },
+            { 3, 4 }
+        };
         Assert(3, d[1, 0], "#2");
 
         dynamic d2 = new Class();
@@ -273,7 +277,11 @@ class Tester
         d[1] = "c";
         Assert("c", d[1], "#1");
 
-        d = new int[,] { { 1, 2 }, { 3, 4 } };
+        d = new int[,]
+        {
+            { 1, 2 },
+            { 3, 4 }
+        };
         d[1, 0] = 100;
         Assert(100, d[1, 0], "#2");
         d[1, 0]++;

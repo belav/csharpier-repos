@@ -892,5 +892,4 @@ namespace System.Reflection.Emit
         }
     } // PunkSafeHandle
 } //namespace System.Reflection.Emit
-
 #endif //FEATURE_CORECLR

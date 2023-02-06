@@ -74,7 +74,13 @@ namespace System.CommandLine.Tests
                 var third = new Argument<string[]> { Name = "third" };
                 var verbose = new Option<bool>("--verbose");
 
-                var command = new Command("the-command") { first, second, third, verbose };
+                var command = new Command("the-command")
+                {
+                    first,
+                    second,
+                    third,
+                    verbose
+                };
 
                 var parseResult = command.Parse(commandLine);
 

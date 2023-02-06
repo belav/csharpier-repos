@@ -16,7 +16,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void RemoveDuplicates1()
         {
-            var builder = new ArrayBuilder<int> { 1, 2, 3, 2, 4, 5, 1 };
+            var builder = new ArrayBuilder<int>
+            {
+                1,
+                2,
+                3,
+                2,
+                4,
+                5,
+                1
+            };
             builder.RemoveDuplicates();
             AssertEx.Equal(new[] { 1, 2, 3, 4, 5 }, builder);
 
@@ -32,7 +41,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void SortAndRemoveDuplicates1()
         {
-            var builder = new ArrayBuilder<int> { 5, 1, 3, 2, 4, 1, 2 };
+            var builder = new ArrayBuilder<int>
+            {
+                5,
+                1,
+                3,
+                2,
+                4,
+                1,
+                2
+            };
             builder.SortAndRemoveDuplicates(Comparer<int>.Default);
             AssertEx.Equal(new[] { 1, 2, 3, 4, 5 }, builder);
 
@@ -44,11 +62,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             builder.SortAndRemoveDuplicates(Comparer<int>.Default);
             AssertEx.Equal(new[] { 1, 2 }, builder);
 
-            builder = new ArrayBuilder<int> { 1, 2, 3 };
+            builder = new ArrayBuilder<int>
+            {
+                1,
+                2,
+                3
+            };
             builder.SortAndRemoveDuplicates(Comparer<int>.Default);
             AssertEx.Equal(new[] { 1, 2, 3 }, builder);
 
-            builder = new ArrayBuilder<int> { 1, 2, 2 };
+            builder = new ArrayBuilder<int>
+            {
+                1,
+                2,
+                2
+            };
             builder.SortAndRemoveDuplicates(Comparer<int>.Default);
             AssertEx.Equal(new[] { 1, 2 }, builder);
 
@@ -60,7 +88,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void SelectDistinct1()
         {
-            var builder = new ArrayBuilder<int> { 1, 2, 3, 2, 4, 5, 1 };
+            var builder = new ArrayBuilder<int>
+            {
+                1,
+                2,
+                3,
+                2,
+                4,
+                5,
+                1
+            };
             AssertEx.Equal(new[] { 1, 2, 3, 4, 5 }, builder.SelectDistinct(n => n));
 
             builder = new ArrayBuilder<int> { 1 };
@@ -69,10 +106,28 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             builder = new ArrayBuilder<int>();
             AssertEx.Equal(new int[0], builder.SelectDistinct(n => n));
 
-            builder = new ArrayBuilder<int> { 1, 2, 3, 2, 4, 5, 1 };
+            builder = new ArrayBuilder<int>
+            {
+                1,
+                2,
+                3,
+                2,
+                4,
+                5,
+                1
+            };
             AssertEx.Equal(new[] { 10 }, builder.SelectDistinct(n => 10));
 
-            builder = new ArrayBuilder<int> { 1, 2, 3, 2, 4, 5, 1 };
+            builder = new ArrayBuilder<int>
+            {
+                1,
+                2,
+                3,
+                2,
+                4,
+                5,
+                1
+            };
             AssertEx.Equal(new byte[] { 1, 2, 3, 4, 5 }, builder.SelectDistinct(n => (byte)n));
         }
 

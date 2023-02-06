@@ -666,7 +666,12 @@ namespace System.ComponentModel.Tests
         {
             var item1 = new Item();
             var item2 = new Item();
-            var list = new List<Item> { item1, item2, null };
+            var list = new List<Item>
+            {
+                item1,
+                item2,
+                null
+            };
             var bindingList = new BindingList<Item>(list);
             Assert.Equal(1, item1.InvocationList.Length);
             Assert.Equal(1, item2.InvocationList.Length);

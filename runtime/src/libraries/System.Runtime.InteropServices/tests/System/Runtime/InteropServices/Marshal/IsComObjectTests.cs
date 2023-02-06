@@ -26,7 +26,13 @@ namespace System.Runtime.InteropServices.Tests
 
             yield return new object[] { new int[] { 10 } };
             yield return new object[] { new int[][] { new int[] { 10 } } };
-            yield return new object[] { new int[,] { { 10 } } };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 }
+                }
+            };
 
             MethodInfo method = typeof(IsComObjectTests).GetMethod(
                 nameof(NonGenericMethod),

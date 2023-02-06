@@ -17,7 +17,15 @@ public class AcceptedResultTests
 {
     public static TheoryData<object> ValuesData
     {
-        get { return new TheoryData<object> { null, "Test string", new object(), }; }
+        get
+        {
+            return new TheoryData<object>
+            {
+                null,
+                "Test string",
+                new object(),
+            };
+        }
     }
 
     [Theory]

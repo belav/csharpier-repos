@@ -95,30 +95,94 @@ public class r4NaNrem
         vt1.f_vt_test3_op2 = 0.0F;
 
         float[] f_arr1d_test1_op1 = { 0, Single.NaN };
-        float[,] f_arr2d_test1_op1 = { { 0, Single.NaN }, { 1, 1 } };
-        float[,,] f_arr3d_test1_op1 = { { { 0, Single.NaN }, { 1, 1 } } };
+        float[,] f_arr2d_test1_op1 =
+        {
+            { 0, Single.NaN },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_test1_op1 =
+        {
+            {
+                { 0, Single.NaN },
+                { 1, 1 }
+            }
+        };
 
         float[] f_arr1d_test1_op2 = { 7.1234567F, 0, 1 };
-        float[,] f_arr2d_test1_op2 = { { 0, 7.1234567F }, { 1, 1 } };
-        float[,,] f_arr3d_test1_op2 = { { { 0, 7.1234567F }, { 1, 1 } } };
+        float[,] f_arr2d_test1_op2 =
+        {
+            { 0, 7.1234567F },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_test1_op2 =
+        {
+            {
+                { 0, 7.1234567F },
+                { 1, 1 }
+            }
+        };
 
         float[] f_arr1d_test2_op1 = { 0, -2.0F };
-        float[,] f_arr2d_test2_op1 = { { 0, -2.0F }, { 1, 1 } };
-        float[,,] f_arr3d_test2_op1 = { { { 0, -2.0F }, { 1, 1 } } };
+        float[,] f_arr2d_test2_op1 =
+        {
+            { 0, -2.0F },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_test2_op1 =
+        {
+            {
+                { 0, -2.0F },
+                { 1, 1 }
+            }
+        };
 
         float[] f_arr1d_test2_op2 = { 0.0F, 0, 1 };
-        float[,] f_arr2d_test2_op2 = { { 0, 0.0F }, { 1, 1 } };
-        float[,,] f_arr3d_test2_op2 = { { { 0, 0.0F }, { 1, 1 } } };
+        float[,] f_arr2d_test2_op2 =
+        {
+            { 0, 0.0F },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_test2_op2 =
+        {
+            {
+                { 0, 0.0F },
+                { 1, 1 }
+            }
+        };
 
         float[] f_arr1d_test3_op1 = { 0, Single.PositiveInfinity };
-        float[,] f_arr2d_test3_op1 = { { 0, Single.PositiveInfinity }, { 1, 1 } };
-        float[,,] f_arr3d_test3_op1 = { { { 0, Single.PositiveInfinity }, { 1, 1 } } };
+        float[,] f_arr2d_test3_op1 =
+        {
+            { 0, Single.PositiveInfinity },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_test3_op1 =
+        {
+            {
+                { 0, Single.PositiveInfinity },
+                { 1, 1 }
+            }
+        };
 
         float[] f_arr1d_test3_op2 = { 0.0F, 0, 1 };
-        float[,] f_arr2d_test3_op2 = { { 0, 0.0F }, { 1, 1 } };
-        float[,,] f_arr3d_test3_op2 = { { { 0, 0.0F }, { 1, 1 } } };
+        float[,] f_arr2d_test3_op2 =
+        {
+            { 0, 0.0F },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_test3_op2 =
+        {
+            {
+                { 0, 0.0F },
+                { 1, 1 }
+            }
+        };
 
-        int[,] index = { { 0, 0 }, { 1, 1 } };
+        int[,] index =
+        {
+            { 0, 0 },
+            { 1, 1 }
+        };
 
         {
             float f_l_test1_op1 = Single.NaN;

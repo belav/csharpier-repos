@@ -2756,7 +2756,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<int, int, int[,], int>> f = (x, y, a) => a[x, y];
             Func<int, int, int[,], int> d = f.Compile(useInterpreter);
-            int[,] array = new int[2, 2] { { 0, 1 }, { 2, 3 } };
+            int[,] array = new int[2, 2]
+            {
+                { 0, 1 },
+                { 2, 3 }
+            };
             Assert.Equal(3, d(1, 1, array));
         }
 

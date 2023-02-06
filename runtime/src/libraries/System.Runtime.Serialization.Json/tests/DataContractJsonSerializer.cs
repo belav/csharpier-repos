@@ -2506,7 +2506,12 @@ public static partial class DataContractJsonSerializerTests
     public static void DCJS_CollectionInterfaceGetOnlyCollection()
     {
         var obj = new TypeWithCollectionInterfaceGetOnlyCollection(
-            new List<string>() { "item1", "item2", "item3" }
+            new List<string>()
+            {
+                "item1",
+                "item2",
+                "item3"
+            }
         );
         var deserializedObj = SerializeAndDeserialize(
             obj,
@@ -2522,7 +2527,12 @@ public static partial class DataContractJsonSerializerTests
         Assert.Throws<InvalidDataContractException>(() =>
         {
             var obj = new TypeWithEnumerableInterfaceGetOnlyCollection(
-                new List<string>() { "item1", "item2", "item3" }
+                new List<string>()
+                {
+                    "item1",
+                    "item2",
+                    "item3"
+                }
             );
             SerializeAndDeserialize(obj, @"{""Items"":[""item1"",""item2"",""item3""]}");
         });
@@ -2770,7 +2780,12 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_GenericICollectionOfBoolean()
     {
-        var value = new TypeImplementsGenericICollection<bool>() { true, false, true };
+        var value = new TypeImplementsGenericICollection<bool>()
+        {
+            true,
+            false,
+            true
+        };
         var deserialized = SerializeAndDeserialize(value, "[true,false,true]");
         Assert.StrictEqual(value.Count, deserialized.Count);
         Assert.True(Enumerable.SequenceEqual(value, deserialized));
@@ -2830,7 +2845,12 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_GenericICollectionOfSingle()
     {
-        var value = new TypeImplementsGenericICollection<float>() { 1.23f, 4.56f, 7.89f };
+        var value = new TypeImplementsGenericICollection<float>()
+        {
+            1.23f,
+            4.56f,
+            7.89f
+        };
         var deserialized = SerializeAndDeserialize(value, "[1.23,4.56,7.89]");
         Assert.StrictEqual(value.Count, deserialized.Count);
         Assert.True(Enumerable.SequenceEqual(value, deserialized));
@@ -2839,7 +2859,12 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_GenericICollectionOfDouble()
     {
-        var value = new TypeImplementsGenericICollection<double>() { 1.23, 4.56, 7.89 };
+        var value = new TypeImplementsGenericICollection<double>()
+        {
+            1.23,
+            4.56,
+            7.89
+        };
         var deserialized = SerializeAndDeserialize(value, "[1.23,4.56,7.89]");
         Assert.StrictEqual(value.Count, deserialized.Count);
         Assert.True(Enumerable.SequenceEqual(value, deserialized));
@@ -3757,7 +3782,12 @@ public static partial class DataContractJsonSerializerTests
         var testClass = new TestClass()
         {
             floatNum = 2.3f,
-            intList = new List<int>() { 2, 3, 4 }
+            intList = new List<int>()
+            {
+                2,
+                3,
+                4
+            }
         };
 
         string spaceChars = "    ";

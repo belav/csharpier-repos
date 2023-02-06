@@ -15,7 +15,14 @@ namespace System.IO.Tests
         public static TheoryData<string> TestData_EmptyString => new TheoryData<string> { "" };
 
         public static TheoryData<string> TestData_ControlChars =>
-            new TheoryData<string> { "\t", "\r\n", "\b", "\v", "\n" };
+            new TheoryData<string>
+            {
+                "\t",
+                "\r\n",
+                "\b",
+                "\v",
+                "\n"
+            };
 
         public static TheoryData<string> TestData_NonDriveColonPaths =>
             new TheoryData<string>

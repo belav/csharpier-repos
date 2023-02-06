@@ -238,7 +238,12 @@ namespace System.Collections.Generic
         [Fact]
         public void SingleOfTypeDefaultOrErrorIListOneMatchReturns()
         {
-            IList<object> singleMatch = new List<object>() { new object(), "Match", new object() };
+            IList<object> singleMatch = new List<object>()
+            {
+                new object(),
+                "Match",
+                new object()
+            };
             object errorArgument = new object();
             Action<object> errorAction = (object argument) =>
             {
@@ -293,7 +298,12 @@ namespace System.Collections.Generic
         [Fact]
         public void ToArrayWithoutNullsICollectionHasNullsRemovesNulls()
         {
-            IList<object> hasNulls = new List<object>() { new object(), null, new object() };
+            IList<object> hasNulls = new List<object>()
+            {
+                new object(),
+                null,
+                new object()
+            };
 
             object[] hasNullsResult = ((ICollection<object>)hasNulls).ToArrayWithoutNulls();
 
