@@ -80,9 +80,7 @@ namespace Castle.Services.Logging.SerilogIntegration.Tests
             var output = new StringWriter();
 
             // New LoggerConfiguration which defaults to Information
-            var serilogLogger = new LoggerConfiguration().WriteTo
-                .TextWriter(output)
-                .CreateLogger();
+            var serilogLogger = new LoggerConfiguration().WriteTo.TextWriter(output).CreateLogger();
 
             var factory = new SerilogFactory(serilogLogger);
             var logger = factory.Create("TestingLogger");

@@ -50,9 +50,7 @@ namespace System.CommandLine.Rendering.Tests
                 return Task.FromResult(0);
             });
 
-            var parser = new CommandLineBuilder(command)
-                .UseAnsiTerminalWhenAvailable()
-                .Build();
+            var parser = new CommandLineBuilder(command).UseAnsiTerminalWhenAvailable().Build();
 
             await parser.InvokeAsync($"[output:{specifiedOutputMode}]", console);
 

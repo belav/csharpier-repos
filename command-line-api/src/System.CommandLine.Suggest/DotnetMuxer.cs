@@ -22,11 +22,7 @@ internal static class DotnetMuxer
             return;
         }
 
-        var muxerDir = new FileInfo(fxDepsFile)
-            .Directory
-            ?.Parent
-            ?.Parent
-            ?.Parent;
+        var muxerDir = new FileInfo(fxDepsFile).Directory?.Parent?.Parent?.Parent;
 
         if (muxerDir is null)
         {

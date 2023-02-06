@@ -62,9 +62,7 @@ namespace WrappedArray
 
         public static T[] FindAll<T>(T[] arr, Fun<T, bool> p)
         {
-            return new WrappedArray<T>(arr)
-                .FindAll(p)
-                .ToArray();
+            return new WrappedArray<T>(arr).FindAll(p).ToArray();
         }
 
         // System.Array.FindIndex(T[], Predicate)
@@ -78,9 +76,7 @@ namespace WrappedArray
 
         public static int FindIndex<T>(T[] arr, int i, Fun<T, bool> p)
         {
-            int j = new WrappedArray<T>(arr)
-                .View(i, arr.Length - i)
-                .FindIndex(p);
+            int j = new WrappedArray<T>(arr).View(i, arr.Length - i).FindIndex(p);
             return j < 0 ? j : j + i;
         }
 
@@ -88,9 +84,7 @@ namespace WrappedArray
 
         public static int FindIndex<T>(T[] arr, int i, int n, Fun<T, bool> p)
         {
-            int j = new WrappedArray<T>(arr)
-                .View(i, n)
-                .FindIndex(p);
+            int j = new WrappedArray<T>(arr).View(i, n).FindIndex(p);
             return j < 0 ? j : j + i;
         }
 
@@ -115,9 +109,7 @@ namespace WrappedArray
 
         public static int FindLastIndex<T>(T[] arr, int i, Fun<T, bool> p)
         {
-            int j = new WrappedArray<T>(arr)
-                .View(i, arr.Length - i)
-                .FindIndex(p);
+            int j = new WrappedArray<T>(arr).View(i, arr.Length - i).FindIndex(p);
             return j < 0 ? j : j + i;
         }
 
@@ -125,9 +117,7 @@ namespace WrappedArray
 
         public static int FindLastIndex<T>(T[] arr, int i, int n, Fun<T, bool> p)
         {
-            int j = new WrappedArray<T>(arr)
-                .View(i, n)
-                .FindIndex(p);
+            int j = new WrappedArray<T>(arr).View(i, n).FindIndex(p);
             return j < 0 ? j : j + i;
         }
 
@@ -150,9 +140,7 @@ namespace WrappedArray
 
         public static int IndexOf<T>(T[] arr, T x, int i)
         {
-            int j = new WrappedArray<T>(arr)
-                .View(i, arr.Length - i)
-                .IndexOf(x);
+            int j = new WrappedArray<T>(arr).View(i, arr.Length - i).IndexOf(x);
             return j < 0 ? -1 : j + i;
         }
 
@@ -160,9 +148,7 @@ namespace WrappedArray
 
         public static int IndexOf<T>(T[] arr, T x, int i, int n)
         {
-            int j = new WrappedArray<T>(arr)
-                .View(i, n)
-                .IndexOf(x);
+            int j = new WrappedArray<T>(arr).View(i, n).IndexOf(x);
             return j < 0 ? -1 : j + i;
         }
 
@@ -178,9 +164,7 @@ namespace WrappedArray
 
         public static int LastIndexOf<T>(T[] arr, T x, int i)
         {
-            int j = new WrappedArray<T>(arr)
-                .View(i, arr.Length - i)
-                .LastIndexOf(x);
+            int j = new WrappedArray<T>(arr).View(i, arr.Length - i).LastIndexOf(x);
             return j < 0 ? -1 : j + i;
         }
 
@@ -188,9 +172,7 @@ namespace WrappedArray
 
         public static int LastIndexOf<T>(T[] arr, T x, int i, int n)
         {
-            int j = new WrappedArray<T>(arr)
-                .View(i, n)
-                .LastIndexOf(x);
+            int j = new WrappedArray<T>(arr).View(i, n).LastIndexOf(x);
             return j < 0 ? -1 : j + i;
         }
 
@@ -205,9 +187,7 @@ namespace WrappedArray
 
         public static void Sort<T>(T[] arr, int i, int n)
         {
-            new WrappedArray<T>(arr)
-                .View(i, n)
-                .Sort();
+            new WrappedArray<T>(arr).View(i, n).Sort();
         }
 
         // System.Array.Sort(T[], SCG.IComparer<T>)
@@ -221,9 +201,7 @@ namespace WrappedArray
 
         public static void Sort<T>(T[] arr, int i, int n, SCG.IComparer<T> cmp)
         {
-            new WrappedArray<T>(arr)
-                .View(i, n)
-                .Sort(cmp);
+            new WrappedArray<T>(arr).View(i, n).Sort(cmp);
         }
 
         // System.Array.Sort(T[], Comparison)

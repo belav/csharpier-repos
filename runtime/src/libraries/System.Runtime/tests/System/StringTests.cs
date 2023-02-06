@@ -2793,18 +2793,8 @@ namespace System.Tests
         public static void Trim_Memory(string s, string expected)
         {
             Assert.Equal(expected, s.AsSpan().Trim().ToString()); // ReadOnlySpan
-            Assert.Equal(
-                expected,
-                new Span<char>(s.ToCharArray())
-                    .Trim()
-                    .ToString()
-            );
-            Assert.Equal(
-                expected,
-                new Memory<char>(s.ToCharArray())
-                    .Trim()
-                    .ToString()
-            );
+            Assert.Equal(expected, new Span<char>(s.ToCharArray()).Trim().ToString());
+            Assert.Equal(expected, new Memory<char>(s.ToCharArray()).Trim().ToString());
             Assert.Equal(expected, s.AsMemory().Trim().ToString()); // ReadOnlyMemory
         }
 
@@ -2816,18 +2806,8 @@ namespace System.Tests
         public static void TrimEnd_Memory(string s, string expected)
         {
             Assert.Equal(expected, s.AsSpan().TrimEnd().ToString()); // ReadOnlySpan
-            Assert.Equal(
-                expected,
-                new Span<char>(s.ToCharArray())
-                    .TrimEnd()
-                    .ToString()
-            );
-            Assert.Equal(
-                expected,
-                new Memory<char>(s.ToCharArray())
-                    .TrimEnd()
-                    .ToString()
-            );
+            Assert.Equal(expected, new Span<char>(s.ToCharArray()).TrimEnd().ToString());
+            Assert.Equal(expected, new Memory<char>(s.ToCharArray()).TrimEnd().ToString());
             Assert.Equal(expected, s.AsMemory().TrimEnd().ToString()); // ReadOnlyMemory
         }
 
@@ -2839,18 +2819,8 @@ namespace System.Tests
         public static void TrimStart_Memory(string s, string expected)
         {
             Assert.Equal(expected, s.AsSpan().TrimStart().ToString()); // ReadOnlySpan
-            Assert.Equal(
-                expected,
-                new Span<char>(s.ToCharArray())
-                    .TrimStart()
-                    .ToString()
-            );
-            Assert.Equal(
-                expected,
-                new Memory<char>(s.ToCharArray())
-                    .TrimStart()
-                    .ToString()
-            );
+            Assert.Equal(expected, new Span<char>(s.ToCharArray()).TrimStart().ToString());
+            Assert.Equal(expected, new Memory<char>(s.ToCharArray()).TrimStart().ToString());
             Assert.Equal(expected, s.AsMemory().TrimStart().ToString()); // ReadOnlyMemory
         }
 

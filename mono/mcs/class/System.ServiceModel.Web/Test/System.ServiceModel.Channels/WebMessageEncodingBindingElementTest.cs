@@ -233,9 +233,7 @@ namespace MonoTests.System.ServiceModel
         [Test]
         public void MessageEncoderIsContentTypeSupported()
         {
-            var enc = new WebMessageEncodingBindingElement()
-                .CreateMessageEncoderFactory()
-                .Encoder;
+            var enc = new WebMessageEncodingBindingElement().CreateMessageEncoderFactory().Encoder;
             Assert.IsTrue(enc.IsContentTypeSupported("application/xml"), "#1");
             Assert.IsTrue(enc.IsContentTypeSupported("text/xml"), "#2");
             Assert.IsTrue(enc.IsContentTypeSupported("application/soap+xml"), "#3");

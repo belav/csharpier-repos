@@ -75,11 +75,7 @@ public class Program
 
         if (args != null)
         {
-            builder.UseConfiguration(
-                new ConfigurationBuilder()
-                    .AddCommandLine(args)
-                    .Build()
-            );
+            builder.UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build());
         }
 
         builder.UseStartup<Startup>();

@@ -8,10 +8,7 @@ public class InternTest
 {
     public static int Main()
     {
-        StringBuilder sb = new StringBuilder()
-            .Append('A')
-            .Append('B')
-            .Append('C');
+        StringBuilder sb = new StringBuilder().Append('A').Append('B').Append('C');
 
         switch (sb.ToString())
         {

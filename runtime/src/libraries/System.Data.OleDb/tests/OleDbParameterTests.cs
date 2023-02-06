@@ -76,11 +76,7 @@ namespace System.Data.OleDb.Tests
 
             new OleDbCommand().Parameters.Clear();
             new OleDbCommand().Parameters.CopyTo(new object[0], 0);
-            Assert.False(
-                new OleDbCommand().Parameters
-                    .GetEnumerator()
-                    .MoveNext()
-            );
+            Assert.False(new OleDbCommand().Parameters.GetEnumerator().MoveNext());
 
             Assert.Throws<InvalidCastException>(() => new OleDbCommand().Parameters.Add(0));
             Assert.Throws<ArgumentNullException>(

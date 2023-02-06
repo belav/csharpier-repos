@@ -311,10 +311,7 @@ DefaultConnection=TestConnectionString
         public void IniConfiguration_Throws_On_Missing_Configuration_File()
         {
             var exception = Assert.Throws<FileNotFoundException>(
-                () =>
-                    new ConfigurationBuilder()
-                        .AddIniFile("NotExistingConfig.ini")
-                        .Build()
+                () => new ConfigurationBuilder().AddIniFile("NotExistingConfig.ini").Build()
             );
 
             // Assert

@@ -158,9 +158,7 @@ namespace System.Reflection.PortableExecutable.Tests
                 );
 
                 peStream.Position = 0;
-                var actualChecksum = new PEHeaders(peStream)
-                    .PEHeader
-                    .CheckSum;
+                var actualChecksum = new PEHeaders(peStream).PEHeader.CheckSum;
                 Assert.Equal(0U, actualChecksum);
 
                 VerifyPE(peStream, machine);
@@ -192,9 +190,7 @@ namespace System.Reflection.PortableExecutable.Tests
                 // The re-signed binary should be the same as the original one.
                 // See https://github.com/dotnet/runtime/issues/24407.
                 peStream.Position = 0;
-                var actualChecksum = new PEHeaders(peStream)
-                    .PEHeader
-                    .CheckSum;
+                var actualChecksum = new PEHeaders(peStream).PEHeader.CheckSum;
                 Assert.Equal(0x0000319cU, actualChecksum);
 
                 VerifyPE(
@@ -851,9 +847,7 @@ namespace System.Reflection.PortableExecutable.Tests
 
             var rvaFieldSignature = new BlobBuilder();
 
-            new BlobEncoder(rvaFieldSignature)
-                .FieldSignature()
-                .Double();
+            new BlobEncoder(rvaFieldSignature).FieldSignature().Double();
 
             var fieldRVADef = metadata.AddFieldDefinition(
                 FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.HasFieldRVA,

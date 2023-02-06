@@ -163,16 +163,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
             );
 
             await Assert.ThrowsAsync<NotSupportedException>(
-                () =>
-                    new BatchedJoinBlock<int, string>(2)
-                        .Target1
-                        .Completion
+                () => new BatchedJoinBlock<int, string>(2).Target1.Completion
             );
             await Assert.ThrowsAsync<NotSupportedException>(
-                () =>
-                    new BatchedJoinBlock<int, string, double>(2)
-                        .Target1
-                        .Completion
+                () => new BatchedJoinBlock<int, string, double>(2).Target1.Completion
             );
         }
 

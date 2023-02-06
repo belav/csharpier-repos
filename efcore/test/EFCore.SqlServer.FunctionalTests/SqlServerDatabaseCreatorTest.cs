@@ -792,9 +792,7 @@ public class SqlServerDatabaseCreatorTest
         (TestDatabaseCreator)context.GetService<IRelationalDatabaseCreator>();
 
     protected static IExecutionStrategy GetExecutionStrategy(SqlServerTestStore testStore) =>
-        new BloggingContext(testStore)
-            .GetService<IExecutionStrategyFactory>()
-            .Create();
+        new BloggingContext(testStore).GetService<IExecutionStrategyFactory>().Create();
 
     // ReSharper disable once ClassNeverInstantiated.Local
     private class TestSqlServerExecutionStrategyFactory : SqlServerExecutionStrategyFactory

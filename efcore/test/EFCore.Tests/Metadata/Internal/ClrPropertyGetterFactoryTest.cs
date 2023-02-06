@@ -107,9 +107,7 @@ public class ClrPropertyGetterFactoryTest
 
         Assert.Equal(
             7,
-            new ClrPropertyGetterFactory()
-                .Create(idProperty)
-                .GetClrValue(new Customer { Id = 7 })
+            new ClrPropertyGetterFactory().Create(idProperty).GetClrValue(new Customer { Id = 7 })
         );
     }
 

@@ -72,15 +72,9 @@ namespace MonoTests.System.ServiceModel.Channels
         [Test]
         public void Properties()
         {
-            MessageEncoder t = new TextElement()
-                .CreateMessageEncoderFactory()
-                .Encoder;
-            MessageEncoder b = new BinaryElement()
-                .CreateMessageEncoderFactory()
-                .Encoder;
-            MessageEncoder m = new MtomElement()
-                .CreateMessageEncoderFactory()
-                .Encoder;
+            MessageEncoder t = new TextElement().CreateMessageEncoderFactory().Encoder;
+            MessageEncoder b = new BinaryElement().CreateMessageEncoderFactory().Encoder;
+            MessageEncoder m = new MtomElement().CreateMessageEncoderFactory().Encoder;
 
             // TextMessageEncodingBindingElement.WriteEncoding
             // default value is UTF8.

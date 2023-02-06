@@ -345,12 +345,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(6464.6464, _test1.ToSqlDouble());
 
             // ToSqlInt16 ()
-            Assert.Equal(
-                (short)1,
-                new SqlDecimal(1)
-                    .ToSqlInt16()
-                    .Value
-            );
+            Assert.Equal((short)1, new SqlDecimal(1).ToSqlInt16().Value);
 
             Assert.Throws<OverflowException>(() => SqlDecimal.MaxValue.ToSqlInt16().Value);
             // ToSqlInt32 ()

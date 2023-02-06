@@ -21,9 +21,7 @@ public class DbSetInitializerTest
         var serviceProvider = InMemoryTestHelpers.Instance.CreateServiceProvider(customServices);
 
         using var context = new JustAContext(
-            new DbContextOptionsBuilder()
-                .UseInternalServiceProvider(serviceProvider)
-                .Options
+            new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider).Options
         );
         Assert.NotNull(context.One);
         Assert.NotNull(context.GetTwo());

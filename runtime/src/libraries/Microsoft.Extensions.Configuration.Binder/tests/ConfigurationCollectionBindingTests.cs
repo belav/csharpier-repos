@@ -84,9 +84,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
                 { "InvalidDictionary:0", "true" },
                 { "InvalidDictionary:1", "invalid" },
             };
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection(input)
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
             var dict = new Dictionary<string, bool>();
 
             config.Bind("InvalidDictionary", dict);
@@ -512,9 +510,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public void ShouldPreserveExistingKeysInDictionary()
         {
             var input = new Dictionary<string, string> { { "ascii:b", "98" } };
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection(input)
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
             var origin = new Dictionary<string, int> { ["a"] = 97 };
 
             config.Bind("ascii", origin);
@@ -528,9 +524,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public void ShouldPreserveExistingKeysInNestedDictionary()
         {
             var input = new Dictionary<string, string> { ["ascii:b"] = "98" };
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection(input)
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
             var origin = new Dictionary<string, IDictionary<string, int>>
             {
                 ["ascii"] = new Dictionary<string, int> { ["a"] = 97 }
@@ -551,9 +545,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
                 ["abc:def"] = "val_2",
                 ["abc:ghi"] = "val_3"
             };
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection(input)
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
             var origin = new Dictionary<KeyEnum, IDictionary<KeyUintEnum, string>>
             {
                 [KeyEnum.abc] = new Dictionary<KeyUintEnum, string> { [KeyUintEnum.abc] = "val_1" }
@@ -571,9 +563,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public void ShouldPreserveExistingValuesInArrayWhenItIsDictionaryElement()
         {
             var input = new Dictionary<string, string> { ["ascii:b"] = "98", };
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection(input)
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
             var origin = new Dictionary<string, int[]> { ["ascii"] = new int[] { 97 } };
 
             config.Bind(origin);
@@ -1637,9 +1627,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         public void DifferentDictionaryBindingCasesTest()
         {
             var dic = new Dictionary<string, string>() { { "key", "value" } };
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection(dic)
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection(dic).Build();
 
             Assert.Single(config.Get<Dictionary<string, string>>());
             Assert.Single(config.Get<IDictionary<string, string>>());

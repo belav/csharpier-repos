@@ -28,11 +28,7 @@ namespace Test
             }
             catch (Exception)
             {
-                Static1(
-                    new BB()
-                        .Method3(0.0f, null)
-                        .m_afField1
-                );
+                Static1(new BB().Method3(0.0f, null).m_afField1);
                 Console.WriteLine("PASSED");
                 return 100;
             }

@@ -193,12 +193,7 @@ public class PropertyEntryTest
 
         entry.SetEntityState(EntityState.Unchanged);
 
-        Assert.Equal(
-            "Primate",
-            new PropertyEntry(entry, "Primate")
-                .Metadata
-                .Name
-        );
+        Assert.Equal("Primate", new PropertyEntry(entry, "Primate").Metadata.Name);
     }
 
     [ConditionalFact]
@@ -651,12 +646,7 @@ public class PropertyEntryTest
             new TWotty { Id = 1, Primate = "Monkey" }
         );
 
-        Assert.Equal(
-            "Primate",
-            new PropertyEntry<Wotty, string>(entry, "Primate")
-                .Metadata
-                .Name
-        );
+        Assert.Equal("Primate", new PropertyEntry<Wotty, string>(entry, "Primate").Metadata.Name);
     }
 
     [ConditionalFact]

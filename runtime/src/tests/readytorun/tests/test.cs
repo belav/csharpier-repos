@@ -759,9 +759,7 @@ public class ILInliningVersioningTest<T>
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void TestGetType()
     {
-        new MyClass()
-            .GetType()
-            .ToString();
+        new MyClass().GetType().ToString();
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]

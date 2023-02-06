@@ -11,11 +11,7 @@ namespace System.IO.Tests
         public override string[] GetEntries(string path)
         {
             return (
-                (
-                    new DirectoryInfo(path)
-                        .GetFileSystemInfos()
-                        .Select(x => x.FullName)
-                ).ToArray()
+                (new DirectoryInfo(path).GetFileSystemInfos().Select(x => x.FullName)).ToArray()
             );
         }
     }
@@ -25,11 +21,7 @@ namespace System.IO.Tests
         public override string[] GetEntries(string path)
         {
             return (
-                (
-                    new DirectoryInfo(path)
-                        .GetFileSystemInfos("*")
-                        .Select(x => x.FullName)
-                ).ToArray()
+                (new DirectoryInfo(path).GetFileSystemInfos("*").Select(x => x.FullName)).ToArray()
             );
         }
 

@@ -17,8 +17,6 @@ class X
 
     public static void Main()
     {
-        new X()
-            .Test<int, long>(1)
-            .Wait();
+        new X().Test<int, long>(1).Wait();
     }
 }

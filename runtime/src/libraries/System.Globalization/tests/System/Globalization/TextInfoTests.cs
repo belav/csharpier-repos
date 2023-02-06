@@ -148,12 +148,7 @@ namespace System.Globalization.Tests
         [InlineData("ar", true)]
         public void IsRightToLeft(string name, bool expected)
         {
-            Assert.Equal(
-                expected,
-                new CultureInfo(name)
-                    .TextInfo
-                    .IsRightToLeft
-            );
+            Assert.Equal(expected, new CultureInfo(name).TextInfo.IsRightToLeft);
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
@@ -216,10 +211,7 @@ namespace System.Globalization.Tests
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "value",
-                () =>
-                    new CultureInfo("en-US")
-                        .TextInfo
-                        .ListSeparator = null
+                () => new CultureInfo("en-US").TextInfo.ListSeparator = null
             );
         }
 

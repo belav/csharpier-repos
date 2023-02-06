@@ -153,9 +153,7 @@ unsafe class ControlFlowGuardTests
             // call produces a freshly allocated vtable (not a vtable in the readonly data segment of
             // the executable that we wouldn't be able to overwrite).
             Type stringType = Type.GetType(
-                new StringBuilder("System.")
-                    .Append("String")
-                    .ToString()
+                new StringBuilder("System.").Append("String").ToString()
             );
             Type testOfString = typeof(Test<>).MakeGenericType(stringType);
 

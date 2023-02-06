@@ -184,9 +184,7 @@ internal static class DefaultEditorTemplates
             return hidden;
         }
 
-        return new HtmlContentBuilder(capacity: 2)
-            .AppendHtml(display)
-            .AppendHtml(hidden);
+        return new HtmlContentBuilder(capacity: 2).AppendHtml(display).AppendHtml(hidden);
     }
 
     private static IDictionary<string, object> CreateHtmlAttributes(

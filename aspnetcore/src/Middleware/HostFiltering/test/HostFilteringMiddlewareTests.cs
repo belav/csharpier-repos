@@ -249,9 +249,7 @@ public class HostFilteringMiddlewareTests
     [Fact]
     public async Task SupportsDynamicOptionsReload()
     {
-        var config = new ConfigurationBuilder()
-            .Add(new ReloadableMemorySource())
-            .Build();
+        var config = new ConfigurationBuilder().Add(new ReloadableMemorySource()).Build();
         config["AllowedHosts"] = "localhost";
         var currentHost = "otherHost";
 

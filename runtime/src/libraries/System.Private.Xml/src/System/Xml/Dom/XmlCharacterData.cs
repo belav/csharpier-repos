@@ -109,10 +109,7 @@ namespace System.Xml
             int capacity = _data != null ? _data.Length : 0;
             if (strData != null)
                 capacity += strData.Length;
-            string newValue = new StringBuilder(capacity)
-                .Append(_data)
-                .Append(strData)
-                .ToString();
+            string newValue = new StringBuilder(capacity).Append(_data).Append(strData).ToString();
             XmlNodeChangedEventArgs? args = GetEventArgs(
                 this,
                 parent,
@@ -173,9 +170,7 @@ namespace System.Xml
                 }
             }
 
-            string newValue = new StringBuilder(_data)
-                .Remove(offset, count)
-                .ToString();
+            string newValue = new StringBuilder(_data).Remove(offset, count).ToString();
             XmlNode? parent = ParentNode;
             XmlNodeChangedEventArgs? args = GetEventArgs(
                 this,

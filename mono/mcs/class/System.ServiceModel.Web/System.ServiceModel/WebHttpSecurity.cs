@@ -35,9 +35,7 @@ namespace System.ServiceModel
         {
             // there is no public constructor for transport ...
 #if !MOBILE
-            Transport = new BasicHttpBinding()
-                .Security
-                .Transport;
+            Transport = new BasicHttpBinding().Security.Transport;
 #endif
         }
 

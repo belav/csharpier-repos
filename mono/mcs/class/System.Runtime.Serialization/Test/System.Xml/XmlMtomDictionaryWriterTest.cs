@@ -80,9 +80,7 @@ namespace MonoTests.System.Xml
             // there are some insiginificant output differences
             Assert.AreEqual(
                 usecase1,
-                new StreamReader(ms)
-                    .ReadToEnd()
-                    .Replace("<root />", "<root/>")
+                new StreamReader(ms).ReadToEnd().Replace("<root />", "<root/>")
             );
         }
 

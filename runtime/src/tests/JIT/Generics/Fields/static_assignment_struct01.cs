@@ -65,39 +65,19 @@ public class Test_static_assignment_struct01
     public static int Main()
     {
         int _int = 1;
-        Eval(
-            new Gen<int>()
-                .Assign(_int)
-                .Equals(_int)
-        );
+        Eval(new Gen<int>().Assign(_int).Equals(_int));
 
         double _double = 1;
-        Eval(
-            new Gen<double>()
-                .Assign(_double)
-                .Equals(_double)
-        );
+        Eval(new Gen<double>().Assign(_double).Equals(_double));
 
         string _string = "string";
-        Eval(
-            new Gen<string>()
-                .Assign(_string)
-                .Equals(_string)
-        );
+        Eval(new Gen<string>().Assign(_string).Equals(_string));
 
         object _object = new object();
-        Eval(
-            new Gen<object>()
-                .Assign(_object)
-                .Equals(_object)
-        );
+        Eval(new Gen<object>().Assign(_object).Equals(_object));
 
         Guid _Guid = new Guid(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-        Eval(
-            new Gen<Guid>()
-                .Assign(_Guid)
-                .Equals(_Guid)
-        );
+        Eval(new Gen<Guid>().Assign(_Guid).Equals(_Guid));
 
         if (result)
         {

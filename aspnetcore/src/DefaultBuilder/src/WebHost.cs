@@ -185,11 +185,7 @@ public static class WebHost
         }
         if (args != null)
         {
-            builder.UseConfiguration(
-                new ConfigurationBuilder()
-                    .AddCommandLine(args)
-                    .Build()
-            );
+            builder.UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build());
         }
 
         builder

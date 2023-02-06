@@ -25,11 +25,7 @@ public class CookieBuilderTests
     [Fact]
     public void ComputesExpiration()
     {
-        Assert.Null(
-            new CookieBuilder()
-                .Build(new DefaultHttpContext())
-                .Expires
-        );
+        Assert.Null(new CookieBuilder().Build(new DefaultHttpContext()).Expires);
 
         var now = DateTimeOffset.Now;
         var options = new CookieBuilder { Expiration = TimeSpan.FromHours(1) }.Build(
@@ -42,11 +38,7 @@ public class CookieBuilderTests
     [Fact]
     public void ComputesMaxAge()
     {
-        Assert.Null(
-            new CookieBuilder()
-                .Build(new DefaultHttpContext())
-                .MaxAge
-        );
+        Assert.Null(new CookieBuilder().Build(new DefaultHttpContext()).MaxAge);
 
         var now = TimeSpan.FromHours(1);
         var options = new CookieBuilder { MaxAge = now }.Build(new DefaultHttpContext());
@@ -58,9 +50,7 @@ public class CookieBuilderTests
     {
         Assert.Equal(
             new CookieOptions().Path,
-            new CookieBuilder()
-                .Build(new DefaultHttpContext())
-                .Path
+            new CookieBuilder().Build(new DefaultHttpContext()).Path
         );
     }
 

@@ -340,9 +340,7 @@ public class CorsPolicyBuilderTests
     public void Build_ThrowsIfConfiguredToAllowAnyOriginWithCredentials()
     {
         // Arrange
-        var builder = new CorsPolicyBuilder()
-            .AllowAnyOrigin()
-            .AllowCredentials();
+        var builder = new CorsPolicyBuilder().AllowAnyOrigin().AllowCredentials();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => builder.Build());

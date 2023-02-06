@@ -18,9 +18,7 @@ namespace Microsoft.Extensions.Logging.Test
         {
             var callbackCalled = false;
             var source = new MemoryConfigurationSource();
-            var configuration = new ConfigurationBuilder()
-                .Add(source)
-                .Build();
+            var configuration = new ConfigurationBuilder().Add(source).Build();
             var provider = (MemoryConfigurationProvider)configuration.Providers.Single();
 
             var serviceCollection = new ServiceCollection();

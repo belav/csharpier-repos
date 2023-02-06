@@ -472,9 +472,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     "HH:mm "
                 ),
             };
-            var configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(configs)
-                .Build();
+            var configuration = new ConfigurationBuilder().AddInMemoryCollection(configs).Build();
 
             var loggerProvider = new ServiceCollection()
                 .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(o => { }))
@@ -503,9 +501,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     invalidMaxQueueLength.ToString()
                 ),
             };
-            var configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(configs)
-                .Build();
+            var configuration = new ConfigurationBuilder().AddInMemoryCollection(configs).Build();
 
             IServiceProvider serviceProvider = new ServiceCollection()
                 .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(o => { }))
@@ -524,9 +520,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
             {
                 new KeyValuePair<string, string>("Console:MaxQueueLength", "12345"),
             };
-            var configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(configs)
-                .Build();
+            var configuration = new ConfigurationBuilder().AddInMemoryCollection(configs).Build();
 
             var loggerProvider = new ServiceCollection()
                 .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(o => { }))

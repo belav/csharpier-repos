@@ -32,9 +32,7 @@ internal static class SigningKeysHandler
 {
     public static byte[] GetSigningKeyMaterial(string userSecretsId, string scheme, string issuer)
     {
-        var projectConfiguration = new ConfigurationBuilder()
-            .AddUserSecrets(userSecretsId)
-            .Build();
+        var projectConfiguration = new ConfigurationBuilder().AddUserSecrets(userSecretsId).Build();
 
         var signingKey = projectConfiguration
             .GetSection(GetSigningKeyPropertyName(scheme))

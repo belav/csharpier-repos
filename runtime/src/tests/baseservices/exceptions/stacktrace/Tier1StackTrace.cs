@@ -45,9 +45,7 @@ internal static class Program
             return null;
         }
 
-        string stackTrace = new StackTrace(true)
-            .ToString()
-            .Trim();
+        string stackTrace = new StackTrace(true).ToString().Trim();
 
         // Remove the last line of the stack trace, which would correspond with Main()
         int lastNewLineIndex = stackTrace.LastIndexOf('\n');

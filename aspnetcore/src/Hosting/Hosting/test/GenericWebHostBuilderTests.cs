@@ -19,9 +19,7 @@ public class GenericWebHostBuilderTests
     {
         var randomEnvKey = Guid.NewGuid().ToString();
         Environment.SetEnvironmentVariable("ASPNETCORE_" + randomEnvKey, "true");
-        using var host = new HostBuilder()
-            .ConfigureWebHost(_ => { })
-            .Build();
+        using var host = new HostBuilder().ConfigureWebHost(_ => { }).Build();
         var config = host.Services.GetRequiredService<IConfiguration>();
         Assert.Equal("true", config[randomEnvKey]);
         Environment.SetEnvironmentVariable("ASPNETCORE_" + randomEnvKey, null);

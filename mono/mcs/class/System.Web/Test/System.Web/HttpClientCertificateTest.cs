@@ -254,9 +254,7 @@ namespace MonoTests.System.Web
 
         private HttpClientCertificate GetHttpClientCertificate()
         {
-            return new HttpContext(hwr)
-                .Request
-                .ClientCertificate;
+            return new HttpContext(hwr).Request.ClientCertificate;
         }
 
         [Test]

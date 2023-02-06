@@ -595,9 +595,7 @@ namespace System.Threading
                     System.Reflection.Assembly.GetCallingAssembly();
                 if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
                 {
-                    string caller = new StackFrame(1)
-                        .GetMethod()
-                        .FullName;
+                    string caller = new StackFrame(1).GetMethod().FullName;
                     string callee = System.Reflection.MethodBase.GetCurrentMethod().FullName;
                     throw new MethodAccessException(
                         String.Format(

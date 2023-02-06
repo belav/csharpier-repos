@@ -10,9 +10,7 @@ public class Program
     public static Task Main(string[] args)
     {
         var scenarioName = "Unknown";
-        var config = new ConfigurationBuilder()
-            .AddCommandLine(args)
-            .Build();
+        var config = new ConfigurationBuilder().AddCommandLine(args).Build();
 
         var builder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
         {

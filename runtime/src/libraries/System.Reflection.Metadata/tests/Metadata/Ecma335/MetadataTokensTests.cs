@@ -122,9 +122,10 @@ namespace System.Reflection.Metadata.Ecma335.Tests
         [Fact]
         public void TryGetTableIndex()
         {
-            var kinds =
-                from i in Enumerable.Range(0, 255)
-                let index = new Func<HandleKind, TableIndex?>(k =>
+            var kinds = from i in Enumerable.Range(0, 255) let index = new Func<
+                    HandleKind,
+                    TableIndex?
+                >(k =>
                 {
                     TableIndex ti;
                     if (MetadataTokens.TryGetTableIndex(k, out ti))
@@ -134,9 +135,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     }
 
                     return null;
-                })((HandleKind)i)
-                where index != null
-                select index.Value;
+                })((HandleKind)i) where index != null select index.Value;
 
             AssertEx.Equal(
                 new TableIndex[]

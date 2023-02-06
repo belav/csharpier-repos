@@ -28,11 +28,7 @@ namespace System.Formats.Tar.Tests
             }
 
             ms.Position = 0;
-            return Task.FromResult(
-                new TarReader(ms)
-                    .GetNextEntry()
-                    .DataStream
-            );
+            return Task.FromResult(new TarReader(ms).GetNextEntry().DataStream);
         }
 
         protected override Task<Stream?> CreateWriteOnlyStreamCore(byte[]? initialData) =>

@@ -150,9 +150,7 @@ public class AuthorizationEndpointConventionBuilderExtensionsTests
     {
         // Arrange
         var builder = new TestEndpointConventionBuilder();
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(_ => true)
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
 
         // Act
         builder.RequireAuthorization(policy);
@@ -238,9 +236,7 @@ public class AuthorizationEndpointConventionBuilderExtensionsTests
     {
         // Arrange
         var builder = new TestEndpointConventionBuilder();
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(_ => true)
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
         var authorize = new AuthorizeAttribute();
 
         // Act

@@ -507,13 +507,7 @@ namespace MonoTests.System.Data.SqlTypes
             Assert.AreEqual((SqlDouble)6464.6464, Test1.ToSqlDouble(), "#N09");
 
             // ToSqlInt16 ()
-            Assert.AreEqual(
-                (short)1,
-                new SqlDecimal(1)
-                    .ToSqlInt16()
-                    .Value,
-                "#N10"
-            );
+            Assert.AreEqual((short)1, new SqlDecimal(1).ToSqlInt16().Value, "#N10");
 
             try
             {

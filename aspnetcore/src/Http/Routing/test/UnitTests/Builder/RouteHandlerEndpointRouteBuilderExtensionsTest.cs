@@ -353,9 +353,7 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
     {
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(
-                new ServiceCollection()
-                    .AddSingleton<TodoService>()
-                    .BuildServiceProvider()
+                new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
         _ = builder.MapGet("/", (TodoService todo) => { });
@@ -379,9 +377,7 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
     {
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(
-                new ServiceCollection()
-                    .AddSingleton<TodoService>()
-                    .BuildServiceProvider()
+                new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
         _ = builder.MapDelete("/", (TodoService todo) => { });
@@ -405,9 +401,7 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
     {
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(
-                new ServiceCollection()
-                    .AddSingleton<TodoService>()
-                    .BuildServiceProvider()
+                new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
         _ = builder.MapPatch("/", (TodoService todo) => { });
@@ -434,9 +428,7 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
     {
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(
-                new ServiceCollection()
-                    .AddSingleton<TodoService>()
-                    .BuildServiceProvider()
+                new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
         _ = builder.MapGet("/", ([TestFromServiceAttribute] TodoService todo) => { });
@@ -460,9 +452,7 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
     {
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(
-                new ServiceCollection()
-                    .AddSingleton<TodoService>()
-                    .BuildServiceProvider()
+                new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
         _ = builder.MapDelete("/", ([TestFromServiceAttribute] TodoService todo) => { });
@@ -486,9 +476,7 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
     {
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(
-                new ServiceCollection()
-                    .AddSingleton<TodoService>()
-                    .BuildServiceProvider()
+                new ServiceCollection().AddSingleton<TodoService>().BuildServiceProvider()
             )
         );
         _ = builder.MapPatch("/", ([TestFromServiceAttribute] TodoService todo) => { });
@@ -813,9 +801,7 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
 
         // Assert that we don't fallback to the query string
         var httpContext = new DefaultHttpContext();
-        httpContext.RequestServices = new ServiceCollection()
-            .AddLogging()
-            .BuildServiceProvider();
+        httpContext.RequestServices = new ServiceCollection().AddLogging().BuildServiceProvider();
 
         httpContext.Request.RouteValues["id"] = "42";
 
@@ -1022,9 +1008,7 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var endpoint = Assert.Single(dataSource.Endpoints);
 
         var httpContext = new DefaultHttpContext();
-        httpContext.RequestServices = new ServiceCollection()
-            .AddLogging()
-            .BuildServiceProvider();
+        httpContext.RequestServices = new ServiceCollection().AddLogging().BuildServiceProvider();
         httpContext.Request.RouteValues["id"] = "invalid!";
 
         if (throwOnBadRequest)
@@ -1055,9 +1039,7 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         var endpoint = Assert.Single(dataSource.Endpoints);
 
         var httpContext = new DefaultHttpContext();
-        httpContext.RequestServices = new ServiceCollection()
-            .AddLogging()
-            .BuildServiceProvider();
+        httpContext.RequestServices = new ServiceCollection().AddLogging().BuildServiceProvider();
         httpContext.Request.RouteValues["id"] = "invalid!";
 
         await endpoint.RequestDelegate!(httpContext);

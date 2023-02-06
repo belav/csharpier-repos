@@ -564,9 +564,7 @@ namespace Moq
         /// </devdoc>
         public static string ToStringFixed(this Expression expression)
         {
-            return new StringBuilder()
-                .AppendExpression(expression)
-                .ToString();
+            return new StringBuilder().AppendExpression(expression).ToString();
         }
     }
 }

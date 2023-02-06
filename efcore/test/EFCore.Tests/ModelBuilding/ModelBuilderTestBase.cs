@@ -125,9 +125,7 @@ public abstract partial class ModelBuilderTest
         {
             var options = new LoggingOptions();
             options.Initialize(
-                new DbContextOptionsBuilder()
-                    .EnableSensitiveDataLogging(false)
-                    .Options
+                new DbContextOptionsBuilder().EnableSensitiveDataLogging(false).Options
             );
             ValidationLoggerFactory = new ListLoggerFactory(
                 l => l == DbLoggerCategory.Model.Validation.Name

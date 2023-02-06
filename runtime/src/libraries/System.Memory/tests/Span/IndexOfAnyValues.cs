@@ -244,20 +244,12 @@ namespace System.SpanTests
             byte[] byteValuesActual = s_getValuesByteMethod(IndexOfAnyValues.Create(byteNeedle));
 
             Assert.Equal(
-                new HashSet<char>(needle)
-                    .Order()
-                    .ToArray(),
-                new HashSet<char>(charValuesActual)
-                    .Order()
-                    .ToArray()
+                new HashSet<char>(needle).Order().ToArray(),
+                new HashSet<char>(charValuesActual).Order().ToArray()
             );
             Assert.Equal(
-                new HashSet<byte>(byteNeedle)
-                    .Order()
-                    .ToArray(),
-                new HashSet<byte>(byteValuesActual)
-                    .Order()
-                    .ToArray()
+                new HashSet<byte>(byteNeedle).Order().ToArray(),
+                new HashSet<byte>(byteValuesActual).Order().ToArray()
             );
         }
 

@@ -48,8 +48,6 @@ public class Class1
 
     public static void Main()
     {
-        new Class1()
-            .Test()
-            .Wait();
+        new Class1().Test().Wait();
     }
 }

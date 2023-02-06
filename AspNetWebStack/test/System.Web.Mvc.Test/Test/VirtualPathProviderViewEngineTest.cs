@@ -578,11 +578,7 @@ namespace System.Web.Mvc.Test
         public void FileExtensions()
         {
             // Arrange + Assert
-            Assert.Null(
-                new Mock<VirtualPathProviderViewEngine>()
-                    .Object
-                    .FileExtensions
-            );
+            Assert.Null(new Mock<VirtualPathProviderViewEngine>().Object.FileExtensions);
         }
 
         [Fact]
@@ -591,9 +587,7 @@ namespace System.Web.Mvc.Test
             // Arrange and Assert
             Assert.Equal(
                 VirtualPathUtility.GetExtension,
-                new Mock<VirtualPathProviderViewEngine>()
-                    .Object
-                    .GetExtensionThunk
+                new Mock<VirtualPathProviderViewEngine>().Object.GetExtensionThunk
             );
         }
 

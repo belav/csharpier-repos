@@ -69,9 +69,7 @@ namespace System.CommandLine.Tests
                 var argument = new Argument<string[]>();
                 var rootCommand = new RootCommand { argument };
 
-                var result = new CommandLineBuilder(rootCommand)
-                    .Build()
-                    .Parse("a b c -- -- d");
+                var result = new CommandLineBuilder(rootCommand).Build().Parse("a b c -- -- d");
 
                 var strings = result.GetValue(argument);
 

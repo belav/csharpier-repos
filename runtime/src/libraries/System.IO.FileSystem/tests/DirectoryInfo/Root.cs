@@ -11,12 +11,7 @@ namespace System.IO.Tests
         public void RootOfRoot()
         {
             string root = Path.GetPathRoot(TestDirectory);
-            Assert.Equal(
-                root,
-                new DirectoryInfo(root)
-                    .Root
-                    .FullName
-            );
+            Assert.Equal(root, new DirectoryInfo(root).Root.FullName);
         }
 
         [Fact]
@@ -45,21 +40,11 @@ namespace System.IO.Tests
         {
             string root = Path.GetPathRoot(Directory.GetCurrentDirectory());
             string path = Path.DirectorySeparatorChar + Path.Combine("Machine", "Test");
-            Assert.Equal(
-                root,
-                new DirectoryInfo(path)
-                    .Root
-                    .FullName
-            );
+            Assert.Equal(root, new DirectoryInfo(path).Root.FullName);
 
             string root2 =
                 new string(Path.DirectorySeparatorChar, 2) + Path.Combine("Machine", "Test");
-            Assert.Equal(
-                root2,
-                new DirectoryInfo(root2)
-                    .Root
-                    .FullName
-            );
+            Assert.Equal(root2, new DirectoryInfo(root2).Root.FullName);
         }
     }
 }

@@ -40,10 +40,7 @@ namespace MonoTests.System.Windows.Forms
         [Test]
         public void Constructor()
         {
-            ToolStripOverflow tso = (ToolStripOverflow)
-                new ToolStrip()
-                    .OverflowButton
-                    .DropDown;
+            ToolStripOverflow tso = (ToolStripOverflow)new ToolStrip().OverflowButton.DropDown;
 
             Assert.AreEqual(
                 "System.Windows.Forms.Layout.FlowLayout",

@@ -290,12 +290,7 @@ namespace MonoTests.System
             Uri b = new Uri("http://a/b/c/d;p?q");
             Assert.AreEqual("http://a/g", new Uri(b, "/g").ToString(), "#1");
             Assert.AreEqual("http://g/", new Uri(b, "//g").ToString(), "#2");
-            Assert.IsTrue(
-                new Uri(b, "#s")
-                    .ToString()
-                    .EndsWith("#s"),
-                "#4"
-            );
+            Assert.IsTrue(new Uri(b, "#s").ToString().EndsWith("#s"), "#4");
 
             Uri u = new Uri(b, "/g?q=r");
             Assert.AreEqual("http://a/g?q=r", u.ToString(), "#5");

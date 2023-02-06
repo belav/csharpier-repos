@@ -10,9 +10,7 @@ internal static class HostingStartupConfigurationExtensions
 {
     public static IConfiguration GetBaseConfiguration()
     {
-        return new ConfigurationBuilder()
-            .AddEnvironmentVariables(prefix: "ASPNETCORE_")
-            .Build();
+        return new ConfigurationBuilder().AddEnvironmentVariables(prefix: "ASPNETCORE_").Build();
     }
 
     public static bool IsEnabled(

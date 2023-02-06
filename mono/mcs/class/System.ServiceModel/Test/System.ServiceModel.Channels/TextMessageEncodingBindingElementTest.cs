@@ -107,9 +107,7 @@ namespace MonoTests.System.ServiceModel.Channels
         [Test]
         public void MessageEncoderIsContentTypeSupported()
         {
-            var enc = new TextMessageEncodingBindingElement()
-                .CreateMessageEncoderFactory()
-                .Encoder;
+            var enc = new TextMessageEncodingBindingElement().CreateMessageEncoderFactory().Encoder;
             Assert.IsFalse(enc.IsContentTypeSupported("application/xml"), "#1");
             Assert.IsFalse(enc.IsContentTypeSupported("text/xml"), "#2");
             Assert.IsTrue(enc.IsContentTypeSupported("application/soap+xml"), "#3");
@@ -119,9 +117,7 @@ namespace MonoTests.System.ServiceModel.Channels
         [ExpectedException(typeof(ArgumentNullException))]
         public void ReadNullStream()
         {
-            var enc = new TextMessageEncodingBindingElement()
-                .CreateMessageEncoderFactory()
-                .Encoder;
+            var enc = new TextMessageEncodingBindingElement().CreateMessageEncoderFactory().Encoder;
             enc.ReadMessage(null, 10, "text/xml");
         }
 
@@ -129,9 +125,7 @@ namespace MonoTests.System.ServiceModel.Channels
         [ExpectedException(typeof(ArgumentNullException))]
         public void ReadNullBufferManager()
         {
-            var enc = new TextMessageEncodingBindingElement()
-                .CreateMessageEncoderFactory()
-                .Encoder;
+            var enc = new TextMessageEncodingBindingElement().CreateMessageEncoderFactory().Encoder;
             enc.ReadMessage(new ArraySegment<byte>(new byte[0]), null, "text/xml");
         }
 
@@ -139,9 +133,7 @@ namespace MonoTests.System.ServiceModel.Channels
         [ExpectedException(typeof(XmlException))] // (document is expected)
         public void ReadEmptyBuffer()
         {
-            var enc = new TextMessageEncodingBindingElement()
-                .CreateMessageEncoderFactory()
-                .Encoder;
+            var enc = new TextMessageEncodingBindingElement().CreateMessageEncoderFactory().Encoder;
             enc.ReadMessage(
                 new ArraySegment<byte>(new byte[0]),
                 BufferManager.CreateBufferManager(1000, 1000),
@@ -152,9 +144,7 @@ namespace MonoTests.System.ServiceModel.Channels
         [Test]
         public void ActionContentTypeParameter()
         {
-            var enc = new TextMessageEncodingBindingElement()
-                .CreateMessageEncoderFactory()
-                .Encoder;
+            var enc = new TextMessageEncodingBindingElement().CreateMessageEncoderFactory().Encoder;
             var msg = Message.CreateMessage(MessageVersion.Soap12, "urn:foo");
             var ms = new MemoryStream();
             using (var xw = XmlWriter.Create(ms))

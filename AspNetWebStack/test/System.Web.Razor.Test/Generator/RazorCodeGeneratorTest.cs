@@ -273,12 +273,7 @@ namespace System.Web.Razor.Test.Generator
             }
             else
             {
-                return RecursiveFind(
-                    path,
-                    new DirectoryInfo(start)
-                        .Parent
-                        .FullName
-                );
+                return RecursiveFind(path, new DirectoryInfo(start).Parent.FullName);
             }
         }
 

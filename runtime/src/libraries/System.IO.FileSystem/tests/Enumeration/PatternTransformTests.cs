@@ -125,10 +125,7 @@ namespace System.IO.Tests.Enumeration
     {
         protected override string[] GetFiles(string directory, string pattern)
         {
-            return new DirectoryInfo(directory)
-                .GetFiles(pattern)
-                .Select(i => i.FullName)
-                .ToArray();
+            return new DirectoryInfo(directory).GetFiles(pattern).Select(i => i.FullName).ToArray();
         }
 
         protected override string[] GetFiles(

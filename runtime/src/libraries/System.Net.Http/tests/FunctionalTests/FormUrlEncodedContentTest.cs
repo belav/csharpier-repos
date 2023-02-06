@@ -129,9 +129,7 @@ namespace System.Net.Http.Functional.Tests
             var content = new FormUrlEncodedContent(data);
 
             Stream stream = await content.ReadAsStreamAsync(readStreamAsync);
-            string result = new StreamReader(stream)
-                .ReadToEnd()
-                .ToLowerInvariant();
+            string result = new StreamReader(stream).ReadToEnd().ToLowerInvariant();
 
             // Result of UrlEncode invoked in .NET Framework 4.6
             // string expectedResult = "key=" + HttpUtility.UrlEncode(testString).ToLowerInvariant();

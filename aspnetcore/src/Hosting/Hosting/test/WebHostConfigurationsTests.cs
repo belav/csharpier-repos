@@ -23,9 +23,7 @@ public class WebHostConfigurationTests
         };
 
         var config = new WebHostOptions(
-            new ConfigurationBuilder()
-                .AddInMemoryCollection(parameters)
-                .Build()
+            new ConfigurationBuilder().AddInMemoryCollection(parameters).Build()
         );
 
         Assert.Equal("wwwroot", config.WebRoot);
@@ -45,9 +43,7 @@ public class WebHostConfigurationTests
             { "ENVIRONMENT", Environments.Development }
         };
         var config = new WebHostOptions(
-            new ConfigurationBuilder()
-                .AddInMemoryCollection(parameters)
-                .Build()
+            new ConfigurationBuilder().AddInMemoryCollection(parameters).Build()
         );
 
         Assert.Equal(Environments.Development, config.Environment);
@@ -60,9 +56,7 @@ public class WebHostConfigurationTests
     {
         var parameters = new Dictionary<string, string>() { { "detailedErrors", value } };
         var config = new WebHostOptions(
-            new ConfigurationBuilder()
-                .AddInMemoryCollection(parameters)
-                .Build()
+            new ConfigurationBuilder().AddInMemoryCollection(parameters).Build()
         );
 
         Assert.Equal(expected, config.DetailedErrors);

@@ -306,41 +306,25 @@ namespace System.ConfigurationTests
         [Fact]
         public void ElementInformationIsCollection()
         {
-            Assert.True(
-                new SimpleCollection()
-                    .ElementInformation
-                    .IsCollection
-            );
+            Assert.True(new SimpleCollection().ElementInformation.IsCollection);
         }
 
         [Fact]
         public void ElementInformationIsNotLocked()
         {
-            Assert.False(
-                new SimpleCollection()
-                    .ElementInformation
-                    .IsLocked
-            );
+            Assert.False(new SimpleCollection().ElementInformation.IsLocked);
         }
 
         [Fact]
         public void ElementInformationIsNotPresent()
         {
-            Assert.False(
-                new SimpleCollection()
-                    .ElementInformation
-                    .IsPresent
-            );
+            Assert.False(new SimpleCollection().ElementInformation.IsPresent);
         }
 
         [Fact]
         public void ElementInformationPropertiesEmpty()
         {
-            Assert.Empty(
-                new SimpleCollection()
-                    .ElementInformation
-                    .Properties
-            );
+            Assert.Empty(new SimpleCollection().ElementInformation.Properties);
         }
 
         [Fact]

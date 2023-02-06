@@ -59,9 +59,7 @@ namespace MonoTests.System.Web.UI
         [Test]
         public void EqualsTest()
         {
-            string foo_built = new StringBuilder("f")
-                .Append("oo")
-                .ToString();
+            string foo_built = new StringBuilder("f").Append("oo").ToString();
             ToolboxDataAttribute left = new ToolboxDataAttribute(foo_built);
             ToolboxDataAttribute right = new ToolboxDataAttribute("foo");
 
@@ -77,9 +75,7 @@ namespace MonoTests.System.Web.UI
         [Test]
         public void HashcodeTest()
         {
-            string foo_built = new StringBuilder("f")
-                .Append("oo")
-                .ToString();
+            string foo_built = new StringBuilder("f").Append("oo").ToString();
             ToolboxDataAttribute left = new ToolboxDataAttribute("foo");
             ToolboxDataAttribute right = new ToolboxDataAttribute(foo_built);
 

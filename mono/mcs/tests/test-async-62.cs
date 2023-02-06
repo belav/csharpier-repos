@@ -22,8 +22,6 @@ class O
 {
     public static void Main()
     {
-        new Tests<long>()
-            .Delete(new Model[0])
-            .Wait();
+        new Tests<long>().Delete(new Model[0]).Wait();
     }
 }

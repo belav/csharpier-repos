@@ -208,45 +208,27 @@ namespace System.Runtime.Versioning.Tests
         public static void ConstructFromVersionWithoutBuildRevision()
         {
             var majorMinor = new Version(1, 2);
-            Assert.Equal(
-                -1,
-                new FrameworkName(s_testName.Identifier, majorMinor)
-                    .Version
-                    .Build
-            );
-            Assert.Equal(
-                -1,
-                new FrameworkName(s_testName.Identifier, majorMinor)
-                    .Version
-                    .Revision
-            );
+            Assert.Equal(-1, new FrameworkName(s_testName.Identifier, majorMinor).Version.Build);
+            Assert.Equal(-1, new FrameworkName(s_testName.Identifier, majorMinor).Version.Revision);
 
             var majorMinorBuild = new Version(1, 2, 3);
             Assert.Equal(
                 3,
-                new FrameworkName(s_testName.Identifier, majorMinorBuild)
-                    .Version
-                    .Build
+                new FrameworkName(s_testName.Identifier, majorMinorBuild).Version.Build
             );
             Assert.Equal(
                 -1,
-                new FrameworkName(s_testName.Identifier, majorMinorBuild)
-                    .Version
-                    .Revision
+                new FrameworkName(s_testName.Identifier, majorMinorBuild).Version.Revision
             );
 
             var majorMinorBuildRevision = new Version(1, 2, 3, 4);
             Assert.Equal(
                 3,
-                new FrameworkName(s_testName.Identifier, majorMinorBuildRevision)
-                    .Version
-                    .Build
+                new FrameworkName(s_testName.Identifier, majorMinorBuildRevision).Version.Build
             );
             Assert.Equal(
                 4,
-                new FrameworkName(s_testName.Identifier, majorMinorBuildRevision)
-                    .Version
-                    .Revision
+                new FrameworkName(s_testName.Identifier, majorMinorBuildRevision).Version.Revision
             );
         }
 

@@ -466,9 +466,7 @@ public class DataAnnotationsModelValidatorTest
         var service = new Mock<IExampleService>();
         service.Setup(x => x.DoSomething()).Verifiable();
 
-        var provider = new ServiceCollection()
-            .AddSingleton(service.Object)
-            .BuildServiceProvider();
+        var provider = new ServiceCollection().AddSingleton(service.Object).BuildServiceProvider();
 
         var httpContext = new Mock<HttpContext>();
         httpContext.SetupGet(x => x.RequestServices).Returns(provider);

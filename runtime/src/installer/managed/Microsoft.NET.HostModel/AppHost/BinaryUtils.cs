@@ -189,9 +189,7 @@ namespace Microsoft.NET.HostModel.AppHost
 
         public static void CopyFile(string sourcePath, string destinationPath)
         {
-            var destinationDirectory = new FileInfo(destinationPath)
-                .Directory
-                .FullName;
+            var destinationDirectory = new FileInfo(destinationPath).Directory.FullName;
             if (!Directory.Exists(destinationDirectory))
             {
                 Directory.CreateDirectory(destinationDirectory);

@@ -1152,9 +1152,7 @@ public class UserManagerTest
     {
         var provider = new ATokenProvider();
         var config = new ConfigurationBuilder().Build();
-        var services = new ServiceCollection()
-            .AddSingleton<IConfiguration>(config)
-            .AddLogging();
+        var services = new ServiceCollection().AddSingleton<IConfiguration>(config).AddLogging();
 
         services
             .AddIdentity<PocoUser, PocoRole>(
@@ -1277,9 +1275,7 @@ public class UserManagerTest
     {
         var provider = new ATokenProvider();
         var config = new ConfigurationBuilder().Build();
-        var services = new ServiceCollection()
-            .AddSingleton<IConfiguration>(config)
-            .AddLogging();
+        var services = new ServiceCollection().AddSingleton<IConfiguration>(config).AddLogging();
 
         services
             .AddIdentity<PocoUser, PocoRole>(

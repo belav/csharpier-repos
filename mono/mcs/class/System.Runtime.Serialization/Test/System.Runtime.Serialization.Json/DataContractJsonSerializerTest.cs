@@ -1303,9 +1303,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
             MemoryStream ms = new MemoryStream();
             using (var xw = JsonReaderWriterFactory.CreateJsonWriter(ms))
                 ser.WriteObject(ms, obj);
-            s = new StreamReader(new MemoryStream(ms.ToArray()))
-                .ReadToEnd()
-                .Replace('"', '/');
+            s = new StreamReader(new MemoryStream(ms.ToArray())).ReadToEnd().Replace('"', '/');
             // since the order is not preserved, we compare only contents.
             Assert.IsTrue(s.IndexOf("/Foo/:/foo/") > 0, "#2-1");
             Assert.IsTrue(s.IndexOf("/Bar/:/bar/") > 0, "#2-2");

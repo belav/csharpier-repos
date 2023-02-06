@@ -1210,9 +1210,7 @@ namespace System.Linq.Tests
             Assert.Equal(0, source.Skip(4).FirstOrDefault());
             Assert.Equal(0, source.Skip(14).FirstOrDefault());
 
-            var empty = new List<int>()
-                .AsReadOnly()
-                .Select(i => i * 2);
+            var empty = new List<int>().AsReadOnly().Select(i => i * 2);
             Assert.Throws<InvalidOperationException>(() => empty.First());
             Assert.Equal(0, empty.FirstOrDefault());
         }
@@ -1263,9 +1261,7 @@ namespace System.Linq.Tests
             Assert.Equal(6, source.Take(3).Last());
             Assert.Equal(6, source.Take(3).LastOrDefault());
 
-            var empty = new List<int>()
-                .AsReadOnly()
-                .Select(i => i * 2);
+            var empty = new List<int>().AsReadOnly().Select(i => i * 2);
             Assert.Throws<InvalidOperationException>(() => empty.Last());
             Assert.Equal(0, empty.LastOrDefault());
             Assert.Throws<InvalidOperationException>(() => empty.Skip(1).Last());

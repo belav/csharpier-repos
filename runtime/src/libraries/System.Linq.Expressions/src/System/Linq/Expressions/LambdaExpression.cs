@@ -144,9 +144,7 @@ namespace System.Linq.Expressions
             else
             {
                 Debug.Assert(CanInterpret);
-                return new Interpreter.LightCompiler()
-                    .CompileTop(this)
-                    .CreateDelegate();
+                return new Interpreter.LightCompiler().CompileTop(this).CreateDelegate();
             }
         }
 
@@ -159,9 +157,7 @@ namespace System.Linq.Expressions
         {
             if (CanCompileToIL && CanInterpret && preferInterpretation)
             {
-                return new Interpreter.LightCompiler()
-                    .CompileTop(this)
-                    .CreateDelegate();
+                return new Interpreter.LightCompiler().CompileTop(this).CreateDelegate();
             }
 
             return Compile();
@@ -228,10 +224,7 @@ namespace System.Linq.Expressions
             {
                 Debug.Assert(CanInterpret);
                 return (TDelegate)
-                    (object)
-                        new Interpreter.LightCompiler()
-                            .CompileTop(this)
-                            .CreateDelegate();
+                    (object)new Interpreter.LightCompiler().CompileTop(this).CreateDelegate();
             }
         }
 
@@ -245,10 +238,7 @@ namespace System.Linq.Expressions
             if (CanCompileToIL && CanInterpret && preferInterpretation)
             {
                 return (TDelegate)
-                    (object)
-                        new Interpreter.LightCompiler()
-                            .CompileTop(this)
-                            .CreateDelegate();
+                    (object)new Interpreter.LightCompiler().CompileTop(this).CreateDelegate();
             }
 
             return Compile();

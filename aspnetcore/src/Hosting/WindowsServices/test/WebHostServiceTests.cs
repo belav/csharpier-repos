@@ -19,10 +19,7 @@ public class WebHostServiceTests
     [ConditionalFact]
     public async Task StopBeforeServiceStarted()
     {
-        var host = new WebHostBuilder()
-            .UseServer(new FakeServer())
-            .Configure(x => { })
-            .Build();
+        var host = new WebHostBuilder().UseServer(new FakeServer()).Configure(x => { }).Build();
         var webHostService = new WebHostService(host);
         var applicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
@@ -37,10 +34,7 @@ public class WebHostServiceTests
     [ConditionalFact]
     public async Task StopAfterServiceStarted()
     {
-        var host = new WebHostBuilder()
-            .UseServer(new FakeServer())
-            .Configure(x => { })
-            .Build();
+        var host = new WebHostBuilder().UseServer(new FakeServer()).Configure(x => { }).Build();
         var webHostService = new WebHostService(host);
         var applicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 

@@ -126,9 +126,7 @@ namespace Microsoft.Extensions.Logging.Test
                 .AddLogging(
                     builder =>
                         builder.AddConfiguration(
-                            new ConfigurationBuilder()
-                                .AddInMemoryCollection(values)
-                                .Build()
+                            new ConfigurationBuilder().AddInMemoryCollection(values).Build()
                         )
                 )
                 .BuildServiceProvider();

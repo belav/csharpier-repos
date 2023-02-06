@@ -128,9 +128,7 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// </summary>
         public static string ToEscapedString(this string value)
         {
-            return new StringBuilder(value.Length + 16)
-                .AppendEscapedString(value)
-                .ToString();
+            return new StringBuilder(value.Length + 16).AppendEscapedString(value).ToString();
         }
     }
 }

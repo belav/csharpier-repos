@@ -47,9 +47,7 @@ public class ControllerActivatorProviderTest
         {
             ControllerTypeInfo = typeof(TestController).GetTypeInfo(),
         };
-        var serviceProvider = new ServiceCollection()
-            .AddSingleton(expected)
-            .BuildServiceProvider();
+        var serviceProvider = new ServiceCollection().AddSingleton(expected).BuildServiceProvider();
         var context = new ControllerContext
         {
             HttpContext = new DefaultHttpContext { RequestServices = serviceProvider, },

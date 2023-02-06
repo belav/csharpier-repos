@@ -593,22 +593,17 @@ namespace MonoTests.System.Xaml
             Assert.IsNull(new XamlType(typeof(List<object>), sctx).TypeConverter, "#1");
             Assert.IsNotNull(new XamlType(typeof(object), sctx).TypeConverter, "#2");
             Assert.IsTrue(
-                new XamlType(typeof(Uri), sctx)
-                    .TypeConverter
-                    .ConverterInstance is UriTypeConverter,
+                new XamlType(typeof(Uri), sctx).TypeConverter.ConverterInstance is UriTypeConverter,
                 "#3"
             );
             Assert.IsTrue(
-                new XamlType(typeof(TimeSpan), sctx)
-                    .TypeConverter
-                    .ConverterInstance is TimeSpanConverter,
+                new XamlType(typeof(TimeSpan), sctx).TypeConverter.ConverterInstance
+                    is TimeSpanConverter,
                 "#4"
             );
             Assert.IsNull(new XamlType(typeof(XamlType), sctx).TypeConverter, "#5");
             Assert.IsTrue(
-                new XamlType(typeof(char), sctx)
-                    .TypeConverter
-                    .ConverterInstance is CharConverter,
+                new XamlType(typeof(char), sctx).TypeConverter.ConverterInstance is CharConverter,
                 "#6"
             );
         }

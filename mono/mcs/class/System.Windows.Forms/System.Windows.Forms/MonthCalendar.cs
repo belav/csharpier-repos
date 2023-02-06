@@ -1850,9 +1850,7 @@ namespace System.Windows.Forms
         // returns the last date of the month
         private DateTime GetLastDateInMonth(DateTime date)
         {
-            return new DateTime(date.Year, date.Month, 1)
-                .AddMonths(1)
-                .AddDays(-1);
+            return new DateTime(date.Year, date.Month, 1).AddMonths(1).AddDays(-1);
         }
 
         // called in response to users seletion with shift key

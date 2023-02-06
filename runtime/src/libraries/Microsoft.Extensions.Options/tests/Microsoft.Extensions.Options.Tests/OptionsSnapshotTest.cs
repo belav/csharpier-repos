@@ -83,9 +83,7 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void SnapshotDoesNotChangeUntilNextRequestOnConfigChanges()
         {
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection()
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection().Build();
 
             var services = new ServiceCollection();
             services.AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));

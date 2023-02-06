@@ -19,9 +19,7 @@ public class PushStreamResultTests
 
         var httpContext = new DefaultHttpContext
         {
-            RequestServices = new ServiceCollection()
-                .AddLogging()
-                .BuildServiceProvider()
+            RequestServices = new ServiceCollection().AddLogging().BuildServiceProvider()
         };
         var ms = new MemoryStream();
         httpContext.Response.Body = ms;

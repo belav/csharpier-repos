@@ -13,9 +13,7 @@ public class AuthorizationBuilderTests
     public void CanSetFallbackPolicy()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var builder = TestHelpers
             .CreateAuthorizationBuilder()
             // Act
@@ -34,9 +32,7 @@ public class AuthorizationBuilderTests
     public void CanUnSetFallbackPolicy()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var builder = TestHelpers
             .CreateAuthorizationBuilder()
             .SetFallbackPolicy(policy)
@@ -56,9 +52,7 @@ public class AuthorizationBuilderTests
     public void CanSetDefaultPolicy()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var builder = TestHelpers
             .CreateAuthorizationBuilder()
             // Act
@@ -97,9 +91,7 @@ public class AuthorizationBuilderTests
     public void CanAddPolicyInstance()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var builder = TestHelpers
             .CreateAuthorizationBuilder()
             // Act

@@ -30,9 +30,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
 
             var eatCommand = new Command("eat") { fruitOption, vegetableOption };
 
-            _testParser = new CommandLineBuilder(eatCommand)
-                .UseSuggestDirective()
-                .Build();
+            _testParser = new CommandLineBuilder(eatCommand).UseSuggestDirective().Build();
         }
 
         [Params("[suggest:4] \"eat\"", "[suggest:13] \"eat --fruit\"")]

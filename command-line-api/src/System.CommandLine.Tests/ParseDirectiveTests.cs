@@ -28,9 +28,7 @@ namespace System.CommandLine.Tests
             var option = new Option<int>(new[] { "-c", "--count" });
             subcommand.Options.Add(option);
 
-            var parser = new CommandLineBuilder(rootCommand)
-                .UseParseDirective()
-                .Build();
+            var parser = new CommandLineBuilder(rootCommand).UseParseDirective().Build();
 
             var result = parser.Parse("[parse] subcommand -c 34 --nonexistent wat");
 

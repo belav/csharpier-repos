@@ -416,12 +416,7 @@ namespace MonoTests.System.Configuration
         [Category("NotWorking")]
         public void Providers()
         {
-            Assert.AreEqual(
-                0,
-                new TestSettings1()
-                    .Providers
-                    .Count
-            );
+            Assert.AreEqual(0, new TestSettings1().Providers.Count);
         }
 
         class Bug532180 : ApplicationSettingsBase

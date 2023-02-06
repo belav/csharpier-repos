@@ -313,9 +313,7 @@ public class WebHostBuilderTests
             { WebHostDefaults.ApplicationKey, assemblyName },
             { WebHostDefaults.HostingStartupAssembliesKey, assemblyName }
         };
-        var config = new ConfigurationBuilder()
-            .AddInMemoryCollection(data)
-            .Build();
+        var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
 
         builder = builder
             .UseConfiguration(config)
@@ -549,9 +547,7 @@ public class WebHostBuilderTests
             { WebHostDefaults.EnvironmentKey, "EnvB" }
         };
 
-        var config = new ConfigurationBuilder()
-            .AddInMemoryCollection(settings)
-            .Build();
+        var config = new ConfigurationBuilder().AddInMemoryCollection(settings).Build();
 
         var hostBuilder = builder
             .UseSetting(WebHostDefaults.EnvironmentKey, "EnvA")
@@ -575,9 +571,7 @@ public class WebHostBuilderTests
             { WebHostDefaults.EnvironmentKey, "EnvA" }
         };
 
-        var config = new ConfigurationBuilder()
-            .AddInMemoryCollection(settings)
-            .Build();
+        var config = new ConfigurationBuilder().AddInMemoryCollection(settings).Build();
 
         var hostBuilder = builder
             .UseConfiguration(config)
@@ -601,9 +595,7 @@ public class WebHostBuilderTests
             { WebHostDefaults.EnvironmentKey, "EnvA" }
         };
 
-        var config = new ConfigurationBuilder()
-            .AddInMemoryCollection(settings)
-            .Build();
+        var config = new ConfigurationBuilder().AddInMemoryCollection(settings).Build();
 
         var overrideSettings = new Dictionary<string, string>
         {

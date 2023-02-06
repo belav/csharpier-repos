@@ -13,12 +13,8 @@ namespace System.Globalization.Tests
 
         public static IEnumerable<object[]> GetWeekOfYear_TestData()
         {
-            CalendarWeekRule rule = new CultureInfo("ko-KR")
-                .DateTimeFormat
-                .CalendarWeekRule;
-            DayOfWeek firstDayOfWeek = new CultureInfo("ko-KR")
-                .DateTimeFormat
-                .FirstDayOfWeek;
+            CalendarWeekRule rule = new CultureInfo("ko-KR").DateTimeFormat.CalendarWeekRule;
+            DayOfWeek firstDayOfWeek = new CultureInfo("ko-KR").DateTimeFormat.FirstDayOfWeek;
 
             yield return new object[] { DateTime.MinValue, rule, firstDayOfWeek };
             yield return new object[] { DateTime.MaxValue, rule, firstDayOfWeek };

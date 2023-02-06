@@ -2550,10 +2550,7 @@ namespace System.Text.RegularExpressions.Tests
                                 () => new Regex(Pattern).IsMatch(input)
                             );
                             Assert.Throws<RegexMatchTimeoutException>(
-                                () =>
-                                    new Regex(Pattern)
-                                        .Matches(input)
-                                        .Count
+                                () => new Regex(Pattern).Matches(input).Count
                             );
 
                             Assert.Throws<RegexMatchTimeoutException>(
@@ -3288,12 +3285,7 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("abc", "abc", "abc", "abc")]
         public void Result(string pattern, string input, string replacement, string expected)
         {
-            Assert.Equal(
-                expected,
-                new Regex(pattern)
-                    .Match(input)
-                    .Result(replacement)
-            );
+            Assert.Equal(expected, new Regex(pattern).Match(input).Result(replacement));
         }
 
         [Fact]

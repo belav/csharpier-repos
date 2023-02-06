@@ -480,9 +480,7 @@ public class KestrelServerTests
     public async Task ListenWithCustomEndpoint_DoesNotThrow()
     {
         var options = new KestrelServerOptions();
-        options.ApplicationServices = new ServiceCollection()
-            .AddLogging()
-            .BuildServiceProvider();
+        options.ApplicationServices = new ServiceCollection().AddLogging().BuildServiceProvider();
 
         var customEndpoint = new UriEndPoint(new("http://localhost:5000"));
         options.Listen(
@@ -522,9 +520,7 @@ public class KestrelServerTests
     public async Task ListenIPWithStaticPort_TransportsGetIPv6Any()
     {
         var options = new KestrelServerOptions();
-        options.ApplicationServices = new ServiceCollection()
-            .AddLogging()
-            .BuildServiceProvider();
+        options.ApplicationServices = new ServiceCollection().AddLogging().BuildServiceProvider();
         options.ListenAnyIP(
             5000,
             options =>
@@ -569,9 +565,7 @@ public class KestrelServerTests
     public async Task ListenIPWithEphemeralPort_TransportsGetIPv6Any()
     {
         var options = new KestrelServerOptions();
-        options.ApplicationServices = new ServiceCollection()
-            .AddLogging()
-            .BuildServiceProvider();
+        options.ApplicationServices = new ServiceCollection().AddLogging().BuildServiceProvider();
         options.ListenAnyIP(
             0,
             options =>
@@ -608,9 +602,7 @@ public class KestrelServerTests
     public async Task ListenIPWithEphemeralPort_MultiplexedTransportsGetIPv6Any()
     {
         var options = new KestrelServerOptions();
-        options.ApplicationServices = new ServiceCollection()
-            .AddLogging()
-            .BuildServiceProvider();
+        options.ApplicationServices = new ServiceCollection().AddLogging().BuildServiceProvider();
         options.ListenAnyIP(
             0,
             options =>

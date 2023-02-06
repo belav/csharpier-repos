@@ -38,9 +38,7 @@ public class WebHostBuilder : IWebHostBuilder
     {
         _hostingEnvironment = new HostingEnvironment();
 
-        _config = new ConfigurationBuilder()
-            .AddEnvironmentVariables(prefix: "ASPNETCORE_")
-            .Build();
+        _config = new ConfigurationBuilder().AddEnvironmentVariables(prefix: "ASPNETCORE_").Build();
 
         if (string.IsNullOrEmpty(GetSetting(WebHostDefaults.EnvironmentKey)))
         {

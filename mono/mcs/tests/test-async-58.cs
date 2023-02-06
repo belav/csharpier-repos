@@ -18,8 +18,6 @@ public class B : A
 
     static void Main()
     {
-        new B()
-            .GetAsync()
-            .Wait();
+        new B().GetAsync().Wait();
     }
 }

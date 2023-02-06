@@ -428,16 +428,12 @@ namespace MonoTests.System.Xaml
             Assert.AreNotEqual(m, XamlLanguage.Type.GetMember("Type"), "#7");
             Assert.AreNotEqual(
                 XamlLanguage.Type.GetMember("Type"),
-                new XamlSchemaContext()
-                    .GetXamlType(typeof(Type))
-                    .GetMember("Type"),
+                new XamlSchemaContext().GetXamlType(typeof(Type)).GetMember("Type"),
                 "#7"
             );
             Assert.AreEqual(
                 XamlLanguage.Type.GetMember("Type"),
-                new XamlSchemaContext()
-                    .GetXamlType(typeof(TypeExtension))
-                    .GetMember("Type"),
+                new XamlSchemaContext().GetXamlType(typeof(TypeExtension)).GetMember("Type"),
                 "#8"
             );
         }

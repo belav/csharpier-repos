@@ -1726,12 +1726,7 @@ namespace System.Globalization.Tests
                     (byte)(0x7F & 0xFF)
                 )
             );
-            Assert.Equal(
-                version,
-                new CultureInfo(cultureName)
-                    .CompareInfo
-                    .Version
-            );
+            Assert.Equal(version, new CultureInfo(cultureName).CompareInfo.Version);
         }
 
         [ConditionalTheory(nameof(PredefinedCulturesOnlyIsDisabled))]

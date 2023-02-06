@@ -39,12 +39,7 @@ public static class BaselineWriter
         }
         else
         {
-            return RecursiveFind(
-                path,
-                new DirectoryInfo(start)
-                    .Parent
-                    .FullName
-            );
+            return RecursiveFind(path, new DirectoryInfo(start).Parent.FullName);
         }
     }
 }

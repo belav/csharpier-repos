@@ -254,9 +254,7 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanMonitorConfigBoundOptions()
         {
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection()
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection().Build();
 
             var services = new ServiceCollection().AddOptions();
             services.AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
@@ -291,9 +289,7 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanMonitorConfigBoundNamedOptions()
         {
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection()
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection().Build();
 
             var services = new ServiceCollection().AddOptions();
             services.AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
@@ -344,9 +340,7 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void ControllerCanWatchOptionsThatTrackConfigChanges()
         {
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection()
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection().Build();
 
             var services = new ServiceCollection().AddOptions();
             services.AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));

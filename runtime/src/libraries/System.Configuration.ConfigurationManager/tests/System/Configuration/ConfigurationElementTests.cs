@@ -118,31 +118,19 @@ namespace System.ConfigurationTests
         [Fact]
         public void ElementInformationIsNotCollection()
         {
-            Assert.False(
-                new SimpleElement()
-                    .ElementInformation
-                    .IsCollection
-            );
+            Assert.False(new SimpleElement().ElementInformation.IsCollection);
         }
 
         [Fact]
         public void ElementInformationIsNotPresent()
         {
-            Assert.False(
-                new SimpleElement()
-                    .ElementInformation
-                    .IsPresent
-            );
+            Assert.False(new SimpleElement().ElementInformation.IsPresent);
         }
 
         [Fact]
         public void ElementInformationPropertiesEmpty()
         {
-            Assert.Empty(
-                new SimpleElement()
-                    .ElementInformation
-                    .Properties
-            );
+            Assert.Empty(new SimpleElement().ElementInformation.Properties);
         }
 
         [Fact]

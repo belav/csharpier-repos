@@ -20,27 +20,20 @@ public class KeyPerFileTests
     [Fact]
     public void DoesNotThrowWhenOptionalAndNoSecrets()
     {
-        new ConfigurationBuilder()
-            .AddKeyPerFile(o => o.Optional = true)
-            .Build();
+        new ConfigurationBuilder().AddKeyPerFile(o => o.Optional = true).Build();
     }
 
     [Fact]
     public void DoesNotThrowWhenOptionalAndDirectoryDoesntExist()
     {
-        new ConfigurationBuilder()
-            .AddKeyPerFile("nonexistent", true)
-            .Build();
+        new ConfigurationBuilder().AddKeyPerFile("nonexistent", true).Build();
     }
 
     [Fact]
     public void ThrowsWhenNotOptionalAndDirectoryDoesntExist()
     {
         var e = Assert.Throws<ArgumentException>(
-            () =>
-                new ConfigurationBuilder()
-                    .AddKeyPerFile("nonexistent", false)
-                    .Build()
+            () => new ConfigurationBuilder().AddKeyPerFile("nonexistent", false).Build()
         );
         Assert.Contains("The path must be absolute.", e.Message);
     }

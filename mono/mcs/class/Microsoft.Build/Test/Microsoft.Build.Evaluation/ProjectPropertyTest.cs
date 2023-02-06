@@ -116,18 +116,10 @@ namespace MonoTests.Microsoft.Build.Evaluation
 </Project>";
             var xml = XmlReader.Create(new StringReader(project_xml));
             var root = ProjectRootElement.Create(xml);
+            Assert.AreEqual("1+1+2", new Project(root).GetProperty("C").EvaluatedValue, "#1");
             Assert.AreEqual(
                 "1+1+2",
-                new Project(root)
-                    .GetProperty("C")
-                    .EvaluatedValue,
-                "#1"
-            );
-            Assert.AreEqual(
-                "1+1+2",
-                new ProjectInstance(root)
-                    .GetProperty("C")
-                    .EvaluatedValue,
+                new ProjectInstance(root).GetProperty("C").EvaluatedValue,
                 "#1"
             );
         }

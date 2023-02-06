@@ -1135,9 +1135,7 @@ public class DefaultAuthorizationServiceTests
         public Task<AuthorizationPolicy> GetDefaultPolicyAsync()
         {
             return Task.FromResult(
-                new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build()
+                new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()
             );
         }
 
@@ -1149,9 +1147,7 @@ public class DefaultAuthorizationServiceTests
         public Task<AuthorizationPolicy> GetPolicyAsync(string policyName)
         {
             return Task.FromResult(
-                new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build()
+                new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()
             );
         }
     }
@@ -1182,9 +1178,7 @@ public class DefaultAuthorizationServiceTests
         public Task<AuthorizationPolicy> GetDefaultPolicyAsync()
         {
             return Task.FromResult(
-                new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build()
+                new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()
             );
         }
 
@@ -1196,9 +1190,7 @@ public class DefaultAuthorizationServiceTests
         public Task<AuthorizationPolicy> GetPolicyAsync(string policyName)
         {
             return Task.FromResult(
-                new AuthorizationPolicyBuilder()
-                    .RequireClaim(policyName)
-                    .Build()
+                new AuthorizationPolicyBuilder().RequireClaim(policyName).Build()
             );
         }
     }

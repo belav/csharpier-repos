@@ -56,9 +56,7 @@ namespace Moq.Tests
 
         private string GetAppendExpressionResult(Expression expression)
         {
-            return new StringBuilder()
-                .AppendExpression(expression)
-                .ToString();
+            return new StringBuilder().AppendExpression(expression).ToString();
         }
 
         public interface IFoo

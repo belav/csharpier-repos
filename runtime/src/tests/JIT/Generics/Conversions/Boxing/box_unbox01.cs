@@ -66,21 +66,9 @@ public class Test_box_unbox01
 
     public static int Main()
     {
-        Eval(
-            new Gen<int>()
-                .Unbox(new Gen<int>().Box(1))
-                .Equals(1)
-        );
-        Eval(
-            new Gen<double>()
-                .Unbox(new Gen<double>().Box(1.111))
-                .Equals(1.111)
-        );
-        Eval(
-            new Gen<string>()
-                .Unbox(new Gen<string>().Box("boxme"))
-                .Equals("boxme")
-        );
+        Eval(new Gen<int>().Unbox(new Gen<int>().Box(1)).Equals(1));
+        Eval(new Gen<double>().Unbox(new Gen<double>().Box(1.111)).Equals(1.111));
+        Eval(new Gen<string>().Unbox(new Gen<string>().Box("boxme")).Equals("boxme"));
         Eval(
             new Gen<Guid>()
                 .Unbox(new Gen<Guid>().Box(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)))

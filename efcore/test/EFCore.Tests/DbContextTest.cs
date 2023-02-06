@@ -373,9 +373,7 @@ public partial class DbContextTest
 
         using var context = new EarlyLearningCenter(
             InMemoryTestHelpers.Instance.CreateServiceProvider(),
-            new DbContextOptionsBuilder()
-                .UseModel(modelBuilder.FinalizeModel())
-                .Options
+            new DbContextOptionsBuilder().UseModel(modelBuilder.FinalizeModel()).Options
         );
         Assert.Equal(
             new[] { typeof(TheGu).FullName },

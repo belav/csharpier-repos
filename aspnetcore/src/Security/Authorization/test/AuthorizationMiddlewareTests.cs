@@ -24,9 +24,7 @@ public class AuthorizationMiddlewareTests
     public async Task NoEndpoint_AnonymousUser_Allows()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
         var next = new TestRequestDelegate();
@@ -45,9 +43,7 @@ public class AuthorizationMiddlewareTests
     public async Task NoEndpointWithFallback_AnonymousUser_Challenges()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetFallbackPolicyAsync()).ReturnsAsync(policy);
         var next = new TestRequestDelegate();
@@ -71,9 +67,7 @@ public class AuthorizationMiddlewareTests
     public async Task HasEndpointWithoutAuth_AnonymousUser_Allows()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
         var next = new TestRequestDelegate();
@@ -92,9 +86,7 @@ public class AuthorizationMiddlewareTests
     public async Task HasEndpointWithFallbackWithoutAuth_AnonymousUser_Challenges()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
         policyProvider.Setup(p => p.GetFallbackPolicyAsync()).ReturnsAsync(policy);
@@ -119,17 +111,11 @@ public class AuthorizationMiddlewareTests
     public async Task HasEndpointWithOnlyFallbackAuth_AnonymousUser_Allows()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider
             .Setup(p => p.GetDefaultPolicyAsync())
-            .ReturnsAsync(
-                new AuthorizationPolicyBuilder()
-                    .RequireAssertion(_ => true)
-                    .Build()
-            );
+            .ReturnsAsync(new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build());
         policyProvider.Setup(p => p.GetFallbackPolicyAsync()).ReturnsAsync(policy);
         var next = new TestRequestDelegate();
         var authenticationService = new TestAuthenticationService();
@@ -157,9 +143,7 @@ public class AuthorizationMiddlewareTests
     public async Task HasEndpointWithAuth_AnonymousUser_Challenges()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
         var next = new TestRequestDelegate();
@@ -189,9 +173,7 @@ public class AuthorizationMiddlewareTests
     public async Task HasEndpointWithAuth_ChallengesAuthenticationSchemes()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
         var next = new TestRequestDelegate();
@@ -255,9 +237,7 @@ public class AuthorizationMiddlewareTests
     public async Task OnAuthorizationAsync_WillCallPolicyProvider()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(_ => true)
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         var getPolicyCount = 0;
         var getFallbackPolicyCount = 0;
@@ -312,9 +292,7 @@ public class AuthorizationMiddlewareTests
     public async Task OnAuthorizationAsync_WillNotCallPolicyProviderWithCache()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(_ => true)
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         var getPolicyCount = 0;
         var getFallbackPolicyCount = 0;
@@ -384,9 +362,7 @@ public class AuthorizationMiddlewareTests
         {
             GetPolicyCount++;
             return Task.FromResult(
-                new AuthorizationPolicyBuilder()
-                    .RequireAssertion(_ => true)
-                    .Build()
+                new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build()
             );
         }
 
@@ -401,9 +377,7 @@ public class AuthorizationMiddlewareTests
     )
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(_ => true)
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
         var policyProvider = new TestDefaultPolicyProvider(
             Options.Create(new AuthorizationOptions()),
             canCache
@@ -439,9 +413,7 @@ public class AuthorizationMiddlewareTests
     public async Task OnAuthorizationAsync_WillCallCustomPolicyProviderWithCache()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(_ => true)
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         var getPolicyCount = 0;
         var getFallbackPolicyCount = 0;
@@ -498,11 +470,7 @@ public class AuthorizationMiddlewareTests
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider
             .Setup(p => p.GetDefaultPolicyAsync())
-            .ReturnsAsync(
-                new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build()
-            );
+            .ReturnsAsync(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
         var next = new TestRequestDelegate();
         var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
         var context = GetHttpContext(
@@ -609,11 +577,7 @@ public class AuthorizationMiddlewareTests
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider
             .Setup(p => p.GetDefaultPolicyAsync())
-            .ReturnsAsync(
-                new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build()
-            );
+            .ReturnsAsync(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
         var next = new TestRequestDelegate();
         var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
         var context = GetHttpContext(
@@ -647,11 +611,7 @@ public class AuthorizationMiddlewareTests
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider
             .Setup(p => p.GetDefaultPolicyAsync())
-            .ReturnsAsync(
-                new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build()
-            );
+            .ReturnsAsync(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
         var next = new TestRequestDelegate();
         var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
         var context = GetHttpContext(
@@ -690,9 +650,7 @@ public class AuthorizationMiddlewareTests
     public async Task HasEndpointWithAuthAndAllowAnonymous_AnonymousUser_Allows()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
         var next = new TestRequestDelegate();
@@ -717,9 +675,7 @@ public class AuthorizationMiddlewareTests
     public async Task HasEndpointWithAuth_AuthenticatedUser_Allows()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
         var next = new TestRequestDelegate();
@@ -743,9 +699,7 @@ public class AuthorizationMiddlewareTests
     public async Task Invoke_AuthSchemesFailShouldSetEmptyPrincipalOnContext()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder("Fails")
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder("Fails").RequireAuthenticatedUser().Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
         var next = new TestRequestDelegate();
@@ -858,9 +812,7 @@ public class AuthorizationMiddlewareTests
     public async Task Invoke_RequireUnknownRoleShouldForbid()
     {
         // Arrange
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireRole("Wut")
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireRole("Wut").Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
         var next = new TestRequestDelegate();

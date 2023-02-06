@@ -25,11 +25,7 @@ public static class DynamicMethodJumpStubTests
         // Reserve memory around framework libraries. This is just a best attempt, it typically doesn't help since the
         // precode allocator may have already committed pages it can allocate from, or it may commit reserved pages close to
         // framework libraries.
-        ReserveMemoryAround(
-            new Action(ExecutionContext.RestoreFlow)
-                .Method
-                .MethodHandle
-        );
+        ReserveMemoryAround(new Action(ExecutionContext.RestoreFlow).Method.MethodHandle);
 
         var dynamicMethodDelegates = new Action[64];
         for (int i = 0; i < dynamicMethodDelegates.Length; ++i)

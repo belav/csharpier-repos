@@ -101,9 +101,7 @@ namespace DebuggerTests.GetPropertiesTests
         public static void run()
         {
             new DerivedClass().InstanceMethod();
-            new DerivedClass()
-                .InstanceMethodAsync()
-                .Wait();
+            new DerivedClass().InstanceMethodAsync().Wait();
         }
 
         public string GetStringField() => _stringField;
@@ -319,9 +317,7 @@ namespace DebuggerTests.GetPropertiesTests
         public static void run()
         {
             new DerivedClass2().InstanceMethod();
-            new DerivedClass2()
-                .InstanceMethodAsync()
-                .Wait();
+            new DerivedClass2().InstanceMethodAsync().Wait();
         }
 
         public void InstanceMethod()
@@ -368,9 +364,7 @@ namespace DebuggerTests.GetPropertiesTests
         public static void run()
         {
             new CloneableStruct(3).InstanceMethod();
-            new CloneableStruct(3)
-                .InstanceMethodAsync()
-                .Wait();
+            new CloneableStruct(3).InstanceMethodAsync().Wait();
         }
 
         public string GetStringField() => _stringField;

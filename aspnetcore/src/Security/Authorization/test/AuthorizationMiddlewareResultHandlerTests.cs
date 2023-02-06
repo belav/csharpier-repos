@@ -16,9 +16,7 @@ public class AuthorizationMiddlewareResultHandlerTests
     {
         var requestDelegate = new Mock<RequestDelegate>();
         var httpContext = CreateHttpContext();
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyAuthorizationResult = PolicyAuthorizationResult.Success();
         var handler = CreateAuthorizationMiddlewareResultHandler();
 
@@ -37,9 +35,7 @@ public class AuthorizationMiddlewareResultHandlerTests
     {
         var requestDelegate = new Mock<RequestDelegate>();
         var httpContext = CreateHttpContext();
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyAuthorizationResult = PolicyAuthorizationResult.Challenge();
         var handler = CreateAuthorizationMiddlewareResultHandler();
 
@@ -58,9 +54,7 @@ public class AuthorizationMiddlewareResultHandlerTests
     {
         var requestDelegate = new Mock<RequestDelegate>();
         var httpContext = CreateHttpContext();
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyAuthorizationResult = PolicyAuthorizationResult.Forbid();
         var handler = CreateAuthorizationMiddlewareResultHandler();
 
@@ -121,9 +115,7 @@ public class AuthorizationMiddlewareResultHandlerTests
         var authenticationServiceMock = new Mock<IAuthenticationService>();
         var requestDelegate = new Mock<RequestDelegate>();
         var httpContext = CreateHttpContext(authenticationServiceMock.Object);
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyAuthorizationResult = PolicyAuthorizationResult.Challenge();
         var handler = CreateAuthorizationMiddlewareResultHandler();
 
@@ -187,9 +179,7 @@ public class AuthorizationMiddlewareResultHandlerTests
         var authenticationServiceMock = new Mock<IAuthenticationService>();
         var requestDelegate = new Mock<RequestDelegate>();
         var httpContext = CreateHttpContext(authenticationServiceMock.Object);
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         var policyAuthorizationResult = PolicyAuthorizationResult.Forbid();
         var handler = CreateAuthorizationMiddlewareResultHandler();
 

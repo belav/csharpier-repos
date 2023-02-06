@@ -20,9 +20,7 @@ public class SqlTestStore : IDisposable
     {
         using (
             var db = new DbContext(
-                new DbContextOptionsBuilder()
-                    .UseSqlite(ConnectionString)
-                    .Options
+                new DbContextOptionsBuilder().UseSqlite(ConnectionString).Options
             )
         )
         {

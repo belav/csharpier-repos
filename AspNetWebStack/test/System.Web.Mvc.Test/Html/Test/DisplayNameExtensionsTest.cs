@@ -27,12 +27,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             MvcHtmlString result = MvcHelper
                 .GetHtmlHelper()
-                .DisplayNameInternal(
-                    "PropertyName",
-                    new MetadataHelper()
-                        .MetadataProvider
-                        .Object
-                );
+                .DisplayNameInternal("PropertyName", new MetadataHelper().MetadataProvider.Object);
 
             // Assert
             Assert.Equal("PropertyName", result.ToHtmlString());
@@ -269,9 +264,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             MvcHtmlString result = html.DisplayNameForInternal(
                 nested => nested.product.Id,
-                new MetadataHelper()
-                    .MetadataProvider
-                    .Object
+                new MetadataHelper().MetadataProvider.Object
             );
 
             //Assert

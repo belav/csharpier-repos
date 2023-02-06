@@ -109,12 +109,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             );
 
             Assert.Empty(new SegmentedArray<byte>(0));
-            Assert.Same(
-                Array.Empty<byte[]>(),
-                new SegmentedArray<byte>(0)
-                    .GetTestAccessor()
-                    .Items
-            );
+            Assert.Same(Array.Empty<byte[]>(), new SegmentedArray<byte>(0).GetTestAccessor().Items);
         }
 
         [Theory]

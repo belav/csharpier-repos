@@ -9,9 +9,7 @@ namespace System.IO.Tests
     {
         protected virtual string Directory(string path)
         {
-            return new FileInfo(path)
-                .Directory
-                .FullName;
+            return new FileInfo(path).Directory.FullName;
         }
 
         [Fact]

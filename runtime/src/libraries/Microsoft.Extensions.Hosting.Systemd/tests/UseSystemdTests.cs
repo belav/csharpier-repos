@@ -12,9 +12,7 @@ namespace Microsoft.Extensions.Hosting
         [Fact]
         public void DefaultsToOffOutsideOfService()
         {
-            using IHost host = new HostBuilder()
-                .UseSystemd()
-                .Build();
+            using IHost host = new HostBuilder().UseSystemd().Build();
 
             var lifetime = host.Services.GetRequiredService<IHostLifetime>();
             Assert.NotNull(lifetime);

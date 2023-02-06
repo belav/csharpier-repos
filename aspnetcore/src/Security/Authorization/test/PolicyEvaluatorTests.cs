@@ -21,9 +21,7 @@ public class PolicyEvaluatorTests
             SadAuthentication
         >();
         context.RequestServices = services.BuildServiceProvider();
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(_ => true)
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
 
         // Act
         var result = await evaluator.AuthenticateAsync(policy, context);
@@ -85,9 +83,7 @@ public class PolicyEvaluatorTests
         // Arrange
         var evaluator = BuildEvaluator();
         var context = new DefaultHttpContext();
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(_ => true)
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
 
         // Act
         var result = await evaluator.AuthorizeAsync(
@@ -136,9 +132,7 @@ public class PolicyEvaluatorTests
         // Arrange
         var evaluator = BuildEvaluator();
         var context = new DefaultHttpContext();
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(_ => false)
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => false).Build();
 
         // Act
         var result = await evaluator.AuthorizeAsync(
@@ -160,9 +154,7 @@ public class PolicyEvaluatorTests
         // Arrange
         var evaluator = BuildEvaluator();
         var context = new DefaultHttpContext();
-        var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(_ => false)
-            .Build();
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => false).Build();
 
         // Act
         var result = await evaluator.AuthorizeAsync(
@@ -210,10 +202,7 @@ public class PolicyEvaluatorTests
 
     private IPolicyEvaluator BuildEvaluator(Action<IServiceCollection> setupServices = null)
     {
-        var services = new ServiceCollection()
-            .AddAuthorization()
-            .AddLogging()
-            .AddOptions();
+        var services = new ServiceCollection().AddAuthorization().AddLogging().AddOptions();
         setupServices?.Invoke(services);
         return services.BuildServiceProvider().GetRequiredService<IPolicyEvaluator>();
     }

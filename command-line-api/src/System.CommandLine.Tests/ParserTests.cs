@@ -145,9 +145,7 @@ namespace System.CommandLine.Tests
                         new Option<bool>("-z")
                     }
                 }
-            )
-                .EnablePosixBundling(false)
-                .Build();
+            ).EnablePosixBundling(false).Build();
 
             var result = parser.Parse("the-command -xyz");
 

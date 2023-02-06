@@ -277,18 +277,8 @@ namespace System.Diagnostics.Tests
                     Assert.True(
                         object.ReferenceEquals(new Activity("a1").Source, new Activity("a2").Source)
                     );
-                    Assert.Equal(
-                        "",
-                        new Activity("a3")
-                            .Source
-                            .Name
-                    );
-                    Assert.Equal(
-                        string.Empty,
-                        new Activity("a4")
-                            .Source
-                            .Version
-                    );
+                    Assert.Equal("", new Activity("a3").Source.Name);
+                    Assert.Equal(string.Empty, new Activity("a4").Source.Version);
 
                     using ActivitySource aSource = new ActivitySource("SourceToTest", "1.2.3.4");
 

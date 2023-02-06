@@ -89,9 +89,7 @@ namespace System.Xaml
             // check type validity. Note that some checks also needs done at Read() phase. (it is likely FIXME:)
             if (instance != null)
             {
-                var type = new InstanceContext(instance)
-                    .GetRawValue()
-                    .GetType();
+                var type = new InstanceContext(instance).GetRawValue().GetType();
                 if (!type.IsPublic)
                     throw new XamlObjectReaderException(
                         String.Format("instance type '{0}' must be public and non-nested.", type)

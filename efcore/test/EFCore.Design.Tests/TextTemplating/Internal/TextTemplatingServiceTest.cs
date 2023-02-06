@@ -15,9 +15,7 @@ public class TextTemplatingServiceTest
     public void Service_works()
     {
         var host = new TextTemplatingService(
-            new ServiceCollection()
-                .AddSingleton("Hello, Services!")
-                .BuildServiceProvider()
+            new ServiceCollection().AddSingleton("Hello, Services!").BuildServiceProvider()
         );
         var callback = new TextTemplatingCallback();
 

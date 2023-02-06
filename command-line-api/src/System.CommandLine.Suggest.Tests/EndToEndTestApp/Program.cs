@@ -29,9 +29,7 @@ namespace EndToEndTestApp
                 durianOption
             );
 
-            var commandLine = new CommandLineBuilder(rootCommand)
-                .UseDefaults()
-                .Build();
+            var commandLine = new CommandLineBuilder(rootCommand).UseDefaults().Build();
 
             await commandLine.InvokeAsync(args);
         }

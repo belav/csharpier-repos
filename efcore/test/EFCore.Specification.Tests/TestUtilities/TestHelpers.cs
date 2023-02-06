@@ -70,9 +70,7 @@ public abstract class TestHelpers
 
     public DbContext CreateContext(IServiceProvider serviceProvider, DbContextOptions options) =>
         new(
-            new DbContextOptionsBuilder(options)
-                .UseInternalServiceProvider(serviceProvider)
-                .Options
+            new DbContextOptionsBuilder(options).UseInternalServiceProvider(serviceProvider).Options
         );
 
     public DbContext CreateContext(IServiceProvider serviceProvider) =>

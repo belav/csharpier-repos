@@ -232,9 +232,7 @@ public class DefaultHttpContextTests
     public async Task RequestServicesAreDisposedAsynOnCompleted()
     {
         var serviceProvider = new AsyncDisposableServiceProvider(
-            new ServiceCollection()
-                .AddTransient<DisposableThing>()
-                .BuildServiceProvider()
+            new ServiceCollection().AddTransient<DisposableThing>().BuildServiceProvider()
         );
 
         var scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();

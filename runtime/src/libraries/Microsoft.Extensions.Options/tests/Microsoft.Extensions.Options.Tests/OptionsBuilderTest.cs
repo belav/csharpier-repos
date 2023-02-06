@@ -19,9 +19,7 @@ namespace Microsoft.Extensions.Options.Tests
         {
             var services = new ServiceCollection();
             var dic = new Dictionary<string, string> { { "Message", "!" }, };
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection(dic)
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection(dic).Build();
 
             var builder = services.AddOptions<FakeOptions>();
             builder
@@ -41,9 +39,7 @@ namespace Microsoft.Extensions.Options.Tests
         {
             var services = new ServiceCollection();
             var dic = new Dictionary<string, string> { { "Message", "!" }, };
-            var config = new ConfigurationBuilder()
-                .AddInMemoryCollection(dic)
-                .Build();
+            var config = new ConfigurationBuilder().AddInMemoryCollection(dic).Build();
 
             var builder1 = services.AddOptions<FakeOptions>("1");
             var builder2 = services.AddOptions<FakeOptions>("2");
@@ -110,9 +106,7 @@ namespace Microsoft.Extensions.Options.Tests
         public void ConfigureOptionsWithSingletonDepWillUpdate()
         {
             var someService = new SomeService("Something");
-            var services = new ServiceCollection()
-                .AddOptions()
-                .AddSingleton(someService);
+            var services = new ServiceCollection().AddOptions().AddSingleton(someService);
             services
                 .AddOptions<FakeOptions>()
                 .Configure<SomeService>((o, s) => o.Message = s.Stuff);
@@ -308,9 +302,7 @@ namespace Microsoft.Extensions.Options.Tests
             services
                 .AddOptions<ComplexOptions>()
                 .Bind(
-                    new ConfigurationBuilder()
-                        .AddInMemoryCollection(dic)
-                        .Build(),
+                    new ConfigurationBuilder().AddInMemoryCollection(dic).Build(),
                     o => o.BindNonPublicProperties = true
                 );
             var sp = services.BuildServiceProvider();
@@ -329,9 +321,7 @@ namespace Microsoft.Extensions.Options.Tests
             services
                 .AddOptions<ComplexOptions>("named")
                 .Bind(
-                    new ConfigurationBuilder()
-                        .AddInMemoryCollection(dic)
-                        .Build(),
+                    new ConfigurationBuilder().AddInMemoryCollection(dic).Build(),
                     o => o.BindNonPublicProperties = true
                 );
             var sp = services.BuildServiceProvider();
