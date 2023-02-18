@@ -880,6 +880,7 @@ namespace System.Xml.Serialization
             return res.CompiledAssembly;
         }
 #endif
+
         GenerationBatch LoadFromSatelliteAssembly(GenerationBatch batch)
         {
             return batch;

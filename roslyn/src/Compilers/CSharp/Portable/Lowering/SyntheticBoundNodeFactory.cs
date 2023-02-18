@@ -772,8 +772,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             RefKind refKind = RefKind.None,
             SynthesizedLocalKind kind = SynthesizedLocalKind.LoweringTemp
 #if DEBUG
-            ,
-            [CallerLineNumber] int createdAtLineNumber = 0,
+            , [CallerLineNumber] int createdAtLineNumber = 0,
             [CallerFilePath] string createdAtFilePath = ""
 #endif
         )
@@ -787,8 +786,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 isKnownToReferToTempIfReferenceType,
                 refKind
 #if DEBUG
-                ,
-                createdAtLineNumber,
+                , createdAtLineNumber,
                 createdAtFilePath
 #endif
             );
@@ -798,8 +796,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             SyntaxNode syntax
 #if DEBUG
-            ,
-            [CallerLineNumber] int createdAtLineNumber = 0,
+            , [CallerLineNumber] int createdAtLineNumber = 0,
             [CallerFilePath] string createdAtFilePath = ""
 #endif
         )
@@ -810,8 +807,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SynthesizedLocalKind.LoweringTemp,
                 syntax
 #if DEBUG
-                ,
-                createdAtLineNumber: createdAtLineNumber,
+                , createdAtLineNumber: createdAtLineNumber,
                 createdAtFilePath: createdAtFilePath
 #endif
             );
@@ -2305,8 +2301,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isKnownToReferToTempIfReferenceType = false,
             SyntaxNode? syntaxOpt = null
 #if DEBUG
-            ,
-            [CallerLineNumber] int callerLineNumber = 0,
+            , [CallerLineNumber] int callerLineNumber = 0,
             [CallerFilePath] string? callerFilePath = null
 #endif
         )

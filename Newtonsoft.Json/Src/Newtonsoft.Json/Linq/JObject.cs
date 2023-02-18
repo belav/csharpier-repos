@@ -58,12 +58,10 @@ namespace Newtonsoft.Json.Linq
             IDictionary<string, JToken?>,
             INotifyPropertyChanged
 #if HAVE_COMPONENT_MODEL
-            ,
-            ICustomTypeDescriptor
+            , ICustomTypeDescriptor
 #endif
 #if HAVE_INOTIFY_PROPERTY_CHANGING
-            ,
-            INotifyPropertyChanging
+            , INotifyPropertyChanging
 #endif
     {
         private readonly JPropertyKeyedCollection _properties = new JPropertyKeyedCollection();

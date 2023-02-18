@@ -500,8 +500,7 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 string title,
                 Func<CancellationToken, Task<Solution>> createChangedSolution
 #if !CODE_STYLE // 'CodeActionPriority' is not a public API, hence not supported in CodeStyle layer.
-                ,
-                CodeActionPriority priority
+                , CodeActionPriority priority
 #endif
             )
                 : base(title, createChangedSolution, title)

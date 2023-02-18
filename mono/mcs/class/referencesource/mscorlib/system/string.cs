@@ -52,8 +52,7 @@ namespace System
             IConvertible,
             IEnumerable
 #if GENERICS_WORK
-            ,
-            IComparable<String>,
+            , IComparable<String>,
             IEnumerable<char>,
             IEquatable<String>
 #endif

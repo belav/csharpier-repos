@@ -22,8 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isPinned = false,
             RefKind refKind = RefKind.None
 #if DEBUG
-            ,
-            [CallerLineNumber] int createdAtLineNumber = 0,
+            , [CallerLineNumber] int createdAtLineNumber = 0,
             [CallerFilePath] string? createdAtFilePath = null
 #endif
         )
@@ -35,8 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 isPinned,
                 refKind
 #if DEBUG
-                ,
-                createdAtLineNumber,
+                , createdAtLineNumber,
                 createdAtFilePath
 #endif
             )

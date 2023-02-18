@@ -83,6 +83,7 @@ namespace System.Reflection.Emit
         }
     }
 #endif
+
     [StructLayout(LayoutKind.Sequential)]
     public sealed partial class LocalBuilder : LocalVariableInfo
     {

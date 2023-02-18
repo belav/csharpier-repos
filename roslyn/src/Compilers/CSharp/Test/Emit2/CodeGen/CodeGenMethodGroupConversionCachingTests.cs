@@ -322,14 +322,11 @@ class C
         var verifier = CompileAndVerify(
             source
 #if NETFRAMEWORK
-            ,
-            expectedOutput: "x => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null))"
+            , expectedOutput: "x => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null))"
 #else
-            ,
-            expectedOutput: "x => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null), Func`2)"
+            , expectedOutput: "x => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null), Func`2)"
 #endif
-            ,
-            symbolValidator: VerifyNoCacheContainersIn("C")
+            , symbolValidator: VerifyNoCacheContainersIn("C")
         );
         verifier.VerifyIL(
             "C.Main",
@@ -408,14 +405,11 @@ class C
         var verifier = CompileAndVerify(
             source
 #if NETFRAMEWORK
-            ,
-            expectedOutput: "y => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null))"
+            , expectedOutput: "y => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null))"
 #else
-            ,
-            expectedOutput: "y => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null), Func`2)"
+            , expectedOutput: "y => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null), Func`2)"
 #endif
-            ,
-            symbolValidator: VerifyNoCacheContainersIn("C")
+            , symbolValidator: VerifyNoCacheContainersIn("C")
         );
         verifier.VerifyIL(
             "C.<>c.<Main>b__0_0",

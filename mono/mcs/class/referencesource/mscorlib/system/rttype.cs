@@ -6583,8 +6583,7 @@ namespace System
             Object[] args,
             CultureInfo culture
 #if !NETCORE
-            ,
-            Object[] activationAttributes,
+            , Object[] activationAttributes,
             ref StackCrawlMark stackMark
 #endif
         )
@@ -6633,8 +6632,7 @@ namespace System
                             true,
                             wrapExceptions
 #if !NETCORE
-                            ,
-                            ref stackMark
+                            , ref stackMark
 #endif
                         );
                     }
@@ -6994,8 +6992,7 @@ namespace System
             bool skipCheckThis,
             bool fillCache
 #if !NETCORE
-            ,
-            ref StackCrawlMark stackMark
+            , ref StackCrawlMark stackMark
 #endif
         )
         {
@@ -7073,8 +7070,7 @@ namespace System
             bool fillCache,
             bool wrapExceptions
 #if !NETCORE
-            ,
-            ref StackCrawlMark stackMark
+            , ref StackCrawlMark stackMark
 #endif
         )
         {

@@ -117,8 +117,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var inferenceDiagnostics = new BindingDiagnosticBag(
                         DiagnosticBag.GetInstance()
 #if DEBUG
-                        ,
-                        PooledHashSet<AssemblySymbol>.GetInstance()
+                        , PooledHashSet<AssemblySymbol>.GetInstance()
 #endif
                     );
 

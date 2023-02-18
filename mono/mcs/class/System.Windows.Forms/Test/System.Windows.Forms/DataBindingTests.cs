@@ -252,8 +252,7 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 #else
                  "0: CurrentChanged\n1: CurrentItemChanged\n2: PositionChanged (to 0)\n3: ItemChanged (index = -1)\n"
 #endif
-                ,
-                event_log,
+                , event_log,
                 "2"
             );
         }
@@ -364,8 +363,7 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 #else
                  "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n"
 #endif
-                ,
-                event_log,
+                , event_log,
                 "2"
             );
 
@@ -420,8 +418,7 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 #else
                  "0: PositionChanged (to 0)\n1: CurrentChanged\n2: CurrentItemChanged\n3: ItemChanged (index = -1)\n4: ItemChanged (index = -1)\n"
 #endif
-                ,
-                event_log,
+                , event_log,
                 "2"
             );
 
@@ -532,8 +529,7 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 #else
                  "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n3: PositionChanged (to 2)\n"
 #endif
-                ,
-                event_log,
+                , event_log,
                 "2"
             );
 
@@ -589,8 +585,7 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 #else
                  "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n3: PositionChanged (to 2)\n"
 #endif
-                ,
-                event_log,
+                , event_log,
                 "2"
             );
 
@@ -828,8 +823,7 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 #else
                      "0: CurrentItemChanged\n1: ItemChanged (index = 0)\n"
 #endif
-                ,
-                event_log,
+                , event_log,
                 "2"
             );
 

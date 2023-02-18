@@ -324,8 +324,7 @@ namespace System.Security
                     ref s_everything,
                     s_everythingXml
 #if FEATURE_CAS_POLICY
-                    ,
-                    s_wpfExtensionUnrestrictedXml
+                    , s_wpfExtensionUnrestrictedXml
 #endif // FEATURE_CAS_POLICY
                 );
             }
@@ -349,8 +348,7 @@ namespace System.Security
                     ref s_internet,
                     s_internetXml
 #if FEATURE_CAS_POLICY
-                    ,
-                    s_wpfExtensionXml
+                    , s_wpfExtensionXml
 #endif // FEATURE_CAS_POLICY
                 );
             }
@@ -364,8 +362,7 @@ namespace System.Security
                     ref s_localIntranet,
                     s_localIntranetXml
 #if FEATURE_CAS_POLICY
-                    ,
-                    s_wpfExtensionXml
+                    , s_wpfExtensionXml
 #endif // FEATURE_CAS_POLICY
                 );
             }
@@ -393,8 +390,7 @@ namespace System.Security
             ref NamedPermissionSet permissionSet,
             string permissionSetXml
 #if FEATURE_CAS_POLICY
-            ,
-            string extensionXml
+            , string extensionXml
 #endif // FEATURE_CAS_POLICY
         )
         {

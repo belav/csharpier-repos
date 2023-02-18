@@ -605,8 +605,7 @@ namespace System.Collections.Generic
         )]
         public struct Enumerator : IEnumerator<T>, System.Collections.IEnumerator
 #if !SILVERLIGHT
-                ,
-                ISerializable,
+                , ISerializable,
                 IDeserializationCallback
 #endif
         {

@@ -103,8 +103,7 @@ namespace Internal.Runtime.TypeLoader
             out IntPtr commonStub
 #if CALLDESCR_FPARGREGSARERETURNREGS
 #else
-            ,
-            out IntPtr returnFloatingPointReturn4Thunk,
+            , out IntPtr returnFloatingPointReturn4Thunk,
             out IntPtr returnFloatingPointReturn8Thunk
 #endif
         );
@@ -133,8 +132,7 @@ namespace Internal.Runtime.TypeLoader
                 out CommonInputThunkStub
 #if CALLDESCR_FPARGREGSARERETURNREGS
 #else
-                ,
-                out ReturnFloatingPointReturn4Thunk,
+                , out ReturnFloatingPointReturn4Thunk,
                 out ReturnFloatingPointReturn8Thunk
 #endif
             );

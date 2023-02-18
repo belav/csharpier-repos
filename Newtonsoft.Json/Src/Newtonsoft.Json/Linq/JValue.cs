@@ -50,8 +50,7 @@ namespace Newtonsoft.Json.Linq
             IComparable,
             IComparable<JValue>
 #if HAVE_ICONVERTIBLE
-            ,
-            IConvertible
+            , IConvertible
 #endif
     {
         private JTokenType _valueType;

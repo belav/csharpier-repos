@@ -134,8 +134,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SynthesizedLocalKind kind,
             SyntaxNode syntax
 #if DEBUG
-            ,
-            [CallerLineNumber] int createdAtLineNumber = 0,
+            , [CallerLineNumber] int createdAtLineNumber = 0,
             [CallerFilePath] string createdAtFilePath = null
 #endif
         )
@@ -146,8 +145,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     kind,
                     syntax
 #if DEBUG
-                    ,
-                    createdAtLineNumber,
+                    , createdAtLineNumber,
                     createdAtFilePath
 #endif
                 ),

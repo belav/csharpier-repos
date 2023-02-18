@@ -1866,8 +1866,7 @@ namespace Internal.JitInterface
                         _compilation.NodeFactory.InterfaceDispatchCell(
                             targetMethod
 #if !SUPPORT_JIT
-                            ,
-                            _methodCodeNode
+                            , _methodCodeNode
 #endif
                         )
                     );

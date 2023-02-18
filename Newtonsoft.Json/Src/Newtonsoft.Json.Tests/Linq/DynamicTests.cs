@@ -261,8 +261,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Guid", new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")),
                 new JProperty("TimeSpan", TimeSpan.FromDays(1))
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
-                ,
-                new JProperty("BigInteger", BigInteger.Parse("1"))
+                , new JProperty("BigInteger", BigInteger.Parse("1"))
 #endif
             );
 
@@ -374,8 +373,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Guid", new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")),
                 new JProperty("TimeSpan", TimeSpan.FromDays(1))
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
-                ,
-                new JProperty("BigInteger", new BigInteger(100))
+                , new JProperty("BigInteger", new BigInteger(100))
 #endif
             );
 
@@ -712,8 +710,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 new JProperty("Guid", new Guid("EA27FE1D-0D80-44F2-BF34-4654156FA7AF")),
                 new JProperty("TimeSpan", TimeSpan.FromDays(1))
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
-                ,
-                new JProperty("BigInteger", new BigInteger(100))
+                , new JProperty("BigInteger", new BigInteger(100))
 #endif
             );
 

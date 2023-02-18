@@ -81,6 +81,7 @@ namespace System.Runtime.InteropServices
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern int CalculateCount();
 #endif
+
         private Object m_array;
         private int m_offset;
         private int m_count;

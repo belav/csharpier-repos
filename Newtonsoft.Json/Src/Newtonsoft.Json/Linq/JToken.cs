@@ -57,8 +57,7 @@ namespace Newtonsoft.Json.Linq
             , ICloneable
 #endif
 #if HAVE_DYNAMIC
-            ,
-            IDynamicMetaObjectProvider
+            , IDynamicMetaObjectProvider
 #endif
     {
         private static JTokenEqualityComparer? _equalityComparer;

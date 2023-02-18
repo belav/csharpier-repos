@@ -85,8 +85,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SynthesizedLocalKind kind,
                 SyntaxNode syntax
 #if DEBUG
-                ,
-                [CallerLineNumber] int createdAtLineNumber = 0,
+                , [CallerLineNumber] int createdAtLineNumber = 0,
                 [CallerFilePath] string createdAtFilePath = null
 #endif
             ) => throw ExceptionUtilities.Unreachable();

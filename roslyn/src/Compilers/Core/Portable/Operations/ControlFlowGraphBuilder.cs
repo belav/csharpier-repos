@@ -2215,10 +2215,13 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     int captureId = GetNextCaptureId(currentSpillRegion);
 
                     AddStatement(
-                        new FlowCaptureOperation(captureId, operationOpt.Syntax, operationOpt)
+                        new FlowCaptureOperation(
+                            captureId,
+                            operationOpt.Syntax,
+                            operationOpt
+                        )
 #if DEBUG
-                        ,
-                        spillingTheStack: true
+                        , spillingTheStack: true
 #endif
                     );
 

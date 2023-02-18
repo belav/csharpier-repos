@@ -25,8 +25,7 @@ namespace Microsoft.CodeAnalysis.Collections
             ISet<T>,
             IReadOnlyCollection<T>
 #if NET5_0_OR_GREATER
-            ,
-            IReadOnlySet<T>
+            , IReadOnlySet<T>
 #endif
     {
         private const bool SupportsComparerDevirtualization

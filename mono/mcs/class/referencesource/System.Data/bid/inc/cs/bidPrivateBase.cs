@@ -2264,5 +2264,4 @@ internal sealed class SignatureGenerator
         }
     } // Patterns
 } // SignatureGenerator
-
 #endif  // BID_AUTOSIG

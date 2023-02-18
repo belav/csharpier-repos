@@ -575,8 +575,7 @@ namespace Internal.JitInterface
             _methodCodeNode.SetCode(
                 objectData
 #if !SUPPORT_JIT && !READYTORUN
-                ,
-                isFoldable: (
+                , isFoldable: (
                     _compilation._compilationOptions & RyuJitCompilationOptions.MethodBodyFolding
                 ) != 0
 #endif
@@ -1607,8 +1606,7 @@ namespace Internal.JitInterface
                         this,
                         decl
 #if READYTORUN
-                        ,
-                        methodWithTokenDecl
+                        , methodWithTokenDecl
 #endif
                     );
                 }
@@ -1633,8 +1631,7 @@ namespace Internal.JitInterface
 
                 info->resolvedTokenDevirtualizedMethod = CreateResolvedTokenFromMethod(this, impl
 #if READYTORUN
-                    ,
-                    methodWithTokenImpl
+                    , methodWithTokenImpl
 #endif
                 );
 
@@ -1680,8 +1677,7 @@ namespace Internal.JitInterface
                 CorInfoImpl jitInterface,
                 MethodDesc method
 #if READYTORUN
-                ,
-                MethodWithToken methodWithToken
+                , MethodWithToken methodWithToken
 #endif
             )
             {
@@ -4994,8 +4990,7 @@ namespace Internal.JitInterface
                         out var nativeSchemas,
                         _cachedMemoryStream
 #if !READYTORUN
-                        ,
-                        _compilation.CanConstructType
+                        , _compilation.CanConstructType
 #endif
                     );
 #pragma warning restore SA1001, SA1113, SA1115 // Commas should be spaced correctly
